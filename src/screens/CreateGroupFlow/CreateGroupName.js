@@ -5,7 +5,9 @@ import { Text, View, ScrollView, TextInput } from 'react-native'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import ErrorBubble from 'components/ErrorBubble'
 import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
-import { getGroupData, getEdited, updateGroupData, setContinueButtonProps } from './CreateGroupFlow.store'
+import {
+  getGroupData, getEdited, updateGroupData, setWorkflowOptions
+} from './CreateGroupFlow.store'
 import styles from './CreateGroupFlow.styles'
 import { ALL_GROUP_ID } from 'store/models/Group'
 
@@ -18,11 +20,11 @@ export default function CreateGroupName ({ navigation }) {
   useFocusEffect(useCallback(() => {
     setGroupName(groupName)
     if (!groupName || groupName.length === 0) {
-      dispatch(setContinueButtonProps({ disabled: true }))
+      dispatch(setWorkflowOptions({ disableContinue: true }))
     } else {
       dispatch(updateGroupData({ name: groupName }))
       setError()
-      dispatch(setContinueButtonProps({ disabled: false }))
+      dispatch(setWorkflowOptions({ disableContinue: false }))
     }
   }, [groupName]))
 

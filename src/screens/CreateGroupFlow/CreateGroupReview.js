@@ -1,5 +1,4 @@
-import React, { useCallback, useState } from 'react'
-import { useFocusEffect } from '@react-navigation/native'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Text, View, TextInput, ScrollView, TouchableOpacity
@@ -10,39 +9,45 @@ import Avatar from 'components/Avatar'
 import { formatDomainWithUrl } from './util'
 import {
   createGroup, clearCreateGroupStore,getGroupData,
-  getNewGroupParentGroups, CREATE_GROUP, setContinueButtonProps
+  getNewGroupParentGroups
 } from './CreateGroupFlow.store'
 import { white } from 'style/colors'
 import styles from './CreateGroupFlow.styles'
+import selectGroup from 'store/actions/selectGroup'
 
 export default function CreateGroupReview ({ navigation }) {
   const dispatch = useDispatch()
   const groupData = useSelector(getGroupData)
   const parentGroups = useSelector(getNewGroupParentGroups)
-  const createGroupPending = useSelector(state => state.pending[CREATE_GROUP])
   const [error, setError] = useState(null)
-  const goToGroup = group => {
-    navigation.closeDrawer()
-    navigation.navigate('Feed', { groupId: group?.id })
+  const goToGroup = groupId => {
+    dispatch(selectGroup(groupId))
+    navigation.navigate('Feed', { groupId })
   }
 
-  useFocusEffect(useCallback(() => {
-    dispatch(setContinueButtonProps({ text: "Let's Do This!" }))
-    return () => dispatch(setContinueButtonProps({}))
-  }, []))
+  useEffect(() => {
+    return navigation.addListener('tabPress', async event => {
+      event.preventDefault()
+      await submit()
+    })
+  }, [navigation])
 
   const submit = async () => {
     try {
       const data = await dispatch(createGroup(groupData))
+      const error = data?.error
+      const newGroup = data?.payload?.data?.createGroup?.group
 
-      if (data.error) {
-        setError('There was an error, please try again.')
-      } else {
+      if (error) {
+        setError('There was an error, your Group was not created. Please try again.')
+      } else if (newGroup) {
         dispatch(clearCreateGroupStore())
-        goToGroup(data.payload.data.createGroup.group)
+        goToGroup(newGroup.id)
+      } else {
+        setError('Group may have been created, but there was an error. Please contact Hylo support.')
       }
     } catch (error) {
-      setError('There was an error, please try again.')
+      setError('There was an unknown error. Please contact Hylo support.')
     }
   }
 
@@ -64,8 +69,9 @@ export default function CreateGroupReview ({ navigation }) {
               style={stepStyles.reviewTextInput}
               value={groupData.name}
               underlineColorAndroid='transparent'
-              disabled
-            />
+              editable={false}
+              selectTextOnFocus={false}
+              />
           </View>
 
           <View style={styles.textInputContainer}>
@@ -77,8 +83,9 @@ export default function CreateGroupReview ({ navigation }) {
               style={stepStyles.reviewTextInput}
               value={formatDomainWithUrl(groupData.slug)}
               underlineColorAndroid='transparent'
-              disabled
-            />
+              editable={false}
+              selectTextOnFocus={false}
+              />
           </View>
         </View>
 
@@ -92,7 +99,8 @@ export default function CreateGroupReview ({ navigation }) {
             multiline
             value={visibilityDescription(groupData.visibility)}
             underlineColorAndroid='transparent'
-            disabled
+            editable={false}
+            selectTextOnFocus={false}
           />
         </View>
 
@@ -106,7 +114,8 @@ export default function CreateGroupReview ({ navigation }) {
             multiline
             value={accessibilityDescription(groupData.accessibility)}
             underlineColorAndroid='transparent'
-            disabled
+            editable={false}
+            selectTextOnFocus={false}
           />
         </View>
 
@@ -152,7 +161,7 @@ const stepStyles = {
     fontSize: 16,
     fontWeight: 'bold',
     padding: 0,
-    paddingBottom: 25
+    paddingBottom: 20
   },
   itemHeader: {
     flexDirection: 'row',
@@ -160,6 +169,7 @@ const stepStyles = {
   },
   groupRows: {
     marginTop: 10,
+    paddingBottom: 13,
     minWidth: '90%',
     justifyContent: 'flex-start',
     flexWrap: 'wrap'

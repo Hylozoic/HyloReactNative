@@ -1,6 +1,7 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { WorkflowModalHeader } from 'navigation/headers'
+import CreateGroupTabBar from 'screens/CreateGroupFlow/CreateGroupTabBar'
 // Screens
 import CreateGroupName from 'screens/CreateGroupFlow/CreateGroupName'
 import CreateGroupUrl from 'screens/CreateGroupFlow/CreateGroupUrl'
@@ -9,7 +10,6 @@ import CreateGroupVisibilityAccessibility
 import CreateGroupParentGroups from 'screens/CreateGroupFlow/CreateGroupParentGroups'
 import CreateGroupReview from 'screens/CreateGroupFlow/CreateGroupReview'
 import { white20onCaribbeanGreen } from 'style/colors'
-import CreateGroupTabBar from './CreateGroupTabBar'
 
 const CreateGroupTabs = createBottomTabNavigator()
 export default function CreateGroupTabsNavigator () {

@@ -10,7 +10,7 @@ export const FETCH_URL_EXISTS = `${MODULE_NAME}/FETCH_URL_EXISTS`
 export const CREATE_GROUP = `${MODULE_NAME}/CREATE_GROUP`
 export const CLEAR_CREATE_GROUP_STORE = `${MODULE_NAME}/CLEAR_CREATE_GROUP_STORE`
 export const FETCH_GROUP_EXISTS = `${MODULE_NAME}/FETCH_GROUP_EXISTS`
-export const SET_CONTINUE_BUTTON_PROPS = `${MODULE_NAME}/SET_CONTINUE_BUTTON_PROPS`
+export const SET_WORKFLOW_OPTIONS = `${MODULE_NAME}/SET_WORKFLOW_OPTIONS`
 
 export const defaultState = {
   // New Group Defaults
@@ -21,7 +21,7 @@ export const defaultState = {
     accessibility: GROUP_ACCESSIBILITY.Restricted,
     parentIds: []
   },
-  continueButtonProps: {},
+  workflowOptions: {},
   urlExists: false,
   edited: false
 }
@@ -29,6 +29,11 @@ export const defaultState = {
 export default function reducer (state = defaultState, action) {
   const { type, payload } = action
   switch (type) {
+    case SET_WORKFLOW_OPTIONS:
+      return {
+        ...state,
+        workflowOptions: payload
+      }
     case UPDATE_GROUP_DATA:
       return {
         ...state,
@@ -37,11 +42,6 @@ export default function reducer (state = defaultState, action) {
           ...payload
         },
         edited: true
-      }
-    case SET_CONTINUE_BUTTON_PROPS:
-      return {
-        ...state,
-        continueButtonProps: payload
       }
     case CLEAR_CREATE_GROUP_STORE:
       return defaultState
@@ -102,9 +102,9 @@ export function fetchGroupExists (slug) {
   }
 }
 
-export function setContinueButtonProps (value = {}) {
+export function setWorkflowOptions (value = {}) {
   return {
-    type: SET_CONTINUE_BUTTON_PROPS,
+    type: SET_WORKFLOW_OPTIONS,
     payload: value
   }
 }
@@ -124,8 +124,8 @@ export function getGroupUrlExists (state) {
   return state[MODULE_NAME].urlExists
 }
 
-export function getContinueButtonProps (state) {
-  return state[MODULE_NAME].continueButtonProps
+export function getWorkflowOptions (state) {
+  return state[MODULE_NAME].workflowOptions
 }
 
 export function getEdited (state) {

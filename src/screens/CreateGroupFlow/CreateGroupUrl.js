@@ -10,7 +10,7 @@ import {
   formatDomainWithUrl, removeDomainFromURL
 } from './util'
 import {
-  updateGroupData, setContinueButtonProps,
+  updateGroupData, setWorkflowOptions,
   fetchGroupExists, getGroupData
 } from './CreateGroupFlow.store'
 import styles from './CreateGroupFlow.styles'
@@ -23,7 +23,7 @@ export default function CreateGroupUrl ({ navigation }) {
   const [error, providedSetError] = useState()
   const [groupSlug, setGroupSlug] = useState(groupData?.slug)
   const setError = error => {
-    dispatch(setContinueButtonProps({ disabled: true }))
+    dispatch(setWorkflowOptions({ disableContinue: true }))
     providedSetError(error)
   }
   const clearError = () => providedSetError()
@@ -32,7 +32,7 @@ export default function CreateGroupUrl ({ navigation }) {
     try {
       if (!slug || slug.length === 0) {
         // setError('Please enter a URL')
-        dispatch(setContinueButtonProps({ disabled: true }))
+        dispatch(setWorkflowOptions({ disableContinue: true }))
         return false
       }
   
@@ -50,7 +50,7 @@ export default function CreateGroupUrl ({ navigation }) {
       } else if (groupExists === false) {
         dispatch(updateGroupData({ slug }))
         clearError()
-        dispatch(setContinueButtonProps({ disabled: false }))
+        dispatch(setWorkflowOptions({ disableContinue: false }))
       } else if (groupExists) {
         setError('This URL already exists. Please choose another one.')
       } else {
@@ -63,7 +63,7 @@ export default function CreateGroupUrl ({ navigation }) {
   }), [])
 
   useFocusEffect(useCallback(() => {
-    dispatch(setContinueButtonProps({ disabled: true }))
+    dispatch(setWorkflowOptions({ disableContinue: true }))
     validateAndSave(groupSlug)
   }, [groupSlug]))
 

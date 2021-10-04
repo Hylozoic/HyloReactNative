@@ -35,7 +35,7 @@ export default {
     alignSelf: 'flex-end'
   },
   textInputContainer: {
-    marginBottom: 20,
+    marginBottom: 15,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: white80onCaribbeanGreen
   },

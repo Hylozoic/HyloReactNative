@@ -8,7 +8,7 @@ import ImagePicker from 'components/ImagePicker'
 import FlagContent from 'components/FlagContent'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from 'assets/default-user-banner.jpg'
-import useGroupSelect from 'navigation/useSelectGroup'
+import useGroupSelect from 'hooks/useSelectGroup'
 
 export const setHeader = ({ route, navigation, currentGroup }) => {
   if (route.name === 'Member - Modal') return

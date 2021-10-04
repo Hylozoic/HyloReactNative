@@ -13,7 +13,7 @@ import CreateGroupNotice from 'components/CreateGroupNotice'
 import FeedList from 'components/FeedList'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './Feed.styles'
-import useGroupSelect from 'navigation/useSelectGroup'
+import useGroupSelect from 'hooks/useSelectGroup'
 import getRouteParam from 'store/selectors/getRouteParam'
 
 export function headerTitle (topicName, group, feedType) {
