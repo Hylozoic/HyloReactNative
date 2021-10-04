@@ -13,7 +13,7 @@ export default {
   fileLabel: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 40,
+    paddingBottom: 12,
     paddingRight: 16
   },
   fileLabelText: {

@@ -127,7 +127,7 @@ export function PostTitle ({ title, style }) {
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 12,
-    marginBottom: 18
+    marginBottom: 0
   },
   resourceEndsAt: {
     marginTop: 6,
@@ -144,7 +144,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   details: {
-    marginTop: 12,
     color: '#5D757A',
     fontSize: 14,
     lineHeight: 20,
