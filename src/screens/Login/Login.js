@@ -83,7 +83,7 @@ export default class Login extends React.Component {
     const { ssoError, emailIsValid, isConnected } = this.state
 
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
         <ScrollView contentContainerStyle={styles.login} style={styles.container}>
           {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
           {/* TODO: Bring back online status message / toast */}

@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { View, Text, TouchableOpacity, Alert } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { KeyboardAccessoryView } from '@flyerhq/react-native-keyboard-accessory-view'
 import { get, isEmpty, find } from 'lodash/fp'
@@ -142,7 +141,7 @@ export class PostDetails extends React.Component {
     const isModal = this.props.route?.name == 'Post Details - Modal'
 
     return (
-      <SafeAreaView style={styles.container} edges={['right', 'left', 'top']}>
+      <View style={styles.container}>
         <KeyboardAccessoryView
           contentContainerStyle={{
             ...styles.promptContentContainer,
@@ -174,7 +173,7 @@ export class PostDetails extends React.Component {
             />
         </KeyboardAccessoryView>
         <SocketSubscriber type='post' id={post.id} />
-      </SafeAreaView>
+      </View>
     )
   }
 }

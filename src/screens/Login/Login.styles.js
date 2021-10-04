@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native'
-import { caribbeanGreen, rhino60 } from 'style/colors'
+import { amaranth, caribbeanGreen, rhino60 } from 'style/colors'
 import { isIOS } from 'util/platform'
 
 const screenHeight = Dimensions.get('window').height
@@ -204,11 +204,13 @@ export default {
   },
   errorBanner: {
     ...mixins.banner,
-    backgroundColor: '#EE4266'
+    paddingTop: 50,
+    backgroundColor: amaranth
   },
   banner: {
     ...mixins.banner,
-    backgroundColor: '#33D089'
+    paddingTop: 50,
+    backgroundColor: caribbeanGreen
   },
   textInput: {
     height: 38,

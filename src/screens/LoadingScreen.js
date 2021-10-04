@@ -1,12 +1,9 @@
 import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import Loading from 'components/Loading'
 
 export default function LoadingScreen () {
   return (
-    <SafeAreaView style={styles.container}>
-      <Loading size='large' />
-    </SafeAreaView>
+    <Loading size='large' style={styles.container} />
   )
 }
 
