@@ -10,7 +10,7 @@ import {
 import { get, uniq, uniqBy, isEmpty, capitalize } from 'lodash/fp'
 import moment from 'moment'
 import { validateTopicName } from 'hylo-utils/validators'
-import { rhino30, white } from 'style/colors'
+import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
 import RNPickerSelect from 'react-native-picker-select'
@@ -130,8 +130,8 @@ export default class PostEditor extends React.Component {
       details: toHtml(detailsText),
       groups,
       memberIds: members.map(m => m.id),
-      fileUrls,
-      imageUrls,
+      fileUrls: uniq(fileUrls),
+      imageUrls: uniq(imageUrls),
       title,
       sendAnnouncement: announcementEnabled,
       topicNames: topics.map(t => t.name),
@@ -364,7 +364,6 @@ export default class PostEditor extends React.Component {
       addImage: this.addImage,
       showAlert: this.showAlert
     }
-    const isProject = type == 'project'
 
     return (
       <KeyboardFriendlyView style={styles.container}>
@@ -436,7 +435,7 @@ export default class PostEditor extends React.Component {
                 <Text style={styles.textInputPlaceholder}>{topicsPlaceholder}</Text>}
             </TouchableOpacity>
 
-            {isProject && (
+            {type == 'project' && (
               <TouchableOpacity style={[styles.section, styles.textInputWrapper]} onPress={this.showProjectMembersEditor}>
                 <View style={styles.topicLabel}>
                   <Text style={styles.sectionLabel}>Members</Text>

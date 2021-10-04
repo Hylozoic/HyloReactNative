@@ -140,13 +140,14 @@ const styles = StyleSheet.create({
     color: '#363D3C',
     fontSize: 19,
     fontFamily: 'Circular-Medium',
-    marginBottom: 12,
+    marginBottom: 8,
     flex: 1
   },
   details: {
     color: '#5D757A',
     fontSize: 14,
     lineHeight: 20,
+    marginBottom: 8,
     fontFamily: 'Circular-Book'
   },
   RSVPOption: {

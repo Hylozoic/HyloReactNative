@@ -22,7 +22,6 @@ const openUrlFn = url => () =>
 
 const styles = { 
   files: {
-    marginHorizontal: 18,
-    marginBottom: 5
+    marginHorizontal: 18
   }
 }
