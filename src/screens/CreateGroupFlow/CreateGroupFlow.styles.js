@@ -2,20 +2,11 @@ import { caribbeanGreen, white, white80onCaribbeanGreen } from 'style/colors'
 import { StyleSheet } from 'react-native'
 import { isIOS } from 'util/platform'
 
-const mixins = {
-  underline: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: white80onCaribbeanGreen
-  }
-}
-
 export default {
   container: {
     backgroundColor: caribbeanGreen,
     padding: 20,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center'
+    flex: 1
   },
   header: {
     marginBottom: 20
@@ -44,8 +35,9 @@ export default {
     alignSelf: 'flex-end'
   },
   textInputContainer: {
-    marginBottom: 10,
-    ...mixins.underline
+    marginBottom: 20,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: white80onCaribbeanGreen
   },
   textInputLabel: {
     color: white80onCaribbeanGreen,
@@ -73,6 +65,5 @@ export default {
     color: white,
     fontSize: 16,
     marginTop: 10
-  },
-  androidInvisibleUnderline: 'rgba(0,0,0,0)'
+  }
 }

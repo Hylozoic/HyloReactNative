@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Text, View } from 'react-native'
-import Button from 'components/Button'
+import { useFocusEffect } from '@react-navigation/native'
+import { Text, View, ScrollView } from 'react-native'
 import RoundCheckbox from 'components/RoundCheckBox'
 import Icon from 'components/Icon'
 import {
@@ -9,41 +9,37 @@ import {
   visibilityDescription, accessibilityDescription,
   visibilityIcon, accessibilityIcon
 } from 'store/models/Group'
-import { caribbeanGreen, white20onCaribbeanGreen, black10OnCaribbeanGreen, white } from 'style/colors'
+import { caribbeanGreen, white20onCaribbeanGreen, white } from 'style/colors'
 import { getGroupData, updateGroupData } from './CreateGroupFlow.store'
 import styles from './CreateGroupFlow.styles'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 
+const groupVisibilityOptions = Object.keys(GROUP_VISIBILITY).map(label => ({
+  label: label + ': ' + visibilityDescription(GROUP_VISIBILITY[label]),
+  iconName: visibilityIcon(GROUP_VISIBILITY[label]),
+  value: GROUP_VISIBILITY[label]
+}))
+
+const groupAccessibilityOptions = Object.keys(GROUP_ACCESSIBILITY).map(label => ({
+  label: label + ': ' + accessibilityDescription(GROUP_ACCESSIBILITY[label]),
+  iconName: accessibilityIcon(GROUP_ACCESSIBILITY[label]),
+  value: GROUP_ACCESSIBILITY[label]
+}))
+
 export default function CreateGroupVisibilityAccessibility ({ navigation }) {
-  const nextScreen = 'CreateGroupParentGroups'
-  const groupData = useSelector(getGroupData)
   const dispatch = useDispatch()
+  const groupData = useSelector(getGroupData)
   const [visibility, setVisibility] = useState(groupData.visibility)
   const [accessibility, setAccessibility] = useState(groupData.accessibility)
 
-  const groupVisibilityOptions = Object.keys(GROUP_VISIBILITY).map(label => ({
-    label: label + ': ' + visibilityDescription(GROUP_VISIBILITY[label]),
-    iconName: visibilityIcon(GROUP_VISIBILITY[label]),
-    value: GROUP_VISIBILITY[label]
-  }))
-  const groupAccessibilityOptions = Object.keys(GROUP_ACCESSIBILITY).map(label => ({
-    label: label + ': ' + accessibilityDescription(GROUP_ACCESSIBILITY[label]),
-    iconName: accessibilityIcon(GROUP_ACCESSIBILITY[label]),
-    value: GROUP_ACCESSIBILITY[label]
-  }))
-
-  const checkAndSubmit = () => {
+  useFocusEffect(useCallback(() => {
     dispatch(updateGroupData({ visibility, accessibility }))
-    navigation.navigate(nextScreen)
-  }
+  }, [visibility, accessibility]))
 
   return (
-    <View style={styles.container}>
-      <KeyboardFriendlyView style={{ flex: 1 }}>
-        {/* <View style={styles.header}>
-          <Text style={styles.heading}>Visibility and Accessibility</Text>
-        </View> */}
+    <KeyboardFriendlyView style={styles.container}>
+      <ScrollView style={{ margins: 0 }}>
         <View style={styles.content}>
           <View style={stepStyles.optionsContainer}>
             <Text style={stepStyles.optionsLabel}>Who can see this group?</Text>
@@ -60,11 +56,8 @@ export default function CreateGroupVisibilityAccessibility ({ navigation }) {
             ))}
           </View>
         </View>
-        <View style={styles.footer}>
-          <Button text='Continue' onPress={checkAndSubmit} style={styles.button} />
-        </View>
-      </KeyboardFriendlyView>
-    </View>
+      </ScrollView>
+    </KeyboardFriendlyView>
   )
 }
 

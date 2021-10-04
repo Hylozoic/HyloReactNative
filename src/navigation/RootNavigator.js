@@ -6,7 +6,7 @@ import { ModalHeader } from 'navigation/headers'
 // Navigation
 import DrawerNavigator from 'navigation/DrawerNavigator'
 import SignupNavigator from 'navigation/SignupNavigator'
-import CreateGroupNavigator from 'navigation/CreateGroupNavigator'
+import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
 import GroupSettingsNavigator from 'navigation/GroupSettingsNavigator'
 // Screens
 import JoinGroup from 'screens/JoinGroup'
@@ -37,6 +37,8 @@ export default function RootNavigator ({ fullyAuthorized }) {
     {/* Logged in */}
     {fullyAuthorized && <>
       <Root.Screen name='Drawer' component={DrawerNavigator} options={{ headerShown: false }} />
+      <Root.Screen name='Create Group' component={CreateGroupTabsNavigator}
+          options={{ headerShown: false }} />
       <Root.Group screenOptions={{ presentation: 'modal', header: ModalHeader }}>
         <Root.Screen name='Post Details - Modal' component={PostDetails}
           options={{ title: 'Post Details' }} />
@@ -45,8 +47,6 @@ export default function RootNavigator ({ fullyAuthorized }) {
         <Root.Screen name='Edit Post' component={PostEditor} />
         <Root.Screen name='Edit Account Info' component={UserSettings} />
         <Root.Screen name='Group Settings' component={GroupSettingsNavigator} />
-        <Root.Screen name='Create Group' component={CreateGroupNavigator}
-          options={{ headerShown: false }} />
         <Root.Screen name='Notifications' component={NotificationsList} />
         <Root.Screen name='Notification Settings' component={NotificationSettings} />
         <Root.Screen name='Blocked Users' component={BlockedUsers} />

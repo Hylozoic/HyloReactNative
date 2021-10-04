@@ -1,53 +1,75 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Text, View, TextInput } from 'react-native'
-import { get } from 'lodash/fp'
+import { Text, View, ScrollView, TextInput } from 'react-native'
+import { useFocusEffect } from '@react-navigation/native'
+import { debounce } from 'lodash/fp'
 import ErrorBubble from 'components/ErrorBubble'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-import Button from 'components/Button'
-import isPendingFor from 'store/selectors/isPendingFor'
 import {
   slugValidatorRegex, invalidSlugMessage,
   formatDomainWithUrl, removeDomainFromURL
 } from './util'
-import { updateGroupData, fetchGroupExists, getGroupData } from './CreateGroupFlow.store'
+import {
+  updateGroupData, setContinueButtonProps,
+  fetchGroupExists, getGroupData
+} from './CreateGroupFlow.store'
 import styles from './CreateGroupFlow.styles'
 
 export default function CreateGroupUrl ({ navigation }) {
-  const nextScreen = 'CreateGroupVisibilityAccessibility'
   const dispatch = useDispatch()
-  const fetchUrlPending = useSelector(state => isPendingFor(fetchGroupExists, state))
-
+  // const pending = useSelector(state => isPendingFor(fetchGroupExists, state))
+  // const canContinue = useSelector(getCanContinue)
   const groupData = useSelector(getGroupData)
-  const [error, setError] = useState()
-  const [groupSlug, providedSetGroupSlug] = useState(groupData.slug)
-
-  const setGroupSlug = slug => {
-    setError()
-    return providedSetGroupSlug(slug)
+  const [error, providedSetError] = useState()
+  const [groupSlug, setGroupSlug] = useState(groupData?.slug)
+  const setError = error => {
+    dispatch(setContinueButtonProps({ disabled: true }))
+    providedSetError(error)
   }
+  const clearError = () => providedSetError()
 
-  const checkAndSubmit = async () => {
-    if (!groupSlug || groupSlug.length === 0) {
-      setError('Please enter a URL')
-      return
-    }
-    if (!slugValidatorRegex.test(groupSlug)) {
-      setError(invalidSlugMessage)
-      return
-    }
+  const validateAndSave = useMemo(() => debounce(300, async (slug) => {
+    try {
+      if (!slug || slug.length === 0) {
+        // setError('Please enter a URL')
+        dispatch(setContinueButtonProps({ disabled: true }))
+        return false
+      }
+  
+      if (!slugValidatorRegex.test(slug)) {
+        setError(invalidSlugMessage)
+        return false
+      }
 
-    return checkGroupUrlThenRedirect(groupSlug,
-      params => dispatch(fetchGroupExists(params)),
-      setError,
-      params => dispatch(updateGroupData(params)),
-      () => navigation.navigate(nextScreen)
-    )
-  }
+      const data = await dispatch(fetchGroupExists(slug))
+      const error = data?.error
+      const groupExists = data?.payload?.data?.groupExists?.exists
+
+      if (error) {
+        setError('There was an error, please try again.')
+      } else if (groupExists === false) {
+        dispatch(updateGroupData({ slug }))
+        clearError()
+        dispatch(setContinueButtonProps({ disabled: false }))
+      } else if (groupExists) {
+        setError('This URL already exists. Please choose another one.')
+      } else {
+        // if there is no error or groupExists variable, assume some other error
+        setError('There was an error, please try again.')
+      }
+    } catch (error) {
+      setError('There was an error, please try again.')
+    }
+  }), [])
+
+  useFocusEffect(useCallback(() => {
+    dispatch(setContinueButtonProps({ disabled: true }))
+    validateAndSave(groupSlug)
+  }, [groupSlug]))
 
   return (
-    <View style={styles.container}>
-      <KeyboardFriendlyView>
+    <KeyboardFriendlyView style={styles.container}>
+      <ScrollView>
         <View style={styles.header}>
           <Text style={styles.heading}>Choose an address for your group</Text>
           <Text style={styles.description}>Your URL is the address that members will use to access your group online. The shorter the better!</Text>
@@ -62,40 +84,12 @@ export default function CreateGroupUrl ({ navigation }) {
               autoCapitalize='none'
               value={formatDomainWithUrl(groupSlug)}
               autoCorrect={false}
-              underlineColorAndroid={styles.androidInvisibleUnderline}
+              underlineColorAndroid='transparent'
             />
           </View>
           {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
         </View>
-        <View style={styles.footer}>
-          <Button text='Continue' onPress={checkAndSubmit} style={styles.button} disabled={!!fetchUrlPending} />
-        </View>
-      </KeyboardFriendlyView>
-    </View>
+      </ScrollView>
+    </KeyboardFriendlyView>
   )
-}
-
-export function checkGroupUrlThenRedirect (slug, fetchGroupExists, setErrorMessage, updateGroupData, goToNextStep) {
-  return fetchGroupExists(slug)
-    .then((data) => {
-      const error = get('error', data)
-      const groupExists = get('payload.data.groupExists.exists', data)
-      if (error) {
-        setErrorMessage('There was an error, please try again.')
-        return
-      }
-      if (groupExists) {
-        setErrorMessage('This URL already exists. Please choose another one.')
-        return
-      }
-      if (groupExists === false) {
-        updateGroupData({ slug })
-        goToNextStep()
-        return
-      }
-      // if there is no error or groupExists variable, assume some other error
-      setErrorMessage('There was an error, please try again.')
-    }, () => {
-      setErrorMessage('There was an error, please try again.')
-    })
 }

@@ -113,7 +113,7 @@ export default class Login extends React.Component {
                   keyboardType='email-address'
                   // UPGRADE TODO: Fix with this: https://stackoverflow.com/a/59626713
                   onSubmitEditing={() => this.passwordInputRef.current.focus() }
-                  underlineColorAndroid={styles.androidInvisibleUnderline}
+                  underlineColorAndroid='transparent'
                 />
               </View>
               <View style={styles.rightIconView}>
@@ -141,7 +141,7 @@ export default class Login extends React.Component {
                   returnKeyType='go'
                   selectTextOnFocus
                   onSubmitEditing={() => this.login()}
-                  underlineColorAndroid='rgba(0,0,0,0)'
+                  underlineColorAndroid='transparent'
                 />
               </View>
               <View style={styles.rightIconView}>

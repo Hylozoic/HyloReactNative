@@ -230,6 +230,5 @@ export default {
     ...mixins.triangle,
     borderTopWidth: 10,
     borderBottomWidth: 0
-  },
-  androidInvisibleUnderline: 'rgba(0,0,0,0)'
+  }
 }

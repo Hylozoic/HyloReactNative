@@ -65,7 +65,7 @@ export default class ForgotPassword extends React.Component {
                 autoCapitalize='none'
                 autoCorrect={false}
                 keyboardType='email-address'
-                underlineColorAndroid={styles.androidInvisibleUnderline}
+                underlineColorAndroid='transparent'
               />
             </View>
             <View style={styles.rightIconView}>

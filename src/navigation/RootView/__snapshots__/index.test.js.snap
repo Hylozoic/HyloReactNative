@@ -202,7 +202,7 @@ exports[`RootView signedIn and signupInProgress matches snapshot 1`] = `
                                       onChangeText={[Function]}
                                       onSubmitEditing={[Function]}
                                       returnKeyType="next"
-                                      underlineColorAndroid="rgba(0,0,0,0)"
+                                      underlineColorAndroid="transparent"
                                     />
                                   </View>
                                   <View />
@@ -240,7 +240,7 @@ exports[`RootView signedIn and signupInProgress matches snapshot 1`] = `
                                       returnKeyType="go"
                                       secureTextEntry={true}
                                       selectTextOnFocus={true}
-                                      underlineColorAndroid="rgba(0,0,0,0)"
+                                      underlineColorAndroid="transparent"
                                     />
                                   </View>
                                   <View>

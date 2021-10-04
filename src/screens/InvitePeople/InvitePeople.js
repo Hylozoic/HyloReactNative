@@ -218,13 +218,13 @@ export class SendInvitesPage extends PureComponent {
               placeholder='Type email addresses'
               onChangeText={(text) => this.setState({ emails: text })}
               style={styles.textInput}
-              underlineColorAndroid={styles.androidInvisibleUnderline}
+              underlineColorAndroid='transparent'
             />
             <TextInput
               value={inputText}
               multiline
               numberOfLines={5}
-              underlineColorAndroid={styles.androidInvisibleUnderline}
+              underlineColorAndroid='transparent'
               style={styles.textInput}
               onChangeText={(text) => this.setState({ inputText: text })}
             />

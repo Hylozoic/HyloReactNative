@@ -1,5 +1,5 @@
 import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { WorkflowModalHeader } from 'navigation/headers'
 // Screens
 import CreateGroupName from 'screens/CreateGroupFlow/CreateGroupName'
@@ -8,44 +8,44 @@ import CreateGroupVisibilityAccessibility
   from 'screens/CreateGroupFlow/CreateGroupVisibilityAccessibility'
 import CreateGroupParentGroups from 'screens/CreateGroupFlow/CreateGroupParentGroups'
 import CreateGroupReview from 'screens/CreateGroupFlow/CreateGroupReview'
-import { white } from 'style/colors'
+import { white20onCaribbeanGreen } from 'style/colors'
+import CreateGroupTabBar from './CreateGroupTabBar'
 
-const CreateGroup = createStackNavigator()
-export default function CreateGroupNavigator () {
+const CreateGroupTabs = createBottomTabNavigator()
+export default function CreateGroupTabsNavigator () {
   const navigatorProps = {
-    presentation: 'modal',
+    tabBar: props => <CreateGroupTabBar {...props} />,
     screenOptions: {
-      header: headerProps =>
-        <WorkflowModalHeader {...headerProps} headerStatusBarHeight={0} />
+      header: headerProps => <WorkflowModalHeader {...headerProps} style={{backgroundColor: white20onCaribbeanGreen }} />
     },
   }
   return (
-    <CreateGroup.Navigator {...navigatorProps}>
-      <CreateGroup.Screen
+    <CreateGroupTabs.Navigator {...navigatorProps}>
+      <CreateGroupTabs.Screen
         name='CreateGroupName'
         component={CreateGroupName}
         options={{ title: 'STEP 1/5', headerLeftCloseIcon: true }}
       />
-      <CreateGroup.Screen
+      <CreateGroupTabs.Screen
         name='CreateGroupUrl'
         component={CreateGroupUrl}
         options={{ title: 'STEP 2/5' }}
       />
-      <CreateGroup.Screen
+      <CreateGroupTabs.Screen
         name='CreateGroupVisibilityAccessibility'
         component={CreateGroupVisibilityAccessibility}
         options={{ title: 'STEP 3/5' }}
       />
-      <CreateGroup.Screen
+      <CreateGroupTabs.Screen
         name='CreateGroupParentGroups'
         component={CreateGroupParentGroups}
         options={{ title: 'STEP 4/5' }}
       />
-      <CreateGroup.Screen
+      <CreateGroupTabs.Screen
         name='CreateGroupReview'
         component={CreateGroupReview}
         options={{ title: 'STEP 5/5' }}
       />
-    </CreateGroup.Navigator>
+    </CreateGroupTabs.Navigator>
   )
 }

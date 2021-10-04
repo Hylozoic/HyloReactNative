@@ -1,42 +1,44 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Text, View, TextInput } from 'react-native'
-import Button from 'components/Button'
+import { useFocusEffect } from '@react-navigation/native'
+import { Text, View, ScrollView, TextInput } from 'react-native'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import ErrorBubble from 'components/ErrorBubble'
 import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
-import { getGroupData, getEdited, updateGroupData } from './CreateGroupFlow.store'
+import { getGroupData, getEdited, updateGroupData, setContinueButtonProps } from './CreateGroupFlow.store'
 import styles from './CreateGroupFlow.styles'
 import { ALL_GROUP_ID } from 'store/models/Group'
 
 export default function CreateGroupName ({ navigation }) {
-  const nextScreen = 'CreateGroupUrl'
   const dispatch = useDispatch()
-  // Add current group in as pre-selected as a parent group 
+  const groupData = useSelector(getGroupData)  
+  const [groupName, setGroupName] = useState(groupData.name)
+  const [error, setError] = useState()
+
+  useFocusEffect(useCallback(() => {
+    setGroupName(groupName)
+    if (!groupName || groupName.length === 0) {
+      dispatch(setContinueButtonProps({ disabled: true }))
+    } else {
+      dispatch(updateGroupData({ name: groupName }))
+      setError()
+      dispatch(setContinueButtonProps({ disabled: false }))
+    }
+  }, [groupName]))
+
+  // Add current group in as pre-selected as a parent group for Parent Groups Step
   const edited = useSelector(getEdited)
   const currentGroupId = useSelector(getCurrentGroupId)
-  useEffect(() => {
-    if (!edited && currentGroupId !== ALL_GROUP_ID) dispatch(updateGroupData({ parentIds: [currentGroupId] }))
-  }, [])
-  const groupData = useSelector(getGroupData)  
-  const [error, setError] = useState()
-  const [groupName, providedSetGroupName] = useState(groupData.name)
-  const setGroupName = name => {
-    setError()
-    return providedSetGroupName(name)
-  }
-  const checkAndSubmit = () => {
-    if (!groupName || groupName.length === 0) {
-      setError('Please enter a group name')
-      return
+
+  useFocusEffect(useCallback(() => {
+    if (!edited && currentGroupId !== ALL_GROUP_ID) {
+      dispatch(updateGroupData({ parentIds: [currentGroupId] }))
     }
-    dispatch(updateGroupData({ name: groupName }))
-    navigation.navigate(nextScreen)
-  }
+  }, [edited, currentGroupId]))
 
   return (
-    <View style={styles.container}>
-      <KeyboardFriendlyView>
+    <KeyboardFriendlyView style={styles.container}>
+      <ScrollView>
         <View style={styles.header}>
           <Text style={styles.heading}>Let's get started!</Text>
           <Text style={styles.description}>All good things start somewhere! Let's kick things off with a catchy name for your group.</Text>
@@ -51,15 +53,12 @@ export default function CreateGroupName ({ navigation }) {
               autoCapitalize='none'
               value={groupName}
               autoCorrect={false}
-              underlineColorAndroid={styles.androidInvisibleUnderline}
+              underlineColorAndroid='transparent'
             />
           </View>
           {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
         </View>
-        <View style={styles.footer}>
-          <Button text='Continue' onPress={checkAndSubmit} style={styles.button} />
-        </View>
-      </KeyboardFriendlyView>
-    </View>
+      </ScrollView>
+    </KeyboardFriendlyView>
   )
 }

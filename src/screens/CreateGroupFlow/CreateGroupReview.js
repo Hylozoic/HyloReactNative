@@ -1,52 +1,49 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Text, View, TextInput, ScrollView, TouchableOpacity
 } from 'react-native'
-import Button from 'components/Button'
 import ErrorBubble from 'components/ErrorBubble'
 import { accessibilityDescription, visibilityDescription } from 'store/models/Group'
-import { white } from 'style/colors'
 import Avatar from 'components/Avatar'
 import { formatDomainWithUrl } from './util'
 import {
   createGroup, clearCreateGroupStore,getGroupData,
-  getNewGroupParentGroups, CREATE_GROUP
+  getNewGroupParentGroups, CREATE_GROUP, setContinueButtonProps
 } from './CreateGroupFlow.store'
+import { white } from 'style/colors'
 import styles from './CreateGroupFlow.styles'
-import { isIOS } from 'util/platform'
 
 export default function CreateGroupReview ({ navigation }) {
-  const [error, setError] = useState(null)
   const dispatch = useDispatch()
   const groupData = useSelector(getGroupData)
   const parentGroups = useSelector(getNewGroupParentGroups)
   const createGroupPending = useSelector(state => state.pending[CREATE_GROUP])
-
-  const goToCreateGroupName = () => navigation.navigate('CreateGroupName')
-  const goToCreateGroupUrl = () => navigation.navigate('CreateGroupUrl')
-  const goToCreateGroupVisibilityAccessibility = () =>
-    navigation.navigate('CreateGroupVisibilityAccessibility')
-  const goToCreateGroupParentGroups = () =>
-    navigation.navigate('CreateGroupParentGroups')
+  const [error, setError] = useState(null)
   const goToGroup = group => {
     navigation.closeDrawer()
     navigation.navigate('Feed', { groupId: group?.id })
   }
 
-  const submit = () => {
-    return dispatch(createGroup(groupData))
-      .then((data) => {
-        if (data.error) {
-          setError('There was an error, please try again.')
-          return
-        }
+  useFocusEffect(useCallback(() => {
+    dispatch(setContinueButtonProps({ text: "Let's Do This!" }))
+    return () => dispatch(setContinueButtonProps({}))
+  }, []))
+
+  const submit = async () => {
+    try {
+      const data = await dispatch(createGroup(groupData))
+
+      if (data.error) {
+        setError('There was an error, please try again.')
+      } else {
         dispatch(clearCreateGroupStore())
         goToGroup(data.payload.data.createGroup.group)
-      })
-      .catch(() => {
-        setError('There was an error, please try again.')
-      })
+      }
+    } catch (error) {
+      setError('There was an error, please try again.')
+    }
   }
 
   return (
@@ -57,15 +54,16 @@ export default function CreateGroupReview ({ navigation }) {
           <Text style={styles.description}>You can always come back and change your details at any time</Text>
         </View>
         <View style={styles.content}>
+
           <View style={styles.textInputContainer}>
             <View style={stepStyles.itemHeader}>
               <Text style={stepStyles.textInputLabel}>What's the name of your group?</Text>
-              <EditButton onPress={goToCreateGroupName} />
+              <EditButton onPress={() => navigation.navigate('CreateGroupName')} />
             </View>
             <TextInput
               style={stepStyles.reviewTextInput}
               value={groupData.name}
-              underlineColorAndroid={styles.androidInvisibleUnderline}
+              underlineColorAndroid='transparent'
               disabled
             />
           </View>
@@ -73,12 +71,12 @@ export default function CreateGroupReview ({ navigation }) {
           <View style={styles.textInputContainer}>
             <View style={stepStyles.itemHeader}>
               <Text style={stepStyles.textInputLabel}>What's the URL of your group?</Text>
-              <EditButton onPress={goToCreateGroupUrl} />
+              <EditButton onPress={() => navigation.navigate('CreateGroupUrl')} />
             </View>
             <TextInput
               style={stepStyles.reviewTextInput}
               value={formatDomainWithUrl(groupData.slug)}
-              underlineColorAndroid={styles.androidInvisibleUnderline}
+              underlineColorAndroid='transparent'
               disabled
             />
           </View>
@@ -87,13 +85,13 @@ export default function CreateGroupReview ({ navigation }) {
         <View style={styles.textInputContainer}>
           <View style={stepStyles.itemHeader}>
             <Text style={stepStyles.textInputLabel}>Who can see this group?</Text>
-            <EditButton onPress={goToCreateGroupVisibilityAccessibility} />
+            <EditButton onPress={() => navigation.navigate('CreateGroupVisibilityAccessibility')} />
           </View>
           <TextInput
             style={stepStyles.reviewTextInput}
             multiline
             value={visibilityDescription(groupData.visibility)}
-            underlineColorAndroid={styles.androidInvisibleUnderline}
+            underlineColorAndroid='transparent'
             disabled
           />
         </View>
@@ -101,21 +99,22 @@ export default function CreateGroupReview ({ navigation }) {
         <View style={styles.textInputContainer}>
           <View style={stepStyles.itemHeader}>
             <Text style={stepStyles.textInputLabel}>Who can join this group?</Text>
-            <EditButton onPress={goToCreateGroupVisibilityAccessibility} />
+            <EditButton onPress={() => navigation.navigate('CreateGroupVisibilityAccessibility')} />
           </View>
           <TextInput
             style={stepStyles.reviewTextInput}
             multiline
             value={accessibilityDescription(groupData.accessibility)}
-            underlineColorAndroid={styles.androidInvisibleUnderline}
+            underlineColorAndroid='transparent'
             disabled
           />
         </View>
+
         {parentGroups.length > 0 && (
           <View style={styles.textInputContainer}>
             <View style={stepStyles.itemHeader}>
               <Text style={stepStyles.textInputLabel}>Is this group a member of other groups?</Text>
-              <EditButton onPress={goToCreateGroupParentGroups} />
+              <EditButton onPress={() => navigation.navigate('CreateGroupParentGroups')} />
             </View>
             <View style={stepStyles.groupRows}>
               {parentGroups.map(parentGroup => <GroupRow group={parentGroup} key={parentGroup.id} />)}
@@ -124,15 +123,6 @@ export default function CreateGroupReview ({ navigation }) {
         )}
 
         {error && <View style={styles.errorBubble}><ErrorBubble text={error} /></View>}
-
-        <View style={styles.footer}>
-          <Button
-            text="Let's Do This!"
-            onPress={submit}
-            style={{ ...styles.button, marginTop: 20 }}
-            disabled={!!createGroupPending}
-          />
-        </View>
       </ScrollView>
     </View>
   )

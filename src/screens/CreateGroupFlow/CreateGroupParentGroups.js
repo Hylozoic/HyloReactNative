@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Text, View, FlatList } from 'react-native'
+import { useFocusEffect } from '@react-navigation/native'
+import { Text, View, ScrollView, FlatList } from 'react-native'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import getMemberships from 'store/selectors/getMemberships'
@@ -13,9 +14,8 @@ import { getGroupData, updateGroupData } from './CreateGroupFlow.store'
 import styles from './CreateGroupFlow.styles'
 
 export default function CreateGroupParentGroups ({ navigation }) {
-  const nextScreen = 'CreateGroupReview'
-  const groupData = useSelector(getGroupData)
   const dispatch = useDispatch()
+  const groupData = useSelector(getGroupData)
   const [parentIds, setParentGroupIds] = useState(groupData.parentIds)
   const memberships = useSelector(getMemberships)
   const parentGroupOptions = memberships
@@ -31,18 +31,17 @@ export default function CreateGroupParentGroups ({ navigation }) {
   
   const clear = () => setParentGroupIds([])
 
-  const checkAndSubmit = () => {
+  useFocusEffect(useCallback(() => {
     // Extra step necessary to reject a default group selection which isn't valid
     parentIds.filter(id => parentGroupOptions.find(validId => id == validId))
     dispatch(updateGroupData({ parentIds }))
-    navigation.navigate(nextScreen)
-  }
+  }, [parentIds]))
 
   return (
-    <View style={styles.container}>
-      <KeyboardFriendlyView>
+    <KeyboardFriendlyView style={styles.container}>
         <Text style={styles.heading}>Is this group a member of other groups?</Text>
         <Text style={stepStyles.subHeading}>Please select below:</Text>
+        {/* TODO: Is this a good use of FlatList? */}
         <FlatList style={stepStyles.parentGroupListContainer} data={parentGroupOptions}
           renderItem={({ item }) => (
             <ItemChooserItemRow item={item} chosen={isChosen(item)} toggleChosen={toggleChosen} />
@@ -51,11 +50,7 @@ export default function CreateGroupParentGroups ({ navigation }) {
         <TouchableOpacity onPress={clear}>
           <Text style={stepStyles.clearButton}>Clear</Text>
         </TouchableOpacity>
-        <View style={styles.footer}>
-          <Button text='Continue' onPress={checkAndSubmit} style={styles.button} />
-        </View>
-      </KeyboardFriendlyView>
-    </View>
+    </KeyboardFriendlyView>
   )
 }
 
@@ -68,6 +63,7 @@ const stepStyles = {
   clearButton: {
     color: white,
     marginTop: 10,
+    marginBottom: 20,
     marginRight: 20,
     fontWeight: 'bold',
     alignSelf: 'flex-end'
@@ -76,7 +72,7 @@ const stepStyles = {
     minWidth: '90%',
     padding: 0,
     backgroundColor: white,
-    borderRadius: 15,
-    maxHeight: '50%'
+    borderRadius: 15
+    // maxHeight: '80%'
   }
 }

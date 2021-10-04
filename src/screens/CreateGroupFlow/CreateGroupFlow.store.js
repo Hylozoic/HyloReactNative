@@ -9,7 +9,8 @@ export const UPDATE_GROUP_DATA = `${MODULE_NAME}/UPDATE_GROUP_DATA`
 export const FETCH_URL_EXISTS = `${MODULE_NAME}/FETCH_URL_EXISTS`
 export const CREATE_GROUP = `${MODULE_NAME}/CREATE_GROUP`
 export const CLEAR_CREATE_GROUP_STORE = `${MODULE_NAME}/CLEAR_CREATE_GROUP_STORE`
-export const FETCH_GROUP_EXISTS = `${MODULE_NAME}/FETCH_URL_EXISTS`
+export const FETCH_GROUP_EXISTS = `${MODULE_NAME}/FETCH_GROUP_EXISTS`
+export const SET_CONTINUE_BUTTON_PROPS = `${MODULE_NAME}/SET_CONTINUE_BUTTON_PROPS`
 
 export const defaultState = {
   // New Group Defaults
@@ -20,6 +21,7 @@ export const defaultState = {
     accessibility: GROUP_ACCESSIBILITY.Restricted,
     parentIds: []
   },
+  continueButtonProps: {},
   urlExists: false,
   edited: false
 }
@@ -35,6 +37,11 @@ export default function reducer (state = defaultState, action) {
           ...payload
         },
         edited: true
+      }
+    case SET_CONTINUE_BUTTON_PROPS:
+      return {
+        ...state,
+        continueButtonProps: payload
       }
     case CLEAR_CREATE_GROUP_STORE:
       return defaultState
@@ -95,6 +102,13 @@ export function fetchGroupExists (slug) {
   }
 }
 
+export function setContinueButtonProps (value = {}) {
+  return {
+    type: SET_CONTINUE_BUTTON_PROPS,
+    payload: value
+  }
+}
+
 export function updateGroupData (groupData) {
   return {
     type: UPDATE_GROUP_DATA,
@@ -108,6 +122,10 @@ export function getGroupData (state) {
 
 export function getGroupUrlExists (state) {
   return state[MODULE_NAME].urlExists
+}
+
+export function getContinueButtonProps (state) {
+  return state[MODULE_NAME].continueButtonProps
 }
 
 export function getEdited (state) {

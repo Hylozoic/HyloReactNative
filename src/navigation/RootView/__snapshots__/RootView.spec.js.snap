@@ -182,7 +182,7 @@ exports[`Navigation Specification renders Login when signedIn false 1`] = `
                                       onChangeText={[Function]}
                                       onSubmitEditing={[Function]}
                                       returnKeyType="next"
-                                      underlineColorAndroid="rgba(0,0,0,0)"
+                                      underlineColorAndroid="transparent"
                                     />
                                   </View>
                                   <View />
@@ -220,7 +220,7 @@ exports[`Navigation Specification renders Login when signedIn false 1`] = `
                                       returnKeyType="go"
                                       secureTextEntry={true}
                                       selectTextOnFocus={true}
-                                      underlineColorAndroid="rgba(0,0,0,0)"
+                                      underlineColorAndroid="transparent"
                                     />
                                   </View>
                                   <View>

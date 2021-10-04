@@ -75,6 +75,8 @@ export function ModalHeader ({
   route,
   options,
   back,
+  headerLeft,
+  headerRight,
   // custom props
   headerLeftCloseIcon: providedHeaderLeftCloseIcon = true,
   headerLeftLabel,
@@ -107,7 +109,7 @@ export function ModalHeader ({
       fontFamily: 'Circular-Bold'
       // maxWidth: '80%'
     },
-    headerLeft: props => {
+    headerLeft: headerLeft || (props => {
       // get go back function from navigation
       const headerLeftOnPress = providedHeaderLeftOnPress
         ? providedHeaderLeftOnPress
@@ -126,14 +128,14 @@ export function ModalHeader ({
             : <HeaderBackButton {...props} label={label} onPress={onPress} />}
         </>
       )
-    },
-    headerRight: () => headerRightButtonOnPress && (
+    }),
+    headerRight: headerRight || (() => headerRightButtonOnPress && (
       <HeaderRightButton
         label={headerRightButtonLabel}
         onPress={headerRightButtonOnPress}
         disabled={headerRightButtonDisabled}
       />
-    )
+    ))
   }
 
   return <Header {...props} {...otherProps} />
@@ -144,7 +146,7 @@ export const WorkflowModalHeader = props => {
     headerBackTitleVisible={false}
     headerLeftCloseIcon={false}
     headerStyle={{
-      backgroundColor: caribbeanGreen,
+      backgroundColor: props?.style?.backgroundColor || caribbeanGreen,
       shadowColor: 'transparent'          
     }}
     headerTitleStyle={{
@@ -154,7 +156,7 @@ export const WorkflowModalHeader = props => {
     }}
     headerTintColor={white60onCaribbeanGreen}
     statusBarOptions={{
-      backgroundColor: caribbeanGreen,
+      backgroundColor: props?.style?.backgroundColor || caribbeanGreen,
       barStyle: 'light-content'
     }}
     {...props}

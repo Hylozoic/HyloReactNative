@@ -14,7 +14,6 @@ export default function Button (props) {
     disabled
   } = props
   const {
-    color = white,
     borderRadius = 100,
     borderColor = white,
     fontSize = 13,
@@ -35,6 +34,9 @@ export default function Button (props) {
   const backgroundColor = disabled
     ? providedStyles.disabledBackgroundColor
     : providedStyles.backgroundColor || caribbeanGreen
+  const color = disabled
+    ? providedStyles.disabledColor
+    : providedStyles.color || white
   const buttonStyle = { ...styles.button, backgroundColor, height, borderRadius, borderColor }
   const textStyle = { ...styles.text, color, fontSize }
   const iconStyle = { ...styles.icon, color, ...providedStyles.icon }

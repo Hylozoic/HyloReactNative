@@ -150,14 +150,14 @@ exports[`InvitePeople renders SendInvitesPage 1`] = `
       <TextInput
         onChangeText={[Function]}
         placeholder="Type email addresses"
-        underlineColorAndroid="rgba(0,0,0,0)"
+        underlineColorAndroid="transparent"
         value=""
       />
       <TextInput
         multiline={true}
         numberOfLines={5}
         onChangeText={[Function]}
-        underlineColorAndroid="rgba(0,0,0,0)"
+        underlineColorAndroid="transparent"
         value="Hey! Here's an invite to the Axolotle group on Hylo."
       />
       <Button

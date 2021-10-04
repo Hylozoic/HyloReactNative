@@ -156,6 +156,5 @@ export default {
   allowGroupInvitesSwitch: {
     paddingLeft: 14,
     marginTop: -6
-  },
-  androidInvisibleUnderline: 'rgba(0,0,0,0)'
+  }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 import Triangle from 'react-native-triangle'
-import { white } from 'style/colors'
+import { amaranth, white } from 'style/colors'
 import { get } from 'lodash/fp'
 
 export default function ErrorBubble ({
@@ -52,7 +52,7 @@ const styles = {
     marginTop: -1
   },
   errorText: {
-    color: 'red',
+    color: amaranth,
     textAlign: 'center',
     fontWeight: 'bold'
   },
