@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 // Required for react-native-root-toast
 import { RootSiblingParent } from 'react-native-root-siblings'
 import { Provider } from 'react-redux'
-import { AppRegistry, Platform, AppState } from 'react-native'
+import { AppRegistry, Platform, AppState, UIManager } from 'react-native'
 import Timer from 'react-native-background-timer'
 import * as Sentry from '@sentry/react-native'
 import OneSignal from 'react-native-onesignal'
@@ -18,6 +18,11 @@ import RootView from 'navigation/RootView'
 
 if (!isDev) {
   Sentry.init({ dsn: process.env.SENTRY_DSN_URL })
+}
+
+// For Layout animation support: https://reactnative.dev/docs/layoutanimation
+if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
 if (Platform.OS === 'android') {

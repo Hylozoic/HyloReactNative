@@ -50,7 +50,7 @@ export default {
     marginVertical: isIOS ? 10 : 1,
   },
   errorBubble: {
-    marginTop: 8
+    marginTop: -8
   },
   textInputWithButton: {
     display: 'flex',

@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View } from 'react-native'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { LayoutAnimation, View, Animated, Keyboard } from 'react-native'
 import Button from 'components/Button'
 import { useSelector } from 'react-redux'
 import { getWorkflowOptions } from 'screens/CreateGroupFlow/CreateGroupFlow.store'
@@ -7,6 +7,7 @@ import { isIOS } from 'util/platform'
 import {
   caribbeanGreen, rhino30, white, white20onCaribbeanGreen, white40onCaribbeanGreen
 } from 'style/colors'
+import { useKeyboard } from '@react-native-community/hooks'
 
 export default function CreateGroupTabBar ({ state, descriptors, navigation }) {
   const workflowOptions = useSelector(getWorkflowOptions)
@@ -15,6 +16,29 @@ export default function CreateGroupTabBar ({ state, descriptors, navigation }) {
   const prevStepScreenName = state.routeNames[state.index - 1]
   const nextStepScreenName = state.routeNames[state.index + 1]
   const currentStepRouteKey = state.routes[state.index].key
+  const keyboard = useKeyboard()
+  const [keyboardWillShow, setKeyboardWillShow] = useState(false)
+
+  useEffect(() => {
+    const willShowSubscription = Keyboard.addListener('keyboardWillShow', (e) => {
+      LayoutAnimation.configureNext(LayoutAnimation.create(
+        e.duration,
+        LayoutAnimation.Types[e.easing]
+      ))
+      setKeyboardWillShow(true)
+    })
+    const willHideSubscription = Keyboard.addListener('keyboardWillHide', (e) => {
+      LayoutAnimation.configureNext(LayoutAnimation.create(
+        e.duration,
+        LayoutAnimation.Types[e.easing]
+      ))
+      setKeyboardWillShow(false)      
+    })
+    return () => {
+      willShowSubscription.remove()
+      willHideSubscription.remove()
+    }
+  }, [])
 
   const gotoPrevStep = () => {
     setCompleteButtonDisabled(false)
@@ -33,8 +57,12 @@ export default function CreateGroupTabBar ({ state, descriptors, navigation }) {
     setCompleteButtonDisabled(true)
   }
 
+  const keyboardAdjustedHeight = keyboardWillShow
+    ? keyboard.keyboardHeight + (isIOS ? 60 : 40)
+    : (isIOS ? 80 : 60)
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { height: keyboardAdjustedHeight }]}>
       {prevStepScreenName && (
         <Button
           text='< Back'
@@ -66,7 +94,7 @@ const styles = {
   container: {
     backgroundColor: white20onCaribbeanGreen,
     paddingTop: 10,
-    paddingBottom: isIOS ? 30 : 10,
+    // paddingBottom: isIOS ? 30 : 10,
     paddingHorizontal: 20,
     flexDirection: 'row',
     justifyContent: 'space-between'
@@ -77,8 +105,10 @@ const styles = {
     fontSize: 16,
     backgroundColor: white40onCaribbeanGreen,
     color: white,
+    paddingBottom: isIOS ? 30 : 10,
   },
   continueButton: {
+    paddingBottom: isIOS ? 30 : 10,
     marginLeft: 'auto',
     width: 134,
     height: 40,

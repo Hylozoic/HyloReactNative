@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useFocusEffect } from '@react-navigation/native'
 import { Text, View, ScrollView, TextInput } from 'react-native'
@@ -6,19 +6,30 @@ import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import ErrorBubble from 'components/ErrorBubble'
 import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
 import {
-  getGroupData, getEdited, updateGroupData, setWorkflowOptions
+  getGroupData, getEdited, updateGroupData, setWorkflowOptions,
+  clearCreateGroupStore
 } from './CreateGroupFlow.store'
 import styles from './CreateGroupFlow.styles'
 import { ALL_GROUP_ID } from 'store/models/Group'
+import getRouteParam from 'store/selectors/getRouteParam'
 
-export default function CreateGroupName ({ navigation }) {
+export default function CreateGroupName ({ navigation, route }) {
   const dispatch = useDispatch()
-  const groupData = useSelector(getGroupData)  
-  const [groupName, setGroupName] = useState(groupData.name)
+  const groupData = useSelector(getGroupData)
+  const [groupName, setGroupName] = useState()
   const [error, setError] = useState()
 
+  useEffect(() => {
+    const reset = getRouteParam('reset', route)
+    if (reset) {
+      dispatch(clearCreateGroupStore())
+      setGroupName('')
+    } else {
+      setGroupName(groupData?.name)
+    }
+  }, [])
+  
   useFocusEffect(useCallback(() => {
-    setGroupName(groupName)
     if (!groupName || groupName.length === 0) {
       dispatch(setWorkflowOptions({ disableContinue: true }))
     } else {
@@ -39,7 +50,7 @@ export default function CreateGroupName ({ navigation }) {
   }, [edited, currentGroupId]))
 
   return (
-    <KeyboardFriendlyView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView>
         <View style={styles.header}>
           <Text style={styles.heading}>Let's get started!</Text>
@@ -61,6 +72,6 @@ export default function CreateGroupName ({ navigation }) {
           {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
         </View>
       </ScrollView>
-    </KeyboardFriendlyView>
+    </View>
   )
 }

@@ -8,7 +8,7 @@ import { accessibilityDescription, visibilityDescription } from 'store/models/Gr
 import Avatar from 'components/Avatar'
 import { formatDomainWithUrl } from './util'
 import {
-  createGroup, clearCreateGroupStore,getGroupData,
+  createGroup, clearCreateGroupStore, getGroupData,
   getNewGroupParentGroups
 } from './CreateGroupFlow.store'
 import { white } from 'style/colors'

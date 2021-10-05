@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Text, View, ScrollView, TextInput } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { debounce } from 'lodash/fp'
 import ErrorBubble from 'components/ErrorBubble'
-import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import {
   slugValidatorRegex, invalidSlugMessage,
   formatDomainWithUrl, removeDomainFromURL
@@ -17,8 +16,6 @@ import styles from './CreateGroupFlow.styles'
 
 export default function CreateGroupUrl ({ navigation }) {
   const dispatch = useDispatch()
-  // const pending = useSelector(state => isPendingFor(fetchGroupExists, state))
-  // const canContinue = useSelector(getCanContinue)
   const groupData = useSelector(getGroupData)
   const [error, providedSetError] = useState()
   const [groupSlug, setGroupSlug] = useState(groupData?.slug)
@@ -68,7 +65,7 @@ export default function CreateGroupUrl ({ navigation }) {
   }, [groupSlug]))
 
   return (
-    <KeyboardFriendlyView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView>
         <View style={styles.header}>
           <Text style={styles.heading}>Choose an address for your group</Text>
@@ -90,6 +87,6 @@ export default function CreateGroupUrl ({ navigation }) {
           {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
         </View>
       </ScrollView>
-    </KeyboardFriendlyView>
+    </View>
   )
 }

@@ -15,9 +15,20 @@ const CreateGroupTabs = createBottomTabNavigator()
 export default function CreateGroupTabsNavigator () {
   const navigatorProps = {
     tabBar: props => <CreateGroupTabBar {...props} />,
+    // NOTE: This is how to have back button functionality
+    // backBehavior: 'order',
     screenOptions: {
-      header: headerProps => <WorkflowModalHeader {...headerProps} style={{backgroundColor: white20onCaribbeanGreen }} />
-    },
+      header: headerProps => {
+        const { navigation } = headerProps
+        const close = () => navigation.navigate('Drawer')
+        return <WorkflowModalHeader
+          {...headerProps}
+          headerLeftCloseIcon
+          headerLeftOnPress={close}
+          style={{ backgroundColor: white20onCaribbeanGreen }}
+        />
+      }
+    }
   }
   return (
     <CreateGroupTabs.Navigator {...navigatorProps}>
