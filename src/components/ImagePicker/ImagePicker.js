@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { View } from 'react-native'
 import Icon from 'components/Icon'
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker'
@@ -19,58 +19,56 @@ if you don't pass any children, icons of an image and a clock will be shown for
 non-pending and pending states respectively
 */
 
-export default class ImagePicker extends Component {
-  state = { pending: false }
+export default function ImagePicker (props) {
+  const { onPendingChange, style, iconStyle, disabled } = props  
+  const [pending, providedSetPending] = useState(false)
 
-  setPending (pending) {
-    const { onPendingChange } = this.props
-    this.setState({ pending })
+  const setPending = pending => {
+    providedSetPending(pending)
     onPendingChange && onPendingChange(pending)
   }
 
-  showPicker = () => {
-    if (this.state.pending) return
+  const showPicker = async () => {
+    if (pending) return
     
-    this.setPending(true)
-    showImagePicker({
-      ...this.props,
-      onCancel: () => this.setPending(false),
-      onComplete: () => this.setPending(false)
+    setPending(true)
+    await showImagePicker({
+      ...props,
+      includeExif: true,
+      onCancel: () => setPending(false),
+      onComplete: () => setPending(false)
     })
   }
 
-  showPickerCamera = () => {
-    if (this.state.pending) return
+  const showPickerCamera = async () => {
+    if (pending) return
 
-    this.setPending(true)
-    showImagePickerCamera({
-      ...this.props,
-      onCancel: () => this.setPending(false),
-      onComplete: () => this.setPending(false)
+    setPending(true)
+    await showImagePickerCamera({
+      ...props,
+      includeExif: true,
+      compressImageQuality: 0.99,
+      onCancel: () => setPending(false),
+      onComplete: () => setPending(false)
     })
   }
 
-  render () {
-    let { children, style, iconStyle, disabled } = this.props
-    const { pending } = this.state
-    const MenuElement = (disabled || pending) ? View : PopupMenuButton
-    const imagePickerOptions = [
-      ['Choose from library', this.showPicker],
-      ['Take photo', this.showPickerCamera]
-    ]
+  const MenuElement = (disabled || pending)
+    ? View
+    : PopupMenuButton
+  const imagePickerOptions = [
+    ['Choose from library', showPicker],
+    ['Take photo', showPickerCamera]
+  ]
+  const children = pending
+    ? <Icon name='Clock' style={[styles.icon, iconStyle]} />
+    : <Icon name='AddImage' style={[styles.icon, iconStyle]} />
 
-    if (!children) {
-      children = pending
-        ? <Icon name='Clock' style={[styles.icon, iconStyle]} />
-        : <Icon name='AddImage' style={[styles.icon, iconStyle]} />
-    }
-
-    return (
-      <MenuElement actions={imagePickerOptions} style={style}>
-        {children}
-      </MenuElement>
-    )
-  }
+  return (
+    <MenuElement actions={imagePickerOptions} style={style}>
+      {props.children || children}
+    </MenuElement>
+  )
 }
 
 export async function showImagePickerCamera (params) {

@@ -1,5 +1,5 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { LayoutAnimation, View, Animated, Keyboard } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { LayoutAnimation, View, Keyboard } from 'react-native'
 import Button from 'components/Button'
 import { useSelector } from 'react-redux'
 import { getWorkflowOptions } from 'screens/CreateGroupFlow/CreateGroupFlow.store'
@@ -94,7 +94,6 @@ const styles = {
   container: {
     backgroundColor: white20onCaribbeanGreen,
     paddingTop: 10,
-    // paddingBottom: isIOS ? 30 : 10,
     paddingHorizontal: 20,
     flexDirection: 'row',
     justifyContent: 'space-between'
@@ -103,16 +102,16 @@ const styles = {
     width: 100,
     height: 40,
     fontSize: 16,
-    backgroundColor: white40onCaribbeanGreen,
-    color: white,
     paddingBottom: isIOS ? 30 : 10,
+    color: white,
+    backgroundColor: white40onCaribbeanGreen
   },
   continueButton: {
-    paddingBottom: isIOS ? 30 : 10,
-    marginLeft: 'auto',
     width: 134,
     height: 40,
     fontSize: 16,
+    paddingBottom: isIOS ? 30 : 10,
+    marginLeft: 'auto',
     color: caribbeanGreen,
     backgroundColor: white,
     disabledColor: white,
