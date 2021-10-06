@@ -39,17 +39,17 @@ export default function CreateGroupParentGroups ({ navigation }) {
 
   return (
     <KeyboardFriendlyView style={styles.container}>
-        <Text style={styles.heading}>Is this group a member of other groups?</Text>
-        <Text style={stepStyles.subHeading}>Please select below:</Text>
-        {/* TODO: Is this a good use of FlatList? */}
-        <FlatList style={stepStyles.parentGroupListContainer} data={parentGroupOptions}
-          renderItem={({ item }) => (
-            <ItemChooserItemRow item={item} chosen={isChosen(item)} toggleChosen={toggleChosen} />
-          )
-        } />
-        <TouchableOpacity onPress={clear}>
-          <Text style={stepStyles.clearButton}>Clear</Text>
-        </TouchableOpacity>
+      <Text style={styles.heading}>Is this group a member of other groups?</Text>
+      <Text style={stepStyles.subHeading}>Please select below:</Text>
+      {/* TODO: Is this a good use of FlatList? */}
+      <FlatList style={stepStyles.parentGroupListContainer} data={parentGroupOptions}
+        renderItem={({ item }) => (
+          <ItemChooserItemRow item={item} chosen={isChosen(item)} toggleChosen={toggleChosen} />
+        )
+      } />
+      <TouchableOpacity onPress={clear}>
+        <Text style={stepStyles.clearButton}>Clear</Text>
+      </TouchableOpacity>
     </KeyboardFriendlyView>
   )
 }
