@@ -8,8 +8,6 @@ import styles from './SignupFlow3.styles'
 
 export default function SignupFlow3 ({
   location, saveAndNext: providedSaveAndNext, navigation, changeSetting
-
-
 }) {
   const controlRef = useRef()
 
