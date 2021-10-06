@@ -51,7 +51,7 @@ export default function CreateGroupName ({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
         <View style={styles.header}>
           <Text style={styles.heading}>Let's get started!</Text>
           <Text style={styles.description}>All good things start somewhere! Let's kick things off with a catchy name for your group.</Text>

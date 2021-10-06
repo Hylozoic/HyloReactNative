@@ -90,6 +90,12 @@ export default function CreateGroupTabBar ({ state, descriptors, navigation }) {
   )
 }
 
+const buttonStyle = {
+  height: 40,
+  fontSize: 16,
+  paddingBottom: isIOS ? 30 : 10
+}
+
 const styles = {
   container: {
     backgroundColor: white20onCaribbeanGreen,
@@ -99,18 +105,14 @@ const styles = {
     justifyContent: 'space-between'
   },
   backButton: {
+    ...buttonStyle,
     width: 100,
-    height: 40,
-    fontSize: 16,
-    paddingBottom: isIOS ? 30 : 10,
     color: white,
     backgroundColor: white40onCaribbeanGreen
   },
   continueButton: {
+    ...buttonStyle,
     width: 134,
-    height: 40,
-    fontSize: 16,
-    paddingBottom: isIOS ? 30 : 10,
     marginLeft: 'auto',
     color: caribbeanGreen,
     backgroundColor: white,
@@ -118,18 +120,3 @@ const styles = {
     disabledBackgroundColor: rhino30
   }
 }
-
-// const onPress = () => {
-//   const event = navigation.emit({
-//     type: 'tabPress',
-//     target: currentStepRouteKey,
-//     canPreventDefault: true,
-//     data: {
-//       nextStepScreenName
-//     }
-//   })
-//   if (!event.defaultPrevented) {
-//     navigation.navigate({ name: nextStepScreenName, merge: true })
-//   }
-// }
-
