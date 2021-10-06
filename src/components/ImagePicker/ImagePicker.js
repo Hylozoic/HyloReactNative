@@ -84,11 +84,13 @@ export async function showImagePicker ({
   type,
   id = 'new',
   upload,
-  selectionLimit = 1
+  selectionLimit = 1,
+  cameraType = 'back'
 }) {
   const pickerOptions = {
     selectionLimit,
-    mediaType: 'photo'
+    mediaType: 'photo',
+    cameraType
   }
 
   pickerFunc(pickerOptions, async result => {
