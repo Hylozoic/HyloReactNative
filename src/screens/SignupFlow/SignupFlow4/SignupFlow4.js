@@ -13,6 +13,7 @@ import SettingControl from 'components/SettingControl'
 import Button from 'components/Button'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 import styles from './SignupFlow4.styles'
+import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 
 export default class SignupFlow4 extends React.Component {
   state = {
@@ -99,13 +100,13 @@ export default class SignupFlow4 extends React.Component {
   render () {
     const {
       name, email, password, confirmPassword, location, avatarUrl, skills,
-      makeChanges, showPasswordField, goToImage
+      showPasswordField, goToImage, navigation
     } = this.props
     const { errors } = this.state
 
     return (
-      <View style={styles.container}>
-        <ScrollView>
+      <KeyboardFriendlyView style={styles.container}>
+        <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
           <View style={styles.header}>
             <Text style={styles.title}>Everything looking good?</Text>
             <Text style={styles.subTitle}>
@@ -167,20 +168,20 @@ export default class SignupFlow4 extends React.Component {
               onFocus={() => this.showLocationPicker(location)}
             />
           </View>
-          <View style={styles.footer}>
-            <Button
-              style={styles.changesButton}
-              text='Make Changes'
-              onPress={makeChanges}
-            />
-            <Button
-              style={styles.continueButton}
-              text='Finish'
-              onPress={this.finishSignup}
-            />
-          </View>
         </ScrollView>
-      </View>
+        <View style={styles.bottomBar}>
+          <Button
+            style={styles.backButton}
+            text='< Back'
+            onPress={() => navigation.goBack()}
+          />
+          <Button
+            style={styles.continueButton}
+            text='Finish'
+            onPress={this.finishSignup}
+          />
+        </View>
+      </KeyboardFriendlyView>
     )
   }
 }

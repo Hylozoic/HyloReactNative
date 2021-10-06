@@ -1,42 +1,38 @@
-import React from 'react'
-import { View, Image, Text } from 'react-native'
+import React, { useState } from 'react'
+import { ScrollView, View, Image, Text } from 'react-native'
+import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import ImagePicker from 'components/ImagePicker'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import styles from './SignupFlow2.styles'
 
-export default class SignupFlow2 extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      localUri: null,
-      imagePickerPending: false
-    }
+export default function SignupFlow2 ({
+  currentUser, saveAndNext, avatarUrl, changeSetting, navigation
+}) {
+  const [localUri, setLocalUri] = useState(null)
+  const [imagePickerPending, setImagePickerPending] = useState(false)
+
+  const imageSource = localUri
+    ? { uri: localUri }
+    : avatarUrl && { uri: avatarUrl }  
+
+  const imagePickerChildren = imageSource && !imagePickerPending
+    ? <Image style={styles.image} source={imageSource} />
+    : (
+      <View style={styles.imagePickerBackground}>
+        {imagePickerPending ? <Loading /> : <Icon name='AddImage' style={styles.cameraIcon} />}
+      </View>
+    )
+
+  const onChoice = ({ local, remote }) => {
+    changeSetting('avatarUrl')(remote)
+    setLocalUri(local)
   }
 
-  onChoice ({ local, remote }) {
-    this.props.changeSetting('avatarUrl')(remote)
-    this.setState({ localUri: local })
-  }
-
-  render () {
-    const { currentUser, saveAndNext, avatarUrl } = this.props
-    const { localUri, imagePickerPending } = this.state
-    const imageSource = localUri
-      ? { uri: localUri }
-      : avatarUrl && { uri: avatarUrl }
-
-    const imagePickerChildren = imageSource && !imagePickerPending
-      ? <Image style={styles.image} source={imageSource} />
-      : (
-        <View style={styles.imagePickerBackground}>
-          {imagePickerPending ? <Loading /> : <Icon name='AddImage' style={styles.cameraIcon} />}
-        </View>
-        )
-
-    return (
-      <View style={styles.container}>
+  return (
+    <KeyboardFriendlyView style={styles.container}>
+      <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
         <View style={styles.header}>
           <Text style={styles.title}>Upload a Photo</Text>
         </View>
@@ -45,19 +41,24 @@ export default class SignupFlow2 extends React.Component {
             type='userAvatar'
             cameraType='front'
             id={currentUser.id}
-            onChoice={choice => this.onChoice(choice)}
-            onPendingChange={pending => this.setState({ imagePickerPending: pending })}
+            onChoice={choice => onChoice(choice)}
+            onPendingChange={pending => setImagePickerPending(pending)}
             children={imagePickerChildren}
           /> 
         </View>
-        <View style={styles.footer}>
-          <Button
-            style={styles.continueButton}
-            text='Continue'
-            onPress={saveAndNext}
-          />
-        </View>
+      </ScrollView>
+      <View style={styles.bottomBar}>
+        <Button
+          style={styles.backButton}
+          text='< Back'
+          onPress={() => navigation.goBack()}
+        />
+        <Button
+          style={styles.continueButton}
+          text='Continue'
+          onPress={saveAndNext}
+        />
       </View>
-    )
-  }
+    </KeyboardFriendlyView>
+  )
 }

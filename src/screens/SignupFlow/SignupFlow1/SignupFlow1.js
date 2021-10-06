@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { View, Text } from 'react-native'
 import SettingControl from 'components/SettingControl'
 import Button from 'components/Button'
@@ -7,74 +7,54 @@ import { validateUser } from 'hylo-utils/validators'
 import validator from 'validator'
 import { any, values } from 'lodash/fp'
 import styles from './SignupFlow1.styles'
+import { ScrollView } from 'react-native-gesture-handler'
 
-export default class SignupFlow1 extends React.Component {
-  componentDidMount () {
-    const { currentUser, loadUserSettings } = this.props
-    // this is for the case where they logged in but hadn't finished sign up
-    if (currentUser) loadUserSettings()
-  }
-
-  componentDidUpdate (prevProps) {
-    if (prevProps.errors !== this.props.errors) {
-      this.setState({
-        errors: {
-          ...this.state.errors,
-          ...this.props.errors
-        }
-      })
-    }
-  }
-
-  constructor (props) {
-    super(props)
-    this.state = {
-      errors: {
-        name: null,
-        email: null,
-        password: null
-      }
-    }
-    this.emailControlRef = React.createRef()
-    this.passwordControlRef = React.createRef()
-    this.confirmPasswordControlRef = React.createRef()
-  }
-
-  validate () {
-    const { name, email, password, confirmPassword, showPasswordField } = this.props
-    const errors = {
+export default function SignupFlow1 ({
+  currentUser, loadUserSettings, errors: errorsFromStore,
+  name, email, password, confirmPassword, pending,
+  showPasswordField, signupOrUpdate, changeSetting
+}) {  
+  const emailControlRef = useRef()
+  const passwordControlRef = useRef()
+  const confirmPasswordControlRef = useRef()
+  const [errors, setErrors] = useState({
+    name: null,
+    email: null,
+    password: null,
+    ...errorsFromStore
+  })
+  const validate = () => {
+    setErrors({
       name: validateUser.name(name),
       email: !validator.isEmail(email) && 'Must be a valid email',
       password: showPasswordField && validateUser.password(password),
       confirmPassword: password !== confirmPassword && 'Passwords must match'
-    }
-    this.setState({ errors })
+    })
+
     return !any(i => i, values(errors))
   }
-
-  submit = () => {
-    if (this.props.pending) return
-    if (this.validate()) {
-      this.props.signupOrUpdate()
+  const submit = () => {
+    if (pending) return
+    if (validate()) {
+      signupOrUpdate()
     }
   }
-
-  updateField (field, value) {
-    this.setState({
-      errors: {
-        ...this.state.errors,
-        [field]: null
-      }
+  const updateField = (field, value) => {
+    setErrors({
+      ...errors,
+      [field]: null
     })
-    this.props.changeSetting(field, value)
+    changeSetting(field, value)
   }
 
-  render () {
-    const { name, email, password, confirmPassword, pending, showPasswordField } = this.props
-    const { errors } = this.state
-  
-    return (
-      <KeyboardFriendlyView style={styles.container}>
+  // this is for the case where they logged in but hadn't finished sign up
+  useEffect(() => {
+    if (currentUser) loadUserSettings()
+  }, [])
+    
+  return (
+    <KeyboardFriendlyView style={styles.container}>
+      <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
         <View style={styles.header}>
           <Text style={styles.title}>Hi there stranger!</Text>
           <Text style={styles.subTitle}>
@@ -85,57 +65,57 @@ export default class SignupFlow1 extends React.Component {
           <SettingControl
             label='Your Full Name'
             value={name}
-            onChange={value => this.updateField('name', value)}
+            onChange={value => updateField('name', value)}
             error={errors.name}
             returnKeyType='next'
-            onSubmitEditing={() => this.emailControlRef.current.focus()}
+            onSubmitEditing={() => emailControlRef.current.focus()}
           />
           <SettingControl
-            ref={this.emailControlRef}
+            ref={emailControlRef}
             label='Email Address'
             value={email}
             keyboardType='email-address'
             autoCapitalize='none'
             autoCorrect={false}
-            onChange={value => this.updateField('email', value)}
+            onChange={value => updateField('email', value)}
             error={errors.email}
             returnKeyType='next'
-            onSubmitEditing={() => this.passwordControlRef.current.focus()}
+            onSubmitEditing={() => passwordControlRef.current.focus()}
           />
           {showPasswordField && (
             <SettingControl
-              ref={this.passwordControlRef}
+              ref={passwordControlRef}
               label='Password'
               value={password}
-              onChange={value => this.updateField('password', value)}
+              onChange={value => updateField('password', value)}
               toggleSecureTextEntry
               error={errors.password}
               returnKeyType='next'
-              onSubmitEditing={() => this.confirmPasswordControlRef.current.focus()}
+              onSubmitEditing={() => confirmPasswordControlRef.current.focus()}
             />
           )}
           {showPasswordField && (
             <SettingControl
-              ref={this.confirmPasswordControlRef}
+              ref={confirmPasswordControlRef}
               label='Confirm Password'
               value={confirmPassword}
-              onChange={value => this.updateField('confirmPassword', value)}
+              onChange={value => updateField('confirmPassword', value)}
               toggleSecureTextEntry
               error={errors.confirmPassword}
               returnKeyType='go'
-              onSubmitEditing={this.submit}
+              onSubmitEditing={submit}
             />
           )}
         </View>
-        <View style={styles.footer}>
-          <Button
-            style={styles.continueButton}
-            text={pending ? 'Saving...' : 'Continue'}
-            onPress={this.submit}
-            disabled={!!pending}
-          />
-        </View>
-      </KeyboardFriendlyView>
-    )
-  }
+      </ScrollView>
+      <View style={styles.bottomBar}>
+        <Button
+          style={styles.continueButton}
+          text={pending ? 'Saving...' : 'Continue'}
+          onPress={submit}
+          disabled={!!pending}
+        />
+      </View>
+    </KeyboardFriendlyView>
+  )
 }

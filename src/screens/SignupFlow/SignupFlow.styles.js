@@ -1,27 +1,28 @@
-import { caribbeanGreen, white80onCaribbeanGreen, white60onCaribbeanGreen } from 'style/colors'
+import { caribbeanGreen, white80onCaribbeanGreen, white60onCaribbeanGreen, white20onCaribbeanGreen, white40onCaribbeanGreen, white, rhino30 } from 'style/colors'
+import { isIOS } from 'util/platform'
+
+const buttonStyle = {
+  height: 40,
+  fontSize: 16
+}
 
 export default {
-  // From Group create flow
   container: {
     backgroundColor: caribbeanGreen,
-    padding: 20,
-    paddingBottom: 0,
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-end'
   },
-  header: {},
+  header: {
+    paddingTop: 20,
+    marginBottom: 30,
+    paddingHorizontal: 20
+  },
   content: {
-    flexGrow: 1
-  },
-  footer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    paddingBottom: 40
+    flexGrow: 1,
+    paddingHorizontal: 20
   },
 
   // 
-
   title: {
     color: 'white',
     fontSize: 20,
@@ -31,18 +32,40 @@ export default {
   subTitle: {
     color: white80onCaribbeanGreen,
     fontSize: 14,
-    fontFamily: 'Circular-Book',
-    marginBottom: 38
+    fontFamily: 'Circular-Book'
+  },
+
+  // 
+  bottomBar: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    paddingBottom: isIOS ? 30 : 10,
+    paddingTop: 10,
+    paddingHorizontal: 10,
+    backgroundColor: white20onCaribbeanGreen
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+    paddingBottom: 20
+  },
+  backButton: {
+    ...buttonStyle,
+    width: 100,
+    color: white,
+    backgroundColor: white40onCaribbeanGreen,
   },
   continueButton: {
+    ...buttonStyle,
+    width: 134,
+    marginLeft: 'auto',
     color: caribbeanGreen,
-    backgroundColor: 'white',
-    disabledBackgroundColor: white60onCaribbeanGreen,
-    height: 38,
-    width: 132,
-    fontSize: 16,
-    marginLeft: 'auto'
+    backgroundColor: white,
+    disabledColor: white,
+    disabledBackgroundColor: rhino30  
   },
+
   // 
   headerStyle: {
     backgroundColor: caribbeanGreen,
