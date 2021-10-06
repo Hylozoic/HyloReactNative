@@ -21,27 +21,5 @@ export default {
     height: 90,
     borderRadius: 45,
     marginHorizontal: 'auto'
-  },
-  skillsLabel: {
-    ...controlStyles.label,
-    marginBottom: 10
-  },
-  skillCloud: {
-    justifyContent: 'flex-start',
-    paddingHorizontal: 0
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 10,
-    paddingBottom: 20
-  },
-  changesButton: {
-    ...styles.continueButton,
-    backgroundColor: white40onCaribbeanGreen,
-    borderColor: 'white',
-    color: 'white',
-    fontSize: 14,
-    marginLeft: 0
   }
 }

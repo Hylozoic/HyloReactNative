@@ -3,11 +3,10 @@ import loginStyles from 'screens/Login/Login.styles'
 import { caribbeanGreen } from 'style/colors'
 
 const bgImageWidth = Dimensions.get('window').width
-const bgImageHeight = bgImageWidth * 0.6
+const bgImageHeight = Dimensions.get('window').height * 0.25
 
 export default {
   container: {
-    flex: 1,
     backgroundColor: 'white'
   },
   banner: loginStyles.banner,
@@ -15,7 +14,8 @@ export default {
   background: {
     width: bgImageWidth,
     height: bgImageHeight,
-    justifyContent: 'center',
+    paddingBottom: bgImageHeight * 0.2,
+    justifyContent: 'flex-end',
     alignItems: 'center'
   },
   backgroundImage: {

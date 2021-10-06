@@ -19,8 +19,7 @@ export default function CreateGroupTabsNavigator () {
     // backBehavior: 'order',
     screenOptions: {
       header: headerProps => {
-        const { navigation } = headerProps
-        const close = () => navigation.navigate('Drawer')
+        const close = () => headerProps.navigation.navigate('Drawer')
         return <WorkflowModalHeader
           {...headerProps}
           headerLeftCloseIcon
@@ -30,6 +29,7 @@ export default function CreateGroupTabsNavigator () {
       }
     }
   }
+
   return (
     <CreateGroupTabs.Navigator {...navigatorProps}>
       <CreateGroupTabs.Screen

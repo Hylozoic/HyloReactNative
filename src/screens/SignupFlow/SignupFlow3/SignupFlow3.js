@@ -1,22 +1,22 @@
-import React from 'react'
-import { View, ScrollView, Text } from 'react-native'
+import React, { useRef } from 'react'
+import { ScrollView, View, Text } from 'react-native'
+import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
 import SettingControl from 'components/SettingControl'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 import styles from './SignupFlow3.styles'
 
+export default function SignupFlow3 ({
+  location, saveAndNext: providedSaveAndNext, navigation, changeSetting
+}) {
+  const controlRef = useRef()
 
-export default class SignupFlow3 extends React.Component {
-  controlRef = React.createRef()
-
-  saveAndNext = () => {
-    this.controlRef.current && this.controlRef.current.blur()
-    this.props.saveAndNext()
+  const saveAndNext = () => {
+    controlRef.current && controlRef.current.blur()
+    providedSaveAndNext()
   }
 
-  showLocationPicker = locationText  => {
-    const { navigation, changeSetting } = this.props
-
+  const showLocationPicker = locationText  => {
     LocationPicker({
       navigation,
       initialSearchTerm: locationText,
@@ -26,13 +26,10 @@ export default class SignupFlow3 extends React.Component {
       }
     })
   }
-
-  render () {
-    const { location } = this.props
-
-    return (
-      <View style={styles.container}>
-        <View styles={styles.header}>
+  return (
+    <KeyboardFriendlyView style={styles.container}>
+      <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
+        <View style={styles.header}>
           <Text style={styles.title}>Add your location</Text>
           <Text style={styles.subTitle}>
             Add your location to see more relevant content and find people and projects near you.
@@ -40,20 +37,25 @@ export default class SignupFlow3 extends React.Component {
         </View>
         <View style={styles.content}>
           <SettingControl
-            ref={this.controlRef}
+            ref={controlRef}
             label='Where do you call home'
             value={location}
-            onFocus={() => this.showLocationPicker(location)}
+            onFocus={() => showLocationPicker(location)}
           />
         </View>
-        <View style={styles.footer}>
-          <Button
-            style={styles.continueButton}
-            text='Continue'
-            onPress={this.saveAndNext}
-          />
-        </View>
+      </ScrollView>
+      <View style={styles.bottomBar}>
+      <Button
+          style={styles.backButton}
+          text='< Back'
+          onPress={() => navigation.goBack()}
+        />
+        <Button
+          style={styles.continueButton}
+          text='Continue'
+          onPress={saveAndNext}
+        />
       </View>
-    )
-  }
+    </KeyboardFriendlyView>
+  )
 }

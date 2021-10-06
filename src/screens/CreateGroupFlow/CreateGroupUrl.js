@@ -66,7 +66,7 @@ export default function CreateGroupUrl ({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
         <View style={styles.header}>
           <Text style={styles.heading}>Choose an address for your group</Text>
           <Text style={styles.description}>Your URL is the address that members will use to access your group online. The shorter the better!</Text>
