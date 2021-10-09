@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Text, View, TextInput, ScrollView } from 'react-native'
 import Clipboard from '@react-native-community/clipboard'
 import { isEmpty, compact } from 'lodash/fp'
+import { isIOS } from 'util/platform'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import fetchGroupSettings from 'store/actions/fetchGroupSettings'
@@ -118,6 +119,7 @@ export default function InvitePeople ({ navigation }) {
         <TextInput
           value={emailBodyText}
           multiline
+          textAlignVertical='top'
           numberOfLines={5}
           underlineColorAndroid='transparent'
           style={styles.textInput}
@@ -136,7 +138,7 @@ export default function InvitePeople ({ navigation }) {
             style={styles.sendInviteButton}
           />
         </View>
-        <KeyboardSpacer />
+        {isIOS && <KeyboardSpacer />}
       </ScrollView>
     </View>
   )

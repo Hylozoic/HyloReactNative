@@ -9,7 +9,6 @@ import {
   Image
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { isIOS } from 'util/platform'
 import validator from 'validator'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import AppleLoginButton from './AppleLoginButton'
@@ -160,11 +159,11 @@ export default class Login extends React.Component {
           </View>
           <View style={styles.connectWith}>
             <Text style={styles.connectWithText}>Or connect with:</Text>
-            {isIOS && <AppleLoginButton
+            <AppleLoginButton
               style={styles.appleLoginButton}
               onLoginFinished={loginWithApple}
               createErrorNotification={this.createErrorNotification}
-            />}
+            />
             <GoogleLoginButton
               style={styles.googleLoginButton}
               onLoginFinished={loginWithGoogle}

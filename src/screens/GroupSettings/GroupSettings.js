@@ -3,12 +3,11 @@ import { Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'reac
 import KeyboardSpacer from 'react-native-keyboard-spacer'
 import { some } from 'lodash/fp'
 import { showToast } from 'util/toast'
-import { ModalHeader } from 'navigation/headers'
+import { isIOS } from 'util/platform'
 import Loading from 'components/Loading'
 import ImagePicker from 'components/ImagePicker'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from 'assets/default-user-banner.jpg'
-import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import styles from './GroupSettings.styles'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 import Button from 'components/Button'
@@ -136,7 +135,7 @@ export default class GroupSettings extends React.Component {
         <View style={styles.buttonBarContainer}>
           <Button onPress={this.saveChanges} text='Save' style={styles.saveButton} />
         </View>
-        <KeyboardSpacer />
+        {isIOS && <KeyboardSpacer />}
       </View>
     )
   }

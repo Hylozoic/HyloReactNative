@@ -1,9 +1,8 @@
 import React, { useLayoutEffect } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import Icon from 'components/Icon'
 import { isIOS } from 'util/platform'
 import { ModalHeader } from 'navigation/headers'
 // Screens

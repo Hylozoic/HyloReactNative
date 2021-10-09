@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import appleAuth, { AppleButton } from '@invertase/react-native-apple-authentication'
+import { appleAuth, AppleButton } from '@invertase/react-native-apple-authentication'
 
 export async function onAppleButtonPress ({
   authorizedCallback,
