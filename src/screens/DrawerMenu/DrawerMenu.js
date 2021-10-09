@@ -11,7 +11,7 @@ import { bannerlinearGradientColors } from 'style/colors'
 export default function DrawerMenu ({
   topGroups, myGroups, goToGroup,
   currentGroup, currentGroupId, canModerateCurrentGroup,
-  goToCreateGroup, goToGroupSettingsMenu, goToInvitePeople
+  goToCreateGroup, goToGroupSettings, goToInvitePeople
 }) {
   const renderItem =  ({ item }) => (
     <GroupRow
@@ -51,7 +51,7 @@ export default function DrawerMenu ({
               <View style={styles.currentGroupButtons}>
                 <Button style={styles.currentGroupButton} 
                   iconName='Settings'
-                  onPress={goToGroupSettingsMenu}
+                  onPress={goToGroupSettings}
                   text='Settings' />
                 <Button style={styles.currentGroupButton} 
                   iconName='Invite'

@@ -1,9 +1,6 @@
-export const MODULE_NAME = 'GroupSettings'
-export const FETCH_GROUP_SETTINGS = `${MODULE_NAME}/FETCH_GROUP_SETTINGS`
-export const UPDATE_GROUP_SETTINGS = `${MODULE_NAME}/UPDATE_GROUP_SETTINGS`
-export const UPDATE_GROUP_SETTINGS_PENDING = UPDATE_GROUP_SETTINGS + '_PENDING'
+import { FETCH_GROUP_SETTINGS } from 'store/constants'
 
-export function fetchGroupSettings (id) {
+export default function fetchGroupSettings (id) {
   return {
     type: FETCH_GROUP_SETTINGS,
     graphql: {
@@ -77,36 +74,3 @@ export function fetchGroupSettings (id) {
   }
 }
 
-export function updateGroupSettings (id, changes) {
-  return {
-    type: UPDATE_GROUP_SETTINGS,
-    graphql: {
-      query: `mutation ($id: ID, $changes: GroupInput) {
-        updateGroupSettings(id: $id, changes: $changes) {
-          id
-          settings {
-            allowGroupInvites
-            askJoinQuestions
-            publicMemberDirectory
-          }
-          joinQuestions {
-            items {
-              id
-              questionId
-              text
-            }
-          }
-        }
-      }`,
-      variables: {
-        id, changes
-      }
-    },
-    meta: {
-      id,
-      changes,
-      extractModel: 'Group',
-      optimistic: true
-    }
-  }
-}

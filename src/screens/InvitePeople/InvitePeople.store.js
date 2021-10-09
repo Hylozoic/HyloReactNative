@@ -3,7 +3,6 @@ import orm from 'store/models'
 
 export const MODULE_NAME = 'InvitePeople'
 export const REGENERATE_ACCESS_CODE = `${MODULE_NAME}/REGENERATE_ACCESS_CODE`
-export const FETCH_GROUP_SETTINGS = `${MODULE_NAME}/FETCH_GROUP_SETTINGS`
 export const CREATE_INVITATIONS = `${MODULE_NAME}/CREATE_INVITATIONS`
 export const CREATE_INVITATIONS_PENDING = `${MODULE_NAME}/CREATE_INVITATIONS_PENDING`
 
@@ -17,42 +16,6 @@ export const REINVITE_ALL = `${MODULE_NAME}/REINVITE_ALL`
 export const REINVITE_ALL_PENDING = `${MODULE_NAME}/REINVITE_ALL_PENDING`
 
 export const ALLOW_GROUP_INVITES = `${MODULE_NAME}/ALLOW_GROUP_INVITES`
-
-export function fetchGroupSettings (groupId) {
-  return {
-    type: FETCH_GROUP_SETTINGS,
-    graphql: {
-      query: `query ($groupId: ID) {
-        group (id: $groupId) {
-          id
-          name
-          slug
-          invitePath
-          settings {
-            allowGroupInvites
-            askJoinQuestions
-            publicMemberDirectory
-          }
-          pendingInvitations (first: 100) {
-            hasMore
-            items {
-              id
-              email
-              createdAt
-              lastSentAt
-            }
-          }
-        }
-      }`,
-      variables: {
-        groupId
-      }
-    },
-    meta: {
-      extractModel: 'Group'
-    }
-  }
-}
 
 export function regenerateAccessCode (groupId) {
   return {

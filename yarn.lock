@@ -1552,6 +1552,14 @@
   resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-1.1.0.tgz#483155ccf5a8f18d015db283bed34cc2255e2e9e"
   integrity sha512-jZncciZPGuoP6B6f+Wpf6MYSSYy86B2HJDbFTCtT5xZV0w6V9GgCeqvSTOEAxifZrmKl8uDxsr0GrIxgQE8NxA==
 
+"@react-navigation/material-top-tabs@^6.0.4":
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/@react-navigation/material-top-tabs/-/material-top-tabs-6.0.4.tgz#01335d0cb3b62dc5f3b83ce1776362965d3f593a"
+  integrity sha512-SMrh0qWgo1TvaaZIk/hVcylvCEdM7FpH9Q7Bje4sL9IsibT5KV8570Pz08PjyUF8KeGE5Fco/+VullEDJmhb1g==
+  dependencies:
+    color "^3.1.3"
+    warn-once "^0.1.0"
+
 "@react-navigation/native@^6.0.2":
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-6.0.2.tgz#6bdb3cfafb6a9cfb603c1555dd61faafca35b7c2"
@@ -5662,11 +5670,6 @@ immutable-ops@^0.7.0:
     "@babel/runtime" "^7.0.0"
     ramda "^0.26.1"
 
-immutable@^3.8.1:
-  version "3.8.2"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
-  integrity sha1-wkOZUUVbs5kT2vKBN28VMOEErfM=
-
 import-fresh@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-2.0.0.tgz#d81355c15612d386c61f9ddd3922d4304822a546"
@@ -8676,6 +8679,11 @@ react-native-intercom@^21.1.0:
   resolved "https://registry.yarnpkg.com/react-native-intercom/-/react-native-intercom-21.1.0.tgz#624fdde1ffda90778b325024449c7b1f40b5231d"
   integrity sha512-FO9iCi8AIhMwVBdOAcb1jdJI+H90T+h/GqEGtxe3LHr+Z+197ZTD6ZKxjzQXYcgOx0ufMWdM+jviVFHVr44e7w==
 
+react-native-keyboard-spacer@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-keyboard-spacer/-/react-native-keyboard-spacer-0.4.1.tgz#46f18a320432098a25ea9fa89f5143dd254d332d"
+  integrity sha1-RvGKMgQyCYol6p+on1FD3SVNMy0=
+
 react-native-linear-gradient@^2.5.6:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
@@ -8743,14 +8751,6 @@ react-native-screens@^3.6.0:
   dependencies:
     warn-once "^0.1.0"
 
-react-native-tab-navigator@^0.3.4:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/react-native-tab-navigator/-/react-native-tab-navigator-0.3.4.tgz#54a18f1ad06a09d4a0de81ff00416bc1b760c960"
-  integrity sha1-VKGPGtBqCdSg3oH/AEFrwbdgyWA=
-  dependencies:
-    immutable "^3.8.1"
-    prop-types "^15.5.10"
-
 react-native-tab-view@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-3.1.1.tgz#1f8d7a835ab4f5b1b1407ec8dddc1053b53fa3c6"
@@ -8797,6 +8797,14 @@ react-native-version@^4.0.0:
     resolve-from "^5.0.0"
     semver "^7.0.0"
 
+react-native-webview@^11.14.0:
+  version "11.14.0"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-11.14.0.tgz#01d7669409d7510c859300c058902c8a8490cbbb"
+  integrity sha512-G5pIYL3dU4rWt4K8W8ZoEDHL3nCR+rnNWsrCP/rJcl1gElxZn2xlpHjNml4myopIzn835NgE0/dJJ9VHvdMg3Q==
+  dependencies:
+    escape-string-regexp "2.0.0"
+    invariant "2.2.4"
+
 react-native-webview@^8.0.1:
   version "8.2.1"
   resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-8.2.1.tgz#23f9e156a3361fee316d54b60e64da1a27f9f73b"
@@ -8805,14 +8813,6 @@ react-native-webview@^8.0.1:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
     rnpm-plugin-windows "^0.5.1-0"
-
-react-native-webview@^9.4.0:
-  version "9.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-9.4.0.tgz#108da34a6c7e1c032dcabc942b7e4947ca1d8028"
-  integrity sha512-BBOFUuza0p04+7fNi7TJmB0arpDJzGxHYwTCgI4vj5n/fl7u4jbm7ETp88mf7lo9lP6C6HGLo38KnEy1aXCQkg==
-  dependencies:
-    escape-string-regexp "2.0.0"
-    invariant "2.2.4"
 
 react-native-zss-rich-text-editor@Hylozoic/react-native-zss-rich-text-editor#merge-jb-updates-for-rn-0.61.5:
   version "1.1.0"

@@ -52,7 +52,7 @@ describe('mergeProps', () => {
 
   it('matches snapshot', () => {
     expect(props).toMatchSnapshot()
-    expect(props.goToGroupSettingsMenu).toBeDefined()
+    expect(props.goToGroupSettings).toBeDefined()
 
     stateProps.canModerateCurrentGroup = false
     const propsNonModerator = mergeProps(stateProps, dispatchProps, ownProps)
@@ -77,8 +77,8 @@ describe('mergeProps', () => {
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
 
-    it('goToGroupSettingsMenu', () => {
-      props.goToGroupSettingsMenu()
+    it('goToGroupSettings', () => {
+      props.goToGroupSettings()
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
   })

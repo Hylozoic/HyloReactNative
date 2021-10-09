@@ -1,7 +1,9 @@
 import { connect } from 'react-redux'
 import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import { fetchGroupSettings, updateGroupSettings, UPDATE_GROUP_SETTINGS } from './GroupSettings.store'
+import fetchGroupSettings from 'store/actions/fetchGroupSettings'
+import updateGroupSettings from 'store/actions/updateGroupSettings'
+import { UPDATE_GROUP_SETTINGS } from 'store/constants'
 
 export function mapStateToProps (state, props) {
   const groupId = getCurrentGroupId(state, props)

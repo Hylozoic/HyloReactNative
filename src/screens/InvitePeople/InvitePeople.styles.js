@@ -1,79 +1,36 @@
-import { StyleSheet, Dimensions } from 'react-native'
-import { caribbeanGreen, white, capeCod40, amaranth, rhino20, white60onCaribbeanGreen, rhino10 } from 'style/colors'
+import { Dimensions } from 'react-native'
+import { caribbeanGreen, white, amaranth, rhino20, white60onCaribbeanGreen, black, rhino80 } from 'style/colors'
 const screenWidth = Dimensions.get('window').width
-const screenHeight = Dimensions.get('window').height
 
 export default {
   container: {
     backgroundColor: white,
-    paddingTop: 20
-  },
-  tabbar: {
-    backgroundColor: white
-  },
-  tab: {
-    width: screenWidth / 2
+    display: 'flex',
+    flex: 1,
+    paddingTop: 20,
+    paddingHorizontal: 18
   },
   indicator: {
     backgroundColor: caribbeanGreen
   },
-  label: {
-    color: '#000',
-    fontFamily: 'Circular-Book'
-  },
   successMessage: {
-    color: caribbeanGreen,
-    marginLeft: 18
+    color: caribbeanGreen
   },
   errorMessage: {
-    color: amaranth,
-    marginLeft: 18
-  },
-  buttonRow: {
-    height: 100,
-    flex: 1,
-    flexDirection: 'row',
-    marginLeft: 18,
-    marginBottom: -45,
-    marginTop: -10
-  },
-  pendingInvitesList: {
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: capeCod40,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: capeCod40,
-    paddingLeft: 18,
-    paddingRight: 18
-  },
-  emptyList: {
-    paddingVertical: 10
-  },
-  nameRow: {
-    paddingTop: 18,
-    paddingBottom: 18,
-    height: 20,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  actionRow: {
-    paddingBottom: 18,
-    height: 20,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  rowContainer: {
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: capeCod40
+    color: amaranth
   },
   joinGroupText: {
-    marginTop: 20,
-    marginLeft: 18,
-    marginBottom: 6
+    marginBottom: 15,
+    color: rhino80
   },
   joinGroupLink: {
-    color: caribbeanGreen,
-    marginLeft: 18,
-    marginBottom: 24
+    color: caribbeanGreen
+  },
+  linkButtonRow: {
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: 15,
+    marginBottom: 35
   },
   copyLinkButton: {
     height: 36,
@@ -97,64 +54,28 @@ export default {
     padding: 10,
     borderColor: rhino20,
     borderWidth: 1,
-    marginLeft: 18,
-    marginRight: 18,
-    marginBottom: 10
+    maxHeight: 200,
+    marginBottom: 15
+  },
+  emailButtonsRow: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 20
   },
   sendInviteButton: {
-    width: 200,
+    width: 180,
     height: 36,
-    marginLeft: 'auto',
-    marginRight: 18,
     fontSize: 14,
-    disabledBackgroundColor: white60onCaribbeanGreen
+    disabledBackgroundColor: white60onCaribbeanGreen,
+    disabledColor: white
   },
-  resendAllButton: {
-    marginBottom: 18,
-    marginTop: 18,
-    fontSize: 14,
+  pendingInviteButton: {
+    width: 130,
     height: 36,
+    fontSize: 14,
     backgroundColor: white,
     borderColor: caribbeanGreen,
     color: caribbeanGreen
-  },
-  pendingInviteEmail: {
-
-  },
-  expireText: {
-    fontSize: 14,
-    color: 'red'
-  },
-  resendText: {
-    fontSize: 14,
-    color: caribbeanGreen,
-    marginLeft: 20
-  },
-  actionItems: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: 'auto'
-  },
-  timeAgoText: {
-    color: rhino20
-  },
-  keyboardFriendlyContainer: {
-    display: 'flex',
-    flex: 1,
-    alignItems: 'stretch',
-    minHeight: screenHeight
-  },
-  allowGroupInvites: {
-    backgroundColor: rhino10,
-    display: 'flex',
-    flexDirection: 'row',
-    flex: 1,
-    paddingLeft: 18,
-    paddingTop: 20,
-    paddingBottom: 15
-  },
-  allowGroupInvitesSwitch: {
-    paddingLeft: 14,
-    marginTop: -6
   }
 }

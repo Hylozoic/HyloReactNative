@@ -24,6 +24,7 @@ import { white } from 'style/colors'
 import PostDetails from 'screens/PostDetails'
 import MemberProfile from 'screens/MemberProfile'
 import LoginByTokenHandler from 'screens/LoginByTokenHandler'
+import PendingInvites from 'screens/PendingInvites'
 
 const Root = createStackNavigator()
 export default function RootNavigator ({ fullyAuthorized }) {
@@ -47,6 +48,7 @@ export default function RootNavigator ({ fullyAuthorized }) {
         <Root.Screen name='Edit Post' component={PostEditor} />
         <Root.Screen name='Edit Account Info' component={UserSettings} />
         <Root.Screen name='Group Settings' component={GroupSettingsNavigator} />
+        <Root.Screen name='Pending Invites' component={PendingInvites} />
         <Root.Screen name='Notifications' component={NotificationsList} />
         <Root.Screen name='Notification Settings' component={NotificationSettings} />
         <Root.Screen name='Blocked Users' component={BlockedUsers} />

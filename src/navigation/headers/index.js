@@ -107,7 +107,6 @@ export function ModalHeader ({
     headerTitleStyle: {
       color: headerTitleStyleColor,
       fontFamily: 'Circular-Bold'
-      // maxWidth: '80%'
     },
     headerLeft: headerLeft || (props => {
       // get go back function from navigation

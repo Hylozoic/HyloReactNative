@@ -3,6 +3,7 @@ import { Alert, FlatList, Text, View, TouchableOpacity } from 'react-native'
 import { get, isEmpty } from 'lodash/fp'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
+import Button from 'components/Button'
 import LoadingScreen from 'components/Loading'
 // Person picker
 import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
@@ -37,11 +38,13 @@ export default class ModeratorSettings extends Component {
 
   isMe = (id) => this.props.currentUser.id === id
 
-  _renderModeratorRow = ({ item }) => <ModeratorRow
-    moderator={item}
-    showMember={this.props.showMember}
-    removeModerator={this.isMe(item.id) ? null : this.removeModerator}
-                                      />
+  _renderModeratorRow = ({ item }) => (
+    <ModeratorRow
+      moderator={item}
+      showMember={this.props.showMember}
+      removeModerator={this.isMe(item.id) ? null : this.removeModerator}
+    />
+  )
 
   openPersonPicker = () => {
     const { navigation } = this.props
@@ -63,22 +66,18 @@ export default class ModeratorSettings extends Component {
       return <LoadingScreen />
     }
 
-    return (
+    return <View style={styles.container}>
       <FlatList
-        style={styles.container}
+        style={styles.moderatorsList}
         data={moderators}
         keyboardShouldPersistTaps='always'
         keyExtractor={item => item.id.toString()}
         renderItem={this._renderModeratorRow}
-        ListHeaderComponent={<View style={styles.headerContainer}>
-          <View style={styles.addNewContainer}>
-            <TouchableOpacity onPress={this.openPersonPicker}>
-              <Text style={styles.addNewButton}><Icon name='Plus' green /> Add New</Text>
-            </TouchableOpacity>
-          </View>
-                             </View>}
       />
-    )
+      <View style={styles.buttonBarContainer}>
+        <Button onPress={this.openPersonPicker} text='Add Moderator' style={styles.addNewButton} />
+      </View>
+    </View>
   }
 }
 
@@ -87,9 +86,11 @@ export function ModeratorRow ({ moderator, showMember, removeModerator }) {
     <TouchableOpacity style={styles.row} onPress={() => showMember(moderator.id)}>
       {moderator.avatarUrl && <Avatar style={{ width: 50 }} avatarUrl={moderator.avatarUrl} />}
       <Text style={styles.moderatorName}>{moderator.name}</Text>
-      {removeModerator && <TouchableOpacity hitSlop={{ top: 15, bottom: 15, left: 10, right: 10 }} onPress={() => removeModerator(moderator.id)}>
-        <Text style={styles.removeButton}>Remove</Text>
-                          </TouchableOpacity>}
+      {removeModerator && (
+        <TouchableOpacity hitSlop={{ top: 15, bottom: 15, left: 10, right: 10 }} onPress={() => removeModerator(moderator.id)}>
+          <Text style={styles.removeButton}>Remove</Text>
+        </TouchableOpacity>
+      )}
     </TouchableOpacity>
   )
 }

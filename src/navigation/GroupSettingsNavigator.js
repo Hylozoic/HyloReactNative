@@ -1,62 +1,93 @@
 import React, { useLayoutEffect } from 'react'
+import { View, Text } from 'react-native'
 import { useSelector } from 'react-redux'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import { createStackNavigator } from '@react-navigation/stack'
+import Icon from 'components/Icon'
+import { isIOS } from 'util/platform'
 import { ModalHeader } from 'navigation/headers'
 // Screens
-import GroupSettingsMenu from 'screens/GroupSettingsMenu'
 import GroupSettingsComponent from 'screens/GroupSettings'
-import InvitePeople from 'screens/InvitePeople'
 import ModeratorSettings from 'screens/ModeratorSettings'
-import { rhino60, white } from 'style/colors'
+import InvitePeople from 'screens/InvitePeople'
+import { caribbeanGreen, gunsmoke, rhino, rhino05, rhino20, rhino30, rhino50, rhino60, rhino80, white } from 'style/colors'
+import Avatar from 'components/Avatar'
 
-const GroupSettings = createStackNavigator()
+const GroupSettings = createMaterialTopTabNavigator()
 export default function GroupSettingsNavigator ({ navigation, route }) {
   const currentGroup = useSelector(getCurrentGroup)
+  const groupName = currentGroup?.name
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: currentGroup?.name,
+      headerStyle: { backgroundColor: rhino },
       headerTitleStyle: { color: white },
-      headerStyle: { backgroundColor: rhino60 },
-      presentation: 'modal',
-      header: headerProps =>
-        <ModalHeader {...headerProps} />
+      headerTitle: props => {
+        return (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Avatar style={{ marginRight: 8 }} avatarUrl={currentGroup?.avatarUrl} dimension={30} />
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: white }}>{currentGroup?.name}</Text>
+          </View>
+        )
+      }
     })
-  }, [navigation, route])
+  }, [navigation, route, groupName])
 
-  const navigatorProps = {}
+  const navigatorProps = {
+    options: {
+    },
+    screenOptions: {
+      headerShown: false,
+      tabBarActiveTintColor: caribbeanGreen,
+      tabBarInactiveTintColor: rhino30,
+      tabBarIndicatorStyle: { backgroundColor: caribbeanGreen },
+      tabBarLabelStyle: {
+        fontSize: 16,
+        textTransform: 'none'
+      },
+      tabBarStyle: (
+        isIOS
+        ? {
+            display: 'flex',
+            backgroundColor: rhino05
+          }
+        : {
+            display: 'flex',
+            backgroundColor: rhino05,
+            borderTopWidth: StyleSheet.hairlineWidth
+          }
+      ),
+      // tabBarIcon: ({ focused }) => (
+      //   <Icon
+      //     name={'Edit'}
+      //     size={30}
+      //     color={focused ? caribbeanGreen : gunsmoke}
+      //     style={{ paddingTop: isIOS ? 0 : 5 }}
+      //   />
+      // )
+    },
+    headerTitleStyle: { color: white },
+    header: headerProps =>
+      <ModalHeader {...headerProps} />
+  }
 
   return (
     <GroupSettings.Navigator {...navigatorProps}>
       <GroupSettings.Screen
-        name='Group Settings Menu' component={GroupSettingsMenu}
-        options={{ headerShown: false }}
-      />
-      <GroupSettings.Screen
         name='Edit Group Info'
         component={GroupSettingsComponent}
+        options={{ title: 'Edit' }}
       />
       <GroupSettings.Screen
         name='Group Moderators'
-        options={{ 
-          header: headerProps =>
-            <ModalHeader
-              {...headerProps}
-              headerLeftCloseIcon={false}
-            />
-        }}
         component={ModeratorSettings}
+        options={{ title: 'Moderators' }}
       />
       <GroupSettings.Screen
-        name='Invite Members' component={InvitePeople}
-        options={{
-          header: (headerProps) =>
-            <ModalHeader
-              {...headerProps}
-              headerLeftCloseIcon={headerProps.back.title == 'Tabs'}
-            />
-        }}
+        name='Invite Members'
+        component={InvitePeople}
+        options={{ title: 'Invite' }}
       />
     </GroupSettings.Navigator>
   )

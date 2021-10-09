@@ -12,7 +12,7 @@ import {
 import presentGroup from 'store/presenters/presentGroup'
 
 import { Image, Text, ScrollView, View, ImageBackground, TouchableOpacity, TextInput } from 'react-native'
-import { accessibilityDescription, GROUP_ACCESSIBILITY } from 'store/models/Group'
+import { GROUP_ACCESSIBILITY } from 'store/models/Group'
 import Loading from 'components/Loading'
 import Button from 'components/Button'
 import { GroupRow } from 'screens/Groups/Groups'

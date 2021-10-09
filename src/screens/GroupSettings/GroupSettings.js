@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
+import KeyboardSpacer from 'react-native-keyboard-spacer'
 import { some } from 'lodash/fp'
 import { showToast } from 'util/toast'
 import { ModalHeader } from 'navigation/headers'
@@ -10,6 +11,8 @@ import defaultBanner from 'assets/default-user-banner.jpg'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import styles from './GroupSettings.styles'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
+import Button from 'components/Button'
+import WebView from 'react-native-webview'
 export default class GroupSettings extends React.Component {
   constructor (props) {
     super(props)
@@ -19,27 +22,9 @@ export default class GroupSettings extends React.Component {
     }
   }
 
-  setHeader = () => {
-    const { changed } = this.state
-    const { navigation, pendingSave } = this.props
-    navigation.setOptions({
-      header: props =>
-        <ModalHeader {...props}
-          // title={this.props.group?.name}
-          headerLeftCloseIcon={false}
-          headerBackTitleVisible={true}
-          headerLeftConfirm={changed}
-          headerRightButtonLabel={pendingSave ? 'Saving' : 'Save'}
-          headerRightButtonOnPress={this.saveChanges}
-          headerRightButtonDisabled={!changed}
-        />
-    })
-  }
-
   componentDidMount () {
     this.props.fetchGroupSettings()
     this.syncLocalFields()
-    this.setHeader()
   }
 
   componentDidUpdate (prevProps) {
@@ -52,8 +37,6 @@ export default class GroupSettings extends React.Component {
     if (some(hasChanged, ['name', 'description', 'location'])) {
       this.syncLocalFields()
     }
-
-    this.setHeader()
   }
 
   shouldComponentUpdate (nextProps) {
@@ -116,8 +99,12 @@ export default class GroupSettings extends React.Component {
     const { name, description, location } = this.state.edits
 
     return (
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <KeyboardFriendlyView style={styles.keyboardFriendlyContainer}>
+      <View style={styles.container}>
+        {/* <WebView
+          source={{ uri: `https://hylo.com/groups/${group?.slug}/settings` }}
+          style={{ marginTop: 0 }}
+        /> */}
+        <ScrollView>
           <TextInput
             style={styles.nameInput}
             onChangeText={this.updateField('name')}
@@ -145,8 +132,12 @@ export default class GroupSettings extends React.Component {
             onFocus={() => this.showLocationPicker(location)}
             underlineColorAndroid='transparent'
           />
-        </KeyboardFriendlyView>
-      </ScrollView>
+        </ScrollView>
+        <View style={styles.buttonBarContainer}>
+          <Button onPress={this.saveChanges} text='Save' style={styles.saveButton} />
+        </View>
+        <KeyboardSpacer />
+      </View>
     )
   }
 }
@@ -232,18 +223,6 @@ export function EditButton ({ isLoading, style }) {
           <EntypoIcon name='edit' style={styles.editIcon} />
           <Text style={styles.editButtonText}>edit</Text>
         </View>}
-    </View>
-  )
-}
-
-export function ReadMoreButton ({ goToDetails }) {
-  return (
-    <View style={styles.buttonContainer}>
-      <TouchableOpacity onPress={goToDetails} style={styles.buttonWrapper}>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>Read More</Text>
-        </View>
-      </TouchableOpacity>
     </View>
   )
 }

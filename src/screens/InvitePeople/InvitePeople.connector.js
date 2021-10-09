@@ -3,7 +3,7 @@ import getGroup from 'store/selectors/getGroup'
 import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
 // import getMe from 'store/selectors/getMe'
 import {
-  regenerateAccessCode, fetchGroupSettings, FETCH_GROUP_SETTINGS,
+  regenerateAccessCode,
   CREATE_INVITATIONS,
   createInvitations,
   getPendingInvites,
@@ -11,9 +11,9 @@ import {
   resendInvitation,
   reinviteAll
 } from './InvitePeople.store'
-import {
-  updateGroupSettings
-} from 'screens/GroupSettings/GroupSettings.store'
+import updateGroupSettings from 'store/actions/updateGroupSettings'
+import fetchGroupSettings from 'store/actions/fetchGroupSettings'
+import { FETCH_GROUP_SETTINGS } from 'store/constants'
 
 export function mapStateToProps (state, props) {
   const groupId = getCurrentGroupId(state, props)

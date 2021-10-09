@@ -56,7 +56,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     goToCreateGroup: () => {
       navigation.navigate('Create Group', { screen: 'CreateGroupName', params: { reset: true } })
     },
-    goToGroupSettingsMenu: () => canModerateCurrentGroup &&
+    goToGroupSettings: () => canModerateCurrentGroup &&
       navigation.navigate('Group Settings'),
     goToInvitePeople: () => canModerateCurrentGroup &&
       navigation.navigate('Group Settings', { screen: 'Invite Members' })

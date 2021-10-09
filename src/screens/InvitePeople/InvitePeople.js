@@ -1,290 +1,143 @@
-import React, { Component, PureComponent } from 'react'
-import { Dimensions, Text, View, TextInput, TouchableOpacity, ScrollView, Switch } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Text, View, TextInput, ScrollView } from 'react-native'
 import Clipboard from '@react-native-community/clipboard'
-import { TabView, TabBar } from 'react-native-tab-view'
-import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
+import { isEmpty, compact } from 'lodash/fp'
+// Redux
+import { useDispatch, useSelector } from 'react-redux'
+import fetchGroupSettings from 'store/actions/fetchGroupSettings'
+import {
+  regenerateAccessCode,
+  CREATE_INVITATIONS,
+  createInvitations
+} from './InvitePeople.store'
+import { FETCH_GROUP_SETTINGS } from 'store/constants'
+import getGroup from 'store/selectors/getGroup'
+import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
+// Components
+import KeyboardSpacer from 'react-native-keyboard-spacer'
 import Button from 'components/Button'
-import { get, isEmpty, compact } from 'lodash/fp'
-import { humanDate } from 'hylo-utils/text'
-import styles from './InvitePeople.styles'
-import { caribbeanGreen } from 'style/colors'
 import Loading from 'components/Loading'
+import styles from './InvitePeople.styles'
 
-// https://github.com/react-native-community/react-native-tab-view/issues/547
-const initialLayout = {
-  height: 0,
-  width: Dimensions.get('window').width
-}
-
-export const parseEmailList = emails =>
-  compact((emails || '').split(/,|\n/).map(email => {
+export function parseEmailList (emails) {
+  return compact((emails || '').split(/,|\n/).map(email => {
     const trimmed = email.trim()
     // use only the email portion of a "Joe Bloggs <joe@bloggs.org>" line
     const match = trimmed.match(/.*<(.*)>/)
     return match ? match[1] : trimmed
   }))
-
-export default class InvitePeople extends Component {
-  state = {
-    index: 0,
-    routes: [
-      { key: '0', title: 'Send Invites' },
-      { key: '1', title: 'Pending Invites' }
-    ]
-  }
-
-  componentDidMount () {
-    this.props.fetchGroupSettings()
-  }
-
-  componentDidUpdate (prevProps, prevState) {
-    if (get('group.slug', prevProps) !== get('group.slug', this.props)) {
-      this.props.fetchGroupSettings()
-    }
-  }
-
-  _handleIndexChange = index => this.setState({ index })
-
-  _renderTabBar = props => (
-    <TabBar
-      {...props}
-      indicatorStyle={styles.indicator}
-      style={styles.tabbar}
-      tabStyle={styles.tab}
-      labelStyle={styles.label}
-    />
-  )
-
-  _renderScene = ({ route }) => {
-    if (this.props.pending) return <Loading />
-    switch (route.key) {
-      case '0':
-        return (
-          <SendInvitesPage
-            inviteLink={this.props.inviteLink}
-            pendingCreate={this.props.pendingCreate}
-            groupName={this.props.group.name}
-            groupId={this.props.group.id}
-            groupMembersCanInvite={this.props.group.settings.allowGroupInvites}
-            createInvitations={this.props.createInvitations}
-            regenerateAccessCode={this.props.regenerateAccessCode}
-            setAllowGroupInvites={this.props.setAllowGroupInvites}
-          />
-        )
-      case '1':
-        return (
-          <PendingInvitesPage
-            invites={this.props.invites}
-            expireInvitation={this.props.expireInvitation}
-            resendInvitation={this.props.resendInvitation}
-            reinviteAll={this.props.reinviteAll}
-          />
-        )
-      default:
-        return null
-    }
-  }
-
-  render () {
-    return (
-      <TabView
-        style={[styles.container, this.props.style]}
-        navigationState={this.state}
-        renderScene={this._renderScene}
-        renderTabBar={this._renderTabBar}
-        onIndexChange={this._handleIndexChange}
-        initialLayout={initialLayout}
-      />
-    )
-  }
 }
 
-export class SendInvitesPage extends PureComponent {
-  constructor (props) {
-    super(props)
-    this.state = {
-      emails: '',
-      copied: false,
-      inputText: `Hey! Here's an invite to the ${this.props.groupName} group on Hylo.`,
-      groupMembersCanInvite: get('groupMembersCanInvite', props)
-    }
+export default function InvitePeople ({ navigation }) {
+  const dispatch = useDispatch()
+  const groupId = useSelector(getCurrentGroupId)
+  const group = useSelector(state => getGroup(state, { id: groupId }))
+  const pending = useSelector(state => state.pending[FETCH_GROUP_SETTINGS])
+  const pendingCreate = useSelector(state => state.pending[CREATE_INVITATIONS])
+  const inviteLink = 'https://www.hylo.com' + group?.invitePath
+  
+  const [emails, setEmails] = useState('')
+  const [emailBodyText, setEmailBodyText] = useState(
+    `Hey! Here's an invite to the ${group?.name} group on Hylo.`
+  )
+  const [successMessage, setSuccessMessage] = useState()
+  const [errorMessage, setErrorMessage] = useState()
+  const [copied, setCopied] = useState(false)
+  const [sending, setSending] = useState(false)
+
+  const copyToClipboard = () => {
+    setCopied(true)
+    Clipboard.setString(inviteLink)
+    setTimeout(() => { setCopied(false) }, 3000)
   }
 
-  copyToClipboard = () => {
-    this.setState({ copied: true })
-    Clipboard.setString(this.props.inviteLink)
-
-    setTimeout(() => {
-      this.setState({ copied: false })
-    }, 3000)
-  }
-
-  resetLink = () => {
+  const resetLink = () => {
     // TODO should have some sort of confirmation here perhaps?
-    this.props.regenerateAccessCode()
+    dispatch(regenerateAccessCode(groupId))
   }
 
-  sendInvite = () => {
-    const { createInvitations } = this.props
-    const { emails, message, sending } = this.state
-
+  const sendInvite = async () => {
     if (sending) return
 
-    this.setState({ sending: true })
+    setSending(true)
 
-    return createInvitations(parseEmailList(emails), message)
-      .then(res => {
-        const { invitations } = res.payload.data.createInvitation
-        const badEmails = invitations.filter(email => email.error).map(e => e.email)
+    const response = await dispatch(createInvitations(groupId, parseEmailList(emails), emailBodyText))
+    const { invitations } = response.payload.data.createInvitation
+    const badEmails = invitations.filter(email => email.error).map(e => e.email)
 
-        const numBad = badEmails.length
-        let errorMessage
-        if (numBad === 1) {
-          errorMessage = 'The address below is invalid.'
-        } else if (numBad > 1) {
-          errorMessage = `The ${numBad} addresses below are invalid.`
-        }
+    const numBad = badEmails.length
+    let errorMessage
+    if (numBad === 1) {
+      errorMessage = 'The address below is invalid.'
+    } else if (numBad > 1) {
+      errorMessage = `The ${numBad} addresses below are invalid.`
+    }
 
-        const numGood = invitations.length - badEmails.length
-        const successMessage = numGood > 0
-          ? `Sent ${numGood} ${numGood === 1 ? 'email' : 'emails'}.`
-          : null
+    const numGood = invitations.length - badEmails.length
+    const successMessage = numGood > 0
+      ? `Sent ${numGood} ${numGood === 1 ? 'email' : 'emails'}.`
+      : null
 
-        this.setState({
-          emails: badEmails.join('\n'),
-          errorMessage,
-          successMessage,
-          sending: false
-        })
-      })
-  }
+    setEmails(badEmails.join('\n'))
+    setErrorMessage(errorMessage)
+    setSuccessMessage(successMessage)
+    setSending(false)
+  } 
 
-  toggleAllowGroupInvites = () => {
-    const { groupMembersCanInvite } = this.state
-    const { groupId } = this.props
-    this.setState({ groupMembersCanInvite: !groupMembersCanInvite })
-    this.props.setAllowGroupInvites(groupId, !groupMembersCanInvite)
-      .then(({ error }) => {
-        if (error) this.setState({ groupMembersCanInvite })
-      })
-  }
+  const disableSendBtn = !!(isEmpty(emails) || pendingCreate || sending)
 
-  render () {
-    const {
-      emails,
-      inputText,
-      copied,
-      successMessage,
-      errorMessage,
-      sending,
-      groupMembersCanInvite
-    } = this.state
+  useEffect(() => { dispatch(fetchGroupSettings()) }, [groupId])
 
-    const {
-      inviteLink,
-      pendingCreate
-    } = this.props
-    const disableSendBtn = !!(isEmpty(emails) || pendingCreate || sending)
+  if (pending) return <Loading />
 
-    return (
+  return (
+    <View style={styles.container}>
       <ScrollView>
-        <KeyboardFriendlyView style={styles.keyboardFriendlyContainer}>
-          <View style={styles.container}>
-            {/* TODO: This feature is not yet used, but this part was done */}
-            {/* <View style={styles.allowGroupInvites}>
-              <Text>Let anyone in this group send invites</Text>
-              <View style={styles.allowGroupInvitesSwitch}>
-                <Switch
-                  onValueChange={this.toggleAllowGroupInvites}
-                  value={groupMembersCanInvite}
-                  trackColor={{ true: caribbeanGreen }}
-                />
-              </View>
-            </View> */}
-            <Text style={styles.joinGroupText}>Anyone with this link can join the group</Text>
-            {inviteLink && <Text style={styles.joinGroupLink}>{inviteLink}</Text>}
-            {!inviteLink && <Text>No link has been set yet</Text>}
+        <Text style={styles.joinGroupText}>Anyone with this link can join the group:</Text>
+        {inviteLink && <Text style={styles.joinGroupLink}>{inviteLink}</Text>}
+        {!inviteLink && <Text>No link has been set yet</Text>}
 
-            <View style={styles.buttonRow}>
-              <Button text='Reset Link' onPress={this.resetLink} style={styles.resetLinkButton} />
-              <Button text={copied ? 'Copied' : 'Copy Link'} onPress={this.copyToClipboard} style={styles.copyLinkButton} />
-            </View>
-
-            {successMessage && <Text style={styles.successMessage}>{successMessage}</Text>}
-            {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
-
-            <TextInput
-              value={emails}
-              placeholder='Type email addresses'
-              onChangeText={(text) => this.setState({ emails: text })}
-              style={styles.textInput}
-              underlineColorAndroid='transparent'
-            />
-            <TextInput
-              value={inputText}
-              multiline
-              numberOfLines={5}
-              underlineColorAndroid='transparent'
-              style={styles.textInput}
-              onChangeText={(text) => this.setState({ inputText: text })}
-            />
-
-            <Button
-              text='Send Invite'
-              disabled={disableSendBtn}
-              onPress={this.sendInvite}
-              style={styles.sendInviteButton}
-            />
-
-          </View>
-        </KeyboardFriendlyView>
-      </ScrollView>
-    )
-  }
-}
-
-export function PendingInvitesPage ({ invites, expireInvitation, resendInvitation, reinviteAll }) {
-  return (
-    <ScrollView style={styles.pendingInvitesList}>
-      {!isEmpty(invites) && (
-        <Button text='Resend All' onPress={reinviteAll} style={styles.resendAllButton} />
-      )}
-      {isEmpty(invites)
-        ? <Text style={styles.emptyList}>No pending invites</Text>
-        : invites.map((invite, i) =>
-          <PendingInviteRow
-            invite={invite} key={i} first={i === 0}
-            expireInvitation={expireInvitation}
-            resendInvitation={resendInvitation}
-          />)}
-    </ScrollView>
-  )
-}
-
-export function PendingInviteRow ({ invite, first, expireInvitation, resendInvitation }) {
-  const { id, email, lastSentAt } = invite
-  return (
-    <View style={styles.rowContainer}>
-      <View style={styles.nameRow}>
-        <Text style={styles.pendingInviteEmail}>{email}</Text>
-      </View>
-      <View style={styles.actionRow}>
-        <Text style={styles.timeAgoText}>{humanDate(lastSentAt)}</Text>
-        <View style={styles.actionItems}>
-          <TouchableOpacity
-            onPress={() => expireInvitation(id)}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-          >
-            <Text style={styles.expireText}>Expire</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => !invite.resent && resendInvitation(id)}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-          >
-            <Text style={styles.resendText}>{invite.resent ? 'Sent' : 'Resend'}</Text>
-          </TouchableOpacity>
+        <View style={styles.linkButtonRow}>
+          <Button text='Reset Link' onPress={resetLink} style={styles.resetLinkButton} />
+          <Button text={copied ? 'Copied' : 'Copy Link'} onPress={copyToClipboard} style={styles.copyLinkButton} />
         </View>
-      </View>
+
+        {successMessage && <Text style={styles.successMessage}>{successMessage}</Text>}
+        {errorMessage && <Text style={styles.errorMessage}>{errorMessage}</Text>}
+
+        <TextInput
+          value={emails}
+          placeholder='Type email addresses'
+          onChangeText={text => setEmails(text)}
+          autoCapitalize='none'
+          autoComplete='email'
+          autoCorrect={false}
+          style={styles.textInput}
+          underlineColorAndroid='transparent'
+        />
+        <TextInput
+          value={emailBodyText}
+          multiline
+          numberOfLines={5}
+          underlineColorAndroid='transparent'
+          style={styles.textInput}
+          onChangeText={text => setEmailBodyText(text)}
+        />
+        <View style={styles.emailButtonsRow}>
+          <Button
+            text='Pending Invites'
+            onPress={() => navigation.navigate('Pending Invites')}
+            style={styles.pendingInviteButton}
+          />
+          <Button
+            text='Send Invite'
+            disabled={disableSendBtn}
+            onPress={sendInvite}
+            style={styles.sendInviteButton}
+          />
+        </View>
+        <KeyboardSpacer />
+      </ScrollView>
     </View>
   )
 }

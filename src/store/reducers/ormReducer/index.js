@@ -6,9 +6,6 @@ import extractModelsFromAction from '../ModelExtractor/extractModelsFromAction'
 import clearCacheFor from './clearCacheFor'
 import { isPromise } from 'util/index'
 import {
-  UPDATE_GROUP_SETTINGS_PENDING
-} from 'screens/GroupSettings/GroupSettings.store'
-import {
   UPDATE_USER_SETTINGS_PENDING
 } from 'store/actions/updateUserSettings'
 import {
@@ -52,7 +49,8 @@ import {
   JOIN_PROJECT_PENDING,
   LEAVE_PROJECT_PENDING,
   RESPOND_TO_EVENT_PENDING,
-  UPDATE_COMMENT_PENDING
+  UPDATE_COMMENT_PENDING,
+  UPDATE_GROUP_SETTINGS_PENDING
 } from 'store/constants'
 import { PIN_POST_PENDING } from 'components/PostCard/PostHeader/PostHeader.store'
 

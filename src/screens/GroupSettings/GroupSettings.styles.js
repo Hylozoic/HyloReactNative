@@ -1,5 +1,5 @@
-import { capeCod, white, caribbeanGreen, alabaster, rhino30, rhino } from 'style/colors'
-import { Dimensions } from 'react-native'
+import { capeCod, white, caribbeanGreen, alabaster, rhino30, rhino, capeCod40, rhino80, rhino40, rhino50, rhino20 } from 'style/colors'
+import { Dimensions, StyleSheet } from 'react-native'
 
 const screenMargin = 16
 const avatarSize = 112
@@ -7,21 +7,29 @@ const screenHeight = Dimensions.get('window').height
 
 export default {
   container: {
-    backgroundColor: white
-  },
-  contentContainer: {
     backgroundColor: white,
-    paddingTop: 20,
+    display: 'flex',
+    flex: 1,
+    alignItems: 'stretch',
+    backgroundColor: white,
     paddingHorizontal: screenMargin
   },
   label: {
     fontSize: 12,
-    color: rhino30,
-    fontFamily: 'Circular-Bold'
+    color: rhino40,
+    fontFamily: 'Circular-Bold',
+    marginBottom: 5
   },
   input: {
     textAlignVertical: 'top',
-    paddingLeft: 0
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    // borderRadius: 3,
+    borderBottomColor: rhino20,
+    color: rhino80,
+    padding: 10,
+    paddingLeft: 0,
+    paddingTop: 0,
+    marginBottom: 10
   },
   bannerImage: {
     height: 140,
@@ -70,33 +78,23 @@ export default {
   editIcon: {
     top: 2,
     fontSize: 12,
-    color: capeCod,
+    color: rhino50,
     marginRight: 2
   },
   editButtonText: {
     fontFamily: 'Circular-Book',
     fontSize: 14,
-    color: capeCod
+    color: rhino50
   },
-  buttonContainer: {
-    marginBottom: 30,
-    alignItems: 'center'
+  buttonBarContainer: {    
+    paddingBottom: 40,
+    alignItems: 'flex-end',
+    backgroundColor: 'transparent'
   },
-  buttonWrapper: {
-    flexDirection: 'row'
-  },
-  button: {
-    height: 30,
-    backgroundColor: alabaster,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
-    borderRadius: 15
-  },
-  buttonText: {
-    color: caribbeanGreen,
-    fontSize: 13,
-    fontFamily: 'Circular-Bold'
+  saveButton: {
+    fontSize: 18,
+    height: 40,
+    width: 150
   },
   nameInput: {
     color: rhino,
@@ -105,13 +103,8 @@ export default {
     backgroundColor: '#FAFBFC',
     borderRadius: 5,
     height: 56,
-    marginBottom: 15,
+    paddingTop: 20,
+    marginBottom: 20,
     textAlign: 'center'
-  },
-  keyboardFriendlyContainer: {
-    display: 'flex',
-    flex: 1,
-    alignItems: 'stretch',
-    minHeight: screenHeight
   }
 }
