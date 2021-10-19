@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { isNull, isUndefined, omitBy, reduce } from 'lodash'
 
-const SESSION_COOKIE_KEY = 'session-cookie-v2'
+const SESSION_COOKIE_KEY = 'hylo-dev-local' // 'hylo.sid.1'
 
 export function setSessionCookie (resp) {
   const header = resp.headers.get('set-cookie')
