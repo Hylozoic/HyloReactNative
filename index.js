@@ -46,15 +46,12 @@ export default class AppContainer extends Component {
       appState: AppState.currentState,
       openedPushNotification: null
     }
+
     // Uncomment for OneSignal debugging
     // OneSignal.setLogLevel(6, 0)
 
-    // TODO: Fix this **** CURRENTLY using Production PUSH notification ID for dev
-    OneSignal.setAppId(process.env.ONESIGNAL_APP_ID_RELEASE)
-    // OneSignal.setAppId(isDev
-    //   ? process.env.ONESIGNAL_APP_ID_DEBUG
-    //   : process.env.ONESIGNAL_APP_ID_RELEASE
-    // )
+    OneSignal.setAppId(process.env.ONESIGNAL_APP_ID)
+
     OneSignal.setNotificationWillShowInForegroundHandler(notifReceivedEvent => {
       notifReceivedEvent.complete()
     })
