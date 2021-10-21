@@ -26,6 +26,9 @@ export function fetchMemberPosts ({ id, first = 10, offset }) {
         $search: String,
         $sortBy: String,
         $topic: ID
+        $order: String
+        $afterTime: Date
+        $beforeTime: Date
       ) {
         person (id: $id) {
           id
