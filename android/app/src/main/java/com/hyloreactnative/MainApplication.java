@@ -50,7 +50,7 @@ public class MainApplication extends Application implements ReactApplication {
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
 
     // This should be coming from the env vars?
-    Intercom.initialize(this, "android_sdk-0aa2608fb3b46dd9efcb74339fc87073a6ed0ba9", "wwelodje");
+    IntercomModule.initialize(this, "android_sdk-0aa2608fb3b46dd9efcb74339fc87073a6ed0ba9", "wwelodje");
     // FacebookSdk.sdkInitialize(getApplicationContext());
   }
 

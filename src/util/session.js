@@ -3,6 +3,7 @@ import { isNull, isUndefined, omitBy, reduce } from 'lodash'
 
 export function setSessionCookie (resp) {
   const header = resp.headers.get('set-cookie')
+
   if (!header) return Promise.resolve()
 
   const newCookies = parseCookies(header)
