@@ -6,6 +6,7 @@ import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { isIOS } from 'util/platform'
 import { ModalHeader } from 'navigation/headers'
 // Screens
+import HyloWebView from 'screens/HyloWebView'
 import GroupSettingsComponent from 'screens/GroupSettings'
 import ModeratorSettings from 'screens/ModeratorSettings'
 import InvitePeople from 'screens/InvitePeople'
@@ -45,6 +46,7 @@ export default function GroupSettingsNavigator ({ navigation, route }) {
         fontSize: 16,
         textTransform: 'none'
       },
+      tabBarScrollEnabled: true,
       tabBarStyle: (
         isIOS
         ? {
@@ -74,19 +76,32 @@ export default function GroupSettingsNavigator ({ navigation, route }) {
   return (
     <GroupSettings.Navigator {...navigatorProps}>
       <GroupSettings.Screen
-        name='Edit Group Info'
-        component={GroupSettingsComponent}
-        options={{ title: 'Edit' }}
+        name='Settings'
+        component={HyloWebView}
+        initialParams={{
+          path: `groups/${currentGroup?.slug}/settings`
+        }}
       />
       <GroupSettings.Screen
-        name='Group Moderators'
-        component={ModeratorSettings}
-        options={{ title: 'Moderators' }}
+        name='Moderators'
+        component={HyloWebView}
+        initialParams={{
+          path: `groups/${currentGroup?.slug}/settings/moderators`
+        }}
       />
       <GroupSettings.Screen
-        name='Invite Members'
-        component={InvitePeople}
-        options={{ title: 'Invite' }}
+        name='Topics'
+        component={HyloWebView}
+        initialParams={{
+          path: `groups/${currentGroup?.slug}/topics`
+        }}
+      />
+      <GroupSettings.Screen
+        name='Invite'
+        component={HyloWebView}
+        initialParams={{
+          path: `groups/${currentGroup?.slug}/settings/invite`
+        }}
       />
     </GroupSettings.Navigator>
   )
