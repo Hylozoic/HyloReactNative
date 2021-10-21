@@ -32,6 +32,9 @@ function setupSocketPromise () {
     socket.request = function (opts, cb) {
       if (!opts.headers) opts.headers = {}
       opts.headers.Cookie = cookie // key must be capitalized
+      // Note: this can be any value in the onlyAllowOrigins
+      // array in the backend sockets config
+      opts.headers.Origin = 'https://hylo.com'
       return this.__originalRequest(opts, cb)
     }
 
