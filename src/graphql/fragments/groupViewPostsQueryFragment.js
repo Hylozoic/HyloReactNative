@@ -1,14 +1,17 @@
 import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
 
-// Change to showing aggregate tree of posts by doing
-// posts: viewPosts(
+// viewPosts shows all the aggregate posts from current group and any
+// children the current user is a member of. We alias as posts so
+// redux-orm sets up the relationship between group and posts correctly
 const groupViewPostsQueryFragment = `
 posts: viewPosts(
+  afterTime: $afterTime,
+  beforeTime: $beforeTime,
   boundingBox: $boundingBox,
   filter: $filter,
   first: $first,
   offset: $offset,
-  order: "desc",
+  order: $order,
   sortBy: $sortBy,
   search: $search,
   topic: $topic
