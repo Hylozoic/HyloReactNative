@@ -11,7 +11,7 @@
 #import "RNBootSplash.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
-#import <Intercom/Intercom.h>
+#import <IntercomModule.h>
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -66,15 +66,15 @@ static void InitializeFlipper(UIApplication *application) {
 
   // react-native-bootsplash
   [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView];
-  //  For Facebook SDK
+  // Facebook SDK
   [[FBSDKApplicationDelegate sharedInstance]
     application:application
     didFinishLaunchingWithOptions:launchOptions
   ];
-  // For Intercom
-  [Intercom
-    setApiKey:@"ios_sdk-b11cb526589263a9890b895d40b934bffa876c43"
-    forAppId:@"wwelodje"
+  // Intercom
+  [IntercomModule
+    initialize:@"ios_sdk-b11cb526589263a9890b895d40b934bffa876c43"
+    withAppId:@"wwelodje"
   ];
 
   return YES;

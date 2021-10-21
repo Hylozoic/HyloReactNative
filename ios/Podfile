@@ -3,6 +3,10 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '11.0'
 
+# Remove this line once intercom-react-native 1.1.0 is released and installed:
+# https://github.com/intercom/intercom-react-native/pull/26
+install! 'cocoapods', :deterministic_uuids => false
+
 target 'HyloReactNative' do
   config = use_native_modules!
 

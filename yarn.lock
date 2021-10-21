@@ -791,6 +791,11 @@
   resolved "https://registry.yarnpkg.com/@hookstate/core/-/core-3.0.8.tgz#d6838153d6d43c2f35cfca475c31248192564e62"
   integrity sha512-blQagGIVIbNoUiNCRrvaXqFmUe7WGMY35ok/LENfl2pcIsLBjkreYIZiaSFi83tkycwq7ZOmcQz/R1nvLKhH8w==
 
+"@intercom/intercom-react-native@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@intercom/intercom-react-native/-/intercom-react-native-1.0.5.tgz#48a7b702feaf54b033d7abc75f829e8c0e3726be"
+  integrity sha512-Pa8R1x/VWZwdyFsT5Zp1tCsOCR8f06jcO2r36Yo6sYc1w0ZvJkDyH/WvSTGvxxFulW8tQeIhs5q9hXjjQCHPBQ==
+
 "@invertase/react-native-apple-authentication@^2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@invertase/react-native-apple-authentication/-/react-native-apple-authentication-2.1.5.tgz#a66d7a6185724ccf3c4dab8ecc7448164dc6c0ea"
@@ -8544,11 +8549,6 @@ react-native-image-picker@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-4.1.1.tgz#f5b20c77b060e4a8cad4e76ae042e1e45b4743da"
   integrity sha512-O78kljfaLQkFNzba4yWueqXlAWzDNzYUavqSQloJAf+ISGsOk95WO/a4Tp27E6hck8vPtx7u0GBrvEULyh1XAw==
-
-react-native-intercom@^21.1.0:
-  version "21.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-intercom/-/react-native-intercom-21.1.0.tgz#624fdde1ffda90778b325024449c7b1f40b5231d"
-  integrity sha512-FO9iCi8AIhMwVBdOAcb1jdJI+H90T+h/GqEGtxe3LHr+Z+197ZTD6ZKxjzQXYcgOx0ufMWdM+jviVFHVr44e7w==
 
 react-native-keyboard-spacer@^0.4.1:
   version "0.4.1"

@@ -26,6 +26,7 @@
   "dependencies": {
     "@flyerhq/react-native-keyboard-accessory-view": "^2.3.2",
     "@hookstate/core": "^3.0.8",
+    "@intercom/intercom-react-native": "^1.0.5",
     "@invertase/react-native-apple-authentication": "^2.1.5",
     "@react-native-async-storage/async-storage": "^1.15.7",
     "@react-native-community/clipboard": "^1.5.1",
@@ -66,7 +67,6 @@
     "react-native-gesture-handler": "^1.10.3",
     "react-native-htmlview": "^0.16.0",
     "react-native-image-picker": "^4.1.1",
-    "react-native-intercom": "^21.1.0",
     "react-native-keyboard-spacer": "^0.4.1",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-onesignal": "^4.3.0",

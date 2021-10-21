@@ -102,7 +102,10 @@ PODS:
     - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.7.0)
   - hermes-engine (0.8.1)
-  - Intercom (9.3.6)
+  - Intercom (10.1.4)
+  - intercom-react-native (1.0.5):
+    - Intercom (~> 10.1.0)
+    - React-Core
   - libevent (2.1.12)
   - Mixpanel-swift (2.9.3):
     - Mixpanel-swift/Complete (= 2.9.3)
@@ -348,9 +351,6 @@ PODS:
     - React-Core
   - react-native-image-picker (4.1.1):
     - React-Core
-  - react-native-intercom (21.1.0):
-    - Intercom (~> 9.3.6)
-    - React
   - react-native-netinfo (6.0.2):
     - React-Core
   - react-native-onesignal (4.3.0):
@@ -492,6 +492,7 @@ DEPENDENCIES:
   - FlipperKit/SKIOSNetworkPlugin (= 0.105.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (~> 0.8.1)
+  - "intercom-react-native (from `../node_modules/@intercom/intercom-react-native`)"
   - libevent (~> 2.1.12)
   - MixpanelReactNative (from `../node_modules/mixpanel-react-native`)
   - OneSignalXCFramework (< 4.0, >= 3.4.3)
@@ -515,7 +516,6 @@ DEPENDENCIES:
   - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - react-native-flipper (from `../node_modules/react-native-flipper`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
-  - react-native-intercom (from `../node_modules/react-native-intercom`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-onesignal (from `../node_modules/react-native-onesignal`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
@@ -590,6 +590,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  intercom-react-native:
+    :path: "../node_modules/@intercom/intercom-react-native"
   MixpanelReactNative:
     :path: "../node_modules/mixpanel-react-native"
   RCT-Folly:
@@ -628,8 +630,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-flipper"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
-  react-native-intercom:
-    :path: "../node_modules/react-native-intercom"
   react-native-netinfo:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-onesignal:
@@ -721,7 +721,8 @@ SPEC CHECKSUMS:
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
   hermes-engine: 7dcd1dbd908e6353bd7e4a4add72dba7bf76bf84
-  Intercom: d44bd4264f61a3e343cac46d7b88d4db0f860077
+  Intercom: fcaf66873547414a41fce8c62b7c4eb9250897b5
+  intercom-react-native: a03d38f8f391f043a6294c50d6bd5605d2b9bfe8
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   Mixpanel-swift: 05ab116526c72e0e66a6a2feb9005e933c414347
   MixpanelReactNative: e1f94cea875b9ad58517cd9798155de33fdcab7d
@@ -745,7 +746,6 @@ SPEC CHECKSUMS:
   react-native-fbsdk-next: a0dd8905af573ec4d21b7bc398423ccaa2ce2b07
   react-native-flipper: 5626e75999bce12c90f587d4f8e2199afd4fe1f9
   react-native-image-picker: 92f51a85a62c2d829dcbd0dda5af99e6f988a113
-  react-native-intercom: 0f5a88141d3c2a9fc7858eca48dd8101012f47cd
   react-native-netinfo: 92e6e4476eb8bf6fc2d7c0a6ca0a1406f663d73a
   react-native-onesignal: f829833463ec574cad5e83d1a3e3eed607a3bc3c
   react-native-pager-view: 43f51f45f37ec9715f6c188e4af46ccdf79872e8
@@ -781,6 +781,6 @@ SPEC CHECKSUMS:
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 0e7b91f654516742145e1eb9fcb69fc78106a0cd
+PODFILE CHECKSUM: 948705599fee4d7642c9843e2cce295fa9883a81
 
 COCOAPODS: 1.11.0

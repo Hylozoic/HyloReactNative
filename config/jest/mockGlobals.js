@@ -40,8 +40,6 @@ jest.mock('react-native-device-info', () => ({
   getVersion: jest.fn()
 }))
 
-jest.mock('react-native-intercom', () => {}, { virtual: true })
-
 jest.mock('@react-native-google-signin/google-signin', () => ({
   GoogleSignin: {
     configure: () => {}

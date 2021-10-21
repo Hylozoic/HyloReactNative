@@ -1,6 +1,6 @@
 import getMe from '../selectors/getMe'
 import getMixpanel from '../selectors/getMixpanel'
-import Intercom from 'react-native-intercom'
+import Intercom from '@intercom/intercom-react-native'
 import { isProduction } from 'config'
 
 export default function userFetchedMiddleware ({ getState }) {
@@ -33,10 +33,10 @@ async function identifyMixpanelUser (state) {
 
 function registerIntercomUser (state) {
   const user = getMe(state)
+  Intercom.setUserHash(user.hash)
   Intercom.registerIdentifiedUser({
     userId: user.id
   })
-  Intercom.setUserHash(user.hash)
   Intercom.updateUser({
     name: user.name,
     email: user.email

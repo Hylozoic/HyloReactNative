@@ -11,8 +11,7 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-import com.robinpowered.react.Intercom.IntercomPackage;
-import io.intercom.android.sdk.Intercom;
+import com.intercom.reactnative.IntercomModule;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -29,10 +28,6 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
-
-          // This is probably autolinked
-          // https://github.com/tinycreative/react-native-intercom/issues/329
-          // packages.add(new IntercomPackage());
 
           return packages;
         }
