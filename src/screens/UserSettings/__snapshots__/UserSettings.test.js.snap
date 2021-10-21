@@ -114,9 +114,7 @@ Array [
 `;
 
 exports[`UserSettings matches snapshot with state set 1`] = `
-<RCTSafeAreaView
-  emulateUnlessSupported={true}
->
+<View>
   <View
     onLayout={[Function]}
   >
@@ -143,6 +141,9 @@ exports[`UserSettings matches snapshot with state set 1`] = `
               "error": Object {
                 "paddingBottom": 10,
                 "paddingVertical": 0,
+              },
+              "eyeIcon": Object {
+                "color": "#c0c6cd",
               },
               "hideErrorTriangle": true,
               "label": Object {
@@ -177,6 +178,9 @@ exports[`UserSettings matches snapshot with state set 1`] = `
                 "paddingBottom": 10,
                 "paddingVertical": 0,
               },
+              "eyeIcon": Object {
+                "color": "#c0c6cd",
+              },
               "hideErrorTriangle": true,
               "label": Object {
                 "color": "#c0c6cd",
@@ -210,6 +214,9 @@ exports[`UserSettings matches snapshot with state set 1`] = `
               "error": Object {
                 "paddingBottom": 10,
                 "paddingVertical": 0,
+              },
+              "eyeIcon": Object {
+                "color": "#c0c6cd",
               },
               "hideErrorTriangle": true,
               "label": Object {
@@ -364,11 +371,11 @@ exports[`UserSettings matches snapshot with state set 1`] = `
       </View>
     </RCTScrollView>
   </View>
-</RCTSafeAreaView>
+</View>
 `;
 
 exports[`UserSettings matches the last snapshot 1`] = `
-<ForwardRef(SafeAreaView)>
+<View>
   <KeyboardFriendlyView>
     <ScrollView
       contentContainerStyle={
@@ -391,6 +398,9 @@ exports[`UserSettings matches the last snapshot 1`] = `
             "error": Object {
               "paddingBottom": 10,
               "paddingVertical": 0,
+            },
+            "eyeIcon": Object {
+              "color": "#c0c6cd",
             },
             "hideErrorTriangle": true,
             "label": Object {
@@ -448,7 +458,7 @@ exports[`UserSettings matches the last snapshot 1`] = `
       </View>
     </ScrollView>
   </KeyboardFriendlyView>
-</ForwardRef(SafeAreaView)>
+</View>
 `;
 
 exports[`UserSettings updateField sets the state 1`] = `

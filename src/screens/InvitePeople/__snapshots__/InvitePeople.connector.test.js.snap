@@ -28,36 +28,74 @@ Object {
 exports[`mergeProps merges the props 1`] = `
 Object {
   "graphql": Object {
-    "query": "query ($groupId: ID) {
-        group (id: $groupId) {
-          id
-          name
-          slug
-          invitePath
-          settings {
-            allowGroupInvites
-            askJoinQuestions
-            publicMemberDirectory
-          }
-          pendingInvitations (first: 100) {
-            hasMore
-            items {
-              id
-              email
-              createdAt
-              lastSentAt
+    "query": "
+        query ($id: ID) {
+          group (id: $id) {
+            id
+            accessibility
+            avatarUrl
+            bannerUrl
+            description
+            location
+            invitePath
+            name
+            settings {
+              allowGroupInvites
+              askJoinQuestions
+              publicMemberDirectory
+            }
+            slug
+            visibility
+            childGroups (first: 100) {
+              items {
+                id
+                name
+                avatarUrl
+              }
+            }
+            moderators (first: 100) {
+              hasMore
+              items {
+                id
+                name
+                avatarUrl
+              }
+            }
+            parentGroups (first: 100) {
+              items {
+                id
+                name
+                avatarUrl
+              }
+            }
+            pendingInvitations {
+              hasMore
+              items {
+                id
+                email
+                createdAt
+                lastSentAt
+              }
+            }
+            joinQuestions {
+              items {
+                id
+                questionId
+                text
+              }
             }
           }
         }
-      }",
+      ",
     "variables": Object {
-      "groupId": "99",
+      "id": "99",
     },
   },
   "meta": Object {
     "extractModel": "Group",
+    "id": "99",
   },
-  "type": "InvitePeople/FETCH_GROUP_SETTINGS",
+  "type": "FETCH_GROUP_SETTINGS",
 }
 `;
 
@@ -215,7 +253,7 @@ Object {
     "id": 1,
     "optimistic": true,
   },
-  "type": "GroupSettings/UPDATE_GROUP_SETTINGS",
+  "type": "UPDATE_GROUP_SETTINGS",
 }
 `;
 

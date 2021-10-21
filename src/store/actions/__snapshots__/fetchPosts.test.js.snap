@@ -4,10 +4,13 @@ exports[`sets updateLastViewed to true when fetching for a group 1`] = `
 Object {
   "graphql": Object {
     "query": "query (
+  $afterTime: Date,
+  $beforeTime: Date,
   $boundingBox: [PointInput],
   $filter: String,
   $first: Int,
   $offset: Int,
+  $order: String,
   $search: String,
   $slug: String,
   $sortBy: String,
@@ -28,11 +31,13 @@ Object {
     postCount
     
 posts: viewPosts(
+  afterTime: $afterTime,
+  beforeTime: $beforeTime,
   boundingBox: $boundingBox,
   filter: $filter,
   first: $first,
   offset: $offset,
-  order: \\"desc\\",
+  order: $order,
   sortBy: $sortBy,
   search: $search,
   topic: $topic
@@ -155,10 +160,13 @@ posts: viewPosts(
   }
 }",
     "variables": Object {
+      "afterTime": undefined,
+      "beforeTime": undefined,
       "context": "groups",
       "filter": undefined,
       "first": 20,
       "offset": undefined,
+      "order": undefined,
       "search": undefined,
       "slug": "anything",
       "sortBy": undefined,
@@ -170,6 +178,7 @@ posts: viewPosts(
     "extractQueryResults": Object {
       "getItems": [Function],
     },
+    "slug": "anything",
   },
   "type": "FETCH_POSTS",
 }

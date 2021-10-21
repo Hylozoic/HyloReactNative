@@ -3,37 +3,46 @@
 exports[`useInvitation 1`] = `
 Object {
   "graphql": Object {
-    "query": "mutation ($userId: ID, $invitationToken: String, $accessCode: String) {
-        useInvitation (userId: $userId, invitationToken: $invitationToken, accessCode: $accessCode) {
+    "query": "mutation ($invitationToken: String, $accessCode: String) {
+        useInvitation (invitationToken: $invitationToken, accessCode: $accessCode) {
           membership {
             id
             role
             group {
               id
+              accessibility
               name
+              settings {
+                allowGroupInvites
+                askJoinQuestions
+                askGroupToGroupJoinQuestions
+                publicMemberDirectory
+                showSuggestedSkills
+              }
               slug
+              visibility
+            }
+            person {
+              id
+            }
+            settings {
+              showJoinForm
             }
           }
           error
         }
       }",
     "variables": Object {
-      "accessCode": undefined,
-      "invitationToken": undefined,
-      "userId": Object {
-        "accessCode": "accesstoken",
-        "invitationToken": "invitationtoken",
-      },
+      "accessCode": "accesstoken",
+      "invitationToken": "invitationtoken",
     },
   },
   "meta": Object {
     "analytics": "Group Invitation Accepted",
-    "extractModel": Array [
-      Object {
-        "getRoot": [Function],
-        "modelName": "Membership",
-      },
-    ],
+    "extractModel": Object {
+      "getRoot": [Function],
+      "modelName": "Membership",
+    },
   },
   "type": "JoinGroup/USE_INVITATION",
 }

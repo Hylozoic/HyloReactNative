@@ -109,7 +109,7 @@ Array [
 exports[`mapDispatchToProps creates actions 3`] = `
 Array [
   Array [
-    "Member",
+    "Member - Modal",
     Object {
       "id": 22,
     },

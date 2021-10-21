@@ -20,7 +20,7 @@ Object {
       "slug": "group_name",
     },
   },
-  "type": "CreateGroupFlow/FETCH_URL_EXISTS",
+  "type": "CreateGroupFlow/FETCH_GROUP_EXISTS",
 }
 `;
 

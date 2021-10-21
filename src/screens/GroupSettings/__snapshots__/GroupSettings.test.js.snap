@@ -48,16 +48,8 @@ exports[`GroupSettings GroupBanner matches the last snapshot 1`] = `
 exports[`GroupSettings GroupBanner shows local images if present 1`] = `undefined`;
 
 exports[`GroupSettings matches the last snapshot 1`] = `
-<ScrollView
-  contentContainerStyle={
-    Object {
-      "backgroundColor": "#FFFFFF",
-      "paddingHorizontal": 16,
-      "paddingTop": 20,
-    }
-  }
->
-  <KeyboardFriendlyView>
+<View>
+  <ScrollView>
     <TextInput
       onChangeText={[Function]}
       underlineColorAndroid="transparent"
@@ -91,6 +83,16 @@ exports[`GroupSettings matches the last snapshot 1`] = `
       onFocus={[Function]}
       underlineColorAndroid="transparent"
     />
-  </KeyboardFriendlyView>
-</ScrollView>
+  </ScrollView>
+  <View>
+    <Button
+      onPress={[Function]}
+      text="Save"
+    />
+  </View>
+  <KeyboardSpacer
+    onToggle={[Function]}
+    topSpacing={0}
+  />
+</View>
 `;

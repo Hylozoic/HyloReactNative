@@ -53,9 +53,7 @@ exports[`commentMenu returns removeComment 1`] = `
 `;
 
 exports[`renders correctly 1`] = `
-<TouchableOpacity
-  onPress={[Function]}
->
+<TouchableOpacity>
   <View>
     <TouchableOpacity
       onPress={[Function]}
@@ -79,16 +77,6 @@ exports[`renders correctly 1`] = `
           </Text>
         </View>
         <View>
-          <TouchableOpacity
-            onPress={[Function]}
-          >
-            <Icon
-              name="Reply"
-            />
-            <Text>
-              Reply
-            </Text>
-          </TouchableOpacity>
           <CommentMenu
             deleteComment={[Function]}
             removeComment={[Function]}
@@ -130,9 +118,7 @@ exports[`renders correctly 1`] = `
 `;
 
 exports[`shows the post title when displayPostTitle is true 1`] = `
-<TouchableOpacity
-  onPress={[Function]}
->
+<TouchableOpacity>
   <View>
     <TouchableOpacity
       onPress={[Function]}
@@ -161,16 +147,6 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
           </Text>
         </View>
         <View>
-          <TouchableOpacity
-            onPress={[Function]}
-          >
-            <Icon
-              name="Reply"
-            />
-            <Text>
-              Reply
-            </Text>
-          </TouchableOpacity>
           <CommentMenu
             deleteComment={[Function]}
             removeComment={[Function]}

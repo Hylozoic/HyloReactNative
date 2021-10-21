@@ -12,7 +12,15 @@ exports[`FormError renders correctly 1`] = `
 `;
 
 exports[`Login renders correctly 1`] = `
-<SafeAreaViewMock>
+<RNCSafeAreaView
+  edges={
+    Array [
+      "bottom",
+      "left",
+      "right",
+    ]
+  }
+>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -99,6 +107,9 @@ exports[`Login renders correctly 1`] = `
       <Text>
         Or connect with:
       </Text>
+      <AppleLoginButton
+        createErrorNotification={[Function]}
+      />
       <GoogleLoginButton
         createErrorNotification={[Function]}
         style={Object {}}
@@ -112,11 +123,19 @@ exports[`Login renders correctly 1`] = `
       goToSignup={[Function]}
     />
   </ScrollView>
-</SafeAreaViewMock>
+</RNCSafeAreaView>
 `;
 
 exports[`Login renders error message 1`] = `
-<SafeAreaViewMock>
+<RNCSafeAreaView
+  edges={
+    Array [
+      "bottom",
+      "left",
+      "right",
+    ]
+  }
+>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -203,6 +222,9 @@ exports[`Login renders error message 1`] = `
       <Text>
         Or connect with:
       </Text>
+      <AppleLoginButton
+        createErrorNotification={[Function]}
+      />
       <GoogleLoginButton
         createErrorNotification={[Function]}
         style={Object {}}
@@ -214,11 +236,19 @@ exports[`Login renders error message 1`] = `
     </View>
     <SignupLink />
   </ScrollView>
-</SafeAreaViewMock>
+</RNCSafeAreaView>
 `;
 
 exports[`Login renders with no network connection error 1`] = `
-<SafeAreaViewMock>
+<RNCSafeAreaView
+  edges={
+    Array [
+      "bottom",
+      "left",
+      "right",
+    ]
+  }
+>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -305,6 +335,9 @@ exports[`Login renders with no network connection error 1`] = `
       <Text>
         Or connect with:
       </Text>
+      <AppleLoginButton
+        createErrorNotification={[Function]}
+      />
       <GoogleLoginButton
         createErrorNotification={[Function]}
         style={Object {}}
@@ -316,11 +349,19 @@ exports[`Login renders with no network connection error 1`] = `
     </View>
     <SignupLink />
   </ScrollView>
-</SafeAreaViewMock>
+</RNCSafeAreaView>
 `;
 
 exports[`Login renders with pending banner 1`] = `
-<SafeAreaViewMock>
+<RNCSafeAreaView
+  edges={
+    Array [
+      "bottom",
+      "left",
+      "right",
+    ]
+  }
+>
   <ScrollView
     contentContainerStyle={
       Object {
@@ -410,6 +451,9 @@ exports[`Login renders with pending banner 1`] = `
       <Text>
         Or connect with:
       </Text>
+      <AppleLoginButton
+        createErrorNotification={[Function]}
+      />
       <GoogleLoginButton
         createErrorNotification={[Function]}
         style={Object {}}
@@ -421,7 +465,7 @@ exports[`Login renders with pending banner 1`] = `
     </View>
     <SignupLink />
   </ScrollView>
-</SafeAreaViewMock>
+</RNCSafeAreaView>
 `;
 
 exports[`SignupLink renders correctly 1`] = `

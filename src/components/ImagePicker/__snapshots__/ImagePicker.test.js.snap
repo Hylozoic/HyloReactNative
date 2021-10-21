@@ -1,12 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches last snapshot 1`] = `
-<TouchableOpacity
-  disabled={true}
-  onPress={[Function]}
+<View
+  actions={
+    Array [
+      Array [
+        "Choose from library",
+        [Function],
+      ],
+      Array [
+        "Take photo",
+        [Function],
+      ],
+    ]
+  }
 >
   <Text>
     Children
   </Text>
-</TouchableOpacity>
+</View>
 `;

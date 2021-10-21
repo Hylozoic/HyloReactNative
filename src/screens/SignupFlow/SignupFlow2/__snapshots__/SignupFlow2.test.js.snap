@@ -56,61 +56,83 @@ exports[`handles localUri 1`] = `
 `;
 
 exports[`handles no image 1`] = `
-<SafeAreaViewMock>
-  <View>
-    <ImagePicker
-      id="1"
-      onChoice={[Function]}
-      onPendingChange={[Function]}
-      title="Upload a Photo"
-      type="userAvatar"
-    >
-      <View>
-        <Icon
-          name="AddImage"
-        />
-      </View>
-    </ImagePicker>
+<KeyboardFriendlyView>
+  <ScrollView
+    keyboardDismissMode="on-drag"
+    keyboardShouldPersistTaps="handled"
+  >
     <View>
       <Text>
         Upload a Photo
       </Text>
     </View>
+    <View>
+      <ImagePicker
+        cameraType="front"
+        id="1"
+        onChoice={[Function]}
+        onPendingChange={[Function]}
+        type="userAvatar"
+      >
+        <View>
+          <Icon
+            name="AddImage"
+          />
+        </View>
+      </ImagePicker>
+    </View>
+  </ScrollView>
+  <View>
+    <Button
+      onPress={[Function]}
+      text="< Back"
+    />
+    <Button
+      onPress={[Function]}
+      text="Continue"
+    />
   </View>
-  <Button
-    onPress={[Function]}
-    text="Continue"
-  />
-</SafeAreaViewMock>
+</KeyboardFriendlyView>
 `;
 
 exports[`matches last snapshot 1`] = `
-<SafeAreaViewMock>
-  <View>
-    <ImagePicker
-      id="1"
-      onChoice={[Function]}
-      onPendingChange={[Function]}
-      title="Upload a Photo"
-      type="userAvatar"
-    >
-      <Image
-        source={
-          Object {
-            "uri": "foo.png",
-          }
-        }
-      />
-    </ImagePicker>
+<KeyboardFriendlyView>
+  <ScrollView
+    keyboardDismissMode="on-drag"
+    keyboardShouldPersistTaps="handled"
+  >
     <View>
       <Text>
         Upload a Photo
       </Text>
     </View>
+    <View>
+      <ImagePicker
+        cameraType="front"
+        id="1"
+        onChoice={[Function]}
+        onPendingChange={[Function]}
+        type="userAvatar"
+      >
+        <Image
+          source={
+            Object {
+              "uri": "foo.png",
+            }
+          }
+        />
+      </ImagePicker>
+    </View>
+  </ScrollView>
+  <View>
+    <Button
+      onPress={[Function]}
+      text="< Back"
+    />
+    <Button
+      onPress={[Function]}
+      text="Continue"
+    />
   </View>
-  <Button
-    onPress={[Function]}
-    text="Continue"
-  />
-</SafeAreaViewMock>
+</KeyboardFriendlyView>
 `;

@@ -162,7 +162,7 @@ Array [
 `;
 
 exports[`ItemChooser full renders as expected 1`] = `
-<SafeAreaView>
+<View>
   <View>
     <View>
       <Icon
@@ -206,11 +206,11 @@ exports[`ItemChooser full renders as expected 1`] = `
       </View>
     </View>
   </RCTScrollView>
-</SafeAreaView>
+</View>
 `;
 
 exports[`ItemChooser shallow renders as expected 1`] = `
-<SafeAreaViewMock>
+<View>
   <ItemChooserListHeader
     ItemRowComponent={[Function]}
     autoFocus={true}
@@ -257,5 +257,5 @@ exports[`ItemChooser shallow renders as expected 1`] = `
     sections={Array []}
     stickySectionHeadersEnabled={true}
   />
-</SafeAreaViewMock>
+</View>
 `;

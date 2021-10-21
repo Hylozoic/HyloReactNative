@@ -14,6 +14,7 @@ exports[`ContentRow shows a Comment when itemType is comment 1`] = `
         }
       }
       displayPostTitle={true}
+      onPress={[Function]}
     />
   </View>
 </TouchableOpacity>

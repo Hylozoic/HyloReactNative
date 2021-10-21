@@ -1,44 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ModeratorSettings matches the last snapshot 1`] = `
-<FlatList
-  ListHeaderComponent={
-    <View>
-      <View>
-        <TouchableOpacity
-          onPress={[Function]}
-        >
-          <Text>
-            <Icon
-              green={true}
-              name="Plus"
-            />
-             Add New
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  }
-  data={
-    Array [
-      Object {
-        "avatarUrl": "http://aurl.com",
-        "id": 10,
-        "name": "John Current",
-      },
-      Object {
-        "avatarUrl": "http://aurl.com",
-        "id": 11,
-        "name": "John Other",
-      },
-    ]
-  }
-  keyExtractor={[Function]}
-  keyboardShouldPersistTaps="always"
-  numColumns={1}
-  removeClippedSubviews={false}
-  renderItem={[Function]}
-/>
+<View>
+  <FlatList
+    data={
+      Array [
+        Object {
+          "avatarUrl": "http://aurl.com",
+          "id": 10,
+          "name": "John Current",
+        },
+        Object {
+          "avatarUrl": "http://aurl.com",
+          "id": 11,
+          "name": "John Other",
+        },
+      ]
+    }
+    keyExtractor={[Function]}
+    keyboardShouldPersistTaps="always"
+    numColumns={1}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+  />
+  <View>
+    <Button
+      onPress={[Function]}
+      text="Add Moderator"
+    />
+  </View>
+</View>
 `;
 
 exports[`ModeratorSettings renders ModeratorRow 1`] = `
@@ -83,64 +74,105 @@ exports[`ModeratorSettings renders ModeratorRow without removeModerator 1`] = `
 `;
 
 exports[`ModeratorSettings shows the Search component appropriately 1`] = `
-<RCTScrollView
-  ListHeaderComponent={
+<View>
+  <RCTScrollView
+    data={
+      Array [
+        Object {
+          "avatarUrl": "http://aurl.com",
+          "id": 10,
+          "name": "John Current",
+        },
+        Object {
+          "avatarUrl": "http://aurl.com",
+          "id": 11,
+          "name": "John Other",
+        },
+      ]
+    }
+    getItem={[Function]}
+    getItemCount={[Function]}
+    keyExtractor={[Function]}
+    keyboardShouldPersistTaps="always"
+    onContentSizeChange={[Function]}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    viewabilityConfigCallbackPairs={Array []}
+  >
     <View>
-      <View>
-        <TouchableOpacity
-          onPress={[Function]}
+      <View
+        onLayout={[Function]}
+      >
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
         >
-          <Text>
-            <Icon
-              green={true}
-              name="Plus"
+          <View>
+            <Image
+              source={
+                Object {
+                  "uri": "http://aurl.com",
+                }
+              }
             />
-             Add New
+          </View>
+          <Text>
+            John Current
           </Text>
-        </TouchableOpacity>
+        </View>
       </View>
-    </View>
-  }
-  data={
-    Array [
-      Object {
-        "avatarUrl": "http://aurl.com",
-        "id": 10,
-        "name": "John Current",
-      },
-      Object {
-        "avatarUrl": "http://aurl.com",
-        "id": 11,
-        "name": "John Other",
-      },
-    ]
-  }
-  getItem={[Function]}
-  getItemCount={[Function]}
-  keyExtractor={[Function]}
-  keyboardShouldPersistTaps="always"
-  onContentSizeChange={[Function]}
-  onLayout={[Function]}
-  onMomentumScrollBegin={[Function]}
-  onMomentumScrollEnd={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  removeClippedSubviews={false}
-  renderItem={[Function]}
-  scrollEventThrottle={50}
-  stickyHeaderIndices={Array []}
-  viewabilityConfigCallbackPairs={Array []}
->
-  <View>
-    <View
-      onLayout={[Function]}
-    >
-      <View>
-        <View>
+      <View
+        onLayout={[Function]}
+      >
+        <View
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+        >
+          <View>
+            <Image
+              source={
+                Object {
+                  "uri": "http://aurl.com",
+                }
+              }
+            />
+          </View>
+          <Text>
+            John Other
+          </Text>
           <View
             accessible={true}
             focusable={true}
+            hitSlop={
+              Object {
+                "bottom": 15,
+                "left": 10,
+                "right": 10,
+                "top": 15,
+              }
+            }
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -150,19 +182,15 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
             onStartShouldSetResponder={[Function]}
           >
             <Text>
-              <Icon
-                green={true}
-                name="Plus"
-              />
-               Add New
+              Remove
             </Text>
           </View>
         </View>
       </View>
     </View>
-    <View
-      onLayout={[Function]}
-    >
+  </RCTScrollView>
+  <View>
+    <View>
       <View
         accessible={true}
         focusable={true}
@@ -175,70 +203,14 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
         onStartShouldSetResponder={[Function]}
       >
         <View>
-          <Image
-            source={
-              Object {
-                "uri": "http://aurl.com",
-              }
-            }
-          />
-        </View>
-        <Text>
-          John Current
-        </Text>
-      </View>
-    </View>
-    <View
-      onLayout={[Function]}
-    >
-      <View
-        accessible={true}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-      >
-        <View>
-          <Image
-            source={
-              Object {
-                "uri": "http://aurl.com",
-              }
-            }
-          />
-        </View>
-        <Text>
-          John Other
-        </Text>
-        <View
-          accessible={true}
-          focusable={true}
-          hitSlop={
-            Object {
-              "bottom": 15,
-              "left": 10,
-              "right": 10,
-              "top": 15,
-            }
-          }
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-        >
-          <Text>
-            Remove
-          </Text>
+          <View>
+            <Text>
+              Add Moderator
+            </Text>
+          </View>
         </View>
       </View>
     </View>
   </View>
-</RCTScrollView>
+</View>
 `;
