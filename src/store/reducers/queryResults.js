@@ -169,6 +169,7 @@ export const queryParamWhitelist = [
   'groupSlug',
   'groupSlugs',
   'sortBy',
+  'order',
   'search',
   'autocomplete',
   'filter',

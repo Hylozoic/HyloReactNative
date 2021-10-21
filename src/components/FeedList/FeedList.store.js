@@ -8,13 +8,16 @@ export const MODULE_NAME = 'FeedList'
 
 export const SET_FILTER = `${MODULE_NAME}/SET_FILTER`
 export const SET_SORT = `${MODULE_NAME}/SET_SORT`
+export const SET_TIMEFRAME = `${MODULE_NAME}/SET_TIMEFRAME`
 
 export const defaultFilter = null
 export const defaultSortBy = 'updated'
+export const defaultTimeframe = 'future'
 
 export const defaultState = {
   filter: defaultFilter,
-  sortBy: defaultSortBy
+  sortBy: defaultSortBy,
+  timeframe: defaultTimeframe
 }
 
 export default function reducer (state = defaultState, action) {
@@ -31,6 +34,11 @@ export default function reducer (state = defaultState, action) {
       return {
         ...state,
         sortBy: payload
+      }
+    case SET_TIMEFRAME:
+      return {
+        ...state,
+        timeframe: payload
       }
     default:
       return state
@@ -51,12 +59,23 @@ export function setSort (sortBy) {
   }
 }
 
+export function setTimeframe (timeframe) {
+  return {
+    type: SET_TIMEFRAME,
+    payload: timeframe
+  }
+}
+
 export function getFilter (state) {
   return state[MODULE_NAME].filter
 }
 
 export function getSort (state) {
   return state[MODULE_NAME].sortBy
+}
+
+export function getTimeframe (state) {
+  return state[MODULE_NAME].timeframe
 }
 
 const getPostResults = makeGetQueryResults(FETCH_POSTS)
@@ -74,12 +93,18 @@ export const getQueryProps = createCachedSelector(
   (_, props) => props.sortBy,
   (_, props) => props.filter,
   (_, props) => props.topicName,
-  (group, sortBy, filter, topicName) => {
+  (_, props) => props.order,
+  (_, props) => props.afterTime,
+  (_, props) => props.beforeTime,
+  (group, sortBy, filter, topicName, order, afterTime, beforeTime) => {
     return omitBy(x => isNull(x) || isUndefined(x), {
       sortBy,
       filter,
       slug: get('slug', group),
-      topic: topicName
+      topic: topicName,
+      order,
+      afterTime,
+      beforeTime
     })
   }
 )(

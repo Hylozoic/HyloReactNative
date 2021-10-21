@@ -28,6 +28,7 @@ export default class FeedList extends React.Component {
         !prevProps.isFocused && this.props.isFocused  ||
         prevProps.sortBy !== this.props.sortBy ||
         prevProps.filter !== this.props.filter ||
+        prevProps.timeframe !== this.props.timeframe ||
         prevProps.group?.id !== this.props.group?.id ||
         prevProps.topicName !== this.props.topicName
     ) {
@@ -45,10 +46,12 @@ export default class FeedList extends React.Component {
       fetchMorePosts,
       setFilter,
       setSort,
+      setTimeframe,
       scrollRef,
       sortBy,
       feedType,
-      filter
+      filter,
+      timeframe
     } = this.props
 
     return (
@@ -68,6 +71,11 @@ export default class FeedList extends React.Component {
                 <View style={[styles.listControls]}>
                   <ListControl selected={sortBy} onChange={setSort} options={sortOptions} />
                   <ListControl selected={filter} onChange={setFilter} options={filterOptions} />
+                </View>
+              </>}
+              {feedType === 'event' && <>
+                <View style={[styles.listControls]}>
+                  <ListControl selected={timeframe} onChange={setTimeframe} options={eventTimeframeOptions} />
                 </View>
               </>}
             </View>
@@ -114,8 +122,13 @@ export const filterOptions = [
   { id: 'resource', label: 'Resources' }
 ]
 
-const sortOptions = [
-  {id: 'updated', label: 'Latest Activity'},
-  {id: 'created', label: 'Post Date'},
-  {id: 'votes', label: 'Popular'}
+export const sortOptions = [
+  { id: 'updated', label: 'Latest Activity' },
+  { id: 'created', label: 'Post Date' },
+  { id: 'votes', label: 'Popular' }
+]
+
+export const eventTimeframeOptions = [
+  { id: 'future', label: 'Upcoming Events' },
+  { id: 'past', label: 'Past Events' }
 ]

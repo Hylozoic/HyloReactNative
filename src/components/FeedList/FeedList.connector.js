@@ -3,8 +3,10 @@ import { get } from 'lodash/fp'
 import {
   getSort,
   getFilter,
+  getTimeframe,
   setSort,
   setFilter,
+  setTimeframe,
   getPostIds,
   getHasMorePosts,
   defaultSortBy,
@@ -19,12 +21,23 @@ export function mapStateToProps (state, props) {
   const { group, topicName } = props
   const sortBy = getSort(state, props)
   const filter = props?.feedType || getFilter(state, props)
-  const queryProps = getQueryProps(state, {
+  const timeframe = getTimeframe(state, props)
+  let queryProps = getQueryProps(state, {
     group,
     sortBy,
     filter,
-    topicName
+    topicName,
   })
+
+  if (props.feedType === 'event') {
+    queryProps = {
+      ...queryProps,
+      order: timeframe === 'future' ? 'asc' : 'desc',
+      afterTime: timeframe === 'future' ? new Date().toISOString() : null,
+      beforeTime: timeframe === 'past' ? new Date().toISOString() : null
+    }
+  }
+
   const pending = state.pending[FETCH_POSTS]
   const groupId = get('group.id', props)
   const postIds = getPostIds(state, queryProps)
@@ -35,6 +48,7 @@ export function mapStateToProps (state, props) {
     groupId,
     sortBy,
     filter,
+    timeframe,
     hasMore,
     pending: !!pending,
     pendingRefresh: !!(pending && pending.extractQueryResults.reset),
@@ -42,12 +56,13 @@ export function mapStateToProps (state, props) {
   }
 }
 
-const mapDispatchToProps = { setFilter, setSort, fetchPosts, resetNewPostCount }
+const mapDispatchToProps = { setFilter, setSort, setTimeframe, fetchPosts, resetNewPostCount }
 
 export function shouldResetNewPostCount ({ slug, sortBy, filter, topic }) {
   return slug !== ALL_GROUP_ID
     && slug !== PUBLIC_GROUP_ID
-    && !topic && sortBy === defaultSortBy
+    && !topic
+    && sortBy === defaultSortBy
     && !filter
 }
 
