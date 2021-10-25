@@ -18,9 +18,10 @@ import getRouteParam from 'store/selectors/getRouteParam'
 
 export function headerTitle (topicName, group, feedType) {
   let title 
-  title = topicName
-    ? group?.name
-    : 'Home'
+  title = group?.name
+  // topicName
+  //   ? group?.name
+  //   : 'Home'
   title = feedType ? capitalize(feedType + 's') : title
   return title
 }
