@@ -7,32 +7,29 @@ import { isIOS } from 'util/platform'
 import { ModalHeader } from 'navigation/headers'
 // Screens
 import HyloWebView from 'screens/HyloWebView'
-import GroupSettingsComponent from 'screens/GroupSettings'
+import BlockedUsers from 'screens/BlockedUsers'
+import UserSettingsComponent from 'screens/UserSettings'
 import ModeratorSettings from 'screens/ModeratorSettings'
 import InvitePeople from 'screens/InvitePeople'
 import { caribbeanGreen, gunsmoke, rhino, rhino05, rhino20, rhino30, rhino50, rhino60, rhino80, white } from 'style/colors'
-import Avatar from 'components/Avatar'
 
-const GroupSettings = createMaterialTopTabNavigator()
-export default function GroupSettingsNavigator ({ navigation, route }) {
-  const currentGroup = useSelector(getCurrentGroup)
-  const groupName = currentGroup?.name
-
+const UserSettings = createMaterialTopTabNavigator()
+export default function UserSettingsNavigator ({ navigation, route }) {
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: currentGroup?.name,
+      headerTitle: 'User Settings',
       headerStyle: { backgroundColor: rhino },
       headerTitleStyle: { color: white },
-      headerTitle: props => {
-        return (
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Avatar style={{ marginRight: 8 }} avatarUrl={currentGroup?.avatarUrl} dimension={30} />
-            <Text style={{ fontSize: 16, fontWeight: 'bold', color: white }}>{currentGroup?.name}</Text>
-          </View>
-        )
-      }
+      // headerTitle: props => {
+      //   return (
+      //     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      //       <Avatar style={{ marginRight: 8 }} avatarUrl={currentGroup?.avatarUrl} dimension={30} />
+      //       <Text style={{ fontSize: 16, fontWeight: 'bold', color: white }}>{currentGroup?.name}</Text>
+      //     </View>
+      //   )
+      // }
     })
-  }, [navigation, route, groupName])
+  }, [navigation, route])
 
   const navigatorProps = {
     options: {
@@ -68,69 +65,59 @@ export default function GroupSettingsNavigator ({ navigation, route }) {
       //   />
       // )
     },
-    headerTitleStyle: { color: white },
-    header: headerProps =>
-      <ModalHeader {...headerProps} />
+    // headerTitleStyle: { color: white },
+    // header: headerProps =>
+    //   <ModalHeader {...headerProps} />
   }
 
   return (
-    <GroupSettings.Navigator {...navigatorProps}>
-      <GroupSettings.Screen
+    <UserSettings.Navigator {...navigatorProps}>
+      <UserSettings.Screen
         name='Settings'
         component={HyloWebView}
         initialParams={{
-          path: `groups/${currentGroup?.slug}/settings`
+          path: 'settings'
         }}
       />
-      <GroupSettings.Screen
-        name='Moderators'
+      <UserSettings.Screen
+        name='Groups &amp; Afflilations'
         component={HyloWebView}
         initialParams={{
-          path: `groups/${currentGroup?.slug}/settings/moderators`
+          path: 'settings/groups'
         }}
       />
-      <GroupSettings.Screen
-        name='Topics'
+      <UserSettings.Screen
+        name='Invites &amp; Requests'
         component={HyloWebView}
         initialParams={{
-          path: `groups/${currentGroup?.slug}/topics`
+          path: 'settings/invitations'
         }}
       />
-      <GroupSettings.Screen
-        name='Invite'
+      <UserSettings.Screen
+        name='Notifications'
         component={HyloWebView}
         initialParams={{
-          path: `groups/${currentGroup?.slug}/settings/invite`
+          path: 'settings/notifications'
         }}
       />
-      <GroupSettings.Screen
-        name='Join Requests'
+      <UserSettings.Screen
+        name='Account'
         component={HyloWebView}
         initialParams={{
-          path: `groups/${currentGroup?.slug}/settings/requests`
+          path: 'settings/account'
         }}
       />
-      <GroupSettings.Screen
-        name='Related Groups'
+      <UserSettings.Screen
+        name='Saved Searches'
         component={HyloWebView}
         initialParams={{
-          path: `groups/${currentGroup?.slug}/settings/relationships`
+          path: 'settings/saved-searches'
         }}
       />
-      <GroupSettings.Screen
-        name='Export Data'
-        component={HyloWebView}
-        initialParams={{
-          path: `groups/${currentGroup?.slug}/settings/export`
-        }}
+      <UserSettings.Screen
+        name='Blocked Users'
+        component={BlockedUsers}
       />
-      <GroupSettings.Screen
-        name='Delete'
-        component={HyloWebView}
-        initialParams={{
-          path: `groups/${currentGroup?.slug}/settings/delete`
-        }}
-      />
-    </GroupSettings.Navigator>
+    </UserSettings.Navigator>
   )
 }

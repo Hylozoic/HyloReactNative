@@ -28,10 +28,10 @@ export function mapStateToProps (state, props) {
   const editing = get('route.params.editing', props)
   const isBlocked = !!getBlockedUsers(state).find(i => get('id', i) === id)
   const goToDetails = () => navigate('Member Details', { id })
-  const goToEdit = () => navigate('Member Details', { id, editing: true })
-  const goToEditAccount = () => navigate('Edit Account Info')
+  const goToEdit = () => navigate('Settings')
+  const goToEditAccount = () => navigate('Account')
   const goToSkills = () => navigate('Edit Your Skills', { id })
-  const goToManageNotifications = () => navigate('Notification Settings')
+  const goToManageNotifications = () => navigate('Notifications')
   const goToBlockedUsers = () => navigate('Blocked Users')
 
   return {

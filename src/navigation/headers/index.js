@@ -62,7 +62,7 @@ export const TabStackHeader = ({
         flexDirection: 'row',
         alignItems: 'center'
       }}>
-        <NotificationsIcon showNotifications={() => navigation.navigate('Notifications')} />
+        <NotificationsIcon showNotifications={() => navigation.navigate('Notifications - Modal')} />
       </View>
     )
   }

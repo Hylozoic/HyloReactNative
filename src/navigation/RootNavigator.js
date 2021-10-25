@@ -7,19 +7,18 @@ import { ModalHeader } from 'navigation/headers'
 import DrawerNavigator from 'navigation/DrawerNavigator'
 import SignupNavigator from 'navigation/SignupNavigator'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
-import GroupSettingsNavigator from 'navigation/GroupSettingsNavigator'
+import GroupSettingsTabNavigator from 'navigation/GroupSettingsTabNavigator'
+import UserSettingsNavigator from 'navigation/UserSettingsNavigator'
 // Screens
 import JoinGroup from 'screens/JoinGroup'
 import InviteExpired from 'screens/InviteExpired'
 import ForgotPassword from 'screens/ForgotPassword'
 import Login from 'screens/Login'
-import BlockedUsers from 'screens/BlockedUsers'
 import ItemChooser from 'screens/ItemChooser'
 import LoadingScreen from 'screens/LoadingScreen'
 import NotificationSettings from 'screens/NotificationSettings'
 import NotificationsList from 'screens/NotificationsList'
 import PostEditor from 'screens/PostEditor'
-import UserSettings from 'screens/UserSettings'
 import { white } from 'style/colors'
 import PostDetails from 'screens/PostDetails'
 import MemberProfile from 'screens/MemberProfile'
@@ -46,12 +45,10 @@ export default function RootNavigator ({ fullyAuthorized }) {
         <Root.Screen name='Member - Modal' component={MemberProfile}
           options={{ title: 'Member' }} />
         <Root.Screen name='Edit Post' component={PostEditor} />
-        <Root.Screen name='Edit Account Info' component={UserSettings} />
-        <Root.Screen name='Group Settings' component={GroupSettingsNavigator} />
+        <Root.Screen name='Group Settings' component={GroupSettingsTabNavigator} />
         <Root.Screen name='Pending Invites' component={PendingInvites} />
-        <Root.Screen name='Notifications' component={NotificationsList} />
+        <Root.Screen name='Notifications - Modal' component={NotificationsList} />
         <Root.Screen name='Notification Settings' component={NotificationSettings} />
-        <Root.Screen name='Blocked Users' component={BlockedUsers} />
       </Root.Group>
     </>}
     {/* Not logged-in or Signing-up */}
