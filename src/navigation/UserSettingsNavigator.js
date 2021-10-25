@@ -1,17 +1,16 @@
 import React, { useLayoutEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { useSelector } from 'react-redux'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { isIOS } from 'util/platform'
 import { ModalHeader } from 'navigation/headers'
+import { caribbeanGreen, rhino, rhino05, rhino30, white } from 'style/colors'
 // Screens
 import HyloWebView from 'screens/HyloWebView'
 import BlockedUsers from 'screens/BlockedUsers'
-import UserSettingsComponent from 'screens/UserSettings'
-import ModeratorSettings from 'screens/ModeratorSettings'
-import InvitePeople from 'screens/InvitePeople'
-import { caribbeanGreen, gunsmoke, rhino, rhino05, rhino20, rhino30, rhino50, rhino60, rhino80, white } from 'style/colors'
+// Existing settings screens built not currently in use:
+// import UserSettingsComponent from 'screens/UserSettings'
+// import ModeratorSettings from 'screens/ModeratorSettings'
+// import InvitePeople from 'screens/InvitePeople'
 
 const UserSettings = createMaterialTopTabNavigator()
 export default function UserSettingsNavigator ({ navigation, route }) {
@@ -20,14 +19,13 @@ export default function UserSettingsNavigator ({ navigation, route }) {
       headerTitle: 'User Settings',
       headerStyle: { backgroundColor: rhino },
       headerTitleStyle: { color: white },
-      // headerTitle: props => {
-      //   return (
-      //     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      //       <Avatar style={{ marginRight: 8 }} avatarUrl={currentGroup?.avatarUrl} dimension={30} />
-      //       <Text style={{ fontSize: 16, fontWeight: 'bold', color: white }}>{currentGroup?.name}</Text>
-      //     </View>
-      //   )
-      // }
+      headerTitle: props => {
+        return (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: white }}>Test</Text>
+          </View>
+        )
+      }
     })
   }, [navigation, route])
 
@@ -65,9 +63,9 @@ export default function UserSettingsNavigator ({ navigation, route }) {
       //   />
       // )
     },
-    // headerTitleStyle: { color: white },
-    // header: headerProps =>
-    //   <ModalHeader {...headerProps} />
+    headerTitleStyle: { color: white },
+    header: headerProps =>
+      <ModalHeader {...headerProps} />
   }
 
   return (
