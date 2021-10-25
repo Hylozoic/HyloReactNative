@@ -103,6 +103,34 @@ export default function GroupSettingsNavigator ({ navigation, route }) {
           path: `groups/${currentGroup?.slug}/settings/invite`
         }}
       />
+      <GroupSettings.Screen
+        name='Join Requests'
+        component={HyloWebView}
+        initialParams={{
+          path: `groups/${currentGroup?.slug}/settings/requests`
+        }}
+      />
+      <GroupSettings.Screen
+        name='Related Groups'
+        component={HyloWebView}
+        initialParams={{
+          path: `groups/${currentGroup?.slug}/settings/relationships`
+        }}
+      />
+      <GroupSettings.Screen
+        name='Export Data'
+        component={HyloWebView}
+        initialParams={{
+          path: `groups/${currentGroup?.slug}/settings/export`
+        }}
+      />
+      <GroupSettings.Screen
+        name='Delete'
+        component={HyloWebView}
+        initialParams={{
+          path: `groups/${currentGroup?.slug}/settings/delete`
+        }}
+      />
     </GroupSettings.Navigator>
   )
 }
