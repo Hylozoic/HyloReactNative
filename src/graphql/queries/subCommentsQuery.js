@@ -1,4 +1,4 @@
-import commentFieldsFrament from 'graphql/fragments/commentFieldsFragment'
+import commentFieldsFragment from 'graphql/fragments/commentFieldsFragment'
 
 export default `
 query subCommentsQuery (
@@ -9,7 +9,7 @@ query subCommentsQuery (
     id
     childComments(first: 10, cursor: $cursor, order: "desc") {
       items {
-        ${commentFieldsFrament}
+        ${commentFieldsFragment}
         post {
           id
         }
