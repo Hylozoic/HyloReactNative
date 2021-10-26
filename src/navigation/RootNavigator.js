@@ -7,8 +7,7 @@ import { ModalHeader } from 'navigation/headers'
 import DrawerNavigator from 'navigation/DrawerNavigator'
 import SignupNavigator from 'navigation/SignupNavigator'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
-import GroupSettingsTabNavigator from 'navigation/GroupSettingsTabNavigator'
-import UserSettingsNavigator from 'navigation/UserSettingsNavigator'
+import GroupSettingsTabsNavigator from 'navigation/GroupSettingsTabsNavigator'
 // Screens
 import JoinGroup from 'screens/JoinGroup'
 import InviteExpired from 'screens/InviteExpired'
@@ -45,7 +44,7 @@ export default function RootNavigator ({ fullyAuthorized }) {
         <Root.Screen name='Member - Modal' component={MemberProfile}
           options={{ title: 'Member' }} />
         <Root.Screen name='Edit Post' component={PostEditor} />
-        <Root.Screen name='Group Settings' component={GroupSettingsTabNavigator} />
+        <Root.Screen name='Group Settings' component={GroupSettingsTabsNavigator} />
         <Root.Screen name='Pending Invites' component={PendingInvites} />
         <Root.Screen name='Notifications - Modal' component={NotificationsList} />
         <Root.Screen name='Notification Settings' component={NotificationSettings} />

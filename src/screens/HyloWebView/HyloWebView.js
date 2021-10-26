@@ -22,23 +22,8 @@ export default function HyloWebView ({ path: pathProp, route }) {
 
   if (!cookie) return <Loading />
 
-  // const onNavigationStateChange = newNavState => {
-  //   const { url } = newNavState
-  
-  //   if (!url) return false
-
-  //   if (url.includes('/groups/')) {
-  //     const groupSlug = url.split('/').slice(-1)[0]
-  //     console.log('!! navigate in WebView to -- url, groupSlug:', url, groupSlug, webViewRef.current)
-  //     // Should blick the WebView from navigating
-  //     // but it doesn't seem to do that currently
-  //     webViewRef.current.stopLoading()
-  //     return false
-  //   }
-  // }
-
   const uri = `${process.env.HYLO_WEB_BASE_URL}${path ? `/${path}` : ''}?layoutFlags=mobileSettings`
-
+  
   return (
     <KeyboardFriendlyView style={{ flex: 1 }}>
       <WebView
@@ -48,27 +33,51 @@ export default function HyloWebView ({ path: pathProp, route }) {
           headers: { Cookie: cookie }
         }}
         sharedCookiesEnabled={true}
-        onShouldStartLoadWithRequest={event => {
-          if (event.url === uri) return true
-          if (event.url.slice(0,4) === 'http') {
-              Linking.openURL(event.url)
-              return false
+        onShouldStartLoadWithRequest={({ url }) => {
+          if (url === uri) return true
+          if (url.slice(0,4) === 'http') {
+            Linking.openURL(url)
+            return false
           }
           return true
         }}
-        // startInLoadingState={true} 
-        // onShouldStartLoadWithRequest={({ url }) => {
-        //   if (!url) return false
-        //   if (url.includes('/groups/')) {
-        //     webViewRef.current.stopLoading()
-        //     return false
-        //   }
-
-        //   return true
-        // }}
-        // onNavigationStateChange={onNavigationStateChange}
-        style={{ marginTop: 0 }}
       />
     </KeyboardFriendlyView>
   )
 }
+
+// NOTES:
+// const onNavigationStateChange = newNavState => {
+//   const { url } = newNavState
+//
+//   if (!url) return false
+//
+//   if (url.includes('/groups/')) {
+//     const groupSlug = url.split('/').slice(-1)[0]
+//     console.log('!! navigate in WebView to -- url, groupSlug:', url, groupSlug, webViewRef.current)
+//     // Should blick the WebView from navigating
+//     // but it doesn't seem to do that currently
+//     webViewRef.current.stopLoading()
+//     return false
+//   }
+// }
+// onNavigationStateChange={({ url }) => {
+//   console.log('!!! onNavigationStateChange:', url)
+//   if (url === 'about:blank') return false
+//
+//   // if (!url.match(/settings/)) {
+//   //   return false
+//   // }
+// }}
+//
+// startInLoadingState={true} 
+// onShouldStartLoadWithRequest={({ url }) => {
+//   if (!url) return false
+//   if (url.includes('/groups/')) {
+//     webViewRef.current.stopLoading()
+//     return false
+//   }
+
+//   return true
+// }}
+// onNavigationStateChange={onNavigationStateChange}

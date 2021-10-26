@@ -14,7 +14,7 @@ import HyloWebView from 'screens/HyloWebView'
 // import InvitePeople from 'screens/InvitePeople'
 
 const GroupSettings = createMaterialTopTabNavigator()
-export default function GroupSettingsTabNavigator ({ navigation, route }) {
+export default function GroupSettingsTabsNavigator ({ navigation, route }) {
   const currentGroup = useSelector(getCurrentGroup)
   const groupName = currentGroup?.name
 
