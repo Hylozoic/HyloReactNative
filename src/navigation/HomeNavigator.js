@@ -15,7 +15,7 @@ import ProjectMembers from 'screens/ProjectMembers/ProjectMembers'
 import TopicsComponent from 'screens/Topics'
 
 const HomeTab = createStackNavigator()
-export default function HomeTabNavigator () {
+export default function HomeNavigator () {
   const navigatorProps = {
     screenOptions: {
       headerMode: 'float',

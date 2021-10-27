@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { isIOS } from 'util/platform'
-import { ModalHeader } from 'navigation/headers'
 import Avatar from 'components/Avatar'
 import { caribbeanGreen, rhino, rhino05, rhino30, white } from 'style/colors'
 import HyloWebView from 'screens/HyloWebView'
@@ -17,28 +16,8 @@ const GroupSettings = createMaterialTopTabNavigator()
 export default function GroupSettingsTabsNavigator ({ navigation, route }) {
   const currentGroup = useSelector(getCurrentGroup)
   const groupName = currentGroup?.name
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTitle: currentGroup?.name,
-      headerStyle: { backgroundColor: rhino },
-      headerTitleStyle: { color: white },
-      headerTitle: props => {
-        return (
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Avatar style={{ marginRight: 8 }} avatarUrl={currentGroup?.avatarUrl} dimension={30} />
-            <Text style={{ fontSize: 16, fontWeight: 'bold', color: white }}>{currentGroup?.name}</Text>
-          </View>
-        )
-      }
-    })
-  }, [navigation, route, groupName])
-
   const navigatorProps = {
-    options: {
-    },
     screenOptions: {
-      headerShown: false,
       tabBarActiveTintColor: caribbeanGreen,
       tabBarInactiveTintColor: rhino30,
       tabBarIndicatorStyle: { backgroundColor: caribbeanGreen },
@@ -58,20 +37,24 @@ export default function GroupSettingsTabsNavigator ({ navigation, route }) {
             backgroundColor: rhino05,
             borderTopWidth: StyleSheet.hairlineWidth
           }
-      ),
-      // tabBarIcon: ({ focused }) => (
-      //   <Icon
-      //     name={'Edit'}
-      //     size={30}
-      //     color={focused ? caribbeanGreen : gunsmoke}
-      //     style={{ paddingTop: isIOS ? 0 : 5 }}
-      //   />
-      // )
-    },
-    headerTitleStyle: { color: white },
-    header: headerProps =>
-      <ModalHeader {...headerProps} />
+      )
+    }
   }
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerStyle: { backgroundColor: rhino },
+      headerTitleStyle: { color: white },
+      headerTitle: props => {
+        return (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Avatar style={{ marginRight: 8 }} avatarUrl={currentGroup?.avatarUrl} dimension={30} />
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: white }}>{groupName}</Text>
+          </View>
+        )
+      }
+    })
+  }, [navigation, route, groupName])
 
   return (
     <GroupSettings.Navigator {...navigatorProps}>
@@ -93,7 +76,7 @@ export default function GroupSettingsTabsNavigator ({ navigation, route }) {
         name='Topics'
         component={HyloWebView}
         initialParams={{
-          path: `groups/${currentGroup?.slug}/topics`
+          path: `groups/${currentGroup?.slug}/settings/topics`
         }}
       />
       <GroupSettings.Screen

@@ -28,7 +28,7 @@ export function mapStateToProps (state, props) {
   const editing = get('route.params.editing', props)
   const isBlocked = !!getBlockedUsers(state).find(i => get('id', i) === id)
   const goToDetails = () => navigate('Member Details', { id })
-  const goToEdit = () => navigate('Settings')
+  const goToEdit = () => navigate('Edit Profile')
   const goToEditAccount = () => navigate('Account')
   const goToSkills = () => navigate('Edit Your Skills', { id })
   const goToManageNotifications = () => navigate('Notifications')

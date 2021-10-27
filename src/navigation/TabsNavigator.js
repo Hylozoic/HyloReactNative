@@ -9,10 +9,10 @@ import Icon from 'components/Icon'
 import Avatar from 'components/Avatar'
 import { caribbeanGreen, gainsboro, gunsmoke, rhino05, white } from 'style/colors'
 // Screens
-import HomeTabNavigator from 'navigation/HomeTabNavigator'
+import HomeNavigator from 'navigation/HomeNavigator'
 import SearchNavigator from 'navigation/SearchNavigator'
 import MessagesNavigator from 'navigation/MessagesNavigator'
-import MyProfileNavigator from 'navigation/MyProfileNavigator'
+import UserSettingsTabsNavigator from './UserSettingsTabsNavigator'
 
 const Tabs = createBottomTabNavigator()
 export default function TabsNavigator () {
@@ -58,12 +58,12 @@ export default function TabsNavigator () {
 
   return (
     <Tabs.Navigator {...navigatorProps}>
-      <Tabs.Screen name='Home Tab' component={HomeTabNavigator} />
+      <Tabs.Screen name='Home Tab' component={HomeNavigator} />
       <Tabs.Screen name='Search Tab' component={SearchNavigator} />
       <Tabs.Screen name='Messages Tab' component={MessagesNavigator} />
       <Tabs.Screen
-        name='Profile Tab'
-        component={MyProfileNavigator}
+        name='Settings Tab'
+        component={UserSettingsTabsNavigator}
         options={{
           tabBarIcon: ({ focused }) => (
             <Avatar style={{

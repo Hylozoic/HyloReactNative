@@ -1,39 +1,27 @@
 import React, { useLayoutEffect } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { isIOS } from 'util/platform'
 import { ModalHeader } from 'navigation/headers'
 import { caribbeanGreen, rhino, rhino05, rhino30, white } from 'style/colors'
+import logoutAction from 'store/actions/logout'
+import confirmDiscardChanges from 'util/confirmDiscardChanges'
 // Screens
 import HyloWebView from 'screens/HyloWebView'
 import BlockedUsers from 'screens/BlockedUsers'
-// Existing settings screens built not currently in use:
+
+// Existing User Settings screens built not currently in use:
 // import UserSettingsComponent from 'screens/UserSettings'
 // import ModeratorSettings from 'screens/ModeratorSettings'
 // import InvitePeople from 'screens/InvitePeople'
 
 const UserSettings = createMaterialTopTabNavigator()
-export default function UserSettingsNavigator ({ navigation, route }) {
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTitle: 'User Settings',
-      headerStyle: { backgroundColor: rhino },
-      headerTitleStyle: { color: white },
-      headerTitle: props => {
-        return (
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Text style={{ fontSize: 16, fontWeight: 'bold', color: white }}>Test</Text>
-          </View>
-        )
-      }
-    })
-  }, [navigation, route])
-
+export default function UserSettingsTabsNavigator ({ navigation, route }) {
+  const dispatch = useDispatch()
+  const logout = () => dispatch(logoutAction())
   const navigatorProps = {
-    options: {
-    },
     screenOptions: {
-      headerShown: false,
       tabBarActiveTintColor: caribbeanGreen,
       tabBarInactiveTintColor: rhino30,
       tabBarIndicatorStyle: { backgroundColor: caribbeanGreen },
@@ -53,32 +41,52 @@ export default function UserSettingsNavigator ({ navigation, route }) {
             backgroundColor: rhino05,
             borderTopWidth: StyleSheet.hairlineWidth
           }
-      ),
-      // tabBarIcon: ({ focused }) => (
-      //   <Icon
-      //     name={'Edit'}
-      //     size={30}
-      //     color={focused ? caribbeanGreen : gunsmoke}
-      //     style={{ paddingTop: isIOS ? 0 : 5 }}
-      //   />
-      // )
-    },
-    headerTitleStyle: { color: white },
-    header: headerProps =>
-      <ModalHeader {...headerProps} />
+      )
+    }
   }
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'Settings',
+      headerShown: true,
+      headerStyle: { backgroundColor: rhino },
+      headerTitleStyle: { color: white },
+      header: headerProps => (
+        <ModalHeader {...headerProps}
+          // headerLeftConfirm={true}
+          // headerLeftCloseIcon={false}
+          headerLeft={() => {}}
+          headerLeftOnPress={() => navigation.navigate('Home Tab')}
+          // headerTitle = {props => (
+          //   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          //     <Avatar style={{ marginRight: 8 }} avatarUrl={currentUser?.avatarUrl} dimension={30} />
+          //     <Text style={{ fontSize: 16, fontWeight: 'bold', color: white }}>Settings</Text>
+          //   </View>
+          // )}
+          headerRightButtonLabel='Logout'
+          headerRightButtonOnPress={() => confirmDiscardChanges({
+            title: 'Logout',
+            confirmationMessage: 'Are you sure you want to logout?',
+            continueButtonText: 'Cancel',
+            disgardButtonText: 'Yes',
+            onDiscard: logout
+          })}
+        />
+      )
+    })
+  }, [navigation, route])
 
   return (
     <UserSettings.Navigator {...navigatorProps}>
       <UserSettings.Screen
-        name='Settings'
+        name='Edit Profile'
         component={HyloWebView}
         initialParams={{
           path: 'settings'
         }}
       />
       <UserSettings.Screen
-        name='Groups &amp; Afflilations'
+        name='Afflilations'
         component={HyloWebView}
         initialParams={{
           path: 'settings/groups'

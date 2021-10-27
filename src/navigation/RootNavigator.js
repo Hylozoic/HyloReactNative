@@ -23,6 +23,7 @@ import PostDetails from 'screens/PostDetails'
 import MemberProfile from 'screens/MemberProfile'
 import LoginByTokenHandler from 'screens/LoginByTokenHandler'
 import PendingInvites from 'screens/PendingInvites'
+import MemberSkillEditor from 'screens/MemberProfile/MemberSkillEditor'
 
 const Root = createStackNavigator()
 export default function RootNavigator ({ fullyAuthorized }) {
@@ -45,6 +46,8 @@ export default function RootNavigator ({ fullyAuthorized }) {
           options={{ title: 'Member' }} />
         <Root.Screen name='Edit Post' component={PostEditor} />
         <Root.Screen name='Group Settings' component={GroupSettingsTabsNavigator} />
+        {/* Not used anymore */}
+        <Root.Screen name='Edit Your Skills' component={MemberSkillEditor} />
         <Root.Screen name='Pending Invites' component={PendingInvites} />
         <Root.Screen name='Notifications - Modal' component={NotificationsList} />
         <Root.Screen name='Notification Settings' component={NotificationSettings} />

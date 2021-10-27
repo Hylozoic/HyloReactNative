@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Image, ScrollView, Text, TextInput, View } from 'react-native'
 import { some } from 'lodash/fp'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
@@ -11,236 +11,212 @@ import styles from './GroupSettings.styles'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 import Button from 'components/Button'
 
-// Just use Web version:
-import { useSelector } from 'react-redux'
-import HyloWebView from 'screens/HyloWebView'
-import getCurrentGroup from 'store/selectors/getCurrentGroup'
+export default class GroupSettings extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      edits: {},
+      changed: false
+    }
+  }
 
-export default function GroupSettings ({ route }) {
-  // const [path, setPath] = useState()
-  // useEffect(() => {
-  //   route && setPath(route.params.webViewPath)
-  // }, [route])
-  // const group = useSelector(getCurrentGroup)
+  componentDidMount () {
+    this.props.fetchGroupSettings()
+    this.syncLocalFields()
+  }
 
-  // if (!path) return <Loading />
-  // console.log('!!! route', path)
+  componentDidUpdate (prevProps) {
+    if (prevProps.groupId !== this.props.groupId) {
+      this.props.fetchGroupSettings()
+    }
 
-  return (
-    <HyloWebView path={route?.params?.webViewPath} />
-  )
+    const hasChanged = key => prevProps.group[key] !== this.props.group[key]
+
+    if (some(hasChanged, ['name', 'description', 'location'])) {
+      this.syncLocalFields()
+    }
+  }
+
+  shouldComponentUpdate (nextProps) {
+    return nextProps.isFocused
+  }
+
+  syncLocalFields () {
+    const { group } = this.props
+    this.setState(() => ({
+      edits: {
+        name: group.name,
+        location: group.location,
+        description: group.description
+      }
+    }))
+  }
+
+  updateField = key => value => {
+    this.setState(() => ({
+      changed: true,
+      edits: {
+        ...this.state.edits,
+        [key]: value
+      }
+    }))
+  }
+
+  showLocationPicker = locationText => {
+    LocationPicker({
+      navigation: this.props.navigation,
+      initialSearchTerm: locationText,
+      onPick: location => {
+        this.updateField('location')(location?.fullText)
+        this.updateField('locationId')(location?.id)
+      }
+    })
+  }
+
+  saveChanges = () => {
+    return this.props.updateGroupSettings(this.state.edits)
+      .then(({ error }) => {
+        if (error) {
+          showToast('Error Saving Changes', { isError: true })
+        } else {
+          this.setState({ changed: false })
+          showToast('Saved')
+        }
+      })
+  }
+
+  render () {
+    const {
+      isFocused,
+      group,
+      updateGroupSettings
+    } = this.props
+
+    if (!group) return <Loading />
+
+    const { name, description, location } = this.state.edits
+
+    return (
+      <View style={styles.container}>
+        <ScrollView>
+          <TextInput
+            style={styles.nameInput}
+            onChangeText={this.updateField('name')}
+            value={name}
+            underlineColorAndroid='transparent'
+          />
+          <GroupBanner
+            isFocused={isFocused}
+            group={group}
+            updateGroupSettings={updateGroupSettings}
+          />
+          <Text style={styles.label}>DESCRIPTION</Text>
+          <TextInput
+            style={styles.input}
+            value={description}
+            onChangeText={this.updateField('description')}
+            multiline
+            numberOfLines={5}
+            underlineColorAndroid='transparent'
+          />
+          <Text style={styles.label}>LOCATION</Text>
+          <TextInput
+            style={styles.input}
+            value={location}
+            onFocus={() => this.showLocationPicker(location)}
+            underlineColorAndroid='transparent'
+          />
+        </ScrollView>
+        <View style={styles.buttonBarContainer}>
+          <Button onPress={this.saveChanges} text='Save' style={styles.saveButton} />
+        </View>
+        {isIOS && <KeyboardSpacer />}
+      </View>
+    )
+  }
 }
 
-// export default class GroupSettings extends React.Component {
-//   constructor (props) {
-//     super(props)
-//     this.state = {
-//       edits: {},
-//       changed: false
-//     }
-//   }
+export class GroupBanner extends React.Component {
+  state = {
+    avatarPickerPending: false,
+    bannerPickerPending: false,
+    avatarLocalUri: null,
+    bannerLocalUri: null
+  }
 
-//   componentDidMount () {
-//     this.props.fetchGroupSettings()
-//     this.syncLocalFields()
-//   }
+  onChoice ({ local, remote }, prefix) {
+    const localKey = `${prefix}LocalUri`
+    const remoteKey = `${prefix}Url`
+    this.setState({
+      [localKey]: local
+    })
 
-//   componentDidUpdate (prevProps) {
-//     if (prevProps.groupId !== this.props.groupId) {
-//       this.props.fetchGroupSettings()
-//     }
+    this.props.updateGroupSettings({ [remoteKey]: remote })
+  }
 
-//     const hasChanged = key => prevProps.group[key] !== this.props.group[key]
+  render () {
+    const { group: { id, avatarUrl, bannerUrl } } = this.props
+    const { avatarPickerPending, bannerPickerPending, avatarLocalUri, bannerLocalUri } = this.state
+    const avatarSource = avatarLocalUri
+      ? { uri: avatarLocalUri }
+      : avatarUrl && { uri: avatarUrl }
 
-//     if (some(hasChanged, ['name', 'description', 'location'])) {
-//       this.syncLocalFields()
-//     }
-//   }
+    // This is a suprisingly annoying piece of logic. Basically, prefer
+    // displaying `bannerLocalUri`, then `bannerUrl`, then `defaultBanner`.
+    // However, don't display `defaultBanner` only to be replaced with
+    // `bannerUrl` after the request finishes! The trick to it is this:
+    // `bannerUrl` will be undefined until the request finishes, then it should
+    // be either string or null. So we don't display the default unless it's null.
 
-//   shouldComponentUpdate (nextProps) {
-//     return nextProps.isFocused
-//   }
+    let bannerSource = {
+      uri: bannerLocalUri || bannerUrl
+    }
+    if (bannerUrl === null && bannerLocalUri === null) {
+      bannerSource = defaultBanner
+    }
 
-//   syncLocalFields () {
-//     const { group } = this.props
-//     this.setState(() => ({
-//       edits: {
-//         name: group.name,
-//         location: group.location,
-//         description: group.description
-//       }
-//     }))
-//   }
+    return (
+      <View>
+        <ImagePicker
+          title='Change Banner'
+          type='groupBanner'
+          style={styles.bannerImagePicker}
+          id={id}
+          onChoice={choice => this.onChoice(choice, 'banner')}
+          onPendingChange={pending => this.setState({ bannerPickerPending: pending })}
+        >
+          <Image source={bannerSource} style={styles.bannerImage} />
+          <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />
+        </ImagePicker>
+        <View style={styles.avatarW3}>
+          <ImagePicker
+            style={styles.avatarWrapperWrapper}
+            title='Change Avatar'
+            type='groupAvatar'
+            id={id}
+            onChoice={choice => this.onChoice(choice, 'avatar')}
+            onPendingChange={pending => this.setState({ avatarPickerPending: pending })}
+          >
+            <View style={styles.avatarWrapper}>
+              <Image source={avatarSource} style={styles.avatarImage} />
+              <EditButton isLoading={avatarPickerPending} style={styles.avatarEditButton} />
+            </View>
+          </ImagePicker>
+        </View>
+      </View>
+    )
+  }
+}
 
-//   updateField = key => value => {
-//     this.setState(() => ({
-//       changed: true,
-//       edits: {
-//         ...this.state.edits,
-//         [key]: value
-//       }
-//     }))
-//   }
-
-//   showLocationPicker = locationText => {
-//     LocationPicker({
-//       navigation: this.props.navigation,
-//       initialSearchTerm: locationText,
-//       onPick: location => {
-//         this.updateField('location')(location?.fullText)
-//         this.updateField('locationId')(location?.id)
-//       }
-//     })
-//   }
-
-//   saveChanges = () => {
-//     return this.props.updateGroupSettings(this.state.edits)
-//       .then(({ error }) => {
-//         if (error) {
-//           showToast('Error Saving Changes', { isError: true })
-//         } else {
-//           this.setState({ changed: false })
-//           showToast('Saved')
-//         }
-//       })
-//   }
-
-//   render () {
-//     const {
-//       isFocused,
-//       group,
-//       updateGroupSettings
-//     } = this.props
-
-//     if (!group) return <Loading />
-
-//     const { name, description, location } = this.state.edits
-
-//     return (
-//       <View style={styles.container}>
-//         {/* <WebView
-//           source={{ uri: `https://hylo.com/groups/${group?.slug}/settings` }}
-//           style={{ marginTop: 0 }}
-//         /> */}
-//         <ScrollView>
-//           <TextInput
-//             style={styles.nameInput}
-//             onChangeText={this.updateField('name')}
-//             value={name}
-//             underlineColorAndroid='transparent'
-//           />
-//           <GroupBanner
-//             isFocused={isFocused}
-//             group={group}
-//             updateGroupSettings={updateGroupSettings}
-//           />
-//           <Text style={styles.label}>DESCRIPTION</Text>
-//           <TextInput
-//             style={styles.input}
-//             value={description}
-//             onChangeText={this.updateField('description')}
-//             multiline
-//             numberOfLines={5}
-//             underlineColorAndroid='transparent'
-//           />
-//           <Text style={styles.label}>LOCATION</Text>
-//           <TextInput
-//             style={styles.input}
-//             value={location}
-//             onFocus={() => this.showLocationPicker(location)}
-//             underlineColorAndroid='transparent'
-//           />
-//         </ScrollView>
-//         <View style={styles.buttonBarContainer}>
-//           <Button onPress={this.saveChanges} text='Save' style={styles.saveButton} />
-//         </View>
-//         {isIOS && <KeyboardSpacer />}
-//       </View>
-//     )
-//   }
-// }
-
-// export class GroupBanner extends React.Component {
-//   state = {
-//     avatarPickerPending: false,
-//     bannerPickerPending: false,
-//     avatarLocalUri: null,
-//     bannerLocalUri: null
-//   }
-
-//   onChoice ({ local, remote }, prefix) {
-//     const localKey = `${prefix}LocalUri`
-//     const remoteKey = `${prefix}Url`
-//     this.setState({
-//       [localKey]: local
-//     })
-
-//     this.props.updateGroupSettings({ [remoteKey]: remote })
-//   }
-
-//   render () {
-//     const { group: { id, avatarUrl, bannerUrl } } = this.props
-//     const { avatarPickerPending, bannerPickerPending, avatarLocalUri, bannerLocalUri } = this.state
-//     const avatarSource = avatarLocalUri
-//       ? { uri: avatarLocalUri }
-//       : avatarUrl && { uri: avatarUrl }
-
-//     // This is a suprisingly annoying piece of logic. Basically, prefer
-//     // displaying `bannerLocalUri`, then `bannerUrl`, then `defaultBanner`.
-//     // However, don't display `defaultBanner` only to be replaced with
-//     // `bannerUrl` after the request finishes! The trick to it is this:
-//     // `bannerUrl` will be undefined until the request finishes, then it should
-//     // be either string or null. So we don't display the default unless it's null.
-
-//     let bannerSource = {
-//       uri: bannerLocalUri || bannerUrl
-//     }
-//     if (bannerUrl === null && bannerLocalUri === null) {
-//       bannerSource = defaultBanner
-//     }
-
-//     return (
-//       <View>
-//         <ImagePicker
-//           title='Change Banner'
-//           type='groupBanner'
-//           style={styles.bannerImagePicker}
-//           id={id}
-//           onChoice={choice => this.onChoice(choice, 'banner')}
-//           onPendingChange={pending => this.setState({ bannerPickerPending: pending })}
-//         >
-//           <Image source={bannerSource} style={styles.bannerImage} />
-//           <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />
-//         </ImagePicker>
-//         <View style={styles.avatarW3}>
-//           <ImagePicker
-//             style={styles.avatarWrapperWrapper}
-//             title='Change Avatar'
-//             type='groupAvatar'
-//             id={id}
-//             onChoice={choice => this.onChoice(choice, 'avatar')}
-//             onPendingChange={pending => this.setState({ avatarPickerPending: pending })}
-//           >
-//             <View style={styles.avatarWrapper}>
-//               <Image source={avatarSource} style={styles.avatarImage} />
-//               <EditButton isLoading={avatarPickerPending} style={styles.avatarEditButton} />
-//             </View>
-//           </ImagePicker>
-//         </View>
-//       </View>
-//     )
-//   }
-// }
-
-// export function EditButton ({ isLoading, style }) {
-//   return (
-//     <View style={[styles.editButton, style]}>
-//       {isLoading
-//         ? <Text style={styles.editButtonText}>loading</Text>
-//         : <View style={{ flexDirection: 'row' }}>
-//           <EntypoIcon name='edit' style={styles.editIcon} />
-//           <Text style={styles.editButtonText}>edit</Text>
-//         </View>}
-//     </View>
-//   )
-// }
+export function EditButton ({ isLoading, style }) {
+  return (
+    <View style={[styles.editButton, style]}>
+      {isLoading
+        ? <Text style={styles.editButtonText}>loading</Text>
+        : <View style={{ flexDirection: 'row' }}>
+          <EntypoIcon name='edit' style={styles.editIcon} />
+          <Text style={styles.editButtonText}>edit</Text>
+        </View>}
+    </View>
+  )
+}

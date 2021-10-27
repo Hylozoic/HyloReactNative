@@ -39,8 +39,8 @@ export const routesConfig = {
   '/post/:id':                                               'Post Details - Modal',
   '/post/:id/edit':                                          'Edit Post',
   '/:context(groups)/:groupSlugFromLink/post/:id/edit':      'Edit Post',
-  '/settings/account':                                       'Drawer/Tabs/Profile Tab/Account',
-  '/settings/:section?':                                     'Drawer/Tabs/Profile Tab/My Profile',
+  '/settings/account':                                       'Drawer/Tabs/Settings Tab/Account',
+  '/settings/:section?':                                     'Drawer/Tabs/Settings Tab/Edit Profile',
   '/messages/:id':                                           'Drawer/Tabs/Messages Tab/Thread',
   '/messages':                                               'Drawer/Tabs/Messages Tab/Messages'
 }

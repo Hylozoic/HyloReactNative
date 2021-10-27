@@ -22,6 +22,7 @@ export default function MessagesNavigator () {
         component={ThreadList}
         options={{
           header: headerProps => <ModalHeader {...headerProps}
+            headerLeft={() => {}}
             headerRightButtonLabel='New'
             headerRightButtonOnPress={() => headerProps.navigation.navigate('New Message')}
           />

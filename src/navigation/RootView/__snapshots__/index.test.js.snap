@@ -2691,7 +2691,7 @@ exports[`RootView signedIn but not signupInProgress matches snapshot 1`] = `
                                                                       nativeID="animatedComponent"
                                                                       numberOfLines={1}
                                                                     >
-                                                                      My Profile
+                                                                      Settings
                                                                     </Text>
                                                                   </View>
                                                                   <View
