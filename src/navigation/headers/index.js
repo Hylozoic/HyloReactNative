@@ -27,6 +27,10 @@ export const TabStackHeader = ({
   navigation,
   route,
   options,
+  back,
+  headerLeft,
+  headerRight,
+  // custom
   rootsScreenNames = TAB_STACK_ROOTS || {},
   ...otherProps
 }) => {
@@ -50,13 +54,13 @@ export const TabStackHeader = ({
     headerStyle: {
       backgroundColor: rhino80
     },
-    headerLeft: () => (
+    headerLeft: headerLeft || options.headerLeft || (() => (
       <>
         <FocusAwareStatusBar barStyle='light-content' backgroundColor={rhino80} />
         <MenuButton canGoBack={canGoBack} navigation={navigation} />
       </>
-    ),
-    headerRight: () =>  (
+    )),
+    headerRight: headerRight || (() =>  (
       <View style={{
         flex: 1,
         flexDirection: 'row',
@@ -64,7 +68,7 @@ export const TabStackHeader = ({
       }}>
         <NotificationsIcon showNotifications={() => navigation.navigate('Notifications - Modal')} />
       </View>
-    )
+    ))
   }
 
   return <Header {...props} {...otherProps} />
@@ -110,9 +114,9 @@ export function ModalHeader ({
     },
     headerLeft: headerLeft || (props => {
       // get go back function from navigation
-      const headerLeftOnPress = providedHeaderLeftOnPress
-        ? providedHeaderLeftOnPress
-        : navigation.goBack
+      const headerLeftOnPress = options.headerLeftOnPress
+        || providedHeaderLeftOnPress
+        || navigation.goBack
       const onPress = headerLeftConfirm
         ? () => confirmDiscardChanges({ onDiscard: headerLeftOnPress })
         : headerLeftOnPress
