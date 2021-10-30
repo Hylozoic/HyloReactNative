@@ -1,11 +1,12 @@
 import React, { useLayoutEffect } from 'react'
 import { StyleSheet } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { isIOS } from 'util/platform'
 import { ModalHeader } from 'navigation/headers'
 import { caribbeanGreen, rhino, rhino05, rhino30, white } from 'style/colors'
 import logoutAction from 'store/actions/logout'
+import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
 // Screens
 import HyloWebView from 'screens/HyloWebView'
@@ -56,7 +57,10 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
           // headerLeftConfirm={true}
           // headerLeftCloseIcon={false}
           headerLeft={() => {}}
-          headerLeftOnPress={() => navigation.navigate('Home Tab')}
+          headerLeftOnPress={() => {
+            dispatch(fetchCurrentUser())
+            navigation.navigate('Home Tab')
+          }}
           // headerTitle = {props => (
           //   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           //     <Avatar style={{ marginRight: 8 }} avatarUrl={currentUser?.avatarUrl} dimension={30} />

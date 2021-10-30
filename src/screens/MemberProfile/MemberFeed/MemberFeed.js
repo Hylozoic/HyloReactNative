@@ -76,7 +76,7 @@ export function ContentRow ({ item, itemType, showPost, showTopic, showMember, g
     content = (
       <PostCard
         goToGroup={goToGroup}
-        shouldShowGroups={true}
+        showGroups={true}
         showMember={showMember}
         showTopic={showTopic}
         post={item}

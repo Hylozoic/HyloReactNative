@@ -10,7 +10,7 @@ export default class PostRow extends React.PureComponent {
   render () {
     const {
       post, commenters, groups, creator, topics, imageUrls, fileUrls,
-      isPinned, showMember, showTopic, goToGroup, shouldShowGroups,
+      isPinned, showMember, showTopic, goToGroup, showGroups,
       respondToEvent
     } = this.props
 
@@ -33,7 +33,7 @@ export default class PostRow extends React.PureComponent {
               respondToEvent={response => respondToEvent(post.id ,response)}
               showTopic={showTopic}
               goToGroup={goToGroup}
-              shouldShowGroups={shouldShowGroups}
+              showGroups={showGroups}
             />
           </View>
         </TouchableOpacity>

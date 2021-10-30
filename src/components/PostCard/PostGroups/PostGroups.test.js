@@ -56,36 +56,4 @@ describe('PostGroups', () => {
     renderer.getInstance().toggleExpanded()
     expect(renderer).toMatchSnapshot()
   })
-
-  it('renders when in one group and shouldShowGroups is true', () => {
-    const props = {
-      groups: [
-        {
-          id: 1,
-          name: 'One',
-          slug: 'one'
-        }
-      ],
-      shouldShowGroups: true
-    }
-
-    const renderer = ReactTestRenderer.create(<PostGroups {...props} />)
-    expect(renderer).toMatchSnapshot()
-  })
-
-  it('returns null when in one group and shouldShowGroups is false', () => {
-    const props = {
-      groups: [
-        {
-          id: 1,
-          name: 'One',
-          slug: 'one'
-        }
-      ],
-      shouldShowGroups: false
-    }
-
-    const renderer = ReactTestRenderer.create(<PostGroups {...props} />)
-    expect(renderer).toMatchSnapshot()
-  })
 })

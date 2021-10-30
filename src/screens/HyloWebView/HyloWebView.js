@@ -5,19 +5,18 @@ import WebView from 'react-native-webview'
 import { getSessionCookie  } from 'util/session'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 
-export default function HyloWebView ({ path: pathProp, route }) {
+export default function HyloWebView ({ path: pathProp, route, navigation }) {
   const [cookie, setCookie] = useState()
   const webViewRef = useRef(null)
 
   const path = pathProp || route?.params?.path
 
   useEffect(() => {
-    const asyncFunc = async () => {
+    const getCookieAsync = async () => {
       const cookie = await getSessionCookie()
       setCookie(cookie)
     }
-
-    asyncFunc()
+    getCookieAsync()
   }, [])
 
   if (!cookie) return <Loading />
@@ -28,6 +27,7 @@ export default function HyloWebView ({ path: pathProp, route }) {
     <KeyboardFriendlyView style={{ flex: 1 }}>
       <WebView
         ref={webViewRef}
+        injectedJavaScript={historyAPIShim}
         source={{
           uri,
           headers: { Cookie: cookie }
@@ -41,43 +41,40 @@ export default function HyloWebView ({ path: pathProp, route }) {
           }
           return true
         }}
+        onNavigationStateChange={({ url }) => {
+          if (!url.match(/\/groups\/settings/)) {
+            // This is a bug, it doesn't work to stop loading
+            // returning false in onShouldStartLoadWithRequest does work
+            // but it doesn't capture the shimmed react router history change
+            // webViewRef.stopLoading()
+            webViewRef.current?.goBack()
+            // Could force navigate to the targeted thing (group detail modal, etc)
+            // navigation.navigate('Notifications - Modal')
+            return false
+          }
+        }}
       />
     </KeyboardFriendlyView>
   )
 }
 
-// NOTES:
-// const onNavigationStateChange = newNavState => {
-//   const { url } = newNavState
-//
-//   if (!url) return false
-//
-//   if (url.includes('/groups/')) {
-//     const groupSlug = url.split('/').slice(-1)[0]
-//     console.log('!! navigate in WebView to -- url, groupSlug:', url, groupSlug, webViewRef.current)
-//     // Should blick the WebView from navigating
-//     // but it doesn't seem to do that currently
-//     webViewRef.current.stopLoading()
-//     return false
-//   }
-// }
-// onNavigationStateChange={({ url }) => {
-//   console.log('!!! onNavigationStateChange:', url)
-//   if (url === 'about:blank') return false
-//
-//   // if (!url.match(/settings/)) {
-//   //   return false
-//   // }
-// }}
-//
-// startInLoadingState={true} 
-// onShouldStartLoadWithRequest={({ url }) => {
-//   if (!url) return false
-//   if (url.includes('/groups/')) {
-//     webViewRef.current.stopLoading()
-//     return false
-//   }
-
-//   return true
-// }}
-// onNavigationStateChange={onNavigationStateChange}
+const historyAPIShim = `
+(function() {
+    function wrap(fn) {
+      return function wrapper() {
+        var res = fn.apply(this, arguments);
+        window.ReactNativeWebView.postMessage(
+          '{"method": "historyChange"}'
+        );
+        return res;
+      };
+    }
+    history.pushState = wrap(history.pushState);
+    history.replaceState = wrap(history.replaceState);
+    window.addEventListener("popstate", function() {
+      window.ReactNativeWebView.postMessage(
+        '{"method": "historyChange"}'
+      );
+    });
+  })();
+`

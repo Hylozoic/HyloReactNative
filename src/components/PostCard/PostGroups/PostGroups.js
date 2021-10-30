@@ -23,14 +23,14 @@ export default class PostGroups extends React.PureComponent {
   }
 
   render () {
-    const { groups: providedGroups, goToGroup, includePublic, shouldShowGroups, style } = this.props
+    const { groups: providedGroups, goToGroup, includePublic, style } = this.props
     const { expanded } = this.state
     const groups = includePublic
       ? [...providedGroups, PUBLIC_GROUP]
       : providedGroups
 
     // don't show if there are no groups or there is exactly 1 group and the flag isn't set
-    if (isEmpty(groups) || (groups.length === 1 && shouldShowGroups)) {
+    if (isEmpty(groups)) {
       return null
     }
 

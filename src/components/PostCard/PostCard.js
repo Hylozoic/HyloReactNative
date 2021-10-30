@@ -37,7 +37,8 @@ export default class PostCard extends React.PureComponent {
   }
 
   static defaultProps = {
-    post: samplePost()
+    post: samplePost(),
+    showGroups: true
   }
 
   render () {
@@ -53,7 +54,7 @@ export default class PostCard extends React.PureComponent {
       isPinned,
       post,
       respondToEvent,
-      shouldShowGroups,
+      showGroups,
       showMember,
       showTopic,
       topics
@@ -92,14 +93,15 @@ export default class PostCard extends React.PureComponent {
           type={post.type}
         />
         <Files urls={fileUrls} />
-        <PostGroups
-          style={styles.groups}
-          shouldShowGroups={shouldShowGroups}
-          groups={groups}
-          includePublic={post.isPublic}
-          slug={slug}
-          goToGroup={goToGroup}
-        />
+        {showGroups && (
+          <PostGroups
+            style={styles.groups}
+            groups={groups}
+            includePublic={post.isPublic}
+            slug={slug}
+            goToGroup={goToGroup}
+          />
+        )}
         <PostFooter
           id={post.id}
           commenters={commenters}

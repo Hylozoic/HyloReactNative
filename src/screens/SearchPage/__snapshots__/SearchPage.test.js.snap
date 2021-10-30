@@ -91,7 +91,7 @@ exports[`PostCard matches the last snapshot 1`] = `
         "id": 1,
       }
     }
-    shouldShowGroups={true}
+    showGroups={true}
     showDetails={[Function]}
     showMember={[Function]}
   />

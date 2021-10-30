@@ -177,7 +177,7 @@ export function PostCard ({ post, goToPost }) {
         groups={groups}
         hideMenu
         hideDetails
-        shouldShowGroups
+        showGroups
       />
     </TouchableOpacity>
   )

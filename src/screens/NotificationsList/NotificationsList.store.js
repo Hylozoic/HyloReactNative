@@ -148,7 +148,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
         body: `wrote: ${presentedText(comment.text)}`,
         header: 'mentioned you in a comment on',
         nameInHeader: true,
-        onPress: () => navigate('Post Details', { id: post.id }),
+        onPress: () => navigate('Post Details - Modal', { id: post.id }),
         title: post.title
       }
 
@@ -156,7 +156,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
       return {
         body: `wrote: ${presentedText(comment.text)}`,
         header: 'New Comment on',
-        onPress: () => navigate('Post Details', { id: post.id }),
+        onPress: () => navigate('Post Details - Modal', { id: post.id }),
         title: post.title
       }
 
@@ -164,7 +164,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
       return {
         body: `wrote: ${presentedText(post.details)}`,
         header: 'mentioned you',
-        onPress: () => navigate('Post Details', { id: post.id }),
+        onPress: () => navigate('Post Details - Modal', { id: post.id }),
         nameInHeader: true
       }
 
@@ -174,7 +174,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
       return {
         body: `wrote: ${presentedText(post.details)}`,
         header: 'New Post in',
-        onPress: () => navigate('Post Details', { id: post.id }),
+        onPress: () => navigate('Post Details - Modal', { id: post.id }),
         topic
       }
 
@@ -184,7 +184,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
         group: group.name,
         header: 'New join request',
         nameInHeader: true,
-        onPress: () => navigate('Settings')
+        onPress: () => navigate('Join Requests')
       }
 
     case ACTION_APPROVED_JOIN_REQUEST:
@@ -198,7 +198,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
       return {
         body: `wrote: ${presentedText(post.title)}`,
         header: 'posted an announcement',
-        onPress: () => navigate('Post Details', { id: post.id }),
+        onPress: () => navigate('Post Details - Modal', { id: post.id }),
         nameInHeader: true
       }
   }

@@ -36,7 +36,7 @@ export class PostDetails extends React.Component {
   }
   
   componentDidUpdate(prevProps) {
-    if (prevProps.currentGroup?.name !== this.props.currentGroup?.name) {
+    if (prevProps.currentGroup?.slug !== this.props.currentGroup?.slug) {
       this.setHeader()
     }
   }
@@ -104,10 +104,12 @@ export class PostDetails extends React.Component {
   }
 
   renderPostDetails = (panHandlers) => {
-    const { post, currentUser, respondToEvent, showMember } = this.props
-    const slug = get('groups.0.slug', post)
+    const { post, currentUser, currentGroup, respondToEvent, showMember, route } = this.props
+    const firstGroupSlug = get('groups.0.slug', post)
     const isMember = find(member => member.id === currentUser.id, post.members)
     const location = post.location || (post.locationObject && post.locationObject.fullText)
+    const inModal = (route?.name == 'Post Details - Modal')
+    const showGroups = inModal || post?.groups.find(g => g.slug != currentGroup?.slug)
 
     return (
       <Comments style={styles.commentsScrollView}
@@ -117,13 +119,14 @@ export class PostDetails extends React.Component {
         header={(
           <PostCardForDetails
             {...this.props}
+            showGroups={showGroups}
             respondToEvent={respondToEvent}
             showTopic={this.onShowTopic}
             isMember={isMember}
             location={location}
           />
         )}
-        slug={slug}
+        slug={firstGroupSlug}
         showMember={showMember}
         showTopic={this.onShowTopic}
         panHandlers={panHandlers}
@@ -196,7 +199,8 @@ export function PostCardForDetails ({
   post,
   respondToEvent,
   showMember,
-  showTopic
+  showTopic,
+  showGroups
 }) {
   const slug = get('groups.0.slug', post)
   const isMember = find(member => member.id === currentUser.id, post.members)
@@ -256,14 +260,15 @@ export function PostCardForDetails ({
           <Text style={styles.infoRowInfo} selectable>{location}</Text>
         </View>
       )}
-      <PostGroups
-        groups={post.groups}
-        includePublic={post.isPublic}
-        slug={slug}
-        style={[styles.infoRow]}
-        goToGroup={goToGroup}
-        shouldShowGroups
-      />
+      {showGroups && (
+        <PostGroups
+          groups={post.groups}
+          includePublic={post.isPublic}
+          slug={slug}
+          style={[styles.infoRow]}
+          goToGroup={goToGroup}
+        />
+      )}
       <PostFooter
         style={styles.postFooter}
         id={post.id}

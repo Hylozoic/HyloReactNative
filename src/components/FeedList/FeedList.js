@@ -6,7 +6,7 @@ import styles from './FeedList.styles'
 import PostRow from './PostRow'
 import ListControl from 'components/ListControl'
 import Loading from 'components/Loading'
-
+import { isContextGroup } from 'store/models/Group'
 export default class FeedList extends React.Component {
   fetchOrShowCached () {
     const { hasMore, postIds, fetchPosts } = this.props
@@ -93,7 +93,7 @@ export default class FeedList extends React.Component {
 
 export function renderItem ({
   item,
-  groupId,
+  group,
   showPost,
   showMember,
   showTopic,
@@ -102,8 +102,8 @@ export function renderItem ({
   return (
     <PostRow
       postId={item}
-      groupId={groupId}
-      shouldShowGroups={!groupId}
+      groupId={group?.id}
+      showGroups={!group?.id || isContextGroup(group?.slug)}
       showPost={showPost}
       showMember={showMember}
       showTopic={showTopic}

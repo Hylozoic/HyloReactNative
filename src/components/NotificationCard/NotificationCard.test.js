@@ -77,7 +77,7 @@ describe('NotificationCard', () => {
       group: 'Hydroponic Gardening',
       header: 'New join request',
       nameInHeader: true,
-      onPress: () => navigate('Settings')
+      onPress: () => navigate('Group Settings')
     }
     const renderer = new ReactShallowRenderer()
     renderer.render(<NotificationCard notification={notification} />)
