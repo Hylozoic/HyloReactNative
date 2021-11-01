@@ -90,7 +90,6 @@ describe('PostDetails', () => {
         </MockedScreen>
       </Provider>
     )
-    console.log('!!!!!! here', renderer.toJSON())
     const instance = renderer.root.findByType(PostDetails).instance
     const commentText = 'some text [amention:0] #topic <some encoded stuff>'
     instance.setState({ commentText })

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`updateGroupSettings 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation ($id: ID, $changes: GroupInput) {
+        updateGroupSettings(id: $id, changes: $changes) {
+          id
+          settings {
+            allowGroupInvites
+            askJoinQuestions
+            publicMemberDirectory
+          }
+          joinQuestions {
+            items {
+              id
+              questionId
+              text
+            }
+          }
+        }
+      }",
+    "variables": Object {
+      "changes": Object {
+        "description": "some desc",
+        "name": "blah",
+      },
+      "id": 123,
+    },
+  },
+  "meta": Object {
+    "changes": Object {
+      "description": "some desc",
+      "name": "blah",
+    },
+    "extractModel": "Group",
+    "id": 123,
+    "optimistic": true,
+  },
+  "type": "UPDATE_GROUP_SETTINGS",
+}
+`;

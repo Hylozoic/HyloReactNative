@@ -13,10 +13,12 @@ Object {
       "visibility": 1,
     },
     "urlExists": false,
+    "workflowOptions": Object {},
   },
   "FeedList": Object {
     "filter": null,
     "sortBy": "updated",
+    "timeframe": "future",
   },
   "ItemChooser": Object {},
   "LoadingModal": Object {
@@ -60,7 +62,19 @@ Object {
   "Topics": Object {
     "term": "",
   },
-  "mixpanel": null,
+  "mixpanel": Object {
+    "init": [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    },
+  },
   "orm": Object {
     "@@_______REDUX_ORM_STATE_FLAG": true,
     "Activity": Object {

@@ -38,6 +38,7 @@ describe('mapStateToProps', () => {
       pendingRefresh: false,
       filter: defaultState.filter,
       sortBy: defaultState.sortBy,
+      timeframe: 'future',
       queryProps: {
         sortBy: 'updated'
       }
@@ -57,6 +58,7 @@ describe('mapStateToProps', () => {
       pendingRefresh: false,
       filter: defaultState.filter,
       sortBy: defaultState.sortBy,
+      timeframe: 'future',
       queryProps: {
         slug: 'foo',
         sortBy: 'updated'

@@ -34,7 +34,18 @@ jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
 
 jest.mock('react-native-autocomplete-input', () => 'Autocomplete')
 
-jest.mock('mixpanel-react-native', () => {})
+// https://github.com/mixpanel/mixpanel-react-native/issues/88
+jest.mock('mixpanel-react-native', () => ({
+  __esModule: true,
+  default: () => jest.fn(),
+  Mixpanel: jest.fn(() => ({
+    init: jest.fn()
+  }))
+}))
+
+
+jest.mock('@intercom/intercom-react-native', () => {}, { virtual: true })
+
 
 jest.mock('react-native-device-info', () => ({
   getVersion: jest.fn()

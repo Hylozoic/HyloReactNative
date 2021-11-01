@@ -45,6 +45,7 @@ describe('makeMapStateToProps', () => {
         groups: null,
         creator: null,
         imageUrls: null,
+        fileUrls: null,
         isPinned: null,
         post: null,
         topics: null
@@ -61,6 +62,7 @@ describe('makeMapStateToProps', () => {
         creator: { avatarUrl: 'someUrl', id: '3', name: 'foo' },
         isPinned: true,
         imageUrls: ['someImageUrl'],
+        fileUrls: [],
         post: { creator: '3', id: '10' },
         topics: [{ id: '2', name: 'namer', slug: 'slugger' }]
       }

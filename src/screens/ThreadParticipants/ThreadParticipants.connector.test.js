@@ -13,6 +13,6 @@ describe('mapStateToProps', () => {
     const stateProps = mapStateToProps({}, props)
     expect(stateProps).toMatchSnapshot()
     stateProps.goToParticipant(1)
-    expect(props.navigation.navigate).toHaveBeenCalledWith('Member', { id: 1 })
+    expect(props.navigation.navigate).toHaveBeenCalledWith('Member - Modal', { id: 1 })
   })
 })

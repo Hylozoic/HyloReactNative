@@ -552,6 +552,49 @@ exports[`PostDetails renders correctly 1`] = `
                                     </View>
                                   </View>
                                 </View>
+                                <View>
+                                  <View>
+                                    <Text>
+                                      Posted In: 
+                                    </Text>
+                                    <View>
+                                      <View
+                                        accessible={true}
+                                        collapsable={false}
+                                        focusable={true}
+                                        nativeID="animatedComponent"
+                                        onClick={[Function]}
+                                        onResponderGrant={[Function]}
+                                        onResponderMove={[Function]}
+                                        onResponderRelease={[Function]}
+                                        onResponderTerminate={[Function]}
+                                        onResponderTerminationRequest={[Function]}
+                                        onStartShouldSetResponder={[Function]}
+                                      >
+                                        <Text
+                                          numberOfLines={1}
+                                        />
+                                      </View>
+                                    </View>
+                                    <View
+                                      accessible={true}
+                                      collapsable={false}
+                                      focusable={true}
+                                      nativeID="animatedComponent"
+                                      onClick={[Function]}
+                                      onResponderGrant={[Function]}
+                                      onResponderMove={[Function]}
+                                      onResponderRelease={[Function]}
+                                      onResponderTerminate={[Function]}
+                                      onResponderTerminationRequest={[Function]}
+                                      onStartShouldSetResponder={[Function]}
+                                    >
+                                      <Icon
+                                        name="ArrowDown"
+                                      />
+                                    </View>
+                                  </View>
+                                </View>
                                 <Text>
                                   ACTIVITY
                                 </Text>
