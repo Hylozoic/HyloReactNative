@@ -23,26 +23,50 @@ export const prefixes = [
 // route mapping as the current version of react-navigation
 // doesn't have a way to map multiple paths to the same
 // screen.
+//
+// There are two possible formats for specifying the target screen:
+//  1) { screenPath: 'path/to/screen', noAuth: (true|false) }
+//  2) 'path/to/screen' (assumed auth required)
+//
 export const routesConfig = {
   '/noo/login/token':                                        { screenPath: 'LoginByTokenHandler', noAuth: true },
   '/signup':                                                 { screenPath: 'Signup', noAuth: true },
-  '/groups/:slug/join/:accessCode':                          'JoinGroup',
   '/h/use-invitation':                                       'JoinGroup',
-  '/':                                                       'Drawer/Tabs/Home Tab/Feed',
+
+  // /members
   '/members/:id':                                            'Member - Modal',
-  '/:context(groups)/:groupSlugFromLink':                    'Drawer/Tabs/Home Tab/Feed',
-  '/:context(groups)/:groupSlugFromLink/topics/:topicName':  'Drawer/Tabs/Home Tab/Topic Feed',
   '/members':                                                'Drawer/Tabs/Home Tab/Members',
-  '/:context(groups)/:groupSlugFromLink/members/:id':        'Drawer/Tabs/Home Tab/Member',
+  
+  // /groups
+  '/:context(groups)/:groupSlug/join/:accessCode':           'JoinGroup',
+  '/:context(groups)/:groupSlug/settings/invite':            'Group Settings/Invite',
+  '/:context(groups)/:groupSlug/settings/requests':          'Group Settings/Join Requests',
+  '/:context(groups)/:groupSlug/settings/relationships':     'Group Settings/Related Groups',
+  '/:context(groups)/:groupSlug/settings/export':            'Group Settings/Export Data',
+  '/:context(groups)/:groupSlug/settings/delete':            'Group Settings/Delete',
+  '/:context(groups)/:groupSlug/settings':                   'Group Settings/Settings',
+  '/:context(groups)/:groupSlug/groups':                     'Drawer/Tabs/Home Tab/Group Relationships',
+  '/:context(groups)/:groupSlug/topics/:topicName':          'Drawer/Tabs/Home Tab/Topic Feed',
+  '/:context(groups)/:groupSlug/members/:id':                'Drawer/Tabs/Home Tab/Member',
+  '/:context(groups)/:groupSlug':                            'Drawer/Tabs/Home Tab/Feed',
+  '/:context(groups)/:groupSlug/post/:id':                   'Drawer/Tabs/Home Tab/Post Details',
   '/:context(groups)/post/:id':                              'Drawer/Tabs/Home Tab/Post Details',
-  '/:context(groups)/:groupSlugFromLink/post/:id':           'Drawer/Tabs/Home Tab/Post Details',
+  '/:context(groups)/:groupSlug/post/:id/edit':              'Edit Post',
+
+  // /post
   '/post/:id':                                               'Post Details - Modal',
   '/post/:id/edit':                                          'Edit Post',
-  '/:context(groups)/:groupSlugFromLink/post/:id/edit':      'Edit Post',
+
+  // /settings
   '/settings/account':                                       'Drawer/Tabs/Settings Tab/Account',
   '/settings/:section?':                                     'Drawer/Tabs/Settings Tab/Edit Profile',
+
+  // /messages
   '/messages/:id':                                           'Drawer/Tabs/Messages Tab/Thread',
-  '/messages':                                               'Drawer/Tabs/Messages Tab/Messages'
+  '/messages':                                               'Drawer/Tabs/Messages Tab/Messages',
+
+  '/all':                                                    'Drawer/Tabs/Home Tab/Feed',
+  '/':                                                       'Drawer/Tabs/Home Tab/Feed',
 }
 
 export const navigateToLinkingPath = async (linkingPath, authed) => {
