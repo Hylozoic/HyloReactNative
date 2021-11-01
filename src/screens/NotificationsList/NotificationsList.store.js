@@ -184,7 +184,11 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
         group: group.name,
         header: 'New join request',
         nameInHeader: true,
-        onPress: () => navigate('Join Requests')
+        onPress: () => navigate('Group Settings', {
+          screen: 'Join Requests', params: {
+            groupId: group.id, groupSlug: group.slug 
+          } 
+        })
       }
 
     case ACTION_APPROVED_JOIN_REQUEST:
