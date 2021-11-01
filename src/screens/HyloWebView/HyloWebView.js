@@ -5,7 +5,7 @@ import WebView from 'react-native-webview'
 import { getSessionCookie  } from 'util/session'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 
-export default function HyloWebView ({ path: pathProp, route, navigation }) {
+export default function HyloWebView ({ path: pathProp, route }) {
   const [cookie, setCookie] = useState()
   const webViewRef = useRef(null)
 

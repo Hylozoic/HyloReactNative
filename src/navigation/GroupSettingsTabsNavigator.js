@@ -1,13 +1,14 @@
 import React, { useLayoutEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import fetchGroupSettings from 'store/actions/fetchGroupSettings'
-import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import useGetGroupFromParamsOrSelected from 'hooks/useGetGroupFromParamsOrSelected'
 import { isIOS } from 'util/platform'
 import Avatar from 'components/Avatar'
 import { caribbeanGreen, rhino, rhino05, rhino30, white } from 'style/colors'
 import HyloWebView from 'screens/HyloWebView'
+
 // Existing settings screens built not currently in use:
 // import GroupSettingsComponent from 'screens/GroupSettings'
 // import ModeratorSettings from 'screens/ModeratorSettings'
@@ -16,8 +17,9 @@ import HyloWebView from 'screens/HyloWebView'
 const GroupSettings = createMaterialTopTabNavigator()
 export default function GroupSettingsTabsNavigator ({ navigation, route }) {
   const dispatch = useDispatch()
-  const currentGroup = useSelector(getCurrentGroup)
-  const groupName = currentGroup?.name
+  // Use group from params or current group if none found
+  const selectedGroup = useGetGroupFromParamsOrSelected(route?.params?.params)
+  const groupName = selectedGroup?.name
   const navigatorProps = {
     screenOptions: {
       tabBarActiveTintColor: caribbeanGreen,
@@ -49,13 +51,13 @@ export default function GroupSettingsTabsNavigator ({ navigation, route }) {
       headerTitleStyle: { color: white },
       // Reload group on exit
       headerLeftOnPress: () => {
-        dispatch(fetchGroupSettings(currentGroup.id))
+        dispatch(fetchGroupSettings(selectedGroup.id))
         navigation.goBack()
       },
       headerTitle: props => {
         return (
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Avatar style={{ marginRight: 8 }} avatarUrl={currentGroup?.avatarUrl} dimension={30} />
+            <Avatar style={{ marginRight: 8 }} avatarUrl={selectedGroup?.avatarUrl} dimension={30} />
             <Text style={{ fontSize: 16, fontWeight: 'bold', color: white }}>{groupName}</Text>
           </View>
         )
@@ -69,56 +71,56 @@ export default function GroupSettingsTabsNavigator ({ navigation, route }) {
         name='Settings'
         component={HyloWebView}
         initialParams={{
-          path: `groups/${currentGroup?.slug}/settings`
+          path: `groups/${selectedGroup?.slug}/settings`
         }}
       />
       <GroupSettings.Screen
         name='Moderators'
         component={HyloWebView}
         initialParams={{
-          path: `groups/${currentGroup?.slug}/settings/moderators`
+          path: `groups/${selectedGroup?.slug}/settings/moderators`
         }}
       />
       <GroupSettings.Screen
         name='Topics'
         component={HyloWebView}
         initialParams={{
-          path: `groups/${currentGroup?.slug}/settings/topics`
+          path: `groups/${selectedGroup?.slug}/settings/topics`
         }}
       />
       <GroupSettings.Screen
         name='Invite'
         component={HyloWebView}
         initialParams={{
-          path: `groups/${currentGroup?.slug}/settings/invite`
+          path: `groups/${selectedGroup?.slug}/settings/invite`
         }}
       />
       <GroupSettings.Screen
         name='Join Requests'
         component={HyloWebView}
         initialParams={{
-          path: `groups/${currentGroup?.slug}/settings/requests`
+          path: `groups/${selectedGroup?.slug}/settings/requests`
         }}
       />
       <GroupSettings.Screen
         name='Related Groups'
         component={HyloWebView}
         initialParams={{
-          path: `groups/${currentGroup?.slug}/settings/relationships`
+          path: `groups/${selectedGroup?.slug}/settings/relationships`
         }}
       />
       <GroupSettings.Screen
         name='Export Data'
         component={HyloWebView}
         initialParams={{
-          path: `groups/${currentGroup?.slug}/settings/export`
+          path: `groups/${selectedGroup?.slug}/settings/export`
         }}
       />
       <GroupSettings.Screen
         name='Delete'
         component={HyloWebView}
         initialParams={{
-          path: `groups/${currentGroup?.slug}/settings/delete`
+          path: `groups/${selectedGroup?.slug}/settings/delete`
         }}
       />
     </GroupSettings.Navigator>
