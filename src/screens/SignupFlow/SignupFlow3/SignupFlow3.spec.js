@@ -1,7 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import getEmptyState from 'store/getEmptyState'
-import { render, waitFor } from '@testing-library/react-native'
+import { render } from '@testing-library/react-native'
 import { createMockStore } from 'util/testing'
 import SignupFlow3 from 'screens/SignupFlow/SignupFlow3'
 
@@ -17,8 +17,6 @@ describe('SignupFlow3 Specification', () => {
         />
       </Provider>
     )
-    await waitFor(() => {
-      expect(toJSON()).toMatchSnapshot()
-    })
+    expect(await toJSON()).toMatchSnapshot()
   })
 })

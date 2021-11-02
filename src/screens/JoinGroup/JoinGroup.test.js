@@ -5,7 +5,6 @@ import { createMockStore } from 'util/testing'
 import { Provider } from 'react-redux'
 import { render } from '@testing-library/react-native'
 import { NavigationContainer } from '@react-navigation/native'
-import { checkInvitation as checkInvitationAction, useInvitation } from './JoinGroup.store'
 import { createStackNavigator } from '@react-navigation/stack'
 import Login from 'screens/Login'
 import getEmptyState from 'store/getEmptyState'
@@ -33,5 +32,5 @@ it('forwards to Login when not signedIn', async () => {
     </Provider>
   )
 
-  expect(getByText('Log in to Hylo')).toBeTruthy()  
+  expect(await getByText('Log in to Hylo')).toBeTruthy()  
 })

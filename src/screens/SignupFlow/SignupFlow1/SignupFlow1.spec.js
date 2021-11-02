@@ -17,8 +17,6 @@ describe('SignupFlow1 Specification', () => {
         />
       </Provider>
     )
-    await waitFor(() => 
-      expect(toJSON()).toMatchSnapshot()
-    )
+    expect(await toJSON()).toMatchSnapshot()
   })
 })

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { render, waitFor } from '@testing-library/react-native'
+import { render } from '@testing-library/react-native'
 import { createMockStore } from 'util/testing'
 import getEmptyState from 'store/getEmptyState'
 import InvitePeople from 'screens/InvitePeople'
@@ -14,9 +14,7 @@ describe('InvitePeople Specification', () => {
       </Provider>
     )
 
-    await waitFor(() => {
-      expect(toJSON()).toMatchSnapshot()
-    })
+    expect(await toJSON()).toMatchSnapshot()
   })
 })
 

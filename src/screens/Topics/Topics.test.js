@@ -5,7 +5,7 @@ import MockedScreen from 'util/testing/MockedScreen'
 import Topics, { TopicList, TopicRow, SubscribeStar } from './Topics'
 
 describe('Topics', () => {
-  it('renders correctly a group and topics', () => {
+  it('renders correctly a group and topics', async () => {
     const props = {
       fetchGroupTopics: () => {},
       group: {
@@ -22,10 +22,10 @@ describe('Topics', () => {
         {() => <Topics {...props} />}
       </MockedScreen>
     )
-    expect(toJSON()).toMatchSnapshot()
+    expect(await toJSON()).toMatchSnapshot()
   })
 
-  it('renders correctly with pending=true', () => {
+  it('renders correctly with pending=true', async () => {
     const props = {
       fetchGroupTopics: () => {},
       group: {
@@ -43,10 +43,10 @@ describe('Topics', () => {
         {() => <Topics {...props} />}
       </MockedScreen>
     )
-    expect(toJSON()).toMatchSnapshot()
+    expect(await toJSON()).toMatchSnapshot()
   })
 
-  it('refetches when rerendered with a different groupId', () => {
+  it('refetches when rerendered with a different groupId', async () => {
     const propsBefore = {
       group: { id: 333 },
       fetchGroupTopics: jest.fn()
@@ -60,7 +60,7 @@ describe('Topics', () => {
         {() => <Topics {...propsBefore} />}
       </MockedScreen>
     )
-    rerender(
+    await rerender(
       <MockedScreen>
         {() => <Topics {...propsAfter} />}
       </MockedScreen>
@@ -71,7 +71,7 @@ describe('Topics', () => {
 })
 
 describe('TopicList', () => {
-  it('matches last snapshot', () => {
+  it('matches last snapshot', async () => {
     const props = {
       group: { id: '1' },
       groupHasTopics: true,
@@ -86,10 +86,10 @@ describe('TopicList', () => {
     const { toJSON } = render(
       <TopicList {...props} />
     )
-    expect(toJSON()).toMatchSnapshot()
+    expect(await toJSON()).toMatchSnapshot()
   })
 
-  it('matches last snapshot with empty list', () => {
+  it('matches last snapshot with empty list', async () => {
     const props = {
       topics: [],
       setTopicSubscribe: () => {},
@@ -98,12 +98,12 @@ describe('TopicList', () => {
     const { toJSON } = render(
       <TopicList {...props} />
     )
-    expect(toJSON()).toMatchSnapshot()
+    expect(await toJSON()).toMatchSnapshot()
   })
 })
 
 describe('TopicRow', () => {
-  it('matches last snapshot', () => {
+  it('matches last snapshot', async () => {
     const props = {
       topic: {
         name: 'theTopic',
@@ -116,12 +116,12 @@ describe('TopicRow', () => {
     const { toJSON } = render(
       <TopicRow {...props} />
     )
-    expect(toJSON()).toMatchSnapshot()
+    expect(await toJSON()).toMatchSnapshot()
   })
 })
 
 describe('SubscribeStar', () => {
-  it('matches last snapshot', () => {
+  it('matches last snapshot', async () => {
     const props = {
       isSubscribed: true,
       onPress: () => {}
@@ -129,6 +129,6 @@ describe('SubscribeStar', () => {
     const { toJSON } = render(
       <SubscribeStar {...props} />
     )
-    expect(toJSON()).toMatchSnapshot()
+    expect(await toJSON()).toMatchSnapshot()
   })
 })

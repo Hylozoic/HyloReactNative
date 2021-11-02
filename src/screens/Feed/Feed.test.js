@@ -1,7 +1,6 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import { act } from 'react-test-renderer'
 import { render } from '@testing-library/react-native'
 import Feed from './Feed'
 import { Provider } from 'react-redux'
@@ -109,9 +108,7 @@ it('calls fetchGroupTopic on componentDidMount', async () => {
 
   expect(props.fetchGroupTopic).toHaveBeenCalledTimes(1)
 
-  await act(async () => {
-    expect(toJSON()).toMatchSnapshot()
-  })
+  expect(await toJSON()).toMatchSnapshot()
 })
 
 

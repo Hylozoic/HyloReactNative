@@ -17,16 +17,16 @@ describe('Error Boundary', () => {
     Sentry.captureException.mockReset()
   })
 
-  it(`matches last snapshot`, () => {
+  it(`matches last snapshot`, async () => {
     const { getByText } = renderProviders(
       <ErrorBoundary>
         <Text>Happy!</Text>
       </ErrorBoundary>
     )
-    expect(getByText('Happy!')).toBeDefined()
+    expect(await getByText('Happy!')).toBeDefined()
   })
 
-  it(`displays an error when a child component throws an error`, () => {
+  it(`displays an error when a child component throws an error`, async () => {
     const consoleSpy = jest.spyOn(console, 'error')
     consoleSpy.mockImplementation(() => {})
     const { getByText } = renderProviders(
@@ -34,7 +34,7 @@ describe('Error Boundary', () => {
         <ErrorComponent />
       </ErrorBoundary>
     )
-    expect(getByText('Oops. Something Went Wrong')).toBeDefined()
+    expect(await getByText('Oops. Something Went Wrong')).toBeDefined()
     expect(Sentry.captureException).toHaveBeenCalled()
     consoleSpy.mockRestore()
   })
