@@ -6,10 +6,10 @@ import middleware from './middleware'
 
 export function getStore () {
   const emptyState = getEmptyState()
-  const store = (undefined === window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
+  const store = (undefined === global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
     ? createStore(rootReducer, emptyState, compose(applyMiddleware(...middleware)))
     : createStore(rootReducer, emptyState,
-      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
+      global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
         applyMiddleware(...middleware)
       )
     )

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native'
 // Currently a bug with React Navigation Flipper plugin, follow:
 // https://github.com/react-navigation/react-navigation/issues/9850

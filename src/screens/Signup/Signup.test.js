@@ -1,16 +1,23 @@
-import 'react-native'
 import React from 'react'
-import ReactShallowRenderer from 'react-test-renderer/shallow'
+import { Provider } from 'react-redux'
+import getEmptyState from 'store/getEmptyState'
+import { render } from '@testing-library/react-native'
+import { createMockStore } from 'util/testing'
 import Signup from './Signup'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 
-it('matches last snapshot', () => {
-  const renderer = new ReactShallowRenderer()
+describe('Signup Specification', () => {
+  it('renders with defaults', async () => {
+    const store = createMockStore(getEmptyState())
+    const { findByText, toJSON } =  render(
+      <SafeAreaProvider>
+        <Provider store={store}>
+          <Signup />
+        </Provider>
+      </SafeAreaProvider>
+    )
 
-  renderer.render(<Signup
-    goToSignupFlow={() => {}}
-    goToLogin={() => {}}
-                  />)
-  const actual = renderer.getRenderOutput()
-
-  expect(actual).toMatchSnapshot()
+    expect(await findByText('Sign up to get started with Hylo')).toBeTruthy()
+    expect(await toJSON()).toMatchSnapshot()
+  })
 })

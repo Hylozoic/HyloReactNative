@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListControl renders correctly 1`] = `
+<PopupMenuButton
+  actions={
+    Array [
+      Array [
+        "All",
+        [Function],
+      ],
+      Array [
+        "Test Item 1",
+        [Function],
+      ],
+      Array [
+        "Test Item 2",
+        [Function],
+      ],
+    ]
+  }
+>
+  <Text>
+    All
+  </Text>
+  <Icon
+    name="ArrowDown"
+  />
+</PopupMenuButton>
+`;

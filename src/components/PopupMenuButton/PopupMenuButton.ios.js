@@ -21,7 +21,7 @@ export default function PopupMenuButton ({
   }
 
   return (
-    <TouchableOpacity onPress={onPress} style={style} hitSlop={hitSlop} {...viewProps} testID='popup-menu-button'>
+    <TouchableOpacity onPress={onPress} style={style} hitSlop={hitSlop} {...viewProps}>
       {children}
     </TouchableOpacity>
   )

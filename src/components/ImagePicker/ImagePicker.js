@@ -52,7 +52,6 @@ export default function ImagePicker (props) {
       onComplete: () => setPending(false)
     })
   }
-
   const MenuElement = (disabled || pending)
     ? View
     : PopupMenuButton
@@ -63,9 +62,9 @@ export default function ImagePicker (props) {
   const children = pending
     ? <Icon name='Clock' style={[styles.icon, iconStyle]} />
     : <Icon name='AddImage' style={[styles.icon, iconStyle]} />
-
+  
   return (
-    <MenuElement actions={imagePickerOptions} style={style} testID='menu-button'>
+    <MenuElement actions={imagePickerOptions} style={style}>
       {props.children || children}
     </MenuElement>
   )

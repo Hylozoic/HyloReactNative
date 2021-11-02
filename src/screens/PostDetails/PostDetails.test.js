@@ -2,7 +2,7 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer, { act } from 'react-test-renderer'
 import { Provider } from 'react-redux'
-import PostDetails, { CommentPrompt, Files, JoinProjectButton, ProjectMembers } from './PostDetails'
+import { PostDetails, CommentPrompt, JoinProjectButton, ProjectMembers } from './PostDetails'
 import { Linking, TouchableOpacity } from 'react-native'
 import { createMockStore } from 'util/testing'
 import MockedScreen from 'util/testing/MockedScreen'
@@ -138,23 +138,6 @@ describe('PostDetails', () => {
       await instance.handleCommentOnChange('something or nothing')
     })
     expect(instance.state.commentText).toEqual('something or nothing')
-  })
-})
-
-describe('Files', () => {
-  it('renders correctly', async () => {
-    const renderer = TestRenderer.create(
-      <Files urls={[
-          'http://foo.com/foo.pdf',
-          'http://foo.com/bar.zip'
-        ]}
-      />
-    )
-    expect(renderer).toMatchSnapshot()
-
-    await renderer.root.findAllByType(TouchableOpacity)[0].props.onPress()
-    expect(Linking.canOpenURL).toHaveBeenCalledWith('http://foo.com/foo.pdf')
-    expect(Linking.openURL).toHaveBeenCalledWith('http://foo.com/foo.pdf')
   })
 })
 

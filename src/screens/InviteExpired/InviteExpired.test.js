@@ -1,14 +1,19 @@
-import 'react-native'
 import React from 'react'
-import ReactShallowRenderer from 'react-test-renderer/shallow'
-import InviteExpired from './InviteExpired'
+import { Provider } from 'react-redux'
+import getEmptyState from 'store/getEmptyState'
+import { render } from '@testing-library/react-native'
+import { createMockStore } from 'util/testing'
+import InviteExpired from 'screens/InviteExpired'
 
-describe('InviteExpired', () => {
-  it('matches the last snapshot', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<InviteExpired />)
-    const actual = renderer.getRenderOutput()
+describe('InviteExpired Specification', () => {
+  it('default render matches snapshot', async () => {
+    const state = getEmptyState()
+    const { getByText } = render(
+      <Provider store={createMockStore(state)}>
+        <InviteExpired navigation={{ setOptions: jest.fn() }} />
+      </Provider>
+    )
 
-    expect(actual).toMatchSnapshot()
+    expect(await getByText(/Invitation has expired/)).toBeTruthy()
   })
 })

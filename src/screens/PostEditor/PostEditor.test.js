@@ -6,8 +6,8 @@ import { Alert } from 'react-native'
 import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
 import MockedScreen from 'util/testing/MockedScreen'
-import { DocumentPicker } from 'react-native-document-picker'
-import RNImagePicker from 'react-native-image-picker'
+// import { DocumentPicker } from 'react-native-document-picker'
+// import RNImagePicker from 'react-native-image-picker'
 import { act } from 'react-test-renderer'
 
 jest.mock('react-native/Libraries/Alert/Alert', () => {
@@ -15,22 +15,23 @@ jest.mock('react-native/Libraries/Alert/Alert', () => {
     alert: jest.fn()
   }
 })
-jest.mock('react-native-document-picker', () => {
-  let callback
+// jest.mock('react-native-document-picker', () => {
+//   let callback
 
-  return {
-    DocumentPicker: {
-      show: jest.fn((options, cb) => {
-        callback = cb
-      }),
-      finishShow: (err, result) => callback(err, result)
-    },
-    DocumentPickerUtil: {
-      allFiles: jest.fn()
-    }
-  }
-})
-jest.mock('react-native-image-picker')
+//   return {
+//     DocumentPicker: {
+//       show: jest.fn((options, cb) => {
+//         callback = cb
+//       }),
+//       finishShow: (err, result) => callback(err, result),
+//       isCancel: jest.fn()
+//     },
+//     DocumentPickerUtil: {
+//       allFiles: jest.fn()
+//     }
+//   }
+// })
+// jest.mock('react-native-image-picker')
 
 const mockPost = {
   details: 'myDetails',
@@ -226,47 +227,6 @@ describe('PostEditor', () => {
       await instance.showAlert('alert message')
     })
     expect(Alert.alert).toHaveBeenCalledWith('alert message')
-  })
-
-  it('showFilePicker', async () => {
-      const upload = jest.fn(() => Promise.resolve({
-        payload: {
-          url: 'https:/storage.hylo.com/foo.pdf'
-        }
-      }))
-      const renderer = TestRenderer.create(
-        <Provider store={createMockStore()}>
-          <MockedScreen>
-            {() => <PostEditor
-              isFocused
-              upload={upload}
-              fetchPost={jest.fn()}
-              fileUrls={[]}
-              navigation={navigation}
-              route={route}
-              imageUrls={['http://foo.com/foo.png']}
-              post={mockPost}
-            />}
-          </MockedScreen>
-        </Provider>
-      )
-      const instance = renderer.root.findByType(PostEditor).instance
-      jest.spyOn(instance, 'addFile')
-      await act(async () => {
-        await instance.showFilePicker()
-      })
-      expect(instance.state.filePickerPending).toBeTruthy()
-      await act(async () => {
-        await DocumentPicker.finishShow(null, {
-          uri: 'file:///somewhere/foo.pdf',
-          fileName: 'foo.pdf',
-          type: 'application/x-pdf'
-        })
-      })
-      expect(instance.state.filePickerPending).toBeFalsy()
-      expect(upload).toHaveBeenCalled()
-      expect(instance.addFile).toHaveBeenCalledWith({ local: 'file:///somewhere/foo.pdf', remote: 'https:/storage.hylo.com/foo.pdf' })
-    // })
   })
   
   it('has file methods', async () => {

@@ -1,5 +1,8 @@
 // Mocking the global.fetch included in React Native
 global.fetch = jest.fn() // eslint-disable-line no-undef
+global.XMLHttpRequest = jest.fn()
+// global.window = {}
+
 // Helper to mock a success response (only once)
 fetch.mockResponseSuccess = body => {
   fetch.mockImplementationOnce(
@@ -90,5 +93,3 @@ jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter.js', () =>
   require('react-native/Libraries/EventEmitter/__mocks__/NativeEventEmitter.js')
 )
 
-global.XMLHttpRequest = jest.fn()
-global.window = {}
