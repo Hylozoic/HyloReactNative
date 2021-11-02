@@ -36,7 +36,7 @@ export default class SignupFlow4 extends React.Component {
     if (this.validate(key)) {
       this.props.updateSetting(key, value)
     } else {
-      setTimeout(() => this.controlRefs[fieldKey || key].current.makeEditable(), 50)
+      setTimeout(() => this.controlRefs[fieldKey || key].current?.makeEditable(), 50)
     }
   }
 

@@ -1,7 +1,6 @@
 import resetStore, { KEYS_PRESERVED_ON_RESET } from './resetStore'
 import getEmptyState from 'store/getEmptyState'
-import { LOGOUT } from 'screens/Login/actions'
-import { RESET_STORE } from '../constants'
+import { LOGOUT, RESET_STORE } from 'store/constants'
 
 describe('resetStore', () => {
   it('resets to initial state on logout', () => {
@@ -10,6 +9,15 @@ describe('resetStore', () => {
     const action = { type: LOGOUT }
     const newState = resetStore(state, action)
     expect(newState).toEqual(fullInitialState)
+  })
+
+  it('preserves session.returnToPath on logout', () => {
+    resetStore(getEmptyState(), {})
+    const returnToPath = 'path/to/return/to' 
+    const state = { foo: 'bar', session: { returnToPath } }
+    const action = { type: LOGOUT }
+    const newState = resetStore(state, action)
+    expect(newState.session.returnToPath).toEqual(returnToPath)
   })
 
   it('preserves necessary state on reset', () => {
@@ -28,4 +36,6 @@ describe('resetStore', () => {
       ...preservedState
     })
   })
+
+  
 })

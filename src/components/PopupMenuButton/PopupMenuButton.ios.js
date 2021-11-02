@@ -1,5 +1,5 @@
-import { ActionSheetIOS, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { ActionSheetIOS, TouchableOpacity } from 'react-native'
 
 export default function PopupMenuButton ({
   actions,
@@ -21,7 +21,7 @@ export default function PopupMenuButton ({
   }
 
   return (
-    <TouchableOpacity onPress={onPress} style={style} hitSlop={hitSlop} {...viewProps}>
+    <TouchableOpacity onPress={onPress} style={style} hitSlop={hitSlop} {...viewProps} testID='popup-menu-button'>
       {children}
     </TouchableOpacity>
   )

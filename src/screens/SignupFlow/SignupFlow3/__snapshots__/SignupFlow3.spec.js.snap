@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignupFlow3 Specification default render matches snapshot 1`] = `
+<View
+  onLayout={[Function]}
+>
+  <RCTScrollView
+    keyboardDismissMode="on-drag"
+    keyboardShouldPersistTaps="handled"
+  >
+    <View>
+      <View>
+        <Text>
+          Add your location
+        </Text>
+        <Text>
+          Add your location to see more relevant content and find people and projects near you.
+        </Text>
+      </View>
+      <View>
+        <View>
+          <Text>
+            Where do you call home
+          </Text>
+          <TextInput
+            editable={true}
+            onFocus={[Function]}
+            onSubmitEditing={[Function]}
+            textContentType="oneTimeCode"
+            value="Hull"
+          />
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+  <View>
+    <View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        nativeID="animatedComponent"
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+      >
+        <View>
+          <View>
+            <Text>
+              &lt; Back
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        nativeID="animatedComponent"
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+      >
+        <View>
+          <View>
+            <Text>
+              Continue
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

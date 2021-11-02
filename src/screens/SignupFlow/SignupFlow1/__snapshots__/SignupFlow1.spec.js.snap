@@ -1,0 +1,198 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignupFlow1 Specification default render matches snapshot 1`] = `
+<View
+  onLayout={[Function]}
+>
+  <RCTScrollView
+    collapsable={false}
+    keyboardDismissMode="on-drag"
+    keyboardShouldPersistTaps="handled"
+    onGestureHandlerEvent={[Function]}
+    onGestureHandlerStateChange={[Function]}
+  >
+    <View>
+      <View>
+        <Text>
+          Hi there stranger!
+        </Text>
+        <Text>
+          To kick things off, tell us a bit more about yourself and get your account off the ground.
+        </Text>
+      </View>
+      <View>
+        <View>
+          <Text>
+            Your Full Name
+          </Text>
+          <TextInput
+            editable={true}
+            onChangeText={[Function]}
+            onSubmitEditing={[Function]}
+            returnKeyType="next"
+            textContentType="oneTimeCode"
+            value=""
+          />
+        </View>
+        <View>
+          <Text>
+            Email Address
+          </Text>
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            editable={true}
+            keyboardType="email-address"
+            onChangeText={[Function]}
+            onSubmitEditing={[Function]}
+            returnKeyType="next"
+            textContentType="oneTimeCode"
+            value=""
+          />
+        </View>
+        <View>
+          <Text>
+            Password
+          </Text>
+          <TextInput
+            editable={true}
+            onChangeText={[Function]}
+            onSubmitEditing={[Function]}
+            returnKeyType="next"
+            secureTextEntry={true}
+            textContentType="oneTimeCode"
+            value=""
+          />
+          <View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              hitSlop={
+                Object {
+                  "bottom": 10,
+                  "left": 10,
+                  "right": 10,
+                  "top": 10,
+                }
+              }
+              nativeID="animatedComponent"
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            >
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": undefined,
+                      "fontSize": 12,
+                    },
+                    undefined,
+                    Object {
+                      "fontFamily": "Entypo",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    Object {},
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View>
+          <Text>
+            Confirm Password
+          </Text>
+          <TextInput
+            editable={true}
+            onChangeText={[Function]}
+            onSubmitEditing={[Function]}
+            returnKeyType="go"
+            secureTextEntry={true}
+            textContentType="oneTimeCode"
+            value=""
+          />
+          <View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              hitSlop={
+                Object {
+                  "bottom": 10,
+                  "left": 10,
+                  "right": 10,
+                  "top": 10,
+                }
+              }
+              nativeID="animatedComponent"
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            >
+              <Text
+                allowFontScaling={false}
+                style={
+                  Array [
+                    Object {
+                      "color": undefined,
+                      "fontSize": 12,
+                    },
+                    undefined,
+                    Object {
+                      "fontFamily": "Entypo",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    Object {},
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+  <View>
+    <View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        nativeID="animatedComponent"
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+      >
+        <View>
+          <View>
+            <Text>
+              Continue
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

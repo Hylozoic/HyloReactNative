@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
 import { View } from 'react-native'
 import Icon from 'components/Icon'
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker'
@@ -65,7 +65,7 @@ export default function ImagePicker (props) {
     : <Icon name='AddImage' style={[styles.icon, iconStyle]} />
 
   return (
-    <MenuElement actions={imagePickerOptions} style={style}>
+    <MenuElement actions={imagePickerOptions} style={style} testID='menu-button'>
       {props.children || children}
     </MenuElement>
   )

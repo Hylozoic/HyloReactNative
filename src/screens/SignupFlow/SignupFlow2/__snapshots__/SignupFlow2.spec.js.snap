@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignupFlow2 Specification default render matches snapshot 1`] = `
+<View
+  onLayout={[Function]}
+>
+  <RCTScrollView
+    keyboardDismissMode="on-drag"
+    keyboardShouldPersistTaps="handled"
+  >
+    <View>
+      <View>
+        <Text>
+          Upload a Photo
+        </Text>
+      </View>
+      <View>
+        <View
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          hitSlop={
+            Object {
+              "bottom": 5,
+              "left": 5,
+              "right": 5,
+              "top": 5,
+            }
+          }
+          nativeID="animatedComponent"
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+        >
+          <View>
+            <Icon
+              name="AddImage"
+            />
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+  <View>
+    <View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        nativeID="animatedComponent"
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+      >
+        <View>
+          <View>
+            <Text>
+              &lt; Back
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        nativeID="animatedComponent"
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+      >
+        <View>
+          <View>
+            <Text>
+              Continue
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

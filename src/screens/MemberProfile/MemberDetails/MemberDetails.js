@@ -252,31 +252,3 @@ export function GroupRow ({ membership, goToGroup, editing }) {
     </View>
   )
 }
-
-// import React from 'react'
-// import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
-// import { LoginManager, AccessToken } from 'react-native-fbsdk-next'
-// import { any, values, isNil } from 'lodash/fp'
-// import validator from 'validator'
-// import prompt from 'react-native-prompt-android'
-// import { validateUser } from 'hylo-utils/validators'
-// import { showToast } from 'util/toast'
-// import confirmDiscardChanges from 'util/confirmDiscardChanges'
-// import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-// import { permissions } from 'screens/Login/FbLoginButton'
-// import Loading from 'components/Loading'
-// import Button from 'components/Button'
-// import SettingControl from 'components/SettingControl'
-// // import styles from './UserSettings.styles'
-
-// // Just use Web version:
-// import HyloWebView from 'screens/HyloWebView'
-
-// export default function UserSettings ({ navigation }) {
-//   // TODO: Add Header back with Logout button
-//   // TODO: Make materialTopTabs with all Settings options as tabs
-//   return (
-//     <HyloWebView path="settings" navigation={navigation} />
-//   )
-// }
-

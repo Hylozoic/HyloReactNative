@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InvitePeople Specification default render matches snapshot 1`] = `
+<View>
+  <RCTScrollView>
+    <View>
+      <Text>
+        Anyone with this link can join the group:
+      </Text>
+      <Text>
+        https://www.hylo.comundefined
+      </Text>
+      <View>
+        <View>
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            nativeID="animatedComponent"
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+          >
+            <View>
+              <View>
+                <Text>
+                  Reset Link
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View>
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            nativeID="animatedComponent"
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+          >
+            <View>
+              <View>
+                <Text>
+                  Copy Link
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <TextInput
+        autoCapitalize="none"
+        autoComplete="email"
+        autoCorrect={false}
+        onChangeText={[Function]}
+        placeholder="Type email addresses"
+        underlineColorAndroid="transparent"
+        value=""
+      />
+      <TextInput
+        multiline={true}
+        numberOfLines={5}
+        onChangeText={[Function]}
+        textAlignVertical="top"
+        underlineColorAndroid="transparent"
+        value="Hey! Here's an invite to the All My Groups group on Hylo."
+      />
+      <View>
+        <View>
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            nativeID="animatedComponent"
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+          >
+            <View>
+              <View>
+                <Text>
+                  Pending Invites
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View>
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            nativeID="animatedComponent"
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+          >
+            <View>
+              <View>
+                <Text>
+                  Send Invite
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View />
+    </View>
+  </RCTScrollView>
+</View>
+`;

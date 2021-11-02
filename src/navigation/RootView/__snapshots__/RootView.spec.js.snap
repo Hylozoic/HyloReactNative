@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Navigation Specification renders Login when signedIn false 1`] = `
+exports[`RootView Specification renders Login when signedIn false 1`] = `
 <View>
   <View
     style={
@@ -9,390 +9,382 @@ exports[`Navigation Specification renders Login when signedIn false 1`] = `
       }
     }
   >
-    <RNCSafeAreaProvider
-      onInsetsChange={[Function]}
+    <View
       style={
         Array [
           Object {
+            "backgroundColor": "rgb(242, 242, 242)",
             "flex": 1,
           },
           undefined,
         ]
       }
     >
-      <View
+      <RNSScreenContainer
+        onLayout={[Function]}
         style={
-          Array [
-            Object {
-              "backgroundColor": "rgb(242, 242, 242)",
-              "flex": 1,
-            },
-            undefined,
-          ]
+          Object {
+            "flex": 1,
+          }
         }
       >
-        <RNSScreenContainer
-          onLayout={[Function]}
-          style={
-            Object {
-              "flex": 1,
-            }
-          }
+        <RNSScreen
+          activityState={2}
+          forwardedRef={[Function]}
+          pointerEvents="box-none"
         >
-          <RNSScreen
-            activityState={2}
-            forwardedRef={[Function]}
+          <View
+            collapsable={false}
+          />
+          <View
+            accessibilityElementsHidden={false}
+            closing={false}
+            gestureVelocityImpact={0.3}
+            importantForAccessibility="auto"
+            onClose={[Function]}
+            onGestureBegin={[Function]}
+            onGestureCanceled={[Function]}
+            onGestureEnd={[Function]}
+            onOpen={[Function]}
+            onTransition={[Function]}
             pointerEvents="box-none"
+            style={
+              Array [
+                Object {
+                  "display": "flex",
+                  "overflow": undefined,
+                },
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+              ]
+            }
+            transitionSpec={
+              Object {
+                "close": Object {
+                  "animation": "spring",
+                  "config": Object {
+                    "damping": 500,
+                    "mass": 3,
+                    "overshootClamping": true,
+                    "restDisplacementThreshold": 10,
+                    "restSpeedThreshold": 10,
+                    "stiffness": 1000,
+                  },
+                },
+                "open": Object {
+                  "animation": "spring",
+                  "config": Object {
+                    "damping": 500,
+                    "mass": 3,
+                    "overshootClamping": true,
+                    "restDisplacementThreshold": 10,
+                    "restSpeedThreshold": 10,
+                    "stiffness": 1000,
+                  },
+                },
+              }
+            }
           >
             <View
-              collapsable={false}
-            />
-            <View
-              accessibilityElementsHidden={false}
-              closing={false}
-              gestureVelocityImpact={0.3}
-              importantForAccessibility="auto"
-              onClose={[Function]}
-              onGestureBegin={[Function]}
-              onGestureCanceled={[Function]}
-              onGestureEnd={[Function]}
-              onOpen={[Function]}
-              onTransition={[Function]}
               pointerEvents="box-none"
-              style={
-                Array [
-                  Object {
-                    "display": "flex",
-                    "overflow": undefined,
-                  },
-                  Object {
-                    "bottom": 0,
-                    "left": 0,
-                    "position": "absolute",
-                    "right": 0,
-                    "top": 0,
-                  },
-                ]
-              }
-              transitionSpec={
-                Object {
-                  "close": Object {
-                    "animation": "spring",
-                    "config": Object {
-                      "damping": 500,
-                      "mass": 3,
-                      "overshootClamping": true,
-                      "restDisplacementThreshold": 10,
-                      "restSpeedThreshold": 10,
-                      "stiffness": 1000,
-                    },
-                  },
-                  "open": Object {
-                    "animation": "spring",
-                    "config": Object {
-                      "damping": 500,
-                      "mass": 3,
-                      "overshootClamping": true,
-                      "restDisplacementThreshold": 10,
-                      "restSpeedThreshold": 10,
-                      "stiffness": 1000,
-                    },
-                  },
-                }
-              }
             >
               <View
                 collapsable={false}
-                nativeID="animatedComponent"
-                pointerEvents="box-none"
+                forwardedRef={[Function]}
+                needsOffscreenAlphaCompositing={false}
+                onGestureHandlerEvent={[Function]}
+                onGestureHandlerStateChange={[Function]}
               >
                 <View
-                  collapsable={false}
-                  forwardedRef={[Function]}
-                  needsOffscreenAlphaCompositing={false}
-                  onGestureHandlerEvent={[Function]}
-                  onGestureHandlerStateChange={[Function]}
+                  style={
+                    Array [
+                      Object {
+                        "flex": 1,
+                        "overflow": "hidden",
+                      },
+                      Array [
+                        Object {
+                          "backgroundColor": "rgb(242, 242, 242)",
+                        },
+                        Object {
+                          "backgroundColor": "#FFFFFF",
+                        },
+                      ],
+                    ]
+                  }
                 >
                   <View
                     style={
-                      Array [
-                        Object {
-                          "flex": 1,
-                          "overflow": "hidden",
-                        },
-                        Array [
-                          Object {
-                            "backgroundColor": "rgb(242, 242, 242)",
-                          },
-                          Object {
-                            "backgroundColor": "#FFFFFF",
-                          },
-                        ],
-                      ]
+                      Object {
+                        "flex": 1,
+                        "flexDirection": "column-reverse",
+                      }
                     }
                   >
                     <View
                       style={
                         Object {
                           "flex": 1,
-                          "flexDirection": "column-reverse",
                         }
                       }
                     >
-                      <View
-                        style={
-                          Object {
-                            "flex": 1,
-                          }
+                      <RNCSafeAreaView
+                        edges={
+                          Array [
+                            "bottom",
+                            "left",
+                            "right",
+                          ]
                         }
                       >
-                        <SafeAreaView>
-                          <RCTScrollView
-                            contentContainerStyle={
-                              Object {
-                                "alignItems": "center",
-                                "backgroundColor": "white",
-                                "justifyContent": "center",
-                              }
+                        <RCTScrollView
+                          contentContainerStyle={
+                            Object {
+                              "alignItems": "center",
+                              "backgroundColor": "white",
+                              "justifyContent": "center",
                             }
-                          >
-                            <View>
-                              <Image
-                                source={
-                                  Object {
-                                    "testUri": "../../../assets/merkaba-green-on-white.png",
-                                  }
+                          }
+                        >
+                          <View>
+                            <Image
+                              source={
+                                Object {
+                                  "testUri": "../../../assets/merkaba-green-on-white.png",
                                 }
-                              />
+                              }
+                            />
+                            <Text>
+                              Log in to Hylo
+                            </Text>
+                            <View>
                               <Text>
-                                Log in to Hylo
+                                Your email address
                               </Text>
-                              <View>
-                                <Text>
-                                  Your email address
-                                </Text>
-                              </View>
+                            </View>
+                            <View>
                               <View>
                                 <View>
-                                  <View>
-                                    <TextInput
-                                      autoCapitalize="none"
-                                      autoCorrect={false}
-                                      keyboardType="email-address"
-                                      onChangeText={[Function]}
-                                      onSubmitEditing={[Function]}
-                                      returnKeyType="next"
-                                      underlineColorAndroid="transparent"
-                                    />
-                                  </View>
-                                  <View />
+                                  <TextInput
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                    keyboardType="email-address"
+                                    onChangeText={[Function]}
+                                    onSubmitEditing={[Function]}
+                                    returnKeyType="next"
+                                    underlineColorAndroid="transparent"
+                                  />
                                 </View>
+                                <View />
                               </View>
-                              <View>
+                            </View>
+                            <View>
+                              <Text>
+                                Password
+                              </Text>
+                              <View
+                                accessible={true}
+                                collapsable={false}
+                                focusable={true}
+                                nativeID="animatedComponent"
+                                onClick={[Function]}
+                                onResponderGrant={[Function]}
+                                onResponderMove={[Function]}
+                                onResponderRelease={[Function]}
+                                onResponderTerminate={[Function]}
+                                onResponderTerminationRequest={[Function]}
+                                onStartShouldSetResponder={[Function]}
+                              >
                                 <Text>
-                                  Password
+                                  Forgot your password?
                                 </Text>
-                                <View
-                                  accessible={true}
-                                  collapsable={false}
-                                  focusable={true}
-                                  nativeID="animatedComponent"
-                                  onClick={[Function]}
-                                  onResponderGrant={[Function]}
-                                  onResponderMove={[Function]}
-                                  onResponderRelease={[Function]}
-                                  onResponderTerminate={[Function]}
-                                  onResponderTerminationRequest={[Function]}
-                                  onStartShouldSetResponder={[Function]}
-                                >
-                                  <Text>
-                                    Forgot your password?
-                                  </Text>
-                                </View>
                               </View>
+                            </View>
+                            <View>
                               <View>
                                 <View>
-                                  <View>
-                                    <TextInput
-                                      autoCapitalize="none"
-                                      onChangeText={[Function]}
-                                      onSubmitEditing={[Function]}
-                                      returnKeyType="go"
-                                      secureTextEntry={true}
-                                      selectTextOnFocus={true}
-                                      underlineColorAndroid="transparent"
-                                    />
-                                  </View>
-                                  <View>
-                                    <Text
-                                      allowFontScaling={false}
-                                      onPress={[Function]}
-                                      style={
-                                        Array [
-                                          Object {
-                                            "color": undefined,
-                                            "fontSize": 12,
-                                          },
-                                          undefined,
-                                          Object {
-                                            "fontFamily": "Entypo",
-                                            "fontStyle": "normal",
-                                            "fontWeight": "normal",
-                                          },
-                                          Object {},
-                                        ]
-                                      }
-                                    >
-                                      
-                                    </Text>
-                                  </View>
+                                  <TextInput
+                                    autoCapitalize="none"
+                                    onChangeText={[Function]}
+                                    onSubmitEditing={[Function]}
+                                    returnKeyType="go"
+                                    secureTextEntry={true}
+                                    selectTextOnFocus={true}
+                                    underlineColorAndroid="transparent"
+                                  />
                                 </View>
-                              </View>
-                              <View>
-                                <View
-                                  accessible={true}
-                                  collapsable={false}
-                                  focusable={true}
-                                  nativeID="animatedComponent"
-                                  onClick={[Function]}
-                                  onResponderGrant={[Function]}
-                                  onResponderMove={[Function]}
-                                  onResponderRelease={[Function]}
-                                  onResponderTerminate={[Function]}
-                                  onResponderTerminationRequest={[Function]}
-                                  onStartShouldSetResponder={[Function]}
-                                >
-                                  <Text>
-                                    Log In
-                                  </Text>
-                                </View>
-                              </View>
-                              <View>
-                                <Text>
-                                  Or connect with:
-                                </Text>
                                 <View>
-                                  <View
-                                    accessible={true}
-                                    collapsable={false}
-                                    focusable={true}
-                                    nativeID="animatedComponent"
-                                    onClick={[Function]}
-                                    onResponderGrant={[Function]}
-                                    onResponderMove={[Function]}
-                                    onResponderRelease={[Function]}
-                                    onResponderTerminate={[Function]}
-                                    onResponderTerminationRequest={[Function]}
-                                    onStartShouldSetResponder={[Function]}
+                                  <Text
+                                    allowFontScaling={false}
+                                    onPress={[Function]}
+                                    style={
+                                      Array [
+                                        Object {
+                                          "color": undefined,
+                                          "fontSize": 12,
+                                        },
+                                        undefined,
+                                        Object {
+                                          "fontFamily": "Entypo",
+                                          "fontStyle": "normal",
+                                          "fontWeight": "normal",
+                                        },
+                                        Object {},
+                                      ]
+                                    }
                                   >
-                                    <View>
-                                      <View>
-                                        <Icon
-                                          name="Google"
-                                        />
-                                        <Text>
-                                          Sign in with Google
-                                        </Text>
-                                      </View>
-                                    </View>
-                                  </View>
-                                </View>
-                                <View>
-                                  <View
-                                    accessible={true}
-                                    collapsable={false}
-                                    focusable={true}
-                                    nativeID="animatedComponent"
-                                    onClick={[Function]}
-                                    onResponderGrant={[Function]}
-                                    onResponderMove={[Function]}
-                                    onResponderRelease={[Function]}
-                                    onResponderTerminate={[Function]}
-                                    onResponderTerminationRequest={[Function]}
-                                    onStartShouldSetResponder={[Function]}
-                                  >
-                                    <View>
-                                      <View>
-                                        <Text
-                                          allowFontScaling={false}
-                                          customIconRender={[Function]}
-                                          onPress={[Function]}
-                                          style={
-                                            Array [
-                                              Object {
-                                                "color": undefined,
-                                                "fontSize": 12,
-                                              },
-                                              Object {
-                                                "color": "#FFFFFF",
-                                                "fontSize": 16,
-                                                "paddingRight": 5,
-                                              },
-                                              Object {
-                                                "fontFamily": "FontAwesome5Brands-Regular",
-                                                "fontStyle": "normal",
-                                                "fontWeight": "normal",
-                                              },
-                                              Object {
-                                                "fontWeight": "400",
-                                              },
-                                            ]
-                                          }
-                                          text="Continue with Facebook"
-                                        >
-                                          
-                                        </Text>
-                                        <Text>
-                                          Continue with Facebook
-                                        </Text>
-                                      </View>
-                                    </View>
-                                  </View>
-                                </View>
-                              </View>
-                              <View>
-                                <Text>
-                                  Dont have an account? 
-                                </Text>
-                                <View
-                                  accessible={true}
-                                  collapsable={false}
-                                  focusable={true}
-                                  nativeID="animatedComponent"
-                                  onClick={[Function]}
-                                  onResponderGrant={[Function]}
-                                  onResponderMove={[Function]}
-                                  onResponderRelease={[Function]}
-                                  onResponderTerminate={[Function]}
-                                  onResponderTerminationRequest={[Function]}
-                                  onStartShouldSetResponder={[Function]}
-                                >
-                                  <Text>
-                                    Sign up now
+                                    
                                   </Text>
                                 </View>
                               </View>
                             </View>
-                          </RCTScrollView>
-                        </SafeAreaView>
-                      </View>
-                      <View
-                        collapsable={false}
-                        nativeID="animatedComponent"
-                        pointerEvents="box-none"
-                      />
+                            <View>
+                              <View
+                                accessible={true}
+                                collapsable={false}
+                                focusable={true}
+                                nativeID="animatedComponent"
+                                onClick={[Function]}
+                                onResponderGrant={[Function]}
+                                onResponderMove={[Function]}
+                                onResponderRelease={[Function]}
+                                onResponderTerminate={[Function]}
+                                onResponderTerminationRequest={[Function]}
+                                onStartShouldSetResponder={[Function]}
+                              >
+                                <Text>
+                                  Log In
+                                </Text>
+                              </View>
+                            </View>
+                            <View>
+                              <Text>
+                                Or connect with:
+                              </Text>
+                              <View>
+                                <View
+                                  accessible={true}
+                                  collapsable={false}
+                                  focusable={true}
+                                  nativeID="animatedComponent"
+                                  onClick={[Function]}
+                                  onResponderGrant={[Function]}
+                                  onResponderMove={[Function]}
+                                  onResponderRelease={[Function]}
+                                  onResponderTerminate={[Function]}
+                                  onResponderTerminationRequest={[Function]}
+                                  onStartShouldSetResponder={[Function]}
+                                >
+                                  <View>
+                                    <View>
+                                      <Icon
+                                        name="Google"
+                                      />
+                                      <Text>
+                                        Sign in with Google
+                                      </Text>
+                                    </View>
+                                  </View>
+                                </View>
+                              </View>
+                              <View>
+                                <View
+                                  accessible={true}
+                                  collapsable={false}
+                                  focusable={true}
+                                  nativeID="animatedComponent"
+                                  onClick={[Function]}
+                                  onResponderGrant={[Function]}
+                                  onResponderMove={[Function]}
+                                  onResponderRelease={[Function]}
+                                  onResponderTerminate={[Function]}
+                                  onResponderTerminationRequest={[Function]}
+                                  onStartShouldSetResponder={[Function]}
+                                >
+                                  <View>
+                                    <View>
+                                      <Text
+                                        allowFontScaling={false}
+                                        customIconRender={[Function]}
+                                        onPress={[Function]}
+                                        style={
+                                          Array [
+                                            Object {
+                                              "color": undefined,
+                                              "fontSize": 12,
+                                            },
+                                            Object {
+                                              "color": "#FFFFFF",
+                                              "fontSize": 16,
+                                              "paddingRight": 5,
+                                            },
+                                            Object {
+                                              "fontFamily": "FontAwesome5Brands-Regular",
+                                              "fontStyle": "normal",
+                                              "fontWeight": "normal",
+                                            },
+                                            Object {
+                                              "fontWeight": "400",
+                                            },
+                                          ]
+                                        }
+                                        text="Continue with Facebook"
+                                      >
+                                        
+                                      </Text>
+                                      <Text>
+                                        Continue with Facebook
+                                      </Text>
+                                    </View>
+                                  </View>
+                                </View>
+                              </View>
+                            </View>
+                            <View>
+                              <Text>
+                                Dont have an account? 
+                              </Text>
+                              <View
+                                accessible={true}
+                                collapsable={false}
+                                focusable={true}
+                                nativeID="animatedComponent"
+                                onClick={[Function]}
+                                onResponderGrant={[Function]}
+                                onResponderMove={[Function]}
+                                onResponderRelease={[Function]}
+                                onResponderTerminate={[Function]}
+                                onResponderTerminationRequest={[Function]}
+                                onStartShouldSetResponder={[Function]}
+                              >
+                                <Text>
+                                  Sign up now
+                                </Text>
+                              </View>
+                            </View>
+                          </View>
+                        </RCTScrollView>
+                      </RNCSafeAreaView>
                     </View>
+                    <View
+                      pointerEvents="box-none"
+                    />
                   </View>
                 </View>
               </View>
             </View>
-          </RNSScreen>
-        </RNSScreenContainer>
-        <View
-          pointerEvents="box-none"
-        />
-      </View>
-    </RNCSafeAreaProvider>
+          </View>
+        </RNSScreen>
+      </RNSScreenContainer>
+      <View
+        pointerEvents="box-none"
+      />
+    </View>
   </View>
 </View>
 `;

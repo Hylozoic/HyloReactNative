@@ -1,22 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches last snapshot 1`] = `
+exports[`ImagePicker Specification default render matches snapshot 1`] = `
 <View
-  actions={
-    Array [
-      Array [
-        "Choose from library",
-        [Function],
-      ],
-      Array [
-        "Take photo",
-        [Function],
-      ],
-    ]
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  hitSlop={
+    Object {
+      "bottom": 5,
+      "left": 5,
+      "right": 5,
+      "top": 5,
+    }
   }
+  nativeID="animatedComponent"
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
 >
-  <Text>
-    Children
-  </Text>
+  <Icon
+    name="AddImage"
+  />
 </View>
 `;
