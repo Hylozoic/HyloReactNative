@@ -53,17 +53,17 @@ describe('mapDispatchToProps', () => {
     dispatchProps = bindActionCreators(mapDispatchToProps, dispatch)
   })
 
-  it('has loginWithFacebook', () => {
-    expect(dispatchProps.loginWithFacebook('token')).toMatchSnapshot()
+  it('has loginWithFacebook', async () => {
+    expect(await dispatchProps.loginWithFacebook('token')).toMatchSnapshot()
   })
 
-  it('has loginWithGoogle', () => {
-    expect(dispatchProps.loginWithGoogle('token')).toMatchSnapshot()
+  it('has loginWithGoogle', async () => {
+    expect(await dispatchProps.loginWithGoogle('token')).toMatchSnapshot()
   })
 
-  it('has login', () => {
+  it('has login', async () => {
     const username = 'name'
     const password = 'pass'
-    expect(dispatchProps.login(username, password)).toMatchSnapshot()
+    expect(await dispatchProps.login(username, password)).toMatchSnapshot()
   })
 })

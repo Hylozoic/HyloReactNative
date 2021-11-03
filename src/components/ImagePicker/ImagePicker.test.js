@@ -1,7 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import getEmptyState from 'store/getEmptyState'
-import { render } from '@testing-library/react-native'
+import { render, cleanup } from '@testing-library/react-native'
 import { createMockStore } from 'util/testing'
 import ImagePicker from 'components/ImagePicker'
 
@@ -16,6 +16,8 @@ jest.mock('react-native/Libraries/ActionSheetIOS/ActionSheetIOS', () => ({
 // }))
 
 describe('ImagePicker Specification', () => {
+  afterEach(cleanup)
+
   it('default render matches snapshot', async () => {
     const state = getEmptyState()
 

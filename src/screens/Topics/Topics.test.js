@@ -1,10 +1,12 @@
 import 'react-native'
 import React from 'react'
-import { render } from '@testing-library/react-native'
+import { render, cleanup } from '@testing-library/react-native'
 import MockedScreen from 'util/testing/MockedScreen'
 import Topics, { TopicList, TopicRow, SubscribeStar } from './Topics'
 
 describe('Topics', () => {
+  afterEach(cleanup)
+
   it('renders correctly a group and topics', async () => {
     const props = {
       fetchGroupTopics: () => {},
@@ -71,6 +73,8 @@ describe('Topics', () => {
 })
 
 describe('TopicList', () => {
+  afterEach(cleanup)
+
   it('matches last snapshot', async () => {
     const props = {
       group: { id: '1' },
@@ -103,6 +107,8 @@ describe('TopicList', () => {
 })
 
 describe('TopicRow', () => {
+  afterEach(cleanup)
+
   it('matches last snapshot', async () => {
     const props = {
       topic: {
@@ -121,6 +127,8 @@ describe('TopicRow', () => {
 })
 
 describe('SubscribeStar', () => {
+  afterEach(cleanup)
+
   it('matches last snapshot', async () => {
     const props = {
       isSubscribed: true,

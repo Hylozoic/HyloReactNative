@@ -1,11 +1,13 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { render } from '@testing-library/react-native'
+import { render, cleanup } from '@testing-library/react-native'
 import { createMockStore } from 'util/testing'
 import getEmptyState from 'store/getEmptyState'
 import InvitePeople from 'screens/InvitePeople'
 
 describe('InvitePeople Specification', () => {
+  afterEach(cleanup)
+
   it('default render matches snapshot', async () => {
     const state = getEmptyState()
     const { toJSON } = render(

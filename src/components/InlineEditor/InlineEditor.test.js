@@ -38,6 +38,10 @@ it('handleSubmit', () => {
 })
 
 describe('mentions and topics', () => {
+  beforeEach(() => { 
+    jest.useFakeTimers()
+  })
+
   it('inserts the markup for a mention', () => {
     const instance = TestRenderer.create(<InlineEditor {...props} />).getInstance()
     instance.handleSelectionChange({ nativeEvent: { selection: { start: 5, end: 5 } } })

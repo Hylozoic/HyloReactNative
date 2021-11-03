@@ -1,15 +1,45 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import ReactTestRenderer from 'react-test-renderer'
+import TestRenderer from 'react-test-renderer'
 import Thread from './Thread'
+import { Provider } from 'react-redux'
+import getEmptyState from 'store/getEmptyState'
+import { createMockStore } from 'util/testing'
 
-jest.mock('components/MessageInput', () => 'MessageInput')
+// jest.mock('components/MessageInput', () => 'MessageInput')
+
+// jest.mock('components/SocketSubscriber', () => {
+//   const React = require('react')
+//   class SocketSubscriber extends React.Component {
+//     render () {
+//       return React.createElement('SocketSubscriber', this.props, this.props.children)
+//     }
+//   }
+//   return SocketSubscriber
+// })
+
+// jest.mock('components/SocketSubscriber', () => {})
+
+// jest.mock('components/PeopleTyping', () => {})
+
+jest.mock('util/websockets', () => {
+  const socket = {
+    post: jest.fn(),
+    on: jest.fn()
+  }
+
+  return {
+    getSocket: () => Promise.resolve(socket),
+    socketUrl: path => 'sockethost' + path
+  }
+})
 
 describe('Thread', () => {
   let props
 
   beforeEach(() => {
+    jest.useFakeTimers()
     props = {
       id: '1',
       createMessage: () => {},
@@ -55,7 +85,12 @@ describe('Thread', () => {
     let root
 
     beforeEach(() => {
-      root = ReactTestRenderer.create(<Thread {...props} />).root
+      const store = createMockStore(getEmptyState())
+      root = TestRenderer.create(
+        <Provider store={store}>
+          <Thread {...props} />
+        </Provider>
+      ).root.children[0]
     })
 
     it('scrolls on new message from anyone', () => {
@@ -78,11 +113,16 @@ describe('Thread', () => {
     let root
 
     beforeEach(() => {
-      root = ReactTestRenderer.create(<Thread {...props} />).root
+      const state = getEmptyState()
+      root = TestRenderer.create(
+        <Provider store={createMockStore(state)}>
+          <Thread {...props} />
+        </Provider>
+      ).root.children[0]
       root.instance.atBottom = () => false
     })
 
-    it('does not scroll if additional messages are old (infinite scroll)', () => {
+    it('does not scroll if additional messages are old (infinite scroll)', async () => {
       const nextProps = {
         ...props,
         messages: [
@@ -93,11 +133,11 @@ describe('Thread', () => {
           }
         ]
       }
-      root.instance.UNSAFE_componentWillUpdate(nextProps)
+      await root.instance.UNSAFE_componentWillUpdate(nextProps)
       expect(root.instance.shouldScroll).toBe(false)
     })
 
-    it('does not scroll on single new message from another user', () => {
+    it('does not scroll on single new message from another user', async () => {
       const nextProps = {
         ...props,
         messages: [
@@ -108,11 +148,11 @@ describe('Thread', () => {
           ...props.messages
         ]
       }
-      root.instance.UNSAFE_componentWillUpdate(nextProps)
+      await root.instance.UNSAFE_componentWillUpdate(nextProps)
       expect(root.instance.shouldScroll).toBe(false)
     })
 
-    it('scrolls on single new message from current user', () => {
+    it('scrolls on single new message from current user', async () => {
       const nextProps = {
         ...props,
         messages: [
@@ -123,7 +163,7 @@ describe('Thread', () => {
           ...props.messages
         ]
       }
-      root.instance.UNSAFE_componentWillUpdate(nextProps)
+      await root.instance.UNSAFE_componentWillUpdate(nextProps)
       expect(root.instance.shouldScroll).toBe(true)
     })
   })
@@ -134,14 +174,17 @@ describe('Thread', () => {
         ...props,
         messages: []
       }
-
       const prevPropsDifferentId = {
         ...props,
         id: '2',
         messages: []
       }
-
-      const instance = ReactTestRenderer.create(<Thread {...props} />).getInstance()
+      const store = createMockStore(getEmptyState())
+      const instance = TestRenderer.create(
+        <Provider store={store}>
+          <Thread {...props} />
+        </Provider>
+      ).root.children[0].instance
       jest.spyOn(instance, 'markAsRead')
 
       instance.componentDidUpdate(prevPropsSameId)
@@ -151,29 +194,3 @@ describe('Thread', () => {
     })
   })
 })
-
-// Can actually get away with `jest.mock('components/SocketSubscriber')` here, but it
-// generates warnings because `undefined` isn't exactly a React component...
-jest.mock('components/SocketSubscriber', () => {
-  const React = require('react')
-  class SocketSubscriber extends React.Component {
-    render () {
-      return React.createElement('SocketSubscriber', this.props, this.props.children)
-    }
-  }
-  return SocketSubscriber
-})
-
-jest.mock('components/PeopleTyping', () => {
-  const React = require('react')
-  class PeopleTyping extends React.Component {
-    render () {
-      return React.createElement('PeopleTyping', this.props, this.props.children)
-    }
-  }
-  return PeopleTyping
-})
-
-jest.mock('util/websockets', () => ({
-  getSocket: Promise.resolve
-}))

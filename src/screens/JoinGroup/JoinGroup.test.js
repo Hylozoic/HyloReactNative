@@ -3,11 +3,13 @@ import React from 'react'
 import JoinGroup from './JoinGroup'
 import { createMockStore } from 'util/testing'
 import { Provider } from 'react-redux'
-import { render } from '@testing-library/react-native'
+import { render, cleanup } from '@testing-library/react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Login from 'screens/Login'
 import getEmptyState from 'store/getEmptyState'
+
+afterEach(cleanup)
 
 it('forwards to Login when not signedIn', async () => {
   const props = {

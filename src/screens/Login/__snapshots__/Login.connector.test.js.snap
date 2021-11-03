@@ -1,59 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`mapDispatchToProps has login 1`] = `
-Promise {
-  "_U": 0,
-  "_V": 1,
-  "_W": Object {
-    "meta": Object {
-      "email": "name",
-    },
-    "payload": Object {
-      "api": Object {
-        "method": "post",
-        "params": Object {
-          "email": "name",
-          "password": "pass",
-        },
-        "path": "/noo/login",
-      },
-    },
-    "type": "LOGIN",
+Object {
+  "meta": Object {
+    "email": "name",
   },
-  "_X": null,
+  "payload": Object {
+    "api": Object {
+      "method": "post",
+      "params": Object {
+        "email": "name",
+        "password": "pass",
+      },
+      "path": "/noo/login",
+    },
+  },
+  "type": "LOGIN",
 }
 `;
 
 exports[`mapDispatchToProps has loginWithFacebook 1`] = `
-Promise {
-  "_U": 0,
-  "_V": 1,
-  "_W": Object {
-    "payload": Object {
-      "api": Object {
-        "method": "post",
-        "path": "/noo/login/facebook-token/oauth?access_token=token",
-      },
+Object {
+  "payload": Object {
+    "api": Object {
+      "method": "post",
+      "path": "/noo/login/facebook-token/oauth?access_token=token",
     },
-    "type": "LOGIN_WITH_FACEBOOK",
   },
-  "_X": null,
+  "type": "LOGIN_WITH_FACEBOOK",
 }
 `;
 
 exports[`mapDispatchToProps has loginWithGoogle 1`] = `
-Promise {
-  "_U": 0,
-  "_V": 1,
-  "_W": Object {
-    "payload": Object {
-      "api": Object {
-        "method": "post",
-        "path": "/noo/login/google-token/oauth?access_token=token",
-      },
+Object {
+  "payload": Object {
+    "api": Object {
+      "method": "post",
+      "path": "/noo/login/google-token/oauth?access_token=token",
     },
-    "type": "LOGIN_WITH_GOOGLE",
   },
-  "_X": null,
+  "type": "LOGIN_WITH_GOOGLE",
 }
 `;

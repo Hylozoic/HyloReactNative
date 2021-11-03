@@ -30,7 +30,7 @@ describe('mergeProps', () => {
       location: 'a'
     }
     const dispatchProps = {
-      updateUserSettings: jest.fn(() => Promise.resolve())
+      updateUserSettings: jest.fn(async () => ({}))
     }
     const ownProps = {
       navigation: {

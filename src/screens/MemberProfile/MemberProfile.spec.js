@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { render, waitFor } from '@testing-library/react-native'
+import { render, cleanup } from '@testing-library/react-native'
 import { createMockStore } from 'util/testing'
 import getEmptyState from 'store/getEmptyState'
 import MemberProfile from 'screens/MemberProfile'
@@ -8,6 +8,8 @@ import MemberProfile from 'screens/MemberProfile'
 jest.mock('hooks/useGroupSelect')
 
 describe('MemberProfile Specification', () => {
+  afterEach(cleanup)
+
   it('default render matches snapshot', async () => {
     const navigation = {
       navigate: jest.fn(),

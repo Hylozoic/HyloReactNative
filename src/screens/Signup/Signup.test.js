@@ -1,12 +1,14 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import getEmptyState from 'store/getEmptyState'
-import { render } from '@testing-library/react-native'
+import { render, cleanup } from '@testing-library/react-native'
 import { createMockStore } from 'util/testing'
 import Signup from './Signup'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 describe('Signup Specification', () => {
+  afterEach(cleanup)
+  
   it('renders with defaults', async () => {
     const store = createMockStore(getEmptyState())
     const { findByText, toJSON } =  render(

@@ -134,7 +134,6 @@ export class InlineEditor extends React.Component {
       style,
       inputStyle
     } = this.props
-    const { isFocused } = this.state
     const hitSlop = { top: 7, bottom: 7, left: 7, right: 7 }
 
     return (

@@ -41,9 +41,10 @@ export default class Thread extends React.Component {
     })
   }
 
-  componentDidMount () {
+  async componentDidMount () {
     const { fetchMessages, reconnectFetchMessages } = this.props
-    getSocket().then(socket => socket.on('reconnect', reconnectFetchMessages))
+    const socket = await getSocket()
+    socket.on('reconnect', reconnectFetchMessages)
     this.scrollToBottom()
     fetchMessages()
     this.markAsRead()
@@ -99,9 +100,10 @@ export default class Thread extends React.Component {
     }
   }
 
-  componentWillUnmount () {
+  async componentWillUnmount () {
     const { reconnectFetchMessages } = this.props
-    getSocket().then(socket => socket.off('reconnect', reconnectFetchMessages))
+    const socket = await getSocket()
+    socket.off('reconnect', reconnectFetchMessages)
   }
 
   atBottom = () => this.yOffset < BOTTOM_THRESHOLD

@@ -11,9 +11,17 @@ import orm from 'store/models'
 // TODO: Fix tests to have test Redux store for Redux hooks:
 //       https://gist.github.com/krawaller/e5d40217658fa132f3c3904987e467cd
 
-jest.mock('util/websockets', () => ({
-  getSocket: Promise.resolve
-}))
+jest.mock('util/websockets', () => {
+  const socket = {
+    post: jest.fn(),
+    on: jest.fn()
+  }
+
+  return {
+    getSocket: () => Promise.resolve(socket),
+    socketUrl: path => 'sockethost' + path
+  }
+})
 
 const post = {
   id: '91',

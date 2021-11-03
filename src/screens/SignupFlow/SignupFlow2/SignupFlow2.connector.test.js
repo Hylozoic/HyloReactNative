@@ -25,12 +25,12 @@ describe('mapDispatchToProps', () => {
 })
 
 describe('mergeProps', () => {
-  it('merges the props', () => {
+  it('merges the props', async () => {
     const stateProps = {
       avatarUrl: 'a'
     }
     const dispatchProps = {
-      updateUserSettings: jest.fn(() => Promise.resolve())
+      updateUserSettings: jest.fn(async () => ({}))
     }
     const ownProps = {
       navigation: {
@@ -39,7 +39,7 @@ describe('mergeProps', () => {
     }
     const mergedProps = mergeProps(stateProps, dispatchProps, ownProps)
     expect(mergedProps).toMatchSnapshot()
-    mergedProps.saveAndNext()
+    await mergedProps.saveAndNext()
     expect(dispatchProps.updateUserSettings).toHaveBeenCalled()
     expect(dispatchProps.updateUserSettings.mock.calls)
       .toMatchSnapshot()

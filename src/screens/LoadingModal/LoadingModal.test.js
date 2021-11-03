@@ -4,6 +4,10 @@ import ReactTestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import LoadingModal from './LoadingModal'
 
+beforeEach(() => {
+  jest.useFakeTimers()
+})
+
 it('returns null when display is false', () => {
   const renderer = new ReactShallowRenderer()
 

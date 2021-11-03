@@ -1,11 +1,13 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import getEmptyState from 'store/getEmptyState'
-import { render } from '@testing-library/react-native'
+import { render, cleanup } from '@testing-library/react-native'
 import { createMockStore } from 'util/testing'
 import SignupFlow3 from 'screens/SignupFlow/SignupFlow3'
 
 describe('SignupFlow3 Specification', () => {
+  afterEach(cleanup)
+
   it('default render matches snapshot', async () => {
     const state = getEmptyState()
     const { toJSON } = render(

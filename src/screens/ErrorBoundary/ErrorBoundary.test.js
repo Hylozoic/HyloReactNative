@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text } from 'react-native'
-import { render } from '@testing-library/react-native'
+import { render, cleanup } from '@testing-library/react-native'
 import ErrorBoundary from './ErrorBoundary'
 import * as Sentry from '@sentry/react-native'
 
@@ -13,6 +13,8 @@ const ErrorComponent = () => {
 }
 
 describe('Error Boundary', () => {
+  afterEach(cleanup)
+
   beforeEach(() => {
     Sentry.captureException.mockReset()
   })

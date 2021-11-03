@@ -47,14 +47,14 @@ exports[`Thread matches the last snapshot 1`] = `
     removeClippedSubviews={false}
     renderItem={[Function]}
   />
-  <MessageInput
+  <Memo(Connect(_default))
     blurOnSubmit={false}
     multiline={true}
     onSubmit={[Function]}
     placeholder="Write something..."
   />
-  <PeopleTyping />
-  <SocketSubscriber
+  <Memo(Connect(PeopleTyping)) />
+  <Memo(Connect(SocketSubscriber))
     id="1"
     type="post"
   />
