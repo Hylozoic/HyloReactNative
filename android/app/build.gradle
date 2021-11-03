@@ -140,8 +140,8 @@ android {
         applicationId "com.hylo.hyloandroid"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 145
-        versionName "3.4.2"
+        versionCode 146
+        versionName "3.4.3"
         // // Enabling multidex support.
         // multiDexEnabled true
         // ndk {
