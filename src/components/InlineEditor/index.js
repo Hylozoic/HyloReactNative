@@ -1,1 +1,1 @@
-export { default, toHtml } from './InlineEditor'
+export { default, toHtml, mentionsToText } from './InlineEditor'

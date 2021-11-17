@@ -10,10 +10,11 @@ import { withNavigation } from '@react-navigation/compat'
 import { trim, isEmpty, get, flow } from 'lodash/fp'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { htmlEncode } from 'js-htmlencode'
+import { htmlToText } from 'html-to-text'
+import { MENTION_ENTITY_TYPE } from 'hylo-utils/constants'
 import { rhino30 } from 'style/colors'
 import styles from './InlineEditor.styles'
 // Mentions
-import { MENTION_ENTITY_TYPE } from 'hylo-utils/constants'
 import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
 import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomplete'
 import PersonPickerItemRow from 'screens/ItemChooser/PersonPickerItemRow'
@@ -197,5 +198,24 @@ export const newLinesToBr = (text) => {
   const replace = '<br>'
   return text.replace(re, replace)
 }
+
+export const mentionsToText = html => htmlToText(html, {
+  formatters: {
+    'mentionFormatter': (elem, walk, builder, formatOptions) => {
+      builder.openBlock({ leadingLineBreaks: formatOptions.leadingLineBreaks || 0 })
+      builder.addInline('[')
+      walk(elem.children, builder)
+      builder.addInline(`:${elem.attribs['data-user-id']}]`)
+      builder.closeBlock({ trailingLineBreaks: formatOptions.trailingLineBreaks || 0 })
+    }
+  },
+  selectors: [
+    {
+      selector: `a[data-entity-type=${MENTION_ENTITY_TYPE}]`,
+      format: 'mentionFormatter',
+      options: { leadingLineBreaks: 0, trailingLineBreaks: 0 }
+    }
+  ]
+})
 
 export const toHtml = flow([trim, htmlEncode, mentionsToHtml, newLinesToBr])

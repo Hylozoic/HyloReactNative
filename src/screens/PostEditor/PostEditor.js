@@ -35,10 +35,10 @@ import FileSelector, { showFilePicker } from './FileSelector'
 import DatePicker from 'components/DatePicker'
 import ImagePicker from 'components/ImagePicker'
 import ImageSelector from './ImageSelector'
-import InlineEditor, { toHtml } from 'components/InlineEditor'
+import InlineEditor, { toHtml, mentionsToText } from 'components/InlineEditor'
 import ErrorBubble from 'components/ErrorBubble'
-import styles from './PostEditor.styles'
 import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
+import styles from './PostEditor.styles'
 
 export default class PostEditor extends React.Component {
   constructor (props) {
@@ -47,9 +47,9 @@ export default class PostEditor extends React.Component {
     this.scrollView = React.createRef()
     this.state = {
       scrollViewHeight: 0,
-      title: get('title', post) || '',
-      type: get('type', post) || 'discussion',
-      groups: get('groups', post) || [],
+      title: post?.title || '',
+      type: post?.type || 'discussion',
+      groups: post?.groups || [],
       imageUrls,
       fileUrls,
       topics: get('topics', post) || [],
@@ -57,7 +57,7 @@ export default class PostEditor extends React.Component {
       topicsPicked: false,
       announcementEnabled: false,
       detailsFocused: false,
-      detailsText: get('details', post) || '',
+      detailsText: post?.details && mentionsToText(post?.details) || '',
       titleLengthError: false,
       startTime: get('startTime', post) ? (new Date(get('startTime', post))) : null,
       endTime: get('endTime', post) ? (new Date(get('endTime', post))) : null,

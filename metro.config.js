@@ -13,5 +13,8 @@ module.exports = {
         inlineRequires: true,
       }
     })
+  },
+  resolver: {
+    sourceExts: ['js', 'json', 'ts', 'tsx', 'cjs']
   }
 }
