@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { View, Text, TouchableOpacity, Alert } from 'react-native'
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { KeyboardAccessoryView } from '@flyerhq/react-native-keyboard-accessory-view'
 import { get, isEmpty, find } from 'lodash/fp'
@@ -135,14 +136,14 @@ export class PostDetails extends React.Component {
   }
 
   render () {
-    const { post } = this.props
+    const { post, tabBarHeight } = this.props
     const { commentText, replyingToName, submitting } = this.state
     const groupId = get('groups.0.id', post)
 
     if (!post?.creator || !post?.title) return <LoadingScreen />
     
     const isModal = this.props.route?.name == 'Post Details - Modal'
-
+console.log('!!! tabBarHeight', tabBarHeight)
     return (
       <View style={styles.container}>
         <KeyboardAccessoryView
@@ -150,9 +151,8 @@ export class PostDetails extends React.Component {
             ...styles.promptContentContainer,
             paddingBottom: isModal ? this.props.safeAreaInsets.bottom : 0
           }}
-          // TODO: Calculate these?
-          spaceBetweenKeyboardAndAccessoryView={isIOS ? -79 : 0}
-          contentOffsetKeyboardOpened={isIOS ? -45 : 0}
+          spaceBetweenKeyboardAndAccessoryView={isIOS ? -tabBarHeight : 0}
+          contentOffsetKeyboardOpened={isIOS ? -tabBarHeight  : 0}
           renderScrollable={this.renderPostDetails}>
             {replyingToName && (
               <View style={styles.commentPrompt}>
@@ -184,8 +184,9 @@ export class PostDetails extends React.Component {
 export default function (props) {
   useGroupSelect()
   const safeAreaInsets = useSafeAreaInsets()
+  const tabBarHeight = useBottomTabBarHeight()
 
-  return <PostDetails {...props} safeAreaInsets={safeAreaInsets} />
+  return <PostDetails {...props} safeAreaInsets={safeAreaInsets} tabBarHeight={tabBarHeight} />
 }
 
 export function PostCardForDetails ({
