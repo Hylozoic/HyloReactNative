@@ -20,7 +20,7 @@ describe('mapDispatchToProps', () => {
     const dispatch = jest.fn(val => val)
     const dispatchProps = mapDispatchToProps(dispatch)
     expect(dispatchProps).toMatchSnapshot()
-    dispatchProps.signup({ name: 'jo', email: 'jo@jo', password: 'Joe Pass' })
+    dispatchProps.signup({ name: 'jo', password: 'Joe Pass' })
     dispatchProps.changeSetting('name', 'yo')
     dispatchProps.updateLocalUserSettings({ la: 'la' })
     dispatchProps.updateUserSettings({ ra: 'ra' })
@@ -33,12 +33,10 @@ describe('mergeProps', () => {
   it('merges the props', () => {
     const stateProps = {
       name: 'a',
-      email: 'b',
       password: 'c',
       currentUser: {
         ref: {
           name: 'aa',
-          email: 'bb',
           unused: 'cc'
         }
       },

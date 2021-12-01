@@ -63,8 +63,8 @@ export default function reducer (state = defaultState, action) {
   }
 }
 
-export function signup ({ name, email, password }) {
-  const params = { name, email, password, resp: 'user', login: true }
+export function signup ({ name, password }) {
+  const params = { name, password, resp: 'user', login: true }
   return {
     type: SIGNUP,
     payload: {

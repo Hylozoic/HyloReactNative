@@ -4,29 +4,25 @@ import SettingControl from 'components/SettingControl'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import { validateUser } from 'hylo-utils/validators'
-import validator from 'validator'
 import { any, values } from 'lodash/fp'
 import styles from './SignupFlow1.styles'
 import { ScrollView } from 'react-native-gesture-handler'
 
 export default function SignupFlow1 ({
   currentUser, loadUserSettings, errors: errorsFromStore,
-  name, email, password, confirmPassword, pending,
+  name, password, confirmPassword, pending,
   showPasswordField, signupOrUpdate, changeSetting
 }) {  
-  const emailControlRef = useRef()
   const passwordControlRef = useRef()
   const confirmPasswordControlRef = useRef()
   const [errors, setErrors] = useState({
     name: null,
-    email: null,
     password: null,
     ...errorsFromStore
   })
   const validate = () => {
     setErrors({
       name: validateUser.name(name),
-      email: !validator.isEmail(email) && 'Must be a valid email',
       password: showPasswordField && validateUser.password(password),
       confirmPassword: password !== confirmPassword && 'Passwords must match'
     })
@@ -67,18 +63,6 @@ export default function SignupFlow1 ({
             value={name}
             onChange={value => updateField('name', value)}
             error={errors.name}
-            returnKeyType='next'
-            onSubmitEditing={() => emailControlRef.current.focus()}
-          />
-          <SettingControl
-            ref={emailControlRef}
-            label='Email Address'
-            value={email}
-            keyboardType='email-address'
-            autoCapitalize='none'
-            autoCorrect={false}
-            onChange={value => updateField('email', value)}
-            error={errors.email}
             returnKeyType='next'
             onSubmitEditing={() => passwordControlRef.current.focus()}
           />

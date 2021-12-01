@@ -13,6 +13,7 @@ import {
 import {
   FETCH_CURRENT_USER,
   SELECT_GROUP,
+  SEND_EMAIL_VERIFICATION,
   STORE_RETURN_TO_PATH
 } from 'store/constants'
 
@@ -64,6 +65,11 @@ export default function sessionReducer (state = {
       return {
         ...state,
         signupInProgress: get('data.updateMe.settings.signupInProgress', payload)
+      }
+    case SEND_EMAIL_VERIFICATION: 
+      return {
+        ...state,
+        emailToVerify: meta.emailToVerify
       }
     case SELECT_GROUP:
       return {

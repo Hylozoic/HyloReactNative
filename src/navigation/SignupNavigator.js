@@ -2,6 +2,8 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { WorkflowModalHeader } from 'navigation/headers'
 import SignupComponent from 'screens/Signup'
+import SignupFlowEmailVerification from 'screens/SignupFlow/SignupFlowEmailVerification'
+import SignupFlowEmailVerificationFinish from 'screens/SignupFlow/SignupFlowEmailVerificationFinish'
 import SignupFlow1 from 'screens/SignupFlow/SignupFlow1'
 import SignupFlow2 from 'screens/SignupFlow/SignupFlow2'
 import SignupFlow3 from 'screens/SignupFlow/SignupFlow3'
@@ -30,6 +32,10 @@ export default function SignupNavigator () {
     <Signup.Navigator {...navigatorProps}>
       <Signup.Screen name='Signup Intro' component={SignupComponent}
         options={{ headerShown: false }} />
+      <Signup.Screen name='Signup - Email Verification' component={SignupFlowEmailVerification}
+        options={{ title: 'Welcome' }} />
+      <Signup.Screen name='Signup - Email Verification - Finish' component={SignupFlowEmailVerificationFinish}
+        options={{ title: 'Verify Email' }} />
       <Signup.Screen name='SignupFlow1' component={SignupFlow1}
         options={{ title: 'STEP 1/4' }} />
       <Signup.Screen name='SignupFlow2' component={SignupFlow2}

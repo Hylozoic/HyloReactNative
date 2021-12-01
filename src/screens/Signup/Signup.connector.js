@@ -3,7 +3,7 @@ import { loginWithApple, loginWithFacebook, loginWithGoogle } from 'screens/Logi
 import { getPending } from 'screens/Login/Login.store'
 
 export function mapStateToProps (state, props) {
-  const goToSignupFlow = () => props.navigation.navigate('SignupFlow1')
+  const goToSignupFlow = () => props.navigation.navigate('Signup - Email Verification')
   const goToLogin = () => props.navigation.navigate('Login')
   return {
     goToSignupFlow,
