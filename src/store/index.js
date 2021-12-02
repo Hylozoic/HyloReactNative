@@ -1,14 +1,22 @@
 import { applyMiddleware, createStore, compose } from 'redux'
 import rootReducer from './reducers'
 import getEmptyState from './getEmptyState'
-
 import middleware from './middleware'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { persistStore, persistReducer } from 'redux-persist'
+
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+  whitelist: ['signup']
+}
 
 export function getStore () {
   const emptyState = getEmptyState()
+  const persistedRootReducer = persistReducer(persistConfig, rootReducer)
   const store = (undefined === global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
-    ? createStore(rootReducer, emptyState, compose(applyMiddleware(...middleware)))
-    : createStore(rootReducer, emptyState,
+    ? createStore(persistedRootReducer, emptyState, compose(applyMiddleware(...middleware)))
+    : createStore(persistedRootReducer, emptyState,
       global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
         applyMiddleware(...middleware)
       )
@@ -29,17 +37,4 @@ const store = getStore()
 
 export default store
 
-// TODO: AsyncStorage is currently bugged with remote debugger:
-// https://github.com/facebook/react-native/issues/12830
-// If we reinstated this, we'd need to rewire the currently synchronous store
-// load in index.js
-// export async function getInitialState () {
-//   if (!isDev) return getEmptyState()
-//   try {
-//     const state = await AsyncStorage.getItem(PERSISTED_STATE_KEY)
-//     return state ? JSON.parse(state) : getEmptyState()
-//   } catch (e) {
-//     console.log("Couldn't retrieve state from AsyncStorage!")
-//     return getEmptyState()
-//   }
-// }
+export const persistor = persistStore(store)

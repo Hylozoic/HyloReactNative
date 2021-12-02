@@ -1,7 +1,6 @@
 import { pick } from 'lodash/fp'
 import getEmptyState from 'store/getEmptyState'
 import { LOGOUT, RESET_STORE } from 'store/constants'
-import { reset } from './persistence'
 
 export const KEYS_PRESERVED_ON_RESET = [
   'session',
@@ -10,7 +9,6 @@ export const KEYS_PRESERVED_ON_RESET = [
 
 export default function (state, action) {
   if (action.type === LOGOUT && !action.error) {
-    reset() // this is an async action with side effects!
     const emptyState = getEmptyState()
     return {
       ...emptyState,
@@ -22,7 +20,6 @@ export default function (state, action) {
   }
 
   if (action.type === RESET_STORE && !action.error) {
-    reset() // this is an async action with side effects!
     return {
       ...getEmptyState(),
       ...pick(KEYS_PRESERVED_ON_RESET, state)

@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { View, Text } from 'react-native'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import validator from 'validator'
-import { any, values } from 'lodash/fp'
 import styles from './SignupFlowEmailVerificationFinish.styles'
+import controlStyles from 'components/SettingControl/SettingControl.styles'
 import { ScrollView } from 'react-native-gesture-handler'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
   CodeField,
   Cursor,
@@ -15,16 +15,18 @@ import {
 } from 'react-native-confirmation-code-field'
 import getEmailToVerify from 'store/selectors/getEmailToVerify'
 import verifyEmail from 'store/actions/verifyEmail'
+import Triangle from 'react-native-triangle'
+import { useFocusEffect } from '@react-navigation/core'
+import clearEmailToVerify from 'store/actions/clearEmailToVerify'
 
 const CODE_LENGTH = 6
 
-export default function SignupFlowEmailVerificationFinish ({ navigation }) {
+export default function SignupFlowEmailVerificationFinish ({ navigation, route }) {
   const dispatch = useDispatch()
-  const emailToVerify = useSelector(getEmailToVerify)
-  const [pending, setPending] = useState()
+  const [pending, setPending] = useState(true)
+  const [email, setEmail] = useState()
   const [verificationCode, setVerificationCode] = useState()
   const [error, setError] = useState()
-  // TODO: Seperate out code entry field as it's own component?
   const verificationCodeRef = useBlurOnFulfill({
     value: verificationCode,
     cellCount: CODE_LENGTH
@@ -33,23 +35,38 @@ export default function SignupFlowEmailVerificationFinish ({ navigation }) {
     value: verificationCode,
     setValue: setVerificationCode
   })
-  const validate = () => {
-    setError('Invalid code')
-    // setError(!validator.isEmail(email) && 'Must be a valid email')
-    return !any(i => i, values(error))
-  }
   const submit = async () => {
     try {
-      console.log('!!! emailToVerify, verificationCodeBegin:', emailToVerify, verificationCode)
       setPending(true)
-      await dispatch(verifyEmail(emailToVerify, verificationCode))
+      await dispatch(verifyEmail(email, verificationCode))
+      await clearEmailToVerify()
       navigation.navigate('SignupFlow1')
     } catch (e) {
-      setError(e || 'Expired or invalid code')
+      setError('Expired or invalid code')
     } finally {
       setPending(false)
     }
   }
+  useFocusEffect(() => {
+    if (route.params?.email) {
+      setEmail(route.params?.email)
+      setPending(false)
+    } else {
+      const asyncFunc = async () => {
+        setEmail(await getEmailToVerify())
+        setPending(false)
+      }
+      asyncFunc()
+    }
+  })
+  useFocusEffect(() => {
+    navigation.setOptions({
+      headerLeftOnPress: () => { 
+        clearEmailToVerify()
+        navigation.navigate('Signup - Email Verification')
+      }
+    })
+  })
 
   return (
     <KeyboardFriendlyView style={styles.container}>
@@ -82,6 +99,14 @@ export default function SignupFlowEmailVerificationFinish ({ navigation }) {
           )}
         />
         </View>
+        {!!error && (
+          <View style={[controlStyles.errorWrapper]}>
+            <Triangle width={10} height={5} color='white' direction='up' />
+            <View style={[controlStyles.error]}>
+              <Text style={controlStyles.errorText}>{error}</Text>
+            </View>
+          </View>
+        )}
       </ScrollView>
       <View style={styles.bottomBar}>
         <Button

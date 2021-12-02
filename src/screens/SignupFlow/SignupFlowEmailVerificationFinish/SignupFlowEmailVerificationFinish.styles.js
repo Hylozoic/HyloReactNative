@@ -1,4 +1,4 @@
-import { rhino60, white, white20onCaribbeanGreen, white40onCaribbeanGreen, white80onCaribbeanGreen } from 'style/colors'
+import { white, white40onCaribbeanGreen } from 'style/colors'
 import defaultStyles from '../SignupFlow.styles'
 
 const styles = {

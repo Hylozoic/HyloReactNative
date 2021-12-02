@@ -15,19 +15,42 @@ import AppleLoginButton from 'screens/Login/AppleLoginButton'
 import FbLoginButton from 'screens/Login/FbLoginButton'
 import GoogleLoginButton from 'screens/Login/GoogleLoginButton'
 import providedStyles from './Signup.styles'
+import { useSelector } from 'react-redux'
+import getSignupInProgress from 'store/selectors/getSignupInProgress'
+import getEmailToVerify from 'store/selectors/getEmailToVerify'
+import { useFocusEffect } from '@react-navigation/native'
 
 const backgroundImage = require('assets/signin_background.png')
 const merkabaImage = require('assets/merkaba_white.png')
 
 export default function Signup ({
   goToSignupFlow, goToLogin, error, loginWithApple,
-  loginWithFacebook, loginWithGoogle, pending
+  loginWithFacebook, loginWithGoogle, pending,
+  navigation, route
 }) {
   const [ssoError, setSsoError] = useState(false)
   const safeAreaInsets = useSafeAreaInsets()
   const createErrorNotification = error => {
     setSsoError(error)
   }
+  const signupInProgress = useSelector(getSignupInProgress)
+
+  useFocusEffect(() => {
+    const asyncFunc = async () => {
+      if (signupInProgress) {
+        navigation.navigate('SignupFlow1')
+      }
+      
+      const emailToVerify = await getEmailToVerify()
+      
+      if (emailToVerify || route.params?.email) {
+        navigation.navigate('Signup - Email Verification - Finish')
+      }
+    }
+
+    asyncFunc()
+  })
+
   const styles = {
     ...providedStyles,
     background: {

@@ -4,12 +4,13 @@ import React, { Component } from 'react'
 // Required for react-native-root-toast
 import { RootSiblingParent } from 'react-native-root-siblings'
 import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 import { AppRegistry, Platform, AppState, UIManager } from 'react-native'
 import Timer from 'react-native-background-timer'
 import * as Sentry from '@sentry/react-native'
 import OneSignal from 'react-native-onesignal'
 import { isDev } from 'config'
-import store from './src/store'
+import store, { persistor } from './src/store'
 import { name as appName } from './app.json'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import ErrorBoundary from 'screens/ErrorBoundary'
@@ -81,8 +82,10 @@ export default class AppContainer extends Component {
           <ErrorBoundary>
             <RootSiblingParent>
               <Provider store={store}>
-                <VersionCheck />
-                <RootView pathFromPushNotification={pathFromPushNotification} />
+                <PersistGate loading={null} persistor={persistor}>
+                  <VersionCheck />
+                  <RootView pathFromPushNotification={pathFromPushNotification} />
+                </PersistGate>
               </Provider>
             </RootSiblingParent>
           </ErrorBoundary>

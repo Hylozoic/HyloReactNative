@@ -30,8 +30,9 @@ export default class Login extends React.Component {
 
   componentDidMount () {
     this.unsubscribeNetInfo = NetInfo.addEventListener(this.handleConnectivityChange)
+    // Signup state redirection happens in Signup Intro component
     if (this.props.signupInProgress) {
-      this.props.navigation.navigate('Signup', { screen: 'SignupFlow1' })
+      this.props.navigation.navigate('Signup')
     }
   }
 

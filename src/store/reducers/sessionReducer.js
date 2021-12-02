@@ -5,15 +5,14 @@ import {
   LOGIN_WITH_FACEBOOK,
   LOGIN_WITH_GOOGLE
 } from 'screens/Login/actions'
-import { LOGIN_BY_TOKEN } from 'store/constants'
 import {
   SIGNUP,
   UPDATE_USER_SETTINGS
 } from 'screens/SignupFlow/SignupFlow.store'
 import {
   FETCH_CURRENT_USER,
+  LOGIN_BY_TOKEN,
   SELECT_GROUP,
-  SEND_EMAIL_VERIFICATION,
   STORE_RETURN_TO_PATH
 } from 'store/constants'
 
@@ -65,11 +64,6 @@ export default function sessionReducer (state = {
       return {
         ...state,
         signupInProgress: get('data.updateMe.settings.signupInProgress', payload)
-      }
-    case SEND_EMAIL_VERIFICATION: 
-      return {
-        ...state,
-        emailToVerify: meta.emailToVerify
       }
     case SELECT_GROUP:
       return {

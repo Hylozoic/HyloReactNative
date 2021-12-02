@@ -9,6 +9,7 @@ import styles from './SignupFlowEmailVerification.styles'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
 import { sendEmailVerification } from 'store/actions/sendEmailVerification'
+import setEmailToVerify from 'store/actions/setEmailToVerify'
 
 export default function SignupFlowEmailVerification ({ navigation }) {
   const dispatch = useDispatch()
@@ -16,15 +17,20 @@ export default function SignupFlowEmailVerification ({ navigation }) {
   const [pending, setPending] = useState()
   const [email, setEmail] = useState()
   const [error, setError] = useState()
-  const validate = () => {
-    setError(!validator.isEmail(email) && 'Must be a valid email')
-    return !any(i => i, values(error))
+  const valid = () => {
+    if (validator.isEmail(email)) {
+      return true
+    } else {
+      setError('Must be a valid email')
+      return false
+    }
   }
   const submit = async () => {
     setPending(true)
-    if (validate()) {
+    if (valid()) {
       await dispatch(sendEmailVerification(email))
-      navigation.navigate('Signup - Email Verification - Finish')
+      await setEmailToVerify(email)
+      navigation.navigate('Signup - Email Verification - Finish', { email })
     }
     setPending(false)
   }

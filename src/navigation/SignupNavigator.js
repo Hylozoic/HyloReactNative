@@ -21,7 +21,7 @@ export default function SignupNavigator () {
         return <WorkflowModalHeader
           {...headerProps}
           headerLeftCloseIcon
-          headerLeftOnPress={close}
+          headerLeftOnPress={headerProps.headerLeftOnPress || close}
           style={{ backgroundColor: white20onCaribbeanGreen }}
         />
       }
