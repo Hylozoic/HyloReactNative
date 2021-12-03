@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { View, Text } from 'react-native'
+import { ScrollView, View, Text } from 'react-native'
 import { useFocusEffect } from '@react-navigation/core'
-import { ScrollView } from 'react-native-gesture-handler'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   CodeField,

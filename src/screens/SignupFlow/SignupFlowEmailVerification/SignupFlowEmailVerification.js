@@ -1,18 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { View, Text } from 'react-native'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { ScrollView, View, Text } from 'react-native'
+import validator from 'validator'
+import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import SettingControl from 'components/SettingControl'
 import Button from 'components/Button'
-import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-import validator from 'validator'
 import styles from './SignupFlowEmailVerification.styles'
-import { ScrollView } from 'react-native-gesture-handler'
-import { useDispatch } from 'react-redux'
-import { sendEmailVerification } from 'screens/SignupFlow/SignupFlow.store'
+import { getEmailToVerify, sendEmailVerification } from 'screens/SignupFlow/SignupFlow.store'
 
 export default function SignupFlowEmailVerification ({ navigation, route }) {
+  const emailToVerify = useSelector(getEmailToVerify) || route.params?.email
   const dispatch = useDispatch()
   const [pending, setPending] = useState()
-  const [email, setEmail] = useState(route.params?.email)
+  const [email, setEmail] = useState(emailToVerify)
   const [error, setError] = useState()
   const submit = async () => {
     setPending(true)
