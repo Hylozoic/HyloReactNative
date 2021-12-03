@@ -1,30 +1,30 @@
 import React, { useState } from 'react'
 import { View, Text } from 'react-native'
-import Button from 'components/Button'
-import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-import validator from 'validator'
-import styles from './SignupFlowEmailVerificationFinish.styles'
-import controlStyles from 'components/SettingControl/SettingControl.styles'
+import { useFocusEffect } from '@react-navigation/core'
 import { ScrollView } from 'react-native-gesture-handler'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   CodeField,
   Cursor,
   useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field'
-import getEmailToVerify from 'store/selectors/getEmailToVerify'
-import verifyEmail from 'store/actions/verifyEmail'
+import {
+  getEmailToVerify,
+  clearEmailToVerify,
+  verifyEmail
+} from 'screens/SignupFlow/SignupFlow.store'
+import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
+import Button from 'components/Button'
 import Triangle from 'react-native-triangle'
-import { useFocusEffect } from '@react-navigation/core'
-import clearEmailToVerify from 'store/actions/clearEmailToVerify'
+import styles from './SignupFlowEmailVerificationFinish.styles'
+import controlStyles from 'components/SettingControl/SettingControl.styles'
 
 const CODE_LENGTH = 6
 
 export default function SignupFlowEmailVerificationFinish ({ navigation, route }) {
   const dispatch = useDispatch()
-  const [pending, setPending] = useState(true)
-  const [email, setEmail] = useState()
+  const [pending, setPending] = useState()
   const [verificationCode, setVerificationCode] = useState()
   const [error, setError] = useState()
   const verificationCodeRef = useBlurOnFulfill({
@@ -35,11 +35,22 @@ export default function SignupFlowEmailVerificationFinish ({ navigation, route }
     value: verificationCode,
     setValue: setVerificationCode
   })
+  const email = route.params?.email || useSelector(getEmailToVerify)
+
+  useFocusEffect(() => {
+    navigation.setOptions({
+      headerLeftOnPress: () => { 
+        dispatch(clearEmailToVerify())
+        navigation.navigate('Signup - Email Verification', { email })
+      }
+    })
+  })
+
   const submit = async () => {
     try {
       setPending(true)
       await dispatch(verifyEmail(email, verificationCode))
-      await clearEmailToVerify()
+      await dispatch(clearEmailToVerify())
       navigation.navigate('SignupFlow1')
     } catch (e) {
       setError('Expired or invalid code')
@@ -47,26 +58,6 @@ export default function SignupFlowEmailVerificationFinish ({ navigation, route }
       setPending(false)
     }
   }
-  useFocusEffect(() => {
-    if (route.params?.email) {
-      setEmail(route.params?.email)
-      setPending(false)
-    } else {
-      const asyncFunc = async () => {
-        setEmail(await getEmailToVerify())
-        setPending(false)
-      }
-      asyncFunc()
-    }
-  })
-  useFocusEffect(() => {
-    navigation.setOptions({
-      headerLeftOnPress: () => { 
-        clearEmailToVerify()
-        navigation.navigate('Signup - Email Verification')
-      }
-    })
-  })
 
   return (
     <KeyboardFriendlyView style={styles.container}>

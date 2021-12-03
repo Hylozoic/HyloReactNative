@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { isIOS } from 'util/platform'
+import { useFocusEffect } from '@react-navigation/native'
 import Button from 'components/Button'
 import AppleLoginButton from 'screens/Login/AppleLoginButton'
 import FbLoginButton from 'screens/Login/FbLoginButton'
@@ -17,8 +18,7 @@ import GoogleLoginButton from 'screens/Login/GoogleLoginButton'
 import providedStyles from './Signup.styles'
 import { useSelector } from 'react-redux'
 import getSignupInProgress from 'store/selectors/getSignupInProgress'
-import getEmailToVerify from 'store/selectors/getEmailToVerify'
-import { useFocusEffect } from '@react-navigation/native'
+import { getEmailToVerify } from 'screens/SignupFlow/SignupFlow.store'
 
 const backgroundImage = require('assets/signin_background.png')
 const merkabaImage = require('assets/merkaba_white.png')
@@ -34,21 +34,16 @@ export default function Signup ({
     setSsoError(error)
   }
   const signupInProgress = useSelector(getSignupInProgress)
+  const emailToVerify = useSelector(getEmailToVerify)
 
   useFocusEffect(() => {
-    const asyncFunc = async () => {
-      if (signupInProgress) {
-        navigation.navigate('SignupFlow1')
-      }
-      
-      const emailToVerify = await getEmailToVerify()
-      
-      if (emailToVerify || route.params?.email) {
-        navigation.navigate('Signup - Email Verification - Finish')
-      }
+    if (signupInProgress) {
+      navigation.navigate('SignupFlow1')
     }
-
-    asyncFunc()
+    
+    if (route.params?.email || emailToVerify) {
+      navigation.navigate('Signup - Email Verification - Finish')
+    }
   })
 
   const styles = {

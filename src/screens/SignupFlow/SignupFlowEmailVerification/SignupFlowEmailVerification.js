@@ -4,33 +4,23 @@ import SettingControl from 'components/SettingControl'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import validator from 'validator'
-import { any, values } from 'lodash/fp'
 import styles from './SignupFlowEmailVerification.styles'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
-import { sendEmailVerification } from 'store/actions/sendEmailVerification'
-import setEmailToVerify from 'store/actions/setEmailToVerify'
+import { sendEmailVerification } from 'screens/SignupFlow/SignupFlow.store'
 
-export default function SignupFlowEmailVerification ({ navigation }) {
+export default function SignupFlowEmailVerification ({ navigation, route }) {
   const dispatch = useDispatch()
-  const emailControlRef = useRef()
   const [pending, setPending] = useState()
-  const [email, setEmail] = useState()
+  const [email, setEmail] = useState(route.params?.email)
   const [error, setError] = useState()
-  const valid = () => {
-    if (validator.isEmail(email)) {
-      return true
-    } else {
-      setError('Must be a valid email')
-      return false
-    }
-  }
   const submit = async () => {
     setPending(true)
-    if (valid()) {
+    if (validator.isEmail(email)) {
       await dispatch(sendEmailVerification(email))
-      await setEmailToVerify(email)
       navigation.navigate('Signup - Email Verification - Finish', { email })
+    } else {
+      setError('Must be a valid email')
     }
     setPending(false)
   }
@@ -44,7 +34,6 @@ export default function SignupFlowEmailVerification ({ navigation }) {
         </View>
         <View style={styles.content}>
           <SettingControl
-            ref={emailControlRef}
             label='Enter your email to get started'
             value={email}
             keyboardType='email-address'

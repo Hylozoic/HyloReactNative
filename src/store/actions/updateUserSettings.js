@@ -1,5 +1,4 @@
-export const UPDATE_USER_SETTINGS = 'UPDATE_USER_SETTINGS'
-export const UPDATE_USER_SETTINGS_PENDING = `${UPDATE_USER_SETTINGS}_PENDING`
+import { UPDATE_USER_SETTINGS } from 'store/constants'
 
 export default function updateUserSettings (changes) {
   return {

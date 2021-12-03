@@ -5,11 +5,11 @@ import {
   signup,
   getUserSettings,
   getSignupErrors,
-  updateUserSettings,
   updateLocalUserSettings,
-  SIGNUP,
-  UPDATE_USER_SETTINGS
+  SIGNUP
 } from '../SignupFlow.store.js'
+import { UPDATE_USER_SETTINGS } from 'store/constants'
+import updateUserSettings from 'store/actions/updateUserSettings'
 import getMe from 'store/selectors/getMe'
 import { pick, omitBy, isNil } from 'lodash/fp'
 

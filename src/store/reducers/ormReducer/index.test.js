@@ -22,9 +22,6 @@ import {
   RESET_NEW_POST_COUNT_PENDING
 } from 'store/actions/resetNewPostCount'
 import {
-  UPDATE_USER_SETTINGS_PENDING
-} from 'store/actions/updateUserSettings'
-import {
   PIN_POST_PENDING
 } from 'components/PostCard/PostHeader/PostHeader.store'
 import {
@@ -37,7 +34,8 @@ import {
   DELETE_COMMENT_PENDING,
   JOIN_PROJECT_PENDING,
   LEAVE_PROJECT_PENDING,
-  FETCH_CURRENT_USER
+  FETCH_CURRENT_USER,
+  UPDATE_USER_SETTINGS_PENDING
 } from 'store/constants'
 
 it('responds to an action with meta.extractModel', () => {

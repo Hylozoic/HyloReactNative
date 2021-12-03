@@ -1,12 +1,14 @@
-export
-{ default as updateUserSettings, UPDATE_USER_SETTINGS, UPDATE_USER_SETTINGS_PENDING }
-  from 'store/actions/updateUserSettings'
+import { omit } from 'lodash/fp'
 
 export const MODULE_NAME = 'SignupFlow'
+export const CLEAR_EMAIL_TO_VERIFY = `${MODULE_NAME}/CLEAR_EMAIL_TO_VERIFY`
+export const SEND_EMAIL_VERIFICATION = `${MODULE_NAME}/SEND_EMAIL_VERIFICATION`
+export const SET_EMAIL_TO_VERIFY = `${MODULE_NAME}/SET_EMAIL_TO_VERIFY`
 export const UPDATE_LOCAL_USER_SETTINGS = `${MODULE_NAME}/UPDATE_LOCAL_USER_SETTINGS`
 export const SIGNUP = `${MODULE_NAME}/SIGNUP`
 
 export const defaultUserSettings = {
+  emailToVerify: null,
   name: '',
   email: '',
   password: '',
@@ -31,7 +33,7 @@ export function getErrors (payload) {
 }
 
 export default function reducer (state = defaultState, action) {
-  const { error, type, payload } = action
+  const { error, type, payload, meta } = action
   if (error) {
     switch (type) {
       case SIGNUP:
@@ -45,6 +47,13 @@ export default function reducer (state = defaultState, action) {
   }
 
   switch (type) {
+    case CLEAR_EMAIL_TO_VERIFY:
+      return omit('emailToVerify', state)
+    case SEND_EMAIL_VERIFICATION: 
+      return {
+        ...state,
+        emailToVerify: meta.emailToVerify
+      }
     case SIGNUP:
       return {
         ...state,
@@ -63,12 +72,26 @@ export default function reducer (state = defaultState, action) {
   }
 }
 
-export function signup ({ name, password }) {
-  const params = { name, password, resp: 'user', login: true }
+export function clearEmailToVerify () {
   return {
-    type: SIGNUP,
+    type: CLEAR_EMAIL_TO_VERIFY
+  }
+}
+
+export function sendEmailVerification (email) {
+  return {
+    type: SEND_EMAIL_VERIFICATION,
     payload: {
-      api: { method: 'post', path: '/noo/user', params }
+      api: {
+        method: 'post',
+        path: '/noo/user/send-email-verification',
+        params: {
+          email
+        }
+      }
+    },
+    meta: {
+      emailToVerify: email
     }
   }
 }
@@ -80,10 +103,24 @@ export function updateLocalUserSettings (settings) {
   }
 }
 
+export function signup ({ name, password }) {
+  const params = { name, password, resp: 'user', login: true }
+  return {
+    type: SIGNUP,
+    payload: {
+      api: { method: 'post', path: '/noo/user', params }
+    }
+  }
+}
+
 export function getUserSettings (state) {
   return state[MODULE_NAME].userSettings
 }
 
 export function getSignupErrors (state) {
   return state[MODULE_NAME].errors
+}
+
+export function getEmailToVerify (state) {
+  return state[MODULE_NAME].emailToVerify
 }
