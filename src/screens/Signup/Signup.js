@@ -42,6 +42,7 @@ export default function Signup ({ navigation, route }) {
   const [email, setEmailBase] = useState(storedEmail)
   const [pending, setPending] = useState()
   const [error, setError] = useState()
+  const [ssoError, setSsoError] = useState()
   const [canSubmit, setCanSubmit] = useState(pending || !email)
   const setEmail = email => {
     error && setError()
@@ -63,7 +64,7 @@ export default function Signup ({ navigation, route }) {
 
   const safeAreaInsets = useSafeAreaInsets()
   const createErrorNotification = error => {
-    setError(error)
+    setSsoError(error)
   }
   const signupInProgress = useSelector(getSignupInProgress)
 
@@ -89,7 +90,7 @@ export default function Signup ({ navigation, route }) {
     <KeyboardFriendlyView style={styles.container}>
       <ScrollView>
         {loginPending && <Text style={styles.banner}>SIGNING UP...</Text>}
-        {loginError && <Text style={styles.errorBanner}>{error}</Text>}
+        {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
         <ImageBackground
           source={backgroundImage}
           style={styles.background}
