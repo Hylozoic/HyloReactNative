@@ -9,47 +9,55 @@ import {
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field'
 import {
-  getEmailToVerify,
-  clearEmailToVerify,
-  verifyEmail
+  updateLocalUserSettings,
+  getUserSettings
 } from 'screens/SignupFlow/SignupFlow.store'
+import verifyEmail from 'store/actions/verifyEmail'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
-import Triangle from 'react-native-triangle'
-import styles from './SignupFlowEmailVerificationFinish.styles'
+import FormattedError from 'components/FormattedError'
 import controlStyles from 'components/SettingControl/SettingControl.styles'
+import styles from './SignupFlowEmailVerificationFinish.styles'
 
 const CODE_LENGTH = 6
 
 export default function SignupFlowEmailVerificationFinish ({ navigation, route }) {
   const dispatch = useDispatch()
   const [pending, setPending] = useState()
-  const [verificationCode, setVerificationCode] = useState()
+  const [verificationCode, setVerificationCodeBase] = useState()
   const [error, setError] = useState()
   const verificationCodeRef = useBlurOnFulfill({
     value: verificationCode,
     cellCount: CODE_LENGTH
   })
+  const setVerificationCode = code => {
+    setVerificationCodeBase(code)
+    setError()
+    if (code?.length == CODE_LENGTH) {
+      submit(code)
+    }
+  }
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value: verificationCode,
     setValue: setVerificationCode
   })
-  const email = route.params?.email || useSelector(getEmailToVerify)
+  const email = useSelector(getUserSettings)?.email || route.params?.email
 
   useFocusEffect(() => {
     navigation.setOptions({
       headerLeftOnPress: () => { 
-        dispatch(clearEmailToVerify())
-        navigation.navigate('Signup - Email Verification', { email })
+        // TODO: Clear email and verified status when going back? A new code will be generated, warn?
+        // dispatch(updateLocalUserSettings({ email: null, emailVerified: false }))
+        navigation.navigate('Signup Intro', { email })
       }
     })
   })
 
-  const submit = async () => {
+  const submit = async (code) => {
     try {
       setPending(true)
-      await dispatch(verifyEmail(email, verificationCode))
-      await dispatch(clearEmailToVerify())
+      await dispatch(verifyEmail(email, code))
+      await dispatch(updateLocalUserSettings({ email, emailVerified: true }))
       navigation.navigate('SignupFlow1')
     } catch (e) {
       setError('Expired or invalid code')
@@ -65,9 +73,11 @@ export default function SignupFlowEmailVerificationFinish ({ navigation, route }
           <Text style={styles.title}>
             Check your email
           </Text>
-          <Text style={styles.subTitle}>
-            We've sent a 6 digit code to EMAIL. The code will expire shortly, so please enter it here soon.
-          </Text>
+          <View>
+            <Text style={styles.subTitle}>We've sent a 6 digit code to:</Text>
+            <Text style={[styles.subTitle, { marginVertical: 10, fontWeight: 'bold' }]}>{email}</Text>
+            <Text style={styles.subTitle}>The code will expire shortly, so please enter it here soon.</Text>
+          </View>
         </View>
         <View style={styles.content}>
         <CodeField
@@ -89,23 +99,22 @@ export default function SignupFlowEmailVerificationFinish ({ navigation, route }
           )}
         />
         </View>
-        {!!error && (
-          <View style={[controlStyles.errorWrapper]}>
-            <Triangle width={10} height={5} color='white' direction='up' />
-            <View style={[controlStyles.error]}>
-              <Text style={controlStyles.errorText}>{error}</Text>
-            </View>
-          </View>
-        )}
+        <FormattedError error={error} styles={controlStyles} />
       </ScrollView>
-      <View style={styles.bottomBar}>
-        <Button
-          style={styles.continueButton}
-          text={pending ? 'Saving...' : 'Continue'}
-          onPress={submit}
-          disabled={!!pending}
-        />
-      </View>
     </KeyboardFriendlyView>
   )
 }
+
+// <View style={styles.bottomBar}>
+//   <Button
+//     style={styles.backButton}
+//     text='Re-send'
+//     onPress={() => navigation.goBack()}
+//   />
+//   <Button
+//     style={styles.continueButton}
+//     text={pending ? 'Saving...' : 'Continue'}
+//     onPress={submit}
+//     disabled={!!pending}
+//   />
+// </View>

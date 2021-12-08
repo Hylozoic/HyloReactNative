@@ -7,7 +7,6 @@ import {
 } from 'screens/Login/actions'
 import { SIGNUP } from 'screens/SignupFlow/SignupFlow.store'
 import {
-  CLEAR_EMAIL_TO_VERIFY,
   FETCH_CURRENT_USER,
   LOGIN_BY_TOKEN,
   SELECT_GROUP,
@@ -64,8 +63,6 @@ export default function sessionReducer (state = {
         ...state,
         signupInProgress: get('data.updateMe.settings.signupInProgress', payload)
       }
-    case CLEAR_EMAIL_TO_VERIFY:
-      return omit('emailToVerify', state)
     case SELECT_GROUP:
       return {
         ...state,

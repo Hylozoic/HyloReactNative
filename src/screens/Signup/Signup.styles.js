@@ -1,62 +1,85 @@
-import { Dimensions } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 import loginStyles from 'screens/Login/Login.styles'
-import { caribbeanGreen } from 'style/colors'
+import { amaranth, caribbeanGreen, rhino30, rhino80, white } from 'style/colors'
 
 const bgImageWidth = Dimensions.get('window').width
 const bgImageHeight = Dimensions.get('window').height * 0.25
 
 export default {
+  ...loginStyles,
   container: {
     backgroundColor: 'white'
   },
-  banner: loginStyles.banner,
-  errorBanner: loginStyles.errorBanner,
   background: {
     width: bgImageWidth,
-    height: bgImageHeight,
-    paddingBottom: bgImageHeight * 0.2,
+    height: bgImageHeight + 20,
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
   backgroundImage: {
     width: bgImageWidth,
-    height: bgImageHeight,
+    height: bgImageHeight + 20,
     resizeMode: 'cover'
   },
   merkabaImage: {
     height: 97,
     width: 97
   },
-  paddedContainer: {
-    paddingVertical: 35,
-    paddingHorizontal: 16,
+  content: {
+    paddingTop: 20,
+    paddingHorizontal: '5%',
     backgroundColor: 'white'
   },
   title: {
     ...loginStyles.title,
-    textAlign: 'center',
-    paddingHorizontal: 40,
-    marginBottom: 12
+    color: white,
+    marginTop: 15,
+    marginBottom: 10,
+    textAlign: 'center'
   },
+  // Error
   errorWrapper: {
-    alignItems: 'center'
+    marginTop: -10
   },
   error: loginStyles.error,
   subTitle: {
     ...loginStyles.helpText,
     textAlign: 'center',
-    paddingHorizontal: 20,
-    marginBottom: 25
+    color: white,
+    fontSize: 16,
+    paddingHorizontal: '20%',
+    marginBottom: 20
+  },
+  labelText: {
+    textAlign: 'center',
+    marginBottom: 10,
+    color: rhino80,
+    fontSize: 14,
+    fontWeight: 'bold'
+  },
+  textInput: {
+    textAlign: 'center',
+    padding: 15,
+    borderColor: rhino80,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 5,
+    marginBottom: 15,
+    fontSize: 14
+  },
+  errorWrapper: {
+    alignItems: 'center',
+    marginBottom: 10
   },
   signupButton: {
+    // paddingHorizontal: 10,
     height: 45,
-    fontSize: 16,
-    marginBottom: 10
+    fontSize: 20,
+    marginBottom: 25,
+    disabledColor: white,
+    disabledBackgroundColor: rhino30
   },
 
   // Connect with
-  connectWith: loginStyles.connectWith,
-  connectWithText: loginStyles.connectWithText,
   appleLoginButton: {
     ...loginStyles.appleLoginButton,
     width: '80%'

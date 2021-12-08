@@ -2,8 +2,7 @@ import React from 'react'
 import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import styles from './SettingControl.styles.js'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
-import Triangle from 'react-native-triangle'
-
+import FormattedError from 'components/FormattedError'
 export default class SettingControl extends React.Component {
   constructor (props) {
     super(props)
@@ -119,7 +118,8 @@ export default class SettingControl extends React.Component {
             )}
           </View>
         )}
-        {!!error && (
+        <FormattedError error={error} syles={styles} theme={theme} />
+        {/* {!!error && (
           <View style={[styles.errorWrapper, theme.errorWrapper]}>
             {!theme.hideErrorTriangle && (
               <Triangle width={10} height={5} color='white' direction='up' />
@@ -128,7 +128,7 @@ export default class SettingControl extends React.Component {
               <Text style={styles.errorText}>{error}</Text>
             </View>
           </View>
-        )}
+        )} */}
       </View>
     )
   }

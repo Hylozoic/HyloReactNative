@@ -51,12 +51,15 @@ export default {
   error: {
     paddingVertical: 8,
     paddingHorizontal: 10,
-    backgroundColor: 'white',
-    borderRadius: 100
+    borderRadius: 100,
+    backgroundColor: amaranth
   },
   errorText: {
-    color: amaranth,
-    fontSize: 10
+    color: white,
+    fontSize: 12
+  },
+  errorTriangle: {
+    backgroundColor: amaranth
   },
   highlight: {
     backgroundColor: '#99EEFF',

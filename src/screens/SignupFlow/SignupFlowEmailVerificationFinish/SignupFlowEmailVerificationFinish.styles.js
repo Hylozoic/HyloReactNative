@@ -3,6 +3,10 @@ import defaultStyles from '../SignupFlow.styles'
 
 const styles = {
   ...defaultStyles,
+  subTitle: {
+    ...defaultStyles.subTitle,
+    fontSize: 16
+  },
   codeFieldRoot: {
     marginHorizontal: 40
   },

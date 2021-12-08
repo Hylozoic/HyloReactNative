@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
-import { getUserSettings, updateLocalUserSettings, updateUserSettings } from '../SignupFlow.store.js'
+import { getUserSettings, updateLocalUserSettings } from '../SignupFlow.store.js'
+import updateUserSettings from 'store/actions/updateUserSettings'
 
 export function mapStateToProps (state, props) {
   const { location, locationId } = getUserSettings(state)

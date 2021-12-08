@@ -15,12 +15,13 @@ import { pick, omitBy, isNil } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
-  const { name, password, confirmPassword } = getUserSettings(state)
+  const { name, email, password, confirmPassword } = getUserSettings(state)
   const pending = state.pending[SIGNUP] || state.pending[UPDATE_USER_SETTINGS]
   const errors = getSignupErrors(state)
 
   return {
     name,
+    email: email || props.route?.params?.email,
     password,
     confirmPassword,
     currentUser,
@@ -43,7 +44,7 @@ export function mapDispatchToProps (dispatch, props) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { name, password, currentUser, showPasswordField } = stateProps
+  const { name, email, password, currentUser, showPasswordField } = stateProps
   const {
     signup, updateUserSettings, updateLocalUserSettings, fetchCurrentUser
   } = dispatchProps
@@ -54,12 +55,13 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ], currentUser.ref))
   )
 
-  const signupOrUpdate = async() => {
+  const signupOrUpdate = async () => {
     const params = omitBy(isNil, {
       name,
       password: showPasswordField
         ? password
-        : null
+        : null,
+      email
     })
 
     try {

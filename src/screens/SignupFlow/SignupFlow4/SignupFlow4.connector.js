@@ -2,10 +2,10 @@ import { connect } from 'react-redux'
 import {
   signup,
   getUserSettings,
-  updateUserSettings,
   updateLocalUserSettings,
   defaultUserSettings
 } from '../SignupFlow.store.js'
+import updateUserSettings from 'store/actions/updateUserSettings'
 import { getMySkillsFromOrm } from 'components/SkillEditor/SkillEditor.store'
 import { isEmpty } from 'lodash/fp'
 import { redirectAfterLogin, resetToMainRoute } from 'navigation/linking/helpers'

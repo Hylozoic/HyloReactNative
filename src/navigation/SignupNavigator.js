@@ -2,7 +2,6 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { WorkflowModalHeader } from 'navigation/headers'
 import SignupComponent from 'screens/Signup'
-import SignupFlowEmailVerification from 'screens/SignupFlow/SignupFlowEmailVerification'
 import SignupFlowEmailVerificationFinish from 'screens/SignupFlow/SignupFlowEmailVerificationFinish'
 import SignupFlow1 from 'screens/SignupFlow/SignupFlow1'
 import SignupFlow2 from 'screens/SignupFlow/SignupFlow2'
@@ -19,10 +18,10 @@ export default function SignupNavigator () {
       header: headerProps => {
         const close = () => headerProps.navigation.navigate('Signup Intro')
         return <WorkflowModalHeader
-          {...headerProps}
           headerLeftCloseIcon
-          headerLeftOnPress={headerProps.headerLeftOnPress || close}
+          headerLeftOnPress={close}
           style={{ backgroundColor: white20onCaribbeanGreen }}
+          {...headerProps}
         />
       }
     }
@@ -32,8 +31,6 @@ export default function SignupNavigator () {
     <Signup.Navigator {...navigatorProps}>
       <Signup.Screen name='Signup Intro' component={SignupComponent}
         options={{ headerShown: false }} />
-      <Signup.Screen name='Signup - Email Verification' component={SignupFlowEmailVerification}
-        options={{ title: 'Welcome' }} />
       <Signup.Screen name='Signup - Email Verification - Finish' component={SignupFlowEmailVerificationFinish}
         options={{ title: 'Verify Email' }} />
       <Signup.Screen name='SignupFlow1' component={SignupFlow1}

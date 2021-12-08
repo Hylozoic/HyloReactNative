@@ -1,17 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { View, Text } from 'react-native'
+import { ScrollView, View, Text } from 'react-native'
+import { any, values } from 'lodash/fp'
+import { validateUser } from 'hylo-utils/validators'
 import SettingControl from 'components/SettingControl'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-import { validateUser } from 'hylo-utils/validators'
-import { any, values } from 'lodash/fp'
 import styles from './SignupFlow1.styles'
-import { ScrollView } from 'react-native-gesture-handler'
 
 export default function SignupFlow1 ({
   currentUser, loadUserSettings, errors: errorsFromStore,
   name, password, confirmPassword, pending,
-  showPasswordField, signupOrUpdate, changeSetting
+  showPasswordField, signupOrUpdate, changeSetting, route
 }) {  
   const passwordControlRef = useRef()
   const confirmPasswordControlRef = useRef()
