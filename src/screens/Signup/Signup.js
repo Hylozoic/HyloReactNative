@@ -37,8 +37,9 @@ const merkabaImage = require('assets/merkaba_white.png')
 export default function Signup ({ navigation, route }) {
   const dispatch = useDispatch()
   const loginPending = useSelector(getPending)
-  const loginError = useSelector(state => state.session.loginError)
-  const storedEmail = useSelector(getUserSettings)?.email || route.params?.email
+  const userSettings = useSelector(getUserSettings)
+  const storedEmail = userSettings?.email || route.params?.email
+  const emailVerified = userSettings?.emailVerified
   const [email, setEmailBase] = useState(storedEmail)
   const [pending, setPending] = useState()
   const [error, setError] = useState()
@@ -70,6 +71,9 @@ export default function Signup ({ navigation, route }) {
 
   useFocusEffect(() => {
     if (signupInProgress) {
+      navigation.navigate('SignupFlow2')
+    }
+    if (email && emailVerified) {
       navigation.navigate('SignupFlow1')
     }
   })
