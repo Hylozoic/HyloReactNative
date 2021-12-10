@@ -9,8 +9,8 @@ import styles from './SignupFlow1.styles'
 
 export default function SignupFlow1 ({
   currentUser, loadUserSettings, errors: errorsFromStore,
-  name, password, confirmPassword, pending,
-  showPasswordField, signupOrUpdate, changeSetting, route
+  name, email, password, confirmPassword, pending,
+  showPasswordField, signupOrUpdate, changeSetting
 }) {  
   const passwordControlRef = useRef()
   const confirmPasswordControlRef = useRef()
@@ -51,9 +51,9 @@ export default function SignupFlow1 ({
     <KeyboardFriendlyView style={styles.container}>
       <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
         <View style={styles.header}>
-          <Text style={styles.title}>Hi there stranger!</Text>
+          <Text style={styles.title}>One more step!</Text>
           <Text style={styles.subTitle}>
-            To kick things off, tell us a bit more about yourself and get your account off the ground.
+            Hi <Text style={{ fontWeight: 'bold' }}>{email}</Text> we just need to know your name and password and you're in.
           </Text>
         </View>
         <View style={styles.content}>
