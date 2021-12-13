@@ -1,4 +1,9 @@
+import { Linking } from 'react-native'
 import { last, eq, omitBy } from 'lodash'
+
+export function openURL (url) {
+  return Linking.canOpenURL(url).then(supported => supported && Linking.openURL(url))
+}
 
 export function isPromise (value) {
   return value && typeof value.then === 'function'

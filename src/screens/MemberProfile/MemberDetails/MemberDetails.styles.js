@@ -69,6 +69,19 @@ export default {
     fontFamily: 'Circular-Book',
     letterSpacing: 0.22
   },
+  affiliationRole: {
+    fontWeight: 'bold'
+  },
+  affiliationPreposition: {
+    // 
+  },
+  affiliationOrgName: {
+    // 
+    fontWeight: 'bold'
+  },
+  affiliationOrgNameLink: {
+    color: caribbeanGreen
+  },
   starIcon: {
     alignSelf: 'center',
     color: caribbeanGreen,

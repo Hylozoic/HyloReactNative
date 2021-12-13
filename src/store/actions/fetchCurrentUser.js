@@ -63,6 +63,18 @@ export default function fetchCurrentUser () {
               }
             }
           }
+          affiliations {
+            items {
+              id
+              role
+              preposition
+              orgName
+              url
+              createdAt
+              updatedAt
+              isActive
+            }
+          }
           memberships {
             id
             lastViewedAt

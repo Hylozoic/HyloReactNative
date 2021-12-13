@@ -143,7 +143,7 @@ export class PostDetails extends React.Component {
     if (!post?.creator || !post?.title) return <LoadingScreen />
     
     const isModal = this.props.route?.name == 'Post Details - Modal'
-console.log('!!! tabBarHeight', tabBarHeight)
+
     return (
       <View style={styles.container}>
         <KeyboardAccessoryView

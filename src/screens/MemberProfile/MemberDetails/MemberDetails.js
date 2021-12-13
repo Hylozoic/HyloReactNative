@@ -9,6 +9,7 @@ import {
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import { debounce, find, isEmpty, pick } from 'lodash/fp'
 import { validateUser } from 'hylo-utils/validators'
+import { openURL } from 'util'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import MemberHeader from 'screens/MemberProfile/MemberHeader'
@@ -164,6 +165,9 @@ export default class MemberDetails extends React.Component {
           goToGroup={goToGroup}
           editing={editing}
         />
+        <MemberAffiliations
+          affiliations={person.affiliations?.items}
+        />
       </ScrollView>
     )
   }
@@ -224,12 +228,44 @@ export function MemberGroups ({ memberships, goToGroup, editing }) {
 
   return (
     <View style={styles.groupsContainer}>
-      <Text style={styles.sectionLabel}>MY GROUPS</Text>
+      <Text style={styles.sectionLabel}>Hylo Communities</Text>
       {memberships.map(membership =>
         <GroupRow membership={membership} key={membership.id}
           goToGroup={goToGroup} editing={editing} />)}
     </View>
   )
+}
+
+export function MemberAffiliations ({ affiliations }) {
+  if (isEmpty(affiliations)) return null
+
+  return (
+    <View style={styles.groupsContainer}>
+      <Text style={styles.sectionLabel}>Other Affiliations</Text>
+      {affiliations.map(affiliation => (
+        <View style={styles.groupRow}>
+          <MemberAffiliation affiliation={affiliation} />
+        </View>
+      ))}
+    </View>
+  )
+}
+
+export function MemberAffiliation ({ affiliation }) {
+  const { role, preposition, orgName, url } = affiliation
+
+  return <>
+    <Text style={styles.affiliationRole}>{role} </Text>
+    <Text style={styles.affiliationPreposition}>{preposition}</Text>
+    {url && (
+      <TouchableOpacity onPress={() => openURL(url)}>
+        <Text style={[ styles.affiliationOrgName, styles.affiliationOrgNameLink ]}> {orgName}</Text>
+      </TouchableOpacity>
+    )}
+    {!url && (
+      <Text style={[ styles.affiliationOrgName ]}> {orgName}</Text>
+    )}
+  </>
 }
 
 export function GroupRow ({ membership, goToGroup, editing }) {

@@ -41,6 +41,18 @@ export function fetchPerson (id) {
             region
           }
           messageThreadId
+          affiliations {
+            items {
+              id
+              role
+              preposition
+              orgName
+              url
+              createdAt
+              updatedAt
+              isActive
+            }
+          }
           memberships {
             id
             role

@@ -1,11 +1,8 @@
 import React from 'react'
-import { TouchableOpacity, Text, Linking } from 'react-native'
+import { TouchableOpacity, Text } from 'react-native'
 import { parse } from 'url'
+import { openURL } from 'util'
 import SpaceFillingImage from 'components/SpaceFillingImage'
-
-export function openURL (url) {
-  return Linking.canOpenURL(url).then(supported => supported && Linking.openURL(url))
-}
 
 export default function LinkPreview ({ title, url, imageUrl }) {
   const domain = parse(url).hostname.replace('www.', '')

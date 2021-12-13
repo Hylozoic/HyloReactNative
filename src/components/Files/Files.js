@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { View, TouchableOpacity, Linking } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
+import { openURL } from 'util'
 import { FileLabel } from 'screens/PostEditor/FileSelector'
 
 export default function Files ({ urls, style = {} }) {
@@ -9,16 +10,13 @@ export default function Files ({ urls, style = {} }) {
   return (
     <View style={{...styles.files, ...style}}>
       {urls.map(url =>
-        <TouchableOpacity key={url} onPress={openUrlFn(url)}>
+        <TouchableOpacity key={url} onPress={openURL(url)}>
           <FileLabel url={url} />
         </TouchableOpacity>
       )}
     </View>
   )
 }
-
-const openUrlFn = url => () =>
-  Linking.canOpenURL(url).then(ok => ok && Linking.openURL(url))
 
 const styles = { 
   files: {
