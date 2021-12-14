@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { ScrollView, View, Text } from 'react-native'
+import { useFocusEffect } from '@react-navigation/native'
 import { any, values } from 'lodash/fp'
 import { validateUser } from 'hylo-utils/validators'
 import SettingControl from 'components/SettingControl'
@@ -8,9 +9,10 @@ import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import styles from './SignupFlow1.styles'
 
 export default function SignupFlow1 ({
-  currentUser, loadUserSettings, errors: errorsFromStore,
+  errors: errorsFromStore,
   name, email, password, confirmPassword, pending,
-  showPasswordField, signupOrUpdate, changeSetting
+  showPasswordField, signupOrUpdate, changeSetting,
+  navigation
 }) {  
   const passwordControlRef = useRef()
   const confirmPasswordControlRef = useRef()
@@ -42,10 +44,15 @@ export default function SignupFlow1 ({
     changeSetting(field, value)
   }
 
-  // this is for the case where they logged in but hadn't finished sign up
-  useEffect(() => {
-    if (currentUser) loadUserSettings()
-  }, [])
+  useFocusEffect(() => {
+    navigation.setOptions({
+      headerLeftOnPress: () => { 
+        // TODO: Clear email and verified status when going back? A new code will be generated, warn?
+        // dispatch(updateLocalUserSettings({ email: null, emailVerified: false }))
+        navigation.navigate('Signup Intro', { email })
+      }
+    })
+  })
     
   return (
     <KeyboardFriendlyView style={styles.container}>

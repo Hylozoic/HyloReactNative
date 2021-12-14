@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import {
   View,
   Text,
-  Linking,
   Image,
   ImageBackground,
   TouchableOpacity,
@@ -12,6 +11,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import validator from 'validator'
+import { openURL } from 'util'
 import { isIOS } from 'util/platform'
 import { useFocusEffect } from '@react-navigation/core'
 import { loginWithApple, loginWithFacebook, loginWithGoogle } from 'screens/Login/actions'
@@ -162,8 +162,4 @@ export default function Signup ({ navigation, route }) {
       </ScrollView>
     </KeyboardFriendlyView>
   )
-}
-
-export function openURL (url) {
-  return Linking.canOpenURL(url).then(supported => supported && Linking.openURL(url))
 }

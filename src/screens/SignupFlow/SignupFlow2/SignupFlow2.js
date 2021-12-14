@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ScrollView, View, Image, Text } from 'react-native'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import ImagePicker from 'components/ImagePicker'
@@ -8,10 +8,18 @@ import Loading from 'components/Loading'
 import styles from './SignupFlow2.styles'
 
 export default function SignupFlow2 ({
-  currentUser, saveAndNext, avatarUrl, changeSetting, navigation
+  currentUser, saveAndNext, avatarUrl,
+  changeSetting, loadUserSettings,
+  navigation
 }) {
   const [localUri, setLocalUri] = useState(null)
   const [imagePickerPending, setImagePickerPending] = useState(false)
+
+
+  // this is for the case where they logged in but hadn't finished sign up
+  useEffect(() => {
+    if (currentUser) loadUserSettings()
+  }, [])
 
   const imageSource = localUri
     ? { uri: localUri }

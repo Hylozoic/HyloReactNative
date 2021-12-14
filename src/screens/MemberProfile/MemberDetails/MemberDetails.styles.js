@@ -70,14 +70,15 @@ export default {
     letterSpacing: 0.22
   },
   affiliationRole: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: nevada
   },
   affiliationPreposition: {
-    // 
+    color: nevada
   },
   affiliationOrgName: {
-    // 
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: nevada
   },
   affiliationOrgNameLink: {
     color: caribbeanGreen
