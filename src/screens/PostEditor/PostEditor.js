@@ -8,7 +8,7 @@ import {
   Alert
 } from 'react-native'
 import { get, uniq, uniqBy, isEmpty, capitalize } from 'lodash/fp'
-import moment from 'moment'
+import moment from 'moment-timezone'
 import { validateTopicName } from 'hylo-utils/validators'
 import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
@@ -649,7 +649,7 @@ export function DatePickerWithLabel ({
     valueText: {},
     placeholderText: styles.textInputPlaceholder
   },
-  dateFormat = 'MM/DD/YYYY LT'
+  dateFormat = 'MM/DD/YYYY LT z'
 }) {
   const [expanded, setExpanded] = useState(initialExpanded)
   const onPress = () => {
@@ -671,7 +671,7 @@ export function DatePickerWithLabel ({
         </View>
       </View>
       {date && !expanded &&
-        <Text style={styleTemplate.valueText}>{moment(date).format(dateFormat)}</Text>}
+        <Text style={styleTemplate.valueText}>{moment.tz(date, moment.tz.guess()).format(dateFormat)}</Text>}
       {!date && !expanded &&
         <Text style={styleTemplate.placeholderText}>{placeholder}</Text>}
       {expanded && (

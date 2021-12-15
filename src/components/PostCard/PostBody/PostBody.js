@@ -2,9 +2,9 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import { decode } from 'ent'
-import moment from 'moment'
 import { isEmpty } from 'lodash/fp'
 import { present, sanitize } from 'hylo-utils/text'
+import { formatDatePair } from 'util'
 import urlHandler from 'navigation/linking/urlHandler'
 import LinkPreview from 'components/PostCard/LinkPreview'
 import { caribbeanGreen, white, white20onCaribbeanGreen } from 'style/colors'
@@ -14,27 +14,6 @@ import { humanResponse, RESPONSES } from 'store/models/EventInvitation'
 import PopupMenuButton from 'components/PopupMenuButton'
 
 const MAX_DETAILS_LENGTH = 144
-
-const formatStartDate = (startTime) => {
-  const current = moment()
-  let start = ''
-  if (moment(startTime).isAfter(current)) {
-    start = moment(startTime).format('MMM D YYYY')
-  }
-  return start
-}
-
-const formatEndDate = (endTime) => {
-  const current = moment()
-  let end = ''
-  const endFormatted = moment(endTime).format('MMM D YYYY')
-  if (moment(endTime).isAfter(current)) {
-    end = `ends ${endFormatted}`
-  } else if (current.isAfter(moment(endTime))) {
-    end = `ended ${endFormatted}`
-  }
-  return end
-}
 
 export default class PostBody extends React.PureComponent {
   handleLinkPress = (url) => {
@@ -67,22 +46,12 @@ export default class PostBody extends React.PureComponent {
         noP: true
       }
     )
-    const startDate = startTime && formatStartDate(startTime)
-    const endDate = endTime && formatEndDate(endTime)
-    let timeWindow
-
-    if (startDate && endDate) {
-      timeWindow = `${type} starts ${startDate} and ${endDate}`
-    } else if (endDate) {
-      timeWindow = `${type} ${endDate}`
-    } else if (startDate) {
-      timeWindow = `${type} starts ${startDate}`
-    }
 
     return (
       <View style={styles.container}>
-        {timeWindow &&
-          <Text style={styles.resourceEndsAt}>{timeWindow}</Text>}
+        {startTime && endTime && (
+          <Text style={styles.resourceEndsAt}>{formatDatePair(startTime, endTime)}</Text>
+        )}
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <PostTitle title={decodedTitle} />
           {type === 'event' && !!respondToEvent &&
