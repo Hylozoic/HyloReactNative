@@ -55,18 +55,71 @@ exports[`matches last snapshot 1`] = `
       </TouchableOpacity>
     </View>
   </View>
-  <View>
-    <Triangle
-      color="white"
-      direction="up"
-      height={5}
-      width={10}
-    />
-    <View>
-      <Text>
-        This is not a real name
-      </Text>
-    </View>
-  </View>
+  <FormattedError
+    error="This is not a real name"
+    syles={
+      Object {
+        "buttonText": Object {
+          "color": "#0DC39F",
+          "fontFamily": "Circular-Medium",
+          "fontSize": 16,
+        },
+        "control": Object {
+          "position": "relative",
+        },
+        "editIcon": Object {
+          "fontSize": 20,
+          "opacity": 0.5,
+        },
+        "error": Object {
+          "backgroundColor": "#EE4266",
+          "borderRadius": 100,
+          "paddingHorizontal": 10,
+          "paddingVertical": 8,
+        },
+        "errorText": Object {
+          "color": "#FFFFFF",
+          "fontSize": 12,
+        },
+        "errorTriangle": Object {
+          "backgroundColor": "#EE4266",
+        },
+        "errorWrapper": Object {
+          "alignItems": "center",
+          "marginBottom": 10,
+        },
+        "eyeIcon": Object {
+          "color": "#6edbc5",
+          "fontSize": 20,
+          "marginRight": 10,
+        },
+        "highlight": Object {
+          "backgroundColor": "#99EEFF",
+          "borderRadius": 4,
+        },
+        "label": Object {
+          "color": "#9ee7d9",
+          "fontFamily": "Circular-Bold",
+          "fontSize": 14,
+        },
+        "textInput": Object {
+          "borderBottomColor": "#6edbc5",
+          "borderBottomWidth": 1,
+          "color": "white",
+          "fontFamily": "Circular-Book",
+          "fontSize": 18,
+          "marginBottom": 15,
+          "paddingBottom": 6,
+        },
+        "toggles": Object {
+          "flexDirection": "row",
+          "position": "absolute",
+          "right": 0,
+          "top": 20,
+        },
+      }
+    }
+    theme={Object {}}
+  />
 </View>
 `;

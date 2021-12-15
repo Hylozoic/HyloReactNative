@@ -7,10 +7,10 @@ Object {
       "method": "post",
       "params": Object {
         "email": "b",
+        "email_validated": true,
         "login": true,
         "name": "a",
         "password": "c",
-        "resp": "user",
       },
       "path": "/noo/user",
     },

@@ -60,7 +60,8 @@ Array [
     Object {
       "avatarUrl": "",
       "confirmPassword": "",
-      "email": "",
+      "email": null,
+      "emailVerified": false,
       "location": "",
       "locationId": null,
       "name": "",

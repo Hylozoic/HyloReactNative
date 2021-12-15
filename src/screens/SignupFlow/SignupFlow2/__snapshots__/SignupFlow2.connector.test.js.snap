@@ -3,6 +3,7 @@
 exports[`mapDispatchToProps maps the action generators 1`] = `
 Object {
   "changeSetting": [Function],
+  "updateLocalUserSettings": [Function],
   "updateUserSettings": [Function],
 }
 `;
@@ -91,6 +92,7 @@ Object {
 exports[`mergeProps merges the props 1`] = `
 Object {
   "avatarUrl": "a",
+  "loadUserSettings": [Function],
   "navigation": Object {
     "navigate": [MockFunction],
   },

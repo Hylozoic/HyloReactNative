@@ -18,11 +18,11 @@ Array [
         "api": Object {
           "method": "post",
           "params": Object {
-            "email": "jo@jo",
+            "email": undefined,
+            "email_validated": true,
             "login": true,
             "name": "jo",
             "password": "Joe Pass",
-            "resp": "user",
           },
           "path": "/noo/user",
         },
@@ -127,12 +127,10 @@ exports[`mergeProps merges the props 1`] = `
 Object {
   "currentUser": Object {
     "ref": Object {
-      "email": "bb",
       "name": "aa",
       "unused": "cc",
     },
   },
-  "email": "b",
   "fetchCurrentUser": [MockFunction],
   "loadUserSettings": [Function],
   "name": "a",
@@ -152,7 +150,6 @@ exports[`mergeProps merges the props 2`] = `
 Array [
   Array [
     Object {
-      "email": "bb",
       "name": "aa",
     },
   ],
@@ -163,7 +160,6 @@ exports[`mergeProps merges the props 3`] = `
 Array [
   Array [
     Object {
-      "email": "b",
       "name": "a",
       "password": "c",
     },
