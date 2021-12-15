@@ -12,7 +12,7 @@ export default function SignupFlow1 ({
   errors: errorsFromStore,
   name, email, password, confirmPassword, pending,
   showPasswordField, signupOrUpdate, changeSetting,
-  navigation
+  updateLocalUserSettings, navigation
 }) {  
   const passwordControlRef = useRef()
   const confirmPasswordControlRef = useRef()
@@ -47,8 +47,7 @@ export default function SignupFlow1 ({
   useFocusEffect(() => {
     navigation.setOptions({
       headerLeftOnPress: () => { 
-        // TODO: Clear email and verified status when going back? A new code will be generated, warn?
-        // dispatch(updateLocalUserSettings({ email: null, emailVerified: false }))
+        updateLocalUserSettings({ email: null, emailVerified: false })
         navigation.navigate('Signup Intro', { email })
       }
     })
