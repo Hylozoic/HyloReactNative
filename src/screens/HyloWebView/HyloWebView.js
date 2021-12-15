@@ -4,6 +4,7 @@ import Loading from 'components/Loading'
 import WebView from 'react-native-webview'
 import { getSessionCookie  } from 'util/session'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
+import RNRestart from 'react-native-restart'
 
 export default function HyloWebView ({ path: pathProp, route }) {
   const [cookie, setCookie] = useState()
@@ -32,9 +33,15 @@ export default function HyloWebView ({ path: pathProp, route }) {
           uri,
           headers: { Cookie: cookie }
         }}
+        geolocationEnabled
         sharedCookiesEnabled={true}
         onShouldStartLoadWithRequest={({ url }) => {
           if (url === uri) return true
+          // Restarts app if webview forwards to login page
+          if (url.match(/\/login/)) {
+            RNRestart.Restart()
+            return false
+          }
           if (url.slice(0,4) === 'http') {
             Linking.openURL(url)
             return false
