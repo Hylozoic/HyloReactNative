@@ -24,7 +24,6 @@ Object {
   "payload": Object {
     "email": "b",
     "name": "a",
-    "password": "c",
   },
   "type": "SignupFlow/UPDATE_LOCAL_USER_SETTINGS",
 }

@@ -16,6 +16,7 @@ describe('SignupFlowEmailVerificationFinish Specification', () => {
           location='Hull'
           saveAndNext={() => {}}
           changeSetting={() => {}}
+          route={{ params: {} }}
         />
       </Provider>
     )

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
+import { NavigationContainer } from '@react-navigation/native'
 import getEmptyState from 'store/getEmptyState'
 import { render, cleanup } from '@testing-library/react-native'
 import { createMockStore } from 'util/testing'
@@ -14,7 +15,9 @@ describe('Signup Specification', () => {
     const { findByText, toJSON } =  render(
       <SafeAreaProvider>
         <Provider store={store}>
-          <Signup />
+          <NavigationContainer>
+            <Signup route={{ params: {} }}/>
+          </NavigationContainer>
         </Provider>
       </SafeAreaProvider>
     )
