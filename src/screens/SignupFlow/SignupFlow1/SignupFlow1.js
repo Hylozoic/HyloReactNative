@@ -33,18 +33,18 @@ export default function SignupFlow1 ({ navigation, route }) {
     })
   }
 
-  const saveAndNext = () => {
+  const saveAndNext = async () => {
     const localUserParams = pickBy(identity, values)
     const userParams = omit(['emailVerified'], localUserParams)
 
     try {
       if (currentUser) {
         dispatch(updateLocalUserSettings(localUserParams))
-        dispatch(updateUserSettings(userParams))
+        await dispatch(updateUserSettings(userParams))
       } else {
-        dispatch(signup(userParams))
+        await dispatch(signup(userParams))
         dispatch(updateLocalUserSettings(localUserParams))
-        dispatch(fetchCurrentUser())
+        await dispatch(fetchCurrentUser())
       }
       navigation.navigate('SignupFlow2')
     } catch (error) {
