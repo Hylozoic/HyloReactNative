@@ -1,3 +1,5 @@
+import { omit } from 'lodash/fp'
+
 export const MODULE_NAME = 'SignupFlow'
 export const UPDATE_LOCAL_USER_SETTINGS = `${MODULE_NAME}/UPDATE_LOCAL_USER_SETTINGS`
 export const SIGNUP = `${MODULE_NAME}/SIGNUP`
@@ -63,7 +65,8 @@ export default function reducer (state = defaultState, action) {
 export function updateLocalUserSettings (settings) {
   return {
     type: UPDATE_LOCAL_USER_SETTINGS,
-    payload: settings
+    // NOTE: This omit should be unnecessary but here now for a sanity check
+    payload: omit(['password', 'confirmPassword'], settings)
   }
 }
 
@@ -86,7 +89,7 @@ export function signup ({ email, name, password }) {
   }
 }
 
-export function getUserSettings (state) {
+export function getLocalUserSettings (state) {
   return state[MODULE_NAME].userSettings
 }
 

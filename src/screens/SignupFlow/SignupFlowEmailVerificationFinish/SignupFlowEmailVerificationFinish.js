@@ -10,7 +10,7 @@ import {
 } from 'react-native-confirmation-code-field'
 import {
   updateLocalUserSettings,
-  getUserSettings
+  getLocalUserSettings
 } from 'screens/SignupFlow/SignupFlow.store'
 import verifyEmail from 'store/actions/verifyEmail'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
@@ -41,7 +41,7 @@ export default function SignupFlowEmailVerificationFinish ({ navigation, route }
     value: verificationCode,
     setValue: setVerificationCode
   })
-  const email = useSelector(getUserSettings)?.email || route.params?.email
+  const email = useSelector(getLocalUserSettings)?.email || route.params?.email
 
   useFocusEffect(() => {
     navigation.setOptions({

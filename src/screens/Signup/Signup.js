@@ -18,7 +18,7 @@ import { loginWithApple, loginWithFacebook, loginWithGoogle } from 'screens/Logi
 import { getPending } from 'screens/Login/Login.store'
 import FormattedError from 'components/FormattedError'
 // 
-import { getUserSettings, updateLocalUserSettings } from 'screens/SignupFlow/SignupFlow.store'
+import { getLocalUserSettings, updateLocalUserSettings } from 'screens/SignupFlow/SignupFlow.store'
 import { sendEmailVerification } from 'store/actions/sendEmailVerification'
 // 
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
@@ -37,10 +37,11 @@ const merkabaImage = require('assets/merkaba_white.png')
 export default function Signup ({ navigation, route }) {
   const dispatch = useDispatch()
   const loginPending = useSelector(getPending)
-  const userSettings = useSelector(getUserSettings)
-  const storedEmail = userSettings?.email || route.params?.email
-  const emailVerified = userSettings?.emailVerified
-  const [email, setEmailBase] = useState(storedEmail)
+  const userSettings = useSelector(getLocalUserSettings)
+  const storedEmail = userSettings?.email
+  const emailFromPath = route.params?.email
+  const providedEmail = emailFromPath || storedEmail
+  const [email, setEmailBase] = useState(providedEmail)
   const [pending, setPending] = useState()
   const [error, setError] = useState()
   const [ssoError, setSsoError] = useState()
@@ -71,9 +72,6 @@ export default function Signup ({ navigation, route }) {
 
   useFocusEffect(() => {
     if (signupInProgress) {
-      navigation.navigate('SignupFlow2')
-    }
-    if (email && emailVerified) {
       navigation.navigate('SignupFlow1')
     }
   })

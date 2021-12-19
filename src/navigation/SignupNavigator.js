@@ -6,7 +6,6 @@ import SignupFlowEmailVerificationFinish from 'screens/SignupFlow/SignupFlowEmai
 import SignupFlow1 from 'screens/SignupFlow/SignupFlow1'
 import SignupFlow2 from 'screens/SignupFlow/SignupFlow2'
 import SignupFlow3 from 'screens/SignupFlow/SignupFlow3'
-import SignupFlow4 from 'screens/SignupFlow/SignupFlow4'
 import ItemChooser from 'screens/ItemChooser'
 import { white, white20onCaribbeanGreen } from 'style/colors'
 
@@ -39,8 +38,6 @@ export default function SignupNavigator () {
         options={{ title: 'STEP 2/4' }} />
       <Signup.Screen name='SignupFlow3' component={SignupFlow3}
         options={{ title: 'STEP 3/4' }} />
-      <Signup.Screen name='SignupFlow4' component={SignupFlow4}
-        options={{ title: 'STEP 4/4' }} />
       <Signup.Screen name='ItemChooser' component={ItemChooser} />
     </Signup.Navigator>
   )

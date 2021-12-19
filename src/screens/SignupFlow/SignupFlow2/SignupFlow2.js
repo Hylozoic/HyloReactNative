@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 import { ScrollView, View, Image, Text } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
+import getMe from 'store/selectors/getMe'
+import { getLocalUserSettings, updateLocalUserSettings } from '../SignupFlow.store.js'
+import updateUserSettings from 'store/actions/updateUserSettings'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import ImagePicker from 'components/ImagePicker'
 import Button from 'components/Button'
@@ -7,23 +12,31 @@ import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import styles from './SignupFlow2.styles'
 
-export default function SignupFlow2 ({
-  currentUser, saveAndNext, avatarUrl,
-  changeSetting, loadUserSettings,
-  navigation
-}) {
+export default function SignupFlow2 ({ navigation }) {
+  const dispatch = useDispatch()
+  const currentUser = useSelector(getMe)
+  const { avatarUrl } = useSelector(getLocalUserSettings)
   const [localUri, setLocalUri] = useState(null)
   const [imagePickerPending, setImagePickerPending] = useState(false)
 
-
-  // this is for the case where they logged in but hadn't finished sign up
   useEffect(() => {
-    if (currentUser) loadUserSettings()
+    // this is for the case where they logged in but hadn't finished sign up    
+    if (!avatarUrl && currentUser) {
+      dispatch(updateLocalUserSettings({ avatarUrl: currentUser.ref?.avatarUrl }))
+    }
   }, [])
+
+  useFocusEffect(() => {
+    navigation.setOptions({
+      headerLeftOnPress: () => {
+        dispatch(updateUserSettings({ settings: { signupInProgress: false } }))
+      }
+    })
+  })
 
   const imageSource = localUri
     ? { uri: localUri }
-    : avatarUrl && { uri: avatarUrl }  
+    : avatarUrl && { uri: avatarUrl }
 
   const imagePickerChildren = imageSource && !imagePickerPending
     ? <Image style={styles.image} source={imageSource} />
@@ -34,8 +47,14 @@ export default function SignupFlow2 ({
     )
 
   const onChoice = ({ local, remote }) => {
-    changeSetting('avatarUrl')(remote)
+    dispatch(updateLocalUserSettings({ avatarUrl: remote }))
     setLocalUri(local)
+  }
+
+  const saveAndNext = async () => {
+    const { error } = await dispatch(updateUserSettings({ avatarUrl }))
+    if (error) return
+    return navigation.navigate('SignupFlow3')
   }
 
   return (

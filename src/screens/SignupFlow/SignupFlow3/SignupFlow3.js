@@ -1,19 +1,36 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { ScrollView, View, Text } from 'react-native'
+import { useFocusEffect } from '@react-navigation/native'
+import { useDispatch, useSelector } from 'react-redux'
+import { getLocalUserSettings, updateLocalUserSettings } from '../SignupFlow.store.js'
+import getMe from 'store/selectors/getMe'
+import updateUserSettings from 'store/actions/updateUserSettings'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
 import SettingControl from 'components/SettingControl'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 import styles from './SignupFlow3.styles'
 
-export default function SignupFlow3 ({
-  location, saveAndNext: providedSaveAndNext, navigation, changeSetting
-}) {
+export default function SignupFlow3 ({ navigation }) {
+  const dispatch = useDispatch()
+  const { location } = useSelector(getLocalUserSettings)
   const controlRef = useRef()
+  const currentUser = useSelector(getMe)
 
-  const saveAndNext = () => {
+  useEffect(() => {
+    // this is for the case where they logged in but hadn't finished sign up
+    currentUser && !location && dispatch(updateLocalUserSettings({ location: currentUser.ref?.location }))
+  }, [])
+
+  useFocusEffect(() => {
+    navigation.setOptions({
+      headerLeftOnPress: () => finish()
+    })
+  })
+
+  const finish = () => {
     controlRef.current && controlRef.current.blur()
-    providedSaveAndNext()
+    dispatch(updateUserSettings({ settings: { signupInProgress: false } }))
   }
 
   const showLocationPicker = locationText  => {
@@ -21,11 +38,12 @@ export default function SignupFlow3 ({
       navigation,
       initialSearchTerm: locationText,
       onPick: location => {
-        changeSetting('location')(location?.fullText)
-        changeSetting('locationId')(location?.id)
+        dispatch(updateLocalUserSettings({ location: location?.fullText }))
+        dispatch(updateLocalUserSettings({ locationId: location?.id }))
       }
     })
   }
+
   return (
     <KeyboardFriendlyView style={styles.container}>
       <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
@@ -52,8 +70,8 @@ export default function SignupFlow3 ({
         />
         <Button
           style={styles.continueButton}
-          text='Continue'
-          onPress={saveAndNext}
+          text='Finish'
+          onPress={finish}
         />
       </View>
     </KeyboardFriendlyView>

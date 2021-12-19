@@ -30,6 +30,7 @@ export const prefixes = [
 //
 export const routesConfig = {
   '/noo/login/token':                                        { screenPath: 'LoginByTokenHandler', noAuth: true },
+  '/signup/finish':                                          { screenPath: 'Signup/Signup - Email Verification - Finish', noAuth: true },
   '/signup/:step?':                                          { screenPath: 'Signup/Signup Intro', noAuth: true },
   '/h/use-invitation':                                       'JoinGroup',
 

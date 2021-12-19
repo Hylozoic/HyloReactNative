@@ -5,7 +5,7 @@ import reducer, {
   signup,
   updateLocalUserSettings,
   updateUserSettings,
-  getUserSettings,
+  getLocalUserSettings,
   getSignupErrors
 } from './SignupFlow.store'
 
@@ -117,9 +117,9 @@ describe('pseudo selectors', () => {
     }
   }
 
-  describe('getUserSettings', () => {
+  describe('getLocalUserSettings', () => {
     it('returns the userSettings', () => {
-      expect(getUserSettings(state))
+      expect(getLocalUserSettings(state))
         .toEqual(state[MODULE_NAME].userSettings)
     })
   })

@@ -1,98 +1,138 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ScrollView, View, Text } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
-import { any, values } from 'lodash/fp'
+import { useDispatch, useSelector } from 'react-redux'
+import { omit, pickBy, identity } from 'lodash/fp'
 import { validateUser } from 'hylo-utils/validators'
+import useForm from 'hooks/useForm'
+import {
+  getLocalUserSettings,
+  updateLocalUserSettings,
+  signup,
+  SIGNUP
+} from '../SignupFlow.store.js'
+import fetchCurrentUser from 'store/actions/fetchCurrentUser'
+import { UPDATE_USER_SETTINGS } from 'store/constants'
+import updateUserSettings from 'store/actions/updateUserSettings'
+import getMe from 'store/selectors/getMe'
 import SettingControl from 'components/SettingControl'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import styles from './SignupFlow1.styles'
 
-export default function SignupFlow1 ({
-  errors: errorsFromStore,
-  name, email, password, confirmPassword, pending,
-  showPasswordField, signupOrUpdate, changeSetting,
-  updateLocalUserSettings, navigation
-}) {  
-  const passwordControlRef = useRef()
-  const confirmPasswordControlRef = useRef()
-  const [errors, setErrors] = useState({
-    name: null,
-    password: null,
-    ...errorsFromStore
-  })
-  const validate = () => {
-    setErrors({
-      name: validateUser.name(name),
-      password: showPasswordField && validateUser.password(password),
-      confirmPassword: password !== confirmPassword && 'Passwords must match'
-    })
+export default function SignupFlow1 ({ navigation, route }) {
+  const currentUser = useSelector(getMe)
+  const userSettingsFromStore = useSelector(getLocalUserSettings)
+  const dispatch = useDispatch()
 
-    return !any(i => i, values(errors))
+  const validator = ({ name, password, confirmPassword }) => {
+    return pickBy(identity, {
+      name: validateUser.name(name),
+      password: !currentUser && validateUser.password(password),
+      confirmPassword: !currentUser && password !== confirmPassword && 'Passwords must match'
+    })
   }
-  const submit = () => {
-    if (pending) return
-    if (validate()) {
-      signupOrUpdate()
+
+  const saveAndNext = () => {
+    const localUserParams = pickBy(identity, values)
+    const userParams = omit(['emailVerified'], localUserParams)
+
+    try {
+      if (currentUser) {
+        dispatch(updateLocalUserSettings(localUserParams))
+        dispatch(updateUserSettings(userParams))
+      } else {
+        dispatch(signup(userParams))
+        dispatch(updateLocalUserSettings(localUserParams))
+        dispatch(fetchCurrentUser())
+      }
+      navigation.navigate('SignupFlow2')
+    } catch (error) {
+      console.log('!!! error', error)
+      return error
     }
   }
-  const updateField = (field, value) => {
-    setErrors({
-      ...errors,
-      [field]: null
+
+  const {
+    values,
+    errors,
+    setValues,
+    handleChange,
+    handleSubmit
+  } = useForm(saveAndNext, validator)
+  const pending = useSelector(state =>
+    state.pending[SIGNUP] || state.pending[UPDATE_USER_SETTINGS])
+  const passwordControlRef = useRef()
+  const confirmPasswordControlRef = useRef()
+  const {
+    name,
+    email,
+    password,
+    confirmPassword
+  } = values
+
+  useEffect(() => {
+    // this is for the case where they logged in but hadn't finished sign up    
+    currentUser && dispatch(updateLocalUserSettings({ name: currentUser.ref?.name }))
+    setValues({
+      ...userSettingsFromStore,
+      email: route.params?.email || userSettingsFromStore?.email
     })
-    changeSetting(field, value)
-  }
+  }, [])
 
   useFocusEffect(() => {
     navigation.setOptions({
       headerLeftOnPress: () => { 
-        updateLocalUserSettings({ email: null, emailVerified: false })
-        navigation.navigate('Signup Intro', { email })
+        if (currentUser) {
+          dispatch(updateUserSettings({ settings: { signupInProgress: false } }))
+        } else {
+          dispatch(updateLocalUserSettings({ email: null }))
+          navigatiosn.navigate('Signup Intro', { email })
+        }
       }
     })
   })
-    
+
   return (
     <KeyboardFriendlyView style={styles.container}>
       <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
         <View style={styles.header}>
-          <Text style={styles.title}>One more step!</Text>
+          <Text style={styles.title}>Let's do this!</Text>
           <Text style={styles.subTitle}>
-            Hi <Text style={{ fontWeight: 'bold' }}>{email}</Text> we just need to know your name and password and you're in.
+            Hi <Text style={{ fontWeight: 'bold' }}>{email}</Text> we just need to know your name and password and you're account will be created.
           </Text>
         </View>
         <View style={styles.content}>
           <SettingControl
             label='Your Full Name'
             value={name}
-            onChange={value => updateField('name', value)}
+            onChange={value => handleChange('name', value)}
             error={errors.name}
             returnKeyType='next'
             onSubmitEditing={() => passwordControlRef.current.focus()}
           />
-          {showPasswordField && (
+          {!currentUser && (
             <SettingControl
               ref={passwordControlRef}
               label='Password'
               value={password}
-              onChange={value => updateField('password', value)}
+              onChange={value => handleChange('password', value)}
               toggleSecureTextEntry
               error={errors.password}
               returnKeyType='next'
               onSubmitEditing={() => confirmPasswordControlRef.current.focus()}
             />
           )}
-          {showPasswordField && (
+          {!currentUser && (
             <SettingControl
               ref={confirmPasswordControlRef}
               label='Confirm Password'
               value={confirmPassword}
-              onChange={value => updateField('confirmPassword', value)}
+              onChange={value => handleChange('confirmPassword', value)}
               toggleSecureTextEntry
               error={errors.confirmPassword}
               returnKeyType='go'
-              onSubmitEditing={submit}
+              onSubmitEditing={handleSubmit}
             />
           )}
         </View>
@@ -101,7 +141,7 @@ export default function SignupFlow1 ({
         <Button
           style={styles.continueButton}
           text={pending ? 'Saving...' : 'Continue'}
-          onPress={submit}
+          onPress={handleSubmit}
           disabled={!!pending}
         />
       </View>
