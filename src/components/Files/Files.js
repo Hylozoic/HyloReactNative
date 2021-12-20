@@ -10,7 +10,7 @@ export default function Files ({ urls, style = {} }) {
   return (
     <View style={{...styles.files, ...style}}>
       {urls.map(url =>
-        <TouchableOpacity key={url} onPress={openURL(url)}>
+        <TouchableOpacity key={url} onPress={() => openURL(url)}>
           <FileLabel url={url} />
         </TouchableOpacity>
       )}

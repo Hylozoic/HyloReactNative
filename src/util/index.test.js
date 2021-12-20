@@ -1,4 +1,5 @@
 import { noncircular, didPropsChange } from './index'
+import { openURL } from 'util'
 
 describe('openURL', () => {
   it('calls Linking.openURL', () => {
