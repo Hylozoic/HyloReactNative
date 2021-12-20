@@ -32,8 +32,6 @@ import providedStyles from './Signup.styles'
 const backgroundImage = require('assets/signin_background.png')
 const merkabaImage = require('assets/merkaba_white.png')
 
-// dispatch(updateLocalUserSettings({ email: null, emailVerified: false }))
-
 export default function Signup ({ navigation, route }) {
   const dispatch = useDispatch()
   const loginPending = useSelector(getPending)

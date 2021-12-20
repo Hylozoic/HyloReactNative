@@ -56,7 +56,7 @@ export default function SignupFlowEmailVerificationFinish ({ navigation, route }
     try {
       setPending(true)
       await dispatch(verifyEmail(email, code))
-      await dispatch(updateLocalUserSettings({ email, emailVerified: true }))
+      await dispatch(updateLocalUserSettings({ email }))
       navigation.navigate('SignupFlow1')
     } catch (e) {
       setError('Expired or invalid code')

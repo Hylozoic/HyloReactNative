@@ -47,7 +47,6 @@ Object {
       "avatarUrl": "",
       "confirmPassword": "",
       "email": null,
-      "emailVerified": false,
       "location": "",
       "locationId": null,
       "name": "",

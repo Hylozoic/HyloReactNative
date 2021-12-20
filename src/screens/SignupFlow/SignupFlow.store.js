@@ -7,7 +7,6 @@ export const SIGNUP = `${MODULE_NAME}/SIGNUP`
 export const defaultUserSettings = {
   name: '',
   email: null,
-  emailVerified: false,
   password: '',
   confirmPassword: '',
   location: '',
@@ -65,8 +64,7 @@ export default function reducer (state = defaultState, action) {
 export function updateLocalUserSettings (settings) {
   return {
     type: UPDATE_LOCAL_USER_SETTINGS,
-    // NOTE: This omit should be unnecessary but here now for a sanity check
-    payload: omit(['password', 'confirmPassword'], settings)
+    payload: settings
   }
 }
 

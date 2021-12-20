@@ -2,14 +2,15 @@ import React, { useEffect, useRef, useState } from 'react'
 import { ScrollView, View, Text } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
-import { omit, pickBy, identity } from 'lodash/fp'
+import { omit, pick, pickBy, identity } from 'lodash/fp'
 import { validateUser } from 'hylo-utils/validators'
 import useForm from 'hooks/useForm'
 import {
   getLocalUserSettings,
   updateLocalUserSettings,
   signup,
-  SIGNUP
+  SIGNUP,
+  defaultUserSettings
 } from '../SignupFlow.store.js'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import { UPDATE_USER_SETTINGS } from 'store/constants'
@@ -34,16 +35,18 @@ export default function SignupFlow1 ({ navigation, route }) {
   }
 
   const saveAndNext = async () => {
-    const localUserParams = pickBy(identity, values)
-    const userParams = omit(['emailVerified'], localUserParams)
+    const filteredValues = pickBy(identity, values)
+    const paramsFromState = omit(['password', 'confirmPassword'], filteredValues)
+    const currentUserParams = pick(['name', 'email', 'avatarUrl', 'location'], filteredValues)
+    const signupParams = pick(['name', 'email', 'password'], filteredValues)
 
     try {
       if (currentUser) {
-        dispatch(updateLocalUserSettings(localUserParams))
-        await dispatch(updateUserSettings(userParams))
+        dispatch(updateLocalUserSettings(paramsFromState))
+        await dispatch(updateUserSettings(currentUserParams))
       } else {
-        await dispatch(signup(userParams))
-        dispatch(updateLocalUserSettings(localUserParams))
+        await dispatch(signup(signupParams))
+        dispatch(updateLocalUserSettings(paramsFromState))
         await dispatch(fetchCurrentUser())
       }
       navigation.navigate('SignupFlow2')
@@ -73,7 +76,12 @@ export default function SignupFlow1 ({ navigation, route }) {
 
   useEffect(() => {
     // this is for the case where they logged in but hadn't finished sign up    
-    currentUser && dispatch(updateLocalUserSettings({ name: currentUser.ref?.name }))
+    if (currentUser) {
+      dispatch(updateLocalUserSettings({ name: currentUser.ref?.name }))
+    } else {
+      dispatch(updateLocalUserSettings(defaultUserSettings))
+    }
+    
     setValues({
       ...userSettingsFromStore,
       email: route.params?.email || userSettingsFromStore?.email
@@ -87,7 +95,7 @@ export default function SignupFlow1 ({ navigation, route }) {
           dispatch(updateUserSettings({ settings: { signupInProgress: false } }))
         } else {
           dispatch(updateLocalUserSettings({ email: null }))
-          navigatiosn.navigate('Signup Intro', { email })
+          navigation.navigate('Signup Intro', { email })
         }
       }
     })
