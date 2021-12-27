@@ -14,6 +14,7 @@ import validator from 'validator'
 import { openURL } from 'util'
 import { isIOS } from 'util/platform'
 import { useFocusEffect } from '@react-navigation/core'
+import logout from 'store/actions/logout'
 import { loginWithApple, loginWithFacebook, loginWithGoogle } from 'screens/Login/actions'
 import { getPending } from 'screens/Login/Login.store'
 import FormattedError from 'components/FormattedError'
@@ -44,11 +45,24 @@ export default function Signup ({ navigation, route }) {
   const [error, setError] = useState()
   const [ssoError, setSsoError] = useState()
   const [canSubmit, setCanSubmit] = useState(pending || !email)
+  const safeAreaInsets = useSafeAreaInsets()
+  const signupInProgress = useSelector(getSignupInProgress)
+  const createErrorNotification = error => {
+    setSsoError(error)
+  }
   const setEmail = email => {
     error && setError()
     setCanSubmit(!validator.isEmail(email))
     setEmailBase(email)
   }
+  const socialLoginMaker = loginWith => async token => {
+    await dispatch(logout())
+    const action = await dispatch(loginWith(token))
+    if (action.error) {
+      const errorMessage = action?.payload?.response?.body
+      return errorMessage ? { errorMessage } : null
+    }
+  }  
   const submit = async () => {
     try {
       setPending(true)
@@ -62,11 +76,6 @@ export default function Signup ({ navigation, route }) {
     }
   }
 
-  const safeAreaInsets = useSafeAreaInsets()
-  const createErrorNotification = error => {
-    setSsoError(error)
-  }
-  const signupInProgress = useSelector(getSignupInProgress)
 
   useFocusEffect(() => {
     if (signupInProgress) {
@@ -124,19 +133,19 @@ export default function Signup ({ navigation, route }) {
             {isIOS && <AppleLoginButton
               signup
               style={styles.appleLoginButton}
-              onLoginFinished={() => dispatch(loginWithApple)}
+              onLoginFinished={socialLoginMaker(loginWithApple)}
               createErrorNotification={createErrorNotification}
                       />}
             <GoogleLoginButton
               signup
               style={styles.googleLoginButton}
-              onLoginFinished={() => dispatch(loginWithGoogle)}
+              onLoginFinished={socialLoginMaker(loginWithGoogle)}
               createErrorNotification={createErrorNotification}
             />
             <FbLoginButton
               signup
               style={styles.facebookLoginButton}
-              onLoginFinished={() => dispatch(loginWithFacebook)}
+              onLoginFinished={socialLoginMaker(loginWithFacebook)}
               createErrorNotification={createErrorNotification}
             />
           </View>
