@@ -58,6 +58,11 @@ export default {
     fontFamily: 'Circular-Book',
     fontSize: 12
   },
+  imageAttachemnt: {
+    height: 200,
+    width: '100%',
+    borderRadius: 10
+  },
   text: {
     color: nevada,
     fontFamily: 'Circular-Book',

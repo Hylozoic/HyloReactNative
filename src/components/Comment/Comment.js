@@ -1,9 +1,10 @@
 /* eslint-disable camelcase */
 import React from 'react'
-import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native'
+import { Image, Text, View, Alert, TouchableOpacity } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import { get, isEmpty, filter, findLastIndex } from 'lodash/fp'
 import { present, sanitize, humanDate } from 'hylo-utils/text'
+import { openURL } from 'util'
 import urlHandler from 'navigation/linking/urlHandler'
 import Avatar from 'components/Avatar'
 import PopupMenuButton from 'components/PopupMenuButton'
@@ -55,6 +56,11 @@ export default function Comment ({
     ? providedOnPress
     : onReply && (() => onReply(comment, { mention: false }))
 
+
+  const imageAttachments = filter({ type: 'image' }, comment?.attachments)
+  // NOTE: Currently no UI for adding comment file attachments
+  // const fileAttachments = filter({ type: 'file' }, comment?.attachments)
+
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={[styles.container, style]}>
@@ -87,6 +93,11 @@ export default function Comment ({
               )}
             </View>
           </View>
+          {imageAttachments && imageAttachments.map(({ url }, i) => (
+            <TouchableOpacity onPress={() => openURL(url)} key={i}>
+              <Image source={{ uri: url }} resizeMode='cover' style={styles.imageAttachemnt} />
+            </TouchableOpacity>
+          ))}
           <HTMLView
             addLineBreaks={true}
             onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
