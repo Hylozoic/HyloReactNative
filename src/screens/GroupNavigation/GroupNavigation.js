@@ -20,6 +20,7 @@ export default function GroupNavigation ({ navigation, route }) {
   const navItems = [
     { label: 'Create', iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
     { label: 'Stream', iconName: 'Stream', onPress: () => navigate('Feed') },
+    { label: 'Map', iconName: 'Events', onPress: () => navigate('Map') },
     { label: 'Projects', iconName: 'Projects', onPress: () => navigate('Projects') },
     { label: 'Events', iconName: 'Events', onPress: () => navigate('Events') }
   ]

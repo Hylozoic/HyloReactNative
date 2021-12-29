@@ -50,6 +50,7 @@ export const routesConfig = {
   '/:context(groups)/:groupSlug/topics/:topicName':          'Drawer/Tabs/Home Tab/Topic Feed',
   '/:context(groups)/:groupSlug/members/:id':                'Drawer/Tabs/Home Tab/Member',
   '/:context(groups)/:groupSlug':                            'Drawer/Tabs/Home Tab/Feed',
+  '/:context(groups)/:groupSlug/map':                        'Drawer/Tabs/Home Tab/Map',
   '/:context(groups)/:groupSlug/post/:id':                   'Drawer/Tabs/Home Tab/Post Details',
   '/:context(groups)/post/:id':                              'Drawer/Tabs/Home Tab/Post Details',
   '/:context(groups)/:groupSlug/post/:id/edit':              'Edit Post',
