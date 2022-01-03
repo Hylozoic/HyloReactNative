@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { ScrollView, View, Text } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
-import { getLocalUserSettings, updateLocalUserSettings } from '../SignupFlow.store.js'
+import { defaultUserSettings, getLocalUserSettings, updateLocalUserSettings } from '../SignupFlow.store.js'
 import getMe from 'store/selectors/getMe'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
@@ -30,6 +30,7 @@ export default function SignupFlow3 ({ navigation }) {
 
   const finish = () => {
     controlRef.current && controlRef.current.blur()
+    dispatch(updateLocalUserSettings(defaultUserSettings))
     dispatch(updateUserSettings({ settings: { signupInProgress: false } }))
   }
 

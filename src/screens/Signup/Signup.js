@@ -62,20 +62,20 @@ export default function Signup ({ navigation, route }) {
       const errorMessage = action?.payload?.response?.body
       return errorMessage ? { errorMessage } : null
     }
+    console.log('!!! here')
   }  
   const submit = async () => {
     try {
       setPending(true)
       await dispatch(updateLocalUserSettings({ email }))
       await dispatch(sendEmailVerification(email))
-      navigation.navigate('Signup - Email Verification - Finish')
+      navigation.navigate('SignupFlow0')
     } catch (error) {
       setError(error.message)
     } finally {
       setPending(false)
     }
   }
-
 
   useFocusEffect(() => {
     if (signupInProgress) {

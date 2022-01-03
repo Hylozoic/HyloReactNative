@@ -17,11 +17,11 @@ import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
 import FormattedError from 'components/FormattedError'
 import controlStyles from 'components/SettingControl/SettingControl.styles'
-import styles from './SignupFlowEmailVerificationFinish.styles'
+import styles from './SignupFlow0.styles'
 
 const CODE_LENGTH = 6
 
-export default function SignupFlowEmailVerificationFinish ({ navigation, route }) {
+export default function SignupFlow0 ({ navigation, route }) {
   const dispatch = useDispatch()
   const [pending, setPending] = useState()
   const [verificationCode, setVerificationCodeBase] = useState()
