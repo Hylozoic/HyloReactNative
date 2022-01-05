@@ -37,7 +37,7 @@ export default function HyloWebView ({ path: pathProp, route }) {
           headers: { Cookie: cookie }
         }}
         geolocationEnabled
-        sharedCookiesEnabled={true}
+        sharedCookiesEnabled
         onShouldStartLoadWithRequest={({ url }) => {
           if (url === uri) return true
           // Restarts app if webview forwards to login page
