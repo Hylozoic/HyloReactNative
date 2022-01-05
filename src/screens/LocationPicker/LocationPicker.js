@@ -13,7 +13,7 @@ export default function LocationPicker ({
     searchPlaceholder: 'Search for your location',
     initialSearchTerm,
     ItemRowComponent: LocationPickerItemRow,
-    pickItem: onPick, // this.setLocation,
+    pickItem: onPick,
     searchTermFilter: searchTerm => searchTerm,
     fetchSearchSuggestions: locationSearch
   })

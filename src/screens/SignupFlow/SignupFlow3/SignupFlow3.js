@@ -11,15 +11,20 @@ import SettingControl from 'components/SettingControl'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 import styles from './SignupFlow3.styles'
 
+// TODO: Figure-out how to incorporate lat/lng to current location string?
+// import useCurrentLocation from 'hooks/useCurrentLocation'
+
 export default function SignupFlow3 ({ navigation }) {
   const dispatch = useDispatch()
   const { location } = useSelector(getLocalUserSettings)
   const controlRef = useRef()
   const currentUser = useSelector(getMe)
+  // const [currentLocation, getLocation] = useCurrentLocation()
 
   useEffect(() => {
     // this is for the case where they logged in but hadn't finished sign up
     currentUser && !location && dispatch(updateLocalUserSettings({ location: currentUser.ref?.location }))
+    // getLocation()
   }, [])
 
   useFocusEffect(() => {
@@ -37,6 +42,7 @@ export default function SignupFlow3 ({ navigation }) {
   const showLocationPicker = locationText  => {
     LocationPicker({
       navigation,
+      // currentLocation,
       initialSearchTerm: locationText,
       onPick: location => {
         dispatch(updateLocalUserSettings({ location: location?.fullText }))
