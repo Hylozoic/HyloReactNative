@@ -23,14 +23,16 @@ export default function CreateGroupTabBar ({ state, descriptors, navigation }) {
     const willShowSubscription = Keyboard.addListener('keyboardWillShow', (e) => {
       LayoutAnimation.configureNext(LayoutAnimation.create(
         e.duration,
-        LayoutAnimation.Types[e.easing]
+        LayoutAnimation.Types[e.easing],
+        LayoutAnimation.Properties.scaleXY
       ))
       setKeyboardWillShow(true)
     })
     const willHideSubscription = Keyboard.addListener('keyboardWillHide', (e) => {
       LayoutAnimation.configureNext(LayoutAnimation.create(
         e.duration,
-        LayoutAnimation.Types[e.easing]
+        LayoutAnimation.Types[e.easing],
+        LayoutAnimation.Properties.scaleXY
       ))
       setKeyboardWillShow(false)      
     })

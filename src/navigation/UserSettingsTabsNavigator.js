@@ -5,7 +5,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { isIOS } from 'util/platform'
 import { ModalHeader } from 'navigation/headers'
 import { caribbeanGreen, rhino, rhino05, rhino30, white } from 'style/colors'
-import logoutAction from 'store/actions/logout'
+import logout from 'store/actions/logout'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
 // Screens
@@ -20,7 +20,6 @@ import BlockedUsers from 'screens/BlockedUsers'
 const UserSettings = createMaterialTopTabNavigator()
 export default function UserSettingsTabsNavigator ({ navigation, route }) {
   const dispatch = useDispatch()
-  const logout = () => dispatch(logoutAction())
   const navigatorProps = {
     screenOptions: {
       tabBarActiveTintColor: caribbeanGreen,
@@ -73,7 +72,7 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
             confirmationMessage: 'Are you sure you want to logout?',
             continueButtonText: 'Cancel',
             disgardButtonText: 'Yes',
-            onDiscard: logout
+            onDiscard: () => dispatch(logout())
           })}
         />
       )

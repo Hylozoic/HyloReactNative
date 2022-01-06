@@ -3,7 +3,7 @@ import { useFocusEffect } from '@react-navigation/native'
 import { ScrollView, View, Image, Text } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import getMe from 'store/selectors/getMe'
-import { getLocalUserSettings, updateLocalUserSettings } from '../SignupFlow.store.js'
+import { defaultUserSettings, getLocalUserSettings, updateLocalUserSettings } from '../SignupFlow.store.js'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import ImagePicker from 'components/ImagePicker'
@@ -29,6 +29,7 @@ export default function SignupFlow2 ({ navigation }) {
   useFocusEffect(() => {
     navigation.setOptions({
       headerLeftOnPress: () => {
+        dispatch(updateLocalUserSettings(defaultUserSettings))
         dispatch(updateUserSettings({ settings: { signupInProgress: false } }))
       }
     })

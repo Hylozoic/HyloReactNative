@@ -15,6 +15,7 @@ import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './Feed.styles'
 import useGroupSelect from 'hooks/useGroupSelect'
 import getRouteParam from 'store/selectors/getRouteParam'
+import { PUBLIC_GROUP_ID } from 'store/models/Group'
 
 export function headerTitle (topicName, group, feedType) {
   let title 
@@ -58,7 +59,7 @@ export default function Feed ({
 
   if (!currentUser) return <Loading style={{ flex: 1 }} />
 
-  if (!currentUserHasMemberships) {
+  if (!currentUserHasMemberships && group?.id !== PUBLIC_GROUP_ID) {
     return (
       <CreateGroupNotice
         goToCreateGroup={goToCreateGroup}

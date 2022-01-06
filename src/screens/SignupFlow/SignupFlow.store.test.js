@@ -4,7 +4,6 @@ import reducer, {
   UPDATE_LOCAL_USER_SETTINGS,
   signup,
   updateLocalUserSettings,
-  updateUserSettings,
   getLocalUserSettings,
   getSignupErrors
 } from './SignupFlow.store'
@@ -95,13 +94,6 @@ describe('action generators', () => {
       name: 'a', email: 'b', password: 'c'
     }
     it('matches snapshot', () => expect(updateLocalUserSettings(params)).toMatchSnapshot())
-  })
-
-  describe('updateUserSettings', () => {
-    const params = {
-      name: 'a', email: 'b', password: 'c'
-    }
-    it('matches snapshot', () => expect(updateUserSettings(params)).toMatchSnapshot())
   })
 })
 

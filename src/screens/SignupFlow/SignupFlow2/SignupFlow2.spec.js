@@ -15,7 +15,7 @@ it('default render matches snapshot', async () => {
     <Provider store={createMockStore(state)}>
       <NavigationContainer>
         <SignupFlow2
-          currentUser={{ name: 'test person' }}
+          currentUser={{ id: 'test-user-id', name: 'test person' }}
           location='Hull'
           saveAndNext={() => {}}
           changeSetting={() => {}}

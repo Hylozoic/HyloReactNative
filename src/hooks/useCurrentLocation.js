@@ -8,7 +8,7 @@ import { rhino80, rhino20, caribbeanGreen } from 'style/colors'
 import { useDispatch } from 'react-redux'
 
 // TODO: WIP -- has not been used or tested yet
-export default function useCurrentLocation ({ item, onPress }) {
+export default function useCurrentLocation () {
   // BEGIN react-native-geolocation-service sample code
   const [forceLocation, setForceLocation] = useState(true)
   const [highAccuracy, setHighAccuracy] = useState(true)
