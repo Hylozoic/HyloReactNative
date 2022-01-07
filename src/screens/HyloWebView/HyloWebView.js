@@ -51,18 +51,24 @@ export default function HyloWebView ({ path: pathProp, route }) {
           }
           return true
         }}
-        onNavigationStateChange={({ url }) => {
-          if (!url.match(/\/groups\/settings/)) {
-            // This is a bug, it doesn't work to stop loading
-            // returning false in onShouldStartLoadWithRequest does work
-            // but it doesn't capture the shimmed react router history change
-            // webViewRef.stopLoading()
-            webViewRef.current?.goBack()
-            // Could force navigate to the targeted thing (group detail modal, etc)
-            // navigation.navigate('Notifications - Modal')
-            return false
-          }
-        }}
+        // TODO: Implemented earlier to avoid user being sent to Web
+        //       for URLs not mapped to mobile when using settings
+        //       but doesn't currently seem to be needed,
+        //       and due to the incorrect regex is always called
+        // onNavigationStateChange={({ url }) => {
+        //   // NOTE: I think this is what I mean:
+        //   //   if (!url.match(/\/groups[^\/+$\/]settings/)) {
+        //   if (!url.match(/\/groups\/([^\/]+)settings/)) {
+        //     // This is a bug, it doesn't work to stop loading
+        //     // returning false in onShouldStartLoadWithRequest does work
+        //     // but it doesn't capture the shimmed react router history change
+        //     // webViewRef.stopLoading()
+        //     webViewRef.current?.goBack()
+        //     // Could force navigate to the targeted thing (group detail modal, etc)
+        //     // navigation.navigate('Notifications - Modal')
+        //     return false
+        //   }
+        // }}
       />
     </KeyboardFriendlyView>
   )

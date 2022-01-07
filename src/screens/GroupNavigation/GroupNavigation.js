@@ -20,7 +20,6 @@ export default function GroupNavigation ({ navigation, route }) {
   const navItems = [
     { label: 'Create', iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
     { label: 'Stream', iconName: 'Stream', onPress: () => navigate('Feed') },
-    { label: 'Map', iconName: 'Events', onPress: () => navigate('Map') },
     { label: 'Projects', iconName: 'Projects', onPress: () => navigate('Projects') },
     { label: 'Events', iconName: 'Events', onPress: () => navigate('Events') }
   ]
@@ -35,6 +34,9 @@ export default function GroupNavigation ({ navigation, route }) {
     navItems.push({ label: 'Groups', iconName: 'Groups',
       onPress: () => navigate('Group Relationships') })
   }
+
+  // Map is last item in menu
+  navItems.push({ label: 'Map', iconName: 'Globe', onPress: () => navigate('Map') })
 
   const NavItem  = ({ label, iconName, onPress }) => (
     <TouchableOpacity style={styles.navItem} onPress={onPress} key={label}>

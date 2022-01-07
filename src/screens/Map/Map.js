@@ -1,14 +1,27 @@
-import React, { useRef, useEffect } from 'react'
-import { Image, View, Text, TouchableOpacity } from 'react-native'
+import React  from 'react'
+import { useFocusEffect } from '@react-navigation/core'
 import { useSelector } from 'react-redux'
 import HyloWebView from 'screens/HyloWebView'
+import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 
-export default function Map () {
-  const currentGroup = useSelector(getCurrentGroup)
-  console.log('!!! currentGroup?.slug', currentGroup?.slug)
+export default function Map ({ navigation }) {
+  const group = useSelector(getCurrentGroup)
+
+  useFocusEffect(() => {
+    navigation.setOptions({
+      title: group?.name
+    })
+  })
+
+  let path
+  if ([ALL_GROUP_ID, PUBLIC_GROUP_ID].includes(group?.slug)) {
+    path = `${group?.slug}/map`
+  } else {
+    path = `groups/${group?.slug}/map`
+  }
 
   return (
-    <HyloWebView path={`${currentGroup?.slug}/map`} />
+    <HyloWebView path={path} />
   )
 }
