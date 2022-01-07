@@ -6,6 +6,8 @@ const prefixes = [
   'http://www.hylo.com',
   'https://hylo.com',
   'https://www.hylo.com',
+  'http://staging.hylo.com',
+  'https://staging.hylo.com',
   'hyloapp://'
 ]
 
