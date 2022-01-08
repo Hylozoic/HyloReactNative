@@ -13,6 +13,7 @@ import HomeNavigator from 'navigation/HomeNavigator'
 import SearchNavigator from 'navigation/SearchNavigator'
 import MessagesNavigator from 'navigation/MessagesNavigator'
 import UserSettingsTabsNavigator from './UserSettingsTabsNavigator'
+import Map from 'screens/Map'
 
 const Tabs = createBottomTabNavigator()
 export default function TabsNavigator () {
@@ -76,6 +77,8 @@ export default function TabsNavigator () {
           )
         }}
       />
+      {/* TODO: Put here for now, but may want to put back as a screen in Home stack... */}
+      <Tabs.Screen name='Map' component={Map} options={{ tabBarButton: () => null, tabBarVisible: false }}/>
     </Tabs.Navigator>
   )
 }

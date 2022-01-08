@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Linking } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
 import logout from 'store/actions/logout'
 import Loading from 'components/Loading'
 import WebView from 'react-native-webview'
 import { getSessionCookie  } from 'util/session'
+import { navigateToLinkingPathPlain } from 'navigation/linking/custom'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import RNRestart from 'react-native-restart'
 
@@ -39,41 +41,50 @@ export default function HyloWebView ({ path: pathProp, route }) {
         geolocationEnabled
         sharedCookiesEnabled
         onShouldStartLoadWithRequest={({ url }) => {
+          // TODO: Is this the things forcing reloads when Map was in StackNavigator vs Tab?
           if (url === uri) return true
           // Restarts app if webview forwards to login page
           if (url.match(/\/login/)) {         
             dispatch(logout()).then(() => RNRestart.Restart())
             return false
           }
+          // TODO: Not sure I really want to be doing this still.
           if (url.slice(0,4) === 'http') {
             Linking.openURL(url)
             return false
           }
           return true
         }}
-        // TODO: Implemented earlier to avoid user being sent to Web
-        //       for URLs not mapped to mobile when using settings
-        //       but doesn't currently seem to be needed,
-        //       and due to the incorrect regex is always called
-        // onNavigationStateChange={({ url }) => {
-        //   // NOTE: I think this is what I mean:
-        //   //   if (!url.match(/\/groups[^\/+$\/]settings/)) {
-        //   if (!url.match(/\/groups\/([^\/]+)settings/)) {
-        //     // This is a bug, it doesn't work to stop loading
-        //     // returning false in onShouldStartLoadWithRequest does work
-        //     // but it doesn't capture the shimmed react router history change
-        //     // webViewRef.stopLoading()
-        //     webViewRef.current?.goBack()
-        //     // Could force navigate to the targeted thing (group detail modal, etc)
-        //     // navigation.navigate('Notifications - Modal')
-        //     return false
-        //   }
-        // }}
+
+        onNavigationStateChange={({ url }) => {
+          // TODO: Probably want to inject all of the below as logic in
+          //       a callback from consuming component
+          if (url.match(/post/)) {
+            // NOTE: This works, but due to custom linking setup resetting
+            // to default state will unload map:
+            // Linking.openURL('hyloapp://groups/all')
+            navigateToLinkingPathPlain(url)
+            webViewRef.current?.goBack()
+            // webViewRef.current?.stopLoading()
+            return false
+          }
+          // TODO: Not sure this is needed or working -- also,
+          //       maybe this regex is what I meant:
+          //   if (!url.match(/\/groups[^\/+$\/]settings/)) {
+          if (!url.match(/\/groups\/([^\/]+)settings/)) {
+            // webViewRef.stopLoading() // doesn't work
+            webViewRef.current?.goBack()
+            // Could force navigate to the targeted thing (group detail modal, etc)
+            // navigation.navigate('Notifications - Modal')
+            return false
+          }
+        }}
       />
     </KeyboardFriendlyView>
   )
 }
 
+// https://github.com/react-native-webview/react-native-webview/issues/1197#issuecomment-644123824
 const historyAPIShim = `
 (function() {
     function wrap(fn) {
@@ -94,3 +105,12 @@ const historyAPIShim = `
     });
   })();
 `
+
+// onMessage={event => {
+//   const url = event.nativeEvent.url
+//   if (url.match(/post/)) {
+//     console.log('!!!! event', url)
+//     navigateToLinkingPathPlain(url, navigation)
+//   }
+// }}
+// originWhitelist={[ process.env.HYLO_WEB_BASE_URL, 'hyloapp://*' ]}

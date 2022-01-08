@@ -8,6 +8,7 @@ import store from 'store'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import { getActionFromState } from '@react-navigation/native'
 import { INITIAL_NAV_STATE, navigationRef } from 'navigation/RootView/RootView'
+import url from 'url'
 
 export const prefixes = [
   'http://hylo.com',
@@ -52,6 +53,7 @@ export const routesConfig = {
   '/:context(groups)/:groupSlug/topics/:topicName':          'Drawer/Tabs/Home Tab/Topic Feed',
   '/:context(groups)/:groupSlug/members/:id':                'Drawer/Tabs/Home Tab/Member',
   '/:context(groups)/:groupSlug':                            'Drawer/Tabs/Home Tab/Feed',
+  '/:context(groups)/:groupSlug/map/post/:id':               'Drawer/Tabs/Home Tab/Post Details',
   '/:context(groups)/:groupSlug/map':                        'Drawer/Tabs/Home Tab/Map',
   '/:context(groups)/:groupSlug/post/:id':                   'Drawer/Tabs/Home Tab/Post Details',
   '/:context(groups)/post/:id':                              'Drawer/Tabs/Home Tab/Post Details',
@@ -71,6 +73,18 @@ export const routesConfig = {
 
   '/all':                                                    'Drawer/Tabs/Home Tab/Feed',
   '/':                                                       'Drawer/Tabs/Home Tab/Feed',
+}
+
+// TODO: For WebView nav... Rename or possibly move closer to HyloWebView?
+//       another possibility is to update logic applied during a Linking.openURL
+//       to not always force nav state reset to default (or storing returnTo URL?) for
+//       this case...
+export const navigateToLinkingPathPlain = providedUrl => {
+  const linkingPath = url.parse(providedUrl).path
+  const state = getStateFromPath(linkingPath)
+  const action = getActionFromState(state)
+  // navigationRef.current?.dispatch(CommonActions.reset(INITIAL_NAV_STATE))
+  navigationRef.current?.dispatch(action)
 }
 
 export const navigateToLinkingPath = async (linkingPath, authed) => {
@@ -153,7 +167,6 @@ const subscribe = listener => {
 
 const getStateFromPath = path => {
   const statePath = matchRouteToScreenPath(path, routesConfig)
-
   return getStateFromPathDefault(statePath ?? '')
 }
 
