@@ -43,8 +43,8 @@ export class PostDetails extends React.Component {
   }
 
   setHeader = () => {
-    const { navigation, route, currentGroup } = this.props
-    if (route?.name == 'Post Details - Modal') return
+    const { navigation, currentGroup, isModal } = this.props
+    if (isModal) return
     navigation.setOptions({ title: currentGroup?.name  })
   }
 
@@ -105,12 +105,11 @@ export class PostDetails extends React.Component {
   }
 
   renderPostDetails = (panHandlers) => {
-    const { post, currentUser, currentGroup, respondToEvent, showMember, route } = this.props
+    const { post, currentUser, currentGroup, respondToEvent, showMember, isModal } = this.props
     const firstGroupSlug = get('groups.0.slug', post)
     const isMember = find(member => member.id === currentUser.id, post.members)
     const location = post.location || (post.locationObject && post.locationObject.fullText)
-    const inModal = (route?.name == 'Post Details - Modal')
-    const showGroups = inModal || post?.groups.find(g => g.slug != currentGroup?.slug)
+    const showGroups = isModal || post?.groups.find(g => g.slug != currentGroup?.slug)
 
     return (
       <Comments style={styles.commentsScrollView}
@@ -136,14 +135,12 @@ export class PostDetails extends React.Component {
   }
 
   render () {
-    const { post, tabBarHeight } = this.props
+    const { post, tabBarHeight, isModal } = this.props
     const { commentText, replyingToName, submitting } = this.state
     const groupId = get('groups.0.id', post)
 
     if (!post?.creator || !post?.title) return <LoadingScreen />
     
-    const isModal = this.props.route?.name == 'Post Details - Modal'
-
     return (
       <View style={styles.container}>
         <KeyboardAccessoryView
@@ -184,9 +181,10 @@ export class PostDetails extends React.Component {
 export default function (props) {
   useGroupSelect()
   const safeAreaInsets = useSafeAreaInsets()
-  const tabBarHeight = useBottomTabBarHeight()
+  const isModal = props.route?.name == 'Post Details - Modal'
+  const tabBarHeight = isModal ? 0 : useBottomTabBarHeight()
 
-  return <PostDetails {...props} safeAreaInsets={safeAreaInsets} tabBarHeight={tabBarHeight} />
+  return <PostDetails {...props} isModal={isModal} safeAreaInsets={safeAreaInsets} tabBarHeight={tabBarHeight} />
 }
 
 export function PostCardForDetails ({
