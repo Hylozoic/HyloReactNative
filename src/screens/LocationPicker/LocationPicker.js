@@ -4,7 +4,7 @@ import LocationPickerItemRow from 'screens/LocationPicker/LocationPickerItemRow'
 export default function LocationPicker ({
   screenTitle = 'Choose a Location',
   navigation,
-  // TODO: Default to current location to send as proximity for location search
+  currentLocation,
   initialSearchTerm = '',
   onPick
 }) {
@@ -15,6 +15,12 @@ export default function LocationPicker ({
     ItemRowComponent: LocationPickerItemRow,
     pickItem: onPick,
     searchTermFilter: searchTerm => searchTerm,
-    fetchSearchSuggestions: locationSearch
+    fetchSearchSuggestions: (scope, searchTerm, providedProximity = '') => {
+      const proximity = currentLocation?.coords
+        ? `${currentLocation.coords.longitude},${currentLocation.coords.latitude}`
+        : providedProximity
+
+      return locationSearch(scope, searchTerm, proximity)
+    }
   })
 }

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { Text, TouchableOpacity } from 'react-native'
 import { propTypesForItemRowComponent } from 'screens/ItemChooser'
 import { pollingFindOrCreateLocation } from 'screens/LocationPicker/LocationPicker.store'

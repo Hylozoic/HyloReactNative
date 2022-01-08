@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { ScrollView, View, Text } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
+import useCurrentLocation from 'hooks/useCurrentLocation'
 import { defaultUserSettings, getLocalUserSettings, updateLocalUserSettings } from '../SignupFlow.store.js'
 import getMe from 'store/selectors/getMe'
 import updateUserSettings from 'store/actions/updateUserSettings'
@@ -11,20 +12,17 @@ import SettingControl from 'components/SettingControl'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 import styles from './SignupFlow3.styles'
 
-// TODO: Figure-out how to incorporate lat/lng to current location string?
-// import useCurrentLocation from 'hooks/useCurrentLocation'
-
 export default function SignupFlow3 ({ navigation }) {
   const dispatch = useDispatch()
   const { location } = useSelector(getLocalUserSettings)
   const controlRef = useRef()
   const currentUser = useSelector(getMe)
-  // const [currentLocation, getLocation] = useCurrentLocation()
+  const [currentLocation, getLocation] = useCurrentLocation()
 
   useEffect(() => {
     // this is for the case where they logged in but hadn't finished sign up
     currentUser && !location && dispatch(updateLocalUserSettings({ location: currentUser.ref?.location }))
-    // getLocation()
+    getLocation()
   }, [])
 
   useFocusEffect(() => {
@@ -42,7 +40,7 @@ export default function SignupFlow3 ({ navigation }) {
   const showLocationPicker = locationText  => {
     LocationPicker({
       navigation,
-      // currentLocation,
+      currentLocation,
       initialSearchTerm: locationText,
       onPick: location => {
         dispatch(updateLocalUserSettings({ location: location?.fullText }))
