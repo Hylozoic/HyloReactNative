@@ -17,23 +17,6 @@ export default function MapWebView ({ navigation }) {
     })
   })
 
-  const onNavigationStateChange = ({ url }) => {
-    // TODO: Probably want to inject all of the below as logic in
-    //       a callback from consuming component
-    if (url.match(/post/)) {
-      // NOTE: This works, but due to custom linking setup resetting
-      // to default state will unload map:
-      // Linking.openURL('hyloapp://groups/all')
-      navigateToLinkingPathInApp(url)
-      webViewRef.current?.goBack()
-      // webViewRef.current?.stopLoading()
-      return false
-    } else {
-      webViewRef.current?.goBack()
-      return false
-    }
-  }
-
   let path
   if ([ALL_GROUP_ID, PUBLIC_GROUP_ID].includes(group?.slug)) {
     path = `${group?.slug}/map`
@@ -43,7 +26,29 @@ export default function MapWebView ({ navigation }) {
 
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['top']}>
-      <HyloWebView path={path} onNavigationStateChange={onNavigationStateChange} ref={webViewRef} />
+      <HyloWebView
+        ref={webViewRef}
+        path={path}
+        onNavigationStateChange={({ url }) => {
+          // TODO: Probably want to inject all of the below as logic in
+          //       a callback from consuming component
+          if (url.match(/post/)) {
+            // NOTE: This works, but due to custom linking setup resetting
+            // to default state will unload map:
+            // Linking.openURL('hyloapp://groups/all')
+            navigateToLinkingPathInApp(url)
+            webViewRef.current?.goBack()
+            // webViewRef.current?.stopLoading()
+            return false
+          } else {
+            webViewRef.current?.goBack()
+            return false
+          }
+        }}
+        // Required for emulator, but may be disadventageous for actual
+        // devices as this has the effect of disabling hardware acceleration.
+        androidLayerType='software'
+      />
     </SafeAreaView>
   )
 }
