@@ -7,7 +7,7 @@ import useGetGroupFromParamsOrSelected from 'hooks/useGetGroupFromParamsOrSelect
 import { isIOS } from 'util/platform'
 import Avatar from 'components/Avatar'
 import { caribbeanGreen, rhino, rhino05, rhino30, white } from 'style/colors'
-import HyloWebView from 'screens/HyloWebView'
+import GroupSettingsWebView from 'screens/GroupSettingsWebView'
 
 // Existing settings screens built not currently in use:
 // import GroupSettingsComponent from 'screens/GroupSettings'
@@ -69,56 +69,56 @@ export default function GroupSettingsTabsNavigator ({ navigation, route }) {
     <GroupSettings.Navigator {...navigatorProps}>
       <GroupSettings.Screen
         name='Settings'
-        component={HyloWebView}
+        component={GroupSettingsWebView}
         initialParams={{
           path: `groups/${selectedGroup?.slug}/settings`
         }}
       />
       <GroupSettings.Screen
         name='Moderators'
-        component={HyloWebView}
+        component={GroupSettingsWebView}
         initialParams={{
           path: `groups/${selectedGroup?.slug}/settings/moderators`
         }}
       />
       <GroupSettings.Screen
         name='Topics'
-        component={HyloWebView}
+        component={GroupSettingsWebView}
         initialParams={{
           path: `groups/${selectedGroup?.slug}/settings/topics`
         }}
       />
       <GroupSettings.Screen
         name='Invite'
-        component={HyloWebView}
+        component={GroupSettingsWebView}
         initialParams={{
           path: `groups/${selectedGroup?.slug}/settings/invite`
         }}
       />
       <GroupSettings.Screen
         name='Join Requests'
-        component={HyloWebView}
+        component={GroupSettingsWebView}
         initialParams={{
           path: `groups/${selectedGroup?.slug}/settings/requests`
         }}
       />
       <GroupSettings.Screen
         name='Related Groups'
-        component={HyloWebView}
+        component={GroupSettingsWebView}
         initialParams={{
           path: `groups/${selectedGroup?.slug}/settings/relationships`
         }}
       />
       <GroupSettings.Screen
         name='Export Data'
-        component={HyloWebView}
+        component={GroupSettingsWebView}
         initialParams={{
           path: `groups/${selectedGroup?.slug}/settings/export`
         }}
       />
       <GroupSettings.Screen
         name='Delete'
-        component={HyloWebView}
+        component={GroupSettingsWebView}
         initialParams={{
           path: `groups/${selectedGroup?.slug}/settings/delete`
         }}

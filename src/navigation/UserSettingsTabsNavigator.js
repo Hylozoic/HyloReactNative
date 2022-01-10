@@ -9,7 +9,7 @@ import logout from 'store/actions/logout'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
 // Screens
-import HyloWebView from 'screens/HyloWebView'
+import UserSettingsWebView from 'screens/UserSettingsWebView'
 import BlockedUsers from 'screens/BlockedUsers'
 
 // Existing User Settings screens built not currently in use:
@@ -83,42 +83,42 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
     <UserSettings.Navigator {...navigatorProps}>
       <UserSettings.Screen
         name='Edit Profile'
-        component={HyloWebView}
+        component={UserSettingsWebView}
         initialParams={{
           path: 'settings'
         }}
       />
       <UserSettings.Screen
         name='Afflilations'
-        component={HyloWebView}
+        component={UserSettingsWebView}
         initialParams={{
           path: 'settings/groups'
         }}
       />
       <UserSettings.Screen
         name='Invites &amp; Requests'
-        component={HyloWebView}
+        component={UserSettingsWebView}
         initialParams={{
           path: 'settings/invitations'
         }}
       />
       <UserSettings.Screen
         name='Notifications'
-        component={HyloWebView}
+        component={UserSettingsWebView}
         initialParams={{
           path: 'settings/notifications'
         }}
       />
       <UserSettings.Screen
         name='Account'
-        component={HyloWebView}
+        component={UserSettingsWebView}
         initialParams={{
           path: 'settings/account'
         }}
       />
       <UserSettings.Screen
         name='Saved Searches'
-        component={HyloWebView}
+        component={UserSettingsWebView}
         initialParams={{
           path: 'settings/saved-searches'
         }}
