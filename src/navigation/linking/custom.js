@@ -20,7 +20,8 @@ export const prefixes = [
   'hyloapp://'
 ]
 
-// NOTE: This custom routing config and utilities
+// Custom routing config and utilities:
+//
 // This way of mapping screens to paths is being used
 // in alternate to the default linking config.screens
 // route mapping as the current version of react-navigation
@@ -53,7 +54,7 @@ export const routesConfig = {
   '/:context(groups)/:groupSlug/topics/:topicName':          'Drawer/Tabs/Home Tab/Topic Feed',
   '/:context(groups)/:groupSlug/members/:id':                'Drawer/Tabs/Home Tab/Member',
   '/:context(groups)/:groupSlug':                            'Drawer/Tabs/Home Tab/Feed',
-  '/:context(groups)/:groupSlug/map/post/:id':               'Drawer/Tabs/Home Tab/Post Details',
+  '/:context(groups)/:groupSlug/map/post/:id':               'Post Details - Modal',
   '/:context(groups)/:groupSlug/map':                        'Drawer/Tabs/Home Tab/Map',
   '/:context(groups)/:groupSlug/post/:id':                   'Drawer/Tabs/Home Tab/Post Details',
   '/:context(groups)/post/:id':                              'Drawer/Tabs/Home Tab/Post Details',
@@ -75,15 +76,14 @@ export const routesConfig = {
   '/':                                                       'Drawer/Tabs/Home Tab/Feed',
 }
 
-// TODO: For WebView nav... Rename or possibly move closer to HyloWebView?
-//       another possibility is to update logic applied during a Linking.openURL
-//       to not always force nav state reset to default (or storing returnTo URL?) for
-//       this case...
-export const navigateToLinkingPathPlain = providedUrl => {
+// TODO: For MapWebView nav... Rename or possibly move closer to MapWebView?
+// another possibility is to update logic applied by Linking.openURL
+// to not always force nav state reset to default (or storing returnTo URL?) for
+// this case...
+export const navigateToLinkingPathInApp = providedUrl => {
   const linkingPath = url.parse(providedUrl).path
   const state = getStateFromPath(linkingPath)
   const action = getActionFromState(state)
-  // navigationRef.current?.dispatch(CommonActions.reset(INITIAL_NAV_STATE))
   navigationRef.current?.dispatch(action)
 }
 
@@ -107,10 +107,8 @@ export const navigateToLinkingPath = async (linkingPath, authed) => {
   }
 }
 
-// Matches path to routes and returns a react-navigation screen path
-// (accordingly params appended as a querystring)
-export function matchRouteToScreenPath (incomingPathAndQuery, routes) {
-  const [incomingPath, incomingQueryString] = incomingPathAndQuery.split('?')
+export function getRouteObjectFromPath (incomingPathAndQuerystring, routes = routesConfig) {
+  const [incomingPath, incomingQuerystring] = incomingPathAndQuerystring.split('?')
 
   for (const pathMatcher in routes) {
     const pathMatch = match(pathMatcher)(incomingPath)
@@ -118,40 +116,50 @@ export function matchRouteToScreenPath (incomingPathAndQuery, routes) {
     if (pathMatch) {
       const routeMatchWithOptions = routes[pathMatcher]
       let routeMatch = routeMatchWithOptions
+      let screenPath = routeMatch
       let options = {}
 
       // Collecting custom route options if present
       if (!isString(routeMatchWithOptions)) {
-        routeMatch = routeMatchWithOptions?.screenPath
+        screenPath = routeMatchWithOptions?.screenPath
         options = reject('screenPath', routeMatchWithOptions)
       }
 
-      const optionsQueryString = qs.stringify(options, {
-        encode: true,
-        strict: true
-      })
-      const screenQueryString = qs.stringify(pathMatch.params, {
-        encode: true,
-        strict: true
-      })
-      const screenAndIncomingQueryString = [optionsQueryString, screenQueryString, incomingQueryString]
-        .filter(Boolean)
-        .join('&')
-
-      return [routeMatch, screenAndIncomingQueryString]
-        .filter(Boolean)
-        .join('?')
+      return {
+        screenPath,
+        options: { ...options, ...pathMatch.params },
+        queryString: incomingQuerystring
+      }
     }
   }
 }
 
+// Matches path to routes and returns a react-navigation screen path
+// (accordingly params appended as a querystring)
+export function getScreenPathWithQuerystring (incomingPathAndQuerystring) {
+  const routeObject = getRouteObjectFromPath(incomingPathAndQuerystring)
+  if (routeObject) {
+    const { screenPath, options, queryString } = routeObject
+    const optionsQueryString = qs.stringify(options, {
+      encode: true,
+      strict: true
+    })
+    const fullQuerystring = [optionsQueryString, queryString]
+      .filter(Boolean)
+      .join('&')
+
+    return [screenPath, fullQuerystring]
+      .filter(Boolean)
+      .join('?')
+  }
+}
+
+// This function intentionally doesn't return to have which
+// has the effect of disabling the default initialURL handling
 const getInitialURL = async () => {
   const initialURL = await Linking.getInitialURL()
 
   if (initialURL) store.dispatch(setReturnToPath(initialURL))
-
-  // NOTE: This function intentionally doesn't return to have which
-  // has the effect of disabling the default initialURL handling
 }
 
 const subscribe = listener => {
@@ -166,12 +174,11 @@ const subscribe = listener => {
 }
 
 const getStateFromPath = path => {
-  const statePath = matchRouteToScreenPath(path, routesConfig)
+  const statePath = getScreenPathWithQuerystring(path, routesConfig)
   return getStateFromPathDefault(statePath ?? '')
 }
 
 // React Navigation linking config
-
 export default {
   prefixes,
   getInitialURL,
