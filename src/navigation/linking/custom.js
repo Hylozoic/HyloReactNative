@@ -44,6 +44,7 @@ export const routesConfig = {
 
   // special group routes (/all, /public)
   '/:groupSlug(all|public)':                                 { screenPath: 'Drawer/Tabs/Home Tab/Feed', context: 'groups' },
+  '/:groupSlug(all|public)/map/post/:id':                    { screenPath: 'Post Details - Modal', context: 'groups' },
   '/:groupSlug(all)/members/:id':                            { screenPath: 'Member - Modal', context: 'groups' },
   
   // /groups
