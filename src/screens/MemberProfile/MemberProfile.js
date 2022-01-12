@@ -42,7 +42,7 @@ export default function MemberProfile ({
   const [flaggingVisible, setFlaggingVisible] = useState(false)
 
   // Don't force selected group switch if this is a modal (generalize into useGroupSelect for any modal?)
-  if (route.name !== 'Member Details - Modal') {
+  if (route.name !== 'Member - Modal') {
     useGroupSelect()
   }
 
