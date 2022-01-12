@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import { useSelector } from 'react-redux'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { navigateToLinkingPathInApp } from 'navigation/linking/custom'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
@@ -25,31 +24,30 @@ export default function MapWebView ({ navigation }) {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }} edges={['top']}>
-      <HyloWebView
-        ref={webViewRef}
-        path={path}
-        onNavigationStateChange={({ url }) => {
-          // TODO: Probably want to inject all of the below as logic in
-          //       a callback from consuming component
-          if (url.match(/post/)) {
-            // NOTE: This works, but due to custom linking setup resetting
-            // to default state will unload map:
-            // Linking.openURL('hyloapp://groups/all')
-            navigateToLinkingPathInApp(url)
-            webViewRef.current?.goBack()
-            // webViewRef.current?.stopLoading()
-            return false
-          } else {
-            webViewRef.current?.goBack()
-            return false
-          }
-        }}
-        // Required for emulator, but may be disadventageous for actual
-        // devices as this has the effect of disabling hardware acceleration.
-        androidLayerType='software'
-      />
-    </SafeAreaView>
+    <HyloWebView
+      ref={webViewRef}
+      path={path}
+      onNavigationStateChange={({ url }) => {
+        // TODO: Considertying this back into the route matching somehow (a "map" property?)
+        //       Also note some of these are modals which may not be reloading the map (good)
+        //       And others are full context resets on the Home Navigator...
+        if (url.match(/post|members|groups\/[a-zA-Z]+$|all$|public$/)) {
+          // NOTE: This works, but due to custom linking setup resetting
+          // to default state will unload map:
+          // Linking.openURL('hyloapp://groups/all')
+          webViewRef.current?.goBack()
+          navigateToLinkingPathInApp(url)
+          // webViewRef.current?.stopLoading()
+          return false
+        } else {
+          webViewRef.current?.goBack()
+          return false
+        }
+      }}
+      // Required for emulator with the map but may be disadventageous for actual
+      // devices as this has the effect of disabling hardware acceleration.
+      androidLayerType='software'
+    />
   )
 }
 

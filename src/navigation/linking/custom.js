@@ -41,6 +41,10 @@ export const routesConfig = {
   // /members
   '/members/:id':                                            'Member - Modal',
   '/members':                                                'Drawer/Tabs/Home Tab/Members',
+
+  // special group routes (/all, /public)
+  '/:groupSlug(all|public)':                                 { screenPath: 'Drawer/Tabs/Home Tab/Feed', context: 'groups' },
+  '/:groupSlug(all)/members/:id':                            { screenPath: 'Member - Modal', context: 'groups' },
   
   // /groups
   '/:context(groups)/:groupSlug/join/:accessCode':           'JoinGroup',

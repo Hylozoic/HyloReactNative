@@ -1,15 +1,16 @@
 import React, { useEffect, forwardRef, useState } from 'react'
 import { Linking } from 'react-native'
-import { useDispatch } from 'react-redux'
-import logout from 'store/actions/logout'
 import Loading from 'components/Loading'
 import WebView from 'react-native-webview'
 import { getSessionCookie  } from 'util/session'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-import RNRestart from 'react-native-restart'
 
-const HyloWebView = forwardRef(({ path: pathProp, onNavigationStateChange = () => {}, route }, webViewRef) => {
-  const dispatch = useDispatch()
+const HyloWebView = forwardRef(({
+  path: pathProp,
+  onNavigationStateChange = () => {},
+  onShouldStartLoadWithRequest = () => true,
+  route
+}, webViewRef) => {
   const [cookie, setCookie] = useState()
   const path = pathProp || route?.params?.path
   const uri = `${process.env.HYLO_WEB_BASE_URL}${path ? `/${path}` : ''}?layoutFlags=mobileSettings`
@@ -35,20 +36,15 @@ const HyloWebView = forwardRef(({ path: pathProp, onNavigationStateChange = () =
         }}
         geolocationEnabled
         sharedCookiesEnabled
-        onShouldStartLoadWithRequest={({ url }) => {
-          // TODO: Is this the thing forcing reloads when Map was in StackNavigator vs Tab?
+        onShouldStartLoadWithRequest={params => {
+          const { url } = params
           if (url === uri) return true
-          // Restarts app if webview forwards to login page
-          if (url.match(/\/login/)) {         
-            dispatch(logout()).then(() => RNRestart.Restart())
-            return false
-          }
-          // TODO: Not sure I really want to be doing this still.
+          // Opens full URLs in external browser
           if (url.slice(0,4) === 'http') {
             Linking.openURL(url)
             return false
           }
-          return true
+          onShouldStartLoadWithRequest(params)
         }}
         onNavigationStateChange={onNavigationStateChange}
       />
