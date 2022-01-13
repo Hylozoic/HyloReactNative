@@ -44,9 +44,14 @@ export const routesConfig = {
 
   // special group routes (/all, /public)
   '/:groupSlug(all|public)':                                 { screenPath: 'Drawer/Tabs/Home Tab/Feed', context: 'groups' },
-  '/:groupSlug(all|public)/map/post/:id':                    { screenPath: 'Post Details - Modal', context: 'groups' },
   '/:groupSlug(all)/members/:id':                            { screenPath: 'Member - Modal', context: 'groups' },
   
+  // map routes
+  '/:groupSlug(all|public)/map':                             { screenPath: 'Drawer/Tabs/Home Tab/Map', context: 'groups' },
+  '/:context(groups)/:groupSlug/map':                        'Drawer/Tabs/Home Tab/Map',
+  '/:groupSlug(all|public)/map/post/:id':                    { screenPath: 'Post Details - Modal', context: 'groups' },
+  '/:context(groups)/:groupSlug/map/post/:id':               'Post Details - Modal',
+
   // /groups
   '/:context(groups)/:groupSlug/join/:accessCode':           'JoinGroup',
   '/:context(groups)/:groupSlug/settings/invite':            'Group Settings/Invite',
@@ -59,8 +64,6 @@ export const routesConfig = {
   '/:context(groups)/:groupSlug/topics/:topicName':          'Drawer/Tabs/Home Tab/Topic Feed',
   '/:context(groups)/:groupSlug/members/:id':                'Drawer/Tabs/Home Tab/Member',
   '/:context(groups)/:groupSlug':                            'Drawer/Tabs/Home Tab/Feed',
-  '/:context(groups)/:groupSlug/map/post/:id':               'Post Details - Modal',
-  '/:context(groups)/:groupSlug/map':                        'Drawer/Tabs/Home Tab/Map',
   '/:context(groups)/:groupSlug/post/:id':                   'Drawer/Tabs/Home Tab/Post Details',
   '/:context(groups)/post/:id':                              'Drawer/Tabs/Home Tab/Post Details',
   '/:context(groups)/:groupSlug/post/:id/edit':              'Edit Post',
@@ -85,10 +88,13 @@ export const routesConfig = {
 // another possibility is to update logic applied by Linking.openURL
 // to not always force nav state reset to default (or storing returnTo URL?) for
 // this case...
-export const navigateToLinkingPathInApp = providedUrl => {
+export const navigateToLinkingPathInApp = async (providedUrl, reset = false) => {
   const linkingPath = url.parse(providedUrl).path
   const state = getStateFromPath(linkingPath)
   const action = getActionFromState(state)
+  if (reset) {
+    await navigationRef.current?.dispatch(CommonActions.reset(INITIAL_NAV_STATE))
+  }
   navigationRef.current?.dispatch(action)
 }
 
