@@ -1,8 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import { useSelector } from 'react-redux'
-import { Linking } from 'react-native'
-import urlParser from 'url'
 import { navigateToLinkingPathInApp } from 'navigation/linking/custom'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
@@ -15,7 +13,6 @@ export default function MapWebView ({ navigation }) {
 
   useFocusEffect(
     useCallback(() => {
-      console.log('!!! group.slug', group?.slug)
       navigation.setOptions({
         title: group?.name
       })
@@ -41,39 +38,46 @@ export default function MapWebView ({ navigation }) {
     <HyloWebView
       ref={webViewRef}
       path={path}
-      onNavigationStateChange={({ url }) => {
-        if (url.match(/post|members/)) {
+      onMessage={event => {
+        const  { url } = JSON.parse(event.nativeEvent.data)
+        if (url?.match(/post|members/)) {
           // This works, but custom linking will reset history to
           // default nav state unloading the map:
           // Linking.openURL('hyloapp://groups/all')
           navigateToLinkingPathInApp(url)
-          webViewRef.current?.stopLoading()
-          webViewRef.current?.goBack()
         } else if (url.match(/groups\/[a-zA-Z]+$|all$|public$/)) {
           // This works fine here too:
           // Linking.openURL(`hyloapp://${urlParser.parse(url).path}`)
           navigateToLinkingPathInApp(url, true)
-          webViewRef.current?.stopLoading()
-          webViewRef.current?.goBack()
-        } else {
-          webViewRef.current?.goBack()
         }
-      }}
-      // Required for emulator with the map but may be disadventageous for actual
-      // devices as this has the effect of disabling hardware acceleration.
+    }}
+    // Required for emulator with the map but may be disadventageous for actual
+    // devices as this has the effect of disabling hardware acceleration.
       androidLayerType='software'
     />
   )
 }
 
-// TODO: May still use this if I make an ammendment to the Web code for mobileLayoutView:
-// onMessage={event => {
-//   const url = event.nativeEvent.url
-//   if (url.match(/post/)) {
-//     console.log('!!!! event', url)
-//     navigateToLinkingPathPlain(url, navigation)
-//   }
-// }}
-
 // TODO: May be able to utilize the white list to block some loading...?
 // originWhitelist={[ process.env.HYLO_WEB_BASE_URL, 'hyloapp://*' ]}
+
+// TODO: Remove - Old version of route capture requiring no changes on Web, 
+// but causing load of page that then we go back from each time.
+// onNavigationStateChange={({ url }) => {
+//   if (url.match(/post|members/)) {
+//     // This works, but custom linking will reset history to
+//     // default nav state unloading the map:
+//     // Linking.openURL('hyloapp://groups/all')
+//     navigateToLinkingPathInApp(url)
+//     // webViewRef.current?.stopLoading()
+//     webViewRef.current?.goBack()
+//   } else if (url.match(/groups\/[a-zA-Z]+$|all$|public$/)) {
+//     // This works fine here too:
+//     // Linking.openURL(`hyloapp://${urlParser.parse(url).path}`)
+//     navigateToLinkingPathInApp(url, true)
+//     // webViewRef.current?.stopLoading()
+//     webViewRef.current?.goBack()
+//   } else {
+//     webViewRef.current?.goBack()
+//   }
+// }}

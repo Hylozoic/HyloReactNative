@@ -62,7 +62,6 @@ export default function Signup ({ navigation, route }) {
       const errorMessage = action?.payload?.response?.body
       return errorMessage ? { errorMessage } : null
     }
-    console.log('!!! here')
   }  
   const submit = async () => {
     try {

@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, forwardRef, useState } from 'react'
+import React, { useCallback, forwardRef, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import { Linking } from 'react-native'
 import Loading from 'components/Loading'
@@ -9,6 +9,7 @@ import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 const HyloWebView = forwardRef(({
   path: pathProp,
   onNavigationStateChange = () => {},
+  onMessage = () => {},
   onShouldStartLoadWithRequest = () => true,
   route
 }, webViewRef) => {
@@ -42,7 +43,6 @@ const HyloWebView = forwardRef(({
     <KeyboardFriendlyView style={{ flex: 1 }}>
       <WebView
         ref={webViewRef}
-        injectedJavaScript={historyAPIShim}
         source={{
           uri,
           headers: { Cookie: cookie }
@@ -60,31 +60,10 @@ const HyloWebView = forwardRef(({
           return onShouldStartLoadWithRequest(params)
         }}
         onNavigationStateChange={onNavigationStateChange}
+        onMessage={onMessage}
       />
     </KeyboardFriendlyView>
   )
 })
 
 export default HyloWebView
-
-// https://github.com/react-native-webview/react-native-webview/issues/1197#issuecomment-644123824
-const historyAPIShim = `
-(function() {
-    function wrap(fn) {
-      return function wrapper() {
-        var res = fn.apply(this, arguments);
-        window.ReactNativeWebView.postMessage(
-          '{"method": "historyChange"}'
-        );
-        return res;
-      };
-    }
-    history.pushState = wrap(history.pushState);
-    history.replaceState = wrap(history.replaceState);
-    window.addEventListener("popstate", function() {
-      window.ReactNativeWebView.postMessage(
-        '{"method": "historyChange"}'
-      );
-    });
-  })();
-`
