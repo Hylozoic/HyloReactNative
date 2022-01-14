@@ -40,19 +40,25 @@ export default function MapWebView ({ navigation }) {
       path={path}
       onMessage={event => {
         const  { url } = JSON.parse(event.nativeEvent.data)
-        if (url?.match(/post|members/)) {
-          // This works, but custom linking will reset history to
-          // default nav state unloading the map:
-          // Linking.openURL('hyloapp://groups/all')
+        // Special case to re-write route for Member details in a group context:
+        //    /groups/my-lovely-group/members/<member-id>
+        // to go to Member Detail in modal:
+        //    /all/member/<member-id>
+        if (url?.match(/groups\/*.+\/members\/*.+$/)) {
+          const memberModalPath = '/all/' + url.split('/').slice(3,5).join('/')
+          navigateToLinkingPathInApp(memberModalPath)
+      // Matches: /groups/our-awesome-group/map/post/<post-id>, /(all|public)/post/<post-id>
+      } else if (url?.match(/\/post|$\/members/)) {
           navigateToLinkingPathInApp(url)
+        // Matches: /groups/our-awesome-group, /all, /public
+        // resets group context to the one specified by the group slug
+        // in these urls
         } else if (url.match(/groups\/[a-zA-Z]+$|all$|public$/)) {
-          // This works fine here too:
-          // Linking.openURL(`hyloapp://${urlParser.parse(url).path}`)
           navigateToLinkingPathInApp(url, true)
         }
-    }}
-    // Required for emulator with the map but may be disadventageous for actual
-    // devices as this has the effect of disabling hardware acceleration.
+      }}
+      // Required for emulator with the map but may be disadventageous for actual
+      // devices as this has the effect of disabling hardware acceleration.
       androidLayerType='software'
     />
   )

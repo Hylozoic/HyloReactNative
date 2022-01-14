@@ -89,7 +89,7 @@ export const routesConfig = {
 // to not always force nav state reset to default (or storing returnTo URL?) for
 // this case...
 export const navigateToLinkingPathInApp = async (providedUrl, reset = false) => {
-  const linkingPath = url.parse(providedUrl).path
+  const linkingPath = url.parse(providedUrl)?.path
   const state = getStateFromPath(linkingPath)
   const action = getActionFromState(state)
   if (reset) {
