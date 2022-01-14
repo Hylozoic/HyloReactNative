@@ -1,29 +1,30 @@
 
-import 'react-native-gesture-handler' // is this necessary?
+import 'react-native-gesture-handler' // probably not necessary as already included in index.js
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { ModalHeader } from 'navigation/headers'
-// Navigation
-import DrawerNavigator from 'navigation/DrawerNavigator'
-import SignupNavigator from 'navigation/SignupNavigator'
-import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
-import GroupSettingsTabsNavigator from 'navigation/GroupSettingsTabsNavigator'
-// Screens
-import JoinGroup from 'screens/JoinGroup'
-import InviteExpired from 'screens/InviteExpired'
-import ForgotPassword from 'screens/ForgotPassword'
-import Login from 'screens/Login'
-import ItemChooser from 'screens/ItemChooser'
-import LoadingScreen from 'screens/LoadingScreen'
-import NotificationSettings from 'screens/NotificationSettings'
-import NotificationsList from 'screens/NotificationsList'
-import PostEditor from 'screens/PostEditor'
 import { white } from 'style/colors'
+// Screens
+import DrawerNavigator from 'navigation/DrawerNavigator'
+import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
 import PostDetails from 'screens/PostDetails'
 import MemberProfile from 'screens/MemberProfile'
-import LoginByTokenHandler from 'screens/LoginByTokenHandler'
-import PendingInvites from 'screens/PendingInvites'
+import GroupDetail from 'screens/GroupDetail'
+import PostEditor from 'screens/PostEditor'
+import GroupSettingsTabsNavigator from 'navigation/GroupSettingsTabsNavigator'
 import MemberSkillEditor from 'screens/MemberProfile/MemberSkillEditor'
+import PendingInvites from 'screens/PendingInvites'
+import NotificationsList from 'screens/NotificationsList'
+import NotificationSettings from 'screens/NotificationSettings'
+import Login from 'screens/Login'
+import ForgotPassword from 'screens/ForgotPassword'
+import SignupNavigator from 'navigation/SignupNavigator'
+import JoinGroup from 'screens/JoinGroup'
+import InviteExpired from 'screens/InviteExpired'
+import LoginByTokenHandler from 'screens/LoginByTokenHandler'
+import ItemChooser from 'screens/ItemChooser'
+import LoadingScreen from 'screens/LoadingScreen'
+
 
 const Root = createStackNavigator()
 export default function RootNavigator ({ fullyAuthorized }) {
@@ -44,6 +45,8 @@ export default function RootNavigator ({ fullyAuthorized }) {
           options={{ title: 'Post Details' }} />
         <Root.Screen name='Member - Modal' component={MemberProfile}
           options={{ title: 'Member' }} />
+        <Root.Screen name='Group Detail - Modal' component={GroupDetail}
+          options={{ title: 'Group Details' }} />
         <Root.Screen name='Edit Post' component={PostEditor} />
         <Root.Screen name='Group Settings' component={GroupSettingsTabsNavigator} />
         {/* Not used anymore */}

@@ -51,6 +51,7 @@ export const routesConfig = {
   '/:context(groups)/:groupSlug/map':                        'Drawer/Tabs/Home Tab/Map',
   '/:groupSlug(all|public)/map/post/:id':                    { screenPath: 'Post Details - Modal', context: 'groups' },
   '/:context(groups)/:groupSlug/map/post/:id':               'Post Details - Modal',
+  '/:context(groups)/:groupSlug/detail':                     'Group Detail - Modal',
 
   // /groups
   '/:context(groups)/:groupSlug/join/:accessCode':           'JoinGroup',

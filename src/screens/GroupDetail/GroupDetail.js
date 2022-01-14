@@ -1,38 +1,43 @@
 import React, { useEffect, useState } from 'react'
+import { Image, Text, ScrollView, View, ImageBackground, TouchableOpacity, TextInput } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
+import LinearGradient from 'react-native-linear-gradient'
+import { bannerlinearGradientColors } from 'style/colors'
+import { GROUP_ACCESSIBILITY } from 'store/models/Group'
 import fetchGroupDetailsAction from 'store/actions/fetchGroupDetails'
 import createJoinRequestAction from 'store/actions/createJoinRequest'
 import joinRequestAction from 'store/actions/joinGroup'
 import getGroup from 'store/selectors/getGroup'
 import getMyJoinRequests from 'store/selectors/getMyJoinRequests'
-import isPendingFor from 'store/selectors/isPendingFor'
-import {
-  JOIN_GROUP, CREATE_JOIN_REQUEST, FETCH_GROUP_DETAILS
-} from 'store/constants'
+import getMemberships from 'store/selectors/getMemberships'
 import presentGroup from 'store/presenters/presentGroup'
-
-import { Image, Text, ScrollView, View, ImageBackground, TouchableOpacity, TextInput } from 'react-native'
-import { GROUP_ACCESSIBILITY } from 'store/models/Group'
 import Loading from 'components/Loading'
 import Button from 'components/Button'
 import { GroupRow } from 'screens/Groups/Groups'
-import LinearGradient from 'react-native-linear-gradient'
-import { bannerlinearGradientColors } from 'style/colors'
 import styles from './GroupDetail.styles'
-import getMemberships from 'store/selectors/getMemberships'
 
 export default function GroupDetail ({ navigation, route }) {
   const dispatch = useDispatch()
   const groupId = route.params.groupId
+  const groupSlug = route.params.groupSlug
+  const group = useSelector(state => presentGroup(getGroup(state, { id: groupId, slug: groupSlug })))
+  const hasPendingRequest = useSelector(getMyJoinRequests).find(joinRequest => joinRequest.group.id === groupId)
   const myMemberships = useSelector(getMemberships)
-  
-  useEffect(() => { dispatch(fetchGroupDetailsAction(groupId)) }, [groupId])
-
-  const loading = useSelector(state => isPendingFor([JOIN_GROUP, CREATE_JOIN_REQUEST,  FETCH_GROUP_DETAILS], state))
-  const group = useSelector(state => presentGroup(getGroup(state, { id: groupId })))
-  const isMember = myMemberships.find(m => m.group.id === group?.id)
-  const hasPendingRequest = useSelector(getMyJoinRequests).find(r => r.group.id === groupId)
+  const [loading, setLoading] = useState(true)
   const [questionAnswers, setAnswer] = useState({})
+
+  useEffect(() => {
+    const asyncFunc = async () => {
+      setLoading(true)
+      await dispatch(fetchGroupDetailsAction({ id: groupId, slug: groupSlug }))
+      setLoading(false)
+    }
+    asyncFunc()
+  }, [groupId, groupSlug])
+
+  if (loading) return <Loading />
+  
+  const isMember = myMemberships.find(m => m.group.id === group?.id)
 
   const setQuestionAnswer = questionId => answer => {
     setAnswer(currentAnswers => ({ ...currentAnswers, [questionId]: answer }))
@@ -43,8 +48,9 @@ export default function GroupDetail ({ navigation, route }) {
     for (const questionId in questionAnswers) {
       answers.push({ questionId: parseInt(questionId), answer: questionAnswers[questionId] })
     }
+    setLoading(true)
     await dispatch(joinRequestAction(group.id))
-    // await dispatch(fetchGroupDetailsAction(group.id))
+    setLoading(false)
   }
 
   const createJoinRequest = async () => {
@@ -52,23 +58,21 @@ export default function GroupDetail ({ navigation, route }) {
     for (const questionId in questionAnswers) {
       answers.push({ questionId: parseInt(questionId), answer: questionAnswers[questionId] })
     }
+    setLoading(true)
     await dispatch(createJoinRequestAction(group.id, answers))
-    // await dispatch(fetchGroupDetailsAction(group.id))
+    setLoading(false)
   }
 
-  const goToGroupDetail = group => {
-    navigation.navigate('Group Detail', { groupId: group?.id })
-  }
+  const goToGroupDetail = group => navigation.navigate('Group Detail', { groupId: group?.id })
+
+  const goToGroup = group => navigation.navigate('Map', { groupId: group.id })
 
   const canJoin = !hasPendingRequest &&
     [GROUP_ACCESSIBILITY.Open, GROUP_ACCESSIBILITY.Restricted].includes(group.accessibility)
-
   const joinQuestions = canJoin && group.settings?.askJoinQuestions
     ? group.joinQuestions
     : []
   const groupBannerImage = group.bannerUrl ? { uri: group.bannerUrl } : null
-
-  if (loading) return <Loading />
 
   return (
     <ScrollView style={styles.container}>
@@ -81,9 +85,9 @@ export default function GroupDetail ({ navigation, route }) {
       </ImageBackground>
       <View style={styles.mainContent}>
         <Text style={styles.groupDescription}>{group.description}</Text>
-        {isMember && (
-          <Text style={styles.joinStatusBox}>You are a member</Text>
-        )}
+        {isMember && <>
+          <Button style={styles.joinButton} onPress={() => goToGroup(group)} text={`Go to ${group.name} now`} />
+        </>}
         {!isMember && (group.prerequisiteGroups?.length > 0
           ? (
             <View style={styles.prerequisiteGroups}>

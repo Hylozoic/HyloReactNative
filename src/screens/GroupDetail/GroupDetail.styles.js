@@ -79,7 +79,7 @@ const styles = {
     borderRadius: 2,
     // borderWidth: 1,
     fontWeight: 'bold',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   accessibilityMessage: {
     fontWeight: 'bold',
