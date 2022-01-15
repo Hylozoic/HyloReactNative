@@ -4,6 +4,7 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import { Header, HeaderBackButton, getHeaderTitle } from '@react-navigation/elements'
 import { isIOS } from 'util/platform'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
+import { modalScreenName } from 'navigation/linking/helpers'
 import FocusAwareStatusBar from 'components/FocusAwareStatusBar'
 import HeaderRightButton from 'navigation/headers/HeaderRightButton'
 import HeaderLeftCloseIcon from 'navigation/headers/HeaderLeftCloseIcon'
@@ -66,7 +67,7 @@ export const TabStackHeader = ({
         flexDirection: 'row',
         alignItems: 'center'
       }}>
-        <NotificationsIcon showNotifications={() => navigation.navigate('Notifications - Modal')} />
+        <NotificationsIcon showNotifications={() => navigation.navigate(modalScreenName('Notifications'))} />
       </View>
     ))
   }

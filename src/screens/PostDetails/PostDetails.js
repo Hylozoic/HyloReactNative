@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { KeyboardAccessoryView } from '@flyerhq/react-native-keyboard-accessory-view'
 import { get, isEmpty, find } from 'lodash/fp'
 import { isIOS } from 'util/platform'
+import { isModalScreen } from 'navigation/linking/helpers'
 import useGroupSelect from 'hooks/useGroupSelect'
 import SocketSubscriber from 'components/SocketSubscriber'
 import Comments from 'components/Comments'
@@ -179,9 +180,11 @@ export class PostDetails extends React.Component {
 }
 
 export default function (props) {
-  useGroupSelect()
+  const isModal = isModalScreen(props.route?.name)
+
+  if (!isModal) useGroupSelect()
+
   const safeAreaInsets = useSafeAreaInsets()
-  const isModal = props.route?.name == 'Post Details - Modal'
   const tabBarHeight = isModal ? 0 : useBottomTabBarHeight()
 
   return <PostDetails {...props} isModal={isModal} safeAreaInsets={safeAreaInsets} tabBarHeight={tabBarHeight} />

@@ -3,6 +3,7 @@ import { Image, Text, ScrollView, View, ImageBackground, TouchableOpacity, TextI
 import { useDispatch, useSelector } from 'react-redux'
 import LinearGradient from 'react-native-linear-gradient'
 import { bannerlinearGradientColors } from 'style/colors'
+import { isModalScreen } from 'navigation/linking/helpers'
 import { GROUP_ACCESSIBILITY } from 'store/models/Group'
 import fetchGroupDetailsAction from 'store/actions/fetchGroupDetails'
 import createJoinRequestAction from 'store/actions/createJoinRequest'
@@ -18,6 +19,7 @@ import styles from './GroupDetail.styles'
 
 export default function GroupDetail ({ navigation, route }) {
   const dispatch = useDispatch()
+  const isModal = isModalScreen(route?.name)
   const groupId = route.params.groupId
   const groupSlug = route.params.groupSlug
   const group = useSelector(state => presentGroup(getGroup(state, { id: groupId, slug: groupSlug })))
@@ -35,9 +37,13 @@ export default function GroupDetail ({ navigation, route }) {
     asyncFunc()
   }, [groupId, groupSlug])
 
+  let isMember = false
+
+  useEffect(() => {
+    isMember = myMemberships.find(m => m.group.id === group?.id)
+  }, [loading])
+
   if (loading) return <Loading />
-  
-  const isMember = myMemberships.find(m => m.group.id === group?.id)
 
   const setQuestionAnswer = questionId => answer => {
     setAnswer(currentAnswers => ({ ...currentAnswers, [questionId]: answer }))
@@ -50,6 +56,7 @@ export default function GroupDetail ({ navigation, route }) {
     }
     setLoading(true)
     await dispatch(joinRequestAction(group.id))
+    navigation.navigate(isModal ? 'Map' : 'Feed', { groupId: group.id })
     setLoading(false)
   }
 
@@ -65,7 +72,7 @@ export default function GroupDetail ({ navigation, route }) {
 
   const goToGroupDetail = group => navigation.navigate('Group Detail', { groupId: group?.id })
 
-  const goToGroup = group => navigation.navigate('Map', { groupId: group.id })
+  const goToGroup = group => navigation.navigate(isModal ? 'Map' : 'Feed', { groupId: group.id })
 
   const canJoin = !hasPendingRequest &&
     [GROUP_ACCESSIBILITY.Open, GROUP_ACCESSIBILITY.Restricted].includes(group.accessibility)

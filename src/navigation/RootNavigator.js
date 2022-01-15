@@ -3,6 +3,7 @@ import 'react-native-gesture-handler' // probably not necessary as already inclu
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { ModalHeader } from 'navigation/headers'
+import { modalScreenName } from './linking/helpers'
 import { white } from 'style/colors'
 // Screens
 import DrawerNavigator from 'navigation/DrawerNavigator'
@@ -25,7 +26,6 @@ import LoginByTokenHandler from 'screens/LoginByTokenHandler'
 import ItemChooser from 'screens/ItemChooser'
 import LoadingScreen from 'screens/LoadingScreen'
 
-
 const Root = createStackNavigator()
 export default function RootNavigator ({ fullyAuthorized }) {
   const navigatorProps = {
@@ -41,18 +41,18 @@ export default function RootNavigator ({ fullyAuthorized }) {
       <Root.Screen name='Create Group' component={CreateGroupTabsNavigator}
           options={{ headerShown: false }} />
       <Root.Group screenOptions={{ presentation: 'modal', header: ModalHeader }}>
-        <Root.Screen name='Post Details - Modal' component={PostDetails}
+        <Root.Screen name={modalScreenName('Post Details')} component={PostDetails}
           options={{ title: 'Post Details' }} />
-        <Root.Screen name='Member - Modal' component={MemberProfile}
+        <Root.Screen name={modalScreenName('Member')} component={MemberProfile}
           options={{ title: 'Member' }} />
-        <Root.Screen name='Group Detail - Modal' component={GroupDetail}
+        <Root.Screen name={modalScreenName('Group Detail')} component={GroupDetail}
           options={{ title: 'Group Details' }} />
         <Root.Screen name='Edit Post' component={PostEditor} />
         <Root.Screen name='Group Settings' component={GroupSettingsTabsNavigator} />
         {/* Not used anymore */}
         <Root.Screen name='Edit Your Skills' component={MemberSkillEditor} />
         <Root.Screen name='Pending Invites' component={PendingInvites} />
-        <Root.Screen name='Notifications - Modal' component={NotificationsList} />
+        <Root.Screen name={modalScreenName('Notifications')} component={NotificationsList} />
         <Root.Screen name='Notification Settings' component={NotificationSettings} />
       </Root.Group>
     </>}

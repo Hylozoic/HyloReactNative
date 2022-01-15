@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
 import { showToast } from 'util/toast'
+import { modalScreenName } from 'navigation/linking/helpers'
 import fetchPost from 'store/actions/fetchPost'
 import createComment from 'store/actions/createComment'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
@@ -51,8 +52,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     editPost: () => navigation.navigate('Edit Post', { id }),
     goToMembers: () => navigation.navigate('Project Members', { id, members: get('members', post) }),
     showMember: id => {
-      if (route?.name === 'Post Details - Modal') {
-        return navigation.navigate('Member - Modal', { id })
+      if (isModalScreen(route.name)) {
+        return navigation.navigate(modalScreenName('Member'), { id })
       } else {
         return navigation.navigate('Member', { id })
       }

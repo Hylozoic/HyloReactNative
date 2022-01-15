@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { debounce } from 'lodash/fp'
+import { modalScreenName } from 'navigation/linking/helpers'
 import {
   fetchSearchResults,
   setSearchTerm,
@@ -10,7 +12,6 @@ import {
   getHasMoreSearchResults,
   FETCH_SEARCH
 } from './SearchPage.store'
-import { debounce } from 'lodash/fp'
 
 export function mapStateToProps (state, props) {
   const searchTerm = getSearchTerm(state, props)
@@ -24,8 +25,8 @@ export function mapStateToProps (state, props) {
 
   // TODO: Fix back links on Home Tab when navigating this way,
   // currently causes a crash if trying to go back from Post Details or Member
-  const goToPost = id => props.navigation.navigate('Post Details - Modal', { id })
-  const goToPerson = id => props.navigation.navigate('Member - Modal', { id })
+  const goToPost = id => props.navigation.navigate(modalScreenName('Post Details'), { id })
+  const goToPerson = id => props.navigation.navigate(modalScreenName('Member'), { id })
 
   return {
     searchTerm,

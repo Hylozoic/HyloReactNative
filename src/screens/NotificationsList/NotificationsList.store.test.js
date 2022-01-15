@@ -1,5 +1,6 @@
 import orm from 'store/models'
 import * as store from './NotificationsList.store'
+import { modalScreenName } from 'navigation/linking/helpers'
 
 describe('action creators', () => {
   it('matches the last snapshot from fetchNotifications', () => {
@@ -104,7 +105,7 @@ describe('selectors/refiners', () => {
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith('Post Details - Modal', { id: '333' })
+      expect(navigation.navigate).toHaveBeenCalledWith(modalScreenName('Post Details'), { id: '333' })
     })
 
     it('matches the previous ACTION_COMMENT_MENTION snapshot', () => {
@@ -117,7 +118,7 @@ describe('selectors/refiners', () => {
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith('Post Details - Modal', { id: '333' })
+      expect(navigation.navigate).toHaveBeenCalledWith(modalScreenName('Post Details'), { id: '333' })
     })
 
     it('matches the previous ACTION_MENTION snapshot', () => {
@@ -132,7 +133,7 @@ describe('selectors/refiners', () => {
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith('Post Details - Modal', { id: '333' })
+      expect(navigation.navigate).toHaveBeenCalledWith(modalScreenName('Post Details'), { id: '333' })
     })
 
     it('matches the previous ACTION_TOPIC snapshot', () => {
@@ -147,7 +148,7 @@ describe('selectors/refiners', () => {
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith('Post Details - Modal', { id: '333' })
+      expect(navigation.navigate).toHaveBeenCalledWith(modalScreenName('Post Details'), { id: '333' })
     })
 
     it('matches the previous ACTION_JOIN_REQUEST snapshot', () => {
@@ -197,7 +198,7 @@ describe('selectors/refiners', () => {
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith('Post Details - Modal', { id: '333' })
+      expect(navigation.navigate).toHaveBeenCalledWith(modalScreenName('Post Details'), { id: '333' })
     })
   })
 

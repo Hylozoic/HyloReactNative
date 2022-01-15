@@ -24,8 +24,6 @@ export default function UserSettingsWebView ({ path: pathProp, navigation, route
       onNavigationStateChange={({ url }) => {
         if (!url.match(/\/settings/)) {
           webViewRef.current?.goBack()
-          // Could force navigate to the targeted thing (group detail modal, etc)
-          // navigation.navigate('Notifications - Modal')
           return false
         }
       }}

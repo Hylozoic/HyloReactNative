@@ -8,6 +8,7 @@ import striptags from 'striptags'
 import orm from 'store/models'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
 import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
+import { modalScreenName } from 'navigation/linking/helpers'
 
 import {
   ACTION_NEW_COMMENT,
@@ -148,7 +149,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
         body: `wrote: ${presentedText(comment.text)}`,
         header: 'mentioned you in a comment on',
         nameInHeader: true,
-        onPress: () => navigate('Post Details - Modal', { id: post.id }),
+        onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
         title: post.title
       }
 
@@ -156,7 +157,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
       return {
         body: `wrote: ${presentedText(comment.text)}`,
         header: 'New Comment on',
-        onPress: () => navigate('Post Details - Modal', { id: post.id }),
+        onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
         title: post.title
       }
 
@@ -164,7 +165,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
       return {
         body: `wrote: ${presentedText(post.details)}`,
         header: 'mentioned you',
-        onPress: () => navigate('Post Details - Modal', { id: post.id }),
+        onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
         nameInHeader: true
       }
 
@@ -174,7 +175,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
       return {
         body: `wrote: ${presentedText(post.details)}`,
         header: 'New Post in',
-        onPress: () => navigate('Post Details - Modal', { id: post.id }),
+        onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
         topic
       }
 
@@ -202,7 +203,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
       return {
         body: `wrote: ${presentedText(post.title)}`,
         header: 'posted an announcement',
-        onPress: () => navigate('Post Details - Modal', { id: post.id }),
+        onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
         nameInHeader: true
       }
   }

@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Text, View, Image, TouchableOpacity } from 'react-native'
+import { isModalScreen } from 'navigation/linking/helpers'
+import useGroupSelect from 'hooks/useGroupSelect'
 import Loading from 'components/Loading'
-import styles from './MemberProfile.styles'
 import MemberFeed from './MemberFeed'
 import MemberHeader from './MemberHeader'
 import ImagePicker from 'components/ImagePicker'
 import FlagContent from 'components/FlagContent'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from 'assets/default-user-banner.jpg'
-import useGroupSelect from 'hooks/useGroupSelect'
+import styles from './MemberProfile.styles'
 
 export const setHeader = ({ route, navigation, currentGroup }) => {
-  if (route.name === 'Member - Modal') return
+  if (isModalScreen(route.name)) return
   navigation.setOptions({ title: currentGroup.name  })
 }
 
@@ -42,7 +43,7 @@ export default function MemberProfile ({
   const [flaggingVisible, setFlaggingVisible] = useState(false)
 
   // Don't force selected group switch if this is a modal (generalize into useGroupSelect for any modal?)
-  if (route.name !== 'Member - Modal') {
+  if (!isModalScreen(route.name)) {
     useGroupSelect()
   }
 

@@ -5,6 +5,7 @@ import { CommonActions } from '@react-navigation/native'
 import { match } from 'path-to-regexp'
 import * as qs from 'query-string'
 import store from 'store'
+import { modalScreenName } from './helpers'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import { getActionFromState } from '@react-navigation/native'
 import { INITIAL_NAV_STATE, navigationRef } from 'navigation/RootView/RootView'
@@ -39,19 +40,19 @@ export const routesConfig = {
   '/h/use-invitation':                                       'JoinGroup',
 
   // /members
-  '/members/:id':                                            'Member - Modal',
+  '/members/:id':                                            modalScreenName('Member'),
   '/members':                                                'Drawer/Tabs/Home Tab/Members',
 
   // special group routes (/all, /public)
   '/:groupSlug(all|public)':                                 { screenPath: 'Drawer/Tabs/Home Tab/Feed', context: 'groups' },
-  '/:groupSlug(all)/members/:id':                            { screenPath: 'Member - Modal', context: 'groups' },
+  '/:groupSlug(all)/members/:id':                            { screenPath: modalScreenName('Member'), context: 'groups' },
   
   // map routes
   '/:groupSlug(all|public)/map':                             { screenPath: 'Drawer/Tabs/Home Tab/Map', context: 'groups' },
   '/:context(groups)/:groupSlug/map':                        'Drawer/Tabs/Home Tab/Map',
-  '/:groupSlug(all|public)/map/post/:id':                    { screenPath: 'Post Details - Modal', context: 'groups' },
-  '/:context(groups)/:groupSlug/map/post/:id':               'Post Details - Modal',
-  '/:context(groups)/:groupSlug/detail':                     'Group Detail - Modal',
+  '/:groupSlug(all|public)/map/post/:id':                    { screenPath: modalScreenName('Post Details'), context: 'groups' },
+  '/:context(groups)/:groupSlug/map/post/:id':               modalScreenName('Post Details'),
+  '/:context(groups)/:groupSlug/detail':                     modalScreenName('Group Detail'),
 
   // /groups
   '/:context(groups)/:groupSlug/join/:accessCode':           'JoinGroup',
@@ -70,7 +71,7 @@ export const routesConfig = {
   '/:context(groups)/:groupSlug/post/:id/edit':              'Edit Post',
 
   // /post
-  '/post/:id':                                               'Post Details - Modal',
+  '/post/:id':                                               modalScreenName('Post Details'),
   '/post/:id/edit':                                          'Edit Post',
 
   // /settings

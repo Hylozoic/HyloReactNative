@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { modalScreenName } from 'navigation/linking/helpers'
 import makeGoToGroup from 'store/actions/makeGoToGroup'
 import respondToEvent from 'store/actions/respondToEvent'
 import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
@@ -69,7 +70,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
       respondToEvent
     }, dispatch),
     goToGroup: makeGoToGroup(navigation, dispatch),
-    showPost: id => navigation.navigate('Post Details - Modal', { id }),
+    showPost: id => navigation.navigate(modalScreenName('Post Details'), { id }),
     showTopic: topicName => navigation.navigate('Topic Feed', { topicName })
   }
 }

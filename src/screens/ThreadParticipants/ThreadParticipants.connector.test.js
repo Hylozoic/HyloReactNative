@@ -1,3 +1,4 @@
+import { modalScreenName } from 'navigation/linking/helpers'
 import { mapStateToProps } from './ThreadParticipants.connector'
 
 describe('mapStateToProps', () => {
@@ -13,6 +14,6 @@ describe('mapStateToProps', () => {
     const stateProps = mapStateToProps({}, props)
     expect(stateProps).toMatchSnapshot()
     stateProps.goToParticipant(1)
-    expect(props.navigation.navigate).toHaveBeenCalledWith('Member - Modal', { id: 1 })
+    expect(props.navigation.navigate).toHaveBeenCalledWith(modalScreenName('Member'), { id: 1 })
   })
 })
