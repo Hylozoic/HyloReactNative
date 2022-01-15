@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { get } from 'lodash/fp'
 import LoadingScreen from 'screens/LoadingScreen'
 import getSignedIn from 'store/selectors/getSignedIn'
-import makeGoToGroup from 'store/actions/makeGoToGroup'
 import getRouteParam from 'store/selectors/getRouteParam'
 import getMemberships from 'store/selectors/getMemberships'
 import { checkInvitation as checkInvitationAction, useInvitation } from './JoinGroup.store'
@@ -15,11 +14,11 @@ export default function JoinGroup ({
   const dispatch = useDispatch()
   const signedIn = useSelector(getSignedIn)
   const memberships = useSelector(getMemberships)
-  const goToGroup = makeGoToGroup(navigation, dispatch, false)
   const invitationCodes = {
     invitationToken: getRouteParam('token', route),
     accessCode: getRouteParam('accessCode', route)
   }
+  const goToGroup = groupId => navigation?.navigate('Feed', { groupId })
 
   useEffect(() => { 
     const checkInviteAndJoin = async () => {

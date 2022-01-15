@@ -25,6 +25,7 @@ export default function GroupDetail ({ navigation, route }) {
   const group = useSelector(state => presentGroup(getGroup(state, { id: groupId, slug: groupSlug })))
   const hasPendingRequest = useSelector(getMyJoinRequests).find(joinRequest => joinRequest.group.id === groupId)
   const myMemberships = useSelector(getMemberships)
+  const [isMember, setIsMember] = useState()
   const [loading, setLoading] = useState(true)
   const [questionAnswers, setAnswer] = useState({})
 
@@ -35,13 +36,8 @@ export default function GroupDetail ({ navigation, route }) {
       setLoading(false)
     }
     asyncFunc()
+    setIsMember(myMemberships.find(m => m.group.id === group?.id))
   }, [groupId, groupSlug])
-
-  let isMember = false
-
-  useEffect(() => {
-    isMember = myMemberships.find(m => m.group.id === group?.id)
-  }, [loading])
 
   if (loading) return <Loading />
 

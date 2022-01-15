@@ -1,4 +1,4 @@
-import React, { useCallback, forwardRef, useState } from 'react'
+import React, { useCallback, forwardRef, useState, useEffect } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import { Linking } from 'react-native'
 import Loading from 'components/Loading'
@@ -14,18 +14,12 @@ const HyloWebView = forwardRef(({
   route
 }, webViewRef) => {
   const [cookie, setCookie] = useState()
+  const [uri, setUri] = useState()
 
-  // TODO: Decide whether to use state for this or not...
-  // const [uri, setUri] = useState()
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     const path = pathProp || route?.params?.path
-  //     setUri(`${process.env.HYLO_WEB_BASE_URL}${path ? `/${path}` : ''}?layoutFlags=mobileSettings`)
-  //   }, [pathProp, route?.params?.path])
-  // )
-
-  const path = pathProp || route?.params?.path
-  const uri = `${process.env.HYLO_WEB_BASE_URL}${path ? `/${path}` : ''}?layoutFlags=mobileSettings`
+  useEffect(() => {
+    const path = pathProp || route?.params?.path
+    setUri(`${process.env.HYLO_WEB_BASE_URL}${path ? `/${path}` : ''}?layoutFlags=mobileSettings`)
+  }, [pathProp, route?.params?.path])
 
   useFocusEffect(
     useCallback(() => {
