@@ -56,8 +56,8 @@ export default function MapWebView ({ navigation }) {
         if (url?.match(/\/groups\/*.+\/members\/*.+$/)) {
           const memberModalPath = '/all/' + url.split('/').slice(3,5).join('/')
           navigateToLinkingPathInApp(memberModalPath)
-      // Matches: /groups/our-awesome-group/map/post/<post-id>, /(all|public)/post/<post-id>
-      } else if (url?.match(/\/post|\/members/)) {
+        // Matches: /groups/our-awesome-group/map/post/<post-id>, /(all|public)/post/<post-id>
+        } else if (url?.match(/\/post|\/members/)) {
           navigateToLinkingPathInApp(url)
         // Matches: /groups/our-awesome-group, /all, /public
         // re-writes linking to go to Group Detail modal
