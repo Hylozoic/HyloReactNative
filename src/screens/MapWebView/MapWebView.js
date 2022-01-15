@@ -11,6 +11,7 @@ import HyloWebView from 'screens/HyloWebView'
 //  MATCHER_GROUP_SLUG currently excludes all and public (|\/all$|\/public)
 export const MATCHER_GROUP_SLUG = '[a-zA-Z0-9\-]+$'
 export const MATCHER_GROUP_URL = `\/groups\/${MATCHER_GROUP_SLUG}$`
+export const MATCHER_ALL_AND_PUBLIC_GROUP_URL = `\/(all|public)$`
 
 export default function MapWebView ({ navigation }) {
   const webViewRef = useRef(null)
@@ -62,6 +63,8 @@ export default function MapWebView ({ navigation }) {
         // re-writes linking to go to Group Detail modal
         } else if (url.match(new RegExp(MATCHER_GROUP_URL))) {
           navigateToLinkingPathInApp(url + '/detail')
+        } else if (url.match(new RegExp(MATCHER_ALL_AND_PUBLIC_GROUP_URL))) {
+          navigateToLinkingPathInApp(url + '/map')
         }
       }}
       // Required for emulator with the map but may be disadventageous for actual
