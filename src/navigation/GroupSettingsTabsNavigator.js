@@ -1,9 +1,9 @@
 import React, { useLayoutEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import fetchGroupSettings from 'store/actions/fetchGroupSettings'
-import useGetGroupFromParamsOrSelected from 'hooks/useGetGroupFromParamsOrSelected'
+import getGroupFromParamsOrCurrent from 'store/selectors/getGroupFromParamsOrCurrent'
 import { isIOS } from 'util/platform'
 import Avatar from 'components/Avatar'
 import { caribbeanGreen, rhino, rhino05, rhino30, white } from 'style/colors'
@@ -18,7 +18,8 @@ const GroupSettings = createMaterialTopTabNavigator()
 export default function GroupSettingsTabsNavigator ({ navigation, route }) {
   const dispatch = useDispatch()
   // Use group from params or current group if none found
-  const selectedGroup = useGetGroupFromParamsOrSelected(route?.params?.params)
+  const routeParams = route?.params?.params
+  const selectedGroup = useSelector(state => getGroupFromParamsOrCurrent(state, routeParams))
   const groupName = selectedGroup?.name
   const navigatorProps = {
     screenOptions: {
