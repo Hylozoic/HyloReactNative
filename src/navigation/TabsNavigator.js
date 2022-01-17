@@ -13,7 +13,6 @@ import HomeNavigator from 'navigation/HomeNavigator'
 import SearchNavigator from 'navigation/SearchNavigator'
 import MessagesNavigator from 'navigation/MessagesNavigator'
 import UserSettingsTabsNavigator from './UserSettingsTabsNavigator'
-// import MapWebView from 'screens/MapWebView'
 
 const Tabs = createBottomTabNavigator()
 export default function TabsNavigator () {
@@ -77,8 +76,6 @@ export default function TabsNavigator () {
           )
         }}
       />
-      {/* TODO: Put here for now, but may want to put back as a screen in Home stack... */}
-      {/* <Tabs.Screen name='Map' component={MapWebView} options={{ tabBarButton: () => null, tabBarVisible: false }}/> */}
     </Tabs.Navigator>
   )
 }

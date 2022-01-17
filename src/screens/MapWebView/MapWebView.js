@@ -1,36 +1,42 @@
 import React, { useState, useCallback, useRef } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import { useSelector } from 'react-redux'
+import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import { navigateToLinkingPathInApp } from 'navigation/linking/custom'
 import useGroupSelect from 'hooks/useGroupSelect'
-import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import HyloWebView from 'screens/HyloWebView'
 
-// TODO: Move these into common library (most likely navigation/linking/custom.js)
-//  MATCHER_GROUP_SLUG currently excludes all and public (|\/all$|\/public)
+// TODO: Move these into common library (probably navigation/linking/helpers.js)
+// MATCHER_GROUP_SLUG matches only actual group paths (e.g. not /all or /public)
 export const MATCHER_GROUP_SLUG = '[a-zA-Z0-9\-]+$'
-export const MATCHER_GROUP_URL = `\/groups\/${MATCHER_GROUP_SLUG}$`
-export const MATCHER_ALL_AND_PUBLIC_GROUP_URL = `\/(all|public)$`
+export const MATCHER_GROUP_ROOT_PATH = `\/groups\/${MATCHER_GROUP_SLUG}$`
+export const MATCHER_GROUP_ALL_AND_PUBLIC_ROOT_PATH = `\/(${ALL_GROUP_ID}|${PUBLIC_GROUP_ID})$`
 
 export default function MapWebView ({ navigation }) {
   const webViewRef = useRef(null)
   const group = useSelector(getCurrentGroup)
   const [path, setPath] = useState()
 
-  // Going to the map will always switch currentGroup context
+  // Going to the map will switch currentGroup context
   useGroupSelect()
 
   useFocusEffect(
     useCallback(() => {
       navigation.setOptions({
-        title: group?.name
+        title: group?.name,
+        // Disables going back by pull right on this screen
+        gestureEnabled: false
       })
+      // DisablesswipeEnabled on DrawerNavigator
+      navigation.getParent()?.getParent()?.setOptions({ swipeEnabled: false })
       if ([ALL_GROUP_ID, PUBLIC_GROUP_ID].includes(group?.slug)) {
         setPath(() => `${group?.slug}/map`)
       } else {
         setPath(() => `groups/${group?.slug}/map`)
       }
+      // Re-enables swipeEnabled on DrawerNavigator when screen blurs
+      return () => navigation.getParent()?.getParent()?.setOptions({ swipeEnabled: true })
     }, [group?.slug])
   )
 
@@ -48,9 +54,9 @@ export default function MapWebView ({ navigation }) {
       navigateToLinkingPathInApp(url)
     // Matches: /groups/our-awesome-group, /all, /public
     // re-writes linking to go to Group Detail modal
-    } else if (url.match(new RegExp(MATCHER_GROUP_URL))) {
+    } else if (url.match(new RegExp(MATCHER_GROUP_ROOT_PATH))) {
       navigateToLinkingPathInApp(url + '/detail')
-    } else if (url.match(new RegExp(MATCHER_ALL_AND_PUBLIC_GROUP_URL))) {
+    } else if (url.match(new RegExp(MATCHER_GROUP_ALL_AND_PUBLIC_ROOT_PATH))) {
       navigateToLinkingPathInApp(url + '/map')
     } else {
       // NOTE: Right now this captures saved search view calls, may capture too much?

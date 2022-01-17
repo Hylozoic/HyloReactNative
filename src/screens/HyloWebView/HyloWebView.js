@@ -44,9 +44,10 @@ const HyloWebView = forwardRef(({
         geolocationEnabled
         sharedCookiesEnabled
         onShouldStartLoadWithRequest={params => {
+          const { url } = params
           // Opens full URLs in external browser if not the
           // initial URI specified on load of the WebView
-          const { url } = params
+          if (url === uri) return true
           if (url !== uri && url.slice(0,4) === 'http') {
             Linking.openURL(url)
             return false
