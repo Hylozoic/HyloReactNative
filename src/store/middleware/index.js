@@ -26,9 +26,4 @@ const middleware = compact([
   })
 ])
 
-if (isDev) {
-  const createDebugger = require('redux-flipper').default
-  middleware.push(createDebugger())
-}
-
 export default middleware

@@ -37,6 +37,7 @@ build/
 .gradle
 local.properties
 *.iml
+*.hprof
 android/app/src/debug/res/values/strings.xml
 android/app/src/release/res/values/strings.xml
 

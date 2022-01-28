@@ -26,8 +26,6 @@ export default function graphqlMiddleware (store) {
           params: { query, variables },
           method: 'POST',
           transform: payload => {
-            console.log('!!! payload', payload)
-
             if (payload.errors) return Promise.reject(payload.errors[0])
             return payload
           }

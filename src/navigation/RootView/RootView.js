@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native'
-// Currently a bug with React Navigation Flipper plugin, follow:
-// https://github.com/react-navigation/react-navigation/issues/9850
-// import { useFlipper } from '@react-navigation/devtools'
 import RNBootSplash from 'react-native-bootsplash'
 import RootNavigator from 'navigation/RootNavigator'
 import OneSignal from 'react-native-onesignal'
