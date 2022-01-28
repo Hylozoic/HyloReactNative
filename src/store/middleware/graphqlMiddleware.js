@@ -1,24 +1,33 @@
+import { graphqlToString } from 'util/graphql'
+
 export default function graphqlMiddleware (store) {
   return next => action => {
     const { type, meta, graphql } = action
+
     if (!graphql) return next(action)
 
-    const { query, variables } = graphql
+    const { query: unknownGraphql, variables = {} } = graphql
+    const query = graphqlToString(unknownGraphql)
+
+    const path = '/noo/graphql'
+
     return next({
       type,
       meta: {
         ...meta,
-        graphql: { query, variables }
+        graphql: {
+          query,
+          variables
+        }
       },
       payload: {
         api: {
-          path: '/noo/graphql',
-          params: {
-            query,
-            variables
-          },
+          path,
+          params: { query, variables },
           method: 'POST',
           transform: payload => {
+            console.log('!!! payload', payload)
+
             if (payload.errors) return Promise.reject(payload.errors[0])
             return payload
           }
