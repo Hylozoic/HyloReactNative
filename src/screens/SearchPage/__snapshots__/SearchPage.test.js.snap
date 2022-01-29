@@ -132,11 +132,9 @@ exports[`SearchPage matches the last snapshot 1`] = `
       ]
     }
     keyExtractor={[Function]}
-    numColumns={1}
     onEndReached={[Function]}
     onRefresh={[Function]}
     refreshing={false}
-    removeClippedSubviews={false}
     renderItem={[Function]}
   />
 </View>

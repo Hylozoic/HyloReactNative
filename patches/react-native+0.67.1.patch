@@ -1,0 +1,23 @@
+diff --git a/node_modules/react-native/jest/setup.js b/node_modules/react-native/jest/setup.js
+index 7787788..1f809cd 100644
+--- a/node_modules/react-native/jest/setup.js
++++ b/node_modules/react-native/jest/setup.js
+@@ -110,11 +110,13 @@ jest
+       getNativeRef: jest.fn(),
+     }),
+   )
+-  .mock('../Libraries/Modal/Modal', () => {
+-    const baseComponent = mockComponent('../Libraries/Modal/Modal');
+-    const mockModal = jest.requireActual('./mockModal');
+-    return mockModal(baseComponent);
+-  })
++  // Patched as per https://github.com/facebook/react-native/issues/32939#issuecomment-1018660604
++  .mock('../Libraries/Modal/Modal', () => mockComponent('../Libraries/Modal/Modal'))
++  // .mock('../Libraries/Modal/Modal', () => {
++  //   const baseComponent = mockComponent('../Libraries/Modal/Modal');
++  //   const mockModal = jest.requireActual('./mockModal');
++  //   return mockModal(baseComponent);
++  // })
+   .mock('../Libraries/Components/View/View', () =>
+     mockComponent('../Libraries/Components/View/View', MockNativeMethods),
+   )

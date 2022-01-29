@@ -36,7 +36,6 @@ exports[`MemberList renders with default props with default non-server search 1`
   keyExtractor={[Function]}
   numColumns="2"
   onEndReached={false}
-  removeClippedSubviews={false}
   renderItem={[Function]}
 />
 `;
@@ -77,7 +76,6 @@ exports[`MemberList runs call for new results if server search 1`] = `
   keyExtractor={[Function]}
   numColumns="2"
   onEndReached={[Function]}
-  removeClippedSubviews={false}
   renderItem={[Function]}
 />
 `;
@@ -153,7 +151,6 @@ exports[`MemberList server search fetches new results when search provided 1`] =
                 "top": 5,
               }
             }
-            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}

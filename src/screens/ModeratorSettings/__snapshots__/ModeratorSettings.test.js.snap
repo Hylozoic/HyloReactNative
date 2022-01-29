@@ -19,8 +19,6 @@ exports[`ModeratorSettings matches the last snapshot 1`] = `
     }
     keyExtractor={[Function]}
     keyboardShouldPersistTaps="always"
-    numColumns={1}
-    removeClippedSubviews={false}
     renderItem={[Function]}
   />
   <View>
@@ -113,6 +111,7 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
       >
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -141,6 +140,7 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
       >
         <View
           accessible={true}
+          collapsable={false}
           focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
@@ -164,6 +164,7 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
           </Text>
           <View
             accessible={true}
+            collapsable={false}
             focusable={true}
             hitSlop={
               Object {
@@ -193,6 +194,7 @@ exports[`ModeratorSettings shows the Search component appropriately 1`] = `
     <View>
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onClick={[Function]}
         onResponderGrant={[Function]}

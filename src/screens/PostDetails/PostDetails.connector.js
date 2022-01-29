@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
 import { showToast } from 'util/toast'
-import { modalScreenName } from 'navigation/linking/helpers'
+import { isModalScreen, modalScreenName } from 'navigation/linking/helpers'
 import fetchPost from 'store/actions/fetchPost'
 import createComment from 'store/actions/createComment'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'

@@ -193,8 +193,6 @@ exports[`renders correctly with all=true, and no group or user 1`] = `
         }
         horizontal={true}
         keyExtractor={[Function]}
-        numColumns={1}
-        removeClippedSubviews={false}
         renderItem={[Function]}
         showsHorizontalScrollIndicator={false}
       />

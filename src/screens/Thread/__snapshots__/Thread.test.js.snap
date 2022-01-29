@@ -39,12 +39,10 @@ exports[`Thread matches the last snapshot 1`] = `
     }
     inverted={true}
     keyExtractor={[Function]}
-    numColumns={1}
     onEndReached={[Function]}
     onEndReachedThreshold={0.3}
     onScroll={[Function]}
     refreshing={false}
-    removeClippedSubviews={false}
     renderItem={[Function]}
   />
   <Memo(Connect(_default))

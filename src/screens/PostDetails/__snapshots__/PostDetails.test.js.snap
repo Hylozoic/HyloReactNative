@@ -34,6 +34,7 @@ exports[`PostDetails renders correctly 1`] = `
     }
   >
     <View
+      collapsable={false}
       pointerEvents="box-none"
     >
       <View
@@ -44,16 +45,15 @@ exports[`PostDetails renders correctly 1`] = `
         style={null}
       >
         <View
+          collapsable={false}
           pointerEvents="box-none"
         >
           <View
             collapsable={false}
-            nativeID="animatedComponent"
           />
         </View>
         <View
           collapsable={false}
-          nativeID="animatedComponent"
           pointerEvents="box-none"
         >
           <View
@@ -75,16 +75,17 @@ exports[`PostDetails renders correctly 1`] = `
             }
           >
             <View
+              collapsable={false}
               pointerEvents="box-none"
             />
             <View
+              collapsable={false}
               pointerEvents="box-none"
             >
               <Text
                 accessibilityRole="header"
                 aria-level="1"
                 collapsable={false}
-                nativeID="animatedComponent"
                 numberOfLines={1}
                 onLayout={[Function]}
               >
@@ -92,6 +93,7 @@ exports[`PostDetails renders correctly 1`] = `
               </Text>
             </View>
             <View
+              collapsable={false}
               pointerEvents="box-none"
             />
           </View>
@@ -108,6 +110,7 @@ exports[`PostDetails renders correctly 1`] = `
     >
       <RNSScreen
         activityState={2}
+        collapsable={false}
         forwardedRef={[Function]}
         pointerEvents="box-none"
       >
@@ -170,7 +173,6 @@ exports[`PostDetails renders correctly 1`] = `
         >
           <View
             collapsable={false}
-            nativeID="animatedComponent"
             pointerEvents="box-none"
           >
             <View
@@ -214,7 +216,6 @@ exports[`PostDetails renders correctly 1`] = `
                     <View>
                       <View
                         collapsable={false}
-                        nativeID="animatedComponent"
                       >
                         <RCTScrollView
                           ListFooterComponent={[Function]}
@@ -278,7 +279,6 @@ exports[`PostDetails renders correctly 1`] = `
                                       accessible={true}
                                       collapsable={false}
                                       focusable={true}
-                                      nativeID="animatedComponent"
                                       onClick={[Function]}
                                       onResponderGrant={[Function]}
                                       onResponderMove={[Function]}
@@ -293,7 +293,6 @@ exports[`PostDetails renders correctly 1`] = `
                                       accessible={true}
                                       collapsable={false}
                                       focusable={true}
-                                      nativeID="animatedComponent"
                                       onClick={[Function]}
                                       onResponderGrant={[Function]}
                                       onResponderMove={[Function]}
@@ -345,7 +344,6 @@ exports[`PostDetails renders correctly 1`] = `
                                               accessible={true}
                                               collapsable={false}
                                               focusable={true}
-                                              nativeID="animatedComponent"
                                               onClick={[Function]}
                                               onResponderGrant={[Function]}
                                               onResponderMove={[Function]}
@@ -385,7 +383,6 @@ exports[`PostDetails renders correctly 1`] = `
                                           "top": 20,
                                         }
                                       }
-                                      nativeID="animatedComponent"
                                       onClick={[Function]}
                                       onResponderGrant={[Function]}
                                       onResponderMove={[Function]}
@@ -405,7 +402,6 @@ exports[`PostDetails renders correctly 1`] = `
                                     accessible={true}
                                     collapsable={false}
                                     focusable={true}
-                                    nativeID="animatedComponent"
                                     onClick={[Function]}
                                     onResponderGrant={[Function]}
                                     onResponderMove={[Function]}
@@ -454,7 +450,6 @@ exports[`PostDetails renders correctly 1`] = `
                                     accessible={true}
                                     collapsable={false}
                                     focusable={true}
-                                    nativeID="animatedComponent"
                                     onClick={[Function]}
                                     onResponderGrant={[Function]}
                                     onResponderMove={[Function]}
@@ -478,7 +473,6 @@ exports[`PostDetails renders correctly 1`] = `
                                     accessible={true}
                                     collapsable={false}
                                     focusable={true}
-                                    nativeID="animatedComponent"
                                     onClick={[Function]}
                                     onResponderGrant={[Function]}
                                     onResponderMove={[Function]}
@@ -509,7 +503,6 @@ exports[`PostDetails renders correctly 1`] = `
                                         accessible={true}
                                         collapsable={false}
                                         focusable={true}
-                                        nativeID="animatedComponent"
                                         onClick={[Function]}
                                         onResponderGrant={[Function]}
                                         onResponderMove={[Function]}
@@ -527,7 +520,6 @@ exports[`PostDetails renders correctly 1`] = `
                                       accessible={true}
                                       collapsable={false}
                                       focusable={true}
-                                      nativeID="animatedComponent"
                                       onClick={[Function]}
                                       onResponderGrant={[Function]}
                                       onResponderMove={[Function]}
@@ -573,7 +565,6 @@ exports[`PostDetails renders correctly 1`] = `
                                     accessible={true}
                                     collapsable={false}
                                     focusable={true}
-                                    nativeID="animatedComponent"
                                     onClick={[Function]}
                                     onResponderGrant={[Function]}
                                     onResponderMove={[Function]}
@@ -597,7 +588,6 @@ exports[`PostDetails renders correctly 1`] = `
                       </View>
                       <View
                         collapsable={false}
-                        nativeID="animatedComponent"
                         testID="container"
                       >
                         <View
@@ -642,7 +632,6 @@ exports[`PostDetails renders correctly 1`] = `
                                       "top": 7,
                                     }
                                   }
-                                  nativeID="animatedComponent"
                                   onClick={[Function]}
                                   onResponderGrant={[Function]}
                                   onResponderMove={[Function]}
@@ -667,7 +656,6 @@ exports[`PostDetails renders correctly 1`] = `
                                       "top": 7,
                                     }
                                   }
-                                  nativeID="animatedComponent"
                                   onClick={[Function]}
                                   onResponderGrant={[Function]}
                                   onResponderMove={[Function]}
@@ -683,6 +671,11 @@ exports[`PostDetails renders correctly 1`] = `
                               </View>
                             </View>
                             <View
+                              accessibilityState={
+                                Object {
+                                  "disabled": true,
+                                }
+                              }
                               accessible={true}
                               collapsable={false}
                               focusable={true}
@@ -694,7 +687,6 @@ exports[`PostDetails renders correctly 1`] = `
                                   "top": 5,
                                 }
                               }
-                              nativeID="animatedComponent"
                               onClick={[Function]}
                               onResponderGrant={[Function]}
                               onResponderMove={[Function]}

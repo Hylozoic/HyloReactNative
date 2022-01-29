@@ -126,6 +126,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
     }
   >
     <View
+      collapsable={false}
       pointerEvents="box-none"
     >
       <View
@@ -136,16 +137,15 @@ exports[`PostEditor renders correctly while saving 1`] = `
         style={null}
       >
         <View
+          collapsable={false}
           pointerEvents="box-none"
         >
           <View
             collapsable={false}
-            nativeID="animatedComponent"
           />
         </View>
         <View
           collapsable={false}
-          nativeID="animatedComponent"
           pointerEvents="box-none"
         >
           <View
@@ -167,16 +167,17 @@ exports[`PostEditor renders correctly while saving 1`] = `
             }
           >
             <View
+              collapsable={false}
               pointerEvents="box-none"
             />
             <View
+              collapsable={false}
               pointerEvents="box-none"
             >
               <Text
                 accessibilityRole="header"
                 aria-level="1"
                 collapsable={false}
-                nativeID="animatedComponent"
                 numberOfLines={1}
                 onLayout={[Function]}
               >
@@ -184,6 +185,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
               </Text>
             </View>
             <View
+              collapsable={false}
               pointerEvents="box-none"
             />
           </View>
@@ -200,6 +202,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
     >
       <RNSScreen
         activityState={2}
+        collapsable={false}
         forwardedRef={[Function]}
         pointerEvents="box-none"
       >
@@ -262,7 +265,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
         >
           <View
             collapsable={false}
-            nativeID="animatedComponent"
             pointerEvents="box-none"
           >
             <View
@@ -319,7 +321,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                   accessible={true}
                                   collapsable={false}
                                   focusable={true}
-                                  nativeID="animatedComponent"
                                   onClick={[Function]}
                                   onResponderGrant={[Function]}
                                   onResponderMove={[Function]}
@@ -363,7 +364,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                     accessible={true}
                                     collapsable={false}
                                     focusable={true}
-                                    nativeID="animatedComponent"
                                     onClick={[Function]}
                                     onResponderGrant={[Function]}
                                     onResponderMove={[Function]}
@@ -381,7 +381,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                         accessible={true}
                                         collapsable={false}
                                         focusable={true}
-                                        nativeID="animatedComponent"
                                         onClick={[Function]}
                                         onResponderGrant={[Function]}
                                         onResponderMove={[Function]}
@@ -396,7 +395,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                         accessible={true}
                                         collapsable={false}
                                         focusable={true}
-                                        nativeID="animatedComponent"
                                         onClick={[Function]}
                                         onResponderGrant={[Function]}
                                         onResponderMove={[Function]}
@@ -420,7 +418,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                           "top": 4,
                                         }
                                       }
-                                      nativeID="animatedComponent"
                                       onClick={[Function]}
                                       onResponderGrant={[Function]}
                                       onResponderMove={[Function]}
@@ -545,7 +542,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                         "top": 7,
                                       }
                                     }
-                                    nativeID="animatedComponent"
                                     onClick={[Function]}
                                     onResponderGrant={[Function]}
                                     onResponderMove={[Function]}
@@ -570,7 +566,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                         "top": 7,
                                       }
                                     }
-                                    nativeID="animatedComponent"
                                     onClick={[Function]}
                                     onResponderGrant={[Function]}
                                     onResponderMove={[Function]}
@@ -586,6 +581,11 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                 </View>
                               </View>
                               <View
+                                accessibilityState={
+                                  Object {
+                                    "disabled": false,
+                                  }
+                                }
                                 accessible={true}
                                 collapsable={false}
                                 focusable={true}
@@ -597,7 +597,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                     "top": 5,
                                   }
                                 }
-                                nativeID="animatedComponent"
                                 onClick={[Function]}
                                 onResponderGrant={[Function]}
                                 onResponderMove={[Function]}
@@ -632,7 +631,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                               accessible={true}
                               collapsable={false}
                               focusable={true}
-                              nativeID="animatedComponent"
                               onClick={[Function]}
                               onResponderGrant={[Function]}
                               onResponderMove={[Function]}
@@ -659,7 +657,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                               accessible={true}
                               collapsable={false}
                               focusable={true}
-                              nativeID="animatedComponent"
                               onClick={[Function]}
                               onResponderGrant={[Function]}
                               onResponderMove={[Function]}
@@ -683,7 +680,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                   accessible={true}
                                   collapsable={false}
                                   focusable={true}
-                                  nativeID="animatedComponent"
                                   onClick={[Function]}
                                   onResponderGrant={[Function]}
                                   onResponderMove={[Function]}
@@ -719,7 +715,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                             accessible={true}
                             collapsable={false}
                             focusable={true}
-                            nativeID="animatedComponent"
                             onClick={[Function]}
                             onResponderGrant={[Function]}
                             onResponderMove={[Function]}
@@ -744,7 +739,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                 "top": 5,
                               }
                             }
-                            nativeID="animatedComponent"
                             onClick={[Function]}
                             onResponderGrant={[Function]}
                             onResponderMove={[Function]}
@@ -792,6 +786,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
     }
   >
     <View
+      collapsable={false}
       pointerEvents="box-none"
     >
       <View
@@ -802,16 +797,15 @@ exports[`PostEditor renders correctly while saving 2`] = `
         style={null}
       >
         <View
+          collapsable={false}
           pointerEvents="box-none"
         >
           <View
             collapsable={false}
-            nativeID="animatedComponent"
           />
         </View>
         <View
           collapsable={false}
-          nativeID="animatedComponent"
           pointerEvents="box-none"
         >
           <View
@@ -833,16 +827,17 @@ exports[`PostEditor renders correctly while saving 2`] = `
             }
           >
             <View
+              collapsable={false}
               pointerEvents="box-none"
             />
             <View
+              collapsable={false}
               pointerEvents="box-none"
             >
               <Text
                 accessibilityRole="header"
                 aria-level="1"
                 collapsable={false}
-                nativeID="animatedComponent"
                 numberOfLines={1}
                 onLayout={[Function]}
               >
@@ -850,6 +845,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
               </Text>
             </View>
             <View
+              collapsable={false}
               pointerEvents="box-none"
             />
           </View>
@@ -866,6 +862,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
     >
       <RNSScreen
         activityState={2}
+        collapsable={false}
         forwardedRef={[Function]}
         pointerEvents="box-none"
       >
@@ -928,7 +925,6 @@ exports[`PostEditor renders correctly while saving 2`] = `
         >
           <View
             collapsable={false}
-            nativeID="animatedComponent"
             pointerEvents="box-none"
           >
             <View
@@ -983,6 +979,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                               <View>
                                 <View
                                   accessible={true}
+                                  collapsable={false}
                                   focusable={true}
                                   onClick={[Function]}
                                   onResponderGrant={[Function]}
@@ -1025,6 +1022,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                                 >
                                   <View
                                     accessible={true}
+                                    collapsable={false}
                                     focusable={true}
                                     onClick={[Function]}
                                     onResponderGrant={[Function]}
@@ -1041,6 +1039,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                                     <View>
                                       <View
                                         accessible={true}
+                                        collapsable={false}
                                         focusable={true}
                                         onClick={[Function]}
                                         onResponderGrant={[Function]}
@@ -1054,6 +1053,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                                       </View>
                                       <View
                                         accessible={true}
+                                        collapsable={false}
                                         focusable={true}
                                         onClick={[Function]}
                                         onResponderGrant={[Function]}
@@ -1068,6 +1068,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                                     </View>
                                     <View
                                       accessible={true}
+                                      collapsable={false}
                                       focusable={true}
                                       hitSlop={
                                         Object {
@@ -1191,6 +1192,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                                 <View>
                                   <View
                                     accessible={true}
+                                    collapsable={false}
                                     focusable={true}
                                     hitSlop={
                                       Object {
@@ -1214,6 +1216,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                                   </View>
                                   <View
                                     accessible={true}
+                                    collapsable={false}
                                     focusable={true}
                                     hitSlop={
                                       Object {
@@ -1243,6 +1246,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                             </View>
                             <View
                               accessible={true}
+                              collapsable={false}
                               focusable={true}
                               onClick={[Function]}
                               onResponderGrant={[Function]}
@@ -1268,6 +1272,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                             </View>
                             <View
                               accessible={true}
+                              collapsable={false}
                               focusable={true}
                               onClick={[Function]}
                               onResponderGrant={[Function]}
@@ -1293,6 +1298,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                             </View>
                             <View
                               accessible={true}
+                              collapsable={false}
                               focusable={true}
                               onClick={[Function]}
                               onResponderGrant={[Function]}
@@ -1318,6 +1324,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                             </View>
                             <View
                               accessible={true}
+                              collapsable={false}
                               focusable={true}
                               onClick={[Function]}
                               onResponderGrant={[Function]}
@@ -1343,6 +1350,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                             </View>
                             <View
                               accessible={true}
+                              collapsable={false}
                               focusable={true}
                               onClick={[Function]}
                               onResponderGrant={[Function]}
@@ -1365,6 +1373,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                               <View>
                                 <View
                                   accessible={true}
+                                  collapsable={false}
                                   focusable={true}
                                   onClick={[Function]}
                                   onResponderGrant={[Function]}
@@ -1399,6 +1408,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                         <View>
                           <View
                             accessible={true}
+                            collapsable={false}
                             focusable={true}
                             onClick={[Function]}
                             onResponderGrant={[Function]}
@@ -1424,7 +1434,6 @@ exports[`PostEditor renders correctly while saving 2`] = `
                                 "top": 5,
                               }
                             }
-                            nativeID="animatedComponent"
                             onClick={[Function]}
                             onResponderGrant={[Function]}
                             onResponderMove={[Function]}

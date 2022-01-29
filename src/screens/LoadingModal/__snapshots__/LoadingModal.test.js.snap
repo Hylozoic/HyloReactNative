@@ -3,7 +3,6 @@
 exports[`matches last snapshot when visible is true 1`] = `
 <View
   collapsable={false}
-  nativeID="animatedComponent"
   useNativeDriver={true}
 >
   <View>

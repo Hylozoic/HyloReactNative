@@ -16,7 +16,6 @@ exports[`InvitePeople Specification default render matches snapshot 1`] = `
             accessible={true}
             collapsable={false}
             focusable={true}
-            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -39,7 +38,6 @@ exports[`InvitePeople Specification default render matches snapshot 1`] = `
             accessible={true}
             collapsable={false}
             focusable={true}
-            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -81,7 +79,6 @@ exports[`InvitePeople Specification default render matches snapshot 1`] = `
             accessible={true}
             collapsable={false}
             focusable={true}
-            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -101,10 +98,14 @@ exports[`InvitePeople Specification default render matches snapshot 1`] = `
         </View>
         <View>
           <View
+            accessibilityState={
+              Object {
+                "disabled": true,
+              }
+            }
             accessible={true}
             collapsable={false}
             focusable={true}
-            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
