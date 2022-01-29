@@ -29,6 +29,7 @@ export class PostDetails extends React.Component {
     commentText: '',
     reaplyingToCommentId: null
   }
+
   commentsRef = React.createRef()
   editorRef = React.createRef()
 
@@ -36,8 +37,8 @@ export class PostDetails extends React.Component {
     this.props.fetchPost()
     this.setHeader()
   }
-  
-  componentDidUpdate(prevProps) {
+
+  componentDidUpdate (prevProps) {
     if (prevProps.currentGroup?.slug !== this.props.currentGroup?.slug) {
       this.setHeader()
     }
@@ -46,7 +47,7 @@ export class PostDetails extends React.Component {
   setHeader = () => {
     const { navigation, currentGroup, isModal } = this.props
     if (isModal) return
-    navigation.setOptions({ title: currentGroup?.name  })
+    navigation.setOptions({ title: currentGroup?.name })
   }
 
   shouldComponentUpdate (nextProps) {
@@ -94,14 +95,14 @@ export class PostDetails extends React.Component {
     this.handleCommentReplyCancel(() => {
       this.setState({ replyingToName: comment.creator.name, commentText: '' })
       this.setState({ reaplyingToCommentId: comment.parentComment || comment.id })
-  
+
       this.commentsRef?.current.highlightComment(comment)
       this.commentsRef?.current.scrollToComment(comment)
       this.editorRef?.editorInputRef.current.clear()
-  
+
       if (mention) this.editorRef?.insertMention(comment.creator)
-  
-      this.editorRef?.editorInputRef.current.focus()  
+
+      this.editorRef?.editorInputRef.current.focus()
     })
   }
 
@@ -110,10 +111,11 @@ export class PostDetails extends React.Component {
     const firstGroupSlug = get('groups.0.slug', post)
     const isMember = find(member => member.id === currentUser.id, post.members)
     const location = post.location || (post.locationObject && post.locationObject.fullText)
-    const showGroups = isModal || post?.groups.find(g => g.slug != currentGroup?.slug)
+    const showGroups = isModal || post?.groups.find(g => g.slug !== currentGroup?.slug)
 
     return (
-      <Comments style={styles.commentsScrollView}
+      <Comments
+        style={styles.commentsScrollView}
         ref={this.commentsRef}
         postId={post.id}
         onReply={this.handleCommentReply}
@@ -141,7 +143,7 @@ export class PostDetails extends React.Component {
     const groupId = get('groups.0.id', post)
 
     if (!post?.creator || !post?.title) return <LoadingScreen />
-    
+    console.log('!!!! test', post)
     return (
       <View style={styles.container}>
         <KeyboardAccessoryView
@@ -150,28 +152,29 @@ export class PostDetails extends React.Component {
             paddingBottom: isModal ? this.props.safeAreaInsets.bottom : 0
           }}
           spaceBetweenKeyboardAndAccessoryView={isIOS ? -tabBarHeight : 0}
-          contentOffsetKeyboardOpened={isIOS ? -tabBarHeight  : 0}
-          renderScrollable={this.renderPostDetails}>
-            {replyingToName && (
-              <View style={styles.commentPrompt}>
-                <Text style={styles.commentPromptText}>
-                  Replying to <Text style={{ fontWeight: 'bold' }}>
-                    {replyingToName}</Text> {'\u00B7'} </Text>
-                <TouchableOpacity onPress={() => this.handleCommentReplyCancel()}>
-                  <Text style={styles.commentPromptClearLink}>Cancel</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-            <InlineEditor
-              style={styles.inlineEditor}
-              onRef={elem => this.editorRef = elem}
-              onChange={this.handleCommentOnChange}
-              onSubmit={this.handleCreateComment}
-              value={commentText}
-              submitting={submitting}
-              placeholder='Write a comment...'
-              groupId={groupId}
-            />
+          contentOffsetKeyboardOpened={isIOS ? -tabBarHeight : 0}
+          renderScrollable={this.renderPostDetails}
+        >
+          {replyingToName && (
+            <View style={styles.commentPrompt}>
+              <Text style={styles.commentPromptText}>
+                Replying to <Text style={{ fontWeight: 'bold' }}>{replyingToName}</Text> {'\u00B7'}
+              </Text>∏
+              <TouchableOpacity onPress={() => this.handleCommentReplyCancel()}>
+                <Text style={styles.commentPromptClearLink}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          <InlineEditor
+            style={styles.inlineEditor}
+            onRef={elem => (this.editorRef = elem)}
+            onChange={this.handleCommentOnChange}
+            onSubmit={this.handleCreateComment}
+            value={commentText}
+            submitting={submitting}
+            placeholder='Write a comment...'
+            groupId={groupId}
+          />
         </KeyboardAccessoryView>
         <SocketSubscriber type='post' id={post.id} />
       </View>
