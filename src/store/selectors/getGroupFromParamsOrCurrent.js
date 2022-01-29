@@ -10,6 +10,6 @@ export default function getGroupFromParamsOrCurrent (state, params) {
   const getGroupParams = groupSlug
     ? { slug: groupSlug }
     : { id: groupId }
-  
+
   return getGroup(state, getGroupParams)
 }
