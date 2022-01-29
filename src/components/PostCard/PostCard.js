@@ -6,7 +6,6 @@ import PostBody from './PostBody'
 import PostImage from './PostImage'
 import PostFooter from './PostFooter'
 import PostGroups from './PostGroups'
-import samplePost from './samplePost'
 import { get } from 'lodash/fp'
 import { capeCod10 } from 'style/colors'
 import Files from 'components/Files'
@@ -37,7 +36,7 @@ export default class PostCard extends React.PureComponent {
   }
 
   static defaultProps = {
-    post: samplePost(),
+    post: {},
     showGroups: true
   }
 

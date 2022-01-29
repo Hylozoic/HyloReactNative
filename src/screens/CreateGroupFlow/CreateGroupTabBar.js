@@ -34,7 +34,7 @@ export default function CreateGroupTabBar ({ state, descriptors, navigation }) {
         LayoutAnimation.Types[e.easing],
         LayoutAnimation.Properties.scaleXY
       ))
-      setKeyboardWillShow(false)      
+      setKeyboardWillShow(false)
     })
     return () => {
       willShowSubscription.remove()
