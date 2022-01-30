@@ -163,8 +163,7 @@ export function getRouteObjectFromPath (incomingPathAndQuerystring, routes = rou
 
     if (pathMatch) {
       const routeMatchWithOptions = routes[pathMatcher]
-      let routeMatch = routeMatchWithOptions
-      let screenPath = routeMatch
+      let screenPath = routeMatchWithOptions
       let options = {}
 
       // Collecting custom route options if present

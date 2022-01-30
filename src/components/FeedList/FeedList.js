@@ -25,12 +25,12 @@ export default class FeedList extends React.Component {
 
   componentDidUpdate (prevProps) {
     if (
-        !prevProps.isFocused && this.props.isFocused  ||
-        prevProps.sortBy !== this.props.sortBy ||
-        prevProps.filter !== this.props.filter ||
-        prevProps.timeframe !== this.props.timeframe ||
-        prevProps.group?.id !== this.props.group?.id ||
-        prevProps.topicName !== this.props.topicName
+      (!prevProps.isFocused && this.props.isFocused) ||
+      prevProps.sortBy !== this.props.sortBy ||
+      prevProps.filter !== this.props.filter ||
+      prevProps.timeframe !== this.props.timeframe ||
+      prevProps.group?.id !== this.props.group?.id ||
+      prevProps.topicName !== this.props.topicName
     ) {
       this.fetchOrShowCached()
     }
@@ -67,17 +67,17 @@ export default class FeedList extends React.Component {
           ListHeaderComponent={
             <View>
               {this.props.header}
-              {!feedType && <>
+              {!feedType && (
                 <View style={[styles.listControls]}>
                   <ListControl selected={sortBy} onChange={setSort} options={sortOptions} />
                   <ListControl selected={filter} onChange={setFilter} options={filterOptions} />
                 </View>
-              </>}
-              {feedType === 'event' && <>
+              )}
+              {feedType === 'event' && (
                 <View style={[styles.listControls]}>
                   <ListControl selected={timeframe} onChange={setTimeframe} options={eventTimeframeOptions} />
                 </View>
-              </>}
+              )}
             </View>
           }
           ListFooterComponent={
