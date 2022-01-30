@@ -143,7 +143,7 @@ export class PostDetails extends React.Component {
     const groupId = get('groups.0.id', post)
 
     if (!post?.creator || !post?.title) return <LoadingScreen />
-    console.log('!!!! test', post)
+
     return (
       <View style={styles.container}>
         <KeyboardAccessoryView
