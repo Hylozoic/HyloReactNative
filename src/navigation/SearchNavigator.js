@@ -10,12 +10,16 @@ export default function SearchNavigator () {
   const navigatorProps = {}
   return (
     <Search.Navigator {...navigatorProps}>
-      <Search.Screen name='Search'
+      <Search.Screen
+        name='Search'
         component={SearchPage}
         options={{
-          header: headerProps => <ModalHeader {...headerProps}
-            headerLeftOnPress={() => headerProps.navigation.navigate('Home Tab')}
-          />
+          header: headerProps => (
+            <ModalHeader
+              {...headerProps}
+              headerLeftOnPress={() => headerProps.navigation.navigate('Home Tab')}
+            />
+          )
         }}
       />
     </Search.Navigator>

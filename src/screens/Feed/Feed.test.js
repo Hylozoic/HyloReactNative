@@ -113,7 +113,6 @@ it('calls fetchGroupTopic on componentDidMount', () => {
   expect(toJSON()).toMatchSnapshot()
 })
 
-
 // From FeedBanner
 //
 // import React from 'react'

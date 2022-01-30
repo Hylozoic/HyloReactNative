@@ -15,46 +15,59 @@ export default function MessagesNavigator () {
       headerMode: 'float'
     }
   }
+
   return (
     <Messages.Navigator {...navigatorProps}>
       <Messages.Screen
         name='Messages'
         component={ThreadList}
         options={{
-          header: headerProps => <ModalHeader {...headerProps}
-            headerLeft={() => {}}
-            headerRightButtonLabel='New'
-            headerRightButtonOnPress={() => headerProps.navigation.navigate('New Message')}
-          />
+          header: headerProps => (
+            <ModalHeader
+              {...headerProps}
+              headerLeft={() => {}}
+              headerRightButtonLabel='New'
+              headerRightButtonOnPress={() => headerProps.navigation.navigate('New Message')}
+            />
+          )
         }}
       />
       <Messages.Screen
         name='New Message'
         component={NewMessage}
         options={{
-          header: headerProps => <ModalHeader {...headerProps}
-            headerLeftCloseIcon={false}
-          />
+          header: headerProps => (
+            <ModalHeader
+              {...headerProps}
+              headerLeftCloseIcon={false}
+            />
+          )
         }}
       />
       <Messages.Screen
         name='ThreadParticipants'
         component={ThreadParticipants}
         options={{
-          header: headerProps => <ModalHeader {...headerProps}
-            headerLeftCloseIcon={false}
-            title='Participants'
-          />
+          header: headerProps => (
+            <ModalHeader
+              {...headerProps}
+              headerLeftCloseIcon={false}
+              title='Participants'
+            />
+          )
         }}
       />
       <Messages.Screen
         name='Thread'
         component={Thread}
         options={{
-          header: headerProps => <ModalHeader {...headerProps}
-            headerLeftCloseIcon={false}
-            headerLeftOnPress={() => headerProps.navigation.navigate('Messages')}
-          />
+          header: headerProps => (
+            <ModalHeader
+              {...headerProps}
+              headerLeftCloseIcon={false}
+              headerLeftOnPress={() => headerProps.navigation.navigate('Messages')}
+            />
+          )
         }}
       />
     </Messages.Navigator>
