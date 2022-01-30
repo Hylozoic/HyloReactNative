@@ -1,28 +1,52 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { View, Image, Text, SectionList, TouchableOpacity } from 'react-native'
 import { visibilityIcon, accessibilityIcon } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getMemberships from 'store/selectors/getMemberships'
+import fetchGraphQL from 'store/actions/fetchGraphQL'
+import { MeMembershipsMemberCountQuery } from './Groups.graphql'
+import Loading from 'components/Loading'
 import Icon from 'components/Icon'
 import styles from './Groups.styles'
 
 export default function Groups ({
-    childGroups,
-    parentGroups,
-    goToGroup,
-    goToGroupDetail,
-    navigation
+  childGroups,
+  parentGroups,
+  goToGroup,
+  goToGroupDetail,
+  navigation
 }) {
+  const dispatch = useDispatch()
   const currentGroup = useSelector(getCurrentGroup)
+  const [loading, setLoading] = useState(true)
 
   useFocusEffect(() => {
-    navigation.setOptions({ title: currentGroup.name  })
+    navigation.setOptions({ title: currentGroup.name })
   })
 
+  useEffect(() => {
+    const asyncFunc = async () => {
+      setLoading(true)
+      await dispatch(fetchGraphQL({
+        // See note in Groups.graphql.js re. memberCount query
+        query: MeMembershipsMemberCountQuery,
+        variables: { id: currentGroup.id },
+        meta: {
+          afterInteractions: true,
+          extractModel: 'Me'
+        }
+      }))
+      setLoading(false)
+    }
+    asyncFunc()
+  }, [currentGroup?.id])
+
+  if (loading) return <Loading />
+
   const listSections = []
-  const renderItem =  ({ item }) => (
+  const renderItem = ({ item }) => (
     <GroupRow
       group={item}
       goToGroup={goToGroup}
@@ -32,26 +56,33 @@ export default function Groups ({
   )
   const keyExtractor = item => 'g' + item.id
 
-  if (parentGroups.length > 0) listSections.push({
-    title: `${currentGroup.name} is a part of ${parentGroups.length} Group(s)`,
-    data: parentGroups,
-    renderItem,
-    keyExtractor
-  })
+  if (parentGroups.length > 0) {
+    listSections.push({
+      title: `${currentGroup.name} is a part of ${parentGroups.length} Group(s)`,
+      data: parentGroups,
+      renderItem,
+      keyExtractor
+    })
+  }
 
-  if (childGroups.length > 0) listSections.push({
-    title: `${childGroups.length} Group(s) are a part of ${currentGroup.name}`,
-    data: childGroups,
-    renderItem,
-    keyExtractor
-  })
+  if (childGroups.length > 0) {
+    listSections.push({
+      title: `${childGroups.length} Group(s) are a part of ${currentGroup.name}`,
+      data: childGroups,
+      renderItem,
+      keyExtractor
+    })
+  }
 
-  const renderSectionHeader =  ({ section: { title } }) => (
+  const renderSectionHeader = ({ section: { title } }) => (
     <Text style={styles.sectionHeader}>{title}</Text>
   )
 
   return (
-    <SectionList style={styles.container} sections={listSections} stickySectionHeadersEnabled={false}
+    <SectionList
+      style={styles.container}
+      sections={listSections}
+      stickySectionHeadersEnabled={false}
       renderSectionHeader={renderSectionHeader}
     />
   )
