@@ -95,7 +95,6 @@ export default function fetchCurrentUser () {
                 bannerUrl
                 description
                 id
-                memberCount
                 name
                 slug
                 visibility
@@ -106,7 +105,6 @@ export default function fetchCurrentUser () {
                     bannerUrl
                     description
                     id
-                    memberCount
                     name
                     slug
                     visibility
@@ -139,7 +137,6 @@ export default function fetchCurrentUser () {
                     bannerUrl
                     description
                     id
-                    memberCount
                     name
                     slug
                     visibility
