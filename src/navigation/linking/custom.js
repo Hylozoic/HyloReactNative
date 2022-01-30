@@ -1,14 +1,16 @@
 import { Linking } from 'react-native'
 import { isString, reject } from 'lodash/fp'
-import { getStateFromPath as getStateFromPathDefault } from '@react-navigation/native'
-import { CommonActions } from '@react-navigation/native'
+import {
+  getActionFromState,
+  CommonActions,
+  getStateFromPath as getStateFromPathDefault
+} from '@react-navigation/native'
 import { match } from 'path-to-regexp'
 import * as qs from 'query-string'
 import store from 'store'
 import { modalScreenName } from './helpers'
 import setReturnToPath from 'store/actions/setReturnToPath'
-import { getActionFromState } from '@react-navigation/native'
-import { INITIAL_NAV_STATE, navigationRef } from 'navigation/RootView/RootView'
+import { navigationRef } from 'navigation/RootView/RootView'
 import url from 'url'
 
 export const prefixes = [
@@ -84,6 +86,39 @@ export const routesConfig = {
 
   '/all':                                                    'Drawer/Tabs/Home Tab/Feed',
   '/':                                                       'Drawer/Tabs/Home Tab/Feed',
+}
+
+export const INITIAL_NAV_STATE = {
+  routes: [
+    {
+      name: 'Drawer',
+      state: {
+        routes: [
+          {
+            name: 'Tabs',
+            state: {
+              routes: [
+                {
+                  name: 'Home Tab',
+                  state: {
+                    initialRouteName: 'Feed',
+                    routes: [
+                      {
+                        name: 'Group Navigation'
+                      },
+                      {
+                        name: 'Feed'
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
 }
 
 // TODO: For MapWebView nav... Rename or possibly move closer to MapWebView?

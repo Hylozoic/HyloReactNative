@@ -4,7 +4,10 @@ import { NavigationContainer, createNavigationContainerRef } from '@react-naviga
 import RNBootSplash from 'react-native-bootsplash'
 import RootNavigator from 'navigation/RootNavigator'
 import OneSignal from 'react-native-onesignal'
-import customLinking, { navigateToLinkingPath } from 'navigation/linking/custom'
+import customLinking, {
+  INITIAL_NAV_STATE,
+  navigateToLinkingPath
+} from 'navigation/linking/custom'
 import SocketListener from 'components/SocketListener'
 import LoadingScreen from 'screens/LoadingScreen'
 
@@ -56,7 +59,7 @@ export default function RootView ({
         linking={customLinking}
         ref={navigationRef}
         initialState={fullyAuthorized ? INITIAL_NAV_STATE : null}
-        onReady={() => { 
+        onReady={() => {
           setNavIsReady(true)
           !loading && RNBootSplash.hide()
         }}
@@ -67,39 +70,6 @@ export default function RootView ({
       </NavigationContainer>
     </View>
   )
-}
-
-export const INITIAL_NAV_STATE = {
-  routes: [
-    {
-      name: 'Drawer',
-      state: {
-        routes: [
-          {
-            name: 'Tabs',
-            state: {
-              routes: [
-                {
-                  name: 'Home Tab',
-                  state: {
-                    initialRouteName: 'Feed',
-                    routes: [
-                      {
-                        name: 'Group Navigation'
-                      },
-                      {
-                        name: 'Feed'
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
 }
 
 const styles = {
