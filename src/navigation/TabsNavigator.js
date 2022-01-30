@@ -19,29 +19,29 @@ export default function TabsNavigator () {
   const navigatorProps = {
     screenOptions: ({ route }) => ({
       //
-      // NOTE: This is required so the home tab is available 
+      // NOTE: This is required so the home tab is available
       //       when path linking into the app to a child tab.
-      // 
+      //
       //       Lazy loading so make sure to check for focus
-      //       before fetching for the initial screen on 
+      //       before fetching for the initial screen on
       //       any Tab stack.
-      lazy: false,
+      lazy: true,
       // TODO: Required for Android, not iOS
       // Set only for Android as it makes undesirable animation in iOS
       tabBarHideOnKeyboard: !isIOS,
       tabBarShowLabel: true,
       tabBarPressColor: gainsboro,
       tabBarIndicatorStyle: { backgroundColor: white },
-      tabBarStyle: isIOS ?
-        {
-          display: 'flex',
-          backgroundColor: rhino05
-        } : {
-          display: 'flex',
-          backgroundColor: rhino05,
-          borderTopWidth: StyleSheet.hairlineWidth
-        },
-      tabBarShowLabel: true,
+      tabBarStyle: isIOS
+        ? {
+            display: 'flex',
+            backgroundColor: rhino05
+          }
+        : {
+            display: 'flex',
+            backgroundColor: rhino05,
+            borderTopWidth: StyleSheet.hairlineWidth
+          },
       tabBarIcon: ({ focused }) => (
         <Icon
           name={route.name.split(' Tab')[0]}
@@ -66,9 +66,11 @@ export default function TabsNavigator () {
         component={UserSettingsTabsNavigator}
         options={{
           tabBarIcon: ({ focused }) => (
-            <Avatar style={{
-              borderWidth: 2,
-              borderColor: focused ? caribbeanGreen : rhino05 }}
+            <Avatar
+              style={{
+                borderWidth: 2,
+                borderColor: focused ? caribbeanGreen : rhino05
+              }}
               dimension={34}
               hasBorder
               avatarUrl={currentUser?.avatarUrl}

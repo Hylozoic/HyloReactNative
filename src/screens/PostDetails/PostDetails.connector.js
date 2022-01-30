@@ -36,7 +36,7 @@ export function mapDispatchToProps (dispatch) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { id, post, currentGroup, memberships  } = stateProps
+  const { id, post, currentGroup, memberships } = stateProps
   const { dispatch } = dispatchProps
   const { navigation, route } = ownProps
 
