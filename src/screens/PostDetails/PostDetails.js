@@ -159,7 +159,7 @@ export class PostDetails extends React.Component {
             <View style={styles.commentPrompt}>
               <Text style={styles.commentPromptText}>
                 Replying to <Text style={{ fontWeight: 'bold' }}>{replyingToName}</Text> {'\u00B7'}
-              </Text>∏
+              </Text>
               <TouchableOpacity onPress={() => this.handleCommentReplyCancel()}>
                 <Text style={styles.commentPromptClearLink}>Cancel</Text>
               </TouchableOpacity>
