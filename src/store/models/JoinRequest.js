@@ -13,6 +13,7 @@ class JoinRequest extends Model {
   }
 }
 
+export default JoinRequest
 
 JoinRequest.modelName = 'JoinRequest'
 JoinRequest.fields = {
@@ -24,8 +25,6 @@ JoinRequest.fields = {
   updatedAt: attr(),
   user: fk('Person')
 }
-
-export default JoinRequest
 
 export class JoinRequestQuestionAnswer extends Model { }
 JoinRequestQuestionAnswer.modelName = 'JoinRequestQuestionAnswer'
