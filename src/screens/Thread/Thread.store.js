@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
 import { get, pick, uniqueId, isEmpty } from 'lodash/fp'
-import { humanDate, sanitize, threadNames } from 'hylo-utils/text'
+import { humanDate, sanitize } from 'hylo-utils/text'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
 import { firstName } from 'store/models/Person'
 
@@ -128,6 +128,12 @@ export function refineMessage ({ id, createdAt, creator, text }, i, messages) {
     suppressCreator,
     suppressDate
   }
+}
+
+// Assumes current user has already been filtered from `names`
+function threadNames (names) {
+  if (names.length < 3) return names.join(' & ')
+  return `${names[0]} & ${names.length - 1} others`
 }
 
 // NOTE: descending order to accommodate inverted FlatList
