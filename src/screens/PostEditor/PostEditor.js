@@ -57,7 +57,7 @@ export default class PostEditor extends React.Component {
       topicsPicked: false,
       announcementEnabled: false,
       detailsFocused: false,
-      detailsText: post?.details && mentionsToText(post?.details) || '',
+      detailsText: (post?.details && mentionsToText(post?.details)) || '',
       titleLengthError: false,
       startTime: get('startTime', post) ? (new Date(get('startTime', post))) : null,
       endTime: get('endTime', post) ? (new Date(get('endTime', post))) : null,
@@ -85,7 +85,7 @@ export default class PostEditor extends React.Component {
       title,
       headerLeftConfirm: true,
       headerRightButtonLabel,
-      headerRightButtonOnPress: this.save,
+      headerRightButtonOnPress: this.handleSave,
       headerRightButtonDisabled: isSaving
     }
     navigation.setOptions({
@@ -145,7 +145,7 @@ export default class PostEditor extends React.Component {
       .catch(e => { this.setIsSaving(false) })
   }
 
-  save = () => {
+  handleSave = () => {
     const { announcementEnabled } = this.state
 
     this.setIsSaving(true)
@@ -167,26 +167,26 @@ export default class PostEditor extends React.Component {
     }
   }
 
-  addImage = ({ local, remote }) => {
+  handleAddImage = ({ local, remote }) => {
     // TODO: use `local` to avoid unnecessary network activity
     this.setState({
       imageUrls: uniq(this.state.imageUrls.concat(remote))
     })
   }
 
-  removeImage = url => {
+  handleRemoveImage = url => {
     this.setState({
       imageUrls: this.state.imageUrls.filter(u => u !== url)
     })
   }
 
-  addFile = ({ local, remote }) => {
+  handleAddFile = ({ local, remote }) => {
     this.setState({
       fileUrls: uniq(this.state.fileUrls.concat(remote))
     })
   }
 
-  addGroup = group => {
+  handleAddGroup = group => {
     this.setState(state => ({
       groups: uniqBy(
         c => c.id,
@@ -195,13 +195,13 @@ export default class PostEditor extends React.Component {
     }))
   }
 
-  removeGroup = groupId => {
+  handleRemoveGroup = groupId => {
     this.setState(state => ({
       groups: this.state.groups.filter(c => c.id !== groupId)
     }))
   }
 
-  removeFile = url => {
+  handleRemoveFile = url => {
     this.setState({
       fileUrls: this.state.fileUrls.filter(u => u !== url)
     })
@@ -217,7 +217,7 @@ export default class PostEditor extends React.Component {
     if (validateTopicName(t.name) === null) this.insertUniqueTopics([t], true)
   }
 
-  insertEditorTopic = topics => {
+  handleInsertEditorTopic = topics => {
     // If topic picker has been used, don't override it with the details editor
     if (this.state.topicsPicked) return
 
@@ -238,7 +238,7 @@ export default class PostEditor extends React.Component {
     this.setState({ topics, topicsPicked })
   }
 
-  removeTopic = topicName => () => this.setState({
+  handleRemoveTopic = topicName => () => this.setState({
     topics: this.state.topics.filter(t => t !== topicName),
     topicsPicked: true
   })
@@ -249,7 +249,7 @@ export default class PostEditor extends React.Component {
     this.setState({ announcementEnabled: !this.state.announcementEnabled })
   }
 
-  updateTitle = (title) => {
+  handleUpdateTitle = (title) => {
     switch (title.length >= MAX_TITLE_LENGTH) {
       case true:
         this.setState({ titleLengthError: true })
@@ -263,20 +263,15 @@ export default class PostEditor extends React.Component {
 
   updateMembers = members => this.setState(state => ({ members }))
 
-  removeMember = member => () => {
-    const { members } = this.state
-    this.updateMembers(members.filter(m => m.id !== member.id))
-  }
-
-  onContentSizeChange = (width, height) => {
+  handleContentSizeChange = (width, height) => {
     this.setState({ scrollViewHeight: height })
   }
 
-  onDatePickerExpand = () => {
+  handleDatePickerExpand = () => {
     this.scrollView.current.scrollToEnd()
   }
 
-  showProjectMembersEditor = () => {
+  handleShowProjectMembersEditor = () => {
     const { navigation } = this.props
     const { members } = this.state
     const screenTitle = 'Project Members'
@@ -291,7 +286,7 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  showTopicsPicker = () => {
+  handleShowTopicsPicker = () => {
     const { navigation } = this.props
     const screenTitle = 'Pick a Topic'
     navigation.navigate('ItemChooser', {
@@ -305,7 +300,7 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  showGroupsEditor = () => {
+  handleShowGroupsEditor = () => {
     const { navigation, groupOptions } = this.props
     const screenTitle = 'Post in Groups'
     navigation.navigate('ItemChooser', {
@@ -314,16 +309,16 @@ export default class PostEditor extends React.Component {
       defaultSuggestedItemsLabel: 'Your Groups',
       defaultSuggestedItems: groupOptions,
       ItemRowComponent: GroupChooserItemRow,
-      pickItem: this.addGroup,
+      pickItem: this.handleAddGroup,
       fetchSearchSuggestions: () => ({ type: 'none' }),
       getSearchSuggestions: (_, { autocomplete: searchTerm }) =>
         groupOptions.filter(c => c.name.toLowerCase().match(searchTerm?.toLowerCase()))
     })
   }
 
-  showLocationPicker = () => {
+  handleShowLocationPicker = () => {
     LocationPicker({
-      navigation: this.props.navigation,      
+      navigation: this.props.navigation,
       initialSearchTerm: get('location', this.state) ||
         get('locationObject.fullText', this.state),
       onPick: (locationObject) => this.setState(() =>
@@ -331,13 +326,13 @@ export default class PostEditor extends React.Component {
     })
   }
 
-  showFilePicker = async () => {
+  handleShowFilePicker = async () => {
     this.setState({ filePickerPending: true })
     await showFilePicker({
       upload: this.props.upload,
       type: 'post',
       id: get('post.id', this.props),
-      onAdd: this.addFile,
+      onAdd: this.handleAddFile,
       onError: this.showAlert,
       onComplete: () => this.setState({ filePickerPending: false }),
       onCancel: () => this.setState({ filePickerPending: false })
@@ -345,12 +340,13 @@ export default class PostEditor extends React.Component {
   }
 
   render () {
-    const { currentGroup, canModerate, post, pendingDetailsText } = this.props
+    const {
+      currentGroup, canModerate, post, pendingDetailsText
+    } = this.props
     const {
       fileUrls, imageUrls, isSaving, topics, title, detailsText, type,
-      filePickerPending, announcementEnabled, detailsFocused,
-      titleLengthError, members, groups, startTime, endTime, location,
-      locationObject
+      filePickerPending, announcementEnabled, titleLengthError, members,
+      groups, startTime, endTime, location, locationObject
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
     const canHaveLocation = type !== 'discussion'
@@ -361,7 +357,7 @@ export default class PostEditor extends React.Component {
       announcementEnabled,
       toggleAnnoucement: this.toggleAnnoucement,
       showFilePicker: this.showFilePicker,
-      addImage: this.addImage,
+      addImage: this.handleAddImage,
       showAlert: this.showAlert
     }
 
@@ -371,7 +367,7 @@ export default class PostEditor extends React.Component {
           ref={this.scrollView}
           keyboardShouldPersistTaps='handled'
           style={styles.scrollContainer}
-          onContentSizeChange={this.onContentSizeChange}
+          onContentSizeChange={this.handleContentSizeChange}
           keyboardDismissMode='on-drag'
         >
           <View style={styles.scrollContent}>
@@ -383,7 +379,7 @@ export default class PostEditor extends React.Component {
               <TextInput
                 style={styles.textInput}
                 editable={!isSaving}
-                onChangeText={this.updateTitle}
+                onChangeText={this.handleUpdateTitle}
                 placeholder={titlePlaceholders[type]}
                 placeholderTextColor={rhino30}
                 underlineColorAndroid='transparent'
@@ -415,7 +411,7 @@ export default class PostEditor extends React.Component {
               groupId={get('id', currentGroup)}
               autoGrow={false}
               onFocusToggle={isFocused => this.setState({ detailsFocused: isFocused })}
-              onInsertTopic={this.insertEditorTopic}
+              onInsertTopic={this.handleInsertEditorTopic}
             />
 
             <TouchableOpacity
@@ -424,19 +420,19 @@ export default class PostEditor extends React.Component {
                 styles.textInputWrapper,
                 styles.topics
               ]}
-              onPress={this.showTopicsPicker}
+              onPress={this.handleShowTopicsPicker}
             >
               <View style={styles.topicLabel}>
                 <Text style={styles.sectionLabel}>Topics</Text>
                 <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
               </View>
-              <Topics onPress={this.removeTopic} topics={topics} />
+              <Topics onPress={this.handleRemoveTopic} topics={topics} />
               {topics.length < 1 &&
                 <Text style={styles.textInputPlaceholder}>{topicsPlaceholder}</Text>}
             </TouchableOpacity>
 
-            {type == 'project' && (
-              <TouchableOpacity style={[styles.section, styles.textInputWrapper]} onPress={this.showProjectMembersEditor}>
+            {type === 'project' && (
+              <TouchableOpacity style={[styles.section, styles.textInputWrapper]} onPress={this.handleShowProjectMembersEditor}>
                 <View style={styles.topicLabel}>
                   <Text style={styles.sectionLabel}>Members</Text>
                   <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
@@ -456,7 +452,7 @@ export default class PostEditor extends React.Component {
                   date={startTime}
                   minimumDate={new Date()}
                   onChange={date => this.setState({ startTime: date })}
-                  onExpand={this.onDatePickerExpand}
+                  onExpand={this.handleDatePickerExpand}
                 />
                 <DatePickerWithLabel
                   label='End Time'
@@ -464,7 +460,7 @@ export default class PostEditor extends React.Component {
                   date={endTime}
                   minimumDate={startTime || new Date()}
                   onChange={date => this.setState({ endTime: date })}
-                  onExpand={this.onDatePickerExpand}
+                  onExpand={this.handleDatePickerExpand}
                 />
               </>
             )}
@@ -476,7 +472,7 @@ export default class PostEditor extends React.Component {
                   styles.textInputWrapper,
                   styles.topics
                 ]}
-                onPress={this.showLocationPicker}
+                onPress={this.handleShowLocationPicker}
               >
                 <View style={styles.topicLabel}>
                   <Text style={styles.sectionLabel}>Location</Text>
@@ -492,7 +488,7 @@ export default class PostEditor extends React.Component {
                 styles.section,
                 styles.textInputWrapper
               ]}
-              onPress={this.showGroupsEditor}
+              onPress={this.handleShowGroupsEditor}
             >
               <View style={styles.topicLabel}>
                 <Text style={styles.sectionLabel}>Post In</Text>
@@ -501,7 +497,7 @@ export default class PostEditor extends React.Component {
               <GroupsList
                 groups={groups}
                 columns={1}
-                onPress={this.removeGroup}
+                onPress={this.handleRemoveGroup}
                 RightIcon={iconProps =>
                   <Icon name='Ex' style={styles.groupRemoveIcon} {...iconProps} />}
               />
@@ -513,8 +509,8 @@ export default class PostEditor extends React.Component {
               <View>
                 <Text style={styles.sectionLabel}>Images</Text>
                 <ImageSelector
-                  onAdd={this.addImage}
-                  onRemove={this.removeImage}
+                  onAdd={this.handleAddImage}
+                  onRemove={this.handleRemoveImage}
                   imageUrls={imageUrls}
                   style={styles.imageSelector}
                   type='post'
@@ -526,7 +522,7 @@ export default class PostEditor extends React.Component {
               <View>
                 <Text style={styles.sectionLabel}>Files</Text>
                 <FileSelector
-                  onRemove={this.removeFile}
+                  onRemove={this.handleRemoveFile}
                   fileUrls={fileUrls}
                 />
               </View>
@@ -553,23 +549,17 @@ const topicsPlaceholder = 'Add topics.'
 
 export function TypeSelector (props) {
   return (
-    <RNPickerSelect {...props}
+    <RNPickerSelect
+      {...props}
       style={styles.typeSelector[props.value]}
       useNativeAndroidPickerStyle={false}
-      items={[
-          { label: 'Discussion'.toUpperCase(), value: 'discussion',
-            color: styles.typeSelector['discussion'].inputIOS.color },
-          { label: 'Event'.toUpperCase(), value: 'event',
-            color: styles.typeSelector['event'].inputIOS.color },
-          { label: 'Offer'.toUpperCase(), value: 'offer',
-            color: styles.typeSelector['offer'].inputIOS.color },
-          { label: 'Resource'.toUpperCase(), value: 'resource',
-            color: styles.typeSelector['resource'].inputIOS.color },
-          { label: 'Project'.toUpperCase(), value: 'project',
-            color: styles.typeSelector['project'].inputIOS.color },
-          { label: 'Request'.toUpperCase(), value: 'request',
-            color: styles.typeSelector['request'].inputIOS.color }
-      ]}
+      items={
+        ['Discussion', 'Event', 'Offer', 'Resource', 'Project', 'Request'].map(type => ({
+          label: type.toUpperCase(),
+          value: type.toLowerCase(),
+          color: styles.typeSelector[type.toLowerCase()].inputIOS.color
+        }))
+      }
       Icon={() => <Icon name='ArrowDown' style={styles.typeSelector.icon} />}
     />
   )
@@ -579,7 +569,6 @@ export function Toolbar ({
   post, canModerate, filePickerPending, announcementEnabled,
   toggleAnnoucement, showFilePicker, addImage, showAlert
 }) {
-
   return (
     <View style={styles.bottomBar}>
       <View style={styles.bottomBarIcons}>
@@ -592,8 +581,13 @@ export function Toolbar ({
           id={get('post.id', post)}
           selectionLimit={10}
           onChoice={addImage}
-          onError={showAlert} />
-        {isEmpty(post) && canModerate && <TouchableOpacity onPress={toggleAnnoucement}><Icon name='Announcement' style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} /></TouchableOpacity>}
+          onError={showAlert}
+        />
+        {isEmpty(post) && canModerate && (
+          <TouchableOpacity onPress={toggleAnnoucement}>
+            <Icon name='Announcement' style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   )
@@ -601,13 +595,14 @@ export function Toolbar ({
 
 export function Groups ({ onPress, groups, placeholder }) {
   if (groups.length > 0) {
-    return groups.map((group, index) =>
-      <TouchableOpacity onPress={onPress} style={styles.topicPill}>
+    return groups.map((group, index) => (
+      <TouchableOpacity onPress={onPress} style={styles.topicPill} key={index}>
         <Text style={styles.topicText}>#{group.name}</Text>
         <Icon name='Ex' style={styles.removeGroup} />
       </TouchableOpacity>
-    )
+    ))
   }
+
   return <Text style={styles.textInputPlaceholder}>{placeholder}</Text>
 }
 
