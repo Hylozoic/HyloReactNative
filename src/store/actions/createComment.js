@@ -1,6 +1,6 @@
 import { CREATE_COMMENT } from 'store/constants'
 import { uniqueId } from 'lodash/fp'
-import { divToP } from 'hylo-utils/text'
+import { divToP } from 'util/text'
 import { AnalyticsEvents } from 'hylo-utils/constants'
 import createCommentMutation from 'graphql/mutations/createCommentMutation.js'
 

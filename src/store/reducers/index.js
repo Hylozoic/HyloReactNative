@@ -14,7 +14,6 @@ import Members from 'screens/Members/Members.store'
 import ModeratorSettings from 'screens/ModeratorSettings/ModeratorSettings.store'
 import NewMessage from 'screens/NewMessage/NewMessage.store'
 import PeopleTyping from 'components/PeopleTyping/PeopleTyping.store'
-import PostEditor from 'screens/PostEditor/PostEditor.store'
 import SkillEditor from 'components/SkillEditor/SkillEditor.store'
 import SignupFlow from 'screens/SignupFlow/SignupFlow.store'
 import SocketListener from 'components/SocketListener/SocketListener.store'
@@ -38,7 +37,6 @@ export const combinedReducers = combineReducers({
   ModeratorSettings,
   NewMessage,
   PeopleTyping,
-  PostEditor,
   SearchPage,
   SignupFlow,
   SkillEditor,

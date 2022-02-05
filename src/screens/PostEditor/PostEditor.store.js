@@ -1,5 +1,6 @@
 import { get } from 'lodash/fp'
-import { divToP, textLength } from 'hylo-utils/text'
+import { textLength } from 'hylo-utils/text'
+import { divToP } from 'util/text'
 import { AnalyticsEvents } from 'hylo-utils/constants'
 import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
 
@@ -255,12 +256,6 @@ export function updatePost (post) {
       }
     }
   }
-}
-
-export default function reducer (state = {}, action) {
-  switch (action.type) {
-  }
-  return state
 }
 
 export function ormSessionReducer (session, action) {

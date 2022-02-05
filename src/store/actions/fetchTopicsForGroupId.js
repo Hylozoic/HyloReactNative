@@ -3,9 +3,6 @@ import { FETCH_TOPICS_FOR_GROUP_ID } from '../constants'
 // TODO make this work for all groups & multiple specific groups
 export default function fetchTopicsForGroupId (groupId) {
   return function (searchTerm) {
-    const collectTopics = results =>
-      results.group.groupTopics.items.map(item => item.topic)
-
     return {
       type: FETCH_TOPICS_FOR_GROUP_ID,
       graphql: {
@@ -30,7 +27,8 @@ export default function fetchTopicsForGroupId (groupId) {
       },
       meta: {
         extractModel: {
-          getRoot: collectTopics,
+          getRoot: results =>
+            results.group.groupTopics.items.map(item => item.topic),
           modelName: 'Topic',
           append: true
         }
