@@ -1,40 +1,8 @@
 import { Linking } from 'react-native'
 import { last, eq, omitBy } from 'lodash'
-import moment from 'moment-timezone'
 
 export function openURL (url) {
   return Linking.canOpenURL(url).then(supported => supported && Linking.openURL(url))
-}
-
-// TOOD: Shared with web, move to hylo-utils
-export const formatDatePair = (startTime, endTime, returnAsObj) => {
-  const start = moment.tz(startTime, moment.tz.guess())
-  const end = moment.tz(endTime, moment.tz.guess())
-
-  const now = moment()
-  const isThisYear = start.year() === now.year() && end.year() === now.year()
-
-  let to = ''
-  let from = ''
-
-  if (isThisYear) {
-    from = endTime ? start.format('ddd, MMM D [at] h:mmA') : start.format('ddd, MMM D [at] h:mmA z')
-  } else {
-    from = endTime ? start.format('ddd, MMM D, YYYY [at] h:mmA') : start.format('ddd, MMM D, YYYY [at] h:mmA z')
-  }
-
-  if (endTime) {
-    if (end.year() !== start.year()) {
-      to = end.format('ddd, MMM D, YYYY [at] h:mmA z')
-    } else if (end.month() !== start.month() || end.day() !== start.day()) {
-      to = end.format('ddd, MMM D [at] h:mmA z')
-    } else {
-      to = end.format('h:mmA z')
-    }
-    to = returnAsObj ? to : ' - ' + to
-  }
-
-  return returnAsObj ? { from, to } : from + to
 }
 
 export function isPromise (value) {
