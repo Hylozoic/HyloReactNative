@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import { filter, get, map, find, isEmpty } from 'lodash/fp'
+import { TextHelpers } from 'hylo-shared'
 
 import Avatar from 'components/Avatar'
 import styles from './ThreadCard.styles'
-import { humanDate } from 'hylo-utils/text'
 
 export default function ThreadCard (props) {
   const { message, currentUser, participants, isLast, unread } = props
@@ -22,7 +22,7 @@ export default function ThreadCard (props) {
       <View style={[styles.messageContent, isLast && styles.lastCard]}>
         <Text style={styles.header}>{names}</Text>
         <Text style={styles.body} numberOfLines={2}>{messageCreatorPrepend}{message.text}</Text>
-        <Text style={styles.date}>{humanDate(get('createdAt', message))}</Text>
+        <Text style={styles.date}>{TextHelpers.humanDate(message?.createdAt)}</Text>
       </View>
     </View>
   )

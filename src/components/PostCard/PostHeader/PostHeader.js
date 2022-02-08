@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, Alert, FlatList } from 'react-native'
 import { get, filter, isEmpty } from 'lodash/fp'
-import { humanDate } from 'hylo-utils/text'
+import { TextHelpers } from 'hylo-shared'
 import { rhino30, rhino50, caribbeanGreen } from 'style/colors'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
@@ -111,7 +111,7 @@ export default class PostHeader extends React.PureComponent {
           </TouchableOpacity>
           {!hideDateRow && (
             <View style={styles.dateRow}>
-              <Text style={styles.metaText}>{humanDate(date)}</Text>
+              <Text style={styles.metaText}>{TextHelpers.humanDate(date)}</Text>
               {!!showTopics && (
                 <FlatList
                   data={topics}
@@ -300,7 +300,7 @@ const labelStyles = {
   },
   discussion: {
     box: {
-      backgroundColor: POST_TYPES.discussion.backgroundColor,
+      backgroundColor: POST_TYPES.discussion.backgroundColor
     },
     text: {
       color: POST_TYPES.discussion.primaryColor
@@ -308,7 +308,7 @@ const labelStyles = {
   },
   event: {
     box: {
-      backgroundColor: POST_TYPES.event.backgroundColor,
+      backgroundColor: POST_TYPES.event.backgroundColor
     },
     text: {
       color: POST_TYPES.event.primaryColor
@@ -316,7 +316,7 @@ const labelStyles = {
   },
   offer: {
     box: {
-      backgroundColor: POST_TYPES.offer.backgroundColor,
+      backgroundColor: POST_TYPES.offer.backgroundColor
     },
     text: {
       color: POST_TYPES.offer.primaryColor
@@ -324,7 +324,7 @@ const labelStyles = {
   },
   resource: {
     box: {
-      backgroundColor: POST_TYPES.resource.backgroundColor,
+      backgroundColor: POST_TYPES.resource.backgroundColor
     },
     text: {
       color: POST_TYPES.resource.primaryColor
@@ -332,7 +332,7 @@ const labelStyles = {
   },
   project: {
     box: {
-      backgroundColor: POST_TYPES.project.backgroundColor,
+      backgroundColor: POST_TYPES.project.backgroundColor
     },
     text: {
       color: POST_TYPES.project.primaryColor
@@ -340,7 +340,7 @@ const labelStyles = {
   },
   request: {
     box: {
-      backgroundColor: POST_TYPES.request.backgroundColor,
+      backgroundColor: POST_TYPES.request.backgroundColor
     },
     text: {
       color: POST_TYPES.request.primaryColor

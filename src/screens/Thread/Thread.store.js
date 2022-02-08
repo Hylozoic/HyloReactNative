@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
 import { get, pick, uniqueId, isEmpty } from 'lodash/fp'
-import { humanDate, sanitize } from 'hylo-utils/text'
+import { TextHelpers } from 'hylo-shared'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
 import { firstName } from 'store/models/Person'
 
@@ -122,9 +122,9 @@ export function refineMessage ({ id, createdAt, creator, text }, i, messages) {
 
   return {
     id,
-    createdAt: humanDate(createdAt),
+    createdAt: TextHelpers.humanDate(createdAt),
     creator: creatorFields,
-    text: sanitize(text),
+    text: TextHelpers.sanitize(text),
     suppressCreator,
     suppressDate
   }
@@ -147,7 +147,7 @@ export function presentThread (thread, currentUserId) {
   let title
   if (isEmpty(otherParticipants)) {
     title = 'You'
-  } else if (otherParticipants.length == 1) {
+  } else if (otherParticipants.length === 1) {
     title = otherParticipants[0].name
   } else {
     title = threadNames(otherParticipants.map(firstName))

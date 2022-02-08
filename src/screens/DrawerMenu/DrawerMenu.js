@@ -13,7 +13,7 @@ export default function DrawerMenu ({
   currentGroup, currentGroupId, canModerateCurrentGroup,
   goToCreateGroup, goToGroupSettings, goToInvitePeople
 }) {
-  const renderItem =  ({ item }) => (
+  const renderItem = ({ item }) => (
     <GroupRow
       group={item}
       goToGroup={goToGroup}
@@ -34,7 +34,6 @@ export default function DrawerMenu ({
       keyExtractor
     }
   ]
-
   const groupBannerImage = currentGroup?.bannerUrl
     ? { uri: currentGroup?.bannerUrl }
     : null
@@ -49,14 +48,18 @@ export default function DrawerMenu ({
             <Text style={styles.headerText}>{currentGroup.name}</Text>
             {canModerateCurrentGroup && (
               <View style={styles.currentGroupButtons}>
-                <Button style={styles.currentGroupButton} 
+                <Button
+                  style={styles.currentGroupButton}
                   iconName='Settings'
                   onPress={goToGroupSettings}
-                  text='Settings' />
-                <Button style={styles.currentGroupButton} 
+                  text='Settings'
+                />
+                <Button
+                  style={styles.currentGroupButton}
                   iconName='Invite'
                   onPress={goToInvitePeople}
-                  text='Invite' />
+                  text='Invite'
+                />
               </View>
             )}
           </View>

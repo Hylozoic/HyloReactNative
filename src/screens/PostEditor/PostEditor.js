@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import { get, uniq, uniqBy, isEmpty, capitalize } from 'lodash/fp'
 import moment from 'moment-timezone'
-import { validateTopicName } from 'hylo-utils/validators'
+import { Validators } from 'hylo-shared'
 import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
@@ -214,14 +214,14 @@ export default class PostEditor extends React.Component {
   insertTopicFromPicker = topic => {
     const t = { ...topic, name: this.ignoreHash(topic.name) }
 
-    if (validateTopicName(t.name) === null) this.insertUniqueTopics([t], true)
+    if (Validators.validateTopicName(t.name) === null) this.insertUniqueTopics([t], true)
   }
 
   handleInsertEditorTopic = topics => {
     // If topic picker has been used, don't override it with the details editor
     if (this.state.topicsPicked) return
 
-    const validTopics = topics.filter(({ name }) => validateTopicName(name) === null)
+    const validTopics = topics.filter(({ name }) => Validators.validateTopicName(name) === null)
     this.insertUniqueTopics(validTopics, false)
   }
 

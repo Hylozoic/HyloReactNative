@@ -3,8 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import { decode } from 'ent'
 import { isEmpty } from 'lodash/fp'
-import { present, sanitize } from 'hylo-utils/text'
-import { formatDatePair } from 'util'
+import { TextHelpers } from 'hylo-shared'
 import urlHandler from 'navigation/linking/urlHandler'
 import LinkPreview from 'components/PostCard/LinkPreview'
 import { caribbeanGreen, white, white20onCaribbeanGreen } from 'style/colors'
@@ -35,8 +34,8 @@ export default class PostBody extends React.PureComponent {
       shouldTruncate
     } = this.props
     const decodedTitle = decode(title)
-    const presentedDetails = present(
-      sanitize(details)
+    const presentedDetails = TextHelpers.present(
+      TextHelpers.sanitize(details)
         .replace(/\n/g, '')
         .replace(/(<p>\s*<\/p>)+/g, '')
         .replace('<p>&nbsp;</p>', ''),
@@ -50,7 +49,7 @@ export default class PostBody extends React.PureComponent {
     return (
       <View style={styles.container}>
         {startTime && endTime && (
-          <Text style={styles.resourceEndsAt}>{formatDatePair(startTime, endTime)}</Text>
+          <Text style={styles.resourceEndsAt}>{TextHelpers.formatDatePair(startTime, endTime)}</Text>
         )}
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <PostTitle title={decodedTitle} />
@@ -72,9 +71,9 @@ export default class PostBody extends React.PureComponent {
 
 export function EventRSVP ({ myEventResponse, respondToEvent }) {
   const actions = [
-    [ humanResponse(RESPONSES.YES), () => respondToEvent(RESPONSES.YES) ],
-    [ humanResponse(RESPONSES.INTERESTED), () => respondToEvent(RESPONSES.INTERESTED) ],
-    [ humanResponse(RESPONSES.NO), () => respondToEvent(RESPONSES.NO) ]
+    [humanResponse(RESPONSES.YES), () => respondToEvent(RESPONSES.YES)],
+    [humanResponse(RESPONSES.INTERESTED), () => respondToEvent(RESPONSES.INTERESTED)],
+    [humanResponse(RESPONSES.NO), () => respondToEvent(RESPONSES.NO)]
   ]
 
   return (

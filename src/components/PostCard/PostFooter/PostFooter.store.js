@@ -1,4 +1,4 @@
-import { AnalyticsEvents } from 'hylo-utils/constants'
+import { AnalyticsEvents } from 'hylo-shared'
 
 export const MODULE_NAME = 'POST_FOOTER'
 export const VOTE_ON_POST = `${MODULE_NAME}_VOTE_ON_POST`

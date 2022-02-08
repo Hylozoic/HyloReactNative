@@ -1,7 +1,6 @@
 import { get } from 'lodash/fp'
-import { textLength } from 'hylo-utils/text'
+import { TextHelpers, AnalyticsEvents } from 'hylo-shared'
 import { divToP } from 'util/text'
-import { AnalyticsEvents } from 'hylo-utils/constants'
 import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
 
 export const MODULE_NAME = 'PostEditor'
@@ -89,7 +88,7 @@ export function createPost (post) {
       },
       analytics: {
         eventName: AnalyticsEvents.POST_CREATED,
-        detailsLength: textLength(preprocessedDetails),
+        detailsLength: TextHelpers.textLength(preprocessedDetails),
         isAnnouncement: sendAnnouncement
       }
     }
@@ -169,7 +168,7 @@ export function createProject (post) {
       },
       analytics: {
         eventName: AnalyticsEvents.POST_CREATED,
-        detailsLength: textLength(preprocessedDetails),
+        detailsLength: TextHelpers.textLength(preprocessedDetails),
         isAnnouncement: sendAnnouncement
       }
     }
@@ -252,7 +251,7 @@ export function updatePost (post) {
       },
       analytics: {
         eventName: AnalyticsEvents.POST_UPDATED,
-        detailsLength: textLength(preprocessedDetails)
+        detailsLength: TextHelpers.textLength(preprocessedDetails)
       }
     }
   }

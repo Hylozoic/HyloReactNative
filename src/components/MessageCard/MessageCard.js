@@ -1,7 +1,7 @@
 import React from 'react'
 import HTMLView from 'react-native-htmlview'
 import { Text, View } from 'react-native'
-import { present, sanitize } from 'hylo-utils/text'
+import { TextHelpers } from 'hylo-shared'
 import { any, bool, shape, string } from 'prop-types'
 import urlHandler from 'navigation/linking/urlHandler'
 import richTextStyles from 'style/richTextStyles'
@@ -14,8 +14,9 @@ export default function MessageCard ({ message, showTopic, showMember }) {
   const { createdAt, creator, suppressCreator, suppressDate, text } = message
 
   // TODO: move the linebreak replacement into the present function. See MBL-379
-  const presentedText = present(
-    sanitize(text).replace(/\n/g, '').replace('<p>&nbsp;</p>', ''))
+  const presentedText = TextHelpers.present(
+    TextHelpers.sanitize(text).replace(/\n/g, '').replace('<p>&nbsp;</p>', '')
+  )
 
   const textStyles = [styles.text, suppressCreator && styles.marginTopNoCreator]
 

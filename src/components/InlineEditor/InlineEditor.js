@@ -11,7 +11,7 @@ import { trim, isEmpty, get, flow } from 'lodash/fp'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { htmlEncode } from 'js-htmlencode'
 import { htmlToText } from 'html-to-text'
-import { MENTION_ENTITY_TYPE } from 'hylo-utils/constants'
+import { MENTION_ENTITY_TYPE } from 'hylo-shared'
 import { rhino30 } from 'style/colors'
 import styles from './InlineEditor.styles'
 // Mentions
@@ -74,7 +74,7 @@ export class InlineEditor extends React.Component {
     }, 100)
   }
 
-  openPersonPicker = () => {
+  handleOpenPersonPicker = () => {
     const { navigation } = this.props
     const screenTitle = 'Mention'
     navigation.navigate('ItemChooser', {
@@ -87,7 +87,7 @@ export class InlineEditor extends React.Component {
     })
   }
 
-  openTopicsPicker = () => {
+  handleOpenTopicsPicker = () => {
     const { navigation } = this.props
     const screenTitle = 'Pick a Topic'
     navigation.navigate('ItemChooser', {
@@ -153,15 +153,15 @@ export class InlineEditor extends React.Component {
             ref={this.editorInputRef}
           />
           <View style={styles.toolbar}>
-            <TouchableOpacity hitSlop={hitSlop} onPress={this.openPersonPicker}>
+            <TouchableOpacity hitSlop={hitSlop} onPress={this.handleOpenPersonPicker}>
               <Text style={styles.toolbarButton}>@</Text>
             </TouchableOpacity>
-            <TouchableOpacity hitSlop={hitSlop} onPress={this.openTopicsPicker}>
+            <TouchableOpacity hitSlop={hitSlop} onPress={this.handleOpenTopicsPicker}>
               <Text style={styles.toolbarButton}>#</Text>
             </TouchableOpacity>
           </View>
         </View>
-        <SubmitButton style={{...styles.submitButton, display: (onSubmit && value.length > 0) ? 'flex' : 'none'}} submitting={submitting} active={value.length > 0} onSubmit={this.handleSubmit} />
+        <SubmitButton style={{ ...styles.submitButton, display: (onSubmit && value.length > 0) ? 'flex' : 'none' }} submitting={submitting} active={value.length > 0} onSubmit={this.handleSubmit} />
       </View>
     )
   }
@@ -201,7 +201,7 @@ export const newLinesToBr = (text) => {
 
 export const mentionsToText = html => htmlToText(html, {
   formatters: {
-    'mentionFormatter': (elem, walk, builder, formatOptions) => {
+    mentionFormatter: (elem, walk, builder, formatOptions) => {
       builder.openBlock({ leadingLineBreaks: formatOptions.leadingLineBreaks || 0 })
       builder.addInline('[')
       walk(elem.children, builder)

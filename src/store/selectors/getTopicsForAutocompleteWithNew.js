@@ -1,6 +1,6 @@
 import { createSelector as ormCreateSelector } from 'redux-orm'
+import { Validators } from 'hylo-shared'
 import orm from 'store/models'
-import { validateTopicName } from 'hylo-utils/validators'
 
 // FIXME this could return topics that are not in the current group
 function topicsResults (session, autocomplete) {
@@ -16,7 +16,7 @@ function topicsResultsWithNew (session, autocomplete) {
   const searchTerm = autocomplete && autocomplete.toLowerCase()
   const results = topicsResults(session, searchTerm)
   const validNewTopic = !results.find(t => t.name === searchTerm) &&
-    !validateTopicName(searchTerm)
+    !Validators.validateTopicName(searchTerm)
   return validNewTopic
     ? [{ id: searchTerm, name: searchTerm }, ...results]
     : results

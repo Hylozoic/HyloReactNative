@@ -4,7 +4,7 @@ import { LoginManager, AccessToken } from 'react-native-fbsdk-next'
 import { any, values, isNil } from 'lodash/fp'
 import validator from 'validator'
 import prompt from 'react-native-prompt-android'
-import { validateUser } from 'hylo-utils/validators'
+import { Validators } from 'hylo-shared'
 import { showToast } from 'util/toast'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
@@ -14,9 +14,9 @@ import Button from 'components/Button'
 import SettingControl from 'components/SettingControl'
 import styles from './UserSettings.styles'
 
-export default class UserSettings extends React.Component {  
+export default class UserSettings extends React.Component {
   passwordInputRef = React.createRef()
-  
+
   state = {
     editingPassword: false,
     changed: false,
@@ -51,14 +51,14 @@ export default class UserSettings extends React.Component {
     })
   }
 
-  editPassword = () => {
+  handleEditPassword = () => {
     // TODO: Currently not setting focus perhaps because it needs to happen
     // after field is shown?
     // this.passwordInputRef()
     this.setState({ editingPassword: true })
   }
 
-  cancelPassword = () => {
+  handleCancelPassword = () => {
     const changed = this.state.edits.email !== this.props.currentUser.email
     this.setState({
       editingPassword: false,
@@ -95,7 +95,7 @@ export default class UserSettings extends React.Component {
     const { email, password, confirmPassword } = this.state.edits
     const errors = {
       email: !validator.isEmail(email) && 'Must be a valid email',
-      password: !isNil(password) && validateUser.password(password),
+      password: !isNil(password) && Validators.validateUser.password(password),
       confirmPassword: password !== confirmPassword && 'Passwords must match'
     }
     this.setState({ errors })
@@ -183,7 +183,7 @@ export default class UserSettings extends React.Component {
             {!editingPassword && (
               <View style={styles.setting}>
                 <Text style={styles.settingLabel}>PASSWORD</Text>
-                <TouchableOpacity onPress={this.editPassword}>
+                <TouchableOpacity onPress={this.handleEditPassword}>
                   <Text style={styles.linkText} ref={this.passwordInputRef}>Change Password</Text>
                 </TouchableOpacity>
               </View>
@@ -213,7 +213,7 @@ export default class UserSettings extends React.Component {
               />
             )}
             {editingPassword && (
-              <TouchableOpacity style={styles.cancelPassword} onPress={this.cancelPassword}>
+              <TouchableOpacity style={styles.cancelPassword} onPress={this.handleCancelPassword}>
                 <Text style={styles.linkText}>Cancel Password Change</Text>
               </TouchableOpacity>
             )}

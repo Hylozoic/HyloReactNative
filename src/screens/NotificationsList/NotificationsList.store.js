@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import { get, find, pick } from 'lodash/fp'
-import { humanDate } from 'hylo-utils/text'
+import { TextHelpers } from 'hylo-shared'
 import { decode } from 'ent'
 import striptags from 'striptags'
 
@@ -169,7 +169,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
         nameInHeader: true
       }
 
-    case ACTION_TOPIC:
+    case ACTION_TOPIC: {
       const topicReason = find(r => r.startsWith('tag: '), meta.reasons)
       const topic = topicReason.split(': ')[1]
       return {
@@ -178,6 +178,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
         onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
         topic
       }
+    }
 
     case ACTION_JOIN_REQUEST:
       return {
@@ -186,9 +187,10 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
         header: 'New join request',
         nameInHeader: true,
         onPress: () => navigate('Group Settings', {
-          screen: 'Join Requests', params: {
-            groupId: group.id, groupSlug: group.slug 
-          } 
+          screen: 'Join Requests',
+          params: {
+            groupId: group.id, groupSlug: group.slug
+          }
         })
       }
 
@@ -223,7 +225,7 @@ export function refineNotification (navigation) {
       activityId: activity.id,
       actor: pick(['avatarUrl', 'name'], actor),
       avatarSeparator,
-      createdAt: humanDate(createdAt),
+      createdAt: TextHelpers.humanDate(createdAt),
       ...refineActivity(activity, navigation),
       unread,
       reasons: meta.reasons

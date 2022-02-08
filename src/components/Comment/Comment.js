@@ -3,7 +3,7 @@ import React from 'react'
 import { Image, Text, View, Alert, TouchableOpacity } from 'react-native'
 import HTMLView from 'react-native-htmlview'
 import { get, isEmpty, filter, findLastIndex } from 'lodash/fp'
-import { present, sanitize, humanDate } from 'hylo-utils/text'
+import { TextHelpers } from 'hylo-shared'
 import { openURL } from 'util'
 import urlHandler from 'navigation/linking/urlHandler'
 import Avatar from 'components/Avatar'
@@ -26,24 +26,29 @@ export default function Comment ({
   onPress: providedOnPress
 }) {
   const { creator, text, createdAt, post } = comment
-  const presentedText = present(sanitize(text), { slug })
+  const presentedText = TextHelpers.present(TextHelpers.sanitize(text), { slug })
 
-  const deleteCommentWithConfirm = deleteComment ? commentId => Alert.alert(
-    'Confirm Delete',
-    'Are you sure you want to delete this comment?',
-    [
-      { text: 'Yes', onPress: () => deleteComment(commentId) },
-      { text: 'Cancel', style: 'cancel' }
-    ]) : null
+  const deleteCommentWithConfirm = deleteComment
+    ? commentId => Alert.alert(
+        'Confirm Delete',
+        'Are you sure you want to delete this comment?',
+        [
+          { text: 'Yes', onPress: () => deleteComment(commentId) },
+          { text: 'Cancel', style: 'cancel' }
+        ]
+      )
+    : null
 
-  const removeCommentWithConfirm = removeComment ? commentId => Alert.alert(
-    'Moderator: Confirm Delete',
-    'Are you sure you want to remove this comment?',
-    [
-      { text: 'Yes', onPress: () => removeComment(commentId) },
-      { text: 'Cancel', style: 'cancel' }
-    ]) : null
-  
+  const removeCommentWithConfirm = removeComment
+    ? commentId => Alert.alert(
+        'Moderator: Confirm Delete',
+        'Are you sure you want to remove this comment?',
+        [
+          { text: 'Yes', onPress: () => removeComment(commentId) },
+          { text: 'Cancel', style: 'cancel' }
+        ])
+    : null
+
   let postTitle = get('title', post)
 
   if (displayPostTitle && postTitle) {
@@ -52,10 +57,7 @@ export default function Comment ({
       : postTitle
   }
 
-  const onPress = providedOnPress
-    ? providedOnPress
-    : onReply && (() => onReply(comment, { mention: false }))
-
+  const onPress = providedOnPress || (onReply && (() => onReply(comment, { mention: false })))
 
   const imageAttachments = filter({ type: 'image' }, comment?.attachments)
   // NOTE: Currently no UI for adding comment file attachments
@@ -73,7 +75,7 @@ export default function Comment ({
               <TouchableOpacity onPress={() => showMember(creator.id)}>
                 <Text style={styles.name}>{creator.name}</Text>
               </TouchableOpacity>
-              <Text style={styles.date}>{humanDate(createdAt)}</Text>
+              <Text style={styles.date}>{TextHelpers.humanDate(createdAt)}</Text>
               {displayPostTitle &&
                 <Text style={styles.date}>on "{postTitle}"</Text>}
             </View>
@@ -99,7 +101,7 @@ export default function Comment ({
             </TouchableOpacity>
           ))}
           <HTMLView
-            addLineBreaks={true}
+            addLineBreaks
             onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
             stylesheet={styles.richTextStyles}
             textComponentProps={{ style: styles.text }}
