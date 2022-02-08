@@ -1,4 +1,4 @@
-import url from 'url'
+import { URL } from 'url'
 import { Linking } from 'react-native'
 
 const prefixes = [
@@ -31,7 +31,7 @@ const screens = {
             screens: {
               Thread: '/messages/:id'
             }
-          }        
+          }
         }
       }
     }
@@ -49,7 +49,7 @@ export const linking = {
 // see navigation/linking/custom/navigateToLinkingPath
 // for replacement
 export async function openPathOrURLInApp (pathOrURL) {
-  const { pathname } = url.parse(pathOrURL)
+  const { pathname } = URL.parse(pathOrURL)
   const targetURL = 'hyloapp://' + pathname
   if (await Linking.canOpenURL(targetURL)) {
     await Linking.openURL(targetURL)

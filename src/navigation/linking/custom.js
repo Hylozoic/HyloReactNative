@@ -11,7 +11,9 @@ import store from 'store'
 import { modalScreenName } from './helpers'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import { navigationRef } from 'navigation/RootView/RootView'
-import url from 'url'
+import { URL } from 'url'
+
+/* eslint-disable key-spacing */
 
 export const prefixes = [
   'http://hylo.com',
@@ -35,6 +37,7 @@ export const prefixes = [
 //  1) { screenPath: 'path/to/screen', noAuth: (true|false) }
 //  2) 'path/to/screen' (assumed auth required)
 //
+
 export const routesConfig = {
   '/noo/login/token':                                        { screenPath: 'LoginByTokenHandler', noAuth: true },
   '/signup/finish':                                          { screenPath: 'Signup/SignupFlow0', noAuth: true },
@@ -48,7 +51,7 @@ export const routesConfig = {
   // special group routes (/all, /public)
   '/:groupSlug(all|public)':                                 { screenPath: 'Drawer/Tabs/Home Tab/Feed', context: 'groups' },
   '/:groupSlug(all)/members/:id':                            { screenPath: modalScreenName('Member'), context: 'groups' },
-  
+
   // map routes
   '/:groupSlug(all|public)/map':                             { screenPath: 'Drawer/Tabs/Home Tab/Map', context: 'groups' },
   '/:context(groups)/:groupSlug/map':                        'Drawer/Tabs/Home Tab/Map',
@@ -126,7 +129,7 @@ export const INITIAL_NAV_STATE = {
 // to not always force nav state reset to default (or storing returnTo URL?) for
 // this case...
 export const navigateToLinkingPathInApp = async (providedUrl, reset = false) => {
-  const linkingPath = url.parse(providedUrl)?.path
+  const linkingPath = URL.parse(providedUrl)?.path
   const state = getStateFromPath(linkingPath)
   const action = getActionFromState(state)
   if (reset) {
