@@ -124,7 +124,7 @@ export function refineMessage ({ id, createdAt, creator, text }, i, messages) {
     id,
     createdAt: TextHelpers.humanDate(createdAt),
     creator: creatorFields,
-    text: TextHelpers.sanitize(text),
+    text,
     suppressCreator,
     suppressDate
   }

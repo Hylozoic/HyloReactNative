@@ -34,17 +34,15 @@ export default class PostBody extends React.PureComponent {
       shouldTruncate
     } = this.props
     const decodedTitle = decode(title)
-    const presentedDetails = TextHelpers.present(
-      TextHelpers.sanitize(details)
-        .replace(/\n/g, '')
-        .replace(/(<p>\s*<\/p>)+/g, '')
-        .replace('<p>&nbsp;</p>', ''),
-      {
-        slug,
-        maxlength: shouldTruncate && MAX_DETAILS_LENGTH,
-        noP: true
-      }
-    )
+    const presentedDetails = TextHelpers.present(details
+      .replace(/\n/g, '')
+      .replace(/(<p>\s*<\/p>)+/g, '')
+      .replace('<p>&nbsp;</p>', ''),
+    {
+      slug,
+      maxlength: shouldTruncate && MAX_DETAILS_LENGTH,
+      noP: true
+    })
 
     return (
       <View style={styles.container}>

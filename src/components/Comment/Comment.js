@@ -26,7 +26,7 @@ export default function Comment ({
   onPress: providedOnPress
 }) {
   const { creator, text, createdAt, post } = comment
-  const presentedText = TextHelpers.present(TextHelpers.sanitize(text), { slug })
+  const presentedText = TextHelpers.present(text, { slug })
 
   const deleteCommentWithConfirm = deleteComment
     ? commentId => Alert.alert(

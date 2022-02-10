@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { TextHelpers } from 'hylo-shared'
 import {
   createMessage,
   fetchMessages,
@@ -36,7 +35,7 @@ export function mapStateToProps (state, props) {
 export function mapDispatchToProps (dispatch, { navigation, route }) {
   const threadId = route.params.id
   return {
-    createMessage: text => dispatch(createMessage(threadId, TextHelpers.sanitize(text))),
+    createMessage: text => dispatch(createMessage(threadId, text)),
     fetchMessages: cursor => dispatch(fetchMessages(threadId, { cursor })),
     reconnectFetchMessages: () => dispatch(fetchMessages(threadId, { reset: true })),
     sendIsTyping: () => sendIsTyping(threadId, true),
