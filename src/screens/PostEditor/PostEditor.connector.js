@@ -35,7 +35,7 @@ export function mapStateToProps (state, props) {
     ? {
         details: selectedTopicTag + ' ',
         groups: currentGroup && [currentGroup]
-      } 
+      }
     : {
         groups: currentGroup && [currentGroup]
       }
@@ -74,10 +74,10 @@ export function mapDispatchToProps (dispatch, props) {
 
       const saveAction = postId
         ? updatePost
-        : postData.type == 'project'
+        : postData.type === 'project'
           ? createProject
           : createPost
-  
+
       return dispatch(saveAction(postData))
         .then(({ meta, error, payload }) => {
           if (error) {

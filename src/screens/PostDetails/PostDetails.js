@@ -19,7 +19,7 @@ import PostHeader from 'components/PostCard/PostHeader'
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import LoadingScreen from 'screens/LoadingScreen'
 import Button from 'components/Button'
-import InlineEditor, { toHtml } from 'components/InlineEditor'
+import InlineEditor, { toHTML } from 'components/InlineEditor'
 import Icon from 'components/Icon'
 import styles from './PostDetails.styles'
 
@@ -58,7 +58,7 @@ export class PostDetails extends React.Component {
     this.props.showTopic(topicId, get('post.groups.0.id', this.props))
 
   handleCreateComment = async commentText => {
-    const commentTextAsHtml = toHtml(commentText)
+    const commentTextAsHtml = toHTML(commentText)
 
     if (!isEmpty(commentTextAsHtml)) {
       this.setState(() => ({ submitting: true }))

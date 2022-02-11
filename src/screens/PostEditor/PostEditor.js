@@ -35,7 +35,7 @@ import FileSelector, { showFilePicker } from './FileSelector'
 import DatePicker from 'components/DatePicker'
 import ImagePicker from 'components/ImagePicker'
 import ImageSelector from './ImageSelector'
-import InlineEditor, { toHtml, mentionsToText } from 'components/InlineEditor'
+import InlineEditor, { toHTML, fromHTML } from 'components/InlineEditor'
 import ErrorBubble from 'components/ErrorBubble'
 import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
 import styles from './PostEditor.styles'
@@ -57,7 +57,7 @@ export default class PostEditor extends React.Component {
       topicsPicked: false,
       announcementEnabled: false,
       detailsFocused: false,
-      detailsText: (post?.details && mentionsToText(post?.details)) || '',
+      detailsText: (post?.details && fromHTML(post?.details)) || '',
       titleLengthError: false,
       startTime: get('startTime', post) ? (new Date(get('startTime', post))) : null,
       endTime: get('endTime', post) ? (new Date(get('endTime', post))) : null,
@@ -127,7 +127,7 @@ export default class PostEditor extends React.Component {
     } = this.state
     const postData = {
       type,
-      details: toHtml(detailsText),
+      details: toHTML(detailsText),
       groups,
       memberIds: members.map(m => m.id),
       fileUrls: uniq(fileUrls),

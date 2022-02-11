@@ -161,7 +161,12 @@ export class InlineEditor extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-        <SubmitButton style={{ ...styles.submitButton, display: (onSubmit && value.length > 0) ? 'flex' : 'none' }} submitting={submitting} active={value.length > 0} onSubmit={this.handleSubmit} />
+        <SubmitButton
+          style={{ ...styles.submitButton, display: (onSubmit && value.length > 0) ? 'flex' : 'none' }}
+          submitting={submitting}
+          active={value.length > 0}
+          onSubmit={this.handleSubmit}
+        />
       </View>
     )
   }
@@ -187,7 +192,7 @@ export const createMentionTag = ({ id, name }) =>
 export const createTopicTag = topic =>
   `#${topic.name}`
 
-export const mentionsToHtml = (text) => {
+export const mentionsToHTML = (text) => {
   const re = /\[([^[]+):(\d+)\]/gi
   const replace = `<a href="#" data-entity-type="${MENTION_ENTITY_TYPE}" data-user-id="$2">$1</a>`
   return text.replace(re, replace)
@@ -199,7 +204,7 @@ export const newLinesToBr = (text) => {
   return text.replace(re, replace)
 }
 
-export const mentionsToText = html => htmlToText(html, {
+export const fromHTML = html => htmlToText(html, {
   formatters: {
     mentionFormatter: (elem, walk, builder, formatOptions) => {
       builder.openBlock({ leadingLineBreaks: formatOptions.leadingLineBreaks || 0 })
@@ -218,4 +223,4 @@ export const mentionsToText = html => htmlToText(html, {
   ]
 })
 
-export const toHtml = flow([trim, htmlEncode, mentionsToHtml, newLinesToBr])
+export const toHTML = flow([trim, htmlEncode, mentionsToHTML, newLinesToBr])

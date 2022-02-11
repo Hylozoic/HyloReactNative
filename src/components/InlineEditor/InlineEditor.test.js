@@ -4,10 +4,10 @@ import TestRenderer from 'react-test-renderer'
 import {
   InlineEditor,
   SubmitButton,
-  mentionsToHtml,
+  mentionsToHTML,
   createMentionTag,
   createTopicTag,
-  toHtml
+  toHTML
 } from './InlineEditor'
 
 const props = {
@@ -76,9 +76,9 @@ it('handleBlur', () => {
   expect(props.onChange).toHaveBeenCalledWith('')
 })
 
-it('toHtml', () => {
+it('toHTML', () => {
   const text = "hello world [tom:3344] [:5] #adlkjdf here's"
-  expect(toHtml(text)).toEqual('hello world <a href="#" data-entity-type="mention" data-user-id="3344">tom</a> [:5] #adlkjdf here&#39;s')
+  expect(toHTML(text)).toEqual('hello world <a href="#" data-entity-type="mention" data-user-id="3344">tom</a> [:5] #adlkjdf here&#39;s')
 })
 
 it('createTopicTag', () => {
@@ -89,8 +89,8 @@ it('createMentionTag', () => {
   expect(createMentionTag({ id: 30, name: 'tom' })).toEqual('[tom:30]')
 })
 
-it('mentionsToHtml', () => {
-  expect(mentionsToHtml('hello [tom:333] [two:233] world [three:3332]')).toEqual('hello <a href="#" data-entity-type="mention" data-user-id="333">tom</a> <a href="#" data-entity-type="mention" data-user-id="233">two</a> world <a href="#" data-entity-type="mention" data-user-id="3332">three</a>')
+it('mentionsToHTML', () => {
+  expect(mentionsToHTML('hello [tom:333] [two:233] world [three:3332]')).toEqual('hello <a href="#" data-entity-type="mention" data-user-id="333">tom</a> <a href="#" data-entity-type="mention" data-user-id="233">two</a> world <a href="#" data-entity-type="mention" data-user-id="3332">three</a>')
 })
 
 it('renders SubmitButton when submitting', () => {
