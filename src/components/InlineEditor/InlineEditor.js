@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import {
   Text,
   View,
@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   ActivityIndicator
 } from 'react-native'
-import { withNavigation } from '@react-navigation/compat'
-import { trim, isEmpty, get, flow } from 'lodash/fp'
+import { useNavigation } from '@react-navigation/native'
+import { trim, isEmpty, flow } from 'lodash/fp'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { htmlEncode } from 'js-htmlencode'
 import { htmlToText } from 'html-to-text'
@@ -23,27 +23,35 @@ import fetchTopicsForGroupId from 'store/actions/fetchTopicsForGroupId'
 import getTopicsForAutocompleteWithNew from 'store/selectors/getTopicsForAutocompleteWithNew'
 import TopicRow from 'screens/TopicList/TopicRow'
 
-export class InlineEditor extends React.Component {
-  state = {
-    isFocused: false,
-    pickerType: null
-  }
+export default function InlineEditor ({
+  placeholder = 'Details',
+  value = '',
+  groupId,
+  editable = true,
+  submitting = false,
+  onChange,
+  onSubmit,
+  onInsertTopic,
+  onFocusToggle,
+  style,
+  inputStyle
+}) {
+  const navigation = useNavigation()
+  const [selection, setSelection] = useState()
+  const editorInputRef = useRef()
 
-  editorInputRef = React.createRef()
-
-  insertTopic = topic => {
+  const insertTopic = topic => {
     const markup = createTopicTag(topic)
-    return this.insertPicked(topic, markup, this.props.onInsertTopic)
+    return insertPicked(topic, markup, onInsertTopic)
   }
 
-  insertMention = person => {
+  const insertMention = person => {
     const markup = createMentionTag(person)
-    return this.insertPicked(person, markup)
+    return insertPicked(person, markup)
   }
 
-  insertPicked = (choice, markup, onInsertCallback = undefined) => {
-    const value = this.props.value || ''
-    const position = get('selection.start', this.state) || 0
+  const insertPicked = (choice, markup, onInsertCallback = undefined) => {
+    const position = selection?.start || 0
 
     // This will insert the markup at the current cursors position while padding the markup with spaces.
     const firstSlice = value.slice(0, position)
@@ -57,122 +65,97 @@ export class InlineEditor extends React.Component {
     // Append the second part of the value (after the cursor)
     newValue += secondSlice
 
-    this.props.onChange(newValue)
+    onChange(newValue)
 
     if (onInsertCallback) onInsertCallback([choice])
 
-    // We use a timeout since the onChange needs to propagate
-    // the new value change before setting the new selection
-    setTimeout(() => {
-      this.setState(() => ({
-        selection: {
-          start: newSelectionStart,
-          end: newSelectionStart
-        }
-      }))
-      this.editorInputRef.current.focus()
-    }, 100)
+    setSelection({
+      start: newSelectionStart,
+      end: newSelectionStart
+    })
+    editorInputRef.current.focus()
   }
 
-  handleOpenPersonPicker = () => {
-    const { navigation } = this.props
+  const handleOpenPersonPicker = () => {
     const screenTitle = 'Mention'
     navigation.navigate('ItemChooser', {
       screenTitle,
       ItemRowComponent: PersonPickerItemRow,
-      pickItem: this.insertMention,
+      pickItem: insertMention,
       searchPlaceholder: 'Type here to search for people',
       fetchSearchSuggestions: scopedFetchPeopleAutocomplete,
       getSearchSuggestions: scopedGetPeopleAutocomplete(screenTitle)
     })
   }
 
-  handleOpenTopicsPicker = () => {
-    const { navigation } = this.props
+  const handleOpenTopicsPicker = () => {
     const screenTitle = 'Pick a Topic'
     navigation.navigate('ItemChooser', {
       screenTitle,
       ItemRowComponent: TopicRow,
-      pickItem: this.insertTopic,
+      pickItem: insertTopic,
       searchPlaceholder: 'Search for a topic by name',
-      fetchSearchSuggestions: fetchTopicsForGroupId(this.props.groupId),
+      fetchSearchSuggestions: fetchTopicsForGroupId(groupId),
       getSearchSuggestions: getTopicsForAutocompleteWithNew
     })
   }
 
-  handleFocus = () => {
-    this.setState(() => ({
-      isFocused: true,
-      selection: { start: 1, end: 1 }
-    }))
-    this.props.onFocusToggle && this.props.onFocusToggle(true)
+  const handleFocus = () => {
+    setSelection({ start: 1, end: 1 })
+    onFocusToggle && onFocusToggle(true)
   }
 
-  handleBlur = () => {
-    if (isEmpty(trim(this.props.value))) this.props.onChange('')
-    this.setState(() => ({ isFocused: false }))
-    this.props.onFocusToggle && this.props.onFocusToggle(false)
+  const handleBlur = () => {
+    if (isEmpty(trim(value))) onChange('')
+    onFocusToggle && onFocusToggle(false)
   }
 
-  handleSelectionChange = ({ nativeEvent: { selection } }) => {
-    this.setState(() => ({ selection }))
+  const handleSelectionChange = ({ nativeEvent: { selection } }) => {
+    console.log('!!!! selection', selection)
+    setSelection(selection)
   }
 
-  handleSubmit = () => {
-    this.setState(() => ({ selection: { start: 0, end: 0 } }))
-    this.editorInputRef.current.blur()
-    this.props.onSubmit(this.props.value)
+  const handleSubmit = () => {
+    setSelection({ start: 0, end: 0 })
+    editorInputRef.current.blur()
+    onSubmit(value)
   }
 
-  render () {
-    const {
-      placeholder = 'Details',
-      editable = true,
-      value,
-      onChange,
-      onSubmit,
-      submitting = false,
-      style,
-      inputStyle
-    } = this.props
-    const hitSlop = { top: 7, bottom: 7, left: 7, right: 7 }
+  const hitSlop = { top: 7, bottom: 7, left: 7, right: 7 }
 
-    return (
-      <View style={[styles.container, style]} onFocus={this.handleFocus} onBlur={this.handleBlur}>
-        <View style={styles.textInputAndTools}>
-          <TextInput
-            multiline
-            editable={!!editable && !submitting}
-            onChangeText={onChange}
-            onSelectionChange={this.handleSelectionChange}
-            placeholder={placeholder}
-            placeholderTextColor={rhino30}
-            style={[styles.textInput, inputStyle]}
-            underlineColorAndroid='transparent'
-            value={value}
-            ref={this.editorInputRef}
-          />
-          <View style={styles.toolbar}>
-            <TouchableOpacity hitSlop={hitSlop} onPress={this.handleOpenPersonPicker}>
-              <Text style={styles.toolbarButton}>@</Text>
-            </TouchableOpacity>
-            <TouchableOpacity hitSlop={hitSlop} onPress={this.handleOpenTopicsPicker}>
-              <Text style={styles.toolbarButton}>#</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <SubmitButton
-          style={{ ...styles.submitButton, display: (onSubmit && value.length > 0) ? 'flex' : 'none' }}
-          submitting={submitting}
-          active={value.length > 0}
-          onSubmit={this.handleSubmit}
+  return (
+    <View style={[styles.container, style]} onFocus={handleFocus} onBlur={handleBlur}>
+      <View style={styles.textInputAndTools}>
+        <TextInput
+          multiline
+          editable={!!editable && !submitting}
+          onChangeText={onChange}
+          onSelectionChange={handleSelectionChange}
+          placeholder={placeholder}
+          placeholderTextColor={rhino30}
+          style={[styles.textInput, inputStyle]}
+          underlineColorAndroid='transparent'
+          value={value}
+          ref={editorInputRef}
         />
+        <View style={styles.toolbar}>
+          <TouchableOpacity hitSlop={hitSlop} onPress={handleOpenPersonPicker}>
+            <Text style={styles.toolbarButton}>@</Text>
+          </TouchableOpacity>
+          <TouchableOpacity hitSlop={hitSlop} onPress={handleOpenTopicsPicker}>
+            <Text style={styles.toolbarButton}>#</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    )
-  }
+      <SubmitButton
+        style={{ ...styles.submitButton, display: (onSubmit && value.length > 0) ? 'flex' : 'none' }}
+        submitting={submitting}
+        active={value.length > 0}
+        onSubmit={handleSubmit}
+      />
+    </View>
+  )
 }
-
-export default withNavigation(InlineEditor)
 
 export function SubmitButton ({ style, submitting, active, onSubmit }) {
   if (submitting) {
