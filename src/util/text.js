@@ -9,7 +9,3 @@ export function divToP (text) {
   })
   return $.html()
 }
-
-export function textLength (html) {
-  return html.replace(/<[^>]+>/g, '').length
-}

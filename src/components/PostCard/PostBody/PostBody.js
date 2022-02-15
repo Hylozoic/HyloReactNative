@@ -34,14 +34,13 @@ export default class PostBody extends React.PureComponent {
       shouldTruncate
     } = this.props
     const decodedTitle = decode(title)
-    const presentedDetails = TextHelpers.present(details
+    const presentedDetails = TextHelpers.presentHTML(details
       .replace(/\n/g, '')
       .replace(/(<p>\s*<\/p>)+/g, '')
       .replace('<p>&nbsp;</p>', ''),
     {
       slug,
-      maxlength: shouldTruncate && MAX_DETAILS_LENGTH,
-      noP: true
+      truncate: shouldTruncate && MAX_DETAILS_LENGTH
     })
 
     return (

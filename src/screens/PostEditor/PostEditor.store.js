@@ -88,7 +88,7 @@ export function createPost (post) {
       },
       analytics: {
         eventName: AnalyticsEvents.POST_CREATED,
-        detailsLength: TextHelpers.textLength(preprocessedDetails),
+        detailsLength: TextHelpers.textLengthHTML(preprocessedDetails),
         isAnnouncement: sendAnnouncement
       }
     }
@@ -168,7 +168,7 @@ export function createProject (post) {
       },
       analytics: {
         eventName: AnalyticsEvents.POST_CREATED,
-        detailsLength: TextHelpers.textLength(preprocessedDetails),
+        detailsLength: TextHelpers.textLengthHTML(preprocessedDetails),
         isAnnouncement: sendAnnouncement
       }
     }
@@ -251,7 +251,7 @@ export function updatePost (post) {
       },
       analytics: {
         eventName: AnalyticsEvents.POST_UPDATED,
-        detailsLength: TextHelpers.textLength(preprocessedDetails)
+        detailsLength: TextHelpers.textLengthHTML(preprocessedDetails)
       }
     }
   }

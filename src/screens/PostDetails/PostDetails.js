@@ -85,8 +85,8 @@ export class PostDetails extends React.Component {
   handleCommentReplyCancel = callback => {
     this.setState({ replyingToName: null, commentText: '' }, () => {
       this.commentsRef?.current.highlightComment(null)
-      this.editorRef?.editorInputRef.current.clear()
-      this.editorRef?.editorInputRef.current.blur()
+      this.editorRef?.editorInputRef?.current.clear()
+      this.editorRef?.editorInputRef?.current.blur()
       callback && callback()
     })
   }

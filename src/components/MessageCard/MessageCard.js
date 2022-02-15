@@ -14,7 +14,7 @@ export default function MessageCard ({ message, showTopic, showMember }) {
   const { createdAt, creator, suppressCreator, suppressDate, text } = message
 
   // TODO: move the linebreak replacement into the present function. See MBL-379
-  const presentedText = TextHelpers.present(text
+  const presentedText = TextHelpers.presentHTML(text
     .replace(/\n/g, '')
     .replace('<p>&nbsp;</p>', '')
   )

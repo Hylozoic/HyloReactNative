@@ -5223,21 +5223,24 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-hylo-shared@1.5.3:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/hylo-shared/-/hylo-shared-1.5.3.tgz#30317d2dacc8dd7cd0d32687c5c9bf62b3641ae7"
-  integrity sha512-CvPnpifhDCZhBjx55bUP9PM3pqA1GMtnPzUZIXbTl7CMIQbQeabC8dLwPbaDTusZTrPf3662JC2dgieuvhRbhQ==
+hylo-shared@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/hylo-shared/-/hylo-shared-1.6.1.tgz#30c9db61af469356e71600fc9badc15f4899df85"
+  integrity sha512-kGlwSN4bgZDxl27txOmc/HOuzpK8/qbW8MIy+iWfPPNUzVo2pvuXEbYvnWaZWoWLUtjEW0x5idmL6ZaF97qO+g==
   dependencies:
     cheerio "^1.0.0-rc.10"
+    html-to-text "^8.1.0"
     insane "^2.6.2"
     linkify-plugin-hashtag "^3.0.4"
     linkify-string "^3.0.4"
     linkifyjs "^3.0.5"
+    lodash "~4.17.21"
     marked "^4.0.12"
     moment-timezone "^0.5.34"
     pretty-date "^0.2.0"
     stream "^0.0.2"
     trunc-html "^1.1.2"
+    trunc-text "^1.0.2"
     validator "^13.7.0"
 
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
@@ -6838,7 +6841,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.7.0:
+lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.7.0, lodash@~4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -10065,6 +10068,11 @@ trunc-text@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trunc-text/-/trunc-text-1.0.1.tgz#58f876d8ac59b224b79834bb478b8656e69622b5"
   integrity sha1-WPh22KxZsiS3mDS7R4uGVuaWIrU=
+
+trunc-text@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/trunc-text/-/trunc-text-1.0.2.tgz#b582bb3ddea9c9adc25017d737c48ebdd2157406"
+  integrity sha1-tYK7Pd6pya3CUBfXN8SOvdIVdAY=
 
 tsconfig-paths@^3.11.0:
   version "3.12.0"
