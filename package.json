@@ -47,7 +47,6 @@
     "graphql-tag": "^2.12.6",
     "html-to-text": "^8.1.0",
     "hylo-shared": "^1.6.1",
-    "js-htmlencode": "^0.3.0",
     "lodash": "^4.17.21",
     "mixpanel-react-native": "^1.3.7",
     "moment": "^2.29.1",

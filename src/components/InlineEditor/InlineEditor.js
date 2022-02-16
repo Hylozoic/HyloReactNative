@@ -9,7 +9,6 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import { trim, isEmpty, flow } from 'lodash/fp'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import { htmlEncode } from 'js-htmlencode'
 import { htmlToText } from 'html-to-text'
 import { MENTION_ENTITY_TYPE } from 'hylo-shared'
 import { rhino30 } from 'style/colors'
@@ -111,7 +110,6 @@ export default function InlineEditor ({
   }
 
   const handleSelectionChange = ({ nativeEvent: { selection } }) => {
-    console.log('!!!! selection', selection)
     setSelection(selection)
   }
 
@@ -181,11 +179,7 @@ export const mentionsToHTML = (text) => {
   return text.replace(re, replace)
 }
 
-export const newLinesToBr = (text) => {
-  const re = /[\r\n|\r|\n]/gi
-  const replace = '<br>'
-  return text.replace(re, replace)
-}
+export const newLinesToBr = (text) => text.replace(/[\r\n|\r|\n]/gi, '<br>')
 
 export const fromHTML = html => htmlToText(html, {
   formatters: {
@@ -200,10 +194,9 @@ export const fromHTML = html => htmlToText(html, {
   selectors: [
     {
       selector: `a[data-entity-type=${MENTION_ENTITY_TYPE}]`,
-      format: 'mentionFormatter',
-      options: { leadingLineBreaks: 0, trailingLineBreaks: 0 }
+      format: 'mentionFormatter'
     }
   ]
 })
 
-export const toHTML = flow([trim, htmlEncode, mentionsToHTML, newLinesToBr])
+export const toHTML = flow([trim, mentionsToHTML, newLinesToBr])
