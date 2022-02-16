@@ -15,7 +15,8 @@ export default class NotificationsList extends Component {
     navigation.setOptions({
       title: 'Notifications',
       header: props =>
-        <ModalHeader {...props}
+        <ModalHeader
+          {...props}
           headerRightButtonLabel='Mark as read'
           headerRightButtonOnPress={markAllActivitiesRead}
         />
