@@ -1,13 +1,13 @@
 /* eslint-disable camelcase */
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Image, Text, View, Alert, TouchableOpacity } from 'react-native'
-import HTMLView from 'react-native-htmlview'
-import { get, isEmpty, filter, findLastIndex } from 'lodash/fp'
+import { isEmpty, filter, findLastIndex } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
 import { openURL } from 'util'
 import urlHandler from 'navigation/linking/urlHandler'
 import Avatar from 'components/Avatar'
 import PopupMenuButton from 'components/PopupMenuButton'
+import HyloHTML from 'components/HyloHTML'
 import Icon from 'components/Icon'
 import styles from './Comment.styles'
 
@@ -26,7 +26,7 @@ export default function Comment ({
   onPress: providedOnPress
 }) {
   const { creator, text, createdAt, post } = comment
-  const presentedText = TextHelpers.presentHTML(text, { slug })
+  const presentedText = useMemo(() => TextHelpers.presentHTML(text, { slug }), [text, slug])
 
   const deleteCommentWithConfirm = deleteComment
     ? commentId => Alert.alert(
@@ -49,12 +49,10 @@ export default function Comment ({
         ])
     : null
 
-  let postTitle = get('title', post)
+  let postTitle = post?.title
 
   if (displayPostTitle && postTitle) {
-    postTitle = postTitle.length > 40
-      ? postTitle.substring(0, 40) + '...'
-      : postTitle
+    postTitle = TextHelpers.truncateText(postTitle, 40)
   }
 
   const onPress = providedOnPress || (onReply && (() => onReply(comment, { mention: false })))
@@ -100,12 +98,10 @@ export default function Comment ({
               <Image source={{ uri: url }} resizeMode='cover' style={styles.imageAttachemnt} />
             </TouchableOpacity>
           ))}
-          <HTMLView
-            addLineBreaks
-            onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
-            stylesheet={styles.richTextStyles}
-            textComponentProps={{ style: styles.text }}
-            value={presentedText}
+          <HyloHTML
+            tagsStyles={{ p: { margin: 0 } }}
+            source={{ html: presentedText }}
+            // onLinkPress: urlHandler
           />
         </View>
       </View>

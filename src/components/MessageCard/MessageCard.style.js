@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native'
-
-import { capeCod, nevada, rhino30 } from 'style/colors'
+import { capeCod, rhino30 } from 'style/colors'
 
 export default StyleSheet.create({
   body: {
@@ -32,10 +31,5 @@ export default StyleSheet.create({
   },
   padLeftNoAvatar: {
     paddingLeft: 44
-  },
-  text: {
-    fontFamily: 'Circular-Book',
-    color: nevada,
-    marginTop: 3
   }
 })

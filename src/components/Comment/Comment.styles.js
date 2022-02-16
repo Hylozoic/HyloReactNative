@@ -62,24 +62,5 @@ export default {
     height: 200,
     width: '100%',
     borderRadius: 10
-  },
-  text: {
-    color: nevada,
-    fontFamily: 'Circular-Book',
-    fontSize: 14,
-    // not sure why this works. Setting height to 0 here should collapse all
-    // comment text, but instead it just gets rid of extra spacing in comments.
-    // Tested and it seems fine, but if comment layout looks word somewhere, try
-    // removing this line.
-    height: 0
-  },
-  richTextStyles: {
-    a: {
-      color: caribbeanGreen
-    },
-    p: {
-      marginTop: 3,
-      marginBottom: 3
-    }
   }
 }

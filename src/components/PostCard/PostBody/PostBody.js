@@ -1,69 +1,60 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import HTMLView from 'react-native-htmlview'
-import { decode } from 'ent'
 import { isEmpty } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
 import urlHandler from 'navigation/linking/urlHandler'
 import LinkPreview from 'components/PostCard/LinkPreview'
 import { caribbeanGreen, white, white20onCaribbeanGreen } from 'style/colors'
-import richTextStyles from 'style/richTextStyles'
 import Icon from 'components/Icon'
 import { humanResponse, RESPONSES } from 'store/models/EventInvitation'
+import HyloHTML from 'components/HyloHTML'
 import PopupMenuButton from 'components/PopupMenuButton'
 
 const MAX_DETAILS_LENGTH = 144
 
-export default class PostBody extends React.PureComponent {
-  handleLinkPress = (url) => {
-    const { slug, showMember, showTopic } = this.props
-    urlHandler(url, showMember, showTopic, slug)
-  }
-
-  render () {
-    const {
-      type,
-      title,
-      details,
-      startTime,
-      endTime,
-      linkPreview,
-      myEventResponse,
-      respondToEvent,
-      slug,
-      shouldTruncate
-    } = this.props
-    const decodedTitle = decode(title)
-    const presentedDetails = TextHelpers.presentHTML(details
-      .replace(/\n/g, '')
-      .replace(/(<p>\s*<\/p>)+/g, '')
-      .replace('<p>&nbsp;</p>', ''),
+export default function PostBody ({
+  type,
+  title,
+  details,
+  startTime,
+  endTime,
+  linkPreview,
+  myEventResponse,
+  respondToEvent,
+  slug,
+  shouldTruncate,
+  showMember,
+  showTopic
+}) {
+  // const handleLinkPress = (_, href) => urlHandler(href, showMember, showTopic, slug)
+  const presentedDetails = useMemo(() => TextHelpers.presentHTML(
+    details,
     {
       slug,
       truncate: shouldTruncate && MAX_DETAILS_LENGTH
-    })
+    }
+  ), [details, slug, shouldTruncate])
 
-    return (
-      <View style={styles.container}>
-        {startTime && endTime && (
-          <Text style={styles.resourceEndsAt}>{TextHelpers.formatDatePair(startTime, endTime)}</Text>
-        )}
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <PostTitle title={decodedTitle} />
-          {type === 'event' && !!respondToEvent &&
-            <EventRSVP myEventResponse={isEmpty(myEventResponse) ? RESPONSES.NO : myEventResponse} respondToEvent={respondToEvent} />}
-        </View>
-        <HTMLView
-          onLinkPress={this.handleLinkPress}
-          addLineBreaks={false}
-          stylesheet={richTextStyles}
-          textComponentProps={{ style: styles.details }}
-          value={presentedDetails}
-        />
-        {linkPreview && <LinkPreview {...linkPreview} />}
+  return (
+    <View style={styles.container}>
+      {startTime && endTime && (
+        <Text style={styles.resourceEndsAt}>{TextHelpers.formatDatePair(startTime, endTime)}</Text>
+      )}
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <PostTitle title={title} />
+        {type === 'event' && !!respondToEvent &&
+          <EventRSVP myEventResponse={isEmpty(myEventResponse) ? RESPONSES.NO : myEventResponse} respondToEvent={respondToEvent} />}
       </View>
-    )
-  }
+      <HyloHTML
+        source={{ html: presentedDetails }}
+        baseStyle={{ marginBottom: 8 }}
+        // onLinkPress: urlHandler / handleLinkPress
+      />
+      {linkPreview && (
+        <LinkPreview {...linkPreview} />
+      )}
+    </View>
+  )
 }
 
 export function EventRSVP ({ myEventResponse, respondToEvent }) {
@@ -85,8 +76,7 @@ export function EventRSVP ({ myEventResponse, respondToEvent }) {
 }
 
 export function PostTitle ({ title, style }) {
-  const decodedTitle = decode(title)
-  return <Text style={[styles.title, style]}>{decodedTitle}</Text>
+  return <Text style={[styles.title, style]}>{title}</Text>
 }
 
 const styles = StyleSheet.create({
