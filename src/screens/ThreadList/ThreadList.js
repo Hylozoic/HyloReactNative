@@ -3,11 +3,8 @@ import { FlatList, TouchableOpacity, View, Text } from 'react-native'
 import { isEmpty } from 'lodash/fp'
 import { getSocket } from 'util/websockets'
 import LoadingScreen from 'screens/LoadingScreen'
-import NotificationOverlay from 'components/NotificationOverlay'
 import ThreadCard from 'components/ThreadCard'
 import styles from './ThreadList.styles'
-import Button from 'components/Button'
-import { caribbeanGreen, rhino20 } from 'style/colors'
 
 export default class ThreadList extends Component {
   state = { ready: false }
@@ -44,14 +41,21 @@ export default class ThreadList extends Component {
       fetchMoreThreads,
       showThread,
       refreshThreads,
-      pendingRefresh,
+      pendingRefresh
       // isConnected
     } = this.props
     const { ready } = this.state
 
-    if (!ready || (pending && threads.length === 0)) return <LoadingScreen />
+    if (!ready || (pending && threads.length === 0)) {
+      return (
+        <LoadingScreen />
+      )
+    }
+
     if (ready && !pending && threads.length === 0) {
-      return <Text style={styles.center}>No active conversations</Text>
+      return (
+        <Text style={styles.center}>No active conversations</Text>
+      )
     }
 
     return (
@@ -62,17 +66,20 @@ export default class ThreadList extends Component {
           onEndReached={fetchMoreThreads}
           onRefresh={refreshThreads}
           refreshing={pendingRefresh}
-          renderItem={({ item, index }) => <MessageRow
-            participants={item.participants}
-            message={item.latestMessage}
-            unread={item.unread}
-            currentUser={currentUser}
-            isLast={index === threads.length - 1}
-            showThread={showThread}
-                                           />}
+          renderItem={({ item, index }) => (
+            <MessageRow
+              participants={item.participants}
+              message={item.latestMessage}
+              unread={item.unread}
+              currentUser={currentUser}
+              isLast={index === threads.length - 1}
+              showThread={showThread}
+            />
+          )}
         />
-        {!pending && threads.length === 0 &&
-          <Text style={styles.center}>No active conversations</Text>}
+        {!pending && threads.length === 0 && (
+          <Text style={styles.center}>No active conversations</Text>
+        )}
         {/* {!isConnected && (
           <NotificationOverlay
             position='bottom'

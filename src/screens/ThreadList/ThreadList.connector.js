@@ -1,11 +1,9 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
-
 import fetchThreads, { FETCH_THREADS } from 'store/actions/fetchThreads'
 import getMe from 'store/selectors/getMe'
 import { getThreads, getThreadsHasMore, updateLastViewed } from './ThreadList.store'
-import { mapWhenFocused, mergeWhenFocused } from 'util/redux'
 
 export function mapStateToProps (state, props) {
   const threads = getThreads(state, props)

@@ -36,7 +36,6 @@ export const mapDispatchToProps = (dispatch, props) => {
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { canModerate, isCreator } = stateProps
-  const { comment } = ownProps
 
   const deleteComment = isCreator ? commentId => dispatchProps.deleteComment(commentId) : null
   const removeComment = !isCreator && canModerate ? commentId => dispatchProps.deleteComment(commentId) : null

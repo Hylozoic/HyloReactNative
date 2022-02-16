@@ -2,6 +2,7 @@ import React from 'react'
 import { FlatList, Text, TouchableOpacity } from 'react-native'
 import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
+import { TextHelpers } from 'hylo-shared'
 import Loading from 'components/Loading'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import MessageCard from 'components/MessageCard'
@@ -108,7 +109,7 @@ export default class Thread extends React.Component {
 
   atBottom = () => this.yOffset < BOTTOM_THRESHOLD
 
-  createMessage = text => this.props.createMessage(text)
+  handleSubmit = text => this.props.createMessage(TextHelpers.markdown(text))
 
   fetchMore = throttle(() => {
     const { fetchMessages, hasMore, messages, pending } = this.props
@@ -122,7 +123,7 @@ export default class Thread extends React.Component {
     return <MessageCard message={item} showTopic={this.props.showTopic} />
   }
 
-  scrollHandler = ({ nativeEvent: { contentOffset } }) => {
+  handleScroll = ({ nativeEvent: { contentOffset } }) => {
     this.yOffset = contentOffset.y
     if (contentOffset.y < BOTTOM_THRESHOLD) this.markAsRead()
   }
@@ -162,7 +163,7 @@ export default class Thread extends React.Component {
           keyExtractor={item => item.id}
           onEndReached={() => this.fetchMore()}
           onEndReachedThreshold={0.3}
-          onScroll={this.scrollHandler}
+          onScroll={this.handleScroll}
           ref={this.messageListRef}
           refreshing={!!pending}
           renderItem={this.renderItem}
@@ -170,7 +171,7 @@ export default class Thread extends React.Component {
         <MessageInput
           blurOnSubmit={false}
           multiline
-          onSubmit={this.createMessage}
+          onSubmit={this.handleSubmit}
           sendIsTyping={sendIsTyping}
           placeholder='Write something...'
         />

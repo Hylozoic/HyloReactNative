@@ -2,13 +2,18 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { filter, get, map, find, isEmpty } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
-
 import Avatar from 'components/Avatar'
 import styles from './ThreadCard.styles'
 
+const MAX_THREAD_PREVIEW_LENGTH = 54
+
 export default function ThreadCard (props) {
+  if (!props?.message) return null
+
   const { message, currentUser, participants, isLast, unread } = props
-  if (!message) return null
+  const latestMessagePreview = message?.text
+    ? TextHelpers.truncateText(TextHelpers.htmlToText(message.text), MAX_THREAD_PREVIEW_LENGTH)
+    : ''
   const otherParticipants = filter(p => p.id !== get('id', currentUser), participants)
   const names = threadNames(map('name', otherParticipants))
   const messageCreatorPrepend = lastMessageCreator(message, currentUser, participants)
@@ -21,7 +26,7 @@ export default function ThreadCard (props) {
       <ThreadAvatars avatarUrls={avatarUrls} />
       <View style={[styles.messageContent, isLast && styles.lastCard]}>
         <Text style={styles.header}>{names}</Text>
-        <Text style={styles.body} numberOfLines={2}>{messageCreatorPrepend}{message.text}</Text>
+        <Text style={styles.body} numberOfLines={2}>{messageCreatorPrepend}{latestMessagePreview}</Text>
         <Text style={styles.date}>{TextHelpers.humanDate(message?.createdAt)}</Text>
       </View>
     </View>
