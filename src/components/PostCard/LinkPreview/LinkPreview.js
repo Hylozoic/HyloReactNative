@@ -1,11 +1,11 @@
 import React from 'react'
 import { TouchableOpacity, Text } from 'react-native'
-import { parse } from 'url'
+import { URL } from 'react-native-url-polyfill'
 import { openURL } from 'util'
 import SpaceFillingImage from 'components/SpaceFillingImage'
 
 export default function LinkPreview ({ title, url, imageUrl }) {
-  const domain = parse(url).hostname.replace('www.', '')
+  const domain = new URL(url).hostname.replace('www.', '')
   return (
     <TouchableOpacity
       style={styles.linkContainer}

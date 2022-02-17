@@ -5,7 +5,7 @@ import logout from 'store/actions/logout'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import { unlinkAccount } from './UserSettings.store'
 import getMe from 'store/selectors/getMe'
-import { navigateToLinkingPathInApp } from 'navigation/linking/custom'
+import { navigateToLinkingPathInApp } from 'navigation/linking'
 
 export function mapStateToProps (state, props) {
   const resettingPassword = get('route.params.section', props) === 'PasswordReset'

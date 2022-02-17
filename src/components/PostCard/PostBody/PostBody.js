@@ -26,14 +26,13 @@ export default function PostBody ({
   showMember,
   showTopic
 }) {
-  // const handleLinkPress = (_, href) => urlHandler(href, showMember, showTopic, slug)
-  const presentedDetails = useMemo(() => TextHelpers.presentHTML(
-    details,
-    {
-      slug,
-      truncate: shouldTruncate && MAX_DETAILS_LENGTH
-    }
-  ), [details, slug, shouldTruncate])
+  const presentedDetails = useMemo(() => {
+    // TODO: Truncate option on presentHTML should not throw-out link attributes
+    const htmlResult = TextHelpers.presentHTML(details, { slug })
+    return shouldTruncate
+      ? TextHelpers.truncateHTML(htmlResult, MAX_DETAILS_LENGTH)
+      : htmlResult
+  }, [details, slug, shouldTruncate])
 
   return (
     <View style={styles.container}>
@@ -48,7 +47,6 @@ export default function PostBody ({
       <HyloHTML
         source={{ html: presentedDetails }}
         baseStyle={{ marginBottom: 8 }}
-        // onLinkPress: urlHandler / handleLinkPress
       />
       {linkPreview && (
         <LinkPreview {...linkPreview} />

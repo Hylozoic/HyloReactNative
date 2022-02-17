@@ -7,7 +7,7 @@ import OneSignal from 'react-native-onesignal'
 import customLinking, {
   INITIAL_NAV_STATE,
   navigateToLinkingPath
-} from 'navigation/linking/custom'
+} from 'navigation/linking'
 import SocketListener from 'components/SocketListener'
 import LoadingScreen from 'screens/LoadingScreen'
 
