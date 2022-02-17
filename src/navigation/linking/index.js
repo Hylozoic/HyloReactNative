@@ -51,7 +51,8 @@ export const routesConfig = {
 
   // special group routes (/all, /public)
   '/:groupSlug(all|public)':                                 { screenPath: 'Drawer/Tabs/Home Tab/Feed', groupId: ALL_GROUP_ID, context: 'groups' },
-  '/:groupSlug(all)/members/:id':                            { screenPath: modalScreenName('Member'), groupId: ALL_GROUP_ID, context: 'groups' },
+  '/:groupSlug(all)/members/:id':                            { screenPath: 'Drawer/Tabs/Home Tab/Member', groupId: ALL_GROUP_ID, context: 'groups' },
+  '/:groupSlug(all)/topics/:topicName':                      { screenPath: 'Drawer/Tabs/Home Tab/Topic Feed', groupId: ALL_GROUP_ID, context: 'groups' },
 
   // map routes
   '/:groupSlug(all|public)/map':                             { screenPath: 'Drawer/Tabs/Home Tab/Map', groupId: ALL_GROUP_ID, context: 'groups' },

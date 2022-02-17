@@ -4,7 +4,6 @@ import { Image, Text, View, Alert, TouchableOpacity } from 'react-native'
 import { isEmpty, filter, findLastIndex } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
 import { openURL } from 'util'
-import urlHandler from 'navigation/linking/urlHandler'
 import Avatar from 'components/Avatar'
 import PopupMenuButton from 'components/PopupMenuButton'
 import HyloHTML from 'components/HyloHTML'
@@ -14,7 +13,6 @@ import styles from './Comment.styles'
 export default function Comment ({
   comment,
   showMember,
-  showTopic,
   slug,
   style,
   displayPostTitle,
@@ -101,7 +99,6 @@ export default function Comment ({
           <HyloHTML
             tagsStyles={{ p: { margin: 0 } }}
             source={{ html: presentedText }}
-            // onLinkPress: urlHandler
           />
         </View>
       </View>

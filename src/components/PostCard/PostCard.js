@@ -84,8 +84,6 @@ export default class PostCard extends React.PureComponent {
           myEventResponse={post.myEventResponse}
           respondToEvent={respondToEvent}
           shouldTruncate
-          showMember={showMember}
-          showTopic={showTopic}
           slug={slug}
           startTime={post.startTime}
           title={post.title}

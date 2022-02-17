@@ -1,16 +1,21 @@
-import { Linking } from 'react-native'
+import { navigateToLinkingPathInApp } from '.'
+import { openURL } from 'util'
 
-export default function urlHandler (url, showMember, showTopic, slug) {
-  // TODO: Adapt to use React Navigation Linking setup with our custom router
-  const groupRoute = slug ? `/c/${slug}/` : ''
-  const variableRoute = url.substring(groupRoute.length - 1)
-  const [_, prefix, suffix] = variableRoute.split('/')
+export default function urlHandler (url, slug = 'all') {
+  const { length, [length - 2]: prefix, [length - 1]: suffix } = url.split('/')
+  const groupRoute = slug === 'all'
+    ? '/all'
+    : `/groups/${slug}`
+  console.log('!!!! url', url)
   switch (prefix) {
+    case 'members':
     case 'm':
-      return showMember && showMember(suffix)
+    case 'u':
+      return navigateToLinkingPathInApp(`${groupRoute}/members/${suffix}`)
+    case 'topics':
     case 'tag':
-      return showTopic && showTopic(suffix)
+      return navigateToLinkingPathInApp(`${groupRoute}/topics/${suffix}`)
     default:
-      Linking.openURL(url)
+      return openURL(url)
   }
 }

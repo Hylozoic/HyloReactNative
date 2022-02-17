@@ -2,12 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Text, View } from 'react-native'
 import { TextHelpers } from 'hylo-shared'
-import urlHandler from 'navigation/linking/urlHandler'
 import HyloHTML from 'components/HyloHTML'
 import Avatar from 'components/Avatar'
 import styles from './MessageCard.style'
 
-export default function MessageCard ({ message, showTopic, showMember }) {
+export default function MessageCard ({ message }) {
   const { createdAt, creator, suppressCreator, suppressDate, text } = message
   // TODO: Makrdown is being used on both Web and Mobile as some messages are HTML
   //       and others are plain text with purposeful linebreaks.
@@ -25,7 +24,6 @@ export default function MessageCard ({ message, showTopic, showMember }) {
           <Text style={styles.name}>{creator.name}</Text>
         )}
         <HyloHTML
-          // onLinkPress={url => urlHandler(url, showMember, showTopic)}
           baseStyle={textBaseStyle}
           classesStyles={classesStyles}
           source={{ html: presentedText }}

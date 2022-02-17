@@ -1,33 +1,35 @@
 import React from 'react'
-import { StyleSheet, Linking, useWindowDimensions } from 'react-native'
+import { useWindowDimensions } from 'react-native'
+import { useSelector } from 'react-redux'
 import RenderHTML, { defaultSystemFonts } from 'react-native-render-html'
+import { openURL } from 'util'
+import urlHandler from 'navigation/linking/urlHandler'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { nevada } from 'style/colors'
-
-const systemFonts = [...defaultSystemFonts, 'Circular-Book']
 
 export default function HyloHTML ({
   baseStyle: providedBaseStyle = {},
   tagsStyles: providedTagsStyles = {},
   classesStyles: providedClassessStyles = {},
   onLinkPress,
+  linkTargetGroupSlug,
   ...props
 }) {
+  const { slug: currentGroupSlug } = useSelector(getCurrentGroup)
   const { width } = useWindowDimensions()
+  const handleLinkPress = (_, href, el) => {
+    if (el.class === 'linkified') return openURL(href)
+    return urlHandler(href, currentGroupSlug)
+  }
+
   return (
     <RenderHTML
-      renderersProps={{
-        a: {
-          onPress: (_, href) => {
-            if (onLinkPress) return onLinkPress(_, href)
-            return Linking.openURL(href)
-          }
-        }
-      }}
+      renderersProps={{ a: { onPress: handleLinkPress } }}
       baseStyle={{ ...renderHTMLStyles.baseStyle, ...providedBaseStyle }}
       tagsStyles={{ ...renderHTMLStyles.tagsStyles, ...providedTagsStyles }}
       classesStyles={{ ...renderHTMLStyles.classesStyles, ...providedClassessStyles }}
       contentWidth={width}
-      systemFonts={systemFonts}
+      systemFonts={[...defaultSystemFonts, 'Circular-Book']}
       {...props}
     />
   )

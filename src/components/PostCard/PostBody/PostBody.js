@@ -2,7 +2,6 @@ import React, { useMemo } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { isEmpty } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
-import urlHandler from 'navigation/linking/urlHandler'
 import LinkPreview from 'components/PostCard/LinkPreview'
 import { caribbeanGreen, white, white20onCaribbeanGreen } from 'style/colors'
 import Icon from 'components/Icon'
@@ -22,9 +21,7 @@ export default function PostBody ({
   myEventResponse,
   respondToEvent,
   slug,
-  shouldTruncate,
-  showMember,
-  showTopic
+  shouldTruncate
 }) {
   const presentedDetails = useMemo(() => {
     // TODO: Truncate option on presentHTML should not throw-out link attributes

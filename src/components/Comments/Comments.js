@@ -19,7 +19,6 @@ function Comments ({
   header: providedHeader = null,
   style = {},
   showMember,
-  showTopic,
   slug,
   panHandlers,
   onReply
@@ -75,7 +74,6 @@ function Comments ({
           comment={comment}
           onReply={onReply}
           showMember={showMember}
-          showTopic={showTopic}
           slug={slug}
           key={comment.id}
         />
@@ -93,7 +91,6 @@ function Comments ({
         comment={comment}
         onReply={onReply}
         showMember={showMember}
-        showTopic={showTopic}
         slug={slug}
         key={comment.id}
       />

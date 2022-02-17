@@ -131,7 +131,6 @@ export class PostDetails extends React.Component {
         )}
         slug={firstGroupSlug}
         showMember={showMember}
-        showTopic={this.onShowTopic}
         panHandlers={panHandlers}
       />
     )
@@ -236,8 +235,6 @@ export function PostCardForDetails ({
         linkPreview={post.linkPreview}
         myEventResponse={post.myEventResponse}
         respondToEvent={respondToEvent}
-        showMember={showMember}
-        showTopic={showTopic}
         slug={slug}
         startTime={post.startTime}
         title={post.title}
