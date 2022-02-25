@@ -413,7 +413,6 @@ export default class PostEditor extends React.Component {
               onFocusToggle={isFocused => this.setState({ detailsFocused: isFocused })}
               onInsertTopic={this.handleInsertEditorTopic}
             />
-
             <TouchableOpacity
               style={[
                 styles.section,

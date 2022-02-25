@@ -62,9 +62,7 @@ export default function ormReducer (state = {}, action) {
     Comment,
     Group,
     GroupRelationship,
-    GroupRelationshipInvite,
     GroupTopic,
-    EventInvitation,
     JoinRequest,
     Me,
     Membership,
@@ -87,7 +85,8 @@ export default function ormReducer (state = {}, action) {
         id: meta.tempId,
         post: meta.postId,
         text: meta.text,
-        creator: Me.first().id })
+        creator: Me.first().id
+      })
       break
     }
 
@@ -100,6 +99,7 @@ export default function ormReducer (state = {}, action) {
         const p = Post.withId(meta.postId)
         p.update({ commentersTotal: p.commentersTotal + 1 })
       }
+      break
     }
 
     case CREATE_MESSAGE_PENDING: {
@@ -170,7 +170,7 @@ export default function ormReducer (state = {}, action) {
       event.update({ myEventResponse: meta.response })
       break
     }
-  
+
     case UPDATE_USER_SETTINGS_PENDING: {
       const me = Me.first()
       const changes = {
@@ -190,7 +190,7 @@ export default function ormReducer (state = {}, action) {
     case UPDATE_GROUP_SETTINGS_PENDING: {
       const group = Group.withId(meta.id)
       group.update(meta.changes)
-      const membership = Membership.safeGet({ group: meta.id }).update({ forceUpdate: new Date() })
+      Membership.safeGet({ group: meta.id }).update({ forceUpdate: new Date() })
       break
     }
 
@@ -232,7 +232,7 @@ export default function ormReducer (state = {}, action) {
     }
 
     case UPDATE_COMMENT_PENDING: {
-      comment = Comment.withId(meta.id)
+      const comment = Comment.withId(meta.id)
       comment.update(meta.data)
       break
     }
@@ -283,18 +283,20 @@ export default function ormReducer (state = {}, action) {
       break
     }
 
-    case CREATE_JOIN_REQUEST:
+    case CREATE_JOIN_REQUEST: {
       if (payload.data.createJoinRequest.request) {
-        me = Me.first()
+        const me = Me.first()
         const jr = JoinRequest.create({ group: meta.groupId, user: me.id })
         me.updateAppending({ joinRequests: [jr] })
       }
       break
+    }
 
-    case CANCEL_JOIN_REQUEST:
+    case CANCEL_JOIN_REQUEST: {
       const jr = JoinRequest.withId(meta.id)
       jr.delete()
       break
+    }
 
     case JOIN_PROJECT_PENDING: {
       const me = Me.first()
@@ -338,7 +340,7 @@ export default function ormReducer (state = {}, action) {
     case UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING: {
       const memberships = Membership.all()
       memberships.toModelArray().map(membership => {
-        membership.update({
+        return membership.update({
           settings: {
             ...membership.settings,
             ...meta.settings

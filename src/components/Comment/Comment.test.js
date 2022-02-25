@@ -55,29 +55,26 @@ it('shows the post title when displayPostTitle is true', () => {
 
 describe('commentMenu', () => {
   it('renders correctly', () => {
-    const deleteComment = jest.fn()
+    const menuItems = {
+      deleteComment: {
+        label: 'Delete Comment',
+        action: jest.fn()
+      }
+    }
     const renderer = new ReactShallowRenderer()
-    renderer.render(<CommentMenu
-      deleteComment={deleteComment}
-                    />)
+    renderer.render(
+      <CommentMenu menuItems={menuItems} />
+    )
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
   })
 
-  it('returns null when deleteComment and removeComment isnt defined', () => {
+  it('returns null when menuItems is not empty', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<CommentMenu />)
+    renderer.render(<CommentMenu menuItems={{}} />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toBeNull()
-  })
-
-  it('returns removeComment', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<CommentMenu removeComment={jest.fn()} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
   })
 })

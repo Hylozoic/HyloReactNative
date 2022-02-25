@@ -5373,10 +5373,10 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-hylo-shared@^1.6.4:
-  version "1.6.4"
-  resolved "https://registry.yarnpkg.com/hylo-shared/-/hylo-shared-1.6.4.tgz#0648342de7bd184cf74411e12f0fcc4f04f9f7ca"
-  integrity sha512-061U7O+nrb5uwXmVfSoGzK1IXFebkDCLtZu/CIh6CcMZNYumpcaNUQXMsFmAHarFbCeUWySpBVPepPcJMlbWcA==
+hylo-shared@1.6.6:
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/hylo-shared/-/hylo-shared-1.6.6.tgz#20c8b9098f99a11eac8b4dfb5e300bd768e64fbf"
+  integrity sha512-WdlzqhiPkFbvv2e1ZlLWVnoPVjWqAz2+520vm4GqEOsckX0HV8f3aeitCCmgrIP0WjjiNcH0sJhBCz+V/US21w==
   dependencies:
     cheerio "^1.0.0-rc.10"
     html-to-text "^8.1.0"

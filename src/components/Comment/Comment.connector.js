@@ -35,10 +35,9 @@ export const mapDispatchToProps = (dispatch, props) => {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { canModerate, isCreator } = stateProps
+  const { isCreator } = stateProps
 
-  const deleteComment = isCreator ? commentId => dispatchProps.deleteComment(commentId) : null
-  const removeComment = !isCreator && canModerate ? commentId => dispatchProps.deleteComment(commentId) : null
+  const deleteComment = commentId => dispatchProps.deleteComment(commentId)
 
   // TODO: These are not used in this component nor is there yet a UI implemented for editing/updating comments
   const editComment = isCreator ? null : null
@@ -51,7 +50,6 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     deleteComment,
-    removeComment,
     editComment,
     updateComment
   }

@@ -12,12 +12,13 @@ import styles from './Comment.styles'
 
 export default function Comment ({
   comment,
+  isCreator,
+  canModerate,
   showMember,
   slug,
   style,
   displayPostTitle,
   deleteComment,
-  removeComment,
   editComment,
   hideMenu,
   onReply,
@@ -25,28 +26,6 @@ export default function Comment ({
 }) {
   const { creator, text, createdAt, post } = comment
   const presentedText = useMemo(() => TextHelpers.presentHTML(text, { slug }), [text, slug])
-
-  const deleteCommentWithConfirm = deleteComment
-    ? commentId => Alert.alert(
-        'Confirm Delete',
-        'Are you sure you want to delete this comment?',
-        [
-          { text: 'Yes', onPress: () => deleteComment(commentId) },
-          { text: 'Cancel', style: 'cancel' }
-        ]
-      )
-    : null
-
-  const removeCommentWithConfirm = removeComment
-    ? commentId => Alert.alert(
-        'Moderator: Confirm Delete',
-        'Are you sure you want to remove this comment?',
-        [
-          { text: 'Yes', onPress: () => removeComment(commentId) },
-          { text: 'Cancel', style: 'cancel' }
-        ])
-    : null
-
   let postTitle = post?.title
 
   if (displayPostTitle && postTitle) {
@@ -54,10 +33,43 @@ export default function Comment ({
   }
 
   const onPress = providedOnPress || (onReply && (() => onReply(comment, { mention: false })))
-
   const imageAttachments = filter({ type: 'image' }, comment?.attachments)
   // NOTE: Currently no UI for adding comment file attachments
   // const fileAttachments = filter({ type: 'file' }, comment?.attachments)
+  const commentMenuItems = {
+    editComment: {
+      label: 'Edit Comment',
+      action: editComment
+    },
+    deleteComment: {
+      label: 'Delete Comment',
+      action: (isCreator && deleteComment) && (
+        () => Alert.alert(
+          'Confirm Delete',
+          'Are you sure you want to delete this comment?',
+          [
+            { text: 'Yes', onPress: () => deleteComment(comment.id) },
+            { text: 'Cancel', style: 'cancel' }
+          ]
+        )
+      ),
+      destructive: true
+    },
+    removeComment: {
+      label: 'Remove Comment',
+      action: (!isCreator && canModerate && deleteComment) && (
+        () => Alert.alert(
+          'Moderator: Confirm Delete',
+          'Are you sure you want to remove this comment?',
+          [
+            { text: 'Yes', onPress: () => deleteComment(comment.id) },
+            { text: 'Cancel', style: 'cancel' }
+          ]
+        )
+      ),
+      destructive: true
+    }
+  }
 
   return (
     <TouchableOpacity onPress={onPress}>
@@ -83,11 +95,7 @@ export default function Comment ({
                 </TouchableOpacity>
               )}
               {!hideMenu && (
-                <CommentMenu
-                  deleteComment={() => deleteCommentWithConfirm(comment.id)}
-                  removeComment={() => removeCommentWithConfirm(comment.id)}
-                  editComment={editComment}
-                />
+                <CommentMenu menuItems={commentMenuItems} />
               )}
             </View>
           </View>
@@ -106,21 +114,13 @@ export default function Comment ({
   )
 }
 
-export function CommentMenu ({ deleteComment, removeComment, editComment }) {
-  const removeLabel = 'Remove Comment'
-  const deleteLabel = 'Delete Comment'
+export function CommentMenu ({ menuItems: providedMenuItems }) {
+  const menuItems = filter(action => action?.action, providedMenuItems)
 
-  // If the function is defined, than it's a valid action
-  const actions = filter(x => x[1], [
-    ['Edit Comment', editComment],
-    [deleteLabel, deleteComment],
-    [removeLabel, removeComment]
-  ])
+  if (isEmpty(menuItems)) return null
 
-  if (isEmpty(actions)) return null
-
-  const destructiveLabels = [deleteLabel, removeLabel]
-  const destructiveButtonIndex = findLastIndex(action => destructiveLabels.includes(action[0]), actions)
+  const destructiveButtonIndex = findLastIndex(menuItem => menuItem?.destructive, menuItems)
+  const actions = menuItems.map(menuItem => ([menuItem.label, menuItem.action]))
 
   return (
     <PopupMenuButton
