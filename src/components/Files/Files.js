@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
-import { openURL } from 'util'
+import { openURL } from 'navigation/linking'
 import { FileLabel } from 'screens/PostEditor/FileSelector'
 
 export default function Files ({ urls, style = {} }) {

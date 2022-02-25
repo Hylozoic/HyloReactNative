@@ -1,3 +1,47 @@
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { Provider } from 'react-redux'
+import { setupServer } from 'msw/node'
+
+// React Native Testing Library
+
+export function createMockStore (state = {}) {
+  return {
+    subscribe: jest.fn(),
+    getState: jest.fn(() => state),
+    dispatch: jest.fn()
+  }
+}
+
+export function ReactNativeTestingLibraryRoot ({
+  children,
+  store: providedStore
+}) {
+  const store = providedStore || createMockStore()
+
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        {children}
+      </NavigationContainer>
+    </Provider>
+  )
+}
+
+// Mock graphql "server"
+
+// This should be ran once per test suite, i.e.
+//   `beforeAll(() => createMockGraphqlServer(handlers))`
+// To learn how to make query or mutation handlers see:
+//   https://mswjs.io/docs/getting-started/mocks/graphql-api
+// (Will need `import { graphql } from 'msw'` in test file)
+// Also `afterEach(() => { server.resetHandlers() })`is required
+export const createMockGraphqlServer = handlers => setupServer(...handlers).listen()
+
+// Misc and legacy test utils
+
+export const isDev = __DEV__ && process.env.NODE_ENV !== 'test'
+
 // Temporary brain-dead test event simulation, until either Enzyme or
 // react-dom/test-utils decides to make React Native a first-class citizen
 //
@@ -18,13 +62,3 @@ export function simulate (instance, eventName, evt = {}) {
   // also introduce a dependency on react-dom.
   if (handler) handler(evt)
 }
-
-export function createMockStore (state = {}) {
-  return {
-    subscribe: jest.fn(),
-    getState: jest.fn(() => state),
-    dispatch: jest.fn()
-  }
-}
-
-export const isDev = __DEV__ && process.env.NODE_ENV !== 'test'

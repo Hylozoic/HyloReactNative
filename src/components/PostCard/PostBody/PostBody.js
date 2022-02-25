@@ -38,8 +38,9 @@ export default function PostBody ({
       )}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <PostTitle title={title} />
-        {type === 'event' && !!respondToEvent &&
-          <EventRSVP myEventResponse={isEmpty(myEventResponse) ? RESPONSES.NO : myEventResponse} respondToEvent={respondToEvent} />}
+        {type === 'event' && !!respondToEvent && (
+          <EventRSVP myEventResponse={isEmpty(myEventResponse) ? RESPONSES.NO : myEventResponse} respondToEvent={respondToEvent} />
+        )}
       </View>
       <HyloHTML
         source={{ html: presentedDetails }}
@@ -65,7 +66,6 @@ export function EventRSVP ({ myEventResponse, respondToEvent }) {
         <Text style={styles.RSVPOptionText}>{humanResponse(myEventResponse)} |</Text>
         <Icon name='ArrowDown' color={white} style={styles.RSVPOptionText} />
       </View>
-
     </PopupMenuButton>
   )
 }

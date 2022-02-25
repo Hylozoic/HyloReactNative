@@ -2,28 +2,31 @@ import React from 'react'
 import { useWindowDimensions } from 'react-native'
 import { useSelector } from 'react-redux'
 import RenderHTML, { defaultSystemFonts } from 'react-native-render-html'
-import { openURL } from 'util'
-import urlHandler from 'navigation/linking/urlHandler'
+import { openURL } from 'navigation/linking'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { nevada } from 'style/colors'
 
-export default function HyloHTML ({
+export default React.memo(function HyloHTML ({
   baseStyle: providedBaseStyle = {},
   tagsStyles: providedTagsStyles = {},
   classesStyles: providedClassessStyles = {},
   onLinkPress,
   linkTargetGroupSlug,
+  source: providedSource,
   ...props
 }) {
   const { slug: currentGroupSlug } = useSelector(getCurrentGroup)
   const { width } = useWindowDimensions()
-  const handleLinkPress = (_, href, el) => {
-    if (el.class === 'linkified') return openURL(href)
-    return urlHandler(href, currentGroupSlug)
+  const handleLinkPress = async (_, href) => {
+    return openURL(href, { groupSlug: currentGroupSlug })
   }
+  const source = providedSource?.html
+    ? { html: wrapInHTMLBody(providedSource.html) }
+    : providedSource
 
   return (
     <RenderHTML
+      source={source}
       renderersProps={{ a: { onPress: handleLinkPress } }}
       baseStyle={{ ...renderHTMLStyles.baseStyle, ...providedBaseStyle }}
       tagsStyles={{ ...renderHTMLStyles.tagsStyles, ...providedTagsStyles }}
@@ -33,6 +36,19 @@ export default function HyloHTML ({
       {...props}
     />
   )
+})
+
+const wrapInHTMLBody = source => {
+  return `
+    <html>
+    <head>
+      <base href="https://hylo.com">
+    </head>
+    <body>
+      ${source}
+    </body>
+    </html>
+  `
 }
 
 export const renderHTMLStyles = {

@@ -8,12 +8,12 @@ import {
   Alert
 } from 'react-native'
 import { get, uniq, uniqBy, isEmpty, capitalize } from 'lodash/fp'
+import RNPickerSelect from 'react-native-picker-select'
 import moment from 'moment-timezone'
 import { Validators } from 'hylo-shared'
-import { rhino30 } from 'style/colors'
 import { showToast, hideToast } from 'util/toast'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
-import RNPickerSelect from 'react-native-picker-select'
+import { rhino30 } from 'style/colors'
 import { ModalHeader } from 'navigation/headers'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 // TODO: Convert all 3 of the below to LocationPicker style calls
@@ -27,7 +27,7 @@ import TopicRow from 'screens/TopicList/TopicRow'
 // Group Chooser
 import GroupChooserItemRow from 'screens/ItemChooser/GroupChooserItemRow'
 import GroupsList from 'components/GroupsList'
-
+// Components
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Icon from 'components/Icon'

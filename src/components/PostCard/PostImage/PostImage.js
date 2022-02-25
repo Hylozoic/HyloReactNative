@@ -11,7 +11,6 @@ import {
 } from 'react-native'
 
 export default class PostImage extends React.PureComponent {
-  // maybe this will help improve performance by avoiding creating new functions
   makeOpenURL = memoize(url => () => Linking.openURL(url))
 
   render () {

@@ -9,7 +9,7 @@ import {
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import { debounce, find, isEmpty, pick } from 'lodash/fp'
 import { Validators } from 'hylo-shared'
-import { openURL } from 'util'
+import { openURL } from 'navigation/linking'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import MemberHeader from 'screens/MemberProfile/MemberHeader'
@@ -52,7 +52,7 @@ export default class MemberDetails extends React.Component {
             headerRightButtonDisabled={!changed || !this.isValid()}
           />
       })
-    } else if (route.name == 'My Profile') {
+    } else if (route.name === 'My Profile') {
       navigation.setOptions({
         header: headerProps =>
           <ModalHeader
@@ -70,7 +70,7 @@ export default class MemberDetails extends React.Component {
             })}
           />
       })
-    } else {  
+    } else {
       navigation.setOptions({
         title,
         header: headerProps =>
@@ -269,11 +269,11 @@ export function MemberAffiliation ({ affiliation }) {
       <Text style={styles.affiliationPreposition}>{preposition}</Text>
       {url && (
         <TouchableOpacity onPress={() => openURL(url)}>
-          <Text style={[ styles.affiliationOrgName, styles.affiliationOrgNameLink ]}> {orgName}</Text>
+          <Text style={[styles.affiliationOrgName, styles.affiliationOrgNameLink]}> {orgName}</Text>
         </TouchableOpacity>
       )}
       {!url && (
-        <Text style={[ styles.affiliationOrgName ]}> {orgName}</Text>
+        <Text style={[styles.affiliationOrgName]}> {orgName}</Text>
       )}
     </>
   )

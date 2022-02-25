@@ -7,20 +7,21 @@ import {
 } from '@react-navigation/native'
 import { match } from 'path-to-regexp'
 import * as qs from 'query-string'
+import { URL } from 'react-native-url-polyfill'
+import { PathHelpers } from 'hylo-shared'
 import store from 'store'
 import { modalScreenName } from './helpers'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import { navigationRef } from 'navigation/RootView/RootView'
-import { URL } from 'react-native-url-polyfill'
 import { ALL_GROUP_ID } from 'store/models/Group'
 
-/* eslint-disable key-spacing */
+export const DEFAULT_APP_HOST = 'https://hylo.com'
 
 export const prefixes = [
+  DEFAULT_APP_HOST,
+  'https://www.hylo.com',
   'http://hylo.com',
   'http://www.hylo.com',
-  'https://hylo.com',
-  'https://www.hylo.com',
   'http://staging.hylo.com',
   'https://staging.hylo.com',
   'hyloapp://'
@@ -39,6 +40,7 @@ export const prefixes = [
 //  2) 'path/to/screen' (assumed auth required)
 //
 
+/* eslint-disable key-spacing */
 export const routesConfig = {
   '/noo/login/token':                                        { screenPath: 'LoginByTokenHandler', noAuth: true },
   '/signup/finish':                                          { screenPath: 'Signup/SignupFlow0', noAuth: true },
@@ -126,17 +128,46 @@ export const INITIAL_NAV_STATE = {
   ]
 }
 
-// TODO: For MapWebView nav... Rename or possibly move closer to MapWebView?
-// another possibility is to update logic applied by Linking.openURL
+export async function openURL (providedUrlOrPath, options = {}) {
+  const urlOrPath = providedUrlOrPath.trim().toLowerCase()
+  const linkingURL = new URL(urlOrPath, DEFAULT_APP_HOST)
+
+  if (prefixes.includes(linkingURL.origin)) {
+    const { length, [length - 2]: prefix, [length - 1]: suffix } = linkingURL.pathname.split('/')
+
+    switch (prefix) {
+      case 'members':
+      case 'm':
+      case 'u': {
+        return navigateToLinkingPathInApp(PathHelpers.mentionPath(suffix, options?.groupSlug))
+      }
+      case 'topics':
+      case 'tag': {
+        return navigateToLinkingPathInApp(PathHelpers.topicPath(suffix, options?.groupSlug))
+      }
+    }
+
+    return navigateToLinkingPathInApp(linkingURL.pathname)
+  }
+
+  if (await Linking.canOpenURL(urlOrPath)) {
+    return Linking.openURL(urlOrPath)
+  }
+}
+
+// This could possibly be replaced by updating the logic applied by Linking.openURL
 // to not always force nav state reset to default (or storing returnTo URL?) for
 // this case...
 export const navigateToLinkingPathInApp = async (providedUrl, reset = false) => {
-  const linkingPath = new URL(providedUrl, 'hyloapp://')?.pathname
+  const linkingURL = new URL(providedUrl, DEFAULT_APP_HOST)
+  const linkingPath = `${linkingURL.pathname}?${linkingURL.search}`
   const state = getStateFromPath(linkingPath)
   const action = getActionFromState(state)
+
   if (reset) {
     await navigationRef.current?.dispatch(CommonActions.reset(INITIAL_NAV_STATE))
   }
+
   navigationRef.current?.dispatch(action)
 }
 
