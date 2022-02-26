@@ -12,7 +12,7 @@ import { PathHelpers } from 'hylo-shared'
 import store from 'store'
 import { modalScreenName } from './helpers'
 import setReturnToPath from 'store/actions/setReturnToPath'
-import { navigationRef } from 'navigation/RootView/RootView'
+import { navigationRef } from 'navigation/linking/helpers'
 import { ALL_GROUP_ID } from 'store/models/Group'
 
 export const DEFAULT_APP_HOST = 'https://hylo.com'

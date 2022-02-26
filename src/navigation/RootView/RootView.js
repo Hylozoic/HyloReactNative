@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
-import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
+import { navigationRef } from 'navigation/linking/helpers'
 import RNBootSplash from 'react-native-bootsplash'
 import RootNavigator from 'navigation/RootNavigator'
 import OneSignal from 'react-native-onesignal'
@@ -10,8 +11,6 @@ import customLinking, {
 } from 'navigation/linking'
 import SocketListener from 'components/SocketListener'
 import LoadingScreen from 'screens/LoadingScreen'
-
-export const navigationRef = createNavigationContainerRef()
 
 export default function RootView ({
   loading,

@@ -6,7 +6,7 @@ import MockedScreen from 'util/testing/MockedScreen'
 
 afterEach(cleanup)
 
-it('default render matches snapshot', async () => {
+it.skip('default render matches snapshot', async () => {
   // TODO: Create a currentUser in store
   // currentUser={{
   //   id: 'test-user-id',

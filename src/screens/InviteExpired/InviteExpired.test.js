@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import getEmptyState from 'store/getEmptyState'
+import { getEmptyState } from 'store/reducers/resetStore'
 import { render, cleanup } from '@testing-library/react-native'
 import { createMockStore } from 'util/testing'
 import InviteExpired from 'screens/InviteExpired'

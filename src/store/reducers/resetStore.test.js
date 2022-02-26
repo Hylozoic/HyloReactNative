@@ -1,6 +1,6 @@
-import resetStore, { KEYS_PRESERVED_ON_RESET } from './resetStore'
-import getEmptyState from 'store/getEmptyState'
+import { getEmptyState } from 'store/reducers/resetStore'
 import { LOGOUT, RESET_STORE } from 'store/constants'
+import resetStore, { KEYS_PRESERVED_ON_RESET } from './resetStore'
 
 describe('resetStore', () => {
   it('resets to initial state on logout', () => {
@@ -36,6 +36,10 @@ describe('resetStore', () => {
       ...preservedState
     })
   })
+})
 
-  
+describe('getEmptyState', () => {
+  it('matches last snapshot', () => {
+    expect(getEmptyState()).toMatchSnapshot()
+  })
 })

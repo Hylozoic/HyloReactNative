@@ -4,7 +4,7 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import Thread from './Thread'
 import { Provider } from 'react-redux'
-import getEmptyState from 'store/getEmptyState'
+import { getEmptyState } from 'store/reducers/resetStore'
 import { createMockStore } from 'util/testing'
 
 // jest.mock('components/MessageInput', () => 'MessageInput')

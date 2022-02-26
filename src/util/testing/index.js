@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { setupServer } from 'msw/node'
-import getEmptyState from 'store/getEmptyState'
+import { getEmptyState } from 'store/reducers/resetStore'
 
 // React Native Testing Library
 
@@ -15,12 +15,14 @@ export function createMockStore (state = {}) {
   }
 }
 
+const emptyState = getEmptyState()
+
 export function ReactNativeTestingLibraryRoot ({
   children,
   store: providedStore,
   state: providedState
 }) {
-  const store = providedStore || createMockStore(providedState || getEmptyState())
+  const store = providedStore || createMockStore(providedState || emptyState)
 
   return (
     <SafeAreaProvider>

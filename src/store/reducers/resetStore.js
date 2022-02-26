@@ -1,11 +1,16 @@
 import { pick } from 'lodash/fp'
-import getEmptyState from 'store/getEmptyState'
 import { LOGOUT, RESET_STORE } from 'store/constants'
+import orm from 'store/models'
+import { combinedReducers } from '.'
 
 export const KEYS_PRESERVED_ON_RESET = [
   'session',
   'SocketListener'
 ]
+
+export function getEmptyState () {
+  return combinedReducers({ orm: orm.getEmptyState() }, { type: '' })
+}
 
 export default function (state, action) {
   if (action.type === LOGOUT && !action.error) {

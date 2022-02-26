@@ -1,9 +1,9 @@
 import { applyMiddleware, createStore, compose } from 'redux'
-import rootReducer from './reducers'
-import getEmptyState from './getEmptyState'
-import middleware from './middleware'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { persistStore, persistReducer } from 'redux-persist'
+import rootReducer from 'store/reducers'
+import middleware from 'store/middleware'
+import { getEmptyState } from './reducers/resetStore'
 
 const persistConfig = {
   key: 'root',

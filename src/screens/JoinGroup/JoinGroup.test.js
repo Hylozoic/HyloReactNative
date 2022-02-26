@@ -7,7 +7,7 @@ import { render, cleanup } from '@testing-library/react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Login from 'screens/Login'
-import getEmptyState from 'store/getEmptyState'
+import { getEmptyState } from 'store/reducers/resetStore'
 
 afterEach(cleanup)
 

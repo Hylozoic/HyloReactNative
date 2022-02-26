@@ -5,8 +5,7 @@ import CreateGroupTabBar from 'screens/CreateGroupFlow/CreateGroupTabBar'
 // Screens
 import CreateGroupName from 'screens/CreateGroupFlow/CreateGroupName'
 import CreateGroupUrl from 'screens/CreateGroupFlow/CreateGroupUrl'
-import CreateGroupVisibilityAccessibility
-  from 'screens/CreateGroupFlow/CreateGroupVisibilityAccessibility'
+import CreateGroupVisibilityAccessibility from 'screens/CreateGroupFlow/CreateGroupVisibilityAccessibility'
 import CreateGroupParentGroups from 'screens/CreateGroupFlow/CreateGroupParentGroups'
 import CreateGroupReview from 'screens/CreateGroupFlow/CreateGroupReview'
 import { white20onCaribbeanGreen } from 'style/colors'
@@ -20,12 +19,14 @@ export default function CreateGroupTabsNavigator () {
     screenOptions: {
       header: headerProps => {
         const close = () => headerProps.navigation.navigate('Drawer')
-        return <WorkflowModalHeader
-          {...headerProps}
-          headerLeftCloseIcon
-          headerLeftOnPress={close}
-          style={{ backgroundColor: white20onCaribbeanGreen }}
-        />
+        return (
+          <WorkflowModalHeader
+            {...headerProps}
+            headerLeftCloseIcon
+            headerLeftOnPress={close}
+            style={{ backgroundColor: white20onCaribbeanGreen }}
+          />
+        )
       }
     }
   }
