@@ -127,23 +127,19 @@ export function Tab ({ id, label, filter, setSearchFilter }) {
 export function SearchResult ({ searchResult, goToPost, goToPerson }) {
   const { type, content } = searchResult
 
-  let component
-  switch (type) {
-    case 'Person':
-      component = <PersonCard person={content} goToPerson={goToPerson} />
-      break
-    case 'Post':
-      component = (
-        <PostCard post={content} goToPost={goToPost} />
-      )
-      break
-    case 'Comment':
-      component = <CommentCard comment={content} expanded={false} goToPost={goToPost} />
-      break
+  const resultComponent = type => {
+    switch (type) {
+      case 'Person':
+        return <PersonCard person={content} goToPerson={goToPerson} />
+      case 'Post':
+        return <PostCard post={content} goToPost={goToPost} />
+      case 'Comment':
+        return <CommentCard comment={content} expanded={false} goToPost={goToPost} />
+    }
   }
   return (
     <View style={styles.searchResult}>
-      {component}
+      {resultComponent(type)}
     </View>
   )
 }

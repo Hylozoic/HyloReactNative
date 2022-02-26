@@ -1,13 +1,14 @@
 import React, { useMemo } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { isEmpty } from 'lodash/fp'
+import { decode } from 'html-entities'
 import { TextHelpers } from 'hylo-shared'
-import LinkPreview from 'components/PostCard/LinkPreview'
-import { caribbeanGreen, white, white20onCaribbeanGreen } from 'style/colors'
-import Icon from 'components/Icon'
 import { humanResponse, RESPONSES } from 'store/models/EventInvitation'
 import HyloHTML from 'components/HyloHTML'
+import LinkPreview from 'components/PostCard/LinkPreview'
+import Icon from 'components/Icon'
 import PopupMenuButton from 'components/PopupMenuButton'
+import { caribbeanGreen, white, white20onCaribbeanGreen } from 'style/colors'
 
 const MAX_DETAILS_LENGTH = 144
 
@@ -71,7 +72,7 @@ export function EventRSVP ({ myEventResponse, respondToEvent }) {
 }
 
 export function PostTitle ({ title, style }) {
-  return <Text style={[styles.title, style]}>{title}</Text>
+  return <Text style={[styles.title, style]}>{decode(title)}</Text>
 }
 
 const styles = StyleSheet.create({

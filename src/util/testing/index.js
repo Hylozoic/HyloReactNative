@@ -1,6 +1,9 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
 import { Provider } from 'react-redux'
+import { NavigationContainer } from '@react-navigation/native'
+import { RootSiblingParent } from 'react-native-root-siblings'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import ErrorBoundary from 'screens/ErrorBoundary'
 import { setupServer } from 'msw/node'
 
 // React Native Testing Library
@@ -20,11 +23,17 @@ export function ReactNativeTestingLibraryRoot ({
   const store = providedStore || createMockStore()
 
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-        {children}
-      </NavigationContainer>
-    </Provider>
+    <SafeAreaProvider>
+      <ErrorBoundary>
+        <RootSiblingParent>
+          <Provider store={store}>
+            <NavigationContainer>
+              {children}
+            </NavigationContainer>
+          </Provider>
+        </RootSiblingParent>
+      </ErrorBoundary>
+    </SafeAreaProvider>
   )
 }
 

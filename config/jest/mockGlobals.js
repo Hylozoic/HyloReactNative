@@ -35,7 +35,6 @@ jest.mock('react-native-reanimated', () => {
 // Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
 
-
 jest.mock('react-native-autocomplete-input', () => 'Autocomplete')
 
 // https://github.com/mixpanel/mixpanel-react-native/issues/88
@@ -47,9 +46,7 @@ jest.mock('mixpanel-react-native', () => ({
   }))
 }))
 
-
 jest.mock('@intercom/intercom-react-native', () => {}, { virtual: true })
-
 
 jest.mock('react-native-device-info', () => ({
   getVersion: jest.fn()
@@ -93,3 +90,13 @@ jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter.js', () =>
   require('react-native/Libraries/EventEmitter/__mocks__/NativeEventEmitter.js')
 )
 
+// https://github.com/rt2zz/redux-persist/issues/1243#issuecomment-692609748
+jest.mock('redux-persist', () => {
+  const real = jest.requireActual('redux-persist')
+  return {
+    ...real,
+    persistReducer: jest
+      .fn()
+      .mockImplementation((config, reducers) => reducers)
+  }
+})
