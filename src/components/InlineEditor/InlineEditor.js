@@ -9,10 +9,7 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import { trim, isEmpty, flow } from 'lodash/fp'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import { htmlToText } from 'html-to-text'
-import { MENTION_ENTITY_TYPE } from 'hylo-shared'
-import { rhino30 } from 'style/colors'
-import styles from './InlineEditor.styles'
+import { TextHelpers, MENTION_ENTITY_TYPE } from 'hylo-shared'
 // Mentions
 import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
 import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomplete'
@@ -21,6 +18,11 @@ import PersonPickerItemRow from 'screens/ItemChooser/PersonPickerItemRow'
 import fetchTopicsForGroupId from 'store/actions/fetchTopicsForGroupId'
 import getTopicsForAutocompleteWithNew from 'store/selectors/getTopicsForAutocompleteWithNew'
 import TopicRow from 'screens/TopicList/TopicRow'
+// Styles
+import { rhino30 } from 'style/colors'
+import styles from './InlineEditor.styles'
+import { NodeHtmlMarkdown } from 'node-html-markdown'
+import { defaultTranslators } from 'node-html-markdown/dist/config'
 
 export default function InlineEditor ({
   placeholder = 'Details',
@@ -51,7 +53,6 @@ export default function InlineEditor ({
 
   const insertPicked = (choice, markup, onInsertCallback = undefined) => {
     const position = selection?.start || 0
-
     // This will insert the markup at the current cursors position while padding the markup with spaces.
     const firstSlice = value.slice(0, position)
     const secondSlice = value.slice(position)
@@ -137,16 +138,19 @@ export default function InlineEditor ({
           ref={editorInputRef}
         />
         <View style={styles.toolbar}>
-          <TouchableOpacity hitSlop={hitSlop} onPress={handleOpenPersonPicker}>
+          <TouchableOpacity hitSlop={hitSlop} onPress={handleOpenPersonPicker} testID='mentionPicker'>
             <Text style={styles.toolbarButton}>@</Text>
           </TouchableOpacity>
-          <TouchableOpacity hitSlop={hitSlop} onPress={handleOpenTopicsPicker}>
+          <TouchableOpacity hitSlop={hitSlop} onPress={handleOpenTopicsPicker} testID='topicPicker'>
             <Text style={styles.toolbarButton}>#</Text>
           </TouchableOpacity>
         </View>
       </View>
       <SubmitButton
-        style={{ ...styles.submitButton, display: (onSubmit && value.length > 0) ? 'flex' : 'none' }}
+        style={{
+          ...styles.submitButton,
+          display: (onSubmit && value.length > 0) ? 'flex' : 'none'
+        }}
         submitting={submitting}
         active={value.length > 0}
         onSubmit={handleSubmit}
@@ -160,7 +164,12 @@ export function SubmitButton ({ style, submitting, active, onSubmit }) {
     return <View style={style}><ActivityIndicator /></View>
   } else {
     return (
-      <TouchableOpacity hitSlop={{ top: 5, bottom: 10, left: 10, right: 10 }} disabled={!active} onPress={onSubmit}>
+      <TouchableOpacity
+        hitSlop={{ top: 5, bottom: 10, left: 10, right: 10 }}
+        disabled={!active}
+        onPress={onSubmit}
+        testID='submitButton'
+      >
         <MaterialIcon name='send' size={26} style={[style, active && styles.activeButton]} />
       </TouchableOpacity>
     )
@@ -168,35 +177,49 @@ export function SubmitButton ({ style, submitting, active, onSubmit }) {
 }
 
 export const createMentionTag = ({ id, name }) =>
-  `[${name}:${id}]`
+  `[${name}](${id})`
 
 export const createTopicTag = topic =>
   `#${topic.name}`
 
-export const mentionsToHTML = (text) => {
-  const re = /\[([^[]+):(\d+)\]/gi
-  const replace = `<a href="#" data-entity-type="${MENTION_ENTITY_TYPE}" data-user-id="$2">$1</a>`
-  return text.replace(re, replace)
+export const mentionsToHTML = text => {
+  const result = text.replace(
+    /\[([^[]+)\]\((\d+)\)/gi,
+    `<a href="#" data-entity-type="${MENTION_ENTITY_TYPE}" data-user-id="$2">$1</a>`
+  )
+  return result
 }
 
-export const newLinesToBr = (text) => text.replace(/[\r\n|\r|\n]/gi, '<br>')
+// This allows multiple linebreaks with markdown by
+// default will collapse.
+// * This breaks markdown blocks/lists (ol, ul, etc)
+// but we're not officially supporting those yet
+export const newLinesToBr = text => text
+  .replace(
+    /[\r\n|\r|\n]/gi,
+    '<br />'
+  )
 
-export const fromHTML = html => htmlToText(html, {
-  formatters: {
-    mentionFormatter: (elem, walk, builder, formatOptions) => {
-      builder.openBlock({ leadingLineBreaks: formatOptions.leadingLineBreaks || 0 })
-      builder.addInline('[')
-      walk(elem.children, builder)
-      builder.addInline(`:${elem.attribs['data-user-id']}]`)
-      builder.closeBlock({ trailingLineBreaks: formatOptions.trailingLineBreaks || 0 })
+export const fromHTML = html => {
+  return NodeHtmlMarkdown.translate(html, {}, {
+    a: opts => {
+      const { node, options, visitor } = opts
+      if (node?.attrs['data-entity-type'] === MENTION_ENTITY_TYPE) {
+        return {
+          prefix: '[',
+          postfix: `](${node?.attrs['data-user-id']})`
+        }
+      } else {
+        defaultTranslators.a(opts)
+      }
     }
-  },
-  selectors: [
-    {
-      selector: `a[data-entity-type=${MENTION_ENTITY_TYPE}]`,
-      format: 'mentionFormatter'
-    }
-  ]
-})
+  })
+}
 
-export const toHTML = flow([trim, mentionsToHTML, newLinesToBr])
+export const toHTML = html => {
+  return flow([
+    newLinesToBr,
+    mentionsToHTML,
+    TextHelpers.markdown
+  ])(html)
+}
