@@ -2,9 +2,8 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
-import MemberDetails, { MemberSkills, MemberGroups, GroupRow } from './MemberDetails'
+import { MemberDetails, MemberSkills, MemberGroups, GroupRow } from './MemberDetails'
 
-jest.mock('@react-navigation/native')
 // Ugly, but seems to be necessary to dodge issues with debounce and timers
 // (see https://github.com/facebook/jest/issues/3465)
 jest.unmock('lodash')
