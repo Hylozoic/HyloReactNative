@@ -75,7 +75,7 @@ exports[`calls fetchGroupTopic on componentDidMount 1`] = `
                 numberOfLines={1}
                 onLayout={[Function]}
               >
-                Feed
+                All My Groups
               </Text>
             </View>
             <View

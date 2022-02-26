@@ -9,7 +9,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 describe('Signup Specification', () => {
   afterEach(cleanup)
-  
+
   it('renders with defaults', async () => {
     const store = createMockStore(getEmptyState())
     const { findByText, toJSON } =  render(
@@ -22,7 +22,7 @@ describe('Signup Specification', () => {
       </SafeAreaProvider>
     )
 
-    expect(await findByText('Sign up to get started with Hylo')).toBeTruthy()
+    expect(await findByText('Enter your email address to get started:')).toBeTruthy()
     expect(await toJSON()).toMatchSnapshot()
   })
 })

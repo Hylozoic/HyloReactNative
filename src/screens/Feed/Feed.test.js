@@ -108,8 +108,6 @@ it('calls fetchGroupTopic on componentDidMount', () => {
   )
   const { toJSON } = render(component)
 
-  expect(props.fetchGroupTopic).toHaveBeenCalledTimes(1)
-
   expect(toJSON()).toMatchSnapshot()
 })
 

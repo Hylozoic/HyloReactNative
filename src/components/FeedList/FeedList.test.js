@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import FeedList from './FeedList'
+import { FeedList } from './FeedList'
 
 describe('FeedList', () => {
   it('renders correctly', () => {

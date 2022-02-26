@@ -10,7 +10,7 @@ describe('RootView Specification', () => {
 
   it('renders Login when signedIn false', async () => {
     const store = createMockStore(getEmptyState())
-    const { findByText } =  render(
+    const { findByText } = render(
       <Provider store={store}>
         <RootView />
       </Provider>

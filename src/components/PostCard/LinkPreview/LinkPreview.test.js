@@ -1,16 +1,6 @@
-import { Linking } from 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import LinkPreview, { openURL } from './LinkPreview'
-
-jest.mock('react-native', () => ({
-  Linking: {
-    openURL: jest.fn(),
-    canOpenURL: jest.fn(() => Promise.resolve(true))
-  },
-  TouchableOpacity: () => 'TouchableOpacity',
-  Text: () => 'Text'
-}))
+import LinkPreview from './LinkPreview'
 
 describe('LinkPreview', () => {
   it('matches snapshot', () => {
@@ -21,7 +11,10 @@ describe('LinkPreview', () => {
       imageUrl: 'rarara.com/ra.png'
     }
 
-    renderer.render(<LinkPreview {...props} />)
+    renderer.render(
+      <LinkPreview {...props} />
+    )
+
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

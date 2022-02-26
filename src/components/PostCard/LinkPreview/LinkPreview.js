@@ -6,6 +6,7 @@ import SpaceFillingImage from 'components/SpaceFillingImage'
 
 export default function LinkPreview ({ title, url, imageUrl }) {
   const domain = new URL(url).hostname.replace('www.', '')
+
   return (
     <TouchableOpacity
       style={styles.linkContainer}
