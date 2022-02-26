@@ -1,10 +1,9 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
-import { RootSiblingParent } from 'react-native-root-siblings'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import ErrorBoundary from 'screens/ErrorBoundary'
 import { setupServer } from 'msw/node'
+import getEmptyState from 'store/getEmptyState'
 
 // React Native Testing Library
 
@@ -18,21 +17,18 @@ export function createMockStore (state = {}) {
 
 export function ReactNativeTestingLibraryRoot ({
   children,
-  store: providedStore
+  store: providedStore,
+  state: providedState
 }) {
-  const store = providedStore || createMockStore()
+  const store = providedStore || createMockStore(providedState || getEmptyState())
 
   return (
     <SafeAreaProvider>
-      <ErrorBoundary>
-        <RootSiblingParent>
-          <Provider store={store}>
-            <NavigationContainer>
-              {children}
-            </NavigationContainer>
-          </Provider>
-        </RootSiblingParent>
-      </ErrorBoundary>
+      <Provider store={store}>
+        <NavigationContainer>
+          {children}
+        </NavigationContainer>
+      </Provider>
     </SafeAreaProvider>
   )
 }
@@ -48,8 +44,6 @@ export function ReactNativeTestingLibraryRoot ({
 export const createMockGraphqlServer = handlers => setupServer(...handlers).listen()
 
 // Misc and legacy test utils
-
-export const isDev = __DEV__ && process.env.NODE_ENV !== 'test'
 
 // Temporary brain-dead test event simulation, until either Enzyme or
 // react-dom/test-utils decides to make React Native a first-class citizen

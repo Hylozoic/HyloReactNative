@@ -68,7 +68,7 @@ export default function SignupFlow3 ({ navigation }) {
         </View>
       </ScrollView>
       <View style={styles.bottomBar}>
-      <Button
+        <Button
           style={styles.backButton}
           text='< Back'
           onPress={() => navigation.goBack()}

@@ -3,6 +3,7 @@ import React from 'react'
 import { render, cleanup } from '@testing-library/react-native'
 import MockedScreen from 'util/testing/MockedScreen'
 import Topics, { TopicList, TopicRow, SubscribeStar } from './Topics'
+import { ReactNativeTestingLibraryRoot } from 'util/testing'
 
 describe('Topics', () => {
   afterEach(cleanup)
@@ -20,9 +21,13 @@ describe('Topics', () => {
       goToTopic: () => {}
     }
     const { toJSON } = render(
-      <MockedScreen>
-        {() => <Topics {...props} />}
-      </MockedScreen>
+      <ReactNativeTestingLibraryRoot>
+        <MockedScreen>
+          {() => (
+            <Topics {...props} />
+          )}
+        </MockedScreen>
+      </ReactNativeTestingLibraryRoot>
     )
     expect(await toJSON()).toMatchSnapshot()
   })
@@ -41,9 +46,13 @@ describe('Topics', () => {
       goToTopic: () => {}
     }
     const { toJSON } = render(
-      <MockedScreen>
-        {() => <Topics {...props} />}
-      </MockedScreen>
+      <ReactNativeTestingLibraryRoot>
+        <MockedScreen>
+          {() => (
+            <Topics {...props} />
+          )}
+        </MockedScreen>
+      </ReactNativeTestingLibraryRoot>
     )
     expect(await toJSON()).toMatchSnapshot()
   })
@@ -58,14 +67,22 @@ describe('Topics', () => {
       fetchGroupTopics: jest.fn()
     }
     const { rerender } = render(
-      <MockedScreen>
-        {() => <Topics {...propsBefore} />}
-      </MockedScreen>
+      <ReactNativeTestingLibraryRoot>
+        <MockedScreen>
+          {() => (
+            <Topics {...propsBefore} />
+          )}
+        </MockedScreen>
+      </ReactNativeTestingLibraryRoot>
     )
     await rerender(
-      <MockedScreen>
-        {() => <Topics {...propsAfter} />}
-      </MockedScreen>
+      <ReactNativeTestingLibraryRoot>
+        <MockedScreen>
+          {() => (
+            <Topics {...propsAfter} />
+          )}
+        </MockedScreen>
+      </ReactNativeTestingLibraryRoot>
     )
     expect(propsBefore.fetchGroupTopics).toBeCalled()
     expect(propsAfter.fetchGroupTopics).toBeCalled()

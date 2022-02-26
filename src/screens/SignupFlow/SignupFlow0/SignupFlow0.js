@@ -6,7 +6,7 @@ import {
   CodeField,
   Cursor,
   useBlurOnFulfill,
-  useClearByFocusCell,
+  useClearByFocusCell
 } from 'react-native-confirmation-code-field'
 import {
   updateLocalUserSettings,
@@ -14,7 +14,6 @@ import {
 } from 'screens/SignupFlow/SignupFlow.store'
 import verifyEmail from 'store/actions/verifyEmail'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-import Button from 'components/Button'
 import FormattedError from 'components/FormattedError'
 import controlStyles from 'components/SettingControl/SettingControl.styles'
 import styles from './SignupFlow0.styles'
@@ -33,7 +32,7 @@ export default function SignupFlow0 ({ navigation, route }) {
   const setVerificationCode = code => {
     setVerificationCodeBase(code)
     setError()
-    if (code?.length == CODE_LENGTH) {
+    if (code?.length === CODE_LENGTH) {
       submit(code)
     }
   }
@@ -45,7 +44,7 @@ export default function SignupFlow0 ({ navigation, route }) {
 
   useFocusEffect(() => {
     navigation.setOptions({
-      headerLeftOnPress: () => { 
+      headerLeftOnPress: () => {
         updateLocalUserSettings({ email: null })
         navigation.navigate('Signup Intro', { email })
       }
@@ -79,24 +78,24 @@ export default function SignupFlow0 ({ navigation, route }) {
           </View>
         </View>
         <View style={styles.content}>
-        <CodeField
-          ref={verificationCodeRef}
-          {...props}
-          value={verificationCode}
-          onChangeText={setVerificationCode}
-          cellCount={CODE_LENGTH}
-          rootStyle={styles.codeFieldRoot}
-          keyboardType='number-pad'
-          textContentType='oneTimeCode'
-          renderCell={({index, symbol, isFocused}) => (
-            <Text
-              key={index}
-              style={[styles.codeFieldCell, isFocused && styles.codeFieldCellFocused]}
-              onLayout={getCellOnLayoutHandler(index)}>
-              {symbol || (isFocused ? <Cursor /> : <Text> </Text>)}
-            </Text>
-          )}
-        />
+          <CodeField
+            ref={verificationCodeRef}
+            {...props}
+            value={verificationCode}
+            onChangeText={setVerificationCode}
+            cellCount={CODE_LENGTH}
+            rootStyle={styles.codeFieldRoot}
+            keyboardType='number-pad'
+            textContentType='oneTimeCode'
+            renderCell={({index, symbol, isFocused}) => (
+              <Text
+                key={index}
+                style={[styles.codeFieldCell, isFocused && styles.codeFieldCellFocused]}
+                onLayout={getCellOnLayoutHandler(index)}>
+                {symbol || (isFocused ? <Cursor /> : <Text> </Text>)}
+              </Text>
+            )}
+          />
         </View>
         <FormattedError error={error} styles={controlStyles} />
       </ScrollView>

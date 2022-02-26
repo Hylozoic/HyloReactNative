@@ -3,8 +3,7 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer, { act } from 'react-test-renderer'
 import { PostEditor, TypeSelector } from './PostEditor'
 import { Alert } from 'react-native'
-import { Provider } from 'react-redux'
-import { createMockStore } from 'util/testing'
+import { ReactNativeTestingLibraryRoot } from 'util/testing'
 import MockedScreen from 'util/testing/MockedScreen'
 // import { DocumentPicker } from 'react-native-document-picker'
 // import RNImagePicker from 'react-native-image-picker'
@@ -61,7 +60,8 @@ describe('PostEditor', () => {
       <PostEditor
         navigation={navigation}
         route={route}
-        save={save} />
+        save={save}
+      />
     )
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
@@ -87,18 +87,19 @@ describe('PostEditor', () => {
   it('renders correctly while saving', async () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
-      <Provider store={createMockStore()}>
+      <ReactNativeTestingLibraryRoot>
         <MockedScreen>
-          {() => <PostEditor
-            fetchPost={jest.fn()}
-            isFocused
-            save={save}
-            navigation={navigation}
-            route={route}
-            post={mockPost}
-          />}
+          {screenProps => (
+            <PostEditor
+              fetchPost={jest.fn()}
+              isFocused
+              save={save}
+              post={mockPost}
+              {...screenProps}
+            />
+          )}
         </MockedScreen>
-      </Provider>
+      </ReactNativeTestingLibraryRoot>
     )
     expect(renderer.toJSON()).toMatchSnapshot()
 
@@ -120,18 +121,19 @@ describe('PostEditor', () => {
   it('calls alert when announcementEnabled', async () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
-      <Provider store={createMockStore()}>
+      <ReactNativeTestingLibraryRoot>
         <MockedScreen>
-          {() => <PostEditor
-            fetchPost={jest.fn()}
-            isFocused
-            save={save}
-            navigation={navigation}
-            route={route}
-            post={mockPost}
-          />}
+          {screenProps => (
+            <PostEditor
+              fetchPost={jest.fn()}
+              isFocused
+              save={save}
+              post={mockPost}
+              {...screenProps}
+            />
+          )}
         </MockedScreen>
-      </Provider>
+      </ReactNativeTestingLibraryRoot>
     )
     const instance = renderer.root.findByType(PostEditor).instance
     await act(async () => {
@@ -146,18 +148,19 @@ describe('PostEditor', () => {
   it('toggles announcement', async () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
-      <Provider store={createMockStore()}>
+      <ReactNativeTestingLibraryRoot>
         <MockedScreen>
-          {() => <PostEditor
-            isFocused
-            fetchPost={jest.fn()}
-            save={save}
-            navigation={navigation}
-            route={route}
-            post={mockPost}
-          />}
+          {screenProps => (
+            <PostEditor
+              fetchPost={jest.fn()}
+              isFocused
+              save={save}
+              post={mockPost}
+              {...screenProps}
+            />
+          )}
         </MockedScreen>
-      </Provider>
+      </ReactNativeTestingLibraryRoot>
     )
     jest.mock('util/toast', () => ({
       showToast: jest.fn(),
@@ -178,18 +181,19 @@ describe('PostEditor', () => {
 
   it('has image methods', async () => {
     const renderer = TestRenderer.create(
-      <Provider store={createMockStore()}>
+      <ReactNativeTestingLibraryRoot>
         <MockedScreen>
-          {() => <PostEditor
-            isFocused
-            fetchPost={jest.fn()}
-            navigation={navigation}
-            route={route}
-            imageUrls={['http://foo.com/foo.png']}
-            post={mockPost}
-          />}
+          {screenProps => (
+            <PostEditor
+              isFocused
+              fetchPost={jest.fn()}
+              imageUrls={['http://foo.com/foo.png']}
+              post={mockPost}
+              {...screenProps}
+            />
+          )}
         </MockedScreen>
-      </Provider>
+      </ReactNativeTestingLibraryRoot>
     )
     const instance = renderer.root.findByType(PostEditor).instance
     await act(async () => {
@@ -208,18 +212,19 @@ describe('PostEditor', () => {
 
   it('showsAlert', async () => {
     const renderer = TestRenderer.create(
-      <Provider store={createMockStore()}>
+      <ReactNativeTestingLibraryRoot>
         <MockedScreen>
-          {() => <PostEditor
-            isFocused
-            fetchPost={jest.fn()}
-            navigation={navigation}
-            route={route}
-            imageUrls={['http://foo.com/foo.png']}
-            post={mockPost}
-          />}
+          {screenProps => (
+            <PostEditor
+              isFocused
+              fetchPost={jest.fn()}
+              imageUrls={['http://foo.com/foo.png']}
+              post={mockPost}
+              {...screenProps}
+            />
+          )}
         </MockedScreen>
-      </Provider>
+      </ReactNativeTestingLibraryRoot>
     )
     const instance = renderer.root.findByType(PostEditor).instance
     await act(async () => {
@@ -227,24 +232,23 @@ describe('PostEditor', () => {
     })
     expect(Alert.alert).toHaveBeenCalledWith('alert message')
   })
-  
+
   it('has file methods', async () => {
     const renderer = TestRenderer.create(
-      <Provider store={createMockStore()}>
+      <ReactNativeTestingLibraryRoot>
         <MockedScreen>
-          {() => (
+          {screenProps => (
             <PostEditor
               isFocused
               fetchPost={jest.fn()}
-              navigation={navigation}
-              route={route}
               postId={mockPost.id}
               fileUrls={['http://foo.com/foo.pdf']}
               post={mockPost}
+              {...screenProps}
             />
           )}
         </MockedScreen>
-      </Provider>
+      </ReactNativeTestingLibraryRoot>
     )
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -266,18 +270,19 @@ describe('PostEditor', () => {
   it('updates the title', async () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
-      <Provider store={createMockStore()}>
+      <ReactNativeTestingLibraryRoot>
         <MockedScreen>
-          {() => <PostEditor
-            fetchPost={jest.fn()}
-            isFocused
-            save={save}
-            navigation={navigation}
-            route={route}
-            post={mockPost}
-          />}
+          {screenProps => (
+            <PostEditor
+              fetchPost={jest.fn()}
+              isFocused
+              save={save}
+              post={mockPost}
+              {...screenProps}
+            />
+          )}
         </MockedScreen>
-      </Provider>
+      </ReactNativeTestingLibraryRoot>
     )
     const instance = renderer.root.findByType(PostEditor).instance
     const someTitle = 'some title'
@@ -291,18 +296,19 @@ describe('PostEditor', () => {
   it('displays an error if the title is too long', async () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
-      <Provider store={createMockStore()}>
+      <ReactNativeTestingLibraryRoot>
         <MockedScreen>
-          {() => <PostEditor
-            fetchPost={jest.fn()}
-            isFocused
-            save={save}
-            navigation={navigation}
-            route={route}
-            post={mockPost}
-          />}
+          {screenProps => (
+            <PostEditor
+              fetchPost={jest.fn()}
+              isFocused
+              save={save}
+              post={mockPost}
+              {...screenProps}
+            />
+          )}
         </MockedScreen>
-      </Provider>
+      </ReactNativeTestingLibraryRoot>
     )
     const instance = renderer.root.findByType(PostEditor).instance
     const longTitle = 'longTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitle'

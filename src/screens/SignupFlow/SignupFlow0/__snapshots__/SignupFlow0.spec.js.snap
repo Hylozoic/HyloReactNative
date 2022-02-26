@@ -219,74 +219,83 @@ exports[`default render matches snapshot 1`] = `
                           <View>
                             <View>
                               <Text>
-                                Add your location
+                                Check your email
                               </Text>
-                              <Text>
-                                Add your location to see more relevant content and find people and projects near you.
-                              </Text>
+                              <View>
+                                <Text>
+                                  We've sent a 6 digit code to:
+                                </Text>
+                                <Text />
+                                <Text>
+                                  The code will expire shortly, so please enter it here soon.
+                                </Text>
+                              </View>
                             </View>
                             <View>
                               <View>
-                                <Text>
-                                  Where do you call home
+                                <Text
+                                  onLayout={[Function]}
+                                >
+                                  <Text>
+                                     
+                                  </Text>
+                                </Text>
+                                <Text
+                                  onLayout={[Function]}
+                                >
+                                  <Text>
+                                     
+                                  </Text>
+                                </Text>
+                                <Text
+                                  onLayout={[Function]}
+                                >
+                                  <Text>
+                                     
+                                  </Text>
+                                </Text>
+                                <Text
+                                  onLayout={[Function]}
+                                >
+                                  <Text>
+                                     
+                                  </Text>
+                                </Text>
+                                <Text
+                                  onLayout={[Function]}
+                                >
+                                  <Text>
+                                     
+                                  </Text>
+                                </Text>
+                                <Text
+                                  onLayout={[Function]}
+                                >
+                                  <Text>
+                                     
+                                  </Text>
                                 </Text>
                                 <TextInput
-                                  editable={true}
+                                  autoCapitalize="characters"
+                                  autoCorrect={false}
+                                  blurOnSubmit={false}
+                                  caretHidden={true}
+                                  clearButtonMode="never"
+                                  disableFullscreenUI={true}
+                                  keyboardType="number-pad"
+                                  maxLength={6}
+                                  onBlur={[Function]}
+                                  onChangeText={[Function]}
                                   onFocus={[Function]}
-                                  onSubmitEditing={[Function]}
+                                  onPressOut={[Function]}
+                                  spellCheck={false}
                                   textContentType="oneTimeCode"
-                                  value=""
+                                  underlineColorAndroid="transparent"
                                 />
                               </View>
                             </View>
                           </View>
                         </RCTScrollView>
-                        <View>
-                          <View>
-                            <View
-                              accessible={true}
-                              collapsable={false}
-                              focusable={true}
-                              onClick={[Function]}
-                              onResponderGrant={[Function]}
-                              onResponderMove={[Function]}
-                              onResponderRelease={[Function]}
-                              onResponderTerminate={[Function]}
-                              onResponderTerminationRequest={[Function]}
-                              onStartShouldSetResponder={[Function]}
-                            >
-                              <View>
-                                <View>
-                                  <Text>
-                                    &lt; Back
-                                  </Text>
-                                </View>
-                              </View>
-                            </View>
-                          </View>
-                          <View>
-                            <View
-                              accessible={true}
-                              collapsable={false}
-                              focusable={true}
-                              onClick={[Function]}
-                              onResponderGrant={[Function]}
-                              onResponderMove={[Function]}
-                              onResponderRelease={[Function]}
-                              onResponderTerminate={[Function]}
-                              onResponderTerminationRequest={[Function]}
-                              onStartShouldSetResponder={[Function]}
-                            >
-                              <View>
-                                <View>
-                                  <Text>
-                                    Finish
-                                  </Text>
-                                </View>
-                              </View>
-                            </View>
-                          </View>
-                        </View>
                       </View>
                     </View>
                   </View>
