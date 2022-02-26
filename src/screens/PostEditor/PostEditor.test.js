@@ -1,14 +1,13 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import TestRenderer from 'react-test-renderer'
-import PostEditor, { TypeSelector } from './PostEditor'
+import TestRenderer, { act } from 'react-test-renderer'
+import { PostEditor, TypeSelector } from './PostEditor'
 import { Alert } from 'react-native'
 import { Provider } from 'react-redux'
 import { createMockStore } from 'util/testing'
 import MockedScreen from 'util/testing/MockedScreen'
 // import { DocumentPicker } from 'react-native-document-picker'
 // import RNImagePicker from 'react-native-image-picker'
-import { act } from 'react-test-renderer'
 
 jest.mock('react-native/Libraries/Alert/Alert', () => {
   return {
@@ -106,7 +105,7 @@ describe('PostEditor', () => {
     const instance = renderer.root.findByType(PostEditor).instance
     await act(async () => {
       await instance.setState({ type: 'request' })
-      await instance.save()
+      await instance.handleSave()
     })
     // TODO: Mock build header
     // expect(navigation.setOptions).toHaveBeenCalledTimes(2)
@@ -137,7 +136,7 @@ describe('PostEditor', () => {
     const instance = renderer.root.findByType(PostEditor).instance
     await act(async () => {
       await instance.setState({ type: 'request', announcementEnabled: true })
-      await instance.save()
+      await instance.handleSave()
     })
     expect(Alert.alert).toHaveBeenCalled()
     expect(save).not.toHaveBeenCalled()
@@ -194,14 +193,14 @@ describe('PostEditor', () => {
     )
     const instance = renderer.root.findByType(PostEditor).instance
     await act(async () => {
-      await instance.addImage({ remote: 'http://bar.com/bar.png' })
+      await instance.handleAddImage({ remote: 'http://bar.com/bar.png' })
     })
     expect(instance.state.imageUrls).toEqual([
       'http://foo.com/foo.png',
       'http://bar.com/bar.png'
     ])
 
-    instance.removeImage('http://foo.com/foo.png')
+    instance.handleRemoveImage('http://foo.com/foo.png')
     expect(instance.state.imageUrls).toEqual([
       'http://bar.com/bar.png'
     ])
@@ -233,29 +232,31 @@ describe('PostEditor', () => {
     const renderer = TestRenderer.create(
       <Provider store={createMockStore()}>
         <MockedScreen>
-          {() => <PostEditor
-            isFocused
-            fetchPost={jest.fn()}
-            navigation={navigation}
-            route={route}
-            postId={mockPost.id}
-            fileUrls={['http://foo.com/foo.pdf']}
-            post={mockPost}
-          />}
+          {() => (
+            <PostEditor
+              isFocused
+              fetchPost={jest.fn()}
+              navigation={navigation}
+              route={route}
+              postId={mockPost.id}
+              fileUrls={['http://foo.com/foo.pdf']}
+              post={mockPost}
+            />
+          )}
         </MockedScreen>
       </Provider>
     )
 
     const instance = renderer.root.findByType(PostEditor).instance
     await act(async () => {
-      await instance.addFile({ remote: 'http://bar.com/bar.pdf' })
+      await instance.handleAddFile({ remote: 'http://bar.com/bar.pdf' })
     })
     expect(instance.state.fileUrls).toEqual([
       'http://foo.com/foo.pdf',
       'http://bar.com/bar.pdf'
     ])
     await act(async () => {
-      await instance.removeFile('http://foo.com/foo.pdf')
+      await instance.handleRemoveFile('http://foo.com/foo.pdf')
     })
     expect(instance.state.fileUrls).toEqual([
       'http://bar.com/bar.pdf'
@@ -281,7 +282,7 @@ describe('PostEditor', () => {
     const instance = renderer.root.findByType(PostEditor).instance
     const someTitle = 'some title'
     await act(async () => {
-      await instance.updateTitle(someTitle)
+      await instance.handleUpdateTitle(someTitle)
     })
     expect(instance.state.title).toEqual(someTitle)
     expect(instance.state.titleLengthError).toBeFalsy()
@@ -306,7 +307,7 @@ describe('PostEditor', () => {
     const instance = renderer.root.findByType(PostEditor).instance
     const longTitle = 'longTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitle'
     await act(async () => {
-      await instance.updateTitle(longTitle)
+      await instance.handleUpdateTitle(longTitle)
     })
     expect(instance.state.titleLengthError).toBeTruthy()
   })

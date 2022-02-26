@@ -60,40 +60,6 @@ exports[`SocialControl matches the last snapshot unlinked 1`] = `
 </View>
 `;
 
-exports[`UserSettings cancelPassword sets the state, setting changed to false when email has not changed 1`] = `
-Object {
-  "changed": false,
-  "editingPassword": false,
-  "edits": Object {
-    "confirmPassword": null,
-    "email": "moo@moo.com",
-    "password": null,
-  },
-  "errors": Object {
-    "confirmPassword": null,
-    "email": "bad email",
-    "password": null,
-  },
-}
-`;
-
-exports[`UserSettings cancelPassword sets the state, setting changed to true when email has changed 1`] = `
-Object {
-  "changed": true,
-  "editingPassword": false,
-  "edits": Object {
-    "confirmPassword": null,
-    "email": "different@email.com",
-    "password": null,
-  },
-  "errors": Object {
-    "confirmPassword": null,
-    "email": "bad email",
-    "password": null,
-  },
-}
-`;
-
 exports[`UserSettings confirmLeave calls Alert.alert when changed is true 1`] = `
 Array [
   Array [
@@ -111,6 +77,40 @@ Array [
     ],
   ],
 ]
+`;
+
+exports[`UserSettings handleCancelPassword sets the state, setting changed to false when email has not changed 1`] = `
+Object {
+  "changed": false,
+  "editingPassword": false,
+  "edits": Object {
+    "confirmPassword": null,
+    "email": "moo@moo.com",
+    "password": null,
+  },
+  "errors": Object {
+    "confirmPassword": null,
+    "email": "bad email",
+    "password": null,
+  },
+}
+`;
+
+exports[`UserSettings handleCancelPassword sets the state, setting changed to true when email has changed 1`] = `
+Object {
+  "changed": true,
+  "editingPassword": false,
+  "edits": Object {
+    "confirmPassword": null,
+    "email": "different@email.com",
+    "password": null,
+  },
+  "errors": Object {
+    "confirmPassword": null,
+    "email": "bad email",
+    "password": null,
+  },
+}
 `;
 
 exports[`UserSettings matches snapshot with state set 1`] = `

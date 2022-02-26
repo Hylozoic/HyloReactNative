@@ -2,12 +2,19 @@ import React from 'react'
 import { FlatList, View } from 'react-native'
 import { isEmpty } from 'lodash/fp'
 import { didPropsChange } from 'util/index'
-import styles from './FeedList.styles'
+import { useIsFocused } from '@react-navigation/native'
 import PostRow from './PostRow'
 import ListControl from 'components/ListControl'
 import Loading from 'components/Loading'
 import { isContextGroup } from 'store/models/Group'
-export default class FeedList extends React.Component {
+import styles from './FeedList.styles'
+
+export default function (props) {
+  const isFocused = useIsFocused()
+  return <FeedList {...props} isFocused={isFocused} />
+}
+
+export class FeedList extends React.Component {
   fetchOrShowCached () {
     const { hasMore, postIds, fetchPosts } = this.props
     if (fetchPosts && isEmpty(postIds) && hasMore !== false) {

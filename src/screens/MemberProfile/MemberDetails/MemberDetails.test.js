@@ -38,7 +38,13 @@ describe('MemberDetails', () => {
 
   it("returns Loading when there's no person", () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberDetails isFocused navigation={navigation} route={route} />)
+    renderer.render(
+      <MemberDetails
+        isFocused
+        navigation={navigation}
+        route={route}
+      />
+    )
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -63,7 +69,9 @@ describe('MemberDetails', () => {
         route
       }
 
-      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      const instance = ReactTestRenderer.create(
+        <MemberDetails {...props} />
+      ).getInstance()
       instance.setState({
         person: { name: 'Sue' }
       })
@@ -88,7 +96,9 @@ describe('MemberDetails', () => {
         route
       }
 
-      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      const instance = ReactTestRenderer.create(
+        <MemberDetails {...props} />
+      ).getInstance()
       instance.setState({
         person: {
           id: 1,
@@ -116,7 +126,9 @@ describe('MemberDetails', () => {
         route
       }
 
-      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      const instance = ReactTestRenderer.create(
+        <MemberDetails {...props} />
+      ).getInstance()
       instance.editProfile()
       expect(instance.state.editing).toEqual(true)
     })
@@ -142,7 +154,9 @@ describe('MemberDetails', () => {
         route
       }
 
-      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      const instance = ReactTestRenderer.create(
+        <MemberDetails {...props} />
+      ).getInstance()
       instance.setState({
         person: {
           name: 'joe',
@@ -174,7 +188,9 @@ describe('MemberDetails', () => {
         route
       }
 
-      const instance = ReactTestRenderer.create(<MemberDetails {...props} />).getInstance()
+      const instance = ReactTestRenderer.create(
+        <MemberDetails {...props} />
+      ).getInstance()
       instance.setState({
         errors: {
           person: {}
@@ -211,9 +227,9 @@ describe('MemberSkills', () => {
     }
 
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberSkills
-      person={person}
-                    />)
+    renderer.render(
+      <MemberSkills person={person} />
+    )
     const actual = renderer.getRenderOutput()
 
     expect(actual).toBeNull()
@@ -231,9 +247,9 @@ describe('MemberGroups', () => {
     }
 
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberGroups
-      person={person}
-                    />)
+    renderer.render(
+      <MemberGroups person={person} />
+    )
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -245,9 +261,9 @@ describe('MemberGroups', () => {
     }
 
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberGroups
-      person={person}
-                    />)
+    renderer.render(
+      <MemberGroups person={person} />
+    )
     const actual = renderer.getRenderOutput()
 
     expect(actual).toBeNull()
@@ -266,9 +282,9 @@ describe('GroupRow', () => {
     }
 
     const renderer = new ReactShallowRenderer()
-    renderer.render(<GroupRow
-      membership={membership}
-                    />)
+    renderer.render(
+      <GroupRow membership={membership} />
+    )
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -285,9 +301,9 @@ describe('GroupRow', () => {
     }
 
     const renderer = new ReactShallowRenderer()
-    renderer.render(<GroupRow
-      membership={membership}
-                    />)
+    renderer.render(
+      <GroupRow membership={membership} />
+    )
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

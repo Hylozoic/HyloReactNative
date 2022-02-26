@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
+import { useIsFocused } from '@react-navigation/native'
 import { isEmpty } from 'lodash/fp'
 import { getSocket } from 'util/websockets'
 import LoadingScreen from 'screens/LoadingScreen'
 import ThreadCard from 'components/ThreadCard'
 import styles from './ThreadList.styles'
 
-export default class ThreadList extends Component {
+export default function (props) {
+  const isFocused = useIsFocused()
+  return <ThreadList {...props} isFocused={isFocused} />
+}
+
+export class ThreadList extends Component {
   state = { ready: false }
 
   componentDidMount () {

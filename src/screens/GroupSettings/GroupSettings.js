@@ -1,5 +1,6 @@
 import React from 'react'
 import { Image, ScrollView, Text, TextInput, View } from 'react-native'
+import { useIsFocused } from '@react-navigation/native'
 import { some } from 'lodash/fp'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
 import { isIOS } from 'util/platform'
@@ -12,7 +13,12 @@ import styles from './GroupSettings.styles'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 import Button from 'components/Button'
 
-export default class GroupSettings extends React.Component {
+export default function (props) {
+  const isFocused = useIsFocused()
+  return <GroupSettings {...props} isFocused={isFocused} />
+}
+
+export class GroupSettings extends React.Component {
   constructor (props) {
     super(props)
     this.state = {

@@ -886,142 +886,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                                   testID="ios_modal"
                                   transparent={true}
                                   visible={false}
-                                >
-                                  <View
-                                    accessible={true}
-                                    collapsable={false}
-                                    focusable={true}
-                                    onClick={[Function]}
-                                    onResponderGrant={[Function]}
-                                    onResponderMove={[Function]}
-                                    onResponderRelease={[Function]}
-                                    onResponderTerminate={[Function]}
-                                    onResponderTerminationRequest={[Function]}
-                                    onStartShouldSetResponder={[Function]}
-                                    testID="ios_modal_top"
-                                  />
-                                  <View
-                                    testID="input_accessory_view"
-                                  >
-                                    <View>
-                                      <View
-                                        accessible={true}
-                                        collapsable={false}
-                                        focusable={true}
-                                        onClick={[Function]}
-                                        onResponderGrant={[Function]}
-                                        onResponderMove={[Function]}
-                                        onResponderRelease={[Function]}
-                                        onResponderTerminate={[Function]}
-                                        onResponderTerminationRequest={[Function]}
-                                        onStartShouldSetResponder={[Function]}
-                                      >
-                                        <View />
-                                      </View>
-                                      <View
-                                        accessible={true}
-                                        collapsable={false}
-                                        focusable={true}
-                                        onClick={[Function]}
-                                        onResponderGrant={[Function]}
-                                        onResponderMove={[Function]}
-                                        onResponderRelease={[Function]}
-                                        onResponderTerminate={[Function]}
-                                        onResponderTerminationRequest={[Function]}
-                                        onStartShouldSetResponder={[Function]}
-                                      >
-                                        <View />
-                                      </View>
-                                    </View>
-                                    <View
-                                      accessible={true}
-                                      collapsable={false}
-                                      focusable={true}
-                                      hitSlop={
-                                        Object {
-                                          "bottom": 4,
-                                          "left": 4,
-                                          "right": 4,
-                                          "top": 4,
-                                        }
-                                      }
-                                      onClick={[Function]}
-                                      onResponderGrant={[Function]}
-                                      onResponderMove={[Function]}
-                                      onResponderRelease={[Function]}
-                                      onResponderTerminate={[Function]}
-                                      onResponderTerminationRequest={[Function]}
-                                      onStartShouldSetResponder={[Function]}
-                                      testID="done_button"
-                                    >
-                                      <View
-                                        testID="needed_for_touchable"
-                                      >
-                                        <Text
-                                          allowFontScaling={false}
-                                          testID="done_text"
-                                        >
-                                          Done
-                                        </Text>
-                                      </View>
-                                    </View>
-                                  </View>
-                                  <View>
-                                    <View>
-                                      <RNCPicker
-                                        items={
-                                          Array [
-                                            Object {
-                                              "label": "Select an item...",
-                                              "testID": undefined,
-                                              "textColor": 4288585892,
-                                              "value": null,
-                                            },
-                                            Object {
-                                              "label": "DISCUSSION",
-                                              "testID": undefined,
-                                              "textColor": 4282425821,
-                                              "value": "discussion",
-                                            },
-                                            Object {
-                                              "label": "EVENT",
-                                              "testID": undefined,
-                                              "textColor": 4294854736,
-                                              "value": "event",
-                                            },
-                                            Object {
-                                              "label": "OFFER",
-                                              "testID": undefined,
-                                              "textColor": 4279092127,
-                                              "value": "offer",
-                                            },
-                                            Object {
-                                              "label": "RESOURCE",
-                                              "testID": undefined,
-                                              "textColor": 4294956035,
-                                              "value": "resource",
-                                            },
-                                            Object {
-                                              "label": "PROJECT",
-                                              "testID": undefined,
-                                              "textColor": 4294737920,
-                                              "value": "project",
-                                            },
-                                            Object {
-                                              "label": "REQUEST",
-                                              "testID": undefined,
-                                              "textColor": 4284894117,
-                                              "value": "request",
-                                            },
-                                          ]
-                                        }
-                                        onChange={[Function]}
-                                        selectedIndex={6}
-                                        testID="ios_picker"
-                                      />
-                                    </View>
-                                  </View>
-                                </Modal>
+                                />
                               </View>
                             </View>
                             <Text>
@@ -1076,6 +941,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                                     onResponderTerminate={[Function]}
                                     onResponderTerminationRequest={[Function]}
                                     onStartShouldSetResponder={[Function]}
+                                    testID="mentionPicker"
                                   >
                                     <Text>
                                       @
@@ -1100,6 +966,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                                     onResponderTerminate={[Function]}
                                     onResponderTerminationRequest={[Function]}
                                     onStartShouldSetResponder={[Function]}
+                                    testID="topicPicker"
                                   >
                                     <Text>
                                       #
@@ -1276,7 +1143,7 @@ exports[`PostEditor renders correctly while saving 2`] = `
                           <View
                             accessible={true}
                             collapsable={false}
-                            focusable={true}
+                            focusable={false}
                             onClick={[Function]}
                             onResponderGrant={[Function]}
                             onResponderMove={[Function]}

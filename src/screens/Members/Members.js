@@ -2,12 +2,18 @@ import React from 'react'
 import { View, Text, Image } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { get, pick } from 'lodash/fp'
-import styles from './Members.styles'
+import { useIsFocused } from '@react-navigation/native'
 import Button from 'components/Button'
 import MemberList from 'components/MemberList'
 import { bannerlinearGradientColors } from 'style/colors'
+import styles from './Members.styles'
 
-export default class Members extends React.Component {
+export default function (props) {
+  const isFocused = useIsFocused()
+  return <Members {...props} isFocused={isFocused} />
+}
+
+export class Members extends React.Component {
   goToInvitePeople = () => this.props.navigation.navigate('Group Settings', { screen: 'Invite Members' })
 
   shouldComponentUpdate (nextProps) {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Alert } from 'react-native'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import ModeratorSettings, { ModeratorRow } from './ModeratorSettings'
+import { ModeratorSettings, ModeratorRow } from './ModeratorSettings'
 import ReactTestRenderer from 'react-test-renderer'
 
 jest.mock('react-native/Libraries/Alert/Alert', () => ({

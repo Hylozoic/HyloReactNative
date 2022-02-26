@@ -7,21 +7,28 @@ import {
   Image
 } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
+import { useIsFocused } from '@react-navigation/native'
 import { debounce, find, isEmpty, pick } from 'lodash/fp'
 import { Validators } from 'hylo-shared'
+import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import { openURL } from 'navigation/linking'
+import { ModalHeader, TabStackHeader } from 'navigation/headers'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import MemberHeader from 'screens/MemberProfile/MemberHeader'
 import Control from 'screens/MemberProfile/Control'
 import styles from './MemberDetails.styles'
-import confirmDiscardChanges from 'util/confirmDiscardChanges'
-import { ModalHeader, TabStackHeader } from 'navigation/headers'
+
+export default function (props) {
+  const isFocused = useIsFocused()
+  return <MemberDetails {...props} isFocused={isFocused} />
+}
 
 export function editableFields (person) {
   return pick(['name', 'location', 'tagline', 'bio'], person)
 }
-export default class MemberDetails extends React.Component {
+
+export class MemberDetails extends React.Component {
   constructor (props) {
     super(props)
     const { editing, person } = props

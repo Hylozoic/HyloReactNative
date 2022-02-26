@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import { get, uniq, uniqBy, isEmpty, capitalize } from 'lodash/fp'
 import RNPickerSelect from 'react-native-picker-select'
+import { useIsFocused } from '@react-navigation/native'
 import moment from 'moment-timezone'
 import { Validators } from 'hylo-shared'
 import { showToast, hideToast } from 'util/toast'
@@ -40,7 +41,12 @@ import ErrorBubble from 'components/ErrorBubble'
 import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
 import styles from './PostEditor.styles'
 
-export default class PostEditor extends React.Component {
+export default function (props) {
+  const isFocused = useIsFocused()
+  return <PostEditor {...props} isFocused={isFocused} />
+}
+
+export class PostEditor extends React.Component {
   constructor (props) {
     super(props)
     const { post, imageUrls, fileUrls } = props

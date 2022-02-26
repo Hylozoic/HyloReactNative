@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
+import { useIsFocused } from '@react-navigation/native'
 import { ModalHeader } from 'navigation/headers'
 import LoadingScreen from 'screens/LoadingScreen'
 import NotificationCard from 'components/NotificationCard'
 import CreateGroupNotice from 'components/CreateGroupNotice'
-
 import styles from './NotificationsList.styles'
 
-export default class NotificationsList extends Component {
+export default function (props) {
+  const isFocused = useIsFocused()
+  return <NotificationsList {...props} isFocused={isFocused} />
+}
+export class NotificationsList extends Component {
   state = { ready: false }
 
   setHeader = () => {

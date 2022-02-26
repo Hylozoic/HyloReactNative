@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { View, Text, TouchableOpacity, Alert } from 'react-native'
+import { useIsFocused } from '@react-navigation/native'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { KeyboardAccessoryView } from '@flyerhq/react-native-keyboard-accessory-view'
@@ -183,13 +184,22 @@ export class PostDetails extends React.Component {
 
 export default function (props) {
   const isModal = isModalScreen(props.route?.name)
+  const isFocused = useIsFocused()
 
   if (!isModal) useGroupSelect()
 
   const safeAreaInsets = useSafeAreaInsets()
   const tabBarHeight = isModal ? 0 : useBottomTabBarHeight()
 
-  return <PostDetails {...props} isModal={isModal} safeAreaInsets={safeAreaInsets} tabBarHeight={tabBarHeight} />
+  return (
+    <PostDetails
+      {...props}
+      isModal={isModal}
+      isFocused={isFocused}
+      safeAreaInsets={safeAreaInsets}
+      tabBarHeight={tabBarHeight}
+    />
+  )
 }
 
 export function PostCardForDetails ({

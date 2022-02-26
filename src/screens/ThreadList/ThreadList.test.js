@@ -2,7 +2,7 @@ import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import TestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import ThreadList, { MessageRow } from './ThreadList'
+import { ThreadList, MessageRow } from './ThreadList'
 
 jest.mock('util/websockets', () => {
   const socket = {
