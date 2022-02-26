@@ -429,20 +429,47 @@ exports[`PostDetails renders correctly 1`] = `
                                       Hi
                                     </Text>
                                   </View>
-                                  <View>
-                                    <Text
-                                      style={
+                                  <View
+                                    style={
+                                      Array [
                                         Object {
-                                          "color": "#5D757A",
-                                          "fontFamily": "Circular-Book",
-                                          "fontSize": 14,
-                                          "lineHeight": 20,
                                           "marginBottom": 8,
-                                        }
+                                        },
+                                        undefined,
+                                        undefined,
+                                      ]
+                                    }
+                                    testID="html"
+                                  >
+                                    <View
+                                      style={
+                                        Array [
+                                          Object {},
+                                          undefined,
+                                          undefined,
+                                        ]
                                       }
+                                      testID="body"
                                     >
-                                      Lo
-                                    </Text>
+                                      <Text
+                                        allowFontScaling={true}
+                                        selectable={false}
+                                        style={
+                                          Array [
+                                            Object {
+                                              "color": "#5D757A",
+                                              "fontFamily": "Circular-Book",
+                                              "fontSize": 14,
+                                              "lineHeight": 20,
+                                            },
+                                            undefined,
+                                            undefined,
+                                          ]
+                                        }
+                                      >
+                                        Lo
+                                      </Text>
+                                    </View>
                                   </View>
                                 </View>
                                 <View>
@@ -593,15 +620,22 @@ exports[`PostDetails renders correctly 1`] = `
                         <View
                           onLayout={[Function]}
                           style={
-                            Object {
-                              "backgroundColor": "#f4f5f7",
-                              "borderWidth": 0,
-                              "flex": 1,
-                              "marginBottom": 0,
-                              "marginLeft": 0,
-                              "marginRight": 0,
-                              "paddingBottom": 0,
-                            }
+                            Array [
+                              Object {
+                                "flex": 1,
+                              },
+                              Object {
+                                "marginBottom": 0,
+                                "marginLeft": 0,
+                                "marginRight": 0,
+                              },
+                              Object {
+                                "backgroundColor": "#f4f5f7",
+                                "borderWidth": 0,
+                                "marginBottom": 0,
+                                "paddingBottom": 0,
+                              },
+                            ]
                           }
                         >
                           <View
@@ -639,6 +673,7 @@ exports[`PostDetails renders correctly 1`] = `
                                   onResponderTerminate={[Function]}
                                   onResponderTerminationRequest={[Function]}
                                   onStartShouldSetResponder={[Function]}
+                                  testID="mentionPicker"
                                 >
                                   <Text>
                                     @
@@ -663,6 +698,7 @@ exports[`PostDetails renders correctly 1`] = `
                                   onResponderTerminate={[Function]}
                                   onResponderTerminationRequest={[Function]}
                                   onStartShouldSetResponder={[Function]}
+                                  testID="topicPicker"
                                 >
                                   <Text>
                                     #
@@ -694,6 +730,7 @@ exports[`PostDetails renders correctly 1`] = `
                               onResponderTerminate={[Function]}
                               onResponderTerminationRequest={[Function]}
                               onStartShouldSetResponder={[Function]}
+                              testID="submitButton"
                             >
                               <Text
                                 allowFontScaling={false}

@@ -99,12 +99,15 @@ describe('PostDetails', () => {
       </Provider>
     )
     const instance = renderer.root.findByType(PostDetails).instance
-    const commentText = 'some text [amention:0] #topic <some encoded stuff>'
+    const commentText = 'some text [amention](0) #topic <shouldn\'t encode entities>'
     instance.setState({ commentText })
     await act(async () => (
-      instance.handleCreateComment('some text [amention:3332] #topic <some encoded stuff>')
+      instance.handleCreateComment(commentText)
     ))
-    expect(props.createComment).toHaveBeenCalledWith({ text: 'some text <a href="#" data-entity-type="mention" data-user-id="3332">amention</a> #topic &lt;some encoded stuff&gt;', "parentCommentId": null })
+    expect(props.createComment).toHaveBeenCalledWith({
+      text: '<p>some text <a href="#" data-entity-type="mention" data-user-id="0">amention</a> #topic &lt;shouldn&#39;t encode entities&gt;</p>\n',
+      parentCommentId: null
+    })
     expect(instance.state.submitting).toBeFalsy()
     expect(instance.state.commentText).toBe('')
   })

@@ -106,15 +106,17 @@ Object {
     neighborhood
     region
   }
+  undefined
   
-  joinQuestions {
-    items {
-      id
-      questionId
-      text
+    joinQuestions {
+      items {
+        id
+        questionId
+        text
+      }
     }
-  }
   
+  undefined
 
           }
           person {

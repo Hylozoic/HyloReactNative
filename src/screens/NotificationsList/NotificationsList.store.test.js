@@ -43,8 +43,8 @@ describe('truncateHTML', () => {
   })
 
   it('trucates to NOTIFICATION_TEXT_MAX', () => {
-    const markup = 'a'.repeat(store.NOTIFICATION_TEXT_MAX + 1)
-    const expected = 'a'.repeat(store.NOTIFICATION_TEXT_MAX)
+    const markup = 'a '.repeat(store.NOTIFICATION_TEXT_MAX + 1)
+    const expected = 'a '.repeat(store.NOTIFICATION_TEXT_MAX / 2) + '…'
     const actual = store.truncateHTML(markup)
     expect(actual).toBe(expected)
   })

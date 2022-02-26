@@ -71,9 +71,7 @@ exports[`NotificationsList matches the last snapshot 1`] = `
                 >
                   <Text />
                 </Text>
-                <Text
-                  numberOfLines={2}
-                >
+                <Text>
                   <Text>
                     Wombat 
                   </Text>

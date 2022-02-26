@@ -36,7 +36,6 @@ Object {
     "message": "",
   },
   "PeopleTyping": Object {},
-  "PostEditor": Object {},
   "SearchPage": Object {
     "filter": "all",
     "search": "",

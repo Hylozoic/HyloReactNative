@@ -206,7 +206,7 @@ Array [
         }
       }",
         "variables": Object {
-          "details": "",
+          "details": undefined,
           "endTime": undefined,
           "fileUrls": Array [],
           "groupIds": Array [

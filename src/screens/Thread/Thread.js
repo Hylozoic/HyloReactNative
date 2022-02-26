@@ -3,6 +3,7 @@ import { FlatList, Text, TouchableOpacity } from 'react-native'
 import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
+import { getSocket } from 'util/websockets'
 import Loading from 'components/Loading'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import MessageCard from 'components/MessageCard'
@@ -10,9 +11,8 @@ import MessageInput from 'components/MessageInput'
 import NotificationOverlay from 'components/NotificationOverlay'
 import PeopleTyping from 'components/PeopleTyping'
 import SocketSubscriber from 'components/SocketSubscriber'
-import { getSocket } from 'util/websockets'
-import styles from './Thread.styles'
 import { pictonBlue } from 'style/colors'
+import styles from './Thread.styles'
 
 const BOTTOM_THRESHOLD = 10
 
