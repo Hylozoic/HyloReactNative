@@ -33,7 +33,7 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch, props) {
+export function mapDispatchToProps (dispatch) {
   return {
     fetchGroupSettingsMaker: groupId => () => dispatch(fetchGroupSettings(groupId)),
     regenerateAccessCodeMaker: groupId => () => dispatch(regenerateAccessCode(groupId)),

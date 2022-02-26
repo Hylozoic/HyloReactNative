@@ -2,12 +2,12 @@ import React from 'react'
 import { View, Text, TextInput, FlatList, TouchableOpacity } from 'react-native'
 import Loading from 'components/Loading'
 import Avatar from 'components/Avatar'
-import styles from './SearchPage.styles'
 import Icon from 'components/Icon'
 import UnwrappedPostCard from 'components/PostCard'
 import PostHeader from 'components/PostCard/PostHeader'
 import { PostTitle } from 'components/PostCard/PostBody/PostBody'
 import UnwrappedCommentCard from 'components/Comment'
+import styles from './SearchPage.styles'
 
 export default class SearchPage extends React.Component {
   state = {

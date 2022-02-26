@@ -2,8 +2,7 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
-import MemberDetails, { MemberBio, MemberSkills, MemberGroups, GroupRow } from './MemberDetails'
-import { pick } from 'lodash/fp'
+import MemberDetails, { MemberSkills, MemberGroups, GroupRow } from './MemberDetails'
 
 jest.mock('@react-navigation/native')
 // Ugly, but seems to be necessary to dodge issues with debounce and timers
@@ -100,7 +99,7 @@ describe('MemberDetails', () => {
           omitable: 'should be omitted',
           skills: { toRefArray: jest.fn(() => []) },
           memberships: { toModelArray: jest.fn(() => []) }
-        },
+        }
       })
       instance.validate()
       expect(instance.state.errors.name).toEqual('Name must not consist solely of whitespace.')
