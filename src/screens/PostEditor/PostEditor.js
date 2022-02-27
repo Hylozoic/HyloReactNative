@@ -58,17 +58,23 @@ export class PostEditor extends React.Component {
       groups: post?.groups || [],
       imageUrls,
       fileUrls,
-      topics: get('topics', post) || [],
-      members: get('members', post) || [],
+      topics: post?.topics || [],
+      members: post?.members || [],
       topicsPicked: false,
       announcementEnabled: false,
       detailsFocused: false,
-      detailsText: (post?.details && fromHTML(post?.details)) || '',
+      detailsText: post?.details
+        ? fromHTML(post.details)
+        : '',
       titleLengthError: false,
-      startTime: get('startTime', post) ? (new Date(get('startTime', post))) : null,
-      endTime: get('endTime', post) ? (new Date(get('endTime', post))) : null,
-      location: get('location', post),
-      locationObject: get('locationObject', post),
+      startTime: post?.startTime
+        ? new Date(post.startTime)
+        : null,
+      endTime: post?.endTime
+        ? new Date(post.endTime)
+        : null,
+      location: post?.location,
+      locationObject: post?.locationObject,
       startTimeExpanded: false,
       endTimeExpanded: false,
       isSaving: false
@@ -325,8 +331,8 @@ export class PostEditor extends React.Component {
   handleShowLocationPicker = () => {
     LocationPicker({
       navigation: this.props.navigation,
-      initialSearchTerm: get('location', this.state) ||
-        get('locationObject.fullText', this.state),
+      initialSearchTerm: this.state?.location ||
+        this.state?.locationObject?.fullText,
       onPick: (locationObject) => this.setState(() =>
         ({ location: locationObject.fullText, locationObject }))
     })
@@ -337,7 +343,7 @@ export class PostEditor extends React.Component {
     await showFilePicker({
       upload: this.props.upload,
       type: 'post',
-      id: get('post.id', this.props),
+      id: this.props?.post?.id,
       onAdd: this.handleAddFile,
       onError: this.showAlert,
       onComplete: () => this.setState({ filePickerPending: false }),
@@ -414,7 +420,7 @@ export class PostEditor extends React.Component {
               editable={!pendingDetailsText}
               submitting={isSaving}
               placeholder={detailsPlaceholder}
-              groupId={get('id', currentGroup)}
+              groupId={currentGroup?.id}
               autoGrow={false}
               onFocusToggle={isFocused => this.setState({ detailsFocused: isFocused })}
               onInsertTopic={this.handleInsertEditorTopic}
@@ -583,7 +589,7 @@ export function Toolbar ({
         <ImagePicker
           iconStyle={styles.bottomBarIcon}
           type='post'
-          id={get('post.id', post)}
+          id={post?.id}
           selectionLimit={10}
           onChoice={addImage}
           onError={showAlert}
