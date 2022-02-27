@@ -63,7 +63,7 @@ export class PostDetails extends React.Component {
 
     if (!isEmpty(commentHTML)) {
       const { replyingToComment } = this.state
-      const parentCommentId = replyingToComment.parentComment || replyingToComment.id
+      const parentCommentId = replyingToComment?.parentComment || replyingToComment?.id || null
 
       this.setState(() => ({ submitting: true }))
 

@@ -44,7 +44,7 @@ export default function PostBody ({
         )}
       </View>
       <HyloHTML
-        source={{ html: presentedDetails }}
+        html={presentedDetails}
         baseStyle={{ marginBottom: 8 }}
       />
       {linkPreview && (

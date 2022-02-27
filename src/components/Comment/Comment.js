@@ -106,7 +106,7 @@ export default function Comment ({
           ))}
           <HyloHTML
             tagsStyles={{ p: { margin: 0 } }}
-            source={{ html: presentedText }}
+            html={presentedText}
           />
         </View>
       </View>

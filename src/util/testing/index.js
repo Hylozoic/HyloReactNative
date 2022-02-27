@@ -4,8 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { setupServer } from 'msw/node'
 import { createInitialState } from 'store'
-
-// React Native Testing Library
+import orm from 'store/models'
 
 export function createMockStore (state = {}) {
   return {
@@ -17,10 +16,25 @@ export function createMockStore (state = {}) {
 
 const emptyState = createInitialState()
 
-export function ReactNativeTestingLibraryRoot ({
-  children,
+// Basic utility CurrentUserState -- to be further abstracted
+export function createInitialStateWithCurrentUser () {
+  const session = orm.session(orm.getEmptyState())
+  const { Me } = session
+
+  Me.create({
+    id: 'current-user-id',
+    name: 'Current User'
+  })
+
+  return createInitialState({
+    orm: session.state
+  })
+}
+
+export function TestRoot ({
   store: providedStore,
-  state: providedState
+  state: providedState,
+  children
 }) {
   const store = providedStore || createMockStore(providedState || emptyState)
 

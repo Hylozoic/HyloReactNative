@@ -1,10 +1,8 @@
 import 'react-native'
 import React from 'react'
-import ReactShallowRenderer from 'react-test-renderer/shallow'
+import { render } from '@testing-library/react-native'
 import TestRenderer from 'react-test-renderer'
-import { Provider } from 'react-redux'
-import { createInitialState } from 'store'
-import { createMockStore } from 'util/testing'
+import { TestRoot } from 'util/testing'
 import Thread from './Thread'
 
 // jest.mock('components/MessageInput', () => 'MessageInput')
@@ -26,7 +24,8 @@ import Thread from './Thread'
 jest.mock('util/websockets', () => {
   const socket = {
     post: jest.fn(),
-    on: jest.fn()
+    on: jest.fn(),
+    off: jest.fn()
   }
 
   return {
@@ -47,7 +46,6 @@ describe('Thread', () => {
       fetchMessages: () => {},
       isConnected: true,
       setNavParams: () => {},
-
       // Remember: _descending_ order, new to old...
       messages: [
         {
@@ -76,21 +74,23 @@ describe('Thread', () => {
   })
 
   it('matches the last snapshot', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<Thread {...props} />)
-    expect(renderer.getRenderOutput()).toMatchSnapshot()
+    const { toJSON } = render(
+      <TestRoot>
+        <Thread {...props} />
+      </TestRoot>
+    )
+    expect(toJSON()).toMatchSnapshot()
   })
 
   describe('when at bottom', () => {
     let root
 
     beforeEach(() => {
-      const store = createMockStore(createInitialState())
       root = TestRenderer.create(
-        <Provider store={store}>
+        <TestRoot>
           <Thread {...props} />
-        </Provider>
-      ).root.children[0]
+        </TestRoot>
+      ).root.findByType(Thread)
     })
 
     it('scrolls on new message from anyone', () => {
@@ -113,12 +113,11 @@ describe('Thread', () => {
     let root
 
     beforeEach(() => {
-      const state = createInitialState()
       root = TestRenderer.create(
-        <Provider store={createMockStore(state)}>
+        <TestRoot>
           <Thread {...props} />
-        </Provider>
-      ).root.children[0]
+        </TestRoot>
+      ).root.findByType(Thread)
       root.instance.atBottom = () => false
     })
 
@@ -179,14 +178,13 @@ describe('Thread', () => {
         id: '2',
         messages: []
       }
-      const store = createMockStore(createInitialState())
       const instance = TestRenderer.create(
-        <Provider store={store}>
+        <TestRoot>
           <Thread {...props} />
-        </Provider>
-      ).root.children[0].instance
-      jest.spyOn(instance, 'markAsRead')
+        </TestRoot>
+      ).root.findByType(Thread).instance
 
+      jest.spyOn(instance, 'markAsRead')
       instance.componentDidUpdate(prevPropsSameId)
       expect(instance.markAsRead).not.toHaveBeenCalled()
       instance.componentDidUpdate(prevPropsDifferentId)

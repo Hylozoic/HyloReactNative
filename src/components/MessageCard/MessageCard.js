@@ -26,7 +26,7 @@ export default function MessageCard ({ message }) {
         <HyloHTML
           baseStyle={textBaseStyle}
           classesStyles={classesStyles}
-          source={{ html: presentedText }}
+          html={presentedText}
         />
         {!suppressDate && (
           <Text style={styles.date}>{createdAt}</Text>

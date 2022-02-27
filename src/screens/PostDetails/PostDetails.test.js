@@ -4,7 +4,7 @@ import TestRenderer, { act } from 'react-test-renderer'
 import { Provider } from 'react-redux'
 import { PostDetails, CommentPrompt, JoinProjectButton, ProjectMembers } from './PostDetails'
 import { Linking, TouchableOpacity } from 'react-native'
-import { createMockStore, ReactNativeTestingLibraryRoot } from 'util/testing'
+import { createMockStore, TestRoot } from 'util/testing'
 import MockedScreen from 'util/testing/MockedScreen'
 import orm from 'store/models'
 
@@ -81,22 +81,22 @@ const state = {
 describe('PostDetails', () => {
   it('renders correctly', () => {
     const renderer = TestRenderer.create(
-      <ReactNativeTestingLibraryRoot state={state}>
+      <TestRoot state={state}>
         <MockedScreen>
           {() => <PostDetails {...props} />}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
     expect(renderer.toJSON()).toMatchSnapshot()
   })
 
   it('handleCreateComment success', async () => {
     const renderer = TestRenderer.create(
-      <ReactNativeTestingLibraryRoot state={state}>
+      <TestRoot state={state}>
         <MockedScreen>
           {() => <PostDetails {...props} />}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
     const instance = renderer.root.findByType(PostDetails).instance
     const commentText = 'some text [amention](0) #topic <shouldn\'t encode entities>'
@@ -118,11 +118,11 @@ describe('PostDetails', () => {
       createComment: jest.fn(() => Promise.resolve({ error: new Error('blah') }))
     }
     const renderer = TestRenderer.create(
-      <ReactNativeTestingLibraryRoot state={state}>
+      <TestRoot state={state}>
         <MockedScreen>
           {() => <PostDetails {...rejectionProps} />}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
     const instance = renderer.root.findByType(PostDetails).instance
     const commentText = 'some text [amention:0] #topic <some encoded stuff>'
@@ -136,11 +136,11 @@ describe('PostDetails', () => {
 
   it('handleCommentOnChange', async () => {
     const renderer = TestRenderer.create(
-      <ReactNativeTestingLibraryRoot state={state}>
+      <TestRoot state={state}>
         <MockedScreen>
           {() => <PostDetails {...props} />}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
     const instance = renderer.root.findByType(PostDetails).instance
     const commentText = 'some text [amention:0] #topic <some encoded stuff>'

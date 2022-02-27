@@ -3,7 +3,7 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer, { act } from 'react-test-renderer'
 import { PostEditor, TypeSelector } from './PostEditor'
 import { Alert } from 'react-native'
-import { ReactNativeTestingLibraryRoot } from 'util/testing'
+import { TestRoot } from 'util/testing'
 import MockedScreen from 'util/testing/MockedScreen'
 // import { DocumentPicker } from 'react-native-document-picker'
 // import RNImagePicker from 'react-native-image-picker'
@@ -87,7 +87,7 @@ describe('PostEditor', () => {
   it('renders correctly while saving', async () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
-      <ReactNativeTestingLibraryRoot>
+      <TestRoot>
         <MockedScreen>
           {screenProps => (
             <PostEditor
@@ -99,7 +99,7 @@ describe('PostEditor', () => {
             />
           )}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
     expect(renderer.toJSON()).toMatchSnapshot()
 
@@ -121,7 +121,7 @@ describe('PostEditor', () => {
   it('calls alert when announcementEnabled', async () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
-      <ReactNativeTestingLibraryRoot>
+      <TestRoot>
         <MockedScreen>
           {screenProps => (
             <PostEditor
@@ -133,7 +133,7 @@ describe('PostEditor', () => {
             />
           )}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
     const instance = renderer.root.findByType(PostEditor).instance
     await act(async () => {
@@ -148,7 +148,7 @@ describe('PostEditor', () => {
   it('toggles announcement', async () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
-      <ReactNativeTestingLibraryRoot>
+      <TestRoot>
         <MockedScreen>
           {screenProps => (
             <PostEditor
@@ -160,7 +160,7 @@ describe('PostEditor', () => {
             />
           )}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
     jest.mock('util/toast', () => ({
       showToast: jest.fn(),
@@ -181,7 +181,7 @@ describe('PostEditor', () => {
 
   it('has image methods', async () => {
     const renderer = TestRenderer.create(
-      <ReactNativeTestingLibraryRoot>
+      <TestRoot>
         <MockedScreen>
           {screenProps => (
             <PostEditor
@@ -193,7 +193,7 @@ describe('PostEditor', () => {
             />
           )}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
     const instance = renderer.root.findByType(PostEditor).instance
     await act(async () => {
@@ -212,7 +212,7 @@ describe('PostEditor', () => {
 
   it('showsAlert', async () => {
     const renderer = TestRenderer.create(
-      <ReactNativeTestingLibraryRoot>
+      <TestRoot>
         <MockedScreen>
           {screenProps => (
             <PostEditor
@@ -224,7 +224,7 @@ describe('PostEditor', () => {
             />
           )}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
     const instance = renderer.root.findByType(PostEditor).instance
     await act(async () => {
@@ -235,7 +235,7 @@ describe('PostEditor', () => {
 
   it('has file methods', async () => {
     const renderer = TestRenderer.create(
-      <ReactNativeTestingLibraryRoot>
+      <TestRoot>
         <MockedScreen>
           {screenProps => (
             <PostEditor
@@ -248,7 +248,7 @@ describe('PostEditor', () => {
             />
           )}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
 
     const instance = renderer.root.findByType(PostEditor).instance
@@ -270,7 +270,7 @@ describe('PostEditor', () => {
   it('updates the title', async () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
-      <ReactNativeTestingLibraryRoot>
+      <TestRoot>
         <MockedScreen>
           {screenProps => (
             <PostEditor
@@ -282,7 +282,7 @@ describe('PostEditor', () => {
             />
           )}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
     const instance = renderer.root.findByType(PostEditor).instance
     const someTitle = 'some title'
@@ -296,7 +296,7 @@ describe('PostEditor', () => {
   it('displays an error if the title is too long', async () => {
     const save = jest.fn(() => Promise.resolve())
     const renderer = TestRenderer.create(
-      <ReactNativeTestingLibraryRoot>
+      <TestRoot>
         <MockedScreen>
           {screenProps => (
             <PostEditor
@@ -308,7 +308,7 @@ describe('PostEditor', () => {
             />
           )}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
     const instance = renderer.root.findByType(PostEditor).instance
     const longTitle = 'longTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitlelongTitle'

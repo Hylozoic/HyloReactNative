@@ -3,7 +3,7 @@ import React from 'react'
 import { render, cleanup } from '@testing-library/react-native'
 import MockedScreen from 'util/testing/MockedScreen'
 import Topics, { TopicList, TopicRow, SubscribeStar } from './Topics'
-import { ReactNativeTestingLibraryRoot } from 'util/testing'
+import { TestRoot } from 'util/testing'
 
 describe('Topics', () => {
   afterEach(cleanup)
@@ -21,13 +21,13 @@ describe('Topics', () => {
       goToTopic: () => {}
     }
     const { toJSON } = render(
-      <ReactNativeTestingLibraryRoot>
+      <TestRoot>
         <MockedScreen>
           {() => (
             <Topics {...props} />
           )}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
     expect(await toJSON()).toMatchSnapshot()
   })
@@ -46,13 +46,13 @@ describe('Topics', () => {
       goToTopic: () => {}
     }
     const { toJSON } = render(
-      <ReactNativeTestingLibraryRoot>
+      <TestRoot>
         <MockedScreen>
           {() => (
             <Topics {...props} />
           )}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
     expect(await toJSON()).toMatchSnapshot()
   })
@@ -67,22 +67,22 @@ describe('Topics', () => {
       fetchGroupTopics: jest.fn()
     }
     const { rerender } = render(
-      <ReactNativeTestingLibraryRoot>
+      <TestRoot>
         <MockedScreen>
           {() => (
             <Topics {...propsBefore} />
           )}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
     await rerender(
-      <ReactNativeTestingLibraryRoot>
+      <TestRoot>
         <MockedScreen>
           {() => (
             <Topics {...propsAfter} />
           )}
         </MockedScreen>
-      </ReactNativeTestingLibraryRoot>
+      </TestRoot>
     )
     expect(propsBefore.fetchGroupTopics).toBeCalled()
     expect(propsAfter.fetchGroupTopics).toBeCalled()

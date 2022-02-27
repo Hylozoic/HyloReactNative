@@ -73,12 +73,8 @@ exports[`renders correctly 1`] = `
           />
         </View>
       </View>
-      <Memo(HyloHTML)
-        source={
-          Object {
-            "html": "tick followed tock followed tick followed tock",
-          }
-        }
+      <Memo
+        html="tick followed tock followed tick followed tock"
         tagsStyles={
           Object {
             "p": Object {
@@ -144,12 +140,8 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
           />
         </View>
       </View>
-      <Memo(HyloHTML)
-        source={
-          Object {
-            "html": "tick followed tock followed tick followed tock",
-          }
-        }
+      <Memo
+        html="tick followed tock followed tick followed tock"
         tagsStyles={
           Object {
             "p": Object {

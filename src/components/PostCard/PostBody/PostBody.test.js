@@ -1,6 +1,6 @@
 import 'react-native'
 import React from 'react'
-import { ReactNativeTestingLibraryRoot } from 'util/testing'
+import { TestRoot } from 'util/testing'
 import PostBody from './PostBody'
 import { render } from '@testing-library/react-native'
 
@@ -15,9 +15,9 @@ it('matches the last snapshot', async () => {
     shouldTruncate: true
   }
   const { toJSON } = render(
-    <ReactNativeTestingLibraryRoot>
+    <TestRoot>
       <PostBody {...post} />
-    </ReactNativeTestingLibraryRoot>
+    </TestRoot>
   )
 
   expect(await toJSON()).toMatchSnapshot()

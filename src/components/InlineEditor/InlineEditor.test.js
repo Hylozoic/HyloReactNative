@@ -2,7 +2,7 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
 import { render, fireEvent } from '@testing-library/react-native'
-import { createMockStore, ReactNativeTestingLibraryRoot } from 'util/testing'
+import { createMockStore, TestRoot } from 'util/testing'
 import InlineEditor, {
   SubmitButton,
   mentionsToHTML,
@@ -28,9 +28,9 @@ const props = {
 
 const renderComponent = async (testProps = {}) => {
   return render(
-    <ReactNativeTestingLibraryRoot>
+    <TestRoot>
       <InlineEditor {...props} {...testProps} />
-    </ReactNativeTestingLibraryRoot>
+    </TestRoot>
   )
 }
 
