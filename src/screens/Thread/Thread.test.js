@@ -2,10 +2,10 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer from 'react-test-renderer'
-import Thread from './Thread'
 import { Provider } from 'react-redux'
-import { getEmptyState } from 'store/reducers/resetStore'
+import { createInitialState } from 'store'
 import { createMockStore } from 'util/testing'
+import Thread from './Thread'
 
 // jest.mock('components/MessageInput', () => 'MessageInput')
 
@@ -85,7 +85,7 @@ describe('Thread', () => {
     let root
 
     beforeEach(() => {
-      const store = createMockStore(getEmptyState())
+      const store = createMockStore(createInitialState())
       root = TestRenderer.create(
         <Provider store={store}>
           <Thread {...props} />
@@ -113,7 +113,7 @@ describe('Thread', () => {
     let root
 
     beforeEach(() => {
-      const state = getEmptyState()
+      const state = createInitialState()
       root = TestRenderer.create(
         <Provider store={createMockStore(state)}>
           <Thread {...props} />
@@ -179,7 +179,7 @@ describe('Thread', () => {
         id: '2',
         messages: []
       }
-      const store = createMockStore(getEmptyState())
+      const store = createMockStore(createInitialState())
       const instance = TestRenderer.create(
         <Provider store={store}>
           <Thread {...props} />

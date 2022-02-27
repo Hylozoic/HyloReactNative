@@ -2,7 +2,7 @@ import orm from 'store/models'
 import { buildKey } from 'store/reducers/queryResults'
 import { times } from 'lodash/fp'
 import { mapStateToProps, mergeProps, shouldResetNewPostCount } from './FeedList.connector'
-import { MODULE_NAME, defaultState, defaultSortBy } from './FeedList.store'
+import { MODULE_NAME, initialState, defaultSortBy } from './FeedList.store'
 import { FETCH_POSTS } from 'store/constants'
 import { ALL_GROUP_ID } from 'store/models/Group'
 
@@ -19,9 +19,9 @@ describe('mapStateToProps', () => {
     state = {
       orm: session.state,
       pending: {},
-      [MODULE_NAME]: defaultState,
+      [MODULE_NAME]: initialState,
       queryResults: {
-        [buildKey(FETCH_POSTS, { ...defaultState, slug: 'foo' })]: {
+        [buildKey(FETCH_POSTS, { ...initialState, slug: 'foo' })]: {
           ids: ['1', '3', '2'],
           hasMore: true
         }
@@ -36,8 +36,8 @@ describe('mapStateToProps', () => {
       hasMore: undefined,
       pending: false,
       pendingRefresh: false,
-      filter: defaultState.filter,
-      sortBy: defaultState.sortBy,
+      filter: initialState.filter,
+      sortBy: initialState.sortBy,
       timeframe: 'future',
       queryProps: {
         sortBy: 'updated'
@@ -56,8 +56,8 @@ describe('mapStateToProps', () => {
       pending: false,
       groupId: 10,
       pendingRefresh: false,
-      filter: defaultState.filter,
-      sortBy: defaultState.sortBy,
+      filter: initialState.filter,
+      sortBy: initialState.sortBy,
       timeframe: 'future',
       queryProps: {
         slug: 'foo',

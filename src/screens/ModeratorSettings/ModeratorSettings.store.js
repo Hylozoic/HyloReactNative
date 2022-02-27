@@ -12,29 +12,30 @@ export const FETCH_MODERATOR_SUGGESTIONS = `${MODULE_NAME}/FETCH_MODERATOR_SUGGE
 export const CLEAR_MODERATOR_SUGGESTIONS = `${MODULE_NAME}/CLEAR_MODERATOR_SUGGESTIONS`
 export const FETCH_MODERATORS = `${MODULE_NAME}/FETCH_MODERATORS`
 
-const defaultState = []
-
 export function ormSessionReducer (session, { type, meta, payload }) {
   const { Group, Person } = session
   let group, person
 
   switch (type) {
-    case REMOVE_MODERATOR_PENDING:
+    case REMOVE_MODERATOR_PENDING: {
       group = Group.withId(meta.groupId)
-      const moderators = group.moderators.filter(m =>
-        m.id !== meta.personId)
+      const moderators = group.moderators.filter(m => m.id !== meta.personId)
         .toModelArray()
       group.update({ moderators })
       break
+    }
 
-    case ADD_MODERATOR_PENDING:
+    case ADD_MODERATOR_PENDING: {
       person = Person.withId(meta.personId)
       Group.withId(meta.groupId).updateAppending({ moderators: [person] })
       break
+    }
   }
 }
 
-export default function reducer (state = defaultState, action) {
+const initialState = []
+
+export default function reducer (state = initialState, action) {
   const { error, type, payload } = action
   if (error) return state
 

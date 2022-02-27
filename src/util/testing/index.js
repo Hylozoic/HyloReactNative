@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { setupServer } from 'msw/node'
-import { getEmptyState } from 'store/reducers/resetStore'
+import { createInitialState } from 'store'
 
 // React Native Testing Library
 
@@ -15,7 +15,7 @@ export function createMockStore (state = {}) {
   }
 }
 
-const emptyState = getEmptyState()
+const emptyState = createInitialState()
 
 export function ReactNativeTestingLibraryRoot ({
   children,

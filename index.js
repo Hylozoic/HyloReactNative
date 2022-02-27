@@ -23,7 +23,7 @@ if (!isDev) {
 
 // For Layout animation support: https://reactnative.dev/docs/layoutanimation
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
-  UIManager.setLayoutAnimationEnabledExperimental(true);
+  UIManager.setLayoutAnimationEnabledExperimental(true)
 }
 
 if (Platform.OS === 'android') {

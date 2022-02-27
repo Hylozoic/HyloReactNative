@@ -1,8 +1,8 @@
-import { defaultState } from './MemberFeed.store'
+import { initialState } from './MemberFeed.store'
 
-describe('defaultState', () => {
+describe('initialState', () => {
   it('is how it should be', () => {
-    expect(defaultState)
+    expect(initialState)
       .toEqual({
         choice: 'Posts'
       })

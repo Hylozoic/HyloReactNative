@@ -9,17 +9,20 @@ import { SIGNUP } from 'screens/SignupFlow/SignupFlow.store'
 import {
   FETCH_CURRENT_USER,
   LOGIN_BY_TOKEN,
+  LOGOUT,
   SELECT_GROUP,
   STORE_RETURN_TO_PATH,
   UPDATE_USER_SETTINGS
 } from 'store/constants'
 
-export default function sessionReducer (state = {
+export const initialState = {
   groupId: null,
   signedIn: false,
   signupInProgress: null,
   returnToPath: null
-}, action) {
+}
+
+export default function sessionReducer (state = initialState, action) {
   const { type, error, payload, meta } = action
 
   if (error) {
@@ -37,6 +40,12 @@ export default function sessionReducer (state = {
   }
 
   switch (type) {
+    case LOGOUT: {
+      return {
+        ...initialState,
+        returnToPath: state?.returnToPath || null
+      }
+    }
     case LOGIN:
     case LOGIN_BY_TOKEN:
     case LOGIN_WITH_APPLE:

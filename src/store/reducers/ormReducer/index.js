@@ -48,15 +48,21 @@ import {
   RESPOND_TO_EVENT_PENDING,
   UPDATE_COMMENT_PENDING,
   UPDATE_GROUP_SETTINGS_PENDING,
-  UPDATE_USER_SETTINGS_PENDING
+  UPDATE_USER_SETTINGS_PENDING,
+  RESET_STORE,
+  LOGOUT
 } from 'store/constants'
 import { PIN_POST_PENDING } from 'components/PostCard/PostHeader/PostHeader.store'
 
-export default function ormReducer (state = {}, action) {
-  const session = orm.session(state)
+export default function ormReducer (state, action) {
   const { payload, type, meta, error } = action
-  if (error) return state
 
+  if (error) return state
+  if (type === RESET_STORE || type === LOGOUT) {
+    return orm.session(orm.getEmptyState()).state
+  }
+
+  const session = orm.session(state)
   const {
     Activity,
     Comment,

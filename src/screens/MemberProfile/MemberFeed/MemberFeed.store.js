@@ -136,11 +136,11 @@ export function fetchMemberUpvotes ({ id, first = 20, offset }) {
   }
 }
 
-export const defaultState = {
+export const initialState = {
   choice: 'Posts'
 }
 
-export default function reducer (state = defaultState, action) {
+export default function reducer (state = initialState, action) {
   const { error, type, payload } = action
   if (error) return state
 

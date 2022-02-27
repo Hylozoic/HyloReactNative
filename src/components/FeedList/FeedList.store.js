@@ -14,13 +14,13 @@ export const defaultFilter = null
 export const defaultSortBy = 'updated'
 export const defaultTimeframe = 'future'
 
-export const defaultState = {
+export const initialState = {
   filter: defaultFilter,
   sortBy: defaultSortBy,
   timeframe: defaultTimeframe
 }
 
-export default function reducer (state = defaultState, action) {
+export default function reducer (state = initialState, action) {
   const { error, type, payload } = action
   if (error) return state
 

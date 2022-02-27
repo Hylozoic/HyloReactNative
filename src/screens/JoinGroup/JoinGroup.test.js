@@ -6,18 +6,14 @@ import { Provider } from 'react-redux'
 import { render, cleanup } from '@testing-library/react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
+import { createInitialState } from 'store'
 import Login from 'screens/Login'
-import { getEmptyState } from 'store/reducers/resetStore'
 
 afterEach(cleanup)
 
 it('forwards to Login when not signedIn', async () => {
-  const props = {
-    route: { params: {} },
-    navigation: {}
-  }
   const state = {
-    ...getEmptyState(),
+    ...createInitialState(),
     session: {
       signedIn: false
     }

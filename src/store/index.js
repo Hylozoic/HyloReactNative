@@ -1,9 +1,8 @@
-import { applyMiddleware, createStore, compose } from 'redux'
+import { applyMiddleware, createStore as reduxCreateStore, compose } from 'redux'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { persistStore, persistReducer } from 'redux-persist'
 import rootReducer from 'store/reducers'
 import middleware from 'store/middleware'
-import { getEmptyState } from './reducers/resetStore'
 
 const persistConfig = {
   key: 'root',
@@ -11,12 +10,18 @@ const persistConfig = {
   whitelist: ['SignupFlow']
 }
 
-export function getStore () {
-  const emptyState = getEmptyState()
+export const initialState = {}
+
+export function createInitialState (state = initialState) {
+  return rootReducer(state, { type: '' })
+}
+
+export function createStore (state = initialState) {
+  const emptyState = createInitialState(state)
   const persistedRootReducer = persistReducer(persistConfig, rootReducer)
   const store = (undefined === global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
-    ? createStore(persistedRootReducer, emptyState, compose(applyMiddleware(...middleware)))
-    : createStore(persistedRootReducer, emptyState,
+    ? reduxCreateStore(persistedRootReducer, emptyState, compose(applyMiddleware(...middleware)))
+    : reduxCreateStore(persistedRootReducer, emptyState,
       global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
         applyMiddleware(...middleware)
       )
@@ -33,8 +38,7 @@ export function getStore () {
   return store
 }
 
-const store = getStore()
-
-export default store
+const store = createStore()
 
 export const persistor = persistStore(store)
+export default store

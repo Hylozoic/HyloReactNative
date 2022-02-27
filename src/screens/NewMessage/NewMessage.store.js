@@ -65,11 +65,11 @@ export function createMessage (messageThreadId, text, forNewThread) {
   }
 }
 
-export const defaultState = {
+export const initialState = {
   message: ''
 }
 
-export default function reducer (state = defaultState, action) {
+export default function reducer (state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case SET_MESSAGE:

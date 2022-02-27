@@ -13,11 +13,6 @@ export const FETCH_MEMBERS = `${MODULE_NAME}/FETCH_MEMBERS`
 export const SET_SORT = `${MODULE_NAME}/SET_SORT`
 export const SET_SEARCH = `${MODULE_NAME}/SET_SEARCH`
 
-export const defaultState = {
-  search: '',
-  sortBy: 'join'
-}
-
 export const groupMembersQuery = `
 query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: String) {
   group (slug: $slug) {
@@ -83,7 +78,12 @@ export function fetchGroupMembers (slug, sortBy, offset, search) {
   }
 }
 
-export default function reducer (state = defaultState, action) {
+export const initialState = {
+  search: '',
+  sortBy: 'join'
+}
+
+export default function reducer (state = initialState, action) {
   const { error, type, payload } = action
   if (error) return state
 

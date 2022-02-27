@@ -1,6 +1,6 @@
 import { Mixpanel } from 'mixpanel-react-native'
 
-let mixpanel = new Mixpanel(process.env.MIXPANEL_TOKEN)
+const mixpanel = new Mixpanel(process.env.MIXPANEL_TOKEN)
 
 mixpanel && mixpanel.init()
 
