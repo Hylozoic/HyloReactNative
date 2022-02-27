@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import React from 'react'
 import { isEmpty } from 'lodash'
 import {
   FETCH_NOTIFICATIONS,
@@ -11,7 +10,6 @@ import {
   updateNewNotificationCount
 } from './NotificationsList.store'
 import getMemberships from 'store/selectors/getMemberships'
-import { mapWhenFocused } from 'util/redux'
 
 const NOTIFICATIONS_PAGE_SIZE = 20
 
@@ -35,7 +33,4 @@ export function mapDispatchToProps (dispatch, { navigation }) {
   }
 }
 
-export default connect(
-  mapWhenFocused(mapStateToProps),
-  mapWhenFocused(mapDispatchToProps)
-)
+export default connect(mapStateToProps, mapDispatchToProps)

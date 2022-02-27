@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { get, isEmpty } from 'lodash/fp'
-import { mapWhenFocused } from 'util/redux'
 import { getPresentedPost } from 'store/selectors/getPost'
 import isPendingFor from 'store/selectors/isPendingFor'
 import getCanModerate from 'store/selectors/getCanModerate'
@@ -96,7 +95,4 @@ export function mapDispatchToProps (dispatch, props) {
   }
 }
 
-export default connect(
-  mapWhenFocused(mapStateToProps),
-  mapWhenFocused(mapDispatchToProps)
-)
+export default connect(mapStateToProps, mapDispatchToProps)
