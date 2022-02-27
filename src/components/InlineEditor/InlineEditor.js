@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   Text,
   View,
@@ -35,11 +35,18 @@ export default function InlineEditor ({
   onInsertTopic,
   onFocusToggle,
   style,
-  inputStyle
+  inputStyle,
+  initialMentionPerson
 }) {
   const navigation = useNavigation()
   const [selection, setSelection] = useState()
   const editorInputRef = useRef()
+
+  useEffect(() => {
+    if (initialMentionPerson && isEmpty(value)) {
+      insertMention(initialMentionPerson)
+    }
+  }, [initialMentionPerson])
 
   const insertTopic = topic => {
     const markup = createTopicTag(topic)

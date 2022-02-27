@@ -26,9 +26,9 @@ import styles from './PostDetails.styles'
 
 export class PostDetails extends React.Component {
   state = {
-    replyingToName: null,
+    replyingToComment: null,
     commentText: '',
-    reaplyingToCommentId: null
+    submitting: false
   }
 
   commentsRef = React.createRef()
@@ -59,14 +59,17 @@ export class PostDetails extends React.Component {
     this.props.showTopic(topicId, get('post.groups.0.id', this.props))
 
   handleCreateComment = async commentText => {
-    const commentTextAsHtml = toHTML(commentText)
+    const commentHTML = toHTML(commentText)
 
-    if (!isEmpty(commentTextAsHtml)) {
+    if (!isEmpty(commentHTML)) {
+      const { replyingToComment } = this.state
+      const parentCommentId = replyingToComment.parentComment || replyingToComment.id
+
       this.setState(() => ({ submitting: true }))
 
       const { error } = await this.props.createComment({
-        text: commentTextAsHtml,
-        parentCommentId: this.state.reaplyingToCommentId
+        text: commentHTML,
+        parentCommentId
       })
 
       this.setState(() => ({ submitting: false }))
@@ -84,7 +87,7 @@ export class PostDetails extends React.Component {
   }
 
   handleCommentReplyCancel = callback => {
-    this.setState({ replyingToName: null, commentText: '' }, () => {
+    this.setState({ replyingToComment: null, commentText: '' }, () => {
       this.commentsRef?.current.highlightComment(null)
       this.editorRef?.editorInputRef?.current.clear()
       this.editorRef?.editorInputRef?.current.blur()
@@ -94,15 +97,11 @@ export class PostDetails extends React.Component {
 
   handleCommentReply = (comment, { mention = false }) => {
     this.handleCommentReplyCancel(() => {
-      this.setState({ replyingToName: comment.creator.name, commentText: '' })
-      this.setState({ reaplyingToCommentId: comment.parentComment || comment.id })
+      this.setState({ replyingToComment: comment, commentText: '' })
 
       this.commentsRef?.current.highlightComment(comment)
       this.commentsRef?.current.scrollToComment(comment)
       this.editorRef?.editorInputRef?.current.clear()
-      // TODO: make event ? For now turning-off
-      // if (mention) this.editorRef?.insertMention(comment.creator)
-
       this.editorRef?.editorInputRef?.current.focus()
     })
   }
@@ -139,7 +138,8 @@ export class PostDetails extends React.Component {
 
   render () {
     const { post, tabBarHeight, isModal } = this.props
-    const { commentText, replyingToName, submitting } = this.state
+    const { commentText, replyingToComment, submitting } = this.state
+    const replyingToPerson = replyingToComment?.parentComment && replyingToComment.creator
     const groupId = get('groups.0.id', post)
 
     if (!post?.creator || !post?.title) return <LoadingScreen />
@@ -155,10 +155,10 @@ export class PostDetails extends React.Component {
           contentOffsetKeyboardOpened={isIOS ? -tabBarHeight : 0}
           renderScrollable={this.renderPostDetails}
         >
-          {replyingToName && (
+          {replyingToPerson?.name && (
             <View style={styles.commentPrompt}>
               <Text style={styles.commentPromptText}>
-                Replying to <Text style={{ fontWeight: 'bold' }}>{replyingToName}</Text> {'\u00B7'}
+                Replying to <Text style={{ fontWeight: 'bold' }}>{replyingToPerson.name}</Text> {'\u00B7'}
               </Text>
               <TouchableOpacity onPress={() => this.handleCommentReplyCancel()}>
                 <Text style={styles.commentPromptClearLink}>Cancel</Text>
@@ -170,9 +170,10 @@ export class PostDetails extends React.Component {
             onRef={elem => (this.editorRef = elem)}
             onChange={this.handleCommentOnChange}
             onSubmit={this.handleCreateComment}
-            value={commentText}
-            submitting={submitting}
             placeholder='Write a comment...'
+            value={commentText}
+            initialMentionPerson={replyingToPerson}
+            submitting={submitting}
             groupId={groupId}
           />
         </KeyboardAccessoryView>
