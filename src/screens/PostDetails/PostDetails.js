@@ -100,8 +100,8 @@ export class PostDetails extends React.Component {
       this.commentsRef?.current.highlightComment(comment)
       this.commentsRef?.current.scrollToComment(comment)
       this.editorRef?.editorInputRef?.current.clear()
-
-      if (mention) this.editorRef?.insertMention(comment.creator)
+      // TODO: make event ? For now turning-off
+      // if (mention) this.editorRef?.insertMention(comment.creator)
 
       this.editorRef?.editorInputRef?.current.focus()
     })
