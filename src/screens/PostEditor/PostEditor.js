@@ -49,15 +49,16 @@ export default function (props) {
 export class PostEditor extends React.Component {
   constructor (props) {
     super(props)
-    const { post, imageUrls, fileUrls } = props
+    const { post } = props
     this.scrollView = React.createRef()
     this.state = {
+      isNewPost: !post?.id,
       scrollViewHeight: 0,
       title: post?.title || '',
       type: post?.type || 'discussion',
       groups: post?.groups || [],
-      imageUrls,
-      fileUrls,
+      imageUrls: post?.imageUrls || [],
+      fileUrls: post?.fileUrls || [],
       topics: post?.topics || [],
       members: post?.members || [],
       topicsPicked: false,
@@ -82,8 +83,8 @@ export class PostEditor extends React.Component {
   }
 
   setHeader = () => {
-    const { isSaving } = this.state
-    const { navigation, isNewPost } = this.props
+    const { isSaving, isNewPost } = this.state
+    const { navigation } = this.props
     const subject = capitalize(this.state?.type || '')
     const title = isNewPost
       ? `New ${subject}`
@@ -100,15 +101,17 @@ export class PostEditor extends React.Component {
       headerRightButtonOnPress: this.handleSave,
       headerRightButtonDisabled: isSaving
     }
+    console.log('!!!! headerRightButtonLabel', headerRightButtonLabel)
     navigation.setOptions({
       header: props => <ModalHeader {...props} {...headerProps} />
     })
   }
 
   componentDidMount () {
-    const { isNewPost } = this.props
+    const { isNewPost } = this.state
+    const { fetchPost } = this.props
     if (!isNewPost) {
-      this.props.fetchPost()
+      fetchPost()
     }
     this.setHeader()
   }
@@ -129,8 +132,11 @@ export class PostEditor extends React.Component {
     this.setState({ isSaving }, this.setHeader)
   }
 
-  _doSave = () => {
-    const { save } = this.props
+  save = async () => {
+    const {
+      createPost, createProject, updatePost,
+      navigation, post
+    } = this.props
     const {
       fileUrls, imageUrls, title, detailsText,
       topics, type, announcementEnabled, members,
@@ -138,6 +144,7 @@ export class PostEditor extends React.Component {
       locationObject
     } = this.state
     const postData = {
+      id: post.id,
       type,
       details: toHTML(detailsText),
       groups,
@@ -153,8 +160,38 @@ export class PostEditor extends React.Component {
       locationId: locationObject && locationObject.id !== 'NEW' && locationObject.id
     }
 
-    return save(postData)
-      .catch(e => { this.setIsSaving(false) })
+    try {
+      if (!postData.title) {
+        throw new Error('Title cannot be blank')
+      }
+
+      if (postData.title.length >= MAX_TITLE_LENGTH) {
+        throw new Error(`Title cannot be more than ${MAX_TITLE_LENGTH} characters`)
+      }
+
+      if (isEmpty(postData.groups)) {
+        throw new Error('You must select a group')
+      }
+
+      const saveAction = postData.id
+        ? updatePost
+        : postData.type === 'project'
+          ? createProject
+          : createPost
+
+      const { payload, meta, error } = await saveAction(postData)
+
+      if (error) {
+        // TODO: handle API errors more appropriately
+        throw new Error('Error submitting post')
+      }
+
+      const id = meta.extractModel?.getRoot(payload?.data)?.id
+
+      navigation.navigate('Post Details', { id })
+    } catch (e) {
+      this.setIsSaving(false)
+    }
   }
 
   handleSave = () => {
@@ -167,7 +204,10 @@ export class PostEditor extends React.Component {
         'MAKE AN ANNOUNCEMENT',
         'This means that all members of this group will receive an instant email and push notification about this Post. \n(This feature is available to moderators only.)',
         [
-          { text: 'Send It', onPress: this._doSave },
+          {
+            text: 'Send It',
+            onPress: this.save
+          },
           {
             text: 'Go Back',
             style: 'cancel',
@@ -175,7 +215,7 @@ export class PostEditor extends React.Component {
           }
         ])
     } else {
-      this._doSave()
+      this.save()
     }
   }
 

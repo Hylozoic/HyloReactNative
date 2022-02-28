@@ -30,7 +30,7 @@ export default class PostRow extends React.PureComponent {
               fileUrls={fileUrls}
               isPinned={isPinned}
               showMember={showMember}
-              respondToEvent={response => respondToEvent(post.id ,response)}
+              respondToEvent={response => respondToEvent(post.id, response)}
               showTopic={showTopic}
               goToGroup={goToGroup}
               showGroups={showGroups}

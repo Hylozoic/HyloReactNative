@@ -2,8 +2,10 @@
 
 exports[`PostEditor mapDispatchToProps calls save correctly 1`] = `
 Object {
+  "createPost": [Function],
+  "createProject": [Function],
   "fetchPost": [Function],
-  "save": [Function],
+  "updatePost": [Function],
   "upload": [Function],
 }
 `;
@@ -242,8 +244,10 @@ Array [
 
 exports[`PostEditor mapDispatchToProps maps the action generators 1`] = `
 Object {
+  "createPost": [Function],
+  "createProject": [Function],
   "fetchPost": [Function],
-  "save": [Function],
+  "updatePost": [Function],
   "upload": [Function],
 }
 `;
@@ -388,17 +392,11 @@ Array [
 exports[`PostEditor mapStateToProps maps 1`] = `
 Object {
   "canModerate": true,
-  "fileUrls": Array [],
   "groupOptions": Array [
     Object {
       "id": "7",
     },
   ],
-  "imageUrls": Array [
-    "bar.png",
-    "foo.png",
-  ],
-  "isNewPost": true,
   "pendingDetailsText": false,
   "post": Object {
     "commenters": Array [],

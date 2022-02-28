@@ -3,8 +3,11 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer, { act } from 'react-test-renderer'
 import { PostEditor, TypeSelector } from './PostEditor'
 import { Alert } from 'react-native'
-import { TestRoot } from 'util/testing'
+import { createInitialStateWithCurrentUser, TestRoot } from 'util/testing'
 import MockedScreen from 'util/testing/MockedScreen'
+import { fireEvent, render, waitFor } from '@testing-library/react-native'
+import { ModalHeader } from 'navigation/headers'
+import HeaderRightButton from 'navigation/headers/HeaderRightButton'
 // import { DocumentPicker } from 'react-native-document-picker'
 // import RNImagePicker from 'react-native-image-picker'
 
@@ -84,38 +87,33 @@ describe('PostEditor', () => {
     expect(actual).toMatchSnapshot()
   })
 
-  it('renders correctly while saving', async () => {
-    const save = jest.fn(() => Promise.resolve())
-    const renderer = TestRenderer.create(
-      <TestRoot>
+  it.only('renders correctly while saving', async () => {
+    const { toJSON, queryByText, getByText, getByDisplayValue } = render(
+      <TestRoot state={createInitialStateWithCurrentUser()}>
         <MockedScreen>
           {screenProps => (
             <PostEditor
               fetchPost={jest.fn()}
               isFocused
-              save={save}
-              post={mockPost}
+              post={{ ...mockPost, title: 'test', id: 'tewst' }}
               {...screenProps}
             />
           )}
         </MockedScreen>
       </TestRoot>
     )
-    expect(renderer.toJSON()).toMatchSnapshot()
-
-    const instance = renderer.root.findByType(PostEditor).instance
-    await act(async () => {
-      await instance.setState({ type: 'request' })
-      await instance.handleSave()
-    })
-    // TODO: Mock build header
-    // expect(navigation.setOptions).toHaveBeenCalledTimes(2)
-    // expect(navigation.setOptions).toHaveBeenCalledWith(expect.objectContaining({
-    //   headerRightButtonDisabled: true
-    // }))
-    expect(save).toHaveBeenCalled()
-    expect(instance.state.isSaving).toBeTruthy()
-    expect(renderer.toJSON()).toMatchSnapshot()
+    // expect(toJSON()).toMatchSnapshot()
+    fireEvent.press(queryByText('Save'))
+    // await waitFor(() => getByText('Saving...'))
+    // expect(toJSON()).toMatchSnapshot()
+    expect(getByDisplayValue('myDetails')).toEqual(true)
+    // const instance = renderer.root.findByType(PostEditor).instance
+    // await act(async () => {
+    //   await instance.setState({ type: 'request' })
+    //   await instance.handleSave()
+    // })
+    // expect(instance.state.isSaving).toBeTruthy()
+    // expect(toJSON()).toMatchSnapshot()
   })
 
   it('calls alert when announcementEnabled', async () => {

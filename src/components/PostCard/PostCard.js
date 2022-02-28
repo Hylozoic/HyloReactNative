@@ -63,13 +63,13 @@ export default class PostCard extends React.PureComponent {
     return (
       <View style={styles.container}>
         <PostHeader
+          postId={post.id}
           creator={creator}
           date={post.createdAt}
           type={post.type}
           topics={topics}
           slug={slug}
           pinned={isPinned}
-          postId={post.id}
           showMember={showMember}
           showTopic={showTopic}
           announcement={post.announcement}
