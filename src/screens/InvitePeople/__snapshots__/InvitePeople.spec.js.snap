@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`InvitePeople Specification default render matches snapshot 1`] = `
+exports[`default render matches snapshot 1`] = `
 <View>
   <RCTScrollView>
     <View>

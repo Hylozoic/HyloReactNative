@@ -1,15 +1,13 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import { render, cleanup } from '@testing-library/react-native'
+import { render } from '@testing-library/react-native'
 import Feed from './Feed'
 import { Provider } from 'react-redux'
 import orm from 'store/models'
 import { createMockStore } from 'util/testing'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-
-afterEach(cleanup)
 
 it('renders correctly if currentUserHasMemberships', () => {
   const group = {

@@ -1,21 +1,15 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import { createInitialState } from 'store'
-import { render, cleanup } from '@testing-library/react-native'
-import { createMockStore } from 'util/testing'
+import { render } from '@testing-library/react-native'
+import { TestRoot } from 'util/testing'
 import InviteExpired from 'screens/InviteExpired'
+import MockedScreen from 'util/testing/MockedScreen'
 
-describe('InviteExpired Specification', () => {
-  afterEach(cleanup)
+it('default render matches snapshot', async () => {
+  const { getByText } = render(
+    <TestRoot>
+      <MockedScreen component={InviteExpired} />
+    </TestRoot>
+  )
 
-  it('default render matches snapshot', async () => {
-    const state = createInitialState()
-    const { getByText } = render(
-      <Provider store={createMockStore(state)}>
-        <InviteExpired navigation={{ setOptions: jest.fn() }} />
-      </Provider>
-    )
-
-    expect(await getByText(/Invitation has expired/)).toBeTruthy()
-  })
+  expect(await getByText(/Invitation has expired/)).toBeTruthy()
 })

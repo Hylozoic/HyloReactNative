@@ -133,7 +133,7 @@
     "validator": "^8.0.0"
   },
   "jest": {
-    "preset": "@testing-library/react-native",
+    "preset": "react-native",
     "setupFiles": [
       "<rootDir>/config/jest/mockGlobals.js",
       "<rootDir>/config/jest/mockError.js",

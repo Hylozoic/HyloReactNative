@@ -187,11 +187,11 @@ export function CommentCard ({ comment, goToPost }) {
     <TouchableOpacity onPress={goToThisPost} style={styles.commentWrapper}>
       <View style={styles.commentPostHeader}>
         <PostHeader
+          postId={post.id}
           creator={post.creator}
           date={post.createdAt}
           type={post.type}
           pinned={post.pinned}
-          postId={post.id}
           showMember={goToThisPost}
           showTopic={goToThisPost}
           goToGroup={goToThisPost}

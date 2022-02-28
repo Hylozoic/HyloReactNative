@@ -1,13 +1,11 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { createInitialState } from 'store'
-import { render, cleanup } from '@testing-library/react-native'
+import { render } from '@testing-library/react-native'
 import { createMockStore } from 'util/testing'
 import RootView from 'navigation/RootView'
 
 describe('RootView Specification', () => {
-  afterEach(cleanup)
-
   it('renders Login when signedIn false', async () => {
     const store = createMockStore(createInitialState())
     const { findByText } = render(

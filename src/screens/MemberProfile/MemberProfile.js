@@ -33,6 +33,7 @@ export default function MemberProfile ({
   isFocused,
   isMe,
   onPressMessages,
+  blockUser,
   person,
   updateUserSettings,
   navigation,
@@ -42,7 +43,8 @@ export default function MemberProfile ({
 }) {
   const [flaggingVisible, setFlaggingVisible] = useState(false)
 
-  // Don't force selected group switch if this is a modal (generalize into useGroupSelect for any modal?)
+  // Don't force selected group switch if this is a modal
+  // should we generalize into useGroupSelect for any modal?
   if (!isModalScreen(route.name)) {
     useGroupSelect()
   }
@@ -50,7 +52,7 @@ export default function MemberProfile ({
   useEffect(() => {
     if (isBlocked) return navigation.goBack()
     fetchPerson()
-    setHeader({ route, navigation, currentGroup })  
+    setHeader({ route, navigation, currentGroup })
   }, [id])
 
   useEffect(() => {
@@ -87,8 +89,11 @@ export default function MemberProfile ({
         <ReadMoreButton goToDetails={goToDetails} />
       </View>
       {flaggingVisible && (
-        <FlagContent type='member' linkData={linkData}
-          onClose={() => setFlaggingVisible(false)} />
+        <FlagContent
+          type='member'
+          linkData={linkData}
+          onClose={() => setFlaggingVisible(false)}
+        />
       )}
     </View>
   )

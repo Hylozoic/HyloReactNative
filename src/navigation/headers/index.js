@@ -61,12 +61,14 @@ export const TabStackHeader = ({
         <MenuButton canGoBack={canGoBack} navigation={navigation} />
       </>
     )),
-    headerRight: headerRight || (() =>  (
-      <View style={{
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center'
-      }}>
+    headerRight: headerRight || (() => (
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          alignItems: 'center'
+        }}
+      >
         <NotificationsIcon showNotifications={() => navigation.navigate(modalScreenName('Notifications'))} />
       </View>
     ))
@@ -97,8 +99,8 @@ export function ModalHeader ({
   ...otherProps
 }) {
   const headerLeftCloseIcon = options.headerLeftCloseIcon ?? providedHeaderLeftCloseIcon
-  const headerTitleStyleColor = otherProps.headerTitleStyle?.color
-    || (options.headerTitleStyle?.color ?? black10onRhino)
+  const headerTitleStyleColor = otherProps.headerTitleStyle?.color ||
+    (options.headerTitleStyle?.color ?? black10onRhino)
   const props = {
     headerStatusBarHeight: options.headerStatusBarHeight ?? (options.presentation ? 0 : undefined),
     headerStyle: {
@@ -115,15 +117,13 @@ export function ModalHeader ({
     },
     headerLeft: headerLeft || (props => {
       // get go back function from navigation
-      const headerLeftOnPress = options.headerLeftOnPress
-        || providedHeaderLeftOnPress
-        || navigation.goBack
+      const headerLeftOnPress = options.headerLeftOnPress ||
+        providedHeaderLeftOnPress ||
+        navigation.goBack
       const onPress = headerLeftConfirm
         ? () => confirmDiscardChanges({ onDiscard: headerLeftOnPress })
         : headerLeftOnPress
-      const label = headerLeftLabel
-        ? headerLeftLabel
-        : props.label
+      const label = headerLeftLabel || props.label
       return (
         <>
           <FocusAwareStatusBar {...statusBarOptions} />
@@ -146,23 +146,25 @@ export function ModalHeader ({
 }
 
 export const WorkflowModalHeader = props => {
-  return <ModalHeader
-    headerBackTitleVisible={false}
-    headerLeftCloseIcon={false}
-    headerStyle={{
-      backgroundColor: props?.style?.backgroundColor || caribbeanGreen,
-      shadowColor: 'transparent'          
-    }}
-    headerTitleStyle={{
-      color: white,
-      fontFamily: 'Circular-Bold',
-      fontSize: 12
-    }}
-    headerTintColor={white60onCaribbeanGreen}
-    statusBarOptions={{
-      backgroundColor: props?.style?.backgroundColor || caribbeanGreen,
-      barStyle: 'light-content'
-    }}
-    {...props}
-  />
+  return (
+    <ModalHeader
+      headerBackTitleVisible={false}
+      headerLeftCloseIcon={false}
+      headerStyle={{
+        backgroundColor: props?.style?.backgroundColor || caribbeanGreen,
+        shadowColor: 'transparent'
+      }}
+      headerTitleStyle={{
+        color: white,
+        fontFamily: 'Circular-Bold',
+        fontSize: 12
+      }}
+      headerTintColor={white60onCaribbeanGreen}
+      statusBarOptions={{
+        backgroundColor: props?.style?.backgroundColor || caribbeanGreen,
+        barStyle: 'light-content'
+      }}
+      {...props}
+    />
+  )
 }
