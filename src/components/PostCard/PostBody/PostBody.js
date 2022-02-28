@@ -26,10 +26,10 @@ export default function PostBody ({
 }) {
   const presentedDetails = useMemo(() => {
     // TODO: Truncate option on presentHTML should not throw-out link attributes
-    const htmlResult = TextHelpers.presentHTML(details, { slug })
-    return shouldTruncate
-      ? TextHelpers.truncateHTML(htmlResult, MAX_DETAILS_LENGTH)
-      : htmlResult
+    return TextHelpers.presentHTML(details, {
+      slug,
+      truncate: shouldTruncate && MAX_DETAILS_LENGTH
+    })
   }, [details, slug, shouldTruncate])
 
   return (

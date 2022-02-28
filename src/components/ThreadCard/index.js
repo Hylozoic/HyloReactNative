@@ -11,9 +11,9 @@ export default function ThreadCard (props) {
   if (!props?.message) return null
 
   const { message, currentUser, participants, isLast, unread } = props
-  const latestMessagePreview = message?.text
-    ? TextHelpers.truncateText(TextHelpers.htmlToText(message.text), MAX_THREAD_PREVIEW_LENGTH)
-    : ''
+  const latestMessagePreview = TextHelpers.presentHTMLToText(message?.text, {
+    truncate: MAX_THREAD_PREVIEW_LENGTH
+  })
   const otherParticipants = filter(p => p.id !== get('id', currentUser), participants)
   const names = threadNames(map('name', otherParticipants))
   const messageCreatorPrepend = lastMessageCreator(message, currentUser, participants)

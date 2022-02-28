@@ -134,7 +134,7 @@ export function updateNewNotificationCount () {
   }
 }
 
-export const truncateHTML = html => TextHelpers.truncateText(TextHelpers.htmlToText(html).replace(/\n/g, ' '), NOTIFICATION_TEXT_MAX)
+export const truncateHTML = html => TextHelpers.presentHTMLToText(html, { truncate: NOTIFICATION_TEXT_MAX }).replace(/\n/g, ' ')
 
 export const truncateText = text => TextHelpers.truncateText(text, NOTIFICATION_TEXT_MAX)
 
