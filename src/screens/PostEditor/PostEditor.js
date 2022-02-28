@@ -101,7 +101,6 @@ export class PostEditor extends React.Component {
       headerRightButtonOnPress: this.handleSave,
       headerRightButtonDisabled: isSaving
     }
-    console.log('!!!! headerRightButtonLabel', headerRightButtonLabel)
     navigation.setOptions({
       header: props => <ModalHeader {...props} {...headerProps} />
     })
@@ -190,13 +189,14 @@ export class PostEditor extends React.Component {
 
       navigation.navigate('Post Details', { id })
     } catch (e) {
-      this.setIsSaving(false)
+      console.log('!!!!', e)
+      // this.setIsSaving(false)
     }
   }
 
   handleSave = () => {
     const { announcementEnabled } = this.state
-
+    // this.setState({ isSaving: true })
     this.setIsSaving(true)
 
     if (announcementEnabled) {
@@ -227,15 +227,15 @@ export class PostEditor extends React.Component {
   }
 
   handleRemoveImage = url => {
-    this.setState({
+    this.setState(() => ({
       imageUrls: this.state.imageUrls.filter(u => u !== url)
-    })
+    }))
   }
 
   handleAddFile = ({ local, remote }) => {
-    this.setState({
+    this.setState(() => ({
       fileUrls: uniq(this.state.fileUrls.concat(remote))
-    })
+    }))
   }
 
   handleAddGroup = group => {
@@ -301,7 +301,7 @@ export class PostEditor extends React.Component {
     this.setState({ announcementEnabled: !this.state.announcementEnabled })
   }
 
-  handleUpdateTitle = (title) => {
+  handleUpdateTitle = title => {
     switch (title.length >= MAX_TITLE_LENGTH) {
       case true:
         this.setState({ titleLengthError: true })

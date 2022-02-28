@@ -274,13 +274,9 @@ describe('UserSettings', () => {
       Alert.alert = origAlert
     })
   })
-  
+
   describe('loginWithFacebook', () => {
     describe('when cancelled', () => {
-      beforeEach(() => {
-
-      })
-
       it('calls onLogin with false', () => {
         LoginManager.logInWithReadPermissions.mockImplementation(() => Promise.resolve({ isCancelled: true }))
         const onLogin = jest.fn()

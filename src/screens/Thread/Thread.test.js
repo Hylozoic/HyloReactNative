@@ -38,7 +38,6 @@ describe('Thread', () => {
   let props
 
   beforeEach(() => {
-    jest.useFakeTimers()
     props = {
       id: '1',
       createMessage: () => {},
@@ -83,17 +82,12 @@ describe('Thread', () => {
   })
 
   describe('when at bottom', () => {
-    let root
-
-    beforeEach(() => {
-      root = TestRenderer.create(
+    it('scrolls on new message from anyone', () => {
+      const root = TestRenderer.create(
         <TestRoot>
           <Thread {...props} />
         </TestRoot>
       ).root.findByType(Thread)
-    })
-
-    it('scrolls on new message from anyone', () => {
       const nextProps = {
         ...props,
         messages: [
@@ -110,18 +104,14 @@ describe('Thread', () => {
   })
 
   describe('when not at bottom', () => {
-    let root
-
-    beforeEach(() => {
-      root = TestRenderer.create(
+    it('does not scroll if additional messages are old (infinite scroll)', async () => {
+      const root = TestRenderer.create(
         <TestRoot>
           <Thread {...props} />
         </TestRoot>
       ).root.findByType(Thread)
       root.instance.atBottom = () => false
-    })
 
-    it('does not scroll if additional messages are old (infinite scroll)', async () => {
       const nextProps = {
         ...props,
         messages: [
@@ -137,6 +127,12 @@ describe('Thread', () => {
     })
 
     it('does not scroll on single new message from another user', async () => {
+      const root = TestRenderer.create(
+        <TestRoot>
+          <Thread {...props} />
+        </TestRoot>
+      ).root.findByType(Thread)
+      root.instance.atBottom = () => false
       const nextProps = {
         ...props,
         messages: [
@@ -152,6 +148,12 @@ describe('Thread', () => {
     })
 
     it('scrolls on single new message from current user', async () => {
+      const root = await TestRenderer.create(
+        <TestRoot>
+          <Thread {...props} />
+        </TestRoot>
+      ).root.findByType(Thread)
+      root.instance.atBottom = () => false
       const nextProps = {
         ...props,
         messages: [

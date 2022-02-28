@@ -224,6 +224,7 @@ export function PostCardForDetails ({
   return (
     <View style={styles.postCard}>
       <PostHeader
+        postId={post.id}
         creator={post.creator}
         date={post.createdAt}
         type={post.type}
@@ -233,7 +234,6 @@ export function PostCardForDetails ({
         pinned={post.pinned}
         topics={post.topics}
         showTopic={showTopic}
-        postId={post.id}
         showMember={showMember}
         goToGroup={goToGroup}
         announcement={post.announcement}

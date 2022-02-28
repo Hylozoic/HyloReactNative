@@ -3,36 +3,16 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer, { act } from 'react-test-renderer'
 import { PostEditor, TypeSelector } from './PostEditor'
 import { Alert } from 'react-native'
-import { createInitialStateWithCurrentUser, TestRoot } from 'util/testing'
+import { TestRoot } from 'util/testing'
 import MockedScreen from 'util/testing/MockedScreen'
-import { fireEvent, render, waitFor } from '@testing-library/react-native'
-import { ModalHeader } from 'navigation/headers'
-import HeaderRightButton from 'navigation/headers/HeaderRightButton'
-// import { DocumentPicker } from 'react-native-document-picker'
-// import RNImagePicker from 'react-native-image-picker'
+import { fireEvent, render } from '@testing-library/react-native'
+import { createStackNavigator } from '@react-navigation/stack'
 
 jest.mock('react-native/Libraries/Alert/Alert', () => {
   return {
     alert: jest.fn()
   }
 })
-// jest.mock('react-native-document-picker', () => {
-//   let callback
-
-//   return {
-//     DocumentPicker: {
-//       show: jest.fn((options, cb) => {
-//         callback = cb
-//       }),
-//       finishShow: (err, result) => callback(err, result),
-//       isCancel: jest.fn()
-//     },
-//     DocumentPickerUtil: {
-//       allFiles: jest.fn()
-//     }
-//   }
-// })
-// jest.mock('react-native-image-picker')
 
 const mockPost = {
   details: 'myDetails',
@@ -40,6 +20,7 @@ const mockPost = {
     { id: 1, name: 'Group 1' }
   ]
 }
+const Stack = createStackNavigator()
 
 describe('PostEditor', () => {
   let route, navigation
@@ -76,44 +57,65 @@ describe('PostEditor', () => {
       <PostEditor
         navigation={navigation}
         route={route}
-        post={mockPost}
-        imageUrls={[
-          'http://foo.com/foo.png',
-          'http://baz.com/baz.png'
-        ]}
+        post={{
+          ...mockPost,
+          imageUrls: [
+            'http://foo.com/foo.png',
+            'http://baz.com/baz.png'
+          ]
+        }}
       />
     )
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
   })
 
-  it.only('renders correctly while saving', async () => {
-    const { toJSON, queryByText, getByText, getByDisplayValue } = render(
-      <TestRoot state={createInitialStateWithCurrentUser()}>
-        <MockedScreen>
-          {screenProps => (
-            <PostEditor
-              fetchPost={jest.fn()}
-              isFocused
-              post={{ ...mockPost, title: 'test', id: 'tewst' }}
-              {...screenProps}
-            />
-          )}
-        </MockedScreen>
+  // Full React Native Testing Library + React Navigation example
+  // helpful here for navigation.setOptions to update header buttons
+  it('renders correctly while saving', async () => {
+    const PostDetails = () => null
+    const fetchPost = jest.fn()
+    const component = (
+      <TestRoot>
+        <Stack.Navigator>
+          <Stack.Screen name='MockedScreen'>
+            {screenProps => (
+              <PostEditor
+                isFocused
+                fetchPost={fetchPost}
+                post={{
+                  ...mockPost,
+                  id: 'editing-post-id'
+                }}
+                updatePost={post => (
+                  {
+                    meta: {
+                      extractModel: {
+                        getRoot: r => r
+                      }
+                    },
+                    payload: {
+                      data: post
+                    }
+                  }
+                )}
+                {...screenProps}
+              />
+            )}
+          </Stack.Screen>
+          <Stack.Screen name='Post Details' component={PostDetails} />
+        </Stack.Navigator>
       </TestRoot>
     )
-    // expect(toJSON()).toMatchSnapshot()
-    fireEvent.press(queryByText('Save'))
-    // await waitFor(() => getByText('Saving...'))
-    // expect(toJSON()).toMatchSnapshot()
-    expect(getByDisplayValue('myDetails')).toEqual(true)
-    // const instance = renderer.root.findByType(PostEditor).instance
-    // await act(async () => {
-    //   await instance.setState({ type: 'request' })
-    //   await instance.handleSave()
-    // })
-    // expect(instance.state.isSaving).toBeTruthy()
-    // expect(toJSON()).toMatchSnapshot()
+    const { getByText, getByPlaceholderText, toJSON } = render(component)
+    await act(async () => {
+      await fireEvent.changeText(getByPlaceholderText('What do you want to discuss?'), 'title of this post')
+      await fireEvent.changeText(getByPlaceholderText('What else should we know?'), 'detail of this post')
+      await fireEvent.press(getByText('Save'))
+    })
+    getByText('Saving...')
+    expect(fetchPost).toHaveBeenCalled()
+    expect(toJSON()).toMatchSnapshot()
   })
 
   it('calls alert when announcementEnabled', async () => {
@@ -185,7 +187,6 @@ describe('PostEditor', () => {
             <PostEditor
               isFocused
               fetchPost={jest.fn()}
-              imageUrls={['http://foo.com/foo.png']}
               post={mockPost}
               {...screenProps}
             />
@@ -194,9 +195,10 @@ describe('PostEditor', () => {
       </TestRoot>
     )
     const instance = renderer.root.findByType(PostEditor).instance
-    await act(async () => {
-      await instance.handleAddImage({ remote: 'http://bar.com/bar.png' })
-    })
+
+    await instance.handleAddImage({ remote: 'http://foo.com/foo.png' })
+    await instance.handleAddImage({ remote: 'http://bar.com/bar.png' })
+
     expect(instance.state.imageUrls).toEqual([
       'http://foo.com/foo.png',
       'http://bar.com/bar.png'
@@ -240,7 +242,6 @@ describe('PostEditor', () => {
               isFocused
               fetchPost={jest.fn()}
               postId={mockPost.id}
-              fileUrls={['http://foo.com/foo.pdf']}
               post={mockPost}
               {...screenProps}
             />
@@ -248,47 +249,21 @@ describe('PostEditor', () => {
         </MockedScreen>
       </TestRoot>
     )
-
     const instance = renderer.root.findByType(PostEditor).instance
-    await act(async () => {
-      await instance.handleAddFile({ remote: 'http://bar.com/bar.pdf' })
-    })
+
+    await instance.handleAddFile({ remote: 'http://foo.com/foo.pdf' })
+    await instance.handleAddFile({ remote: 'http://bar.com/bar.pdf' })
+
     expect(instance.state.fileUrls).toEqual([
       'http://foo.com/foo.pdf',
       'http://bar.com/bar.pdf'
     ])
-    await act(async () => {
-      await instance.handleRemoveFile('http://foo.com/foo.pdf')
-    })
+
+    await instance.handleRemoveFile('http://foo.com/foo.pdf')
+
     expect(instance.state.fileUrls).toEqual([
       'http://bar.com/bar.pdf'
     ])
-  })
-
-  it('updates the title', async () => {
-    const save = jest.fn(() => Promise.resolve())
-    const renderer = TestRenderer.create(
-      <TestRoot>
-        <MockedScreen>
-          {screenProps => (
-            <PostEditor
-              fetchPost={jest.fn()}
-              isFocused
-              save={save}
-              post={mockPost}
-              {...screenProps}
-            />
-          )}
-        </MockedScreen>
-      </TestRoot>
-    )
-    const instance = renderer.root.findByType(PostEditor).instance
-    const someTitle = 'some title'
-    await act(async () => {
-      await instance.handleUpdateTitle(someTitle)
-    })
-    expect(instance.state.title).toEqual(someTitle)
-    expect(instance.state.titleLengthError).toBeFalsy()
   })
 
   it('displays an error if the title is too long', async () => {
@@ -328,3 +303,39 @@ describe('TypeButton', () => {
     expect(actual).toMatchSnapshot()
   })
 })
+
+// TODO: Moved save from connector and these
+// tests may be retrofit here
+// it('calls save correctly', async () => {
+//   expect.assertions(6)
+//   const props = {
+//     route: {
+//       params: {
+//         groupId,
+//         id
+//       }
+//     },
+//     navigation: {
+//       navigate: jest.fn()
+//     }
+//   }
+//   const dispatch = jest.fn(val => Promise.resolve(val))
+//   const dispatchProps = mapDispatchToProps(dispatch, props)
+//   expect(dispatchProps).toMatchSnapshot()
+
+//   const postData = {
+//     title: '',
+//     groups: []
+//   }
+
+//   await expect(dispatchProps.save(postData)).rejects.toHaveProperty('message', 'Title cannot be blank')
+
+//   postData.title = 'a title'
+//   await expect(dispatchProps.save(postData)).rejects.toHaveProperty('message', 'You must select a group')
+
+//   postData.groups = [{ id: 1 }]
+//   await expect(dispatchProps.save(postData)).resolves.toBeDefined()
+
+//   expect(dispatch).toHaveBeenCalled()
+//   expect(dispatch.mock.calls).toMatchSnapshot()
+// })

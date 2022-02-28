@@ -61,10 +61,9 @@ describe('PostEditor mapStateToProps', () => {
     expect(mapStateToProps(state, props).post).toBeDefined()
   })
 
-  it('sets groups and imageUrls from post', () => {
+  it('sets groups from post', () => {
     const stateProps = mapStateToProps(state, props)
     expect(stateProps.post.groups).toEqual([group1.ref, group2.ref])
-    expect(stateProps.imageUrls).toEqual(['bar.png', 'foo.png'])
   })
 })
 
@@ -85,40 +84,6 @@ describe('PostEditor mapDispatchToProps', () => {
     const dispatchProps = mapDispatchToProps(dispatch, props)
     expect(dispatchProps).toMatchSnapshot()
     dispatchProps.fetchPost(1)
-    expect(dispatch).toHaveBeenCalled()
-    expect(dispatch.mock.calls).toMatchSnapshot()
-  })
-
-  it('calls save correctly', async () => {
-    expect.assertions(6)
-    const props = {
-      route: {
-        params: {
-          groupId,
-          id
-        }
-      },
-      navigation: {
-        navigate: jest.fn()
-      }
-    }
-    const dispatch = jest.fn(val => Promise.resolve(val))
-    const dispatchProps = mapDispatchToProps(dispatch, props)
-    expect(dispatchProps).toMatchSnapshot()
-
-    const postData = {
-      title: '',
-      groups: []
-    }
-
-    await expect(dispatchProps.save(postData)).rejects.toHaveProperty('message', 'Title cannot be blank')
-
-    postData.title = 'a title'
-    await expect(dispatchProps.save(postData)).rejects.toHaveProperty('message', 'You must select a group')
-
-    postData.groups = [{ id: 1 }]
-    await expect(dispatchProps.save(postData)).resolves.toBeDefined()
-
     expect(dispatch).toHaveBeenCalled()
     expect(dispatch.mock.calls).toMatchSnapshot()
   })

@@ -35,10 +35,6 @@ const renderComponent = async (testProps = {}) => {
 }
 
 describe('mentions and topics', () => {
-  beforeEach(() => {
-    jest.useFakeTimers()
-  })
-
   it('renders as expected', async () => {
     const { getByPlaceholderText, getByDisplayValue } = await renderComponent()
     expect(await getByPlaceholderText('Placeholder Text')).toBeTruthy()
@@ -50,7 +46,7 @@ describe('mentions and topics', () => {
     const { getByDisplayValue } = await renderComponent({ onChange: onChangeMock })
     const textInput = await getByDisplayValue(props.value)
     const newValue = 'new text value'
-    fireEvent.changeText(textInput, newValue)
+    await fireEvent.changeText(textInput, newValue)
     expect(onChangeMock).toHaveBeenCalledWith(newValue)
   })
 
