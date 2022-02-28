@@ -189,8 +189,7 @@ export class PostEditor extends React.Component {
 
       navigation.navigate('Post Details', { id })
     } catch (e) {
-      console.log('!!!!', e)
-      // this.setIsSaving(false)
+      this.setIsSaving(false)
     }
   }
 
