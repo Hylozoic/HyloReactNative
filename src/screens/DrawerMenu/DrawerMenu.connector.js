@@ -45,7 +45,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    goToGroup: async group => {
+    goToGroup: group => {
       navigation.navigate('Feed', { groupId: group.id })
     },
     goToMyProfile: () => {

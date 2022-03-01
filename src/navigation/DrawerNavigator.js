@@ -10,13 +10,14 @@ import DrawerMenu from 'screens/DrawerMenu'
 const Drawer = createDrawerNavigator()
 export default function DrawerNavigator () {
   const navigatorProps = {
-    // Changed from React Navigation 5.x to 6.x but seems to not be needed (was for a moment?)
-    // backBehavior: 'history',
     drawerType: 'slide',
     drawerStyle: {
       width: Dimensions.get('window').width * 0.9
     },
-    drawerContent: props => <DrawerMenu {...props} />
+    useLegacyImplementation: true,
+    drawerContent: props => (
+      <DrawerMenu {...props} />
+    )
   }
 
   return (
