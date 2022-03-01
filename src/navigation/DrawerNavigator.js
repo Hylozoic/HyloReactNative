@@ -14,6 +14,8 @@ export default function DrawerNavigator () {
     drawerStyle: {
       width: Dimensions.get('window').width * 0.9
     },
+    // Without this Drawer was re-opening sometimes after nav
+    // something to do with Reanimated 2.0 config probably
     useLegacyImplementation: true,
     drawerContent: props => (
       <DrawerMenu {...props} />
