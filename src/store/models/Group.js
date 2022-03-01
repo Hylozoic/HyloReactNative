@@ -183,7 +183,7 @@ Group.fields = {
     as: 'upcomingEvents',
     relatedName: 'eventGroups'
   }),
-  visibility: attr(),
+  visibility: attr()
   // Not certain we will use Widgets on Mobile?
   // widgets: many('Widget')
 }
