@@ -72,27 +72,31 @@ const groupFieldsFragment = ({ withTopics, withJoinQuestions, withPrerequisites 
     neighborhood
     region
   }
-  ${withTopics && `groupTopics(first: 8) {
-    items {
-      id
-      topic {
+  ${withTopics
+    ? `groupTopics(first: 8) {
+      items {
         id
-        name
+        topic {
+          id
+          name
+        }
+        postsTotal
       }
-      postsTotal
-    }
-  }`}
-  ${withJoinQuestions && `
-    joinQuestions {
+    }`
+    : ''
+  }
+  ${withJoinQuestions
+    ? `joinQuestions {
       items {
         id
         questionId
         text
       }
-    }
-  `}
-  ${withPrerequisites && `
-    prerequisiteGroups(onlyNotMember: true) {
+    }`
+    : ''
+  }
+  ${withPrerequisites
+    ? `prerequisiteGroups(onlyNotMember: true) {
       items {
         avatarUrl
         id
@@ -107,8 +111,8 @@ const groupFieldsFragment = ({ withTopics, withJoinQuestions, withPrerequisites 
         slug
       }
     }
-    numPrerequisitesLeft
-  `}
+    numPrerequisitesLeft`
+  : ''}
 `
 
 export default groupFieldsFragment

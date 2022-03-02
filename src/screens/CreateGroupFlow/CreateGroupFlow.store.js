@@ -17,7 +17,7 @@ export const initialState = {
   groupData: {
     name: '',
     slug: '',
-    visibility: GROUP_VISIBILITY.Protected, 
+    visibility: GROUP_VISIBILITY.Protected,
     accessibility: GROUP_ACCESSIBILITY.Restricted,
     parentIds: []
   },
