@@ -64,9 +64,7 @@ export class PostEditor extends React.Component {
       topicsPicked: false,
       announcementEnabled: false,
       detailsFocused: false,
-      detailsText: post?.details
-        ? fromHTML(post.details)
-        : '',
+      detailsText: fromHTML(post?.details),
       titleLengthError: false,
       startTime: post?.startTime
         ? new Date(post.startTime)
@@ -119,7 +117,7 @@ export class PostEditor extends React.Component {
     return nextProps.isFocused
   }
 
-  handleDetailsOnChange = (detailsText) => {
+  handleDetailsOnChange = detailsText => {
     this.setState({ detailsText })
   }
 
@@ -177,7 +175,6 @@ export class PostEditor extends React.Component {
         : postData.type === 'project'
           ? createProject
           : createPost
-
       const { payload, meta, error } = await saveAction(postData)
 
       if (error) {
@@ -258,7 +255,7 @@ export class PostEditor extends React.Component {
     })
   }
 
-  showAlert = (msg) => Alert.alert(msg)
+  showAlert = msg => Alert.alert(msg)
 
   ignoreHash = name => name[0] === '#' ? name.slice(1) : name
 

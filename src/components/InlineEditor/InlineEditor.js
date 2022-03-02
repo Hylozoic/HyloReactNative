@@ -208,6 +208,8 @@ export const newLinesToBr = text => text
   )
 
 export const fromHTML = html => {
+  if (!html) return ''
+
   return NodeHtmlMarkdown.translate(html, {}, {
     a: opts => {
       const { node, options, visitor } = opts
@@ -223,10 +225,10 @@ export const fromHTML = html => {
   })
 }
 
-export const toHTML = html => {
+export const toHTML = text => {
   return flow([
     newLinesToBr,
     mentionsToHTML,
     TextHelpers.markdown
-  ])(html)
+  ])(text)
 }
