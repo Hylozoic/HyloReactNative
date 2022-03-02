@@ -6,7 +6,8 @@ import { Linking, TouchableOpacity } from 'react-native'
 describe('Files', () => {
   it('renders correctly', async () => {
     const renderer = TestRenderer.create(
-      <Files urls={[
+      <Files
+        urls={[
           'http://foo.com/foo.pdf',
           'http://foo.com/bar.zip'
         ]}
