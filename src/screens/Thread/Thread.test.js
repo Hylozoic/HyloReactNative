@@ -6,15 +6,12 @@ import { TestRoot } from 'util/testing'
 import Thread from './Thread'
 
 jest.mock('util/websockets', () => {
-  const socket = {
-    post: jest.fn(),
-    on: jest.fn(),
-    off: jest.fn()
-  }
-
   return {
-    getSocket: () => Promise.resolve(socket),
-    socketUrl: path => 'sockethost' + path
+    getSocket: () => Promise.resolve({
+      post: jest.fn(),
+      on: jest.fn(),
+      off: jest.fn()
+    })
   }
 })
 

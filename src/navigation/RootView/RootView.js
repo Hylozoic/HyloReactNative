@@ -53,7 +53,9 @@ export default function RootView ({
 
   return (
     <View style={styles.rootContainer}>
-      {fullyAuthorized && <SocketListener />}
+      {fullyAuthorized && (
+        <SocketListener />
+      )}
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}

@@ -5,14 +5,11 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import { ThreadList, MessageRow } from './ThreadList'
 
 jest.mock('util/websockets', () => {
-  const socket = {
-    post: jest.fn(),
-    on: jest.fn()
-  }
-
   return {
-    getSocket: () => Promise.resolve(socket),
-    socketUrl: path => 'sockethost' + path
+    getSocket: () => Promise.resolve({
+      post: jest.fn(),
+      on: jest.fn()
+    })
   }
 })
 

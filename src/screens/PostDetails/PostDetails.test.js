@@ -1,10 +1,8 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer, { act } from 'react-test-renderer'
-import { Provider } from 'react-redux'
-import { PostDetails, CommentPrompt, JoinProjectButton, ProjectMembers } from './PostDetails'
-import { Linking, TouchableOpacity } from 'react-native'
-import { createMockStore, TestRoot } from 'util/testing'
+import { PostDetails, JoinProjectButton } from './PostDetails'
+import { TestRoot } from 'util/testing'
 import MockedScreen from 'util/testing/MockedScreen'
 import orm from 'store/models'
 
