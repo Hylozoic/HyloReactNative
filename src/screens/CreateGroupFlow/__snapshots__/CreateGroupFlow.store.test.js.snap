@@ -106,9 +106,8 @@ Object {
     neighborhood
     region
   }
-  undefined
   
-    joinQuestions {
+  joinQuestions {
       items {
         id
         questionId
@@ -116,7 +115,6 @@ Object {
       }
     }
   
-  undefined
 
           }
           person {

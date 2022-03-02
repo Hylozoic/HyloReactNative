@@ -249,9 +249,11 @@ exports[`renders correctly with all=true, and no group or user 1`] = `
         data={
           Array [
             Object {
+              "id": "1",
               "name": "topic1",
             },
             Object {
+              "id": "2",
               "name": "topic2",
             },
           ]

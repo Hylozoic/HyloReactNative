@@ -18,7 +18,7 @@ it('renders correctly with all=true, and no group or user', () => {
         creator={creator}
         postId={22}
         pinned
-        topics={[{ name: 'topic1' }, { name: 'topic2' }]}
+        topics={[{ id: '1', name: 'topic1' }, { id: '2', name: 'topic2' }]}
         date={new Date(new Date().getTime() - 60000 * 10)}
       />
     </TestRoot>

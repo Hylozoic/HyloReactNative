@@ -417,8 +417,8 @@ Object {
   commentersTotal
   commentsTotal
   comments(first: 10, order: \\"desc\\") {
-    items {
-      
+      items {
+        
   id
   text
   creator {
@@ -437,9 +437,9 @@ Object {
   }
   createdAt
 
-      childComments(first: 10, order: \\"desc\\") {
-        items {
-          
+        childComments(first: 10, order: \\"desc\\") {
+          items {
+            
   id
   text
   creator {
@@ -458,17 +458,17 @@ Object {
   }
   createdAt
 
-          post {
-            id
+            post {
+              id
+            }
           }
+          total
+          hasMore
         }
-        total
-        hasMore
       }
+      total
+      hasMore
     }
-    total
-    hasMore
-  }
   linkPreview {
     id
     title

@@ -8,17 +8,17 @@ export default function Files ({ urls, style = {} }) {
   if (!urls) return null
 
   return (
-    <View style={{...styles.files, ...style}}>
-      {urls.map(url =>
+    <View style={{ ...styles.files, ...style }}>
+      {urls.map((url, index) =>
         <TouchableOpacity key={url} onPress={() => openURL(url)}>
-          <FileLabel url={url} />
+          <FileLabel url={url} key={index} />
         </TouchableOpacity>
       )}
     </View>
   )
 }
 
-const styles = { 
+const styles = {
   files: {
     marginHorizontal: 18
   }

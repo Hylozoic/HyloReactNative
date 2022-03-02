@@ -1,4 +1,4 @@
-import { mapStateToProps, mapDispatchToProps } from './UserSettings.connector'
+import { mapStateToProps } from './UserSettings.connector'
 
 describe('mapStateToProps', () => {
   it('sets up cancel', () => {
