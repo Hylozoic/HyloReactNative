@@ -5,22 +5,6 @@ import TestRenderer from 'react-test-renderer'
 import { TestRoot } from 'util/testing'
 import Thread from './Thread'
 
-// jest.mock('components/MessageInput', () => 'MessageInput')
-
-// jest.mock('components/SocketSubscriber', () => {
-//   const React = require('react')
-//   class SocketSubscriber extends React.Component {
-//     render () {
-//       return React.createElement('SocketSubscriber', this.props, this.props.children)
-//     }
-//   }
-//   return SocketSubscriber
-// })
-
-// jest.mock('components/SocketSubscriber', () => {})
-
-// jest.mock('components/PeopleTyping', () => {})
-
 jest.mock('util/websockets', () => {
   const socket = {
     post: jest.fn(),
@@ -33,6 +17,9 @@ jest.mock('util/websockets', () => {
     socketUrl: path => 'sockethost' + path
   }
 })
+
+// Throws multiple render warnings that muddy tests results without this
+jest.mock('components/HyloHTML', () => ({ html }) => html)
 
 describe('Thread', () => {
   let props
@@ -104,7 +91,7 @@ describe('Thread', () => {
   })
 
   describe('when not at bottom', () => {
-    it('does not scroll if additional messages are old (infinite scroll)', async () => {
+    it('does not scroll if additional messages are old (infinite scroll)', () => {
       const root = TestRenderer.create(
         <TestRoot>
           <Thread {...props} />
@@ -122,11 +109,11 @@ describe('Thread', () => {
           }
         ]
       }
-      await root.instance.UNSAFE_componentWillUpdate(nextProps)
+      root.instance.UNSAFE_componentWillUpdate(nextProps)
       expect(root.instance.shouldScroll).toBe(false)
     })
 
-    it('does not scroll on single new message from another user', async () => {
+    it('does not scroll on single new message from another user', () => {
       const root = TestRenderer.create(
         <TestRoot>
           <Thread {...props} />
@@ -143,12 +130,12 @@ describe('Thread', () => {
           ...props.messages
         ]
       }
-      await root.instance.UNSAFE_componentWillUpdate(nextProps)
+      root.instance.UNSAFE_componentWillUpdate(nextProps)
       expect(root.instance.shouldScroll).toBe(false)
     })
 
-    it('scrolls on single new message from current user', async () => {
-      const root = await TestRenderer.create(
+    it('scrolls on single new message from current user', () => {
+      const root = TestRenderer.create(
         <TestRoot>
           <Thread {...props} />
         </TestRoot>
@@ -164,7 +151,7 @@ describe('Thread', () => {
           ...props.messages
         ]
       }
-      await root.instance.UNSAFE_componentWillUpdate(nextProps)
+      root.instance.UNSAFE_componentWillUpdate(nextProps)
       expect(root.instance.shouldScroll).toBe(true)
     })
   })

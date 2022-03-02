@@ -120,7 +120,9 @@ export default class Thread extends React.Component {
   markAsRead = debounce(() => this.props.updateThreadReadTime(), 1000)
 
   renderItem = ({ item }) => {
-    return <MessageCard message={item} showTopic={this.props.showTopic} />
+    return (
+      <MessageCard message={item} showTopic={this.props.showTopic} />
+    )
   }
 
   handleScroll = ({ nativeEvent: { contentOffset } }) => {

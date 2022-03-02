@@ -90,62 +90,8 @@ exports[`Thread matches the last snapshot 1`] = `
             <Text>
               Yup
             </Text>
-            <View
-              style={
-                Array [
-                  Object {
-                    "marginTop": 3,
-                  },
-                  undefined,
-                  undefined,
-                ]
-              }
-              testID="html"
-            >
-              <View
-                style={
-                  Array [
-                    Object {},
-                    undefined,
-                    undefined,
-                  ]
-                }
-                testID="body"
-              >
-                <View
-                  style={
-                    Array [
-                      Object {
-                        "marginBottom": 10,
-                        "marginTop": 0,
-                      },
-                      undefined,
-                      undefined,
-                    ]
-                  }
-                  testID="p"
-                >
-                  <Text
-                    allowFontScaling={true}
-                    selectable={false}
-                    style={
-                      Array [
-                        Object {
-                          "color": "#5D757A",
-                          "fontFamily": "Circular-Book",
-                          "fontSize": 14,
-                          "lineHeight": 20,
-                        },
-                        undefined,
-                        undefined,
-                      ]
-                    }
-                  >
-                    Flargle argle
-                  </Text>
-                </View>
-              </View>
-            </View>
+            &lt;p&gt;Flargle argle&lt;/p&gt;
+
             <Text>
               Mon Aug 14 2017 18:58:37 GMT+1200 (NZST)
             </Text>
@@ -169,62 +115,8 @@ exports[`Thread matches the last snapshot 1`] = `
             <Text>
               Nope
             </Text>
-            <View
-              style={
-                Array [
-                  Object {
-                    "marginTop": 3,
-                  },
-                  undefined,
-                  undefined,
-                ]
-              }
-              testID="html"
-            >
-              <View
-                style={
-                  Array [
-                    Object {},
-                    undefined,
-                    undefined,
-                  ]
-                }
-                testID="body"
-              >
-                <View
-                  style={
-                    Array [
-                      Object {
-                        "marginBottom": 10,
-                        "marginTop": 0,
-                      },
-                      undefined,
-                      undefined,
-                    ]
-                  }
-                  testID="p"
-                >
-                  <Text
-                    allowFontScaling={true}
-                    selectable={false}
-                    style={
-                      Array [
-                        Object {
-                          "color": "#5D757A",
-                          "fontFamily": "Circular-Book",
-                          "fontSize": 14,
-                          "lineHeight": 20,
-                        },
-                        undefined,
-                        undefined,
-                      ]
-                    }
-                  >
-                    Argle bargle
-                  </Text>
-                </View>
-              </View>
-            </View>
+            &lt;p&gt;Argle bargle&lt;/p&gt;
+
             <Text>
               Mon Aug 14 2017 17:27:42 GMT+1200 (NZST)
             </Text>
@@ -248,62 +140,8 @@ exports[`Thread matches the last snapshot 1`] = `
             <Text>
               Maybe
             </Text>
-            <View
-              style={
-                Array [
-                  Object {
-                    "marginTop": 3,
-                  },
-                  undefined,
-                  undefined,
-                ]
-              }
-              testID="html"
-            >
-              <View
-                style={
-                  Array [
-                    Object {},
-                    undefined,
-                    undefined,
-                  ]
-                }
-                testID="body"
-              >
-                <View
-                  style={
-                    Array [
-                      Object {
-                        "marginBottom": 10,
-                        "marginTop": 0,
-                      },
-                      undefined,
-                      undefined,
-                    ]
-                  }
-                  testID="p"
-                >
-                  <Text
-                    allowFontScaling={true}
-                    selectable={false}
-                    style={
-                      Array [
-                        Object {
-                          "color": "#5D757A",
-                          "fontFamily": "Circular-Book",
-                          "fontSize": 14,
-                          "lineHeight": 20,
-                        },
-                        undefined,
-                        undefined,
-                      ]
-                    }
-                  >
-                    Bargle wargle
-                  </Text>
-                </View>
-              </View>
-            </View>
+            &lt;p&gt;Bargle wargle&lt;/p&gt;
+
             <Text>
               Mon Aug 14 2017 15:24:36 GMT+1200 (NZST)
             </Text>
