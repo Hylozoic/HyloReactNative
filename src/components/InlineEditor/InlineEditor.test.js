@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import TestRenderer from 'react-test-renderer'
-import { render, fireEvent } from '@testing-library/react-native'
-import { createMockStore, TestRoot } from 'util/testing'
+import { render, fireEvent, waitFor } from '@testing-library/react-native'
+import { TestRoot } from 'util/testing'
 import InlineEditor, {
   SubmitButton,
   mentionsToHTML,
@@ -26,7 +25,7 @@ const props = {
   }
 }
 
-const renderComponent = async (testProps = {}) => {
+const renderComponent = (testProps = {}) => {
   return render(
     <TestRoot>
       <InlineEditor {...props} {...testProps} />
@@ -35,36 +34,42 @@ const renderComponent = async (testProps = {}) => {
 }
 
 describe('mentions and topics', () => {
-  it('renders as expected', async () => {
-    const { getByPlaceholderText, getByDisplayValue } = await renderComponent()
-    expect(await getByPlaceholderText('Placeholder Text')).toBeTruthy()
-    expect(await getByDisplayValue('some value')).toBeTruthy()
+  it('renders as expected', () => {
+    const { getByPlaceholderText, getByDisplayValue } = render(
+      <TestRoot>
+        <InlineEditor {...props} />
+      </TestRoot>
+    )
+    waitFor(() => {
+      expect(getByPlaceholderText('Placeholder Text')).toBeTruthy()
+      expect(getByDisplayValue('some value')).toBeTruthy()
+    })
   })
 
   it('onChange is called', async () => {
     const onChangeMock = jest.fn()
-    const { getByDisplayValue } = await renderComponent({ onChange: onChangeMock })
-    const textInput = await getByDisplayValue(props.value)
+    const { findByDisplayValue } = renderComponent({ onChange: onChangeMock })
+    const textInput = await findByDisplayValue(props.value)
     const newValue = 'new text value'
-    await fireEvent.changeText(textInput, newValue)
+    fireEvent.changeText(textInput, newValue)
     expect(onChangeMock).toHaveBeenCalledWith(newValue)
   })
 
   it('onSubmit is called', async () => {
     const onSubmitMock = jest.fn()
-    const { getByTestId } = await renderComponent({ onSubmit: onSubmitMock })
-    await fireEvent.press(await getByTestId('submitButton'))
+    const { findByTestId } = renderComponent({ onSubmit: onSubmitMock })
+    fireEvent.press(await findByTestId('submitButton'))
     expect(onSubmitMock).toHaveBeenCalledWith(props.value)
   })
 
   // it('inserts the markup for a mention', async () => {
   //   let currentValue
   //   const onChangeMock = jest.fn(value => { currentValue = value })
-  //   const { getByTestId } = await renderComponent({ onChange: onChangeMock })
+  //   const { findByTestId } = await renderComponent({ onChange: onChangeMock })
   //   // const instance = TestRenderer.create(<InlineEditor {...props} />).getInstance()
   //   // instance.handleSelectionChange({ nativeEvent: { selection: { start: 5, end: 5 } } })
   //   // instance.insertMention({ id: 333, name: 'sdfdfz' })
-  //   await fireEvent.press(await getByTestId('mentionPicker'))
+  //   fireEvent.press(await findByTestId('mentionPicker'))
   //   expect(onChangeMock).toHaveBeenCalledWith('some [sdfdfz:333] text')
   // })
 

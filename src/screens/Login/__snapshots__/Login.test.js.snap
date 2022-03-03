@@ -12,7 +12,7 @@ exports[`FormError renders correctly 1`] = `
 `;
 
 exports[`Login renders correctly 1`] = `
-<RNCSafeAreaView
+<ForwardRef
   edges={
     Array [
       "bottom",
@@ -123,11 +123,11 @@ exports[`Login renders correctly 1`] = `
       goToSignup={[Function]}
     />
   </ScrollView>
-</RNCSafeAreaView>
+</ForwardRef>
 `;
 
 exports[`Login renders error message 1`] = `
-<RNCSafeAreaView
+<ForwardRef
   edges={
     Array [
       "bottom",
@@ -236,11 +236,11 @@ exports[`Login renders error message 1`] = `
     </View>
     <SignupLink />
   </ScrollView>
-</RNCSafeAreaView>
+</ForwardRef>
 `;
 
 exports[`Login renders with no network connection error 1`] = `
-<RNCSafeAreaView
+<ForwardRef
   edges={
     Array [
       "bottom",
@@ -349,11 +349,11 @@ exports[`Login renders with no network connection error 1`] = `
     </View>
     <SignupLink />
   </ScrollView>
-</RNCSafeAreaView>
+</ForwardRef>
 `;
 
 exports[`Login renders with pending banner 1`] = `
-<RNCSafeAreaView
+<ForwardRef
   edges={
     Array [
       "bottom",
@@ -465,7 +465,7 @@ exports[`Login renders with pending banner 1`] = `
     </View>
     <SignupLink />
   </ScrollView>
-</RNCSafeAreaView>
+</ForwardRef>
 `;
 
 exports[`SignupLink renders correctly 1`] = `

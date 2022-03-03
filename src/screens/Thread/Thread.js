@@ -73,9 +73,10 @@ export default class Thread extends React.Component {
 
       // If there's one new message, it's not from currentUser,
       // and we're not already at the bottom, don't scroll
-      if (deltaLength === 1 &&
-        !this.atBottom() &&
-        get('creator.id', latest) !== currentUserId) {
+      if (
+        deltaLength === 1 && !this.atBottom() &&
+        latest?.creator?.id !== currentUserId
+      ) {
         this.setState({
           newMessages: this.state.newMessages + 1,
           notify: true

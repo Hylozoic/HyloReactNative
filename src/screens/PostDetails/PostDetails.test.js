@@ -9,17 +9,7 @@ import orm from 'store/models'
 // TODO: Fix tests to have test Redux store for Redux hooks:
 //       https://gist.github.com/krawaller/e5d40217658fa132f3c3904987e467cd
 
-jest.mock('util/websockets', () => {
-  const socket = {
-    post: jest.fn(),
-    on: jest.fn()
-  }
-
-  return {
-    getSocket: () => Promise.resolve(socket),
-    socketUrl: path => 'sockethost' + path
-  }
-})
+jest.mock('components/SocketSubscriber', () => () => null)
 
 const post = {
   id: '91',
@@ -60,7 +50,7 @@ const props = {
   fetchPost: jest.fn(),
   showMember: jest.fn(),
   showTopic: jest.fn(),
-  createComment: jest.fn(() => Promise.resolve({ success: true })),
+  createComment: jest.fn(async () => ({ success: true })),
   goToGroup: jest.fn(),
   navigation: {
     setOptions: jest.fn(),

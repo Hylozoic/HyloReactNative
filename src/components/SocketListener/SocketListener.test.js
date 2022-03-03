@@ -16,10 +16,11 @@ jest.mock('util/websockets', () => {
 })
 
 it('sets up reconnection behavior', async () => {
-  const renderer = await TestRenderer.create(<SocketListener
-    setupCoreEventHandlers={() => {}}
-                                             />)
-
+  const renderer = await TestRenderer.create(
+    <SocketListener
+      setupCoreEventHandlers={() => {}}
+    />
+  )
   const socket = await getSocket()
 
   expect(socket.on.mock.calls.map(x => x[0])).toEqual([

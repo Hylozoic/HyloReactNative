@@ -20,7 +20,7 @@ export default function SignupFlow2 ({ navigation }) {
   const [imagePickerPending, setImagePickerPending] = useState(false)
 
   useEffect(() => {
-    // this is for the case where they logged in but hadn't finished sign up    
+    // this is for the case where they logged in but hadn't finished sign up
     if (!avatarUrl && currentUser) {
       dispatch(updateLocalUserSettings({ avatarUrl: currentUser.ref?.avatarUrl }))
     }

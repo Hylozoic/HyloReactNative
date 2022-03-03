@@ -2,7 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { setupServer } from 'msw/node'
+// import { setupServer } from 'msw/node'
 import { createInitialState } from 'store'
 import orm from 'store/models'
 
@@ -57,7 +57,7 @@ export function TestRoot ({
 //   https://mswjs.io/docs/getting-started/mocks/graphql-api
 // (Will need `import { graphql } from 'msw'` in test file)
 // Also `afterEach(() => { server.resetHandlers() })`is required
-export const createMockGraphqlServer = handlers => setupServer(...handlers).listen()
+// export const createMockGraphqlServer = handlers => setupServer(...handlers).listen()
 
 // Misc and legacy test utils
 

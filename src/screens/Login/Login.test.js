@@ -10,7 +10,7 @@ jest.mock('@react-native-google-signin/google-signin', () => ({
     signIn: jest.fn(() => Promise.resolve()),
     getTokens: jest.fn(() => ({ accessToken: 'faketoken' })),
     configure: jest.fn()
-  } 
+  }
 }))
 jest.mock('react-native-fbsdk-next', () => ({
   LoginManager: {

@@ -37,7 +37,7 @@ export default function SignupFlow3 ({ navigation }) {
     dispatch(updateUserSettings({ settings: { signupInProgress: false } }))
   }
 
-  const showLocationPicker = locationText  => {
+  const showLocationPicker = locationText => {
     LocationPicker({
       navigation,
       currentLocation,

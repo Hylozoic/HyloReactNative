@@ -5,7 +5,7 @@ import MockedScreen from 'util/testing/MockedScreen'
 import SignupFlow1 from 'screens/SignupFlow/SignupFlow1'
 
 it('default render matches snapshot', async () => {
-  const { toJSON } = await render(
+  const { toJSON } = render(
     <TestRoot>
       <MockedScreen component={SignupFlow1} />
     </TestRoot>
