@@ -20,10 +20,10 @@ describe('BadgedIcon', () => {
     expect(renderer.getRenderOutput()).toMatchSnapshot()
   })
 
-  it('calls the onPress passed to the wrapped component', () => {
+  it('calls the onPress passed to the wrapped component', async () => {
     const onPress = jest.fn()
     const root = TestRenderer.create(<BadgedIcon onPress={onPress} />).root
-    simulate(root.findByType(Icon), 'press')
+    simulate(await root.findByType(Icon), 'press')
     expect(onPress).toHaveBeenCalled()
   })
 })
