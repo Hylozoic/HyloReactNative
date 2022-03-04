@@ -1,30 +1,40 @@
 module.exports = {
   root: true,
   extends: [
+    'prettier',
     '@react-native-community',
     'standard',
-    'standard-react',
     'standard-jsx',
-    'eslint-config-prettier'
+    'standard-react'
   ],
   parser: '@babel/eslint-parser',
   parserOptions: {
     requireConfigFile: false,
-    ecmaFeatures: {
-      jsx: true
-    },
     project: './tsconfig.json'
   },
   plugins: [
     'react',
     'react-native'
   ],
-  env: {
-    'react-native/react-native': true
-  },
   rules: {
     'prettier/prettier': 'off',
-    'react/prop-types': 'off'
+    'react/prop-types': 'off',
+    'react/no-children-prop': 'warn',
+    'react/jsx-fragments': 'warn',
+    'react/jsx-wrap-multilines': 'warn',
+    'import/export': 'off'
+  },
+  settings: {
+    react: {
+      version: 'detect'
+    },
+    jest: {
+      version: require('jest/package.json').version
+    }
+  },
+  env: {
+    'react-native/react-native': true,
+    'jest/globals': true
   },
   overrides: [
     {
@@ -40,10 +50,6 @@ module.exports = {
         'jest',
         'testing-library'
       ],
-      env: {
-        'jest': true,
-        'jest/globals': true
-      },
       rules: {
         'jest/no-disabled-tests': 'warn',
         'jest/no-focused-tests': 'error',
@@ -63,11 +69,6 @@ module.exports = {
             testIdPattern: '^TestId(__[A-Z]*)?$'
           }
         ]
-      },
-      settings: {
-        jest: {
-          version: require('jest/package.json').version
-        }
       }
     }
   ]
