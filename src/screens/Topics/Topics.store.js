@@ -19,11 +19,11 @@ export function presentGroupTopic (groupTopic) {
   }
 }
 
-export const defaultState = {
+export const initialState = {
   term: ''
 }
 
-export default function reducer (state = defaultState, action) {
+export default function reducer (state = initialState, action) {
   const { error, type, payload } = action
   if (error) return state
 

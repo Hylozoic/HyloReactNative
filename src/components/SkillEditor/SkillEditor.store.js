@@ -9,12 +9,12 @@ export const REMOVE_SKILL = `${MODULE_NAME}/REMOVE_SKILL`
 export const REMOVE_SKILL_PENDING = `${REMOVE_SKILL}_PENDING`
 export const SET_USER_SKILLS = `${MODULE_NAME}/SET_USER_SKILLS`
 
-export const defaultState = {
+export const initialState = {
   skill: '',
   userSkills: []
 }
 
-export default function reducer (state = defaultState, action) {
+export default function reducer (state = initialState, action) {
   const { error, type, payload, meta } = action
   if (error) {
     return state

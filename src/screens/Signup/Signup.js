@@ -11,7 +11,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import validator from 'validator'
-import { openURL } from 'util'
+import { openURL } from 'navigation/linking'
 import { isIOS } from 'util/platform'
 import { useFocusEffect } from '@react-navigation/core'
 import logout from 'store/actions/logout'

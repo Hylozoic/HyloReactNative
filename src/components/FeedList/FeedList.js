@@ -2,12 +2,19 @@ import React from 'react'
 import { FlatList, View } from 'react-native'
 import { isEmpty } from 'lodash/fp'
 import { didPropsChange } from 'util/index'
-import styles from './FeedList.styles'
+import { useIsFocused } from '@react-navigation/native'
 import PostRow from './PostRow'
 import ListControl from 'components/ListControl'
 import Loading from 'components/Loading'
 import { isContextGroup } from 'store/models/Group'
-export default class FeedList extends React.Component {
+import styles from './FeedList.styles'
+
+export default function (props) {
+  const isFocused = useIsFocused()
+  return <FeedList {...props} isFocused={isFocused} />
+}
+
+export class FeedList extends React.Component {
   fetchOrShowCached () {
     const { hasMore, postIds, fetchPosts } = this.props
     if (fetchPosts && isEmpty(postIds) && hasMore !== false) {
@@ -25,12 +32,12 @@ export default class FeedList extends React.Component {
 
   componentDidUpdate (prevProps) {
     if (
-        !prevProps.isFocused && this.props.isFocused  ||
-        prevProps.sortBy !== this.props.sortBy ||
-        prevProps.filter !== this.props.filter ||
-        prevProps.timeframe !== this.props.timeframe ||
-        prevProps.group?.id !== this.props.group?.id ||
-        prevProps.topicName !== this.props.topicName
+      (!prevProps.isFocused && this.props.isFocused) ||
+      prevProps.sortBy !== this.props.sortBy ||
+      prevProps.filter !== this.props.filter ||
+      prevProps.timeframe !== this.props.timeframe ||
+      prevProps.group?.id !== this.props.group?.id ||
+      prevProps.topicName !== this.props.topicName
     ) {
       this.fetchOrShowCached()
     }
@@ -67,17 +74,17 @@ export default class FeedList extends React.Component {
           ListHeaderComponent={
             <View>
               {this.props.header}
-              {!feedType && <>
+              {!feedType && (
                 <View style={[styles.listControls]}>
                   <ListControl selected={sortBy} onChange={setSort} options={sortOptions} />
                   <ListControl selected={filter} onChange={setFilter} options={filterOptions} />
                 </View>
-              </>}
-              {feedType === 'event' && <>
+              )}
+              {feedType === 'event' && (
                 <View style={[styles.listControls]}>
                   <ListControl selected={timeframe} onChange={setTimeframe} options={eventTimeframeOptions} />
                 </View>
-              </>}
+              )}
             </View>
           }
           ListFooterComponent={

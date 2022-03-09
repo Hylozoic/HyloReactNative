@@ -6,7 +6,6 @@ import PostBody from './PostBody'
 import PostImage from './PostImage'
 import PostFooter from './PostFooter'
 import PostGroups from './PostGroups'
-import samplePost from './samplePost'
 import { get } from 'lodash/fp'
 import { capeCod10 } from 'style/colors'
 import Files from 'components/Files'
@@ -37,7 +36,7 @@ export default class PostCard extends React.PureComponent {
   }
 
   static defaultProps = {
-    post: samplePost(),
+    post: {},
     showGroups: true
   }
 
@@ -64,13 +63,13 @@ export default class PostCard extends React.PureComponent {
     return (
       <View style={styles.container}>
         <PostHeader
+          postId={post.id}
           creator={creator}
           date={post.createdAt}
           type={post.type}
           topics={topics}
           slug={slug}
           pinned={isPinned}
-          postId={post.id}
           showMember={showMember}
           showTopic={showTopic}
           announcement={post.announcement}
@@ -85,8 +84,6 @@ export default class PostCard extends React.PureComponent {
           myEventResponse={post.myEventResponse}
           respondToEvent={respondToEvent}
           shouldTruncate
-          showMember={showMember}
-          showTopic={showTopic}
           slug={slug}
           startTime={post.startTime}
           title={post.title}

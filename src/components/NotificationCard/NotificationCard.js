@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { any, bool, func, shape, string } from 'prop-types'
 
 import Avatar from 'components/Avatar'
@@ -53,7 +53,7 @@ export default function NotificationCard ({ notification }) {
           {renderTitle(title)}
           {renderTopic(topic)}
         </Text>
-        <Text style={styles.text} numberOfLines={2}>
+        <Text style={styles.text}>
           {renderFirstName(actor)}
           {body}
           {renderGroup(group)}

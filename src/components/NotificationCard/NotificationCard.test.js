@@ -3,7 +3,6 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import { modalScreenName } from 'navigation/linking/helpers'
 import NotificationCard from './NotificationCard'
-import index from './'
 
 describe('NotificationCard', () => {
   let notificationBase
@@ -17,7 +16,8 @@ describe('NotificationCard', () => {
         name: 'Wombat Aardvark'
       },
       createdAt: '1 mo ago',
-      onPress: () => navigate(modalScreenName('Post Details'), { id: '1' })
+      onPress: () => {}
+      // onPress: () => modalScreenName('Post Details'), { id: '1' }
     }
   })
 

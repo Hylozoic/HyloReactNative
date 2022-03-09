@@ -27,7 +27,8 @@ module.exports = {
           'assets': './assets'
         }
       }
-    ]
+    ],
+    'react-native-reanimated/plugin'
   ],
   env: {
     test: {

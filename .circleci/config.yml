@@ -9,7 +9,7 @@ jobs:
       CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     docker:
-    - image: cimg/node:15.5.1
+    - image: cimg/node:16.13.2
     shell: /bin/bash --login
     steps:
     - checkout
@@ -29,10 +29,10 @@ jobs:
         keys:
         # This branch if available
         - v1-dep-{{ .Branch }}-{{ checksum "yarn.lock" }}
-        # Default branch if not
-        - v1-dep-master-{{ checksum "yarn.lock" }}
-        # Any branch if there are none on the default branch - this should be unnecessary if you have your default branch configured correctly
-        - v1-dep-{{ checksum "yarn.lock" }}
+        # # Default branch if not
+        # - v1-dep-master-{{ checksum "yarn.lock" }}
+        # # Any branch if there are none on the default branch - this should be unnecessary if you have your default branch configured correctly
+        # - v1-dep-{{ checksum "yarn.lock" }}
     - run: yarn global add codecov
     - run: yarn
     - save_cache:
@@ -40,6 +40,7 @@ jobs:
         paths:
         - ~/.cache/yarn
         - ./node_modules
+        - ./ios/Pods
     - run: yarn test -- --coverage --runInBand
     - run: yarn run codecov
     - store_test_results:

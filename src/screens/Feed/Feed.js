@@ -1,59 +1,76 @@
 import React, { useRef, useEffect } from 'react'
 import { Image, View, Text, TouchableOpacity } from 'react-native'
-import { capitalize } from 'lodash/fp'
-import Avatar from 'components/Avatar'
-import Icon from 'components/Icon'
-// import NotificationOverlay from 'components/NotificationOverlay'
+import { capitalize, isEmpty } from 'lodash/fp'
+import { useDispatch, useSelector } from 'react-redux'
 import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
-import Button from 'components/Button'
-import { bannerlinearGradientColors } from 'style/colors'
-import Loading from 'components/Loading'
-import CreateGroupNotice from 'components/CreateGroupNotice'
-import FeedList from 'components/FeedList'
-import SocketSubscriber from 'components/SocketSubscriber'
-import styles from './Feed.styles'
-import useGroupSelect from 'hooks/useGroupSelect'
-import getRouteParam from 'store/selectors/getRouteParam'
 import { PUBLIC_GROUP_ID } from 'store/models/Group'
+import makeGoToGroup from 'store/actions/makeGoToGroup'
+import getRouteParam from 'store/selectors/getRouteParam'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import getMe from 'store/selectors/getMe'
+import getMemberships from 'store/selectors/getMemberships'
+import useGroupSelect from 'hooks/useGroupSelect'
+import {
+  fetchGroupTopic,
+  getGroupTopic,
+  setTopicSubscribe as setTopicSubscribeAction
+} from './Feed.store'
+import Loading from 'components/Loading'
+import FeedList from 'components/FeedList'
+import Button from 'components/Button'
+import CreateGroupNotice from 'components/CreateGroupNotice'
+import SocketSubscriber from 'components/SocketSubscriber'
+import Avatar from 'components/Avatar'
+import Icon from 'components/Icon'
+import { bannerlinearGradientColors } from 'style/colors'
+import styles from './Feed.styles'
 
-export function headerTitle (topicName, group, feedType) {
-  let title 
+export function headerTitle (group, feedType) {
+  let title
   title = group?.name
-  // topicName
-  //   ? group?.name
-  //   : 'Home'
   title = feedType ? capitalize(feedType + 's') : title
   return title
 }
 
-export default function Feed ({
-  group,
-  currentUser,
-  route,
-  navigation,
-  showPost,
-  showMember,
-  topicName,
-  topicSubscribed,
-  topicPostsTotal,
-  topicFollowersTotal,
-  goToCreateGroup,
-  currentUserHasMemberships,
-  goToGroup,
-  setTopicSubscribe,
-  showTopic,
-  newPost,
-  fetchGroupTopic
-}) {
-  const feedType = getRouteParam('feedType', route)
+export default function Feed ({ topicName: providedTopicName, route, navigation }) {
   const ref = useRef(null)
+  const dispatch = useDispatch()
+  const feedType = getRouteParam('feedType', route)
+  const topicName = providedTopicName || getRouteParam('topicName', route)
 
   useGroupSelect()
-  useEffect(() => { fetchGroupTopic() }, [])
+
+  const currentUser = useSelector(getMe)
+  const memberships = useSelector(getMemberships)
+  const currentUserHasMemberships = !isEmpty(memberships)
+  const group = useSelector(getCurrentGroup)
+  const groupTopic = useSelector(state => getGroupTopic(state, { topicName, slug: group.slug }))
+  const topic = groupTopic?.topic?.ref
+  const topicSubscribed = groupTopic?.isSubscribed
+  const topicPostsTotal = groupTopic?.postsTotal
+  const topicFollowersTotal = groupTopic?.followersTotal
+  const goToGroup = groupId => makeGoToGroup(navigation, dispatch)(groupId, memberships, group.id)
+  const goToPostEditor = (params = {}) => navigation.navigate('Edit Post', { groupId: group.id, ...params })
+  const goToPostDetails = id => navigation.navigate('Post Details', { id })
+  const goToCreateGroup = () => navigation.navigate('Create Group')
+  const goToMember = id => navigation.navigate('Member', { id })
+  const goToTopic = selectedTopicName => {
+    if (selectedTopicName === topic?.name) return
+    if (topic?.name) {
+      navigation.setParams({ topicName: selectedTopicName })
+    } else {
+      navigation.push('Topic Feed', { groupId: group.id, topicName: selectedTopicName })
+    }
+  }
+
+  useEffect(() => {
+    topicName && group?.slug && dispatch(fetchGroupTopic(topicName, group.slug))
+  }, [topicName, group?.slug])
+
   useEffect(() => {
     navigation.setOptions({
-      title: headerTitle(topicName, group, feedType)
+      title: headerTitle(group, feedType)
     })
   }, [topicName, group?.id, feedType])
 
@@ -70,6 +87,7 @@ export default function Feed ({
 
   if (!group) return null
 
+  const setTopicSubscribe = () => topicName && group.id && dispatch(setTopicSubscribeAction(topic.id, group.id, !topicSubscribed))
   const name = topicName
     ? '#' + topicName
     : group.name
@@ -107,32 +125,34 @@ export default function Feed ({
         <Button
           style={styles.newPostButton}
           text={`Create ${capitalize(feedType)}`}
-          onPress={() => newPost({ type: feedType })}
-        />      
+          onPress={() => goToPostEditor({ type: feedType })}
+        />
       )}
-      {!feedType && <PostPrompt currentUser={currentUser} newPost={newPost} />}
+      {!feedType && <PostPrompt currentUser={currentUser} newPost={goToPostEditor} />}
       {!!currentUser && !feedType && <View style={styles.promptShadow} />}
     </View>
   )
 
-  return <>
-    <FeedList
-      scrollRef={ref}
-      group={group}
-      showPost={showPost}
-      goToGroup={goToGroup}
-      header={feedListHeader}
-      route={route}
-      navigation={navigation}
-      showMember={showMember}
-      showTopic={showTopic}
-      topicName={topicName}
-      feedType={feedType}
-    />
-    {!topicName && group && (
-      <SocketSubscriber type='group' id={group.id} />
-    )}
-  </>
+  return (
+    <>
+      <FeedList
+        scrollRef={ref}
+        group={group}
+        showPost={goToPostDetails}
+        goToGroup={goToGroup}
+        header={feedListHeader}
+        route={route}
+        navigation={navigation}
+        showMember={goToMember}
+        showTopic={goToTopic}
+        topicName={topicName}
+        feedType={feedType}
+      />
+      {!topicName && group && (
+        <SocketSubscriber type='group' id={group.id} />
+      )}
+    </>
+  )
 }
 
 export function PostPrompt ({ currentUser, newPost }) {
@@ -153,24 +173,3 @@ export function SubscribeButton ({ active, onPress }) {
   const style = active ? styles.unsubscribeButton : styles.subscribeButton
   return <Button onPress={onPress} style={style} iconName='Star' text={text} />
 }
-
-// const toggleSubscribe = () => {
-//   this.setState({
-//     overlayMessage: this.props.topicSubscribed
-//       ? 'UNSUBSCRIBED FROM TOPIC'
-//       : 'SUBSCRIBED TO TOPIC'
-//   })
-//   setTopicSubscribe()
-// }
-//
-// resetOverlayMessage = () => {
-//   this.setState({ overlayMessage: null })
-// }
-//
-// {!!this.state.overlayMessage && (
-//   <NotificationOverlay
-//     message={this.state.overlayMessage}
-//     type='info'
-//     onComplete={this.resetOverlayMessage}
-//   />
-// )}

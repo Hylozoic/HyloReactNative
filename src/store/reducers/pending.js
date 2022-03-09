@@ -1,5 +1,9 @@
-export default function pending (state = {}, action) {
-  const { type, meta } = action
+export const initialState = {}
+
+export default function pending (state = initialState, action) {
+  const { type, meta, error } = action
+
+  if (error) return state
 
   const originalType = type.replace(/_PENDING/, '')
 

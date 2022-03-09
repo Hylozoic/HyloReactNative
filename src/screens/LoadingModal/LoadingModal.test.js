@@ -8,13 +8,17 @@ beforeEach(() => {
   jest.useFakeTimers()
 })
 
+afterEach(() => {
+  jest.useRealTimers()
+})
+
 it('returns null when display is false', () => {
   const renderer = new ReactShallowRenderer()
 
   renderer.render(<LoadingModal />)
-  const actual = renderer.getRenderOutput()
+  const view = renderer.getRenderOutput()
 
-  expect(actual).toEqual(null)
+  expect(view).toEqual(null)
 })
 
 it('matches last snapshot when visible is true', () => {

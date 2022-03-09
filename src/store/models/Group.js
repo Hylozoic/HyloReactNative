@@ -1,5 +1,6 @@
 import { Image } from 'react-native'
 import { attr, many, Model, fk } from 'redux-orm'
+import { ALL_GROUPS_CONTEXT_SLUG, PUBLIC_CONTEXT_SLUG } from 'hylo-shared'
 import allGroupsBannerImage from 'assets/all-groups-banner.png'
 import allGroupsAvatarUrl from 'assets/All_Groups2.png'
 import allGroupshHeaderAvatarUrl from 'assets/All_Groups.png'
@@ -182,16 +183,15 @@ Group.fields = {
     as: 'upcomingEvents',
     relatedName: 'eventGroups'
   }),
-  visibility: attr(),
+  visibility: attr()
   // Not certain we will use Widgets on Mobile?
   // widgets: many('Widget')
 }
 
-export const isContextGroup = slug => [ALL_GROUP_ID, PUBLIC_GROUP_ID].includes(slug)
 export const DEFAULT_BANNER = 'https://d3ngex8q79bk55.cloudfront.net/misc/default_community_banner.jpg'
 export const DEFAULT_AVATAR = 'https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png'
 
-export const ALL_GROUP_ID = 'all'
+export const ALL_GROUP_ID = ALL_GROUPS_CONTEXT_SLUG
 export const ALL_GROUP_AVATAR_PATH = '/assets/white-merkaba.png'
 export const ALL_GROUP = {
   id: ALL_GROUP_ID,
@@ -204,7 +204,7 @@ export const ALL_GROUP = {
   childGroups: { toModelArray: () => [] },
 }
 
-export const PUBLIC_GROUP_ID = 'public'
+export const PUBLIC_GROUP_ID = PUBLIC_CONTEXT_SLUG
 export const PUBLIC_GROUP_AVATAR_PATH = '/public.svg'
 export const PUBLIC_GROUP = {
   id: PUBLIC_GROUP_ID,
@@ -216,3 +216,6 @@ export const PUBLIC_GROUP = {
   parentGroups: { toModelArray: () => [] },
   childGroups: { toModelArray: () => [] }
 }
+
+// Move into hylo-shared (PathsHelper?)
+export const isContextGroup = slug => [ALL_GROUPS_CONTEXT_SLUG, PUBLIC_CONTEXT_SLUG].includes(slug)

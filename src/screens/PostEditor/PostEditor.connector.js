@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { get, isEmpty } from 'lodash/fp'
-import { mapWhenFocused } from 'util/redux'
+import { bindActionCreators } from 'redux'
 import { getPresentedPost } from 'store/selectors/getPost'
 import isPendingFor from 'store/selectors/isPendingFor'
 import getCanModerate from 'store/selectors/getCanModerate'
@@ -12,20 +12,16 @@ import { createTopicTag } from 'components/InlineEditor/InlineEditor'
 import {
   createPost,
   createProject,
-  updatePost,
-  MAX_TITLE_LENGTH
+  updatePost
 } from './PostEditor.store'
-
-function getPostId (state, props) {
-  return props.route.params.id
-}
+import getRouteParam from 'store/selectors/getRouteParam'
 
 export function mapStateToProps (state, props) {
   const currentGroup = get('ref', getCurrentGroup(state))
   const currentUser = getMe(state, props)
   const groupOptions = props.groupOptions ||
     (currentUser && currentUser.memberships.toModelArray().map(m => m.group.ref))
-  const postId = getPostId(state, props)
+  const postId = getRouteParam('id', props?.route)
   const post = getPresentedPost(state, { id: postId })
   // Setup new post with defaults from routing
   const selectedTopicName = get('route.params.topicName', props)
@@ -35,7 +31,7 @@ export function mapStateToProps (state, props) {
     ? {
         details: selectedTopicTag + ' ',
         groups: currentGroup && [currentGroup]
-      } 
+      }
     : {
         groups: currentGroup && [currentGroup]
       }
@@ -44,59 +40,21 @@ export function mapStateToProps (state, props) {
   return {
     post: post || defaultPost,
     groupOptions,
-    imageUrls: post ? post.imageUrls : [],
-    fileUrls: post ? post.fileUrls : [],
-    isNewPost: isEmpty(postId),
     canModerate: getCanModerate(state),
     pendingDetailsText: isPendingFor(fetchPost, state)
   }
 }
 
-export function mapDispatchToProps (dispatch, props) {
-  const { navigation } = props
-  const postId = getPostId(null, props)
-
+export function mapDispatchToProps (dispatch) {
   return {
-    save: postData => {
-      if (!postData.title) {
-        return Promise.reject(new Error('Title cannot be blank'))
-      }
-
-      if (postData.title.length >= MAX_TITLE_LENGTH) {
-        return Promise.reject(new Error(`Title cannot be more than ${MAX_TITLE_LENGTH} characters`))
-      }
-
-      if (isEmpty(postData.groups)) {
-        return Promise.reject(new Error('You must select a group'))
-      }
-
-      if (postId) postData.id = postId
-
-      const saveAction = postId
-        ? updatePost
-        : postData.type == 'project'
-          ? createProject
-          : createPost
-  
-      return dispatch(saveAction(postData))
-        .then(({ meta, error, payload }) => {
-          if (error) {
-            // TODO: handle API errors more appropriately
-            throw new Error('Error submitting post')
-          }
-          const id = meta.extractModel?.getRoot(payload?.data)?.id
-
-          navigation.navigate('Post Details', { id })
-
-          return Promise.resolve({})
-        })
-    },
-    upload: (type, id, file) => dispatch(upload(type, id, file)),
-    fetchPost: () => dispatch(fetchPost(postId))
+    ...bindActionCreators({
+      fetchPost,
+      createPost,
+      createProject,
+      updatePost,
+      upload
+    }, dispatch)
   }
 }
 
-export default connect(
-  mapWhenFocused(mapStateToProps),
-  mapWhenFocused(mapDispatchToProps)
-)
+export default connect(mapStateToProps, mapDispatchToProps)

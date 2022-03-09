@@ -3,12 +3,8 @@ import React from 'react'
 import TestRenderer from 'react-test-renderer'
 import Members, { Banner, Member } from './Members'
 
-import '@react-navigation/compat'
 import '@react-navigation/native'
 jest.mock('@react-navigation/native')
-jest.mock('@react-navigation/compat', () => ({
-  withNavigationFocus: component => component
-}))
 
 it('renders correctly with no group (all groups default)', () => {
   const members = [

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Alert, FlatList, Text, View, TouchableOpacity } from 'react-native'
 import { get, isEmpty } from 'lodash/fp'
+import { useIsFocused } from '@react-navigation/native'
 import Avatar from 'components/Avatar'
-import Icon from 'components/Icon'
 import Button from 'components/Button'
 import LoadingScreen from 'components/Loading'
 // Person picker
@@ -11,7 +11,11 @@ import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomp
 import PersonPickerItemRow from 'screens/ItemChooser/PersonPickerItemRow'
 import styles from './ModeratorSettings.styles'
 
-export default class ModeratorSettings extends Component {
+export default function (props) {
+  const isFocused = useIsFocused()
+  return <ModeratorSettings {...props} isFocused={isFocused} />
+}
+export class ModeratorSettings extends Component {
   componentDidMount () {
     this.props.fetchModerators()
   }

@@ -6,15 +6,15 @@ Array [
     "data": Array [
       Object {
         "chosen": true,
-        "id": 1,
+        "id": "1",
       },
       Object {
         "chosen": true,
-        "id": 2,
+        "id": "2",
       },
       Object {
         "chosen": true,
-        "id": 3,
+        "id": "3",
       },
     ],
     "label": undefined,
@@ -28,7 +28,7 @@ Array [
     "data": Array [
       Object {
         "chosen": false,
-        "id": 1,
+        "id": "1",
       },
     ],
     "label": "Current Selection",
@@ -37,11 +37,11 @@ Array [
     "data": Array [
       Object {
         "chosen": true,
-        "id": 2,
+        "id": "2",
       },
       Object {
         "chosen": true,
-        "id": 3,
+        "id": "3",
       },
     ],
     "label": "Added",
@@ -55,15 +55,15 @@ Array [
     "data": Array [
       Object {
         "chosen": false,
-        "id": 1,
+        "id": "1",
       },
       Object {
         "chosen": false,
-        "id": 2,
+        "id": "2",
       },
       Object {
         "chosen": false,
-        "id": 3,
+        "id": "3",
       },
     ],
     "label": "Current Selection",
@@ -72,7 +72,7 @@ Array [
     "data": Array [
       Object {
         "chosen": true,
-        "id": 5,
+        "id": "5",
       },
     ],
     "label": "Added",
@@ -86,15 +86,15 @@ Array [
     "data": Array [
       Object {
         "chosen": true,
-        "id": 1,
+        "id": "1",
       },
       Object {
         "chosen": false,
-        "id": 2,
+        "id": "2",
       },
       Object {
         "chosen": false,
-        "id": 3,
+        "id": "3",
       },
     ],
   },
@@ -107,15 +107,15 @@ Array [
     "data": Array [
       Object {
         "chosen": true,
-        "id": 1,
+        "id": "1",
       },
       Object {
         "chosen": false,
-        "id": 2,
+        "id": "2",
       },
       Object {
         "chosen": false,
-        "id": 3,
+        "id": "3",
       },
     ],
   },
@@ -128,15 +128,15 @@ Array [
     "data": Array [
       Object {
         "chosen": false,
-        "id": 1,
+        "id": "1",
       },
       Object {
         "chosen": false,
-        "id": 2,
+        "id": "2",
       },
       Object {
         "chosen": false,
-        "id": 3,
+        "id": "3",
       },
     ],
     "label": "Recent Items",
@@ -151,10 +151,10 @@ Array [
   Object {
     "data": Array [
       Object {
-        "id": 2,
+        "id": "2",
       },
       Object {
-        "id": 3,
+        "id": "3",
       },
     ],
   },

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import GroupSettings, { GroupBanner, EditButton } from './GroupSettings'
+import { GroupSettings, GroupBanner, EditButton } from './GroupSettings'
 import ReactTestRenderer from 'react-test-renderer'
 import ImagePicker from 'components/ImagePicker'
 import defaultBanner from 'assets/default-user-banner.jpg'

@@ -67,7 +67,7 @@ export default class PostFooter extends React.PureComponent {
           }
         )
     }
-    
+
     const { caption, avatarUrls } = peopleRowResult
 
     return (

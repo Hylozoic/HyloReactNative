@@ -7,177 +7,295 @@ exports[`matches the last snapshot 1`] = `
       Combined breaks and links
     </Text>
   </View>
-  <View>
-    <Text
-      onLongPress={null}
-      onPress={null}
+  <View
+    style={
+      Array [
+        Object {
+          "marginBottom": 8,
+        },
+        undefined,
+        undefined,
+      ]
+    }
+    testID="html"
+  >
+    <View
+      style={
+        Array [
+          Object {},
+          undefined,
+          undefined,
+        ]
+      }
+      testID="body"
     >
-      <Text
+      <View
         style={
-          Object {
-            "color": "#5D757A",
-            "fontFamily": "Circular-Book",
-            "fontSize": 14,
-            "lineHeight": 20,
-            "marginBottom": 8,
-          }
+          Array [
+            Object {
+              "marginBottom": 10,
+              "marginTop": 0,
+            },
+            undefined,
+            undefined,
+          ]
         }
-      >
-        This post has a 
-      </Text>
-      <Text
-        onLongPress={null}
-        onPress={[Function]}
+        testID="p"
       >
         <Text
+          allowFontScaling={true}
+          selectable={false}
           style={
-            Object {
-              "color": "#5D757A",
-              "fontFamily": "Circular-Book",
-              "fontSize": 14,
-              "lineHeight": 20,
-              "marginBottom": 8,
-            }
+            Array [
+              Object {
+                "color": "#5D757A",
+                "fontFamily": "Circular-Book",
+                "fontSize": 14,
+                "lineHeight": 20,
+              },
+              undefined,
+              undefined,
+            ]
           }
         >
-          Flargle
+          <Text
+            allowFontScaling={true}
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "#5D757A",
+                  "fontFamily": "Circular-Book",
+                  "fontSize": 14,
+                  "lineHeight": 20,
+                },
+                undefined,
+                undefined,
+              ]
+            }
+          >
+            This post has a 
+          </Text>
+          <Text
+            accessibilityRole="link"
+            accessible={true}
+            allowFontScaling={true}
+            onPress={[Function]}
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "#0DC39F",
+                  "fontFamily": "Circular-Book",
+                  "fontSize": 14,
+                  "lineHeight": 20,
+                  "textDecorationColor": "#245dc1",
+                  "textDecorationLine": "none",
+                },
+                undefined,
+                undefined,
+              ]
+            }
+            testID="a"
+          >
+            Flargle
+          </Text>
+          <Text
+            allowFontScaling={true}
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "#5D757A",
+                  "fontFamily": "Circular-Book",
+                  "fontSize": 14,
+                  "lineHeight": 20,
+                },
+                undefined,
+                undefined,
+              ]
+            }
+          >
+             mention.
+          </Text>
         </Text>
-      </Text>
-      <Text
+      </View>
+      <View
         style={
-          Object {
-            "color": "#5D757A",
-            "fontFamily": "Circular-Book",
-            "fontSize": 14,
-            "lineHeight": 20,
-            "marginBottom": 8,
-          }
+          Array [
+            Object {
+              "marginBottom": 10,
+              "marginTop": 0,
+            },
+            undefined,
+            undefined,
+          ]
         }
-      >
-         mention.
-      </Text>
-    </Text>
-    <Text
-      onLongPress={null}
-      onPress={null}
-    >
-      <Text
-        style={
-          Object {
-            "color": "#5D757A",
-            "fontFamily": "Circular-Book",
-            "fontSize": 14,
-            "lineHeight": 20,
-            "marginBottom": 8,
-          }
-        }
-      >
-        Then a break.
-      </Text>
-    </Text>
-    <Text
-      onLongPress={null}
-      onPress={null}
-    >
-      <Text
-        style={
-          Object {
-            "color": "#5D757A",
-            "fontFamily": "Circular-Book",
-            "fontSize": 14,
-            "lineHeight": 20,
-            "marginBottom": 8,
-          }
-        }
-      >
-        Then a para ending with a mention 
-      </Text>
-      <Text
-        onLongPress={null}
-        onPress={[Function]}
+        testID="p"
       >
         <Text
+          allowFontScaling={true}
+          selectable={false}
           style={
-            Object {
-              "color": "#5D757A",
-              "fontFamily": "Circular-Book",
-              "fontSize": 14,
-              "lineHeight": 20,
-              "marginBottom": 8,
-            }
+            Array [
+              Object {
+                "color": "#5D757A",
+                "fontFamily": "Circular-Book",
+                "fontSize": 14,
+                "lineHeight": 20,
+              },
+              undefined,
+              undefined,
+            ]
           }
         >
-          Anita Cartwright
+          Then a break.
         </Text>
-      </Text>
-      <Text
+      </View>
+      <View
         style={
-          Object {
-            "color": "#5D757A",
-            "fontFamily": "Circular-Book",
-            "fontSize": 14,
-            "lineHeight": 20,
-            "marginBottom": 8,
-          }
+          Array [
+            Object {
+              "marginBottom": 10,
+              "marginTop": 0,
+            },
+            undefined,
+            undefined,
+          ]
         }
-      >
-         
-      </Text>
-    </Text>
-    <Text
-      onLongPress={null}
-      onPress={null}
-    >
-      <Text
-        onLongPress={null}
-        onPress={[Function]}
+        testID="p"
       >
         <Text
+          allowFontScaling={true}
+          selectable={false}
           style={
-            Object {
-              "color": "#5D757A",
-              "fontFamily": "Circular-Book",
-              "fontSize": 14,
-              "lineHeight": 20,
-              "marginBottom": 8,
-            }
+            Array [
+              Object {
+                "color": "#5D757A",
+                "fontFamily": "Circular-Book",
+                "fontSize": 14,
+                "lineHeight": 20,
+              },
+              undefined,
+              undefined,
+            ]
           }
+        >
+          <Text
+            allowFontScaling={true}
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "#5D757A",
+                  "fontFamily": "Circular-Book",
+                  "fontSize": 14,
+                  "lineHeight": 20,
+                },
+                undefined,
+                undefined,
+              ]
+            }
+          >
+            Then a para ending with a mention 
+          </Text>
+          <Text
+            accessibilityRole="link"
+            accessible={true}
+            allowFontScaling={true}
+            onPress={[Function]}
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "#0DC39F",
+                  "fontFamily": "Circular-Book",
+                  "fontSize": 14,
+                  "lineHeight": 20,
+                  "textDecorationColor": "#245dc1",
+                  "textDecorationLine": "none",
+                },
+                undefined,
+                undefined,
+              ]
+            }
+            testID="a"
+          >
+            Anita Cartwright
+          </Text>
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "marginBottom": 10,
+              "marginTop": 0,
+            },
+            undefined,
+            undefined,
+          ]
+        }
+        testID="p"
+      >
+        <Text
+          accessibilityRole="link"
+          accessible={true}
+          allowFontScaling={true}
+          onPress={[Function]}
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "color": "#0DC39F",
+                "fontFamily": "Circular-Book",
+                "fontSize": 14,
+                "lineHeight": 20,
+                "textDecorationColor": "#245dc1",
+                "textDecorationLine": "none",
+              },
+              undefined,
+              undefined,
+            ]
+          }
+          testID="a"
         >
           Alexane Rowe
         </Text>
-      </Text>
-      <Text
+      </View>
+      <View
         style={
-          Object {
-            "color": "#5D757A",
-            "fontFamily": "Circular-Book",
-            "fontSize": 14,
-            "lineHeight": 20,
-            "marginBottom": 8,
-          }
+          Array [
+            Object {
+              "marginBottom": 10,
+              "marginTop": 0,
+            },
+            undefined,
+            undefined,
+          ]
         }
+        testID="p"
       >
-         
-      </Text>
-    </Text>
-    <Text
-      onLongPress={null}
-      onPress={null}
-    >
-      <Text
-        style={
-          Object {
-            "color": "#5D757A",
-            "fontFamily": "Circular-Book",
-            "fontSize": 14,
-            "lineHeight": 20,
-            "marginBottom": 8,
+        <Text
+          allowFontScaling={true}
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "color": "#5D757A",
+                "fontFamily": "Circular-Book",
+                "fontSize": 14,
+                "lineHeight": 20,
+              },
+              undefined,
+              undefined,
+            ]
           }
-        }
-      >
-        More characters to trigger …
-      </Text>
-    </Text>
+        >
+          More characters to trigger …
+        </Text>
+      </View>
+    </View>
   </View>
 </View>
 `;

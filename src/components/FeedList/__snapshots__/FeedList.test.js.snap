@@ -6,66 +6,64 @@ exports[`FeedList renders correctly 1`] = `
     ListFooterComponent={<Loading />}
     ListHeaderComponent={
       <View>
-        <React.Fragment>
-          <View>
-            <ListControl
-              onChange={[Function]}
-              options={
-                Array [
-                  Object {
-                    "id": "updated",
-                    "label": "Latest Activity",
-                  },
-                  Object {
-                    "id": "created",
-                    "label": "Post Date",
-                  },
-                  Object {
-                    "id": "votes",
-                    "label": "Popular",
-                  },
-                ]
-              }
-              selected="latest"
-            />
-            <ListControl
-              onChange={[Function]}
-              options={
-                Array [
-                  Object {
-                    "id": null,
-                    "label": "All",
-                  },
-                  Object {
-                    "id": "discussion",
-                    "label": "Discussions",
-                  },
-                  Object {
-                    "id": "event",
-                    "label": "Events",
-                  },
-                  Object {
-                    "id": "offer",
-                    "label": "Offers",
-                  },
-                  Object {
-                    "id": "project",
-                    "label": "Projects",
-                  },
-                  Object {
-                    "id": "request",
-                    "label": "Requests",
-                  },
-                  Object {
-                    "id": "resource",
-                    "label": "Resources",
-                  },
-                ]
-              }
-              selected="all"
-            />
-          </View>
-        </React.Fragment>
+        <View>
+          <ListControl
+            onChange={[Function]}
+            options={
+              Array [
+                Object {
+                  "id": "updated",
+                  "label": "Latest Activity",
+                },
+                Object {
+                  "id": "created",
+                  "label": "Post Date",
+                },
+                Object {
+                  "id": "votes",
+                  "label": "Popular",
+                },
+              ]
+            }
+            selected="latest"
+          />
+          <ListControl
+            onChange={[Function]}
+            options={
+              Array [
+                Object {
+                  "id": null,
+                  "label": "All",
+                },
+                Object {
+                  "id": "discussion",
+                  "label": "Discussions",
+                },
+                Object {
+                  "id": "event",
+                  "label": "Events",
+                },
+                Object {
+                  "id": "offer",
+                  "label": "Offers",
+                },
+                Object {
+                  "id": "project",
+                  "label": "Projects",
+                },
+                Object {
+                  "id": "request",
+                  "label": "Requests",
+                },
+                Object {
+                  "id": "resource",
+                  "label": "Resources",
+                },
+              ]
+            }
+            selected="all"
+          />
+        </View>
       </View>
     }
     data={
@@ -76,11 +74,9 @@ exports[`FeedList renders correctly 1`] = `
       ]
     }
     keyExtractor={[Function]}
-    numColumns={1}
     onEndReached={[Function]}
     onRefresh={[Function]}
     refreshing={false}
-    removeClippedSubviews={false}
     renderItem={[Function]}
   />
 </View>

@@ -11,13 +11,14 @@ export const SET_SEARCH_TERM = `${MODULE_NAME}/SET_SEARCH_TERM`
 export const SET_SEARCH_FILTER = `${MODULE_NAME}/SET_SEARCH_FILTER`
 export const FETCH_SEARCH = `${MODULE_NAME}/FETCH_SEARCH`
 
-export const defaultState = {
+export const initialState = {
   search: '',
   filter: 'all'
 }
 
-export default function reducer (state = defaultState, action) {
+export default function reducer (state = initialState, action) {
   const { error, type, payload } = action
+
   if (error) return state
 
   switch (type) {

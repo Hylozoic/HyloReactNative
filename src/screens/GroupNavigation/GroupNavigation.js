@@ -8,12 +8,11 @@ import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import styles from './GroupNavigation.styles'
 import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
 
-export default function GroupNavigation ({ navigation, route }) {
-
+export default function GroupNavigation ({ navigation }) {
   const currentGroup = useSelector(getCurrentGroup)
 
   useFocusEffect(() => {
-    navigation.setOptions({ title: currentGroup?.name  })
+    navigation.setOptions({ title: currentGroup?.name })
   })
 
   const { navigate } = navigation
@@ -31,29 +30,26 @@ export default function GroupNavigation ({ navigation, route }) {
   }
 
   if (childGroups?.length > 0 || parentGroups?.length > 0) {
-    navItems.push({ label: 'Groups', iconName: 'Groups',
-      onPress: () => navigate('Group Relationships') })
+    navItems.push({
+      label: 'Groups',
+      iconName: 'Groups',
+      onPress: () => navigate('Group Relationships')
+    })
   }
 
   // Map is last item in menu
   navItems.push({ label: 'Map', iconName: 'Globe', onPress: () => navigate('Map') })
 
-  const NavItem  = ({ label, iconName, onPress }) => (
+  const NavItem = ({ label, iconName, onPress }) => (
     <TouchableOpacity style={styles.navItem} onPress={onPress} key={label}>
       <Icon style={styles.navItemIcon} name={iconName} />
       <Text style={styles.navItemLabel}>{label}</Text>
     </TouchableOpacity>
   )
 
-  // if (!navigation.canGoBack()) {
-  //   navigation.navigate('Feed')
-  //   return null
-  // }
-
-
   return (
     <ScrollView style={styles.container}>
-      {navItems.map(item => <NavItem {...item} key={item.label} /> )}
+      {navItems.map(item => <NavItem {...item} key={item.label} />)}
       {currentGroup.id !== PUBLIC_GROUP_ID && (
         <>
           <View style={styles.divider} />

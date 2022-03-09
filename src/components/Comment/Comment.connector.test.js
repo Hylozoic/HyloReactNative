@@ -1,4 +1,4 @@
-import { mapStateToProps, mergeProps } from './Comment.connector'
+import { mapStateToProps } from './Comment.connector'
 import orm from 'store/models'
 
 let session, state
@@ -37,52 +37,5 @@ describe('mapStateToProps', () => {
       canModerate: true,
       isCreator: true
     })
-  })
-})
-
-describe('mergeProps', () => {
-  const dispatchProps = {
-    deleteComment: jest.fn()
-  }
-
-  it('returns removeComment when moderator', () => {
-    const stateProps = {
-      canModerate: true
-    }
-    const ownProps = { comment: { id: 34 } }
-
-    const mprops = mergeProps(stateProps, dispatchProps, ownProps)
-    expect(mprops).toMatchSnapshot()
-
-    expect(mprops.removeComment).toBeTruthy()
-    expect(mprops.deleteComment).toBeFalsy()
-  })
-
-  it('return deleteComment when creator', () => {
-    const stateProps = {
-      isCreator: true,
-      canModerate: true
-    }
-    const ownProps = { comment: { id: 34 } }
-
-    const mprops = mergeProps(stateProps, dispatchProps, ownProps)
-    expect(mprops).toMatchSnapshot()
-
-    expect(mprops.removeComment).toBeFalsy()
-    expect(mprops.deleteComment).toBeTruthy()
-  })
-
-  it('returns nothing when neither creator nor moderator', () => {
-    const stateProps = {
-      canModerate: false,
-      isCreator: false
-    }
-    const ownProps = { comment: { id: 34 } }
-
-    const mprops = mergeProps(stateProps, dispatchProps, ownProps)
-    expect(mprops).toMatchSnapshot()
-
-    expect(mprops.removeComment).toBeFalsy()
-    expect(mprops.deleteComment).toBeFalsy()
   })
 })

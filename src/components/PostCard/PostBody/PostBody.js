@@ -1,80 +1,64 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import HTMLView from 'react-native-htmlview'
-import { decode } from 'ent'
 import { isEmpty } from 'lodash/fp'
-import { present, sanitize } from 'hylo-utils/text'
-import { formatDatePair } from 'util'
-import urlHandler from 'navigation/linking/urlHandler'
-import LinkPreview from 'components/PostCard/LinkPreview'
-import { caribbeanGreen, white, white20onCaribbeanGreen } from 'style/colors'
-import richTextStyles from 'style/richTextStyles'
-import Icon from 'components/Icon'
+import { decode } from 'html-entities'
+import { TextHelpers } from 'hylo-shared'
 import { humanResponse, RESPONSES } from 'store/models/EventInvitation'
+import HyloHTML from 'components/HyloHTML'
+import LinkPreview from 'components/PostCard/LinkPreview'
+import Icon from 'components/Icon'
 import PopupMenuButton from 'components/PopupMenuButton'
+import { caribbeanGreen, white, white20onCaribbeanGreen } from 'style/colors'
 
 const MAX_DETAILS_LENGTH = 144
 
-export default class PostBody extends React.PureComponent {
-  handleLinkPress = (url) => {
-    const { slug, showMember, showTopic } = this.props
-    urlHandler(url, showMember, showTopic, slug)
-  }
-
-  render () {
-    const {
-      type,
-      title,
-      details,
-      startTime,
-      endTime,
-      linkPreview,
-      myEventResponse,
-      respondToEvent,
+export default function PostBody ({
+  type,
+  title,
+  details,
+  startTime,
+  endTime,
+  linkPreview,
+  myEventResponse,
+  respondToEvent,
+  slug,
+  shouldTruncate
+}) {
+  const presentedDetails = useMemo(() => {
+    // TODO: Truncate option on presentHTML should not throw-out link attributes
+    return TextHelpers.presentHTML(details, {
       slug,
-      shouldTruncate
-    } = this.props
-    const decodedTitle = decode(title)
-    const presentedDetails = present(
-      sanitize(details)
-        .replace(/\n/g, '')
-        .replace(/(<p>\s*<\/p>)+/g, '')
-        .replace('<p>&nbsp;</p>', ''),
-      {
-        slug,
-        maxlength: shouldTruncate && MAX_DETAILS_LENGTH,
-        noP: true
-      }
-    )
+      truncate: shouldTruncate && MAX_DETAILS_LENGTH
+    })
+  }, [details, slug, shouldTruncate])
 
-    return (
-      <View style={styles.container}>
-        {startTime && endTime && (
-          <Text style={styles.resourceEndsAt}>{formatDatePair(startTime, endTime)}</Text>
+  return (
+    <View style={styles.container}>
+      {startTime && endTime && (
+        <Text style={styles.resourceEndsAt}>{TextHelpers.formatDatePair(startTime, endTime)}</Text>
+      )}
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <PostTitle title={title} />
+        {type === 'event' && !!respondToEvent && (
+          <EventRSVP myEventResponse={isEmpty(myEventResponse) ? RESPONSES.NO : myEventResponse} respondToEvent={respondToEvent} />
         )}
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-          <PostTitle title={decodedTitle} />
-          {type === 'event' && !!respondToEvent &&
-            <EventRSVP myEventResponse={isEmpty(myEventResponse) ? RESPONSES.NO : myEventResponse} respondToEvent={respondToEvent} />}
-        </View>
-        <HTMLView
-          onLinkPress={this.handleLinkPress}
-          addLineBreaks={false}
-          stylesheet={richTextStyles}
-          textComponentProps={{ style: styles.details }}
-          value={presentedDetails}
-        />
-        {linkPreview && <LinkPreview {...linkPreview} />}
       </View>
-    )
-  }
+      <HyloHTML
+        html={presentedDetails}
+        baseStyle={{ marginBottom: 8 }}
+      />
+      {linkPreview && (
+        <LinkPreview {...linkPreview} />
+      )}
+    </View>
+  )
 }
 
 export function EventRSVP ({ myEventResponse, respondToEvent }) {
   const actions = [
-    [ humanResponse(RESPONSES.YES), () => respondToEvent(RESPONSES.YES) ],
-    [ humanResponse(RESPONSES.INTERESTED), () => respondToEvent(RESPONSES.INTERESTED) ],
-    [ humanResponse(RESPONSES.NO), () => respondToEvent(RESPONSES.NO) ]
+    [humanResponse(RESPONSES.YES), () => respondToEvent(RESPONSES.YES)],
+    [humanResponse(RESPONSES.INTERESTED), () => respondToEvent(RESPONSES.INTERESTED)],
+    [humanResponse(RESPONSES.NO), () => respondToEvent(RESPONSES.NO)]
   ]
 
   return (
@@ -83,14 +67,12 @@ export function EventRSVP ({ myEventResponse, respondToEvent }) {
         <Text style={styles.RSVPOptionText}>{humanResponse(myEventResponse)} |</Text>
         <Icon name='ArrowDown' color={white} style={styles.RSVPOptionText} />
       </View>
-
     </PopupMenuButton>
   )
 }
 
 export function PostTitle ({ title, style }) {
-  const decodedTitle = decode(title)
-  return <Text style={[styles.title, style]}>{decodedTitle}</Text>
+  return <Text style={[styles.title, style]}>{decode(title)}</Text>
 }
 
 const styles = StyleSheet.create({

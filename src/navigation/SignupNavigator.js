@@ -16,29 +16,43 @@ export default function SignupNavigator () {
       cardStyle: { backgroundColor: white },
       header: headerProps => {
         const close = () => headerProps.navigation.navigate('Signup Intro')
-        return <WorkflowModalHeader
-          headerLeftCloseIcon
-          headerLeftOnPress={close}
-          style={{ backgroundColor: white20onCaribbeanGreen }}
-          {...headerProps}
-        />
+        return (
+          <WorkflowModalHeader
+            headerLeftCloseIcon
+            headerLeftOnPress={close}
+            style={{ backgroundColor: white20onCaribbeanGreen }}
+            {...headerProps}
+          />
+        )
       }
     }
   }
 
   return (
     <Signup.Navigator {...navigatorProps}>
-      <Signup.Screen name='Signup Intro' component={SignupComponent}
-        options={{ headerShown: false }} />
-      <Signup.Screen name='SignupFlow0' component={SignupFlow0}
-        options={{ title: 'Verify Email' }} />
-      <Signup.Screen name='SignupFlow1' component={SignupFlow1}
-        options={{ title: 'STEP 1/3' }} />
-      <Signup.Screen name='SignupFlow2' component={SignupFlow2}
-        options={{ title: 'STEP 2/3' }} />
-      <Signup.Screen name='SignupFlow3' component={SignupFlow3}
-        options={{ title: 'STEP 3/3' }} />
-      <Signup.Screen name='ItemChooser' component={ItemChooser} />
+      <Signup.Screen
+        name='Signup Intro' component={SignupComponent}
+        options={{ headerShown: false }}
+      />
+      <Signup.Screen
+        name='SignupFlow0' component={SignupFlow0}
+        options={{ title: 'Verify Email' }}
+      />
+      <Signup.Screen
+        name='SignupFlow1' component={SignupFlow1}
+        options={{ title: 'STEP 1/3' }}
+      />
+      <Signup.Screen
+        name='SignupFlow2' component={SignupFlow2}
+        options={{ title: 'STEP 2/3' }}
+      />
+      <Signup.Screen
+        name='SignupFlow3' component={SignupFlow3}
+        options={{ title: 'STEP 3/3' }}
+      />
+      <Signup.Screen
+        name='ItemChooser' component={ItemChooser}
+      />
     </Signup.Navigator>
   )
 }

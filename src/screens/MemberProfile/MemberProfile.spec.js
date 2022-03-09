@@ -1,27 +1,20 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import { render, cleanup } from '@testing-library/react-native'
-import { createMockStore } from 'util/testing'
-import getEmptyState from 'store/getEmptyState'
+import { render } from '@testing-library/react-native'
+import { TestRoot } from 'util/testing'
 import MemberProfile from 'screens/MemberProfile'
+import MockedScreen from 'util/testing/MockedScreen'
 
 jest.mock('hooks/useGroupSelect')
 
-describe('MemberProfile Specification', () => {
-  afterEach(cleanup)
-
-  it('default render matches snapshot', async () => {
-    const navigation = {
-      navigate: jest.fn(),
-      setOptions: jest.fn()
-    }
-    const state = getEmptyState()
-    const { toJSON } = render(
-      <Provider store={createMockStore(state)}>
-        <MemberProfile navigation={navigation} route={{ name: 'test' }} />
-      </Provider>
-    )
-
-    expect(await toJSON()).toMatchSnapshot()
-  })
+it('default render matches snapshot', async () => {
+  const { toJSON } = render(
+    <TestRoot>
+      <MockedScreen>
+        {screenProps => (
+          <MemberProfile {...screenProps} route={{ name: 'test' }} />
+        )}
+      </MockedScreen>
+    </TestRoot>
+  )
+  expect(await toJSON()).toMatchSnapshot()
 })

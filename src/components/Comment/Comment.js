@@ -1,65 +1,75 @@
 /* eslint-disable camelcase */
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Image, Text, View, Alert, TouchableOpacity } from 'react-native'
-import HTMLView from 'react-native-htmlview'
-import { get, isEmpty, filter, findLastIndex } from 'lodash/fp'
-import { present, sanitize, humanDate } from 'hylo-utils/text'
-import { openURL } from 'util'
-import urlHandler from 'navigation/linking/urlHandler'
+import { isEmpty, filter, findLastIndex } from 'lodash/fp'
+import { TextHelpers } from 'hylo-shared'
+import { openURL } from 'navigation/linking'
 import Avatar from 'components/Avatar'
 import PopupMenuButton from 'components/PopupMenuButton'
+import HyloHTML from 'components/HyloHTML'
 import Icon from 'components/Icon'
 import styles from './Comment.styles'
 
 export default function Comment ({
   comment,
+  isCreator,
+  canModerate,
   showMember,
-  showTopic,
   slug,
   style,
   displayPostTitle,
   deleteComment,
-  removeComment,
   editComment,
   hideMenu,
   onReply,
   onPress: providedOnPress
 }) {
   const { creator, text, createdAt, post } = comment
-  const presentedText = present(sanitize(text), { slug })
-
-  const deleteCommentWithConfirm = deleteComment ? commentId => Alert.alert(
-    'Confirm Delete',
-    'Are you sure you want to delete this comment?',
-    [
-      { text: 'Yes', onPress: () => deleteComment(commentId) },
-      { text: 'Cancel', style: 'cancel' }
-    ]) : null
-
-  const removeCommentWithConfirm = removeComment ? commentId => Alert.alert(
-    'Moderator: Confirm Delete',
-    'Are you sure you want to remove this comment?',
-    [
-      { text: 'Yes', onPress: () => removeComment(commentId) },
-      { text: 'Cancel', style: 'cancel' }
-    ]) : null
-  
-  let postTitle = get('title', post)
+  const presentedText = useMemo(() => TextHelpers.presentHTML(text, { slug }), [text, slug])
+  let postTitle = post?.title
 
   if (displayPostTitle && postTitle) {
-    postTitle = postTitle.length > 40
-      ? postTitle.substring(0, 40) + '...'
-      : postTitle
+    postTitle = TextHelpers.truncateText(postTitle, 40)
   }
 
-  const onPress = providedOnPress
-    ? providedOnPress
-    : onReply && (() => onReply(comment, { mention: false }))
-
-
+  const onPress = providedOnPress || (onReply && (() => onReply(comment, { mention: false })))
   const imageAttachments = filter({ type: 'image' }, comment?.attachments)
   // NOTE: Currently no UI for adding comment file attachments
   // const fileAttachments = filter({ type: 'file' }, comment?.attachments)
+  const commentMenuItems = {
+    editComment: {
+      label: 'Edit Comment',
+      action: editComment
+    },
+    deleteComment: {
+      label: 'Delete Comment',
+      action: (isCreator && deleteComment) && (
+        () => Alert.alert(
+          'Confirm Delete',
+          'Are you sure you want to delete this comment?',
+          [
+            { text: 'Yes', onPress: () => deleteComment(comment.id) },
+            { text: 'Cancel', style: 'cancel' }
+          ]
+        )
+      ),
+      destructive: true
+    },
+    removeComment: {
+      label: 'Remove Comment',
+      action: (!isCreator && canModerate && deleteComment) && (
+        () => Alert.alert(
+          'Moderator: Confirm Delete',
+          'Are you sure you want to remove this comment?',
+          [
+            { text: 'Yes', onPress: () => deleteComment(comment.id) },
+            { text: 'Cancel', style: 'cancel' }
+          ]
+        )
+      ),
+      destructive: true
+    }
+  }
 
   return (
     <TouchableOpacity onPress={onPress}>
@@ -73,7 +83,7 @@ export default function Comment ({
               <TouchableOpacity onPress={() => showMember(creator.id)}>
                 <Text style={styles.name}>{creator.name}</Text>
               </TouchableOpacity>
-              <Text style={styles.date}>{humanDate(createdAt)}</Text>
+              <Text style={styles.date}>{TextHelpers.humanDate(createdAt)}</Text>
               {displayPostTitle &&
                 <Text style={styles.date}>on "{postTitle}"</Text>}
             </View>
@@ -85,11 +95,7 @@ export default function Comment ({
                 </TouchableOpacity>
               )}
               {!hideMenu && (
-                <CommentMenu
-                  deleteComment={() => deleteCommentWithConfirm(comment.id)}
-                  removeComment={() => removeCommentWithConfirm(comment.id)}
-                  editComment={editComment}
-                />
+                <CommentMenu menuItems={commentMenuItems} />
               )}
             </View>
           </View>
@@ -98,12 +104,9 @@ export default function Comment ({
               <Image source={{ uri: url }} resizeMode='cover' style={styles.imageAttachemnt} />
             </TouchableOpacity>
           ))}
-          <HTMLView
-            addLineBreaks={true}
-            onLinkPress={url => urlHandler(url, showMember, showTopic, slug)}
-            stylesheet={styles.richTextStyles}
-            textComponentProps={{ style: styles.text }}
-            value={presentedText}
+          <HyloHTML
+            tagsStyles={{ p: { margin: 0 } }}
+            html={presentedText}
           />
         </View>
       </View>
@@ -111,21 +114,13 @@ export default function Comment ({
   )
 }
 
-export function CommentMenu ({ deleteComment, removeComment, editComment }) {
-  const removeLabel = 'Remove Comment'
-  const deleteLabel = 'Delete Comment'
+export function CommentMenu ({ menuItems: providedMenuItems }) {
+  const menuItems = filter(action => action?.action, providedMenuItems)
 
-  // If the function is defined, than it's a valid action
-  const actions = filter(x => x[1], [
-    ['Edit Comment', editComment],
-    [deleteLabel, deleteComment],
-    [removeLabel, removeComment]
-  ])
+  if (isEmpty(menuItems)) return null
 
-  if (isEmpty(actions)) return null
-
-  const destructiveLabels = [deleteLabel, removeLabel]
-  const destructiveButtonIndex = findLastIndex(action => destructiveLabels.includes(action[0]), actions)
+  const destructiveButtonIndex = findLastIndex(menuItem => menuItem?.destructive, menuItems)
+  const actions = menuItems.map(menuItem => ([menuItem.label, menuItem.action]))
 
   return (
     <PopupMenuButton

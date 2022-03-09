@@ -31,7 +31,7 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch, props) {
+export function mapDispatchToProps (dispatch) {
   return {
     ...bindActionCreators({
       updateUserSettings,

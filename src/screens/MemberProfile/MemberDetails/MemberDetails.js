@@ -7,21 +7,28 @@ import {
   Image
 } from 'react-native'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
+import { useIsFocused } from '@react-navigation/native'
 import { debounce, find, isEmpty, pick } from 'lodash/fp'
-import { validateUser } from 'hylo-utils/validators'
-import { openURL } from 'util'
+import { Validators } from 'hylo-shared'
+import confirmDiscardChanges from 'util/confirmDiscardChanges'
+import { openURL } from 'navigation/linking'
+import { ModalHeader, TabStackHeader } from 'navigation/headers'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import MemberHeader from 'screens/MemberProfile/MemberHeader'
 import Control from 'screens/MemberProfile/Control'
 import styles from './MemberDetails.styles'
-import confirmDiscardChanges from 'util/confirmDiscardChanges'
-import { ModalHeader, TabStackHeader } from 'navigation/headers'
+
+export default function (props) {
+  const isFocused = useIsFocused()
+  return <MemberDetails {...props} isFocused={isFocused} />
+}
 
 export function editableFields (person) {
   return pick(['name', 'location', 'tagline', 'bio'], person)
 }
-export default class MemberDetails extends React.Component {
+
+export class MemberDetails extends React.Component {
   constructor (props) {
     super(props)
     const { editing, person } = props
@@ -42,7 +49,8 @@ export default class MemberDetails extends React.Component {
     if (editing) {
       navigation.setOptions({
         header: headerProps =>
-          <ModalHeader {...headerProps}
+          <ModalHeader
+            {...headerProps}
             title={title}
             headerLeftOnPress={this.saveChanges}
             headerLeftConfirm={changed}
@@ -51,10 +59,11 @@ export default class MemberDetails extends React.Component {
             headerRightButtonDisabled={!changed || !this.isValid()}
           />
       })
-    } else if (route.name == 'My Profile') {
+    } else if (route.name === 'My Profile') {
       navigation.setOptions({
         header: headerProps =>
-          <ModalHeader {...headerProps}
+          <ModalHeader
+            {...headerProps}
             title='My Profile'
             headerLeftOnPress={() => navigation.navigate('Home Tab')}
             headerLeftConfirm={changed}
@@ -68,7 +77,7 @@ export default class MemberDetails extends React.Component {
             })}
           />
       })
-    } else {  
+    } else {
       navigation.setOptions({
         title,
         header: headerProps =>
@@ -97,7 +106,7 @@ export default class MemberDetails extends React.Component {
     this.setState({
       errors: {
         // TODO: validate more fields!
-        name: validateUser.name(this.state.person.name)
+        name: Validators.validateUser.name(this.state.person.name)
       }
     })
   })
@@ -184,9 +193,11 @@ export function MemberBio (props) {
     <View style={styles.bioContainer}>
       <View style={styles.labelWrapper}>
         <Text style={[styles.sectionLabel, { marginTop: 10 }]}>ABOUT ME</Text>
-        {editable && <TouchableOpacity onPress={focus}>
-          <EntypoIcon name='edit' style={styles.editIcon} />
-        </TouchableOpacity>}
+        {editable && (
+          <TouchableOpacity onPress={focus}>
+            <EntypoIcon name='edit' style={styles.editIcon} />
+          </TouchableOpacity>
+        )}
       </View>
       <Control
         ref={controlRef}
@@ -210,9 +221,11 @@ export function MemberSkills ({ skills, editable, goToSkills }) {
     <View style={styles.skillsContainer}>
       <View style={styles.labelWrapper}>
         <Text style={styles.sectionLabel}>MY SKILLS</Text>
-        {editable && <TouchableOpacity onPress={goToSkills}>
-          <EntypoIcon name='edit' style={styles.editIcon} />
-        </TouchableOpacity>}
+        {editable && (
+          <TouchableOpacity onPress={goToSkills}>
+            <EntypoIcon name='edit' style={styles.editIcon} />
+          </TouchableOpacity>
+        )}
       </View>
       <TouchableOpacity onPress={goToSkills} disabled={!editable}>
         <View style={styles.skills}>{skills.map(skill =>
@@ -229,9 +242,12 @@ export function MemberGroups ({ memberships, goToGroup, editing }) {
   return (
     <View style={styles.groupsContainer}>
       <Text style={styles.sectionLabel}>Hylo Communities</Text>
-      {memberships.map(membership =>
-        <GroupRow membership={membership} key={membership.id}
-          goToGroup={goToGroup} editing={editing} />)}
+      {memberships.map(membership => (
+        <GroupRow
+          membership={membership} key={membership.id}
+          goToGroup={goToGroup} editing={editing}
+        />
+      ))}
     </View>
   )
 }
@@ -242,8 +258,8 @@ export function MemberAffiliations ({ affiliations }) {
   return (
     <View style={styles.groupsContainer}>
       <Text style={styles.sectionLabel}>Other Affiliations</Text>
-      {affiliations.map(affiliation => (
-        <View style={styles.groupRow}>
+      {affiliations.map((affiliation, index) => (
+        <View style={styles.groupRow} key={index}>
           <MemberAffiliation affiliation={affiliation} />
         </View>
       ))}
@@ -254,18 +270,20 @@ export function MemberAffiliations ({ affiliations }) {
 export function MemberAffiliation ({ affiliation }) {
   const { role, preposition, orgName, url } = affiliation
 
-  return <>
-    <Text style={styles.affiliationRole}>{role} </Text>
-    <Text style={styles.affiliationPreposition}>{preposition}</Text>
-    {url && (
-      <TouchableOpacity onPress={() => openURL(url)}>
-        <Text style={[ styles.affiliationOrgName, styles.affiliationOrgNameLink ]}> {orgName}</Text>
-      </TouchableOpacity>
-    )}
-    {!url && (
-      <Text style={[ styles.affiliationOrgName ]}> {orgName}</Text>
-    )}
-  </>
+  return (
+    <>
+      <Text style={styles.affiliationRole}>{role} </Text>
+      <Text style={styles.affiliationPreposition}>{preposition}</Text>
+      {url && (
+        <TouchableOpacity onPress={() => openURL(url)}>
+          <Text style={[styles.affiliationOrgName, styles.affiliationOrgNameLink]}> {orgName}</Text>
+        </TouchableOpacity>
+      )}
+      {!url && (
+        <Text style={[styles.affiliationOrgName]}> {orgName}</Text>
+      )}
+    </>
+  )
 }
 
 export function GroupRow ({ membership, goToGroup, editing }) {

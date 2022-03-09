@@ -26,7 +26,7 @@ export function mapStateToProps (state, props) {
     group,
     sortBy,
     filter,
-    topicName,
+    topicName
   })
 
   if (props.feedType === 'event') {
@@ -59,11 +59,11 @@ export function mapStateToProps (state, props) {
 const mapDispatchToProps = { setFilter, setSort, setTimeframe, fetchPosts, resetNewPostCount }
 
 export function shouldResetNewPostCount ({ slug, sortBy, filter, topic }) {
-  return slug !== ALL_GROUP_ID
-    && slug !== PUBLIC_GROUP_ID
-    && !topic
-    && sortBy === defaultSortBy
-    && !filter
+  return slug !== ALL_GROUP_ID &&
+    slug !== PUBLIC_GROUP_ID &&
+    !topic &&
+    sortBy === defaultSortBy &&
+    !filter
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {

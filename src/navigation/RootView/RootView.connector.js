@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { register as registerOneSignal } from 'util/onesignal'
 import OneSignal from 'react-native-onesignal'
 import registerDevice from 'store/actions/registerDevice'

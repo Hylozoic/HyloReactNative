@@ -2,6 +2,8 @@ import React from 'react'
 import { FlatList, Text, TouchableOpacity } from 'react-native'
 import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
+import { TextHelpers } from 'hylo-shared'
+import { getSocket } from 'util/websockets'
 import Loading from 'components/Loading'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import MessageCard from 'components/MessageCard'
@@ -9,9 +11,8 @@ import MessageInput from 'components/MessageInput'
 import NotificationOverlay from 'components/NotificationOverlay'
 import PeopleTyping from 'components/PeopleTyping'
 import SocketSubscriber from 'components/SocketSubscriber'
-import { getSocket } from 'util/websockets'
-import styles from './Thread.styles'
 import { pictonBlue } from 'style/colors'
+import styles from './Thread.styles'
 
 const BOTTOM_THRESHOLD = 10
 
@@ -72,9 +73,10 @@ export default class Thread extends React.Component {
 
       // If there's one new message, it's not from currentUser,
       // and we're not already at the bottom, don't scroll
-      if (deltaLength === 1 &&
-        !this.atBottom() &&
-        get('creator.id', latest) !== currentUserId) {
+      if (
+        deltaLength === 1 && !this.atBottom() &&
+        latest?.creator?.id !== currentUserId
+      ) {
         this.setState({
           newMessages: this.state.newMessages + 1,
           notify: true
@@ -108,7 +110,7 @@ export default class Thread extends React.Component {
 
   atBottom = () => this.yOffset < BOTTOM_THRESHOLD
 
-  createMessage = text => this.props.createMessage(text)
+  handleSubmit = text => this.props.createMessage(TextHelpers.markdown(text))
 
   fetchMore = throttle(() => {
     const { fetchMessages, hasMore, messages, pending } = this.props
@@ -119,10 +121,12 @@ export default class Thread extends React.Component {
   markAsRead = debounce(() => this.props.updateThreadReadTime(), 1000)
 
   renderItem = ({ item }) => {
-    return <MessageCard message={item} showTopic={this.props.showTopic} />
+    return (
+      <MessageCard message={item} showTopic={this.props.showTopic} />
+    )
   }
 
-  scrollHandler = ({ nativeEvent: { contentOffset } }) => {
+  handleScroll = ({ nativeEvent: { contentOffset } }) => {
     this.yOffset = contentOffset.y
     if (contentOffset.y < BOTTOM_THRESHOLD) this.markAsRead()
   }
@@ -162,7 +166,7 @@ export default class Thread extends React.Component {
           keyExtractor={item => item.id}
           onEndReached={() => this.fetchMore()}
           onEndReachedThreshold={0.3}
-          onScroll={this.scrollHandler}
+          onScroll={this.handleScroll}
           ref={this.messageListRef}
           refreshing={!!pending}
           renderItem={this.renderItem}
@@ -170,7 +174,7 @@ export default class Thread extends React.Component {
         <MessageInput
           blurOnSubmit={false}
           multiline
-          onSubmit={this.createMessage}
+          onSubmit={this.handleSubmit}
           sendIsTyping={sendIsTyping}
           placeholder='Write something...'
         />

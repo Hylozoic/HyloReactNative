@@ -1,6 +1,6 @@
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
-import { AnalyticsEvents } from 'hylo-utils/constants'
+import { AnalyticsEvents } from 'hylo-shared'
 import { GROUP_ACCESSIBILITY, GROUP_VISIBILITY } from 'store/models/Group'
 import groupFieldsFragment from 'graphql/fragments/groupFieldsFragment'
 
@@ -12,12 +12,12 @@ export const CLEAR_CREATE_GROUP_STORE = `${MODULE_NAME}/CLEAR_CREATE_GROUP_STORE
 export const FETCH_GROUP_EXISTS = `${MODULE_NAME}/FETCH_GROUP_EXISTS`
 export const SET_WORKFLOW_OPTIONS = `${MODULE_NAME}/SET_WORKFLOW_OPTIONS`
 
-export const defaultState = {
+export const initialState = {
   // New Group Defaults
   groupData: {
     name: '',
     slug: '',
-    visibility: GROUP_VISIBILITY.Protected, 
+    visibility: GROUP_VISIBILITY.Protected,
     accessibility: GROUP_ACCESSIBILITY.Restricted,
     parentIds: []
   },
@@ -26,7 +26,7 @@ export const defaultState = {
   edited: false
 }
 
-export default function reducer (state = defaultState, action) {
+export default function reducer (state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case SET_WORKFLOW_OPTIONS:
@@ -44,7 +44,7 @@ export default function reducer (state = defaultState, action) {
         edited: true
       }
     case CLEAR_CREATE_GROUP_STORE:
-      return defaultState
+      return initialState
     case FETCH_URL_EXISTS:
       return {
         ...state,

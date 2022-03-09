@@ -1,20 +1,16 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './ThreadList.connector'
 import { UPDATE_LAST_VIEWED } from './ThreadList.store'
 
-describe('mapStateToProps', () => {
-  it('has the expected shape', () => {
-    const state = {
-      pending: {},
-      queryResults: {},
-      SocketListener: {
-        connected: true
-      }
+test('mapStateToProps', () => {
+  const state = {
+    pending: {},
+    queryResults: {},
+    SocketListener: {
+      connected: true
     }
-
-    const props = {}
-
-    expect(mapStateToProps(state, props)).toMatchSnapshot()
-  })
+  }
+  const props = {}
+  expect(mapStateToProps(state, props)).toMatchSnapshot()
 })
 
 describe('mapDispatchToProps', () => {
@@ -31,7 +27,7 @@ describe('mapDispatchToProps', () => {
   })
 })
 
-describe('mergeProps', () => {
+test('mergeProps', () => {
   const dispatchProps = {
     fetchThreads: jest.fn(),
     updateLastViewed: jest.fn()

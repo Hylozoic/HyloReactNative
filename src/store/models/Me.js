@@ -87,4 +87,3 @@ Me.fields = {
   }),
   blockedUsers: many('Person')
 }
-

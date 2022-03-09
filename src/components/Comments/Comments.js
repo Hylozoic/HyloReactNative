@@ -19,7 +19,6 @@ function Comments ({
   header: providedHeader = null,
   style = {},
   showMember,
-  showTopic,
   slug,
   panHandlers,
   onReply
@@ -38,11 +37,10 @@ function Comments ({
   const scrollToComment = comment => {
     const parentCommentId = comment.parentComment || comment.id
     const subCommentId = comment.parentComment ? comment.id : null
-    const section = sections.find(section => parentCommentId == section.comment.id)
+    const section = sections.find(section => parentCommentId === section.comment.id)
     const sectionIndex = section.comment.sectionIndex
-    const itemIndex = section.data.find(subComment => subCommentId == subComment.id)?.itemIndex
-      || section.data.length + 1
-
+    const itemIndex = section.data.find(subComment =>
+      subCommentId === subComment.id)?.itemIndex || section.data.length + 1
     commentsListRef?.current.scrollToLocation({ sectionIndex, itemIndex })
   }
 
@@ -51,51 +49,57 @@ function Comments ({
     highlightComment
   }))
 
-
   useEffect(() => { fetchComments() }, [])
 
   const header = () => (
     <>
       {providedHeader}
       <ShowMore postId={postId} />
-      {pending && <View style={styles.loadingContainer}>
-        <Loading style={styles.loading} />
-      </View>}
+      {pending && (
+        <View style={styles.loadingContainer}>
+          <Loading style={styles.loading} />
+        </View>
+      )}
     </>
   )
 
-  const renderComment = ({ section: { comment }}) => {
-    return <>
-      <ShowMore commentId={comment.id} style={styles.subCommentsShowMore} />
-      <Comment style={
-          comment.id == highlightedComment?.id && styles.highlighted
-        }
-        comment={comment}
-        onReply={onReply}
-        showMember={showMember}
-        showTopic={showTopic}
-        slug={slug}
-        key={comment.id} />
-    </>
+  const renderComment = ({ section: { comment } }) => {
+    return (
+      <>
+        <ShowMore commentId={comment.id} style={styles.subCommentsShowMore} />
+        <Comment
+          style={
+            comment.id === highlightedComment?.id && styles.highlighted
+          }
+          comment={comment}
+          onReply={onReply}
+          showMember={showMember}
+          slug={slug}
+          key={comment.id}
+        />
+      </>
+    )
   }
 
   const renderSubComment = ({ item: comment }) => {
     return (
-      <Comment style={[
-          comment.id == highlightedComment?.id && styles.highlighted,
+      <Comment
+        style={[
+          comment.id === highlightedComment?.id && styles.highlighted,
           styles.subComment
         ]}
         comment={comment}
         onReply={onReply}
         showMember={showMember}
-        showTopic={showTopic}
         slug={slug}
-        key={comment.id} />
+        key={comment.id}
+      />
     )
   }
 
   return (
-    <SectionList style={style}
+    <SectionList
+      style={style}
       ref={commentsListRef}
       inverted
       ListFooterComponent={header}
@@ -118,7 +122,7 @@ function Comments ({
 
 export default forwardRef(Comments)
 
-export function ShowMore ({ postId, commentId, style = {}  }) {
+export function ShowMore ({ postId, commentId, style = {} }) {
   const queryParams = commentId ? { commentId } : { postId }
   const dispatch = useDispatch()
   const fetchComments = () => dispatch(fetchCommentsAction(queryParams, { cursor }))

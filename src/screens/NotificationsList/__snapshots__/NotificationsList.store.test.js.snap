@@ -48,8 +48,8 @@ Object {
   commentersTotal
   commentsTotal
   comments(first: 10, order: \\"desc\\") {
-    items {
-      
+      items {
+        
   id
   text
   creator {
@@ -68,9 +68,9 @@ Object {
   }
   createdAt
 
-      childComments(first: 10, order: \\"desc\\") {
-        items {
-          
+        childComments(first: 10, order: \\"desc\\") {
+          items {
+            
   id
   text
   creator {
@@ -89,17 +89,17 @@ Object {
   }
   createdAt
 
-          post {
-            id
+            post {
+              id
+            }
           }
+          total
+          hasMore
         }
-        total
-        hasMore
       }
+      total
+      hasMore
     }
-    total
-    hasMore
-  }
   linkPreview {
     id
     title
@@ -275,7 +275,7 @@ Object {
 
 exports[`selectors/refiners refineActivity matches the previous ACTION_ANNOUNCEMENT snapshot 1`] = `
 Object {
-  "body": "wrote: This post should have a really long title. It should not even come close to fitting on a notificatio",
+  "body": "wrote: This post should have a really long title. It should not even come close to …",
   "header": "posted an announcement",
   "nameInHeader": true,
   "onPress": [Function],

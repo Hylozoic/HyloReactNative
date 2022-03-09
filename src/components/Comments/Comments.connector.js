@@ -31,7 +31,7 @@ export function mapStateToProps (state, props) {
 export const mapDispatchToProps = {
   fetchComments
 }
-  
+
 export const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { comments, queryCacheParams } = stateProps
   const cursor = !isEmpty(comments) && comments[comments.length - 1].id

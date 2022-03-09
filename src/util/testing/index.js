@@ -1,3 +1,66 @@
+import React from 'react'
+import { Provider } from 'react-redux'
+import { NavigationContainer } from '@react-navigation/native'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+// import { setupServer } from 'msw/node'
+import { createInitialState } from 'store'
+import orm from 'store/models'
+
+export function createMockStore (state = {}) {
+  return {
+    subscribe: jest.fn(),
+    getState: jest.fn(() => state),
+    dispatch: jest.fn()
+  }
+}
+
+const emptyState = createInitialState()
+
+// Basic utility CurrentUserState -- to be further abstracted
+export function createInitialStateWithCurrentUser () {
+  const session = orm.session(orm.getEmptyState())
+  const { Me } = session
+
+  Me.create({
+    id: 'current-user-id',
+    name: 'Current User'
+  })
+
+  return createInitialState({
+    orm: session.state
+  })
+}
+
+export function TestRoot ({
+  store: providedStore,
+  state: providedState,
+  children
+}) {
+  const store = providedStore || createMockStore(providedState || emptyState)
+
+  return (
+    <SafeAreaProvider>
+      <Provider store={store}>
+        <NavigationContainer>
+          {children}
+        </NavigationContainer>
+      </Provider>
+    </SafeAreaProvider>
+  )
+}
+
+// Mock graphql "server"
+
+// This should be ran once per test suite, i.e.
+//   `beforeAll(() => createMockGraphqlServer(handlers))`
+// To learn how to make query or mutation handlers see:
+//   https://mswjs.io/docs/getting-started/mocks/graphql-api
+// (Will need `import { graphql } from 'msw'` in test file)
+// Also `afterEach(() => { server.resetHandlers() })`is required
+// export const createMockGraphqlServer = handlers => setupServer(...handlers).listen()
+
+// Misc and legacy test utils
+
 // Temporary brain-dead test event simulation, until either Enzyme or
 // react-dom/test-utils decides to make React Native a first-class citizen
 //
@@ -18,13 +81,3 @@ export function simulate (instance, eventName, evt = {}) {
   // also introduce a dependency on react-dom.
   if (handler) handler(evt)
 }
-
-export function createMockStore (state = {}) {
-  return {
-    subscribe: jest.fn(),
-    getState: jest.fn(() => state),
-    dispatch: jest.fn()
-  }
-}
-
-export const isDev = __DEV__ && process.env.NODE_ENV !== 'test'

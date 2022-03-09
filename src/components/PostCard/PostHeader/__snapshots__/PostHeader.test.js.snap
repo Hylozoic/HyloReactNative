@@ -114,20 +114,44 @@ exports[`PostMenu returns a popupmenu when removePost 1`] = `
 
 exports[`PostMenu returns null when no actions 1`] = `null`;
 
-exports[`renders correctly when showGroup is true 1`] = `
+exports[`renders correctly with a current user 1`] = `
 <View>
   <View>
-    <TouchableOpacity
-      onPress={[Function]}
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
     >
-      <Avatar
-        avatarUrl="foo.png"
-      />
-    </TouchableOpacity>
+      <View>
+        <Image
+          source={
+            Object {
+              "uri": "foo.png",
+            }
+          }
+        />
+      </View>
+    </View>
   </View>
   <View>
-    <TouchableOpacity
-      onPress={[Function]}
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
     >
       <Text>
         Zeus
@@ -135,7 +159,7 @@ exports[`renders correctly when showGroup is true 1`] = `
       <Text>
         Go!
       </Text>
-    </TouchableOpacity>
+    </View>
     <View>
       <Text>
         10m ago
@@ -143,13 +167,30 @@ exports[`renders correctly when showGroup is true 1`] = `
     </View>
   </View>
   <View>
-    <PostMenu
-      deletePost={[Function]}
-      flagPost={[Function]}
-      pinPost={[Function]}
-      pinned={false}
-      removePost={null}
-    />
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        Object {
+          "bottom": 10,
+          "left": 10,
+          "right": 15,
+          "top": 20,
+        }
+      }
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+    >
+      <Icon
+        name="More"
+      />
+    </View>
   </View>
 </View>
 `;
@@ -157,17 +198,41 @@ exports[`renders correctly when showGroup is true 1`] = `
 exports[`renders correctly with all=true, and no group or user 1`] = `
 <View>
   <View>
-    <TouchableOpacity
-      onPress={[Function]}
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
     >
-      <Avatar
-        avatarUrl="foo.png"
-      />
-    </TouchableOpacity>
+      <View>
+        <Image
+          source={
+            Object {
+              "uri": "foo.png",
+            }
+          }
+        />
+      </View>
+    </View>
   </View>
   <View>
-    <TouchableOpacity
-      onPress={[Function]}
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
     >
       <Text>
         Zeus
@@ -175,84 +240,117 @@ exports[`renders correctly with all=true, and no group or user 1`] = `
       <Text>
         Go!
       </Text>
-    </TouchableOpacity>
+    </View>
     <View>
       <Text>
         10m ago
       </Text>
-      <FlatList
+      <RCTScrollView
         data={
           Array [
             Object {
+              "id": "1",
               "name": "topic1",
             },
             Object {
+              "id": "2",
               "name": "topic2",
             },
           ]
         }
+        getItem={[Function]}
+        getItemCount={[Function]}
         horizontal={true}
         keyExtractor={[Function]}
-        numColumns={1}
+        onContentSizeChange={[Function]}
+        onLayout={[Function]}
+        onMomentumScrollBegin={[Function]}
+        onMomentumScrollEnd={[Function]}
+        onScroll={[Function]}
+        onScrollBeginDrag={[Function]}
+        onScrollEndDrag={[Function]}
         removeClippedSubviews={false}
         renderItem={[Function]}
+        scrollEventThrottle={50}
         showsHorizontalScrollIndicator={false}
-      />
+        stickyHeaderIndices={Array []}
+        viewabilityConfigCallbackPairs={Array []}
+      >
+        <View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            >
+              <Text>
+                #
+                topic1
+              </Text>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            >
+              <Text>
+                #
+                topic2
+              </Text>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
     </View>
   </View>
   <View>
     <Icon
       name="Pin"
     />
-    <PostMenu
-      deletePost={[Function]}
-      flagPost={[Function]}
-      pinPost={[Function]}
-      pinned={true}
-      removePost={[Function]}
-    />
-  </View>
-</View>
-`;
-
-exports[`renders correctly with no flagging 1`] = `
-<View>
-  <View>
-    <TouchableOpacity
-      onPress={[Function]}
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        Object {
+          "bottom": 10,
+          "left": 10,
+          "right": 15,
+          "top": 20,
+        }
+      }
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
     >
-      <Avatar
-        avatarUrl="foo.png"
+      <Icon
+        name="More"
       />
-    </TouchableOpacity>
-  </View>
-  <View>
-    <TouchableOpacity
-      onPress={[Function]}
-    >
-      <Text>
-        Zeus
-      </Text>
-      <Text>
-        Go!
-      </Text>
-    </TouchableOpacity>
-    <View>
-      <Text>
-        10m ago
-      </Text>
     </View>
-  </View>
-  <View>
-    <Icon
-      name="Pin"
-    />
-    <PostMenu
-      deletePost={[Function]}
-      pinPost={[Function]}
-      pinned={true}
-      removePost={null}
-    />
   </View>
 </View>
 `;

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { View, TouchableOpacity, Text, ScrollView, StyleSheet } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { isEmpty } from 'lodash/fp'
-import { humanDate } from 'hylo-utils/text'
+import { TextHelpers } from 'hylo-shared'
 import getGroup from 'store/selectors/getGroup'
 import fetchGroupSettings from 'store/actions/fetchGroupSettings'
 import { FETCH_GROUP_SETTINGS } from 'store/constants'
@@ -34,17 +34,15 @@ export default function PendingInvites () {
       {!isEmpty(invites) && (
         <Button text='Resend All' onPress={() => groupId && dispatch(reinviteAll(groupId))} style={styles.resendAllButton} />
       )}
-      {isEmpty(invites) ? (
-        <Text style={styles.emptyList}>No pending invites</Text>
-      ) : (
-        invites.map((invite, i) => (
+      {isEmpty(invites)
+        ? <Text style={styles.emptyList}>No pending invites</Text>
+        : invites.map((invite, i) => (
           <PendingInviteRow
             invite={invite} key={i} first={i === 0}
             expireInvitation={invitationToken => dispatch(expireInvitation(invitationToken))}
             resendInvitation={invitationToken => dispatch(resendInvitation(invitationToken))}
           />
-        )
-      ))}
+        ))}
     </ScrollView>
   )
 }
@@ -58,7 +56,7 @@ export function PendingInviteRow ({ invite, first, expireInvitation, resendInvit
         <Text style={styles.pendingInviteEmail}>{email}</Text>
       </View>
       <View style={styles.actionRow}>
-        <Text style={styles.timeAgoText}>{humanDate(lastSentAt)}</Text>
+        <Text style={styles.timeAgoText}>{TextHelpers.humanDate(lastSentAt)}</Text>
         <View style={styles.actionItems}>
           <TouchableOpacity
             onPress={() => expireInvitation(id)}

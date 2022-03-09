@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text } from 'react-native'
-import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native'
-// Currently a bug with React Navigation Flipper plugin, follow:
-// https://github.com/react-navigation/react-navigation/issues/9850
-// import { useFlipper } from '@react-navigation/devtools'
+import { View } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { navigationRef } from 'navigation/linking/helpers'
 import RNBootSplash from 'react-native-bootsplash'
 import RootNavigator from 'navigation/RootNavigator'
 import OneSignal from 'react-native-onesignal'
-import customLinking, { navigateToLinkingPath } from 'navigation/linking/custom'
+import customLinking, {
+  INITIAL_NAV_STATE,
+  navigateToLinkingPath
+} from 'navigation/linking'
 import SocketListener from 'components/SocketListener'
 import LoadingScreen from 'screens/LoadingScreen'
-
-export const navigationRef = createNavigationContainerRef()
 
 export default function RootView ({
   loading,
@@ -54,12 +53,14 @@ export default function RootView ({
 
   return (
     <View style={styles.rootContainer}>
-      {fullyAuthorized && <SocketListener />}
+      {fullyAuthorized && (
+        <SocketListener />
+      )}
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}
         initialState={fullyAuthorized ? INITIAL_NAV_STATE : null}
-        onReady={() => { 
+        onReady={() => {
           setNavIsReady(true)
           !loading && RNBootSplash.hide()
         }}
@@ -70,39 +71,6 @@ export default function RootView ({
       </NavigationContainer>
     </View>
   )
-}
-
-export const INITIAL_NAV_STATE = {
-  routes: [
-    {
-      name: 'Drawer',
-      state: {
-        routes: [
-          {
-            name: 'Tabs',
-            state: {
-              routes: [
-                {
-                  name: 'Home Tab',
-                  state: {
-                    initialRouteName: 'Feed',
-                    routes: [
-                      {
-                        name: 'Group Navigation'
-                      },
-                      {
-                        name: 'Feed'
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
 }
 
 const styles = {

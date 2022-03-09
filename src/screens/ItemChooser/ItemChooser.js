@@ -31,12 +31,12 @@ export default class ItemChooser extends React.Component {
     updateItems: PropTypes.func,
     initialItems: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.isRequired
+        id: PropTypes.string.isRequired
       })
     ),
     defaultSuggestedItems: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.isRequired
+        id: PropTypes.string.isRequired
       })
     ),
     defaultSuggestedItemsLabel: PropTypes.string,

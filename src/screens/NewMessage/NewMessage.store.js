@@ -1,5 +1,5 @@
 import { uniqueId } from 'lodash/fp'
-import { AnalyticsEvents } from 'hylo-utils/constants'
+import { AnalyticsEvents } from 'hylo-shared'
 
 export const MODULE_NAME = 'NewMessage'
 export const SET_MESSAGE = `${MODULE_NAME}/SET_MESSAGE`
@@ -65,11 +65,11 @@ export function createMessage (messageThreadId, text, forNewThread) {
   }
 }
 
-export const defaultState = {
+export const initialState = {
   message: ''
 }
 
-export default function reducer (state = defaultState, action) {
+export default function reducer (state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case SET_MESSAGE:

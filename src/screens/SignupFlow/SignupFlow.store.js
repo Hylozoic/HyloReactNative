@@ -15,11 +15,6 @@ export const defaultUserSettings = {
   settings: {}
 }
 
-export const defaultState = {
-  userSettings: defaultUserSettings,
-  errors: {}
-}
-
 export function getErrors (payload) {
   if (payload.response.body.startsWith('That email address is already in use')) {
     return {
@@ -28,8 +23,13 @@ export function getErrors (payload) {
   }
 }
 
-export default function reducer (state = defaultState, action) {
-  const { error, type, payload, meta } = action
+export const initialState = {
+  userSettings: defaultUserSettings,
+  errors: {}
+}
+
+export default function reducer (state = initialState, action) {
+  const { error, type, payload } = action
   if (error) {
     switch (type) {
       case SIGNUP:

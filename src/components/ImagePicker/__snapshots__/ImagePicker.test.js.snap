@@ -13,7 +13,6 @@ exports[`ImagePicker Specification default render matches snapshot 1`] = `
       "top": 5,
     }
   }
-  nativeID="animatedComponent"
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}

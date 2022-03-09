@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   Text,
   View,
@@ -6,14 +6,10 @@ import {
   TouchableOpacity,
   ActivityIndicator
 } from 'react-native'
-import { withNavigation } from '@react-navigation/compat'
-import { trim, isEmpty, get, flow } from 'lodash/fp'
+import { useNavigation } from '@react-navigation/native'
+import { trim, isEmpty, flow } from 'lodash/fp'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import { htmlEncode } from 'js-htmlencode'
-import { htmlToText } from 'html-to-text'
-import { MENTION_ENTITY_TYPE } from 'hylo-utils/constants'
-import { rhino30 } from 'style/colors'
-import styles from './InlineEditor.styles'
+import { TextHelpers, MENTION_ENTITY_TYPE } from 'hylo-shared'
 // Mentions
 import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
 import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomplete'
@@ -22,29 +18,48 @@ import PersonPickerItemRow from 'screens/ItemChooser/PersonPickerItemRow'
 import fetchTopicsForGroupId from 'store/actions/fetchTopicsForGroupId'
 import getTopicsForAutocompleteWithNew from 'store/selectors/getTopicsForAutocompleteWithNew'
 import TopicRow from 'screens/TopicList/TopicRow'
+// Styles
+import { rhino30 } from 'style/colors'
+import styles from './InlineEditor.styles'
+import { NodeHtmlMarkdown } from 'node-html-markdown'
+import { defaultTranslators } from 'node-html-markdown/dist/config'
 
-export class InlineEditor extends React.Component {
-  state = {
-    isFocused: false,
-    pickerType: null
-  }
+export default function InlineEditor ({
+  placeholder = 'Details',
+  value = '',
+  groupId,
+  editable = true,
+  submitting = false,
+  onChange,
+  onSubmit,
+  onInsertTopic,
+  onFocusToggle,
+  style,
+  inputStyle,
+  initialMentionPerson
+}) {
+  const navigation = useNavigation()
+  const [selection, setSelection] = useState()
+  const editorInputRef = useRef()
 
-  editorInputRef = React.createRef()
+  useEffect(() => {
+    if (initialMentionPerson && isEmpty(value)) {
+      insertMention(initialMentionPerson)
+    }
+  }, [initialMentionPerson])
 
-  insertTopic = topic => {
+  const insertTopic = topic => {
     const markup = createTopicTag(topic)
-    return this.insertPicked(topic, markup, this.props.onInsertTopic)
+    return insertPicked(topic, markup, onInsertTopic)
   }
 
-  insertMention = person => {
+  const insertMention = person => {
     const markup = createMentionTag(person)
-    return this.insertPicked(person, markup)
+    return insertPicked(person, markup)
   }
 
-  insertPicked = (choice, markup, onInsertCallback = undefined) => {
-    const value = this.props.value || ''
-    const position = get('selection.start', this.state) || 0
-
+  const insertPicked = (choice, markup, onInsertCallback = undefined) => {
+    const position = selection?.start || 0
     // This will insert the markup at the current cursors position while padding the markup with spaces.
     const firstSlice = value.slice(0, position)
     const secondSlice = value.slice(position)
@@ -57,124 +72,111 @@ export class InlineEditor extends React.Component {
     // Append the second part of the value (after the cursor)
     newValue += secondSlice
 
-    this.props.onChange(newValue)
+    onChange(newValue)
 
     if (onInsertCallback) onInsertCallback([choice])
 
-    // We use a timeout since the onChange needs to propagate
-    // the new value change before setting the new selection
-    setTimeout(() => {
-      this.setState(() => ({
-        selection: {
-          start: newSelectionStart,
-          end: newSelectionStart
-        }
-      }))
-      this.editorInputRef.current.focus()
-    }, 100)
+    setSelection({
+      start: newSelectionStart,
+      end: newSelectionStart
+    })
+    editorInputRef.current.focus()
   }
 
-  openPersonPicker = () => {
-    const { navigation } = this.props
+  const handleOpenPersonPicker = () => {
     const screenTitle = 'Mention'
     navigation.navigate('ItemChooser', {
       screenTitle,
       ItemRowComponent: PersonPickerItemRow,
-      pickItem: this.insertMention,
+      pickItem: insertMention,
       searchPlaceholder: 'Type here to search for people',
       fetchSearchSuggestions: scopedFetchPeopleAutocomplete,
       getSearchSuggestions: scopedGetPeopleAutocomplete(screenTitle)
     })
   }
 
-  openTopicsPicker = () => {
-    const { navigation } = this.props
+  const handleOpenTopicsPicker = () => {
     const screenTitle = 'Pick a Topic'
     navigation.navigate('ItemChooser', {
       screenTitle,
       ItemRowComponent: TopicRow,
-      pickItem: this.insertTopic,
+      pickItem: insertTopic,
       searchPlaceholder: 'Search for a topic by name',
-      fetchSearchSuggestions: fetchTopicsForGroupId(this.props.groupId),
+      fetchSearchSuggestions: fetchTopicsForGroupId(groupId),
       getSearchSuggestions: getTopicsForAutocompleteWithNew
     })
   }
 
-  handleFocus = () => {
-    this.setState(() => ({
-      isFocused: true,
-      selection: { start: 1, end: 1 }
-    }))
-    this.props.onFocusToggle && this.props.onFocusToggle(true)
+  const handleFocus = () => {
+    setSelection({ start: 1, end: 1 })
+    onFocusToggle && onFocusToggle(true)
   }
 
-  handleBlur = () => {
-    if (isEmpty(trim(this.props.value))) this.props.onChange('')
-    this.setState(() => ({ isFocused: false }))
-    this.props.onFocusToggle && this.props.onFocusToggle(false)
+  const handleBlur = () => {
+    if (isEmpty(trim(value))) onChange('')
+    onFocusToggle && onFocusToggle(false)
   }
 
-  handleSelectionChange = ({ nativeEvent: { selection } }) => {
-    this.setState(() => ({ selection }))
+  const handleSelectionChange = ({ nativeEvent: { selection } }) => {
+    setSelection(selection)
   }
 
-  handleSubmit = () => {
-    this.setState(() => ({ selection: { start: 0, end: 0 } }))
-    this.editorInputRef.current.blur()
-    this.props.onSubmit(this.props.value)
+  const handleSubmit = () => {
+    setSelection({ start: 0, end: 0 })
+    editorInputRef.current.blur()
+    onSubmit(value)
   }
 
-  render () {
-    const {
-      placeholder = 'Details',
-      editable = true,
-      value,
-      onChange,
-      onSubmit,
-      submitting = false,
-      style,
-      inputStyle
-    } = this.props
-    const hitSlop = { top: 7, bottom: 7, left: 7, right: 7 }
+  const hitSlop = { top: 7, bottom: 7, left: 7, right: 7 }
 
-    return (
-      <View style={[styles.container, style]} onFocus={this.handleFocus} onBlur={this.handleBlur}>
-        <View style={styles.textInputAndTools}>
-          <TextInput
-            multiline
-            editable={!!editable && !submitting}
-            onChangeText={onChange}
-            onSelectionChange={this.handleSelectionChange}
-            placeholder={placeholder}
-            placeholderTextColor={rhino30}
-            style={[styles.textInput, inputStyle]}
-            underlineColorAndroid='transparent'
-            value={value}
-            ref={this.editorInputRef}
-          />
-          <View style={styles.toolbar}>
-            <TouchableOpacity hitSlop={hitSlop} onPress={this.openPersonPicker}>
-              <Text style={styles.toolbarButton}>@</Text>
-            </TouchableOpacity>
-            <TouchableOpacity hitSlop={hitSlop} onPress={this.openTopicsPicker}>
-              <Text style={styles.toolbarButton}>#</Text>
-            </TouchableOpacity>
-          </View>
+  return (
+    <View style={[styles.container, style]} onFocus={handleFocus} onBlur={handleBlur}>
+      <View style={styles.textInputAndTools}>
+        <TextInput
+          multiline
+          editable={!!editable && !submitting}
+          onChangeText={onChange}
+          onSelectionChange={handleSelectionChange}
+          placeholder={placeholder}
+          placeholderTextColor={rhino30}
+          style={[styles.textInput, inputStyle]}
+          underlineColorAndroid='transparent'
+          value={value}
+          ref={editorInputRef}
+        />
+        <View style={styles.toolbar}>
+          <TouchableOpacity hitSlop={hitSlop} onPress={handleOpenPersonPicker} testID='mentionPicker'>
+            <Text style={styles.toolbarButton}>@</Text>
+          </TouchableOpacity>
+          <TouchableOpacity hitSlop={hitSlop} onPress={handleOpenTopicsPicker} testID='topicPicker'>
+            <Text style={styles.toolbarButton}>#</Text>
+          </TouchableOpacity>
         </View>
-        <SubmitButton style={{...styles.submitButton, display: (onSubmit && value.length > 0) ? 'flex' : 'none'}} submitting={submitting} active={value.length > 0} onSubmit={this.handleSubmit} />
       </View>
-    )
-  }
+      <SubmitButton
+        style={{
+          ...styles.submitButton,
+          display: (onSubmit && value.length > 0) ? 'flex' : 'none'
+        }}
+        submitting={submitting}
+        active={value.length > 0}
+        onSubmit={handleSubmit}
+      />
+    </View>
+  )
 }
-
-export default withNavigation(InlineEditor)
 
 export function SubmitButton ({ style, submitting, active, onSubmit }) {
   if (submitting) {
     return <View style={style}><ActivityIndicator /></View>
   } else {
     return (
-      <TouchableOpacity hitSlop={{ top: 5, bottom: 10, left: 10, right: 10 }} disabled={!active} onPress={onSubmit}>
+      <TouchableOpacity
+        hitSlop={{ top: 5, bottom: 10, left: 10, right: 10 }}
+        disabled={!active}
+        onPress={onSubmit}
+        testID='submitButton'
+      >
         <MaterialIcon name='send' size={26} style={[style, active && styles.activeButton]} />
       </TouchableOpacity>
     )
@@ -182,40 +184,51 @@ export function SubmitButton ({ style, submitting, active, onSubmit }) {
 }
 
 export const createMentionTag = ({ id, name }) =>
-  `[${name}:${id}]`
+  `[${name}](${id})`
 
 export const createTopicTag = topic =>
   `#${topic.name}`
 
-export const mentionsToHtml = (text) => {
-  const re = /\[([^[]+):(\d+)\]/gi
-  const replace = `<a href="#" data-entity-type="${MENTION_ENTITY_TYPE}" data-user-id="$2">$1</a>`
-  return text.replace(re, replace)
+export const mentionsToHTML = text => {
+  const result = text.replace(
+    /\[([^[]+)\]\((\d+)\)/gi,
+    `<a href="#" data-entity-type="${MENTION_ENTITY_TYPE}" data-user-id="$2">$1</a>`
+  )
+  return result
 }
 
-export const newLinesToBr = (text) => {
-  const re = /[\r\n|\r|\n]/gi
-  const replace = '<br>'
-  return text.replace(re, replace)
+// This allows multiple linebreaks with markdown by
+// default will collapse.
+// * This breaks markdown blocks/lists (ol, ul, etc)
+// but we're not officially supporting those yet
+export const newLinesToBr = text => text
+  .replace(
+    /[\r\n|\r|\n]/gi,
+    '<br />'
+  )
+
+export const fromHTML = html => {
+  if (!html) return ''
+
+  return NodeHtmlMarkdown.translate(html, {}, {
+    a: opts => {
+      const { node, options, visitor } = opts
+      if (node?.attrs['data-entity-type'] === MENTION_ENTITY_TYPE) {
+        return {
+          prefix: '[',
+          postfix: `](${node?.attrs['data-user-id']})`
+        }
+      } else {
+        defaultTranslators.a(opts)
+      }
+    }
+  })
 }
 
-export const mentionsToText = html => htmlToText(html, {
-  formatters: {
-    'mentionFormatter': (elem, walk, builder, formatOptions) => {
-      builder.openBlock({ leadingLineBreaks: formatOptions.leadingLineBreaks || 0 })
-      builder.addInline('[')
-      walk(elem.children, builder)
-      builder.addInline(`:${elem.attribs['data-user-id']}]`)
-      builder.closeBlock({ trailingLineBreaks: formatOptions.trailingLineBreaks || 0 })
-    }
-  },
-  selectors: [
-    {
-      selector: `a[data-entity-type=${MENTION_ENTITY_TYPE}]`,
-      format: 'mentionFormatter',
-      options: { leadingLineBreaks: 0, trailingLineBreaks: 0 }
-    }
-  ]
-})
-
-export const toHtml = flow([trim, htmlEncode, mentionsToHtml, newLinesToBr])
+export const toHTML = text => {
+  return flow([
+    newLinesToBr,
+    mentionsToHTML,
+    TextHelpers.markdown
+  ])(text)
+}

@@ -2,7 +2,7 @@ import { createLogger } from 'redux-logger'
 import { compact } from 'lodash'
 import afterInteractionsMiddleware from './afterInteractions'
 import apiMiddleware from './api'
-import graphQLMiddleware from './graphQL'
+import graphQLMiddleware from './graphqlMiddleware'
 import optimisticMiddleware from './optimistic'
 import pendingMiddleware from './pending'
 import promiseMiddleware from 'redux-promise'
@@ -25,10 +25,5 @@ const middleware = compact([
     collapsed: (getState, action, logEntry) => !logEntry.error
   })
 ])
-
-if (isDev) {
-  const createDebugger = require('redux-flipper').default
-  middleware.push(createDebugger())
-}
 
 export default middleware

@@ -1,156 +1,184 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { View, Text, TouchableOpacity, Alert, FlatList } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { TextHelpers } from 'hylo-shared'
 import { get, filter, isEmpty } from 'lodash/fp'
-import { humanDate } from 'hylo-utils/text'
-import { rhino30, rhino50, caribbeanGreen } from 'style/colors'
+import getMe from 'store/selectors/getMe'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import getCanModerate from 'store/selectors/getCanModerate'
+import { POST_TYPES } from 'store/models/Post'
+import { removePost, deletePost, pinPost } from './PostHeader.store'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
 import PopupMenuButton from 'components/PopupMenuButton'
 import FlagContent from 'components/FlagContent'
-import { POST_TYPES } from 'store/models/Post'
+import { rhino30, rhino50, caribbeanGreen } from 'style/colors'
 
-export default class PostHeader extends React.PureComponent {
-  constructor (props) {
-    super(props)
-    this.state = {
-      creator: {},
-      flaggingVisible: false
+export default React.memo(function PostHeader ({
+  postId,
+  creator,
+  date,
+  type,
+  slug,
+  showTopic,
+  showMember,
+  closeOnDelete,
+  pinned,
+  topics,
+  announcement,
+  hideMenu,
+  hideDateRow,
+  smallAvatar
+}) {
+  const navigation = useNavigation()
+  const dispatch = useDispatch()
+  const group = useSelector(getCurrentGroup)
+  const currentUser = useSelector(getMe)
+  const canModerate = useSelector(getCanModerate)
+  const [flaggingVisible, setFlaggingVisible] = useState(false)
+
+  const isCreator = currentUser && creator && currentUser.id === creator.id
+  const canEdit = isCreator
+  const canFlag = !isCreator
+
+  const { avatarUrl, name, tagline } = creator
+
+  const handleEditPost = canEdit
+    ? () => navigation.navigate('Edit Post', { id: postId })
+    : null
+
+  const handleDeletePost = canEdit
+    ? () => dispatch(deletePost(postId))
+    : null
+
+  const handleDeletePostAndClose = () => {
+    if (canEdit) {
+      dispatch(deletePost(postId))
+      navigation.goBack()
     }
   }
 
-  handleEditPost = () => {
-    this.props.editPost(this.props.postId)
-  }
+  const handleRemovePost = !isCreator && canModerate
+    ? () => dispatch(removePost(postId, slug))
+    : null
 
-  handleShowMember = () => {
-    this.props.showMember && this.props.showMember(this.props.creator.id)
-  }
+  const handlePinPost = canModerate && group
+    ? () => dispatch(pinPost(postId, group.id))
+    : null
 
-  topicKeyExtractor = item => item.id
+  const handleShowMember = () => showMember && showMember(creator.id)
 
-  renderTopic = ({ item }) => (
-    <TouchableOpacity onPress={() => this.props.showTopic && this.props.showTopic(item.name)}>
+  const topicKeyExtractor = item => item.id
+
+  const renderTopic = ({ item }) => (
+    <TouchableOpacity onPress={() => showTopic && showTopic(item.name)}>
       <Text style={styles.topicLabel}>#{item.name}</Text>
     </TouchableOpacity>
   )
 
-  render () {
-    const {
-      creator: { avatarUrl, name, tagline },
-      date,
-      type,
-      postId,
-      slug,
-      canFlag,
-      removePost,
-      deletePost,
-      deletePostAndClose,
-      closeOnDelete,
-      pinned,
-      pinPost,
-      topics,
-      announcement,
-      canEdit,
-      hideMenu,
-      hideDateRow,
-      smallAvatar
-    } = this.props
-    const { flaggingVisible } = this.state
-    const showTopics = !isEmpty(topics)
-    // Used to generate a link to this post from the backend.
-    const linkData = {
-      slug,
-      id: postId,
-      type: 'post'
-    }
+  const showTopics = !isEmpty(topics)
 
-    let flagPost
-    if (canFlag) {
-      flagPost = () => {
-        this.setState({ flaggingVisible: true })
-      }
-    }
-
-    const deletePostWithConfirm = deletePost
-      ? () => Alert.alert(
-          'Confirm Delete',
-          'Are you sure you want to delete this post?',
-          [
-            {
-              text: 'Yes',
-              onPress: () => closeOnDelete
-                ? deletePostAndClose()
-                : deletePost()
-            },
-            { text: 'Cancel', style: 'cancel' }
-          ]
-        )
-      : null
-
-    const removePostWithConfirm = removePost
-      ? () => Alert.alert(
-          'Confirm Removal',
-          'Are you sure you want to remove this post from this group?',
-          [
-            { text: 'Yes', onPress: () => removePost() },
-            { text: 'Cancel', style: 'cancel' }
-          ])
-      : null
-
-    return (
-      <View style={styles.container}>
-        <View style={styles.avatarSpacing}>
-          <TouchableOpacity onPress={this.handleShowMember}>
-            {!!avatarUrl && <Avatar avatarUrl={avatarUrl} dimension={smallAvatar && 20} />}
-          </TouchableOpacity>
-        </View>
-        <View style={styles.meta}>
-          <TouchableOpacity onPress={this.handleShowMember}>
-            {name && <Text style={styles.username}>{name}</Text>}
-            {!!tagline && <Text style={styles.metaText}>{tagline}</Text>}
-          </TouchableOpacity>
-          {!hideDateRow && (
-            <View style={styles.dateRow}>
-              <Text style={styles.metaText}>{humanDate(date)}</Text>
-              {!!showTopics && (
-                <FlatList
-                  data={topics}
-                  style={styles.topicList}
-                  horizontal
-                  keyExtractor={this.topicKeyExtractor}
-                  showsHorizontalScrollIndicator={false}
-                  renderItem={this.renderTopic}
-                />
-              )}
-            </View>
-          )}
-        </View>
-        <View style={styles.upperRight}>
-          {pinned && <Icon name='Pin' style={styles.pinIcon} />}
-          {announcement && <Icon name='Announcement' style={styles.announcementIcon} />}
-          {type && <PostLabel type={type} />}
-          {!hideMenu && (
-            <PostMenu
-              removePost={removePostWithConfirm}
-              deletePost={deletePostWithConfirm}
-              editPost={canEdit && this.handleEditPost}
-              flagPost={flagPost}
-              pinPost={pinPost}
-              pinned={pinned}
-            />
-          )}
-          {flaggingVisible && (
-            <FlagContent
-              type='post'
-              linkData={linkData}
-              onClose={() => this.setState({ flaggingVisible: false })}
-            />
-          )}
-        </View>
-      </View>
-    )
+  // Used to generate a link to this post from the backend.
+  const linkData = {
+    slug,
+    id: postId,
+    type: 'post'
   }
-}
+
+  const handleFlagPost = canFlag
+    ? () => setFlaggingVisible(true)
+    : null
+
+  const deletePostWithConfirm = handleDeletePost
+    ? () => Alert.alert(
+        'Confirm Delete',
+        'Are you sure you want to delete this post?',
+        [
+          {
+            text: 'Yes',
+            onPress: () => closeOnDelete
+              ? handleDeletePostAndClose()
+              : handleDeletePost()
+          },
+          { text: 'Cancel', style: 'cancel' }
+        ]
+      )
+    : null
+
+  const removePostWithConfirm = handleRemovePost
+    ? () => Alert.alert(
+        'Confirm Removal',
+        'Are you sure you want to remove this post from this group?',
+        [
+          { text: 'Yes', onPress: () => handleRemovePost() },
+          { text: 'Cancel', style: 'cancel' }
+        ])
+    : null
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.avatarSpacing}>
+        <TouchableOpacity onPress={handleShowMember}>
+          {!!avatarUrl && <Avatar avatarUrl={avatarUrl} dimension={smallAvatar && 20} />}
+        </TouchableOpacity>
+      </View>
+      <View style={styles.meta}>
+        <TouchableOpacity onPress={handleShowMember}>
+          {name && (
+            <Text style={styles.username}>{name}</Text>
+          )}
+          {!!tagline && (
+            <Text style={styles.metaText}>{tagline}</Text>
+          )}
+        </TouchableOpacity>
+        {!hideDateRow && (
+          <View style={styles.dateRow}>
+            <Text style={styles.metaText}>{TextHelpers.humanDate(date)}</Text>
+            {!!showTopics && (
+              <FlatList
+                data={topics}
+                style={styles.topicList}
+                horizontal
+                keyExtractor={topicKeyExtractor}
+                showsHorizontalScrollIndicator={false}
+                renderItem={renderTopic}
+              />
+            )}
+          </View>
+        )}
+      </View>
+      <View style={styles.upperRight}>
+        {pinned && (
+          <Icon name='Pin' style={styles.pinIcon} />
+        )}
+        {announcement && (
+          <Icon name='Announcement' style={styles.announcementIcon} />
+        )}
+        {type && (
+          <PostLabel type={type} />
+        )}
+        {!hideMenu && (
+          <PostMenu
+            removePost={removePostWithConfirm}
+            deletePost={deletePostWithConfirm}
+            editPost={handleEditPost}
+            flagPost={handleFlagPost}
+            pinPost={handlePinPost}
+            pinned={pinned}
+          />
+        )}
+        {flaggingVisible && (
+          <FlagContent
+            type='post'
+            linkData={linkData}
+            onClose={() => this.setState({ flaggingVisible: false })}
+          />
+        )}
+      </View>
+    </View>
+  )
+})
 
 export function PostMenu ({ deletePost, editPost, flagPost, removePost, pinPost, pinned }) {
   // If the function is defined, than it's a valid action
@@ -300,7 +328,7 @@ const labelStyles = {
   },
   discussion: {
     box: {
-      backgroundColor: POST_TYPES.discussion.backgroundColor,
+      backgroundColor: POST_TYPES.discussion.backgroundColor
     },
     text: {
       color: POST_TYPES.discussion.primaryColor
@@ -308,7 +336,7 @@ const labelStyles = {
   },
   event: {
     box: {
-      backgroundColor: POST_TYPES.event.backgroundColor,
+      backgroundColor: POST_TYPES.event.backgroundColor
     },
     text: {
       color: POST_TYPES.event.primaryColor
@@ -316,7 +344,7 @@ const labelStyles = {
   },
   offer: {
     box: {
-      backgroundColor: POST_TYPES.offer.backgroundColor,
+      backgroundColor: POST_TYPES.offer.backgroundColor
     },
     text: {
       color: POST_TYPES.offer.primaryColor
@@ -324,7 +352,7 @@ const labelStyles = {
   },
   resource: {
     box: {
-      backgroundColor: POST_TYPES.resource.backgroundColor,
+      backgroundColor: POST_TYPES.resource.backgroundColor
     },
     text: {
       color: POST_TYPES.resource.primaryColor
@@ -332,7 +360,7 @@ const labelStyles = {
   },
   project: {
     box: {
-      backgroundColor: POST_TYPES.project.backgroundColor,
+      backgroundColor: POST_TYPES.project.backgroundColor
     },
     text: {
       color: POST_TYPES.project.primaryColor
@@ -340,7 +368,7 @@ const labelStyles = {
   },
   request: {
     box: {
-      backgroundColor: POST_TYPES.request.backgroundColor,
+      backgroundColor: POST_TYPES.request.backgroundColor
     },
     text: {
       color: POST_TYPES.request.primaryColor

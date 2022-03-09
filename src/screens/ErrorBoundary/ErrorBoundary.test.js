@@ -1,10 +1,8 @@
 import React from 'react'
 import { Text } from 'react-native'
-import { render, cleanup } from '@testing-library/react-native'
+import { render } from '@testing-library/react-native'
 import ErrorBoundary from './ErrorBoundary'
 import * as Sentry from '@sentry/react-native'
-
-const renderProviders = (ui: React.ReactElement) => render(ui, {})
 
 jest.mock('@sentry/react-native', () => ({ captureException: jest.fn() }))
 
@@ -13,14 +11,12 @@ const ErrorComponent = () => {
 }
 
 describe('Error Boundary', () => {
-  afterEach(cleanup)
-
   beforeEach(() => {
     Sentry.captureException.mockReset()
   })
 
-  it(`matches last snapshot`, async () => {
-    const { getByText } = renderProviders(
+  it('matches last snapshot', async () => {
+    const { getByText } = render(
       <ErrorBoundary>
         <Text>Happy!</Text>
       </ErrorBoundary>
@@ -28,10 +24,10 @@ describe('Error Boundary', () => {
     expect(await getByText('Happy!')).toBeDefined()
   })
 
-  it(`displays an error when a child component throws an error`, async () => {
+  it('displays an error when a child component throws an error', async () => {
     const consoleSpy = jest.spyOn(console, 'error')
     consoleSpy.mockImplementation(() => {})
-    const { getByText } = renderProviders(
+    const { getByText } = render(
       <ErrorBoundary>
         <ErrorComponent />
       </ErrorBoundary>

@@ -44,23 +44,25 @@ const postFieldsFragment = withComments => `
   }
   commentersTotal
   commentsTotal
-  ${withComments ? `comments(first: 10, order: "desc") {
-    items {
-      ${CommentFieldsFragment}
-      childComments(first: 10, order: "desc") {
-        items {
-          ${CommentFieldsFragment}
-          post {
-            id
+  ${withComments
+    ? `comments(first: 10, order: "desc") {
+      items {
+        ${CommentFieldsFragment}
+        childComments(first: 10, order: "desc") {
+          items {
+            ${CommentFieldsFragment}
+            post {
+              id
+            }
           }
+          total
+          hasMore
         }
-        total
-        hasMore
       }
-    }
-    total
-    hasMore
-  }` : ''}
+      total
+      hasMore
+    }`
+    : ''}
   linkPreview {
     id
     title

@@ -1,66 +1,164 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signup Specification renders with defaults 1`] = `
-<RCTScrollView>
-  <View>
-    <View
-      accessibilityIgnoresInvertColors={true}
-    >
-      <Image
-        source={
-          Object {
-            "testUri": "../../../assets/signin_background.png",
-          }
-        }
-      />
-      <Image
-        source={
-          Object {
-            "testUri": "../../../assets/merkaba_white.png",
-          }
-        }
-      />
-    </View>
+exports[`renders with defaults 1`] = `
+<View
+  onLayout={[Function]}
+>
+  <RCTScrollView>
     <View>
-      <Text>
-        Sign up to get started with Hylo
-      </Text>
-      <Text>
-        Stay connected, organized and engaged with your group.
-      </Text>
+      <View
+        accessibilityIgnoresInvertColors={true}
+      >
+        <Image
+          source={
+            Object {
+              "testUri": "../../../assets/signin_background.png",
+            }
+          }
+        />
+        <Image
+          source={
+            Object {
+              "testUri": "../../../assets/merkaba_white.png",
+            }
+          }
+        />
+        <Text>
+          Welcome to Hylo
+        </Text>
+        <Text>
+          Stay connected, organized, and engaged with your group.
+        </Text>
+      </View>
       <View>
-        <View
-          accessible={true}
-          collapsable={false}
-          focusable={false}
-          nativeID="animatedComponent"
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-        >
+        <Text>
+          Enter your email address to get started:
+        </Text>
+        <TextInput
+          autoCapitalize="none"
+          autoCorrect={false}
+          keyboardType="email-address"
+          onChangeText={[Function]}
+          returnKeyType="next"
+          underlineColorAndroid="transparent"
+          value={null}
+        />
+        <View>
+          <View
+            accessibilityState={
+              Object {
+                "disabled": true,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+          >
+            <View>
+              <View>
+                <Text>
+                  Continue
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View>
+          <Text>
+            Or sign up using:
+          </Text>
           <View>
-            <View>
-              <Text>
-                Sign Up
-              </Text>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            >
+              <View>
+                <View>
+                  <Icon
+                    name="Google"
+                  />
+                  <Text>
+                    Sign up with Google
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View>
+            <View
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+            >
+              <View>
+                <View>
+                  <Text
+                    allowFontScaling={false}
+                    customIconRender={[Function]}
+                    onPress={[Function]}
+                    style={
+                      Array [
+                        Object {
+                          "color": undefined,
+                          "fontSize": 12,
+                        },
+                        Object {
+                          "color": "#FFFFFF",
+                          "fontSize": 16,
+                          "paddingRight": 5,
+                        },
+                        Object {
+                          "fontFamily": "FontAwesome5Brands-Regular",
+                          "fontStyle": "normal",
+                          "fontWeight": "normal",
+                        },
+                        Object {
+                          "fontWeight": "400",
+                        },
+                      ]
+                    }
+                    text="Continue with Facebook"
+                  >
+                    
+                  </Text>
+                  <Text>
+                    Continue with Facebook
+                  </Text>
+                </View>
+              </View>
             </View>
           </View>
         </View>
-      </View>
-      <View>
-        <Text>
-          Or sign up using:
-        </Text>
         <View>
+          <Text>
+            Already have an account? 
+          </Text>
           <View
             accessible={true}
             collapsable={false}
             focusable={true}
-            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -69,24 +167,19 @@ exports[`Signup Specification renders with defaults 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
           >
-            <View>
-              <View>
-                <Icon
-                  name="Google"
-                />
-                <Text>
-                  Sign up with Google
-                </Text>
-              </View>
-            </View>
+            <Text>
+              Log in now
+            </Text>
           </View>
         </View>
         <View>
+          <Text>
+            Your data is safe with Hylo. By clicking the "Sign Up" button above you are agreeing to these terms:
+          </Text>
           <View
             accessible={true}
             collapsable={false}
             focusable={true}
-            nativeID="animatedComponent"
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -95,90 +188,13 @@ exports[`Signup Specification renders with defaults 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
           >
-            <View>
-              <View>
-                <Text
-                  allowFontScaling={false}
-                  customIconRender={[Function]}
-                  onPress={[Function]}
-                  style={
-                    Array [
-                      Object {
-                        "color": undefined,
-                        "fontSize": 12,
-                      },
-                      Object {
-                        "color": "#FFFFFF",
-                        "fontSize": 16,
-                        "paddingRight": 5,
-                      },
-                      Object {
-                        "fontFamily": "FontAwesome5Brands-Regular",
-                        "fontStyle": "normal",
-                        "fontWeight": "normal",
-                      },
-                      Object {
-                        "fontWeight": "400",
-                      },
-                    ]
-                  }
-                  text="Continue with Facebook"
-                >
-                  
-                </Text>
-                <Text>
-                  Continue with Facebook
-                </Text>
-              </View>
-            </View>
+            <Text>
+              https://www.hylo.com/terms
+            </Text>
           </View>
-        </View>
-      </View>
-      <View>
-        <Text>
-          Already have an account? 
-        </Text>
-        <View
-          accessible={true}
-          collapsable={false}
-          focusable={false}
-          nativeID="animatedComponent"
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-        >
-          <Text>
-            Log in now
-          </Text>
-        </View>
-      </View>
-      <View>
-        <Text>
-          Your data is safe with Hylo. By clicking the "Sign Up" button above you are agreeing to these terms:
-        </Text>
-        <View
-          accessible={true}
-          collapsable={false}
-          focusable={true}
-          nativeID="animatedComponent"
-          onClick={[Function]}
-          onResponderGrant={[Function]}
-          onResponderMove={[Function]}
-          onResponderRelease={[Function]}
-          onResponderTerminate={[Function]}
-          onResponderTerminationRequest={[Function]}
-          onStartShouldSetResponder={[Function]}
-        >
-          <Text>
-            https://www.hylo.com/terms
-          </Text>
         </View>
       </View>
     </View>
-  </View>
-</RCTScrollView>
+  </RCTScrollView>
+</View>
 `;

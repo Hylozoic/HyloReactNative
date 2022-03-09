@@ -9,7 +9,7 @@ import reducer,
   SAVE_GROUP_URL,
   CLEAR_CREATE_GROUP_STORE,
   FETCH_URL_EXISTS,
-  defaultState
+  initialState
 }
   from './CreateGroupFlow.store'
 
@@ -29,7 +29,7 @@ describe('reducer', () => {
         }
       }
       const newState = reducer(state, action)
-      expect(newState).toEqual(defaultState)
+      expect(newState).toEqual(initialState)
     })
   })
   describe('on FETCH_URL_EXISTS', () => {

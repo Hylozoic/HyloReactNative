@@ -1,10 +1,7 @@
 import { createSelector } from 'reselect'
 import { createSelector as ormCreateSelector } from 'redux-orm'
 import { get, find, pick } from 'lodash/fp'
-import { humanDate } from 'hylo-utils/text'
-import { decode } from 'ent'
-import striptags from 'striptags'
-
+import { TextHelpers } from 'hylo-shared'
 import orm from 'store/models'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
 import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
@@ -28,7 +25,7 @@ export const MARK_ALL_ACTIVITIES_READ = `${MODULE_NAME}/MARK_ALL_ACTIVITIES_READ
 export const UPDATE_NEW_NOTIFICATION_COUNT = `${MODULE_NAME}/UPDATE_NEW_NOTIFICATION_COUNT`
 export const UPDATE_NEW_NOTIFICATION_COUNT_PENDING = `${UPDATE_NEW_NOTIFICATION_COUNT}_PENDING`
 
-export const NOTIFICATION_TEXT_MAX = 100
+export const NOTIFICATION_TEXT_MAX = 76
 
 export function fetchNotifications (first = 20, offset = 0) {
   return {
@@ -137,16 +134,15 @@ export function updateNewNotificationCount () {
   }
 }
 
-export function presentedText (text) {
-  const stripped = striptags(text)
-  return decode(stripped.substring(0, NOTIFICATION_TEXT_MAX))
-}
+export const truncateHTML = html => TextHelpers.presentHTMLToText(html, { truncate: NOTIFICATION_TEXT_MAX }).replace(/\n/g, ' ')
+
+export const truncateText = text => TextHelpers.truncateText(text, NOTIFICATION_TEXT_MAX)
 
 export function refineActivity ({ action, actor, comment, group, post, meta }, { navigate }) {
   switch (action) {
     case ACTION_COMMENT_MENTION:
       return {
-        body: `wrote: ${presentedText(comment.text)}`,
+        body: `wrote: ${truncateHTML(comment.text)}`,
         header: 'mentioned you in a comment on',
         nameInHeader: true,
         onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
@@ -155,7 +151,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
 
     case ACTION_NEW_COMMENT:
       return {
-        body: `wrote: ${presentedText(comment.text)}`,
+        body: `wrote: ${truncateHTML(comment.text)}`,
         header: 'New Comment on',
         onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
         title: post.title
@@ -163,21 +159,22 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
 
     case ACTION_MENTION:
       return {
-        body: `wrote: ${presentedText(post.details)}`,
+        body: `wrote: ${truncateHTML(post.details)}`,
         header: 'mentioned you',
         onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
         nameInHeader: true
       }
 
-    case ACTION_TOPIC:
+    case ACTION_TOPIC: {
       const topicReason = find(r => r.startsWith('tag: '), meta.reasons)
       const topic = topicReason.split(': ')[1]
       return {
-        body: `wrote: ${presentedText(post.details)}`,
+        body: `wrote: ${truncateHTML(post.details)}`,
         header: 'New Post in',
         onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
         topic
       }
+    }
 
     case ACTION_JOIN_REQUEST:
       return {
@@ -186,9 +183,10 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
         header: 'New join request',
         nameInHeader: true,
         onPress: () => navigate('Group Settings', {
-          screen: 'Join Requests', params: {
-            groupId: group.id, groupSlug: group.slug 
-          } 
+          screen: 'Join Requests',
+          params: {
+            groupId: group.id, groupSlug: group.slug
+          }
         })
       }
 
@@ -201,7 +199,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
       }
     case ACTION_ANNOUNCEMENT:
       return {
-        body: `wrote: ${presentedText(post.title)}`,
+        body: `wrote: ${truncateText(post.title)}`,
         header: 'posted an announcement',
         onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
         nameInHeader: true
@@ -211,7 +209,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
 
 export function refineNotification (navigation) {
   return ({ activity, createdAt, id }, i, notifications) => {
-    const { action, actor, meta, unread } = activity
+    const { actor, meta, unread } = activity
     // Only show separator between read and unread notifications
 
     const avatarSeparator = i !== notifications.length - 1
@@ -223,7 +221,7 @@ export function refineNotification (navigation) {
       activityId: activity.id,
       actor: pick(['avatarUrl', 'name'], actor),
       avatarSeparator,
-      createdAt: humanDate(createdAt),
+      createdAt: TextHelpers.humanDate(createdAt),
       ...refineActivity(activity, navigation),
       unread,
       reasons: meta.reasons

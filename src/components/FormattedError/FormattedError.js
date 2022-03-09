@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import { uniq, merge } from 'lodash/fp'
-import LinkButton from 'navigation/linking/LinkButton'
+import LinkButton from 'components/LinkButton'
 import Triangle from 'react-native-triangle'
 import { amaranth, white } from 'style/colors'
 
@@ -17,7 +17,7 @@ export function testJSON (text) {
 }
 
 export function errorMessages (type, action) {
-  var err
+  let err
 
   if (testJSON(type)) {
     err = JSON.parse(type)
@@ -56,7 +56,7 @@ export const defaultStyles = {
   errorText: {
     color: white,
     fontSize: 14
-  },  
+  },
   errorTriangle: {
     backgroundColor: amaranth
   }
@@ -75,13 +75,13 @@ export default function FormattedError ({
   const noPasswordMatch = error.match(/password account not found. available: \[(.*)\]/)
 
   if (noPasswordMatch) {
-    var options = uniq(noPasswordMatch[1].split(',')
+    const options = uniq(noPasswordMatch[1].split(',')
       .map(option => ({
-        'google': 'Google',
+        google: 'Google',
         'google-token': 'Google',
-        'facebook': 'Facebook',
+        facebook: 'Facebook',
         'facebook-token': 'Facebook',
-        'linkedin': 'LinkedIn',
+        linkedin: 'LinkedIn',
         'linkedin-token': 'LinkedIn'
       }[option])))
 
@@ -112,10 +112,12 @@ export function Error ({ children, styles }) {
   return (
     <View style={styles.errorWrapper}>
       {!styles.hideErrorTriangle && (
-        <Triangle styles={styles?.errorTriangle}
+        <Triangle
+          styles={styles?.errorTriangle}
           width={10} height={5}
           color={styles.errorTriangle?.backgroundColor}
-          direction='up' />
+          direction='up'
+        />
       )}
       <View style={styles.error}>
         {children}

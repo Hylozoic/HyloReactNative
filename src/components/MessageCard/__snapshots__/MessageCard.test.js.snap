@@ -7,35 +7,22 @@ exports[`matches the last snapshot 1`] = `
   />
   <View>
     <Text />
-    <HtmlView
-      RootComponent={[Function]}
-      addLineBreaks={false}
-      onError={[Function]}
-      onLinkLongPress={null}
-      onLinkPress={[Function]}
-      stylesheet={
+    <Memo
+      baseStyle={
         Object {
-          "a": Object {
-            "color": "#0DC39F",
-          },
+          "marginTop": 3,
+        }
+      }
+      classesStyles={
+        Object {
           "p": Object {
-            "marginBottom": 12,
+            "margin": 0,
+            "padding": 0,
           },
         }
       }
-      textComponentProps={
-        Object {
-          "style": Array [
-            Object {
-              "color": "#5D757A",
-              "fontFamily": "Circular-Book",
-              "marginTop": 3,
-            },
-            undefined,
-          ],
-        }
-      }
-      value="<p>Hi</p>"
+      html="<p>Hi</p>
+"
     />
     <Text>
       1 mo ago

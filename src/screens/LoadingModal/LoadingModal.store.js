@@ -1,11 +1,11 @@
 export const MODULE_NAME = 'LoadingModal'
 export const SHOW_LOADING_MODAL = `${MODULE_NAME}/SHOW_LOADING_MODAL`
 
-export const defaultState = {
+export const initialState = {
   shouldDisplay: false
 }
 
-export default function reducer (state = defaultState, action) {
+export default function reducer (state = initialState, action) {
   const { type, payload } = action
   if (type === SHOW_LOADING_MODAL) {
     return {

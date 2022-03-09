@@ -1,5 +1,5 @@
 import { createSelector as ormCreateSelector } from 'redux-orm'
-import { get } from 'lodash/fp'
+import gql from 'graphql-tag'
 import orm from 'store/models'
 
 const MODULE_NAME = 'Feed'
@@ -11,21 +11,23 @@ export function fetchGroupTopic (topicName, groupSlug) {
   return {
     type: FETCH_GROUP_TOPIC,
     graphql: {
-      query: `query ($topicName: String, $groupSlug: String) {
-        groupTopic(topicName: $topicName, groupSlug: $groupSlug) {
-          id
-          isSubscribed
-          followersTotal
-          postsTotal
-          topic {
+      query: gql`
+        query GroupTopicQuery($topicName: String, $groupSlug: String) {
+          groupTopic(topicName: $topicName, groupSlug: $groupSlug) {
             id
-            name
-          }
-          group {
-            id
+            isSubscribed
+            followersTotal
+            postsTotal
+            topic {
+              id
+              name
+            }
+            group {
+              id
+            }
           }
         }
-      }`,
+      `,
       variables: { topicName, groupSlug }
     },
     meta: {
@@ -39,11 +41,13 @@ export function setTopicSubscribe (topicId, groupId, isSubscribing) {
   return {
     type: SET_TOPIC_SUBSCRIBE,
     graphql: {
-      query: `mutation($topicId: ID, $groupId: ID, $isSubscribing: Boolean) {
-        subscribe(topicId: $topicId, groupId: $groupId, isSubscribing: $isSubscribing) {
-          success
+      query: gql`
+        mutation TopicSubscribeMutation($topicId: ID, $groupId: ID, $isSubscribing: Boolean) {
+          subscribe(topicId: $topicId, groupId: $groupId, isSubscribing: $isSubscribing) {
+            success
+          }
         }
-      }`,
+      `,
       variables: {
         topicId,
         groupId,

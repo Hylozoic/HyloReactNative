@@ -63,7 +63,6 @@ describe('mergeProps', () => {
     it('goToGroup', () => {
       const group = { id: 'testgroup' }
       props.goToGroup(group)
-      expect(dispatchProps.selectGroup).toHaveBeenCalled()
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
     })
 

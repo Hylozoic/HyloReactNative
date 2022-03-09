@@ -1,5 +1,5 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './NewMessage.connector'
-import { MODULE_NAME, defaultState, FETCH_SUGGESTIONS, FETCH_CONTACTS, FETCH_RECENT_CONTACTS } from './NewMessage.store.js'
+import { MODULE_NAME, initialState, FETCH_SUGGESTIONS, FETCH_CONTACTS, FETCH_RECENT_CONTACTS } from './NewMessage.store.js'
 
 describe('mapStateToProps', () => {
   it('returns the right keys and gets the pending values', () => {
@@ -9,7 +9,7 @@ describe('mapStateToProps', () => {
         [FETCH_CONTACTS]: 'contacts',
         [FETCH_RECENT_CONTACTS]: 'recent'
       },
-      [MODULE_NAME]: defaultState,
+      [MODULE_NAME]: initialState,
       queryResults: {}
     }
     expect(mapStateToProps(state, {}))

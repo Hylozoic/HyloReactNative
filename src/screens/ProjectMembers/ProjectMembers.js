@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React from 'react'
 import { View } from 'react-native'
 import { modalScreenName } from 'navigation/linking/helpers'

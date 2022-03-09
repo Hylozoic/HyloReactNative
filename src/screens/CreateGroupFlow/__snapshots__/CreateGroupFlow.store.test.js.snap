@@ -108,12 +108,12 @@ Object {
   }
   
   joinQuestions {
-    items {
-      id
-      questionId
-      text
+      items {
+        id
+        questionId
+        text
+      }
     }
-  }
   
 
           }

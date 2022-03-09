@@ -1,6 +1,5 @@
 import { get } from 'lodash/fp'
-import { divToP, textLength } from 'hylo-utils/text'
-import { AnalyticsEvents } from 'hylo-utils/constants'
+import { TextHelpers, AnalyticsEvents } from 'hylo-shared'
 import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
 
 export const MODULE_NAME = 'PostEditor'
@@ -28,7 +27,7 @@ export function createPost (post) {
     sendAnnouncement
   } = post
   const groupIds = groups.map(c => c.id)
-  const preprocessedDetails = divToP(details)
+
   return {
     type: CREATE_POST,
     graphql: {
@@ -68,7 +67,7 @@ export function createPost (post) {
       variables: {
         type,
         title,
-        details: preprocessedDetails,
+        details: details,
         groupIds,
         startTime,
         endTime,
@@ -88,7 +87,7 @@ export function createPost (post) {
       },
       analytics: {
         eventName: AnalyticsEvents.POST_CREATED,
-        detailsLength: textLength(preprocessedDetails),
+        detailsLength: TextHelpers.textLengthHTML(details),
         isAnnouncement: sendAnnouncement
       }
     }
@@ -111,7 +110,7 @@ export function createProject (post) {
     sendAnnouncement
   } = post
   const groupIds = groups.map(c => c.id)
-  const preprocessedDetails = divToP(details)
+
   return {
     type: CREATE_PROJECT,
     graphql: {
@@ -148,7 +147,7 @@ export function createProject (post) {
       }`,
       variables: {
         title,
-        details: preprocessedDetails,
+        details,
         groupIds,
         startTime,
         endTime,
@@ -168,7 +167,7 @@ export function createProject (post) {
       },
       analytics: {
         eventName: AnalyticsEvents.POST_CREATED,
-        detailsLength: textLength(preprocessedDetails),
+        detailsLength: TextHelpers.textLengthHTML(details),
         isAnnouncement: sendAnnouncement
       }
     }
@@ -192,7 +191,7 @@ export function updatePost (post) {
     memberIds = []
   } = post
   const groupIds = groups.map(c => c.id)
-  const preprocessedDetails = divToP(details)
+
   return {
     type: UPDATE_POST,
     graphql: {
@@ -231,7 +230,7 @@ export function updatePost (post) {
         id,
         type,
         title,
-        details: preprocessedDetails,
+        details: details,
         groupIds,
         startTime,
         endTime,
@@ -251,16 +250,10 @@ export function updatePost (post) {
       },
       analytics: {
         eventName: AnalyticsEvents.POST_UPDATED,
-        detailsLength: textLength(preprocessedDetails)
+        detailsLength: TextHelpers.textLengthHTML(details)
       }
     }
   }
-}
-
-export default function reducer (state = {}, action) {
-  switch (action.type) {
-  }
-  return state
 }
 
 export function ormSessionReducer (session, action) {

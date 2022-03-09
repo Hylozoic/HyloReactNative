@@ -1,53 +1,52 @@
 import React from 'react'
-import HTMLView from 'react-native-htmlview'
+import PropTypes from 'prop-types'
 import { Text, View } from 'react-native'
-import { present, sanitize } from 'hylo-utils/text'
-import { any, bool, shape, string } from 'prop-types'
-import urlHandler from 'navigation/linking/urlHandler'
-import richTextStyles from 'style/richTextStyles'
-
+import { TextHelpers } from 'hylo-shared'
+import HyloHTML from 'components/HyloHTML'
 import Avatar from 'components/Avatar'
-
 import styles from './MessageCard.style'
 
-export default function MessageCard ({ message, showTopic, showMember }) {
+export default function MessageCard ({ message }) {
   const { createdAt, creator, suppressCreator, suppressDate, text } = message
-
-  // TODO: move the linebreak replacement into the present function. See MBL-379
-  const presentedText = present(
-    sanitize(text).replace(/\n/g, '').replace('<p>&nbsp;</p>', ''))
-
-  const textStyles = [styles.text, suppressCreator && styles.marginTopNoCreator]
+  // TODO: Makrdown is being used on both Web and Mobile as some messages are HTML
+  //       and others are plain text with purposeful linebreaks.
+  const presentedText = TextHelpers.presentHTML(TextHelpers.markdown(text))
+  const textBaseStyle = Object.assign({}, { marginTop: 3 }, suppressCreator && styles.marginTopNoCreator)
+  const classesStyles = { p: { margin: 0, padding: 0 } }
 
   return (
     <View style={[styles.container, suppressCreator && styles.padLeftNoAvatar]}>
-      {!suppressCreator && <Avatar avatarUrl={creator.avatarUrl} />}
+      {!suppressCreator && (
+        <Avatar avatarUrl={creator.avatarUrl} />
+      )}
       <View style={[styles.body, suppressCreator && styles.padTopNoCreator]}>
-        {!suppressCreator && <Text style={styles.name}>{creator.name}</Text>}
-        <HTMLView
-          onLinkPress={url => urlHandler(url, showMember, showTopic)}
-          addLineBreaks={false}
-          stylesheet={richTextStyles}
-          textComponentProps={{ style: textStyles }}
-          value={presentedText}
+        {!suppressCreator && (
+          <Text style={styles.name}>{creator.name}</Text>
+        )}
+        <HyloHTML
+          baseStyle={textBaseStyle}
+          classesStyles={classesStyles}
+          html={presentedText}
         />
-        {!suppressDate && <Text style={styles.date}>{createdAt}</Text>}
+        {!suppressDate && (
+          <Text style={styles.date}>{createdAt}</Text>
+        )}
       </View>
     </View>
   )
 }
 
 MessageCard.propTypes = {
-  message: shape({
-    id: any,
-    createdAt: string,
-    creator: shape({
-      id: any,
-      name: string,
-      avatarUrl: string
+  message: PropTypes.shape({
+    id: PropTypes.any,
+    createdAt: PropTypes.string,
+    creator: PropTypes.shape({
+      id: PropTypes.any,
+      name: PropTypes.string,
+      avatarUrl: PropTypes.string
     }),
-    suppressCreator: bool,
-    suppressDate: bool,
-    text: string
+    suppressCreator: PropTypes.bool,
+    suppressDate: PropTypes.bool,
+    text: PropTypes.string
   })
 }

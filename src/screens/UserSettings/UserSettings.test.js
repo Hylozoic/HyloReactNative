@@ -111,18 +111,18 @@ describe('UserSettings', () => {
     })
   })
 
-  describe('editPassword', () => {
+  describe('handleEditPassword', () => {
     it('sets the state', () => {
       const props = {
         updateUserSettings: jest.fn(() => Promise.resolve({}))
       }
       const instance = ReactTestRenderer.create(<UserSettings {...props} />).getInstance()
-      instance.editPassword()
+      instance.handleEditPassword()
       expect(instance.state.editingPassword).toEqual(true)
     })
   })
 
-  describe('cancelPassword', () => {
+  describe('handleCancelPassword', () => {
     it('sets the state, setting changed to true when email has changed', () => {
       const currentUser = { email: 'moo@moo.com' }
       const instance = ReactTestRenderer.create(
@@ -140,7 +140,7 @@ describe('UserSettings', () => {
           confirmPassword: 'too different'
         }
       })
-      instance.cancelPassword()
+      instance.handleCancelPassword()
       expect(instance.state).toMatchSnapshot()
     })
 
@@ -161,7 +161,7 @@ describe('UserSettings', () => {
           confirmPassword: 'too different'
         }
       })
-      instance.cancelPassword()
+      instance.handleCancelPassword()
       expect(instance.state).toMatchSnapshot()
     })
   })
@@ -274,13 +274,9 @@ describe('UserSettings', () => {
       Alert.alert = origAlert
     })
   })
-  
+
   describe('loginWithFacebook', () => {
     describe('when cancelled', () => {
-      beforeEach(() => {
-
-      })
-
       it('calls onLogin with false', () => {
         LoginManager.logInWithReadPermissions.mockImplementation(() => Promise.resolve({ isCancelled: true }))
         const onLogin = jest.fn()

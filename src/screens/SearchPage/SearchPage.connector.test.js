@@ -1,8 +1,8 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './SearchPage.connector'
-import { MODULE_NAME, defaultState } from './SearchPage.store'
+import { MODULE_NAME, initialState } from './SearchPage.store'
 
 const minState = {
-  [MODULE_NAME]: defaultState,
+  [MODULE_NAME]: initialState,
   queryResults: {},
   pending: {}
 }

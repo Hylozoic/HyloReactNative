@@ -1,30 +1,14 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import getEmptyState from 'store/getEmptyState'
-import { render, cleanup } from '@testing-library/react-native'
-import { createMockStore } from 'util/testing'
+import { render } from '@testing-library/react-native'
+import { TestRoot } from 'util/testing'
 import ImagePicker from 'components/ImagePicker'
 
-jest.mock('react-native/Libraries/ActionSheetIOS/ActionSheetIOS', () => ({
-  showActionSheetWithOptions: jest.fn()
-}))
-
-// jest.mock('components/ImagePicker/ImagePicker', () => ({
-//   __esModule: true,
-//   ...jest.requireActual('components/ImagePicker/ImagePicker'),
-//   showImagePicker: jest.fn()
-// }))
-
 describe('ImagePicker Specification', () => {
-  afterEach(cleanup)
-
   it('default render matches snapshot', async () => {
-    const state = getEmptyState()
-
     const { toJSON } = render(
-      <Provider store={createMockStore(state)}>
+      <TestRoot>
         <ImagePicker disabled={false} />
-      </Provider>
+      </TestRoot>
     )
     expect(await toJSON()).toMatchSnapshot()
   })

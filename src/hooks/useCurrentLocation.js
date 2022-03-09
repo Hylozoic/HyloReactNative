@@ -1,11 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { Text, TouchableOpacity, Alert } from 'react-native'
+import { useState } from 'react'
+import {
+  Alert, Linking, Platform,
+  PermissionsAndroid, ToastAndroid
+} from 'react-native'
 import Geolocation from 'react-native-geolocation-service'
-import { propTypesForItemRowComponent } from 'screens/ItemChooser'
-import { pollingFindOrCreateLocation } from 'screens/LocationPicker/LocationPicker.store'
-import Icon from 'components/Icon'
-import { rhino80, rhino20, caribbeanGreen } from 'style/colors'
-import { useDispatch } from 'react-redux'
 
 // TODO: WIP -- has not been used or tested yet
 export default function useCurrentLocation () {
@@ -34,12 +32,12 @@ export default function useCurrentLocation () {
 
     if (status === 'disabled') {
       Alert.alert(
-        `Turn on Location Services to allow "${appConfig.displayName}" to determine your location.`,
+        'Turn on Location Services to allow "Hylo" to determine your location.',
         '',
         [
           { text: 'Go to Settings', onPress: openSetting },
           { text: "Don't Use Location", onPress: () => {} }
-        ],
+        ]
       )
     }
 
@@ -115,7 +113,7 @@ export default function useCurrentLocation () {
         forceRequestLocation: forceLocation,
         forceLocationManager: useLocationManager,
         showLocationDialog: locationDialog
-      },
+      }
     )
   }
 

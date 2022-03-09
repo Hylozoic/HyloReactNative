@@ -1,27 +1,15 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import TestRenderer, { act } from 'react-test-renderer'
-import { Provider } from 'react-redux'
-import { PostDetails, CommentPrompt, JoinProjectButton, ProjectMembers } from './PostDetails'
-import { Linking, TouchableOpacity } from 'react-native'
-import { createMockStore } from 'util/testing'
+import { PostDetails, JoinProjectButton } from './PostDetails'
+import { TestRoot } from 'util/testing'
 import MockedScreen from 'util/testing/MockedScreen'
 import orm from 'store/models'
 
 // TODO: Fix tests to have test Redux store for Redux hooks:
 //       https://gist.github.com/krawaller/e5d40217658fa132f3c3904987e467cd
 
-jest.mock('util/websockets', () => {
-  const socket = {
-    post: jest.fn(),
-    on: jest.fn()
-  }
-
-  return {
-    getSocket: () => Promise.resolve(socket),
-    socketUrl: path => 'sockethost' + path
-  }
-})
+jest.mock('components/SocketSubscriber', () => () => null)
 
 const post = {
   id: '91',
@@ -62,7 +50,7 @@ const props = {
   fetchPost: jest.fn(),
   showMember: jest.fn(),
   showTopic: jest.fn(),
-  createComment: jest.fn(() => Promise.resolve({ success: true })),
+  createComment: jest.fn(async () => ({ success: true })),
   goToGroup: jest.fn(),
   navigation: {
     setOptions: jest.fn(),
@@ -81,30 +69,33 @@ const state = {
 describe('PostDetails', () => {
   it('renders correctly', () => {
     const renderer = TestRenderer.create(
-      <Provider store={createMockStore(state)}>
+      <TestRoot state={state}>
         <MockedScreen>
           {() => <PostDetails {...props} />}
         </MockedScreen>
-      </Provider>
+      </TestRoot>
     )
     expect(renderer.toJSON()).toMatchSnapshot()
   })
 
   it('handleCreateComment success', async () => {
     const renderer = TestRenderer.create(
-      <Provider store={createMockStore(state)}>
+      <TestRoot state={state}>
         <MockedScreen>
           {() => <PostDetails {...props} />}
         </MockedScreen>
-      </Provider>
+      </TestRoot>
     )
     const instance = renderer.root.findByType(PostDetails).instance
-    const commentText = 'some text [amention:0] #topic <some encoded stuff>'
+    const commentText = 'some text [amention](0) #topic <shouldn\'t encode entities>'
     instance.setState({ commentText })
     await act(async () => (
-      instance.handleCreateComment('some text [amention:3332] #topic <some encoded stuff>')
+      instance.handleCreateComment(commentText)
     ))
-    expect(props.createComment).toHaveBeenCalledWith({ text: 'some text <a href="#" data-entity-type="mention" data-user-id="3332">amention</a> #topic &lt;some encoded stuff&gt;', "parentCommentId": null })
+    expect(props.createComment).toHaveBeenCalledWith({
+      text: '<p>some text <a href="#" data-entity-type="mention" data-user-id="0">amention</a> #topic &lt;shouldn&#39;t encode entities&gt;</p>\n',
+      parentCommentId: null
+    })
     expect(instance.state.submitting).toBeFalsy()
     expect(instance.state.commentText).toBe('')
   })
@@ -115,11 +106,11 @@ describe('PostDetails', () => {
       createComment: jest.fn(() => Promise.resolve({ error: new Error('blah') }))
     }
     const renderer = TestRenderer.create(
-      <Provider store={createMockStore(state)}>
+      <TestRoot state={state}>
         <MockedScreen>
           {() => <PostDetails {...rejectionProps} />}
         </MockedScreen>
-      </Provider>
+      </TestRoot>
     )
     const instance = renderer.root.findByType(PostDetails).instance
     const commentText = 'some text [amention:0] #topic <some encoded stuff>'
@@ -133,11 +124,11 @@ describe('PostDetails', () => {
 
   it('handleCommentOnChange', async () => {
     const renderer = TestRenderer.create(
-      <Provider store={createMockStore(state)}>
+      <TestRoot state={state}>
         <MockedScreen>
           {() => <PostDetails {...props} />}
         </MockedScreen>
-      </Provider>
+      </TestRoot>
     )
     const instance = renderer.root.findByType(PostDetails).instance
     const commentText = 'some text [amention:0] #topic <some encoded stuff>'

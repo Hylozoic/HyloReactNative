@@ -37,6 +37,7 @@ build/
 .gradle
 local.properties
 *.iml
+*.hprof
 android/app/src/debug/res/values/strings.xml
 android/app/src/release/res/values/strings.xml
 
@@ -65,7 +66,6 @@ GoogleService-Info.plist
 .bundle/*
 vendor/*
 *.code-workspace
-.vscode
 
 # Bundle artifact
 *.jsbundle

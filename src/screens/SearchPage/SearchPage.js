@@ -2,12 +2,12 @@ import React from 'react'
 import { View, Text, TextInput, FlatList, TouchableOpacity } from 'react-native'
 import Loading from 'components/Loading'
 import Avatar from 'components/Avatar'
-import styles from './SearchPage.styles'
 import Icon from 'components/Icon'
 import UnwrappedPostCard from 'components/PostCard'
 import PostHeader from 'components/PostCard/PostHeader'
 import { PostTitle } from 'components/PostCard/PostBody/PostBody'
 import UnwrappedCommentCard from 'components/Comment'
+import styles from './SearchPage.styles'
 
 export default class SearchPage extends React.Component {
   state = {
@@ -127,23 +127,19 @@ export function Tab ({ id, label, filter, setSearchFilter }) {
 export function SearchResult ({ searchResult, goToPost, goToPerson }) {
   const { type, content } = searchResult
 
-  let component
-  switch (type) {
-    case 'Person':
-      component = <PersonCard person={content} goToPerson={goToPerson} />
-      break
-    case 'Post':
-      component = (
-        <PostCard post={content} goToPost={goToPost} />
-      )
-      break
-    case 'Comment':
-      component = <CommentCard comment={content} expanded={false} goToPost={goToPost} />
-      break
+  const resultComponent = type => {
+    switch (type) {
+      case 'Person':
+        return <PersonCard person={content} goToPerson={goToPerson} />
+      case 'Post':
+        return <PostCard post={content} goToPost={goToPost} />
+      case 'Comment':
+        return <CommentCard comment={content} expanded={false} goToPost={goToPost} />
+    }
   }
   return (
     <View style={styles.searchResult}>
-      {component}
+      {resultComponent(type)}
     </View>
   )
 }
@@ -191,11 +187,11 @@ export function CommentCard ({ comment, goToPost }) {
     <TouchableOpacity onPress={goToThisPost} style={styles.commentWrapper}>
       <View style={styles.commentPostHeader}>
         <PostHeader
+          postId={post.id}
           creator={post.creator}
           date={post.createdAt}
           type={post.type}
           pinned={post.pinned}
-          postId={post.id}
           showMember={goToThisPost}
           showTopic={goToThisPost}
           goToGroup={goToThisPost}

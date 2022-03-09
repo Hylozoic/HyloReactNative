@@ -39,7 +39,7 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export function mapDispatchToProps (dispatch, props) {
+export function mapDispatchToProps (dispatch) {
   return {
     fetchSearchResults: debounce(400, params => dispatch(fetchSearchResults(params))),
     ...bindActionCreators({

@@ -46,9 +46,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     goToGroup: group => {
-      navigation.closeDrawer()
       navigation.navigate('Feed', { groupId: group.id })
-      dispatchProps.selectGroup(group.id)
     },
     goToMyProfile: () => {
       navigation.navigate('Members', { screen: 'Member', params: { id: currentUser.id } })

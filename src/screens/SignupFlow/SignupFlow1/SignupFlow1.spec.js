@@ -1,27 +1,14 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import { NavigationContainer } from '@react-navigation/native'
-import getEmptyState from 'store/getEmptyState'
-import { render, cleanup } from '@testing-library/react-native'
-import { createMockStore } from 'util/testing'
+import { render } from '@testing-library/react-native'
+import { TestRoot } from 'util/testing'
+import MockedScreen from 'util/testing/MockedScreen'
 import SignupFlow1 from 'screens/SignupFlow/SignupFlow1'
 
-describe('SignupFlow1 Specification', () => {
-  afterEach(cleanup)
-
-  it('default render matches snapshot', async () => {
-    const state = getEmptyState()
-    const { toJSON } = render(
-      <Provider store={createMockStore(state)}>
-        <NavigationContainer>
-          <SignupFlow1
-            location='Hull'
-            saveAndNext={() => {}}
-            changeSetting={() => {}}
-          />
-        </NavigationContainer>
-      </Provider>
-    )
-    expect(await toJSON()).toMatchSnapshot()
-  })
+it('default render matches snapshot', async () => {
+  const { toJSON } = render(
+    <TestRoot>
+      <MockedScreen component={SignupFlow1} />
+    </TestRoot>
+  )
+  expect(await toJSON()).toMatchSnapshot()
 })

@@ -132,6 +132,7 @@ exports[`SettingsRow matches snapshot when expanded 1`] = `
     </Text>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
@@ -151,7 +152,6 @@ exports[`SettingsRow matches snapshot when expanded 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
-      nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -168,7 +168,6 @@ exports[`SettingsRow matches snapshot when expanded 1`] = `
       accessible={true}
       collapsable={false}
       focusable={true}
-      nativeID="animatedComponent"
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}

@@ -36,7 +36,7 @@ export default class RoundCheckbox extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this.scaleAndOpacityOfCheckbox = new Animated.Value(props.checked ? 1 : 0);
+    this.scaleAndOpacityOfCheckbox = new Animated.Value(props.checked ? 1 : 0)
   }
 
   componentDidUpdate(prevProps) {

@@ -99,9 +99,7 @@ exports[`MemberProfile matches the last snapshot 1`] = `
       ]
     }
     keyExtractor={[Function]}
-    numColumns={1}
     onEndReached={[Function]}
-    removeClippedSubviews={false}
     renderItem={[Function]}
   />
 </View>

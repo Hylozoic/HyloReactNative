@@ -12,7 +12,6 @@ const getPost = ormCreateSelector(
 
 export default getPost
 
-
 export const getPresentedPost = createSelector(
   getPost,
   (state, props) => get('id', props),

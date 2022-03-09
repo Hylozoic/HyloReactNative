@@ -4,9 +4,11 @@ import { RESPONSES } from 'store/models/EventInvitation'
 
 export default (post, groupId) => {
   if (!post) return null
+
   const postMembership = post.postMemberships.filter(p =>
     Number(p.group) === Number(groupId)).toRefArray()[0]
   const pinned = postMembership && postMembership.pinned
+
   return {
     ...post.ref,
     creator: post.creator?.ref,

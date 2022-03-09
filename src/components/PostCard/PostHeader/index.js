@@ -1,6 +1,3 @@
-import { withNavigation } from '@react-navigation/compat'
+import component from './PostHeader'
 
-import PostHeader from './PostHeader'
-import connector from './PostHeader.connector'
-
-export default withNavigation(connector(PostHeader))
+export default component

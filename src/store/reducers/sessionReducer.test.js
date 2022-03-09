@@ -1,9 +1,11 @@
-import sessionReducer from './sessionReducer'
+import sessionReducer, { initialState } from './sessionReducer'
 import { LOGIN } from 'screens/Login/actions'
 import { 
   FETCH_CURRENT_USER,
+  LOGOUT,
   SELECT_GROUP
 } from 'store/constants'
+import { createInitialState } from 'store'
 
 describe('on LOGIN', () => {
   it('stores an error message', () => {
@@ -29,6 +31,25 @@ describe('on LOGIN', () => {
       signedIn: true,
       defaultLoginEmail: 'foo@bar.com'
     })
+  })
+})
+
+describe('on LOGOUT', () => {
+  it('resets to initial state on logout', () => {
+    const state = { foo: 'bar' }
+    const action = {
+      type: LOGOUT
+    }
+    const newState = sessionReducer(state, action)
+    expect(newState).toEqual(initialState)
+  })
+  it('preserves session.returnToPath on logout', () => {
+    sessionReducer(createInitialState(), {})
+    const returnToPath = 'path/to/return/to'
+    const state = { returnToPath }
+    const action = { type: LOGOUT }
+    const newState = sessionReducer(state, action)
+    expect(newState.returnToPath).toEqual(returnToPath)
   })
 })
 

@@ -1,15 +1,10 @@
 import 'react-native'
 import React from 'react'
-import ReactShallowRenderer from 'react-test-renderer/shallow'
-import { render, cleanup } from '@testing-library/react-native'
-import Feed from './Feed'
-import { Provider } from 'react-redux'
-import orm from 'store/models'
-import { createMockStore } from 'util/testing'
-import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-
-afterEach(cleanup)
+import ReactShallowRenderer from 'react-test-renderer/shallow'
+import { render } from '@testing-library/react-native'
+import { TestRoot } from 'util/testing'
+import Feed from './Feed'
 
 it('renders correctly if currentUserHasMemberships', () => {
   const group = {
@@ -22,7 +17,7 @@ it('renders correctly if currentUserHasMemberships', () => {
 
   const renderer = new ReactShallowRenderer()
   renderer.render(
-    <NavigationContainer>
+    <TestRoot>
       <Feed
         group={group}
         currentUser={currentUser}
@@ -35,7 +30,7 @@ it('renders correctly if currentUserHasMemberships', () => {
         goToGroup={() => {}}
         topicName='amazing'
       />
-    </NavigationContainer>
+    </TestRoot>
   )
   const actual = renderer.getRenderOutput()
 
@@ -53,7 +48,7 @@ it('renders correctly if currentUserHasMemberships is false', () => {
 
   const renderer = new ReactShallowRenderer()
   renderer.render(
-    <NavigationContainer>
+    <TestRoot>
       <Feed
         group={group}
         currentUser={currentUser}
@@ -65,7 +60,7 @@ it('renders correctly if currentUserHasMemberships is false', () => {
         goToGroup={() => {}}
         topicName='amazing'
       />
-    </NavigationContainer>
+    </TestRoot>
   )
   const actual = renderer.getRenderOutput()
 
@@ -73,13 +68,6 @@ it('renders correctly if currentUserHasMemberships is false', () => {
 })
 
 it('calls fetchGroupTopic on componentDidMount', () => {
-  const state = {
-    orm: orm.getEmptyState(),
-    FeedList: {},
-    queryResults: {},
-    pending: {}
-  }
-
   const props = {
     navigation: {},
     fetchGroupTopic: jest.fn(),
@@ -94,25 +82,20 @@ it('calls fetchGroupTopic on componentDidMount', () => {
   const TestStack = createStackNavigator()
 
   const component = (
-    <Provider store={createMockStore(state)}>
-      <NavigationContainer>
-        <TestStack.Navigator>
-          <TestStack.Screen name='Feed'>
-            {screenProps => (
-              <Feed {...props} {...screenProps} />
-            )}
-          </TestStack.Screen>
-        </TestStack.Navigator>
-      </NavigationContainer>
-    </Provider>
+    <TestRoot>
+      <TestStack.Navigator>
+        <TestStack.Screen name='Feed'>
+          {screenProps => (
+            <Feed {...props} {...screenProps} />
+          )}
+        </TestStack.Screen>
+      </TestStack.Navigator>
+    </TestRoot>
   )
   const { toJSON } = render(component)
 
-  expect(props.fetchGroupTopic).toHaveBeenCalledTimes(1)
-
   expect(toJSON()).toMatchSnapshot()
 })
-
 
 // From FeedBanner
 //
@@ -213,12 +196,3 @@ it('calls fetchGroupTopic on componentDidMount', () => {
 //     expect(actual).toMatchSnapshot()
 //   })
 // })
-
-
-
-
-
-
-
-
-

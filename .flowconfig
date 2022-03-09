@@ -25,6 +25,8 @@ emoji=true
 
 exact_by_default=true
 
+format.bracket_spacing=false
+
 module.file_ext=.js
 module.file_ext=.json
 module.file_ext=.ios.js
@@ -49,7 +51,6 @@ deprecated-type=warn
 unsafe-getters-setters=warn
 unnecessary-invariant=warn
 signature-verification-failure=warn
-deprecated-utility=error
 
 [strict]
 deprecated-type
@@ -61,4 +62,4 @@ untyped-import
 untyped-type-import
 
 [version]
-^0.149.0
+^0.162.0
