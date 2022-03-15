@@ -1,17 +1,6 @@
-export const LOGIN = 'LOGIN'
 export const LOGIN_WITH_APPLE = 'LOGIN_WITH_APPLE'
 export const LOGIN_WITH_FACEBOOK = 'LOGIN_WITH_FACEBOOK'
 export const LOGIN_WITH_GOOGLE = 'LOGIN_WITH_GOOGLE'
-
-export function login (email, password) {
-  return {
-    type: LOGIN,
-    payload: {
-      api: { method: 'post', path: '/noo/login', params: { email, password } }
-    },
-    meta: { email }
-  }
-}
 
 export function loginWithApple (params) {
   return {

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
+import login from 'store/actions/login'
 import {
-  login,
   loginWithApple,
   loginWithFacebook,
   loginWithGoogle

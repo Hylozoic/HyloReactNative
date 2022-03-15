@@ -1,4 +1,4 @@
-import { omit } from 'lodash/fp'
+import { get } from 'lodash/fp'
 
 export const MODULE_NAME = 'SignupFlow'
 export const UPDATE_LOCAL_USER_SETTINGS = `${MODULE_NAME}/UPDATE_LOCAL_USER_SETTINGS`
@@ -68,21 +68,42 @@ export function updateLocalUserSettings (settings) {
   }
 }
 
-export function signup ({ email, name, password }) {
+// TODO: Previously was expecting to also send email address?
+export function signup (name, password) {
   return {
     type: SIGNUP,
-    payload: {
-      api: {
-        method: 'post',
-        path: '/noo/user',
-        params: {
-          name,
-          email,
-          email_validated: true,
-          password,
-          login: true
+    graphql: {
+      query: `mutation ($name: String, $password: String) {
+        register(name: $name, password: $password) {
+          id
+          email
+          emailValidated
+          hasRegistered
+          name
+          settings {
+            alreadySeenTour
+            digestFrequency
+            dmNotifications
+            commentNotifications
+            signupInProgress
+            streamViewMode
+            streamSortBy
+            streamPostType
+          }
         }
+      }`,
+      variables: {
+        name,
+        password
       }
+    },
+    meta: {
+      extractModel: [
+        {
+          getRoot: get('register'),
+          modelName: 'Me'
+        }
+      ]
     }
   }
 }
