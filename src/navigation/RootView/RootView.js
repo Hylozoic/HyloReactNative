@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
+import { useDispatch, useSelector } from 'react-redux'
 import { navigationRef } from 'navigation/linking/helpers'
 import RNBootSplash from 'react-native-bootsplash'
 import RootNavigator from 'navigation/RootNavigator'
@@ -9,20 +10,51 @@ import customLinking, {
   INITIAL_NAV_STATE,
   navigateToLinkingPath
 } from 'navigation/linking'
+
+import { FETCH_CURRENT_USER } from 'store/constants'
+import { register as registerOneSignal } from 'util/onesignal'
+import registerDevice from 'store/actions/registerDevice'
+import fetchCurrentUser from 'store/actions/fetchCurrentUser'
+import selectGroup from 'store/actions/selectGroup'
+import getMe from 'store/selectors/getMe'
+import { getLastViewedGroup } from 'store/models/Me'
+import getSignedIn from 'store/selectors/getSignedIn'
+import getSignupInProgress from 'store/selectors/getSignupInProgress'
+import getReturnToPath from 'store/selectors/getReturnToPath'
+import setReturnToPath from 'store/actions/setReturnToPath'
 import SocketListener from 'components/SocketListener'
 import LoadingScreen from 'screens/LoadingScreen'
 
-export default function RootView ({
-  loading,
-  signedIn,
-  signupInProgress,
-  currentUser,
-  loadCurrentUserSession,
-  returnToPath,
-  setReturnToPath
-}) {
+export const SIGNUP_STATE = {
+  EmailValidation: 'EmailValidation',
+  AccountDetails: 'AccountDetails',
+  ProfileDetails: 'ProfileDetails',
+  Complete: 'Complete'
+}
+
+export function getSignupState (currentUser) {
+  if (!currentUser) throw new Error('currentUser must be provided')
+
+  const { emailValidated, hasRegistered, settings: { signupInProgress } } = currentUser
+
+  if (!emailValidated) return SIGNUP_STATE.EmailValidation
+  if (!hasRegistered) return SIGNUP_STATE.AccountDetails
+  if (signupInProgress) return SIGNUP_STATE.ProfileDetails
+
+  return SIGNUP_STATE.Complete
+}
+
+export default function RootView () {
   const [navIsReady, setNavIsReady] = useState(false)
-  const fullyAuthorized = !signupInProgress && currentUser
+  const dispatch = useDispatch()
+
+  const currentUser = useSelector(getMe)
+  const signedIn = useSelector(getSignedIn)
+  const signupInProgress = useSelector(getSignupInProgress)
+  const returnToPath = useSelector(getReturnToPath)
+  const loading = useSelector(state => state.pending[FETCH_CURRENT_USER])
+
+  const fullyAuthorized = currentUser && getSignupState(currentUser) === SIGNUP_STATE.Complete
 
   // Handle Push Notifications opened
   useEffect(() => OneSignal.setNotificationOpenedHandler(({ notification }) => {
@@ -40,10 +72,22 @@ export default function RootView ({
   // Handle loading of currentUser if already "signedIn" via Login screen
   // or on app launch when signedIn status is not yet known
   useEffect(() => {
-    if (!signedIn || (signedIn && !currentUser)) {
-      loadCurrentUserSession()
+    const loadCurrentUserSessionAsync = async () => {
+      const currentUserRaw = await dispatch(fetchCurrentUser())
+      if (currentUserRaw?.payload?.data?.me) {
+        const memberships = currentUserRaw?.payload?.data?.me?.memberships
+        const lastViewedgroupId = getLastViewedGroup(memberships)?.id
+        await dispatch(selectGroup(lastViewedgroupId))
+        await dispatch(registerOneSignal({ registerDevice }))
+        // Prompt for push on iOS
+        OneSignal.promptForPushNotificationsWithUserResponse(() => {})
+      }
     }
-  }, [signedIn])
+
+    if (!signedIn || (signedIn && !currentUser)) {
+      loadCurrentUserSessionAsync()
+    }
+  }, [dispatch, currentUser, signedIn])
 
   if (loading && !signupInProgress) {
     return (
