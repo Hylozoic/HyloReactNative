@@ -6,7 +6,7 @@ export default function login (email, password) {
     type: LOGIN,
     graphql: {
       query: `mutation ($email: String, $password: String) {
-        createSession(email: $email, password: $password) {
+        login(email: $email, password: $password) {
           me {
             id
             email
@@ -34,7 +34,7 @@ export default function login (email, password) {
     meta: {
       extractModel: [
         {
-          getRoot: get('createSession.me'),
+          getRoot: get('login.me'),
           modelName: 'Me'
         }
       ]

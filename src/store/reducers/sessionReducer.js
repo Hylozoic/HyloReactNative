@@ -1,6 +1,5 @@
 import { omit, get } from 'lodash/fp'
 import {
-  LOGIN,
   LOGIN_WITH_APPLE,
   LOGIN_WITH_FACEBOOK,
   LOGIN_WITH_GOOGLE
@@ -8,6 +7,7 @@ import {
 import { SIGNUP } from 'screens/SignupFlow/SignupFlow.store'
 import {
   FETCH_CURRENT_USER,
+  LOGIN,
   LOGIN_BY_TOKEN,
   LOGOUT,
   SELECT_GROUP,

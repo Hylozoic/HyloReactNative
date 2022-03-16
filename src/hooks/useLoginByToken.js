@@ -20,7 +20,7 @@ export default function useLoginByToken () {
   useEffect(() => {
     const asyncFunc = async () => {
       if (loginToken && loginTokenUserId) {
-        await logout()
+        await dispatch(logout())
         await dispatch(loginByToken(loginTokenUserId, loginToken))
       }
     }

@@ -23,7 +23,7 @@ export default function LoginByTokenHandler ({ navigation, route }) {
   useEffect(() => {
     const asyncFunc = async () => {
       if (loginToken && loginTokenUserId) {
-        await logout()
+        await dispatch(logout())
         await dispatch(loginByToken(loginTokenUserId, loginToken))
         if (returnToURLFromLink) {
           dispatch(setReturnToPath(returnToURLFromLink))
