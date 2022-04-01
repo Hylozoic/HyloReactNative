@@ -72,7 +72,7 @@ export default function SignupFlow2 ({ navigation }) {
             onChoice={choice => onChoice(choice)}
             onPendingChange={pending => setImagePickerPending(pending)}
             children={imagePickerChildren}
-          /> 
+          />
         </View>
       </ScrollView>
       <View style={styles.bottomBar}>

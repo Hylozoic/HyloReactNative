@@ -27,7 +27,7 @@ import ItemChooser from 'screens/ItemChooser'
 import LoadingScreen from 'screens/LoadingScreen'
 
 const Root = createStackNavigator()
-export default function RootNavigator ({ fullyAuthorized }) {
+export default function RootNavigator ({ isAuthorized }) {
   const navigatorProps = {
     screenOptions: {
       cardStyle: { backgroundColor: white }
@@ -37,7 +37,7 @@ export default function RootNavigator ({ fullyAuthorized }) {
   return (
     <Root.Navigator {...navigatorProps}>
       {/* Logged in */}
-      {fullyAuthorized && (
+      {isAuthorized && (
         <>
           <Root.Screen name='Drawer' component={DrawerNavigator} options={{ headerShown: false }} />
           <Root.Screen
@@ -68,7 +68,7 @@ export default function RootNavigator ({ fullyAuthorized }) {
         </>
       )}
       {/* Not logged-in or Signing-up */}
-      {!fullyAuthorized && (
+      {!isAuthorized && (
         <>
           <Root.Group
             screenOptions={{

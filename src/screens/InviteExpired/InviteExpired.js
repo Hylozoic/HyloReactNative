@@ -6,13 +6,13 @@ import {
   TouchableOpacity
 } from 'react-native'
 import { useSelector } from 'react-redux'
-import getSignedIn from 'store/selectors/getSignedIn'
+import { getAuthenticated } from 'store/selectors/getSignupState'
 import styles from './InviteExpired.styles'
 
 const axolotlImage = require('assets/Axel_Fretting.png')
 
 export default function InviteExpired ({ navigation }) {
-  const signedIn = useSelector(getSignedIn)
+  const isAuthenticated = useSelector(getAuthenticated)
   const goBack = () => navigation.goBack()
   const goToLogin = () => navigation.navigate('Login')
 
@@ -29,8 +29,8 @@ export default function InviteExpired ({ navigation }) {
       </View>
       <Image style={styles.image} resizeMode='stretch' source={axolotlImage} />
       <View style={styles.paddedRow}>
-        <TouchableOpacity onPress={signedIn ? goBack : goToLogin} style={styles.goToLoginButton}>
-          {signedIn
+        <TouchableOpacity onPress={isAuthenticated ? goBack : goToLogin} style={styles.goToLoginButton}>
+          {isAuthenticated
             ? <Text style={styles.goToLoginButtonText}>Go Back</Text>
             : <Text style={styles.goToLoginButtonText}>Log In</Text>
           }

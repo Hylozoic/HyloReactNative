@@ -6,55 +6,29 @@ import { navigationRef } from 'navigation/linking/helpers'
 import RNBootSplash from 'react-native-bootsplash'
 import RootNavigator from 'navigation/RootNavigator'
 import OneSignal from 'react-native-onesignal'
+import { register as registerOneSignal } from 'util/onesignal'
 import customLinking, {
   INITIAL_NAV_STATE,
   navigateToLinkingPath
 } from 'navigation/linking'
-
-import { FETCH_CURRENT_USER } from 'store/constants'
-import { register as registerOneSignal } from 'util/onesignal'
 import registerDevice from 'store/actions/registerDevice'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import selectGroup from 'store/actions/selectGroup'
 import getMe from 'store/selectors/getMe'
 import { getLastViewedGroup } from 'store/models/Me'
-import getSignedIn from 'store/selectors/getSignedIn'
-import getSignupInProgress from 'store/selectors/getSignupInProgress'
+import { getAuthorized } from 'store/selectors/getSignupState'
 import getReturnToPath from 'store/selectors/getReturnToPath'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import SocketListener from 'components/SocketListener'
 import LoadingScreen from 'screens/LoadingScreen'
 
-export const SIGNUP_STATE = {
-  EmailValidation: 'EmailValidation',
-  AccountDetails: 'AccountDetails',
-  ProfileDetails: 'ProfileDetails',
-  Complete: 'Complete'
-}
-
-export function getSignupState (currentUser) {
-  if (!currentUser) throw new Error('currentUser must be provided')
-
-  const { emailValidated, hasRegistered, settings: { signupInProgress } } = currentUser
-
-  if (!emailValidated) return SIGNUP_STATE.EmailValidation
-  if (!hasRegistered) return SIGNUP_STATE.AccountDetails
-  if (signupInProgress) return SIGNUP_STATE.ProfileDetails
-
-  return SIGNUP_STATE.Complete
-}
-
 export default function RootView () {
-  const [navIsReady, setNavIsReady] = useState(false)
   const dispatch = useDispatch()
-
-  const currentUser = useSelector(getMe)
-  const signedIn = useSelector(getSignedIn)
-  const signupInProgress = useSelector(getSignupInProgress)
+  const [navIsReady, setNavIsReady] = useState(false)
+  const [loading, setLoading] = useState(true)
   const returnToPath = useSelector(getReturnToPath)
-  const loading = useSelector(state => state.pending[FETCH_CURRENT_USER])
-
-  const fullyAuthorized = currentUser && getSignupState(currentUser) === SIGNUP_STATE.Complete
+  const currentUser = useSelector(getMe)
+  const isAuthorized = useSelector(getAuthorized)
 
   // Handle Push Notifications opened
   useEffect(() => OneSignal.setNotificationOpenedHandler(({ notification }) => {
@@ -65,9 +39,9 @@ export default function RootView () {
   // Handle returnToPath
   useEffect(() => {
     if (navIsReady && returnToPath) {
-      navigateToLinkingPath(returnToPath, fullyAuthorized)
+      navigateToLinkingPath(returnToPath, isAuthorized)
     }
-  }, [navIsReady, fullyAuthorized, returnToPath])
+  }, [navIsReady, isAuthorized, returnToPath])
 
   // Handle loading of currentUser if already "signedIn" via Login screen
   // or on app launch when signedIn status is not yet known
@@ -82,14 +56,18 @@ export default function RootView () {
         // Prompt for push on iOS
         OneSignal.promptForPushNotificationsWithUserResponse(() => {})
       }
+      setLoading(false)
     }
 
-    if (!signedIn || (signedIn && !currentUser)) {
+    if (!currentUser) {
+      setLoading(true)
       loadCurrentUserSessionAsync()
+    } else {
+      setLoading(false)
     }
-  }, [dispatch, currentUser, signedIn])
+  }, [dispatch, currentUser])
 
-  if (loading && !signupInProgress) {
+  if (loading) {
     return (
       <LoadingScreen />
     )
@@ -97,13 +75,13 @@ export default function RootView () {
 
   return (
     <View style={styles.rootContainer}>
-      {fullyAuthorized && (
+      {isAuthorized && (
         <SocketListener />
       )}
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}
-        initialState={fullyAuthorized ? INITIAL_NAV_STATE : null}
+        initialState={isAuthorized ? INITIAL_NAV_STATE : null}
         onReady={() => {
           setNavIsReady(true)
           !loading && RNBootSplash.hide()
@@ -111,7 +89,7 @@ export default function RootView () {
         // NOTE: Uncomment below to get a map of the state
         // onStateChange={state => console.log('!!! onStateChange:', state.routes)}
       >
-        <RootNavigator fullyAuthorized={fullyAuthorized} />
+        <RootNavigator isAuthorized={isAuthorized} />
       </NavigationContainer>
     </View>
   )
@@ -124,6 +102,6 @@ const styles = {
 }
 
 // NOTE: Another option for handling initial state:
-// if (!initialURL && fullyAuthorized) {
+// if (!initialURL && isAuthorized) {
 //   navigationRef.current?.navigate('Drawer', { screen:'Tabs', params: { screen: 'Home Tab', params: { screen: 'Feed' } } })
 // }

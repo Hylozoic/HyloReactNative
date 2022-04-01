@@ -34,7 +34,7 @@ export function errorMessages (type, action) {
     'duplicate-email': 'Account already exists',
     'no password provided': 'Please enter your password',
     'email not found': 'Email address not found',
-    'invalid code': 'Invalid code, please try again',
+    'invalid-code': 'Invalid code, please try again',
     'invalid-link': 'Link expired, please try again',
     default: err
   }

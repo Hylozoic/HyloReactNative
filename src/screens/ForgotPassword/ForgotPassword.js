@@ -18,11 +18,6 @@ export default class ForgotPassword extends React.Component {
     }
   }
 
-  submit = async () => {
-    await this.props.resetPassword(this.state.email)
-    await this.props.goToLogin(this.state.email)
-  }
-
   validateEmail (email) {
     this.setState({
       emailIsValid: validator.isEmail(email)
@@ -39,6 +34,11 @@ export default class ForgotPassword extends React.Component {
     }
   }
 
+  handleSubmit = async () => {
+    await this.props.sendPasswordReset(this.state.email)
+    await this.props.goToLogin(this.state.email)
+  }
+
   render () {
     const { error } = this.props
     const { emailIsValid } = this.state
@@ -51,10 +51,14 @@ export default class ForgotPassword extends React.Component {
             that lets you reset your password.
           </Text>
         </View>
-        {error && <FormError />}
-        {!error && <View style={styles.labelRow}>
-          <Text style={styles.labelText}>Your email address</Text>
-                   </View>}
+        {error && (
+          <FormError />
+        )}
+        {!error && (
+          <View style={styles.labelRow}>
+            <Text style={styles.labelText}>Your email address</Text>
+          </View>
+        )}
         <View style={styles.paddedRow}>
           <View style={emailIsValid ? styles.paddedBorderValid : styles.paddedBorder}>
             <View style={styles.leftInputView}>
@@ -69,15 +73,14 @@ export default class ForgotPassword extends React.Component {
               />
             </View>
             <View style={styles.rightIconView}>
-              {emailIsValid && <EntypoIcon
-                name='check'
-                style={styles.iconGreen}
-                               />}
+              {emailIsValid && (
+                <EntypoIcon name='check' style={styles.iconGreen} />
+              )}
             </View>
           </View>
         </View>
         <View style={styles.paddedRow}>
-          <TouchableOpacity onPress={this.submit} disabled={!emailIsValid} style={styles.forgotPasswordButton}>
+          <TouchableOpacity onPress={this.handleSubmit} disabled={!emailIsValid} style={styles.forgotPasswordButton}>
             <Text style={styles.forgotPasswordText}>Reset</Text>
           </TouchableOpacity>
         </View>

@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
-import { resetPassword } from './ForgotPassword.store.js'
+import sendPasswordReset from 'store/actions/sendPasswordReset'
 
 export const mapDispatchToProps = {
-  resetPassword
+  sendPasswordReset
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {

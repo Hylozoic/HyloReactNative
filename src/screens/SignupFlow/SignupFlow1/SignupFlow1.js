@@ -5,15 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { omit, pick, pickBy, identity } from 'lodash/fp'
 import { Validators } from 'hylo-shared'
 import useForm from 'hooks/useForm'
-import {
-  getLocalUserSettings,
-  updateLocalUserSettings,
-  signup,
-  SIGNUP,
-  defaultUserSettings
-} from '../SignupFlow.store.js'
+import { getLocalUserSettings, updateLocalUserSettings, defaultUserSettings } from '../SignupFlow.store.js'
+import register from 'store/actions/register'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import { FETCH_CURRENT_USER, UPDATE_USER_SETTINGS } from 'store/constants'
+import { FETCH_CURRENT_USER, REGISTER, UPDATE_USER_SETTINGS } from 'store/constants'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import getMe from 'store/selectors/getMe'
 import SettingControl from 'components/SettingControl'
@@ -46,7 +41,7 @@ export default function SignupFlow1 ({ navigation, route }) {
         dispatch(updateLocalUserSettings(paramsFromState))
         await dispatch(updateUserSettings(currentUserParams))
       } else {
-        await dispatch(signup(signupParams))
+        await dispatch(register(signupParams))
         dispatch(updateLocalUserSettings(paramsFromState))
         await dispatch(fetchCurrentUser())
       }
@@ -66,7 +61,7 @@ export default function SignupFlow1 ({ navigation, route }) {
   } = useForm(saveAndNext, validator)
 
   const pending = useSelector(state =>
-    state.pending[FETCH_CURRENT_USER] || state.pending[SIGNUP] || state.pending[UPDATE_USER_SETTINGS])
+    state.pending[FETCH_CURRENT_USER] || state.pending[REGISTER] || state.pending[UPDATE_USER_SETTINGS])
   const passwordControlRef = useRef()
   const confirmPasswordControlRef = useRef()
   const {

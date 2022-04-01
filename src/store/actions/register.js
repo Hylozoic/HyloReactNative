@@ -1,13 +1,13 @@
 import { get } from 'lodash/fp'
-import { LOGIN } from 'store/constants'
+import { REGISTER } from 'store/constants'
 
-export default function login (email, password) {
+export default function register (name, password) {
   return {
-    type: LOGIN,
+    type: REGISTER,
     graphql: {
       query: `
-        mutation ($email: String, $password: String) {
-          login(email: $email, password: $password) {
+        mutation Register ($name: String!, $password: String!) {
+          register(name: $name, password: $password) {
             me {
               id
               email
@@ -25,19 +25,18 @@ export default function login (email, password) {
                 streamPostType
               }
             }
-            error
           }
         }
       `,
       variables: {
-        email,
+        name,
         password
       }
     },
     meta: {
       extractModel: [
         {
-          getRoot: get('login.me'),
+          getRoot: get('register.me'),
           modelName: 'Me'
         }
       ]

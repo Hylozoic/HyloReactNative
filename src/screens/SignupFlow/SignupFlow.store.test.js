@@ -1,58 +1,11 @@
 import reducer, {
   MODULE_NAME,
-  SIGNUP,
   UPDATE_LOCAL_USER_SETTINGS,
-  signup,
   updateLocalUserSettings,
-  getLocalUserSettings,
-  getSignupErrors
+  getLocalUserSettings
 } from './SignupFlow.store'
 
 describe('reducer', () => {
-  describe('on SIGNUP', () => {
-    const state = {
-      errors: {
-        email: 'No good email'
-      }
-    }
-    const action = {
-      type: SIGNUP
-    }
-
-    it('clears errors', () => {
-      expect(reducer(state, action))
-        .toEqual({
-          errors: {}
-        })
-    })
-  })
-
-  describe('on SIGNUP with email error', () => {
-    const state = {
-      errors: {
-        email: 'No good email'
-      }
-    }
-    const action = {
-      type: SIGNUP,
-      error: true,
-      payload: {
-        response: {
-          body: 'That email address is already in use'
-        }
-      }
-    }
-
-    it('sets the email error', () => {
-      expect(reducer(state, action))
-        .toEqual({
-          errors: {
-            email: 'That address is already in use. Try logging in instead.'
-          }
-        })
-    })
-  })
-
   describe('on UPDATE_LOCAL_USER_SETTINGS', () => {
     const state = {
       userSettings: {
@@ -82,13 +35,6 @@ describe('reducer', () => {
 })
 
 describe('action generators', () => {
-  describe('signup', () => {
-    const params = {
-      name: 'a', email: 'b', password: 'c'
-    }
-    it('matches snapshot', () => expect(signup(params)).toMatchSnapshot())
-  })
-
   describe('updateLocalUserSettings', () => {
     const params = {
       name: 'a', email: 'b', password: 'c'
@@ -113,13 +59,6 @@ describe('pseudo selectors', () => {
     it('returns the userSettings', () => {
       expect(getLocalUserSettings(state))
         .toEqual(state[MODULE_NAME].userSettings)
-    })
-  })
-
-  describe('getSignupErrors', () => {
-    it('returns the errors', () => {
-      expect(getSignupErrors(state))
-        .toEqual(state[MODULE_NAME].errors)
     })
   })
 })

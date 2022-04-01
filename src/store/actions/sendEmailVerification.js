@@ -1,16 +1,29 @@
+import { get } from 'lodash/fp'
 import { SEND_EMAIL_VERIFICATION } from 'store/constants'
 
-export function sendEmailVerification (email) {
+export default function sendEmailVerification (email) {
   return {
     type: SEND_EMAIL_VERIFICATION,
-    payload: {
-      api: {
-        method: 'post',
-        path: '/noo/user/send-email-verification',
-        params: {
-          email
+    graphql: {
+      query: `
+        mutation SendEmailVerification ($email: String!) {
+          sendEmailVerification(email: $email) {
+            success
+            error
+          }
         }
+      `,
+      variables: {
+        email
       }
+    },
+    meta: {
+      extractModel: [
+        {
+          getRoot: get('sendEmailVerification.me'),
+          modelName: 'Me'
+        }
+      ]
     }
   }
 }

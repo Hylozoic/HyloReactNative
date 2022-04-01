@@ -18,17 +18,18 @@ import logout from 'store/actions/logout'
 import { loginWithApple, loginWithFacebook, loginWithGoogle } from 'screens/Login/actions'
 import { getPending } from 'screens/Login/Login.store'
 import FormattedError from 'components/FormattedError'
-// 
+//
 import { getLocalUserSettings, updateLocalUserSettings } from 'screens/SignupFlow/SignupFlow.store'
 import { sendEmailVerification } from 'store/actions/sendEmailVerification'
-// 
+//
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
 import AppleLoginButton from 'screens/Login/AppleLoginButton'
 import FbLoginButton from 'screens/Login/FbLoginButton'
 import GoogleLoginButton from 'screens/Login/GoogleLoginButton'
-import getSignupInProgress from 'store/selectors/getSignupInProgress'
 import providedStyles from './Signup.styles'
+import getMe from 'store/selectors/getMe'
+import { getSignupState, SignupState } from 'store/selectors/getSignupState'
 
 const backgroundImage = require('assets/signin_background.png')
 const merkabaImage = require('assets/merkaba_white.png')
@@ -45,8 +46,33 @@ export default function Signup ({ navigation, route }) {
   const [error, setError] = useState()
   const [ssoError, setSsoError] = useState()
   const [canSubmit, setCanSubmit] = useState(pending || !email)
+  const signupState = useSelector(getSignupState)
   const safeAreaInsets = useSafeAreaInsets()
-  const signupInProgress = useSelector(getSignupInProgress)
+
+  
+  // Maybe turn this into a signupState hook as it may be reused
+  // also on the sign-up pages?
+  useFocusEffect(() => {
+    switch (signupState) {
+      // case SignupState.None: {
+      //   // do nothing, we're in the right place?
+      // }
+      case SignupState.EmailValidation: {
+        navigation.navigate('SignupFlow0', route.params)
+        return null
+      }
+      case SignupState.AccountDetails: {
+        navigation.navigate('SignupFlow1')
+        return null
+      }
+      case SignupState.ProfileDetails: {
+        navigation.navigate('SignupFlow2')
+        return null
+      }
+    }
+  })
+
+  // const signupInProgress = useSelector(getSignupInProgress)
   const createErrorNotification = error => {
     setSsoError(error)
   }
@@ -62,25 +88,24 @@ export default function Signup ({ navigation, route }) {
       const errorMessage = action?.payload?.response?.body
       return errorMessage ? { errorMessage } : null
     }
-  }  
+  }
   const submit = async () => {
+    const genericError = new Error('An account may already exist for this email address, Login or try resetting your password.')
     try {
       setPending(true)
       await dispatch(updateLocalUserSettings({ email }))
-      await dispatch(sendEmailVerification(email))
-      navigation.navigate('SignupFlow0')
-    } catch (error) {
-      setError(error.message)
+      const result = await dispatch(sendEmailVerification(email))
+      if (result.payload.data.getData().success) {
+        navigation.navigate('SignupFlow0')
+      } else {
+        throw genericError
+      }
+    } catch (err) {
+      setError(genericError.message)
     } finally {
       setPending(false)
     }
   }
-
-  useFocusEffect(() => {
-    if (signupInProgress) {
-      navigation.navigate('SignupFlow1')
-    }
-  })
 
   const styles = {
     ...providedStyles,

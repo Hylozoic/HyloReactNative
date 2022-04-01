@@ -43,6 +43,7 @@ export const prefixes = [
 /* eslint-disable key-spacing */
 export const routesConfig = {
   '/noo/login/token':                                        { screenPath: 'LoginByTokenHandler', noAuth: true },
+  '/signup/verify-email':                                    { screenPath: 'Signup/SignupFlow0', noAuth: true },
   '/signup/finish':                                          { screenPath: 'Signup/SignupFlow0', noAuth: true },
   '/signup/:step?':                                          { screenPath: 'Signup/Signup Intro', noAuth: true },
   '/h/use-invitation':                                       'JoinGroup',

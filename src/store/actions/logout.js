@@ -1,18 +1,15 @@
 import { isEmpty } from 'lodash'
+import RNRestart from 'react-native-restart'
 import { LoginManager } from 'react-native-fbsdk-next'
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
-import { LOGOUT } from 'store/constants'
 import { clearSessionCookie } from 'util/session'
+import { LOGOUT } from 'store/constants'
 
 export default function logout () {
   return {
     type: LOGOUT,
-    graphql: {
-      query: `mutation Logout {
-        logout {
-          success
-        }
-      }`
+    payload: {
+      api: { path: '/noo/session', method: 'DELETE' }
     },
     meta: {
       then: () => {
@@ -25,6 +22,9 @@ export default function logout () {
             if (!isEmpty(await GoogleSignin.getCurrentUser())) {
               return GoogleSignin.signOut()
             }
+          })
+          .then(() => {
+            RNRestart.Restart()
           })
       }
     }

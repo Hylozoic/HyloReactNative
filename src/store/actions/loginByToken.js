@@ -4,7 +4,14 @@ export default function loginByToken (userId, loginToken) {
   return {
     type: LOGIN_BY_TOKEN,
     payload: {
-      api: { method: 'post', path: '/noo/login/token', params: { u: userId, t: loginToken } }
+      api: {
+        method: 'post',
+        path: '/noo/login/token',
+        params: {
+          u: userId,
+          t: loginToken
+        }
+      }
     }
   }
 }

@@ -17,6 +17,7 @@ import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import FormattedError from 'components/FormattedError'
 import controlStyles from 'components/SettingControl/SettingControl.styles'
 import styles from './SignupFlow0.styles'
+import logout from 'store/actions/logout'
 
 const CODE_LENGTH = 6
 
@@ -45,7 +46,8 @@ export default function SignupFlow0 ({ navigation, route }) {
   useFocusEffect(() => {
     navigation.setOptions({
       headerLeftOnPress: () => {
-        updateLocalUserSettings({ email: null })
+        dispatch(updateLocalUserSettings({ email: null }))
+        dispatch(logout())
         navigation.navigate('Signup Intro', { email })
       }
     })
@@ -102,17 +104,3 @@ export default function SignupFlow0 ({ navigation, route }) {
     </KeyboardFriendlyView>
   )
 }
-
-// <View style={styles.bottomBar}>
-//   <Button
-//     style={styles.backButton}
-//     text='Re-send'
-//     onPress={() => navigation.goBack()}
-//   />
-//   <Button
-//     style={styles.continueButton}
-//     text={pending ? 'Saving...' : 'Continue'}
-//     onPress={submit}
-//     disabled={!!pending}
-//   />
-// </View>

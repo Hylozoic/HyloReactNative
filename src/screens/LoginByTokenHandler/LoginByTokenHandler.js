@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import getRouteParam from 'store/selectors/getRouteParam'
 import loginByToken from 'store/actions/loginByToken'
 import logout from 'store/actions/logout'
-import getSignupInProgress from 'store/selectors/getSignupInProgress'
+import { getSignupInProgress } from 'store/selectors/getSignupState'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import LoadingScreen from 'screens/LoadingScreen'
 
