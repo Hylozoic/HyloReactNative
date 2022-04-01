@@ -5,7 +5,6 @@ import { ScrollView, Text, TextInput, TouchableOpacity, View, Image } from 'reac
 import { useFocusEffect } from '@react-navigation/core'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import loginAction from 'store/actions/login'
-import logoutAction from 'store/actions/logout'
 import {
   loginWithApple as loginWithAppleAction,
   loginWithFacebook as loginWithFacebookAction,
@@ -75,26 +74,22 @@ export default function Login (props) {
   }
 
   const loginWithApple = async token => {
-    await dispatch(logoutAction())
-    const response = dispatch(await loginWithAppleAction(token))
+    const response = await dispatch(loginWithAppleAction(token))
     return finishLogin(response)
   }
 
   const loginWithFacebook = async token => {
-    await dispatch(logoutAction())
-    const response = dispatch(await loginWithFacebookAction(token))
+    const response = await dispatch(loginWithFacebookAction(token))
     return finishLogin(response)
   }
 
   const loginWithGoogle = async token => {
-    await dispatch(logoutAction())
-    const response = dispatch(await loginWithGoogleAction(token))
+    const response = await dispatch(loginWithGoogleAction(token))
     return finishLogin(response)
   }
 
   const login = async () => {
-    // await dispatch(logoutAction())
-    const response = dispatch(await loginAction(email, password))
+    const response = await dispatch(loginAction(email, password))
     return finishLogin(response)
   }
 

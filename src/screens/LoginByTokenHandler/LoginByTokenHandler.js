@@ -18,10 +18,10 @@ export default function LoginByTokenHandler ({ navigation, route }) {
     if (signupInProgress) {
       navigation.navigate('Signup', { screen: 'SignupFlow1' })
     }
-  }, [])
+  }, [navigation, signupInProgress])
 
   useEffect(() => {
-    const asyncFunc = async () => {
+    (async function () {
       if (loginToken && loginTokenUserId) {
         await dispatch(logout())
         await dispatch(loginByToken(loginTokenUserId, loginToken))
@@ -29,9 +29,8 @@ export default function LoginByTokenHandler ({ navigation, route }) {
           dispatch(setReturnToPath(returnToURLFromLink))
         }
       }
-    }
-    asyncFunc()
-  }, [loginToken])
+    })()
+  }, [loginToken, loginTokenUserId, dispatch, returnToURLFromLink])
 
   return (
     <LoadingScreen />
