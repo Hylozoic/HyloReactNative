@@ -15,33 +15,39 @@ import { openURL } from 'navigation/linking'
 import { isIOS } from 'util/platform'
 import { useFocusEffect } from '@react-navigation/core'
 import logout from 'store/actions/logout'
-import { loginWithApple, loginWithFacebook, loginWithGoogle } from 'screens/Login/actions'
-import { getPending } from 'screens/Login/Login.store'
 import FormattedError from 'components/FormattedError'
-//
+import {
+  loginWithApple, loginWithFacebook, loginWithGoogle,
+  LOGIN_WITH_APPLE, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE
+} from 'screens/Login/actions'
 import { getLocalUserSettings, updateLocalUserSettings } from 'screens/SignupFlow/SignupFlow.store'
 import { sendEmailVerification } from 'store/actions/sendEmailVerification'
-//
+import { getSignupState, SignupState } from 'store/selectors/getSignupState'
+import { FETCH_CURRENT_USER, LOGIN } from 'store/constants'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
 import AppleLoginButton from 'screens/Login/AppleLoginButton'
 import FbLoginButton from 'screens/Login/FbLoginButton'
 import GoogleLoginButton from 'screens/Login/GoogleLoginButton'
 import providedStyles from './Signup.styles'
-import getMe from 'store/selectors/getMe'
-import { getSignupState, SignupState } from 'store/selectors/getSignupState'
 
 const backgroundImage = require('assets/signin_background.png')
 const merkabaImage = require('assets/merkaba_white.png')
 
 export default function Signup ({ navigation, route }) {
   const dispatch = useDispatch()
-  const loginPending = useSelector(getPending)
+  const loginPending = useSelector(state => {
+    return state.pending[LOGIN] ||
+      state.pending[LOGIN_WITH_APPLE] ||
+      state.pending[LOGIN_WITH_FACEBOOK] ||
+      state.pending[LOGIN_WITH_GOOGLE] ||
+      state.pending[FETCH_CURRENT_USER]
+  })
   const userSettings = useSelector(getLocalUserSettings)
   const storedEmail = userSettings?.email
   const emailFromPath = route.params?.email
   const providedEmail = emailFromPath || storedEmail
-  const [email, setEmailBase] = useState(providedEmail)
+  const [email, providedSetEmail] = useState(providedEmail)
   const [pending, setPending] = useState()
   const [error, setError] = useState()
   const [ssoError, setSsoError] = useState()
@@ -49,7 +55,6 @@ export default function Signup ({ navigation, route }) {
   const signupState = useSelector(getSignupState)
   const safeAreaInsets = useSafeAreaInsets()
 
-  
   // Maybe turn this into a signupState hook as it may be reused
   // also on the sign-up pages?
   useFocusEffect(() => {
@@ -73,13 +78,13 @@ export default function Signup ({ navigation, route }) {
   })
 
   // const signupInProgress = useSelector(getSignupInProgress)
-  const createErrorNotification = error => {
-    setSsoError(error)
+  const createErrorNotification = providedError => {
+    setSsoError(providedError)
   }
-  const setEmail = email => {
+  const setEmail = validateEmail => {
     error && setError()
-    setCanSubmit(!validator.isEmail(email))
-    setEmailBase(email)
+    setCanSubmit(!validator.isEmail(validateEmail))
+    providedSetEmail(validateEmail)
   }
   const socialLoginMaker = loginWith => async token => {
     await dispatch(logout())
