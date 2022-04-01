@@ -431,7 +431,7 @@ describe('handles CREATE_GROUP', () => {
       payload: {
         data: {
           createGroup: {
-            id: membershipId
+            id: groupId
           }
         }
       }
