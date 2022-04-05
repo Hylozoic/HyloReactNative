@@ -44,15 +44,19 @@ export default function CreateGroupVisibilityAccessibility ({ navigation }) {
           <View style={stepStyles.optionsContainer}>
             <Text style={stepStyles.optionsLabel}>Who can see this group?</Text>
             {groupVisibilityOptions.map(option => (
-              <Option option={option} chosen={option.value === visibility}
-                onPress={setVisibility} key={option.value} />
+              <Option
+                option={option} chosen={option.value === visibility}
+                onPress={setVisibility} key={option.value}
+              />
             ))}
           </View>
           <View style={styles.optionsContainer}>
             <Text style={stepStyles.optionsLabel}>Who can join this group?</Text>
             {groupAccessibilityOptions.map(option => (
-              <Option option={option} chosen={option.value === accessibility}
-                onPress={setAccessibility} key={option.value} />
+              <Option
+                option={option} chosen={option.value === accessibility}
+                onPress={setAccessibility} key={option.value}
+              />
             ))}
           </View>
         </View>
@@ -76,14 +80,16 @@ const stepStyles = {
 export function Option ({ option, chosen, onPress }) {
   return (
     <TouchableOpacity style={optionStyles.optionRow} onPress={() => onPress(option.value)}>
-      <RoundCheckbox style={optionStyles.optionCheckbox}
+      <RoundCheckbox
+        style={optionStyles.optionCheckbox}
         size={24}
         // icon={'checkmark-outline'}
         checked={chosen}
         iconColor={white20onCaribbeanGreen}
         borderColor={white}
         backgroundColor={white}
-        onValueChange={() => onPress(option.value)} />
+        onValueChange={() => onPress(option.value)}
+      />
       <Icon style={optionStyles.optionIcon} name={option.iconName} />
       <Text style={optionStyles.optionsLabel}>{option.label}</Text>
     </TouchableOpacity>
@@ -100,7 +106,7 @@ const optionStyles = {
   },
   optionCheckbox: {
     marginTop: 10,
-    color: caribbeanGreen,
+    color: caribbeanGreen
   },
   optionIcon: {
     marginLeft: 10,
@@ -113,6 +119,6 @@ const optionStyles = {
     fontFamily: 'Circular-Bold',
     flex: 1,
     fontSize: 16,
-    color: white,
+    color: white
   }
 }

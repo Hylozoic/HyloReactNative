@@ -31,10 +31,12 @@ export default function RootView () {
   // Routes will not be available until this check is complete.
   useEffect(() => {
     (async function () {
-      setLoading(true)
-      await dispatch(checkLogin())
-      RNBootSplash.hide()
-      setLoading(false)
+      if (!isAuthorized) {
+        setLoading(true)
+        await dispatch(checkLogin())
+        RNBootSplash.hide()
+        setLoading(false)
+      }
     })()
   }, [isAuthorized])
 
@@ -51,14 +53,16 @@ export default function RootView () {
     }
   }
 
+  if (loading) return <LoadingScreen />
+
   return (
     <View style={styles.rootContainer}>
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}
-        onReady={() => {
-          RNBootSplash.hide()
-        }}
+        // onReady={() => {
+        //   RNBootSplash.hide()
+        // }}
         initialState={isAuthorized ? INITIAL_NAV_STATE : null}
         // NOTE: Uncomment below to get a map of the state
         // onStateChange={state => console.log('!!! onStateChange:', state.routes)}

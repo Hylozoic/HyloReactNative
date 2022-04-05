@@ -14,7 +14,6 @@ export default function UserSettingsWebView ({ path: pathProp, navigation, route
       ref={webViewRef}
       path={path}
       onNavigationStateChange={({ url }) => {
-        console.log('!!! in onNavigationStateChange', url)
         if (url.match(/\/login/)) {
           dispatch(logout()).then(() => RNRestart.Restart())
           return false

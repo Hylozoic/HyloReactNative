@@ -13,7 +13,6 @@ import {
 } from './CreateGroupFlow.store'
 import { white } from 'style/colors'
 import styles from './CreateGroupFlow.styles'
-import selectGroup from 'store/actions/selectGroup'
 import { useNavigation } from '@react-navigation/native'
 
 export default function CreateGroupReview () {
@@ -23,7 +22,6 @@ export default function CreateGroupReview () {
   const parentGroups = useSelector(getNewGroupParentGroups)
   const [error, setError] = useState(null)
   const goToGroup = groupId => {
-    dispatch(selectGroup(groupId))
     navigation.navigate('Feed', { groupId })
   }
 
@@ -37,19 +35,16 @@ export default function CreateGroupReview () {
   const submit = async () => {
     try {
       const graphqlResponse = await dispatch(createGroup(groupData))
-      const responseError = graphqlResponse?.getData().error
-      const newGroup = graphqlResponse?.payload?.getData().group
+      const newGroup = graphqlResponse.payload?.data
 
-      if (responseError) {
-        setError('There was an error, your Group was not created. Please try again.')
-      } else if (newGroup) {
+      if (newGroup) {
         dispatch(clearCreateGroupStore())
         goToGroup(newGroup.id)
       } else {
         setError('Group may have been created, but there was an error. Please contact Hylo support.')
       }
-    } catch {
-      setError('There was an unknown error. Please contact Hylo support.')
+    } catch (e) {
+      setError(e.message)
     }
   }
 
@@ -179,7 +174,7 @@ const stepStyles = {
   groupRow: {
     marginBottom: 10,
     paddingBottom: 0,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   groupAvatar: {
     marginRight: 14

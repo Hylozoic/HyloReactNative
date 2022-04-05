@@ -284,8 +284,9 @@ export default function ormReducer (state, action) {
     }
 
     case CREATE_GROUP: {
-      const me = Me.first()
+      const me = Me.withId(Me.first().id)
       me.updateAppending({ memberships: [payload.data.createGroup.memberships.items[0].id] })
+      clearCacheFor(Me, me.id)
       break
     }
 
