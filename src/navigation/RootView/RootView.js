@@ -27,10 +27,8 @@ export default function RootView () {
   const isAuthorized = useSelector(getAuthorized)
   const [loading, setLoading] = useState(true)
 
-  console.log('!!! isAuthorized in RootView', isAuthorized)
   // This should be the only place we check for a session from the API.
   // Routes will not be available until this check is complete.
-
   useEffect(() => {
     (async function () {
       setLoading(true)
@@ -55,7 +53,6 @@ export default function RootView () {
 
   return (
     <View style={styles.rootContainer}>
-      {loading && <LoadingScreen />}
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}
