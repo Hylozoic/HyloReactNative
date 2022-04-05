@@ -10,6 +10,7 @@ export default function register (name, password) {
           register(name: $name, password: $password) {
             me {
               id
+              avatarUrl
               email
               emailValidated
               hasRegistered

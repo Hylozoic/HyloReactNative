@@ -22,7 +22,7 @@ export default function SignupUploadAvatar ({ navigation }) {
   useEffect(() => {
     // this is for the case where they logged in but hadn't finished sign up
     if (!avatarUrl && currentUser) {
-      dispatch(updateLocalUserSettings({ avatarUrl: currentUser.ref?.avatarUrl }))
+      dispatch(updateLocalUserSettings({ avatarUrl: currentUser.avatarUrl }))
     }
   }, [])
 

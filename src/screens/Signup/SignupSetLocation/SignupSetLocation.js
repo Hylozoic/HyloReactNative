@@ -16,13 +16,13 @@ import checkLogin from 'store/actions/checkLogin'
 export default function SignupSetLocation ({ navigation }) {
   const dispatch = useDispatch()
   const { location, locationId } = useSelector(getLocalUserSettings)
-  const controlRef = useRef()
   const currentUser = useSelector(getMe)
   const [currentLocation, getLocation] = useCurrentLocation()
+  const controlRef = useRef()
 
   useEffect(() => {
     // this is for the case where they logged in but hadn't finished sign up
-    currentUser && !location && dispatch(updateLocalUserSettings({ location: currentUser.ref?.location }))
+    currentUser && !location && dispatch(updateLocalUserSettings({ location: currentUser.location }))
     getLocation()
   }, [])
 

@@ -13,7 +13,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import validator from 'validator'
 import { openURL } from 'navigation/linking'
 import { isIOS } from 'util/platform'
-import { useFocusEffect } from '@react-navigation/core'
+import { useFocusEffect, useNavigation, useRoute, useNavigationState } from '@react-navigation/core'
 import FormattedError from 'components/FormattedError'
 import {
   loginWithApple, loginWithFacebook, loginWithGoogle,
@@ -30,11 +30,15 @@ import FbLoginButton from 'screens/Login/FbLoginButton'
 import GoogleLoginButton from 'screens/Login/GoogleLoginButton'
 import providedStyles from './Signup.styles'
 import checkLogin from 'store/actions/checkLogin'
+import getMe from 'store/selectors/getMe'
 
 const backgroundImage = require('assets/signin_background.png')
 const merkabaImage = require('assets/merkaba_white.png')
 
-export default function Signup({ navigation, route }) {
+export default function Signup () {
+  const route = useRoute()
+  const navigation = useNavigation()
+  const currentRouteName = useNavigationState(state => state?.routes[state.index]?.name)
   const safeAreaInsets = useSafeAreaInsets()
   const dispatch = useDispatch()
   const loading = useSelector(state => {
@@ -55,7 +59,6 @@ export default function Signup({ navigation, route }) {
   const [canSubmit, setCanSubmit] = useState(pending || !email)
 
   const signupRedirect = () => {
-    console.log('!!!! in signupRedirect -- signupState', signupState)
     switch (signupState) {
       case SignupState.None: {
         navigation.navigate('Signup Intro')
@@ -70,7 +73,9 @@ export default function Signup({ navigation, route }) {
         break
       }
       case SignupState.InProgress: {
-        navigation.navigate('SignupUploadAvatar')
+        if (!['SignupUploadAvatar', 'SignupSetLocation'].includes(currentRouteName)) {
+          navigation.navigate('SignupUploadAvatar')
+        }
         break
       }
     }

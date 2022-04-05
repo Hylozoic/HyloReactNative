@@ -11,6 +11,7 @@ export default function verifyEmail (email, code, token) {
           verifyEmail(email: $email, code: $code, token: $token) {
             me {
               id
+              avatarUrl
               email
               emailValidated
               hasRegistered
