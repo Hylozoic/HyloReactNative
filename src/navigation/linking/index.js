@@ -42,80 +42,85 @@ export const prefixes = [
 
 /* eslint-disable key-spacing */
 export const routesConfig = {
-  '/noo/login/token':                                        { screenPath: 'LoginByTokenHandler', noAuth: true },
-  '/signup/verify-email':                                    { screenPath: 'Signup/SignupFlow0', noAuth: true },
-  '/signup/finish':                                          { screenPath: 'Signup/SignupFlow0', noAuth: true },
-  '/signup/:step?':                                          { screenPath: 'Signup/Signup Intro', noAuth: true },
+  '/noo/login/token':                                        { screenPath: 'NonAuthRoot/LoginByTokenHandler', noAuth: true },
+  '/signup/:step?':                                          { screenPath: 'NonAuthRoot/Signup/Signup Intro', noAuth: true },
   '/h/use-invitation':                                       'JoinGroup',
 
   // /members
-  '/members/:id':                                            modalScreenName('Member'),
-  '/members':                                                'Drawer/Tabs/Home Tab/Members',
+  '/members/:id':                                            `AuthRoot/${modalScreenName('Member')}`,
+  '/members':                                                'AuthRoot/Drawer/Tabs/Home Tab/Members',
 
   // special group routes (/all, /public)
-  '/:groupSlug(all|public)':                                 { screenPath: 'Drawer/Tabs/Home Tab/Feed', groupId: ALL_GROUP_ID, context: 'groups' },
-  '/:groupSlug(all)/members/:id':                            { screenPath: 'Drawer/Tabs/Home Tab/Member', groupId: ALL_GROUP_ID, context: 'groups' },
-  '/:groupSlug(all)/topics/:topicName':                      { screenPath: 'Drawer/Tabs/Home Tab/Topic Feed', groupId: ALL_GROUP_ID, context: 'groups' },
+  '/:groupSlug(all|public)':                                 { screenPath: 'AuthRoot/Drawer/Tabs/Home Tab/Feed', groupId: ALL_GROUP_ID, context: 'groups' },
+  '/:groupSlug(all)/members/:id':                            { screenPath: 'AuthRoot/Drawer/Tabs/Home Tab/Member', groupId: ALL_GROUP_ID, context: 'groups' },
+  '/:groupSlug(all)/topics/:topicName':                      { screenPath: 'AuthRoot/Drawer/Tabs/Home Tab/Topic Feed', groupId: ALL_GROUP_ID, context: 'groups' },
 
   // map routes
-  '/:groupSlug(all|public)/map':                             { screenPath: 'Drawer/Tabs/Home Tab/Map', groupId: ALL_GROUP_ID, context: 'groups' },
-  '/:context(groups)/:groupSlug/map':                        'Drawer/Tabs/Home Tab/Map',
-  '/:groupSlug(all|public)/map/post/:id':                    { screenPath: modalScreenName('Post Details'), groupId: ALL_GROUP_ID, context: 'groups' },
-  '/:context(groups)/:groupSlug/map/post/:id':               modalScreenName('Post Details'),
-  '/:context(groups)/:groupSlug/detail':                     modalScreenName('Group Detail'),
+  '/:groupSlug(all|public)/map':                             { screenPath: 'AuthRoot/Drawer/Tabs/Home Tab/Map', groupId: ALL_GROUP_ID, context: 'groups' },
+  '/:context(groups)/:groupSlug/map':                        'AuthRoot/Drawer/Tabs/Home Tab/Map',
+  '/:groupSlug(all|public)/map/post/:id':                    { screenPath: `AuthRoot/${modalScreenName('Post Details')}`, groupId: ALL_GROUP_ID, context: 'groups' },
+  '/:context(groups)/:groupSlug/map/post/:id':               `AuthRoot/${modalScreenName('Post Details')}`,
+  '/:context(groups)/:groupSlug/detail':                     `AuthRoot/${modalScreenName('Group Detail')}`,
 
   // /groups
   '/:context(groups)/:groupSlug/join/:accessCode':           'JoinGroup',
-  '/:context(groups)/:groupSlug/settings/invite':            'Group Settings/Invite',
-  '/:context(groups)/:groupSlug/settings/requests':          'Group Settings/Join Requests',
-  '/:context(groups)/:groupSlug/settings/relationships':     'Group Settings/Related Groups',
-  '/:context(groups)/:groupSlug/settings/export':            'Group Settings/Export Data',
-  '/:context(groups)/:groupSlug/settings/delete':            'Group Settings/Delete',
-  '/:context(groups)/:groupSlug/settings':                   'Group Settings/Settings',
-  '/:context(groups)/:groupSlug/groups':                     'Drawer/Tabs/Home Tab/Group Relationships',
-  '/:context(groups)/:groupSlug/topics/:topicName':          'Drawer/Tabs/Home Tab/Topic Feed',
-  '/:context(groups)/:groupSlug/members/:id':                'Drawer/Tabs/Home Tab/Member',
-  '/:context(groups)/:groupSlug':                            'Drawer/Tabs/Home Tab/Feed',
-  '/:context(groups)/:groupSlug/post/:id':                   'Drawer/Tabs/Home Tab/Post Details',
-  '/:context(groups)/post/:id':                              'Drawer/Tabs/Home Tab/Post Details',
-  '/:context(groups)/:groupSlug/post/:id/edit':              'Edit Post',
+  '/:context(groups)/:groupSlug/settings/invite':            'AuthRoot/Group Settings/Invite',
+  '/:context(groups)/:groupSlug/settings/requests':          'AuthRoot/Group Settings/Join Requests',
+  '/:context(groups)/:groupSlug/settings/relationships':     'AuthRoot/Group Settings/Related Groups',
+  '/:context(groups)/:groupSlug/settings/export':            'AuthRoot/Group Settings/Export Data',
+  '/:context(groups)/:groupSlug/settings/delete':            'AuthRoot/Group Settings/Delete',
+  '/:context(groups)/:groupSlug/settings':                   'AuthRoot/Group Settings/Settings',
+  '/:context(groups)/:groupSlug/groups':                     'AuthRoot/Drawer/Tabs/Home Tab/Group Relationships',
+  '/:context(groups)/:groupSlug/topics/:topicName':          'AuthRoot/Drawer/Tabs/Home Tab/Topic Feed',
+  '/:context(groups)/:groupSlug/members/:id':                'AuthRoot/Drawer/Tabs/Home Tab/Member',
+  '/:context(groups)/:groupSlug':                            'AuthRoot/Drawer/Tabs/Home Tab/Feed',
+  '/:context(groups)/:groupSlug/post/:id':                   'AuthRoot/Drawer/Tabs/Home Tab/Post Details',
+  '/:context(groups)/post/:id':                              'AuthRoot/Drawer/Tabs/Home Tab/Post Details',
+  '/:context(groups)/:groupSlug/post/:id/edit':              'AuthRoot/Edit Post',
 
   // /post
-  '/post/:id':                                               modalScreenName('Post Details'),
-  '/post/:id/edit':                                          'Edit Post',
+  '/post/:id':                                               `AuthRoot/${modalScreenName('Post Details')}`,
+  '/post/:id/edit':                                          'AuthRoot/Edit Post',
 
   // /settings
-  '/settings/account':                                       'Drawer/Tabs/Settings Tab/Account',
-  '/settings/:section?':                                     'Drawer/Tabs/Settings Tab/Edit Profile',
+  '/settings/account':                                       'AuthRoot/Drawer/Tabs/Settings Tab/Account',
+  '/settings/:section?':                                     'AuthRoot/Drawer/Tabs/Settings Tab/Edit Profile',
 
   // /messages
-  '/messages/:id':                                           'Drawer/Tabs/Messages Tab/Thread',
-  '/messages':                                               'Drawer/Tabs/Messages Tab/Messages',
+  '/messages/:id':                                           'AuthRoot/Drawer/Tabs/Messages Tab/Thread',
+  '/messages':                                               'AuthRoot/Drawer/Tabs/Messages Tab/Messages',
 
-  '/all':                                                    'Drawer/Tabs/Home Tab/Feed',
-  '/':                                                       'Drawer/Tabs/Home Tab/Feed',
+  '/all':                                                    'AuthRoot/Drawer/Tabs/Home Tab/Feed',
+  '/':                                                       'AuthRoot/Drawer/Tabs/Home Tab/Feed'
 }
 
 export const INITIAL_NAV_STATE = {
   routes: [
     {
-      name: 'Drawer',
+      name: 'AuthRoot',
       state: {
         routes: [
           {
-            name: 'Tabs',
+            name: 'Drawer',
             state: {
               routes: [
                 {
-                  name: 'Home Tab',
+                  name: 'Tabs',
                   state: {
-                    initialRouteName: 'Feed',
                     routes: [
                       {
-                        name: 'Group Navigation'
-                      },
-                      {
-                        name: 'Feed'
+                        name: 'Home Tab',
+                        state: {
+                          initialRouteName: 'Feed',
+                          routes: [
+                            {
+                              name: 'Group Navigation'
+                            },
+                            {
+                              name: 'Feed'
+                            }
+                          ]
+                        }
                       }
                     ]
                   }

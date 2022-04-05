@@ -2,10 +2,7 @@ import {
   makeGetQueryResults, makeQueryResultsModelSelector
 } from 'store/reducers/queryResults'
 import { createSelector } from 'reselect'
-import { createSelector as ormCreateSelector } from 'redux-orm'
-import { get, includes, isEmpty } from 'lodash/fp'
-import orm from 'store/models'
-import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import { get } from 'lodash/fp'
 
 export const MODULE_NAME = 'Members'
 

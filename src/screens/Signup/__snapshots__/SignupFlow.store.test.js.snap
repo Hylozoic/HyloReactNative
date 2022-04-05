@@ -15,7 +15,7 @@ Object {
       "path": "/noo/user",
     },
   },
-  "type": "SignupFlow/SIGNUP",
+  "type": "Signup/SIGNUP",
 }
 `;
 
@@ -26,6 +26,6 @@ Object {
     "name": "a",
     "password": "c",
   },
-  "type": "SignupFlow/UPDATE_LOCAL_USER_SETTINGS",
+  "type": "Signup/UPDATE_LOCAL_USER_SETTINGS",
 }
 `;

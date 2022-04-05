@@ -8,9 +8,6 @@ describe('mixpanelMiddleware', () => {
       track: jest.fn()
     }
     const state = {
-      session: {
-        signedIn: false
-      },
       mixpanel
     }
     const store = {

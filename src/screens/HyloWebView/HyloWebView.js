@@ -32,7 +32,7 @@ const HyloWebView = forwardRef(({
   )
 
   if (!cookie) return <Loading />
-  
+
   return (
     <KeyboardFriendlyView style={{ flex: 1 }}>
       <WebView

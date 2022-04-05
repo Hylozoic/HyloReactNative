@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import NetInfo from '@react-native-community/netinfo'
 import { ScrollView, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
 import { useFocusEffect } from '@react-navigation/core'
+import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import loginAction from 'store/actions/login'
 import {
@@ -15,109 +16,128 @@ import {
 } from './actions'
 import { FETCH_CURRENT_USER, LOGIN } from 'store/constants'
 import getRouteParam from 'store/selectors/getRouteParam'
-import { getSignupInProgress } from 'store/selectors/getSignupState'
 import validator from 'validator'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import AppleLoginButton from './AppleLoginButton'
 import FbLoginButton from './FbLoginButton'
 import GoogleLoginButton from './GoogleLoginButton'
 import styles from './Login.styles'
+import checkLogin from 'store/actions/checkLogin'
 
-export default function Login (props) {
+export default function Login () {
+  const navigation = useNavigation()
   const dispatch = useDispatch()
-  const pending = useSelector(state => {
-    return state.pending[LOGIN] ||
-      state.pending[LOGIN_WITH_APPLE] ||
-      state.pending[LOGIN_WITH_FACEBOOK] ||
-      state.pending[LOGIN_WITH_GOOGLE] ||
-      state.pending[FETCH_CURRENT_USER]
-  })
-  const signupInProgress = useSelector(getSignupInProgress)
   const defaultLoginEmail = useSelector(state => state.session?.defaultLoginEmail)
-  const formError = useSelector(state => state.session.loginError)
-  const goToSignup = () => props.navigation.navigate('Signup')
-  const goToResetPassword = () => props.navigation.navigate('ForgotPassword')
   // const returnToURLFromLink = decodeURIComponent(getRouteParam('n', props.route))
   // const loginToken = decodeURIComponent(getRouteParam('t', props.route) || getRouteParam('loginToken', props.route))
   // const loginTokenUserId = getRouteParam('u', props.route) || getRouteParam('userId', props.route)
-  const bannerMessage = getRouteParam('bannerMessage', props.route)
+  // const bannerMessage = getRouteParam('bannerMessage', props.route)
   const [email, providedSetEmail] = useState(defaultLoginEmail)
-  const [password, setPassword] = useState()
-  const [securePassword, setSecurePassword] = useState()
+  const [password, providedSetPassword] = useState()
+  const [securePassword, setSecurePassword] = useState(true)
   const [emailIsValid, setEmailIsValid] = useState()
   const [isConnected, setIsConnected] = useState()
-  const [ssoError, setSsoError] = useState()
+  const [socialLoginError, setSocialLoginError] = useState()
+  const [error, setError] = useState()
+  const [loading, setLoading] = useState()
   const passwordInputRef = useRef()
 
   const setEmail = validateEmail => {
+    setError()
+    setSocialLoginError()
     setEmailIsValid(validator.isEmail(validateEmail))
     providedSetEmail(validateEmail)
   }
 
-  const handleConnectivityChange = ({ isConnected: isConnectedParam }) => {
-    if (isConnectedParam !== isConnected) setIsConnected(isConnectedParam)
+  const setPassword = passwordValue => {
+    setError()
+    setSocialLoginError()
+    providedSetPassword(passwordValue)
   }
 
   useFocusEffect(() => {
-    // Signup state redirection happens in Signup Intro component
-    if (signupInProgress) {
-      props.navigation.navigate('Signup')
+    const handleConnectivityChange = ({ isConnected: isConnectedParam }) => {
+      if (isConnectedParam !== isConnected) setIsConnected(isConnectedParam)
     }
+
     return NetInfo.addEventListener(handleConnectivityChange)
   })
 
-  const finishLogin = action => {
-    if (action.error) {
-      const errorMessage = action?.payload?.response?.body
-      return errorMessage ? { errorMessage } : null
+  const finishSocialLogin = async response => {
+    try {
+      setError()
+      if (response.error) {
+        const errorMessage = response?.payload?.response?.body
+        // return errorMessage ? { errorMessage } : null
+        if (errorMessage) {
+          setSocialLoginError(errorMessage)
+        }
+      }
+      await dispatch(checkLogin())
+    } catch (err) {
+      setSocialLoginError(err.message)
+    } finally {
+      setLoading(false)
     }
   }
 
   const loginWithApple = async token => {
+    setLoading(true)
     const response = await dispatch(loginWithAppleAction(token))
-    return finishLogin(response)
+    return finishSocialLogin(response)
   }
 
   const loginWithFacebook = async token => {
+    setLoading(true)
     const response = await dispatch(loginWithFacebookAction(token))
-    return finishLogin(response)
+    return finishSocialLogin(response)
   }
 
   const loginWithGoogle = async token => {
+    setLoading(true)
     const response = await dispatch(loginWithGoogleAction(token))
-    return finishLogin(response)
+    return finishSocialLogin(response)
   }
 
   const login = async () => {
-    const response = await dispatch(loginAction(email, password))
-    return finishLogin(response)
-  }
+    try {
+      setLoading(true)
+      const response = await dispatch(loginAction(email, password))
+      const responseError = response.payload?.getData().error
 
-  const createErrorNotification = error => setSsoError(error)
+      if (responseError) setError(responseError)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const togglePassword = () => {
     setSecurePassword(!securePassword)
   }
 
+  const goToSignup = () => navigation.navigate('Signup')
+
+  const goToResetPassword = () => navigation.navigate('ForgotPassword')
+
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
       <ScrollView contentContainerStyle={styles.login} style={styles.container}>
-        {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
+        {socialLoginError && <Text style={styles.errorBanner}>{socialLoginError}</Text>}
         {/* TODO: Bring back online status message / toast */}
         {/* {!isConnected && <Text style={styles.errorBanner}>OFFLINE; TRYING TO RECONNECT...</Text>} */}
-        {pending && <Text style={styles.banner}>LOGGING IN...</Text>}
-        {bannerMessage && <Text style={styles.banner}>{bannerMessage}</Text>}
+        {loading && <Text style={styles.banner}>LOGGING IN...</Text>}
+        {/* {bannerMessage && <Text style={styles.banner}>{bannerMessage}</Text>} */}
         <Image
           style={styles.logo}
           source={require('assets/merkaba-green-on-white.png')}
         />
         <Text style={styles.title}>Log in to Hylo</Text>
-        {formError && <FormError />}
-        {!formError && (
-          <View style={styles.labelRow}>
-            <Text style={styles.labelText}>Your email address</Text>
-          </View>
-        )}
+        <FormError>{error}</FormError>
+        <View style={styles.labelRow}>
+          <Text style={styles.labelText}>Your email address</Text>
+        </View>
         <View style={styles.paddedRow}>
           <View style={emailIsValid ? styles.paddedBorderValid : styles.paddedBorder}>
             <View style={styles.leftInputView}>
@@ -171,7 +191,7 @@ export default function Login (props) {
           </View>
         </View>
         <View style={styles.paddedRow}>
-          <TouchableOpacity onPress={login} style={styles.loginButton}>
+          <TouchableOpacity onPress={login} disabled={!emailIsValid} style={styles.loginButton}>
             <Text style={styles.loginText}>Log In</Text>
           </TouchableOpacity>
         </View>
@@ -180,17 +200,17 @@ export default function Login (props) {
           <AppleLoginButton
             style={styles.appleLoginButton}
             onLoginFinished={loginWithApple}
-            createErrorNotification={createErrorNotification}
+            createErrorNotification={setSocialLoginError}
           />
           <GoogleLoginButton
             style={styles.googleLoginButton}
             onLoginFinished={loginWithGoogle}
-            createErrorNotification={createErrorNotification}
+            createErrorNotification={setSocialLoginError}
           />
           <FbLoginButton
             style={styles.facebookLoginButton}
             onLoginFinished={loginWithFacebook}
-            createErrorNotification={createErrorNotification}
+            createErrorNotification={setSocialLoginError}
           />
         </View>
         <SignupLink goToSignup={goToSignup} />
@@ -210,14 +230,16 @@ export function SignupLink ({ goToSignup }) {
   )
 }
 
-export function FormError () {
+export function FormError ({ children }) {
   const rowStyle = styles.emailErrorRow
   const triangleStyle = styles.emailTriangle
-  const message = 'Username or Password was incorrect'
+
+  if (!children) return null
+
   return (
     <View style={styles.errorView}>
       <View style={rowStyle}>
-        <Text style={styles.errorMessage}>{message}</Text>
+        <Text style={styles.errorMessage}>{children}</Text>
       </View>
       <View style={triangleStyle} />
     </View>

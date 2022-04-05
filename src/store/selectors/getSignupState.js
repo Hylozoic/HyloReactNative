@@ -61,7 +61,8 @@ export const getAuthorized = createSelector(
   getSignupState,
   signupState => {
     return [
-      SignupState.InProgress,
+      // NOTE: Unlike Web the InProgress state is handled before being considered fully authorized
+      // SignupState.InProgress,
       SignupState.Complete
     ].includes(signupState)
   }

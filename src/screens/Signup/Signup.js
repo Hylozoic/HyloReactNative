@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
   View,
   Text,
@@ -14,94 +14,100 @@ import validator from 'validator'
 import { openURL } from 'navigation/linking'
 import { isIOS } from 'util/platform'
 import { useFocusEffect } from '@react-navigation/core'
-import logout from 'store/actions/logout'
 import FormattedError from 'components/FormattedError'
 import {
   loginWithApple, loginWithFacebook, loginWithGoogle,
   LOGIN_WITH_APPLE, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE
 } from 'screens/Login/actions'
-import { getLocalUserSettings, updateLocalUserSettings } from 'screens/SignupFlow/SignupFlow.store'
-import { sendEmailVerification } from 'store/actions/sendEmailVerification'
+import { getLocalUserSettings, updateLocalUserSettings } from 'screens/Signup/Signup.store'
+import sendEmailVerification from 'store/actions/sendEmailVerification'
 import { getSignupState, SignupState } from 'store/selectors/getSignupState'
-import { FETCH_CURRENT_USER, LOGIN } from 'store/constants'
+import { CHECK_LOGIN, FETCH_CURRENT_USER, LOGIN, UPDATE_USER_SETTINGS } from 'store/constants'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
 import AppleLoginButton from 'screens/Login/AppleLoginButton'
 import FbLoginButton from 'screens/Login/FbLoginButton'
 import GoogleLoginButton from 'screens/Login/GoogleLoginButton'
 import providedStyles from './Signup.styles'
+import checkLogin from 'store/actions/checkLogin'
 
 const backgroundImage = require('assets/signin_background.png')
 const merkabaImage = require('assets/merkaba_white.png')
 
-export default function Signup ({ navigation, route }) {
+export default function Signup({ navigation, route }) {
+  const safeAreaInsets = useSafeAreaInsets()
   const dispatch = useDispatch()
-  const loginPending = useSelector(state => {
+  const loading = useSelector(state => {
     return state.pending[LOGIN] ||
       state.pending[LOGIN_WITH_APPLE] ||
       state.pending[LOGIN_WITH_FACEBOOK] ||
       state.pending[LOGIN_WITH_GOOGLE] ||
-      state.pending[FETCH_CURRENT_USER]
+      state.pending[CHECK_LOGIN] ||
+      state.pending[FETCH_CURRENT_USER] ||
+      state.pending[UPDATE_USER_SETTINGS]
   })
+  const signupState = useSelector(getSignupState)
   const userSettings = useSelector(getLocalUserSettings)
-  const storedEmail = userSettings?.email
-  const emailFromPath = route.params?.email
-  const providedEmail = emailFromPath || storedEmail
-  const [email, providedSetEmail] = useState(providedEmail)
+  const [email, providedSetEmail] = useState(route.params?.email || userSettings?.email)
   const [pending, setPending] = useState()
   const [error, setError] = useState()
-  const [ssoError, setSsoError] = useState()
+  const [socialLoginError, setSocialLoginError] = useState()
   const [canSubmit, setCanSubmit] = useState(pending || !email)
-  const signupState = useSelector(getSignupState)
-  const safeAreaInsets = useSafeAreaInsets()
 
-  // Maybe turn this into a signupState hook as it may be reused
-  // also on the sign-up pages?
-  useFocusEffect(() => {
+  const signupRedirect = () => {
+    console.log('!!!! in signupRedirect -- signupState', signupState)
     switch (signupState) {
-      // case SignupState.None: {
-      //   // do nothing, we're in the right place?
-      // }
+      case SignupState.None: {
+        navigation.navigate('Signup Intro')
+        break
+      }
       case SignupState.EmailValidation: {
-        navigation.navigate('SignupFlow0', route.params)
-        return null
+        navigation.navigate('SignupEmailValidation')
+        break
       }
-      case SignupState.AccountDetails: {
-        navigation.navigate('SignupFlow1')
-        return null
+      case SignupState.Registration: {
+        navigation.navigate('SignupRegistration')
+        break
       }
-      case SignupState.ProfileDetails: {
-        navigation.navigate('SignupFlow2')
-        return null
+      case SignupState.InProgress: {
+        navigation.navigate('SignupUploadAvatar')
+        break
       }
     }
-  })
-
-  // const signupInProgress = useSelector(getSignupInProgress)
-  const createErrorNotification = providedError => {
-    setSsoError(providedError)
   }
+
+  useEffect(signupRedirect, [loading, signupState])
+  useFocusEffect(signupRedirect)
+
+  const createErrorNotification = providedError => {
+    setSocialLoginError(providedError)
+  }
+
   const setEmail = validateEmail => {
-    error && setError()
+    setSocialLoginError()
+    setError()
     setCanSubmit(!validator.isEmail(validateEmail))
     providedSetEmail(validateEmail)
   }
+
   const socialLoginMaker = loginWith => async token => {
-    await dispatch(logout())
     const action = await dispatch(loginWith(token))
     if (action.error) {
       const errorMessage = action?.payload?.response?.body
       return errorMessage ? { errorMessage } : null
+    } else {
+      dispatch(checkLogin())
     }
   }
+
   const submit = async () => {
     const genericError = new Error('An account may already exist for this email address, Login or try resetting your password.')
     try {
       setPending(true)
       await dispatch(updateLocalUserSettings({ email }))
       const result = await dispatch(sendEmailVerification(email))
-      if (result.payload.data.getData().success) {
-        navigation.navigate('SignupFlow0')
+      if (result.payload.getData().success) {
+        navigation.navigate('SignupEmailValidation')
       } else {
         throw genericError
       }
@@ -127,8 +133,8 @@ export default function Signup ({ navigation, route }) {
   return (
     <KeyboardFriendlyView style={styles.container}>
       <ScrollView>
-        {loginPending && <Text style={styles.banner}>SIGNING UP...</Text>}
-        {ssoError && <Text style={styles.errorBanner}>{ssoError}</Text>}
+        {loading && <Text style={styles.banner}>SIGNING UP...</Text>}
+        {socialLoginError && <Text style={styles.errorBanner}>{socialLoginError}</Text>}
         <ImageBackground
           source={backgroundImage}
           style={styles.background}
@@ -159,12 +165,14 @@ export default function Signup ({ navigation, route }) {
           />
           <View style={styles.connectWith}>
             <Text style={styles.connectWithText}>Or sign up using:</Text>
-            {isIOS && <AppleLoginButton
-              signup
-              style={styles.appleLoginButton}
-              onLoginFinished={socialLoginMaker(loginWithApple)}
-              createErrorNotification={createErrorNotification}
-                      />}
+            {isIOS && (
+              <AppleLoginButton
+                signup
+                style={styles.appleLoginButton}
+                onLoginFinished={socialLoginMaker(loginWithApple)}
+                createErrorNotification={createErrorNotification}
+              />
+            )}
             <GoogleLoginButton
               signup
               style={styles.googleLoginButton}

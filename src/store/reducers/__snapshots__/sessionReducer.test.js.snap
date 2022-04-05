@@ -3,7 +3,6 @@
 exports[`on FETCH_CURRENT_USER handles a not signed-in 1`] = `
 Object {
   "id": 1,
-  "signedIn": false,
   "signupInProgress": undefined,
 }
 `;
@@ -11,7 +10,6 @@ Object {
 exports[`on FETCH_CURRENT_USER handles a user with a membership 1`] = `
 Object {
   "id": 1,
-  "signedIn": true,
   "signupInProgress": undefined,
 }
 `;
@@ -19,7 +17,6 @@ Object {
 exports[`on FETCH_CURRENT_USER handles a user with no memberships 1`] = `
 Object {
   "id": 1,
-  "signedIn": true,
   "signupInProgress": undefined,
 }
 `;

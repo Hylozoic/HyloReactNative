@@ -12,20 +12,14 @@ export default function logout () {
       api: { path: '/noo/session', method: 'DELETE' }
     },
     meta: {
-      then: () => {
-        return clearSessionCookie()
-          .then(() =>
-            LoginManager.logOut()
-          )
-          // TODO: This should be already handled by the same code in login/actions/Logout
-          .then(async () => {
-            if (!isEmpty(await GoogleSignin.getCurrentUser())) {
-              return GoogleSignin.signOut()
-            }
-          })
-          .then(() => {
-            RNRestart.Restart()
-          })
+      then: async () => {
+        await clearSessionCookie()
+        await LoginManager.logOut()
+        // TODO: This should be already handled by the same code in login/actions/Logout
+        if (!isEmpty(await GoogleSignin.getCurrentUser())) {
+          await GoogleSignin.signOut()
+        }
+        RNRestart.Restart()
       }
     }
   }

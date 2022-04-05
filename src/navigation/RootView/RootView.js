@@ -1,96 +1,96 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { View } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, useFocusEffect } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { navigationRef } from 'navigation/linking/helpers'
-import RNBootSplash from 'react-native-bootsplash'
-import RootNavigator from 'navigation/RootNavigator'
 import OneSignal from 'react-native-onesignal'
-import { register as registerOneSignal } from 'util/onesignal'
-import customLinking, {
-  INITIAL_NAV_STATE,
-  navigateToLinkingPath
-} from 'navigation/linking'
-import registerDevice from 'store/actions/registerDevice'
-import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import selectGroup from 'store/actions/selectGroup'
-import getMe from 'store/selectors/getMe'
-import { getLastViewedGroup } from 'store/models/Me'
+import customLinking, { INITIAL_NAV_STATE } from 'navigation/linking'
 import { getAuthorized } from 'store/selectors/getSignupState'
-import getReturnToPath from 'store/selectors/getReturnToPath'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import SocketListener from 'components/SocketListener'
+import RNBootSplash from 'react-native-bootsplash'
 import LoadingScreen from 'screens/LoadingScreen'
+import ItemChooser from 'screens/ItemChooser'
+import InviteExpired from 'screens/InviteExpired'
+import checkLogin from 'store/actions/checkLogin'
+import { white } from 'style/colors'
+import { createStackNavigator } from '@react-navigation/stack'
+import { ModalHeader } from 'navigation/headers'
+import AuthRootNavigator from 'navigation/AuthRootNavigator'
+import NonAuthRootNavigator from 'navigation/NonAuthRootNavigator'
+import JoinGroup from 'screens/JoinGroup'
+import LoginByTokenHandler from 'screens/LoginByTokenHandler'
 
+const Root = createStackNavigator()
 export default function RootView () {
   const dispatch = useDispatch()
-  const [navIsReady, setNavIsReady] = useState(false)
-  const [loading, setLoading] = useState(true)
-  const returnToPath = useSelector(getReturnToPath)
-  const currentUser = useSelector(getMe)
   const isAuthorized = useSelector(getAuthorized)
+  const [loading, setLoading] = useState(true)
 
-  // Handle Push Notifications opened
+  console.log('!!! isAuthorized in RootView', isAuthorized)
+  // This should be the only place we check for a session from the API.
+  // Routes will not be available until this check is complete.
+
+  useEffect(() => {
+    (async function () {
+      setLoading(true)
+      await dispatch(checkLogin())
+      RNBootSplash.hide()
+      setLoading(false)
+    })()
+  }, [isAuthorized])
+
+  // Handle Push Notifications opened. NOTE the handler it's important that the
+  // handlers is returns so it gets cleaned-up on unmount
   useEffect(() => OneSignal.setNotificationOpenedHandler(({ notification }) => {
     const path = notification?.additionalData?.path
     setReturnToPath(path)
   }), [])
 
-  // Handle returnToPath
-  useEffect(() => {
-    if (navIsReady && returnToPath) {
-      navigateToLinkingPath(returnToPath, isAuthorized)
+  const navigatorProps = {
+    screenOptions: {
+      cardStyle: { backgroundColor: white }
     }
-  }, [navIsReady, isAuthorized, returnToPath])
-
-  // Handle loading of currentUser if already "signedIn" via Login screen
-  // or on app launch when signedIn status is not yet known
-  useEffect(() => {
-    const loadCurrentUserSessionAsync = async () => {
-      const currentUserRaw = await dispatch(fetchCurrentUser())
-      if (currentUserRaw?.payload?.data?.me) {
-        const memberships = currentUserRaw?.payload?.data?.me?.memberships
-        const lastViewedgroupId = getLastViewedGroup(memberships)?.id
-        await dispatch(selectGroup(lastViewedgroupId))
-        await dispatch(registerOneSignal({ registerDevice }))
-        // Prompt for push on iOS
-        OneSignal.promptForPushNotificationsWithUserResponse(() => {})
-      }
-      setLoading(false)
-    }
-
-    if (!currentUser) {
-      setLoading(true)
-      loadCurrentUserSessionAsync()
-    } else {
-      setLoading(false)
-    }
-  }, [dispatch, currentUser])
-
-  if (loading) {
-    return (
-      <LoadingScreen />
-    )
   }
 
   return (
     <View style={styles.rootContainer}>
-      {isAuthorized && (
-        <SocketListener />
-      )}
+      {loading && <LoadingScreen />}
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}
-        initialState={isAuthorized ? INITIAL_NAV_STATE : null}
         onReady={() => {
-          setNavIsReady(true)
-          !loading && RNBootSplash.hide()
+          RNBootSplash.hide()
         }}
+        initialState={isAuthorized ? INITIAL_NAV_STATE : null}
         // NOTE: Uncomment below to get a map of the state
         // onStateChange={state => console.log('!!! onStateChange:', state.routes)}
       >
-        <RootNavigator isAuthorized={isAuthorized} />
+        <Root.Navigator {...navigatorProps}>
+          {/* Logged in */}
+          {isAuthorized && (
+            <Root.Screen name='AuthRoot' component={AuthRootNavigator} options={{ headerShown: false }} />
+          )}
+          {/* Not logged-in or Signing-up */}
+          {!isAuthorized && (
+            <Root.Screen name='NonAuthRoot' component={NonAuthRootNavigator} options={{ headerShown: false }} />
+          )}
+          {/* Screens always available */}
+          <Root.Screen name='LoginByTokenHandler' options={{ headerShown: false }} component={LoginByTokenHandler} />
+          <Root.Group screenOptions={{ presentation: 'modal', header: ModalHeader }}>
+            <Root.Screen
+              name='JoinGroup'
+              component={JoinGroup}
+              options={{ title: 'Joining Group...' }}
+            />
+            {/* TODO: Remove and replace with error message passed back to Login screen */}
+            <Root.Screen name='InviteExpired' component={InviteExpired} />
+            <Root.Screen name='ItemChooser' component={ItemChooser} />
+          </Root.Group>
+          <Root.Screen name='Loading' component={LoadingScreen} />
+        </Root.Navigator>
       </NavigationContainer>
+      {isAuthorized && <SocketListener />}
     </View>
   )
 }

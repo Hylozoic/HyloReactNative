@@ -2,12 +2,15 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { WorkflowModalHeader } from 'navigation/headers'
 import SignupComponent from 'screens/Signup'
-import SignupFlow0 from 'screens/SignupFlow/SignupFlow0'
-import SignupFlow1 from 'screens/SignupFlow/SignupFlow1'
-import SignupFlow2 from 'screens/SignupFlow/SignupFlow2'
-import SignupFlow3 from 'screens/SignupFlow/SignupFlow3'
+import SignupEmailValidation from 'screens/Signup/SignupEmailValidation'
+import SignupRegistration from 'screens/Signup/SignupRegistration'
+import SignupUploadAvatar from 'screens/Signup/SignupUploadAvatar'
+import SignupSetLocation from 'screens/Signup/SignupSetLocation'
 import ItemChooser from 'screens/ItemChooser'
 import { white, white20onCaribbeanGreen } from 'style/colors'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import getSignupState, { SignupState } from 'store/selectors/getSignupState'
+import { useSelector } from 'react-redux'
 
 const Signup = createStackNavigator()
 export default function SignupNavigator () {
@@ -15,6 +18,7 @@ export default function SignupNavigator () {
     screenOptions: {
       cardStyle: { backgroundColor: white },
       header: headerProps => {
+        // Hmmm, maybe should clear current user session...
         const close = () => headerProps.navigation.navigate('Signup Intro')
         return (
           <WorkflowModalHeader
@@ -35,19 +39,19 @@ export default function SignupNavigator () {
         options={{ headerShown: false }}
       />
       <Signup.Screen
-        name='SignupFlow0' component={SignupFlow0}
+        name='SignupEmailValidation' component={SignupEmailValidation}
         options={{ title: 'Verify Email' }}
       />
       <Signup.Screen
-        name='SignupFlow1' component={SignupFlow1}
+        name='SignupRegistration' component={SignupRegistration}
         options={{ title: 'STEP 1/3' }}
       />
       <Signup.Screen
-        name='SignupFlow2' component={SignupFlow2}
+        name='SignupUploadAvatar' component={SignupUploadAvatar}
         options={{ title: 'STEP 2/3' }}
       />
       <Signup.Screen
-        name='SignupFlow3' component={SignupFlow3}
+        name='SignupSetLocation' component={SignupSetLocation}
         options={{ title: 'STEP 3/3' }}
       />
       <Signup.Screen

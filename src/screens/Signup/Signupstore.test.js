@@ -3,7 +3,7 @@ import reducer, {
   UPDATE_LOCAL_USER_SETTINGS,
   updateLocalUserSettings,
   getLocalUserSettings
-} from './SignupFlow.store'
+} from './Signup.store'
 
 describe('reducer', () => {
   describe('on UPDATE_LOCAL_USER_SETTINGS', () => {

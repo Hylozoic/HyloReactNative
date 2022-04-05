@@ -1,10 +1,6 @@
 import sessionReducer, { initialState } from './sessionReducer'
 import { LOGIN } from 'screens/Login/actions'
-import { 
-  FETCH_CURRENT_USER,
-  LOGOUT,
-  SELECT_GROUP
-} from 'store/constants'
+import { LOGOUT, SELECT_GROUP } from 'store/constants'
 import { createInitialState } from 'store'
 
 describe('on LOGIN', () => {
@@ -19,7 +15,7 @@ describe('on LOGIN', () => {
     })
   })
 
-  it('sets signedIn and resets errors', () => {
+  it('resets errors', () => {
     const action = {
       type: LOGIN,
       payload: { id: '7' },
@@ -28,7 +24,6 @@ describe('on LOGIN', () => {
       }
     }
     expect(sessionReducer({ loginError: 'oh noes!' }, action)).toEqual({
-      signedIn: true,
       defaultLoginEmail: 'foo@bar.com'
     })
   })
@@ -66,62 +61,3 @@ describe('on SELECT_GROUP', () => {
   })
 })
 
-describe('on FETCH_CURRENT_USER', () => {
-  it('handles a user with a membership', () => {
-    const state = {
-      id: 1
-    }
-    const action = {
-      type: FETCH_CURRENT_USER,
-      payload: {
-        data: {
-          me: {
-            memberships: [
-              {
-                group: {
-                  id: 34
-                }
-              }
-            ]
-          }
-        }
-      }
-    }
-    expect(sessionReducer(state, action))
-      .toMatchSnapshot()
-  })
-
-  it('handles a user with no memberships', () => {
-    const state = {
-      id: 1
-    }
-    const action = {
-      type: FETCH_CURRENT_USER,
-      payload: {
-        data: {
-          me: {
-            memberships: []
-          }
-        }
-      }
-    }
-    expect(sessionReducer(state, action))
-      .toMatchSnapshot()
-  })
-
-  it('handles a not signed-in', () => {
-    const state = {
-      id: 1
-    }
-    const action = {
-      type: FETCH_CURRENT_USER,
-      payload: {
-        data: {
-          me: null
-        }
-      }
-    }
-    expect(sessionReducer(state, action))
-      .toMatchSnapshot()
-  })
-})

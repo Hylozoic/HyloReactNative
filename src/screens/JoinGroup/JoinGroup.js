@@ -12,7 +12,7 @@ export default function JoinGroup ({
   navigation
 }) {
   const dispatch = useDispatch()
-  const signedIn = useSelector(getAuthorized)
+  const isAuthorized = useSelector(getAuthorized)
   const memberships = useSelector(getMemberships)
   const invitationCodes = {
     invitationToken: getRouteParam('token', route),
@@ -22,7 +22,7 @@ export default function JoinGroup ({
 
   useEffect(() => {
     const checkInviteAndJoin = async () => {
-      if (!signedIn) return navigation?.navigate('Login')
+      if (!isAuthorized) return navigation?.navigate('Login')
       try {
         const checkInviteResult = await dispatch(checkInvitationAction(invitationCodes))
         const getInviteValid = get('payload.data.checkInvitation.valid')

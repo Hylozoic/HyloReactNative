@@ -8,7 +8,7 @@ import Login from 'screens/Login'
 
 const TestNavigator = createStackNavigator()
 
-it('forwards to Login when not signedIn', async () => {
+it('forwards to Login when not authorized', async () => {
   const { getByText } = render(
     <TestRoot>
       <TestNavigator.Navigator>

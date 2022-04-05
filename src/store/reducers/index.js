@@ -4,6 +4,7 @@ import ormReducer from './ormReducer'
 import pending from './pending'
 import queryResults from './queryResults'
 import sessionReducer from './sessionReducer'
+import returnToPathReducer from './returnToPathReducer'
 import mixpanelReducer from './mixpanel'
 import CommentEditor from 'screens/PostDetails/CommentEditor/CommentEditor.store'
 import FeedList from 'components/FeedList/FeedList.store'
@@ -15,7 +16,7 @@ import ModeratorSettings from 'screens/ModeratorSettings/ModeratorSettings.store
 import NewMessage from 'screens/NewMessage/NewMessage.store'
 import PeopleTyping from 'components/PeopleTyping/PeopleTyping.store'
 import SkillEditor from 'components/SkillEditor/SkillEditor.store'
-import SignupFlow from 'screens/SignupFlow/SignupFlow.store'
+import Signup from 'screens/Signup/Signup.store'
 import SocketListener from 'components/SocketListener/SocketListener.store'
 import Topics from 'screens/Topics/Topics.store'
 import CreateGroupFlow from 'screens/CreateGroupFlow/CreateGroupFlow.store'
@@ -27,6 +28,7 @@ export const appReducer = combineReducers({
   pending,
   queryResults,
   session: sessionReducer,
+  returnToPath: returnToPathReducer,
   mixpanel: mixpanelReducer,
   CommentEditor,
   FeedList,
@@ -38,7 +40,7 @@ export const appReducer = combineReducers({
   NewMessage,
   PeopleTyping,
   SearchPage,
-  SignupFlow,
+  Signup,
   SkillEditor,
   SocketListener,
   Topics,

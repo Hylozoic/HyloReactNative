@@ -6,7 +6,7 @@ import { createMockStore } from 'util/testing'
 import RootView from 'navigation/RootView'
 
 describe('RootView Specification', () => {
-  it('renders Login when signedIn false', async () => {
+  it('renders Login when not authorized', async () => {
     const store = createMockStore(createInitialState())
     const { findByText } = render(
       <Provider store={store}>

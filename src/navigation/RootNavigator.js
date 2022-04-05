@@ -1,33 +1,46 @@
 
 import 'react-native-gesture-handler' // probably not necessary as already included in index.js
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { createStackNavigator } from '@react-navigation/stack'
-import { ModalHeader } from 'navigation/headers'
-import { modalScreenName } from './linking/helpers'
+import RNBootSplash from 'react-native-bootsplash'
+import checkLogin from 'store/actions/checkLogin'
+import { getAuthorized } from 'store/selectors/getSignupState'
 import { white } from 'style/colors'
 // Screens
-import DrawerNavigator from 'navigation/DrawerNavigator'
-import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
-import PostDetails from 'screens/PostDetails'
-import MemberProfile from 'screens/MemberProfile'
-import GroupDetail from 'screens/GroupDetail'
-import PostEditor from 'screens/PostEditor'
-import GroupSettingsTabsNavigator from 'navigation/GroupSettingsTabsNavigator'
-import MemberSkillEditor from 'screens/MemberProfile/MemberSkillEditor'
-import PendingInvites from 'screens/PendingInvites'
-import NotificationsList from 'screens/NotificationsList'
-import NotificationSettings from 'screens/NotificationSettings'
-import Login from 'screens/Login'
-import ForgotPassword from 'screens/ForgotPassword'
-import SignupNavigator from 'navigation/SignupNavigator'
+import { ModalHeader } from 'navigation/headers'
+import AuthRootNavigator from 'navigation/AuthRootNavigator'
+import NonAuthRootNavigator from './NonAuthRootNavigator'
 import JoinGroup from 'screens/JoinGroup'
 import InviteExpired from 'screens/InviteExpired'
+import LoadingScreen from 'screens/LoadingScreen'
 import LoginByTokenHandler from 'screens/LoginByTokenHandler'
 import ItemChooser from 'screens/ItemChooser'
-import LoadingScreen from 'screens/LoadingScreen'
+import { useFocusEffect } from '@react-navigation/native'
 
 const Root = createStackNavigator()
-export default function RootNavigator ({ isAuthorized }) {
+export default function RootNavigator () {
+  const dispatch = useDispatch()
+  const isAuthorized = useSelector(getAuthorized)
+  const [loading, setLoading] = useState(true)
+
+  // This should be the only place we check for a session from the API.
+  // Routes will not be available until this check is complete.
+  useFocusEffect(
+    useCallback(() => {
+      (async function () {
+        setLoading(true)
+        await dispatch(checkLogin())
+        RNBootSplash.hide()
+        setLoading(false)
+      }())
+    }, [checkLogin, dispatch, setLoading, RNRootSplash])
+  )
+
+  if (loading) {
+    return <LoadingScreen />
+  }
+
   const navigatorProps = {
     screenOptions: {
       cardStyle: { backgroundColor: white }
@@ -38,60 +51,11 @@ export default function RootNavigator ({ isAuthorized }) {
     <Root.Navigator {...navigatorProps}>
       {/* Logged in */}
       {isAuthorized && (
-        <>
-          <Root.Screen name='Drawer' component={DrawerNavigator} options={{ headerShown: false }} />
-          <Root.Screen
-            name='Create Group' component={CreateGroupTabsNavigator}
-            options={{ headerShown: false }}
-          />
-          <Root.Group screenOptions={{ presentation: 'modal', header: ModalHeader }}>
-            <Root.Screen
-              name={modalScreenName('Post Details')} component={PostDetails}
-              options={{ title: 'Post Details' }}
-            />
-            <Root.Screen
-              name={modalScreenName('Member')} component={MemberProfile}
-              options={{ title: 'Member' }}
-            />
-            <Root.Screen
-              name={modalScreenName('Group Detail')} component={GroupDetail}
-              options={{ title: 'Group Details' }}
-            />
-            <Root.Screen name='Edit Post' component={PostEditor} />
-            <Root.Screen name='Group Settings' component={GroupSettingsTabsNavigator} />
-            {/* Not used anymore */}
-            <Root.Screen name='Edit Your Skills' component={MemberSkillEditor} />
-            <Root.Screen name='Pending Invites' component={PendingInvites} />
-            <Root.Screen name={modalScreenName('Notifications')} component={NotificationsList} />
-            <Root.Screen name='Notification Settings' component={NotificationSettings} />
-          </Root.Group>
-        </>
+        <Root.Screen name='AuthRoot' component={AuthRootNavigator} options={{ headerShown: false }} />
       )}
       {/* Not logged-in or Signing-up */}
       {!isAuthorized && (
-        <>
-          <Root.Group
-            screenOptions={{
-              headerShown: false,
-              header: headerProps => <ModalHeader {...headerProps} />
-            }}
-          >
-            <Root.Screen
-              name='Login' component={Login}
-              options={{
-                animationEnabled: false
-              }}
-            />
-            <Root.Screen
-              name='ForgotPassword' component={ForgotPassword}
-              options={{
-                headerShown: true,
-                title: 'Reset Your Password'
-              }}
-            />
-            <Root.Screen name='Signup' component={SignupNavigator} />
-          </Root.Group>
-        </>
+        <Root.Screen name='NonAuthRoot' component={NonAuthRootNavigator} options={{ headerShown: false }} />
       )}
       {/* Screens always available */}
       <Root.Screen name='LoginByTokenHandler' options={{ headerShown: false }} component={LoginByTokenHandler} />

@@ -11,6 +11,8 @@ export default function fetchCurrentUser () {
             id
             name
             email
+            emailValidated
+            hasRegistered
             bio
             tagline    
             location
@@ -52,8 +54,14 @@ export default function fetchCurrentUser () {
               name
             }
             settings {
-              signupInProgress
+              alreadySeenTour
+              digestFrequency
               dmNotifications
+              commentNotifications
+              signupInProgress
+              streamViewMode
+              streamSortBy
+              streamPostType
             }
             joinRequests(status: 0) {
               items {

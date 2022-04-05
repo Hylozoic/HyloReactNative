@@ -11,17 +11,17 @@ import {
 import {
   updateLocalUserSettings,
   getLocalUserSettings
-} from 'screens/SignupFlow/SignupFlow.store'
+} from 'screens/Signup/Signup.store'
 import verifyEmail from 'store/actions/verifyEmail'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import FormattedError from 'components/FormattedError'
 import controlStyles from 'components/SettingControl/SettingControl.styles'
-import styles from './SignupFlow0.styles'
+import styles from './SignupEmailValidation.styles'
 import logout from 'store/actions/logout'
 
 const CODE_LENGTH = 6
 
-export default function SignupFlow0 ({ navigation, route }) {
+export default function SignupEmailValidation ({ navigation, route }) {
   const dispatch = useDispatch()
   const [pending, setPending] = useState()
   const [verificationCode, setVerificationCodeBase] = useState()
@@ -58,7 +58,7 @@ export default function SignupFlow0 ({ navigation, route }) {
       setPending(true)
       await dispatch(verifyEmail(email, code))
       await dispatch(updateLocalUserSettings({ email }))
-      navigation.navigate('SignupFlow1')
+      navigation.navigate('SignupRegistration')
     } catch (e) {
       setError('Expired or invalid code')
     } finally {

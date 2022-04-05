@@ -3,16 +3,16 @@ import { useFocusEffect } from '@react-navigation/native'
 import { ScrollView, View, Image, Text } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import getMe from 'store/selectors/getMe'
-import { defaultUserSettings, getLocalUserSettings, updateLocalUserSettings } from '../SignupFlow.store.js'
+import { defaultUserSettings, getLocalUserSettings, updateLocalUserSettings } from '../Signup.store'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import ImagePicker from 'components/ImagePicker'
 import Button from 'components/Button'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
-import styles from './SignupFlow2.styles'
+import styles from './SignupUploadAvatar.styles'
 
-export default function SignupFlow2 ({ navigation }) {
+export default function SignupUploadAvatar ({ navigation }) {
   const dispatch = useDispatch()
   const currentUser = useSelector(getMe)
   const { avatarUrl } = useSelector(getLocalUserSettings)
@@ -53,9 +53,9 @@ export default function SignupFlow2 ({ navigation }) {
   }
 
   const saveAndNext = async () => {
-    const { error } = await dispatch(updateUserSettings({ avatarUrl }))
-    if (error) return
-    return navigation.navigate('SignupFlow3')
+    const response = await dispatch(updateUserSettings({ avatarUrl }))
+    const responseError = response.payload.getData()?.error
+    if (!responseError) navigation.navigate('SignupSetLocation')
   }
 
   return (

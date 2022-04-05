@@ -1,12 +1,7 @@
-import { find, get, maxBy } from 'lodash/fp'
+import { find, get } from 'lodash/fp'
 import PropTypes from 'prop-types'
 import { attr, fk, many, Model } from 'redux-orm'
 import { toRefArray } from 'util/reduxOrmMigration'
-
-export const getLastViewedGroup = memberships => {
-  const lastViewedMembership = maxBy(m => new Date(m.lastViewedAt), memberships)
-  return get('group', lastViewedMembership)
-}
 
 export function firstName (user) {
   return user.name ? user.name.split(' ')[0] : null

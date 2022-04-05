@@ -14,8 +14,10 @@ import {
 import { white } from 'style/colors'
 import styles from './CreateGroupFlow.styles'
 import selectGroup from 'store/actions/selectGroup'
+import { useNavigation } from '@react-navigation/native'
 
-export default function CreateGroupReview ({ navigation }) {
+export default function CreateGroupReview () {
+  const navigation = useNavigation()
   const dispatch = useDispatch()
   const groupData = useSelector(getGroupData)
   const parentGroups = useSelector(getNewGroupParentGroups)
@@ -34,11 +36,11 @@ export default function CreateGroupReview ({ navigation }) {
 
   const submit = async () => {
     try {
-      const data = await dispatch(createGroup(groupData))
-      const error = data?.error
-      const newGroup = data?.payload?.data?.createGroup?.group
+      const graphqlResponse = await dispatch(createGroup(groupData))
+      const responseError = graphqlResponse?.getData().error
+      const newGroup = graphqlResponse?.payload?.getData().group
 
-      if (error) {
+      if (responseError) {
         setError('There was an error, your Group was not created. Please try again.')
       } else if (newGroup) {
         dispatch(clearCreateGroupStore())
@@ -46,7 +48,7 @@ export default function CreateGroupReview ({ navigation }) {
       } else {
         setError('Group may have been created, but there was an error. Please contact Hylo support.')
       }
-    } catch (error) {
+    } catch {
       setError('There was an unknown error. Please contact Hylo support.')
     }
   }

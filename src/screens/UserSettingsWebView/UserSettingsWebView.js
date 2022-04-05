@@ -13,15 +13,12 @@ export default function UserSettingsWebView ({ path: pathProp, navigation, route
     <HyloWebView
       ref={webViewRef}
       path={path}
-      onShouldStartLoadWithRequest={({ url }) => {
-        // Restarts app if webview forwards to login page
+      onNavigationStateChange={({ url }) => {
+        console.log('!!! in onNavigationStateChange', url)
         if (url.match(/\/login/)) {
           dispatch(logout()).then(() => RNRestart.Restart())
           return false
         }
-        return true
-      }}
-      onNavigationStateChange={({ url }) => {
         if (!url.match(/\/settings/)) {
           webViewRef.current?.goBack()
           return false

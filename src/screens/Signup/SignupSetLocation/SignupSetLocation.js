@@ -3,18 +3,19 @@ import { ScrollView, View, Text } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import useCurrentLocation from 'hooks/useCurrentLocation'
-import { defaultUserSettings, getLocalUserSettings, updateLocalUserSettings } from '../SignupFlow.store.js'
+import { defaultUserSettings, getLocalUserSettings, updateLocalUserSettings } from '../Signup.store'
 import getMe from 'store/selectors/getMe'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
 import SettingControl from 'components/SettingControl'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
-import styles from './SignupFlow3.styles'
+import styles from './SignupSetLocation.styles'
+import checkLogin from 'store/actions/checkLogin'
 
-export default function SignupFlow3 ({ navigation }) {
+export default function SignupSetLocation ({ navigation }) {
   const dispatch = useDispatch()
-  const { location } = useSelector(getLocalUserSettings)
+  const { location, locationId } = useSelector(getLocalUserSettings)
   const controlRef = useRef()
   const currentUser = useSelector(getMe)
   const [currentLocation, getLocation] = useCurrentLocation()
@@ -31,10 +32,12 @@ export default function SignupFlow3 ({ navigation }) {
     })
   })
 
-  const finish = () => {
+  const finish = async () => {
     controlRef.current && controlRef.current.blur()
-    dispatch(updateLocalUserSettings(defaultUserSettings))
-    dispatch(updateUserSettings({ settings: { signupInProgress: false } }))
+    // Clears sign-up flow state (!!! not currently checking for error)
+    await dispatch(updateLocalUserSettings(defaultUserSettings))
+    await dispatch(updateUserSettings({ location, locationId, settings: { signupInProgress: false } }))
+    await dispatch(checkLogin())
   }
 
   const showLocationPicker = locationText => {
@@ -42,9 +45,11 @@ export default function SignupFlow3 ({ navigation }) {
       navigation,
       currentLocation,
       initialSearchTerm: locationText,
-      onPick: location => {
-        dispatch(updateLocalUserSettings({ location: location?.fullText }))
-        dispatch(updateLocalUserSettings({ locationId: location?.id }))
+      onPick: pickedLocation => {
+        dispatch(updateLocalUserSettings({
+          location: pickedLocation?.fullText,
+          locationId: pickedLocation?.id
+        }))
       }
     })
   }

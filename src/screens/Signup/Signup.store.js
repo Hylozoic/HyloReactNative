@@ -1,4 +1,4 @@
-export const MODULE_NAME = 'SignupFlow'
+export const MODULE_NAME = 'Signup'
 export const UPDATE_LOCAL_USER_SETTINGS = `${MODULE_NAME}/UPDATE_LOCAL_USER_SETTINGS`
 
 export const defaultUserSettings = {

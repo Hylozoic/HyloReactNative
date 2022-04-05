@@ -13,11 +13,10 @@ it('mapStateToProps matches the latest snapshot', () => {
 
   const state = {
     session: {
-      signedIn: true,
-      entryUrl: 'http://www.hylo.com/a/path'
+      entryUrl: 'http://www.hylo.com/a/path',
+      groupId: '7'
     },
     pending: {},
-    session: { groupId: '7' },
     orm: session.state
   }
   const props = {

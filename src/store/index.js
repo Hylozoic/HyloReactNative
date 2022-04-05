@@ -7,7 +7,7 @@ import middleware from 'store/middleware'
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['SignupFlow']
+  whitelist: ['Signup']
 }
 
 export const initialState = {}

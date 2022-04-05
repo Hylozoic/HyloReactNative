@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { omit, pick, pickBy, identity } from 'lodash/fp'
 import { Validators } from 'hylo-shared'
 import useForm from 'hooks/useForm'
-import { getLocalUserSettings, updateLocalUserSettings, defaultUserSettings } from '../SignupFlow.store.js'
+import { getLocalUserSettings, updateLocalUserSettings, defaultUserSettings } from '../Signup.store'
 import register from 'store/actions/register'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import { FETCH_CURRENT_USER, REGISTER, UPDATE_USER_SETTINGS } from 'store/constants'
@@ -14,13 +14,13 @@ import getMe from 'store/selectors/getMe'
 import SettingControl from 'components/SettingControl'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-import styles from './SignupFlow1.styles'
+import styles from './SignupRegistration.styles'
 import Loading from 'components/Loading'
 
-export default function SignupFlow1 ({ navigation, route }) {
+export default function SignupRegistration ({ navigation, route }) {
+  const dispatch = useDispatch()
   const currentUser = useSelector(getMe)
   const userSettingsFromStore = useSelector(getLocalUserSettings)
-  const dispatch = useDispatch()
 
   const validator = ({ name, password, confirmPassword }) => {
     return pickBy(identity, {
@@ -37,15 +37,11 @@ export default function SignupFlow1 ({ navigation, route }) {
     const signupParams = pick(['name', 'email', 'password'], filteredValues)
 
     try {
-      if (currentUser) {
-        dispatch(updateLocalUserSettings(paramsFromState))
-        await dispatch(updateUserSettings(currentUserParams))
-      } else {
-        await dispatch(register(signupParams))
-        dispatch(updateLocalUserSettings(paramsFromState))
-        await dispatch(fetchCurrentUser())
-      }
-      navigation.navigate('SignupFlow2')
+      await dispatch(register(name, password))
+      // await dispatch(updateUserSettings({ settings: { signupInProgress: false } }))
+      dispatch(updateLocalUserSettings(paramsFromState))
+      // await dispatch(fetchCurrentUser())
+      // navigation.navigate('SignupUploadAvatar')
     } catch (error) {
       console.log('!!! error', error)
       return error
@@ -122,30 +118,26 @@ export default function SignupFlow1 ({ navigation, route }) {
                 returnKeyType='next'
                 onSubmitEditing={() => passwordControlRef.current.focus()}
               />
-              {!currentUser && (
-                <SettingControl
-                  ref={passwordControlRef}
-                  label='Password'
-                  value={password}
-                  onChange={value => handleChange('password', value)}
-                  toggleSecureTextEntry
-                  error={errors.password}
-                  returnKeyType='next'
-                  onSubmitEditing={() => confirmPasswordControlRef.current.focus()}
-                />
-              )}
-              {!currentUser && (
-                <SettingControl
-                  ref={confirmPasswordControlRef}
-                  label='Confirm Password'
-                  value={confirmPassword}
-                  onChange={value => handleChange('confirmPassword', value)}
-                  toggleSecureTextEntry
-                  error={errors.confirmPassword}
-                  returnKeyType='go'
-                  onSubmitEditing={handleSubmit}
-                />
-              )}
+              <SettingControl
+                ref={passwordControlRef}
+                label='Password'
+                value={password}
+                onChange={value => handleChange('password', value)}
+                toggleSecureTextEntry
+                error={errors.password}
+                returnKeyType='next'
+                onSubmitEditing={() => confirmPasswordControlRef.current.focus()}
+              />
+              <SettingControl
+                ref={confirmPasswordControlRef}
+                label='Confirm Password'
+                value={confirmPassword}
+                onChange={value => handleChange('confirmPassword', value)}
+                toggleSecureTextEntry
+                error={errors.confirmPassword}
+                returnKeyType='go'
+                onSubmitEditing={handleSubmit}
+              />
             </>
           )}
         </View>

@@ -40,7 +40,7 @@ Object {
     "filter": "all",
     "search": "",
   },
-  "SignupFlow": Object {
+  "Signup": Object {
     "errors": Object {},
     "userSettings": Object {
       "avatarUrl": "",
@@ -587,9 +587,7 @@ Object {
   "queryResults": Object {},
   "session": Object {
     "groupId": null,
-    "returnToPath": null,
-    "signedIn": false,
-    "signupInProgress": null,
+    "returnToPath": null
   },
 }
 `;
