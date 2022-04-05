@@ -6,7 +6,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 import { useSelector } from 'react-redux'
-import { getAuthenticated } from 'store/selectors/getSignupState'
+import { getAuthenticated } from 'store/selectors/getAuthState'
 import styles from './InviteExpired.styles'
 
 const axolotlImage = require('assets/Axel_Fretting.png')

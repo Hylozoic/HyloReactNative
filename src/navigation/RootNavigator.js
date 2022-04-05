@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createStackNavigator } from '@react-navigation/stack'
 import RNBootSplash from 'react-native-bootsplash'
 import checkLogin from 'store/actions/checkLogin'
-import { getAuthorized } from 'store/selectors/getSignupState'
+import { getAuthorized } from 'store/selectors/getAuthState'
 import { white } from 'style/colors'
 // Screens
 import { ModalHeader } from 'navigation/headers'

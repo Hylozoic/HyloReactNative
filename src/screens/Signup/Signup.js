@@ -21,7 +21,7 @@ import {
 } from 'screens/Login/actions'
 import { getLocalUserSettings, updateLocalUserSettings } from 'screens/Signup/Signup.store'
 import sendEmailVerification from 'store/actions/sendEmailVerification'
-import { getSignupState, SignupState } from 'store/selectors/getSignupState'
+import { getAuthState, AuthState } from 'store/selectors/getAuthState'
 import { CHECK_LOGIN, FETCH_CURRENT_USER, LOGIN, UPDATE_USER_SETTINGS } from 'store/constants'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
@@ -50,7 +50,7 @@ export default function Signup () {
       state.pending[FETCH_CURRENT_USER] ||
       state.pending[UPDATE_USER_SETTINGS]
   })
-  const signupState = useSelector(getSignupState)
+  const authState = useSelector(getAuthState)
   const userSettings = useSelector(getLocalUserSettings)
   const [email, providedSetEmail] = useState(route.params?.email || userSettings?.email)
   const [pending, setPending] = useState()
@@ -59,20 +59,20 @@ export default function Signup () {
   const [canSubmit, setCanSubmit] = useState(pending || !email)
 
   const signupRedirect = () => {
-    switch (signupState) {
-      case SignupState.None: {
+    switch (authState) {
+      case AuthState.None: {
         navigation.navigate('Signup Intro')
         break
       }
-      case SignupState.EmailValidation: {
+      case AuthState.EmailValidation: {
         navigation.navigate('SignupEmailValidation')
         break
       }
-      case SignupState.Registration: {
+      case AuthState.Registration: {
         navigation.navigate('SignupRegistration')
         break
       }
-      case SignupState.InProgress: {
+      case AuthState.SignupInProgress: {
         if (!['SignupUploadAvatar', 'SignupSetLocation'].includes(currentRouteName)) {
           navigation.navigate('SignupUploadAvatar')
         }
@@ -81,7 +81,7 @@ export default function Signup () {
     }
   }
 
-  useEffect(signupRedirect, [loading, signupState])
+  useEffect(signupRedirect, [loading, authState])
   useFocusEffect(signupRedirect)
 
   const createErrorNotification = providedError => {

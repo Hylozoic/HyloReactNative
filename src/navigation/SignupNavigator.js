@@ -9,7 +9,7 @@ import SignupSetLocation from 'screens/Signup/SignupSetLocation'
 import ItemChooser from 'screens/ItemChooser'
 import { white, white20onCaribbeanGreen } from 'style/colors'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
-import getSignupState, { SignupState } from 'store/selectors/getSignupState'
+import getAuthState, { AuthState } from 'store/selectors/getAuthState'
 import { useSelector } from 'react-redux'
 
 const Signup = createStackNavigator()
