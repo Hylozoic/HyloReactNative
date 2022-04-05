@@ -13,7 +13,7 @@ in `RootRouter`, `SignupRouter`, and `AuthRouter`.
 
 Each state below below implies transition from the previous state has completed, e.g.:
 
-  None > EmailValidation > Registration > InProgress > Complete
+  None > EmailValidation > Registration > SignupInProgress > Complete
 
 *Some of this may be best consolidated into the `me` resolver, and/or `User` and
 `Session` models, on the API side.*
