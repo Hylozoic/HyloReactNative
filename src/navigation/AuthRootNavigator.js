@@ -10,12 +10,10 @@ import { white } from 'style/colors'
 import registerDevice from 'store/actions/registerDevice'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import getMe from 'store/selectors/getMe'
 import getReturnToPath from 'store/selectors/getReturnToPath'
 import getLastViewedGroup from 'store/selectors/getLastViewedGroup'
-import selectGroup from 'store/actions/selectGroup'
 import { register as registerOneSignal } from 'util/onesignal'
-import { navigateToLinkingPath } from 'navigation/linking'
+import { navigateToLinkingPathInApp } from 'navigation/linking'
 // Screens
 import DrawerNavigator from 'navigation/DrawerNavigator'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
@@ -34,7 +32,6 @@ const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
   const dispatch = useDispatch()
   const returnToPath = useSelector(getReturnToPath)
-  const currentUser = useSelector(getMe)
   const currentGroup = useSelector(getCurrentGroup)
   const lastViewedGroup = useSelector(getLastViewedGroup)
   const [loading, setLoading] = useState(true)
@@ -61,7 +58,7 @@ export default function AuthRootNavigator () {
     return <LoadingScreen />
   }
 
-  if (currentUser && returnToPath) navigateToLinkingPath(returnToPath, true)
+  if (returnToPath) navigateToLinkingPathInApp(returnToPath, true)
 
   const navigatorProps = {
     screenOptions: {

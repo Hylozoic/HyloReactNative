@@ -10,10 +10,11 @@ import * as qs from 'query-string'
 import { URL } from 'react-native-url-polyfill'
 import { PathHelpers } from 'hylo-shared'
 import store from 'store'
-import { modalScreenName } from './helpers'
+import { getAuthorized } from 'store/selectors/getAuthState'
 import setReturnToPath from 'store/actions/setReturnToPath'
-import { navigationRef } from 'navigation/linking/helpers'
+import { modalScreenName } from './helpers'
 import { ALL_GROUP_ID } from 'store/models/Group'
+import { navigationRef } from 'navigation/linking/helpers'
 
 export const DEFAULT_APP_HOST = 'https://hylo.com'
 
@@ -43,6 +44,7 @@ export const prefixes = [
 /* eslint-disable key-spacing */
 export const routesConfig = {
   '/noo/login/token':                                        { screenPath: 'NonAuthRoot/LoginByTokenHandler', noAuth: true },
+  '/signup/verify-email':                                    { screenPath: 'NonAuthRoot/Signup/SignupEmailValidation', noAuth: true },
   '/signup/:step?':                                          { screenPath: 'NonAuthRoot/Signup/Signup Intro', noAuth: true },
   '/h/use-invitation':                                       'JoinGroup',
 
@@ -94,7 +96,7 @@ export const routesConfig = {
   '/':                                                       'AuthRoot/Drawer/Tabs/Home Tab/Feed'
 }
 
-export const INITIAL_NAV_STATE = {
+export const INITIAL_AUTH_NAV_STATE = {
   routes: [
     {
       name: 'AuthRoot',
@@ -134,6 +136,24 @@ export const INITIAL_NAV_STATE = {
   ]
 }
 
+export const INITIAL_NON_AUTH_NAV_STATE = {
+  routes: [
+    {
+      name: 'NonAuthRoot',
+      state: {
+        routes: [
+          {
+            name: 'Signup'
+          },
+          {
+            name: 'Login'
+          }
+        ]
+      }
+    }
+  ]
+}
+
 export async function openURL (providedUrlOrPath, options = {}) {
   const urlOrPath = providedUrlOrPath.trim().toLowerCase()
   const linkingURL = new URL(urlOrPath, DEFAULT_APP_HOST)
@@ -166,12 +186,18 @@ export async function openURL (providedUrlOrPath, options = {}) {
 // this case...
 export const navigateToLinkingPathInApp = async (providedUrl, reset = false) => {
   const linkingURL = new URL(providedUrl, DEFAULT_APP_HOST)
-  const linkingPath = `${linkingURL.pathname}?${linkingURL.search}`
+  const linkingPath = `${linkingURL.pathname}${linkingURL.search}`
+  const isAuthorized = getAuthorized(store.getState())
   const state = getStateFromPath(linkingPath)
   const action = getActionFromState(state)
 
   if (reset) {
-    await navigationRef.current?.dispatch(CommonActions.reset(INITIAL_NAV_STATE))
+    await navigationRef.current?.dispatch(
+      CommonActions.reset(isAuthorized
+        ? INITIAL_AUTH_NAV_STATE
+        : INITIAL_NON_AUTH_NAV_STATE
+      )
+    )
   }
 
   navigationRef.current?.dispatch(action)
@@ -190,7 +216,7 @@ export const navigateToLinkingPath = async (linkingPath, authed) => {
 
   if (noAuth || authed) {
     if (authed) {
-      await navigationRef.current?.dispatch(CommonActions.reset(INITIAL_NAV_STATE))
+      await navigationRef.current?.dispatch(CommonActions.reset(INITIAL_AUTH_NAV_STATE))
     }
     await navigationRef.current?.dispatch(action)
     store.dispatch(setReturnToPath(null))
@@ -216,7 +242,7 @@ export function getRouteObjectFromPath (incomingPathAndQuerystring, routes = rou
 
       return {
         screenPath,
-        options: { ...options, ...pathMatch.params },
+        options: { ...options, originalLinkingPath: incomingPathAndQuerystring, ...pathMatch.params },
         queryString: incomingQuerystring
       }
     }

@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 import { ScrollView, View, Image, Text } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import getMe from 'store/selectors/getMe'
-import { defaultUserSettings, getLocalUserSettings, updateLocalUserSettings } from '../Signup.store'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import ImagePicker from 'components/ImagePicker'
@@ -15,41 +14,23 @@ import styles from './SignupUploadAvatar.styles'
 export default function SignupUploadAvatar ({ navigation }) {
   const dispatch = useDispatch()
   const currentUser = useSelector(getMe)
-  const { avatarUrl } = useSelector(getLocalUserSettings)
-  const [localUri, setLocalUri] = useState(null)
+  const [avatarUrl, setAvatarUrl] = useState(currentUser?.avatarUrl)
+  const [avatarImageSource, setAvatarImageSource] = useState({ uri: avatarUrl })
   const [imagePickerPending, setImagePickerPending] = useState(false)
-
-  useEffect(() => {
-    // this is for the case where they logged in but hadn't finished sign up
-    if (!avatarUrl && currentUser) {
-      dispatch(updateLocalUserSettings({ avatarUrl: currentUser.avatarUrl }))
-    }
-  }, [])
 
   useFocusEffect(() => {
     navigation.setOptions({
       headerLeftOnPress: () => {
-        dispatch(updateLocalUserSettings(defaultUserSettings))
+        // onCancel: This will have the effect of fully Authorizing the user
+        // and they will be forwarded to `AuthRoot`
         dispatch(updateUserSettings({ settings: { signupInProgress: false } }))
       }
     })
   })
 
-  const imageSource = localUri
-    ? { uri: localUri }
-    : avatarUrl && { uri: avatarUrl }
-
-  const imagePickerChildren = imageSource && !imagePickerPending
-    ? <Image style={styles.image} source={imageSource} />
-    : (
-      <View style={styles.imagePickerBackground}>
-        {imagePickerPending ? <Loading /> : <Icon name='AddImage' style={styles.cameraIcon} />}
-      </View>
-    )
-
   const onChoice = ({ local, remote }) => {
-    dispatch(updateLocalUserSettings({ avatarUrl: remote }))
-    setLocalUri(local)
+    setAvatarUrl(remote)
+    setAvatarImageSource({ uri: local })
   }
 
   const saveAndNext = async () => {
@@ -71,16 +52,24 @@ export default function SignupUploadAvatar ({ navigation }) {
             id={currentUser.id}
             onChoice={choice => onChoice(choice)}
             onPendingChange={pending => setImagePickerPending(pending)}
-            children={imagePickerChildren}
-          />
+          >
+            {avatarImageSource && !imagePickerPending 
+              ? <Image style={styles.image} source={avatarImageSource} />
+              : (
+                <View style={styles.imagePickerBackground}>
+                  {imagePickerPending ? <Loading /> : <Icon name='AddImage' style={styles.cameraIcon} />}
+                </View>
+              )
+            }
+          </ImagePicker>
         </View>
       </ScrollView>
       <View style={styles.bottomBar}>
-        <Button
+        {/* <Button
           style={styles.backButton}
           text='< Back'
           onPress={() => navigation.goBack()}
-        />
+        /> */}
         <Button
           style={styles.continueButton}
           text='Continue'

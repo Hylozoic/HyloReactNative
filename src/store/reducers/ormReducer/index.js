@@ -21,9 +21,6 @@ import {
   VOTE_ON_POST_PENDING
 } from 'components/PostCard/PostFooter/PostFooter.store'
 import {
-  USE_INVITATION
-} from 'screens/JoinGroup/JoinGroup.store'
-import {
   UPDATE_LAST_VIEWED_PENDING
 } from 'screens/ThreadList/ThreadList.store'
 import {
@@ -50,7 +47,8 @@ import {
   UPDATE_GROUP_SETTINGS_PENDING,
   UPDATE_USER_SETTINGS_PENDING,
   RESET_STORE,
-  LOGOUT
+  LOGOUT,
+  USE_INVITATION
 } from 'store/constants'
 import { PIN_POST_PENDING } from 'components/PostCard/PostHeader/PostHeader.store'
 

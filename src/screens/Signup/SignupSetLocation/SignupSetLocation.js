@@ -1,41 +1,39 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ScrollView, View, Text } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import useCurrentLocation from 'hooks/useCurrentLocation'
-import { defaultUserSettings, getLocalUserSettings, updateLocalUserSettings } from '../Signup.store'
 import getMe from 'store/selectors/getMe'
+import checkLogin from 'store/actions/checkLogin'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
 import SettingControl from 'components/SettingControl'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 import styles from './SignupSetLocation.styles'
-import checkLogin from 'store/actions/checkLogin'
 
 export default function SignupSetLocation ({ navigation }) {
   const dispatch = useDispatch()
-  const { location, locationId } = useSelector(getLocalUserSettings)
   const currentUser = useSelector(getMe)
+  const [location, setLocation] = useState(currentUser?.location)
+  const [locationId, setLocationId] = useState(currentUser?.locationId)
   const [currentLocation, getLocation] = useCurrentLocation()
   const controlRef = useRef()
 
-  useEffect(() => {
-    // this is for the case where they logged in but hadn't finished sign up
-    currentUser && !location && dispatch(updateLocalUserSettings({ location: currentUser.location }))
-    getLocation()
-  }, [])
+  useEffect(() => { getLocation() }, [])
 
   useFocusEffect(() => {
     navigation.setOptions({
-      headerLeftOnPress: () => finish()
+      headerLeftOnPress: () => {
+        // onCancel: This will have the effect of fully Authorizing the user
+        // and they will be forwarded to `AuthRoot`
+        dispatch(updateUserSettings({ settings: { signupInProgress: false } }))
+      }
     })
   })
 
   const finish = async () => {
     controlRef.current && controlRef.current.blur()
-    // Clears sign-up flow state (!!! not currently checking for error)
-    await dispatch(updateLocalUserSettings(defaultUserSettings))
     await dispatch(updateUserSettings({ location, locationId, settings: { signupInProgress: false } }))
     await dispatch(checkLogin())
   }
@@ -46,10 +44,8 @@ export default function SignupSetLocation ({ navigation }) {
       currentLocation,
       initialSearchTerm: locationText,
       onPick: pickedLocation => {
-        dispatch(updateLocalUserSettings({
-          location: pickedLocation?.fullText,
-          locationId: pickedLocation?.id
-        }))
+        setLocation(pickedLocation?.fullText)
+        setLocationId(pickedLocation?.id)
       }
     })
   }

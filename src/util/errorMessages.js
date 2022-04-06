@@ -27,8 +27,8 @@ export default function errorMessages (type, action = '') {
     'no password provided': 'Please enter your password',
     'email not found': 'Email address not found',
     'invalid-code': 'Invalid code, please try again',
-    'invalid-link': 'Link expired, please try again',
-    'invite-expired': 'Sorry, your invitation to this group has already been used, is invalid, or expired. Contact your moderator for another one.',
+    'invalid-link': 'Link expired, please start over',
+    'invite-expired': 'Sorry, your invitation to this group is expired, has already been used, or invalid. Please contact a group moderator for another one.',
     default: err
   }
 

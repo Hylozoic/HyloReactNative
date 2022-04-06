@@ -1,50 +1,46 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { ScrollView, View, Text } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
-import { useDispatch, useSelector } from 'react-redux'
-import { omit, pick, pickBy, identity } from 'lodash/fp'
+import { useDispatch } from 'react-redux'
+import { pickBy, identity } from 'lodash/fp'
 import { Validators } from 'hylo-shared'
 import useForm from 'hooks/useForm'
-import { getLocalUserSettings, updateLocalUserSettings, defaultUserSettings } from '../Signup.store'
 import register from 'store/actions/register'
-import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import { FETCH_CURRENT_USER, REGISTER, UPDATE_USER_SETTINGS } from 'store/constants'
-import updateUserSettings from 'store/actions/updateUserSettings'
-import getMe from 'store/selectors/getMe'
 import SettingControl from 'components/SettingControl'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-import styles from './SignupRegistration.styles'
 import Loading from 'components/Loading'
+import styles from './SignupRegistration.styles'
 
 export default function SignupRegistration ({ navigation, route }) {
   const dispatch = useDispatch()
-  const currentUser = useSelector(getMe)
-  const userSettingsFromStore = useSelector(getLocalUserSettings)
+  const passwordControlRef = useRef()
+  const confirmPasswordControlRef = useRef()
+  const [loading, setLoading] = useState()
+  // WIP: Need to display response error somewhere on page
+  const [error, setError] = useState()
 
   const validator = ({ name, password, confirmPassword }) => {
     return pickBy(identity, {
       name: Validators.validateUser.name(name),
-      password: !currentUser && Validators.validateUser.password(password),
-      confirmPassword: !currentUser && password !== confirmPassword && 'Passwords must match'
+      password: Validators.validateUser.password(password),
+      confirmPassword: (password?.length > 8) && (password !== confirmPassword) && 'Passwords must match'
     })
   }
 
   const saveAndNext = async () => {
-    const filteredValues = pickBy(identity, values)
-    const paramsFromState = omit(['password', 'confirmPassword'], filteredValues)
-    const currentUserParams = pick(['name', 'email', 'avatarUrl', 'location'], filteredValues)
-    const signupParams = pick(['name', 'email', 'password'], filteredValues)
-
     try {
-      await dispatch(register(name, password))
-      // await dispatch(updateUserSettings({ settings: { signupInProgress: false } }))
-      dispatch(updateLocalUserSettings(paramsFromState))
-      // await dispatch(fetchCurrentUser())
-      // navigation.navigate('SignupUploadAvatar')
-    } catch (error) {
-      console.log('!!! error', error)
-      return error
+      setLoading(true)
+      const response = await dispatch(register(values.name, values.password))
+      const { error: responseError = null } = response.payload.getData()
+
+      if (responseError) {
+        setError(responseError)
+      }
+    } catch (e) {
+      setError(e.message)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -56,41 +52,10 @@ export default function SignupRegistration ({ navigation, route }) {
     handleSubmit
   } = useForm(saveAndNext, validator)
 
-  const pending = useSelector(state =>
-    state.pending[FETCH_CURRENT_USER] || state.pending[REGISTER] || state.pending[UPDATE_USER_SETTINGS])
-  const passwordControlRef = useRef()
-  const confirmPasswordControlRef = useRef()
-  const {
-    name,
-    email,
-    password,
-    confirmPassword
-  } = values
-
-  useEffect(() => {
-    // this is for the case where they logged in but hadn't finished sign up
-    if (currentUser) {
-      dispatch(updateLocalUserSettings({ name: currentUser?.name }))
-    } else {
-      dispatch(updateLocalUserSettings(defaultUserSettings))
-    }
-
-    setValues({
-      ...userSettingsFromStore,
-      name: currentUser?.name || userSettingsFromStore?.name,
-      email: route.params?.email || userSettingsFromStore?.email
-    })
-  }, [currentUser])
-
   useFocusEffect(() => {
     navigation.setOptions({
       headerLeftOnPress: () => {
-        dispatch(updateLocalUserSettings(defaultUserSettings))
-        if (currentUser) {
-          dispatch(updateUserSettings({ settings: { signupInProgress: false } }))
-        } else {
-          navigation.navigate('Signup Intro', { email })
-        }
+        navigation.navigate('Signup Intro')
       }
     })
   })
@@ -101,18 +66,16 @@ export default function SignupRegistration ({ navigation, route }) {
         <View style={styles.header}>
           <Text style={styles.title}>Let's do this!</Text>
           <Text style={styles.subTitle}>
-            Hi <Text style={{ fontWeight: 'bold' }}>{email}</Text> we just need to know your name and password and you're account will be created.
+            Hi <Text style={{ fontWeight: 'bold' }}>{values.email}</Text> we just need to know your name and password and you're account will be created.
           </Text>
         </View>
         <View style={styles.content}>
-          {pending && (
-            <Loading />
-          )}
-          {!pending && (
+          {loading && <Loading />}
+          {!loading && (
             <>
               <SettingControl
                 label='Your Full Name'
-                value={name}
+                value={values.name}
                 onChange={value => handleChange('name', value)}
                 error={errors.name}
                 returnKeyType='next'
@@ -120,8 +83,8 @@ export default function SignupRegistration ({ navigation, route }) {
               />
               <SettingControl
                 ref={passwordControlRef}
-                label='Password'
-                value={password}
+                label='Password (at least 9 characters)'
+                value={values.password}
                 onChange={value => handleChange('password', value)}
                 toggleSecureTextEntry
                 error={errors.password}
@@ -131,7 +94,7 @@ export default function SignupRegistration ({ navigation, route }) {
               <SettingControl
                 ref={confirmPasswordControlRef}
                 label='Confirm Password'
-                value={confirmPassword}
+                value={values.confirmPassword}
                 onChange={value => handleChange('confirmPassword', value)}
                 toggleSecureTextEntry
                 error={errors.confirmPassword}
@@ -145,9 +108,9 @@ export default function SignupRegistration ({ navigation, route }) {
       <View style={styles.bottomBar}>
         <Button
           style={styles.continueButton}
-          text={pending ? 'Saving...' : 'Continue'}
+          text={loading ? 'Saving...' : 'Continue'}
           onPress={handleSubmit}
-          disabled={!!pending}
+          disabled={!!loading}
         />
       </View>
     </KeyboardFriendlyView>

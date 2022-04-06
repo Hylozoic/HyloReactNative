@@ -1,70 +1,81 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ScrollView, View, Text } from 'react-native'
 import { useFocusEffect } from '@react-navigation/core'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
-  CodeField,
-  Cursor,
-  useBlurOnFulfill,
-  useClearByFocusCell
+  CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell
 } from 'react-native-confirmation-code-field'
-import {
-  updateLocalUserSettings,
-  getLocalUserSettings
-} from 'screens/Signup/Signup.store'
+import errorMessages from 'util/errorMessages'
 import verifyEmail from 'store/actions/verifyEmail'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import FormattedError from 'components/FormattedError'
 import controlStyles from 'components/SettingControl/SettingControl.styles'
+import LoadingScreen from 'screens/LoadingScreen'
 import styles from './SignupEmailValidation.styles'
-import logout from 'store/actions/logout'
 
 const CODE_LENGTH = 6
 
 export default function SignupEmailValidation ({ navigation, route }) {
   const dispatch = useDispatch()
-  const [pending, setPending] = useState()
-  const [verificationCode, setVerificationCodeBase] = useState()
+  const [loading, setLoading] = useState()
+  const [verificationCode, setVerificationCode] = useState()
   const [error, setError] = useState()
   const verificationCodeRef = useBlurOnFulfill({
     value: verificationCode,
     cellCount: CODE_LENGTH
   })
-  const setVerificationCode = code => {
-    setVerificationCodeBase(code)
-    setError()
-    if (code?.length === CODE_LENGTH) {
-      submit(code)
-    }
-  }
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value: verificationCode,
     setValue: setVerificationCode
   })
-  const email = useSelector(getLocalUserSettings)?.email || route.params?.email
+  const email = route.params?.email
+  const token = route.params?.token
 
   useFocusEffect(() => {
     navigation.setOptions({
       headerLeftOnPress: () => {
-        dispatch(updateLocalUserSettings({ email: null }))
-        dispatch(logout())
         navigation.navigate('Signup Intro', { email })
       }
     })
+    // WIP: token may not be received if already on this screen, which is a problem
+    // if (token) submit()
   })
 
-  const submit = async (code) => {
+  useEffect(() => {
+    if (token) submit()
+  }, [token])
+
+  useEffect(() => {
+    setError()
+    if (verificationCode?.length === CODE_LENGTH) submit()
+  }, [verificationCode])
+
+  if (!email) navigation.navigate('Signup')
+
+  const submit = async () => {
     try {
-      setPending(true)
-      await dispatch(verifyEmail(email, code))
-      await dispatch(updateLocalUserSettings({ email }))
-      navigation.navigate('SignupRegistration')
+      setLoading(true)
+      const response = await dispatch(verifyEmail(email, verificationCode, token))
+      const { error: responseError = null } = response.payload.getData()
+
+      if (responseError) {
+        if (responseError === 'invalid-link') {
+          navigation.navigate('Signup Intro', { error: errorMessages(responseError) })
+          return
+        }
+        setError(responseError)
+        return
+      }
+
+      // navigation.navigate('SignupRegistration')
     } catch (e) {
       setError('Expired or invalid code')
     } finally {
-      setPending(false)
+      setLoading(false)
     }
   }
+
+  if (loading) return <LoadingScreen />
 
   return (
     <KeyboardFriendlyView style={styles.container}>
@@ -89,11 +100,12 @@ export default function SignupEmailValidation ({ navigation, route }) {
             rootStyle={styles.codeFieldRoot}
             keyboardType='number-pad'
             textContentType='oneTimeCode'
-            renderCell={({index, symbol, isFocused}) => (
+            renderCell={({ index, symbol, isFocused }) => (
               <Text
                 key={index}
                 style={[styles.codeFieldCell, isFocused && styles.codeFieldCellFocused]}
-                onLayout={getCellOnLayoutHandler(index)}>
+                onLayout={getCellOnLayoutHandler(index)}
+              >
                 {symbol || (isFocused ? <Cursor /> : <Text> </Text>)}
               </Text>
             )}

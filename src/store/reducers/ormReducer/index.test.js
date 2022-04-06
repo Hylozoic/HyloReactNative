@@ -7,9 +7,6 @@ import {
   VOTE_ON_POST_PENDING
 } from 'components/PostCard/PostFooter/PostFooter.store'
 import {
-  USE_INVITATION
-} from 'screens/JoinGroup/JoinGroup.store'
-import {
   UPDATE_THREAD_READ_TIME_PENDING
 } from 'screens/Thread/Thread.store'
 import {
@@ -35,7 +32,8 @@ import {
   JOIN_PROJECT_PENDING,
   LEAVE_PROJECT_PENDING,
   FETCH_CURRENT_USER,
-  UPDATE_USER_SETTINGS_PENDING
+  UPDATE_USER_SETTINGS_PENDING,
+  USE_INVITATION
 } from 'store/constants'
 
 it('responds to an action with meta.extractModel', () => {

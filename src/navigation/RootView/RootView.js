@@ -4,7 +4,7 @@ import { NavigationContainer, useFocusEffect } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { navigationRef } from 'navigation/linking/helpers'
 import OneSignal from 'react-native-onesignal'
-import customLinking, { INITIAL_NAV_STATE } from 'navigation/linking'
+import customLinking, { INITIAL_AUTH_NAV_STATE, INITIAL_NON_AUTH_NAV_STATE } from 'navigation/linking'
 import { getAuthorized } from 'store/selectors/getAuthState'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import SocketListener from 'components/SocketListener'
@@ -63,7 +63,7 @@ export default function RootView () {
         // onReady={() => {
         //   RNBootSplash.hide()
         // }}
-        initialState={isAuthorized ? INITIAL_NAV_STATE : null}
+        initialState={isAuthorized ? INITIAL_AUTH_NAV_STATE : INITIAL_NON_AUTH_NAV_STATE}
         // NOTE: Uncomment below to get a map of the state
         // onStateChange={state => console.log('!!! onStateChange:', state.routes)}
       >

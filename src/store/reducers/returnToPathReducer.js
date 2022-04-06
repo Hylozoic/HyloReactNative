@@ -6,9 +6,9 @@ export const initialState = null
 export default function returnToPathReducer (state = initialState, { type, payload }) {
   switch (type) {
     case SET_RETURN_TO_PATH: {
-      return isEmpty(payload.returnToPath)
+      return isEmpty(payload)
         ? null
-        : payload.returnToPath
+        : payload
     }
 
     // Handles the case the of logout action firing and then NonAuthLayout capturing

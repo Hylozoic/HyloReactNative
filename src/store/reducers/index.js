@@ -16,7 +16,6 @@ import ModeratorSettings from 'screens/ModeratorSettings/ModeratorSettings.store
 import NewMessage from 'screens/NewMessage/NewMessage.store'
 import PeopleTyping from 'components/PeopleTyping/PeopleTyping.store'
 import SkillEditor from 'components/SkillEditor/SkillEditor.store'
-import Signup from 'screens/Signup/Signup.store'
 import SocketListener from 'components/SocketListener/SocketListener.store'
 import Topics from 'screens/Topics/Topics.store'
 import CreateGroupFlow from 'screens/CreateGroupFlow/CreateGroupFlow.store'
@@ -40,7 +39,6 @@ export const appReducer = combineReducers({
   NewMessage,
   PeopleTyping,
   SearchPage,
-  Signup,
   SkillEditor,
   SocketListener,
   Topics,

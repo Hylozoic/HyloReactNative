@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import NetInfo from '@react-native-community/netinfo'
 import { ScrollView, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
 import { useFocusEffect } from '@react-navigation/core'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import loginAction from 'store/actions/login'
 import {
@@ -26,8 +26,11 @@ import checkLogin from 'store/actions/checkLogin'
 
 export default function Login () {
   const navigation = useNavigation()
+  const route = useRoute()
   const dispatch = useDispatch()
   const defaultLoginEmail = useSelector(state => state.session?.defaultLoginEmail)
+  const message = decodeURIComponent(getRouteParam('message', route))
+  console.log('!!!! message', route)
   // const returnToURLFromLink = decodeURIComponent(getRouteParam('n', props.route))
   // const loginToken = decodeURIComponent(getRouteParam('t', props.route) || getRouteParam('loginToken', props.route))
   // const loginTokenUserId = getRouteParam('u', props.route) || getRouteParam('userId', props.route)

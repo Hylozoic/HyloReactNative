@@ -11,18 +11,15 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import validator from 'validator'
-import { openURL } from 'navigation/linking'
+import { navigateToLinkingPathInApp, openURL } from 'navigation/linking'
 import { isIOS } from 'util/platform'
-import { useFocusEffect, useNavigation, useRoute, useNavigationState } from '@react-navigation/core'
+import { useNavigation, useRoute, useNavigationState } from '@react-navigation/core'
 import FormattedError from 'components/FormattedError'
 import {
-  loginWithApple, loginWithFacebook, loginWithGoogle,
-  LOGIN_WITH_APPLE, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE
+  loginWithApple, loginWithFacebook, loginWithGoogle
 } from 'screens/Login/actions'
-import { getLocalUserSettings, updateLocalUserSettings } from 'screens/Signup/Signup.store'
 import sendEmailVerification from 'store/actions/sendEmailVerification'
 import { getAuthState, AuthState } from 'store/selectors/getAuthState'
-import { CHECK_LOGIN, FETCH_CURRENT_USER, LOGIN, UPDATE_USER_SETTINGS } from 'store/constants'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
 import AppleLoginButton from 'screens/Login/AppleLoginButton'
@@ -30,10 +27,10 @@ import FbLoginButton from 'screens/Login/FbLoginButton'
 import GoogleLoginButton from 'screens/Login/GoogleLoginButton'
 import providedStyles from './Signup.styles'
 import checkLogin from 'store/actions/checkLogin'
-import getMe from 'store/selectors/getMe'
 
 const backgroundImage = require('assets/signin_background.png')
 const merkabaImage = require('assets/merkaba_white.png')
+const genericError = new Error('An account may already exist for this email address, Login or try resetting your password.')
 
 export default function Signup () {
   const route = useRoute()
@@ -41,48 +38,53 @@ export default function Signup () {
   const currentRouteName = useNavigationState(state => state?.routes[state.index]?.name)
   const safeAreaInsets = useSafeAreaInsets()
   const dispatch = useDispatch()
-  const loading = useSelector(state => {
-    return state.pending[LOGIN] ||
-      state.pending[LOGIN_WITH_APPLE] ||
-      state.pending[LOGIN_WITH_FACEBOOK] ||
-      state.pending[LOGIN_WITH_GOOGLE] ||
-      state.pending[CHECK_LOGIN] ||
-      state.pending[FETCH_CURRENT_USER] ||
-      state.pending[UPDATE_USER_SETTINGS]
-  })
   const authState = useSelector(getAuthState)
-  const userSettings = useSelector(getLocalUserSettings)
-  const [email, providedSetEmail] = useState(route.params?.email || userSettings?.email)
-  const [pending, setPending] = useState()
-  const [error, setError] = useState()
+  const [email, providedSetEmail] = useState(route.params?.email)
+  const [loading, setLoading] = useState()
+  const [error, setError] = useState(route.params?.error)
+  // WIP: Positive mesage for `checkInvitation` result
+  const [message, setMessage] = useState(route.params?.message)
   const [socialLoginError, setSocialLoginError] = useState()
-  const [canSubmit, setCanSubmit] = useState(pending || !email)
+  const [canSubmit, setCanSubmit] = useState(loading || !email)
+
+  console.log('!!! message, error', message, error)
+  // const setStateFromRouteParams = () => {
+  //   const errorRouteParam = route.params?.error
+  //   const messageRouteParam = route.params?.message
+
+  //   if (errorRouteParam) setError(errorRouteParam)
+  //   if (messageRouteParam) setMessage(messageRouteParam)
+
+  //   navigation.setParams()
+  // }
 
   const signupRedirect = () => {
     switch (authState) {
-      case AuthState.None: {
-        navigation.navigate('Signup Intro')
-        break
-      }
       case AuthState.EmailValidation: {
-        navigation.navigate('SignupEmailValidation')
+        navigation.navigate('SignupEmailValidation', route.params)
         break
       }
       case AuthState.Registration: {
-        navigation.navigate('SignupRegistration')
+        navigation.navigate('SignupRegistration', route.params)
         break
       }
       case AuthState.SignupInProgress: {
         if (!['SignupUploadAvatar', 'SignupSetLocation'].includes(currentRouteName)) {
-          navigation.navigate('SignupUploadAvatar')
+          navigation.navigate('SignupUploadAvatar', route.params)
         }
         break
       }
     }
   }
 
-  useEffect(signupRedirect, [loading, authState])
-  useFocusEffect(signupRedirect)
+  useEffect(() => {
+    if (!loading) signupRedirect()
+  }, [loading, authState])
+
+  // Probably still need this
+  // useFocusEffect(() => {
+  //   signupRedirect()
+  // })
 
   const createErrorNotification = providedError => {
     setSocialLoginError(providedError)
@@ -96,30 +98,38 @@ export default function Signup () {
   }
 
   const socialLoginMaker = loginWith => async token => {
-    const action = await dispatch(loginWith(token))
-    if (action.error) {
-      const errorMessage = action?.payload?.response?.body
-      return errorMessage ? { errorMessage } : null
-    } else {
-      dispatch(checkLogin())
+    try {
+      setLoading(true)
+      const response = await dispatch(loginWith(token))
+
+      if (response.error) {
+        const errorMessage = response?.payload?.response?.body
+        return errorMessage ? { errorMessage } : null
+      } else {
+        dispatch(checkLogin())
+      }
+    } catch (e) {
+      return e.message
+    } finally {
+      setLoading(false)
     }
   }
 
   const submit = async () => {
-    const genericError = new Error('An account may already exist for this email address, Login or try resetting your password.')
     try {
-      setPending(true)
-      await dispatch(updateLocalUserSettings({ email }))
+      setLoading(true)
+
       const result = await dispatch(sendEmailVerification(email))
+
       if (result.payload.getData().success) {
-        navigation.navigate('SignupEmailValidation')
+        navigateToLinkingPathInApp(`/signup/verify-email?email=${email}`, true)
       } else {
         throw genericError
       }
     } catch (err) {
-      setError(genericError.message)
+      setError(err.message)
     } finally {
-      setPending(false)
+      setLoading(false)
     }
   }
 
@@ -164,7 +174,7 @@ export default function Signup () {
           <FormattedError styles={styles} error={error} action='Signup' />
           <Button
             style={styles.signupButton}
-            text={pending ? 'Saving...' : 'Continue'}
+            text={loading ? 'Saving...' : 'Continue'}
             onPress={submit}
             disabled={canSubmit}
           />
