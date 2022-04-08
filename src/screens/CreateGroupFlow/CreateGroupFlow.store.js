@@ -84,7 +84,7 @@ export function createGroup (groupData) {
       }
     },
     meta: {
-      extractModel: 'Membership',
+      extractModel: 'Group',
       ...groupData,
       analytics: AnalyticsEvents.GROUP_CREATED
     }

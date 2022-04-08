@@ -21,9 +21,6 @@ export default function CreateGroupReview () {
   const groupData = useSelector(getGroupData)
   const parentGroups = useSelector(getNewGroupParentGroups)
   const [error, setError] = useState(null)
-  const goToGroup = groupId => {
-    navigation.navigate('Feed', { groupId })
-  }
 
   useEffect(() => {
     return navigation.addListener('tabPress', async event => {
@@ -35,11 +32,11 @@ export default function CreateGroupReview () {
   const submit = async () => {
     try {
       const graphqlResponse = await dispatch(createGroup(groupData))
-      const newGroup = graphqlResponse.payload?.data
+      const newGroup = graphqlResponse.payload?.getData()
 
       if (newGroup) {
         dispatch(clearCreateGroupStore())
-        goToGroup(newGroup.id)
+        navigation.navigate('Feed', { groupId: newGroup.id })
       } else {
         setError('Group may have been created, but there was an error. Please contact Hylo support.')
       }
@@ -68,7 +65,7 @@ export default function CreateGroupReview () {
               underlineColorAndroid='transparent'
               editable={false}
               selectTextOnFocus={false}
-              />
+            />
           </View>
 
           <View style={styles.textInputContainer}>
@@ -82,7 +79,7 @@ export default function CreateGroupReview () {
               underlineColorAndroid='transparent'
               editable={false}
               selectTextOnFocus={false}
-              />
+            />
           </View>
         </View>
 
