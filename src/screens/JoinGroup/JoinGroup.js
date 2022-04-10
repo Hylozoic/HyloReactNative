@@ -19,6 +19,7 @@ export default function JoinGroup (props) {
   const dispatch = useDispatch()
   const signupComplete = useSelector(getSignupComplete)
 
+  // Probably should use `useFocusEffect`
   useEffect(() => {
     (async function () {
       try {

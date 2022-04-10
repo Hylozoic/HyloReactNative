@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
-import { NavigationContainer, useFocusEffect } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { navigationRef } from 'navigation/linking/helpers'
 import OneSignal from 'react-native-onesignal'
@@ -22,7 +22,7 @@ import JoinGroup from 'screens/JoinGroup'
 import LoginByTokenHandler from 'screens/LoginByTokenHandler'
 
 const Root = createStackNavigator()
-export default function RootView () {
+export default function RootNavigator () {
   const dispatch = useDispatch()
   const isAuthorized = useSelector(getAuthorized)
   const [loading, setLoading] = useState(true)

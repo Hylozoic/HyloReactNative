@@ -1,4 +1,4 @@
-import { LOGIN_WITH_APPLE, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE } from 'screens/Login/actions'
+import { LOGIN_WITH_APPLE, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE } from 'components/SocialAuth/actions'
 import { LOGIN, LOGIN_BY_TOKEN, SELECT_GROUP } from 'store/constants'
 
 export const initialState = {

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   View,
   Text,
@@ -12,21 +12,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import validator from 'validator'
 import { navigateToLinkingPathInApp, openURL } from 'navigation/linking'
-import { isIOS } from 'util/platform'
 import { useNavigation, useRoute, useNavigationState } from '@react-navigation/core'
 import FormattedError from 'components/FormattedError'
-import {
-  loginWithApple, loginWithFacebook, loginWithGoogle
-} from 'screens/Login/actions'
 import sendEmailVerification from 'store/actions/sendEmailVerification'
 import { getAuthState, AuthState } from 'store/selectors/getAuthState'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
-import AppleLoginButton from 'screens/Login/AppleLoginButton'
-import FbLoginButton from 'screens/Login/FbLoginButton'
-import GoogleLoginButton from 'screens/Login/GoogleLoginButton'
 import providedStyles from './Signup.styles'
-import checkLogin from 'store/actions/checkLogin'
+import SocialAuth from 'components/SocialAuth'
 
 const backgroundImage = require('assets/signin_background.png')
 const merkabaImage = require('assets/merkaba_white.png')
@@ -43,20 +36,9 @@ export default function Signup () {
   const [loading, setLoading] = useState()
   const [error, setError] = useState(route.params?.error)
   // WIP: Positive mesage for `checkInvitation` result
-  const [message, setMessage] = useState(route.params?.message)
-  const [socialLoginError, setSocialLoginError] = useState()
+  // const [message, setMessage] = useState(route.params?.message)
+  const [bannerError, setBannerError] = useState()
   const [canSubmit, setCanSubmit] = useState(loading || !email)
-
-  console.log('!!! message, error', message, error)
-  // const setStateFromRouteParams = () => {
-  //   const errorRouteParam = route.params?.error
-  //   const messageRouteParam = route.params?.message
-
-  //   if (errorRouteParam) setError(errorRouteParam)
-  //   if (messageRouteParam) setMessage(messageRouteParam)
-
-  //   navigation.setParams()
-  // }
 
   const signupRedirect = () => {
     switch (authState) {
@@ -86,33 +68,20 @@ export default function Signup () {
   //   signupRedirect()
   // })
 
-  const createErrorNotification = providedError => {
-    setSocialLoginError(providedError)
-  }
-
   const setEmail = validateEmail => {
-    setSocialLoginError()
+    setBannerError()
     setError()
     setCanSubmit(!validator.isEmail(validateEmail))
     providedSetEmail(validateEmail)
   }
 
-  const socialLoginMaker = loginWith => async token => {
-    try {
-      setLoading(true)
-      const response = await dispatch(loginWith(token))
+  const handleSocialAuthStart = () => {
+    setLoading(true)
+  }
 
-      if (response.error) {
-        const errorMessage = response?.payload?.response?.body
-        return errorMessage ? { errorMessage } : null
-      } else {
-        dispatch(checkLogin())
-      }
-    } catch (e) {
-      return e.message
-    } finally {
-      setLoading(false)
-    }
+  const handleSocialAuthComplete = socialAuthError => {
+    if (socialAuthError) setBannerError(socialAuthError)
+    setLoading(false)
   }
 
   const submit = async () => {
@@ -148,8 +117,9 @@ export default function Signup () {
   return (
     <KeyboardFriendlyView style={styles.container}>
       <ScrollView>
-        {loading && <Text style={styles.banner}>SIGNING UP...</Text>}
-        {socialLoginError && <Text style={styles.errorBanner}>{socialLoginError}</Text>}
+        {loading && <Text style={styles.bannerMessage}>SIGNING UP...</Text>}
+        {bannerError && <Text style={styles.bannerError}>{bannerError}</Text>}
+
         <ImageBackground
           source={backgroundImage}
           style={styles.background}
@@ -178,29 +148,7 @@ export default function Signup () {
             onPress={submit}
             disabled={canSubmit}
           />
-          <View style={styles.connectWith}>
-            <Text style={styles.connectWithText}>Or sign up using:</Text>
-            {isIOS && (
-              <AppleLoginButton
-                signup
-                style={styles.appleLoginButton}
-                onLoginFinished={socialLoginMaker(loginWithApple)}
-                createErrorNotification={createErrorNotification}
-              />
-            )}
-            <GoogleLoginButton
-              signup
-              style={styles.googleLoginButton}
-              onLoginFinished={socialLoginMaker(loginWithGoogle)}
-              createErrorNotification={createErrorNotification}
-            />
-            <FbLoginButton
-              signup
-              style={styles.facebookLoginButton}
-              onLoginFinished={socialLoginMaker(loginWithFacebook)}
-              createErrorNotification={createErrorNotification}
-            />
-          </View>
+          <SocialAuth onStart={handleSocialAuthStart} onComplete={handleSocialAuthComplete} forSignup />
           <View style={styles.login}>
             <Text style={styles.haveAccount}>Already have an account? </Text>
             <TouchableOpacity onPress={() => navigation.navigate('Login')}>

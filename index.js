@@ -15,7 +15,7 @@ import { name as appName } from './app.json'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import ErrorBoundary from 'screens/ErrorBoundary'
 import VersionCheck from 'components/VersionCheck'
-import RootView from 'navigation/RootView'
+import RootNavigator from 'navigation/RootNavigator'
 
 if (!isDev) {
   Sentry.init({ dsn: process.env.SENTRY_DSN_URL })
@@ -84,7 +84,7 @@ export default class AppContainer extends Component {
             <Provider store={store}>
               <PersistGate loading={null} persistor={persistor}>
                 <VersionCheck />
-                <RootView pathFromPushNotification={pathFromPushNotification} />
+                <RootNavigator pathFromPushNotification={pathFromPushNotification} />
               </PersistGate>
             </Provider>
           </RootSiblingParent>

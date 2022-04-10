@@ -1,14 +1,14 @@
 import { LOGIN_BY_TOKEN } from 'store/constants'
 
-export default function loginByToken (userId, loginToken) {
+export default function loginByToken (userID, loginToken) {
   return {
     type: LOGIN_BY_TOKEN,
     payload: {
       api: {
-        method: 'post',
+        method: 'POST',
         path: '/noo/login/token',
         params: {
-          u: userId,
+          u: userID,
           t: loginToken
         }
       }

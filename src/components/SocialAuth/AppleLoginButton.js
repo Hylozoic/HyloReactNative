@@ -24,8 +24,9 @@ export async function onAppleButtonPress ({
       authorizedCallback(appleAuthRequestResponse)
     }
   } catch (error) {
-    console.log('!!!! error in onAppleButtonPress:', error)
-    createErrorNotification('COULD NOT SIGN IN WITH YOUR APPLE ACCOUNT')
+    if (error.code !== appleAuth.Error.CANCELED) {
+      createErrorNotification('COULD NOT SIGN IN WITH YOUR APPLE ACCOUNT')
+    }
   }
 }
 
@@ -35,14 +36,14 @@ export default function AppleLoginButton ({
   style: providedStyle,
   signup
 }) {
-  if (!appleAuth.isSupported) return null
-
   useEffect(() => {
+    if (!appleAuth.isSupported) return null
     // onCredentialRevoked returns a function that will remove the event listener. useEffect will call this function when the component unmounts
     return appleAuth.onCredentialRevoked(async () => {
       console.warn('If this function executes, User Credentials have been Revoked')
     })
   }, []) // passing in an empty array as the second argument ensures this is only ran once when component mounts initially.
+
 
   const style = {
     height: 40,

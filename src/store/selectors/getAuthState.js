@@ -38,7 +38,9 @@ export const getAuthState = createSelector(
     const { signupInProgress } = settings
 
     if (!emailValidated) return AuthState.EmailValidation
-    if (!hasRegistered) return AuthState.Registration
+    // The extra check for presence of `name` should not be necessary,
+    // here for testig some edge cases at the moment.
+    if (!hasRegistered || !currentUser?.name) return AuthState.Registration
     if (signupInProgress) return AuthState.SignupInProgress
 
     return AuthState.Complete

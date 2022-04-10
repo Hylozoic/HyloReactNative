@@ -3,14 +3,14 @@ import { Provider } from 'react-redux'
 import { createInitialState } from 'store'
 import { render } from '@testing-library/react-native'
 import { createMockStore } from 'util/testing'
-import RootView from 'navigation/RootView'
+import RootNavigator from 'navigation/RootNavigator'
 
-describe('RootView Specification', () => {
+describe('RootNavigator Specification', () => {
   it('renders Login when not authorized', async () => {
     const store = createMockStore(createInitialState())
     const { findByText } = render(
       <Provider store={store}>
-        <RootView />
+        <RootNavigator />
       </Provider>
     )
     expect(await findByText('Log in to Hylo')).toBeTruthy()

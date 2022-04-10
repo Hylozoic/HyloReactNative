@@ -1,105 +1,81 @@
-import React, { useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import NetInfo from '@react-native-community/netinfo'
 import { ScrollView, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
 import { useFocusEffect } from '@react-navigation/core'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import loginAction from 'store/actions/login'
-import {
-  loginWithApple as loginWithAppleAction,
-  loginWithFacebook as loginWithFacebookAction,
-  loginWithGoogle as loginWithGoogleAction,
-  LOGIN_WITH_APPLE,
-  LOGIN_WITH_FACEBOOK,
-  LOGIN_WITH_GOOGLE
-} from './actions'
-import { FETCH_CURRENT_USER, LOGIN } from 'store/constants'
-import getRouteParam from 'store/selectors/getRouteParam'
-import validator from 'validator'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
-import AppleLoginButton from './AppleLoginButton'
-import FbLoginButton from './FbLoginButton'
-import GoogleLoginButton from './GoogleLoginButton'
+import loginAction from 'store/actions/login'
+import validator from 'validator'
+import errorMessages from 'util/errorMessages'
+import SocialAuth from 'components/SocialAuth'
 import styles from './Login.styles'
-import checkLogin from 'store/actions/checkLogin'
 
 export default function Login () {
   const navigation = useNavigation()
   const route = useRoute()
   const dispatch = useDispatch()
   const defaultLoginEmail = useSelector(state => state.session?.defaultLoginEmail)
-  const message = decodeURIComponent(getRouteParam('message', route))
-  console.log('!!!! message', route)
-  // const returnToURLFromLink = decodeURIComponent(getRouteParam('n', props.route))
-  // const loginToken = decodeURIComponent(getRouteParam('t', props.route) || getRouteParam('loginToken', props.route))
-  // const loginTokenUserId = getRouteParam('u', props.route) || getRouteParam('userId', props.route)
-  // const bannerMessage = getRouteParam('bannerMessage', props.route)
+  // For redirect error handling... Not currently used
+  // const messageParam = decodeURIComponent(getRouteParam('message', route))
+  // const bannerMessage = getRouteParam('bannerMessage', route)
+  const bannerErrorParam = route?.params?.bannerError
+
   const [email, providedSetEmail] = useState(defaultLoginEmail)
   const [password, providedSetPassword] = useState()
   const [securePassword, setSecurePassword] = useState(true)
   const [emailIsValid, setEmailIsValid] = useState()
   const [isConnected, setIsConnected] = useState()
-  const [socialLoginError, setSocialLoginError] = useState()
-  const [error, setError] = useState()
+  const [bannerError, setBannerError] = useState()
+  const [formError, providedFormError] = useState()
   const [loading, setLoading] = useState()
   const passwordInputRef = useRef()
+  const setError = errorMessage => {
+    providedFormError(errorMessages(errorMessage))
+  }
 
   const setEmail = validateEmail => {
     setError()
-    setSocialLoginError()
+    setBannerError()
     setEmailIsValid(validator.isEmail(validateEmail))
     providedSetEmail(validateEmail)
   }
 
   const setPassword = passwordValue => {
     setError()
-    setSocialLoginError()
+    setBannerError()
     providedSetPassword(passwordValue)
   }
 
-  useFocusEffect(() => {
-    const handleConnectivityChange = ({ isConnected: isConnectedParam }) => {
-      if (isConnectedParam !== isConnected) setIsConnected(isConnectedParam)
-    }
+  // NOTE: This works, but I don't trust it and it could/should probably be moved
+  //       into a modal at the level of the `RootNavigator`
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     const handleConnectivityChange = ({ isConnected: isConnectedParam }) => {
+  //       if (isConnectedParam !== isConnected) {
+  //         setIsConnected(isConnectedParam)
+  //         setBannerError(!isConnectedParam ? 'OFFLINE; TRYING TO RECONNECT...' : null)
+  //       }
+  //     }
 
-    return NetInfo.addEventListener(handleConnectivityChange)
-  })
+  //     return NetInfo.addEventListener(handleConnectivityChange)
+  //   }, [isConnected])
+  // )
 
-  const finishSocialLogin = async response => {
-    try {
-      setError()
-      if (response.error) {
-        const errorMessage = response?.payload?.response?.body
-        // return errorMessage ? { errorMessage } : null
-        if (errorMessage) {
-          setSocialLoginError(errorMessage)
-        }
-      }
-      await dispatch(checkLogin())
-    } catch (err) {
-      setSocialLoginError(err.message)
-    } finally {
-      setLoading(false)
-    }
+  useFocusEffect(
+    useCallback(() => {
+      if (bannerErrorParam) setBannerError(errorMessages(bannerErrorParam))
+    }, [bannerErrorParam])
+  )
+
+  const handleSocialAuthStart = () => {
+    setLoading(true)
   }
 
-  const loginWithApple = async token => {
-    setLoading(true)
-    const response = await dispatch(loginWithAppleAction(token))
-    return finishSocialLogin(response)
-  }
-
-  const loginWithFacebook = async token => {
-    setLoading(true)
-    const response = await dispatch(loginWithFacebookAction(token))
-    return finishSocialLogin(response)
-  }
-
-  const loginWithGoogle = async token => {
-    setLoading(true)
-    const response = await dispatch(loginWithGoogleAction(token))
-    return finishSocialLogin(response)
+  const handleSocialAuthComplete = error => {
+    if (error) setBannerError(error)
+    setLoading(false)
   }
 
   const login = async () => {
@@ -127,17 +103,15 @@ export default function Login () {
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
       <ScrollView contentContainerStyle={styles.login} style={styles.container}>
-        {socialLoginError && <Text style={styles.errorBanner}>{socialLoginError}</Text>}
-        {/* TODO: Bring back online status message / toast */}
-        {/* {!isConnected && <Text style={styles.errorBanner}>OFFLINE; TRYING TO RECONNECT...</Text>} */}
-        {loading && <Text style={styles.banner}>LOGGING IN...</Text>}
-        {/* {bannerMessage && <Text style={styles.banner}>{bannerMessage}</Text>} */}
+        {bannerError && <Text style={styles.bannerError}>{bannerError}</Text>}
+        {loading && <Text style={styles.bannerMessage}>LOGGING IN...</Text>}
+
         <Image
           style={styles.logo}
           source={require('assets/merkaba-green-on-white.png')}
         />
         <Text style={styles.title}>Log in to Hylo</Text>
-        <FormError>{error}</FormError>
+        <FormError>{formError}</FormError>
         <View style={styles.labelRow}>
           <Text style={styles.labelText}>Your email address</Text>
         </View>
@@ -151,7 +125,6 @@ export default function Login () {
                 autoCapitalize='none'
                 autoCorrect={false}
                 keyboardType='email-address'
-                // UPGRADE TODO: Fix with this: https://stackoverflow.com/a/59626713
                 onSubmitEditing={() => passwordInputRef.current.focus()}
                 underlineColorAndroid='transparent'
               />
@@ -198,24 +171,7 @@ export default function Login () {
             <Text style={styles.loginText}>Log In</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.connectWith}>
-          <Text style={styles.connectWithText}>Or connect with:</Text>
-          <AppleLoginButton
-            style={styles.appleLoginButton}
-            onLoginFinished={loginWithApple}
-            createErrorNotification={setSocialLoginError}
-          />
-          <GoogleLoginButton
-            style={styles.googleLoginButton}
-            onLoginFinished={loginWithGoogle}
-            createErrorNotification={setSocialLoginError}
-          />
-          <FbLoginButton
-            style={styles.facebookLoginButton}
-            onLoginFinished={loginWithFacebook}
-            createErrorNotification={setSocialLoginError}
-          />
-        </View>
+        <SocialAuth onStart={handleSocialAuthStart} onComplete={handleSocialAuthComplete} />
         <SignupLink goToSignup={goToSignup} />
       </ScrollView>
     </SafeAreaView>

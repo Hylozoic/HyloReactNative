@@ -1,38 +1,47 @@
-import React, { useEffect } from 'react'
+import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import getRouteParam from 'store/selectors/getRouteParam'
 import loginByToken from 'store/actions/loginByToken'
-import logout from 'store/actions/logout'
-import { getSignupComplete } from 'store/selectors/getAuthState'
-import setReturnToPath from 'store/actions/setReturnToPath'
-import LoadingScreen from 'screens/LoadingScreen'
+import loginByJWT from 'store/actions/loginByJWT'
+import { getAuthorized } from 'store/selectors/getAuthState'
+import checkLogin from 'store/actions/checkLogin'
+import { navigateToLinkingPathInApp } from 'navigation/linking'
+import { useFocusEffect, useRoute } from '@react-navigation/native'
 
-export default function LoginByTokenHandler ({ navigation, route }) {
+export default function LoginByTokenHandler () {
+  const route = useRoute()
   const dispatch = useDispatch()
-  const returnToURLFromLink = decodeURIComponent(getRouteParam('n', route))
-  const loginToken = decodeURIComponent(getRouteParam('t', route) || getRouteParam('loginToken', route))
-  const loginTokenUserId = getRouteParam('u', route) || getRouteParam('userId', route)
-  const signupComplete = useSelector(getSignupComplete)
+  const returnToURLFromLink = decodeURIComponent(route?.params?.n)
+  const jwt = decodeURIComponent(route?.params?.token)
+  const loginToken = decodeURIComponent(route?.params?.t || route?.params?.loginToken)
+  const userID = route?.params?.u || route?.params?.userId
+  const isAuthorized = useSelector(getAuthorized)
 
-  useEffect(() => {
-    if (!signupComplete) {
-      navigation.navigate('Signup', { screen: 'SignupRegistration' })
-    }
-  }, [navigation, signupComplete])
+  useFocusEffect(
+    useCallback(() => {
+      (async function () {
+        try {
+          if (!isAuthorized && userID && (jwt || loginToken)) {
+            if (jwt) {
+              const response = await dispatch(loginByJWT(jwt))
 
-  useEffect(() => {
-    (async function () {
-      if (loginToken && loginTokenUserId) {
-        await dispatch(logout())
-        await dispatch(loginByToken(loginTokenUserId, loginToken))
-        if (returnToURLFromLink) {
-          dispatch(setReturnToPath(returnToURLFromLink))
+              if (response?.error) {
+                navigateToLinkingPathInApp('/login?bannerError=invalid-link')
+                return null
+              }
+
+              await dispatch(checkLogin())
+            } else if (loginToken) {
+              await dispatch(loginByToken(userID, loginToken))
+            }
+          }
+
+          navigateToLinkingPathInApp(returnToURLFromLink || '/')
+        } catch (e) {
+          navigateToLinkingPathInApp('/login?bannerError=invalid-link')
         }
-      }
-    })()
-  }, [loginToken, loginTokenUserId, dispatch, returnToURLFromLink])
-
-  return (
-    <LoadingScreen />
+      })()
+    }, [isAuthorized, jwt, loginToken, userID, returnToURLFromLink])
   )
+
+  return null
 }

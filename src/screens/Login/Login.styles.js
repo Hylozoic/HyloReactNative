@@ -41,7 +41,7 @@ const mixins = {
   },
   banner: {
     color: 'white',
-    paddingTop: 10,
+    paddingTop: 50,
     paddingBottom: 10,
     textAlign: 'center',
     position: 'absolute',
@@ -49,10 +49,6 @@ const mixins = {
     left: 0,
     right: 0,
     zIndex: 2
-  },
-  socialLoginButton: {
-    width: '70%',
-    marginBottom: 10
   }
 }
 
@@ -97,33 +93,6 @@ export default {
     fontFamily: 'Circular-Book',
     fontSize: 18,
     lineHeight: 34
-  },
-
-  // Connect with:
-  connectWith: {
-    marginTop: 10,
-    display: 'flex',
-    flexWrap: 'wrap',
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingLeft: 30,
-    paddingRight: 30
-  },
-  connectWithText: {
-    ...mixins.helpText,
-    flexBasis: '100%',
-    textAlign: 'center',
-    marginBottom: 15
-  },
-  appleLoginButton: {
-    ...mixins.socialLoginButton
-  },
-  googleLoginButton: {
-    ...mixins.socialLoginButton
-  },
-  facebookLoginButton: {
-    ...mixins.socialLoginButton
   },
 
   // Signup
@@ -201,14 +170,12 @@ export default {
     color: 'white',
     textAlign: 'center'
   },
-  errorBanner: {
+  bannerError: {
     ...mixins.banner,
-    paddingTop: 50,
     backgroundColor: amaranth
   },
-  banner: {
+  bannerMessage: {
     ...mixins.banner,
-    paddingTop: 50,
     backgroundColor: caribbeanGreen
   },
   textInput: {

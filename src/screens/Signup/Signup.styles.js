@@ -78,21 +78,6 @@ export default {
     disabledColor: white,
     disabledBackgroundColor: rhino30
   },
-
-  // Connect with
-  appleLoginButton: {
-    ...loginStyles.appleLoginButton,
-    width: '80%'
-  },
-  googleLoginButton: {
-    ...loginStyles.googleLoginButton,
-    width: '80%'
-  },
-  facebookLoginButton: {
-    ...loginStyles.facebookLoginButton,
-    width: '80%'
-  },
-
   login: {
     flexDirection: 'row',
     justifyContent: 'center',

@@ -4,7 +4,7 @@ import apiHost from './apiHost'
 export default async function fetchJSON (path, params, options = {}) {
   const { host, method } = options
   const requestUrl = (host || apiHost) + path
-  const response = await fetch(requestUrl, {
+  const requestParams = {
     method: method || 'get',
     headers: {
       Accept: 'application/json',
@@ -12,7 +12,16 @@ export default async function fetchJSON (path, params, options = {}) {
     },
     body: JSON.stringify(params),
     withCredentials: true
-  })
+  }
+
+  if (options.headers) {
+    requestParams.headers = {
+      ...requestParams.headers,
+      ...options.headers
+    }
+  }
+
+  const response = await fetch(requestUrl, requestParams)
   const { status, statusText, url } = response
 
   if (status === 200) {

@@ -30,6 +30,7 @@ import LoadingScreen from 'screens/LoadingScreen'
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
+
   const dispatch = useDispatch()
   const returnToPath = useSelector(getReturnToPath)
   const currentGroup = useSelector(getCurrentGroup)

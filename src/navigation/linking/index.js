@@ -20,9 +20,9 @@ export const DEFAULT_APP_HOST = 'https://hylo.com'
 
 export const prefixes = [
   DEFAULT_APP_HOST,
-  'https://www.hylo.com',
   'http://hylo.com',
   'http://www.hylo.com',
+  'https://www.hylo.com',
   'http://staging.hylo.com',
   'https://staging.hylo.com',
   'hyloapp://'
@@ -43,7 +43,9 @@ export const prefixes = [
 
 /* eslint-disable key-spacing */
 export const routesConfig = {
-  '/noo/login/token':                                        { screenPath: 'NonAuthRoot/LoginByTokenHandler', noAuth: true },
+  // TODO: Change back to `/noo/login/(jwt|token)` once evo is deployed allowing this URL
+  '/login/(jwt|token)':                                      { screenPath: 'LoginByTokenHandler', noAuth: true },
+  '/login':                                                  { screenPath: 'NonAuthRoot/Login', noAuth: true },
   '/signup/verify-email':                                    { screenPath: 'NonAuthRoot/Signup/SignupEmailValidation', noAuth: true },
   '/signup/:step?':                                          { screenPath: 'NonAuthRoot/Signup/Signup Intro', noAuth: true },
   '/h/use-invitation':                                       'JoinGroup',
@@ -279,7 +281,8 @@ const getInitialURL = async () => {
 
 const subscribe = listener => {
   const onReceiveURL = ({ url }) => {
-    store.dispatch(setReturnToPath(url))
+    console.log('!!! url in subscribe -- would be setting returnToPath', url)
+    // store.dispatch(setReturnToPath(url))
     return listener(url)
   }
 

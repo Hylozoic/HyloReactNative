@@ -1,5 +1,5 @@
 import React from 'react'
-import { GoogleSignin } from '@react-native-google-signin/google-signin'
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import Button from 'components/Button'
 
 export default class GoogleLoginButton extends React.Component {
@@ -27,8 +27,9 @@ export default class GoogleLoginButton extends React.Component {
 
       this.props.onLoginFinished(accessToken)
     } catch (error) {
-      process.env.NODE_ENV !== 'test' && console.log('!!! error in GoogleLoginButton', error)
-      this.props.createErrorNotification('COULD NOT SIGN IN WITH YOUR GOOGLE ACCOUNT')
+      if (error.code !== statusCodes.SIGN_IN_CANCELLED) {
+        this.props.createErrorNotification('COULD NOT SIGN IN WITH YOUR GOOGLE ACCOUNT')
+      }
     }
   }
 
