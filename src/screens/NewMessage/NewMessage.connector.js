@@ -3,7 +3,6 @@ import { get } from 'lodash/fp'
 import isPendingFor from 'store/selectors/isPendingFor'
 import scopedFetchRecentContacts from 'store/actions/scopedFetchRecentContacts'
 import scopedGetRecentContacts from 'store/selectors/scopedGetRecentContacts'
-import { showLoadingModal } from 'screens/LoadingModal/LoadingModal.store'
 import {
   createMessage,
   findOrCreateThread,
@@ -32,23 +31,19 @@ export function mapStateToProps (state, props) {
 export const mapDispatchToProps = {
   createMessage,
   findOrCreateThread,
-  showLoadingModal,
   fetchRecentContacts: scopedFetchRecentContacts(MODULE_NAME)
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { showLoadingModal, findOrCreateThread } = dispatchProps
+  const { findOrCreateThread } = dispatchProps
   const { navigation } = ownProps
 
   const createMessage = async (text, participantIds) => {
-    // TODO: Bring back loading modal?
-    // showLoadingModal(true)
     const resp = await findOrCreateThread(participantIds)
 
     const messageThreadId = get('payload.data.findOrCreateThread.id', resp)
     const { error } = await dispatchProps.createMessage(messageThreadId, text, true)
     if (!error) navigation.navigate('Thread', { id: messageThreadId })
-    // showLoadingModal(false)
   }
 
   return {

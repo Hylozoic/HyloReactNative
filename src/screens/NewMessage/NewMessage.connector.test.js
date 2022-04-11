@@ -60,8 +60,7 @@ describe('mergeProps', () => {
     }
     const dispatchProps = {
       findOrCreateThread: jest.fn(() => Promise.resolve(findOrCreateThreadResp)),
-      createMessage: jest.fn(() => Promise.resolve({})),
-      showLoadingModal: jest.fn()
+      createMessage: jest.fn(() => Promise.resolve({}))
     }
     const ownProps = {
       navigation: {
