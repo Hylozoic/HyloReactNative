@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import HyloWebView from 'screens/HyloWebView'
+import RNRestart from 'react-native-restart'
 
 export default function GroupSettingsWebView ({ path: pathProp, navigation, route }) {
   const webViewRef = useRef(null)
@@ -10,6 +11,11 @@ export default function GroupSettingsWebView ({ path: pathProp, navigation, rout
       ref={webViewRef}
       path={path}
       onNavigationStateChange={({ url }) => {
+        // Temporary sorta fix for Group delete which reloads the page
+        if (url.match(/\/all/)) {
+          RNRestart.Restart()
+          return false
+        }
         if (!url.match(/\/groups\/([^\/]+)settings/)) {
           webViewRef.current?.goBack()
           return false

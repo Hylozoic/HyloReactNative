@@ -289,6 +289,7 @@ describe('on RESET_NEW_POST_COUNT_PENDING', () => {
   expect(newSession.Membership.first().newPostCount).toEqual(0)
 })
 
+// NOTE: Expecting this to break/be irrelevant
 describe('on UPDATE_USER_SETTINGS_PENDING', () => {
   const session = orm.session(orm.getEmptyState())
   const id = 123

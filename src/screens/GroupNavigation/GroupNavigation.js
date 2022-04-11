@@ -2,11 +2,11 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Text, ScrollView, View, TouchableOpacity } from 'react-native'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
-import Icon from 'components/Icon'
 import { useFocusEffect } from '@react-navigation/core'
-import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import styles from './GroupNavigation.styles'
 import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import Icon from 'components/Icon'
+import styles from './GroupNavigation.styles'
 
 export default function GroupNavigation ({ navigation }) {
   const currentGroup = useSelector(getCurrentGroup)

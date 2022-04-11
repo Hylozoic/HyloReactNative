@@ -24,7 +24,7 @@ export default function SocialAuth ({ onStart, onComplete, forSignup }) {
           onComplete(errorMessage)
         }
       } else {
-        dispatch(checkLogin())
+        await dispatch(checkLogin())
       }
     } catch (e) {
       onComplete(e.message)

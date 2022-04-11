@@ -1,4 +1,5 @@
 import { createSelector as ormCreateSelector } from 'redux-orm'
+import { get } from 'lodash/fp'
 import orm from 'store/models'
 import { AnalyticsEvents } from 'hylo-shared'
 import { GROUP_ACCESSIBILITY, GROUP_VISIBILITY } from 'store/models/Group'
@@ -84,8 +85,10 @@ export function createGroup (groupData) {
       }
     },
     meta: {
-      extractModel: 'Group',
-      ...groupData,
+      extractModel: [
+        { modelName: 'Group', getRoot: get('createGroup') },
+        { modelName: 'Membership', getRoot: get('createGroup.memberships.items[0]') }
+      ],
       analytics: AnalyticsEvents.GROUP_CREATED
     }
   }

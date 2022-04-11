@@ -1,18 +1,20 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 // Helper Components
-import { ModalHeader } from 'navigation/headers'
+import { ModalHeader, TabStackHeader } from 'navigation/headers'
 // Screens
 import NewMessage from 'screens/NewMessage'
 import Thread from 'screens/Thread'
 import ThreadList from 'screens/ThreadList'
 import ThreadParticipants from 'screens/ThreadParticipants'
+import { white } from 'style/colors'
 
 const Messages = createStackNavigator()
 export default function MessagesNavigator () {
   const navigatorProps = {
     screenOptions: {
-      headerMode: 'float'
+      headerMode: 'float',
+      headerStyle: { backgroundColor: white }
     }
   }
 

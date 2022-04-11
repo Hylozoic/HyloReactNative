@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { capeCod40, rhino, rhino30, rhino60, capeCod10, white } from 'style/colors'
+import { capeCod40, rhino, rhino30, rhino60, capeCod10, white, caribbeanGreen } from 'style/colors'
 
 const cardMargin = 15
 const cardPadding = 10
@@ -42,17 +42,16 @@ export default {
     paddingTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginHorizontal: 35,
-    marginTop: 5,
+    marginHorizontal: 30,
     marginBottom: 10
   },
   tab: {
-    fontSize: 12,
+    fontSize: 15,
     color: rhino30,
     fontFamily: 'Circular-Book'
   },
   active: {
-    color: rhino
+    color: caribbeanGreen
   },
   personCard: {
     ...row,

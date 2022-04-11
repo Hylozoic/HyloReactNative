@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { isIOS } from 'util/platform'
 import { ModalHeader } from 'navigation/headers'
-import { caribbeanGreen, rhino, rhino05, rhino30, white } from 'style/colors'
+import { caribbeanGreen, rhino, rhino30, white } from 'style/colors'
 import logout from 'store/actions/logout'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
@@ -24,7 +24,9 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
     screenOptions: {
       tabBarActiveTintColor: caribbeanGreen,
       tabBarInactiveTintColor: rhino30,
-      tabBarIndicatorStyle: { backgroundColor: caribbeanGreen },
+      tabBarIndicatorStyle: {
+        backgroundColor: caribbeanGreen
+      },
       tabBarLabelStyle: {
         fontSize: 16,
         textTransform: 'none'
@@ -34,11 +36,11 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
         isIOS
         ? {
             display: 'flex',
-            backgroundColor: rhino05
+            backgroundColor: white
           }
         : {
             display: 'flex',
-            backgroundColor: rhino05,
+            backgroundColor: white,
             borderTopWidth: StyleSheet.hairlineWidth
           }
       )
@@ -49,10 +51,11 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
     navigation.setOptions({
       title: 'Settings',
       headerShown: true,
-      headerStyle: { backgroundColor: rhino },
-      headerTitleStyle: { color: white },
+      headerStyle: { backgroundColor: rhino30 },
+      headerTitleStyle: { color: rhino },
       header: headerProps => (
-        <ModalHeader {...headerProps}
+        <ModalHeader
+          {...headerProps}
           // headerLeftConfirm={true}
           // headerLeftCloseIcon={false}
           headerLeft={() => {}}

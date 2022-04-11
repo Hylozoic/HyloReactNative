@@ -45,7 +45,6 @@ import {
   RESPOND_TO_EVENT_PENDING,
   UPDATE_COMMENT_PENDING,
   UPDATE_GROUP_SETTINGS_PENDING,
-  UPDATE_USER_SETTINGS_PENDING,
   RESET_STORE,
   LOGOUT,
   USE_INVITATION
@@ -125,7 +124,7 @@ export default function ormReducer (state, action) {
       Message.withId(meta.tempId).delete()
       ModelExtractor.addAll({
         session,
-        root: payload.data.createMessage,
+        root: payload.getData(),
         modelName: 'Message'
       })
       break
@@ -145,7 +144,7 @@ export default function ormReducer (state, action) {
 
     case ADD_SKILL: {
       const me = Me.first()
-      const skill = Skill.create(payload.data.addSkill)
+      const skill = Skill.create(payload.getData())
       me.updateAppending({ skills: [skill] })
       break
     }
@@ -175,22 +174,6 @@ export default function ormReducer (state, action) {
       break
     }
 
-    case UPDATE_USER_SETTINGS_PENDING: {
-      const me = Me.first()
-      const changes = {
-        ...meta.changes,
-        settings: {
-          ...me.settings,
-          ...meta.changes.settings
-        }
-      }
-      me.update(changes)
-      if (Person.idExists(me.id)) {
-        Person.withId(me.id).update(changes)
-      }
-      break
-    }
-
     case UPDATE_GROUP_SETTINGS_PENDING: {
       const group = Group.withId(meta.id)
       group.update(meta.changes)
@@ -211,7 +194,7 @@ export default function ormReducer (state, action) {
 
     case USE_INVITATION: {
       const me = Me.first()
-      me.updateAppending({ memberships: [payload.data.useInvitation.membership.id] })
+      me.updateAppending({ memberships: [payload.getData().membership.id] })
       break
     }
 
@@ -224,7 +207,7 @@ export default function ormReducer (state, action) {
     }
 
     case DELETE_GROUP_RELATIONSHIP: {
-      if (payload.data.deleteGroupRelationship.success) {
+      if (payload.getData().success) {
         const gr = GroupRelationship.safeGet({ parentGroup: meta.parentId, childGroup: meta.childId })
         if (gr) {
           gr.delete()
@@ -272,7 +255,7 @@ export default function ormReducer (state, action) {
     }
 
     case FETCH_CURRENT_USER: {
-      const personId = payload.data?.me?.id
+      const personId = payload.getData()?.id
       const attrs = pick(['id', 'avatarUrl', 'name', 'location'], payload.data.me)
       const person = Person.safeWithId(personId)
       person
@@ -282,14 +265,14 @@ export default function ormReducer (state, action) {
     }
 
     case CREATE_GROUP: {
-      const me = Me.withId(Me.first().id)
-      me.updateAppending({ memberships: [payload.data.createGroup.memberships.items[0].id] })
+      const me = Me.first()
+      me.updateAppending({ memberships: [payload.getData().memberships.items[0].id] })
       clearCacheFor(Me, me.id)
       break
     }
 
     case CREATE_JOIN_REQUEST: {
-      if (payload.data.createJoinRequest.request) {
+      if (payload.getData().request) {
         const me = Me.first()
         const jr = JoinRequest.create({ group: meta.groupId, user: me.id })
         me.updateAppending({ joinRequests: [jr] })
