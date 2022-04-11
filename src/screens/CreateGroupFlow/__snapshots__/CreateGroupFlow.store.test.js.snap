@@ -24,7 +24,7 @@ Object {
 }
 `;
 
-exports[`showLoadingModal matches snapshot 1`] = `
+exports[`createGroup 1`] = `
 Object {
   "graphql": Object {
     "query": "mutation ($data: GroupInput) {

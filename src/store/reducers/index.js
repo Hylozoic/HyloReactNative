@@ -9,7 +9,6 @@ import mixpanelReducer from './mixpanel'
 import CommentEditor from 'screens/PostDetails/CommentEditor/CommentEditor.store'
 import FeedList from 'components/FeedList/FeedList.store'
 import ItemChooser from 'screens/ItemChooser/ItemChooser.store'
-import LoadingModal from 'screens/LoadingModal/LoadingModal.store'
 import MemberFeed from 'screens/MemberProfile/MemberFeed/MemberFeed.store'
 import Members from 'screens/Members/Members.store'
 import ModeratorSettings from 'screens/ModeratorSettings/ModeratorSettings.store'
@@ -32,7 +31,6 @@ export const appReducer = combineReducers({
   CommentEditor,
   FeedList,
   ItemChooser,
-  LoadingModal,
   MemberFeed,
   Members,
   ModeratorSettings,

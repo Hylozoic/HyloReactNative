@@ -54,7 +54,7 @@ describe('reducer', () => {
   })
 })
 
-describe('showLoadingModal', () => {
+describe('createGroup', () => {
   it('matches snapshot', () => expect(createGroup({ name, slug })).toMatchSnapshot())
 })
 

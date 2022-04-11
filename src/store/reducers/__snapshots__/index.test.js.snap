@@ -21,9 +21,6 @@ Object {
     "timeframe": "future",
   },
   "ItemChooser": Object {},
-  "LoadingModal": Object {
-    "shouldDisplay": false,
-  },
   "MemberFeed": Object {
     "choice": "Posts",
   },
