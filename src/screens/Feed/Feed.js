@@ -98,7 +98,12 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
   const pluralPosts = (topicPostsTotal !== 1)
   const showPostPrompt = !feedType && !topicName
   const feedListHeader = (
-    <View style={[styles.bannerContainer, showPostPrompt ? styles.bannerContainerWithPostPrompt : {}]}>
+    <View
+      style={[
+        styles.bannerContainer,
+        showPostPrompt ? styles.bannerContainerWithPostPrompt : {}
+      ]}
+    >
       <Image source={image} style={styles.image} />
       <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
       <View style={styles.titleRow}>
@@ -109,10 +114,10 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
           {topicName && (
             <View style={styles.topicInfo}>
               <Text style={styles.subName}>
-                <Icon name='Star' /> {topicFollowersTotal} subscriber{pluralFollowers && 's'}
+                <Icon name='Star' /> {topicFollowersTotal || 0} subscriber{pluralFollowers && 's'}
               </Text>
               <Text style={styles.subName}>
-                <Icon name='Post' /> {topicPostsTotal} post{pluralPosts && 's'}
+                <Icon name='Post' /> {topicPostsTotal || 0} post{pluralPosts && 's'}
               </Text>
             </View>
           )}
