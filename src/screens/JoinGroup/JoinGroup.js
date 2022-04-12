@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { every, isEmpty } from 'lodash/fp'
-import setReturnToPath from 'store/actions/setReturnToPath'
+import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
 import getRouteParam from 'store/selectors/getRouteParam'
 import { getAuthorized } from 'store/selectors/getAuthState'
 import { navigateToLinkingPath } from 'navigation/linking'
@@ -19,7 +19,7 @@ export default function JoinGroup (props) {
   const dispatch = useDispatch()
   const isAuthorized = useSelector(getAuthorized)
 
-  // Probably should use `useFocusEffect`
+  // Might be more clear to simply use `useEffect`
   useFocusEffect(
     useCallback(() => {
       (async function () {
@@ -40,7 +40,7 @@ export default function JoinGroup (props) {
             const groupSlug = newMembership?.group?.slug
 
             if (groupSlug) {
-              navigateToLinkingPath(`/groups/${groupSlug}`, true)
+              navigateToLinkingPath(`/groups/${groupSlug}`)
             } else {
               throw new Error('Join group was unsuccessful')
             }
@@ -49,7 +49,7 @@ export default function JoinGroup (props) {
             const isValidInvite = result?.payload?.getData()?.valid
 
             if (isValidInvite) {
-              dispatch(setReturnToPath(route.params?.originalLinkingPath))
+              dispatch(setReturnToOnAuthPath(route.params?.originalLinkingPath))
               navigateToLinkingPath('/signup?message=Signup or login to join this group.', true)
             } else {
               navigateToLinkingPath('/signup?error=invite-expired', true)

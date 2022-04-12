@@ -3,7 +3,6 @@ import { isEmpty } from 'lodash/fp'
 import {
   getActionFromState,
   CommonActions,
-  getInitialURL,
   subscribe,
   getStateFromPath as getStateFromPathDefault
 } from '@react-navigation/native'
@@ -13,7 +12,7 @@ import * as queryString from 'query-string'
 import { PathHelpers } from 'hylo-shared'
 import store from 'store'
 import { getAuthorized } from 'store/selectors/getAuthState'
-import setReturnToPath from 'store/actions/setReturnToPath'
+import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
 import { navigationRef } from 'navigation/linking/helpers'
 import { modalScreenName } from './helpers'
 
@@ -97,6 +96,7 @@ export const routesConfig = {
 
   '/all':                                                    'AuthRoot/Drawer/Tabs/Home Tab/Feed',
   '/':                                                       'AuthRoot/Drawer/Tabs/Home Tab/Feed'
+  // '/:unknownPath*':                                          'AuthRoot/Drawer/Tabs/Home Tab'
 }
 
 export const AUTH_ROOT_SCREEN_NAME = 'AuthRoot'
@@ -189,24 +189,28 @@ export async function openURL (providedUrlOrPath, options = {}) {
   }
 }
 
+export const resetToInitialNavState = providedIsAuthorized => {
+  const isAuthorized = providedIsAuthorized || getAuthorized(store.getState())
+
+  navigationRef.current?.dispatch(
+    CommonActions.reset(
+      isAuthorized
+        ? INITIAL_AUTH_NAV_STATE
+        : INITIAL_NON_AUTH_NAV_STATE
+    )
+  )
+}
+
 // This could possibly be replaced by updating the logic applied by Linking.openURL
 // to not always force nav state reset to default (or storing returnTo URL?) for
 // this case...
 export const navigateToLinkingPath = async (providedUrl, reset = false) => {
   const linkingURL = new URL(providedUrl, DEFAULT_APP_HOST)
   const linkingPath = `${linkingURL.pathname}${linkingURL.search}`
-  const isAuthorized = getAuthorized(store.getState())
   const state = getStateFromPath(linkingPath)
   const action = getActionFromState(state)
 
-  if (reset) {
-    await navigationRef.current?.dispatch(
-      CommonActions.reset(isAuthorized
-        ? INITIAL_AUTH_NAV_STATE
-        : INITIAL_NON_AUTH_NAV_STATE
-      )
-    )
-  }
+  if (reset) resetToInitialNavState()
 
   navigationRef.current?.dispatch(action)
 }
@@ -222,13 +226,14 @@ export function getScreenPathWithParamsFromPath (incomingPathAndQuerystring, rou
 
     if (pathMatch) {
       const screenPath = routes[pathMatcher]
-      const routeParamsQueryString = incomingQuerystring.concat(
-        !isEmpty(pathMatch.params)
-          ? `&${queryString.stringify(pathMatch.params)}`
-          : ''
-      )
+      const routeParams = []
 
-      return `${screenPath}${routeParamsQueryString}`
+      if (!isEmpty(incomingQuerystring)) routeParams.push(incomingQuerystring.substring(1))
+      if (!isEmpty(pathMatch.params)) routeParams.push(queryString.stringify(pathMatch.params))
+
+      const routeParamsQueryString = routeParams.join('&')
+
+      return `${screenPath}?${routeParamsQueryString}`
     }
   }
 }
@@ -237,21 +242,13 @@ const getStateFromPath = path => {
   const screenPathWithParams = getScreenPathWithParamsFromPath(path, routesConfig)
   const isAuthorized = getAuthorized(store.getState())
 
-  // The following two conditions are 404 handling
-  // and `returnToPath` for routes requiring auth
-  // before auth is complete
+  // 404 handling
+  if (!screenPathWithParams) return null
 
-  if (!screenPathWithParams) {
-    if (!isAuthorized) {
-      return INITIAL_NON_AUTH_NAV_STATE
-    } else {
-      return INITIAL_AUTH_NAV_STATE
-    }
-  }
-
+  // Set `returnToOnAuthPath` for routes requiring auth when not auth'd
   if (!isAuthorized && screenPathWithParams.match(new RegExp(`^${AUTH_ROOT_SCREEN_NAME}`))) {
-    store.dispatch(setReturnToPath(path))
-    return INITIAL_NON_AUTH_NAV_STATE
+    store.dispatch(setReturnToOnAuthPath(path))
+    return null
   }
 
   return getStateFromPathDefault(screenPathWithParams)
@@ -260,7 +257,6 @@ const getStateFromPath = path => {
 // React Navigation linking config
 export default {
   prefixes,
-  getInitialURL,
   subscribe,
   getStateFromPath,
   getPathFromState: () => {}

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { View } from 'react-native'
+import { View, Linking } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { navigationRef } from 'navigation/linking/helpers'
 import OneSignal from 'react-native-onesignal'
-import customLinking from 'navigation/linking'
+import customLinking, {
+  navigateToLinkingPath,
+  AUTH_ROOT_SCREEN_NAME,
+  NON_AUTH_ROOT_SCREEN_NAME
+} from 'navigation/linking'
 import { getAuthorized, getAuthStateLoading } from 'store/selectors/getAuthState'
-import setReturnToPath from 'store/actions/setReturnToPath'
 import SocketListener from 'components/SocketListener'
 import RNBootSplash from 'react-native-bootsplash'
 import LoadingScreen from 'screens/LoadingScreen'
 import ItemChooser from 'screens/ItemChooser'
-import InviteExpired from 'screens/InviteExpired'
 import checkLogin from 'store/actions/checkLogin'
 import { white } from 'style/colors'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -26,17 +28,25 @@ export default function RootNavigator () {
   const dispatch = useDispatch()
   const authStateLoading = useSelector(getAuthStateLoading)
   const isAuthorized = useSelector(getAuthorized)
+  const [initialURL, setInitialURL] = useState()
 
   // This should be (nearly) the only place we check for a session from the API.
   // Routes will not be available until this check is complete.
-  useEffect(() => { dispatch(checkLogin()) }, [])
+  useEffect(() => {
+    (async function () {
+      setInitialURL(await Linking.getInitialURL())
+      dispatch(checkLogin())
+    })()
+  }, [])
 
   // Handle Push Notifications opened. NOTE the handler it's important that the
   // handlers is returns so it gets cleaned-up on unmount
   useEffect(() => OneSignal.setNotificationOpenedHandler(({ notification }) => {
     const path = notification?.additionalData?.path
-    setReturnToPath(path)
+    navigateToLinkingPath(path)
   }), [])
+
+  if (authStateLoading) return <LoadingScreen />
 
   const navigatorProps = {
     screenOptions: {
@@ -46,6 +56,7 @@ export default function RootNavigator () {
 
   return (
     <View style={styles.rootContainer}>
+      {/* <LoadingScreen visible={authStateLoading} /> */}
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}
@@ -60,13 +71,14 @@ export default function RootNavigator () {
         <Root.Navigator {...navigatorProps}>
           {/* Logged in */}
           {isAuthorized && (
-            <Root.Screen name='AuthRoot' component={AuthRootNavigator} options={{ headerShown: false }} />
+            <Root.Screen name={AUTH_ROOT_SCREEN_NAME} component={AuthRootNavigator} options={{ headerShown: false, initialURL }} />
           )}
           {/* Not logged-in or Signing-up */}
           {!isAuthorized && (
-            <Root.Screen name='NonAuthRoot' component={NonAuthRootNavigator} options={{ headerShown: false }} />
+            <Root.Screen name={NON_AUTH_ROOT_SCREEN_NAME} component={NonAuthRootNavigator} options={{ headerShown: false, initialURL }} />
           )}
           {/* Screens always available */}
+          <Root.Screen name='Loading' component={LoadingScreen} />
           <Root.Screen name='LoginByTokenHandler' options={{ headerShown: false }} component={LoginByTokenHandler} />
           <Root.Group screenOptions={{ presentation: 'modal', header: ModalHeader }}>
             <Root.Screen
@@ -76,11 +88,9 @@ export default function RootNavigator () {
             />
             <Root.Screen name='ItemChooser' component={ItemChooser} />
           </Root.Group>
-          <Root.Screen name='Loading' component={LoadingScreen} />
         </Root.Navigator>
       </NavigationContainer>
       {isAuthorized && <SocketListener />}
-      <LoadingScreen visible={authStateLoading} />
     </View>
   )
 }

@@ -4,8 +4,9 @@ import { useFocusEffect } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 import { pickBy, identity } from 'lodash/fp'
 import { Validators } from 'hylo-shared'
-import useForm from 'hooks/useForm'
 import register from 'store/actions/register'
+import logout from 'store/actions/logout'
+import useForm from 'hooks/useForm'
 import SettingControl from 'components/SettingControl'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
@@ -55,6 +56,7 @@ export default function SignupRegistration ({ navigation, route }) {
   useFocusEffect(() => {
     navigation.setOptions({
       headerLeftOnPress: () => {
+        dispatch(logout())
         navigation.navigate('Signup Intro')
       }
     })

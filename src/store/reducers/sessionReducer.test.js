@@ -38,13 +38,13 @@ describe('on LOGOUT', () => {
     const newState = sessionReducer(state, action)
     expect(newState).toEqual(initialState)
   })
-  it('preserves session.returnToPath on logout', () => {
+  it('preserves session.returnToOnAuthPath on logout', () => {
     sessionReducer(createInitialState(), {})
-    const returnToPath = 'path/to/return/to'
-    const state = { returnToPath }
+    const returnToOnAuthPath = 'path/to/return/to'
+    const state = { returnToOnAuthPath }
     const action = { type: LOGOUT }
     const newState = sessionReducer(state, action)
-    expect(newState.returnToPath).toEqual(returnToPath)
+    expect(newState.returnToOnAuthPath).toEqual(returnToOnAuthPath)
   })
 })
 

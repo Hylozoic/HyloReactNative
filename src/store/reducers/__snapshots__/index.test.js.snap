@@ -584,7 +584,7 @@ Object {
   "queryResults": Object {},
   "session": Object {
     "groupId": null,
-    "returnToPath": null
+    "returnToOnAuthPath": null
   },
 }
 `;

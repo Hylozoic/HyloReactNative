@@ -1,17 +1,17 @@
 
 import 'react-native-gesture-handler' // probably not necessary as already included in index.js
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createStackNavigator } from '@react-navigation/stack'
 import OneSignal from 'react-native-onesignal'
 import { ModalHeader } from 'navigation/headers'
 import { modalScreenName } from './linking/helpers'
 import { white } from 'style/colors'
-import setReturnToPath from 'store/actions/setReturnToPath'
-import { useFocusEffect } from '@react-navigation/native'
+import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import registerDevice from 'store/actions/registerDevice'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import getReturnToPath from 'store/selectors/getReturnToPath'
+import getReturnToOnAuthPath from 'store/selectors/getReturnToOnAuthPath'
 import { navigateToLinkingPath } from 'navigation/linking'
 // Screens
 import DrawerNavigator from 'navigation/DrawerNavigator'
@@ -28,15 +28,16 @@ import NotificationSettings from 'screens/NotificationSettings'
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
+  const navigation = useNavigation()
+  const route = useRoute()
   const dispatch = useDispatch()
-  const returnToPath = useSelector(getReturnToPath)
-  const [loading, setLoading] = useState(true)
+  const returnToOnAuthPath = useSelector(getReturnToOnAuthPath)
 
   useEffect(() => {
     (async function () {
-      const response = await dispatch(fetchCurrentUser())
+      navigation.navigate('Loading')
 
-      setLoading(false)
+      const response = await dispatch(fetchCurrentUser())
 
       if (!response?.payload?.getData()?.error) {
         const deviceState = await OneSignal.getDeviceState()
@@ -49,17 +50,17 @@ export default function AuthRootNavigator () {
           console.log('Note: Not registering to OneSignal for push notifications. OneSignal did not successfully retrieve a userId')
         }
       }
+
+      if (route?.params?.initialURL) {
+        navigateToLinkingPath(route?.params?.initialURL)
+      } else if (returnToOnAuthPath) {
+        dispatch(setReturnToOnAuthPath())
+        navigateToLinkingPath(returnToOnAuthPath)
+      } else {
+        navigation.navigate('Home Tab', { screen: 'Feed' })
+      }
     }())
   }, [])
-
-  useFocusEffect(
-    useCallback(() => {
-      if (!loading && returnToPath) {
-        dispatch(setReturnToPath())
-        navigateToLinkingPath(returnToPath, true)
-      }
-    }, [loading, returnToPath])
-  )
 
   const navigatorProps = {
     screenOptions: {

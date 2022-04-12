@@ -4,7 +4,7 @@ import ormReducer from './ormReducer'
 import pending from './pending'
 import queryResults from './queryResults'
 import sessionReducer from './sessionReducer'
-import returnToPathReducer from './returnToPathReducer'
+import returnToOnAuthPathReducer from './returnToOnAuthPathReducer'
 import mixpanelReducer from './mixpanel'
 import CommentEditor from 'screens/PostDetails/CommentEditor/CommentEditor.store'
 import FeedList from 'components/FeedList/FeedList.store'
@@ -26,7 +26,7 @@ export const appReducer = combineReducers({
   pending,
   queryResults,
   session: sessionReducer,
-  returnToPath: returnToPathReducer,
+  returnToOnAuthPath: returnToOnAuthPathReducer,
   mixpanel: mixpanelReducer,
   CommentEditor,
   FeedList,
