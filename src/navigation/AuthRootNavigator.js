@@ -9,13 +9,9 @@ import { modalScreenName } from './linking/helpers'
 import { white } from 'style/colors'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import { useFocusEffect } from '@react-navigation/native'
-import selectGroup from 'store/actions/selectGroup'
 import registerDevice from 'store/actions/registerDevice'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getReturnToPath from 'store/selectors/getReturnToPath'
-import getLastViewedGroup from 'store/selectors/getLastViewedGroup'
-import { register as registerOneSignal } from 'util/onesignal'
 import { navigateToLinkingPath } from 'navigation/linking'
 // Screens
 import DrawerNavigator from 'navigation/DrawerNavigator'
@@ -30,9 +26,6 @@ import PendingInvites from 'screens/PendingInvites'
 import NotificationsList from 'screens/NotificationsList'
 import NotificationSettings from 'screens/NotificationSettings'
 
-// import useGroupSelect from 'hooks/useGroupSelect'
-// useGroupSelect()
-
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
   const dispatch = useDispatch()
@@ -42,11 +35,19 @@ export default function AuthRootNavigator () {
   useEffect(() => {
     (async function () {
       const response = await dispatch(fetchCurrentUser())
+
       setLoading(false)
+
       if (!response?.payload?.getData()?.error) {
-        await registerOneSignal({ registerDevice })
-        // Prompt for push on iOS
-        OneSignal.promptForPushNotificationsWithUserResponse(() => {})
+        const deviceState = await OneSignal.getDeviceState()
+        if (deviceState?.userId) {
+          await dispatch(registerDevice(deviceState?.userId))
+          OneSignal.setExternalUserId(response.payload?.getData()?.me?.id)
+          // Prompt for push on iOS
+          OneSignal.promptForPushNotificationsWithUserResponse(() => {})
+        } else {
+          console.log('Note: Not registering to OneSignal for push notifications. OneSignal did not successfully retrieve a userId')
+        }
       }
     }())
   }, [])

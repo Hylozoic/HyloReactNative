@@ -53,7 +53,9 @@ export default class AppContainer extends Component {
 
     OneSignal.setAppId(process.env.ONESIGNAL_APP_ID)
 
+    // Method for handling notifications received while app in foreground
     OneSignal.setNotificationWillShowInForegroundHandler(notifReceivedEvent => {
+      // Complete with null means don't show a notification.
       notifReceivedEvent.complete()
     })
   }
