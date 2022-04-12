@@ -16,7 +16,7 @@ import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getReturnToPath from 'store/selectors/getReturnToPath'
 import getLastViewedGroup from 'store/selectors/getLastViewedGroup'
 import { register as registerOneSignal } from 'util/onesignal'
-import { navigateToLinkingPathInApp } from 'navigation/linking'
+import { navigateToLinkingPath } from 'navigation/linking'
 // Screens
 import DrawerNavigator from 'navigation/DrawerNavigator'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
@@ -55,7 +55,7 @@ export default function AuthRootNavigator () {
     useCallback(() => {
       if (!loading && returnToPath) {
         dispatch(setReturnToPath())
-        navigateToLinkingPathInApp(returnToPath, true)
+        navigateToLinkingPath(returnToPath, true)
       }
     }, [loading, returnToPath])
   )

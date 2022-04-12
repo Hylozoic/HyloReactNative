@@ -2,7 +2,7 @@ import React, { useState, useCallback, useRef } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import { useSelector } from 'react-redux'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
-import { navigateToLinkingPathInApp } from 'navigation/linking'
+import { navigateToLinkingPath } from 'navigation/linking'
 import useGroupSelect from 'hooks/useGroupSelect'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import HyloWebView from 'screens/HyloWebView'
@@ -61,22 +61,22 @@ export default function MapWebView ({ navigation }) {
     // Matches: groups/my-awesome-group/members/<member-id> or /all|pubic/members/<member-id>
     // re-writes linking to go to Member details modal in the all context
     if (url.match(/\/groups\/*.+\/members\/*.+$/)) {
-      const memberModalPath = '/all/' + url.split('/').slice(3,5).join('/')
-      navigateToLinkingPathInApp(memberModalPath)
+      const memberModalPath = '/all/' + url.split('/').slice(3, 5).join('/')
+      navigateToLinkingPath(memberModalPath)
     // Matches: /groups/our-awesome-group/map/post/<post-id>, /(all|public)/post/<post-id>
     } else if (url.match(/\/post|\/members/)) {
-      navigateToLinkingPathInApp(url)
+      navigateToLinkingPath(url)
     // Matches: /groups/our-awesome-group
     // re-writes linking to go to Group Detail modal
     } else if (url.match(new RegExp(MATCHER_GROUP_ROOT_PATH))) {
-      navigateToLinkingPathInApp(url + '/detail')
+      navigateToLinkingPath(url + '/detail')
     // Matches: /all, /public
     // re-writes linking to stays on map reloading it in the target context
     } else if (url.match(new RegExp(MATCHER_GROUP_ALL_AND_PUBLIC_ROOT_PATH))) {
-      navigateToLinkingPathInApp(url + '/map')
+      navigateToLinkingPath(url + '/map')
     } else {
       // NOTE: Right now this captures saved search view calls, may capture too much?
-      navigateToLinkingPathInApp(url)
+      navigateToLinkingPath(url)
     }
   }
 

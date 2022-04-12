@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { every, isEmpty } from 'lodash/fp'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import getRouteParam from 'store/selectors/getRouteParam'
-import { getAuthorized, getSignupComplete } from 'store/selectors/getAuthState'
-import { navigateToLinkingPathInApp } from 'navigation/linking'
+import { getAuthorized } from 'store/selectors/getAuthState'
+import { navigateToLinkingPath } from 'navigation/linking'
 import useInvitation from 'store/actions/useInvitation'
 import checkInvitation from 'store/actions/checkInvitation'
 import LoadingScreen from 'screens/LoadingScreen'
@@ -40,7 +40,7 @@ export default function JoinGroup (props) {
             const groupSlug = newMembership?.group?.slug
 
             if (groupSlug) {
-              navigateToLinkingPathInApp(`/groups/${groupSlug}`, true)
+              navigateToLinkingPath(`/groups/${groupSlug}`, true)
             } else {
               throw new Error('Join group was unsuccessful')
             }
@@ -50,9 +50,9 @@ export default function JoinGroup (props) {
 
             if (isValidInvite) {
               dispatch(setReturnToPath(route.params?.originalLinkingPath))
-              navigateToLinkingPathInApp('/signup?message=Signup or login to join this group.', true)
+              navigateToLinkingPath('/signup?message=Signup or login to join this group.', true)
             } else {
-              navigateToLinkingPathInApp('/signup?error=invite-expired', true)
+              navigateToLinkingPath('/signup?error=invite-expired', true)
             }
           }
         } catch (error) {

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import loginByToken from 'store/actions/loginByToken'
 import loginByJWT from 'store/actions/loginByJWT'
 import { getAuthorized, getAuthStateLoading } from 'store/selectors/getAuthState'
-import { navigateToLinkingPathInApp } from 'navigation/linking'
+import { navigateToLinkingPath } from 'navigation/linking'
 import { useFocusEffect, useRoute } from '@react-navigation/native'
 
 export default function LoginByTokenHandler () {
@@ -27,7 +27,7 @@ export default function LoginByTokenHandler () {
               const response = await dispatch(loginByJWT(jwt))
 
               if (response?.error) {
-                navigateToLinkingPathInApp('/login?bannerError=invalid-link')
+                navigateToLinkingPath('/login?bannerError=invalid-link')
                 return null
               }
             } else if (loginToken) {
@@ -35,9 +35,9 @@ export default function LoginByTokenHandler () {
             }
           }
 
-          navigateToLinkingPathInApp(returnToURLFromLink || '/')
+          navigateToLinkingPath(returnToURLFromLink || '/')
         } catch (e) {
-          navigateToLinkingPathInApp('/login?bannerError=invalid-link')
+          navigateToLinkingPath('/login?bannerError=invalid-link')
         }
       })()
     }, [authStateLoading, isAuthorized, jwt, loginToken, userID, returnToURLFromLink])

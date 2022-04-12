@@ -11,7 +11,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import validator from 'validator'
-import { navigateToLinkingPathInApp, openURL } from 'navigation/linking'
+import { navigateToLinkingPath, openURL } from 'navigation/linking'
 import { useNavigation, useRoute, useNavigationState } from '@react-navigation/core'
 import FormattedError from 'components/FormattedError'
 import sendEmailVerification from 'store/actions/sendEmailVerification'
@@ -91,7 +91,7 @@ export default function Signup () {
       const result = await dispatch(sendEmailVerification(email))
 
       if (result.payload.getData().success) {
-        navigateToLinkingPathInApp(`/signup/verify-email?email=${email}`, true)
+        navigateToLinkingPath(`/signup/verify-email?email=${email}`, true)
       } else {
         throw genericError
       }

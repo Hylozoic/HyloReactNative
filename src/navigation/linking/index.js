@@ -8,14 +8,14 @@ import {
   getStateFromPath as getStateFromPathDefault
 } from '@react-navigation/native'
 import { match } from 'path-to-regexp'
-import * as queryString from 'query-string'
 import { URL } from 'react-native-url-polyfill'
+import * as queryString from 'query-string'
 import { PathHelpers } from 'hylo-shared'
 import store from 'store'
 import { getAuthorized } from 'store/selectors/getAuthState'
 import setReturnToPath from 'store/actions/setReturnToPath'
-import { modalScreenName } from './helpers'
 import { navigationRef } from 'navigation/linking/helpers'
+import { modalScreenName } from './helpers'
 
 export const DEFAULT_APP_HOST = 'https://hylo.com'
 
@@ -159,7 +159,7 @@ export const INITIAL_NON_AUTH_NAV_STATE = {
   ]
 }
 
-// Could potentially be entirely replaced by `navigateToLinkingPathInApp` below
+// Could potentially be entirely replaced by `navigateToLinkingPath` below
 // by adding these legacy routes in the routing above. The key differentiating
 // feature besides the rourtes is the ability to provide a `groupSlug`.
 export async function openURL (providedUrlOrPath, options = {}) {
@@ -173,15 +173,15 @@ export async function openURL (providedUrlOrPath, options = {}) {
       case 'members':
       case 'm':
       case 'u': {
-        return navigateToLinkingPathInApp(PathHelpers.mentionPath(suffix, options?.groupSlug))
+        return navigateToLinkingPath(PathHelpers.mentionPath(suffix, options?.groupSlug))
       }
       case 'topics':
       case 'tag': {
-        return navigateToLinkingPathInApp(PathHelpers.topicPath(suffix, options?.groupSlug))
+        return navigateToLinkingPath(PathHelpers.topicPath(suffix, options?.groupSlug))
       }
     }
 
-    return navigateToLinkingPathInApp(linkingURL.pathname)
+    return navigateToLinkingPath(linkingURL.pathname)
   }
 
   if (await Linking.canOpenURL(urlOrPath)) {
@@ -192,7 +192,7 @@ export async function openURL (providedUrlOrPath, options = {}) {
 // This could possibly be replaced by updating the logic applied by Linking.openURL
 // to not always force nav state reset to default (or storing returnTo URL?) for
 // this case...
-export const navigateToLinkingPathInApp = async (providedUrl, reset = false) => {
+export const navigateToLinkingPath = async (providedUrl, reset = false) => {
   const linkingURL = new URL(providedUrl, DEFAULT_APP_HOST)
   const linkingPath = `${linkingURL.pathname}${linkingURL.search}`
   const isAuthorized = getAuthorized(store.getState())
