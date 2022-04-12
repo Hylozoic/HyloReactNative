@@ -9,28 +9,11 @@ import SignupNavigator from 'navigation/SignupNavigator'
 import { white } from 'style/colors'
 import { getAuthenticated } from 'store/selectors/getAuthState'
 import { useNavigation } from '@react-navigation/native'
-import { CHECK_LOGIN, FETCH_CURRENT_USER, LOGIN, UPDATE_USER_SETTINGS } from 'store/constants'
-import { LOGIN_WITH_APPLE, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE } from 'screens/Login/actions'
 
 const NonAuthRoot = createStackNavigator()
 export default function NonAuthRootNavigator () {
   const navigation = useNavigation()
   const isAuthenticated = useSelector(getAuthenticated)
-  // const loading = useSelector(state =>
-  //   state.pending[FETCH_CURRENT_USER] ||
-  //   state.pending[CHECK_LOGIN] ||
-  //   state.pending[UPDATE_USER_SETTINGS]
-  // )
-
-  // const loading = useSelector(state => {
-  //   return state.pending[LOGIN] ||
-  //     state.pending[LOGIN_WITH_APPLE] ||
-  //     state.pending[LOGIN_WITH_FACEBOOK] ||
-  //     state.pending[LOGIN_WITH_GOOGLE] ||
-  //     state.pending[CHECK_LOGIN] ||
-  //     state.pending[FETCH_CURRENT_USER] ||
-  //     state.pending[UPDATE_USER_SETTINGS]
-  // })
 
   useEffect(() => {
     if (isAuthenticated) navigation.navigate('Signup')
