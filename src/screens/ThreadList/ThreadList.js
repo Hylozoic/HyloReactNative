@@ -3,9 +3,9 @@ import { FlatList, TouchableOpacity, View, Text } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
 import { isEmpty } from 'lodash/fp'
 import { getSocket } from 'util/websockets'
-import LoadingScreen from 'screens/LoadingScreen'
 import ThreadCard from 'components/ThreadCard'
 import styles from './ThreadList.styles'
+import Loading from 'components/Loading'
 
 export default function (props) {
   const isFocused = useIsFocused()
@@ -13,18 +13,10 @@ export default function (props) {
 }
 
 export class ThreadList extends Component {
-  state = { ready: false }
-
   componentDidMount () {
     this.props.updateLastViewed()
     this.fetchOrShowCached()
     getSocket().then(socket => socket.on('reconnect', this.props.refreshThreads))
-  }
-
-  UNSAFE_componentWillReceiveProps (nextProps) {
-    if (!this.props.pending && nextProps.pending) {
-      this.setState({ ready: true })
-    }
   }
 
   shouldComponentUpdate (nextProps) {
@@ -34,7 +26,6 @@ export class ThreadList extends Component {
   fetchOrShowCached () {
     const { hasMore, threads, fetchThreads } = this.props
     if (isEmpty(threads) && hasMore !== false) return fetchThreads()
-    if (!this.state.ready) this.setState({ ready: true })
   }
 
   _keyExtractor = (item, index) => item.id.toString()
@@ -50,22 +41,15 @@ export class ThreadList extends Component {
       pendingRefresh
       // isConnected
     } = this.props
-    const { ready } = this.state
-
-    if (!ready || (pending && threads.length === 0)) {
-      return (
-        <LoadingScreen />
-      )
-    }
-
-    if (ready && !pending && threads.length === 0) {
-      return (
-        <Text style={styles.center}>No active conversations</Text>
-      )
-    }
 
     return (
       <View style={styles.threadList}>
+        {pending && (
+          <Loading />
+        )}
+        {!pending && threads.length === 0 && (
+          <Text style={styles.center}>No active conversations</Text>
+        )}
         <FlatList
           data={threads}
           keyExtractor={this._keyExtractor}
@@ -83,9 +67,6 @@ export class ThreadList extends Component {
             />
           )}
         />
-        {!pending && threads.length === 0 && (
-          <Text style={styles.center}>No active conversations</Text>
-        )}
         {/* {!isConnected && (
           <NotificationOverlay
             position='bottom'
