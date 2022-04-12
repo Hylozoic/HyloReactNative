@@ -4,8 +4,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { navigationRef } from 'navigation/linking/helpers'
 import OneSignal from 'react-native-onesignal'
-import customLinking, { INITIAL_AUTH_NAV_STATE, INITIAL_NON_AUTH_NAV_STATE } from 'navigation/linking'
-import { getAuthorized } from 'store/selectors/getAuthState'
+import customLinking from 'navigation/linking'
+import { getAuthorized, getAuthStateLoading } from 'store/selectors/getAuthState'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import SocketListener from 'components/SocketListener'
 import RNBootSplash from 'react-native-bootsplash'
@@ -24,21 +24,12 @@ import LoginByTokenHandler from 'screens/LoginByTokenHandler'
 const Root = createStackNavigator()
 export default function RootNavigator () {
   const dispatch = useDispatch()
+  const authStateLoading = useSelector(getAuthStateLoading)
   const isAuthorized = useSelector(getAuthorized)
-  const [loading, setLoading] = useState(true)
 
-  // This should be the only place we check for a session from the API.
+  // This should be (nearly) the only place we check for a session from the API.
   // Routes will not be available until this check is complete.
-  useEffect(() => {
-    (async function () {
-      if (!isAuthorized) {
-        setLoading(true)
-        await dispatch(checkLogin())
-        RNBootSplash.hide()
-        setLoading(false)
-      }
-    })()
-  }, [isAuthorized])
+  useEffect(() => { dispatch(checkLogin()) }, [])
 
   // Handle Push Notifications opened. NOTE the handler it's important that the
   // handlers is returns so it gets cleaned-up on unmount
@@ -53,17 +44,16 @@ export default function RootNavigator () {
     }
   }
 
-  if (loading) return <LoadingScreen />
-
   return (
     <View style={styles.rootContainer}>
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}
-        // onReady={() => {
-        //   RNBootSplash.hide()
-        // }}
-        initialState={isAuthorized ? INITIAL_AUTH_NAV_STATE : INITIAL_NON_AUTH_NAV_STATE}
+        onReady={() => {
+          RNBootSplash.hide()
+        }}
+        // This will be override or be overriden by `getInitalURL` ?
+        // initialState={isAuthorized ? INITIAL_AUTH_NAV_STATE : INITIAL_NON_AUTH_NAV_STATE}
         // NOTE: Uncomment below to get a map of the state
         // onStateChange={state => console.log('!!! onStateChange:', state.routes)}
       >
@@ -84,14 +74,13 @@ export default function RootNavigator () {
               component={JoinGroup}
               options={{ title: 'Joining Group...' }}
             />
-            {/* TODO: Remove and replace with error message passed back to Login screen */}
-            <Root.Screen name='InviteExpired' component={InviteExpired} />
             <Root.Screen name='ItemChooser' component={ItemChooser} />
           </Root.Group>
           <Root.Screen name='Loading' component={LoadingScreen} />
         </Root.Navigator>
       </NavigationContainer>
       {isAuthorized && <SocketListener />}
+      <LoadingScreen visible={authStateLoading} />
     </View>
   )
 }

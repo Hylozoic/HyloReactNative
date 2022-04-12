@@ -1,9 +1,12 @@
 import React from 'react'
+import { Modal } from 'react-native'
 import Loading from 'components/Loading'
 
-export default function LoadingScreen () {
+export default function LoadingScreen ({ visible = true }) {
   return (
-    <Loading size='large' style={styles.container} />
+    <Modal visible={visible}>
+      <Loading size='large' style={styles.container} />
+    </Modal>
   )
 }
 

@@ -2,23 +2,25 @@ import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import loginByToken from 'store/actions/loginByToken'
 import loginByJWT from 'store/actions/loginByJWT'
-import { getAuthorized } from 'store/selectors/getAuthState'
-import checkLogin from 'store/actions/checkLogin'
+import { getAuthorized, getAuthStateLoading } from 'store/selectors/getAuthState'
 import { navigateToLinkingPathInApp } from 'navigation/linking'
 import { useFocusEffect, useRoute } from '@react-navigation/native'
 
 export default function LoginByTokenHandler () {
   const route = useRoute()
   const dispatch = useDispatch()
+  const authStateLoading = useSelector(getAuthStateLoading)
+  const isAuthorized = useSelector(getAuthorized)
   const returnToURLFromLink = decodeURIComponent(route?.params?.n)
   const jwt = decodeURIComponent(route?.params?.token)
   const loginToken = decodeURIComponent(route?.params?.t || route?.params?.loginToken)
   const userID = route?.params?.u || route?.params?.userId
-  const isAuthorized = useSelector(getAuthorized)
 
   useFocusEffect(
     useCallback(() => {
       (async function () {
+        if (authStateLoading) return null
+
         try {
           if (!isAuthorized && userID && (jwt || loginToken)) {
             if (jwt) {
@@ -28,8 +30,6 @@ export default function LoginByTokenHandler () {
                 navigateToLinkingPathInApp('/login?bannerError=invalid-link')
                 return null
               }
-
-              await dispatch(checkLogin())
             } else if (loginToken) {
               await dispatch(loginByToken(userID, loginToken))
             }
@@ -40,7 +40,7 @@ export default function LoginByTokenHandler () {
           navigateToLinkingPathInApp('/login?bannerError=invalid-link')
         }
       })()
-    }, [isAuthorized, jwt, loginToken, userID, returnToURLFromLink])
+    }, [authStateLoading, isAuthorized, jwt, loginToken, userID, returnToURLFromLink])
   )
 
   return null

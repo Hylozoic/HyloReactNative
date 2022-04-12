@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { ScrollView, View, Text } from 'react-native'
 import { useFocusEffect } from '@react-navigation/core'
 import { useDispatch } from 'react-redux'
@@ -37,13 +37,13 @@ export default function SignupEmailValidation ({ navigation, route }) {
         navigation.navigate('Signup Intro', { email })
       }
     })
-    // WIP: token may not be received if already on this screen, which is a problem
-    // if (token) submit()
   })
 
-  useEffect(() => {
-    if (token) submit()
-  }, [token])
+  useFocusEffect(
+    useCallback(() => {
+      if (token) submit()
+    }, [token])
+  )
 
   useEffect(() => {
     setError()
@@ -66,8 +66,6 @@ export default function SignupEmailValidation ({ navigation, route }) {
         setError(responseError)
         return
       }
-
-      // navigation.navigate('SignupRegistration')
     } catch (e) {
       setError('Expired or invalid code')
     } finally {

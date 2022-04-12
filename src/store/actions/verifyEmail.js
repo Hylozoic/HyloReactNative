@@ -1,7 +1,6 @@
 import { get } from 'lodash/fp'
 import { VERIFY_EMAIL } from 'store/constants'
 
-
 export default function verifyEmail (email, code, token) {
   return {
     type: VERIFY_EMAIL,
@@ -32,8 +31,8 @@ export default function verifyEmail (email, code, token) {
         }
       `,
       variables: {
-        code,
         email,
+        code,
         token
       }
     },

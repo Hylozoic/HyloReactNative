@@ -1,19 +1,20 @@
 import { Linking } from 'react-native'
-import { isString, reject } from 'lodash/fp'
+import { isEmpty } from 'lodash/fp'
 import {
   getActionFromState,
   CommonActions,
+  getInitialURL,
+  subscribe,
   getStateFromPath as getStateFromPathDefault
 } from '@react-navigation/native'
 import { match } from 'path-to-regexp'
-import * as qs from 'query-string'
+import * as queryString from 'query-string'
 import { URL } from 'react-native-url-polyfill'
 import { PathHelpers } from 'hylo-shared'
 import store from 'store'
 import { getAuthorized } from 'store/selectors/getAuthState'
 import setReturnToPath from 'store/actions/setReturnToPath'
 import { modalScreenName } from './helpers'
-import { ALL_GROUP_ID } from 'store/models/Group'
 import { navigationRef } from 'navigation/linking/helpers'
 
 export const DEFAULT_APP_HOST = 'https://hylo.com'
@@ -37,37 +38,37 @@ export const prefixes = [
 // screen.
 //
 // There are two possible formats for specifying the target screen:
-//  1) { screenPath: 'path/to/screen', noAuth: (true|false) }
+//  1) { screenPath: 'path/to/screen', ...providedStaticDefaultRouteParams }
 //  2) 'path/to/screen' (assumed auth required)
 //
 
 /* eslint-disable key-spacing */
 export const routesConfig = {
-  // TODO: Change back to `/noo/login/(jwt|token)` once evo is deployed allowing this URL
-  '/login/(jwt|token)':                                      { screenPath: 'LoginByTokenHandler', noAuth: true },
-  '/login':                                                  { screenPath: 'NonAuthRoot/Login', noAuth: true },
-  '/signup/verify-email':                                    { screenPath: 'NonAuthRoot/Signup/SignupEmailValidation', noAuth: true },
-  '/signup/:step?':                                          { screenPath: 'NonAuthRoot/Signup/Signup Intro', noAuth: true },
+  '/login':                                                  'NonAuthRoot/Login',
+  '/signup/:step(verify-email)':                             'NonAuthRoot/Signup/SignupEmailValidation',
+  '/signup/:step?':                                          'NonAuthRoot/Signup/Signup Intro',
+  '/noo/login/(jwt|token)':                                  'LoginByTokenHandler',
   '/h/use-invitation':                                       'JoinGroup',
+  '/:context(groups)/:groupSlug/join/:accessCode':           'JoinGroup',
 
   // /members
   '/members/:id':                                            `AuthRoot/${modalScreenName('Member')}`,
   '/members':                                                'AuthRoot/Drawer/Tabs/Home Tab/Members',
 
   // special group routes (/all, /public)
-  '/:groupSlug(all|public)':                                 { screenPath: 'AuthRoot/Drawer/Tabs/Home Tab/Feed', groupId: ALL_GROUP_ID, context: 'groups' },
-  '/:groupSlug(all)/members/:id':                            { screenPath: 'AuthRoot/Drawer/Tabs/Home Tab/Member', groupId: ALL_GROUP_ID, context: 'groups' },
-  '/:groupSlug(all)/topics/:topicName':                      { screenPath: 'AuthRoot/Drawer/Tabs/Home Tab/Topic Feed', groupId: ALL_GROUP_ID, context: 'groups' },
+  '/:groupSlug(all|public)':                                 'AuthRoot/Drawer/Tabs/Home Tab/Feed',
+  '/:groupSlug(all|public)/post/:id':                        'AuthRoot/Drawer/Tabs/Home Tab/Post Details',
+  '/:groupSlug(all)/members/:id':                            'AuthRoot/Drawer/Tabs/Home Tab/Member',
+  '/:groupSlug(all)/topics/:topicName':                      'AuthRoot/Drawer/Tabs/Home Tab/Topic Feed',
 
   // map routes
-  '/:groupSlug(all|public)/map':                             { screenPath: 'AuthRoot/Drawer/Tabs/Home Tab/Map', groupId: ALL_GROUP_ID, context: 'groups' },
+  '/:groupSlug(all|public)/map':                             'AuthRoot/Drawer/Tabs/Home Tab/Map',
   '/:context(groups)/:groupSlug/map':                        'AuthRoot/Drawer/Tabs/Home Tab/Map',
-  '/:groupSlug(all|public)/map/post/:id':                    { screenPath: `AuthRoot/${modalScreenName('Post Details')}`, groupId: ALL_GROUP_ID, context: 'groups' },
+  '/:groupSlug(all|public)/map/post/:id':                    `AuthRoot/${modalScreenName('Post Details')}`,
   '/:context(groups)/:groupSlug/map/post/:id':               `AuthRoot/${modalScreenName('Post Details')}`,
   '/:context(groups)/:groupSlug/detail':                     `AuthRoot/${modalScreenName('Group Detail')}`,
 
   // /groups
-  '/:context(groups)/:groupSlug/join/:accessCode':           'JoinGroup',
   '/:context(groups)/:groupSlug/settings/invite':            'AuthRoot/Group Settings/Invite',
   '/:context(groups)/:groupSlug/settings/requests':          'AuthRoot/Group Settings/Join Requests',
   '/:context(groups)/:groupSlug/settings/relationships':     'AuthRoot/Group Settings/Related Groups',
@@ -98,10 +99,11 @@ export const routesConfig = {
   '/':                                                       'AuthRoot/Drawer/Tabs/Home Tab/Feed'
 }
 
+export const AUTH_ROOT_SCREEN_NAME = 'AuthRoot'
 export const INITIAL_AUTH_NAV_STATE = {
   routes: [
     {
-      name: 'AuthRoot',
+      name: AUTH_ROOT_SCREEN_NAME,
       state: {
         routes: [
           {
@@ -138,10 +140,11 @@ export const INITIAL_AUTH_NAV_STATE = {
   ]
 }
 
+export const NON_AUTH_ROOT_SCREEN_NAME = 'NonAuthRoot'
 export const INITIAL_NON_AUTH_NAV_STATE = {
   routes: [
     {
-      name: 'NonAuthRoot',
+      name: NON_AUTH_ROOT_SCREEN_NAME,
       state: {
         routes: [
           {
@@ -156,6 +159,9 @@ export const INITIAL_NON_AUTH_NAV_STATE = {
   ]
 }
 
+// Could potentially be entirely replaced by `navigateToLinkingPathInApp` below
+// by adding these legacy routes in the routing above. The key differentiating
+// feature besides the rourtes is the ability to provide a `groupSlug`.
 export async function openURL (providedUrlOrPath, options = {}) {
   const urlOrPath = providedUrlOrPath.trim().toLowerCase()
   const linkingURL = new URL(urlOrPath, DEFAULT_APP_HOST)
@@ -205,95 +211,50 @@ export const navigateToLinkingPathInApp = async (providedUrl, reset = false) => 
   navigationRef.current?.dispatch(action)
 }
 
-export const navigateToLinkingPath = async (linkingPath, authed) => {
-  const state = getStateFromPath(linkingPath)
-
-  if (!state) {
-    store.dispatch(setReturnToPath(null))
-    return
-  }
-
-  const action = getActionFromState(state)
-  const noAuth = action.payload?.params?.noAuth
-
-  if (noAuth || authed) {
-    if (authed) {
-      await navigationRef.current?.dispatch(CommonActions.reset(INITIAL_AUTH_NAV_STATE))
-    }
-    await navigationRef.current?.dispatch(action)
-    store.dispatch(setReturnToPath(null))
-  }
-}
-
-export function getRouteObjectFromPath (incomingPathAndQuerystring, routes = routesConfig) {
-  const [incomingPath, incomingQuerystring] = incomingPathAndQuerystring.split('?')
+export function getScreenPathWithParamsFromPath (incomingPathAndQuerystring, routes = routesConfig) {
+  const {
+    pathname: incomingPathname,
+    search: incomingQuerystring
+  } = new URL(incomingPathAndQuerystring, DEFAULT_APP_HOST)
 
   for (const pathMatcher in routes) {
-    const pathMatch = match(pathMatcher)(incomingPath)
+    const pathMatch = match(pathMatcher)(incomingPathname)
 
     if (pathMatch) {
-      const routeMatchWithOptions = routes[pathMatcher]
-      let screenPath = routeMatchWithOptions
-      let options = {}
+      const screenPath = routes[pathMatcher]
+      const routeParamsQueryString = incomingQuerystring.concat(
+        !isEmpty(pathMatch.params)
+          ? `&${queryString.stringify(pathMatch.params)}`
+          : ''
+      )
 
-      // Collecting custom route options if present
-      if (!isString(routeMatchWithOptions)) {
-        screenPath = routeMatchWithOptions?.screenPath
-        options = reject('screenPath', routeMatchWithOptions)
-      }
-
-      return {
-        screenPath,
-        options: { ...options, originalLinkingPath: incomingPathAndQuerystring, ...pathMatch.params },
-        queryString: incomingQuerystring
-      }
+      return `${screenPath}${routeParamsQueryString}`
     }
   }
-}
-
-// Matches path to routes and returns a react-navigation screen path
-// (accordingly params appended as a querystring)
-export function getScreenPathWithQuerystring (incomingPathAndQuerystring) {
-  const routeObject = getRouteObjectFromPath(incomingPathAndQuerystring)
-  if (routeObject) {
-    const { screenPath, options, queryString } = routeObject
-    const optionsQueryString = qs.stringify(options, {
-      encode: true,
-      strict: true
-    })
-    const fullQuerystring = [optionsQueryString, queryString]
-      .filter(Boolean)
-      .join('&')
-
-    return [screenPath, fullQuerystring]
-      .filter(Boolean)
-      .join('?')
-  }
-}
-
-// This function intentionally doesn't return to have which
-// has the effect of disabling the default initialURL handling
-const getInitialURL = async () => {
-  const initialURL = await Linking.getInitialURL()
-
-  if (initialURL) store.dispatch(setReturnToPath(initialURL))
-}
-
-const subscribe = listener => {
-  const onReceiveURL = ({ url }) => {
-    console.log('!!! url in subscribe -- would be setting returnToPath', url)
-    // store.dispatch(setReturnToPath(url))
-    return listener(url)
-  }
-
-  const eventSubscription = Linking.addEventListener('url', onReceiveURL)
-
-  return () => eventSubscription.remove()
 }
 
 const getStateFromPath = path => {
-  const statePath = getScreenPathWithQuerystring(path, routesConfig)
-  return getStateFromPathDefault(statePath ?? '')
+  const screenPathWithParams = getScreenPathWithParamsFromPath(path, routesConfig)
+  const isAuthorized = getAuthorized(store.getState())
+
+  // The following two conditions are 404 handling
+  // and `returnToPath` for routes requiring auth
+  // before auth is complete
+
+  if (!screenPathWithParams) {
+    if (!isAuthorized) {
+      return INITIAL_NON_AUTH_NAV_STATE
+    } else {
+      return INITIAL_AUTH_NAV_STATE
+    }
+  }
+
+  if (!isAuthorized && screenPathWithParams.match(new RegExp(`^${AUTH_ROOT_SCREEN_NAME}`))) {
+    store.dispatch(setReturnToPath(path))
+    return INITIAL_NON_AUTH_NAV_STATE
+  }
+
+  return getStateFromPathDefault(screenPathWithParams)
 }
 
 // React Navigation linking config

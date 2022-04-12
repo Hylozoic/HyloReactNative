@@ -1,4 +1,6 @@
 import { createSelector } from 'reselect'
+import { isUndefined } from 'lodash'
+import { CHECK_LOGIN } from 'store/constants'
 import getMe from 'store/selectors/getMe'
 
 /*
@@ -28,6 +30,20 @@ export const AuthState = {
   SignupInProgress: 'SignupInProgress',
   Complete: 'Complete'
 }
+
+export const getAuthStateLoading = createSelector(
+  state => state,
+  state => {
+    // Note: the `pending` reducer will not have a key if the action
+    // has never been called and will always have a key with a value of `null`
+    // once it has. Exploiting this fact here but this is not the most stable
+    // proposition.
+    //
+    // Essentialy the logic below is: if we're currently running `checkLogin`
+    // OR we've never ran it then return true.
+    return isUndefined(state.pending[CHECK_LOGIN]) || state.pending[CHECK_LOGIN]
+  }
+)
 
 export const getAuthState = createSelector(
   getMe,

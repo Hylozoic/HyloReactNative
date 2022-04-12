@@ -1,12 +1,15 @@
 
 import 'react-native-gesture-handler' // probably not necessary as already included in index.js
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createStackNavigator } from '@react-navigation/stack'
 import OneSignal from 'react-native-onesignal'
 import { ModalHeader } from 'navigation/headers'
 import { modalScreenName } from './linking/helpers'
 import { white } from 'style/colors'
+import setReturnToPath from 'store/actions/setReturnToPath'
+import { useFocusEffect } from '@react-navigation/native'
+import selectGroup from 'store/actions/selectGroup'
 import registerDevice from 'store/actions/registerDevice'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
@@ -26,40 +29,36 @@ import MemberSkillEditor from 'screens/MemberProfile/MemberSkillEditor'
 import PendingInvites from 'screens/PendingInvites'
 import NotificationsList from 'screens/NotificationsList'
 import NotificationSettings from 'screens/NotificationSettings'
-import LoadingScreen from 'screens/LoadingScreen'
+
+// import useGroupSelect from 'hooks/useGroupSelect'
+// useGroupSelect()
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
-
   const dispatch = useDispatch()
   const returnToPath = useSelector(getReturnToPath)
-  const currentGroup = useSelector(getCurrentGroup)
-  const lastViewedGroup = useSelector(getLastViewedGroup)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     (async function () {
       const response = await dispatch(fetchCurrentUser())
+      setLoading(false)
       if (!response?.payload?.getData()?.error) {
         await registerOneSignal({ registerDevice })
         // Prompt for push on iOS
         OneSignal.promptForPushNotificationsWithUserResponse(() => {})
       }
-      setLoading(false)
     }())
   }, [])
 
-  // useEffect(() => {
-  //   if (!loading && currentGroup?.id !== lastViewedGroup?.id) {
-  //     dispatch(selectGroup(lastViewedGroup))
-  //   }
-  // }, [dispatch, currentGroup, lastViewedGroup, loading])
-
-  if (loading) {
-    return <LoadingScreen />
-  }
-
-  if (returnToPath) navigateToLinkingPathInApp(returnToPath, true)
+  useFocusEffect(
+    useCallback(() => {
+      if (!loading && returnToPath) {
+        dispatch(setReturnToPath())
+        navigateToLinkingPathInApp(returnToPath, true)
+      }
+    }, [loading, returnToPath])
+  )
 
   const navigatorProps = {
     screenOptions: {
