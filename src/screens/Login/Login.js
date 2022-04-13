@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import NetInfo from '@react-native-community/netinfo'
 import { ScrollView, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
@@ -14,81 +14,75 @@ import styles from './Login.styles'
 
 export default function Login () {
   const navigation = useNavigation()
+  const passwordInputRef = useRef()
   const route = useRoute()
   const dispatch = useDispatch()
   const defaultLoginEmail = useSelector(state => state.session?.defaultLoginEmail)
-  // For redirect error handling... Not currently used
-  // const messageParam = decodeURIComponent(getRouteParam('message', route))
-  // const bannerMessage = getRouteParam('bannerMessage', route)
-  const bannerErrorParam = route?.params?.bannerError
 
   const [email, providedSetEmail] = useState(defaultLoginEmail)
   const [password, providedSetPassword] = useState()
   const [securePassword, setSecurePassword] = useState(true)
   const [emailIsValid, setEmailIsValid] = useState()
-  // const [isConnected, setIsConnected] = useState()
   const [bannerError, setBannerError] = useState()
+  const [bannerMessage, setBannerMessage] = useState()
   const [formError, providedFormError] = useState()
-  const [loading, setLoading] = useState()
-  const passwordInputRef = useRef()
+  const bannerMessageParam = route?.params?.bannerMessage
+  const bannerErrorParam = route?.params?.bannerError
+
+  useFocusEffect(
+    useCallback(() => {
+      if (bannerErrorParam) setBannerError(errorMessages(bannerErrorParam))
+      if (bannerMessageParam) setBannerMessage(bannerMessageParam)
+    }, [bannerErrorParam, bannerMessageParam])
+  )
+
   const setError = errorMessage => {
     providedFormError(errorMessages(errorMessage))
   }
 
-  const setEmail = validateEmail => {
+  const setLoadingMessage = loadingStatus => {
+    if (loadingStatus) setBannerMessage('LOGGING IN...')
+  }
+
+  const clearErrors = () => {
     setError()
     setBannerError()
+    setBannerMessage()
+  }
+
+  const setEmail = validateEmail => {
+    clearErrors()
     setEmailIsValid(validator.isEmail(validateEmail))
     providedSetEmail(validateEmail)
   }
 
   const setPassword = passwordValue => {
-    setError()
-    setBannerError()
+    clearErrors()
     providedSetPassword(passwordValue)
   }
 
-  // NOTE: This works, but I don't trust it and it could/should probably be moved
-  //       into a modal at the level of the `RootNavigator`
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     const handleConnectivityChange = ({ isConnected: isConnectedParam }) => {
-  //       if (isConnectedParam !== isConnected) {
-  //         setIsConnected(isConnectedParam)
-  //         setBannerError(!isConnectedParam ? 'OFFLINE; TRYING TO RECONNECT...' : null)
-  //       }
-  //     }
-
-  //     return NetInfo.addEventListener(handleConnectivityChange)
-  //   }, [isConnected])
-  // )
-
-  useFocusEffect(
-    useCallback(() => {
-      if (bannerErrorParam) setBannerError(errorMessages(bannerErrorParam))
-    }, [bannerErrorParam])
-  )
-
   const handleSocialAuthStart = () => {
-    setLoading(true)
+    setLoadingMessage(true)
   }
 
   const handleSocialAuthComplete = error => {
     if (error) setBannerError(error)
-    setLoading(false)
+    setLoadingMessage(false)
   }
 
   const login = async () => {
     try {
-      setLoading(true)
+      setLoadingMessage(true)
       const response = await dispatch(loginAction(email, password))
       const responseError = response.payload?.getData().error
 
-      if (responseError) setError(responseError)
+      if (responseError) {
+        setError(responseError)
+      }
+      setLoadingMessage(false)
     } catch (err) {
+      setLoadingMessage(false)
       setError(err.message)
-    } finally {
-      setLoading(false)
     }
   }
 
@@ -104,7 +98,7 @@ export default function Login () {
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
       <ScrollView contentContainerStyle={styles.login} style={styles.container}>
         {bannerError && <Text style={styles.bannerError}>{bannerError}</Text>}
-        {loading && <Text style={styles.bannerMessage}>LOGGING IN...</Text>}
+        {(!bannerError && bannerMessage) && <Text style={styles.bannerMessage}>{bannerMessage}</Text>}
 
         <Image
           style={styles.logo}
@@ -204,3 +198,19 @@ export function FormError ({ children }) {
     </View>
   )
 }
+
+// NOTE: This works, but I don't trust it and it could/should probably be moved
+//       into a modal at the level of the `RootNavigator`
+// const [isConnected, setIsConnected] = useState()
+// useFocusEffect(
+//   useCallback(() => {
+//     const handleConnectivityChange = ({ isConnected: isConnectedParam }) => {
+//       if (isConnectedParam !== isConnected) {
+//         setIsConnected(isConnectedParam)
+//         setBannerError(!isConnectedParam ? 'OFFLINE; TRYING TO RECONNECT...' : null)
+//       }
+//     }
+
+//     return NetInfo.addEventListener(handleConnectivityChange)
+//   }, [isConnected])
+// )

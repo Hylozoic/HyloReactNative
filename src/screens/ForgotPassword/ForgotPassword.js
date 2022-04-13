@@ -1,92 +1,74 @@
-import React from 'react'
-import {
-  ScrollView,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity
-} from 'react-native'
+import React, { useState } from 'react'
+import { ScrollView, Text, TextInput, View, TouchableOpacity } from 'react-native'
+import { useDispatch } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
 import validator from 'validator'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
+import sendPasswordReset from 'store/actions/sendPasswordReset'
 import styles from './ForgotPassword.styles'
 
-export default class ForgotPassword extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      emailIsValid: false
-    }
+export default function ForgotPassword ({ error }) {
+  const navigation = useNavigation()
+  const dispatch = useDispatch()
+  const [emailIsValid, setEmailIsValid] = useState(false)
+  const [email, providedSetEmail] = useState()
+
+  const setEmail = emailValue => {
+    setEmailIsValid(validator.isEmail(emailValue))
+    providedSetEmail(emailValue)
   }
 
-  validateEmail (email) {
-    this.setState({
-      emailIsValid: validator.isEmail(email)
+  const handleSubmit = async () => {
+    await dispatch(sendPasswordReset(email))
+
+    navigation.navigate('Login', {
+      bannerMessage: `A link to reset your password has been sent to you at ${email}`
     })
   }
 
-  setInput (key, value) {
-    this.setState({
-      ...this.state,
-      [key]: value
-    })
-    if (key === 'email') {
-      this.validateEmail(value)
-    }
-  }
-
-  handleSubmit = async () => {
-    await this.props.sendPasswordReset(this.state.email)
-    await this.props.goToLogin(this.state.email)
-  }
-
-  render () {
-    const { error } = this.props
-    const { emailIsValid } = this.state
-    // const message = 'If your email address matched an account in our system, we sent you an email. Please check your inbox.'
-    return (
-      <ScrollView contentContainerStyle={styles.forgotPassword} style={styles.container}>
-        <View style={styles.paddedRow}>
-          <Text style={styles.messageText}>
-            Enter your email address and we'll send you an email
-            that lets you reset your password.
-          </Text>
+  return (
+    <ScrollView contentContainerStyle={styles.forgotPassword} style={styles.container}>
+      <View style={styles.paddedRow}>
+        <Text style={styles.messageText}>
+          Enter your email address and we'll send you an email
+          that lets you reset your password.
+        </Text>
+      </View>
+      {error && (
+        <FormError />
+      )}
+      {!error && (
+        <View style={styles.labelRow}>
+          <Text style={styles.labelText}>Your email address</Text>
         </View>
-        {error && (
-          <FormError />
-        )}
-        {!error && (
-          <View style={styles.labelRow}>
-            <Text style={styles.labelText}>Your email address</Text>
+      )}
+      <View style={styles.paddedRow}>
+        <View style={emailIsValid ? styles.paddedBorderValid : styles.paddedBorder}>
+          <View style={styles.leftInputView}>
+            <TextInput
+              style={styles.textInput}
+              onChangeText={setEmail}
+              returnKeyType='next'
+              autoCapitalize='none'
+              autoCorrect={false}
+              keyboardType='email-address'
+              underlineColorAndroid='transparent'
+            />
           </View>
-        )}
-        <View style={styles.paddedRow}>
-          <View style={emailIsValid ? styles.paddedBorderValid : styles.paddedBorder}>
-            <View style={styles.leftInputView}>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={email => this.setInput('email', email)}
-                returnKeyType='next'
-                autoCapitalize='none'
-                autoCorrect={false}
-                keyboardType='email-address'
-                underlineColorAndroid='transparent'
-              />
-            </View>
-            <View style={styles.rightIconView}>
-              {emailIsValid && (
-                <EntypoIcon name='check' style={styles.iconGreen} />
-              )}
-            </View>
+          <View style={styles.rightIconView}>
+            {emailIsValid && (
+              <EntypoIcon name='check' style={styles.iconGreen} />
+            )}
           </View>
         </View>
-        <View style={styles.paddedRow}>
-          <TouchableOpacity onPress={this.handleSubmit} disabled={!emailIsValid} style={styles.forgotPasswordButton}>
-            <Text style={styles.forgotPasswordText}>Reset</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    )
-  }
+      </View>
+      <View style={styles.paddedRow}>
+        <TouchableOpacity onPress={handleSubmit} disabled={!emailIsValid} style={styles.forgotPasswordButton}>
+          <Text style={styles.forgotPasswordText}>Reset</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  )
 }
 
 export function FormError () {
