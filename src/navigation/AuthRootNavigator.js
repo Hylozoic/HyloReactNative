@@ -1,5 +1,4 @@
 
-import 'react-native-gesture-handler' // probably not necessary as already included in index.js
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -41,6 +40,7 @@ export default function AuthRootNavigator () {
 
       if (!response?.payload?.getData()?.error) {
         const deviceState = await OneSignal.getDeviceState()
+        console.log('!!!! deviceState', deviceState)
         if (deviceState?.userId) {
           await dispatch(registerDevice(deviceState?.userId))
           OneSignal.setExternalUserId(response.payload?.getData()?.me?.id)
