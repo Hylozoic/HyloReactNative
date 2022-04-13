@@ -17,7 +17,7 @@
     "ios:qa": "cd ios && bundle exec fastlane qa",
     "lint": "standard",
     "postinstall": "./scripts/postinstall.sh",
-    "postversion": "react-native-version",
+    "version": "react-native-version --never-amend; git add .",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "node scripts/test.js",
     "clean": "react-native-clean-project",
