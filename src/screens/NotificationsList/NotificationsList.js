@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
 import { ModalHeader } from 'navigation/headers'
-import LoadingScreen from 'screens/LoadingScreen'
 import NotificationCard from 'components/NotificationCard'
 import CreateGroupNotice from 'components/CreateGroupNotice'
 import styles from './NotificationsList.styles'
+import Loading from 'components/Loading'
 
 export default function (props) {
   const isFocused = useIsFocused()
@@ -51,9 +51,11 @@ export class NotificationsList extends Component {
   render () {
     const { hasMore, markActivityRead, notifications, pending, currentUserHasMemberships, goToCreateGroup } = this.props
     const { ready } = this.state
+
     if (!ready || (pending && notifications.length === 0)) {
-      return <LoadingScreen />
+      return <Loading />
     }
+
     if (!currentUserHasMemberships) {
       return (
         <CreateGroupNotice
@@ -62,6 +64,7 @@ export class NotificationsList extends Component {
         />
       )
     }
+
     if (ready && !pending && notifications.length === 0) {
       return <Text style={styles.center}>Nothing new for you!</Text>
     }
