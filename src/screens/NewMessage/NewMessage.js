@@ -5,15 +5,15 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native'
+import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
+import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomplete'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
-import LoadingScreen from 'screens/LoadingScreen'
 import Button from 'components/Button'
 import MessageInput from 'components/MessageInput'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
-import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomplete'
+import Loading from 'components/Loading'
 import PersonPickerItemRow from 'screens/ItemChooser/PersonPickerItemRow'
 import styles from './NewMessage.styles'
 
@@ -74,7 +74,7 @@ export default class NewMessage extends React.Component {
   render () {
     const { pending } = this.props
 
-    if (pending) return <LoadingScreen />
+    if (pending) return <Loading />
 
     const { participants } = this.state
     const emptyParticipantsList = participants.length === 0
