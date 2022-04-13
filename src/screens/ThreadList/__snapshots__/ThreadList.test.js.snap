@@ -74,13 +74,41 @@ exports[`MessageRow renders correctly 1`] = `
 `;
 
 exports[`ThreadList fetches threads initially when empty 1`] = `
-<Text>
-  No active conversations
-</Text>
+<View>
+  <Text>
+    No active conversations
+  </Text>
+  <RCTScrollView
+    data={Array []}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    viewabilityConfigCallbackPairs={Array []}
+  >
+    <View />
+  </RCTScrollView>
+</View>
 `;
 
 exports[`ThreadList handles pending correctly with threads 1`] = `
 <View>
+  <View>
+    <ActivityIndicator
+      color="#818A88"
+      size="small"
+    />
+  </View>
   <RCTScrollView
     data={
       Array [
@@ -129,12 +157,43 @@ exports[`ThreadList handles pending correctly with threads 1`] = `
 </View>
 `;
 
-exports[`ThreadList handles pending correctly without threads 1`] = `<LoadingScreen />`;
+exports[`ThreadList handles pending correctly without threads 1`] = `
+<View>
+  <Loading />
+  <FlatList
+    data={Array []}
+    keyExtractor={[Function]}
+    renderItem={[Function]}
+  />
+</View>
+`;
 
 exports[`ThreadList handles when there are no threads correctly 1`] = `
-<Text>
-  No active conversations
-</Text>
+<View>
+  <Text>
+    No active conversations
+  </Text>
+  <RCTScrollView
+    data={Array []}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    keyExtractor={[Function]}
+    onContentSizeChange={[Function]}
+    onLayout={[Function]}
+    onMomentumScrollBegin={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    removeClippedSubviews={false}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    viewabilityConfigCallbackPairs={Array []}
+  >
+    <View />
+  </RCTScrollView>
+</View>
 `;
 
 exports[`ThreadList renders correctly 1`] = `

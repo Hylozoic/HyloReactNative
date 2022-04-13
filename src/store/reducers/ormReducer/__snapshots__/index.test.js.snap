@@ -13,27 +13,3 @@ Object {
   "tagline": "lalala",
 }
 `;
-
-exports[`on UPDATE_USER_SETTINGS_PENDING updates Me and the Person 1`] = `
-Object {
-  "id": 123,
-  "location": "Japan",
-  "settings": Object {
-    "setting1": 1,
-    "setting2": 3,
-  },
-  "tagline": "lalala",
-}
-`;
-
-exports[`on UPDATE_USER_SETTINGS_PENDING updates Me and the Person 2`] = `
-Object {
-  "id": 123,
-  "location": "Japan",
-  "settings": Object {
-    "setting1": 1,
-    "setting2": 3,
-  },
-  "tagline": "lalala",
-}
-`;

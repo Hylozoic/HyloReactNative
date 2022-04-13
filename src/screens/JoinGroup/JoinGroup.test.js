@@ -4,19 +4,19 @@ import JoinGroup from './JoinGroup'
 import { TestRoot } from 'util/testing'
 import { render } from '@testing-library/react-native'
 import { createStackNavigator } from '@react-navigation/stack'
-import Login from 'screens/Login'
+import Signup from 'screens/Signup'
 
 const TestNavigator = createStackNavigator()
 
-it('forwards to Login when not authorized', async () => {
-  const { getByText } = render(
+it.skip('forwards to Login when not authorized', async () => {
+  const { findByText } = await render(
     <TestRoot>
       <TestNavigator.Navigator>
-        <TestNavigator.Screen name='JoinGroup' component={JoinGroup} />
-        <TestNavigator.Screen name='Login' component={Login} />
+        <TestNavigator.Screen name='JoinGroup' component={JoinGroup} initialParams={{ token: 'anything' }} />
+        <TestNavigator.Screen name='Signup' component={Signup} />
       </TestNavigator.Navigator>
     </TestRoot>
   )
 
-  expect(await getByText('Log in to Hylo')).toBeTruthy()
+  expect(await findByText('Welcome to Hylo')).toBeTruthy()
 })

@@ -6,33 +6,12 @@ Object {
 }
 `;
 
-exports[`fetchGroupExists matches snapshot 1`] = `
-Object {
-  "graphql": Object {
-    "query": "
-        query ($slug: String) {
-          groupExists (slug: $slug) {
-            exists
-          }
-        }
-      ",
-    "variables": Object {
-      "slug": "group_name",
-    },
-  },
-  "type": "CreateGroupFlow/FETCH_GROUP_EXISTS",
-}
-`;
-
-exports[`createGroup 1`] = `
+exports[`createGroup matches snapshot 1`] = `
 Object {
   "graphql": Object {
     "query": "mutation ($data: GroupInput) {
         createGroup(data: $data) {
-          id
-          hasModeratorRole
-          group {
-            
+          
   id
   accessibility
   avatarUrl
@@ -116,9 +95,19 @@ Object {
     }
   
 
-          }
-          person {
-            id
+          memberships {
+            items {
+              id
+              hasModeratorRole
+              person {
+                id
+              }
+              settings {
+                sendEmail
+                showJoinForm
+                sendPushNotifications
+              }
+            }
           }
         }
       }
@@ -132,10 +121,35 @@ Object {
   },
   "meta": Object {
     "analytics": "Group Created",
-    "extractModel": "Membership",
-    "name": "group name",
-    "slug": "group_name",
+    "extractModel": Array [
+      Object {
+        "getRoot": [Function],
+        "modelName": "Group",
+      },
+      Object {
+        "getRoot": [Function],
+        "modelName": "Membership",
+      },
+    ],
   },
   "type": "CreateGroupFlow/CREATE_GROUP",
+}
+`;
+
+exports[`fetchGroupExists matches snapshot 1`] = `
+Object {
+  "graphql": Object {
+    "query": "
+        query ($slug: String) {
+          groupExists (slug: $slug) {
+            exists
+          }
+        }
+      ",
+    "variables": Object {
+      "slug": "group_name",
+    },
+  },
+  "type": "CreateGroupFlow/FETCH_GROUP_EXISTS",
 }
 `;

@@ -37,19 +37,6 @@ Object {
     "filter": "all",
     "search": "",
   },
-  "Signup": Object {
-    "errors": Object {},
-    "userSettings": Object {
-      "avatarUrl": "",
-      "confirmPassword": "",
-      "email": null,
-      "location": "",
-      "locationId": null,
-      "name": "",
-      "password": "",
-      "settings": Object {},
-    },
-  },
   "SkillEditor": Object {
     "skill": "",
     "userSkills": Array [],
@@ -582,9 +569,10 @@ Object {
   },
   "pending": Object {},
   "queryResults": Object {},
+  "returnToOnAuthPath": null,
   "session": Object {
+    "defaultLoginEmail": null,
     "groupId": null,
-    "returnToOnAuthPath": null
   },
 }
 `;

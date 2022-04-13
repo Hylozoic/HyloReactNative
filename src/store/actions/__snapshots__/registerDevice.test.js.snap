@@ -3,11 +3,13 @@
 exports[`behaves as expected 1`] = `
 Object {
   "graphql": Object {
-    "query": "mutation ($playerId: String, $platform: String, $version: String) {
-        registerDevice(playerId: $playerId, platform: $platform, version: $version) {
-          success
+    "query": "
+        mutation ($playerId: String, $platform: String, $version: String) {
+          registerDevice(playerId: $playerId, platform: $platform, version: $version) {
+            success
+          }
         }
-      }",
+      ",
     "variables": Object {
       "platform": "ios_dev",
       "playerId": "foo",

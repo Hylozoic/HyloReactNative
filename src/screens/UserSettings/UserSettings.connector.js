@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
-import { loginWithFacebook } from 'screens/Login/actions'
+import { loginWithFacebook } from 'components/SocialAuth/actions'
 import logout from 'store/actions/logout'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import { unlinkAccount } from './UserSettings.store'

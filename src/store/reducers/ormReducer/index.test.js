@@ -177,16 +177,17 @@ describe('handles USE_INVITATION', () => {
     session.Membership.create({ id: membership1Id, group: group1Id, person: meId })
     session.Membership.create({ id: membership2Id, group: group2Id, person: meId }) // const me = session.Me.first()
 
+    const data = {
+      membership: {
+        id: membership1Id
+      }
+    }
+
     const action = {
       type: USE_INVITATION,
       payload: {
-        data: {
-          useInvitation: {
-            membership: {
-              id: membership1Id
-            }
-          }
-        }
+        getData: () => data,
+        data: { useInvitation: data }
       }
     }
     const memberships = session.Me.first().memberships
@@ -289,42 +290,6 @@ describe('on RESET_NEW_POST_COUNT_PENDING', () => {
   expect(newSession.Membership.first().newPostCount).toEqual(0)
 })
 
-// NOTE: Expecting this to break/be irrelevant
-describe('on UPDATE_USER_SETTINGS_PENDING', () => {
-  const session = orm.session(orm.getEmptyState())
-  const id = 123
-  const userData = {
-    id,
-    location: 'Spain',
-    tagline: 'lalala',
-    settings: {
-      setting1: 1,
-      setting2: 2
-    }
-  }
-  session.Me.create(userData)
-
-  session.Person.create(userData)
-
-  const action = {
-    type: UPDATE_USER_SETTINGS_PENDING,
-    meta: {
-      changes: {
-        location: 'Japan',
-        settings: {
-          setting2: 3
-        }
-      }
-    }
-  }
-
-  it('updates Me and the Person', () => {
-    const newSession = orm.session(ormReducer(session.state, action))
-    expect(newSession.Me.first().ref).toMatchSnapshot()
-    expect(newSession.Person.withId(id).ref).toMatchSnapshot()
-  })
-})
-
 describe('on FETCH_CURRENT_USER', () => {
   const session = orm.session(orm.getEmptyState())
   const id = 123
@@ -346,6 +311,7 @@ describe('on FETCH_CURRENT_USER', () => {
   const action = {
     type: FETCH_CURRENT_USER,
     payload: {
+      getData: () => userData,
       data: {
         me: userData
       }
@@ -421,17 +387,28 @@ describe('handles CREATE_GROUP', () => {
     const meId = 'meId'
     const groupId = 'groupId'
     const membershipId = 'membershipId'
+
     session.Me.create({ id: meId })
     session.Group.create({ id: groupId, name: 'group 1' })
     session.Membership.create({ id: membershipId, group: groupId, person: meId })
 
+    const groupData = {
+      id: groupId,
+      memberships: {
+        items: [
+          {
+            id: membershipId,
+            person: { id: meId }
+          }
+        ]
+      }
+    }
     const action = {
       type: CREATE_GROUP,
       payload: {
+        getData: () => groupData,
         data: {
-          createGroup: {
-            id: groupId
-          }
+          createGroup: groupData
         }
       }
     }

@@ -235,7 +235,6 @@ exports[`default render matches snapshot 1`] = `
                                   onFocus={[Function]}
                                   onSubmitEditing={[Function]}
                                   textContentType="oneTimeCode"
-                                  value=""
                                 />
                               </View>
                             </View>

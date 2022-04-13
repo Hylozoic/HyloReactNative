@@ -5,8 +5,9 @@ Object {
   "currentUser": undefined,
   "hasMore": undefined,
   "isConnected": true,
-  "pending": undefined,
+  "pending": true,
   "pendingRefresh": false,
+  "showThread": [Function],
   "threads": undefined,
 }
 `;

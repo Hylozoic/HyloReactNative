@@ -243,38 +243,18 @@ exports[`default render matches snapshot 1`] = `
                                 onResponderTerminationRequest={[Function]}
                                 onStartShouldSetResponder={[Function]}
                               >
-                                <View>
-                                  <Icon
-                                    name="AddImage"
-                                  />
-                                </View>
+                                <Image
+                                  source={
+                                    Object {
+                                      "uri": undefined,
+                                    }
+                                  }
+                                />
                               </View>
                             </View>
                           </View>
                         </RCTScrollView>
                         <View>
-                          <View>
-                            <View
-                              accessible={true}
-                              collapsable={false}
-                              focusable={true}
-                              onClick={[Function]}
-                              onResponderGrant={[Function]}
-                              onResponderMove={[Function]}
-                              onResponderRelease={[Function]}
-                              onResponderTerminate={[Function]}
-                              onResponderTerminationRequest={[Function]}
-                              onStartShouldSetResponder={[Function]}
-                            >
-                              <View>
-                                <View>
-                                  <Text>
-                                    &lt; Back
-                                  </Text>
-                                </View>
-                              </View>
-                            </View>
-                          </View>
                           <View>
                             <View
                               accessible={true}

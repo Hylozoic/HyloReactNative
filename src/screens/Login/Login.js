@@ -26,7 +26,7 @@ export default function Login () {
   const [password, providedSetPassword] = useState()
   const [securePassword, setSecurePassword] = useState(true)
   const [emailIsValid, setEmailIsValid] = useState()
-  const [isConnected, setIsConnected] = useState()
+  // const [isConnected, setIsConnected] = useState()
   const [bannerError, setBannerError] = useState()
   const [formError, providedFormError] = useState()
   const [loading, setLoading] = useState()

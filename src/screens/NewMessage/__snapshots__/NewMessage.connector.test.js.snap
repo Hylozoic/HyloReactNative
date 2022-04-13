@@ -4,7 +4,7 @@ exports[`mapDispatchToProps matches the last snapshot 1`] = `
 Object {
   "createMessage": [Function],
   "fetchRecentContacts": [Function],
-  "findOrCreateThread": [Function]
+  "findOrCreateThread": [Function],
 }
 `;
 

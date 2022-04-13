@@ -238,12 +238,11 @@ exports[`default render matches snapshot 1`] = `
                                   onSubmitEditing={[Function]}
                                   returnKeyType="next"
                                   textContentType="oneTimeCode"
-                                  value=""
                                 />
                               </View>
                               <View>
                                 <Text>
-                                  Password
+                                  Password (at least 9 characters)
                                 </Text>
                                 <TextInput
                                   editable={true}
@@ -252,7 +251,6 @@ exports[`default render matches snapshot 1`] = `
                                   returnKeyType="next"
                                   secureTextEntry={true}
                                   textContentType="oneTimeCode"
-                                  value=""
                                 />
                                 <View>
                                   <View
@@ -309,7 +307,6 @@ exports[`default render matches snapshot 1`] = `
                                   returnKeyType="go"
                                   secureTextEntry={true}
                                   textContentType="oneTimeCode"
-                                  value=""
                                 />
                                 <View>
                                   <View
