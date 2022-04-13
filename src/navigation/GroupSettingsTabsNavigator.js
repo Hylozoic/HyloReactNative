@@ -6,7 +6,7 @@ import fetchGroupSettings from 'store/actions/fetchGroupSettings'
 import getGroupFromParamsOrCurrent from 'store/selectors/getGroupFromParamsOrCurrent'
 import { isIOS } from 'util/platform'
 import Avatar from 'components/Avatar'
-import { caribbeanGreen, rhino, rhino05, rhino30, white } from 'style/colors'
+import { caribbeanGreen, rhino05, rhino30, rhino60, white } from 'style/colors'
 import GroupSettingsWebView from 'screens/GroupSettingsWebView'
 
 // Existing settings screens built not currently in use:
@@ -48,7 +48,7 @@ export default function GroupSettingsTabsNavigator ({ navigation, route }) {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerStyle: { backgroundColor: rhino },
+      headerStyle: { backgroundColor: rhino60 },
       headerTitleStyle: { color: white },
       // Reload group on exit
       headerLeftOnPress: () => {

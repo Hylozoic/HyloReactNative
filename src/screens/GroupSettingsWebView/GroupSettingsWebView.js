@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import HyloWebView from 'screens/HyloWebView'
 import RNRestart from 'react-native-restart'
 
-export default function GroupSettingsWebView ({ path: pathProp, navigation, route }) {
+export default function GroupSettingsWebView ({ path: pathProp, route }) {
   const webViewRef = useRef(null)
   const path = pathProp || route?.params?.path
 

@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import RNRestart from 'react-native-restart'
 import logout from 'store/actions/logout'
 import HyloWebView from 'screens/HyloWebView'
 
@@ -16,7 +15,6 @@ export default function UserSettingsWebView ({ path: pathProp, navigation, route
       onNavigationStateChange={({ url }) => {
         if (url.match(/\/login/)) {
           dispatch(logout())
-          // .then(() => RNRestart.Restart())
           return false
         }
         if (!url.match(/\/settings/)) {

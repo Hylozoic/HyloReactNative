@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { isIOS } from 'util/platform'
 import { ModalHeader } from 'navigation/headers'
-import { caribbeanGreen, rhino, rhino30, white } from 'style/colors'
+import { caribbeanGreen, ghost, rhino30, rhino80, white } from 'style/colors'
 import logout from 'store/actions/logout'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
@@ -51,8 +51,8 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
     navigation.setOptions({
       title: 'Settings',
       headerShown: true,
-      headerStyle: { backgroundColor: rhino30 },
-      headerTitleStyle: { color: rhino },
+      headerStyle: { backgroundColor: ghost },
+      headerTitleStyle: { color: rhino80 },
       header: headerProps => (
         <ModalHeader
           {...headerProps}

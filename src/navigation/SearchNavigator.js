@@ -1,14 +1,15 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import SearchPage from 'screens/SearchPage'
-import { white } from 'style/colors'
+import { ghost, rhino80 } from 'style/colors'
 
 const Search = createStackNavigator()
 export default function SearchNavigator () {
   const navigatorProps = {
     screenOptions: {
       headerMode: 'float',
-      headerStyle: { backgroundColor: white }
+      headerStyle: { backgroundColor: ghost },
+      headerTitleStyle: { color: rhino80 }
     }
   }
 

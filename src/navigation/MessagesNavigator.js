@@ -7,14 +7,15 @@ import NewMessage from 'screens/NewMessage'
 import Thread from 'screens/Thread'
 import ThreadList from 'screens/ThreadList'
 import ThreadParticipants from 'screens/ThreadParticipants'
-import { white } from 'style/colors'
+import { ghost, rhino80 } from 'style/colors'
 
 const Messages = createStackNavigator()
 export default function MessagesNavigator () {
   const navigatorProps = {
     screenOptions: {
       headerMode: 'float',
-      headerStyle: { backgroundColor: white }
+      headerStyle: { backgroundColor: ghost },
+      headerTitleStyle: { color: rhino80 }
     }
   }
 
