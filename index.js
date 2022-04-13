@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler'
 import { enableScreens } from 'react-native-screens'
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 // Required for react-native-root-toast
 import { RootSiblingParent } from 'react-native-root-siblings'
 import { Provider } from 'react-redux'
@@ -36,62 +36,52 @@ if (Platform.OS === 'android') {
   clearInterval = (fn, ms = 0) => Timer.clearInterval(fn, ms)
 }
 
-AppRegistry.registerComponent(appName, () => AppContainer)
+AppRegistry.registerComponent(appName, () => App)
 
 enableScreens()
 
-export default class AppContainer extends Component {
-  constructor (properties) {
-    super(properties)
-    this.state = {
-      appState: AppState.currentState,
-      openedPushNotification: null
-    }
+export default function App () {
+  const [appState, setAppState] = useState(AppState.currentState)
+
+  useEffect(() => {
+    OneSignal.setAppId(process.env.ONESIGNAL_APP_ID)
 
     // Uncomment for OneSignal debugging
     // OneSignal.setLogLevel(6, 0)
-
-    OneSignal.setAppId(process.env.ONESIGNAL_APP_ID)
 
     // Method for handling notifications received while app in foreground
     OneSignal.setNotificationWillShowInForegroundHandler(notifReceivedEvent => {
       // Complete with null means don't show a notification.
       notifReceivedEvent.complete()
     })
-  }
 
-  componentDidMount () {
-    this.setState({ subscription: AppState.addEventListener('change', this.handleAppStateChange) })
-  }
+    const appStateHandler = AppState.addEventListener('change', handleAppStateChange)
 
-  componentWillUnmount () {
-    this.state.subscription && this.state.subscription.remove()
-    OneSignal.clearHandlers()
-  }
+    return () => {
+      appStateHandler && appStateHandler.remove()
+      OneSignal.clearHandlers()
+    }
+  }, [])
 
-  handleAppStateChange = nextAppState => {
-    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+  const handleAppStateChange = nextAppState => {
+    if (appState.match(/inactive|background/) && nextAppState === 'active') {
       OneSignal.clearOneSignalNotifications()
     }
-    this.setState({ appState: nextAppState })
+    setAppState(nextAppState)
   }
 
-  render () {
-    const { pathFromPushNotification } = this.state
-
-    return (
-      <SafeAreaProvider>
-        <ErrorBoundary>
-          <RootSiblingParent>
-            <Provider store={store}>
-              <PersistGate loading={null} persistor={persistor}>
-                <VersionCheck />
-                <RootNavigator pathFromPushNotification={pathFromPushNotification} />
-              </PersistGate>
-            </Provider>
-          </RootSiblingParent>
-        </ErrorBoundary>
-      </SafeAreaProvider>
-    )
-  }
+  return (
+    <SafeAreaProvider>
+      <ErrorBoundary>
+        <RootSiblingParent>
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <VersionCheck />
+              <RootNavigator />
+            </PersistGate>
+          </Provider>
+        </RootSiblingParent>
+      </ErrorBoundary>
+    </SafeAreaProvider>
+  )
 }

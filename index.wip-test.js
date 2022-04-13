@@ -37,4 +37,3 @@
 //       expect(OneSignal.clearOneSignalNotifications).toHaveBeenCalled()
 //     })
 //   })
-

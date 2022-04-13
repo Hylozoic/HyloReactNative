@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler' // is this necessary?
 import React from 'react'
 import { Dimensions } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer'

@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler' // probably not necessary as already included in index.js
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { createStackNavigator } from '@react-navigation/stack'

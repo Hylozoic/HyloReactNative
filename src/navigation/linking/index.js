@@ -96,7 +96,6 @@ export const routesConfig = {
 
   '/all':                                                    'AuthRoot/Drawer/Tabs/Home Tab/Feed',
   '/':                                                       'AuthRoot/Drawer/Tabs/Home Tab/Feed'
-  // '/:unknownPath*':                                          'AuthRoot/Drawer/Tabs/Home Tab'
 }
 
 export const AUTH_ROOT_SCREEN_NAME = 'AuthRoot'
