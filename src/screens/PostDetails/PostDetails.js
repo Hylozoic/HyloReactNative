@@ -18,10 +18,10 @@ import Files from 'components/Files'
 import PostFooter from 'components/PostCard/PostFooter'
 import PostHeader from 'components/PostCard/PostHeader'
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
-import LoadingScreen from 'screens/LoadingScreen'
 import Button from 'components/Button'
 import InlineEditor, { toHTML } from 'components/InlineEditor'
 import Icon from 'components/Icon'
+import Loading from 'components/Loading'
 import styles from './PostDetails.styles'
 
 export class PostDetails extends React.Component {
@@ -142,7 +142,7 @@ export class PostDetails extends React.Component {
     const replyingToPerson = replyingToComment?.parentComment && replyingToComment.creator
     const groupId = get('groups.0.id', post)
 
-    if (!post?.creator || !post?.title) return <LoadingScreen />
+    if (!post?.creator || !post?.title) return <Loading />
 
     return (
       <View style={styles.container}>
