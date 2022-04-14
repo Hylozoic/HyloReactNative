@@ -16,6 +16,19 @@ import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
 import { navigationRef } from 'navigation/linking/helpers'
 import { modalScreenName } from './helpers'
 
+// Hylo Custom link routing config and related utilities:
+//
+// The current version of `react-navigation` doesn't have a way to map multiple paths
+// to the same screen. The below way of mapping screens to paths is being used in to
+// construct and, otherwise in alternate to, the default `config.screens` config.
+//
+// All routes are always available but routes that begin with `AUTH_ROOT_SCREEN_NAME`
+// will be set as the `returnToPath` and not navigated to until after
+// the user is authorized (see `getAuthState`).
+//
+// NOTE: The linking route paths below are equivilant to `exact` route paths in
+// React Router (web)
+
 export const DEFAULT_APP_HOST = 'https://hylo.com'
 
 export const prefixes = [
@@ -28,78 +41,67 @@ export const prefixes = [
   'hyloapp://'
 ]
 
-// Hylo Custom link routing config and related utilities:
-//
-// The current version of `react-navigation` doesn't have a way to map multiple paths
-// to the same screen. The below way of mapping screens to paths is being used in to
-// construct and, otherwise in alternate to, the default `config.screens` config.
-//
-// All routes are always available but routes that begin with `AUTH_ROOT_SCREEN_NAME`
-// will be set as the `returnToPath` and not navigated to until after
-// the user is authorized (see `getAuthState`).
-//
-// NOTE: All of these linking routes default as `exact` in terms of React Router
-// which we used on web.
+export const AUTH_ROOT_SCREEN_NAME = 'AuthRoot'
+export const NON_AUTH_ROOT_SCREEN_NAME = 'NonAuthRoot'
 
 /* eslint-disable key-spacing */
 export const routesConfig = {
-  '/login':                                                  'NonAuthRoot/Login',
-  '/signup/:step(verify-email)':                             'NonAuthRoot/Signup/SignupEmailValidation',
-  '/signup/:step?':                                          'NonAuthRoot/Signup/Signup Intro',
+  '/login':                                                  `${NON_AUTH_ROOT_SCREEN_NAME}/Login`,
+  '/signup/:step(verify-email)':                             `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/SignupEmailValidation`,
+  '/signup/:step?':                                          `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/Signup Intro`,
   '/noo/login/(jwt|token)':                                  'LoginByTokenHandler',
   '/h/use-invitation':                                       'JoinGroup',
   '/:context(groups)/:groupSlug/join/:accessCode':           'JoinGroup',
 
   // /members
-  '/members/:id':                                            `AuthRoot/${modalScreenName('Member')}`,
-  '/members':                                                'AuthRoot/Drawer/Tabs/Home Tab/Members',
+  '/members/:id':                                            `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Member')}`,
+  '/members':                                                `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Members`,
 
   // special group routes (/all, /public)
-  '/:groupSlug(all|public)':                                 'AuthRoot/Drawer/Tabs/Home Tab/Feed',
-  '/:groupSlug(all|public)/post/:id':                        'AuthRoot/Drawer/Tabs/Home Tab/Post Details',
-  '/:groupSlug(all)/members/:id':                            'AuthRoot/Drawer/Tabs/Home Tab/Member',
-  '/:groupSlug(all)/topics/:topicName':                      'AuthRoot/Drawer/Tabs/Home Tab/Topic Feed',
+  '/:groupSlug(all|public)':                                 `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`,
+  '/:groupSlug(all|public)/post/:id':                        `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Post Details`,
+  '/:groupSlug(all)/members/:id':                            `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Member`,
+  '/:groupSlug(all)/topics/:topicName':                      `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Topic Feed`,
 
   // map routes
-  '/:groupSlug(all|public)/map':                             'AuthRoot/Drawer/Tabs/Home Tab/Map',
-  '/:context(groups)/:groupSlug/map':                        'AuthRoot/Drawer/Tabs/Home Tab/Map',
-  '/:context(all|public)/map/post/:id':                      `AuthRoot/${modalScreenName('Post Details')}`,
-  '/:context(groups)/:groupSlug/map/post/:id':               `AuthRoot/${modalScreenName('Post Details')}`,
-  '/:context(groups)/:groupSlug/detail':                     `AuthRoot/${modalScreenName('Group Detail')}`,
-  '/:context(all|public)/map/group/:groupSlug':              `AuthRoot/${modalScreenName('Group Detail')}`,
+  '/:groupSlug(all|public)/map':                             `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Map`,
+  '/:context(groups)/:groupSlug/map':                        `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Map`,
+  '/:context(all|public)/map/post/:id':                      `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
+  '/:context(groups)/:groupSlug/map/post/:id':               `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
+  '/:context(groups)/:groupSlug/detail':                     `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Group Detail')}`,
+  '/:context(all|public)/map/group/:groupSlug':              `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Group Detail')}`,
 
   // /groups
-  '/:context(groups)/:groupSlug/settings/invite':            'AuthRoot/Group Settings/Invite',
-  '/:context(groups)/:groupSlug/settings/requests':          'AuthRoot/Group Settings/Join Requests',
-  '/:context(groups)/:groupSlug/settings/relationships':     'AuthRoot/Group Settings/Related Groups',
-  '/:context(groups)/:groupSlug/settings/export':            'AuthRoot/Group Settings/Export Data',
-  '/:context(groups)/:groupSlug/settings/delete':            'AuthRoot/Group Settings/Delete',
-  '/:context(groups)/:groupSlug/settings':                   'AuthRoot/Group Settings/Settings',
-  '/:context(groups)/:groupSlug/groups':                     'AuthRoot/Drawer/Tabs/Home Tab/Group Relationships',
-  '/:context(groups)/:groupSlug/topics/:topicName':          'AuthRoot/Drawer/Tabs/Home Tab/Topic Feed',
-  '/:context(groups)/:groupSlug/members/:id':                'AuthRoot/Drawer/Tabs/Home Tab/Member',
-  '/:context(groups)/:groupSlug':                            'AuthRoot/Drawer/Tabs/Home Tab/Feed',
-  '/:context(groups)/:groupSlug/post/:id':                   'AuthRoot/Drawer/Tabs/Home Tab/Post Details',
-  '/:context(groups)/post/:id':                              'AuthRoot/Drawer/Tabs/Home Tab/Post Details',
-  '/:context(groups)/:groupSlug/post/:id/edit':              'AuthRoot/Edit Post',
+  '/:context(groups)/:groupSlug/settings/invite':            `${AUTH_ROOT_SCREEN_NAME}/Group Settings/Invite`,
+  '/:context(groups)/:groupSlug/settings/requests':          `${AUTH_ROOT_SCREEN_NAME}/Group Settings/Join Requests`,
+  '/:context(groups)/:groupSlug/settings/relationships':     `${AUTH_ROOT_SCREEN_NAME}/Group Settings/Related Groups`,
+  '/:context(groups)/:groupSlug/settings/export':            `${AUTH_ROOT_SCREEN_NAME}/Group Settings/Export Data`,
+  '/:context(groups)/:groupSlug/settings/delete':            `${AUTH_ROOT_SCREEN_NAME}/Group Settings/Delete`,
+  '/:context(groups)/:groupSlug/settings':                   `${AUTH_ROOT_SCREEN_NAME}/Group Settings/Settings`,
+  '/:context(groups)/:groupSlug/groups':                     `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Group Relationships`,
+  '/:context(groups)/:groupSlug/topics/:topicName':          `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Topic Feed`,
+  '/:context(groups)/:groupSlug/members/:id':                `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Member`,
+  '/:context(groups)/:groupSlug':                            `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`,
+  '/:context(groups)/:groupSlug/post/:id':                   `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Post Details`,
+  '/:context(groups)/post/:id':                              `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Post Details`,
+  '/:context(groups)/:groupSlug/post/:id/edit':              `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
 
   // /post
-  '/post/:id':                                               `AuthRoot/${modalScreenName('Post Details')}`,
-  '/post/:id/edit':                                          'AuthRoot/Edit Post',
+  '/post/:id':                                               `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
+  '/post/:id/edit':                                          `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
 
   // /settings
-  '/settings/account':                                       'AuthRoot/Drawer/Tabs/Settings Tab/Account',
-  '/settings/:section?':                                     'AuthRoot/Drawer/Tabs/Settings Tab/Edit Profile',
+  '/settings/account':                                       `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Settings Tab/Account`,
+  '/settings/:section?':                                     `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Settings Tab/Edit Profile`,
 
   // /messages
-  '/messages/:id':                                           'AuthRoot/Drawer/Tabs/Messages Tab/Thread',
-  '/messages':                                               'AuthRoot/Drawer/Tabs/Messages Tab/Messages',
+  '/messages/:id':                                           `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Messages Tab/Thread`,
+  '/messages':                                               `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Messages Tab/Messages`,
 
-  '/all':                                                    'AuthRoot/Drawer/Tabs/Home Tab/Feed',
-  '/':                                                       'AuthRoot/Drawer/Tabs/Home Tab/Feed'
+  '/all':                                                    `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`,
+  '/':                                                       `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`
 }
 
-export const AUTH_ROOT_SCREEN_NAME = 'AuthRoot'
 export const INITIAL_AUTH_NAV_STATE = {
   routes: [
     {
@@ -140,7 +142,6 @@ export const INITIAL_AUTH_NAV_STATE = {
   ]
 }
 
-export const NON_AUTH_ROOT_SCREEN_NAME = 'NonAuthRoot'
 export const INITIAL_NON_AUTH_NAV_STATE = {
   routes: [
     {
