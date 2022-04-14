@@ -240,7 +240,7 @@ exports[`renders with defaults 1`] = `
                             </View>
                             <View>
                               <Text>
-                                Enter your email address to get started:
+                                Enter your email below to get started!
                               </Text>
                               <TextInput
                                 autoCapitalize="none"

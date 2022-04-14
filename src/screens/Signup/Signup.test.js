@@ -18,6 +18,6 @@ it('renders with defaults', async () => {
       </TestNavigator.Navigator>
     </TestRoot>
   )
-  expect(await findByText('Enter your email address to get started:')).toBeTruthy()
+  expect(await findByText('Enter your email below to get started!')).toBeTruthy()
   expect(await toJSON()).toMatchSnapshot()
 })
