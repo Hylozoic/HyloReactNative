@@ -209,7 +209,7 @@ export const navigateToLinkingPath = async (providedUrl, reset = false) => {
   const linkingPath = `${linkingURL.pathname}${linkingURL.search}`
   const state = getStateFromPath(linkingPath)
   const action = getActionFromState(state)
-console.log(action)
+
   if (reset) resetToInitialNavState()
 
   navigationRef.current?.dispatch(action)
