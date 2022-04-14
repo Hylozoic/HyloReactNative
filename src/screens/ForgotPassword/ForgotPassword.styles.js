@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native'
-import { caribbeanGreen, gunsmoke } from 'style/colors'
+import { caribbeanGreen, rhino, rhino80 } from 'style/colors'
 import { isIOS } from 'util/platform'
 
 const screenHeight = Dimensions.get('window').height
@@ -62,6 +62,7 @@ export default {
   messageText: {
     fontFamily: 'Circular-Book',
     fontSize: 16,
+    color: rhino,
     textAlign: 'left'
   },
   iconOpaque: {
@@ -157,6 +158,7 @@ export default {
   labelText: {
     fontFamily: 'Circular-Book',
     textAlign: 'left',
+    color: rhino80,
     flex: 1
   },
   rightIconView: {

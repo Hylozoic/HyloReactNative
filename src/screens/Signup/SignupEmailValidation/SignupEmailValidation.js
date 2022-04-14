@@ -10,7 +10,7 @@ import verifyEmail from 'store/actions/verifyEmail'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import FormattedError from 'components/FormattedError'
 import controlStyles from 'components/SettingControl/SettingControl.styles'
-import LoadingScreen from 'screens/LoadingScreen'
+import Loading from 'components/Loading'
 import styles from './SignupEmailValidation.styles'
 
 const CODE_LENGTH = 6
@@ -73,8 +73,6 @@ export default function SignupEmailValidation ({ navigation, route }) {
     }
   }
 
-  if (loading) return <LoadingScreen />
-
   return (
     <KeyboardFriendlyView style={styles.container}>
       <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
@@ -89,25 +87,30 @@ export default function SignupEmailValidation ({ navigation, route }) {
           </View>
         </View>
         <View style={styles.content}>
-          <CodeField
-            ref={verificationCodeRef}
-            {...props}
-            value={verificationCode}
-            onChangeText={setVerificationCode}
-            cellCount={CODE_LENGTH}
-            rootStyle={styles.codeFieldRoot}
-            keyboardType='number-pad'
-            textContentType='oneTimeCode'
-            renderCell={({ index, symbol, isFocused }) => (
-              <Text
-                key={index}
-                style={[styles.codeFieldCell, isFocused && styles.codeFieldCellFocused]}
-                onLayout={getCellOnLayoutHandler(index)}
-              >
-                {symbol || (isFocused ? <Cursor /> : <Text> </Text>)}
-              </Text>
-            )}
-          />
+          {loading && (
+            <Loading />
+          )}
+          {!loading && (
+            <CodeField
+              ref={verificationCodeRef}
+              {...props}
+              value={verificationCode}
+              onChangeText={setVerificationCode}
+              cellCount={CODE_LENGTH}
+              rootStyle={styles.codeFieldRoot}
+              keyboardType='number-pad'
+              textContentType='oneTimeCode'
+              renderCell={({ index, symbol, isFocused }) => (
+                <Text
+                  key={index}
+                  style={[styles.codeFieldCell, isFocused && styles.codeFieldCellFocused]}
+                  onLayout={getCellOnLayoutHandler(index)}
+                >
+                  {symbol || (isFocused ? <Cursor /> : <Text> </Text>)}
+                </Text>
+              )}
+            />
+          )}
         </View>
         <FormattedError error={error} styles={controlStyles} />
       </ScrollView>

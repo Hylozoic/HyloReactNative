@@ -107,7 +107,7 @@ export default function Login () {
         <Text style={styles.title}>Log in to Hylo</Text>
         <FormError>{formError}</FormError>
         <View style={styles.labelRow}>
-          <Text style={styles.labelText}>Your email address</Text>
+          <Text style={styles.labelText}>Email address</Text>
         </View>
         <View style={styles.paddedRow}>
           <View style={emailIsValid ? styles.paddedBorderValid : styles.paddedBorder}>

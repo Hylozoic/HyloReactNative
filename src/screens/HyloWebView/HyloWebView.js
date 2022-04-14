@@ -48,7 +48,7 @@ const HyloWebView = forwardRef(({
           // Opens full URLs in external browser if not the
           // initial URI specified on load of the WebView
           if (url === uri) return true
-          if (url !== uri && url.slice(0,4) === 'http') {
+          if (url !== uri && url.slice(0, 4) === 'http') {
             Linking.openURL(url)
             return false
           }

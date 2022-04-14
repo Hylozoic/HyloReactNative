@@ -39,7 +39,7 @@ export default function ForgotPassword ({ error }) {
       )}
       {!error && (
         <View style={styles.labelRow}>
-          <Text style={styles.labelText}>Your email address</Text>
+          <Text style={styles.labelText}>Email address</Text>
         </View>
       )}
       <View style={styles.paddedRow}>
@@ -64,7 +64,7 @@ export default function ForgotPassword ({ error }) {
       </View>
       <View style={styles.paddedRow}>
         <TouchableOpacity onPress={handleSubmit} disabled={!emailIsValid} style={styles.forgotPasswordButton}>
-          <Text style={styles.forgotPasswordText}>Reset</Text>
+          <Text style={styles.forgotPasswordText}>Send</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>

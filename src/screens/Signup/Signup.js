@@ -130,7 +130,7 @@ export default function Signup () {
           <Text style={styles.subTitle}>Stay connected, organized, and engaged with your group.</Text>
         </ImageBackground>
         <View style={styles.content}>
-          <Text style={styles.labelText}>Enter your email address to get started:</Text>
+          <Text style={styles.labelText}>Enter your email below to get started!</Text>
           <TextInput
             style={styles.textInput}
             value={email}
