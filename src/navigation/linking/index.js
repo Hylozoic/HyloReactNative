@@ -28,18 +28,18 @@ export const prefixes = [
   'hyloapp://'
 ]
 
-// Custom routing config and utilities:
+// Hylo Custom link routing config and related utilities:
 //
-// This way of mapping screens to paths is being used
-// in alternate to the default linking config.screens
-// route mapping as the current version of react-navigation
-// doesn't have a way to map multiple paths to the same
-// screen.
+// The current version of `react-navigation` doesn't have a way to map multiple paths
+// to the same screen. The below way of mapping screens to paths is being used in to
+// construct and, otherwise in alternate to, the default `config.screens` config.
 //
-// There are two possible formats for specifying the target screen:
-//  1) { screenPath: 'path/to/screen', ...providedStaticDefaultRouteParams }
-//  2) 'path/to/screen' (assumed auth required)
+// All routes are always available but routes that begin with `AUTH_ROOT_SCREEN_NAME`
+// will be set as the `returnToPath` and not navigated to until after
+// the user is authorized (see `getAuthState`).
 //
+// NOTE: All of these linking routes default as `exact` in terms of React Router
+// which we used on web.
 
 /* eslint-disable key-spacing */
 export const routesConfig = {
@@ -63,9 +63,10 @@ export const routesConfig = {
   // map routes
   '/:groupSlug(all|public)/map':                             'AuthRoot/Drawer/Tabs/Home Tab/Map',
   '/:context(groups)/:groupSlug/map':                        'AuthRoot/Drawer/Tabs/Home Tab/Map',
-  '/:groupSlug(all|public)/map/post/:id':                    `AuthRoot/${modalScreenName('Post Details')}`,
+  '/:context(all|public)/map/post/:id':                      `AuthRoot/${modalScreenName('Post Details')}`,
   '/:context(groups)/:groupSlug/map/post/:id':               `AuthRoot/${modalScreenName('Post Details')}`,
   '/:context(groups)/:groupSlug/detail':                     `AuthRoot/${modalScreenName('Group Detail')}`,
+  '/:context(all|public)/map/group/:groupSlug':              `AuthRoot/${modalScreenName('Group Detail')}`,
 
   // /groups
   '/:context(groups)/:groupSlug/settings/invite':            'AuthRoot/Group Settings/Invite',
@@ -208,7 +209,7 @@ export const navigateToLinkingPath = async (providedUrl, reset = false) => {
   const linkingPath = `${linkingURL.pathname}${linkingURL.search}`
   const state = getStateFromPath(linkingPath)
   const action = getActionFromState(state)
-
+console.log(action)
   if (reset) resetToInitialNavState()
 
   navigationRef.current?.dispatch(action)
