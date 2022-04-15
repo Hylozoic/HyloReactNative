@@ -15,11 +15,9 @@ export default function UserSettingsWebView ({ path: pathProp, navigation, route
       onNavigationStateChange={({ url }) => {
         if (url.match(/\/login/)) {
           dispatch(logout())
-          return false
         }
         if (!url.match(/\/settings/)) {
           webViewRef.current?.goBack()
-          return false
         }
       }}
     />
