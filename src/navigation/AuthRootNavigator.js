@@ -40,7 +40,7 @@ export default function AuthRootNavigator () {
 
       if (!response?.payload?.getData()?.error) {
         const deviceState = await OneSignal.getDeviceState()
-        console.log('!!!! deviceState', deviceState)
+
         if (deviceState?.userId) {
           await dispatch(registerDevice(deviceState?.userId))
           OneSignal.setExternalUserId(response.payload?.getData()?.me?.id)

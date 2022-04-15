@@ -18,7 +18,7 @@ export default function logout () {
         if (!isEmpty(await GoogleSignin.getCurrentUser())) {
           await GoogleSignin.signOut()
         }
-        RNRestart.Restart()
+        // RNRestart.Restart()
       }
     }
   }

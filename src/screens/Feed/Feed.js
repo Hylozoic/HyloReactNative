@@ -45,7 +45,7 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
   const memberships = useSelector(getMemberships)
   const currentUserHasMemberships = !isEmpty(memberships)
   const group = useSelector(getCurrentGroup)
-  const groupTopic = useSelector(state => getGroupTopic(state, { topicName, slug: group.slug }))
+  const groupTopic = useSelector(state => getGroupTopic(state, { topicName, slug: group?.slug }))
   const topic = groupTopic?.topic?.ref
   const topicSubscribed = groupTopic?.isSubscribed
   const topicPostsTotal = groupTopic?.postsTotal

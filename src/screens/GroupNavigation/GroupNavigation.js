@@ -50,7 +50,7 @@ export default function GroupNavigation ({ navigation }) {
   return (
     <ScrollView style={styles.container}>
       {navItems.map(item => <NavItem {...item} key={item.label} />)}
-      {currentGroup.id !== PUBLIC_GROUP_ID && (
+      {currentGroup?.id !== PUBLIC_GROUP_ID && (
         <>
           <View style={styles.divider} />
           <View style={styles.navItems}>

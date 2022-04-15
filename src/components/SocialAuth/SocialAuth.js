@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { Text, View } from 'react-native'
 import { loginWithApple, loginWithFacebook, loginWithGoogle } from './actions'
 import checkLogin from 'store/actions/checkLogin'
+import { isIOS } from 'util/platform'
 import AppleLoginButton from './AppleLoginButton'
 import FbLoginButton from './FbLoginButton'
 import GoogleLoginButton from './GoogleLoginButton'
@@ -36,12 +37,14 @@ export default function SocialAuth ({ onStart, onComplete, forSignup }) {
   return (
     <View style={styles.connectWith}>
       <Text style={styles.connectWithText}>Or connect with:</Text>
-      <AppleLoginButton
-        style={styles.socialLoginButton}
-        onLoginFinished={socialLoginMaker(loginWithApple)}
-        createErrorNotification={onComplete}
-        signup={forSignup}
-      />
+      {isIOS && (
+        <AppleLoginButton
+          style={styles.socialLoginButton}
+          onLoginFinished={socialLoginMaker(loginWithApple)}
+          createErrorNotification={onComplete}
+          signup={forSignup}
+        />
+      )}
       <GoogleLoginButton
         style={styles.socialLoginButton}
         onLoginFinished={socialLoginMaker(loginWithGoogle)}
