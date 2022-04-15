@@ -71,7 +71,7 @@ exports[`default render matches snapshot 1`] = `
         onChangeText={[Function]}
         textAlignVertical="top"
         underlineColorAndroid="transparent"
-        value="Hey! Here's an invite to the All My Groups group on Hylo."
+        value="Hey! Here's an invite to the Public Groups & Posts group on Hylo."
       />
       <View>
         <View>

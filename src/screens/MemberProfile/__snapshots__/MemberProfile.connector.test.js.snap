@@ -19,12 +19,12 @@ Object {
       "toModelArray": [Function],
     },
     "headerAvatarUrl": undefined,
-    "id": "all",
-    "name": "All My Groups",
+    "id": "public",
+    "name": "Public Groups & Posts",
     "parentGroups": Object {
       "toModelArray": [Function],
     },
-    "slug": "all",
+    "slug": "public",
   },
   "currentUser": SessionBoundModel {
     "_fields": Object {

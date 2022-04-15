@@ -247,14 +247,15 @@ exports[`renders with defaults 1`] = `
                                 autoCorrect={false}
                                 keyboardType="email-address"
                                 onChangeText={[Function]}
-                                returnKeyType="next"
+                                onSubmitEditing={[Function]}
+                                returnKeyType="go"
                                 underlineColorAndroid="transparent"
                               />
                               <View>
                                 <View
                                   accessibilityState={
                                     Object {
-                                      "disabled": true,
+                                      "disabled": false,
                                     }
                                   }
                                   accessible={true}

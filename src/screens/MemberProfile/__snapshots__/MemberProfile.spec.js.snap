@@ -85,7 +85,7 @@ exports[`default render matches snapshot 1`] = `
                   numberOfLines={1}
                   onLayout={[Function]}
                 >
-                  All My Groups
+                  Public Groups & Posts
                 </Text>
               </View>
               <View
