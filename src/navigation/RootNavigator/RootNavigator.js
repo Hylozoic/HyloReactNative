@@ -1,12 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Linking } from 'react-native'
-import { NavigationContainer, useFocusEffect } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { navigationRef } from 'navigation/linking/helpers'
 import OneSignal from 'react-native-onesignal'
 import customLinking, {
-  navigateToLinkingPath, resetToInitialNavState,
-  AUTH_ROOT_SCREEN_NAME, NON_AUTH_ROOT_SCREEN_NAME
+  navigateToLinkingPath,
+  AUTH_ROOT_SCREEN_NAME,
+  NON_AUTH_ROOT_SCREEN_NAME,
+  INITIAL_AUTH_NAV_STATE
 } from 'navigation/linking'
 import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
 import getReturnToOnAuthPath from 'store/selectors/getReturnToOnAuthPath'
@@ -76,15 +78,11 @@ export default function RootNavigator () {
           if (returnToOnAuthPath) {
             dispatch(setReturnToOnAuthPath())
             navigateToLinkingPath(returnToOnAuthPath)
-          } else {
-            resetToInitialNavState()
           }
-        } else {
-          // navigationRef.current?.navigate(NON_AUTH_ROOT_SCREEN_NAME, { screen: 'Login' })
         }
       }
     }())
-  }, [authStateLoading, isAuthorized, navigationIsReady])
+  }, [authStateLoading, isAuthorized, navigationIsReady, returnToOnAuthPath])
 
   // if (authStateLoading) return <LoadingScreen />
 
@@ -105,7 +103,7 @@ export default function RootNavigator () {
           RNBootSplash.hide()
         }}
         // This will be override or be overriden by `getInitalURL` ?
-        // initialState={isAuthorized ? INITIAL_AUTH_NAV_STATE : INITIAL_NON_AUTH_NAV_STATE}
+        initialState={(!initialURL && isAuthorized) ? INITIAL_AUTH_NAV_STATE : null}
         // NOTE: Uncomment below to get a map of the state
         // onStateChange={state => console.log('!!! onStateChange:', state.routes)}
       >

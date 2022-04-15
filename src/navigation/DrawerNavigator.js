@@ -1,9 +1,7 @@
 import React from 'react'
 import { Dimensions } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-// Navigation
 import TabsNavigator from 'navigation/TabsNavigator'
-// Screens
 import DrawerMenu from 'screens/DrawerMenu'
 
 const Drawer = createDrawerNavigator()
@@ -13,8 +11,9 @@ export default function DrawerNavigator () {
     drawerStyle: {
       width: Dimensions.get('window').width * 0.9
     },
-    // Without this Drawer was re-opening sometimes after nav
-    // something to do with Reanimated 2.0 config probably
+    // Without this the Drawer was sometimes re-opening after
+    // navigating to a group Feed.
+    // Possibly something to do with Reanimated 2.0 config.
     useLegacyImplementation: true,
     drawerContent: props => (
       <DrawerMenu {...props} />

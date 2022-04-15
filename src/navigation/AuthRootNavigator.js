@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { ModalHeader } from 'navigation/headers'
 import { modalScreenName } from './linking/helpers'
 import { white } from 'style/colors'
-// Screens
 import DrawerNavigator from 'navigation/DrawerNavigator'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
 import PostDetails from 'screens/PostDetails'
