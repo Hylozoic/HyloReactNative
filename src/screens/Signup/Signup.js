@@ -33,7 +33,7 @@ export default function Signup () {
   const dispatch = useDispatch()
   const authState = useSelector(getAuthState)
   const [email, providedSetEmail] = useState(route.params?.email)
-  const [loading, setLoading] = useState()
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(route.params?.error)
   // WIP: Positive mesage for `checkInvitation` result
   // const [message, setMessage] = useState(route.params?.message)
@@ -63,15 +63,10 @@ export default function Signup () {
     if (!loading) signupRedirect()
   }, [loading, authState])
 
-  // Probably still need this
-  // useFocusEffect(() => {
-  //   signupRedirect()
-  // })
-
   const setEmail = validateEmail => {
     setBannerError()
     setError()
-    setCanSubmit(!validator.isEmail(validateEmail))
+    setCanSubmit(!!validator.isEmail(validateEmail))
     providedSetEmail(validateEmail)
   }
 
@@ -133,12 +128,13 @@ export default function Signup () {
           <Text style={styles.labelText}>Enter your email below to get started!</Text>
           <TextInput
             style={styles.textInput}
+            returnKeyType='go'
+            onSubmitEditing={canSubmit ? submit : () => {}}
             value={email}
+            onChangeText={value => setEmail(value)}
             keyboardType='email-address'
             autoCapitalize='none'
             autoCorrect={false}
-            onChangeText={value => setEmail(value)}
-            returnKeyType='next'
             underlineColorAndroid='transparent'
           />
           <FormattedError styles={styles} error={error} action='Signup' />
@@ -146,7 +142,7 @@ export default function Signup () {
             style={styles.signupButton}
             text={loading ? 'Saving...' : 'Continue'}
             onPress={submit}
-            disabled={canSubmit}
+            disabled={!canSubmit}
           />
           <SocialAuth onStart={handleSocialAuthStart} onComplete={handleSocialAuthComplete} forSignup />
           <View style={styles.login}>
