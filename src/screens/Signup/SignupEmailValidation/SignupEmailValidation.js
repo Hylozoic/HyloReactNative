@@ -31,13 +31,17 @@ export default function SignupEmailValidation ({ navigation, route }) {
   const email = route.params?.email
   const token = route.params?.token
 
-  useFocusEffect(() => {
-    navigation.setOptions({
-      headerLeftOnPress: () => {
-        navigation.navigate('Signup Intro', { email })
-      }
-    })
-  })
+  useFocusEffect(
+    useCallback(() => {
+      if (!email) navigation.navigate('Signup')
+
+      navigation.setOptions({
+        headerLeftOnPress: () => {
+          navigation.navigate('Signup Intro', { email })
+        }
+      })
+    }, [email])
+  )
 
   useFocusEffect(
     useCallback(() => {
@@ -50,11 +54,10 @@ export default function SignupEmailValidation ({ navigation, route }) {
     if (verificationCode?.length === CODE_LENGTH) submit()
   }, [verificationCode])
 
-  if (!email) navigation.navigate('Signup')
-
   const submit = async () => {
     try {
       setLoading(true)
+
       const response = await dispatch(verifyEmail(email, verificationCode, token))
       const { error: responseError = null } = response.payload.getData()
 
@@ -64,7 +67,6 @@ export default function SignupEmailValidation ({ navigation, route }) {
           return
         }
         setError(responseError)
-        return
       }
     } catch (e) {
       setError('Expired or invalid code')

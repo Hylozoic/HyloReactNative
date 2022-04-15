@@ -7,6 +7,7 @@ import { Validators } from 'hylo-shared'
 import register from 'store/actions/register'
 import logout from 'store/actions/logout'
 import useForm from 'hooks/useForm'
+import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import SettingControl from 'components/SettingControl'
 import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
@@ -48,7 +49,6 @@ export default function SignupRegistration ({ navigation, route }) {
   const {
     values,
     errors,
-    setValues,
     handleChange,
     handleSubmit
   } = useForm(saveAndNext, validator)
@@ -56,8 +56,16 @@ export default function SignupRegistration ({ navigation, route }) {
   useFocusEffect(() => {
     navigation.setOptions({
       headerLeftOnPress: () => {
-        dispatch(logout())
-        navigation.navigate('Signup Intro')
+        confirmDiscardChanges({
+          title: '',
+          confirmationMessage: "We're almost done, are you sure you want to cancel signing-up for Hylo?",
+          disgardButtonText: 'Yes',
+          continueButtonText: 'No',
+          onDiscard: () => {
+            dispatch(logout())
+            navigation.navigate('Signup Intro')
+          }
+        })
       }
     })
   })

@@ -71,7 +71,7 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
           // )}
           headerRightButtonLabel='Logout'
           headerRightButtonOnPress={() => confirmDiscardChanges({
-            title: 'Logout',
+            title: '',
             confirmationMessage: 'Are you sure you want to logout?',
             continueButtonText: 'Cancel',
             disgardButtonText: 'Yes',

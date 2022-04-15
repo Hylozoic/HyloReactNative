@@ -7,23 +7,20 @@ import ForgotPassword from 'screens/ForgotPassword'
 import SignupNavigator from 'navigation/SignupNavigator'
 import { white } from 'style/colors'
 import { getAuthenticated } from 'store/selectors/getAuthState'
-import { useNavigation, useRoute } from '@react-navigation/native'
-import { navigateToLinkingPath } from './linking'
+import { useNavigation } from '@react-navigation/native'
 
 const NonAuthRoot = createStackNavigator()
 export default function NonAuthRootNavigator () {
   const navigation = useNavigation()
-  const route = useRoute()
   const isAuthenticated = useSelector(getAuthenticated)
 
+  // If user authenticated we know they are not authorized also
+  // as authorization is handled by `RootNavigator`.
+  // This redirection is for the purpose of sending the user
+  // to `Signup` where additional redirection happens according
+  // to their "authState".
   useEffect(() => {
-    if (isAuthenticated) {
-      navigation.navigate('Signup')
-    } else if (route?.params?.initialURL) {
-      navigateToLinkingPath(route?.params?.initialURL)
-    } else {
-      navigation.navigate('Login')
-    }
+    if (isAuthenticated) navigation.navigate('Signup')
   }, [isAuthenticated])
 
   const navigatorProps = {

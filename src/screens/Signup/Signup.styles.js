@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native'
 import loginStyles from 'screens/Login/Login.styles'
 import { caribbeanGreen, rhino30, rhino80, white } from 'style/colors'
+import { isIOS } from 'util/platform'
 
 const bgImageWidth = Dimensions.get('window').width
 const bgImageHeight = Dimensions.get('window').height * 0.25
@@ -12,13 +13,13 @@ export default {
   },
   background: {
     width: bgImageWidth,
-    height: bgImageHeight + 20,
+    height: bgImageHeight + (isIOS ? 20 : 60),
     justifyContent: 'flex-end',
     alignItems: 'center'
   },
   backgroundImage: {
     width: bgImageWidth,
-    height: bgImageHeight + 20,
+    height: bgImageHeight + (isIOS ? 20 : 60),
     resizeMode: 'cover'
   },
   merkabaImage: {

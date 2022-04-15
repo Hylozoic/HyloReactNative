@@ -1,5 +1,4 @@
 import { isEmpty } from 'lodash'
-import RNRestart from 'react-native-restart'
 import { LoginManager as FacebookLoginManager } from 'react-native-fbsdk-next'
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
 import { clearSessionCookie } from 'util/session'
@@ -13,12 +12,15 @@ export default function logout () {
     },
     meta: {
       then: async () => {
-        await clearSessionCookie()
-        await FacebookLoginManager.logOut()
-        if (!isEmpty(await GoogleSignin.getCurrentUser())) {
-          await GoogleSignin.signOut()
+        try {
+          await clearSessionCookie()
+          FacebookLoginManager.logOut()
+          if (!isEmpty(await GoogleSignin.getCurrentUser())) {
+            await GoogleSignin.signOut()
+          }
+        } catch (e) {
+          console.log('ERROR on logout', e.message)
         }
-        // RNRestart.Restart()
       }
     }
   }

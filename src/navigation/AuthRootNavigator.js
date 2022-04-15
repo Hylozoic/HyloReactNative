@@ -1,17 +1,9 @@
 
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import OneSignal from 'react-native-onesignal'
 import { ModalHeader } from 'navigation/headers'
 import { modalScreenName } from './linking/helpers'
 import { white } from 'style/colors'
-import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
-import { useNavigation, useRoute } from '@react-navigation/native'
-import registerDevice from 'store/actions/registerDevice'
-import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import getReturnToOnAuthPath from 'store/selectors/getReturnToOnAuthPath'
-import { navigateToLinkingPath } from 'navigation/linking'
 // Screens
 import DrawerNavigator from 'navigation/DrawerNavigator'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
@@ -27,41 +19,6 @@ import NotificationSettings from 'screens/NotificationSettings'
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
-  const navigation = useNavigation()
-  const route = useRoute()
-  const dispatch = useDispatch()
-  const returnToOnAuthPath = useSelector(getReturnToOnAuthPath)
-
-  useEffect(() => {
-    (async function () {
-      navigation.navigate('Loading')
-
-      const response = await dispatch(fetchCurrentUser())
-
-      if (!response?.payload?.getData()?.error) {
-        const deviceState = await OneSignal.getDeviceState()
-
-        if (deviceState?.userId) {
-          await dispatch(registerDevice(deviceState?.userId))
-          OneSignal.setExternalUserId(response.payload?.getData()?.me?.id)
-          // Prompt for push on iOS
-          OneSignal.promptForPushNotificationsWithUserResponse(() => {})
-        } else {
-          console.log('Note: Not registering to OneSignal for push notifications. OneSignal did not successfully retrieve a userId')
-        }
-      }
-
-      if (route?.params?.initialURL) {
-        navigateToLinkingPath(route?.params?.initialURL)
-      } else if (returnToOnAuthPath) {
-        dispatch(setReturnToOnAuthPath())
-        navigateToLinkingPath(returnToOnAuthPath)
-      } else {
-        navigation.navigate('Home Tab', { screen: 'Feed' })
-      }
-    }())
-  }, [])
-
   const navigatorProps = {
     screenOptions: {
       cardStyle: { backgroundColor: white }

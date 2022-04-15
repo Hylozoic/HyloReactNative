@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { View, Linking } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, useFocusEffect } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { navigationRef } from 'navigation/linking/helpers'
 import OneSignal from 'react-native-onesignal'
 import customLinking, {
-  navigateToLinkingPath,
-  AUTH_ROOT_SCREEN_NAME,
-  NON_AUTH_ROOT_SCREEN_NAME
+  navigateToLinkingPath, resetToInitialNavState,
+  AUTH_ROOT_SCREEN_NAME, NON_AUTH_ROOT_SCREEN_NAME
 } from 'navigation/linking'
+import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
+import getReturnToOnAuthPath from 'store/selectors/getReturnToOnAuthPath'
+import registerDevice from 'store/actions/registerDevice'
+import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import { getAuthorized, getAuthStateLoading } from 'store/selectors/getAuthState'
 import SocketListener from 'components/SocketListener'
 import RNBootSplash from 'react-native-bootsplash'
@@ -28,7 +31,9 @@ export default function RootNavigator () {
   const dispatch = useDispatch()
   const authStateLoading = useSelector(getAuthStateLoading)
   const isAuthorized = useSelector(getAuthorized)
+  const returnToOnAuthPath = useSelector(getReturnToOnAuthPath)
   const [initialURL, setInitialURL] = useState()
+  const [navigationIsReady, setNavigationIsReady] = useState(false)
 
   // This should be (nearly) the only place we check for a session from the API.
   // Routes will not be available until this check is complete.
@@ -40,13 +45,48 @@ export default function RootNavigator () {
   }, [])
 
   // Handle Push Notifications opened. NOTE the handler it's important that the
-  // handlers is returns so it gets cleaned-up on unmount
+  // handlers is returned so it gets cleaned-up on unmount
   useEffect(() => OneSignal.setNotificationOpenedHandler(({ notification }) => {
     const path = notification?.additionalData?.path
     navigateToLinkingPath(path)
   }), [])
 
-  if (authStateLoading) return <LoadingScreen />
+  // Everything that happens once a user is successfully Authorized
+  useEffect(() => {
+    (async function () {
+      if (!authStateLoading && navigationIsReady) {
+        if (initialURL) navigateToLinkingPath(initialURL)
+
+        if (isAuthorized) {
+          const response = await dispatch(fetchCurrentUser())
+
+          if (!response.payload?.getData()?.error) {
+            const deviceState = await OneSignal.getDeviceState()
+
+            if (deviceState?.userId) {
+              await dispatch(registerDevice(deviceState?.userId))
+              OneSignal.setExternalUserId(response.payload?.getData()?.me?.id)
+              // Prompt for push on iOS
+              OneSignal.promptForPushNotificationsWithUserResponse(() => {})
+            } else {
+              console.log('Note: Not registering to OneSignal for push notifications. OneSignal did not successfully retrieve a userId')
+            }
+          }
+
+          if (returnToOnAuthPath) {
+            dispatch(setReturnToOnAuthPath())
+            navigateToLinkingPath(returnToOnAuthPath)
+          } else {
+            resetToInitialNavState()
+          }
+        } else {
+          // navigationRef.current?.navigate(NON_AUTH_ROOT_SCREEN_NAME, { screen: 'Login' })
+        }
+      }
+    }())
+  }, [authStateLoading, isAuthorized, navigationIsReady])
+
+  // if (authStateLoading) return <LoadingScreen />
 
   const navigatorProps = {
     screenOptions: {
@@ -61,6 +101,7 @@ export default function RootNavigator () {
         linking={customLinking}
         ref={navigationRef}
         onReady={() => {
+          setNavigationIsReady(true)
           RNBootSplash.hide()
         }}
         // This will be override or be overriden by `getInitalURL` ?
@@ -71,11 +112,11 @@ export default function RootNavigator () {
         <Root.Navigator {...navigatorProps}>
           {/* Logged in */}
           {isAuthorized && (
-            <Root.Screen name={AUTH_ROOT_SCREEN_NAME} component={AuthRootNavigator} options={{ headerShown: false, initialURL }} />
+            <Root.Screen name={AUTH_ROOT_SCREEN_NAME} component={AuthRootNavigator} options={{ headerShown: false }} />
           )}
           {/* Not logged-in or Signing-up */}
           {!isAuthorized && (
-            <Root.Screen name={NON_AUTH_ROOT_SCREEN_NAME} component={NonAuthRootNavigator} options={{ headerShown: false, initialURL }} />
+            <Root.Screen name={NON_AUTH_ROOT_SCREEN_NAME} component={NonAuthRootNavigator} options={{ headerShown: false }} />
           )}
           {/* Screens always available */}
           <Root.Screen name='Loading' component={LoadingScreen} />

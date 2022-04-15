@@ -203,8 +203,6 @@ export const resetToInitialNavState = providedIsAuthorized => {
 }
 
 // This could possibly be replaced by updating the logic applied by Linking.openURL
-// to not always force nav state reset to default (or storing returnTo URL?) for
-// this case...
 export const navigateToLinkingPath = async (providedUrl, reset = false) => {
   const linkingURL = new URL(providedUrl, DEFAULT_APP_HOST)
   const linkingPath = `${linkingURL.pathname}${linkingURL.search}`

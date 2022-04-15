@@ -30,8 +30,8 @@ export default function ForgotPassword ({ error }) {
     <ScrollView contentContainerStyle={styles.forgotPassword} style={styles.container}>
       <View style={styles.paddedRow}>
         <Text style={styles.messageText}>
-          Enter your email address and we'll send you an email
-          that lets you reset your password.
+          Enter your email address below and we'll send you an email
+          message with a link for resetting your password.
         </Text>
       </View>
       {error && (
