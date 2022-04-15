@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import NetInfo from '@react-native-community/netinfo'
 import { ScrollView, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
 import { useFocusEffect } from '@react-navigation/core'
 import { useNavigation, useRoute } from '@react-navigation/native'
@@ -201,6 +200,7 @@ export function FormError ({ children }) {
 
 // NOTE: This works, but I don't trust it and it could/should probably be moved
 //       into a modal at the level of the `RootNavigator`
+// import NetInfo from '@react-native-community/netinfo'
 // const [isConnected, setIsConnected] = useState()
 // useFocusEffect(
 //   useCallback(() => {
