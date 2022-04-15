@@ -66,8 +66,8 @@ jest.mock('@sentry/react-native', () => ({
   init: jest.fn()
 }))
 
-import mockRNCNetInfo from '@react-native-community/netinfo/jest/netinfo-mock.js'
-jest.mock('@react-native-community/netinfo', () => mockRNCNetInfo)
+// import mockRNCNetInfo from '@react-native-community/netinfo/jest/netinfo-mock.js'
+// jest.mock('@react-native-community/netinfo', () => mockRNCNetInfo)
 
 jest.mock('react-native-bootsplash', () => {
   return {
