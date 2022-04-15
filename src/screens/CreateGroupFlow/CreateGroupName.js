@@ -13,8 +13,11 @@ import styles from './CreateGroupFlow.styles'
 import { ALL_GROUP_ID } from 'store/models/Group'
 import getRouteParam from 'store/selectors/getRouteParam'
 
-export default function CreateGroupName ({ navigation, route }) {
+export default function CreateGroupName ({ route }) {
   const dispatch = useDispatch()
+  // Add current group in as pre-selected as a parent group for Parent Groups Step
+  const edited = useSelector(getEdited)
+  const currentGroupId = useSelector(getCurrentGroupId)
   const groupData = useSelector(getGroupData)
   const [groupName, setGroupName] = useState()
   const [error, setError] = useState()
@@ -28,7 +31,7 @@ export default function CreateGroupName ({ navigation, route }) {
       setGroupName(groupData?.name)
     }
   }, [])
-  
+
   useFocusEffect(useCallback(() => {
     if (!groupName || groupName.length === 0) {
       dispatch(setWorkflowOptions({ disableContinue: true }))
@@ -38,10 +41,6 @@ export default function CreateGroupName ({ navigation, route }) {
       dispatch(setWorkflowOptions({ disableContinue: false }))
     }
   }, [groupName]))
-
-  // Add current group in as pre-selected as a parent group for Parent Groups Step
-  const edited = useSelector(getEdited)
-  const currentGroupId = useSelector(getCurrentGroupId)
 
   useFocusEffect(useCallback(() => {
     if (!edited && currentGroupId !== ALL_GROUP_ID) {

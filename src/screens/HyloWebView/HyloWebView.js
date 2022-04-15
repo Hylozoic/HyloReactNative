@@ -18,7 +18,7 @@ const HyloWebView = forwardRef(({
 
   useEffect(() => {
     const path = pathProp || route?.params?.path
-    setUri(`${process.env.HYLO_WEB_BASE_URL}${path ? `/${path}` : ''}?layoutFlags=mobileSettings`)
+    setUri(`${process.env.HYLO_WEB_BASE_URL}${path ? `/${path}` : ''}?layoutFlags=hyloApp`)
   }, [pathProp, route?.params?.path])
 
   useFocusEffect(
