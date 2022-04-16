@@ -19,10 +19,6 @@ export default function MapWebView ({ navigation }) {
   const group = useSelector(getCurrentGroup)
   const [path, setPath] = useState()
 
-  // Navigating to map switches to `currentGroup` context of the currently
-  // selected group or the one found in the `groupId` route param
-  useGroupSelect()
-
   useFocusEffect(
     useCallback(() => {
       navigation.setOptions({

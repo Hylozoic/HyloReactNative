@@ -39,8 +39,6 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
   const feedType = getRouteParam('feedType', route)
   const topicName = providedTopicName || getRouteParam('topicName', route)
 
-  useGroupSelect()
-
   const currentUser = useSelector(getMe)
   const memberships = useSelector(getMemberships)
   const currentUserHasMemberships = !isEmpty(memberships)

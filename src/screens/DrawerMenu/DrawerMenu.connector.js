@@ -38,6 +38,7 @@ export const mapDispatchToProps = {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
+  const { selectGroup } = dispatchProps
   const { currentUser, canModerateCurrentGroup } = stateProps
   const { navigation } = ownProps
 
@@ -46,6 +47,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     goToGroup: group => {
+      selectGroup(group.id)
       navigation.navigate('Feed', { groupId: group.id })
     },
     goToMyProfile: () => {

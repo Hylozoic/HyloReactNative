@@ -37,10 +37,6 @@ class Me extends Model {
   canModerate (group) {
     return canModerate(this.memberships, group)
   }
-
-  lastViewedGroup () {
-    return getLastViewedGroup(this.memberships.toModelArray())
-  }
 }
 
 export class MySkillsToLearn extends Model {}

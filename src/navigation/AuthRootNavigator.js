@@ -1,8 +1,9 @@
 
-import React, { useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
+import { find } from 'lodash/fp'
 import { ModalHeader } from 'navigation/headers'
-import { modalScreenName } from './linking/helpers'
+import { isModalScreen, modalScreenName } from './linking/helpers'
 import { white } from 'style/colors'
 import DrawerNavigator from 'navigation/DrawerNavigator'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
@@ -15,14 +16,64 @@ import MemberSkillEditor from 'screens/MemberProfile/MemberSkillEditor'
 import PendingInvites from 'screens/PendingInvites'
 import NotificationsList from 'screens/NotificationsList'
 import NotificationSettings from 'screens/NotificationSettings'
-import { useFocusEffect } from '@react-navigation/native'
+import { useRoute } from '@react-navigation/native'
 import { navigateToLinkingPath } from './linking'
-import { useSelector } from 'react-redux'
-import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import { useDispatch, useSelector } from 'react-redux'
+import registerDevice from 'store/actions/registerDevice'
+import OneSignal from 'react-native-onesignal'
+import fetchCurrentUser from 'store/actions/fetchCurrentUser'
+import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
+import getReturnToOnAuthPath from 'store/selectors/getReturnToOnAuthPath'
+import selectGroupByIdAction from 'store/actions/selectGroup'
+import getGroupFromParamsOrCurrent from 'store/selectors/getGroupFromParamsOrCurrent'
+import { isContextGroup } from 'store/models/Group'
+import LoadingScreen from 'screens/LoadingScreen'
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
-  // const currentGroup = useSelector(getCurrentGroup)
+  const route = useRoute()
+  const routeParams = route?.params
+  const isModal = isModalScreen(route?.name)
+  const groupIdFromParamsOrCurrent = useSelector(state => getGroupFromParamsOrCurrent(state, routeParams))?.id
+  const groupIdToSelect = groupIdFromParamsOrCurrent
+  // isContextGroup(find('groupSlug', routeParams))
+  //   ? find('groupSlug', routeParams)
+  //   : groupIdFromParamsOrCurrent
+  const dispatch = useDispatch()
+  const returnToOnAuthPath = useSelector(getReturnToOnAuthPath)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    (async function () {
+      const response = await dispatch(fetchCurrentUser())
+
+      setLoading(false)
+
+      if (!response.payload?.getData()?.error) {
+        const deviceState = await OneSignal.getDeviceState()
+
+        if (deviceState?.userId) {
+          await dispatch(registerDevice(deviceState?.userId))
+          OneSignal.setExternalUserId(response.payload?.getData()?.me?.id)
+          // Prompt for push notifications (iOS only)
+          OneSignal.promptForPushNotificationsWithUserResponse(() => {})
+        } else {
+          console.warn('Not registering to OneSignal for push notifications. OneSignal did not successfully retrieve a userId')
+        }
+      }
+
+      if (returnToOnAuthPath) {
+        dispatch(setReturnToOnAuthPath())
+        navigateToLinkingPath(returnToOnAuthPath)
+      } else {
+        navigateToLinkingPath('/')
+      }
+    })()
+  }, [])
+
+  useEffect(() => {
+    if (!isModal && !loading) dispatch(selectGroupByIdAction(groupIdToSelect))
+  }, [loading, isModal, groupIdToSelect, dispatch])
 
   const navigatorProps = {
     screenOptions: {
@@ -30,11 +81,7 @@ export default function AuthRootNavigator () {
     }
   }
 
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     if (currentGroup?.slug) navigateToLinkingPath(`/groups/${currentGroup.slug})`)
-  //   }, [currentGroup])
-  // )
+  if (loading) return <LoadingScreen />
 
   return (
     <AuthRoot.Navigator {...navigatorProps}>
@@ -67,3 +114,9 @@ export default function AuthRootNavigator () {
     </AuthRoot.Navigator>
   )
 }
+
+// useFocusEffect(
+//   useCallback(() => {
+//     if (currentGroup?.slug) navigateToLinkingPath(`/groups/${currentGroup.slug})`)
+//   }, [currentGroup])
+// )

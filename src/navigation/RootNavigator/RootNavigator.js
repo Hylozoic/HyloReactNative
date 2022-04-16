@@ -12,10 +12,6 @@ import customLinking, {
   NON_AUTH_ROOT_SCREEN_NAME
 } from 'navigation/linking'
 import checkLogin from 'store/actions/checkLogin'
-import registerDevice from 'store/actions/registerDevice'
-import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
-import getReturnToOnAuthPath from 'store/selectors/getReturnToOnAuthPath'
 import { getAuthorized } from 'store/selectors/getAuthState'
 import { white } from 'style/colors'
 import SocketListener from 'components/SocketListener'
@@ -31,7 +27,6 @@ const Root = createStackNavigator()
 export default function RootNavigator () {
   const dispatch = useDispatch()
   const isAuthorized = useSelector(getAuthorized)
-  const returnToOnAuthPath = useSelector(getReturnToOnAuthPath)
   const [loading, setLoading] = useState(true)
   const [navigationIsReady, setNavigationIsReady] = useState(false)
 
@@ -53,39 +48,10 @@ export default function RootNavigator () {
   }, [])
 
   useEffect(() => {
-    (async function () {
-      if (navigationIsReady) {
-        RNBootSplash.hide()
-      }
-
-      if (!loading && navigationIsReady) {
-        // NOTE: The below could all be moved back into `AuthRootNavigator`
-        if (isAuthorized) {
-          const response = await dispatch(fetchCurrentUser())
-
-          if (!response.payload?.getData()?.error) {
-            const deviceState = await OneSignal.getDeviceState()
-
-            if (deviceState?.userId) {
-              await dispatch(registerDevice(deviceState?.userId))
-              OneSignal.setExternalUserId(response.payload?.getData()?.me?.id)
-              // Prompt for push notifications (iOS only)
-              OneSignal.promptForPushNotificationsWithUserResponse(() => {})
-            } else {
-              console.warn('Not registering to OneSignal for push notifications. OneSignal did not successfully retrieve a userId')
-            }
-          }
-
-          if (returnToOnAuthPath) {
-            dispatch(setReturnToOnAuthPath())
-            navigateToLinkingPath(returnToOnAuthPath)
-          } else {
-            navigateToLinkingPath('/')
-          }
-        }
-      }
-    }())
-  }, [dispatch, loading, isAuthorized, navigationIsReady, returnToOnAuthPath])
+    if (navigationIsReady) {
+      RNBootSplash.hide()
+    }
+  }, [dispatch, loading, navigationIsReady])
 
   if (loading) return <LoadingScreen />
 

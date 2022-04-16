@@ -187,8 +187,6 @@ export default function (props) {
   const isModal = isModalScreen(props.route?.name)
   const isFocused = useIsFocused()
 
-  if (!isModal) useGroupSelect()
-
   const safeAreaInsets = useSafeAreaInsets()
   const tabBarHeight = isModal ? 0 : useBottomTabBarHeight()
 

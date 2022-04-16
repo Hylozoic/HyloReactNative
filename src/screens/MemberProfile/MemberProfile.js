@@ -43,12 +43,6 @@ export default function MemberProfile ({
 }) {
   const [flaggingVisible, setFlaggingVisible] = useState(false)
 
-  // Don't force selected group switch if this is a modal
-  // should we generalize into useGroupSelect for any modal?
-  if (!isModalScreen(route.name)) {
-    useGroupSelect()
-  }
-
   useEffect(() => {
     if (isBlocked) return navigation.goBack()
     fetchPerson()
