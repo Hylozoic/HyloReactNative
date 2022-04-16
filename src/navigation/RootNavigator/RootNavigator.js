@@ -1,64 +1,65 @@
 import React, { useEffect, useState } from 'react'
-import { View, Linking } from 'react-native'
+import { View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 import { useDispatch, useSelector } from 'react-redux'
 import { navigationRef } from 'navigation/linking/helpers'
 import OneSignal from 'react-native-onesignal'
+import RNBootSplash from 'react-native-bootsplash'
 import customLinking, {
   navigateToLinkingPath,
   AUTH_ROOT_SCREEN_NAME,
-  NON_AUTH_ROOT_SCREEN_NAME,
-  INITIAL_AUTH_NAV_STATE
+  NON_AUTH_ROOT_SCREEN_NAME
 } from 'navigation/linking'
-import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
-import getReturnToOnAuthPath from 'store/selectors/getReturnToOnAuthPath'
+import checkLogin from 'store/actions/checkLogin'
 import registerDevice from 'store/actions/registerDevice'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import { getAuthorized, getAuthStateLoading } from 'store/selectors/getAuthState'
-import SocketListener from 'components/SocketListener'
-import RNBootSplash from 'react-native-bootsplash'
-import LoadingScreen from 'screens/LoadingScreen'
-import ItemChooser from 'screens/ItemChooser'
-import checkLogin from 'store/actions/checkLogin'
+import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
+import getReturnToOnAuthPath from 'store/selectors/getReturnToOnAuthPath'
+import { getAuthorized } from 'store/selectors/getAuthState'
 import { white } from 'style/colors'
-import { createStackNavigator } from '@react-navigation/stack'
+import SocketListener from 'components/SocketListener'
 import { ModalHeader } from 'navigation/headers'
-import AuthRootNavigator from 'navigation/AuthRootNavigator'
-import NonAuthRootNavigator from 'navigation/NonAuthRootNavigator'
+import ItemChooser from 'screens/ItemChooser'
 import JoinGroup from 'screens/JoinGroup'
 import LoginByTokenHandler from 'screens/LoginByTokenHandler'
+import AuthRootNavigator from 'navigation/AuthRootNavigator'
+import NonAuthRootNavigator from 'navigation/NonAuthRootNavigator'
+import LoadingScreen from 'screens/LoadingScreen'
 
 const Root = createStackNavigator()
 export default function RootNavigator () {
   const dispatch = useDispatch()
-  const authStateLoading = useSelector(getAuthStateLoading)
   const isAuthorized = useSelector(getAuthorized)
   const returnToOnAuthPath = useSelector(getReturnToOnAuthPath)
-  const [initialURL, setInitialURL] = useState()
+  const [loading, setLoading] = useState(true)
   const [navigationIsReady, setNavigationIsReady] = useState(false)
 
-  // This should be (nearly) the only place we check for a session from the API.
+  // Here and `JoinGroup` should be the only place we check for a session from the API.
   // Routes will not be available until this check is complete.
   useEffect(() => {
     (async function () {
-      setInitialURL(await Linking.getInitialURL())
-      dispatch(checkLogin())
+      await dispatch(checkLogin())
+      setLoading(false)
     })()
   }, [])
 
-  // Handle Push Notifications opened. NOTE the handler it's important that the
-  // handlers is returned so it gets cleaned-up on unmount
-  useEffect(() => OneSignal.setNotificationOpenedHandler(({ notification }) => {
-    const path = notification?.additionalData?.path
-    navigateToLinkingPath(path)
-  }), [])
+  // Handle Push Notifications opened
+  useEffect(() => {
+    return OneSignal.setNotificationOpenedHandler(({ notification }) => {
+      const path = notification?.additionalData?.path
+      navigateToLinkingPath(path)
+    })
+  }, [])
 
-  // Everything that happens once a user is successfully Authorized
   useEffect(() => {
     (async function () {
-      if (!authStateLoading && navigationIsReady) {
-        if (initialURL) navigateToLinkingPath(initialURL)
+      if (navigationIsReady) {
+        RNBootSplash.hide()
+      }
 
+      if (!loading && navigationIsReady) {
+        // NOTE: The below could all be moved back into `AuthRootNavigator`
         if (isAuthorized) {
           const response = await dispatch(fetchCurrentUser())
 
@@ -68,23 +69,25 @@ export default function RootNavigator () {
             if (deviceState?.userId) {
               await dispatch(registerDevice(deviceState?.userId))
               OneSignal.setExternalUserId(response.payload?.getData()?.me?.id)
-              // Prompt for push on iOS
+              // Prompt for push notifications (iOS only)
               OneSignal.promptForPushNotificationsWithUserResponse(() => {})
             } else {
-              console.log('Note: Not registering to OneSignal for push notifications. OneSignal did not successfully retrieve a userId')
+              console.warn('Not registering to OneSignal for push notifications. OneSignal did not successfully retrieve a userId')
             }
           }
 
           if (returnToOnAuthPath) {
             dispatch(setReturnToOnAuthPath())
             navigateToLinkingPath(returnToOnAuthPath)
+          } else {
+            navigateToLinkingPath('/')
           }
         }
       }
     }())
-  }, [authStateLoading, isAuthorized, navigationIsReady, returnToOnAuthPath])
+  }, [dispatch, loading, isAuthorized, navigationIsReady, returnToOnAuthPath])
 
-  // if (authStateLoading) return <LoadingScreen />
+  if (loading) return <LoadingScreen />
 
   const navigatorProps = {
     screenOptions: {
@@ -94,25 +97,17 @@ export default function RootNavigator () {
 
   return (
     <View style={styles.rootContainer}>
-      {/* <LoadingScreen visible={authStateLoading} /> */}
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}
-        onReady={() => {
-          setNavigationIsReady(true)
-          RNBootSplash.hide()
-        }}
-        // This will be override or be overriden by `getInitalURL` ?
-        initialState={(!initialURL && isAuthorized) ? INITIAL_AUTH_NAV_STATE : null}
-        // NOTE: Uncomment below to get a map of the state
+        onReady={() => { setNavigationIsReady(true) }}
+        // To get a map of the current navigation state:
         // onStateChange={state => console.log('!!! onStateChange:', state.routes)}
       >
         <Root.Navigator {...navigatorProps}>
-          {/* Logged in */}
           {isAuthorized && (
             <Root.Screen name={AUTH_ROOT_SCREEN_NAME} component={AuthRootNavigator} options={{ headerShown: false }} />
           )}
-          {/* Not logged-in or Signing-up */}
           {!isAuthorized && (
             <Root.Screen name={NON_AUTH_ROOT_SCREEN_NAME} component={NonAuthRootNavigator} options={{ headerShown: false }} />
           )}
@@ -139,8 +134,3 @@ const styles = {
     flex: 1
   }
 }
-
-// NOTE: Another option for handling initial state:
-// if (!initialURL && isAuthorized) {
-//   navigationRef.current?.navigate('Drawer', { screen:'Tabs', params: { screen: 'Home Tab', params: { screen: 'Feed' } } })
-// }

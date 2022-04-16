@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useCallback } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { ModalHeader } from 'navigation/headers'
 import { modalScreenName } from './linking/helpers'
@@ -15,14 +15,26 @@ import MemberSkillEditor from 'screens/MemberProfile/MemberSkillEditor'
 import PendingInvites from 'screens/PendingInvites'
 import NotificationsList from 'screens/NotificationsList'
 import NotificationSettings from 'screens/NotificationSettings'
+import { useFocusEffect } from '@react-navigation/native'
+import { navigateToLinkingPath } from './linking'
+import { useSelector } from 'react-redux'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
+  // const currentGroup = useSelector(getCurrentGroup)
+
   const navigatorProps = {
     screenOptions: {
       cardStyle: { backgroundColor: white }
     }
   }
+
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     if (currentGroup?.slug) navigateToLinkingPath(`/groups/${currentGroup.slug})`)
+  //   }, [currentGroup])
+  // )
 
   return (
     <AuthRoot.Navigator {...navigatorProps}>

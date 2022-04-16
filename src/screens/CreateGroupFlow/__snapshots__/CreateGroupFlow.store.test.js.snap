@@ -9,9 +9,10 @@ Object {
 exports[`createGroup matches snapshot 1`] = `
 Object {
   "graphql": Object {
-    "query": "mutation ($data: GroupInput) {
-        createGroup(data: $data) {
-          
+    "query": "
+        mutation ($data: GroupInput) {
+          createGroup(data: $data) {
+            
   id
   accessibility
   avatarUrl
@@ -95,22 +96,22 @@ Object {
     }
   
 
-          memberships {
-            items {
-              id
-              hasModeratorRole
-              person {
+            memberships {
+              items {
                 id
-              }
-              settings {
-                sendEmail
-                showJoinForm
-                sendPushNotifications
+                hasModeratorRole
+                person {
+                  id
+                }
+                settings {
+                  sendEmail
+                  showJoinForm
+                  sendPushNotifications
+                }
               }
             }
           }
         }
-      }
       ",
     "variables": Object {
       "data": Object {

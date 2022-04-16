@@ -2,8 +2,8 @@ import { Linking } from 'react-native'
 import { isEmpty } from 'lodash/fp'
 import {
   getActionFromState,
-  CommonActions,
   subscribe,
+  getInitialURL,
   getStateFromPath as getStateFromPathDefault
 } from '@react-navigation/native'
 import { match } from 'path-to-regexp'
@@ -98,67 +98,74 @@ export const routesConfig = {
   '/messages/:id':                                           `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Messages Tab/Thread`,
   '/messages':                                               `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Messages Tab/Messages`,
 
-  '/all':                                                    `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`,
   '/':                                                       `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`
 }
 
-export const INITIAL_AUTH_NAV_STATE = {
-  routes: [
-    {
-      name: AUTH_ROOT_SCREEN_NAME,
-      state: {
-        routes: [
-          {
-            name: 'Drawer',
-            state: {
-              routes: [
-                {
-                  name: 'Tabs',
-                  state: {
-                    routes: [
-                      {
-                        name: 'Home Tab',
-                        state: {
-                          initialRouteName: 'Feed',
-                          routes: [
-                            {
-                              name: 'Group Navigation'
-                            },
-                            {
-                              name: 'Feed'
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-}
+// export const INITIAL_AUTH_NAV_STATE = {
+//   routes: [
+//     {
+//       name: AUTH_ROOT_SCREEN_NAME,
+//       state: {
+//         routes: [
+//           {
+//             name: 'Drawer',
+//             state: {
+//               routes: [
+//                 {
+//                   name: 'Tabs',
+//                   state: {
+//                     routes: [
+//                       {
+//                         name: 'Home Tab',
+//                         state: {
+//                           initialRouteName: 'Feed',
+//                           routes: [
+//                             {
+//                               name: 'Group Navigation'
+//                             },
+//                             {
+//                               name: 'Feed'
+//                             }
+//                           ]
+//                         }
+//                       }
+//                     ]
+//                   }
+//                 }
+//               ]
+//             }
+//           }
+//         ]
+//       }
+//     }
+//   ]
+// }
 
-export const INITIAL_NON_AUTH_NAV_STATE = {
-  routes: [
-    {
-      name: NON_AUTH_ROOT_SCREEN_NAME,
-      state: {
-        routes: [
-          {
-            name: 'Signup'
-          },
-          {
-            name: 'Login'
-          }
-        ]
-      }
-    }
-  ]
-}
+// export const INITIAL_NON_AUTH_NAV_STATE = {
+//   routes: [
+//     {
+//       name: NON_AUTH_ROOT_SCREEN_NAME,
+//       state: {
+//         routes: [
+//           {
+//             name: 'Signup'
+//           },
+//           {
+//             name: 'Login'
+//           }
+//         ]
+//       }
+//     }
+//   ]
+// }
+
+// // This function intentionally doesn't return to have which
+// // has the effect of disabling the default initialURL handling
+// const getInitialURL = async () => {
+//   const initialURL = await Linking.getInitialURL()
+
+//   if (initialURL) getStateFromPath(initialURL)
+// }
 
 // Could potentially be entirely replaced by `navigateToLinkingPath` below
 // by adding these legacy routes in the routing above. The key differentiating
@@ -190,17 +197,17 @@ export async function openURL (providedUrlOrPath, options = {}) {
   }
 }
 
-export const resetToInitialNavState = providedIsAuthorized => {
-  const isAuthorized = providedIsAuthorized || getAuthorized(store.getState())
+// export const resetToInitialNavState = providedIsAuthorized => {
+//   const isAuthorized = providedIsAuthorized || getAuthorized(store.getState())
 
-  navigationRef.current?.dispatch(
-    CommonActions.reset(
-      isAuthorized
-        ? INITIAL_AUTH_NAV_STATE
-        : INITIAL_NON_AUTH_NAV_STATE
-    )
-  )
-}
+//   navigationRef.current?.dispatch(
+//     CommonActions.reset(
+//       isAuthorized
+//         ? INITIAL_AUTH_NAV_STATE
+//         : INITIAL_NON_AUTH_NAV_STATE
+//     )
+//   )
+// }
 
 // This could possibly be replaced by updating the logic applied by Linking.openURL
 export const navigateToLinkingPath = async (providedUrl, reset = false) => {
@@ -209,7 +216,8 @@ export const navigateToLinkingPath = async (providedUrl, reset = false) => {
   const state = getStateFromPath(linkingPath)
   const action = getActionFromState(state)
 
-  if (reset) resetToInitialNavState()
+  if (reset) console.log('!!! would reset nav but currently won\'t !!!!')
+  // if (reset) resetToInitialNavState()
 
   navigationRef.current?.dispatch(action)
 }
@@ -237,7 +245,7 @@ export function getScreenPathWithParamsFromPath (incomingPathAndQuerystring, rou
   }
 }
 
-const getStateFromPath = path => {
+export const getStateFromPath = path => {
   const screenPathWithParams = getScreenPathWithParamsFromPath(path, routesConfig)
   const isAuthorized = getAuthorized(store.getState())
 
@@ -257,6 +265,7 @@ const getStateFromPath = path => {
 export default {
   prefixes,
   subscribe,
+  getInitialURL,
   getStateFromPath,
   getPathFromState: () => {}
 }
