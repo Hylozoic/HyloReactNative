@@ -23,17 +23,17 @@ export default function CreateGroupParentGroups ({ navigation }) {
     .map((m) => m.group)
     .sort((a, b) => a.name.localeCompare(b.name))
 
-  const isChosen = item => !!parentIds.find(groupId => groupId == item.id)
+  const isChosen = item => !!parentIds.find(groupId => groupId === item.id)
 
-  const toggleChosen = item => parentIds.find(groupId => groupId == item.id)
+  const toggleChosen = item => parentIds.find(groupId => groupId === item.id)
     ? setParentGroupIds(parentIds.filter(groupId => groupId !== item.id))
     : setParentGroupIds([...parentIds, item.id])
-  
+
   const clear = () => setParentGroupIds([])
 
   useFocusEffect(useCallback(() => {
     // Extra step necessary to reject a default group selection which isn't valid
-    parentIds.filter(id => parentGroupOptions.find(validId => id == validId))
+    parentIds.filter(id => parentGroupOptions.find(validId => id === validId))
     dispatch(updateGroupData({ parentIds }))
   }, [parentIds]))
 
@@ -41,12 +41,13 @@ export default function CreateGroupParentGroups ({ navigation }) {
     <KeyboardFriendlyView style={styles.container}>
       <Text style={styles.heading}>Is this group a member of other groups?</Text>
       <Text style={stepStyles.subHeading}>Please select below:</Text>
-      {/* TODO: Is this a good use of FlatList? */}
-      <FlatList style={stepStyles.parentGroupListContainer} data={parentGroupOptions}
+      <FlatList
+        style={stepStyles.parentGroupListContainer}
+        data={parentGroupOptions}
         renderItem={({ item }) => (
           <ItemChooserItemRow item={item} chosen={isChosen(item)} toggleChosen={toggleChosen} />
-        )
-      } />
+        )}
+      />
       <TouchableOpacity onPress={clear}>
         <Text style={stepStyles.clearButton}>Clear</Text>
       </TouchableOpacity>

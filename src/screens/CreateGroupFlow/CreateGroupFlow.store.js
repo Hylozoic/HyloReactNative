@@ -60,25 +60,26 @@ export function createGroup (groupData) {
   return {
     type: CREATE_GROUP,
     graphql: {
-      query: `mutation ($data: GroupInput) {
-        createGroup(data: $data) {
-          ${groupFieldsFragment({ withJoinQuestions: true })}
-          memberships {
-            items {
-              id
-              hasModeratorRole
-              person {
+      query: `
+        mutation ($data: GroupInput) {
+          createGroup(data: $data) {
+            ${groupFieldsFragment({ withJoinQuestions: true })}
+            memberships {
+              items {
                 id
-              }
-              settings {
-                sendEmail
-                showJoinForm
-                sendPushNotifications
+                hasModeratorRole
+                person {
+                  id
+                }
+                settings {
+                  sendEmail
+                  showJoinForm
+                  sendPushNotifications
+                }
               }
             }
           }
         }
-      }
       `,
       variables: {
         data: groupData

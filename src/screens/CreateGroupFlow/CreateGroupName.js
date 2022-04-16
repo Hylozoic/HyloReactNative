@@ -10,7 +10,7 @@ import {
   clearCreateGroupStore
 } from './CreateGroupFlow.store'
 import styles from './CreateGroupFlow.styles'
-import { ALL_GROUP_ID } from 'store/models/Group'
+import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import getRouteParam from 'store/selectors/getRouteParam'
 
 export default function CreateGroupName ({ route }) {
@@ -43,7 +43,7 @@ export default function CreateGroupName ({ route }) {
   }, [groupName]))
 
   useFocusEffect(useCallback(() => {
-    if (!edited && currentGroupId !== ALL_GROUP_ID) {
+    if (!edited && ![ALL_GROUP_ID, PUBLIC_GROUP_ID].includes(currentGroupId)) {
       dispatch(updateGroupData({ parentIds: [currentGroupId] }))
     }
   }, [edited, currentGroupId]))
