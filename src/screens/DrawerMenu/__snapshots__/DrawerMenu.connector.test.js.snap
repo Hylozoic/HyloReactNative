@@ -73,7 +73,6 @@ Object {
     "closeDrawer": [MockFunction],
     "navigate": [MockFunction],
   },
-  "selectGroup": [MockFunction],
 }
 `;
 
@@ -93,6 +92,5 @@ Object {
     "closeDrawer": [MockFunction],
     "navigate": [MockFunction],
   },
-  "selectGroup": [MockFunction],
 }
 `;
