@@ -6,6 +6,8 @@ import getGroupFromParamsOrCurrent from 'store/selectors/getGroupFromParamsOrCur
 import { isContextGroup } from 'store/models/Group'
 import { isModalScreen } from 'navigation/linking/helpers'
 
+// DEPRECATED: Group selection should happen exclusively in `AuthRootNavigator`
+
 // NOTE: This forces selection of the group provided in a deeplink to the group feed
 // Generalize skipping this if in any modal?
 export default function useGroupSelect () {

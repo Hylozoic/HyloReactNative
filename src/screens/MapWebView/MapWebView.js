@@ -3,7 +3,6 @@ import { useFocusEffect } from '@react-navigation/core'
 import { useSelector } from 'react-redux'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import { navigateToLinkingPath } from 'navigation/linking'
-import useGroupSelect from 'hooks/useGroupSelect'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import HyloWebView from 'screens/HyloWebView'
 

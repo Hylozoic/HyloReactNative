@@ -10,7 +10,6 @@ import getRouteParam from 'store/selectors/getRouteParam'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getMe from 'store/selectors/getMe'
 import getMemberships from 'store/selectors/getMemberships'
-import useGroupSelect from 'hooks/useGroupSelect'
 import {
   fetchGroupTopic,
   getGroupTopic,
@@ -43,12 +42,13 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
   const memberships = useSelector(getMemberships)
   const currentUserHasMemberships = !isEmpty(memberships)
   const group = useSelector(getCurrentGroup)
+  console.log('!!! group', group?.slug)
   const groupTopic = useSelector(state => getGroupTopic(state, { topicName, slug: group?.slug }))
   const topic = groupTopic?.topic?.ref
   const topicSubscribed = groupTopic?.isSubscribed
   const topicPostsTotal = groupTopic?.postsTotal
   const topicFollowersTotal = groupTopic?.followersTotal
-  const goToGroup = groupId => makeGoToGroup(navigation, dispatch)(groupId, memberships, group.id)
+  const goToGroup = groupSlug => makeGoToGroup(navigation, dispatch)(groupSlug, memberships, group.slug)
   const goToPostEditor = (params = {}) => navigation.navigate('Edit Post', { groupId: group.id, ...params })
   const goToPostDetails = id => navigation.navigate('Post Details', { id })
   const goToCreateGroup = () => navigation.navigate('Create Group')

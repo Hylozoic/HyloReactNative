@@ -297,7 +297,7 @@ export function GroupRow ({ membership, goToGroup, editing }) {
   return (
     <View style={styles.groupRow}>
       <Image source={{ uri: group.avatarUrl }} style={styles.groupAvatar} />
-      <TouchableOpacity onPress={() => goToGroup(group.id)} disabled={editing}>
+      <TouchableOpacity onPress={() => goToGroup(group.slug)} disabled={editing}>
         <Text style={styles.groupName}>{group.name}</Text>
       </TouchableOpacity>
       {hasModeratorRole && <Icon name='Star' style={styles.starIcon} />}

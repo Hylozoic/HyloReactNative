@@ -4,8 +4,6 @@ import { TestRoot } from 'util/testing'
 import MemberProfile from 'screens/MemberProfile'
 import MockedScreen from 'util/testing/MockedScreen'
 
-jest.mock('hooks/useGroupSelect')
-
 it('default render matches snapshot', async () => {
   const { toJSON } = render(
     <TestRoot>

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   Text, View, TextInput, ScrollView, TouchableOpacity
 } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { navigateToLinkingPath } from 'navigation/linking'
 import ErrorBubble from 'components/ErrorBubble'
 import { accessibilityDescription, visibilityDescription } from 'store/models/Group'
 import Avatar from 'components/Avatar'
@@ -13,7 +15,6 @@ import {
 } from './CreateGroupFlow.store'
 import { white } from 'style/colors'
 import styles from './CreateGroupFlow.styles'
-import { useNavigation } from '@react-navigation/native'
 
 export default function CreateGroupReview () {
   const navigation = useNavigation()
@@ -36,7 +37,7 @@ export default function CreateGroupReview () {
 
       if (newGroup) {
         dispatch(clearCreateGroupStore())
-        navigation.navigate('Feed', { groupId: newGroup.id })
+        navigateToLinkingPath(`/groups/${newGroup.slug}`)
       } else {
         setError('Group may have been created, but there was an error. Please contact Hylo support.')
       }

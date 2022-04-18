@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useFocusEffect } from '@react-navigation/native'
 import { Text, View, ScrollView, TextInput } from 'react-native'
-import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import ErrorBubble from 'components/ErrorBubble'
 import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
 import {

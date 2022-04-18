@@ -1,23 +1,19 @@
 import confirmNavigate from 'util/confirmNavigate'
-import selectGroup from 'store/actions/selectGroup'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
+import { navigateToLinkingPath } from 'navigation/linking'
 
 export default function makeGoToGroup ({ navigate }, dispatch, confirm = true) {
-  return (groupId, myMemberships, currentGroupId) => {
+  return (groupSlug, myMemberships, currentGroupSlug) => {
     if (!myMemberships) {
       throw new Error('Must provide current user memberships as 2nd parameter')
     }
-    if (groupId == currentGroupId) return
+    if (groupSlug == currentGroupSlug) return
 
-    const canViewGroup = myMemberships.find(m => m.group.id === groupId)
-      || groupId == PUBLIC_GROUP_ID
-      || groupId == ALL_GROUP_ID
+    const canViewGroup = myMemberships.find(m => m.group.slug === groupSlug) ||
+      [PUBLIC_GROUP_ID, ALL_GROUP_ID].includes(groupSlug)
 
     if (canViewGroup) {
-      const goToGroup = () => {
-        dispatch(selectGroup(groupId))
-        navigate('Feed', { groupId })
-      }
+      const goToGroup = () => navigateToLinkingPath(`/groups/${groupSlug}`)
       confirm
         ? confirmNavigate(goToGroup, {
             title: 'Changing Groups',
@@ -25,7 +21,7 @@ export default function makeGoToGroup ({ navigate }, dispatch, confirm = true) {
           })
         : goToGroup()
     } else {
-      navigate('Group Detail', { groupId })
+      navigate('Group Detail', { groupSlug })
     }
   }
 }

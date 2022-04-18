@@ -90,7 +90,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
   const updateUserSettings = isMe ? dispatchProps.updateUserSettings : () => {}
 
   const goToMemberProfile = () => navigation.navigate('Member', { id })
-  const goToGroup = groupId => dispatchProps.goToGroup(groupId, memberships, currentGroup.id)
+  const goToGroup = groupSlug => dispatchProps.goToGroup(groupSlug, memberships, currentGroup.slug)
 
   return {
     ...stateProps,

@@ -3,11 +3,10 @@ import { get } from 'lodash/fp'
 import getMe from 'store/selectors/getMe'
 import getMemberships from 'store/selectors/getMemberships'
 import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
-import logout from 'store/actions/logout'
-import selectGroup from 'store/actions/selectGroup'
 import { PUBLIC_GROUP, ALL_GROUP } from 'store/models/Group'
 import getCanModerate from 'store/selectors/getCanModerate'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import { navigateToLinkingPath } from 'navigation/linking'
 
 export function mapStateToProps (state, props) {
   const topGroups = [
@@ -32,13 +31,9 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export const mapDispatchToProps = {
-  logout,
-  selectGroup
-}
+export const mapDispatchToProps = {}
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { selectGroup } = dispatchProps
   const { currentUser, canModerateCurrentGroup } = stateProps
   const { navigation } = ownProps
 
@@ -47,8 +42,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     goToGroup: group => {
-      selectGroup(group.id)
-      navigation.navigate('Feed', { groupId: group.id })
+      navigateToLinkingPath(`/groups/${group.slug}`)
     },
     goToMyProfile: () => {
       navigation.navigate('Members', { screen: 'Member', params: { id: currentUser.id } })

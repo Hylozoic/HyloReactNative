@@ -68,7 +68,7 @@ export function GroupsListSummary ({ groups, goToGroup, expandFunc }) {
   const othersText = n => n === 1 ? '1 other' : `${n} others`
   return (
     <View style={[styles.groupList, styles.row]}>
-      <TouchableOpacity onPress={() => goToGroup && goToGroup(groups[0].id)} style={{ flex: -1 }}><Text style={styles.linkText} numberOfLines={1}>{groups[0].name}</Text></TouchableOpacity>
+      <TouchableOpacity onPress={() => goToGroup && goToGroup(groups[0].slug)} style={{ flex: -1 }}><Text style={styles.linkText} numberOfLines={1}>{groups[0].name}</Text></TouchableOpacity>
       {moreGroups && (
         <View style={[styles.row, { flex: 0 }]}>
           <Text style={[styles.reminderText]}> and </Text>

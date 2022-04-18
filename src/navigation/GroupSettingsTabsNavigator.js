@@ -3,11 +3,11 @@ import { View, Text, StyleSheet } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import fetchGroupSettings from 'store/actions/fetchGroupSettings'
-import getGroupFromParamsOrCurrent from 'store/selectors/getGroupFromParamsOrCurrent'
 import { isIOS } from 'util/platform'
 import Avatar from 'components/Avatar'
 import { caribbeanGreen, rhino05, rhino30, rhino60, white } from 'style/colors'
 import GroupSettingsWebView from 'screens/GroupSettingsWebView'
+import getCurrentGroup from 'store/selectors/getCurrentGroup';
 
 // Existing settings screens built not currently in use:
 // import GroupSettingsComponent from 'screens/GroupSettings'
@@ -17,9 +17,7 @@ import GroupSettingsWebView from 'screens/GroupSettingsWebView'
 const GroupSettings = createMaterialTopTabNavigator()
 export default function GroupSettingsTabsNavigator ({ navigation, route }) {
   const dispatch = useDispatch()
-  // Use group from params or current group if none found
-  const routeParams = route?.params?.params
-  const selectedGroup = useSelector(state => getGroupFromParamsOrCurrent(state, routeParams))
+  const selectedGroup = useSelector(getCurrentGroup)
   const groupName = selectedGroup?.name
   const navigatorProps = {
     screenOptions: {

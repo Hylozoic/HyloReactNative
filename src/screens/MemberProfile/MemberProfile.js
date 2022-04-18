@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Text, View, Image, TouchableOpacity } from 'react-native'
 import { isModalScreen } from 'navigation/linking/helpers'
-import useGroupSelect from 'hooks/useGroupSelect'
 import Loading from 'components/Loading'
 import MemberFeed from './MemberFeed'
 import MemberHeader from './MemberHeader'

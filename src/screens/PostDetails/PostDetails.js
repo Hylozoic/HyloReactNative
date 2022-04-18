@@ -8,7 +8,6 @@ import { KeyboardAccessoryView } from '@flyerhq/react-native-keyboard-accessory-
 import { get, isEmpty, find } from 'lodash/fp'
 import { isIOS } from 'util/platform'
 import { isModalScreen } from 'navigation/linking/helpers'
-import useGroupSelect from 'hooks/useGroupSelect'
 import SocketSubscriber from 'components/SocketSubscriber'
 import Comments from 'components/Comments'
 import PostBody from 'components/PostCard/PostBody'

@@ -20,10 +20,9 @@ import styles from './GroupDetail.styles'
 export default function GroupDetail ({ navigation, route }) {
   const dispatch = useDispatch()
   const isModal = isModalScreen(route?.name)
-  const groupId = route.params.groupId
   const groupSlug = route.params.groupSlug
-  const group = useSelector(state => presentGroup(getGroup(state, { id: groupId, slug: groupSlug })))
-  const hasPendingRequest = useSelector(getMyJoinRequests).find(joinRequest => joinRequest.group.id === groupId)
+  const group = useSelector(state => presentGroup(getGroup(state, { slug: groupSlug })))
+  const hasPendingRequest = useSelector(getMyJoinRequests).find(joinRequest => joinRequest.group.slug === groupSlug)
   const myMemberships = useSelector(getMemberships)
   const [isMember, setIsMember] = useState()
   const [loading, setLoading] = useState(true)
@@ -32,12 +31,12 @@ export default function GroupDetail ({ navigation, route }) {
   useEffect(() => {
     const asyncFunc = async () => {
       setLoading(true)
-      await dispatch(fetchGroupDetailsAction({ id: groupId, slug: groupSlug }))
+      await dispatch(fetchGroupDetailsAction({ slug: groupSlug }))
       setLoading(false)
     }
     asyncFunc()
-    setIsMember(myMemberships.find(m => m.group.id === group?.id))
-  }, [groupId, groupSlug])
+    setIsMember(myMemberships.find(m => m.group.slug === groupSlug))
+  }, [groupSlug])
 
   if (loading) return <Loading />
 
@@ -52,7 +51,7 @@ export default function GroupDetail ({ navigation, route }) {
     }
     setLoading(true)
     await dispatch(joinRequestAction(group.id))
-    navigation.navigate(isModal ? 'Map' : 'Feed', { groupId: group.id })
+    navigation.navigate(isModal ? 'Map' : 'Feed', { groupSlug: group.slug })
     setLoading(false)
   }
 
@@ -66,9 +65,9 @@ export default function GroupDetail ({ navigation, route }) {
     setLoading(false)
   }
 
-  const goToGroupDetail = group => navigation.navigate('Group Detail', { groupId: group?.id })
+  const goToGroupDetail = group => navigation.navigate('Group Detail', { groupSlug: group?.slug })
 
-  const goToGroup = group => navigation.navigate(isModal ? 'Map' : 'Feed', { groupId: group.id })
+  const goToGroup = group => navigation.navigate(isModal ? 'Map' : 'Feed', { groupSlug: group?.slug })
 
   const canJoin = !hasPendingRequest &&
     [GROUP_ACCESSIBILITY.Open, GROUP_ACCESSIBILITY.Restricted].includes(group.accessibility)
