@@ -3,7 +3,6 @@
 exports[`mapDispatchToProps returns the right keys 1`] = `
 Object {
   "fetchGroupTopics": [Function],
-  "selectGroup": [Function],
   "setTerm": [Function],
   "setTopicSubscribe": [Function],
 }

@@ -39,13 +39,12 @@ export default function AuthRootNavigator () {
   const routeParams = route?.params
   const isModal = isModalScreen(route?.name)
   const groupSlugRouteParam = get('params.params.params.params.groupSlug', routeParams)
-  const groupFromGroupSlug = useSelector(state => getGroup(state, { slug: groupSlugRouteParam }))
+
+  const groupFromGroupSlugRouteParam = useSelector(state => getGroup(state, { slug: groupSlugRouteParam }))
   const currentlySelectedGroup = useSelector(getCurrentGroup)
   const lastViewedGroup = useSelector(getLastViewedGroup)
   const returnToOnAuthPath = useSelector(getReturnToOnAuthPath)
   const dispatch = useDispatch()
-
-  console.log('!!! here', groupSlugRouteParam)
 
   const [loading, setLoading] = useState(true)
 
@@ -81,15 +80,15 @@ export default function AuthRootNavigator () {
 
   useFocusEffect(
     useCallback(() => {
-      if (!loading && !isModal) {
-        if (groupFromGroupSlug?.id) {
-          // remove `groupSlug` route param?
-          dispatch(selectGroupAction(groupFromGroupSlug?.id))
+      if (!loading && !isModal && groupFromGroupSlugRouteParam?.id) {
+        if (groupFromGroupSlugRouteParam?.id !== currentlySelectedGroup?.id) {
+          dispatch(selectGroupAction(groupFromGroupSlugRouteParam?.id))
         } else if (!currentlySelectedGroup?.id) {
-          dispatch(selectGroupAction(lastViewedGroup?.id || PUBLIC_GROUP_ID))
+          // Forces default group selection if none selected
+          dispatch(selectGroupAction())
         }
       }
-    }, [loading, isModal, groupFromGroupSlug?.id, currentlySelectedGroup?.id, lastViewedGroup?.id, dispatch])
+    }, [loading, isModal, groupFromGroupSlugRouteParam?.id, currentlySelectedGroup?.id, lastViewedGroup?.id, dispatch])
   )
 
   const navigatorProps = {

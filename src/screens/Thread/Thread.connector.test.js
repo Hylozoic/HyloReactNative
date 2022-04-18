@@ -1,4 +1,4 @@
-import { mapStateToProps, mapDispatchToProps, mergeProps } from './Thread.connector'
+import { mapStateToProps, mapDispatchToProps } from './Thread.connector'
 import { ALL_GROUP_ID } from 'store/models/Group'
 
 jest.mock('util/websockets', () => ({

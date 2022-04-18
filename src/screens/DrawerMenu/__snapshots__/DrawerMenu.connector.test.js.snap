@@ -1,11 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mapDispatchToProps matches the last snapshot 1`] = `
-Object {
-  "logout": [Function],
-  "selectGroup": [Function],
-}
-`;
+exports[`mapDispatchToProps matches the last snapshot 1`] = `Object {}`;
 
 exports[`mapStateToProps matches the latest snapshot 1`] = `
 Object {

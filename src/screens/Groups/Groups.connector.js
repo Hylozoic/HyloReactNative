@@ -3,7 +3,6 @@ import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import getMyJoinRequests from 'store/selectors/getMyJoinRequests'
 import getMemberships from 'store/selectors/getMemberships'
-import selectGroup from 'store/actions/selectGroup'
 
 export function mapStateToProps (state, props) {
   const group = getCurrentGroup(state, props)
@@ -35,9 +34,7 @@ export function mapStateToProps (state, props) {
   }
 }
 
-export const mapDispatchToProps = {
-  selectGroup
-}
+export const mapDispatchToProps = {}
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
   const { navigation } = ownProps

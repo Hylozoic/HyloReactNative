@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import selectGroup from 'store/actions/selectGroup'
 import fetchGroupTopics, { FETCH_GROUP_TOPICS } from 'store/actions/fetchGroupTopics'
 import {
   getGroupTopics, presentGroupTopic, setTopicSubscribe, getTerm, setTerm
@@ -40,8 +39,7 @@ export function mapStateToProps (state, props) {
 export const mapDispatchToProps = {
   fetchGroupTopics,
   setTopicSubscribe,
-  setTerm,
-  selectGroup
+  setTerm
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {

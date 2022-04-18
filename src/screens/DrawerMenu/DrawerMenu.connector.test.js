@@ -1,8 +1,7 @@
 import {
   mapStateToProps,
   mapDispatchToProps,
-  mergeProps,
-  partitionGroups
+  mergeProps
 } from './DrawerMenu.connector'
 import orm from 'store/models'
 
@@ -37,9 +36,7 @@ describe('mergeProps', () => {
       canModerateCurrentGroup: true,
       name: 'Roy Rogers'
     }
-    dispatchProps = {
-      selectGroup: jest.fn(x => x)
-    }
+    dispatchProps = {}
     ownProps = {
       navigation: {
         navigate: jest.fn(x => x),
@@ -59,12 +56,6 @@ describe('mergeProps', () => {
   })
 
   describe('canModerate functions are bound', () => {
-    it('goToGroup', () => {
-      const group = { id: 'testgroup' }
-      props.goToGroup(group)
-      expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
-    })
-
     it('should goToMyProfile', () => {
       props.goToMyProfile()
       expect(ownProps.navigation.navigate).toHaveBeenCalledTimes(1)
