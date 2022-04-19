@@ -2,6 +2,8 @@ import { mapStateToProps, mapDispatchToProps, mergeProps } from './Topics.connec
 import { MODULE_NAME } from './Topics.store'
 import { FETCH_GROUP_TOPICS } from 'store/actions/fetchGroupTopics'
 
+jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
+
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {
     const state = {

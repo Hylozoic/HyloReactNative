@@ -6,6 +6,8 @@ import orm from 'store/models'
 
 let state, props, stateProps, dispatchProps
 
+jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
+
 beforeAll(() => {
   const session = orm.session(orm.getEmptyState())
   session.Group.create({ id: '2', name: 'Home' })

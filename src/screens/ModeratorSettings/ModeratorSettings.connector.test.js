@@ -1,6 +1,8 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './ModeratorSettings.connector'
 import orm from 'store/models'
 
+jest.mock('store/selectors/getCurrentGroupId', () => () => '99')
+
 let state
 beforeAll(() => {
   const session = orm.session(orm.getEmptyState())

@@ -1,7 +1,10 @@
 import { mapStateToProps, mapDispatchToProps, mergeProps } from './InvitePeople.connector'
 import orm from 'store/models'
 
+jest.mock('store/selectors/getCurrentGroupId', () => () => 99)
+
 let state
+
 beforeAll(() => {
   const session = orm.session(orm.getEmptyState())
   const group = session.Group.create({ id: '99', slug: 'foo', inviteLink: '/38adslkjlkj3' })

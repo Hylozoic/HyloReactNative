@@ -17,21 +17,4 @@ describe('getCurrentGroupId', () => {
     const groupId = getCurrentGroupId(state)
     expect(groupId).toBe(55)
   })
-
-  it('gets by current user', () => {
-    const group1 = session.Group.create({ id: '55', slug: 'myslug' })
-    session.Me.create({
-      id: '10',
-      memberships: [session.Membership.create({
-        id: '345',
-        group: group1.id,
-        lastViewedAt: new Date(),
-        hasModeratorRole: true
-      })]
-    })
-
-    const state = { orm: session.state }
-    const groupId = getCurrentGroupId(state)
-    expect(groupId).toBe(group1.id)
-  })
 })

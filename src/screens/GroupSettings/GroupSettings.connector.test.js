@@ -3,6 +3,8 @@ import orm from 'store/models'
 
 let state
 
+jest.mock('store/selectors/getCurrentGroupId', () => () => '99')
+
 describe('GroupSettings.connector', () => {
   let groupId
   beforeAll(() => {

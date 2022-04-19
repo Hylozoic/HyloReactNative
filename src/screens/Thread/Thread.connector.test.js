@@ -5,6 +5,8 @@ jest.mock('util/websockets', () => ({
   sendIsTyping: jest.fn()
 }))
 
+jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
+
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {
     const state = {

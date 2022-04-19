@@ -7,6 +7,8 @@ const details = 'details'
 let group1, group2
 let props, state
 
+jest.mock('store/selectors/getCurrentGroupId', () => () => 7)
+
 describe('PostEditor mapStateToProps', () => {
   beforeEach(() => {
     const session = orm.session(orm.getEmptyState())

@@ -3,6 +3,8 @@ import { render } from '@testing-library/react-native'
 import { TestRoot } from 'util/testing'
 import InvitePeople from 'screens/InvitePeople'
 
+jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
+
 it('default render matches snapshot', async () => {
   const { toJSON } = render(
     <TestRoot>

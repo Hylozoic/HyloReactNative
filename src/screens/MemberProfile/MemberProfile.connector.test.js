@@ -4,6 +4,8 @@ import { FETCH_PERSON } from './MemberProfile.store'
 
 let ormSession
 
+jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
+
 describe('mapStateToProps', () => {
   beforeAll(() => {
     ormSession = orm.session(orm.getEmptyState())

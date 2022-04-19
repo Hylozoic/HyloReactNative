@@ -2,6 +2,8 @@ import { mapStateToProps, mapDispatchToProps, mergeProps, makeFetchOpts } from '
 import { MODULE_NAME } from './Members.store'
 import orm from 'store/models'
 
+jest.mock('store/selectors/getCurrentGroupId', () => () => 10)
+
 describe('makeFetchOpts', () => {
   it('handles a group', () => {
     const props = {
