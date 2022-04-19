@@ -1,9 +1,10 @@
 import { Linking } from 'react-native'
-import { isEmpty, find } from 'lodash/fp'
+import { isEmpty } from 'lodash/fp'
 import {
   getActionFromState,
   subscribe,
   getStateFromPath as getStateFromPathDefault,
+  getInitialURL,
   CommonActions
 } from '@react-navigation/native'
 import { match } from 'path-to-regexp'
