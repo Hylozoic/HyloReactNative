@@ -17,6 +17,7 @@ export default function (props) {
 export class FeedList extends React.Component {
   fetchOrShowCached () {
     const { hasMore, postIds, fetchPosts } = this.props
+
     if (fetchPosts && isEmpty(postIds) && hasMore !== false) {
       fetchPosts()
     }

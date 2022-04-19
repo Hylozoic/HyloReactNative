@@ -28,7 +28,6 @@ export default function RootNavigator () {
   const dispatch = useDispatch()
   const isAuthorized = useSelector(getAuthorized)
   const [loading, setLoading] = useState(true)
-  const [navigationIsReady, setNavigationIsReady] = useState(false)
 
   // Here and `JoinGroup` should be the only place we check for a session from the API.
   // Routes will not be available until this check is complete.
@@ -47,12 +46,6 @@ export default function RootNavigator () {
     })
   }, [])
 
-  useEffect(() => {
-    if (navigationIsReady) {
-      RNBootSplash.hide()
-    }
-  }, [dispatch, loading, navigationIsReady])
-
   if (loading) return <LoadingScreen />
 
   const navigatorProps = {
@@ -66,7 +59,7 @@ export default function RootNavigator () {
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}
-        onReady={() => { setNavigationIsReady(true) }}
+        onReady={() => { RNBootSplash.hide() }}
         // To get a map of the current navigation state:
         // onStateChange={state => console.log('!!! onStateChange:', state.routes)}
       >

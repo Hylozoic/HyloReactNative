@@ -1,10 +1,10 @@
 import { Linking } from 'react-native'
-import { isEmpty } from 'lodash/fp'
+import { isEmpty, find } from 'lodash/fp'
 import {
   getActionFromState,
   subscribe,
-  getInitialURL,
-  getStateFromPath as getStateFromPathDefault
+  getStateFromPath as getStateFromPathDefault,
+  CommonActions
 } from '@react-navigation/native'
 import { match } from 'path-to-regexp'
 import { URL } from 'react-native-url-polyfill'
@@ -49,6 +49,7 @@ export const routesConfig = {
   '/login':                                                  `${NON_AUTH_ROOT_SCREEN_NAME}/Login`,
   '/signup/:step(verify-email)':                             `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/SignupEmailValidation`,
   '/signup/:step?':                                          `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/Signup Intro`,
+  '/signup':                                          `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/Signup Intro`,
   '/noo/login/(jwt|token)':                                  'LoginByTokenHandler',
   '/h/use-invitation':                                       'JoinGroup',
   '/:context(groups)/:groupSlug/join/:accessCode':           'JoinGroup',
@@ -138,10 +139,20 @@ export const navigateToLinkingPath = async (providedUrl, reset = false) => {
   const state = getStateFromPath(linkingPath)
   const action = getActionFromState(state)
 
-  if (reset) console.log('!!! would reset nav but currently won\'t because probably not necessary !!!!')
-  // if (reset) resetToInitialNavState()
+  if (reset) {
+    // This works for reseting the initial screen to be `Group Navigation`
+    // but needs a recursive and dynamic `route.params` method instead
+    // before it should be used
+    // action.payload.params.params.params.params.initial = false
 
-  navigationRef.current?.dispatch(action)
+    navigationRef.current.dispatch(
+      CommonActions.reset({
+        routes: [action.payload]
+      })
+    )
+  } else {
+    navigationRef.current?.dispatch(action)
+  }
 }
 
 export function getScreenPathWithParamsFromPath (incomingPathAndQuerystring, routes = routesConfig) {
@@ -159,6 +170,9 @@ export function getScreenPathWithParamsFromPath (incomingPathAndQuerystring, rou
 
       if (!isEmpty(incomingQuerystring)) routeParams.push(incomingQuerystring.substring(1))
       if (!isEmpty(pathMatch.params)) routeParams.push(queryString.stringify(pathMatch.params))
+
+      // For now required by JoinGroup
+      routeParams.push(`originalLinkingPath=${encodeURIComponent(incomingPathAndQuerystring)}`)
 
       const routeParamsQueryString = routeParams.join('&')
 

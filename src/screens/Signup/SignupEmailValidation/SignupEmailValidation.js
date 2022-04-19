@@ -20,6 +20,10 @@ export default function SignupEmailValidation ({ navigation, route }) {
   const [loading, setLoading] = useState()
   const [verificationCode, setVerificationCode] = useState()
   const [error, setError] = useState()
+
+  const email = route.params?.email
+  const token = route.params?.token
+
   const verificationCodeRef = useBlurOnFulfill({
     value: verificationCode,
     cellCount: CODE_LENGTH
@@ -28,8 +32,6 @@ export default function SignupEmailValidation ({ navigation, route }) {
     value: verificationCode,
     setValue: setVerificationCode
   })
-  const email = route.params?.email
-  const token = route.params?.token
 
   useFocusEffect(
     useCallback(() => {

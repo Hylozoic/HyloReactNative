@@ -86,7 +86,7 @@ export default function Signup () {
       const result = await dispatch(sendEmailVerification(email))
 
       if (result.payload.getData().success) {
-        navigateToLinkingPath(`/signup/verify-email?email=${encodeURIComponent(email)}`, true)
+        navigateToLinkingPath(`/signup/verify-email?email=${encodeURIComponent(email)}`)
       } else {
         throw genericError
       }

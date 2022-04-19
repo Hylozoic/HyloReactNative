@@ -67,28 +67,25 @@ export default function AuthRootNavigator () {
             console.warn('Not registering to OneSignal for push notifications. OneSignal did not successfully retrieve a userId')
           }
         }
-
-        if (returnToOnAuthPath) {
-          dispatch(setReturnToOnAuthPath())
-          navigateToLinkingPath(returnToOnAuthPath)
-        } else {
-          navigateToLinkingPath('/')
-        }
       })()
     }, [])
   )
 
   useFocusEffect(
     useCallback(() => {
-      if (!loading && !isModal && groupFromGroupSlugRouteParam?.id) {
-        if (groupFromGroupSlugRouteParam?.id !== currentlySelectedGroup?.id) {
+      if (!loading) {
+        if (returnToOnAuthPath) {
+          dispatch(setReturnToOnAuthPath())
+          navigateToLinkingPath(returnToOnAuthPath, true)
+        } else if (!isModal && groupFromGroupSlugRouteParam?.id) {
+          // if (groupFromGroupSlugRouteParam?.id !== currentlySelectedGroup?.id) {
           dispatch(selectGroupAction(groupFromGroupSlugRouteParam?.id))
+          // }
         } else if (!currentlySelectedGroup?.id) {
-          // Forces default group selection if none selected
-          dispatch(selectGroupAction())
+          dispatch(selectGroupAction(lastViewedGroup?.id || PUBLIC_GROUP_ID))
         }
       }
-    }, [loading, isModal, groupFromGroupSlugRouteParam?.id, currentlySelectedGroup?.id, lastViewedGroup?.id, dispatch])
+    }, [loading, isModal, returnToOnAuthPath, groupFromGroupSlugRouteParam?.id, currentlySelectedGroup?.id, lastViewedGroup?.id, dispatch])
   )
 
   const navigatorProps = {

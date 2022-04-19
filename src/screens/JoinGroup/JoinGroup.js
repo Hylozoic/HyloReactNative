@@ -40,7 +40,7 @@ export default function JoinGroup (props) {
             const groupSlug = newMembership?.group?.slug
 
             if (groupSlug) {
-              navigateToLinkingPath(`/groups/${groupSlug}`)
+              navigateToLinkingPath(`/groups/${groupSlug}`, true)
             } else {
               throw new Error('Join group was unsuccessful')
             }

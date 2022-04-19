@@ -1,12 +1,12 @@
 import React from 'react'
-import { Modal } from 'react-native'
+import { SafeAreaView } from 'react-native'
 import Loading from 'components/Loading'
 
-export default function LoadingScreen ({ visible = true }) {
+export default function LoadingScreen () {
   return (
-    <Modal visible={visible}>
-      <Loading size='large' style={styles.container} />
-    </Modal>
+    <SafeAreaView style={styles.container}>
+      <Loading size='large' />
+    </SafeAreaView>
   )
 }
 
