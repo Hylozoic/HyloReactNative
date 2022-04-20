@@ -1,5 +1,5 @@
 import { Linking } from 'react-native'
-import { isEmpty } from 'lodash/fp'
+import { isEmpty, get, set } from 'lodash/fp'
 import {
   getActionFromState,
   subscribe,
@@ -50,7 +50,7 @@ export const routesConfig = {
   '/login':                                                  `${NON_AUTH_ROOT_SCREEN_NAME}/Login`,
   '/signup/:step(verify-email)':                             `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/SignupEmailValidation`,
   '/signup/:step?':                                          `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/Signup Intro`,
-  '/signup':                                          `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/Signup Intro`,
+  '/signup':                                                 `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/Signup Intro`,
   '/noo/login/(jwt|token)':                                  'LoginByTokenHandler',
   '/h/use-invitation':                                       'JoinGroup',
   '/:context(groups)/:groupSlug/join/:accessCode':           'JoinGroup',
@@ -133,18 +133,36 @@ export async function openURL (providedUrlOrPath, options = {}) {
   }
 }
 
+const screenLevelInState = (navState, targetScreenName = 'Feed', level = 0) => {
+  level += 1
+
+  if (navState?.screen === targetScreenName || navState?.name === targetScreenName) {
+    return level
+  }
+
+  if (navState?.params) {
+    return screenLevelInState(navState.params, targetScreenName, level)
+  } else {
+    return 0
+  }
+}
+
 // This could possibly be replaced by updating the logic applied by Linking.openURL
 export const navigateToLinkingPath = async (providedUrl, reset = false) => {
   const linkingURL = new URL(providedUrl, DEFAULT_APP_HOST)
   const linkingPath = `${linkingURL.pathname}${linkingURL.search}`
   const state = getStateFromPath(linkingPath)
-  const action = getActionFromState(state)
+  let action = getActionFromState(state)
 
   if (reset) {
-    // This works for reseting the initial screen to be `Group Navigation`
-    // but needs a recursive and dynamic `route.params` method instead
-    // before it should be used
-    // action.payload.params.params.params.params.initial = false
+    const feedScreenLevel = screenLevelInState(action.payload)
+
+    if (feedScreenLevel !== 0) {
+      // This maintains `Group Navigation` as the the initial screen while on Home Tab
+      // in particular when navigating to the `Feed` from links.
+      // Same as this, but dynamic: `action.payload.params.params.params.params.initial = false`
+      action = set(`payload${'.params'.repeat(feedScreenLevel - 1)}.initial`, false, action)
+    }
 
     navigationRef.current.dispatch(
       CommonActions.reset({
