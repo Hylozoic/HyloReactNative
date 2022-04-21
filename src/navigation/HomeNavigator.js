@@ -18,6 +18,7 @@ import MapWebView from 'screens/MapWebView/MapWebView'
 const HomeTab = createStackNavigator()
 export default function HomeNavigator () {
   const navigatorProps = {
+    initialRouteName: 'Group Navigation',
     screenOptions: {
       headerMode: 'float',
       header: headerProps => <TabStackHeader {...headerProps} />
@@ -27,7 +28,7 @@ export default function HomeNavigator () {
   return (
     <HomeTab.Navigator {...navigatorProps}>
       <HomeTab.Screen name='Group Navigation' component={GroupNavigation} />
-      <HomeTab.Screen name='Feed' component={Feed} />
+      <HomeTab.Screen name='Feed' component={Feed} options={{ animationEnabled: false }} />
       <HomeTab.Screen name='Topic Feed' key='Topic Feed' component={Feed} />
       <HomeTab.Screen name='Post Details' key='Post Details' component={PostDetails} />
       <HomeTab.Screen name='Projects' component={Feed} initialParams={{ feedType: 'project' }} />

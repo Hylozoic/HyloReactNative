@@ -155,12 +155,12 @@ export const navigateToLinkingPath = async (providedUrl, reset = false) => {
   let action = getActionFromState(state)
 
   if (reset) {
-    const feedScreenLevel = screenLevelInState(action.payload)
+    const feedScreenLevel = screenLevelInState(action.payload, 'Feed')
 
     if (feedScreenLevel !== 0) {
       // This maintains `Group Navigation` as the the initial screen while on Home Tab
       // in particular when navigating to the `Feed` from links.
-      // Same as this, but dynamic: `action.payload.params.params.params.params.initial = false`
+      // Same as this, but dynamic: `action.pyload.params.params.params.params.initial = false`
       action = set(`payload${'.params'.repeat(feedScreenLevel - 1)}.initial`, false, action)
     }
 
@@ -173,6 +173,11 @@ export const navigateToLinkingPath = async (providedUrl, reset = false) => {
     navigationRef.current?.dispatch(action)
   }
 }
+
+// const getInitialURL = async () => {
+//   const initialURL = await Linking.getInitialURL()
+//   if (initialURL) store.dispatch(setReturnToOnAuthPath(initialURL))
+// }
 
 export function getScreenPathWithParamsFromPath (incomingPathAndQuerystring, routes = routesConfig) {
   const {

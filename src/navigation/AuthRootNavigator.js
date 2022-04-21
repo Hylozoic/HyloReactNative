@@ -78,11 +78,11 @@ export default function AuthRootNavigator () {
           dispatch(setReturnToOnAuthPath())
           navigateToLinkingPath(returnToOnAuthPath, true)
         } else if (!isModal && groupFromGroupSlugRouteParam?.id) {
-          // if (groupFromGroupSlugRouteParam?.id !== currentlySelectedGroup?.id) {
           dispatch(selectGroupAction(groupFromGroupSlugRouteParam?.id))
-          // }
+          navigateToLinkingPath(`groups/${groupFromGroupSlugRouteParam?.id}`)
         } else if (!currentlySelectedGroup?.id) {
           dispatch(selectGroupAction(lastViewedGroup?.id || PUBLIC_GROUP_ID))
+          navigateToLinkingPath(`groups/${lastViewedGroup?.id || PUBLIC_GROUP_ID}`)
         }
       }
     }, [loading, isModal, returnToOnAuthPath, groupFromGroupSlugRouteParam?.id, currentlySelectedGroup?.id, lastViewedGroup?.id, dispatch])
