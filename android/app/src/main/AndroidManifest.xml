@@ -32,7 +32,6 @@
           <action android:name="android.intent.action.MAIN" />
           <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
-      </activity>
         <!-- Deep linking intent-filter moved from MainActivity to react-native-boot-splash as per setup instructions -->
         <intent-filter>
           <action android:name="android.intent.action.VIEW" />
