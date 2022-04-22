@@ -35,6 +35,7 @@ export default function RootNavigator () {
     (async function () {
       await dispatch(checkLogin())
       setLoading(false)
+      RNBootSplash.hide()
     })()
   }, [])
 
