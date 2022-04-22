@@ -1,9 +1,8 @@
 package com.hylo.hyloandroid;
 
 import com.facebook.react.ReactActivity;
-
 // react-native-bootsplash
-import android.os.Bundle;
+import com.facebook.react.ReactActivityDelegate;
 import com.zoontek.rnbootsplash.RNBootSplash;
 
 public class MainActivity extends ReactActivity {
@@ -18,8 +17,15 @@ public class MainActivity extends ReactActivity {
   }
   
   // react-native-bootsplash
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    RNBootSplash.init(R.drawable.bootsplash, MainActivity.this);
+  @Override
+  protected ReactActivityDelegate createReactActivityDelegate() {
+    return new ReactActivityDelegate(this, getMainComponentName()) {
+
+      @Override
+      protected void loadApp(String appKey) {
+        RNBootSplash.init(MainActivity.this);
+        super.loadApp(appKey);
+      }
+    };
   }
 }
