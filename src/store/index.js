@@ -1,14 +1,6 @@
 import { applyMiddleware, createStore as reduxCreateStore, compose } from 'redux'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { persistStore, persistReducer } from 'redux-persist'
 import rootReducer from 'store/reducers'
 import middleware from 'store/middleware'
-
-const persistConfig = {
-  key: 'root',
-  storage: AsyncStorage,
-  whitelist: ['Signup']
-}
 
 export const initialState = {}
 
@@ -18,10 +10,9 @@ export function createInitialState (state = initialState) {
 
 export function createStore (state = initialState) {
   const emptyState = createInitialState(state)
-  const persistedRootReducer = persistReducer(persistConfig, rootReducer)
   const store = (undefined === global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
-    ? reduxCreateStore(persistedRootReducer, emptyState, compose(applyMiddleware(...middleware)))
-    : reduxCreateStore(persistedRootReducer, emptyState,
+    ? reduxCreateStore(rootReducer, emptyState, compose(applyMiddleware(...middleware)))
+    : reduxCreateStore(rootReducer, emptyState,
       global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
         applyMiddleware(...middleware)
       )
@@ -40,5 +31,4 @@ export function createStore (state = initialState) {
 
 const store = createStore()
 
-export const persistor = persistStore(store)
 export default store
