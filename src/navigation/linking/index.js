@@ -1,10 +1,10 @@
 import { Linking } from 'react-native'
-import { isEmpty, get, set } from 'lodash/fp'
+import { isEmpty, set } from 'lodash/fp'
 import {
   getActionFromState,
   subscribe,
-  getStateFromPath as getStateFromPathDefault,
   getInitialURL,
+  getStateFromPath as getStateFromPathDefault,
   CommonActions
 } from '@react-navigation/native'
 import { match } from 'path-to-regexp'
@@ -149,6 +149,7 @@ const screenLevelInState = (navState, targetScreenName = 'Feed', level = 0) => {
 
 // This could possibly be replaced by updating the logic applied by Linking.openURL
 export const navigateToLinkingPath = async (providedUrl, reset = false) => {
+  // const linkingFunc = () => {
   const linkingURL = new URL(providedUrl, DEFAULT_APP_HOST)
   const linkingPath = `${linkingURL.pathname}${linkingURL.search}`
   const state = getStateFromPath(linkingPath)
@@ -164,19 +165,27 @@ export const navigateToLinkingPath = async (providedUrl, reset = false) => {
       action = set(`payload${'.params'.repeat(feedScreenLevel - 1)}.initial`, false, action)
     }
 
-    navigationRef.current.dispatch(
+    navigationRef.dispatch(
       CommonActions.reset({
         routes: [action.payload]
       })
     )
   } else {
-    navigationRef.current?.dispatch(action)
+    navigationRef.dispatch(action)
   }
+  // }
+
+  // if (navigationRef.isReady()) {
+  //   linkingFunc()
+  // } else {
+  //   window.setTimeout(linkingFunc, 100)
+  // }
 }
 
 // const getInitialURL = async () => {
-//   const initialURL = await Linking.getInitialURL()
-//   if (initialURL) store.dispatch(setReturnToOnAuthPath(initialURL))
+//   // const initialURL = await Linking.getInitialURL()
+//   // if (initialURL) store.dispatch(setInitialURL(initialURL))
+//   return null
 // }
 
 export function getScreenPathWithParamsFromPath (incomingPathAndQuerystring, routes = routesConfig) {

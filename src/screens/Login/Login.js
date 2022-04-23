@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ScrollView, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
 import { useFocusEffect } from '@react-navigation/core'
@@ -28,13 +28,6 @@ export default function Login () {
   const bannerMessageParam = route?.params?.bannerMessage
   const bannerErrorParam = route?.params?.bannerError
 
-  useFocusEffect(
-    useCallback(() => {
-      if (bannerErrorParam) setBannerError(errorMessages(bannerErrorParam))
-      if (bannerMessageParam) setBannerMessage(bannerMessageParam)
-    }, [bannerErrorParam, bannerMessageParam])
-  )
-
   const setError = errorMessage => {
     providedFormError(errorMessages(errorMessage))
   }
@@ -43,11 +36,19 @@ export default function Login () {
     if (loadingStatus) setBannerMessage('LOGGING IN...')
   }
 
-  const clearErrors = () => {
+  const clearErrors = useCallback(() => {
     setError()
     setBannerError()
     setBannerMessage()
-  }
+  }, [])
+
+  useFocusEffect(
+    useCallback(() => {
+      clearErrors()
+      if (bannerErrorParam) setBannerError(errorMessages(bannerErrorParam))
+      if (bannerMessageParam) setBannerMessage(bannerMessageParam)
+    }, [bannerErrorParam, bannerMessageParam, clearErrors])
+  )
 
   const setEmail = validateEmail => {
     clearErrors()

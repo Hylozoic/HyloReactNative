@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View } from 'react-native'
+import { View, Linking } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useDispatch, useSelector } from 'react-redux'
@@ -35,7 +35,7 @@ export default function RootNavigator () {
     (async function () {
       await dispatch(checkLogin())
       setLoading(false)
-      RNBootSplash.hide()
+      // RNBootSplash.hide()
     })()
   }, [])
 
@@ -47,7 +47,17 @@ export default function RootNavigator () {
     })
   }, [])
 
-  if (loading) return <LoadingScreen />
+  // // Handle initialURL
+  // useEffect(() => {
+  //   (async function () {
+  //     if (!loading) {
+  //       const initialURL = await Linking.getInitialURL()
+  //       if (initialURL) navigateToLinkingPath(initialURL)
+  //     }
+  //   })()
+  // }, [loading])
+
+  // if (loading) return <LoadingScreen />
 
   const navigatorProps = {
     screenOptions: {

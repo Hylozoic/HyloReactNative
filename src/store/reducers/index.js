@@ -67,4 +67,4 @@ export function rootReducer (state, action) {
   return appReducer(state, action)
 }
 
-export default composeReducers(appReducer)
+export default composeReducers(rootReducer)
