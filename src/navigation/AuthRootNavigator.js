@@ -1,15 +1,15 @@
 
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useDispatch, useSelector } from 'react-redux'
-import { get } from 'lodash/fp'
+import { get, isEmpty } from 'lodash/fp'
 import OneSignal from 'react-native-onesignal'
 import { navigateToLinkingPath } from './linking'
 import { isModalScreen, modalScreenName } from './linking/helpers'
 import getGroup from 'store/selectors/getGroup'
 import getLastViewedGroup from 'store/selectors/getLastViewedGroup'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import { useFocusEffect, useRoute } from '@react-navigation/native'
+import { useRoute } from '@react-navigation/native'
 import registerDevice from 'store/actions/registerDevice'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
@@ -46,52 +46,48 @@ export default function AuthRootNavigator () {
 
   const [loading, setLoading] = useState(true)
 
-  useFocusEffect(
-    useCallback(() => {
-      (async function () {
-        const response = await dispatch(fetchCurrentUser())
+  useEffect(() => {
+    (async function () {
+      const response = await dispatch(fetchCurrentUser())
 
-        if (!response.payload?.getData()?.error) {
-          const deviceState = await OneSignal.getDeviceState()
+      if (!response.payload?.getData()?.error) {
+        const deviceState = await OneSignal.getDeviceState()
 
-          if (deviceState?.userId) {
-            await dispatch(registerDevice(deviceState?.userId))
-            OneSignal.setExternalUserId(response.payload?.getData()?.me?.id)
-            // Prompt for push notifications (iOS only)
-            OneSignal.promptForPushNotificationsWithUserResponse(() => {})
-          } else {
-            console.warn('Not registering to OneSignal for push notifications. OneSignal did not successfully retrieve a userId')
-          }
+        if (deviceState?.userId) {
+          await dispatch(registerDevice(deviceState?.userId))
+          OneSignal.setExternalUserId(response.payload?.getData()?.me?.id)
+          // Prompt for push notifications (iOS only)
+          OneSignal.promptForPushNotificationsWithUserResponse(() => {})
+        } else {
+          console.warn('Not registering to OneSignal for push notifications. OneSignal did not successfully retrieve a userId')
         }
+      }
 
-        setLoading(false)
-      })()
-    }, [])
-  )
+      setLoading(false)
+    })()
+  }, [])
 
-  useFocusEffect(
-    useCallback(() => {
+  useEffect(() => {
+    (async function () {
       if (!loading) {
         if (!isModal) {
           const groupToSelect = groupFromGroupSlugRouteParam ||
             lastViewedGroup ||
-            currentlySelectedGroup ||
             PUBLIC_GROUP
 
-          dispatch(selectGroupAction(groupToSelect.id))
-
-          if (!returnToOnAuthPath && groupToSelect.id !== currentlySelectedGroup?.id) {
-            navigateToLinkingPath(`groups/${groupToSelect.slug}`)
+          if (currentlySelectedGroup?.id !== groupToSelect?.id) {
+            dispatch(selectGroupAction(groupToSelect.id))
+            await navigateToLinkingPath(`groups/${groupToSelect.slug}`)
           }
         }
 
-        if (returnToOnAuthPath) {
+        if (!isEmpty(returnToOnAuthPath)) {
           dispatch(setReturnToOnAuthPath())
           navigateToLinkingPath(returnToOnAuthPath)
         }
       }
-    }, [loading, isModal, groupFromGroupSlugRouteParam?.id, currentlySelectedGroup?.id, lastViewedGroup?.id, dispatch])
-  )
+    })()
+  }, [loading, returnToOnAuthPath, isModal, groupFromGroupSlugRouteParam?.id, currentlySelectedGroup?.id, lastViewedGroup?.id, dispatch])
 
   const navigatorProps = {
     screenOptions: {

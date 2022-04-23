@@ -7,7 +7,8 @@ export default function makeGoToGroup ({ navigate }, dispatch, confirm = true) {
     if (!myMemberships) {
       throw new Error('Must provide current user memberships as 2nd parameter')
     }
-    if (groupSlug == currentGroupSlug) return
+
+    if (groupSlug === currentGroupSlug) return
 
     const canViewGroup = myMemberships.find(m => m.group.slug === groupSlug) ||
       [PUBLIC_GROUP_ID, ALL_GROUP_ID].includes(groupSlug)

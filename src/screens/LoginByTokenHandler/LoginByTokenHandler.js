@@ -1,12 +1,14 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import loginByToken from 'store/actions/loginByToken'
 import loginByJWT from 'store/actions/loginByJWT'
 import { getAuthorized } from 'store/selectors/getAuthState'
 import { navigateToLinkingPath } from 'navigation/linking'
-import { useFocusEffect, useRoute } from '@react-navigation/native'
+import { StackActions, useFocusEffect, useRoute } from '@react-navigation/native'
 import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
 import checkLogin from 'store/actions/checkLogin'
+import { navigationRef } from 'navigation/linking/helpers'
+import LoadingScreen from 'screens/LoadingScreen'
 
 export default function LoginByTokenHandler () {
   const route = useRoute()
@@ -21,31 +23,35 @@ export default function LoginByTokenHandler () {
     useCallback(() => {
       (async function () {
         try {
-          if (isAuthorized) {
-            navigateToLinkingPath(returnToURLFromLink || '/', true)
-          } else {
+          dispatch(setReturnToOnAuthPath(returnToURLFromLink || '/'))
+
+          if (!isAuthorized) {
             if (jwt) {
               const response = await dispatch(loginByJWT(jwt))
 
-              if (response?.error) {
-                navigateToLinkingPath('/login?bannerError=invalid-link', true)
-              }
-              dispatch(setReturnToOnAuthPath(returnToURLFromLink || '/'))
+              if (response?.error) throw response.error
+
               await dispatch(checkLogin())
             } else if (loginToken && userID) {
               await dispatch(loginByToken(userID, loginToken))
-              await dispatch(setReturnToOnAuthPath(returnToURLFromLink || '/'))
-            } else {
-              navigateToLinkingPath('/')
             }
           }
         } catch (e) {
           console.log('!!! error', e)
-          navigateToLinkingPath('/login?bannerError=invalid-link', true)
+          navigateToLinkingPath('/login?bannerError=invalid-link')
         }
       })()
     }, [dispatch, isAuthorized, jwt, loginToken, userID, returnToURLFromLink])
   )
 
-  return null
+  // Removes this screen from the stack, one way or another
+  useEffect(() => {
+    if (navigationRef.canGoBack()) {
+      navigationRef.dispatch(StackActions.pop())
+    } else if (isAuthorized) {
+      navigateToLinkingPath('/', true)
+    }
+  }, [isAuthorized])
+
+  return <LoadingScreen />
 }

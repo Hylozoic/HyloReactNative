@@ -28,8 +28,8 @@ export default function HomeNavigator () {
   return (
     <HomeTab.Navigator {...navigatorProps}>
       <HomeTab.Screen name='Group Navigation' component={GroupNavigation} />
-      <HomeTab.Screen name='Feed' component={Feed} />
-      <HomeTab.Screen name='Topic Feed' key='Topic Feed' component={Feed} />
+      <HomeTab.Screen name='Feed' options={{ title: 'Stream' }} component={Feed} />
+      <HomeTab.Screen name='Topic Feed' key='Topic Feed' options={{ title: 'Topic' }} component={Feed} />
       <HomeTab.Screen name='Post Details' key='Post Details' component={PostDetails} />
       <HomeTab.Screen name='Projects' component={Feed} initialParams={{ feedType: 'project' }} />
       <HomeTab.Screen name='Project Members' key='Project Members' component={ProjectMembers} />

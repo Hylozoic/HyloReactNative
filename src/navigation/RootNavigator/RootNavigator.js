@@ -47,17 +47,7 @@ export default function RootNavigator () {
     })
   }, [])
 
-  // // Handle initialURL
-  // useEffect(() => {
-  //   (async function () {
-  //     if (!loading) {
-  //       const initialURL = await Linking.getInitialURL()
-  //       if (initialURL) navigateToLinkingPath(initialURL)
-  //     }
-  //   })()
-  // }, [loading])
-
-  // if (loading) return <LoadingScreen />
+  if (loading) return <LoadingScreen />
 
   const navigatorProps = {
     screenOptions: {
@@ -83,7 +73,11 @@ export default function RootNavigator () {
           )}
           {/* Screens always available */}
           <Root.Screen name='Loading' component={LoadingScreen} />
-          <Root.Screen name='LoginByTokenHandler' options={{ headerShown: false }} component={LoginByTokenHandler} />
+          <Root.Screen
+            name='LoginByTokenHandler'
+            options={{ headerShown: false, animationEnabled: false }}
+            component={LoginByTokenHandler}
+          />
           <Root.Group screenOptions={{ presentation: 'modal', header: ModalHeader }}>
             <Root.Screen
               name='JoinGroup'

@@ -2,9 +2,7 @@ import { createSelector } from 'reselect'
 
 export const getCurrentGroupId = createSelector(
   state => state.session?.groupId,
-  (currentGroupId, lastViewedGroup) => {
-    return currentGroupId
-  }
+  currentGroupId => currentGroupId
 )
 
 export default getCurrentGroupId

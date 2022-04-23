@@ -148,45 +148,42 @@ const screenLevelInState = (navState, targetScreenName = 'Feed', level = 0) => {
 }
 
 // This could possibly be replaced by updating the logic applied by Linking.openURL
-export const navigateToLinkingPath = async (providedUrl, reset = false) => {
-  // const linkingFunc = () => {
+export const navigateToLinkingPath = async (providedUrl, reset) => {
   const linkingURL = new URL(providedUrl, DEFAULT_APP_HOST)
   const linkingPath = `${linkingURL.pathname}${linkingURL.search}`
-  const state = getStateFromPath(linkingPath)
-  let action = getActionFromState(state)
+  const stateForPath = getStateFromPath(linkingPath)
+  let actionForPath = getActionFromState(stateForPath)
 
   if (reset) {
-    const feedScreenLevel = screenLevelInState(action.payload, 'Feed')
+    const feedScreenLevel = screenLevelInState(actionForPath.payload, 'Feed')
 
     if (feedScreenLevel !== 0) {
       // This maintains `Group Navigation` as the the initial screen while on Home Tab
       // in particular when navigating to the `Feed` from links.
-      // Same as this, but dynamic: `action.pyload.params.params.params.params.initial = false`
-      action = set(`payload${'.params'.repeat(feedScreenLevel - 1)}.initial`, false, action)
+      // Same as this, but dynamic: `actionForPath.pyload.params.params.params.params.initial = false`
+      actionForPath = set(`payload${'.params'.repeat(feedScreenLevel - 1)}.initial`, false, actionForPath)
     }
-
-    navigationRef.dispatch(
+    return navigationRef.dispatch(
       CommonActions.reset({
-        routes: [action.payload]
+        routes: [actionForPath.payload]
       })
     )
-  } else {
-    navigationRef.dispatch(action)
   }
-  // }
 
+  return navigationRef.dispatch(actionForPath)
+  // Note: If issues with `isReady` on initial app load of `initialURL` wrap all of
+  // the above as below:
+  //
+  // const linkingFunc = () => {
+  // // ALL OF THE ABOVE HERE
+  // }
+  //
   // if (navigationRef.isReady()) {
   //   linkingFunc()
   // } else {
   //   window.setTimeout(linkingFunc, 100)
   // }
 }
-
-// const getInitialURL = async () => {
-//   // const initialURL = await Linking.getInitialURL()
-//   // if (initialURL) store.dispatch(setInitialURL(initialURL))
-//   return null
-// }
 
 export function getScreenPathWithParamsFromPath (incomingPathAndQuerystring, routes = routesConfig) {
   const {
