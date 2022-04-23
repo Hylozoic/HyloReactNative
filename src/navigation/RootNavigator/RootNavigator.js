@@ -34,8 +34,8 @@ export default function RootNavigator () {
   useEffect(() => {
     (async function () {
       await dispatch(checkLogin())
-      setLoading(false)
       RNBootSplash.hide()
+      setLoading(false)
     })()
   }, [])
 
