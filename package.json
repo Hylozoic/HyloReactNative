@@ -1,6 +1,6 @@
 {
   "name": "HyloReactNative",
-  "version": "3.6.18",
+  "version": "3.6.19",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
