@@ -33,29 +33,6 @@ export default function SignupEmailValidation ({ navigation, route }) {
     setValue: setVerificationCode
   })
 
-  useFocusEffect(
-    useCallback(() => {
-      if (!email) navigation.navigate('Signup')
-
-      navigation.setOptions({
-        headerLeftOnPress: () => {
-          navigation.navigate('Signup Intro', { email })
-        }
-      })
-    }, [email])
-  )
-
-  useFocusEffect(
-    useCallback(() => {
-      if (token) submit()
-    }, [token])
-  )
-
-  useEffect(() => {
-    setError()
-    if (verificationCode?.length === CODE_LENGTH) submit()
-  }, [verificationCode])
-
   const submit = async () => {
     try {
       setLoading(true)
@@ -76,6 +53,27 @@ export default function SignupEmailValidation ({ navigation, route }) {
       setLoading(false)
     }
   }
+
+  useFocusEffect(
+    useCallback(() => {
+      if (!email) navigation.navigate('Signup')
+
+      navigation.setOptions({
+        headerLeftOnPress: () => {
+          navigation.navigate('Signup Intro', { email })
+        }
+      })
+    }, [email])
+  )
+
+  useEffect(() => {
+    if (token) submit()
+  }, [token])
+
+  useEffect(() => {
+    setError()
+    if (verificationCode?.length === CODE_LENGTH) submit()
+  }, [verificationCode])
 
   return (
     <KeyboardFriendlyView style={styles.container}>
