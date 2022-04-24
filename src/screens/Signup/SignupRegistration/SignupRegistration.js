@@ -58,7 +58,7 @@ export default function SignupRegistration ({ navigation, route }) {
       headerLeftOnPress: () => {
         confirmDiscardChanges({
           title: '',
-          confirmationMessage: "We're almost done, are you sure you want to cancel signing-up for Hylo?",
+          confirmationMessage: "We're almost done, are you sure you want to cancel signing-up?",
           disgardButtonText: 'Yes',
           continueButtonText: 'No',
           onDiscard: () => {
