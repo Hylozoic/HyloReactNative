@@ -36,7 +36,7 @@ export default function ThreadCard (props) {
 export function lastMessageCreator (message, currentUser, participants) {
   if (get('id', message.creator) === currentUser.id) return 'You: '
   if (participants.length <= 2) return ''
-  return find(p => p.id === get('id', message.creator), participants).name + ': '
+  return find(p => p.id === get('id', message.creator), participants)?.name || 'Deleted User' + ': '
 }
 
 export function threadNames (names) {
