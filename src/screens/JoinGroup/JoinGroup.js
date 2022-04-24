@@ -57,7 +57,7 @@ export default function JoinGroup (props) {
           }
         } catch (error) {
           console.log('!!! error', error)
-          navigation.goBack()
+          navigation.canGoBack() ? navigation.goBack() : navigateToLinkingPath('/')
         }
       })()
     }, [])
