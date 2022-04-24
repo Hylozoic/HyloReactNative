@@ -43,6 +43,7 @@ export default function AuthRootNavigator () {
   const lastViewedGroup = useSelector(getLastViewedGroup)
   const returnToOnAuthPath = useSelector(getReturnToOnAuthPath)
   const dispatch = useDispatch()
+  // console.log('!!! lastViewedGroup', lastViewedGroup)
 
   const [loading, setLoading] = useState(true)
 
@@ -71,9 +72,7 @@ export default function AuthRootNavigator () {
     (async function () {
       if (!loading) {
         if (!isModal) {
-          const groupToSelect = groupFromGroupSlugRouteParam ||
-            lastViewedGroup ||
-            PUBLIC_GROUP
+          const groupToSelect = groupFromGroupSlugRouteParam || lastViewedGroup
 
           if (currentlySelectedGroup?.id !== groupToSelect?.id) {
             dispatch(selectGroupAction(groupToSelect.id))
@@ -87,7 +86,17 @@ export default function AuthRootNavigator () {
         }
       }
     })()
-  }, [loading, returnToOnAuthPath, isModal, groupFromGroupSlugRouteParam?.id, currentlySelectedGroup?.id, lastViewedGroup?.id, dispatch])
+  }, [
+    loading,
+    returnToOnAuthPath,
+    isModal,
+    groupFromGroupSlugRouteParam,
+    groupFromGroupSlugRouteParam?.id,
+    currentlySelectedGroup?.id,
+    lastViewedGroup,
+    lastViewedGroup?.id,
+    dispatch
+  ])
 
   const navigatorProps = {
     screenOptions: {

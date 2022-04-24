@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+import { PUBLIC_GROUP } from 'store/models/Group'
 import getMe from './getMe'
 
 export const getLastViewedGroup = createSelector(
@@ -10,6 +11,8 @@ export const getLastViewedGroup = createSelector(
         .orderBy(m => new Date(m.lastViewedAt), 'desc')
         .first()
         .group
+    } else {
+      return PUBLIC_GROUP
     }
   }
 )
