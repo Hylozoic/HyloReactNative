@@ -43,8 +43,6 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
 
-  // react-native-bootsplash
-  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView];
   // Facebook SDK
   [[FBSDKApplicationDelegate sharedInstance]
     application:application
@@ -55,6 +53,9 @@
     initialize:@"ios_sdk-b11cb526589263a9890b895d40b934bffa876c43"
     withAppId:@"wwelodje"
   ];
+
+  // react-native-bootsplash
+  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView];
 
   return YES;
 }

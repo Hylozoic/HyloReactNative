@@ -1,9 +1,10 @@
 PODS:
-  - AppAuth (1.4.0):
-    - AppAuth/Core (= 1.4.0)
-    - AppAuth/ExternalUserAgent (= 1.4.0)
-  - AppAuth/Core (1.4.0)
-  - AppAuth/ExternalUserAgent (1.4.0)
+  - AppAuth (1.5.0):
+    - AppAuth/Core (= 1.5.0)
+    - AppAuth/ExternalUserAgent (= 1.5.0)
+  - AppAuth/Core (1.5.0)
+  - AppAuth/ExternalUserAgent (1.5.0):
+    - AppAuth/Core
   - boost (1.76.0)
   - BVLinearGradient (2.5.6):
     - React
@@ -36,10 +37,10 @@ PODS:
     - AppAuth (~> 1.4)
     - GTMAppAuth (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GTMAppAuth (1.2.2):
+  - GTMAppAuth (1.2.3):
     - AppAuth/Core (~> 1.4)
     - GTMSessionFetcher/Core (~> 1.5)
-  - GTMSessionFetcher/Core (1.7.0)
+  - GTMSessionFetcher/Core (1.7.1)
   - hermes-engine (0.9.0)
   - Intercom (10.3.5)
   - intercom-react-native (1.1.1):
@@ -632,7 +633,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
+  AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
@@ -644,8 +645,8 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
   GoogleSignIn: c90b5bec45e780f54c6a8e1e3c182a86e3dda69d
-  GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
-  GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
+  GTMAppAuth: 987526d41b07efb1bedda5e936fe0cb718a03113
+  GTMSessionFetcher: 4577a4cc914a5a07c40a8a0ad0acc22080418c2d
   hermes-engine: bf7577d12ac6ccf53ab8b5af3c6ccf0dd8458c5c
   Intercom: d5d4549e40ca8da9f583edab5080e67ef70a8811
   intercom-react-native: 3e766f78c84e80cf3065aad26b798756b5942f06
