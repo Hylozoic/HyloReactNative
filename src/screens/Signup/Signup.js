@@ -34,7 +34,7 @@ export default function Signup () {
   const authState = useSelector(getAuthState)
   const [email, providedSetEmail] = useState(route.params?.email)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(route.params?.error)
+  const [error, setError] = useState()
   // WIP: Positive mesage for `checkInvitation` result
   // const [message, setMessage] = useState(route.params?.message)
   const [bannerError, setBannerError] = useState()
@@ -62,6 +62,11 @@ export default function Signup () {
   useEffect(() => {
     if (!loading) signupRedirect()
   }, [loading, authState])
+
+  useEffect(() => {
+    setBannerError(route.params?.bannerError)
+    setError(route.params?.error)
+  }, [route.params?.bannerError, route.params?.error])
 
   const setEmail = validateEmail => {
     setBannerError()

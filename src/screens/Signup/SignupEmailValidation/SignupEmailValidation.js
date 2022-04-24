@@ -42,7 +42,7 @@ export default function SignupEmailValidation ({ navigation, route }) {
 
       if (responseError) {
         if (responseError === 'invalid-link') {
-          navigation.navigate('Signup Intro', { error: errorMessages(responseError) })
+          navigation.navigate('Signup Intro', { bannerError: errorMessages(responseError) })
           return
         }
         setError(responseError)
