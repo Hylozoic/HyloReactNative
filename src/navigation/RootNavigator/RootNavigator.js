@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Linking } from 'react-native'
+import { View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useDispatch, useSelector } from 'react-redux'
@@ -34,7 +34,6 @@ export default function RootNavigator () {
   useEffect(() => {
     (async function () {
       await dispatch(checkLogin())
-      RNBootSplash.hide()
       setLoading(false)
     })()
   }, [])
@@ -60,7 +59,7 @@ export default function RootNavigator () {
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}
-        // onReady={() => { RNBootSplash.hide() }}
+        onReady={() => RNBootSplash.hide()}
         // To get a map of the current navigation state:
         // onStateChange={state => console.log('!!! onStateChange:', state.routes)}
       >
