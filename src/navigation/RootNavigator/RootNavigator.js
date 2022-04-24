@@ -33,8 +33,13 @@ export default function RootNavigator () {
   // Routes will not be available until this check is complete.
   useEffect(() => {
     (async function () {
-      await dispatch(checkLogin())
-      setLoading(false)
+      try {
+        await dispatch(checkLogin())
+      } catch (e) {
+        console.log('!!! Error when trying to check for session', e)
+      } finally {
+        setLoading(false)
+      }
     })()
   }, [])
 
