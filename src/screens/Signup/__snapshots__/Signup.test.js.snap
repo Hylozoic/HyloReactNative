@@ -255,7 +255,7 @@ exports[`renders with defaults 1`] = `
                                 <View
                                   accessibilityState={
                                     Object {
-                                      "disabled": false,
+                                      "disabled": true,
                                     }
                                   }
                                   accessible={true}
