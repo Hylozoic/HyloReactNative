@@ -56,7 +56,7 @@ it('uses the session cookie', () => {
       const callback = () => {}
       socket.request({}, callback)
       expect(socket.__originalRequest)
-        .toBeCalledWith({ headers: { Cookie: 'foo=bar' } }, callback)
+        .toBeCalledWith({ headers: { cookie: 'foo=bar' } }, callback)
     })
 })
 

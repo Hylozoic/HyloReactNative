@@ -1,40 +1,32 @@
-import React from 'react'
-import { func } from 'prop-types'
+import React, { useLayoutEffect } from 'react'
+import { getSocket, socketUrl } from 'util/websockets'
 
-export default class SocketSubscriber extends React.PureComponent {
-  static propTypes = {
-    subscribe: func.isRequired,
-    unsubscribe: func.isRequired
-  }
+let socket, handler
 
-  setup () {
-    // see the connector to understand why this is called "reconnectHandler"
-    this.props.subscribe().then(handler => { this.reconnectHandler = handler })
-  }
+export default function SocketSubscriber ({ id, type }) {
+  useLayoutEffect(() => {
+    (async function () {
+      if (!id) return Promise.resolve()
 
-  teardown () {
-    this.props.unsubscribe(this.reconnectHandler)
-  }
+      if (!['post', 'group'].includes(type)) {
+        throw new Error(`unrecognized SocketSubscriber type "${type}"`)
+      }
 
-  componentDidMount () {
-    this.setup()
-  }
+      socket = await getSocket()
+      handler = () => socket.post(socketUrl(`/noo/${type}/${id}/subscribe`))
 
-  UNSAFE_componentWillReceiveProps (nextProps) {
-    if (this.props.id !== nextProps.id) this.teardown()
-  }
+      socket.on('reconnect', handler)
 
-  componentDidUpdate (prevProps) {
-    if (this.props.id && this.props.id !== prevProps.id) {
-      this.setup()
+      handler()
+    })()
+
+    return async () => {
+      if (!id) return {}
+
+      socket.off('reconnect', handler)
+      socket.post(socketUrl(`/noo/${type}/${id}/unsubscribe`))
     }
-  }
+  }, [type, id])
 
-  componentWillUnmount () {
-    this.teardown()
-  }
-
-  render () {
-    return null
-  }
+  return null
 }

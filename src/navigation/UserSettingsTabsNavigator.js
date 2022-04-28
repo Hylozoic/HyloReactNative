@@ -8,7 +8,6 @@ import { caribbeanGreen, ghost, rhino30, rhino80, white } from 'style/colors'
 import logout from 'store/actions/logout'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
-// Screens
 import UserSettingsWebView from 'screens/UserSettingsWebView'
 import BlockedUsers from 'screens/BlockedUsers'
 
@@ -75,7 +74,7 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
             confirmationMessage: 'Are you sure you want to logout?',
             continueButtonText: 'Cancel',
             disgardButtonText: 'Yes',
-            onDiscard: () => dispatch(logout())
+            onDiscard: async () => dispatch(logout())
           })}
         />
       )

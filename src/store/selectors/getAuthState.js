@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import { isUndefined } from 'lodash'
-import { CHECK_LOGIN } from 'store/constants'
+import { CHECK_LOGIN, LOGOUT } from 'store/constants'
 import getMe from 'store/selectors/getMe'
 
 /*
@@ -41,7 +41,9 @@ export const getAuthStateLoading = createSelector(
     //
     // Essentialy the logic below is: if we're currently running `checkLogin`
     // OR we've never ran it then return true.
-    return isUndefined(state.pending[CHECK_LOGIN]) || state.pending[CHECK_LOGIN]
+    // isUndefined(state.pending[CHECK_LOGIN]) ||
+    // return isUndefined(state.pending[CHECK_LOGIN]) || state.pending[CHECK_LOGIN]
+    return !!state.pending[LOGOUT] || !!state.pending[CHECK_LOGIN]
   }
 )
 
@@ -68,8 +70,9 @@ export const getAuthState = createSelector(
 // APIs (i.e. Mixpanel currently) as soon as authentication is complete
 export const getAuthenticated = createSelector(
   getAuthState,
-  authState => {
-    return authState !== AuthState.None
+  getAuthStateLoading,
+  (authState, authStateLoading) => {
+    return !authStateLoading && (authState !== AuthState.None)
   }
 )
 
@@ -77,8 +80,9 @@ export const getAuthenticated = createSelector(
 // * Used by `RootRouter`
 export const getAuthorized = createSelector(
   getAuthState,
-  authState => {
-    return [
+  getAuthStateLoading,
+  (authState, authStateLoading) => {
+    return !authStateLoading && [
       // NOTE: Unlike Web the InProgress state is handled before being considered fully authorized
       // AuthState.SignupInProgress,
       AuthState.Complete

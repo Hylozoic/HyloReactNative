@@ -3,7 +3,7 @@ import { useFocusEffect } from '@react-navigation/core'
 import { Linking } from 'react-native'
 import Loading from 'components/Loading'
 import WebView from 'react-native-webview'
-import { getSessionCookie  } from 'util/session'
+import { getSessionCookie } from 'util/session'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 
 const HyloWebView = forwardRef(({
@@ -24,8 +24,8 @@ const HyloWebView = forwardRef(({
   useFocusEffect(
     useCallback(() => {
       const getCookieAsync = async () => {
-        const cookie = await getSessionCookie()
-        setCookie(cookie)
+        const newCookie = await getSessionCookie()
+        setCookie(newCookie)
       }
       getCookieAsync()
     }, [])
@@ -39,7 +39,7 @@ const HyloWebView = forwardRef(({
         ref={webViewRef}
         source={{
           uri,
-          headers: { Cookie: cookie }
+          headers: { cookie }
         }}
         geolocationEnabled
         sharedCookiesEnabled

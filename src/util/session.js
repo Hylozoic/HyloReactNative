@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { isNull, isUndefined, omitBy, reduce } from 'lodash'
 
-export function setSessionCookie (resp) {
+export async function setSessionCookie (resp) {
   const header = resp.headers.get('set-cookie')
 
   if (!header) return Promise.resolve()
@@ -15,11 +15,11 @@ export function setSessionCookie (resp) {
   })
 }
 
-export function getSessionCookie () {
+export async function getSessionCookie () {
   return AsyncStorage.getItem(process.env.SESSION_COOKIE_KEY)
 }
 
-export function clearSessionCookie () {
+export async function clearSessionCookie () {
   return AsyncStorage.removeItem(process.env.SESSION_COOKIE_KEY)
 }
 
@@ -49,6 +49,7 @@ export function parseCookies (cookieStr) {
     } else {
       m[decodeURIComponent(key)] = decodeURIComponent(value)
     }
+
     return m
   }, {})
 }

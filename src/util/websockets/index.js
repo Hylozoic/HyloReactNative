@@ -30,7 +30,7 @@ function setupSocketPromise () {
     socket.__originalRequest = socket.request
     socket.request = function (opts, cb) {
       if (!opts.headers) opts.headers = {}
-      opts.headers.Cookie = cookie // key must be capitalized
+      opts.headers.cookie = cookie // MAY need to be capitalized
       return this.__originalRequest(opts, cb)
     }
 

@@ -10,7 +10,7 @@ import {
 import { match } from 'path-to-regexp'
 import { URL } from 'react-native-url-polyfill'
 import * as queryString from 'query-string'
-import { PathHelpers } from 'hylo-shared'
+import { PathHelpers, PUBLIC_CONTEXT_SLUG } from 'hylo-shared'
 import store from 'store'
 import { getAuthorized } from 'store/selectors/getAuthState'
 import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
@@ -117,11 +117,11 @@ export async function openURL (providedUrlOrPath, options = {}) {
       case 'members':
       case 'm':
       case 'u': {
-        return navigateToLinkingPath(PathHelpers.mentionPath(suffix, options?.groupSlug))
+        return navigateToLinkingPath(PathHelpers.mentionPath(suffix, options?.groupSlug || PUBLIC_CONTEXT_SLUG))
       }
       case 'topics':
       case 'tag': {
-        return navigateToLinkingPath(PathHelpers.topicPath(suffix, options?.groupSlug))
+        return navigateToLinkingPath(PathHelpers.topicPath(suffix, options?.groupSlug || PUBLIC_CONTEXT_SLUG))
       }
     }
 

@@ -15,7 +15,6 @@ import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
 import getReturnToOnAuthPath from 'store/selectors/getReturnToOnAuthPath'
 import selectGroupAction from 'store/actions/selectGroup'
-import { PUBLIC_GROUP } from 'store/models/Group'
 import { ModalHeader } from 'navigation/headers'
 import DrawerNavigator from 'navigation/DrawerNavigator'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
@@ -43,7 +42,6 @@ export default function AuthRootNavigator () {
   const lastViewedGroup = useSelector(getLastViewedGroup)
   const returnToOnAuthPath = useSelector(getReturnToOnAuthPath)
   const dispatch = useDispatch()
-  // console.log('!!! lastViewedGroup', lastViewedGroup)
 
   const [loading, setLoading] = useState(true)
 
