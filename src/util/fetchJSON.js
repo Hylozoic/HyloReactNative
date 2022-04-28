@@ -1,5 +1,5 @@
-import { setSessionCookie } from './session'
-import apiHost from './apiHost'
+import { setSessionCookie } from 'util/session'
+import apiHost from 'util/apiHost'
 
 export default async function fetchJSON (path, params, options = {}) {
   const { host, method } = options
