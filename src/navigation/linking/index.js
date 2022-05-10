@@ -108,11 +108,12 @@ export const routesConfig = {
 // by adding these legacy routes in the routing above. The key differentiating
 // feature besides the rourtes is the ability to provide a `groupSlug`.
 export async function openURL (providedUrlOrPath, options = {}) {
-  const urlOrPath = providedUrlOrPath.trim().toLowerCase()
+  const urlOrPath = providedUrlOrPath.trim()
   const linkingURL = new URL(urlOrPath, DEFAULT_APP_HOST)
 
   if (prefixes.includes(linkingURL.origin)) {
-    const { length, [length - 2]: prefix, [length - 1]: suffix } = linkingURL.pathname.split('/')
+    const pathname = linkingURL.pathname.toLowerCase()
+    const { length, [length - 2]: prefix, [length - 1]: suffix } = pathname.split('/')
 
     switch (prefix) {
       case 'members':
@@ -126,7 +127,7 @@ export async function openURL (providedUrlOrPath, options = {}) {
       }
     }
 
-    return navigateToLinkingPath(linkingURL.pathname)
+    return navigateToLinkingPath(pathname)
   }
 
   if (await Linking.canOpenURL(urlOrPath)) {
