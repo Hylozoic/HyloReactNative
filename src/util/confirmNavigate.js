@@ -16,5 +16,5 @@ export default function confirmNavigate (onConfirm, options = {}) {
       { text: options.confirmButtonText, onPress: onConfirm },
       { text: options.cancelButtonText, style: 'cancel' }
     ]
-  )  
+  )
 }

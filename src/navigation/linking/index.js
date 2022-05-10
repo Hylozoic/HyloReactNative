@@ -67,11 +67,12 @@ export const routesConfig = {
 
   // map routes
   '/:groupSlug(all|public)/map':                             `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Map`,
+  '/:groupSlug(all|public)/map/post/:id':                    `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
+  '/:ignored(all|public)/map/group/:groupSlug':              `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Group Detail')}`,
   '/:context(groups)/:groupSlug/map':                        `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Map`,
-  '/:context(all|public)/map/post/:id':                      `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
   '/:context(groups)/:groupSlug/map/post/:id':               `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
   '/:context(groups)/:groupSlug/detail':                     `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Group Detail')}`,
-  '/:context(all|public)/map/group/:groupSlug':              `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Group Detail')}`,
+  '/:context(groups)/:ignored/map/group/:groupSlug':         `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Group Detail')}`,
 
   // /groups
   '/:context(groups)/:groupSlug/settings/invite':            `${AUTH_ROOT_SCREEN_NAME}/Group Settings/Invite`,
@@ -152,25 +153,30 @@ export const navigateToLinkingPath = async (providedUrl, reset) => {
   const linkingURL = new URL(providedUrl, DEFAULT_APP_HOST)
   const linkingPath = `${linkingURL.pathname}${linkingURL.search}`
   const stateForPath = getStateFromPath(linkingPath)
-  let actionForPath = getActionFromState(stateForPath)
+  console.log('~!!! staetforpath', linkingPath, stateForPath)
+  if (stateForPath) {
+    let actionForPath = getActionFromState(stateForPath)
 
-  if (reset) {
-    const feedScreenLevel = screenLevelInState(actionForPath.payload, 'Feed')
+    if (reset) {
+      const feedScreenLevel = screenLevelInState(actionForPath.payload, 'Feed')
 
-    if (feedScreenLevel !== 0) {
-      // This maintains `Group Navigation` as the the initial screen while on Home Tab
-      // in particular when navigating to the `Feed` from links.
-      // Same as this, but dynamic: `actionForPath.pyload.params.params.params.params.initial = false`
-      actionForPath = set(`payload${'.params'.repeat(feedScreenLevel - 1)}.initial`, false, actionForPath)
+      if (feedScreenLevel !== 0) {
+        // This maintains `Group Navigation` as the the initial screen while on Home Tab
+        // in particular when navigating to the `Feed` from links.
+        // Same as this, but dynamic: `actionForPath.pyload.params.params.params.params.initial = false`
+        actionForPath = set(`payload${'.params'.repeat(feedScreenLevel - 1)}.initial`, false, actionForPath)
+      }
+      return navigationRef.dispatch(
+        CommonActions.reset({
+          routes: [actionForPath.payload]
+        })
+      )
     }
-    return navigationRef.dispatch(
-      CommonActions.reset({
-        routes: [actionForPath.payload]
-      })
-    )
-  }
 
-  return navigationRef.dispatch(actionForPath)
+    return navigationRef.dispatch(actionForPath)
+  } else {
+    return null
+  }
   // Note: If issues with `isReady` on initial app load of `initialURL` wrap all of
   // the above as below:
   //

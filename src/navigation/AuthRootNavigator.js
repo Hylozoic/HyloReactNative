@@ -34,7 +34,7 @@ const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
   const route = useRoute()
   const routeParams = route?.params
-  const isModal = isModalScreen(route?.name)
+  const isModal = isModalScreen(route?.name) || isModalScreen(route?.params?.screen)
   // TODO: Replace with a dynamic nested object search or ?
   const groupSlugRouteParam = get('params.params.params.params.groupSlug', routeParams)
   const groupFromGroupSlugRouteParam = useSelector(state => getGroup(state, { slug: groupSlugRouteParam }))
