@@ -38,27 +38,27 @@ export default function MapWebView ({ navigation }) {
   )
 
   const onMessage = event => {
-    const { url } = JSON.parse(event.nativeEvent.data)
+    const { pathname, search } = JSON.parse(event.nativeEvent.data)
 
     // Matches: `groups/my-awesome-group/members/<member-id>` or `/all|pubic/members/<member-id>`
     // re-writes linking to go to "Member Details - Modal" in the "all" context
-    if (url.match(/\/groups\/*.+\/members\/*.+$/)) {
-      const memberModalPath = '/all/' + url.split('/').slice(3, 5).join('/')
+    if (pathname.match(/\/groups\/*.+\/members\/*.+$/)) {
+      const memberModalPath = '/all/' + pathname.split('/').slice(3, 5).join('/')
       navigateToLinkingPath(memberModalPath)
     // Matches: `/groups/our-awesome-group/map/post/<post-id>`, `/(all|public)/post/<post-id>`
-    } else if (url.match(/\/post|\/members/)) {
-      navigateToLinkingPath(url)
+    } else if (pathname.match(/\/post|\/members/)) {
+      navigateToLinkingPath(pathname)
     // Matches: `/groups/our-awesome-group`
     // re-writes linking to go to "Group Detail - Modal"
-    } else if (url.match(new RegExp(MATCHER_GROUP_ROOT_PATH))) {
-      navigateToLinkingPath(url + '/detail')
+    } else if (pathname.match(new RegExp(MATCHER_GROUP_ROOT_PATH))) {
+      navigateToLinkingPath(pathname + '/detail')
     // Matches: `/all`, `/public`
     // re-writes linking to remain on map, reloading it in the target context
-    } else if (url.match(new RegExp(MATCHER_GROUP_ALL_AND_PUBLIC_ROOT_PATH))) {
-      navigateToLinkingPath(url + '/map')
+    } else if (pathname.match(new RegExp(MATCHER_GROUP_ALL_AND_PUBLIC_ROOT_PATH))) {
+      navigateToLinkingPath(pathname + '/map')
     } else {
       // This captures saved search view calls, may capture too much
-      navigateToLinkingPath(url)
+      navigateToLinkingPath(pathname + search)
     }
   }
 

@@ -14,21 +14,28 @@ export default function LocationPickerItemRow ({ item, onPress }) {
     if (!isGeocoded) {
       onPress(locationData)
     } else {
-      pollingFindOrCreateLocation(dispatch,
-        locationData, locationObject => onPress(locationObject))
+      pollingFindOrCreateLocation(
+        dispatch,
+        locationData,
+        locationObject => onPress(locationObject)
+      )
     }
   }
 
   return (
     <TouchableOpacity style={styles.locationRow} onPress={() => selectLocation(item)}>
-      {!isGeocoded && <>
-        <Icon name='Back' color={rhino80} style={styles.locationIcon} />
-        <Text style={[styles.locationText, styles.notGeocodedRow]}>Use "{item.fullText}" (without mapping)</Text>
-      </>}
-      {isGeocoded && <>
-        <Icon name='Location' color={caribbeanGreen} style={styles.locationIcon} />
-        <Text style={styles.locationText}>{item.fullText}</Text>
-      </>}
+      {!isGeocoded && (
+        <>
+          <Icon name='Back' color={rhino80} style={styles.locationIcon} />
+          <Text style={[styles.locationText, styles.notGeocodedRow]}>Use "{item.fullText}" (without mapping)</Text>
+        </>
+      )}
+      {isGeocoded && (
+        <>
+          <Icon name='Location' color={caribbeanGreen} style={styles.locationIcon} />
+          <Text style={styles.locationText}>{item.fullText}</Text>
+        </>
+      )}
     </TouchableOpacity>
   )
 }

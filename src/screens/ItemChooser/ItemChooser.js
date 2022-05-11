@@ -75,7 +75,7 @@ export default class ItemChooser extends React.Component {
   }
 
   componentDidMount () {
-    const { initialSearchTerm, initialItems,  pickItem, updateItems } = this.props
+    const { initialSearchTerm, initialItems, pickItem, updateItems } = this.props
     if (updateItems) this.updateItems(initialItems)
     if (initialSearchTerm) this.setSearchTerm(initialSearchTerm)
     this.setHeader()
@@ -174,8 +174,7 @@ export default class ItemChooser extends React.Component {
   }
 
   fetchSearchSuggestions = debounce(400, (searchTerm) =>
-    this.props.fetchSearchSuggestions
-    && this.props.fetchSearchSuggestions(searchTerm)
+    this.props.fetchSearchSuggestions && this.props.fetchSearchSuggestions(searchTerm)
   )
 
   clearSearchTerm = () => this.props.setSearchTerm()

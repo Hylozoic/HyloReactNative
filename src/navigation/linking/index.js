@@ -71,6 +71,7 @@ export const routesConfig = {
   '/:ignored(all|public)/map/group/:groupSlug':              `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Group Detail')}`,
   '/:context(groups)/:groupSlug/map':                        `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Map`,
   '/:context(groups)/:groupSlug/map/post/:id':               `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
+  '/:context(groups)/:groupSlug/map/create':                 `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
   '/:context(groups)/:groupSlug/detail':                     `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Group Detail')}`,
   '/:context(groups)/:ignored/map/group/:groupSlug':         `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Group Detail')}`,
 

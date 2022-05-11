@@ -106,9 +106,13 @@ export class PostEditor extends React.Component {
 
   componentDidMount () {
     const { isNewPost } = this.state
-    const { fetchPost } = this.props
+    const { fetchPost, pollingFindOrCreateLocation, post } = this.props
     if (!isNewPost) {
       fetchPost()
+    } else {
+      if (post?.locationObject) {
+        pollingFindOrCreateLocation(post.locationObject, this.handlePickLocation)
+      }
     }
     this.setHeader()
   }
@@ -369,9 +373,12 @@ export class PostEditor extends React.Component {
       navigation: this.props.navigation,
       initialSearchTerm: this.state?.location ||
         this.state?.locationObject?.fullText,
-      onPick: (locationObject) => this.setState(() =>
-        ({ location: locationObject.fullText, locationObject }))
+      onPick: this.handlePickLocation
     })
+  }
+
+  handlePickLocation = locationObject => {
+    this.setState(() => ({ location: locationObject.fullText, locationObject }))
   }
 
   handleShowFilePicker = async () => {
@@ -397,7 +404,6 @@ export class PostEditor extends React.Component {
       groups, startTime, endTime, location, locationObject
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
-    const canHaveLocation = type !== 'discussion'
     const toolbarProps = {
       post,
       canModerate,
@@ -512,23 +518,21 @@ export class PostEditor extends React.Component {
               </>
             )}
 
-            {canHaveLocation && (
-              <TouchableOpacity
-                style={[
-                  styles.section,
-                  styles.textInputWrapper,
-                  styles.topics
-                ]}
-                onPress={this.handleShowLocationPicker}
-              >
-                <View style={styles.topicLabel}>
-                  <Text style={styles.sectionLabel}>Location</Text>
-                  <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
-                </View>
-                {!location && !locationObject && <Text style={styles.textInputPlaceholder}>Select a Location</Text>}
-                {(location || locationObject) && <Text>{location || locationObject.fullText}</Text>}
-              </TouchableOpacity>
-            )}
+            <TouchableOpacity
+              style={[
+                styles.section,
+                styles.textInputWrapper,
+                styles.topics
+              ]}
+              onPress={this.handleShowLocationPicker}
+            >
+              <View style={styles.topicLabel}>
+                <Text style={styles.sectionLabel}>Location</Text>
+                <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+              </View>
+              {!location && !locationObject && <Text style={styles.textInputPlaceholder}>Select a Location</Text>}
+              {(location || locationObject) && <Text>{location || locationObject.fullText}</Text>}
+            </TouchableOpacity>
 
             <TouchableOpacity
               style={[

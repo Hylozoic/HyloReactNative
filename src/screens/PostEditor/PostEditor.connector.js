@@ -15,6 +15,7 @@ import {
   updatePost
 } from './PostEditor.store'
 import getRouteParam from 'store/selectors/getRouteParam'
+import { pollingFindOrCreateLocation as providedPollingFindOrCreateLocation } from 'screens/LocationPicker/LocationPicker.store'
 
 export function mapStateToProps (state, props) {
   const currentGroup = get('ref', getCurrentGroup(state))
@@ -27,13 +28,24 @@ export function mapStateToProps (state, props) {
   const selectedTopicName = get('route.params.topicName', props)
   const selectedTopicTag = createTopicTag({ name: selectedTopicName })
   const providedType = get('route.params.type', props)
+  const providedLat = getRouteParam('lat', props?.route)
+  const providedLng = getRouteParam('lng', props?.route)
+  const providedLocationObject = providedLat && {
+    center: {
+      lat: parseFloat(providedLat),
+      lng: parseFloat(providedLng)
+    },
+    fullText: `${providedLat}, ${providedLng}`
+  }
   const defaultPost = selectedTopicName
     ? {
         details: selectedTopicTag + ' ',
-        groups: currentGroup && [currentGroup]
+        groups: currentGroup && [currentGroup],
+        locationObject: providedLocationObject
       }
     : {
-        groups: currentGroup && [currentGroup]
+        groups: currentGroup && [currentGroup],
+        locationObject: providedLocationObject
       }
   if (providedType) defaultPost.type = providedType
 
@@ -47,6 +59,13 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch) {
   return {
+    pollingFindOrCreateLocation: (locationData, callback) => {
+      return providedPollingFindOrCreateLocation(
+        dispatch,
+        locationData,
+        locationObject => callback(locationObject)
+      )
+    },
     ...bindActionCreators({
       fetchPost,
       createPost,
