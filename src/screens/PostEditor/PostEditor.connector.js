@@ -28,29 +28,23 @@ export function mapStateToProps (state, props) {
   const selectedTopicName = get('route.params.topicName', props)
   const selectedTopicTag = createTopicTag({ name: selectedTopicName })
   const providedType = get('route.params.type', props)
-  const providedLat = getRouteParam('lat', props?.route)
-  const providedLng = getRouteParam('lng', props?.route)
-  const providedLocationObject = providedLat && {
-    center: {
-      lat: parseFloat(providedLat),
-      lng: parseFloat(providedLng)
-    },
-    fullText: `${providedLat}, ${providedLng}`
-  }
+  const mapCoordinateLat = getRouteParam('lat', props?.route)
+  const mapCoordinateLng = getRouteParam('lng', props?.route)
+  const mapCoordinate = mapCoordinateLat && { lat: mapCoordinateLat, lng: mapCoordinateLng }
   const defaultPost = selectedTopicName
     ? {
         details: selectedTopicTag + ' ',
-        groups: currentGroup && [currentGroup],
-        locationObject: providedLocationObject
+        groups: currentGroup && [currentGroup]
       }
     : {
-        groups: currentGroup && [currentGroup],
-        locationObject: providedLocationObject
+        groups: currentGroup && [currentGroup]
       }
+
   if (providedType) defaultPost.type = providedType
 
   return {
     post: post || defaultPost,
+    mapCoordinate,
     groupOptions,
     canModerate: getCanModerate(state),
     pendingDetailsText: isPendingFor(fetchPost, state)

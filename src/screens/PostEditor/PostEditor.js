@@ -106,12 +106,19 @@ export class PostEditor extends React.Component {
 
   componentDidMount () {
     const { isNewPost } = this.state
-    const { fetchPost, pollingFindOrCreateLocation, post } = this.props
+    const { fetchPost, pollingFindOrCreateLocation, mapCoordinate } = this.props
     if (!isNewPost) {
       fetchPost()
     } else {
-      if (post?.locationObject) {
-        pollingFindOrCreateLocation(post.locationObject, this.handlePickLocation)
+      if (mapCoordinate) {
+        const locationObject = {
+          fullText: `${mapCoordinate.lat},${mapCoordinate.lng}`,
+          center: {
+            lat: parseFloat(mapCoordinate.lat),
+            lng: parseFloat(mapCoordinate.lng)
+          }
+        }
+        pollingFindOrCreateLocation(locationObject, this.handlePickLocation)
       }
     }
     this.setHeader()
@@ -371,7 +378,7 @@ export class PostEditor extends React.Component {
   handleShowLocationPicker = () => {
     LocationPicker({
       navigation: this.props.navigation,
-      initialSearchTerm: this.state?.locationObject || this.state?.location,
+      initialSearchTerm: this.state?.location,
       onPick: this.handlePickLocation
     })
   }

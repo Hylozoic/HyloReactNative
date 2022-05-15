@@ -1,43 +1,25 @@
 import { fetchMapboxLocations, convertMapboxToLocation } from 'services/mapbox'
-import { get, isObject } from 'lodash/fp'
+import { get } from 'lodash/fp'
+import { LocationHelpers } from 'hylo-shared'
 import { SET_SEARCH_SUGGESTIONS } from 'screens/ItemChooser/ItemChooser.store'
 
 export const FIND_OR_CREATE_LOCATION = 'FIND_OR_CREATE_LOCATION'
 
-// This should be fixed on the backend such that Floats are always returned.
-// See https://github.com/Hylozoic/hylo-node/issues/810
-export function fixHyloLocationObject (locationObject) {
-  return {
-    ...locationObject,
-    center: {
-      lat: parseFloat(locationObject.center.lat),
-      lng: parseFloat(locationObject.center.lng)
-    }
-  }
-}
-
-export async function locationSearch (scope, searchTermOrLocationObject, proximity) {
-  const locationObject = isObject(searchTermOrLocationObject) && searchTermOrLocationObject
-  const searchTerm = !locationObject && searchTermOrLocationObject
-  // TODO: To allow direct entry of lat/lng check if this string value
-  // is a valid lat/lng coordinates. If construct or lookup the mapbox entry
-  // for the coordinates and return that as a valid Hylo locationObject.
-  const mapboxLocations = searchTerm
-    ? await fetchMapboxLocations(searchTerm, { proximity })
-    : await fetchMapboxLocations(`${locationObject.center.lng},${locationObject.center.lat}`)
-
-  let locations = mapboxLocations.features.map(feature => ({
+export async function locationSearch (scope, searchTerm, proximity) {
+  const coordinate = LocationHelpers.parseCoordinate(searchTerm).coordinate
+  const mapboxLocations = coordinate
+    // If coordinate then get results centered from that coordinate
+    ? await fetchMapboxLocations(`${coordinate.lng},${coordinate.lat}`)
+    : await fetchMapboxLocations(searchTerm, { proximity })
+  const locations = mapboxLocations.features.map(feature => ({
     ...convertMapboxToLocation(feature),
     // TODO: Check this. Is this a mapbox ID or a hylo location ID?
     id: feature.id
   }))
 
-  locations = [
-    searchTerm
-      ? { id: 'NEW', fullText: searchTerm }
-      : fixHyloLocationObject(locationObject),
-    ...locations
-  ]
+  coordinate
+    ? locations.unshift({ center: { lat: coordinate.lat, lng: coordinate.lng }, fullText: coordinate.string })
+    : locations.unshift({ id: 'NEW', fullText: searchTerm })
 
   return {
     type: SET_SEARCH_SUGGESTIONS,
