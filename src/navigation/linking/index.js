@@ -155,7 +155,7 @@ export const navigateToLinkingPath = async (providedUrl, reset) => {
   const linkingURL = new URL(providedUrl, DEFAULT_APP_HOST)
   const linkingPath = `${linkingURL.pathname}${linkingURL.search}`
   const stateForPath = getStateFromPath(linkingPath)
-  console.log('~!!! staetforpath', linkingPath, stateForPath)
+
   if (stateForPath) {
     let actionForPath = getActionFromState(stateForPath)
 
