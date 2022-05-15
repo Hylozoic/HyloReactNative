@@ -4,11 +4,8 @@ import { SET_SEARCH_SUGGESTIONS } from 'screens/ItemChooser/ItemChooser.store'
 
 export const FIND_OR_CREATE_LOCATION = 'FIND_OR_CREATE_LOCATION'
 
-// NOTE: `locationObject` as derived from API response stores coordinates
-// as strings (i.e. `center.lat` and `lng`) but they need to remain floats
-// to be valid for sending back to the API as valid locationObjects.
-// This function is a temporary fix for something that needs to be further
-// ironed-out between our graphql response handling and ReduxORM.
+// This should be fixed on the backend such that Floats are always returned.
+// See https://github.com/Hylozoic/hylo-node/issues/810
 export function fixHyloLocationObject (locationObject) {
   return {
     ...locationObject,
