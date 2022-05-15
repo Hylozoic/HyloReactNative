@@ -4,7 +4,7 @@ export async function fetchMapboxLocations (searchTerm, {
   proximity,
   bbox = '',
   types = ''
-}) {
+} = {}) {
   const uri = MAPBOX_GEOCODING_API_URL +
     '/' +
     encodeURIComponent(searchTerm) +

@@ -157,7 +157,7 @@ export class PostEditor extends React.Component {
       topicNames: topics.map(t => t.name),
       startTime: startTime && startTime.getTime(),
       endTime: endTime && endTime.getTime(),
-      location: location,
+      location,
       locationId: locationObject && locationObject.id !== 'NEW' && locationObject.id
     }
 
@@ -371,8 +371,7 @@ export class PostEditor extends React.Component {
   handleShowLocationPicker = () => {
     LocationPicker({
       navigation: this.props.navigation,
-      initialSearchTerm: this.state?.location ||
-        this.state?.locationObject?.fullText,
+      initialSearchTerm: this.state?.locationObject || this.state?.location,
       onPick: this.handlePickLocation
     })
   }

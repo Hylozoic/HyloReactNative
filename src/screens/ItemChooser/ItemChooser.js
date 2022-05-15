@@ -44,7 +44,10 @@ export default class ItemChooser extends React.Component {
     searchPlaceholder: PropTypes.string,
     // Regular props mostly from connector
     setSearchTerm: PropTypes.func.isRequired,
-    searchTerm: PropTypes.string,
+    searchTerm: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object
+    ]),
     suggestedItems: PropTypes.array,
     loading: PropTypes.bool,
     style: PropTypes.object
@@ -75,7 +78,7 @@ export default class ItemChooser extends React.Component {
   }
 
   componentDidMount () {
-    const { initialSearchTerm, initialItems, pickItem, updateItems } = this.props
+    const { initialSearchTerm, initialItems, updateItems } = this.props
     if (updateItems) this.updateItems(initialItems)
     if (initialSearchTerm) this.setSearchTerm(initialSearchTerm)
     this.setHeader()
