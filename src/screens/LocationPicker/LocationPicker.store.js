@@ -18,6 +18,7 @@ export function fixHyloLocationObject (locationObject) {
     }
   }
 }
+
 export async function locationSearch (scope, searchTermOrLocationObject, proximity) {
   const locationObject = isObject(searchTermOrLocationObject) && searchTermOrLocationObject
   const searchTerm = !locationObject && searchTermOrLocationObject
@@ -28,13 +29,12 @@ export async function locationSearch (scope, searchTermOrLocationObject, proximi
     ? await fetchMapboxLocations(searchTerm, { proximity })
     : await fetchMapboxLocations(`${locationObject.center.lng},${locationObject.center.lat}`)
 
-  let locations = mapboxLocations
-    .features
-    .map(feature => ({
-      ...convertMapboxToLocation(feature),
-      // TODO: Check this. Is this a mapbox ID or a hylo location ID?
-      id: feature.id
-    }))
+  let locations = mapboxLocations.features.map(feature => ({
+    ...convertMapboxToLocation(feature),
+    // TODO: Check this. Is this a mapbox ID or a hylo location ID?
+    id: feature.id
+  }))
+
   locations = [
     searchTerm
       ? { id: 'NEW', fullText: searchTerm }
