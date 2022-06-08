@@ -1,6 +1,7 @@
 import confirmNavigate from 'util/confirmNavigate'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import { navigateToLinkingPath } from 'navigation/linking'
+import { modalScreenName } from 'navigation/linking/helpers'
 
 export default function makeGoToGroup ({ navigate }, dispatch, confirm = true) {
   return (groupSlug, myMemberships, currentGroupSlug) => {
@@ -22,7 +23,7 @@ export default function makeGoToGroup ({ navigate }, dispatch, confirm = true) {
           })
         : goToGroup()
     } else {
-      navigate('Group Detail', { groupSlug })
+      navigate(modalScreenName('Group Detail'), { groupSlug })
     }
   }
 }

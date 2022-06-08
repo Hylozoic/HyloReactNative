@@ -37,8 +37,8 @@ export default function MapWebView ({ navigation }) {
     }, [group?.slug])
   )
 
-  const onMessage = event => {
-    const { pathname, search } = JSON.parse(event.nativeEvent.data)
+  const onMessage = message => {
+    const { pathname, search } = JSON.parse(message.nativeEvent.data)
 
     // Matches: `groups/my-awesome-group/members/<member-id>` or `/all|pubic/members/<member-id>`
     // re-writes linking to go to "Member Details - Modal" in the "all" context
