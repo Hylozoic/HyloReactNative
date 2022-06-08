@@ -317,7 +317,7 @@ exports[`PostDetails renders correctly 1`] = `
                                       </View>
                                       <View>
                                         <Text>
-                                          4 years ago
+                                          5 years ago
                                         </Text>
                                         <RCTScrollView
                                           data={

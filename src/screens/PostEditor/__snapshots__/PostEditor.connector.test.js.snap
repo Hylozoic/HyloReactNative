@@ -5,6 +5,7 @@ Object {
   "createPost": [Function],
   "createProject": [Function],
   "fetchPost": [Function],
+  "pollingFindOrCreateLocation": [Function],
   "updatePost": [Function],
   "upload": [Function],
 }
@@ -155,6 +156,7 @@ Object {
       "id": "7",
     },
   ],
+  "mapCoordinate": undefined,
   "pendingDetailsText": false,
   "post": Object {
     "commenters": Array [],

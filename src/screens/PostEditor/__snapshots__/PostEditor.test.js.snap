@@ -76,6 +76,23 @@ exports[`PostEditor renders a new editor correctly 1`] = `
       >
         <View>
           <Text>
+            Location
+          </Text>
+          <View>
+            <Icon
+              name="Plus"
+            />
+          </View>
+        </View>
+        <Text>
+          Select a Location
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={[Function]}
+      >
+        <View>
+          <Text>
             Post In
           </Text>
           <View>
@@ -433,6 +450,32 @@ exports[`PostEditor renders correctly while saving 1`] = `
                               >
                                 <View>
                                   <Text>
+                                    Location
+                                  </Text>
+                                  <View>
+                                    <Icon
+                                      name="Plus"
+                                    />
+                                  </View>
+                                </View>
+                                <Text>
+                                  Select a Location
+                                </Text>
+                              </View>
+                              <View
+                                accessible={true}
+                                collapsable={false}
+                                focusable={true}
+                                onClick={[Function]}
+                                onResponderGrant={[Function]}
+                                onResponderMove={[Function]}
+                                onResponderRelease={[Function]}
+                                onResponderTerminate={[Function]}
+                                onResponderTerminationRequest={[Function]}
+                                onStartShouldSetResponder={[Function]}
+                              >
+                                <View>
+                                  <Text>
                                     Post In
                                   </Text>
                                   <View>
@@ -728,6 +771,23 @@ exports[`PostEditor renders with a post 1`] = `
         />
         <Text>
           Add topics.
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={[Function]}
+      >
+        <View>
+          <Text>
+            Location
+          </Text>
+          <View>
+            <Icon
+              name="Plus"
+            />
+          </View>
+        </View>
+        <Text>
+          Select a Location
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
