@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { TabStackHeader } from 'navigation/headers'
 // Screens
 import Feed from 'screens/Feed'
-import GroupDetail from 'screens/GroupDetail'
+import GroupDetailWebView from 'screens/GroupDetailWebView'
 import GroupNavigation from 'screens/GroupNavigation'
 import Groups from 'screens/Groups'
 import MemberDetails from 'screens/MemberProfile/MemberDetails'
@@ -38,7 +38,7 @@ export default function HomeNavigator () {
       <HomeTab.Screen name='Member' key='Member' component={MemberProfile} />
       <HomeTab.Screen name='Member Details' component={MemberDetails} />
       <HomeTab.Screen name='Group Relationships' component={Groups} />
-      <HomeTab.Screen name='Group Detail' component={GroupDetail} />
+      <HomeTab.Screen name='Group Detail' component={GroupDetailWebView} />
       <HomeTab.Screen name='Topics' component={TopicsComponent} />
       <HomeTab.Screen name='Map' component={MapWebView} />
     </HomeTab.Navigator>
