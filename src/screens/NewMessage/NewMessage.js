@@ -27,6 +27,7 @@ import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Loading from 'components/Loading'
 import PersonPickerItemRow from 'screens/ItemChooser/PersonPickerItemRow'
 import styles from './NewMessage.styles'
+import { isModalScreen } from 'navigation/linking/helpers'
 
 export default function NewMessage (props) {
   const dispatch = useDispatch()
@@ -36,7 +37,8 @@ export default function NewMessage (props) {
     findOrCreateThread,
     createMessageAction
   ], state))
-  // const prompt = props.route?.params?.prompt
+  const isModal = isModalScreen(props.route?.name)
+  const prompt = props.route?.params?.prompt
   // console.log('!!!! prompt', prompt)
   const recentContacts = useSelector(state => scopedGetRecentContacts(null, { scope: MODULE_NAME })(state, props))
   const initialParticipantIds = !isArray(props.route?.params?.participants)
@@ -49,7 +51,9 @@ export default function NewMessage (props) {
     const messageThreadId = get('payload.data.findOrCreateThread.id', resp)
     const { error } = await dispatch(createMessageAction(messageThreadId, text, true))
     if (!error) {
-      navigateToLinkingPath(`/messages/${messageThreadId}`)
+      isModal
+        ? props.navigation.goBack()
+        : navigateToLinkingPath(`/messages/${messageThreadId}`)
     }
   }
 
@@ -106,7 +110,7 @@ export default function NewMessage (props) {
       </ScrollView>
       <MessageInput
         style={styles.messageInput}
-        // value={prompt}
+        value={prompt}
         multiline
         onSubmit={createMessage}
         placeholder='Type your message here'
