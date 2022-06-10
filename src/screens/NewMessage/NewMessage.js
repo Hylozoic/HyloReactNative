@@ -39,7 +39,6 @@ export default function NewMessage (props) {
   ], state))
   const isModal = isModalScreen(props.route?.name)
   const prompt = props.route?.params?.prompt
-  // console.log('!!!! prompt', prompt)
   const recentContacts = useSelector(state => scopedGetRecentContacts(null, { scope: MODULE_NAME })(state, props))
   const initialParticipantIds = !isArray(props.route?.params?.participants)
     ? props.route?.params?.participants.split(',')
