@@ -1,22 +1,17 @@
-import React, { useState, useCallback, useRef } from 'react'
+import React, { useCallback, useRef, useEffect } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
-import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import { navigateToLinkingPath } from 'navigation/linking'
 import HyloWebView from 'screens/HyloWebView'
+import { useDispatch } from 'react-redux'
+import fetchGroupModerators from 'store/actions/fetchGroupModerators'
 
-// Matches actual group paths (e.g. not /all or /public)
-export const MATCHER_GROUP_SLUG = '[a-zA-Z0-9-]+$'
-export const MATCHER_GROUP_ROOT_PATH = `/groups/${MATCHER_GROUP_SLUG}$`
-
-// Matches special group paths (e.g. /all and /public)
-export const MATCHER_GROUP_ALL_AND_PUBLIC_ROOT_PATH = `/(${ALL_GROUP_ID}|${PUBLIC_GROUP_ID})$`
+// TODO: Move into hylo-shared and use in related code here and on Web
+export const JOINED_GROUP = 'JOINED_GROUP'
 
 export default function GroupDetailWebView ({ navigation, route }) {
+  const dispatch = useDispatch()
   const webViewRef = useRef(null)
-  // const group = useSelector(getCurrentGroup)
   const groupSlug = route.params.groupSlug
-  const [path, setPath] = useState(`groups/${groupSlug}/about`)
-  // const group = useSelector(state => presentGroup(getGroup(state, { slug: groupSlug })))
 
   useFocusEffect(
     useCallback(() => {
@@ -26,12 +21,17 @@ export default function GroupDetailWebView ({ navigation, route }) {
     }, [groupSlug, navigation])
   )
 
+  // Fetch moderators for "Opportunities to Connect" / Message to all moderators feature
+  useEffect(() => {
+    dispatch(fetchGroupModerators({ slug: groupSlug }))
+  }, [])
+
   const onMessage = message => {
-    const { eventName, groupSlug, pathname, search } = JSON.parse(message.nativeEvent.data)
+    const { eventName, groupSlug: joinedGroupSlug, pathname, search } = JSON.parse(message.nativeEvent.data)
 
     switch (eventName) {
-      case 'JOIN_GROUP': {
-        navigateToLinkingPath(`/groups/${groupSlug}`)
+      case JOINED_GROUP: {
+        navigateToLinkingPath(`/groups/${joinedGroupSlug}`)
         return
       }
     }
@@ -41,24 +41,24 @@ export default function GroupDetailWebView ({ navigation, route }) {
       // re-writes linking to go to "Member Details - Modal" in the "all" context
       if (pathname.match(/\/groups\/*.+\/members\/*.+$/)) {
         const memberModalPath = '/' + pathname.split('/').slice(3, 5).join('/')
-        console.log('!!!! memberModalPath', memberModalPath)
+
         navigateToLinkingPath(memberModalPath)
       // Matches: `/groups/our-awesome-group/map/post/<post-id>`, `/(all|public)/post/<post-id>`
       } else if (pathname.match(/\/post|\/members/)) {
         const postModalPath = '/' + pathname.split('/').slice(3, 5).join('/')
-        console.log('!!!! postModalPath', postModalPath)
+
         navigateToLinkingPath(postModalPath)
-      } else {
-        console.log('!!!! uncaptured click to', pathname, search)
+      // "Opportunities to Connect" / Message to moderators
+      } else if (pathname.match(/\/messages\/new$/)) {
+        navigateToLinkingPath(pathname + search)
       }
-      // navigateToLinkingPath(pathname + search)
     }
   }
 
   return (
     <HyloWebView
       ref={webViewRef}
-      path={path}
+      path={`groups/${groupSlug}/about`}
       onMessage={onMessage}
     />
   )

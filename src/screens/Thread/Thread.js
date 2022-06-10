@@ -4,6 +4,7 @@ import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
 import { getSocket } from 'util/websockets'
+import { modalScreenName } from 'navigation/linking/helpers'
 import Loading from 'components/Loading'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import MessageCard from 'components/MessageCard'
@@ -35,7 +36,7 @@ export default class Thread extends React.Component {
     const { navigation, id, title } = this.props
     title && navigation.setOptions({
       headerTitle: ({ style }) => (
-        <TouchableOpacity onPress={() => navigation.navigate('ThreadParticipants', { id })}>
+        <TouchableOpacity onPress={() => navigation.navigate(modalScreenName('ThreadParticipants'), { id })}>
           <Text style={{ ...style, color: pictonBlue }}>{title}</Text>
         </TouchableOpacity>
       )
@@ -185,7 +186,7 @@ export default class Thread extends React.Component {
             type={isConnected ? 'info' : 'error'}
             permanent={!isConnected}
             message={overlayMessage}
-            onPress={this.scrollToBottom}
+            onPress={() => this.scrollToBottom()}
           />
         )}
         <SocketSubscriber type='post' id={id} />

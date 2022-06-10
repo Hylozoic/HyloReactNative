@@ -67,7 +67,7 @@ describe('makeOnPressMessages', () => {
     const otherPersonId = 2
     const onPressMessages = makeOnPressMessages({ id: 1 }, { id: otherPersonId }, navigation)
     onPressMessages()
-    expect(navigation.navigate).toHaveBeenCalledWith('Messages Tab', { screen: 'New Message', params: { participantIds: [otherPersonId] } })
+    expect(navigation.navigate).toHaveBeenCalledWith('Messages Tab', { screen: 'New Message', params: { participants: [otherPersonId] } })
   })
 })
 

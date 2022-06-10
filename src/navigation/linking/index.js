@@ -99,7 +99,8 @@ export const routesConfig = {
   '/settings/:section?':                                     `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Settings Tab/Edit Profile`,
 
   // /messages
-  '/messages/:id':                                           `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Messages Tab/Thread`,
+  '/messages/new':                                           `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('New Message')}`,
+  '/messages/:id':                                           `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Thread')}`,
   '/messages':                                               `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Messages Tab/Messages`,
 
   '/':                                                       `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`
