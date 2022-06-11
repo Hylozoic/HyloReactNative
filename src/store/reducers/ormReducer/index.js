@@ -1,5 +1,5 @@
 import * as sessionReducers from './sessionReducers'
-import { values, pick } from 'lodash/fp'
+import { values, pick, find } from 'lodash/fp'
 import orm from 'store/models'
 import ModelExtractor from '../ModelExtractor'
 import extractModelsFromAction from '../ModelExtractor/extractModelsFromAction'
@@ -41,6 +41,7 @@ import {
   DELETE_GROUP_RELATIONSHIP,
   FETCH_CURRENT_USER,
   JOIN_PROJECT_PENDING,
+  LEAVE_GROUP,
   LEAVE_PROJECT_PENDING,
   RESPOND_TO_EVENT_PENDING,
   UPDATE_COMMENT_PENDING,
@@ -122,6 +123,18 @@ export default function ormReducer (state = orm.getEmptyState().state, action) {
         root: payload.getData(),
         modelName: 'Message'
       })
+      break
+    }
+
+    case LEAVE_GROUP: {
+      const me = Me.first()
+      let membership = find(m => m.group.id === meta.id, me.memberships.toModelArray())
+
+      if (membership) membership.delete()
+
+      membership = Membership.safeGet({ group: meta.id, person: me.id })
+
+      if (membership) membership.delete()
       break
     }
 

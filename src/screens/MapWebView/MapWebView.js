@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import { useSelector } from 'react-redux'
+import { HyloApp } from 'hylo-shared'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import { navigateToLinkingPath } from 'navigation/linking'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
@@ -37,28 +38,33 @@ export default function MapWebView ({ navigation }) {
     }, [group?.slug])
   )
 
-  const onMessage = message => {
-    const { pathname, search } = JSON.parse(message.nativeEvent.data)
+  const handleMessage = message => {
+    const { type, data } = HyloApp.parseWebViewMessage(message)
 
-    // Matches: `groups/my-awesome-group/members/<member-id>` or `/all|pubic/members/<member-id>`
-    // re-writes linking to go to "Member Details - Modal" in the "all" context
-    if (pathname.match(/\/groups\/*.+\/members\/*.+$/)) {
-      const memberModalPath = '/all/' + pathname.split('/').slice(3, 5).join('/')
-      navigateToLinkingPath(memberModalPath)
-    // Matches: `/groups/our-awesome-group/map/post/<post-id>`, `/(all|public)/post/<post-id>`
-    } else if (pathname.match(/\/post|\/members/)) {
-      navigateToLinkingPath(pathname)
-    // Matches: `/groups/our-awesome-group`
-    // re-writes linking to go to "Group Detail - Modal"
-    } else if (pathname.match(new RegExp(MATCHER_GROUP_ROOT_PATH))) {
-      navigateToLinkingPath(pathname + '/detail')
-    // Matches: `/all`, `/public`
-    // re-writes linking to remain on map, reloading it in the target context
-    } else if (pathname.match(new RegExp(MATCHER_GROUP_ALL_AND_PUBLIC_ROOT_PATH))) {
-      navigateToLinkingPath(pathname + '/map')
-    } else {
-      // This captures saved search view calls, may capture too much
-      navigateToLinkingPath(pathname + search)
+    switch (type) {
+      case HyloApp.NAVIGATION: {
+        const { pathname, search } = data
+        // Matches: `groups/my-awesome-group/members/<member-id>` or `/all|pubic/members/<member-id>`
+        // re-writes linking to go to "Member Details - Modal" in the "all" context
+        if (pathname.match(/\/groups\/*.+\/members\/*.+$/)) {
+          const memberModalPath = '/all/' + pathname.split('/').slice(3, 5).join('/')
+          navigateToLinkingPath(memberModalPath)
+        // Matches: `/groups/our-awesome-group/map/post/<post-id>`, `/(all|public)/post/<post-id>`
+        } else if (pathname.match(/\/post|\/members/)) {
+          navigateToLinkingPath(pathname)
+        // Matches: `/groups/our-awesome-group`
+        // re-writes linking to go to "Group Detail - Modal"
+        } else if (pathname.match(new RegExp(MATCHER_GROUP_ROOT_PATH))) {
+          navigateToLinkingPath(pathname + '/detail')
+        // Matches: `/all`, `/public`
+        // re-writes linking to remain on map, reloading it in the target context
+        } else if (pathname.match(new RegExp(MATCHER_GROUP_ALL_AND_PUBLIC_ROOT_PATH))) {
+          navigateToLinkingPath(pathname + '/map')
+        } else {
+          // This captures saved search view calls, may capture too much
+          navigateToLinkingPath(pathname + search)
+        }
+      }
     }
   }
 
@@ -66,7 +72,7 @@ export default function MapWebView ({ navigation }) {
     <HyloWebView
       ref={webViewRef}
       path={path}
-      onMessage={onMessage}
+      onMessage={handleMessage}
       // Required for emulator with the map but may be disadventageous for actual
       // devices as this has the effect of disabling hardware acceleration.
       androidLayerType='software'
