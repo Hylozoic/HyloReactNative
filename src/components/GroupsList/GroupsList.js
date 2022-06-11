@@ -39,7 +39,7 @@ export function GroupCell ({ group, onPress, RightIcon }) {
   const imageSource = { uri: avatarUrl || DEFAULT_AVATAR }
 
   return (
-    <TouchableOpacity style={[styles.groupCell, styles.row]} onPress={() => onPress && onPress(group.id)}>
+    <TouchableOpacity style={[styles.groupCell, styles.row]} onPress={() => onPress && onPress(group?.slug)}>
       <Image source={imageSource} style={styles.groupAvatar} />
       <Text style={[styles.linkText, styles.groupCell]} numberOfLines={1}>{name}</Text>
       {RightIcon && <RightIcon />}
