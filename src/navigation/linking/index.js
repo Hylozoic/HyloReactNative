@@ -55,6 +55,8 @@ export const routesConfig = {
   '/h/use-invitation':                                       'JoinGroup',
   '/:context(groups)/:groupSlug/join/:accessCode':           'JoinGroup',
 
+  '/hylo-editor':                                            `${AUTH_ROOT_SCREEN_NAME}/HyloEditor`,
+
   // /members
   '/members/:id':                                            `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Member')}`,
   '/members':                                                `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Members`,

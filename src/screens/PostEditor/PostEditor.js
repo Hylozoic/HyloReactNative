@@ -37,6 +37,7 @@ import DatePicker from 'components/DatePicker'
 import ImagePicker from 'components/ImagePicker'
 import ImageSelector from './ImageSelector'
 import InlineEditor, { toHTML, fromHTML } from 'components/InlineEditor'
+import HyloEditorWebView from 'screens/HyloEditorWebView'
 import ErrorBubble from 'components/ErrorBubble'
 import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
 import styles from './PostEditor.styles'
@@ -457,7 +458,8 @@ export class PostEditor extends React.Component {
               </View>
             )}
             <Text style={styles.sectionLabel}>Details</Text>
-            <InlineEditor
+            <HyloEditorWebView />
+            {/* <InlineEditor
               style={[
                 styles.section,
                 styles.textInputWrapper
@@ -472,7 +474,7 @@ export class PostEditor extends React.Component {
               autoGrow={false}
               onFocusToggle={isFocused => this.setState({ detailsFocused: isFocused })}
               onInsertTopic={this.handleInsertEditorTopic}
-            />
+            /> */}
             <TouchableOpacity
               style={[
                 styles.section,

@@ -5,6 +5,23 @@ import { openURL } from 'navigation/linking'
 import { nevada } from 'style/colors'
 import { useSelector } from 'react-redux'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import iframe, { iframeModel } from '@native-html/iframe-plugin'
+import WebView from 'react-native-webview'
+
+const htmlConfig = {
+  renderers: {
+    iframe
+  },
+  tagsStyles: {
+    iframe: {
+      alignSelf: 'center'
+    }
+  },
+  customHTMLElementModels: {
+    iframe: iframeModel
+  },
+  WebView
+}
 
 const HyloHTML = React.memo(
   function ({
@@ -21,7 +38,10 @@ const HyloHTML = React.memo(
     }
 
     const source = { html: wrapInHTMLBody(html) }
-    const renderersProps = { a: { onPress: handleLinkPress } }
+    const renderersProps = {
+      a: { onPress: handleLinkPress },
+      iframe: { scalesPageToFit: true }
+    }
     const baseStyle = { ...renderHTMLStyles.baseStyle, ...providedBaseStyle }
     const tagsStyles = { ...renderHTMLStyles.tagsStyles, ...providedTagsStyles }
     const classesStyles = { ...renderHTMLStyles.classesStyles, ...providedClassessStyles }
@@ -36,6 +56,7 @@ const HyloHTML = React.memo(
         classesStyles={classesStyles}
         contentWidth={contentWidth}
         systemFonts={systemFonts}
+        {...htmlConfig}
       />
     )
   }

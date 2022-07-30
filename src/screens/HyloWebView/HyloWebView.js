@@ -11,7 +11,8 @@ const HyloWebView = forwardRef(({
   onNavigationStateChange = () => {},
   onMessage = () => {},
   onShouldStartLoadWithRequest = () => true,
-  route
+  route,
+  style
 }, webViewRef) => {
   const [cookie, setCookie] = useState()
   const [uri, setUri] = useState()
@@ -34,7 +35,7 @@ const HyloWebView = forwardRef(({
   if (!cookie) return <Loading />
 
   return (
-    <KeyboardFriendlyView style={{ flex: 1 }}>
+    <KeyboardFriendlyView style={{ flex: 1, ...style }}>
       <WebView
         ref={webViewRef}
         source={{
@@ -43,17 +44,17 @@ const HyloWebView = forwardRef(({
         }}
         geolocationEnabled
         sharedCookiesEnabled
-        onShouldStartLoadWithRequest={params => {
-          const { url } = params
-          // Opens full URLs in external browser if not the
-          // initial URI specified on load of the WebView
-          if (url === uri) return true
-          if (url !== uri && url.slice(0, 4) === 'http') {
-            Linking.openURL(url)
-            return false
-          }
-          return onShouldStartLoadWithRequest(params)
-        }}
+        // onShouldStartLoadWithRequest={params => {
+        //   const { url } = params
+        //   // Opens full URLs in external browser if not the
+        //   // initial URI specified on load of the WebView
+        //   if (url === uri) return true
+        //   if (url !== uri && url.slice(0, 4) === 'http') {
+        //     Linking.openURL(url)
+        //     return false
+        //   }
+        //   return onShouldStartLoadWithRequest(params)
+        // }}
         onNavigationStateChange={onNavigationStateChange}
         onMessage={onMessage}
       />
