@@ -1,8 +1,8 @@
 import React, { useCallback, useRef, useEffect } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
-import { HyloApp } from 'hylo-shared'
+import { WebViewMessageTypes } from 'hylo-shared'
 import { navigateToLinkingPath } from 'navigation/linking'
-import HyloWebView from 'screens/HyloWebView'
+import HyloWebView, { parseWebViewMessage } from 'screens/HyloWebView'
 import { useDispatch } from 'react-redux'
 import fetchGroupModerators from 'store/actions/fetchGroupModerators'
 import fetchGroupDetails from 'store/actions/fetchGroupDetails'
@@ -36,15 +36,15 @@ export default function GroupDetailWebView ({ navigation, route }) {
   }
 
   const handleMessage = message => {
-    const { type, data } = HyloApp.parseWebViewMessage(message)
+    const { type, data } = parseWebViewMessage(message)
 
     switch (type) {
-      case HyloApp.JOINED_GROUP: {
+      case WebViewMessageTypes.JOINED_GROUP: {
         const { groupSlug } = data
 
         return joinGroup(groupSlug)
       }
-      case HyloApp.NAVIGATION: {
+      case WebViewMessageTypes.NAVIGATION: {
         const { pathname, search } = data
 
         // Matches: `groups/my-awesome-group/members/<member-id>` or `/all|pubic/members/<member-id>`

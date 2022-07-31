@@ -1,6 +1,5 @@
 import React, { useCallback, forwardRef, useState, useEffect } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
-import { Linking } from 'react-native'
 import Loading from 'components/Loading'
 import WebView from 'react-native-webview'
 import { getSessionCookie } from 'util/session'

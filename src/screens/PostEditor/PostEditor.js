@@ -458,7 +458,7 @@ export class PostEditor extends React.Component {
               </View>
             )}
             <Text style={styles.sectionLabel}>Details</Text>
-            <HyloEditorWebView />
+            <HyloEditorWebView contentHTML={post?.details} />
             {/* <InlineEditor
               style={[
                 styles.section,

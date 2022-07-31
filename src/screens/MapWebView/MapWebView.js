@@ -1,11 +1,11 @@
 import React, { useState, useCallback, useRef } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import { useSelector } from 'react-redux'
-import { HyloApp } from 'hylo-shared'
+import { WebViewMessageTypes } from 'hylo-shared'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import { navigateToLinkingPath } from 'navigation/linking'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import HyloWebView from 'screens/HyloWebView'
+import HyloWebView, { parseWebViewMessage } from 'screens/HyloWebView'
 
 // Matches actual group paths (e.g. not /all or /public)
 export const MATCHER_GROUP_SLUG = '[a-zA-Z0-9-]+$'
@@ -39,10 +39,10 @@ export default function MapWebView ({ navigation }) {
   )
 
   const handleMessage = message => {
-    const { type, data } = HyloApp.parseWebViewMessage(message)
+    const { type, data } = parseWebViewMessage(message)
 
     switch (type) {
-      case HyloApp.NAVIGATION: {
+      case WebViewMessageTypes.NAVIGATION: {
         const { pathname, search } = data
         // Matches: `groups/my-awesome-group/members/<member-id>` or `/all|pubic/members/<member-id>`
         // re-writes linking to go to "Member Details - Modal" in the "all" context

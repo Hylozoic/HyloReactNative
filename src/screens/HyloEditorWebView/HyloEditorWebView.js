@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react'
-// import { useFocusEffect } from '@react-navigation/core'
-import { HyloApp } from 'hylo-shared'
-import HyloWebView from 'screens/HyloWebView'
+import React, { useState, useRef, useCallback } from 'react'
+import { useFocusEffect } from '@react-navigation/core'
+import { WebViewMessageTypes } from 'hylo-shared'
+import HyloWebView, { sendMessageFromWebView, parseWebViewMessage } from 'screens/HyloWebView'
 
 export default function HyloEditorWebView ({
   contentHTML: providedContentHTML = '<p>test</p>',
@@ -9,7 +9,7 @@ export default function HyloEditorWebView ({
   onChange,
   onEnter
 }) {
-  const webViewRef = useRef(null)
+  const webViewRef = useRef()
   // TODO: Pass along `placeholder`, `readOnly`, and `hideMenu` to the querystring
   const [path, setPath] = useState('hyloApp/editor')
   const [contentHTML, setContentHTML] = useState(providedContentHTML)
@@ -18,19 +18,20 @@ export default function HyloEditorWebView ({
   // const myGroupIds = myGroups?.map(g => g.id)
 
   const handleMessage = message => {
-    const { type, data } = HyloApp.parseWebViewMessage(message)
+    console.log('!!! handleMessage', message)
+    const { type, data } = parseWebViewMessage(message)
 
     switch (type) {
-      case HyloApp.EDITOR.onChange: {
+      case WebViewMessageTypes.EDITOR.ON_CHANGE: {
         setContentHTML(data)
 
-        console.log('!!! onChange:', data)
+        console.log('!!! onChangde:', data)
         onChange && onChange(data)
 
         break
       }
 
-      case HyloApp.EDITOR.onAddTopic: {
+      case WebViewMessageTypes.EDITOR.ON_ADD_TOPIC: {
         const topic = data
 
         console.log('!!! onAddTopic:', topic)
@@ -38,7 +39,7 @@ export default function HyloEditorWebView ({
         break
       }
 
-      case 'onEnter': {
+      case WebViewMessageTypes.EDITOR.ON_ENTER: {
         console.log('!!! onEnter:', data)
         onEnter && onEnter(contentHTML)
 
@@ -47,9 +48,12 @@ export default function HyloEditorWebView ({
     }
   }
 
-  useEffect(() => {
-    // HyloApp.sendMessageFromWebView(webViewRef, 'setContent', providedContentHTML)
-  }, [contentHTML])
+  useFocusEffect(
+    useCallback(() => {
+      // TODO: Wait until WebView is done loading, make editor readOnly while doing so ...
+      setTimeout(() => sendMessageFromWebView(webViewRef, WebViewMessageTypes.EDITOR.SET_CONTENT, providedContentHTML), 1000)
+    }, [webViewRef.current, providedContentHTML])
+  )
 
   return (
     <HyloWebView

@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import logout from 'store/actions/logout'
-import HyloWebView from 'screens/HyloWebView'
-import { HyloApp } from 'hylo-shared'
+import HyloWebView, { parseWebViewMessage } from 'screens/HyloWebView'
+import { WebViewMessageTypes } from 'hylo-shared'
 import { LEAVE_GROUP } from 'store/constants'
 
 export default function UserSettingsWebView ({ path: pathProp, navigation, route }) {
@@ -11,10 +11,10 @@ export default function UserSettingsWebView ({ path: pathProp, navigation, route
   const path = pathProp || route?.params?.path
 
   const handleMessage = message => {
-    const { type, data } = HyloApp.parseWebViewMessage(message)
+    const { type, data } = parseWebViewMessage(message)
 
     switch (type) {
-      case HyloApp.LEFT_GROUP: {
+      case WebViewMessageTypes.LEFT_GROUP: {
         return data.groupId && dispatch({ type: LEAVE_GROUP, meta: { id: data.groupId } })
       }
     }
