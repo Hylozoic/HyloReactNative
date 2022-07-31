@@ -7,11 +7,9 @@ import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 
 const HyloWebView = forwardRef(({
   path: pathProp,
-  onNavigationStateChange = () => {},
-  onMessage = () => {},
-  onShouldStartLoadWithRequest = () => true,
   route,
-  style
+  onShouldStartLoadWithRequest = () => true,
+  ...forwardedProps
 }, webViewRef) => {
   const [cookie, setCookie] = useState()
   const [uri, setUri] = useState()
@@ -34,7 +32,7 @@ const HyloWebView = forwardRef(({
   if (!cookie) return <Loading />
 
   return (
-    <KeyboardFriendlyView style={{ flex: 1, ...style }}>
+    <KeyboardFriendlyView style={{ flex: 1 }}>
       <WebView
         ref={webViewRef}
         source={{
@@ -43,6 +41,7 @@ const HyloWebView = forwardRef(({
         }}
         geolocationEnabled
         sharedCookiesEnabled
+        {...forwardedProps}
         // onShouldStartLoadWithRequest={params => {
         //   const { url } = params
         //   // Opens full URLs in external browser if not the
@@ -54,8 +53,6 @@ const HyloWebView = forwardRef(({
         //   }
         //   return onShouldStartLoadWithRequest(params)
         // }}
-        onNavigationStateChange={onNavigationStateChange}
-        onMessage={onMessage}
       />
     </KeyboardFriendlyView>
   )

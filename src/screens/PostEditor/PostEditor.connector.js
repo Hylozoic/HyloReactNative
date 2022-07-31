@@ -47,7 +47,7 @@ export function mapStateToProps (state, props) {
     mapCoordinate,
     groupOptions,
     canModerate: getCanModerate(state),
-    pendingDetailsText: isPendingFor(fetchPost, state)
+    postLoading: isPendingFor(fetchPost, state)
   }
 }
 

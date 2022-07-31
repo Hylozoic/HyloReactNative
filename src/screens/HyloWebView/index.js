@@ -4,7 +4,7 @@ export function parseWebViewMessage (messageOrEvent) {
   return JSON.parse(messageOrEvent?.nativeEvent ? messageOrEvent.nativeEvent.data : messageOrEvent)
 }
 
-export function sendMessageFromWebView (webViewRef, type, data) {
+export function sendMessageFromWebView (webViewRef, type, data, delay) {
   if (!webViewRef) {
     throw new Error('The first parameter `webViewRef` is empty or not valid')
   }
@@ -14,7 +14,11 @@ export function sendMessageFromWebView (webViewRef, type, data) {
   }
 
   if (webViewRef.current?.postMessage) {
-    webViewRef.current.postMessage(JSON.stringify({ type, data }))
+    if (delay) {
+      setTimeout(() => webViewRef.current.postMessage(JSON.stringify({ type, data })), delay)
+    } else {
+      webViewRef.current.postMessage(JSON.stringify({ type, data }))
+    }
   }
 }
 

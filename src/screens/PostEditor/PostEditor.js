@@ -389,7 +389,7 @@ export class PostEditor extends React.Component {
   }
 
   render () {
-    const { canModerate, post } = this.props
+    const { canModerate, post, postLoading, groupOptions } = this.props
     const {
       fileUrls, imageUrls, isSaving, topics, title, type,
       filePickerPending, announcementEnabled, titleLengthError, members,
@@ -444,26 +444,17 @@ export class PostEditor extends React.Component {
             )}
             <Text style={styles.sectionLabel}>Details</Text>
             <HyloEditorWebView
+              placeholder={detailsPlaceholder}
               contentHTML={post?.details}
+              groupIds={groupOptions && groupOptions.map(g => g.id)}
               onChange={this.handleDetailsOnChange}
               onAddTopic={!topicsPicked && this.handleAddTopic}
-            />
-            {/* <InlineEditor
+              readOnly={postLoading || isSaving}
               style={[
                 styles.section,
                 styles.textInputWrapper
               ]}
-              inputStyle={styles.textInput}
-              onChange={this.handleDetailsOnChange}
-              value={detailsText}
-              editable={!pendingDetailsText}
-              submitting={isSaving}
-              placeholder={detailsPlaceholder}
-              groupId={currentGroup?.id}
-              autoGrow={false}
-              onFocusToggle={isFocused => this.setState({ detailsFocused: isFocused })}
-              onInsertTopic={this.handleInsertEditorTopic}
-            /> */}
+            />
             <TouchableOpacity
               style={[
                 styles.section,
