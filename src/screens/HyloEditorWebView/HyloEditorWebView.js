@@ -7,6 +7,7 @@ export default function HyloEditorWebView ({
   contentHTML: providedContentHTML = '<p>test</p>',
   placeholder,
   onChange,
+  onAddTopic,
   onEnter
 }) {
   const webViewRef = useRef()
@@ -18,29 +19,25 @@ export default function HyloEditorWebView ({
   // const myGroupIds = myGroups?.map(g => g.id)
 
   const handleMessage = message => {
-    console.log('!!! handleMessage', message)
     const { type, data } = parseWebViewMessage(message)
 
     switch (type) {
       case WebViewMessageTypes.EDITOR.ON_CHANGE: {
         setContentHTML(data)
 
-        console.log('!!! onChangde:', data)
         onChange && onChange(data)
 
         break
       }
 
       case WebViewMessageTypes.EDITOR.ON_ADD_TOPIC: {
-        const topic = data
-
-        console.log('!!! onAddTopic:', topic)
+        console.log('!!! onAddTopic:', data)
+        onAddTopic && onAddTopic(data)
 
         break
       }
 
       case WebViewMessageTypes.EDITOR.ON_ENTER: {
-        console.log('!!! onEnter:', data)
         onEnter && onEnter(contentHTML)
 
         break

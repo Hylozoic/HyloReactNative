@@ -36,7 +36,6 @@ import FileSelector, { showFilePicker } from './FileSelector'
 import DatePicker from 'components/DatePicker'
 import ImagePicker from 'components/ImagePicker'
 import ImageSelector from './ImageSelector'
-import InlineEditor, { toHTML, fromHTML } from 'components/InlineEditor'
 import HyloEditorWebView from 'screens/HyloEditorWebView'
 import ErrorBubble from 'components/ErrorBubble'
 import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
@@ -65,7 +64,7 @@ export class PostEditor extends React.Component {
       topicsPicked: false,
       announcementEnabled: false,
       detailsFocused: false,
-      detailsText: fromHTML(post?.details),
+      details: post?.details,
       titleLengthError: false,
       startTime: post?.startTime
         ? new Date(post.startTime)
@@ -129,8 +128,8 @@ export class PostEditor extends React.Component {
     return nextProps.isFocused
   }
 
-  handleDetailsOnChange = detailsText => {
-    this.setState({ detailsText })
+  handleDetailsOnChange = details => {
+    this.setState({ details })
   }
 
   handleTypeOnChange = type => {
@@ -147,7 +146,7 @@ export class PostEditor extends React.Component {
       navigation, post
     } = this.props
     const {
-      fileUrls, imageUrls, title, detailsText,
+      fileUrls, imageUrls, title, details,
       topics, type, announcementEnabled, members,
       groups, startTime, endTime, location,
       locationObject
@@ -155,7 +154,7 @@ export class PostEditor extends React.Component {
     const postData = {
       id: post.id,
       type,
-      details: toHTML(detailsText),
+      details,
       groups,
       memberIds: members.map(m => m.id),
       fileUrls: uniq(fileUrls),
@@ -271,31 +270,19 @@ export class PostEditor extends React.Component {
 
   ignoreHash = name => name[0] === '#' ? name.slice(1) : name
 
-  insertTopicFromPicker = topic => {
-    const t = { ...topic, name: this.ignoreHash(topic.name) }
-
-    if (Validators.validateTopicName(t.name) === null) this.insertUniqueTopics([t], true)
-  }
-
-  handleInsertEditorTopic = topics => {
-    // If topic picker has been used, don't override it with the details editor
-    if (this.state.topicsPicked) return
-
-    const validTopics = topics.filter(({ name }) => Validators.validateTopicName(name) === null)
-    this.insertUniqueTopics(validTopics, false)
-  }
-
   // Assumptions:
   //  - a maximum of three topics per post are allowed
   //  - topics must be unique
   //  - priority is given to topics already on the post (preserve order)
-  // TODO: support topics from more than one group, for crossposting
-  insertUniqueTopics = (topicCandidates, topicsPicked) => {
-    const topics = uniqBy(
-      t => t.name,
-      [...this.state.topics, ...topicCandidates]
-    ).slice(0, 3)
-    this.setState({ topics, topicsPicked })
+  handleAddTopic = (providedTopic, picked) => {
+    const topic = { ...providedTopic, name: this.ignoreHash(providedTopic.name) }
+
+    if (Validators.validateTopicName(topic.name) === null) {
+      this.setState({
+        topics: uniqBy(t => t.name, [...this.state.topics, topic]).slice(0, 3),
+        topicsPicked: picked !== undefined ? picked : this.state.topicsPicked
+      })
+    }
   }
 
   handleRemoveTopic = topicName => () => this.setState({
@@ -353,7 +340,7 @@ export class PostEditor extends React.Component {
       screenTitle,
       searchPlaceholder: 'Search for a topic by name',
       ItemRowComponent: TopicRow,
-      pickItem: this.insertTopicFromPicker,
+      pickItem: topic => { this.handleAddTopic(topic, true) },
       // FIX: Will only find topics for first group
       fetchSearchSuggestions: fetchTopicsForGroupId(get('[0].id', this.state.groups)),
       getSearchSuggestions: getTopicsForAutocompleteWithNew
@@ -402,13 +389,11 @@ export class PostEditor extends React.Component {
   }
 
   render () {
+    const { canModerate, post } = this.props
     const {
-      currentGroup, canModerate, post, pendingDetailsText
-    } = this.props
-    const {
-      fileUrls, imageUrls, isSaving, topics, title, detailsText, type,
+      fileUrls, imageUrls, isSaving, topics, title, type,
       filePickerPending, announcementEnabled, titleLengthError, members,
-      groups, startTime, endTime, location, locationObject
+      groups, startTime, endTime, location, locationObject, topicsPicked
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
     const toolbarProps = {
@@ -458,7 +443,11 @@ export class PostEditor extends React.Component {
               </View>
             )}
             <Text style={styles.sectionLabel}>Details</Text>
-            <HyloEditorWebView contentHTML={post?.details} />
+            <HyloEditorWebView
+              contentHTML={post?.details}
+              onChange={this.handleDetailsOnChange}
+              onAddTopic={!topicsPicked && this.handleAddTopic}
+            />
             {/* <InlineEditor
               style={[
                 styles.section,
