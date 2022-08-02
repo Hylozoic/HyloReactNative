@@ -32,7 +32,7 @@ export default function Comment ({
     postTitle = TextHelpers.truncateText(postTitle, 40)
   }
 
-  const onPress = providedOnPress || (onReply && (() => onReply(comment, { mention: false })))
+  const handlePress = providedOnPress || (onReply && (() => onReply(comment, { mention: false })))
   const imageAttachments = filter({ type: 'image' }, comment?.attachments)
   // NOTE: Currently no UI for adding comment file attachments
   // const fileAttachments = filter({ type: 'file' }, comment?.attachments)
@@ -72,7 +72,7 @@ export default function Comment ({
   }
 
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={handlePress}>
       <View style={[styles.container, style]}>
         <TouchableOpacity onPress={() => showMember(creator.id)}>
           <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />

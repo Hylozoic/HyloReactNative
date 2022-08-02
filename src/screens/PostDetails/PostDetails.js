@@ -18,7 +18,7 @@ import PostFooter from 'components/PostCard/PostFooter'
 import PostHeader from 'components/PostCard/PostHeader'
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import Button from 'components/Button'
-import InlineEditor, { toHTML } from 'components/InlineEditor'
+import HyloEditorWebView from 'screens/HyloEditorWebView'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import styles from './PostDetails.styles'
@@ -26,7 +26,7 @@ import styles from './PostDetails.styles'
 export class PostDetails extends React.Component {
   state = {
     replyingToComment: null,
-    commentText: '',
+    commentHTML: '',
     submitting: false
   }
 
@@ -57,9 +57,7 @@ export class PostDetails extends React.Component {
   onShowTopic = (topicId) =>
     this.props.showTopic(topicId, get('post.groups.0.id', this.props))
 
-  handleCreateComment = async commentText => {
-    const commentHTML = toHTML(commentText)
-
+  handleCreateComment = async commentHTML => {
     if (!isEmpty(commentHTML)) {
       const { replyingToComment } = this.state
       const parentCommentId = replyingToComment?.parentComment || replyingToComment?.id || null
@@ -81,27 +79,25 @@ export class PostDetails extends React.Component {
     }
   }
 
-  handleCommentOnChange = (commentText) => {
-    this.setState(() => ({ commentText }))
+  handleCommentOnChange = (commentHTML) => {
+    this.setState(() => ({ commentHTML }))
   }
 
   handleCommentReplyCancel = callback => {
-    this.setState({ replyingToComment: null, commentText: '' }, () => {
+    this.setState({ replyingToComment: null, commentHTML: '' }, () => {
       this.commentsRef?.current.highlightComment(null)
-      this.editorRef?.editorInputRef?.current.clear()
-      this.editorRef?.editorInputRef?.current.blur()
+      this.editorRef?.current.clearContent()
       callback && callback()
     })
   }
 
   handleCommentReply = (comment, { mention = false }) => {
     this.handleCommentReplyCancel(() => {
-      this.setState({ replyingToComment: comment, commentText: '' })
+      this.setState({ replyingToComment: comment, commentHTML: '' })
 
       this.commentsRef?.current.highlightComment(comment)
       this.commentsRef?.current.scrollToComment(comment)
-      this.editorRef?.editorInputRef?.current.clear()
-      this.editorRef?.editorInputRef?.current.focus()
+      this.editorRef?.current.clearContent()
     })
   }
 
@@ -137,7 +133,7 @@ export class PostDetails extends React.Component {
 
   render () {
     const { post, tabBarHeight, isModal } = this.props
-    const { commentText, replyingToComment, submitting } = this.state
+    const { commentHTML, replyingToComment, submitting } = this.state
     const replyingToPerson = replyingToComment?.parentComment && replyingToComment.creator
     const groupId = get('groups.0.id', post)
 
@@ -164,17 +160,29 @@ export class PostDetails extends React.Component {
               </TouchableOpacity>
             </View>
           )}
-          <InlineEditor
+          <HyloEditorWebView
+            // initialMentionPerson={replyingToPerson}
+            // groupId={groupId}
+            placeholder='Write a comment...'
+            contentHTML={commentHTML}
+            onEnter={this.handleCreateComment}
+            onChange={this.handleDetailsOnChange}
+            readOnly={submitting}
+            hideMenu
+            // style={[{ height: 200 }]}
+            ref={this.editorRef}
+          />
+          {/* <InlineEditor
             style={styles.inlineEditor}
             onRef={elem => (this.editorRef = elem)}
             onChange={this.handleCommentOnChange}
             onSubmit={this.handleCreateComment}
             placeholder='Write a comment...'
-            value={commentText}
+            value={commentHTML}
             initialMentionPerson={replyingToPerson}
             submitting={submitting}
             groupId={groupId}
-          />
+          /> */}
         </KeyboardAccessoryView>
         <SocketSubscriber type='post' id={post.id} />
       </View>
