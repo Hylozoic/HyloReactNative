@@ -192,7 +192,7 @@ export const createTopicTag = topic =>
 export const mentionsToHTML = text => {
   const result = text.replace(
     /\[([^[]+)\]\((\d+)\)/gi,
-    `<a href="#" data-entity-type="${MENTION_ENTITY_TYPE}" data-user-id="$2">$1</a>`
+    '<span data-type="mention" class="mention" data-id="$2" data-label="$1">$1</span>'
   )
   return result
 }
@@ -213,10 +213,13 @@ export const fromHTML = html => {
   return NodeHtmlMarkdown.translate(html, {}, {
     a: opts => {
       const { node, options, visitor } = opts
-      if (node?.attrs['data-entity-type'] === MENTION_ENTITY_TYPE) {
+      if (
+        node?.attrs['data-entity-type'] === MENTION_ENTITY_TYPE ||
+        node?.attrs['data-type'] === MENTION_ENTITY_TYPE
+      ) {
         return {
           prefix: '[',
-          postfix: `](${node?.attrs['data-user-id']})`
+          postfix: `](${node?.attrs['data-user-id'] || node?.attrs['data-id']})`
         }
       } else {
         defaultTranslators.a(opts)

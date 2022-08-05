@@ -18,19 +18,15 @@ import PostFooter from 'components/PostCard/PostFooter'
 import PostHeader from 'components/PostCard/PostHeader'
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import Button from 'components/Button'
-import HyloEditorWebView from 'screens/HyloEditorWebView'
+import InlineEditor, { toHTML } from 'components/InlineEditor'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import styles from './PostDetails.styles'
 
-export const initialMentionEditorContent = person => (
-  `<p><span data-type="mention" data-id="${person.id}" data-label="${person.name}">${person.name}</span>&nbsp;</p>`
-)
-
 export class PostDetails extends React.Component {
   state = {
     replyingToComment: null,
-    commentHTML: '',
+    commentText: '',
     submitting: false
   }
 
@@ -61,7 +57,9 @@ export class PostDetails extends React.Component {
   onShowTopic = (topicId) =>
     this.props.showTopic(topicId, get('post.groups.0.id', this.props))
 
-  handleCreateComment = async commentHTML => {
+  handleCreateComment = async commentText => {
+    const commentHTML = toHTML(commentText)
+
     if (!isEmpty(commentHTML)) {
       const { replyingToComment } = this.state
       const parentCommentId = replyingToComment?.parentComment || replyingToComment?.id || null
@@ -83,29 +81,27 @@ export class PostDetails extends React.Component {
     }
   }
 
-  handleCommentOnChange = (commentHTML) => {
-    this.setState(() => ({ commentHTML }))
+  handleCommentOnChange = (commentText) => {
+    this.setState(() => ({ commentText }))
   }
 
   handleCommentReplyCancel = callback => {
-    this.setState({ replyingToComment: null, commentHTML: '' }, () => {
+    this.setState({ replyingToComment: null, commentText: '' }, () => {
       this.commentsRef?.current.highlightComment(null)
-      this.editorRef?.current.clearContent()
+      this.editorRef?.editorInputRef?.current.clear()
+      this.editorRef?.editorInputRef?.current.blur()
       callback && callback()
     })
   }
 
   handleCommentReply = (comment, { mention = false }) => {
     this.handleCommentReplyCancel(() => {
+      this.setState({ replyingToComment: comment, commentText: '' })
+
       this.commentsRef?.current.highlightComment(comment)
       this.commentsRef?.current.scrollToComment(comment)
-      // this.editorRef?.current.clearContent()
-
-      this.setState({ replyingToComment: comment })
-
-      if (comment.parentComment) {
-        this.setState({ commentHTML: initialMentionEditorContent(comment.creator) })
-      }
+      this.editorRef?.editorInputRef?.current.clear()
+      this.editorRef?.editorInputRef?.current.focus()
     })
   }
 
@@ -141,7 +137,7 @@ export class PostDetails extends React.Component {
 
   render () {
     const { post, tabBarHeight, isModal } = this.props
-    const { commentHTML, replyingToComment, submitting } = this.state
+    const { commentText, replyingToComment, submitting } = this.state
     const replyingToPerson = replyingToComment?.parentComment && replyingToComment.creator
     const groupId = get('groups.0.id', post)
 
@@ -168,29 +164,17 @@ export class PostDetails extends React.Component {
               </TouchableOpacity>
             </View>
           )}
-          <HyloEditorWebView
-            style={styles.commentPrompt}
-            // groupId={groupId}
-            placeholder='Write a comment...'
-            contentHTML={commentHTML}
-            onEnter={this.handleCreateComment}
-            onChange={this.handleDetailsOnChange}
-            readOnly={submitting}
-            hideMenu
-            // style={[{ height: 200 }]}
-            ref={this.editorRef}
-          />
-          {/* <InlineEditor
+          <InlineEditor
             style={styles.inlineEditor}
             onRef={elem => (this.editorRef = elem)}
             onChange={this.handleCommentOnChange}
             onSubmit={this.handleCreateComment}
             placeholder='Write a comment...'
-            value={commentHTML}
+            value={commentText}
             initialMentionPerson={replyingToPerson}
             submitting={submitting}
             groupId={groupId}
-          /> */}
+          />
         </KeyboardAccessoryView>
         <SocketSubscriber type='post' id={post.id} />
       </View>

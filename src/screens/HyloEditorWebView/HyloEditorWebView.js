@@ -20,7 +20,7 @@ export const HyloEditorWebView = React.forwardRef(function HyloEditorWebView ({
   const webViewRef = useRef()
   const [path, setPath] = useState('hyloApp/editor')
   const [loaded, setLoaded] = useState()
-  const [height, setHeight] = useState(200)
+  const [height, setHeight] = useState(300)
   const [contentHTML, setContentHTML] = useState(providedContentHTML)
 
   useImperativeHandle(ref, () => ({
@@ -97,7 +97,8 @@ export const HyloEditorWebView = React.forwardRef(function HyloEditorWebView ({
       path={path}
       onMessage={handleMessage}
       startInLoadingState
-      style={{ height, ...style }}
+      // style={{ ...style }}
+      containerStyle={{ height }}
       ref={webViewRef}
     />
   )

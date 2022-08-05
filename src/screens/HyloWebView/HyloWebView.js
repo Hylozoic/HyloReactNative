@@ -5,12 +5,12 @@ import WebView from 'react-native-webview'
 import { getSessionCookie } from 'util/session'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 
-const HyloWebView = forwardRef(({
+const HyloWebView = forwardRef(function HyloWebView ({
   path: pathProp,
   route,
   onShouldStartLoadWithRequest = () => true,
   ...forwardedProps
-}, webViewRef) => {
+}, webViewRef) {
   const [cookie, setCookie] = useState()
   const [uri, setUri] = useState()
 
