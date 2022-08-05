@@ -23,6 +23,10 @@ import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import styles from './PostDetails.styles'
 
+export const initialMentionEditorContent = person => (
+  `<p><span data-type="mention" data-id="${person.id}" data-label="${person.name}">${person.name}</span>&nbsp;</p>`
+)
+
 export class PostDetails extends React.Component {
   state = {
     replyingToComment: null,
@@ -93,11 +97,15 @@ export class PostDetails extends React.Component {
 
   handleCommentReply = (comment, { mention = false }) => {
     this.handleCommentReplyCancel(() => {
-      this.setState({ replyingToComment: comment, commentHTML: '' })
-
       this.commentsRef?.current.highlightComment(comment)
       this.commentsRef?.current.scrollToComment(comment)
-      this.editorRef?.current.clearContent()
+      // this.editorRef?.current.clearContent()
+
+      this.setState({ replyingToComment: comment })
+
+      if (comment.parentComment) {
+        this.setState({ commentHTML: initialMentionEditorContent(comment.creator) })
+      }
     })
   }
 
@@ -161,7 +169,7 @@ export class PostDetails extends React.Component {
             </View>
           )}
           <HyloEditorWebView
-            // initialMentionPerson={replyingToPerson}
+            style={styles.commentPrompt}
             // groupId={groupId}
             placeholder='Write a comment...'
             contentHTML={commentHTML}
