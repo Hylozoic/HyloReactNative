@@ -14,6 +14,7 @@ export const HyloEditorWebView = React.forwardRef(function HyloEditorWebView ({
   hideMenu,
   onChange,
   onAddTopic,
+  onAddLink,
   onEnter,
   style
 }, ref) {
@@ -44,6 +45,11 @@ export const HyloEditorWebView = React.forwardRef(function HyloEditorWebView ({
       case WebViewMessageTypes.EDITOR.ON_CHANGE: {
         setContentHTML(data)
         onChange && onChange(data)
+        break
+      }
+
+      case WebViewMessageTypes.EDITOR.ON_ADD_LINK: {
+        onAddLink && onAddLink(data)
         break
       }
 
