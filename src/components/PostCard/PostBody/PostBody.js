@@ -19,6 +19,7 @@ export default function PostBody ({
   startTime,
   endTime,
   linkPreview,
+  linkPreviewFeatured,
   myEventResponse,
   respondToEvent,
   slug,
@@ -42,11 +43,14 @@ export default function PostBody ({
           <EventRSVP myEventResponse={isEmpty(myEventResponse) ? RESPONSES.NO : myEventResponse} respondToEvent={respondToEvent} />
         )}
       </View>
+      {(linkPreview?.url && linkPreviewFeatured) && (
+        <LinkPreview {...linkPreview} />
+      )}
       <HyloHTML
         html={presentedDetails}
         baseStyle={{ marginBottom: 8 }}
       />
-      {linkPreview && (
+      {(linkPreview?.url && !linkPreviewFeatured) && (
         <LinkPreview {...linkPreview} />
       )}
     </View>

@@ -112,7 +112,7 @@ it('toHTML', () => {
   expect(toHTML(
     "hello world [tom](3344) [:5] #adlkjdf here's"
   )).toBe(
-    '<p>hello world <a href="#" data-entity-type="mention" data-user-id="3344">tom</a> [:5] #adlkjdf here&#39;s</p>\n'
+    '<p>hello world <span data-type="mention" class="mention" data-id="3344" data-label="tom">tom</span> [:5] #adlkjdf here&#39;s</p>'
   )
 })
 
@@ -136,6 +136,6 @@ it('mentionsToHTML', () => {
   expect(mentionsToHTML(
     'hello [tom](333) [two](233) world [three](3332)'
   )).toEqual(
-    'hello <a href="#" data-entity-type="mention" data-user-id="333">tom</a> <a href="#" data-entity-type="mention" data-user-id="233">two</a> world <a href="#" data-entity-type="mention" data-user-id="3332">three</a>'
+    'hello <span data-type="mention" class="mention" data-id="333" data-label="tom">tom</span> <span data-type="mention" class="mention" data-id="233" data-label="two">two</span> world <span data-type="mention" class="mention" data-id="3332" data-label="three">three</span>'
   )
 })

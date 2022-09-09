@@ -94,7 +94,7 @@ describe('PostDetails', () => {
       instance.handleCreateComment(commentText)
     ))
     expect(props.createComment).toHaveBeenCalledWith({
-      text: '<p>some text <a href="#" data-entity-type="mention" data-user-id="0">amention</a> #topic &lt;shouldn&#39;t encode entities&gt;</p>\n',
+      text: '<p>some text <span data-type=\"mention\" class=\"mention\" data-id=\"0\" data-label=\"amention\">amention</span> #topic &lt;shouldn&#39;t encode entities&gt;</p>\n',
       parentCommentId: null
     })
     expect(instance.state.submitting).toBeFalsy()

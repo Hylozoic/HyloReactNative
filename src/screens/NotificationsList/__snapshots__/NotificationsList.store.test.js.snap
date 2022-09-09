@@ -106,6 +106,7 @@ Object {
     url
     imageUrl
   }
+  linkPreviewFeatured
   location
   locationObject {
     id

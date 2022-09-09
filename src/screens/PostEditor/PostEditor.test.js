@@ -113,13 +113,13 @@ describe('PostEditor', () => {
       getByPlaceholderText('What do you want to discuss?'),
       'title of this post'
     )
-    fireEvent.changeText(
-      getByPlaceholderText('What else should we know?'),
-      'detail of this post'
-    )
+    // fireEvent.changeText(
+    //   getByPlaceholderText('What else should we know?'),
+    //   'detail of this post'
+    // )
     fireEvent.press(getByText('Save'))
 
-    waitFor(() => {
+    await waitFor(() => {
       getByText('Saving...')
     })
 

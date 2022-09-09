@@ -5,7 +5,7 @@ import postsQueryFragment from 'graphql/fragments/postsQueryFragment'
 import groupViewPostsQueryFragment from 'graphql/fragments/groupViewPostsQueryFragment'
 
 export default function fetchPosts ({ afterTime, beforeTime, context, filter, offset, order, search, slug, sortBy, topic }) {
-  var query, extractModel, getItems
+  let query, extractModel, getItems
 
   if (isContextGroup(slug)) {
     query = postsQuery

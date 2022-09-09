@@ -81,6 +81,7 @@ export default class PostCard extends React.PureComponent {
           endTime={post.endTime}
           hideDetails={hideDetails}
           linkPreview={post.linkPreview}
+          linkPreviewFeatured={post.linkPreviewFeatured}
           myEventResponse={post.myEventResponse}
           respondToEvent={respondToEvent}
           shouldTruncate

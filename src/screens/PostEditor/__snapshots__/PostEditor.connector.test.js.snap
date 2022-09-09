@@ -50,6 +50,7 @@ Array [
     url
     imageUrl
   }
+  linkPreviewFeatured
   location
   locationObject {
     id
@@ -157,7 +158,6 @@ Object {
     },
   ],
   "mapCoordinate": undefined,
-  "pendingDetailsText": false,
   "post": Object {
     "commenters": Array [],
     "creator": Object {
@@ -186,5 +186,6 @@ Object {
     "pinned": undefined,
     "topics": Array [],
   },
+  "postLoading": false,
 }
 `;

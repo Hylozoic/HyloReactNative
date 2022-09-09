@@ -69,6 +69,7 @@ const postFieldsFragment = withComments => `
     url
     imageUrl
   }
+  linkPreviewFeatured
   location
   locationObject {
     id
