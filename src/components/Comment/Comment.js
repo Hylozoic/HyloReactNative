@@ -1,5 +1,4 @@
-/* eslint-disable camelcase */
-import React, { useMemo } from 'react'
+import React from 'react'
 import { Image, Text, View, Alert, TouchableOpacity } from 'react-native'
 import { isEmpty, filter, findLastIndex } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
@@ -25,7 +24,6 @@ export default function Comment ({
   onPress: providedOnPress
 }) {
   const { creator, text, createdAt, post } = comment
-  const presentedText = useMemo(() => TextHelpers.presentHTML(text, { slug }), [text, slug])
   let postTitle = post?.title
 
   if (displayPostTitle && postTitle) {
@@ -106,7 +104,7 @@ export default function Comment ({
           ))}
           <HyloHTML
             tagsStyles={{ p: { margin: 0 } }}
-            html={presentedText}
+            html={text}
           />
         </View>
       </View>

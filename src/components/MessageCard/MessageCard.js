@@ -10,7 +10,7 @@ export default function MessageCard ({ message }) {
   const { createdAt, creator, suppressCreator, suppressDate, text } = message
   // TODO: Makrdown is being used on both Web and Mobile as some messages are HTML
   //       and others are plain text with purposeful linebreaks.
-  const presentedText = TextHelpers.presentHTML(TextHelpers.markdown(text))
+  const presentedText = TextHelpers.markdown(text)
   const textBaseStyle = Object.assign({}, { marginTop: 3 }, suppressCreator && styles.marginTopNoCreator)
   const classesStyles = { p: { margin: 0, padding: 0 } }
 

@@ -26,11 +26,8 @@ export default function PostBody ({
   shouldTruncate
 }) {
   const presentedDetails = useMemo(() => {
-    return TextHelpers.presentHTML(details, {
-      slug,
-      truncate: shouldTruncate && MAX_DETAILS_LENGTH
-    })
-  }, [details, slug, shouldTruncate])
+    return shouldTruncate ? TextHelpers.truncateHTML(details, MAX_DETAILS_LENGTH) : details
+  }, [details, shouldTruncate])
 
   return (
     <View style={styles.container}>
