@@ -84,7 +84,7 @@
     "react-native-triangle": "^0.0.9",
     "react-native-url-polyfill": "^1.3.0",
     "react-native-vector-icons": "^7.1.0",
-    "react-native-webview": "^11.21.2",
+    "react-native-webview": "^11.23.1",
     "react-native-zss-rich-text-editor": "Hylozoic/react-native-zss-rich-text-editor#merge-jb-updates-for-rn-0.61.5",
     "react-redux": "^7.2.6",
     "redux": "^4.0.5",
