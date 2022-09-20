@@ -95,6 +95,14 @@ export const renderHTMLStyles = {
     }
   },
   classesStyles: {
+    topic: {
+      color: '#0DC39F',
+      textDecorationLine: 'none'
+    },
+    mention: {
+      color: '#0DC39F',
+      textDecorationLine: 'none'
+    },
     linkified: {
       color: '#0275d8'
     }
