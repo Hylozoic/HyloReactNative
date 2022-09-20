@@ -111,8 +111,8 @@ describe('SubmitButton', () => {
 it('toHTML', () => {
   expect(toHTML(
     "hello world [tom](3344) [:5] #adlkjdf here's"
-  )).toBe(
-    '<p>hello world <span data-type="mention" class="mention" data-id="3344" data-label="tom">tom</span> [:5] #adlkjdf here&#39;s</p>'
+  )).toEqual(
+    '<p>hello world <span data-type="mention" class="mention" data-id="3344" data-label="tom">tom</span> [:5] #adlkjdf here&#39;s</p>\n'
   )
 })
 
