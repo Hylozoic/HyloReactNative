@@ -1,17 +1,15 @@
 import React from 'react'
 import { useWindowDimensions } from 'react-native'
 import RenderHTML, { defaultSystemFonts } from 'react-native-render-html'
-import { openURL } from 'navigation/linking'
-import { nevada } from 'style/colors'
+import WebView from 'react-native-webview'
+import iframe, { iframeModel } from '@native-html/iframe-plugin'
 import { useSelector } from 'react-redux'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import iframe, { iframeModel } from '@native-html/iframe-plugin'
-import WebView from 'react-native-webview'
+import { openURL, navigateToLinkingPath } from 'navigation/linking'
+import { PathHelpers } from 'hylo-shared'
+import { nevada } from 'style/colors'
 
 const htmlConfig = {
-  renderers: {
-    iframe
-  },
   tagsStyles: {
     iframe: {
       alignSelf: 'center'
@@ -33,14 +31,36 @@ const HyloHTML = React.memo(
     const { width: contentWidth } = useWindowDimensions()
     const { slug: currentGroupSlug } = useSelector(getCurrentGroup)
 
-    const handleLinkPress = async (_, href) => {
-      return openURL(href, { groupSlug: currentGroupSlug })
+    const handleLinkPress = async (_, href) => openURL(href, { groupSlug: currentGroupSlug })
+
+    const spanRenderer = ({ TDefaultRenderer, ...props }) => {
+      const handlePress = () => {
+        const textNode = props.tnode
+
+        if (textNode.hasClass('mention')) {
+          return navigateToLinkingPath(PathHelpers.mentionPath(textNode.attributes['data-id'], currentGroupSlug))
+        }
+        if (textNode.hasClass('topic')) {
+          return navigateToLinkingPath(PathHelpers.topicPath(textNode.attributes['data-label'], currentGroupSlug))
+        }
+      }
+
+      return (
+        <TDefaultRenderer {...props} onPress={handlePress} />
+      )
     }
 
     const source = { html: wrapInHTMLBody(html) }
+    const renderers = {
+      iframe,
+      span: spanRenderer
+    }
     const renderersProps = {
       a: { onPress: handleLinkPress },
       iframe: { scalesPageToFit: true }
+    }
+    const defaultTextProps = {
+      selectable: true
     }
     const baseStyle = { ...renderHTMLStyles.baseStyle, ...providedBaseStyle }
     const tagsStyles = { ...renderHTMLStyles.tagsStyles, ...providedTagsStyles }
@@ -50,7 +70,9 @@ const HyloHTML = React.memo(
     return (
       <RenderHTML
         source={source}
+        renderers={renderers}
         renderersProps={renderersProps}
+        defaultTextProps={defaultTextProps}
         baseStyle={baseStyle}
         tagsStyles={tagsStyles}
         classesStyles={classesStyles}
