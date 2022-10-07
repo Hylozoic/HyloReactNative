@@ -5,6 +5,7 @@ import { TestRoot } from 'util/testing'
 import InlineEditor, {
   SubmitButton,
   mentionsToHTML,
+  topicsToHTML,
   createMentionTag,
   createTopicTag,
   toHTML
@@ -108,14 +109,6 @@ describe('SubmitButton', () => {
   })
 })
 
-it('toHTML', () => {
-  expect(toHTML(
-    "hello world [tom](3344) [:5] #adlkjdf here's"
-  )).toEqual(
-    '<p>hello world <span data-type="mention" class="mention" data-id="3344" data-label="tom">tom</span> [:5] #adlkjdf here&#39;s</p>\n'
-  )
-})
-
 it('createTopicTag', () => {
   expect(createTopicTag(
     { id: 333, name: 'topic' }
@@ -137,5 +130,21 @@ it('mentionsToHTML', () => {
     'hello [tom](333) [two](233) world [three](3332)'
   )).toEqual(
     'hello <span data-type="mention" class="mention" data-id="333" data-label="tom">tom</span> <span data-type="mention" class="mention" data-id="233" data-label="two">two</span> world <span data-type="mention" class="mention" data-id="3332" data-label="three">three</span>'
+  )
+})
+
+it('topicsToHTML', () => {
+  expect(topicsToHTML(
+    'hello [tom](333) [two](233) world #topic-car [three](3332) #test-topic'
+  )).toEqual(
+    'hello [tom](333) [two](233) world <span data-type="topic" class="topic" data-label="topic-car">#topic-car</span> [three](3332) <span data-type="topic" class="topic" data-label="test-topic">#test-topic</span>'
+  )
+})
+
+it('toHTML', () => {
+  expect(toHTML(
+    'hello [tom](333) [two](233) **world** #topic-car [three](3332) #test-topic'
+  )).toEqual(
+    '<p>hello <span data-type="mention" class="mention" data-id="333" data-label="tom">tom</span> <span data-type="mention" class="mention" data-id="233" data-label="two">two</span> <strong>world</strong> <span data-type="topic" class="topic" data-label="topic-car">#topic-car</span> <span data-type="mention" class="mention" data-id="3332" data-label="three">three</span> <span data-type="topic" class="topic" data-label="test-topic">#test-topic</span></p>\n'
   )
 })

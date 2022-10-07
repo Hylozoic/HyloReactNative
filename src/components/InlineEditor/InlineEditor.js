@@ -197,6 +197,16 @@ export const mentionsToHTML = text => {
   return result
 }
 
+export const TOPIC_REGEX = /\B(#([a-zA-Z-_]+\b)(?!;))/gi
+
+export const topicsToHTML = text => {
+  const result = text.replace(
+    TOPIC_REGEX,
+    '<span data-type="topic" class="topic" data-label="$2">$1</span>'
+  )
+  return result
+}
+
 // This allows multiple linebreaks with markdown by
 // default will collapse.
 // * This breaks markdown blocks/lists (ol, ul, etc)
@@ -207,19 +217,22 @@ export const newLinesToBr = text => text
     '<br />'
   )
 
+// NOTE: This is deprecated, shouldn't be used anywhere anymore
 export const fromHTML = html => {
   if (!html) return ''
 
   return NodeHtmlMarkdown.translate(html, {}, {
     a: opts => {
       const { node, options, visitor } = opts
-      if (
-        node?.attrs['data-entity-type'] === MENTION_ENTITY_TYPE ||
-        node?.attrs['data-type'] === MENTION_ENTITY_TYPE
-      ) {
+      if (node?.attrs['data-type'] === 'mention') {
         return {
           prefix: '[',
-          postfix: `](${node?.attrs['data-user-id'] || node?.attrs['data-id']})`
+          postfix: `](${node?.attrs['data-id']})`
+        }
+      } else if (node?.attrs['data-type'] === 'topic') {
+        return {
+          prefix: '#',
+          postfix: node?.attrs['data-label']
         }
       } else {
         defaultTranslators.a(opts)
@@ -232,6 +245,7 @@ export const toHTML = text => {
   return flow([
     newLinesToBr,
     mentionsToHTML,
+    topicsToHTML,
     TextHelpers.markdown
   ])(text)
 }
