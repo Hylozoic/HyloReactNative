@@ -19,15 +19,13 @@ export default StyleSheet.create({
     fontFamily: 'Circular-Book',
     marginTop: 3
   },
-  marginTopNoCreator: {
-    marginTop: 0
-  },
   name: {
     color: capeCod,
     fontFamily: 'Circular-Bold'
   },
   padTopNoCreator: {
-    paddingTop: 0
+    paddingTop: 0,
+    marginTop: -10
   },
   padLeftNoAvatar: {
     paddingLeft: 44

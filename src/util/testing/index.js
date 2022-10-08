@@ -2,7 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-// import { setupServer } from 'msw/node'
+import { TRenderEngineProvider } from 'react-native-render-html'
 import { createInitialState } from 'store'
 import orm from 'store/models'
 
@@ -40,11 +40,13 @@ export function TestRoot ({
 
   return (
     <SafeAreaProvider>
-      <Provider store={store}>
-        <NavigationContainer>
-          {children}
-        </NavigationContainer>
-      </Provider>
+      <TRenderEngineProvider>
+        <Provider store={store}>
+          <NavigationContainer>
+            {children}
+          </NavigationContainer>
+        </Provider>
+      </TRenderEngineProvider>
     </SafeAreaProvider>
   )
 }

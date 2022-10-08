@@ -11,9 +11,6 @@ export default function MessageCard ({ message }) {
   // TODO: Markdown is being used on both Web and Mobile as some messages are HTML
   //       and others are plain text with purposeful linebreaks.
   const messageHTML = TextHelpers.markdown(text)
-  // TODO: Refactor to put this as margin on body container ?
-  const textBaseStyle = Object.assign({}, { marginTop: 3 }, suppressCreator && styles.marginTopNoCreator)
-  const tagsStyles = { p: { margin: 0, padding: 0 } }
 
   return (
     <View style={[styles.container, suppressCreator && styles.padLeftNoAvatar]}>
@@ -24,11 +21,7 @@ export default function MessageCard ({ message }) {
         {!suppressCreator && (
           <Text style={styles.name}>{creator.name}</Text>
         )}
-        <HyloHTML
-          baseStyle={textBaseStyle}
-          tagsStyles={tagsStyles}
-          html={messageHTML}
-        />
+        <HyloHTML html={messageHTML} />
         {!suppressDate && (
           <Text style={styles.date}>{createdAt}</Text>
         )}

@@ -12,10 +12,11 @@ import { isDev } from 'config'
 import store from './src/store'
 import { name as appName } from './app.json'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-// import { TRenderEngineProvider, defaultSystemFonts } from 'react-native-render-html'
+import { TRenderEngineProvider, defaultSystemFonts } from 'react-native-render-html'
 import ErrorBoundary from 'screens/ErrorBoundary'
 import VersionCheck from 'components/VersionCheck'
 import RootNavigator from 'navigation/RootNavigator'
+import { baseStyle, tagsStyles, classesStyles } from 'components/HyloHTML/HyloHTML.styles'
 
 if (!isDev) {
   Sentry.init({ dsn: process.env.SENTRY_DSN_URL })
@@ -74,10 +75,22 @@ export default function App () {
     <SafeAreaProvider>
       <ErrorBoundary>
         <RootSiblingParent>
-          <Provider store={store}>
-            <VersionCheck />
-            <RootNavigator />
-          </Provider>
+          {/*
+            `TRenderEngineProvider` is the react-native-render-html rendering engine.
+            It is app-wide for performance reasons. The styles applied are global and
+            not readily overridden. For more details see: https://bit.ly/3MeJCIR
+          */}
+          <TRenderEngineProvider
+            baseStyle={baseStyle}
+            tagsStyles={tagsStyles}
+            classesStyles={classesStyles}
+            systemFonts={[...defaultSystemFonts, 'Circular-Book']}
+          >
+            <Provider store={store}>
+              <VersionCheck />
+              <RootNavigator />
+            </Provider>
+          </TRenderEngineProvider>
         </RootSiblingParent>
       </ErrorBoundary>
     </SafeAreaProvider>

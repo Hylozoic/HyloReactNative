@@ -75,13 +75,6 @@ exports[`renders correctly 1`] = `
       </View>
       <Memo
         html="tick followed tock followed tick followed tock"
-        tagsStyles={
-          Object {
-            "p": Object {
-              "margin": 0,
-            },
-          }
-        }
       />
     </View>
   </View>
@@ -142,13 +135,6 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
       </View>
       <Memo
         html="tick followed tock followed tick followed tock"
-        tagsStyles={
-          Object {
-            "p": Object {
-              "margin": 0,
-            },
-          }
-        }
       />
     </View>
   </View>

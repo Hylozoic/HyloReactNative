@@ -10,9 +10,7 @@ exports[`matches the last snapshot 1`] = `
   <View
     style={
       Array [
-        Object {
-          "marginBottom": 8,
-        },
+        Object {},
         undefined,
         undefined,
       ]
@@ -48,10 +46,7 @@ exports[`matches the last snapshot 1`] = `
           style={
             Array [
               Object {
-                "color": "#5D757A",
-                "fontFamily": "Circular-Book",
                 "fontSize": 14,
-                "lineHeight": 20,
               },
               undefined,
               undefined,
@@ -64,10 +59,7 @@ exports[`matches the last snapshot 1`] = `
             style={
               Array [
                 Object {
-                  "color": "#5D757A",
-                  "fontFamily": "Circular-Book",
                   "fontSize": 14,
-                  "lineHeight": 20,
                 },
                 undefined,
                 undefined,
@@ -82,10 +74,7 @@ exports[`matches the last snapshot 1`] = `
             style={
               Array [
                 Object {
-                  "color": "#5D757A",
-                  "fontFamily": "Circular-Book",
                   "fontSize": 14,
-                  "lineHeight": 20,
                 },
                 undefined,
                 undefined,
@@ -101,10 +90,7 @@ exports[`matches the last snapshot 1`] = `
             style={
               Array [
                 Object {
-                  "color": "#5D757A",
-                  "fontFamily": "Circular-Book",
                   "fontSize": 14,
-                  "lineHeight": 20,
                 },
                 undefined,
                 undefined,
@@ -134,10 +120,7 @@ exports[`matches the last snapshot 1`] = `
           style={
             Array [
               Object {
-                "color": "#5D757A",
-                "fontFamily": "Circular-Book",
                 "fontSize": 14,
-                "lineHeight": 20,
               },
               undefined,
               undefined,
@@ -166,10 +149,7 @@ exports[`matches the last snapshot 1`] = `
           style={
             Array [
               Object {
-                "color": "#5D757A",
-                "fontFamily": "Circular-Book",
                 "fontSize": 14,
-                "lineHeight": 20,
               },
               undefined,
               undefined,
@@ -182,10 +162,7 @@ exports[`matches the last snapshot 1`] = `
             style={
               Array [
                 Object {
-                  "color": "#5D757A",
-                  "fontFamily": "Circular-Book",
                   "fontSize": 14,
-                  "lineHeight": 20,
                 },
                 undefined,
                 undefined,
@@ -200,10 +177,7 @@ exports[`matches the last snapshot 1`] = `
             style={
               Array [
                 Object {
-                  "color": "#5D757A",
-                  "fontFamily": "Circular-Book",
                   "fontSize": 14,
-                  "lineHeight": 20,
                 },
                 undefined,
                 undefined,
@@ -234,10 +208,7 @@ exports[`matches the last snapshot 1`] = `
           style={
             Array [
               Object {
-                "color": "#5D757A",
-                "fontFamily": "Circular-Book",
                 "fontSize": 14,
-                "lineHeight": 20,
               },
               undefined,
               undefined,
@@ -267,10 +238,7 @@ exports[`matches the last snapshot 1`] = `
           style={
             Array [
               Object {
-                "color": "#5D757A",
-                "fontFamily": "Circular-Book",
                 "fontSize": 14,
-                "lineHeight": 20,
               },
               undefined,
               undefined,

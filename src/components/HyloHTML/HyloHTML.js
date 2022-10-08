@@ -1,13 +1,12 @@
 import React from 'react'
 import { useWindowDimensions } from 'react-native'
-import RenderHTML, { defaultSystemFonts } from 'react-native-render-html'
+import { RenderHTMLConfigProvider, RenderHTMLSource } from 'react-native-render-html'
 import WebView from 'react-native-webview'
 import iframe, { iframeModel } from '@native-html/iframe-plugin'
 import { useSelector } from 'react-redux'
+import { PathHelpers } from 'hylo-shared'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { openURL, navigateToLinkingPath } from 'navigation/linking'
-import { PathHelpers } from 'hylo-shared'
-import { nevada, rhino, white80 } from 'style/colors'
 
 const wrapInHTMLDoc = source => {
   return `
@@ -32,56 +31,9 @@ const htmlConfig = {
 const defaultTextProps = {
   selectable: true
 }
-const systemFonts = [...defaultSystemFonts, 'Circular-Book']
-const baseStyle = {
-  color: nevada,
-  fontSize: 14,
-  lineHeight: 20,
-  fontFamily: 'Circular-Book'
-}
-const tagsStyles = {
-  iframe: {
-    alignSelf: 'center'
-  },
-  a: {
-    color: '#0275d8',
-    textDecorationLine: 'none'
-  },
-  code: {
-    color: white80,
-    backgroundColor: rhino,
-    fontSize: 12,
-    padding: 10
-  },
-  pre: {
-    borderRadius: '0.5em',
-    display: 'block',
-    overflow: 'scroll',
-    fontSize: 12,
-    padding: 1.25
-  }
-}
-const classesStyles = {
-  'hylo-link': {
-    color: '#0DC39F'
-  },
-  mention: {
-    color: '#0DC39F',
-    textDecorationLine: 'none'
-  },
-  topic: {
-    color: '#0DC39F',
-    textDecorationLine: 'none'
-  }
-}
 
 const HyloHTML = React.memo(
-  function ({
-    html,
-    baseStyle: providedBaseStyle = {},
-    tagsStyles: providedTagsStyles = {},
-    classesStyles: providedClassessStyles = {}
-  }) {
+  function ({ html }) {
     const { width: contentWidth } = useWindowDimensions()
     const { slug: currentGroupSlug } = useSelector(getCurrentGroup)
 
@@ -114,18 +66,17 @@ const HyloHTML = React.memo(
     }
 
     return (
-      <RenderHTML
-        source={{ html: wrapInHTMLDoc(html) }}
+      <RenderHTMLConfigProvider
         renderers={renderers}
         renderersProps={renderersProps}
         defaultTextProps={defaultTextProps}
-        baseStyle={{ ...baseStyle, ...providedBaseStyle }}
-        tagsStyles={{ ...tagsStyles, ...providedTagsStyles }}
-        classesStyles={{ ...classesStyles, ...providedClassessStyles }}
-        contentWidth={contentWidth}
-        systemFonts={systemFonts}
         {...htmlConfig}
-      />
+      >
+        <RenderHTMLSource
+          source={{ html: wrapInHTMLDoc(html) }}
+          contentWidth={contentWidth}
+        />
+      </RenderHTMLConfigProvider>
     )
   }
 )

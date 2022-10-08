@@ -8,19 +8,6 @@ exports[`matches the last snapshot 1`] = `
   <View>
     <Text />
     <Memo
-      baseStyle={
-        Object {
-          "marginTop": 3,
-        }
-      }
-      classesStyles={
-        Object {
-          "p": Object {
-            "margin": 0,
-            "padding": 0,
-          },
-        }
-      }
       html="<p>Hi</p>
 "
     />
