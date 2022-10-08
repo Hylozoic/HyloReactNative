@@ -14,7 +14,6 @@ export default function Comment ({
   isCreator,
   canModerate,
   showMember,
-  slug,
   style,
   displayPostTitle,
   deleteComment,
@@ -102,10 +101,7 @@ export default function Comment ({
               <Image source={{ uri: url }} resizeMode='cover' style={styles.imageAttachemnt} />
             </TouchableOpacity>
           ))}
-          <HyloHTML
-            tagsStyles={{ p: { margin: 0 } }}
-            html={text}
-          />
+          <HyloHTML html={text} />
         </View>
       </View>
     </TouchableOpacity>

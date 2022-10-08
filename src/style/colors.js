@@ -50,6 +50,7 @@ export const black10onRhino = fakeAlpha('#000000', 0.1, rhino)
 export const slateGrey80 = '#8490a1'
 
 export const white = '#FFFFFF'
+export const white80 = fakeAlpha('#FFFFFF', 0.8)
 export const white80onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.8, caribbeanGreen)
 export const white60onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.6, caribbeanGreen)
 export const white40onCaribbeanGreen = fakeAlpha('#FFFFFF', 0.4, caribbeanGreen)

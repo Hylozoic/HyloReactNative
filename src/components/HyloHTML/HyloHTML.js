@@ -7,18 +7,72 @@ import { useSelector } from 'react-redux'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { openURL, navigateToLinkingPath } from 'navigation/linking'
 import { PathHelpers } from 'hylo-shared'
-import { nevada } from 'style/colors'
+import { nevada, rhino, white80 } from 'style/colors'
+
+const wrapInHTMLDoc = source => {
+  return `
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <base href="https://hylo.com">
+    </head>
+    <body>
+      ${source}
+    </body>
+    </html>
+  `
+}
 
 const htmlConfig = {
-  tagsStyles: {
-    iframe: {
-      alignSelf: 'center'
-    }
-  },
   customHTMLElementModels: {
     iframe: iframeModel
   },
   WebView
+}
+const defaultTextProps = {
+  selectable: true
+}
+const systemFonts = [...defaultSystemFonts, 'Circular-Book']
+const baseStyle = {
+  color: nevada,
+  fontSize: 14,
+  lineHeight: 20,
+  fontFamily: 'Circular-Book'
+}
+const tagsStyles = {
+  iframe: {
+    alignSelf: 'center'
+  },
+  a: {
+    color: '#0275d8',
+    textDecorationLine: 'none'
+  },
+  code: {
+    color: white80,
+    backgroundColor: rhino,
+    fontSize: 12,
+    padding: 10
+  },
+  pre: {
+    borderRadius: '0.5em',
+    display: 'block',
+    overflow: 'scroll',
+    fontSize: 12,
+    padding: 1.25
+  }
+}
+const classesStyles = {
+  'hylo-link': {
+    color: '#0DC39F'
+  },
+  mention: {
+    color: '#0DC39F',
+    textDecorationLine: 'none'
+  },
+  topic: {
+    color: '#0DC39F',
+    textDecorationLine: 'none'
+  }
 }
 
 const HyloHTML = React.memo(
@@ -50,7 +104,6 @@ const HyloHTML = React.memo(
       )
     }
 
-    const source = { html: wrapInHTMLBody(html) }
     const renderers = {
       iframe,
       span: spanRenderer
@@ -59,23 +112,16 @@ const HyloHTML = React.memo(
       a: { onPress: handleLinkPress },
       iframe: { scalesPageToFit: true }
     }
-    const defaultTextProps = {
-      selectable: true
-    }
-    const baseStyle = { ...renderHTMLStyles.baseStyle, ...providedBaseStyle }
-    const tagsStyles = { ...renderHTMLStyles.tagsStyles, ...providedTagsStyles }
-    const classesStyles = { ...renderHTMLStyles.classesStyles, ...providedClassessStyles }
-    const systemFonts = [...defaultSystemFonts, 'Circular-Book']
 
     return (
       <RenderHTML
-        source={source}
+        source={{ html: wrapInHTMLDoc(html) }}
         renderers={renderers}
         renderersProps={renderersProps}
         defaultTextProps={defaultTextProps}
-        baseStyle={baseStyle}
-        tagsStyles={tagsStyles}
-        classesStyles={classesStyles}
+        baseStyle={{ ...baseStyle, ...providedBaseStyle }}
+        tagsStyles={{ ...tagsStyles, ...providedTagsStyles }}
+        classesStyles={{ ...classesStyles, ...providedClassessStyles }}
         contentWidth={contentWidth}
         systemFonts={systemFonts}
         {...htmlConfig}
@@ -85,49 +131,3 @@ const HyloHTML = React.memo(
 )
 
 export default HyloHTML
-
-const wrapInHTMLBody = source => {
-  return `
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <base href="https://hylo.com">
-    </head>
-    <body>
-      ${source}
-    </body>
-    </html>
-  `
-}
-
-export const renderHTMLStyles = {
-  baseStyle: {
-    color: nevada,
-    fontSize: 14,
-    lineHeight: 20,
-    fontFamily: 'Circular-Book'
-  },
-  tagsStyles: {
-    a: {
-      color: '#0DC39F',
-      textDecorationLine: 'none'
-    },
-    p: {
-      marginTop: 0,
-      marginBottom: 10
-    }
-  },
-  classesStyles: {
-    topic: {
-      color: '#0DC39F',
-      textDecorationLine: 'none'
-    },
-    mention: {
-      color: '#0DC39F',
-      textDecorationLine: 'none'
-    },
-    linkified: {
-      color: '#0275d8'
-    }
-  }
-}
