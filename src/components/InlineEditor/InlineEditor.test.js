@@ -137,7 +137,7 @@ it('topicsToHTML', () => {
   expect(topicsToHTML(
     'hello [tom](333) [two](233) world #topic-car [three](3332) #test-topic'
   )).toEqual(
-    'hello [tom](333) [two](233) world <span data-type="topic" class="topic" data-label="topic-car">#topic-car</span> [three](3332) <span data-type="topic" class="topic" data-label="test-topic">#test-topic</span>'
+    'hello [tom](333) [two](233) world <span data-type="topic" class="topic" data-id="topic-car" data-label="#topic-car">#topic-car</span> [three](3332) <span data-type="topic" class="topic" data-id="test-topic" data-label="#test-topic">#test-topic</span>'
   )
 })
 
@@ -145,6 +145,6 @@ it('toHTML', () => {
   expect(toHTML(
     'hello [tom](333) [two](233) **world** #topic-car [three](3332) #test-topic'
   )).toEqual(
-    '<p>hello <span data-type="mention" class="mention" data-id="333" data-label="tom">tom</span> <span data-type="mention" class="mention" data-id="233" data-label="two">two</span> <strong>world</strong> <span data-type="topic" class="topic" data-label="topic-car">#topic-car</span> <span data-type="mention" class="mention" data-id="3332" data-label="three">three</span> <span data-type="topic" class="topic" data-label="test-topic">#test-topic</span></p>\n'
+    '<p>hello <span data-type="mention" class="mention" data-id="333" data-label="tom">tom</span> <span data-type="mention" class="mention" data-id="233" data-label="two">two</span> <strong>world</strong> <span data-type="topic" class="topic" data-id="topic-car" data-label="#topic-car">#topic-car</span> <span data-type="mention" class="mention" data-id="3332" data-label="three">three</span> <span data-type="topic" class="topic" data-id="test-topic" data-label="#test-topic">#test-topic</span></p>\n'
   )
 })

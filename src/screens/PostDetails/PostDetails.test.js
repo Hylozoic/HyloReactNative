@@ -88,13 +88,13 @@ describe('PostDetails', () => {
       </TestRoot>
     )
     const instance = renderer.root.findByType(PostDetails).instance
-    const commentText = 'some text [amention](0) #topic <shouldn\'t encode entities>'
+    const commentText = 'some text [amention](0) #topic 😂 <shouldn\'t encode entities>'
     instance.setState({ commentText })
     await act(async () => (
       instance.handleCreateComment(commentText)
     ))
     expect(props.createComment).toHaveBeenCalledWith({
-      text: '<p>some text <span data-type=\"mention\" class=\"mention\" data-id=\"0\" data-label=\"amention\">amention</span> #topic &lt;shouldn&#39;t encode entities&gt;</p>\n',
+      text: '<p>some text <span data-type="mention" class="mention" data-id="0" data-label="amention">amention</span> <span data-type="topic" class="topic" data-id="topic" data-label="#topic">#topic</span> 😂 &lt;shouldn&#39;t encode entities&gt;</p>\n',
       parentCommentId: null
     })
     expect(instance.state.submitting).toBeFalsy()

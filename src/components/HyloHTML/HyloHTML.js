@@ -6,8 +6,10 @@ import iframe, { iframeModel } from '@native-html/iframe-plugin'
 import { useSelector } from 'react-redux'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { openURL, navigateToLinkingPath } from 'navigation/linking'
-import { PathHelpers } from 'hylo-shared'
+import { PathHelpers, TextHelpers } from 'hylo-shared'
 import { nevada } from 'style/colors'
+
+const TAG_WHITELIST = TextHelpers.insaneOptions().allowedTags
 
 const htmlConfig = {
   tagsStyles: {
@@ -41,7 +43,7 @@ const HyloHTML = React.memo(
           return navigateToLinkingPath(PathHelpers.mentionPath(textNode.attributes['data-id'], currentGroupSlug))
         }
         if (textNode.hasClass('topic')) {
-          return navigateToLinkingPath(PathHelpers.topicPath(textNode.attributes['data-label'], currentGroupSlug))
+          return navigateToLinkingPath(PathHelpers.topicPath(textNode.attributes['data-id'], currentGroupSlug))
         }
       }
 
@@ -51,6 +53,12 @@ const HyloHTML = React.memo(
     }
 
     const source = { html: wrapInHTMLBody(html) }
+    const ignoreDomNode = (node, parentTagName, parentIsText) => {
+      if (!node.name || TAG_WHITELIST.includes(node.name)) {
+        return false
+      }
+      return true
+    }
     const renderers = {
       iframe,
       span: spanRenderer
@@ -70,6 +78,7 @@ const HyloHTML = React.memo(
     return (
       <RenderHTML
         source={source}
+        // ignoreDomNode={ignoreDomNode}
         renderers={renderers}
         renderersProps={renderersProps}
         defaultTextProps={defaultTextProps}

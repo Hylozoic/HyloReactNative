@@ -202,7 +202,7 @@ export const TOPIC_REGEX = /\B(#([a-zA-Z-_]+\b)(?!;))/gi
 export const topicsToHTML = text => {
   const result = text.replace(
     TOPIC_REGEX,
-    '<span data-type="topic" class="topic" data-label="$2">$1</span>'
+    '<span data-type="topic" class="topic" data-id="$2" data-label="$1">$1</span>'
   )
   return result
 }
@@ -232,7 +232,7 @@ export const fromHTML = html => {
       } else if (node?.attrs['data-type'] === 'topic') {
         return {
           prefix: '#',
-          postfix: node?.attrs['data-label']
+          postfix: node?.attrs['data-id']
         }
       } else {
         defaultTranslators.a(opts)

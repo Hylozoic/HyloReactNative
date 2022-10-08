@@ -471,7 +471,7 @@ exports[`PostDetails renders correctly 1`] = `
                                       >
                                         <Text
                                           allowFontScaling={true}
-                                          selectable={false}
+                                          selectable={true}
                                           style={
                                             Array [
                                               Object {
