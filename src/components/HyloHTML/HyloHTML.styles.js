@@ -12,8 +12,8 @@ export const tagsStyles = {
     alignSelf: 'center'
   },
   p: {
-    margin: '0.5em',
-    // padding: 0
+    marginTop: 0,
+    marginBottom: '0.8em'
   },
   a: {
     color: '#0275d8',
@@ -30,7 +30,9 @@ export const tagsStyles = {
     overflow: 'scroll',
     fontSize: 12,
     backgroundColor: rhino,
-    padding: 12
+    padding: 12,
+    marginTop: 0,
+    marginBottom: 0
   }
 }
 

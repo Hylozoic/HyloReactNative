@@ -7,9 +7,10 @@ import {
   View,
   Alert
 } from 'react-native'
-import { get, uniq, uniqBy, isEmpty, capitalize } from 'lodash/fp'
 import RNPickerSelect from 'react-native-picker-select'
 import { useIsFocused } from '@react-navigation/native'
+import { useKeyboard } from '@react-native-community/hooks'
+import { get, uniq, uniqBy, isEmpty, capitalize } from 'lodash/fp'
 import moment from 'moment-timezone'
 import { Validators } from 'hylo-shared'
 import { showToast, hideToast } from 'util/toast'
@@ -30,9 +31,8 @@ import GroupChooserItemRow from 'screens/ItemChooser/GroupChooserItemRow'
 import GroupsList from 'components/GroupsList'
 // Components
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
-import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Icon from 'components/Icon'
-import FileSelector, { showFilePicker } from './FileSelector'
+import FileSelector, { showFilePicker as fileSelectorShowFilePicker} from './FileSelector'
 import DatePicker from 'components/DatePicker'
 import ImagePicker from 'components/ImagePicker'
 import ImageSelector from './ImageSelector'
@@ -377,7 +377,7 @@ export class PostEditor extends React.Component {
 
   handleShowFilePicker = async () => {
     this.setState({ filePickerPending: true })
-    await showFilePicker({
+    await fileSelectorShowFilePicker({
       upload: this.props.upload,
       type: 'post',
       id: this.props?.post?.id,
@@ -408,7 +408,7 @@ export class PostEditor extends React.Component {
     }
 
     return (
-      <KeyboardFriendlyView style={styles.container}>
+      <>
         <ScrollView
           ref={this.scrollView}
           keyboardShouldPersistTaps='handled'
@@ -537,13 +537,13 @@ export class PostEditor extends React.Component {
                 groups={groups}
                 columns={1}
                 onPress={this.handleRemoveGroup}
-                RightIcon={iconProps =>
-                  <Icon name='Ex' style={styles.groupRemoveIcon} {...iconProps} />}
+                RightIcon={iconProps => (
+                  <Icon name='Ex' style={styles.groupRemoveIcon} {...iconProps} />
+                )}
               />
               {groups.length < 1 &&
                 <Text style={styles.textInputPlaceholder}>Select which groups to post in.</Text>}
             </TouchableOpacity>
-
             {!isEmpty(imageUrls) && (
               <View>
                 <Text style={styles.sectionLabel}>Images</Text>
@@ -569,7 +569,7 @@ export class PostEditor extends React.Component {
           </View>
         </ScrollView>
         <Toolbar {...toolbarProps} />
-      </KeyboardFriendlyView>
+      </>
     )
   }
 }
@@ -608,6 +608,12 @@ export function Toolbar ({
   post, canModerate, filePickerPending, announcementEnabled,
   toggleAnnoucement, showFilePicker, addImage, showAlert
 }) {
+  const keyboard = useKeyboard()
+
+  if (keyboard.keyboardShown) {
+    return null
+  }
+
   return (
     <View style={styles.bottomBar}>
       <View style={styles.bottomBarIcons}>

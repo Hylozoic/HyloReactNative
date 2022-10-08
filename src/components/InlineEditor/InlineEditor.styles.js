@@ -1,10 +1,10 @@
-import { azureRadiance, gunsmoke, rhino05, rhino60, white } from 'style/colors'
+import { azureRadiance, gunsmoke, rhino10, rhino60, white } from 'style/colors'
 
 export default {
   container: {
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor: rhino05,
+    backgroundColor: rhino10,
     padding: 8,
     alignItems: 'flex-end',
     justifyContent: 'flex-end'

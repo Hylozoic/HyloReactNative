@@ -22,13 +22,10 @@ const typeSelectorDefaults = {
 }
 
 export default {
-  container: {
+  scrollContainer: {
     flex: 1,
     backgroundColor: 'white',
     paddingHorizontal: 16
-  },
-  scrollContainer: {
-    flex: 1
   },
   scrollContent: {
     paddingVertical: 12
@@ -147,7 +144,7 @@ export default {
       }
     }
   },
-  
+
   topics: {
     justifyContent: 'center',
     display: 'flex',

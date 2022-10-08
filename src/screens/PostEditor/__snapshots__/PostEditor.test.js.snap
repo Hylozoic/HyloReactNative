@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PostEditor renders a new editor correctly 1`] = `
-<KeyboardFriendlyView>
+<React.Fragment>
   <ScrollView
     keyboardDismissMode="on-drag"
     keyboardShouldPersistTaps="handled"
@@ -107,7 +107,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
     showAlert={[Function]}
     toggleAnnoucement={[Function]}
   />
-</KeyboardFriendlyView>
+</React.Fragment>
 `;
 
 exports[`PostEditor renders correctly while saving 1`] = `
@@ -260,224 +260,87 @@ exports[`PostEditor renders correctly while saving 1`] = `
                         }
                       }
                     >
-                      <View
-                        onLayout={[Function]}
+                      <RCTScrollView
+                        keyboardDismissMode="on-drag"
+                        keyboardShouldPersistTaps="handled"
+                        onContentSizeChange={[Function]}
                       >
-                        <RCTScrollView
-                          keyboardDismissMode="on-drag"
-                          keyboardShouldPersistTaps="handled"
-                          onContentSizeChange={[Function]}
-                        >
+                        <View>
                           <View>
                             <View>
                               <View>
-                                <View>
+                                <View
+                                  accessible={true}
+                                  collapsable={false}
+                                  focusable={true}
+                                  onClick={[Function]}
+                                  onResponderGrant={[Function]}
+                                  onResponderMove={[Function]}
+                                  onResponderRelease={[Function]}
+                                  onResponderTerminate={[Function]}
+                                  onResponderTerminationRequest={[Function]}
+                                  onStartShouldSetResponder={[Function]}
+                                  testID="ios_touchable_wrapper"
+                                >
                                   <View
-                                    accessible={true}
-                                    collapsable={false}
-                                    focusable={true}
-                                    onClick={[Function]}
-                                    onResponderGrant={[Function]}
-                                    onResponderMove={[Function]}
-                                    onResponderRelease={[Function]}
-                                    onResponderTerminate={[Function]}
-                                    onResponderTerminationRequest={[Function]}
-                                    onStartShouldSetResponder={[Function]}
-                                    testID="ios_touchable_wrapper"
+                                    pointerEvents="box-only"
                                   >
+                                    <TextInput
+                                      editable={false}
+                                      testID="text_input"
+                                      value="DISCUSSION"
+                                    />
                                     <View
-                                      pointerEvents="box-only"
+                                      testID="icon_container"
                                     >
-                                      <TextInput
-                                        editable={false}
-                                        testID="text_input"
-                                        value="DISCUSSION"
+                                      <Icon
+                                        name="ArrowDown"
                                       />
-                                      <View
-                                        testID="icon_container"
-                                      >
-                                        <Icon
-                                          name="ArrowDown"
-                                        />
-                                      </View>
                                     </View>
                                   </View>
-                                  <Modal
-                                    hardwareAccelerated={false}
-                                    onOrientationChange={[Function]}
-                                    supportedOrientations={
-                                      Array [
-                                        "portrait",
-                                        "landscape",
-                                      ]
-                                    }
-                                    testID="ios_modal"
-                                    transparent={true}
-                                    visible={false}
-                                  />
                                 </View>
-                              </View>
-                              <Text>
-                                Title
-                              </Text>
-                              <View>
-                                <TextInput
-                                  editable={false}
-                                  maxLength={100}
-                                  onChangeText={[Function]}
-                                  placeholder="What do you want to discuss?"
-                                  placeholderTextColor="#c0c6cd"
-                                  underlineColorAndroid="transparent"
-                                  value="title of this post"
+                                <Modal
+                                  hardwareAccelerated={false}
+                                  onOrientationChange={[Function]}
+                                  supportedOrientations={
+                                    Array [
+                                      "portrait",
+                                      "landscape",
+                                    ]
+                                  }
+                                  testID="ios_modal"
+                                  transparent={true}
+                                  visible={false}
                                 />
-                              </View>
-                              <Text>
-                                Details
-                              </Text>
-                              <View>
-                                <ActivityIndicator
-                                  color="#818A88"
-                                  size="small"
-                                />
-                              </View>
-                              <View
-                                accessible={true}
-                                collapsable={false}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <View>
-                                  <Text>
-                                    Topics
-                                  </Text>
-                                  <View>
-                                    <Icon
-                                      name="Plus"
-                                    />
-                                  </View>
-                                </View>
-                                <Text>
-                                  Add topics.
-                                </Text>
-                              </View>
-                              <View
-                                accessible={true}
-                                collapsable={false}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <View>
-                                  <Text>
-                                    Location
-                                  </Text>
-                                  <View>
-                                    <Icon
-                                      name="Plus"
-                                    />
-                                  </View>
-                                </View>
-                                <Text>
-                                  Select a Location
-                                </Text>
-                              </View>
-                              <View
-                                accessible={true}
-                                collapsable={false}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <View>
-                                  <Text>
-                                    Post In
-                                  </Text>
-                                  <View>
-                                    <Icon
-                                      name="Plus"
-                                    />
-                                  </View>
-                                </View>
-                                <View>
-                                  <View
-                                    accessible={true}
-                                    collapsable={false}
-                                    focusable={true}
-                                    onClick={[Function]}
-                                    onResponderGrant={[Function]}
-                                    onResponderMove={[Function]}
-                                    onResponderRelease={[Function]}
-                                    onResponderTerminate={[Function]}
-                                    onResponderTerminationRequest={[Function]}
-                                    onStartShouldSetResponder={[Function]}
-                                  >
-                                    <Image
-                                      source={
-                                        Object {
-                                          "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
-                                        }
-                                      }
-                                    />
-                                    <Text
-                                      numberOfLines={1}
-                                    >
-                                      Group 1
-                                    </Text>
-                                    <Icon
-                                      name="Ex"
-                                    />
-                                  </View>
-                                </View>
                               </View>
                             </View>
-                          </View>
-                        </RCTScrollView>
-                        <View>
-                          <View>
-                            <View
-                              accessible={true}
-                              collapsable={false}
-                              focusable={false}
-                              onClick={[Function]}
-                              onResponderGrant={[Function]}
-                              onResponderMove={[Function]}
-                              onResponderRelease={[Function]}
-                              onResponderTerminate={[Function]}
-                              onResponderTerminationRequest={[Function]}
-                              onStartShouldSetResponder={[Function]}
-                            >
-                              <Icon
-                                name="Paperclip"
+                            <Text>
+                              Title
+                            </Text>
+                            <View>
+                              <TextInput
+                                editable={false}
+                                maxLength={100}
+                                onChangeText={[Function]}
+                                placeholder="What do you want to discuss?"
+                                placeholderTextColor="#c0c6cd"
+                                underlineColorAndroid="transparent"
+                                value="title of this post"
+                              />
+                            </View>
+                            <Text>
+                              Details
+                            </Text>
+                            <View>
+                              <ActivityIndicator
+                                color="#818A88"
+                                size="small"
                               />
                             </View>
                             <View
                               accessible={true}
                               collapsable={false}
                               focusable={true}
-                              hitSlop={
-                                Object {
-                                  "bottom": 5,
-                                  "left": 5,
-                                  "right": 5,
-                                  "top": 5,
-                                }
-                              }
                               onClick={[Function]}
                               onResponderGrant={[Function]}
                               onResponderMove={[Function]}
@@ -486,10 +349,143 @@ exports[`PostEditor renders correctly while saving 1`] = `
                               onResponderTerminationRequest={[Function]}
                               onStartShouldSetResponder={[Function]}
                             >
-                              <Icon
-                                name="AddImage"
-                              />
+                              <View>
+                                <Text>
+                                  Topics
+                                </Text>
+                                <View>
+                                  <Icon
+                                    name="Plus"
+                                  />
+                                </View>
+                              </View>
+                              <Text>
+                                Add topics.
+                              </Text>
                             </View>
+                            <View
+                              accessible={true}
+                              collapsable={false}
+                              focusable={true}
+                              onClick={[Function]}
+                              onResponderGrant={[Function]}
+                              onResponderMove={[Function]}
+                              onResponderRelease={[Function]}
+                              onResponderTerminate={[Function]}
+                              onResponderTerminationRequest={[Function]}
+                              onStartShouldSetResponder={[Function]}
+                            >
+                              <View>
+                                <Text>
+                                  Location
+                                </Text>
+                                <View>
+                                  <Icon
+                                    name="Plus"
+                                  />
+                                </View>
+                              </View>
+                              <Text>
+                                Select a Location
+                              </Text>
+                            </View>
+                            <View
+                              accessible={true}
+                              collapsable={false}
+                              focusable={true}
+                              onClick={[Function]}
+                              onResponderGrant={[Function]}
+                              onResponderMove={[Function]}
+                              onResponderRelease={[Function]}
+                              onResponderTerminate={[Function]}
+                              onResponderTerminationRequest={[Function]}
+                              onStartShouldSetResponder={[Function]}
+                            >
+                              <View>
+                                <Text>
+                                  Post In
+                                </Text>
+                                <View>
+                                  <Icon
+                                    name="Plus"
+                                  />
+                                </View>
+                              </View>
+                              <View>
+                                <View
+                                  accessible={true}
+                                  collapsable={false}
+                                  focusable={true}
+                                  onClick={[Function]}
+                                  onResponderGrant={[Function]}
+                                  onResponderMove={[Function]}
+                                  onResponderRelease={[Function]}
+                                  onResponderTerminate={[Function]}
+                                  onResponderTerminationRequest={[Function]}
+                                  onStartShouldSetResponder={[Function]}
+                                >
+                                  <Image
+                                    source={
+                                      Object {
+                                        "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
+                                      }
+                                    }
+                                  />
+                                  <Text
+                                    numberOfLines={1}
+                                  >
+                                    Group 1
+                                  </Text>
+                                  <Icon
+                                    name="Ex"
+                                  />
+                                </View>
+                              </View>
+                            </View>
+                          </View>
+                        </View>
+                      </RCTScrollView>
+                      <View>
+                        <View>
+                          <View
+                            accessible={true}
+                            collapsable={false}
+                            focusable={false}
+                            onClick={[Function]}
+                            onResponderGrant={[Function]}
+                            onResponderMove={[Function]}
+                            onResponderRelease={[Function]}
+                            onResponderTerminate={[Function]}
+                            onResponderTerminationRequest={[Function]}
+                            onStartShouldSetResponder={[Function]}
+                          >
+                            <Icon
+                              name="Paperclip"
+                            />
+                          </View>
+                          <View
+                            accessible={true}
+                            collapsable={false}
+                            focusable={true}
+                            hitSlop={
+                              Object {
+                                "bottom": 5,
+                                "left": 5,
+                                "right": 5,
+                                "top": 5,
+                              }
+                            }
+                            onClick={[Function]}
+                            onResponderGrant={[Function]}
+                            onResponderMove={[Function]}
+                            onResponderRelease={[Function]}
+                            onResponderTerminate={[Function]}
+                            onResponderTerminationRequest={[Function]}
+                            onStartShouldSetResponder={[Function]}
+                          >
+                            <Icon
+                              name="AddImage"
+                            />
                           </View>
                         </View>
                       </View>
@@ -887,7 +883,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
 `;
 
 exports[`PostEditor renders with a post 1`] = `
-<KeyboardFriendlyView>
+<React.Fragment>
   <ScrollView
     keyboardDismissMode="on-drag"
     keyboardShouldPersistTaps="handled"
@@ -1029,7 +1025,7 @@ exports[`PostEditor renders with a post 1`] = `
     showAlert={[Function]}
     toggleAnnoucement={[Function]}
   />
-</KeyboardFriendlyView>
+</React.Fragment>
 `;
 
 exports[`TypeButton renders correctly 1`] = `

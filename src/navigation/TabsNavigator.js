@@ -7,7 +7,7 @@ import getMe from 'store/selectors/getMe'
 // Helper Components
 import Icon from 'components/Icon'
 import Avatar from 'components/Avatar'
-import { caribbeanGreen, gainsboro, gunsmoke, rhino05, white } from 'style/colors'
+import { caribbeanGreen, gainsboro, gunsmoke, rhino05, rhino10, white } from 'style/colors'
 // Screens
 import HomeNavigator from 'navigation/HomeNavigator'
 import SearchNavigator from 'navigation/SearchNavigator'
@@ -35,11 +35,11 @@ export default function TabsNavigator () {
       tabBarStyle: isIOS
         ? {
             display: 'flex',
-            backgroundColor: rhino05
+            backgroundColor: rhino10
           }
         : {
             display: 'flex',
-            backgroundColor: rhino05,
+            backgroundColor: rhino10,
             borderTopWidth: StyleSheet.hairlineWidth
           },
       tabBarIcon: ({ focused }) => (
