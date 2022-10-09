@@ -64,6 +64,11 @@ export const routesConfig = {
   // special group routes (/all, /public)
   '/:groupSlug(all|public)':                                 `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`,
   '/:groupSlug(all|public)/post/:id':                        `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Post Details`,
+  '/:groupSlug(all|public)/:streamType(events|explore|groups|map|members|projects|settings|stream|topics)/post/:id':
+    `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
+  '/:groupSlug(all|public)/post/:id/edit':                   `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
+  '/:groupSlug(all|public)/:streamType(events|explore|groups|map|members|projects|settings|stream|topics)/post/:id/edit':
+    `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
   '/:groupSlug(all)/members/:id':                            `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Member`,
   '/:groupSlug(all)/topics/:topicName':                      `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Topic Feed`,
 
@@ -89,8 +94,11 @@ export const routesConfig = {
   '/:context(groups)/:groupSlug/members/:id':                `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Member`,
   '/:context(groups)/:groupSlug':                            `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`,
   '/:context(groups)/:groupSlug/post/:id':                   `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Post Details`,
-  '/:context(groups)/post/:id':                              `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Post Details`,
+  '/:context(groups)/:groupSlug/:streamType(events|explore|groups|map|members|projects|settings|stream|topics)/post/:id':
+    `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
   '/:context(groups)/:groupSlug/post/:id/edit':              `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
+  '/:context(groups)/:groupSlug/:streamType(events|explore|groups|map|members|projects|settings|stream|topics)/post/:id/edit':
+    `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
 
   // /post
   '/post/:id':                                               `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
