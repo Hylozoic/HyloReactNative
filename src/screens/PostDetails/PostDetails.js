@@ -1,37 +1,29 @@
-/* eslint-disable camelcase */
 import React from 'react'
-import { View, Text, TouchableOpacity, Alert } from 'react-native'
+import { View, Text } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { KeyboardAccessoryView } from '@flyerhq/react-native-keyboard-accessory-view'
-import { get, isEmpty, find } from 'lodash/fp'
-import { isIOS } from 'util/platform'
+import { get, find } from 'lodash/fp'
 import { isModalScreen } from 'navigation/linking/helpers'
-import SocketSubscriber from 'components/SocketSubscriber'
-import Comments from 'components/Comments'
-import PostBody from 'components/PostCard/PostBody'
-import PostGroups from 'components/PostCard/PostGroups'
-import PostImage from 'components/PostCard/PostImage'
-import Files from 'components/Files'
-import PostFooter from 'components/PostCard/PostFooter'
-import PostHeader from 'components/PostCard/PostHeader'
-import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import Button from 'components/Button'
-import InlineEditor, { toHTML } from 'components/InlineEditor'
+import { KeyboardAccessoryCommentEditor } from 'components/CommentEditor/CommentEditor'
+import Comments from 'components/Comments'
+import Files from 'components/Files'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
+import PostBody from 'components/PostCard/PostBody'
+import PostFooter from 'components/PostCard/PostFooter'
+import PostGroups from 'components/PostCard/PostGroups'
+import PostHeader from 'components/PostCard/PostHeader'
+import PostImage from 'components/PostCard/PostImage'
+import ProjectMembersSummary from 'components/ProjectMembersSummary'
+import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './PostDetails.styles'
 
 export class PostDetails extends React.Component {
   state = {
-    replyingToComment: null,
-    commentText: '',
-    submitting: false
+    selectedComment: null
   }
 
   commentsRef = React.createRef()
-  editorRef = React.createRef()
 
   componentDidMount () {
     this.props.fetchPost()
@@ -57,52 +49,15 @@ export class PostDetails extends React.Component {
   onShowTopic = (topicId) =>
     this.props.showTopic(topicId, get('post.groups.0.id', this.props))
 
-  handleCreateComment = async commentText => {
-    const commentHTML = toHTML(commentText)
+  handleSetSelectedComment = selectedComment => this.setState({ selectedComment })
 
-    if (!isEmpty(commentHTML)) {
-      const { replyingToComment } = this.state
-      const parentCommentId = replyingToComment?.parentComment || replyingToComment?.id || null
-
-      this.setState(() => ({ submitting: true }))
-
-      const { error } = await this.props.createComment({
-        text: commentHTML,
-        parentCommentId
-      })
-
-      this.setState(() => ({ submitting: false }))
-
-      if (error) {
-        Alert.alert("Your comment couldn't be saved; please try again.")
-      } else {
-        this.handleCommentReplyCancel()
-      }
-    }
+  clearSelectedComment = () => {
+    this.setState({ selectedComment: null })
+    this.commentsRef.current && this.commentsRef.current.clearSelection()
   }
 
-  handleCommentOnChange = (commentText) => {
-    this.setState(() => ({ commentText }))
-  }
-
-  handleCommentReplyCancel = callback => {
-    this.setState({ replyingToComment: null, commentText: '' }, () => {
-      this.commentsRef?.current.highlightComment(null)
-      this.editorRef?.editorInputRef?.current.clear()
-      this.editorRef?.editorInputRef?.current.blur()
-      callback && callback()
-    })
-  }
-
-  handleCommentReply = (comment, { mention = false }) => {
-    this.handleCommentReplyCancel(() => {
-      this.setState({ replyingToComment: comment, commentText: '' })
-
-      this.commentsRef?.current.highlightComment(comment)
-      this.commentsRef?.current.scrollToComment(comment)
-      this.editorRef?.editorInputRef?.current.clear()
-      this.editorRef?.editorInputRef?.current.focus()
-    })
+  scrollToSelectedComment = () => {
+    this.commentsRef.current && this.commentsRef.current.scrollTo(this.state.selectedComment)
   }
 
   renderPostDetails = (panHandlers) => {
@@ -117,7 +72,6 @@ export class PostDetails extends React.Component {
         style={styles.commentsScrollView}
         ref={this.commentsRef}
         postId={post.id}
-        onReply={this.handleCommentReply}
         header={(
           <PostCardForDetails
             {...this.props}
@@ -128,6 +82,7 @@ export class PostDetails extends React.Component {
             location={location}
           />
         )}
+        onSelect={this.handleSetSelectedComment}
         slug={firstGroupSlug}
         showMember={showMember}
         panHandlers={panHandlers}
@@ -136,46 +91,23 @@ export class PostDetails extends React.Component {
   }
 
   render () {
-    const { post, tabBarHeight, isModal } = this.props
-    const { commentText, replyingToComment, submitting } = this.state
-    const replyingToPerson = replyingToComment?.parentComment && replyingToComment.creator
+    const { selectedComment } = this.state
+    const { post, isModal } = this.props
     const groupId = get('groups.0.id', post)
 
     if (!post?.creator || !post?.title) return <Loading />
 
     return (
       <View style={styles.container}>
-        <KeyboardAccessoryView
-          contentContainerStyle={{
-            ...styles.promptContentContainer,
-            paddingBottom: isModal ? this.props.safeAreaInsets.bottom : 0
-          }}
-          spaceBetweenKeyboardAndAccessoryView={isIOS ? -tabBarHeight : 0}
-          contentOffsetKeyboardOpened={isIOS ? -tabBarHeight : 0}
+        <KeyboardAccessoryCommentEditor
           renderScrollable={this.renderPostDetails}
-        >
-          {replyingToPerson?.name && (
-            <View style={styles.commentPrompt}>
-              <Text style={styles.commentPromptText}>
-                Replying to <Text style={{ fontWeight: 'bold' }}>{replyingToPerson.name}</Text> {'\u00B7'}
-              </Text>
-              <TouchableOpacity onPress={() => this.handleCommentReplyCancel()}>
-                <Text style={styles.commentPromptClearLink}>Cancel</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-          <InlineEditor
-            style={styles.inlineEditor}
-            onRef={elem => (this.editorRef = elem)}
-            onChange={this.handleCommentOnChange}
-            onSubmit={this.handleCreateComment}
-            placeholder='Write a comment...'
-            value={commentText}
-            initialMentionPerson={replyingToPerson}
-            submitting={submitting}
-            groupId={groupId}
-          />
-        </KeyboardAccessoryView>
+          isModal={isModal}
+          postId={post?.id}
+          groupId={groupId}
+          replyingTo={selectedComment}
+          scrollToReplyingTo={this.scrollToSelectedComment}
+          clearReplyingTo={this.clearSelectedComment}
+        />
         <SocketSubscriber type='post' id={post.id} />
       </View>
     )
@@ -186,17 +118,8 @@ export default function (props) {
   const isModal = isModalScreen(props.route?.name)
   const isFocused = useIsFocused()
 
-  const safeAreaInsets = useSafeAreaInsets()
-  const tabBarHeight = isModal ? 0 : useBottomTabBarHeight()
-
   return (
-    <PostDetails
-      {...props}
-      isModal={isModal}
-      isFocused={isFocused}
-      safeAreaInsets={safeAreaInsets}
-      tabBarHeight={tabBarHeight}
-    />
+    <PostDetails {...props} isModal={isModal} isFocused={isFocused} />
   )
 }
 

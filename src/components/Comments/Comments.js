@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { useEffect, useState, useRef, useImperativeHandle, forwardRef } from 'react'
+import React, { useEffect, useState, useRef, useImperativeHandle, forwardRef, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Text, TouchableOpacity, View, SectionList } from 'react-native'
 import Comment from 'components/Comment'
@@ -21,12 +21,11 @@ function Comments ({
   showMember,
   slug,
   panHandlers,
-  onReply
+  onSelect
 }, ref) {
   const dispatch = useDispatch()
   const comments = useSelector(state => getComments(state, { postId })) || []
   const pending = useSelector(state => state.pending[FETCH_COMMENTS])
-  const fetchComments = () => dispatch(fetchCommentsAction({ postId }))
   const sections = comments.map(comment => ({
     comment: omit(['subComments'], comment),
     data: comment.subComments
@@ -34,22 +33,32 @@ function Comments ({
   const [highlightedComment, highlightComment] = useState()
   const commentsListRef = useRef()
 
-  const scrollToComment = comment => {
+  const scrollTo = useCallback(comment => {
     const parentCommentId = comment.parentComment || comment.id
     const subCommentId = comment.parentComment ? comment.id : null
-    const section = sections.find(section => parentCommentId === section.comment.id)
+    const section = sections.find(s => parentCommentId === s.comment.id)
     const sectionIndex = section.comment.sectionIndex
     const itemIndex = section.data.find(subComment =>
       subCommentId === subComment.id)?.itemIndex || section.data.length + 1
     commentsListRef?.current.scrollToLocation({ sectionIndex, itemIndex })
-  }
+  }, [sections])
+
+  const select = useCallback(comment => {
+    highlightComment(comment)
+    scrollTo(comment)
+    onSelect(comment)
+  }, [highlightComment, scrollTo, onSelect])
 
   useImperativeHandle(ref, () => ({
-    scrollToComment,
-    highlightComment
-  }))
+    select,
+    // selected: highlightedComment,
+    scrollTo,
+    clearSelection: () => highlightComment(null)
+  }), [select, highlightComment, scrollTo])
 
-  useEffect(() => { fetchComments() }, [])
+  useEffect(() => {
+    dispatch(fetchCommentsAction({ postId }))
+  }, [dispatch, postId])
 
   const header = () => (
     <>
@@ -72,7 +81,7 @@ function Comments ({
             comment.id === highlightedComment?.id && styles.highlighted
           }
           comment={comment}
-          onReply={onReply}
+          onReply={select}
           showMember={showMember}
           slug={slug}
           key={comment.id}
@@ -89,7 +98,7 @@ function Comments ({
           styles.subComment
         ]}
         comment={comment}
-        onReply={onReply}
+        onReply={select}
         showMember={showMember}
         slug={slug}
         key={comment.id}

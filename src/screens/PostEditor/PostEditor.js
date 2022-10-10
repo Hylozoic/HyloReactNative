@@ -53,7 +53,6 @@ export class PostEditor extends React.Component {
     this.scrollView = React.createRef()
     this.state = {
       isNewPost: !post?.id,
-      scrollViewHeight: 0,
       title: post?.title || '',
       type: post?.type || 'discussion',
       groups: post?.groups || [],
@@ -310,10 +309,6 @@ export class PostEditor extends React.Component {
 
   updateMembers = members => this.setState(state => ({ members }))
 
-  handleContentSizeChange = (width, height) => {
-    this.setState({ scrollViewHeight: height })
-  }
-
   handleDatePickerExpand = () => {
     this.scrollView.current.scrollToEnd()
   }
@@ -413,7 +408,6 @@ export class PostEditor extends React.Component {
           ref={this.scrollView}
           keyboardShouldPersistTaps='handled'
           style={styles.scrollContainer}
-          onContentSizeChange={this.handleContentSizeChange}
           keyboardDismissMode='on-drag'
         >
           <View style={styles.scrollContent}>
@@ -443,18 +437,26 @@ export class PostEditor extends React.Component {
               </View>
             )}
             <Text style={styles.sectionLabel}>Details</Text>
-            <HyloEditorWebView
-              placeholder={detailsPlaceholder}
-              contentHTML={post?.details}
-              groupIds={groupOptions && groupOptions.map(g => g.id)}
-              onChange={this.handleDetailsOnChange}
-              onAddTopic={!topicsPicked && this.handleAddTopic}
-              readOnly={postLoading || isSaving}
+            {/* <View
               style={[
                 styles.section,
                 styles.textInputWrapper
               ]}
-            />
+            > */}
+              <HyloEditorWebView
+                placeholder={detailsPlaceholder}
+                contentHTML={post?.details}
+                groupIds={groupOptions && groupOptions.map(g => g.id)}
+                onChange={this.handleDetailsOnChange}
+                onAddTopic={!topicsPicked && this.handleAddTopic}
+                readOnly={postLoading || isSaving}
+                widthOffset={24}
+                containerStyle={[
+                  styles.section,
+                  styles.textInputWrapper
+                ]}  
+              />
+            {/* </View> */}
             <TouchableOpacity
               style={[
                 styles.section,

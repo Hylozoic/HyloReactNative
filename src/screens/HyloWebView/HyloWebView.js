@@ -1,7 +1,7 @@
 import React, { useCallback, forwardRef, useState, useEffect } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import Loading from 'components/Loading'
-import WebView from 'react-native-webview'
+import AutoHeightWebView from 'react-native-autoheight-webview'
 import { getSessionCookie } from 'util/session'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 
@@ -32,8 +32,8 @@ const HyloWebView = forwardRef(function HyloWebView ({
   if (!cookie) return <Loading />
 
   return (
-    <KeyboardFriendlyView style={{ flex: 1 }}>
-      <WebView
+    // <KeyboardFriendlyView style={{ flex: 1, flexGrow: true }}>
+      <AutoHeightWebView
         ref={webViewRef}
         source={{
           uri,
@@ -41,20 +41,21 @@ const HyloWebView = forwardRef(function HyloWebView ({
         }}
         geolocationEnabled
         sharedCookiesEnabled
+        // onSizeUpdated={test => console.log('!!! onContentSizeChange', test)}
+        // Note: See docs for `AutoHeightWebView`. Their recommendation:
+        //       `import { Dimensions } from 'react-native'`
+        //
+        //       `style={{ width: Dimensions.get('window').width - 15, marginTop: 35 }}`
+        //
+        //        This is what seemed necessary in `HyloEditorWebView`:
+        //
+        //        `style ={{ width: Dimensions.get('window').width - 35 }}`
+        //
+        //        * Don't forget to merge any styles provided in `forwardedProps.style`
+        //
         {...forwardedProps}
-        // onShouldStartLoadWithRequest={params => {
-        //   const { url } = params
-        //   // Opens full URLs in external browser if not the
-        //   // initial URI specified on load of the WebView
-        //   if (url === uri) return true
-        //   if (url !== uri && url.slice(0, 4) === 'http') {
-        //     Linking.openURL(url)
-        //     return false
-        //   }
-        //   return onShouldStartLoadWithRequest(params)
-        // }}
       />
-    </KeyboardFriendlyView>
+    // </KeyboardFriendlyView>
   )
 })
 

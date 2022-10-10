@@ -32,51 +32,59 @@ const defaultTextProps = {
   selectable: true
 }
 
-const HyloHTML = React.memo(
-  function ({ html }) {
-    const { width: contentWidth } = useWindowDimensions()
-    const { slug: currentGroupSlug } = useSelector(getCurrentGroup)
+export function HlyoHTMLConfigProvider ({ groupSlug, children }) {
+  const currentlySelectedGroup = useSelector(getCurrentGroup)
+  const currentGroupSlug = currentlySelectedGroup?.slug
 
-    const handleLinkPress = async (_, href) => openURL(href, { groupSlug: currentGroupSlug })
+  const handleLinkPress = async (_, href) => openURL(href, { groupSlug: currentGroupSlug || groupSlug })
 
-    const spanRenderer = ({ TDefaultRenderer, ...props }) => {
-      const handlePress = () => {
-        const textNode = props.tnode
+  const spanRenderer = ({ TDefaultRenderer, ...props }) => {
+    const handlePress = () => {
+      const textNode = props.tnode
 
-        if (textNode.hasClass('mention')) {
-          return navigateToLinkingPath(PathHelpers.mentionPath(textNode.attributes['data-id'], currentGroupSlug))
-        }
-        if (textNode.hasClass('topic')) {
-          return navigateToLinkingPath(PathHelpers.topicPath(textNode.attributes['data-id'], currentGroupSlug))
-        }
+      if (textNode.hasClass('mention')) {
+        return navigateToLinkingPath(PathHelpers.mentionPath(textNode.attributes['data-id'], currentGroupSlug))
       }
-
-      return (
-        <TDefaultRenderer {...props} onPress={handlePress} />
-      )
-    }
-
-    const renderers = {
-      iframe,
-      span: spanRenderer
-    }
-    const renderersProps = {
-      a: { onPress: handleLinkPress },
-      iframe: { scalesPageToFit: true }
+      if (textNode.hasClass('topic')) {
+        return navigateToLinkingPath(PathHelpers.topicPath(textNode.attributes['data-id'], currentGroupSlug))
+      }
     }
 
     return (
-      <RenderHTMLConfigProvider
-        renderers={renderers}
-        renderersProps={renderersProps}
-        defaultTextProps={defaultTextProps}
-        {...htmlConfig}
-      >
-        <RenderHTMLSource
-          source={{ html: wrapInHTMLDoc(html) }}
-          contentWidth={contentWidth}
-        />
-      </RenderHTMLConfigProvider>
+      <TDefaultRenderer {...props} onPress={handlePress} />
+    )
+  }
+
+  const renderers = {
+    iframe,
+    span: spanRenderer
+  }
+  const renderersProps = {
+    a: { onPress: handleLinkPress },
+    iframe: { scalesPageToFit: true }
+  }
+
+  return (
+    <RenderHTMLConfigProvider
+      renderers={renderers}
+      renderersProps={renderersProps}
+      defaultTextProps={defaultTextProps}
+      {...htmlConfig}
+    >
+      {children}
+    </RenderHTMLConfigProvider>
+  )
+}
+
+const HyloHTML = React.memo(
+  function ({ html }) {
+    const { width: contentWidth } = useWindowDimensions()
+
+    return (
+      <RenderHTMLSource
+        source={{ html: wrapInHTMLDoc(html) }}
+        contentWidth={contentWidth}
+      />
     )
   }
 )

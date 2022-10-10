@@ -2,7 +2,6 @@ import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
 import { isModalScreen, modalScreenName } from 'navigation/linking/helpers'
 import fetchPost from 'store/actions/fetchPost'
-import createComment from 'store/actions/createComment'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { getPresentedPost } from 'store/selectors/getPost'
 import getRouteParam from 'store/selectors/getRouteParam'
@@ -44,7 +43,6 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     fetchPost: () => dispatch(fetchPost(id)),
-    createComment: params => dispatch(createComment({ ...params, postId: id })),
     joinProject: () => dispatch(joinProject(id)),
     leaveProject: () => dispatch(leaveProject(id)),
     goToGroup: groupId => makeGoToGroup(navigation, dispatch)(groupId, memberships, currentGroup.id),

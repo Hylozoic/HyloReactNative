@@ -1,36 +1,57 @@
 import React, { useState, useRef, useEffect, useImperativeHandle } from 'react'
+import { Dimensions } from 'react-native'
 import { WebViewMessageTypes } from 'hylo-shared'
 import HyloWebView, { sendMessageFromWebView, parseWebViewMessage } from 'screens/HyloWebView'
 
-// const onWebViewMessage = (event: WebViewMessageEvent) => {
-//   this.setState({webViewHeight: Number(event.nativeEvent.data)})
-// }
+const DEFAULT_WIDTH_OFFSET_IOS = 15
+const DEFAULT_HEIGHT_OFFSET_IOS = 15
 
-export const HyloEditorWebView = React.forwardRef(function HyloEditorWebView ({
+export function HyloEditorWebView ({
   contentHTML: providedContentHTML,
   placeholder,
   readOnly,
-  // groupIds,
-  hideMenu,
+  groupIds,
+  hideMenu = true,
   onChange,
   onAddTopic,
   onAddLink,
   onEnter,
-  style
+  style,
+  containerStyle,
+  customStyle,
+  widthOffset = 0
 }, ref) {
   const webViewRef = useRef()
-  const [path, setPath] = useState('hyloApp/editor')
+  // const [path] = useState('hyloApp/editor?suppressEnterKeyPropagation=true')
+  const [path] = useState('hyloApp/editor')
+  const [isEmpty, setIsEmpty] = useState()
+  const [contentHTML, setContentHTML] = useState()
   const [loaded, setLoaded] = useState()
-  const [height, setHeight] = useState(200)
-  const [contentHTML, setContentHTML] = useState(providedContentHTML)
 
   useImperativeHandle(ref, () => ({
+    blur: () => {
+      sendMessageFromWebView(
+        webViewRef,
+        WebViewMessageTypes.EDITOR.BLUR
+      )
+    },
     clearContent: () => {
       sendMessageFromWebView(
         webViewRef,
         WebViewMessageTypes.EDITOR.CLEAR_CONTENT
       )
-    }
+    },
+    focus: () => {
+      webViewRef.current.requestFocus()
+      sendMessageFromWebView(
+        webViewRef,
+        WebViewMessageTypes.EDITOR.FOCUS
+      )
+    },
+    getHTML: () => {
+      return contentHTML
+    },
+    isEmpty
   }))
 
   const handleMessage = message => {
@@ -44,6 +65,7 @@ export const HyloEditorWebView = React.forwardRef(function HyloEditorWebView ({
 
       case WebViewMessageTypes.EDITOR.ON_CHANGE: {
         setContentHTML(data)
+        setIsEmpty(!data || data.trim() === '<p></p>' || data.trim() === '<p> </p>')
         onChange && onChange(data)
         break
       }
@@ -59,19 +81,25 @@ export const HyloEditorWebView = React.forwardRef(function HyloEditorWebView ({
       }
 
       case WebViewMessageTypes.EDITOR.ON_ENTER: {
-        onEnter && onEnter(contentHTML)
+        onEnter && onEnter(data)
         break
       }
-
-      // Some steps towards auto height... Probably will switch to WebShell.
-      // injectedJavaScript='setTimeout(window.ReactNativeWebView.postMessage(JSON.stringify({ type: "SET_HEIGHT", data: document.body.scrollHeight })), 1000)'
-      // case 'SET_HEIGHT': {
-      //   console.log('!!!! SET_HEIGHT', data)
-      //   setHeight(data)
-      //   break
-      // }
     }
   }
+
+  useEffect(() => {
+    if (loaded) {
+      sendMessageFromWebView(
+        webViewRef,
+        WebViewMessageTypes.EDITOR.SET_PROPS, {
+          readOnly,
+          hideMenu,
+          placeholder,
+          groupIds
+        }
+      )
+    }
+  }, [loaded, readOnly, hideMenu, placeholder, groupIds])
 
   useEffect(() => {
     if (loaded) {
@@ -84,31 +112,39 @@ export const HyloEditorWebView = React.forwardRef(function HyloEditorWebView ({
     }
   }, [loaded, providedContentHTML])
 
-  useEffect(() => {
-    if (loaded) {
-      sendMessageFromWebView(
-        webViewRef,
-        WebViewMessageTypes.EDITOR.SET_PROPS, {
-          readOnly,
-          hideMenu,
-          placeholder
-          // groupIds
-        }
-      )
-    }
-  }, [loaded, readOnly, hideMenu, placeholder])
+  return React.createElement(HyloWebView, {
+    path,
+    onMessage: handleMessage,
+    startInLoadingState: false,
+    customStyle: customStyle || `
+      .hyloAppEditorContainer {
+        padding: 8px;
+        height: auto;
+        overflow-y: auto;
+      }
+      .hyloAppEditorContainer .hyloAppEditor .ProseMirror {
+        height: auto;
+        max-height: 200px;
+      }
+    `,
+    // Related to getting auto-height right and scrolling:
+    scrollEnabled: false,
+    nestedScrollEnabled: true,
+    scalesPageToFit: false,
+    // Seems to help but when it's relied upon (e.g. PostEditor height)
+    // it causes 2 resizes and could probably be handled better otherwise
+    automaticallyAdjustContentInsets: true,
 
-  return (
-    <HyloWebView
-      path={path}
-      onMessage={handleMessage}
-      startInLoadingState
-      nestedScrollEnabled
-      // style={{ ...style }}
-      containerStyle={{ height }}
-      ref={webViewRef}
-    />
-  )
-})
+    // If Android crashes, apply this fix (ref. https://github.com/iou90/react-native-autoheight-webview/issues/191)
+    // style={{ opacity: 0.99, minHeight: 1 }}
+    style: [style, {
+      width: Dimensions.get('window').width - DEFAULT_WIDTH_OFFSET_IOS - widthOffset
+    }],
+    containerStyle,
+    ref: webViewRef,
+    showsVerticalScrollIndicator: true,
+    hideKeyboardAccessoryView: true
+  })
+}
 
-export default HyloEditorWebView
+export default React.forwardRef(HyloEditorWebView)

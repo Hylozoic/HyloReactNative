@@ -20,7 +20,7 @@ export default function Comment ({
   editComment,
   hideMenu,
   onReply,
-  onPress: providedOnPress
+  onPress
 }) {
   const { creator, text, createdAt, post } = comment
   let postTitle = post?.title
@@ -29,11 +29,17 @@ export default function Comment ({
     postTitle = TextHelpers.truncateText(postTitle, 40)
   }
 
-  const handlePress = providedOnPress || (onReply && (() => onReply(comment, { mention: false })))
+  const handleReply = onReply && (() => onReply(comment))
+  const handlePress = onPress || handleReply
   const imageAttachments = filter({ type: 'image' }, comment?.attachments)
+
   // NOTE: Currently no UI for adding comment file attachments
   // const fileAttachments = filter({ type: 'file' }, comment?.attachments)
   const commentMenuItems = {
+    replyComment: {
+      label: 'Reply',
+      action: handleReply
+    },
     editComment: {
       label: 'Edit Comment',
       action: editComment
@@ -85,12 +91,12 @@ export default function Comment ({
                 <Text style={styles.date}>on "{postTitle}"</Text>}
             </View>
             <View style={styles.headerRight}>
-              {onReply && (
-                <TouchableOpacity style={styles.replyLink} onPress={() => onReply(comment, { mention: !!comment.parentComment })}>
+              {/* {handleReply && (
+                <TouchableOpacity style={styles.replyLink} onPress={handleReply}>
                   <Icon style={styles.replyLinkIcon} name='Reply' />
                   <Text style={styles.replyLinkText}>Reply</Text>
                 </TouchableOpacity>
-              )}
+              )} */}
               {!hideMenu && (
                 <CommentMenu menuItems={commentMenuItems} />
               )}

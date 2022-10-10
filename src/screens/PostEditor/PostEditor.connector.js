@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { get, isEmpty } from 'lodash/fp'
+import { get } from 'lodash/fp'
 import { bindActionCreators } from 'redux'
 import { getPresentedPost } from 'store/selectors/getPost'
 import isPendingFor from 'store/selectors/isPendingFor'

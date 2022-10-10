@@ -1,8 +1,5 @@
 import { POST_TYPES } from 'store/models/Post'
-import {
-  capeCod10, rhino60, rhino30, caribbeanGreen,
-  white, rhino05, rhino, rhino80
-} from 'style/colors'
+import { capeCod10, rhino60, rhino30, caribbeanGreen, white } from 'style/colors'
 
 export default {
   container: {
@@ -51,23 +48,5 @@ export default {
   },
   memberCount: {
     color: caribbeanGreen
-  },
-  commentPrompt: {
-    paddingHorizontal: 10,
-    paddingTop: 10,
-    paddingBottom: 5,
-    backgroundColor: rhino05,
-    flexDirection: 'row'
-  },
-  commentPromptText: {
-    color: rhino80
-  },
-  commentPromptClearLink: {
-    color: rhino
-  },
-  promptContentContainer: {
-    backgroundColor: rhino05,
-    marginBottom: 0,
-    borderWidth: 0
   }
 }
