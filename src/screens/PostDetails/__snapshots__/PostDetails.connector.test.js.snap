@@ -133,7 +133,6 @@ Array [
 
 exports[`mergeProps maps 1`] = `
 Object {
-  "createComment": [Function],
   "currentUser": Object {
     "id": "currentuser",
   },

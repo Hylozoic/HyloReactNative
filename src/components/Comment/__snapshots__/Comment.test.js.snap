@@ -68,6 +68,10 @@ exports[`renders correctly 1`] = `
                   "destructive": true,
                   "label": "Remove Comment",
                 },
+                "replyComment": Object {
+                  "action": undefined,
+                  "label": "Reply",
+                },
               }
             }
           />
@@ -127,6 +131,10 @@ exports[`shows the post title when displayPostTitle is true 1`] = `
                   "action": undefined,
                   "destructive": true,
                   "label": "Remove Comment",
+                },
+                "replyComment": Object {
+                  "action": undefined,
+                  "label": "Reply",
                 },
               }
             }

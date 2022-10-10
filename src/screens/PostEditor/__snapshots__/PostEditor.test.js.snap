@@ -5,7 +5,6 @@ exports[`PostEditor renders a new editor correctly 1`] = `
   <ScrollView
     keyboardDismissMode="on-drag"
     keyboardShouldPersistTaps="handled"
-    onContentSizeChange={[Function]}
   >
     <View>
       <View>
@@ -33,10 +32,23 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         Details
       </Text>
       <ForwardRef(HyloEditorWebView)
+        containerStyle={
+          Array [
+            Object {
+              "marginBottom": 8,
+              "paddingBottom": 8,
+            },
+            Object {
+              "borderBottomWidth": 0.5,
+              "borderColor": "#c0c6cd",
+            },
+          ]
+        }
         onAddTopic={[Function]}
         onChange={[Function]}
         placeholder="What else should we know?"
         readOnly={false}
+        widthOffset={24}
       />
       <TouchableOpacity
         onPress={[Function]}
@@ -263,7 +275,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                       <RCTScrollView
                         keyboardDismissMode="on-drag"
                         keyboardShouldPersistTaps="handled"
-                        onContentSizeChange={[Function]}
                       >
                         <View>
                           <View>
@@ -887,7 +898,6 @@ exports[`PostEditor renders with a post 1`] = `
   <ScrollView
     keyboardDismissMode="on-drag"
     keyboardShouldPersistTaps="handled"
-    onContentSizeChange={[Function]}
   >
     <View>
       <View>
@@ -915,11 +925,24 @@ exports[`PostEditor renders with a post 1`] = `
         Details
       </Text>
       <ForwardRef(HyloEditorWebView)
+        containerStyle={
+          Array [
+            Object {
+              "marginBottom": 8,
+              "paddingBottom": 8,
+            },
+            Object {
+              "borderBottomWidth": 0.5,
+              "borderColor": "#c0c6cd",
+            },
+          ]
+        }
         contentHTML="myDetails"
         onAddTopic={[Function]}
         onChange={[Function]}
         placeholder="What else should we know?"
         readOnly={false}
+        widthOffset={24}
       />
       <TouchableOpacity
         onPress={[Function]}
