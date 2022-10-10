@@ -3,7 +3,6 @@ import { useFocusEffect } from '@react-navigation/core'
 import Loading from 'components/Loading'
 import AutoHeightWebView from 'react-native-autoheight-webview'
 import { getSessionCookie } from 'util/session'
-import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 
 const HyloWebView = forwardRef(function HyloWebView ({
   path: pathProp,
@@ -32,30 +31,29 @@ const HyloWebView = forwardRef(function HyloWebView ({
   if (!cookie) return <Loading />
 
   return (
-    // <KeyboardFriendlyView style={{ flex: 1, flexGrow: true }}>
-      <AutoHeightWebView
-        ref={webViewRef}
-        source={{
-          uri,
-          headers: { cookie }
-        }}
-        geolocationEnabled
-        sharedCookiesEnabled
-        // onSizeUpdated={test => console.log('!!! onContentSizeChange', test)}
-        // Note: See docs for `AutoHeightWebView`. Their recommendation:
-        //       `import { Dimensions } from 'react-native'`
-        //
-        //       `style={{ width: Dimensions.get('window').width - 15, marginTop: 35 }}`
-        //
-        //        This is what seemed necessary in `HyloEditorWebView`:
-        //
-        //        `style ={{ width: Dimensions.get('window').width - 35 }}`
-        //
-        //        * Don't forget to merge any styles provided in `forwardedProps.style`
-        //
-        {...forwardedProps}
-      />
-    // </KeyboardFriendlyView>
+    // Note: This used to be wrapped in a `KeyboardFriendView`. Seems to be ok or better without it.
+    <AutoHeightWebView
+      ref={webViewRef}
+      source={{
+        uri,
+        headers: { cookie }
+      }}
+      geolocationEnabled
+      sharedCookiesEnabled
+      // onSizeUpdated={test => console.log('!!! onContentSizeChange', test)}
+      // Note: See docs for `AutoHeightWebView`. Their recommendation:
+      //       `import { Dimensions } from 'react-native'`
+      //
+      //       `style={{ width: Dimensions.get('window').width - 15, marginTop: 35 }}`
+      //
+      //        This is what seemed necessary in `HyloEditorWebView`:
+      //
+      //        `style ={{ width: Dimensions.get('window').width - 35 }}`
+      //
+      //        * Don't forget to merge any styles provided in `forwardedProps.style`
+      //
+      {...forwardedProps}
+    />
   )
 })
 

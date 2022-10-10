@@ -318,28 +318,30 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
         }
       }
     >
-      <ForwardRef(NavigationContainerInner)>
-        <Feed
-          currentUser={
-            Object {
-              "id": "2",
+      <HlyoHTMLConfigProvider>
+        <ForwardRef(NavigationContainerInner)>
+          <Feed
+            currentUser={
+              Object {
+                "id": "2",
+              }
             }
-          }
-          currentUserHasMemberships={true}
-          editPost={[Function]}
-          goToGroup={[Function]}
-          group={
-            Object {
-              "id": "1",
+            currentUserHasMemberships={true}
+            editPost={[Function]}
+            goToGroup={[Function]}
+            group={
+              Object {
+                "id": "1",
+              }
             }
-          }
-          navigation={Object {}}
-          newPost={[Function]}
-          route={Object {}}
-          showPost={[Function]}
-          topicName="amazing"
-        />
-      </ForwardRef(NavigationContainerInner)>
+            navigation={Object {}}
+            newPost={[Function]}
+            route={Object {}}
+            showPost={[Function]}
+            topicName="amazing"
+          />
+        </ForwardRef(NavigationContainerInner)>
+      </HlyoHTMLConfigProvider>
     </Provider>
   </TRenderEngineProvider>
 </SafeAreaProvider>
@@ -427,27 +429,29 @@ exports[`renders correctly if currentUserHasMemberships is false 1`] = `
         }
       }
     >
-      <ForwardRef(NavigationContainerInner)>
-        <Feed
-          currentUser={
-            Object {
-              "id": "2",
+      <HlyoHTMLConfigProvider>
+        <ForwardRef(NavigationContainerInner)>
+          <Feed
+            currentUser={
+              Object {
+                "id": "2",
+              }
             }
-          }
-          currentUserHasMemberships={false}
-          editPost={[Function]}
-          goToGroup={[Function]}
-          group={
-            Object {
-              "id": "1",
+            currentUserHasMemberships={false}
+            editPost={[Function]}
+            goToGroup={[Function]}
+            group={
+              Object {
+                "id": "1",
+              }
             }
-          }
-          navigation={Object {}}
-          newPost={[Function]}
-          showPost={[Function]}
-          topicName="amazing"
-        />
-      </ForwardRef(NavigationContainerInner)>
+            navigation={Object {}}
+            newPost={[Function]}
+            showPost={[Function]}
+            topicName="amazing"
+          />
+        </ForwardRef(NavigationContainerInner)>
+      </HlyoHTMLConfigProvider>
     </Provider>
   </TRenderEngineProvider>
 </SafeAreaProvider>

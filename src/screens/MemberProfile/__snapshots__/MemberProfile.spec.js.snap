@@ -3,41 +3,70 @@
 exports[`default render matches snapshot 1`] = `
 <View
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {
+        "flex": 1,
+      },
+      undefined,
+    ]
   }
 >
-  <View
+  <RNSScreenNavigationContainer
     style={
-      Array [
-        Object {
-          "flex": 1,
-        },
-        undefined,
-      ]
+      Object {
+        "flex": 1,
+        "overflow": "hidden",
+      }
     }
   >
-    <View
-      style={
-        Array [
-          Object {
-            "backgroundColor": "rgb(242, 242, 242)",
-            "flex": 1,
-          },
-          undefined,
-        ]
+    <RNSScreen
+      activityState={2}
+      collapsable={false}
+      forwardedRef={[Function]}
+      gestureResponseDistance={
+        Object {
+          "bottom": -1,
+          "end": -1,
+          "start": -1,
+          "top": -1,
+        }
       }
     >
       <View
-        collapsable={false}
-        pointerEvents="box-none"
+        accessibilityElementsHidden={false}
+        importantForAccessibility="auto"
+        style={
+          Array [
+            Object {
+              "backgroundColor": "rgb(242, 242, 242)",
+              "flex": 1,
+            },
+            Array [
+              Object {
+                "flex": 1,
+                "flexDirection": "column-reverse",
+              },
+              undefined,
+            ],
+          ]
+        }
       >
         <View
-          accessibilityElementsHidden={false}
-          importantForAccessibility="auto"
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          <View>
+            <ActivityIndicator
+              color="#818A88"
+              size="small"
+            />
+          </View>
+        </View>
+        <View
           onLayout={[Function]}
-          pointerEvents="box-none"
           style={null}
         >
           <View
@@ -83,7 +112,6 @@ exports[`default render matches snapshot 1`] = `
                   aria-level="1"
                   collapsable={false}
                   numberOfLines={1}
-                  onLayout={[Function]}
                 >
                   Public Groups & Posts
                 </Text>
@@ -96,141 +124,162 @@ exports[`default render matches snapshot 1`] = `
           </View>
         </View>
       </View>
-      <RNSScreenContainer
-        onLayout={[Function]}
-        style={
+    </RNSScreen>
+  </RNSScreenNavigationContainer>
+  <View
+    collapsable={false}
+    onLayout={[Function]}
+    pointerEvents="auto"
+  >
+    <View
+      pointerEvents="none"
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    />
+    <View
+      accessibilityRole="tablist"
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        accessibilityLabel="Public Groups & Posts, tab, 1 of 1"
+        accessibilityRole="button"
+        accessibilityState={
           Object {
-            "flex": 1,
+            "selected": true,
           }
         }
+        accessibilityStates={
+          Array [
+            "selected",
+          ]
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
       >
-        <RNSScreen
-          activityState={2}
-          collapsable={false}
-          forwardedRef={[Function]}
-          gestureResponseDistance={
-            Object {
-              "bottom": -1,
-              "end": -1,
-              "start": -1,
-              "top": -1,
-            }
+        <View
+          style={
+            Array [
+              Object {
+                "flex": 1,
+              },
+              undefined,
+            ]
           }
-          pointerEvents="box-none"
         >
           <View
-            collapsable={false}
-          />
-          <View
-            accessibilityElementsHidden={false}
-            closing={false}
-            gestureVelocityImpact={0.3}
-            importantForAccessibility="auto"
-            onClose={[Function]}
-            onGestureBegin={[Function]}
-            onGestureCanceled={[Function]}
-            onGestureEnd={[Function]}
-            onOpen={[Function]}
-            onTransition={[Function]}
-            pointerEvents="box-none"
             style={
               Array [
                 Object {
-                  "display": "flex",
-                  "overflow": undefined,
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
                 },
                 Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
+                  "opacity": 1,
                 },
               ]
             }
-            transitionSpec={
-              Object {
-                "close": Object {
-                  "animation": "spring",
-                  "config": Object {
-                    "damping": 500,
-                    "mass": 3,
-                    "overshootClamping": true,
-                    "restDisplacementThreshold": 10,
-                    "restSpeedThreshold": 10,
-                    "stiffness": 1000,
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
                   },
-                },
-                "open": Object {
-                  "animation": "spring",
-                  "config": Object {
-                    "damping": 500,
-                    "mass": 3,
-                    "overshootClamping": true,
-                    "restDisplacementThreshold": 10,
-                    "restSpeedThreshold": 10,
-                    "stiffness": 1000,
+                  Object {
+                    "color": "rgb(0, 122, 255)",
+                    "fontSize": 25,
                   },
-                },
+                  undefined,
+                ]
               }
+            >
+              ⏷
+            </Text>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "alignSelf": "center",
+                  "height": "100%",
+                  "justifyContent": "center",
+                  "minWidth": 25,
+                  "position": "absolute",
+                  "width": "100%",
+                },
+                Object {
+                  "opacity": 0,
+                },
+              ]
             }
           >
-            <View
-              collapsable={false}
-              pointerEvents="box-none"
+            <Text
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                  },
+                  Object {
+                    "color": "#8E8E8F",
+                    "fontSize": 25,
+                  },
+                  undefined,
+                ]
+              }
             >
-              <View
-                collapsable={false}
-                forwardedRef={[Function]}
-                needsOffscreenAlphaCompositing={false}
-                onGestureHandlerEvent={[Function]}
-                onGestureHandlerStateChange={[Function]}
-              >
-                <View
-                  style={
-                    Array [
-                      Object {
-                        "flex": 1,
-                        "overflow": "hidden",
-                      },
-                      Array [
-                        Object {
-                          "backgroundColor": "rgb(242, 242, 242)",
-                        },
-                        undefined,
-                      ],
-                    ]
-                  }
-                >
-                  <View
-                    style={
-                      Object {
-                        "flex": 1,
-                        "flexDirection": "column-reverse",
-                      }
-                    }
-                  >
-                    <View
-                      style={
-                        Object {
-                          "flex": 1,
-                        }
-                      }
-                    >
-                      <View>
-                        <ActivityIndicator
-                          color="#818A88"
-                          size="small"
-                        />
-                      </View>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            </View>
+              ⏷
+            </Text>
           </View>
-        </RNSScreen>
-      </RNSScreenContainer>
+        </View>
+        <Text
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "textAlign": "center",
+              },
+              Object {
+                "color": "rgb(0, 122, 255)",
+              },
+              Object {
+                "fontSize": 10,
+              },
+              undefined,
+            ]
+          }
+        >
+          Public Groups & Posts
+        </Text>
+      </View>
     </View>
   </View>
 </View>

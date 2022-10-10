@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { TRenderEngineProvider } from 'react-native-render-html'
 import { createInitialState } from 'store'
 import orm from 'store/models'
+import { HlyoHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
 
 export function createMockStore (state = {}) {
   return {
@@ -42,9 +43,11 @@ export function TestRoot ({
     <SafeAreaProvider>
       <TRenderEngineProvider>
         <Provider store={store}>
-          <NavigationContainer>
-            {children}
-          </NavigationContainer>
+          <HlyoHTMLConfigProvider>
+            <NavigationContainer>
+              {children}
+            </NavigationContainer>
+          </HlyoHTMLConfigProvider>
         </Provider>
       </TRenderEngineProvider>
     </SafeAreaProvider>

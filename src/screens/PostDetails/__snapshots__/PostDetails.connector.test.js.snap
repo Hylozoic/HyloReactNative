@@ -57,68 +57,6 @@ Object {
 }
 `;
 
-exports[`mergeProps createComment 1`] = `
-Array [
-  "dispatch",
-  Array [
-    Object {
-      "graphql": Object {
-        "query": "
-mutation CreateCommentMutation (
-  $postId: String,
-  $parentCommentId: String,
-  $text: String,
-  $attachments: [AttachmentInput],
-) {
-  createComment(data: {
-    postId: $postId,
-    parentCommentId: $parentCommentId,
-    text: $text,
-    attachments: $attachments,
-  }) {
-    id
-    text
-    post {
-      id
-    }
-    creator {
-      id
-    }
-    attachments {
-      type
-      url
-      position
-      id
-    }
-    parentComment {
-      id
-    }
-    createdAt
-  }
-}
-",
-        "variables": Object {
-          "attachments": undefined,
-          "parentCommentId": undefined,
-          "postId": "testpost",
-          "text": "some comment",
-        },
-      },
-      "meta": Object {
-        "analytics": "Comment Created",
-        "attachments": undefined,
-        "extractModel": "Comment",
-        "optimistic": true,
-        "postId": "testpost",
-        "tempId": "posttestpost_1",
-        "text": "some comment",
-      },
-      "type": "CREATE_COMMENT",
-    },
-  ],
-]
-`;
-
 exports[`mergeProps editPost 1`] = `
 Array [
   "navigate",

@@ -69,10 +69,6 @@ describe('mergeProps', () => {
     expect(mergedProps).toMatchSnapshot()
   })
 
-  it('createComment', () => {
-    expect(mergedProps.createComment({ text: 'some comment' })).toMatchSnapshot()
-  })
-
   it('showTopic', () => {
     expect(mergedProps.showTopic('mytopicname', 4)).toMatchSnapshot()
   })
