@@ -20,7 +20,8 @@ export default function Comment ({
   editComment,
   hideMenu,
   onReply,
-  onPress
+  onPress,
+  // onLongPress
 }) {
   const { creator, text, createdAt, post } = comment
   let postTitle = post?.title
@@ -30,7 +31,8 @@ export default function Comment ({
   }
 
   const handleReply = onReply && (() => onReply(comment))
-  const handlePress = onPress || handleReply
+  // Currently will be beat by native "Copy" context menu when over the actual text of the Comment
+  // const handleLongPress = onLongPress || handleReply
   const imageAttachments = filter({ type: 'image' }, comment?.attachments)
 
   // NOTE: Currently no UI for adding comment file attachments
@@ -75,38 +77,38 @@ export default function Comment ({
   }
 
   return (
-    <TouchableOpacity onPress={handlePress}>
+    <TouchableOpacity onPress={onPress}>
       <View style={[styles.container, style]}>
-        <TouchableOpacity onPress={() => showMember(creator.id)}>
-          <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
-        </TouchableOpacity>
-        <View style={styles.details}>
-          <View style={styles.header}>
-            <View style={styles.meta}>
-              <TouchableOpacity onPress={() => showMember(creator.id)}>
-                <Text style={styles.name}>{creator.name}</Text>
-              </TouchableOpacity>
-              <Text style={styles.date}>{TextHelpers.humanDate(createdAt)}</Text>
-              {displayPostTitle &&
-                <Text style={styles.date}>on "{postTitle}"</Text>}
-            </View>
-            <View style={styles.headerRight}>
-              {/* {handleReply && (
-                <TouchableOpacity style={styles.replyLink} onPress={handleReply}>
-                  <Icon style={styles.replyLinkIcon} name='Reply' />
-                  <Text style={styles.replyLinkText}>Reply</Text>
-                </TouchableOpacity>
-              )} */}
-              {!hideMenu && (
-                <CommentMenu menuItems={commentMenuItems} />
-              )}
-            </View>
-          </View>
-          {imageAttachments && imageAttachments.map(({ url }, i) => (
-            <TouchableOpacity onPress={() => openURL(url)} key={i}>
-              <Image source={{ uri: url }} resizeMode='cover' style={styles.imageAttachemnt} />
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => showMember(creator.id)}>
+            <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
+          </TouchableOpacity>
+          <View style={styles.headerLeft}>
+            <TouchableOpacity onPress={() => showMember(creator.id)}>
+              <Text style={styles.name}>{creator.name}</Text>
             </TouchableOpacity>
-          ))}
+            <Text style={styles.date}>{TextHelpers.humanDate(createdAt)}</Text>
+            {displayPostTitle &&
+              <Text style={styles.date}>on "{postTitle}"</Text>}
+          </View>
+          <View style={styles.headerMiddle} />
+          <View style={styles.headerRight}>
+            {handleReply && (
+              <TouchableOpacity style={styles.replyLink} onPress={handleReply}>
+                <Icon style={styles.replyLinkIcon} name='Replies' />
+              </TouchableOpacity>
+            )}
+            {!hideMenu && (
+              <CommentMenu menuItems={commentMenuItems} />
+            )}
+          </View>
+        </View>
+        {imageAttachments && imageAttachments.map(({ url }, i) => (
+          <TouchableOpacity onPress={() => openURL(url)} key={i}>
+            <Image source={{ uri: url }} resizeMode='cover' style={styles.imageAttachemnt} />
+          </TouchableOpacity>
+        ))}
+        <View style={styles.body}>
           <HyloHTML html={text} />
         </View>
       </View>

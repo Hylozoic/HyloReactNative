@@ -29,54 +29,55 @@ exports[`commentMenu renders correctly 1`] = `
 exports[`renders correctly 1`] = `
 <TouchableOpacity>
   <View>
-    <TouchableOpacity
-      onPress={[Function]}
-    >
-      <Avatar
-        avatarUrl="foo.png"
-      />
-    </TouchableOpacity>
     <View>
+      <TouchableOpacity
+        onPress={[Function]}
+      >
+        <Avatar
+          avatarUrl="foo.png"
+        />
+      </TouchableOpacity>
       <View>
-        <View>
-          <TouchableOpacity
-            onPress={[Function]}
-          >
-            <Text>
-              Ishamel
-            </Text>
-          </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
           <Text>
-            
+            Ishamel
           </Text>
-        </View>
-        <View>
-          <CommentMenu
-            menuItems={
-              Object {
-                "deleteComment": Object {
-                  "action": undefined,
-                  "destructive": true,
-                  "label": "Delete Comment",
-                },
-                "editComment": Object {
-                  "action": undefined,
-                  "label": "Edit Comment",
-                },
-                "removeComment": Object {
-                  "action": undefined,
-                  "destructive": true,
-                  "label": "Remove Comment",
-                },
-                "replyComment": Object {
-                  "action": undefined,
-                  "label": "Reply",
-                },
-              }
-            }
-          />
-        </View>
+        </TouchableOpacity>
+        <Text>
+          
+        </Text>
       </View>
+      <View />
+      <View>
+        <CommentMenu
+          menuItems={
+            Object {
+              "deleteComment": Object {
+                "action": undefined,
+                "destructive": true,
+                "label": "Delete Comment",
+              },
+              "editComment": Object {
+                "action": undefined,
+                "label": "Edit Comment",
+              },
+              "removeComment": Object {
+                "action": undefined,
+                "destructive": true,
+                "label": "Remove Comment",
+              },
+              "replyComment": Object {
+                "action": undefined,
+                "label": "Reply",
+              },
+            }
+          }
+        />
+      </View>
+    </View>
+    <View>
       <Memo
         html="tick followed tock followed tick followed tock"
       />
@@ -88,59 +89,60 @@ exports[`renders correctly 1`] = `
 exports[`shows the post title when displayPostTitle is true 1`] = `
 <TouchableOpacity>
   <View>
-    <TouchableOpacity
-      onPress={[Function]}
-    >
-      <Avatar
-        avatarUrl="foo.png"
-      />
-    </TouchableOpacity>
     <View>
+      <TouchableOpacity
+        onPress={[Function]}
+      >
+        <Avatar
+          avatarUrl="foo.png"
+        />
+      </TouchableOpacity>
       <View>
-        <View>
-          <TouchableOpacity
-            onPress={[Function]}
-          >
-            <Text>
-              Ishamel
-            </Text>
-          </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
           <Text>
-            
+            Ishamel
           </Text>
-          <Text>
-            on "
-            What's good? A long enough post title …
-            "
-          </Text>
-        </View>
-        <View>
-          <CommentMenu
-            menuItems={
-              Object {
-                "deleteComment": Object {
-                  "action": undefined,
-                  "destructive": true,
-                  "label": "Delete Comment",
-                },
-                "editComment": Object {
-                  "action": undefined,
-                  "label": "Edit Comment",
-                },
-                "removeComment": Object {
-                  "action": undefined,
-                  "destructive": true,
-                  "label": "Remove Comment",
-                },
-                "replyComment": Object {
-                  "action": undefined,
-                  "label": "Reply",
-                },
-              }
-            }
-          />
-        </View>
+        </TouchableOpacity>
+        <Text>
+          
+        </Text>
+        <Text>
+          on "
+          What's good? A long enough post title …
+          "
+        </Text>
       </View>
+      <View />
+      <View>
+        <CommentMenu
+          menuItems={
+            Object {
+              "deleteComment": Object {
+                "action": undefined,
+                "destructive": true,
+                "label": "Delete Comment",
+              },
+              "editComment": Object {
+                "action": undefined,
+                "label": "Edit Comment",
+              },
+              "removeComment": Object {
+                "action": undefined,
+                "destructive": true,
+                "label": "Remove Comment",
+              },
+              "replyComment": Object {
+                "action": undefined,
+                "label": "Reply",
+              },
+            }
+          }
+        />
+      </View>
+    </View>
+    <View>
       <Memo
         html="tick followed tock followed tick followed tock"
       />

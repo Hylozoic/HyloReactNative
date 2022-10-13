@@ -55,7 +55,7 @@ const SpanRenderer = ({ TDefaultRenderer, ...props }) => {
 
 // Collapse `p` bottom margins when they are a child of a `li`
 // Not possible using `react-native-render-html` due to lack of CSS Selectors
-// Watch feature request for updates: https://bit.ly/3MrQYZq
+// Watch this feature request for updates on that: https://bit.ly/3MrQYZq
 const CustomPRenderer = ({ TDefaultRenderer, ...props }) => {
   const fixMarginInListStyle = props?.tnode?.parent?.tagName === 'li'
     ? { marginBottom: 5 }

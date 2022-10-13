@@ -5,6 +5,7 @@ import HyloWebView, { sendMessageFromWebView, parseWebViewMessage } from 'screen
 
 const DEFAULT_WIDTH_OFFSET_IOS = 15
 const DEFAULT_HEIGHT_OFFSET_IOS = 15
+const EMPTY_STATE = '<p></p>'
 
 export function HyloEditorWebView ({
   contentHTML: providedContentHTML,
@@ -12,7 +13,7 @@ export function HyloEditorWebView ({
   readOnly,
   groupIds,
   showMenu,
-  onChange,
+  onUpdate,
   onAddTopic,
   onAddLink,
   onEnter,
@@ -24,35 +25,9 @@ export function HyloEditorWebView ({
   const webViewRef = useRef()
   // const [path] = useState('hyloApp/editor?suppressEnterKeyPropagation=true')
   const [path] = useState('hyloApp/editor')
-  const [isEmpty, setIsEmpty] = useState()
+  const [isEmpty, setIsEmpty] = useState(true)
   const [contentHTML, setContentHTML] = useState()
   const [loaded, setLoaded] = useState()
-
-  useImperativeHandle(ref, () => ({
-    blur: () => {
-      sendMessageFromWebView(
-        webViewRef,
-        WebViewMessageTypes.EDITOR.BLUR
-      )
-    },
-    clearContent: () => {
-      sendMessageFromWebView(
-        webViewRef,
-        WebViewMessageTypes.EDITOR.CLEAR_CONTENT
-      )
-    },
-    focus: () => {
-      webViewRef.current.requestFocus()
-      sendMessageFromWebView(
-        webViewRef,
-        WebViewMessageTypes.EDITOR.FOCUS
-      )
-    },
-    getHTML: () => {
-      return contentHTML
-    },
-    isEmpty
-  }))
 
   const handleMessage = message => {
     const { type, data } = parseWebViewMessage(message)
@@ -63,10 +38,10 @@ export function HyloEditorWebView ({
         break
       }
 
-      case WebViewMessageTypes.EDITOR.ON_CHANGE: {
+      case WebViewMessageTypes.EDITOR.ON_UPDATE: {
         setContentHTML(data)
-        setIsEmpty(!data || data.trim() === '<p></p>' || data.trim() === '<p> </p>')
-        onChange && onChange(data)
+        setIsEmpty(data.trim() === EMPTY_STATE)
+        onUpdate && onUpdate(data)
         break
       }
 
@@ -103,6 +78,7 @@ export function HyloEditorWebView ({
 
   useEffect(() => {
     if (loaded) {
+      // setContentHTML(providedContentHTML)
       sendMessageFromWebView(
         webViewRef,
         WebViewMessageTypes.EDITOR.SET_PROPS, {
@@ -111,6 +87,43 @@ export function HyloEditorWebView ({
       )
     }
   }, [loaded, providedContentHTML])
+
+  useImperativeHandle(ref, () => ({
+    blur: () => {
+      sendMessageFromWebView(
+        webViewRef,
+        WebViewMessageTypes.EDITOR.BLUR
+      )
+    },
+    clearContent: () => {
+      sendMessageFromWebView(
+        webViewRef,
+        WebViewMessageTypes.EDITOR.CLEAR_CONTENT
+      )
+      setIsEmpty(true)
+    },
+    focus: position => {
+      webViewRef.current.requestFocus()
+      sendMessageFromWebView(
+        webViewRef,
+        WebViewMessageTypes.EDITOR.FOCUS,
+        position
+      )
+    },
+    getHTML: () => {
+      return contentHTML
+    },
+    isEmpty,
+    setContent: newContentHTML => {
+      sendMessageFromWebView(
+        webViewRef,
+        WebViewMessageTypes.EDITOR.SET_PROPS, {
+          content: newContentHTML
+        }
+      )
+      // setContentHTML(newContentHTML)
+    }
+  }), [isEmpty, contentHTML, webViewRef])
 
   return React.createElement(HyloWebView, {
     path,

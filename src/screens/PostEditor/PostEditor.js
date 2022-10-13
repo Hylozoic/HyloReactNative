@@ -440,12 +440,13 @@ export class PostEditor extends React.Component {
             <HyloEditorWebView
               placeholder={detailsPlaceholder}
               contentHTML={post?.details}
-              groupIds={groupOptions && groupOptions.map(g => g.id)}
+              // groupIds={groupOptions && groupOptions.map(g => g.id)}
               onChange={this.handleDetailsOnChange}
               onAddTopic={!topicsPicked && this.handleAddTopic}
               readOnly={postLoading || isSaving}
               widthOffset={24}
               containerStyle={[
+                styles.detailsEditor,
                 styles.section,
                 styles.textInputWrapper
               ]}

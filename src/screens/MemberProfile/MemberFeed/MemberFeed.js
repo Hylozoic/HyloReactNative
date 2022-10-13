@@ -76,7 +76,7 @@ export function ContentRow ({ item, itemType, showPost, showTopic, showMember, g
     content = (
       <PostCard
         goToGroup={goToGroup}
-        showGroups={true}
+        showGroups
         showMember={showMember}
         showTopic={showTopic}
         post={item}
@@ -89,11 +89,13 @@ export function ContentRow ({ item, itemType, showPost, showTopic, showMember, g
     )
   } else {
     postId = item.post.id
-    content = <Comment
-      onPress={() => showPost(postId)}
-      comment={item}
-      displayPostTitle
-    />
+    content = (
+      <Comment
+        onPress={() => showPost(postId)}
+        comment={item}
+        displayPostTitle
+      />
+    )
   }
   return (
     <TouchableOpacity onPress={() => showPost(postId)}>

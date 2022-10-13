@@ -31,8 +31,6 @@ export default {
     ...subCommentIndentation
   },
   highlighted: {
-    borderRadius: 5,
-    backgroundColor: 'rgb(255,255,224)',
-    padding: 10
+    backgroundColor: 'rgb(255,255,224)'
   }
 }

@@ -1,24 +1,24 @@
-import { limedSpruce, slateGrey80, nevada, rhino50, caribbeanGreen } from 'style/colors'
+import { limedSpruce, slateGrey80, rhino50 } from 'style/colors'
 
 export default {
   container: {
-    flexDirection: 'row',
-    marginLeft: 12,
-    marginRight: 12,
-    marginBottom: 20
-  },
-  details: {
-    flex: 1
+    flexDirection: 'column',
+    flex: 1,
+    padding: 10,
+    paddingBottom: 5
   },
   avatar: {
     marginRight: 10
   },
-  meta: {
-    flex: 1
-  },
   header: {
     flexDirection: 'row',
+    justifyItems: 'stretch',
     marginBottom: 8
+  },
+  headerLeft: {
+  },
+  headerMiddle: {
+    flex: 1
   },
   headerRight: {
     paddingTop: 3,
@@ -28,7 +28,6 @@ export default {
   menuIcon: {
     fontSize: 20,
     paddingLeft: 10,
-    paddingRight: 5,
     color: rhino50
   },
   name: {
@@ -36,31 +35,30 @@ export default {
     fontFamily: 'Circular-Bold',
     fontSize: 14
   },
-  replyLink: {
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: slateGrey80,
-    padding: 3,
-    borderRadius: 5
-  },
-  replyLinkText: {
-    fontSize: 12,
-    color: slateGrey80,
-    marginLeft: 5
-  },
-  replyLinkIcon: {
-    transform: [{rotateY: '180deg'}],
-    fontSize: 12,
-    color: slateGrey80
-  },
   date: {
     color: slateGrey80,
     fontFamily: 'Circular-Book',
     fontSize: 12
   },
+  replyLink: {
+    flexDirection: 'row'
+  },
+  // replyLinkText: {
+  //   fontSize: 12,
+  //   color: slateGrey80,
+  //   marginLeft: 5
+  // },
+  replyLinkIcon: {
+    transform: [{ rotateY: '180deg' }],
+    fontSize: 17,
+    color: slateGrey80
+  },
   imageAttachemnt: {
     height: 200,
     width: '100%',
     borderRadius: 10
+  },
+  body: {
+    paddingLeft: 42
   }
 }

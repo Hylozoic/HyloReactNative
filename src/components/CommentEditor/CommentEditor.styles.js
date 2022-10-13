@@ -1,9 +1,9 @@
-import { white, rhino, rhino80, gunsmoke, azureRadiance, rhino10, pictonBlue, amaranth } from 'style/colors'
+import { white, rhino80, gunsmoke, azureRadiance, rhino10, amaranth } from 'style/colors'
 
 export default {
   keyboardAccessoryContainerStyle: {
     // backgroundColor: rhino10,
-    backgroundColor: 'transparent',
+    backgroundColor: white,
     marginBottom: 0,
     borderWidth: 0
   },
@@ -20,7 +20,11 @@ export default {
     backgroundColor: white,
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: '#CCC'
+    borderColor: '#CCC',
+    // padding: 8,
+    // A hack to make it not look as weird when loading editor
+    // This looks ok in iOS, Likely will need to be adjusted for Android
+    minHeight: 42
   },
 
   prompt: {
@@ -37,6 +41,10 @@ export default {
   promptText: {
     color: rhino80,
     lineHeight: 22
+  },
+
+  promptTextName: {
+    fontWeight: 'bold'
   },
 
   promptClearIcon: {

@@ -5236,10 +5236,10 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-hylo-shared@4.1.0-beta.14:
-  version "4.1.0-beta.14"
-  resolved "https://registry.yarnpkg.com/hylo-shared/-/hylo-shared-4.1.0-beta.14.tgz#4b07c13327e10ea44c230a780401c8fb01f7625a"
-  integrity sha512-3XtDvSKdTQIa07N55XbppzyWs5PFOOIHpWhPeIupyLVvZj89o9oF4X/n77+ZH/2a3F5y42KZ0OO7I9p+jrzFBg==
+hylo-shared@4.1.0-beta.15:
+  version "4.1.0-beta.15"
+  resolved "https://registry.yarnpkg.com/hylo-shared/-/hylo-shared-4.1.0-beta.15.tgz#cb4531c3fe8ac273196af2f98e03a647d6eead2c"
+  integrity sha512-opuPSQ0DyrzVg1feQMw7JKiOlLGBQEXvMZNOMD8XZF5QFOMlniiGy0CDYSGG6XU+QDwN7zFZy5MkFHf8Vv0+gw==
   dependencies:
     coordinate-parser "^1.0.7"
     html-to-text "^8.1.0"

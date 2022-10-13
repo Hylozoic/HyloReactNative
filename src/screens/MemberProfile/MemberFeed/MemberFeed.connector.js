@@ -84,7 +84,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     Upvotes: dispatchProps.fetchMemberUpvotes
   }[choice]
 
-  const offset = items.length
+  const offset = items.length || 0
 
   const fetchItems = () => fetchFunction({ id })
   const fetchMoreItems = hasMore

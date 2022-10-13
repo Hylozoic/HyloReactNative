@@ -49,15 +49,13 @@ export const CommentEditor = forwardRef(function CommentEditor ({
   const dispatch = useDispatch()
   const [hasContent, setHasContent] = useState()
   const editorRef = useRef()
-  const [contentHTML, setContentHTML] = useState()
   const [submitting, setSubmitting] = useState()
 
   const handleDone = useCallback(() => {
     clearReplyingTo()
-    setContentHTML('<p> </p>')
-    setHasContent(false)
-    editorRef?.current.blur()
-  }, [clearReplyingTo, setContentHTML])
+    editorRef?.current.clearContent()
+    // editorRef?.current.blur()
+  }, [clearReplyingTo])
 
   const handleCancel = useCallback(() => {
     if (replyingTo?.creator?.name) {
@@ -89,27 +87,20 @@ export const CommentEditor = forwardRef(function CommentEditor ({
     }
   }, [handleDone, postId, replyingTo?.id, replyingTo?.parentComment, dispatch])
 
+  const setEditorRef = useCallback(newEditorRef => {
+    setHasContent(!newEditorRef?.isEmpty)
+    editorRef.current = newEditorRef
+  }, [])
+
   useEffect(() => {
     if (replyingTo?.parentComment) {
-      setHasContent(true)
-      setContentHTML(`<p>${TextHelpers.mentionHTML(replyingTo.creator)}&nbsp;</p>`)
+      editorRef?.current.setContent(`<p>${TextHelpers.mentionHTML(replyingTo.creator)}&nbsp;</p>`)
+      setTimeout(() => editorRef?.current.focus('end'), 100)
     } else {
-      setHasContent(false)
-      setContentHTML('<p></p>')
+      editorRef?.current.clearContent()
+      setTimeout(() => editorRef?.current.focus('end'), 100)
     }
-
-    if (replyingTo?.id) {
-      editorRef?.current.focus()
-    }
-  }, [replyingTo?.id])
-
-  const handleChange = newHTML => {
-    setHasContent(
-      newHTML &&
-      newHTML.trim() !== '<p></p>' &&
-      newHTML.trim() !== '<p> </p>'
-    )
-  }
+  }, [replyingTo?.id, replyingTo?.parentComment, replyingTo?.creator])
 
   useImperativeHandle(ref, () => ({
     clearContent: () => editorRef?.current.clearContent(),
@@ -126,7 +117,7 @@ export const CommentEditor = forwardRef(function CommentEditor ({
           </TouchableOpacity>
           <TouchableOpacity onPress={() => { scrollToReplyingTo() }}>
             <Text style={styles.promptText}>
-              Replying to <Text style={{ fontWeight: 'bold' }}>{firstName(replyingTo?.creator)}'s</Text> comment
+              Replying to <Text style={styles.promptTextName}>{firstName(replyingTo?.creator)}'s</Text> comment
             </Text>
           </TouchableOpacity>
         </View>
@@ -134,18 +125,14 @@ export const CommentEditor = forwardRef(function CommentEditor ({
       <View style={styles.editor}>
         <HyloEditorWebView
           placeholder='Write a comment...'
-          contentHTML={contentHTML}
-          groupIds={[groupId]}
+          // groupIds={[groupId]}
           readOnly={submitting}
-          onChange={handleChange}
           containerStyle={styles.htmlEditor}
-          ref={editorRef}
-          widthOffset={45}
+          ref={setEditorRef}
+          widthOffset={30}
           customStyle={`
             .hyloEditorMobileContainer {
               padding: 8px;
-              overflow-y: auto;
-              max-height: 200px;
             }
           `}
         />

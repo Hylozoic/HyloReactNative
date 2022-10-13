@@ -46,12 +46,9 @@ export default {
     fontFamily: 'Circular-Book',
     color: rhino30
   },
-  detailsEditorInput: {
-    fontFamily: 'Circular-Book',
-    padding: 0,
-    margin: 0
+  detailsEditor: {
+    minHeight: 100
   },
-  detailsEditorContainer: {},
   section: {
     marginBottom: 8,
     paddingBottom: 8

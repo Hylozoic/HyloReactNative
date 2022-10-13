@@ -40,7 +40,7 @@ function Comments ({
     const sectionIndex = section.comment.sectionIndex
     const itemIndex = section.data.find(subComment =>
       subCommentId === subComment.id)?.itemIndex || section.data.length + 1
-    commentsListRef?.current.scrollToLocation({ sectionIndex, itemIndex })
+    commentsListRef?.current.scrollToLocation({ sectionIndex, itemIndex, viewPosition: 0.2 })
   }, [sections])
 
   const select = useCallback(comment => {
@@ -51,7 +51,6 @@ function Comments ({
 
   useImperativeHandle(ref, () => ({
     select,
-    // selected: highlightedComment,
     scrollTo,
     clearSelection: () => highlightComment(null)
   }), [select, highlightComment, scrollTo])
@@ -117,7 +116,8 @@ function Comments ({
       sections={sections}
       keyExtractor={comment => comment.id}
       initialScrollIndex={0}
-      keyboardDismissMode='on-drag'
+      keyboardShouldPersistTaps='never'
+      keyboardDismissMode='interactive'
       {...panHandlers}
       // NOTE: Because inverted this will make the "footer" rise to the top
       // of the view when the content is shorter than full height
@@ -139,7 +139,6 @@ export function ShowMore ({ postId, commentId, style = {} }) {
   const cursor = !isEmpty(comments) && comments[comments.length - 1].id
   const total = useSelector(state => getTotalComments(state, queryParams)) || 0
   const hasMore = useSelector(state => getHasMoreComments(state, queryParams))
-
   const extra = total - comments.length
 
   if (!hasMore || extra < 1) return null
