@@ -11,7 +11,7 @@ export function HyloEditorWebView ({
   placeholder,
   readOnly,
   groupIds,
-  hideMenu = true,
+  showMenu,
   onChange,
   onAddTopic,
   onAddLink,
@@ -93,13 +93,13 @@ export function HyloEditorWebView ({
         webViewRef,
         WebViewMessageTypes.EDITOR.SET_PROPS, {
           readOnly,
-          hideMenu,
+          showMenu,
           placeholder,
           groupIds
         }
       )
     }
-  }, [loaded, readOnly, hideMenu, placeholder, groupIds])
+  }, [loaded, readOnly, showMenu, placeholder, groupIds])
 
   useEffect(() => {
     if (loaded) {
@@ -116,17 +116,21 @@ export function HyloEditorWebView ({
     path,
     onMessage: handleMessage,
     startInLoadingState: false,
-    customStyle: customStyle || `
-      .hyloAppEditorContainer {
-        padding: 8px;
-        height: auto;
-        overflow-y: auto;
-      }
-      .hyloAppEditorContainer .hyloAppEditor .ProseMirror {
-        height: auto;
-        max-height: 200px;
-      }
-    `,
+    customStyle,
+    //  || `
+    //   .hyloEditorMobileContainer {
+    //     padding: 8px;
+    //     height: auto;
+    //     overflow-y: auto;
+    //   }
+    //   .ProseMirror p.is-editor-empty:first-child::after {
+    //     margin-bottom: 0px;
+    //   }
+    //   .hyloEditorMobileContainer .hyloEditorMobile .ProseMirror {
+    //     height: auto;
+    //     max-height: 200px;
+    //   }
+    // `,
     // Related to getting auto-height right and scrolling:
     scrollEnabled: false,
     nestedScrollEnabled: true,
@@ -134,10 +138,9 @@ export function HyloEditorWebView ({
     // Seems to help but when it's relied upon (e.g. PostEditor height)
     // it causes 2 resizes and could probably be handled better otherwise
     automaticallyAdjustContentInsets: true,
-
-    // If Android crashes, apply this fix (ref. https://github.com/iou90/react-native-autoheight-webview/issues/191)
-    // style={{ opacity: 0.99, minHeight: 1 }}
     style: [style, {
+      // If Android crashes, apply this fix (ref. https://github.com/iou90/react-native-autoheight-webview/issues/191)
+      // opacity: 0.99, minHeight: 1
       width: Dimensions.get('window').width - DEFAULT_WIDTH_OFFSET_IOS - widthOffset
     }],
     containerStyle,

@@ -117,7 +117,7 @@ function Comments ({
       sections={sections}
       keyExtractor={comment => comment.id}
       initialScrollIndex={0}
-      keyboardDismissMode='interactive'
+      keyboardDismissMode='on-drag'
       {...panHandlers}
       // NOTE: Because inverted this will make the "footer" rise to the top
       // of the view when the content is shorter than full height

@@ -32,7 +32,7 @@ import GroupsList from 'components/GroupsList'
 // Components
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import Icon from 'components/Icon'
-import FileSelector, { showFilePicker as fileSelectorShowFilePicker} from './FileSelector'
+import FileSelector, { showFilePicker as fileSelectorShowFilePicker } from './FileSelector'
 import DatePicker from 'components/DatePicker'
 import ImagePicker from 'components/ImagePicker'
 import ImageSelector from './ImageSelector'
@@ -437,26 +437,19 @@ export class PostEditor extends React.Component {
               </View>
             )}
             <Text style={styles.sectionLabel}>Details</Text>
-            {/* <View
-              style={[
+            <HyloEditorWebView
+              placeholder={detailsPlaceholder}
+              contentHTML={post?.details}
+              groupIds={groupOptions && groupOptions.map(g => g.id)}
+              onChange={this.handleDetailsOnChange}
+              onAddTopic={!topicsPicked && this.handleAddTopic}
+              readOnly={postLoading || isSaving}
+              widthOffset={24}
+              containerStyle={[
                 styles.section,
                 styles.textInputWrapper
               ]}
-            > */}
-              <HyloEditorWebView
-                placeholder={detailsPlaceholder}
-                contentHTML={post?.details}
-                groupIds={groupOptions && groupOptions.map(g => g.id)}
-                onChange={this.handleDetailsOnChange}
-                onAddTopic={!topicsPicked && this.handleAddTopic}
-                readOnly={postLoading || isSaving}
-                widthOffset={24}
-                containerStyle={[
-                  styles.section,
-                  styles.textInputWrapper
-                ]}  
-              />
-            {/* </View> */}
+            />
             <TouchableOpacity
               style={[
                 styles.section,

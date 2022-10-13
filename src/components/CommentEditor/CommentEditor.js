@@ -142,12 +142,10 @@ export const CommentEditor = forwardRef(function CommentEditor ({
           ref={editorRef}
           widthOffset={45}
           customStyle={`
-            .hyloAppEditorContainer {
+            .hyloEditorMobileContainer {
               padding: 8px;
               overflow-y: auto;
               max-height: 200px;
-            }
-            .hyloAppEditorContainer .hyloAppEditor .ProseMirror {
             }
           `}
         />

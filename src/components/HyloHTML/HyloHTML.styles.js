@@ -1,4 +1,4 @@
-import { nevada, rhino, white80 } from 'style/colors'
+import { nevada, rhino, white80 } from 'style/colors';
 
 export const baseStyle = {
   color: nevada,
@@ -18,6 +18,15 @@ export const tagsStyles = {
   a: {
     color: '#0275d8',
     textDecorationLine: 'none'
+  },
+  ul: {
+    marginTop: 0,
+    paddingLeft: '2em'
+  },
+
+  ol: {
+    marginTop: 0,
+    paddingLeft: '2em'
   },
   code: {
     color: white80,

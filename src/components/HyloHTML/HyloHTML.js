@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useWindowDimensions } from 'react-native'
 import { RenderHTMLConfigProvider, RenderHTMLSource } from 'react-native-render-html'
 import WebView from 'react-native-webview'
@@ -28,37 +28,58 @@ const htmlConfig = {
   },
   WebView
 }
+
 const defaultTextProps = {
   selectable: true
 }
 
-export function HlyoHTMLConfigProvider ({ groupSlug, children }) {
+const SpanRenderer = ({ TDefaultRenderer, ...props }) => {
   const currentlySelectedGroup = useSelector(getCurrentGroup)
   const currentGroupSlug = currentlySelectedGroup?.slug
 
-  const handleLinkPress = async (_, href) => openURL(href, { groupSlug: currentGroupSlug || groupSlug })
+  const handlePress = () => {
+    const textNode = props.tnode
 
-  const spanRenderer = ({ TDefaultRenderer, ...props }) => {
-    const handlePress = () => {
-      const textNode = props.tnode
-
-      if (textNode.hasClass('mention')) {
-        return navigateToLinkingPath(PathHelpers.mentionPath(textNode.attributes['data-id'], currentGroupSlug))
-      }
-      if (textNode.hasClass('topic')) {
-        return navigateToLinkingPath(PathHelpers.topicPath(textNode.attributes['data-id'], currentGroupSlug))
-      }
+    if (textNode.hasClass('mention')) {
+      return navigateToLinkingPath(PathHelpers.mentionPath(textNode.attributes['data-id'], currentGroupSlug))
     }
-
-    return (
-      <TDefaultRenderer {...props} onPress={handlePress} />
-    )
+    if (textNode.hasClass('topic')) {
+      return navigateToLinkingPath(PathHelpers.topicPath(textNode.attributes['data-id'], currentGroupSlug))
+    }
   }
 
-  const renderers = {
-    iframe,
-    span: spanRenderer
-  }
+  return (
+    <TDefaultRenderer {...props} onPress={handlePress} />
+  )
+}
+
+// Collapse `p` bottom margins when they are a child of a `li`
+// Not possible using `react-native-render-html` due to lack of CSS Selectors
+// Watch feature request for updates: https://bit.ly/3MrQYZq
+const CustomPRenderer = ({ TDefaultRenderer, ...props }) => {
+  const fixMarginInListStyle = props?.tnode?.parent?.tagName === 'li'
+    ? { marginBottom: 5 }
+    : null
+
+  return (
+    <TDefaultRenderer {...props} style={{ ...props.style, ...fixMarginInListStyle }} />
+  )
+}
+
+const renderers = {
+  iframe,
+  span: SpanRenderer,
+  p: CustomPRenderer
+}
+
+export function HlyoHTMLConfigProvider ({ children }) {
+  const currentlySelectedGroup = useSelector(getCurrentGroup)
+
+  const handleLinkPress = useCallback(
+    async (_, href) => openURL(href, { groupSlug: currentlySelectedGroup?.slug }),
+    [currentlySelectedGroup?.slug]
+  )
+
   const renderersProps = {
     a: { onPress: handleLinkPress },
     iframe: { scalesPageToFit: true }
@@ -66,9 +87,9 @@ export function HlyoHTMLConfigProvider ({ groupSlug, children }) {
 
   return (
     <RenderHTMLConfigProvider
+      defaultTextProps={defaultTextProps}
       renderers={renderers}
       renderersProps={renderersProps}
-      defaultTextProps={defaultTextProps}
       {...htmlConfig}
     >
       {children}
