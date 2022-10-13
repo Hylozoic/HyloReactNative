@@ -4,7 +4,6 @@ import { WebViewMessageTypes } from 'hylo-shared'
 import HyloWebView, { sendMessageFromWebView, parseWebViewMessage } from 'screens/HyloWebView'
 
 const DEFAULT_WIDTH_OFFSET_IOS = 15
-const DEFAULT_HEIGHT_OFFSET_IOS = 15
 const EMPTY_STATE = '<p></p>'
 
 export function HyloEditorWebView ({

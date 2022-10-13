@@ -14,6 +14,7 @@ build/
 *.perspectivev3
 !default.perspectivev3
 xcuserdata
+ios/.xcode.env.local
 *.xccheckout
 *.moved-aside
 DerivedData
@@ -26,9 +27,10 @@ ios/fastlane/report.xml
 ios/debug.xcconfig
 ios/release.xcconfig
 
-*/fastlane/report.xml
-*/fastlane/Preview.html
-*/fastlane/screenshots
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
 
 # Android/IntelliJ
 #
@@ -63,6 +65,7 @@ google-services.json
 GoogleService-Info.plist
 
 # Ruby Gems / Bundle (Fastlane related)
+/vendor/bundle/
 .bundle/*
 vendor/*
 *.code-workspace
@@ -72,7 +75,7 @@ vendor/*
 *.jsbundle.map
 
 # CocoaPods
-Pods/
+/ios/Pods/
 
 ios/codesigndoc_exports
 .bitrise.secrets.yml

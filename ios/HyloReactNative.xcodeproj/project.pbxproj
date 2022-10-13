@@ -16,9 +16,9 @@
 		04928C2A26D81F03003D5C6F /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04928C2926D81F03003D5C6F /* BootSplash.storyboard */; };
 		04BF1DE1248F357F00ECC3A2 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF1DE0248F357F00ECC3A2 /* NotificationService.swift */; };
 		04BF1DE5248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 04BF1DDE248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		04C29B0628F8CF6D009A9FCD /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04C29B0528F8CF6D009A9FCD /* AppDelegate.mm */; };
 		04F54BA224F4D59500031D32 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F54BA124F4D59500031D32 /* File.swift */; };
 		12DF135DDA5240B3BE9C9ED5 /* Circular-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEEE5B8B897F4DCBBC0452B0 /* Circular-MediumItalic.ttf */; };
-		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1FC1D83F47654BAFB0C9B45E /* Circular-BookItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F3ACB10FF738470A830BFED1 /* Circular-BookItalic.ttf */; };
@@ -79,6 +79,7 @@
 		04BF1DDE248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		04BF1DE0248F357F00ECC3A2 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		04BF1DE2248F357F00ECC3A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04C29B0528F8CF6D009A9FCD /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = HyloReactNative/AppDelegate.mm; sourceTree = "<group>"; };
 		04F54BA024F4D59400031D32 /* HyloReactNative-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HyloReactNative-Bridging-Header.h"; sourceTree = "<group>"; };
 		04F54BA124F4D59500031D32 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		085C94288678962E98464B34 /* Pods-HyloReactNative-HyloReactNativeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HyloReactNative-HyloReactNativeTests.debug.xcconfig"; path = "Target Support Files/Pods-HyloReactNative-HyloReactNativeTests/Pods-HyloReactNative-HyloReactNativeTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,7 +87,6 @@
 		132848DAF02E4203BC2960D5 /* Circular-Book.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Circular-Book.ttf"; path = "../assets/fonts/Circular-Book.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Hylo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hylo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = HyloReactNative/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = HyloReactNative/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = HyloReactNative/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = HyloReactNative/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = HyloReactNative/main.m; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 				0401F47B248F312A002E45AC /* HyloReactNative.entitlements */,
 				0401F47A248F311C002E45AC /* HyloReactNativeRelease.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
-				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				04C29B0528F8CF6D009A9FCD /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -648,8 +648,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				04F54BA224F4D59500031D32 /* File.swift in Sources */,
+				04C29B0628F8CF6D009A9FCD /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -890,7 +890,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -939,6 +939,7 @@
 				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(PROJECT_DIR)/OneSignalNotificationServiceExtension/**";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = YES;
 				SWIFT_VERSION = "";
@@ -952,7 +953,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -992,6 +993,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(PROJECT_DIR)/OneSignalNotificationServiceExtension";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;

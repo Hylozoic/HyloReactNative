@@ -7,9 +7,12 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.config.ReactFeatureFlags;
 import com.facebook.react.bridge.JSIModulePackage; // Reanimated
 import com.swmansion.reanimated.ReanimatedJSIModulePackage; // Reanimated
 import com.facebook.soloader.SoLoader;
+import com.hylo.hyloandroid.newarchitecture.MainApplicationReactNativeHost;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -47,12 +50,18 @@ public class MainApplication extends Application implements ReactApplication {
 
   @Override
   public ReactNativeHost getReactNativeHost() {
-    return mReactNativeHost;
+    if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
+	    return mNewArchitectureNativeHost;
+	  } else {
+	    return mReactNativeHost;
+	  }
   }
 
   @Override
   public void onCreate() {
     super.onCreate();
+    // If you opted-in for the New Architecture, we enable the TurboModule system
+    ReactFeatureFlags.useTurboModules = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     SoLoader.init(this, /* native exopackage */ false);
     // This should be coming from the env vars?
     IntercomModule.initialize(this, "android_sdk-0aa2608fb3b46dd9efcb74339fc87073a6ed0ba9", "wwelodje");

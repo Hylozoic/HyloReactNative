@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useFocusEffect } from '@react-navigation/native'
-import { Text, View, ScrollView } from 'react-native'
+import { Text, View, ScrollView, TouchableOpacity } from 'react-native'
 import RoundCheckbox from 'components/RoundCheckBox'
 import Icon from 'components/Icon'
 import {
@@ -12,7 +12,6 @@ import {
 import { caribbeanGreen, white20onCaribbeanGreen, white } from 'style/colors'
 import { getGroupData, updateGroupData } from './CreateGroupFlow.store'
 import styles from './CreateGroupFlow.styles'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 
 const groupVisibilityOptions = Object.keys(GROUP_VISIBILITY).map(label => ({
