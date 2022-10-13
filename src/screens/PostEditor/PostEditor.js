@@ -141,12 +141,17 @@ export class PostEditor extends React.Component {
   }
 
   save = async () => {
+    if (!this.detailsEditorRef?.current) {
+      this.setIsSaving(false)
+      return
+    }
+
     const {
       createPost, createProject, updatePost,
       navigation, post
     } = this.props
     const {
-      fileUrls, imageUrls, title, details,
+      fileUrls, imageUrls, title,
       topics, type, announcementEnabled, members,
       groups, startTime, endTime, location,
       locationObject
