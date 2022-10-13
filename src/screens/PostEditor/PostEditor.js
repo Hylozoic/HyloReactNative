@@ -50,7 +50,8 @@ export class PostEditor extends React.Component {
   constructor (props) {
     super(props)
     const { post } = props
-    this.scrollView = React.createRef()
+    this.scrollViewRef = React.createRef()
+    this.detailsEditorRef = React.createRef()
     this.state = {
       isNewPost: !post?.id,
       title: post?.title || '',
@@ -153,7 +154,7 @@ export class PostEditor extends React.Component {
     const postData = {
       id: post.id,
       type,
-      details,
+      details: this.detailsEditorRef.current.getHTML(),
       groups,
       memberIds: members.map(m => m.id),
       fileUrls: uniq(fileUrls),
@@ -310,7 +311,7 @@ export class PostEditor extends React.Component {
   updateMembers = members => this.setState(state => ({ members }))
 
   handleDatePickerExpand = () => {
-    this.scrollView.current.scrollToEnd()
+    this.scrollViewRef.current.scrollToEnd()
   }
 
   handleShowProjectMembersEditor = () => {
@@ -405,7 +406,7 @@ export class PostEditor extends React.Component {
     return (
       <>
         <ScrollView
-          ref={this.scrollView}
+          ref={this.scrollViewRef}
           keyboardShouldPersistTaps='handled'
           style={styles.scrollContainer}
           keyboardDismissMode='on-drag'
@@ -445,6 +446,7 @@ export class PostEditor extends React.Component {
               onAddTopic={!topicsPicked && this.handleAddTopic}
               readOnly={postLoading || isSaving}
               widthOffset={24}
+              ref={this.detailsEditorRef}
               containerStyle={[
                 styles.detailsEditor,
                 styles.section,

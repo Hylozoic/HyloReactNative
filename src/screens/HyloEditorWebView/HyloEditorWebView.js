@@ -103,7 +103,7 @@ export function HyloEditorWebView ({
       setIsEmpty(true)
     },
     focus: position => {
-      webViewRef.current.requestFocus()
+      webViewRef?.current?.requestFocus()
       sendMessageFromWebView(
         webViewRef,
         WebViewMessageTypes.EDITOR.FOCUS,
