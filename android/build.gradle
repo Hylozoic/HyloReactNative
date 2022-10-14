@@ -22,8 +22,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        // 7.1.1 may fix issue
-        classpath("com.android.tools.build:gradle:7.2.1")
+        // RN 0.70 version is 7.2.1, this was downgraded to fix a build issue caused by `mixpanel-react-native`
+        classpath("com.android.tools.build:gradle:7.1.1")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("de.undercouch:gradle-download-task:5.0.1")
         classpath("com.google.gms:google-services:4.3.14")
