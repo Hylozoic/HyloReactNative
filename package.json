@@ -3,8 +3,8 @@
   "version": "4.1.5",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "android:device": "adb reverse tcp:3001 tcp:3001 && react-native run-android",
+    "android": "adb reverse tcp:3001 tcp:3001 && adb reverse tcp:3000 tcp:3000 && react-native run-android",
+    "android:device": "adb reverse tcp:3001 tcp:3001 && adb reverse tcp:3000 tcp:3000 && && react-native run-android",
     "android:build": "yarn run android:prod && yarn run android:usb",
     "codecov": "codecov -t b30663d3-771b-4b16-b030-0a0a56b335e3",
     "configure": "./scripts/configure.sh",
