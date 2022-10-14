@@ -33,14 +33,14 @@ PODS:
     - FBSDKCoreKit (~> 9.3.0)
   - fmt (6.2.1)
   - glog (0.3.5)
-  - GoogleSignIn (6.1.0):
-    - AppAuth (~> 1.4)
-    - GTMAppAuth (~> 1.0)
-    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleSignIn (6.2.4):
+    - AppAuth (~> 1.5)
+    - GTMAppAuth (~> 1.3)
+    - GTMSessionFetcher/Core (< 3.0, >= 1.1)
   - GTMAppAuth (1.3.1):
     - AppAuth/Core (~> 1.6)
     - GTMSessionFetcher/Core (< 3.0, >= 1.5)
-  - GTMSessionFetcher/Core (1.7.2)
+  - GTMSessionFetcher/Core (2.1.0)
   - hermes-engine (0.70.3)
   - Intercom (12.4.3)
   - intercom-react-native (3.0.5):
@@ -412,8 +412,8 @@ PODS:
     - React-Core
   - RNGestureHandler (2.7.1):
     - React-Core
-  - RNGoogleSignin (7.2.2):
-    - GoogleSignIn (~> 6.1.0)
+  - RNGoogleSignin (8.0.0):
+    - GoogleSignIn (~> 6.2.2)
     - React-Core
   - RNReanimated (3.0.0-rc.3):
     - DoubleConversion
@@ -676,9 +676,9 @@ SPEC CHECKSUMS:
   FBSDKShareKit: 70889c97c62f0c6b3ccb8b999e73a85f19024001
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
-  GoogleSignIn: c90b5bec45e780f54c6a8e1e3c182a86e3dda69d
+  GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
   GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
-  GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
+  GTMSessionFetcher: ffbb25ec00ebcb5201adab0a56d808f6f1902d9f
   hermes-engine: bb344d89a0d14c2c91ad357480a79698bb80e186
   Intercom: 43bfacc55b1c93cce9ec569833696d3f15678430
   intercom-react-native: b2a48297f0ed988970c819133cabe8c965080003
@@ -733,7 +733,7 @@ SPEC CHECKSUMS:
   RNCPicker: 914b557e20b3b8317b084aca9ff4b4edb95f61e4
   RNDeviceInfo: c31137f22ee779fe3931d1a8d60cc1af80ef4077
   RNGestureHandler: b7a872907ee289ada902127f2554fa1d2c076122
-  RNGoogleSignin: d7f8368b82d94f1dec964785d496387ca7f19092
+  RNGoogleSignin: b2179ba653c759b936404a7746fc5302f9de6a5a
   RNReanimated: 060da3e16f6c2a12cffea0b1a620e38347e45edf
   RNScreens: 1b7bb502dac62cc4cf01b94bea591c8da275132f
   RNSentry: 58384d14366f70dc57028cff801b85efb5962de0
