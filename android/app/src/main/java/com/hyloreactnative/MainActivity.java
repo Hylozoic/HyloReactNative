@@ -4,7 +4,7 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 // react-native-bootsplash
-import com.facebook.react.ReactActivityDelegate;
+import android.os.Bundle;
 import com.zoontek.rnbootsplash.RNBootSplash;
 
 public class MainActivity extends ReactActivity {
