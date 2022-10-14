@@ -47,12 +47,12 @@ PODS:
     - Intercom (~> 12.4.3)
     - React-Core
   - libevent (2.1.12)
-  - Mixpanel-swift (3.3.0):
-    - Mixpanel-swift/Complete (= 3.3.0)
-  - Mixpanel-swift/Complete (3.3.0)
-  - MixpanelReactNative (1.5.0):
-    - Mixpanel-swift (= 3.3.0)
-    - React
+  - Mixpanel-swift (4.0.2):
+    - Mixpanel-swift/Complete (= 4.0.2)
+  - Mixpanel-swift/Complete (4.0.2)
+  - MixpanelReactNative (2.1.0):
+    - Mixpanel-swift (= 4.0.2)
+    - React-Core
   - OneSignalXCFramework (3.11.2):
     - OneSignalXCFramework/OneSignalCore (= 3.11.2)
     - OneSignalXCFramework/OneSignalExtension (= 3.11.2)
@@ -683,8 +683,8 @@ SPEC CHECKSUMS:
   Intercom: 43bfacc55b1c93cce9ec569833696d3f15678430
   intercom-react-native: b2a48297f0ed988970c819133cabe8c965080003
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
-  Mixpanel-swift: 6ffe368bcfc3b538f540f31372bc798afd90c1ad
-  MixpanelReactNative: 53b80c245f89ea602fbdda0568900e2b69fa632a
+  Mixpanel-swift: 91fc28834402720682f4cce760e95571fbb388c3
+  MixpanelReactNative: f509f0674e7f80a7a294ff5afa88ac1e8ec61640
   OneSignalXCFramework: 81ceac017a290f23793443323090cfbe888f74ea
   RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
   RCTRequired: 5cf7e7d2f12699724b59f90350257a422eaa9492
