@@ -79,3 +79,11 @@ vendor/*
 
 ios/codesigndoc_exports
 .bitrise.secrets.yml
+
+# Android / Android Studio. Just in case you build the project in this foler
+android/gradle/.tmp/**
+android/gradle/caches/**
+android/gradle/wrapper/dists/**
+android/gradle/daemon/**
+android/gradle/native/**
+android/gradle/kotlin-profile/**
