@@ -72,6 +72,5 @@ const stepStyles = {
     padding: 0,
     backgroundColor: white,
     borderRadius: 15
-    // maxHeight: '80%'
   }
 }
