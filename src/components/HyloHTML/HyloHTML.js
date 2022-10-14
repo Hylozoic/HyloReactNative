@@ -30,7 +30,7 @@ const htmlConfig = {
 }
 
 const defaultTextProps = {
-  selectable: true
+  selectable: false
 }
 
 const SpanRenderer = ({ TDefaultRenderer, ...props }) => {

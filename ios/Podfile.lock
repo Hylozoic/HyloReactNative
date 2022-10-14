@@ -415,7 +415,7 @@ PODS:
   - RNGoogleSignin (7.2.2):
     - GoogleSignIn (~> 6.1.0)
     - React-Core
-  - RNReanimated (2.11.0):
+  - RNReanimated (3.0.0-rc.3):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -445,14 +445,14 @@ PODS:
   - RNScreens (3.18.1):
     - React-Core
     - React-RCTImage
-  - RNSentry (3.4.3):
+  - RNSentry (4.6.1):
     - React-Core
-    - Sentry (= 7.11.0)
-  - RNVectorIcons (7.1.0):
-    - React
-  - Sentry (7.11.0):
-    - Sentry/Core (= 7.11.0)
-  - Sentry/Core (7.11.0)
+    - Sentry (= 7.27.1)
+  - RNVectorIcons (9.2.0):
+    - React-Core
+  - Sentry (7.27.1):
+    - Sentry/Core (= 7.27.1)
+  - Sentry/Core (7.27.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -734,11 +734,11 @@ SPEC CHECKSUMS:
   RNDeviceInfo: c31137f22ee779fe3931d1a8d60cc1af80ef4077
   RNGestureHandler: b7a872907ee289ada902127f2554fa1d2c076122
   RNGoogleSignin: d7f8368b82d94f1dec964785d496387ca7f19092
-  RNReanimated: b46e9d81287cc85588e6f7024a29a29ad27d5c71
+  RNReanimated: 060da3e16f6c2a12cffea0b1a620e38347e45edf
   RNScreens: 1b7bb502dac62cc4cf01b94bea591c8da275132f
-  RNSentry: 85f6525b5fe8d2ada065858026b338605b3c09da
-  RNVectorIcons: bc69e6a278b14842063605de32bec61f0b251a59
-  Sentry: 0c5cd63d714187b4a39c331c1f0eb04ba7868341
+  RNSentry: f8591057d48d4f6d64196a76cbca67895667b033
+  RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
+  Sentry: bc644307e2eb6a4c9c55cf117a80b895bb2a25a7
   Yoga: 2ed968a4f060a92834227c036279f2736de0fce3
 
 PODFILE CHECKSUM: 581cc66f5319325a83d524868c645679c217756c

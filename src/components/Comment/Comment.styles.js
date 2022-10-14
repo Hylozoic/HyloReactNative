@@ -50,7 +50,7 @@ export default {
   // },
   replyLinkIcon: {
     transform: [{ rotateY: '180deg' }],
-    fontSize: 17,
+    fontSize: 20,
     color: slateGrey80
   },
   imageAttachemnt: {
