@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@flyerhq/react-native-keyboard-accessory-view": "^2.4.0",
-    "@intercom/intercom-react-native": "^1.0.5",
+    "@intercom/intercom-react-native": "^3.0.5",
     "@invertase/react-native-apple-authentication": "^2.1.5",
     "@native-html/iframe-plugin": "^2.6.1",
     "@react-native-async-storage/async-storage": "^1.15.17",

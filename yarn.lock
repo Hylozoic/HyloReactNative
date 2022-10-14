@@ -855,10 +855,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@intercom/intercom-react-native@^1.0.5":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@intercom/intercom-react-native/-/intercom-react-native-1.1.1.tgz#e6034a02ed88b2edb458398e5240f2895587fbea"
-  integrity sha512-nP5FSOxlsbGxIaW1L0gM/KqQOTvCz7pvmMlFVep/wNh/ZzpnXM3s5d67FABXJBZy/7uaiMkZ5BJUyaBL62q+uA==
+"@intercom/intercom-react-native@^3.0.5":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@intercom/intercom-react-native/-/intercom-react-native-3.0.5.tgz#24e4a18bfc5154c6f66b686b3effa8a4a3a6937c"
+  integrity sha512-j4NUx1UGDX/2WDMrZwGFaCMhhW8mYXzirpqUjQeycGGMZ0m/6u7H/jY+K1gWHF1aHCY/lDFs1F6uefzjLs3jsg==
 
 "@invertase/react-native-apple-authentication@^2.1.5":
   version "2.2.2"

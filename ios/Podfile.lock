@@ -42,9 +42,9 @@ PODS:
     - GTMSessionFetcher/Core (< 3.0, >= 1.5)
   - GTMSessionFetcher/Core (1.7.2)
   - hermes-engine (0.70.3)
-  - Intercom (10.3.5)
-  - intercom-react-native (1.1.1):
-    - Intercom (~> 10.3.0)
+  - Intercom (12.4.3)
+  - intercom-react-native (3.0.5):
+    - Intercom (~> 12.4.3)
     - React-Core
   - libevent (2.1.12)
   - Mixpanel-swift (3.3.0):
@@ -680,8 +680,8 @@ SPEC CHECKSUMS:
   GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
   hermes-engine: bb344d89a0d14c2c91ad357480a79698bb80e186
-  Intercom: d5d4549e40ca8da9f583edab5080e67ef70a8811
-  intercom-react-native: 3e766f78c84e80cf3065aad26b798756b5942f06
+  Intercom: 43bfacc55b1c93cce9ec569833696d3f15678430
+  intercom-react-native: b2a48297f0ed988970c819133cabe8c965080003
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   Mixpanel-swift: 6ffe368bcfc3b538f540f31372bc798afd90c1ad
   MixpanelReactNative: 53b80c245f89ea602fbdda0568900e2b69fa632a
@@ -741,6 +741,6 @@ SPEC CHECKSUMS:
   Sentry: bc644307e2eb6a4c9c55cf117a80b895bb2a25a7
   Yoga: 2ed968a4f060a92834227c036279f2736de0fce3
 
-PODFILE CHECKSUM: 581cc66f5319325a83d524868c645679c217756c
+PODFILE CHECKSUM: ee67797d55de777f2c5be2908fa7795890fd4b4d
 
 COCOAPODS: 1.11.3

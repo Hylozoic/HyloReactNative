@@ -11,7 +11,9 @@ export default function DrawerNavigator () {
     drawerStyle: {
       width: Dimensions.get('window').width * 0.9
     },
-    drawerContent: DrawerMenu
+    drawerContent: props => (
+      <DrawerMenu {...props} />
+    )
   }
 
   return (
