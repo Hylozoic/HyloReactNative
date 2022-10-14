@@ -6,7 +6,6 @@ import queryResults from './queryResults'
 import sessionReducer from './sessionReducer'
 import returnToOnAuthPathReducer from './returnToOnAuthPathReducer'
 import mixpanelReducer from './mixpanel'
-import CommentEditor from 'screens/PostDetails/CommentEditor/CommentEditor.store'
 import FeedList from 'components/FeedList/FeedList.store'
 import ItemChooser from 'screens/ItemChooser/ItemChooser.store'
 import MemberFeed from 'screens/MemberProfile/MemberFeed/MemberFeed.store'
@@ -28,7 +27,6 @@ export const appReducer = combineReducers({
   session: sessionReducer,
   returnToOnAuthPath: returnToOnAuthPathReducer,
   mixpanel: mixpanelReducer,
-  CommentEditor,
   FeedList,
   ItemChooser,
   MemberFeed,
