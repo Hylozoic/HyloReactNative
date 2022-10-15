@@ -5,10 +5,6 @@ import Comment from 'components/Comment'
 import Loading from 'components/Loading'
 import styles from './MemberFeed.styles'
 
-const feedOptions = [
-  'Posts', 'Comments', 'Upvotes'
-]
-
 export default function MemberFeed ({
   id,
   items,
@@ -24,12 +20,40 @@ export default function MemberFeed ({
   showMember,
   goToGroup
 }) {
-  useEffect(() => {
-    console.log('!!1 fetching')
-    fetchItems()
-  }, [id, choice])
+  useEffect(() => { fetchItems() }, [id, choice])
 
-  const listHeaderComponent = (
+  return (
+    <View style={styles.superContainer}>
+      <FlatList
+        contentContainerStyle={styles.container}
+        data={items}
+        keyExtractor={item => item.id}
+        ListFooterComponent={<FooterComponent pending={pending} />}
+        ListHeaderComponent={<HeaderComponent header={header} setChoice={setChoice} choice={choice} />}
+        onEndReached={fetchMoreItems}
+        renderItem={({ item }) => (
+          <ContentRow
+            item={item}
+            itemType={itemType}
+            showPost={showPost}
+            showTopic={showTopic}
+            showMember={showMember}
+            goToGroup={goToGroup}
+          />
+        )}
+      />
+    </View>
+  )
+}
+
+export const HeaderComponent = ({
+  choice,
+  header,
+  setChoice
+}) => {
+  const feedOptions = ['Posts', 'Comments', 'Upvotes']
+
+  return (
     <View>
       {header}
       <View style={styles.feedTabs}>
@@ -43,67 +67,51 @@ export default function MemberFeed ({
       </View>
     </View>
   )
+}
 
-  const listFooterComponent = (
+export function FooterComponent ({ pending }) {
+  return (
     <View style={styles.footer}>
       {pending && <Loading />}
     </View>
   )
-
-  return (
-    <View style={styles.superContainer}>
-      <FlatList
-        data={items}
-        renderItem={({ item }) =>
-          <ContentRow
-            item={item}
-            itemType={itemType}
-            showPost={showPost}
-            showTopic={showTopic}
-            showMember={showMember}
-            goToGroup={goToGroup} />}
-        keyExtractor={item => item.id}
-        onEndReached={fetchMoreItems}
-        ListHeaderComponent={listHeaderComponent}
-        ListFooterComponent={listFooterComponent}
-        contentContainerStyle={styles.container}
-      />
-    </View>
-  )
 }
 
-export function ContentRow ({ item, itemType, showPost, showTopic, showMember, goToGroup, respondToEvent }) {
-  let content, postId
-  if (itemType === 'post') {
-    postId = item.id
-    content = (
-      <PostCard
-        goToGroup={goToGroup}
-        showGroups
-        showMember={showMember}
-        showTopic={showTopic}
-        post={item}
-        respondToEvent={response => respondToEvent(postId, response)}
-        creator={item.creator}
-        commenters={item.commenters}
-        groups={item.groups}
-        topics={item.topics}
-      />
-    )
-  } else {
-    postId = item.post.id
-    content = (
-      <Comment
-        onPress={() => showPost(postId)}
-        comment={item}
-        displayPostTitle
-      />
-    )
-  }
+export function ContentRow ({
+  item,
+  itemType,
+  showPost: providedShowPost,
+  showTopic,
+  showMember,
+  goToGroup,
+  respondToEvent
+}) {
+  const showPost = () => providedShowPost(itemType === 'post' ? item.id : item.post.id)
+
   return (
-    <TouchableOpacity onPress={() => showPost(postId)}>
+    <TouchableOpacity onPress={showPost}>
       <View style={styles.contentRow}>
-        {content}
+        {itemType === 'post' && (
+          <PostCard
+            goToGroup={goToGroup}
+            showGroups
+            showMember={showMember}
+            showTopic={showTopic}
+            post={item}
+            respondToEvent={response => respondToEvent(item.id, response)}
+            creator={item.creator}
+            commenters={item.commenters}
+            groups={item.groups}
+            topics={item.topics}
+          />
+        )}
+        {itemType !== 'post' && (
+          <Comment
+            onPress={showPost}
+            comment={item}
+            displayPostTitle
+          />
+        )}
       </View>
     </TouchableOpacity>
   )

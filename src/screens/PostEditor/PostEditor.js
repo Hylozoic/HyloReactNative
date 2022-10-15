@@ -133,7 +133,7 @@ export class PostEditor extends React.Component {
   }
 
   handleTypeOnChange = type => {
-    !this.state.isSaving && this.setState({ type }, this.setHeader)
+    this.setState({ type }, this.setHeader)
   }
 
   setIsSaving = isSaving => {
@@ -413,12 +413,17 @@ export class PostEditor extends React.Component {
         <ScrollView
           ref={this.scrollViewRef}
           keyboardShouldPersistTaps='handled'
-          style={styles.scrollContainer}
           keyboardDismissMode='on-drag'
+          style={styles.scrollContainer}
         >
           <View style={styles.scrollContent}>
             <View style={[styles.typeSelector.row, styles.section, { marginTop: -3 }]}>
-              <TypeSelector value={type} onValueChange={this.handleTypeOnChange} disabled={isSaving} />
+              <TypeSelector
+                disabled={isSaving}
+                onValueChange={this.handleTypeOnChange}
+                placeholder={{}}
+                value={type}
+              />
             </View>
             <Text style={styles.sectionLabel}>Title</Text>
             <View style={[styles.section, styles.textInputWrapper]}>
@@ -602,7 +607,9 @@ export function TypeSelector (props) {
           color: styles.typeSelector[type.toLowerCase()].inputIOS.color
         }))
       }
-      Icon={() => <Icon name='ArrowDown' style={styles.typeSelector.icon} />}
+      Icon={() => (
+        <Icon name='ArrowDown' style={styles.typeSelector.icon} />
+      )}
     />
   )
 }
@@ -658,7 +665,9 @@ export function Topics ({ onPress, topics, placeholder }) {
   if (topics.length < 1) return null
   return (
     <ScrollView horizontal style={styles.topicPillBox}>
-      {topics.map((t, i) => <TopicPill key={i} topic={t} onPress={onPress(t)} />)}
+      {topics.map((t, i) => (
+        <TopicPill key={i} topic={t} onPress={onPress(t)} />
+      ))}
     </ScrollView>
   )
 }
