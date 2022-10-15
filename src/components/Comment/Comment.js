@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { Image, Text, View, Alert, TouchableOpacity } from 'react-native'
 import { isEmpty, filter, findLastIndex } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
@@ -20,8 +20,7 @@ export default function Comment ({
   editComment,
   hideMenu,
   onReply,
-  onPress,
-  // onLongPress
+  onPress
 }) {
   const { creator, text, createdAt, post } = comment
   let postTitle = post?.title
@@ -116,7 +115,9 @@ export default function Comment ({
   )
 }
 
-export function CommentMenu ({ menuItems: providedMenuItems }) {
+export const CommentMenu = forwardRef(function CommentMenu ({
+  menuItems: providedMenuItems
+}, ref) {
   const menuItems = filter(action => action?.action, providedMenuItems)
 
   if (isEmpty(menuItems)) return null
@@ -126,6 +127,7 @@ export function CommentMenu ({ menuItems: providedMenuItems }) {
 
   return (
     <PopupMenuButton
+      ref={ref}
       actions={actions}
       hitSlop={{ top: 20, bottom: 10, left: 0, right: 15 }}
       destructiveButtonIndex={destructiveButtonIndex}
@@ -133,4 +135,4 @@ export function CommentMenu ({ menuItems: providedMenuItems }) {
       <Icon name='More' style={styles.menuIcon} />
     </PopupMenuButton>
   )
-}
+})

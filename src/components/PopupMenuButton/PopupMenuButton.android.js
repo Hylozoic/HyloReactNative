@@ -20,7 +20,7 @@ export default class PopupMenuButton extends React.PureComponent {
     }
   }
 
-  onPress = () => {
+  handleShow = () => {
     if (this.buttonRef.current && !this.state.open) {
       UIManager.showPopupMenu(
         findNodeHandle(this.buttonRef.current),
@@ -39,7 +39,7 @@ export default class PopupMenuButton extends React.PureComponent {
         {...this.props.viewProps}
         style={this.props.style}
         hitSlop={hitSlop}
-        onPress={this.onPress}
+        onPress={this.handleShow}
         ref={this.buttonRef}
       >
         {this.props.children}

@@ -11,7 +11,7 @@ export default function PopupMenuButton ({
 }) {
   const onSelect = index => actions[index][1]()
 
-  const onPress = () => {
+  const handleShowMenu = () => {
     const cancelButtonIndex = actions.length
     ActionSheetIOS.showActionSheetWithOptions({
       options: actions.map(a => a[0]).concat(['Cancel']),
@@ -21,7 +21,12 @@ export default function PopupMenuButton ({
   }
 
   return (
-    <TouchableOpacity onPress={onPress} style={style} hitSlop={hitSlop} {...viewProps}>
+    <TouchableOpacity
+      onPress={handleShowMenu}
+      style={style}
+      hitSlop={hitSlop}
+      {...viewProps}
+    >
       {children}
     </TouchableOpacity>
   )
