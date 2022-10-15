@@ -13,8 +13,11 @@ export default function SocketListener (props) {
     newPost: props.receivePost,
     newThread: props.newThread,
     userTyping: ({ userId, userName, isTyping }) => {
-      const { addUserTyping, clearUserTyping } = this.props
-      isTyping ? addUserTyping(userId, userName) : clearUserTyping(userId)
+      const { addUserTyping, clearUserTyping } = props
+
+      isTyping
+        ? addUserTyping(userId, userName)
+        : clearUserTyping(userId)
     }
   }
 
@@ -24,11 +27,11 @@ export default function SocketListener (props) {
 
       handler = () => {
         if (isDev) console.log('connecting SocketListener...')
-        socket.post(socketUrl('/noo/threads/subscribe'), (body, jwr) => {
+        setTimeout(() => socket.post(socketUrl('/noo/threads/subscribe'), (body, jwr) => {
           if (!isEqual(body, {})) {
             if (isDev) console.error(`Failed to connect SocketListener: ${body}`)
           }
-        })
+        }), 500)
       }
 
       handler()
