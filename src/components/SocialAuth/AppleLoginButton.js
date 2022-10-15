@@ -25,7 +25,7 @@ export async function onAppleButtonPress ({
     }
   } catch (error) {
     if (error.code !== appleAuth.Error.CANCELED) {
-      createErrorNotification('COULD NOT SIGN IN WITH YOUR APPLE ACCOUNT')
+      createErrorNotification('Could not sign in with your Apple account')
     }
   }
 }

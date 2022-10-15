@@ -23,12 +23,13 @@ export default class GoogleLoginButton extends React.Component {
     try {
       await this.GoogleSignin.hasPlayServices()
       await this.GoogleSignin.signIn()
+
       const { accessToken } = await this.GoogleSignin.getTokens()
 
       this.props.onLoginFinished(accessToken)
     } catch (error) {
       if (error.code !== statusCodes.SIGN_IN_CANCELLED) {
-        this.props.createErrorNotification('COULD NOT SIGN IN WITH YOUR GOOGLE ACCOUNT')
+        this.props.createErrorNotification('Could not sign in with your Google account')
       }
     }
   }

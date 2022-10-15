@@ -24,12 +24,12 @@ export default function Login () {
   const [emailIsValid, setEmailIsValid] = useState()
   const [bannerError, setBannerError] = useState()
   const [bannerMessage, setBannerMessage] = useState()
-  const [formError, providedFormError] = useState()
+  const [formError, setFormError] = useState()
   const bannerMessageParam = route?.params?.bannerMessage
   const bannerErrorParam = route?.params?.bannerError
 
   const setError = errorMessage => {
-    providedFormError(errorMessages(errorMessage))
+    setFormError(errorMessages(errorMessage))
   }
 
   const setLoadingMessage = loadingStatus => {
@@ -79,6 +79,7 @@ export default function Login () {
       if (responseError) {
         setError(responseError)
       }
+
       setLoadingMessage(false)
     } catch (err) {
       setLoadingMessage(false)
