@@ -722,10 +722,12 @@ export function DatePickerWithLabel ({
           <Icon name={expanded ? 'ArrowUp' : 'ArrowDown'} style={styleTemplate.expandIcon} />
         </View>
       </View>
-      {date && !expanded &&
-        <Text style={styleTemplate.valueText}>{moment.tz(date, moment.tz.guess()).format(dateFormat)}</Text>}
-      {!date && !expanded &&
-        <Text style={styleTemplate.placeholderText}>{placeholder}</Text>}
+      {date && !expanded && (
+        <Text style={styleTemplate.valueText}>{moment.tz(date, moment.tz.guess()).format(dateFormat)}</Text>
+      )}
+      {!date && !expanded && (
+        <Text style={styleTemplate.placeholderText}>{placeholder}</Text>
+      )}
       {expanded && (
         <View style={{ flex: 1, alignItems: 'center' }}>
           <DatePicker
