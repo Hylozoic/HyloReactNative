@@ -390,7 +390,7 @@ export class PostEditor extends React.Component {
   }
 
   render () {
-    const { canModerate, post, postLoading, groupOptions } = this.props
+    const { canModerate, post, postLoading } = this.props
     const {
       fileUrls, imageUrls, isSaving, topics, title, type,
       filePickerPending, announcementEnabled, titleLengthError, members,

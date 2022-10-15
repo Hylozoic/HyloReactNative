@@ -1,7 +1,6 @@
 import React from 'react'
 import PopupMenuButton from 'components/PopupMenuButton'
 import { Text, View } from 'react-native'
-import upload from 'store/actions/upload'
 import Icon from 'components/Icon'
 import DocumentPicker from 'react-native-document-picker'
 import styles from './FileSelector.styles'
@@ -9,6 +8,7 @@ import { cleanName } from 'store/models/Attachment'
 
 export default function FileSelector (props) {
   const { fileUrls = [], onRemove } = props
+
   return (
     <View>
       {fileUrls.map((url, index) => renderFileButton(url, index, onRemove))}
@@ -17,11 +17,10 @@ export default function FileSelector (props) {
 }
 
 export async function showFilePicker ({
-  type, id, onAdd, onError, onCancel, onComplete,
-  allowMultiSelection = true
+  allowMultiSelection = true, id, onAdd, onCancel,
+  onComplete, onError, type, upload
 }) {
   try {
-    console.log('!!! here')
     const documents = await DocumentPicker.pickMultiple({
       type: [DocumentPicker.types.allFiles],
       allowMultiSelection
@@ -52,7 +51,6 @@ export async function showFilePicker ({
 
     onComplete && onComplete(uploadedFiles)
   } catch (error) {
-    console.log('!!!!! error:', error)
     // TODO: Always onComplete?
     if (DocumentPicker.isCancel(error)) {
       onCancel && onCancel()
