@@ -259,9 +259,9 @@ export class PostEditor extends React.Component {
     }))
   }
 
-  handleRemoveGroup = groupId => {
+  handleRemoveGroup = groupSlug => {
     this.setState(state => ({
-      groups: this.state.groups.filter(c => c.id !== groupId)
+      groups: state.groups.filter(group => group.slug !== groupSlug)
     }))
   }
 
@@ -403,7 +403,7 @@ export class PostEditor extends React.Component {
       filePickerPending,
       announcementEnabled,
       toggleAnnoucement: this.toggleAnnoucement,
-      showFilePicker: this.showFilePicker,
+      showFilePicker: this.handleShowFilePicker,
       addImage: this.handleAddImage,
       showAlert: this.showAlert
     }

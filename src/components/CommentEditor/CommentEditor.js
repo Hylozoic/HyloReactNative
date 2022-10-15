@@ -1,5 +1,6 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { View, Text, TouchableOpacity, Alert, ActivityIndicator } from 'react-native'
+import { BottomTabBarHeightContext } from '@react-navigation/bottom-tabs'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 // ⚠️⚠️⚠️ Deprecated - see https://github.com/facebook/react-native/pull/31402 for native `InputAccessoryView` component (React Native 0.68+) ⚠️⚠️⚠️
 import { KeyboardAccessoryView } from '@flyerhq/react-native-keyboard-accessory-view'
@@ -11,7 +12,6 @@ import createComment from 'store/actions/createComment'
 import HyloEditorWebView from 'screens/HyloEditorWebView'
 import styles from './CommentEditor.styles'
 import { useDispatch } from 'react-redux'
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
 import Icon from 'components/Icon'
 import { firstName } from 'store/models/Person'
 
@@ -21,21 +21,27 @@ export const KeyboardAccessoryCommentEditor = forwardRef(function KeyboardAccess
   ...commentFormProps
 }, ref) {
   const safeAreaInsets = useSafeAreaInsets()
-  const actualTabBarHeight = useBottomTabBarHeight()
-  const tabBarHeight = isModal ? 0 : actualTabBarHeight
 
   return (
-    <KeyboardAccessoryView
-      contentContainerStyle={{
-        ...styles.keyboardAccessoryContainerStyle,
-        paddingBottom: isModal ? safeAreaInsets.bottom : 0
+    <BottomTabBarHeightContext.Consumer>
+      {actualTabBarHeight => {
+        const tabBarHeight = (isModal || !actualTabBarHeight) ? 0 : actualTabBarHeight
+
+        return (
+          <KeyboardAccessoryView
+            contentContainerStyle={{
+              ...styles.keyboardAccessoryContainerStyle,
+              paddingBottom: isModal ? safeAreaInsets.bottom : 0
+            }}
+            spaceBetweenKeyboardAndAccessoryView={isIOS ? -tabBarHeight : 0}
+            contentOffsetKeyboardOpened={isIOS ? -tabBarHeight : 0}
+            renderScrollable={renderScrollable}
+          >
+            <CommentEditor {...commentFormProps} ref={ref} />
+          </KeyboardAccessoryView>
+        )
       }}
-      spaceBetweenKeyboardAndAccessoryView={isIOS ? -tabBarHeight : 0}
-      contentOffsetKeyboardOpened={isIOS ? -tabBarHeight : 0}
-      renderScrollable={renderScrollable}
-    >
-      <CommentEditor {...commentFormProps} ref={ref} />
-    </KeyboardAccessoryView>
+    </BottomTabBarHeightContext.Consumer>
   )
 })
 

@@ -34,7 +34,6 @@ import {
 } from 'store/actions/resetNewPostCount'
 import {
   CANCEL_JOIN_REQUEST,
-  CREATE_COMMENT_PENDING,
   CREATE_COMMENT,
   CREATE_JOIN_REQUEST,
   DELETE_COMMENT_PENDING,
@@ -79,18 +78,7 @@ export default function ormReducer (state = orm.getEmptyState().state, action) {
   }
 
   switch (type) {
-    case CREATE_COMMENT_PENDING: {
-      Comment.create({
-        id: meta.tempId,
-        post: meta.postId,
-        text: meta.text,
-        creator: Me.first().id
-      })
-      break
-    }
-
     case CREATE_COMMENT: {
-      Comment.withId(meta.tempId).delete()
       if (!PostCommenter.safeGet({ post: meta.postId, commenter: Me.first().id })) {
         PostCommenter.create({ post: meta.postId, commenter: Me.first().id })
         // we can assume the following because the backend returns the results pre-sorted

@@ -1,4 +1,3 @@
-import { connect } from 'react-redux'
-import upload from 'store/actions/upload'
+import component from './FileSelector'
 
-export default connect(null, { upload })
+export default component

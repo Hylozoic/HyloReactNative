@@ -24,7 +24,10 @@ export default function MemberFeed ({
   showMember,
   goToGroup
 }) {
-  useEffect(() => { fetchItems() }, [ id, choice ])
+  useEffect(() => {
+    console.log('!!1 fetching')
+    fetchItems()
+  }, [id, choice])
 
   const listHeaderComponent = (
     <View>
