@@ -1,25 +1,25 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import { find } from 'lodash/fp'
-import { capeCod } from 'style/colors'
+import { capeCod, pictonBlue } from 'style/colors'
 import { isIOS } from 'util/platform'
+import { useActionSheet } from '@expo/react-native-action-sheet'
 import Icon from 'components/Icon'
-import PopupMenuButton from 'components/PopupMenuButton'
+import { useHyloActionSheet } from 'components/PopupMenuButton/PopupMenuButton'
 
 export default function ListControl ({ selected, options, onChange }) {
-  const actions = options.map(option => [
-    option.label,
-    () => onChange(option.id)
-  ])
+  const { showHyloActionSheet } = useHyloActionSheet()
+
+  const actionSheetActions = options.map(option => [option.label, () => onChange(option.id)])
 
   return (
-    <PopupMenuButton
-      actions={actions}
+    <TouchableOpacity
+      onPress={() => showHyloActionSheet({ actions: actionSheetActions })}
       style={styles.listControl}
     >
       <Text style={styles.optionText}>{optionText(selected, options)}</Text>
       <Icon name='ArrowDown' style={[styles.optionText, styles.downArrow]} />
-    </PopupMenuButton>
+    </TouchableOpacity>
   )
 }
 

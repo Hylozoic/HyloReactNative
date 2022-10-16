@@ -29,8 +29,5 @@ export default {
   },
   subCommentsShowMore: {
     ...subCommentIndentation
-  },
-  highlighted: {
-    backgroundColor: 'rgb(255,255,224)'
   }
 }

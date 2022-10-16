@@ -16,6 +16,7 @@ import { TRenderEngineProvider, defaultSystemFonts } from 'react-native-render-h
 import ErrorBoundary from 'screens/ErrorBoundary'
 import VersionCheck from 'components/VersionCheck'
 import RootNavigator from 'navigation/RootNavigator'
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { baseStyle, tagsStyles, classesStyles } from 'components/HyloHTML/HyloHTML.styles'
 
 if (!isDev) {
@@ -74,24 +75,26 @@ export default function App () {
   return (
     <SafeAreaProvider>
       <ErrorBoundary>
-        <RootSiblingParent>
-          {/*
-            `TRenderEngineProvider` is the react-native-render-html rendering engine.
-            It is app-wide for performance reasons. The styles applied are global and
-            not readily overridden. For more details see: https://bit.ly/3MeJCIR
-          */}
-          <TRenderEngineProvider
-            baseStyle={baseStyle}
-            tagsStyles={tagsStyles}
-            classesStyles={classesStyles}
-            systemFonts={[...defaultSystemFonts, 'Circular-Book']}
-          >
-            <Provider store={store}>
-              <VersionCheck />
-              <RootNavigator />
-            </Provider>
-          </TRenderEngineProvider>
-        </RootSiblingParent>
+        <ActionSheetProvider>
+          <RootSiblingParent>
+            {/*
+              `TRenderEngineProvider` is the react-native-render-html rendering engine.
+              It is app-wide for performance reasons. The styles applied are global and
+              not readily overridden. For more details see: https://bit.ly/3MeJCIR
+            */}
+            <TRenderEngineProvider
+              baseStyle={baseStyle}
+              tagsStyles={tagsStyles}
+              classesStyles={classesStyles}
+              systemFonts={[...defaultSystemFonts, 'Circular-Book']}
+            >
+              <Provider store={store}>
+                <VersionCheck />
+                <RootNavigator />
+              </Provider>
+            </TRenderEngineProvider>
+          </RootSiblingParent>
+        </ActionSheetProvider>
       </ErrorBoundary>
     </SafeAreaProvider>
   )

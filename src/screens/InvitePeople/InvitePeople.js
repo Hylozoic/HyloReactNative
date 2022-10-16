@@ -36,7 +36,6 @@ export default function InvitePeople ({ navigation }) {
   const pending = useSelector(state => state.pending[FETCH_GROUP_SETTINGS])
   const pendingCreate = useSelector(state => state.pending[CREATE_INVITATIONS])
   const inviteLink = 'https://www.hylo.com' + group?.invitePath
-  
   const [emails, setEmails] = useState('')
   const [emailBodyText, setEmailBodyText] = useState(
     `Hey! Here's an invite to the ${group?.name} group on Hylo.`

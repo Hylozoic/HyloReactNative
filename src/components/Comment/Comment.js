@@ -1,27 +1,33 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import { Image, Text, View, Alert, TouchableOpacity } from 'react-native'
-import { isEmpty, filter, findLastIndex } from 'lodash/fp'
+import { filter } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
+import Clipboard from '@react-native-community/clipboard'
+import { useHyloActionSheet } from 'components/PopupMenuButton/PopupMenuButton'
 import { openURL } from 'navigation/linking'
 import Avatar from 'components/Avatar'
-import PopupMenuButton from 'components/PopupMenuButton'
 import HyloHTML from 'components/HyloHTML'
 import Icon from 'components/Icon'
 import styles from './Comment.styles'
 
 export default function Comment ({
   comment,
-  isCreator,
   canModerate,
-  showMember,
-  style,
-  displayPostTitle,
+  clearHighlighted,
+  isCreator,
   deleteComment,
+  displayPostTitle,
   editComment,
   hideMenu,
+  highlighted,
+  onPress,
   onReply,
-  onPress
+  scrollTo,
+  setHighlighted,
+  showMember,
+  style
 }) {
+  const { showHyloActionSheet } = useHyloActionSheet()
   const { creator, text, createdAt, post } = comment
   let postTitle = post?.title
 
@@ -36,32 +42,25 @@ export default function Comment ({
 
   // NOTE: Currently no UI for adding comment file attachments
   // const fileAttachments = filter({ type: 'file' }, comment?.attachments)
-  const commentMenuItems = {
-    replyComment: {
-      label: 'Reply',
-      action: handleReply
-    },
-    editComment: {
-      label: 'Edit Comment',
-      action: editComment
-    },
-    deleteComment: {
-      label: 'Delete Comment',
-      action: (isCreator && deleteComment) && (
-        () => Alert.alert(
-          'Confirm Delete',
-          'Are you sure you want to delete this comment?',
-          [
-            { text: 'Yes', onPress: () => deleteComment(comment.id) },
-            { text: 'Cancel', style: 'cancel' }
-          ]
-        )
-      ),
-      destructive: true
-    },
-    removeComment: {
-      label: 'Remove Comment',
-      action: (!isCreator && canModerate && deleteComment) && (
+  const commentMenuActions = [
+    [
+      'Reply',
+      handleReply,
+      {
+        icon: <Icon style={styles.replyLinkIcon} name='Replies' />
+      }
+    ],
+    [
+      'Copy',
+      () => Clipboard.setString(TextHelpers.presentHTMLToText(comment.text))
+    ],
+    [
+      'Edit Comment',
+      editComment
+    ],
+    [
+      'Remove Comment',
+      (!isCreator && canModerate && deleteComment) && (
         () => Alert.alert(
           'Moderator: Confirm Delete',
           'Are you sure you want to remove this comment?',
@@ -71,13 +70,46 @@ export default function Comment ({
           ]
         )
       ),
-      destructive: true
-    }
+      {
+        destructive: true
+      }
+    ],
+    [
+      'Delete Comment',
+      (isCreator && deleteComment) && (
+        () => Alert.alert(
+          'Confirm Delete',
+          'Are you sure you want to delete this comment?',
+          [
+            { text: 'Yes', onPress: () => deleteComment(comment.id) },
+            { text: 'Cancel', style: 'cancel' }
+          ]
+        )
+      ),
+      {
+        destructive: true
+      }
+    ]
+  ]
+
+  const showActionSheet = () => {
+    setHighlighted()
+    scrollTo(0.9)
+    showHyloActionSheet(
+      { actions: commentMenuActions },
+      index => {
+        if (commentMenuActions[index][1]) {
+          commentMenuActions[index][1]()
+        }
+
+        if (commentMenuActions[index][0] !== 'Reply') clearHighlighted()
+      }
+    )
   }
 
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={[styles.container, style]}>
+    <TouchableOpacity onPress={onPress} onLongPress={showActionSheet}>
+      <View style={[styles.container, highlighted && styles.highlighted, style]}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => showMember(creator.id)}>
             <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />
@@ -98,7 +130,12 @@ export default function Comment ({
               </TouchableOpacity>
             )}
             {!hideMenu && (
-              <CommentMenu menuItems={commentMenuItems} />
+              <TouchableOpacity
+                onPress={showActionSheet}
+                hitSlop={{ top: 20, bottom: 10, left: 0, right: 15 }}
+              >
+                <Icon name='More' style={styles.menuIcon} />
+              </TouchableOpacity>
             )}
           </View>
         </View>
@@ -114,25 +151,3 @@ export default function Comment ({
     </TouchableOpacity>
   )
 }
-
-export const CommentMenu = forwardRef(function CommentMenu ({
-  menuItems: providedMenuItems
-}, ref) {
-  const menuItems = filter(action => action?.action, providedMenuItems)
-
-  if (isEmpty(menuItems)) return null
-
-  const destructiveButtonIndex = findLastIndex(menuItem => menuItem?.destructive, menuItems)
-  const actions = menuItems.map(menuItem => ([menuItem.label, menuItem.action]))
-
-  return (
-    <PopupMenuButton
-      ref={ref}
-      actions={actions}
-      hitSlop={{ top: 20, bottom: 10, left: 0, right: 15 }}
-      destructiveButtonIndex={destructiveButtonIndex}
-    >
-      <Icon name='More' style={styles.menuIcon} />
-    </PopupMenuButton>
-  )
-})

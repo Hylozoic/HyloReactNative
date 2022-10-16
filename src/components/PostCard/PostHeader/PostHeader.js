@@ -182,23 +182,23 @@ export default React.memo(function PostHeader ({
 
 export function PostMenu ({ deletePost, editPost, flagPost, removePost, pinPost, pinned }) {
   // If the function is defined, than it's a valid action
-  const flagLabel = 'Flag This Post'
-  const deleteLabel = 'Delete This Post'
+  const flagLabel = 'Flag this Post'
+  const deleteLabel = 'Delete this Post'
   const removeLabel = 'Remove Post From Group'
   const pinLabel = pinned ? 'Unpin' : 'Pin'
 
   const actions = filter(x => x[1], [
-    [deleteLabel, deletePost],
+    [pinLabel, pinPost],
+    ['Edit this Post', editPost],
     [flagLabel, flagPost],
     [removeLabel, removePost],
-    ['Edit This Post', editPost],
-    [pinLabel, pinPost]
+    [deleteLabel, deletePost]
   ])
 
   if (isEmpty(actions)) return null
 
   const destructiveLabels = [flagLabel, deleteLabel, removeLabel]
-  const destructiveButtonIndex = destructiveLabels.includes(actions[0][0]) ? 0 : -1
+  const destructiveButtonIndex = destructiveLabels.includes(actions[actions.length - 1][0]) ? actions.length - 1 : -1
 
   return (
     <PopupMenuButton

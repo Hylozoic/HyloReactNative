@@ -100,7 +100,8 @@ export class MemberList extends React.Component {
           <SearchBar
             placeholder='Search Members'
             onChangeText={onSearch}
-            style={styles.searchWrapper} />
+            style={styles.searchWrapper}
+          />
           {!hideSortOptions && (
             <PopupMenuButton actions={actions} style={styles.sortBy}>
               <Text style={styles.sortByText}>{sortKeys && sortKeys[sortBy]}</Text>

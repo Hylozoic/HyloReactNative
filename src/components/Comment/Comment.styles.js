@@ -25,6 +25,9 @@ export default {
     flexDirection: 'row',
     alignItems: 'flex-start'
   },
+  highlighted: {
+    backgroundColor: 'rgb(255,255,224)'
+  },
   menuIcon: {
     fontSize: 20,
     paddingLeft: 10,

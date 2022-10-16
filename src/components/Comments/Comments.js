@@ -30,36 +30,36 @@ function Comments ({
     comment: omit(['subComments'], comment),
     data: comment.subComments
   }))
-  const [highlightedComment, highlightComment] = useState()
+  const [highlightedComment, setHighlightedComment] = useState()
   const commentsListRef = useRef()
 
-  const scrollTo = useCallback(comment => {
+  const scrollToComment = useCallback((comment, viewPosition = 0.2) => {
     const parentCommentId = comment.parentComment || comment.id
     const subCommentId = comment.parentComment ? comment.id : null
     const section = sections.find(s => parentCommentId === s.comment.id)
     const sectionIndex = section.comment.sectionIndex
     const itemIndex = section.data.find(subComment =>
       subCommentId === subComment.id)?.itemIndex || section.data.length + 1
-    commentsListRef?.current.scrollToLocation({ sectionIndex, itemIndex, viewPosition: 0.2 })
+    commentsListRef?.current.scrollToLocation({ sectionIndex, itemIndex, viewPosition })
   }, [sections])
 
-  const select = useCallback(comment => {
-    highlightComment(comment)
-    scrollTo(comment)
+  const selectComment = useCallback(comment => {
+    setHighlightedComment(comment)
+    scrollToComment(comment)
     onSelect(comment)
-  }, [highlightComment, scrollTo, onSelect])
+  }, [setHighlightedComment, scrollToComment, onSelect])
 
   useImperativeHandle(ref, () => ({
-    select,
-    scrollTo,
-    clearSelection: () => highlightComment(null)
-  }), [select, highlightComment, scrollTo])
+    setHighlightedComment,
+    scrollToComment,
+    clearHighlightedComment: () => setHighlightedComment(null)
+  }), [setHighlightedComment, scrollToComment])
 
   useEffect(() => {
     dispatch(fetchCommentsAction({ postId }))
   }, [dispatch, postId])
 
-  const header = () => (
+  const Header = () => (
     <>
       {providedHeader}
       <ShowMore postId={postId} />
@@ -71,16 +71,17 @@ function Comments ({
     </>
   )
 
-  const renderComment = ({ section: { comment } }) => {
+  const SectionFooter = ({ section: { comment } }) => {
     return (
       <>
         <ShowMore commentId={comment.id} style={styles.subCommentsShowMore} />
         <Comment
-          style={
-            comment.id === highlightedComment?.id && styles.highlighted
-          }
+          clearHighlighted={() => setHighlightedComment(null)}
           comment={comment}
-          onReply={select}
+          highlighted={comment.id === highlightedComment?.id}
+          onReply={selectComment}
+          scrollTo={viewPosition => scrollToComment(comment, viewPosition)}
+          setHighlighted={() => setHighlightedComment(comment)}
           showMember={showMember}
           slug={slug}
           key={comment.id}
@@ -89,17 +90,18 @@ function Comments ({
     )
   }
 
-  const renderSubComment = ({ item: comment }) => {
+  const Item = ({ item: comment }) => {
     return (
       <Comment
-        style={[
-          comment.id === highlightedComment?.id && styles.highlighted,
-          styles.subComment
-        ]}
+        clearHighlighted={() => setHighlightedComment(null)}
         comment={comment}
-        onReply={select}
+        highlighted={comment.id === highlightedComment?.id}
+        onReply={selectComment}
+        scrollTo={viewPosition => scrollToComment(comment, viewPosition)}
+        setHighlighted={() => setHighlightedComment(comment)}
         showMember={showMember}
         slug={slug}
+        style={styles.subComment}
         key={comment.id}
       />
     )
@@ -109,13 +111,15 @@ function Comments ({
     <SectionList
       style={style}
       ref={commentsListRef}
+      // Footer is Header, etc.
       inverted
-      ListFooterComponent={header}
-      renderSectionFooter={renderComment}
-      renderItem={renderSubComment}
+      ListFooterComponent={Header}
+      renderSectionFooter={SectionFooter}
+      renderItem={Item}
       sections={sections}
       keyExtractor={comment => comment.id}
       initialScrollIndex={0}
+      // keyboardShouldPersistTaps='handled'
       keyboardShouldPersistTaps='never'
       keyboardDismissMode='on-drag'
       {...panHandlers}

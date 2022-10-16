@@ -53,11 +53,11 @@ export class PostDetails extends React.Component {
 
   clearSelectedComment = () => {
     this.setState({ selectedComment: null })
-    this.commentsRef.current && this.commentsRef.current.clearSelection()
+    this.commentsRef.current && this.commentsRef.current.clearHighlightedComment()
   }
 
   scrollToSelectedComment = () => {
-    this.commentsRef.current && this.commentsRef.current.scrollTo(this.state.selectedComment)
+    this.commentsRef.current && this.commentsRef.current.scrollToComment(this.state.selectedComment)
   }
 
   renderPostDetails = (panHandlers) => {
@@ -91,6 +91,8 @@ export class PostDetails extends React.Component {
   }
 
   render () {
+    // ??? Follow-up: `PostDetails#replyingToComment` is also `Comments#selectedComment`
+    // but `Comments#selectedComment` is not `PostDetails#replyingToComment`
     const { selectedComment } = this.state
     const { post, isModal } = this.props
     const groupId = get('groups.0.id', post)
