@@ -4,15 +4,17 @@ import { View, Text, TouchableOpacity, Alert, FlatList } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { TextHelpers } from 'hylo-shared'
 import { get, filter, isEmpty } from 'lodash/fp'
+// import Clipboard from '@react-native-community/clipboard'
+import useHyloActionSheet from 'hooks/useHyloActionSheet'
 import getMe from 'store/selectors/getMe'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getCanModerate from 'store/selectors/getCanModerate'
 import { POST_TYPES } from 'store/models/Post'
 import { removePost, deletePost, pinPost } from './PostHeader.store'
 import Avatar from 'components/Avatar'
-import Icon from 'components/Icon'
-import PopupMenuButton from 'components/PopupMenuButton'
 import FlagContent from 'components/FlagContent'
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
+import Icon from 'components/Icon'
 import { rhino30, rhino50, caribbeanGreen } from 'style/colors'
 
 export default React.memo(function PostHeader ({
@@ -32,6 +34,7 @@ export default React.memo(function PostHeader ({
   smallAvatar
 }) {
   const navigation = useNavigation()
+  const { showHyloActionSheet } = useHyloActionSheet()
   const dispatch = useDispatch()
   const group = useSelector(getCurrentGroup)
   const currentUser = useSelector(getMe)
@@ -44,7 +47,7 @@ export default React.memo(function PostHeader ({
 
   const { avatarUrl, name, tagline } = creator
 
-  const handleEditPost = canEdit
+  const editPost = canEdit
     ? () => navigation.navigate('Edit Post', { id: postId })
     : null
 
@@ -63,7 +66,7 @@ export default React.memo(function PostHeader ({
     ? () => dispatch(removePost(postId, slug))
     : null
 
-  const handlePinPost = canModerate && group
+  const pinPost = canModerate && group
     ? () => dispatch(pinPost(postId, group.id))
     : null
 
@@ -86,7 +89,7 @@ export default React.memo(function PostHeader ({
     type: 'post'
   }
 
-  const handleFlagPost = canFlag
+  const flagPost = canFlag
     ? () => setFlaggingVisible(true)
     : null
 
@@ -115,6 +118,34 @@ export default React.memo(function PostHeader ({
           { text: 'Cancel', style: 'cancel' }
         ])
     : null
+
+  // const handleCopy = () => Clipboard.setString(TextHelpers.presentHTMLToText(post.details))
+
+  const actionSheetActions = filter(x => x[1], [
+    [pinned ? 'Unpin' : 'Pin', pinPost, {
+      icon: <Icon name='Pin' style={[styles.actionSheetIcon, { fontSize: 30 }]} />
+    }],
+    ['Edit this Post', editPost, {
+      icon: <FontAwesome5Icon name='pencil-alt' style={styles.actionSheetIcon} />
+    }],
+    // ['Copy', handleCopy, {
+    //   icon: <FontAwesome5Icon style={styles.actionSheetIcon} name='copy' />
+    // }],
+    ['Flag this Post', flagPost, {
+      icon: <FontAwesome5Icon name='flag-alt' style={styles.actionSheetIcon} />,
+      destructive: true
+    }],
+    ['Remove Post From Group', removePostWithConfirm, {
+      icon: <FontAwesome5Icon name='trash-alt' style={styles.actionSheetIcon} />,
+      destructive: true
+    }],
+    ['Delete this Post', deletePostWithConfirm, {
+      icon: <FontAwesome5Icon name='trash-alt' style={styles.actionSheetIcon} />,
+      destructive: true
+    }]
+  ])
+
+  const showActionSheet = () => !isEmpty(actionSheetActions) && showHyloActionSheet({ actions: actionSheetActions })
 
   return (
     <View style={styles.container}>
@@ -159,14 +190,12 @@ export default React.memo(function PostHeader ({
           <PostLabel type={type} />
         )}
         {!hideMenu && (
-          <PostMenu
-            removePost={removePostWithConfirm}
-            deletePost={deletePostWithConfirm}
-            editPost={handleEditPost}
-            flagPost={handleFlagPost}
-            pinPost={handlePinPost}
-            pinned={pinned}
-          />
+          <TouchableOpacity
+            onPress={showActionSheet}
+            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+          >
+            <Icon name='More' style={styles.moreIcon} />
+          </TouchableOpacity>
         )}
         {flaggingVisible && (
           <FlagContent
@@ -179,37 +208,6 @@ export default React.memo(function PostHeader ({
     </View>
   )
 })
-
-export function PostMenu ({ deletePost, editPost, flagPost, removePost, pinPost, pinned }) {
-  // If the function is defined, than it's a valid action
-  const flagLabel = 'Flag this Post'
-  const deleteLabel = 'Delete this Post'
-  const removeLabel = 'Remove Post From Group'
-  const pinLabel = pinned ? 'Unpin' : 'Pin'
-
-  const actions = filter(x => x[1], [
-    [pinLabel, pinPost],
-    ['Edit this Post', editPost],
-    [flagLabel, flagPost],
-    [removeLabel, removePost],
-    [deleteLabel, deletePost]
-  ])
-
-  if (isEmpty(actions)) return null
-
-  const destructiveLabels = [flagLabel, deleteLabel, removeLabel]
-  const destructiveButtonIndex = destructiveLabels.includes(actions[actions.length - 1][0]) ? actions.length - 1 : -1
-
-  return (
-    <PopupMenuButton
-      actions={actions}
-      hitSlop={{ top: 20, bottom: 10, left: 10, right: 15 }}
-      destructiveButtonIndex={destructiveButtonIndex}
-    >
-      <Icon name='More' style={styles.menuIcon} />
-    </PopupMenuButton>
-  )
-}
 
 export function PostLabel ({ type }) {
   // Prevent redboxing on missing type in styles object
@@ -297,11 +295,14 @@ const styles = {
     color: rhino50,
     marginRight: 10
   },
-  menuIcon: {
+  moreIcon: {
     fontSize: 20,
     paddingLeft: 10,
     paddingRight: 5,
     color: rhino50
+  },
+  actionSheetIcon: {
+    fontSize: 20
   },
   announcementIcon: {
     color: caribbeanGreen,

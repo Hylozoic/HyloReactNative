@@ -20,6 +20,4 @@ function Icon ({ color, ...otherProps }) {
   return <RawIcon {...{ color, ...otherProps }} />
 }
 
-Icon.TabBarItemIOS = RawIcon.TabBarItemIOS
-
 export default Icon

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { UIManager, findNodeHandle, TouchableOpacity } from 'react-native'
 import { isIOS } from 'util/platform'
-import { useHyloActionSheet } from 'hooks/useHyloActionSheet'
+import useHyloActionSheet from 'hooks/useHyloActionSheet'
 
 export default function PopupMenuButton ({
   actions,

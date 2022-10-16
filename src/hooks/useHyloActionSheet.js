@@ -22,8 +22,9 @@ import { DefaultTheme } from '@react-navigation/native'
     }, afterSelect)
     ```
 
+  * May wish to convert to https://github.com/react-native-menu/menu soon to support iOS 14 style popup menus
 */
-export function useHyloActionSheet () {
+export default function useHyloActionSheet () {
   const { showActionSheetWithOptions } = useActionSheet()
 
   return {

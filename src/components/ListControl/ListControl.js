@@ -3,7 +3,7 @@ import { Text, TouchableOpacity } from 'react-native'
 import { find } from 'lodash/fp'
 import { capeCod } from 'style/colors'
 import { isIOS } from 'util/platform'
-import { useHyloActionSheet } from 'hooks/useHyloActionSheet'
+import useHyloActionSheet from 'hooks/useHyloActionSheet'
 import Icon from 'components/Icon'
 
 export default function ListControl ({ selected, options, onChange }) {

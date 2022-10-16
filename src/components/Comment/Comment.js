@@ -5,7 +5,7 @@ import Clipboard from '@react-native-community/clipboard'
 import { TextHelpers } from 'hylo-shared'
 import { openURL } from 'navigation/linking'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHyloActionSheet } from 'hooks/useHyloActionSheet'
+import useHyloActionSheet from 'hooks/useHyloActionSheet'
 import deleteCommentAction from 'store/actions/deleteComment'
 import getGroup from 'store/selectors/getGroup'
 import getMe from 'store/selectors/getMe'
@@ -67,17 +67,17 @@ export default function Comment ({
 
   const commentMenuActions = [
     ['Reply', handleReply, {
-      icon: <Icon style={styles.actionSheetIcon} name='Replies' />
+      icon: <Icon name='Replies' style={styles.actionSheetIcon} />
     }],
     ['Copy', handleCopy, {
-      icon: <FontAwesome5Icon style={styles.actionSheetIcon} name='copy' />
+      icon: <FontAwesome5Icon name='copy' style={styles.actionSheetIcon} />
     }],
     ['Remove', handleRemove, {
-      icon: <FontAwesome5Icon style={styles.actionSheetIcon} name='trash-alt' />,
+      icon: <FontAwesome5Icon name='trash-alt' style={styles.actionSheetIcon} />,
       destructive: true
     }],
     ['Delete', handleDelete, {
-      icon: <FontAwesome5Icon style={styles.actionSheetIcon} name='trash-alt' />,
+      icon: <FontAwesome5Icon name='trash-alt' style={styles.actionSheetIcon} />,
       destructive: true
     }]
   ]
@@ -116,7 +116,11 @@ export default function Comment ({
           <View style={styles.headerMiddle} />
           <View style={styles.headerRight}>
             {handleReply && (
-              <TouchableOpacity style={styles.replyLink} onPress={handleReply}>
+              <TouchableOpacity
+                style={styles.replyLink}
+                hitSlop={{ top: 15, left: 20, bottom: 20, right: 20 }}
+                onPress={handleReply}
+              >
                 <Icon style={styles.replyLinkIcon} name='Replies' />
               </TouchableOpacity>
             )}

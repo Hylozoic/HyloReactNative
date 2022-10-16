@@ -133,7 +133,7 @@ export class MemberList extends React.Component {
   }
 }
 
-export default function(props) {
+export default function (props) {
   const ref = React.useRef(null)
 
   useScrollToTop(ref)
