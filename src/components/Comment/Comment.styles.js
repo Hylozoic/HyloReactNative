@@ -4,7 +4,7 @@ export default {
   container: {
     flexDirection: 'column',
     flex: 1,
-    padding: 10,
+    padding: 15,
     paddingBottom: 5
   },
   avatar: {
@@ -33,6 +33,9 @@ export default {
     paddingLeft: 10,
     color: rhino50
   },
+  actionSheetIcon: {
+    fontSize: 20
+  },
   name: {
     color: limedSpruce,
     fontFamily: 'Circular-Bold',
@@ -44,7 +47,7 @@ export default {
     fontSize: 12
   },
   replyLink: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   // replyLinkText: {
   //   fontSize: 12,

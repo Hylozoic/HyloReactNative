@@ -1,11 +1,10 @@
 import React from 'react'
 import { Text, TouchableOpacity } from 'react-native'
 import { find } from 'lodash/fp'
-import { capeCod, pictonBlue } from 'style/colors'
+import { capeCod } from 'style/colors'
 import { isIOS } from 'util/platform'
-import { useActionSheet } from '@expo/react-native-action-sheet'
+import { useHyloActionSheet } from 'hooks/useHyloActionSheet'
 import Icon from 'components/Icon'
-import { useHyloActionSheet } from 'components/PopupMenuButton/PopupMenuButton'
 
 export default function ListControl ({ selected, options, onChange }) {
   const { showHyloActionSheet } = useHyloActionSheet()
