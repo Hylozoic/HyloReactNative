@@ -97,8 +97,14 @@ export default function Comment ({
   // NOTE: Currently no UI for adding comment file attachments
   // const fileAttachments = filter({ type: 'file' }, comment?.attachments)
 
+  const handleOnPress = () => {
+    if (onPress) return onPress()
+
+    return handleReply()
+  }
+
   return (
-    <TouchableOpacity onPress={onPress} onLongPress={showActionSheet}>
+    <TouchableOpacity onPress={handleOnPress} onLongPress={showActionSheet}>
       <View style={[styles.container, highlighted && styles.highlighted, style]}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => showMember(creator.id)}>
