@@ -69,7 +69,6 @@ export class PostDetails extends React.Component {
 
     return (
       <Comments
-        style={styles.commentsScrollView}
         ref={this.commentsRef}
         postId={post.id}
         header={(
@@ -173,7 +172,7 @@ export function PostCardForDetails ({
         title={post.title}
         type={post.type}
       />
-      <Files urls={post.fileUrls} />
+      <Files urls={post.fileUrls} style={{ marginBottom: 10 }} />
       {isProject && (
         <ProjectMembersSummary
           members={post.members}
