@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef, useImperativeHandle, forwardRef, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Text, TouchableOpacity, View, SectionList } from 'react-native'
+import { isIOS } from 'util/platform'
 import Comment from 'components/Comment'
 import Loading from 'components/Loading'
 import styles from './Comments.styles'
@@ -122,7 +123,7 @@ function Comments ({
       initialScrollIndex={0}
       // keyboardShouldPersistTaps='handled'
       keyboardShouldPersistTaps='never'
-      keyboardDismissMode='on-drag'
+      keyboardDismissMode={isIOS ? 'interactive' : 'on-drag'}
       {...panHandlers}
     />
   )

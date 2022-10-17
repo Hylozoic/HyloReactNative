@@ -12,6 +12,7 @@ import { useIsFocused } from '@react-navigation/native'
 import { get, uniq, uniqBy, isEmpty, capitalize } from 'lodash/fp'
 import moment from 'moment-timezone'
 import { Validators } from 'hylo-shared'
+import { isIOS } from 'util/platform'
 import { showToast, hideToast } from 'util/toast'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
 import { rhino30 } from 'style/colors'
@@ -421,8 +422,8 @@ export class PostEditor extends React.Component {
         </View>
         <ScrollView
           ref={this.scrollViewRef}
-          keyboardShouldPersistTaps='handled'
-          keyboardDismissMode='on-drag'
+          keyboardShouldPersistTaps='never'
+          keyboardDismissMode={isIOS ? 'interactive' : 'on-drag'}
           style={styles.scrollContainer}
           // May crash Android due to WebView editor without this
           overScrollMode='never'
@@ -465,7 +466,7 @@ export class PostEditor extends React.Component {
                 ref={this.detailsEditorRef}
                 customEditorCSS={`
                   min-height: 50px;
-                  max-height: 220px;
+                  max-height: 140px;
                 `}
               />
             </View>
