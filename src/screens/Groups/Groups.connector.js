@@ -3,6 +3,7 @@ import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import getMyJoinRequests from 'store/selectors/getMyJoinRequests'
 import getMemberships from 'store/selectors/getMemberships'
+import { navigateToLinkingPath, openURL } from 'navigation/linking'
 
 export function mapStateToProps (state, props) {
   const group = getCurrentGroup(state, props)
@@ -37,17 +38,17 @@ export function mapStateToProps (state, props) {
 export const mapDispatchToProps = {}
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { navigation } = ownProps
-
   return {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
     goToGroup: group => {
-      navigation.navigate('Group Navigation', { groupSlug: group.slug })
+      // Make a hylo-shared `PathHelper`, reconcile with Web
+      navigateToLinkingPath(`/groups/${group.slug}`, true)
     },
     goToGroupDetail: group => {
-      navigation.navigate('Group Detail', { groupSlug: group.slug })
+      // Make a hylo-share `PathHelper`, reconcile with Web
+      openURL(`/groups/${group.slug}/detail`)
     }
   }
 }
