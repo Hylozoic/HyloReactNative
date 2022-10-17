@@ -423,6 +423,8 @@ export class PostEditor extends React.Component {
           keyboardShouldPersistTaps='handled'
           keyboardDismissMode='on-drag'
           style={styles.scrollContainer}
+          // May crash Android due to WebView editor without this
+          overScrollMode='never'
         >
           <View style={styles.scrollContent}>
             <Text style={styles.sectionLabel}>Title</Text>

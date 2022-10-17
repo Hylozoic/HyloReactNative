@@ -145,9 +145,12 @@ export function HyloEditorWebView ({
     // Seems to help but when it's relied upon (e.g. PostEditor height)
     // it causes 2 resizes and could probably be handled better otherwise
     automaticallyAdjustContentInsets: true,
+    // they needed to be slightly different and that seems to work fine.
     style: [style, {
-      // If Android crashes, apply this fix (ref. https://github.com/iou90/react-native-autoheight-webview/issues/191)
-      // opacity: 0.99, minHeight: 1
+      // Note: See docs for `AutoHeightWebView`. Their recommendation for iOS:
+      //   `import { Dimensions } from 'react-native'`
+      //   `style={{ width: Dimensions.get('window').width - 15, marginTop: 35 }}`
+      // Currently using a manually set `widthOffset` in `PostEditor` and `CommentEditor`
       width: Dimensions.get('window').width - DEFAULT_WIDTH_OFFSET_IOS - widthOffset
     }],
     containerStyle,

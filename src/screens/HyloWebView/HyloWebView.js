@@ -8,6 +8,7 @@ const HyloWebView = forwardRef(function HyloWebView ({
   path: pathProp,
   route,
   onShouldStartLoadWithRequest = () => true,
+  style,
   ...forwardedProps
 }, webViewRef) {
   const [cookie, setCookie] = useState()
@@ -41,17 +42,13 @@ const HyloWebView = forwardRef(function HyloWebView ({
       geolocationEnabled
       sharedCookiesEnabled
       // onSizeUpdated={test => console.log('!!! onContentSizeChange', test)}
-      // Note: See docs for `AutoHeightWebView`. Their recommendation:
-      //       `import { Dimensions } from 'react-native'`
-      //
-      //       `style={{ width: Dimensions.get('window').width - 15, marginTop: 35 }}`
-      //
-      //        This is what seemed necessary in `HyloEditorWebView`:
-      //
-      //        `style ={{ width: Dimensions.get('window').width - 35 }}`
-      //
-      //        * Don't forget to merge any styles provided in `forwardedProps.style`
-      //
+      viewportContent='width=device-width, user-scalable=no'
+      style={[style, {
+        // Avoids a known issue which can cause Android crashes
+        // ref. https://github.com/iou90/react-native-autoheight-webview/issues/191
+        opacity: 0.99,
+        minHeight: 1
+      }]}
       {...forwardedProps}
     />
   )
