@@ -90,7 +90,7 @@ export default class PostCard extends React.PureComponent {
           title={post.title}
           type={post.type}
         />
-        <Files urls={fileUrls} />
+        <Files urls={fileUrls} style={{ marginBottom: 10 }} />
         {showGroups && (
           <PostGroups
             style={styles.groups}
