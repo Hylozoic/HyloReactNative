@@ -10,7 +10,11 @@ import getMe from 'store/selectors/getMe'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getCanModerate from 'store/selectors/getCanModerate'
 import { POST_TYPES } from 'store/models/Post'
-import { removePost, deletePost, pinPost } from './PostHeader.store'
+import {
+  removePost as removePostAction,
+  deletePost as deletePostAction,
+  pinPost as pinPostAction 
+} from './PostHeader.store'
 import Avatar from 'components/Avatar'
 import FlagContent from 'components/FlagContent'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
@@ -52,22 +56,22 @@ export default React.memo(function PostHeader ({
     : null
 
   const handleDeletePost = canEdit
-    ? () => dispatch(deletePost(postId))
+    ? () => dispatch(deletePostAction(postId))
     : null
 
   const handleDeletePostAndClose = () => {
     if (canEdit) {
-      dispatch(deletePost(postId))
+      dispatch(deletePostAction(postId))
       navigation.goBack()
     }
   }
 
   const handleRemovePost = !isCreator && canModerate
-    ? () => dispatch(removePost(postId, slug))
+    ? () => dispatch(removePostAction(postId, slug))
     : null
 
   const pinPost = canModerate && group
-    ? () => dispatch(pinPost(postId, group.id))
+    ? () => dispatch(pinPostAction(postId, group.id))
     : null
 
   const handleShowMember = () => showMember && showMember(creator.id)

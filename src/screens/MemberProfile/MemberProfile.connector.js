@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { get } from 'lodash/fp'
 import { fetchPerson } from './MemberProfile.store'
-import { navigateToLinkingPath } from 'navigation/linking'
+import { navigateToLinkingPath, openURL } from 'navigation/linking'
 import blockUser from 'store/actions/blockUser'
 import makeGoToGroup from 'store/actions/makeGoToGroup'
 import getMe from 'store/selectors/getMe'
@@ -28,11 +28,11 @@ export function mapStateToProps (state, props) {
   const editing = get('route.params.editing', props)
   const isBlocked = !!getBlockedUsers(state).find(i => get('id', i) === id)
   const goToDetails = () => navigate('Member Details', { id })
-  const goToEdit = () => navigate('Edit Profile')
-  const goToEditAccount = () => navigate('Account')
-  const goToSkills = () => navigate('Edit Your Skills', { id })
-  const goToManageNotifications = () => navigate('Notifications')
-  const goToBlockedUsers = () => navigate('Blocked Users')
+  const goToEdit = () => openURL('/settings')
+  const goToEditAccount = () => openURL('/settings/account')
+  const goToSkills = () => openURL('/settings')
+  const goToManageNotifications = () => openURL('/settings/notifications')
+  const goToBlockedUsers = () => openURL('/settings/blocked-users')
 
   return {
     isBlocked,

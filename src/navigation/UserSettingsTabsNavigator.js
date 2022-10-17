@@ -81,6 +81,8 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
     })
   }, [navigation, route])
 
+  // `initialParams` below used to be used for route generation but are not deprecated
+  // routes should be made only in `linking/index`
   return (
     <UserSettings.Navigator {...navigatorProps}>
       <UserSettings.Screen
@@ -128,6 +130,9 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
       <UserSettings.Screen
         name='Blocked Users'
         component={BlockedUsers}
+        initialParams={{
+          path: 'settings/blocked-users'
+        }}
       />
     </UserSettings.Navigator>
   )
