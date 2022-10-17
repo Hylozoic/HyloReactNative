@@ -1,8 +1,6 @@
 import { caribbeanGreen } from 'style/colors'
 
-export const subCommentIndentation = {
-  marginLeft: 40
-}
+export const subCommentIndentation = 30
 
 export default {
   // IMPORTANT: Because this is an inverted SectionList this will make
@@ -27,16 +25,16 @@ export default {
     marginBottom: 15
   },
   showMore: {
-    marginLeft: 12,
+    marginLeft: 15,
     marginRight: 12,
-    marginBottom: 20,
+    marginBottom: 15,
     fontSize: 13,
     color: caribbeanGreen
   },
   subComment: {
-    ...subCommentIndentation
+    marginLeft: subCommentIndentation
   },
   subCommentsShowMore: {
-    ...subCommentIndentation
+    marginLeft: subCommentIndentation + 15
   }
 }

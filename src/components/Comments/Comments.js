@@ -74,7 +74,7 @@ function Comments ({
   const SectionFooter = ({ section: { comment } }) => {
     return (
       <>
-        <ShowMore commentId={comment.id} style={styles.subCommentsShowMore} />
+        <ShowMore commentId={comment.id} style={styles.subCommentsShowMore} forSubcomments />
         <Comment
           clearHighlighted={() => setHighlightedComment(null)}
           comment={comment}
@@ -130,7 +130,7 @@ function Comments ({
 
 export default forwardRef(Comments)
 
-export function ShowMore ({ postId, commentId, style = {} }) {
+export function ShowMore ({ postId, commentId, forSubcomments = false, style = {} }) {
   const queryParams = commentId ? { commentId } : { postId }
   const dispatch = useDispatch()
   const fetchComments = () => dispatch(fetchCommentsAction(queryParams, { cursor }))
@@ -145,7 +145,7 @@ export function ShowMore ({ postId, commentId, style = {} }) {
   return (
     <TouchableOpacity>
       <Text style={[styles.showMore, style]} onPress={fetchComments}>
-        View {extra} previous comment{extra > 1 ? 's' : ''}
+        View {extra} previous {forSubcomments ? 'replies' : `comment${extra > 1 ? 's' : ''}`}
       </Text>
     </TouchableOpacity>
   )

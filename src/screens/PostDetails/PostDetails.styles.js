@@ -1,5 +1,5 @@
 import { POST_TYPES } from 'store/models/Post'
-import { capeCod10, rhino60, rhino30, caribbeanGreen, white } from 'style/colors'
+import { capeCod10, rhino60, rhino30, caribbeanGreen, white, rhino10 } from 'style/colors'
 
 export default {
   container: {

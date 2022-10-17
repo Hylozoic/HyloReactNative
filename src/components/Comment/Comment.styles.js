@@ -5,7 +5,8 @@ export default {
     flexDirection: 'column',
     flex: 1,
     padding: 15,
-    paddingBottom: 5
+    paddingTop: 3,
+    paddingBottom: 3
   },
   avatar: {
     marginRight: 10
@@ -13,7 +14,7 @@ export default {
   header: {
     flexDirection: 'row',
     justifyItems: 'stretch',
-    marginBottom: 8
+    marginBottom: 3
   },
   headerLeft: {
   },
