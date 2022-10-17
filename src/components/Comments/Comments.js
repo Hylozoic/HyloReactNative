@@ -110,6 +110,7 @@ function Comments ({
   return (
     <SectionList
       style={style}
+      contentContainerStyle={styles.contentContainerStyle}
       ref={commentsListRef}
       // Footer is Header, etc.
       inverted
@@ -123,12 +124,6 @@ function Comments ({
       keyboardShouldPersistTaps='never'
       keyboardDismissMode='on-drag'
       {...panHandlers}
-      // NOTE: Because inverted this will make the "footer" rise to the top
-      // of the view when the content is shorter than full height
-      contentContainerStyle={{
-        flexGrow: 1,
-        justifyContent: 'flex-end'
-      }}
     />
   )
 }

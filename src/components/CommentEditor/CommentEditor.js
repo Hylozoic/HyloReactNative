@@ -133,13 +133,12 @@ export const CommentEditor = forwardRef(function CommentEditor ({
           placeholder='Write a comment...'
           // groupIds={[groupId]}
           readOnly={submitting}
-          containerStyle={styles.htmlEditor}
           ref={setEditorRef}
           widthOffset={30}
-          customStyle={`
-            .hyloEditorMobileContainer {
-              padding: 8px;
-            }
+          containerStyle={styles.htmlEditor}
+          customEditorCSS={`
+            padding: 8px;
+            max-height: 200px;
           `}
         />
         <CommentSubmitButton

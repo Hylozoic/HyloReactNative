@@ -17,14 +17,11 @@ export default {
   },
 
   htmlEditor: {
+    minHeight: 42,
     backgroundColor: white,
     borderWidth: 1,
-    borderRadius: 10,
     borderColor: '#CCC',
-    // padding: 8,
-    // A hack to make it not look as weird when loading editor
-    // This looks ok in iOS, Likely will need to be adjusted for Android
-    minHeight: 42
+    borderRadius: 10
   },
 
   prompt: {

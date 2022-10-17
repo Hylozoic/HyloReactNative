@@ -5,6 +5,15 @@ export const subCommentIndentation = {
 }
 
 export default {
+  // IMPORTANT: Because this is an inverted SectionList this will make
+  // the "footer" rise to the top of the view when the content is
+  // shorter than full height
+  contentContainerStyle: {
+    flexGrow: 1,
+    justifyContent: 'flex-end',
+    paddingTop: 100
+  },
+
   loadingContainer: {
     position: 'absolute',
     top: 0,

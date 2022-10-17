@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native'
 import { WebViewMessageTypes } from 'hylo-shared'
 import HyloWebView, { sendMessageFromWebView, parseWebViewMessage } from 'screens/HyloWebView'
 
-const DEFAULT_WIDTH_OFFSET_IOS = 15
+const DEFAULT_WIDTH_OFFSET_IOS = 18
 const EMPTY_STATE = '<p></p>'
 
 export function HyloEditorWebView ({
@@ -18,7 +18,8 @@ export function HyloEditorWebView ({
   onEnter,
   style,
   containerStyle,
-  customStyle,
+  customEditorCSS = '',
+  customStyle = '',
   widthOffset = 0
 }, ref) {
   const webViewRef = useRef()
@@ -128,21 +129,15 @@ export function HyloEditorWebView ({
     path,
     onMessage: handleMessage,
     startInLoadingState: false,
-    customStyle,
-    //  || `
-    //   .hyloEditorMobileContainer {
-    //     padding: 8px;
-    //     height: auto;
-    //     overflow-y: auto;
-    //   }
-    //   .ProseMirror p.is-editor-empty:first-child::after {
-    //     margin-bottom: 0px;
-    //   }
-    //   .hyloEditorMobileContainer .hyloEditorMobile .ProseMirror {
-    //     height: auto;
-    //     max-height: 200px;
-    //   }
-    // `,
+    customStyle: `
+      .ProseMirror {
+        height: auto;
+        overflow: scroll;
+        ${customEditorCSS}
+      }
+
+      ${customStyle}
+    `,
     // Related to getting auto-height right and scrolling:
     scrollEnabled: false,
     nestedScrollEnabled: true,
