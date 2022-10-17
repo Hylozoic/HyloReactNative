@@ -41,8 +41,8 @@ const HyloWebView = forwardRef(function HyloWebView ({
       }}
       geolocationEnabled
       sharedCookiesEnabled
-      // onSizeUpdated={test => console.log('!!! onContentSizeChange', test)}
       viewportContent='width=device-width, user-scalable=no'
+      // eslint-disable-next-line react-native/no-inline-styles
       style={[style, {
         // Avoids a known issue which can cause Android crashes
         // ref. https://github.com/iou90/react-native-autoheight-webview/issues/191

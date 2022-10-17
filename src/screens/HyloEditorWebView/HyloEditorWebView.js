@@ -23,7 +23,6 @@ export function HyloEditorWebView ({
   widthOffset = 0
 }, ref) {
   const webViewRef = useRef()
-  // const [path] = useState('hyloApp/editor?suppressEnterKeyPropagation=true')
   const [path] = useState('hyloApp/editor')
   const [isEmpty, setIsEmpty] = useState(true)
   const [contentHTML, setContentHTML] = useState()
@@ -78,7 +77,6 @@ export function HyloEditorWebView ({
 
   useEffect(() => {
     if (loaded) {
-      // setContentHTML(providedContentHTML)
       sendMessageFromWebView(
         webViewRef,
         WebViewMessageTypes.EDITOR.SET_PROPS, {
@@ -121,7 +119,6 @@ export function HyloEditorWebView ({
           content: newContentHTML
         }
       )
-      // setContentHTML(newContentHTML)
     }
   }), [isEmpty, contentHTML, webViewRef])
 
@@ -141,10 +138,12 @@ export function HyloEditorWebView ({
     // Related to getting auto-height right and scrolling:
     scrollEnabled: false,
     nestedScrollEnabled: true,
-    scalesPageToFit: false,
+    // This is critical for Android, but works fine when `false` on iOS ?
+    // also ref: https://github.com/iou90/react-native-autoheight-webview/issues/242
+    scalesPageToFit: true,
     // Seems to help but when it's relied upon (e.g. PostEditor height)
     // it causes 2 resizes and could probably be handled better otherwise
-    automaticallyAdjustContentInsets: true,
+    // automaticallyAdjustContentInsets: true,
     // they needed to be slightly different and that seems to work fine.
     style: [style, {
       // Note: See docs for `AutoHeightWebView`. Their recommendation for iOS:
