@@ -1,15 +1,16 @@
 import { rhino10, limedSpruce } from 'style/colors'
 import { Dimensions } from 'react-native'
 
-const screenPadding = 0 // postEditorStyles.scrollContainer.paddingHorizontal
-const containerWidth = Dimensions.get('window').width - 2 * screenPadding
+const containerWidth = Dimensions.get('window').width - 2
 const buttonMargin = 10
-const buttonWidth = (containerWidth - 2 * buttonMargin) / 3
+const buttonWidth = (containerWidth - 10 * buttonMargin) / 3
 
 export default {
   container: {
+    flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
+    justifyContent: 'center',
     marginRight: -buttonMargin
   },
   addImageButton: {
@@ -30,6 +31,7 @@ export default {
   addImageButtonImage: {
     width: buttonWidth,
     height: buttonWidth,
+    resizeMode: 'contain',
     borderRadius: 4
   },
   hiddenImagePicker: {
