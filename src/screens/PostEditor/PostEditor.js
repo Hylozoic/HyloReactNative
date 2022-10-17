@@ -9,7 +9,6 @@ import {
 } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select'
 import { useIsFocused } from '@react-navigation/native'
-import { useKeyboard } from '@react-native-community/hooks'
 import { get, uniq, uniqBy, isEmpty, capitalize } from 'lodash/fp'
 import moment from 'moment-timezone'
 import { Validators } from 'hylo-shared'
@@ -43,6 +42,7 @@ import styles from './PostEditor.styles'
 
 export default function (props) {
   const isFocused = useIsFocused()
+
   return <PostEditor {...props} isFocused={isFocused} />
 }
 
@@ -410,6 +410,14 @@ export class PostEditor extends React.Component {
 
     return (
       <>
+        <View style={[styles.typeSelector.row]}>
+          <TypeSelector
+            disabled={isSaving}
+            onValueChange={this.handleTypeOnChange}
+            placeholder={{}}
+            value={type}
+          />
+        </View>
         <ScrollView
           ref={this.scrollViewRef}
           keyboardShouldPersistTaps='handled'
@@ -417,14 +425,6 @@ export class PostEditor extends React.Component {
           style={styles.scrollContainer}
         >
           <View style={styles.scrollContent}>
-            <View style={[styles.typeSelector.row, styles.section, { marginTop: -3 }]}>
-              <TypeSelector
-                disabled={isSaving}
-                onValueChange={this.handleTypeOnChange}
-                placeholder={{}}
-                value={type}
-              />
-            </View>
             <Text style={styles.sectionLabel}>Title</Text>
             <View style={[styles.section, styles.textInputWrapper]}>
               <TextInput
@@ -442,27 +442,31 @@ export class PostEditor extends React.Component {
               <View style={styles.errorView}>
                 <ErrorBubble
                   customStyles={styles.errorBubble}
-                  errorRowStyle={styles.errorRow} text={`Title can't have more than ${MAX_TITLE_LENGTH} characters.`}
+                  errorRowStyle={styles.errorRow}
+                  text={`Title can't have more than ${MAX_TITLE_LENGTH} characters.`}
                   topRightArrow
                 />
               </View>
             )}
+
             <Text style={styles.sectionLabel}>Details</Text>
-            <HyloEditorWebView
-              placeholder={detailsPlaceholder}
-              contentHTML={post?.details}
-              // groupIds={groupOptions && groupOptions.map(g => g.id)}
-              onChange={this.handleDetailsOnChange}
-              onAddTopic={!topicsPicked && this.handleAddTopic}
-              readOnly={postLoading || isSaving}
-              widthOffset={24}
-              ref={this.detailsEditorRef}
-              containerStyle={[
-                styles.detailsEditor,
-                styles.section,
-                styles.textInputWrapper
-              ]}
-            />
+            <View style={[styles.section, styles.textInputWrapper, styles.textInput]}>
+              <HyloEditorWebView
+                placeholder={detailsPlaceholder}
+                contentHTML={post?.details}
+                // groupIds={groupOptions && groupOptions.map(g => g.id)}
+                onChange={this.handleDetailsOnChange}
+                onAddTopic={!topicsPicked && this.handleAddTopic}
+                readOnly={postLoading || isSaving}
+                widthOffset={24}
+                ref={this.detailsEditorRef}
+                customEditorCSS={`
+                  min-height: 50px;
+                  max-height: 220px;
+                `}
+              />
+            </View>
+
             <TouchableOpacity
               style={[
                 styles.section,
@@ -471,25 +475,22 @@ export class PostEditor extends React.Component {
               ]}
               onPress={this.handleShowTopicsPicker}
             >
-              <View style={styles.topicLabel}>
-                <Text style={styles.sectionLabel}>Topics</Text>
-                <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+              <View style={styles.pressSelection}>
+                <Text style={styles.pressSelectionLeft}>Topics</Text>
+                <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.topicAdd} /></View>
               </View>
               <Topics onPress={this.handleRemoveTopic} topics={topics} />
-              {topics.length < 1 &&
-                <Text style={styles.textInputPlaceholder}>{topicsPlaceholder}</Text>}
+              {/* {topics.length < 1 &&
+                <Text style={styles.textInputPlaceholder}>{topicsPlaceholder}</Text>} */}
             </TouchableOpacity>
 
             {type === 'project' && (
               <TouchableOpacity style={[styles.section, styles.textInputWrapper]} onPress={this.handleShowProjectMembersEditor}>
-                <View style={styles.topicLabel}>
-                  <Text style={styles.sectionLabel}>Members</Text>
-                  <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+                <View style={styles.pressSelection}>
+                  <Text style={styles.pressSelectionLeft}>Project Members</Text>
+                  <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.topicAdd} /></View>
                 </View>
-                {members.length > 0 &&
-                  <ProjectMembersSummary members={members} />}
-                {members.length < 1 &&
-                  <Text style={styles.textInputPlaceholder}>Who is a part of this project?</Text>}
+                {members.length > 0 && <ProjectMembersSummary members={members} />}
               </TouchableOpacity>
             )}
 
@@ -497,7 +498,6 @@ export class PostEditor extends React.Component {
               <>
                 <DatePickerWithLabel
                   label='Start Time'
-                  placeholder='When does it start?'
                   date={startTime}
                   minimumDate={new Date()}
                   onChange={date => this.setState({ startTime: date })}
@@ -505,7 +505,6 @@ export class PostEditor extends React.Component {
                 />
                 <DatePickerWithLabel
                   label='End Time'
-                  placeholder='When does it end?'
                   date={endTime}
                   minimumDate={startTime || new Date()}
                   onChange={date => this.setState({ endTime: date })}
@@ -522,12 +521,11 @@ export class PostEditor extends React.Component {
               ]}
               onPress={this.handleShowLocationPicker}
             >
-              <View style={styles.topicLabel}>
-                <Text style={styles.sectionLabel}>Location</Text>
-                <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+              <View style={styles.pressSelection}>
+                <Text style={styles.pressSelectionLeft}>Location</Text>
+                <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.topicAdd} /></View>
               </View>
-              {!location && !locationObject && <Text style={styles.textInputPlaceholder}>Select a Location</Text>}
-              {(location || locationObject) && <Text>{location || locationObject.fullText}</Text>}
+              {(location || locationObject) && <Text style={styles.pressSelectionText}>{location || locationObject.fullText}</Text>}
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -537,37 +535,35 @@ export class PostEditor extends React.Component {
               ]}
               onPress={this.handleShowGroupsEditor}
             >
-              <View style={styles.topicLabel}>
-                <Text style={styles.sectionLabel}>Post In</Text>
-                <View style={styles.topicAddBorder}><Icon name='Plus' style={styles.topicAdd} /></View>
+              <View style={styles.pressSelection}>
+                <Text style={styles.pressSelectionLeft}>Post In</Text>
+                <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.topicAdd} /></View>
               </View>
               <GroupsList
                 groups={groups}
                 columns={1}
-                onPress={this.handleRemoveGroup}
-                RightIcon={iconProps => (
-                  <Icon name='Ex' style={styles.groupRemoveIcon} {...iconProps} />
+                onPress={this.handleShowGroupsEditor}
+                onRemove={this.handleRemoveGroup}
+                RemoveIcon={() => (
+                  <Icon name='Ex' style={styles.groupRemoveIcon} />
                 )}
               />
-              {groups.length < 1 &&
-                <Text style={styles.textInputPlaceholder}>Select which groups to post in.</Text>}
             </TouchableOpacity>
+
+            <Toolbar {...toolbarProps} />
+
             {!isEmpty(imageUrls) && (
-              <View>
-                <Text style={styles.sectionLabel}>Images</Text>
-                <ImageSelector
-                  onAdd={this.handleAddImage}
-                  onRemove={this.handleRemoveImage}
-                  imageUrls={imageUrls}
-                  style={styles.imageSelector}
-                  type='post'
-                />
-              </View>
+              <ImageSelector
+                onAdd={this.handleAddImage}
+                onRemove={this.handleRemoveImage}
+                imageUrls={imageUrls}
+                style={styles.imageSelector}
+                type='post'
+              />
             )}
 
             {!isEmpty(fileUrls) && (
               <View>
-                <Text style={styles.sectionLabel}>Files</Text>
                 <FileSelector
                   onRemove={this.handleRemoveFile}
                   fileUrls={fileUrls}
@@ -576,7 +572,6 @@ export class PostEditor extends React.Component {
             )}
           </View>
         </ScrollView>
-        <Toolbar {...toolbarProps} />
       </>
     )
   }
@@ -618,50 +613,42 @@ export function Toolbar ({
   post, canModerate, filePickerPending, announcementEnabled,
   toggleAnnoucement, showFilePicker, addImage, showAlert
 }) {
-  const keyboard = useKeyboard()
-
-  if (keyboard.keyboardShown) {
-    return null
-  }
-
   return (
-    <View style={styles.bottomBar}>
-      <View style={styles.bottomBarIcons}>
-        <TouchableOpacity onPress={showFilePicker}>
-          <Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} />
+    <View style={styles.bottomBarIcons}>
+      <TouchableOpacity onPress={showFilePicker}>
+        <Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} />
+      </TouchableOpacity>
+      <ImagePicker
+        iconStyle={styles.bottomBarIcon}
+        type='post'
+        id={post?.id}
+        selectionLimit={10}
+        onChoice={addImage}
+        onError={showAlert}
+      />
+      {isEmpty(post) && canModerate && (
+        <TouchableOpacity onPress={toggleAnnoucement}>
+          <Icon name='Announcement' style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} />
         </TouchableOpacity>
-        <ImagePicker
-          iconStyle={styles.bottomBarIcon}
-          type='post'
-          id={post?.id}
-          selectionLimit={10}
-          onChoice={addImage}
-          onError={showAlert}
-        />
-        {isEmpty(post) && canModerate && (
-          <TouchableOpacity onPress={toggleAnnoucement}>
-            <Icon name='Announcement' style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} />
-          </TouchableOpacity>
-        )}
-      </View>
+      )}
     </View>
   )
 }
 
-export function Groups ({ onPress, groups, placeholder }) {
+export function Groups ({ onPress, groups }) {
   if (groups.length > 0) {
     return groups.map((group, index) => (
-      <TouchableOpacity onPress={onPress} style={styles.topicPill} key={index}>
+      <TouchableOpacity onPress={onPress} style={styles.topicPillBox} key={index}>
         <Text style={styles.topicText}>#{group.name}</Text>
         <Icon name='Ex' style={styles.removeGroup} />
       </TouchableOpacity>
     ))
   }
 
-  return <Text style={styles.textInputPlaceholder}>{placeholder}</Text>
+  return null
 }
 
-export function Topics ({ onPress, topics, placeholder }) {
+export function Topics ({ onPress, topics }) {
   if (topics.length < 1) return null
   return (
     <ScrollView horizontal style={styles.topicPillBox}>
@@ -685,7 +672,6 @@ export function DatePickerWithLabel ({
   date,
   minimumDate,
   label,
-  placeholder,
   expanded: initialExpanded = false,
   onChange,
   onExpand,
@@ -694,12 +680,11 @@ export function DatePickerWithLabel ({
       styles.section,
       styles.textInputWrapper
     ],
-    labelWrapper: styles.topicLabel,
-    labelText: styles.sectionLabel,
-    expandIconWrapper: styles.topicAddBorder,
+    labelWrapper: styles.pressSelection,
+    labelText: styles.pressSelectionLeft,
+    expandIconWrapper: styles.pressSelectionRight,
     expandIcon: styles.topicAdd,
-    valueText: {},
-    placeholderText: styles.textInputPlaceholder
+    valueText: styles.pressSelectionText
   },
   dateFormat = 'MM/DD/YYYY LT z'
 }) {
@@ -724,9 +709,6 @@ export function DatePickerWithLabel ({
       </View>
       {date && !expanded && (
         <Text style={styleTemplate.valueText}>{moment.tz(date, moment.tz.guess()).format(dateFormat)}</Text>
-      )}
-      {!date && !expanded && (
-        <Text style={styleTemplate.placeholderText}>{placeholder}</Text>
       )}
       {expanded && (
         <View style={{ flex: 1, alignItems: 'center' }}>

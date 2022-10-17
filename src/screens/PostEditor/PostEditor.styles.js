@@ -1,72 +1,70 @@
 import { isIOS } from 'util/platform'
-import { StyleSheet } from 'react-native'
 import { POST_TYPES } from 'store/models/Post'
 import {
   caribbeanGreen,
   rhino30,
-  capeCod40,
   white,
-  black,
-  capeCod05
+  rhino80,
+  rhino60
 } from 'style/colors'
 
 const typeSelectorDefaults = {
-  fontSize: 12,
+  fontSize: 14,
   fontWeight: 'bold',
   borderRadius: 5,
   borderWidth: 0,
   color: white,
-  padding: isIOS ? 15 : 5,
-  paddingLeft: 10,
-  paddingRight: 0
+  padding: isIOS ? 20 : 10,
+  paddingLeft: 20,
+  paddingRight: 20
 }
 
 export default {
   scrollContainer: {
     flex: 1,
     backgroundColor: 'white',
-    paddingHorizontal: 16
+    paddingHorizontal: 18
   },
   scrollContent: {
-    paddingVertical: 12
+    paddingVertical: 12,
+    paddingBottom: 200
   },
   textInputWrapper: {
     borderBottomWidth: 0.5,
     borderColor: rhino30
   },
   textInput: {
-    fontSize: 14,
+    paddingVertical: 10,
+    fontSize: 16,
     fontFamily: 'Circular-Book',
     margin: 0,
     padding: 0
   },
   textInputPlaceholder: {
     height: isIOS ? 22 : null,
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: 'Circular-Book',
     color: rhino30
   },
-  detailsEditor: {
-    minHeight: 100
-  },
   section: {
-    marginBottom: 8,
-    paddingBottom: 8
+    marginBottom: 12,
+    paddingBottom: 12
   },
   sectionLabel: {
+    color: rhino80,
     fontFamily: 'Circular-Bold'
   },
 
   // Type Selector
   typeSelector: {
     row: {
-      marginTop: 10
+      marginTop: 0
     },
     icon: {
-      fontSize: 20,
-      marginTop: isIOS ? 12 : 8,
-      marginRight: 10,
-      color: black
+      fontSize: 24,
+      marginTop: isIOS ? 16 : 12,
+      marginRight: 20,
+      color: rhino60
     },
     discussion: {
       inputIOS: {
@@ -141,13 +139,30 @@ export default {
       }
     }
   },
-
+  detailsEditor: {
+    minHeight: 50
+  },
   topics: {
     justifyContent: 'center',
     display: 'flex',
     flexDirection: 'column'
   },
-  topicAddBorder: {
+  topicAdd: {
+    color: caribbeanGreen,
+    fontSize: 16
+  },
+  pressSelection: {
+    paddingVertical: 10,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  pressSelectionLeft: {
+    color: rhino80,
+    fontFamily: 'Circular-Bold'
+  },
+  pressSelectionRight: {
     height: 25,
     width: 25,
     marginHorizontal: 10,
@@ -158,14 +173,15 @@ export default {
     alignItems: 'center',
     justifyContent: 'center'
   },
-  topicAdd: {
+  // Same as textInput without top padding
+  pressSelectionText: {
+    paddingVertical: 0,
+    paddingBottom: 5,
+    fontSize: 16,
     color: caribbeanGreen,
-    fontSize: 16
-  },
-  topicLabel: {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'row'
+    fontFamily: 'Circular-Book',
+    margin: 0,
+    padding: 0
   },
   topicPill: {
     display: 'flex',
@@ -209,17 +225,19 @@ export default {
   },
   bottomBar: {
     flexDirection: 'row',
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: capeCod40,
-    backgroundColor: capeCod05,
-    padding: isIOS ? 8 : 4,
-    paddingBottom: isIOS ? 30 : 4,
-    paddingLeft: isIOS ? 20 : 10,
-    marginHorizontal: -16
+    // borderTopWidth: StyleSheet.hairlineWidth,
+    // borderTopColor: capeCod40,
+    // backgroundColor: capeCod05,
+    // padding: isIOS ? 8 : 4,
+    // paddingBottom: isIOS ? 30 : 4,
+    // paddingLeft: isIOS ? 20 : 10,
+    // marginHorizontal: -16
+
   },
   bottomBarIcons: {
     flexDirection: 'row',
-    flex: 1
+    flex: 1,
+    justifyContent: 'flex-end'
   },
   bottomBarIcon: {
     paddingRight: 5,
