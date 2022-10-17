@@ -16,7 +16,7 @@ export function mapStateToProps (state, props) {
   const id = getRouteParam('id', props.route)
   const currentUser = getMe(state, props)
   const currentGroup = getCurrentGroup(state, props)
-  const post = getPresentedPost(state, { id, currentGroupId: currentGroup?.id })
+  const post = getPresentedPost(state, { id, groupId: currentGroup?.id })
   const isProject = get('type', post) === 'project'
   const memberships = getMemberships(state)
   return {

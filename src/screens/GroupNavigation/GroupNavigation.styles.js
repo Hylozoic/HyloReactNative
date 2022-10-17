@@ -17,15 +17,15 @@ export default {
   navItem: {
     color: rhino05,
     flexDirection: 'row',
-    paddingBottom: 10
+    paddingBottom: 13
   },
   navItemIcon: {
     color: rhino05,
-    fontSize: 24,
+    fontSize: 28,
     paddingRight: 10
   },
   navItemLabel: {
     color: rhino05,
-    fontSize: 24
+    fontSize: 28
   }
 }
