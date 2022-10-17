@@ -53,7 +53,7 @@ export default function SignupUploadAvatar ({ navigation }) {
             onChoice={choice => onChoice(choice)}
             onPendingChange={pending => setImagePickerPending(pending)}
           >
-            {avatarImageSource && !imagePickerPending 
+            {avatarImageSource && !imagePickerPending
               ? <Image style={styles.image} source={avatarImageSource} />
               : (
                 <View style={styles.imagePickerBackground}>

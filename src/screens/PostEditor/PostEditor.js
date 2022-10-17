@@ -618,10 +618,14 @@ export function Toolbar ({
   return (
     <View style={styles.bottomBarIcons}>
       <TouchableOpacity onPress={showFilePicker}>
-        <Icon name={filePickerPending ? 'Clock' : 'Paperclip'} style={styles.bottomBarIcon} />
+        <Icon
+          name='Paperclip'
+          style={[styles.bottomBarIcon, filePickerPending && styles.bottomBarIconLoading]}
+        />
       </TouchableOpacity>
       <ImagePicker
         iconStyle={styles.bottomBarIcon}
+        iconStyleLoading={[styles.bottomBarIcon, styles.bottomBarIconLoading]}
         type='post'
         id={post?.id}
         selectionLimit={10}

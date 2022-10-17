@@ -245,6 +245,9 @@ export default {
   bottomBarIcon: {
     paddingRight: 5,
     fontSize: 46,
+    color: caribbeanGreen
+  },
+  bottomBarIconLoading: {
     color: rhino30
   },
   annoucementIcon: {

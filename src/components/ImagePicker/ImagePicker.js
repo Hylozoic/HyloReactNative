@@ -20,17 +20,17 @@ non-pending and pending states respectively
 */
 
 export default function ImagePicker (props) {
-  const { onPendingChange, style, iconStyle, disabled } = props  
+  const { onPendingChange, style, iconStyle, iconStyleLoading, disabled } = props
   const [pending, providedSetPending] = useState(false)
 
-  const setPending = pending => {
-    providedSetPending(pending)
-    onPendingChange && onPendingChange(pending)
+  const setPending = newPending => {
+    providedSetPending(newPending)
+    onPendingChange && onPendingChange(newPending)
   }
 
   const showPicker = async () => {
     if (pending) return
-    
+
     setPending(true)
     await showImagePicker({
       ...props,
@@ -59,13 +59,10 @@ export default function ImagePicker (props) {
     ['Choose from library', showPicker],
     ['Take photo', showPickerCamera]
   ]
-  const children = pending
-    ? <Icon name='Clock' style={[styles.icon, iconStyle]} />
-    : <Icon name='AddImage' style={[styles.icon, iconStyle]} />
-  
+
   return (
     <MenuElement actions={imagePickerOptions} style={style}>
-      {props.children || children}
+      {props.children || <Icon name='AddImage' style={[styles.icon, pending ? iconStyleLoading : iconStyle]} />}
     </MenuElement>
   )
 }

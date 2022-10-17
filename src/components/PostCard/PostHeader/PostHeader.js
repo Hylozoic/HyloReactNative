@@ -136,7 +136,7 @@ export default React.memo(function PostHeader ({
     //   icon: <FontAwesome5Icon style={styles.actionSheetIcon} name='copy' />
     // }],
     ['Flag this Post', flagPost, {
-      icon: <FontAwesome5Icon name='flag-alt' style={styles.actionSheetIcon} />,
+      icon: <FontAwesome5Icon name='flag' style={styles.actionSheetIcon} />,
       destructive: true
     }],
     ['Remove Post From Group', removePostWithConfirm, {
