@@ -32,7 +32,7 @@ import GroupsList from 'components/GroupsList'
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import Icon from 'components/Icon'
 import FileSelector, { showFilePicker as fileSelectorShowFilePicker } from './FileSelector'
-import DatePicker from 'components/DatePicker'
+import DatePicker from 'react-native-date-picker'
 import ImagePicker from 'components/ImagePicker'
 import ImageSelector from './ImageSelector'
 import HyloEditorWebView from 'screens/HyloEditorWebView'
@@ -315,8 +315,9 @@ export class PostEditor extends React.Component {
 
   updateMembers = members => this.setState(state => ({ members }))
 
-  handleDatePickerExpand = () => {
-    this.scrollViewRef.current.scrollToEnd()
+  handleDatePickerExpand = key => () => {
+    this.scrollViewRef.current.scrollTo({ x: 20 })
+    // this.scrollViewRef.current.scroll()
   }
 
   handleShowProjectMembersEditor = () => {
@@ -502,15 +503,14 @@ export class PostEditor extends React.Component {
                   label='Start Time'
                   date={startTime}
                   minimumDate={new Date()}
-                  onChange={date => this.setState({ startTime: date })}
-                  onExpand={this.handleDatePickerExpand}
+                  onSelect={date => this.setState({ startTime: date })}
                 />
                 <DatePickerWithLabel
                   label='End Time'
+                  disabled={!startTime}
                   date={endTime}
                   minimumDate={startTime || new Date()}
-                  onChange={date => this.setState({ endTime: date })}
-                  onExpand={this.handleDatePickerExpand}
+                  onSelect={date => this.setState({ endTime: date })}
                 />
               </>
             )}
@@ -674,53 +674,64 @@ export function DatePickerWithLabel ({
   date,
   minimumDate,
   label,
-  expanded: initialExpanded = false,
-  onChange,
-  onExpand,
+  onSelect,
+  disabled,
   styleTemplate = {
     wrapper: [
       styles.section,
       styles.textInputWrapper
     ],
-    labelWrapper: styles.pressSelection,
-    labelText: styles.pressSelectionLeft,
+    disabled: styles.pressDisabled,
     expandIconWrapper: styles.pressSelectionRight,
     expandIcon: styles.topicAdd,
+    labelText: styles.pressSelectionLeft,
+    labelWrapper: styles.pressSelection,
     valueText: styles.pressSelectionText
   },
   dateFormat = 'MM/DD/YYYY LT z'
 }) {
-  const [expanded, setExpanded] = useState(initialExpanded)
-  const onPress = () => {
-    if (!expanded) onExpand()
-    setExpanded(!expanded)
+  const [open, setOpen] = useState(false)
+  const handleOnPress = () => {
+    !disabled && setOpen(true)
+  }
+  const handleOnConfirm = newDate => {
+    onSelect(newDate)
+    setOpen(false)
+  }
+  const handleOnCancel = () => {
+    onSelect(null)
+    setOpen(false)
   }
 
   return (
-    <TouchableOpacity
-      style={styleTemplate.wrapper}
-      onPress={onPress}
-    >
-      <View style={styleTemplate.labelWrapper}>
-        <Text style={styleTemplate.labelText}>
-          {label}
-        </Text>
-        <View style={styleTemplate.expandIconWrapper}>
-          <Icon name={expanded ? 'ArrowUp' : 'ArrowDown'} style={styleTemplate.expandIcon} />
+    <>
+      <TouchableOpacity
+        style={styleTemplate.wrapper}
+        onPress={handleOnPress}
+      >
+        <View style={styleTemplate.labelWrapper}>
+          <Text style={[styleTemplate.labelText, disabled && styleTemplate.disabled]}>
+            {label}
+          </Text>
+          <View style={styleTemplate.expandIconWrapper}>
+            <Icon name={open ? 'ArrowUp' : 'ArrowDown'} style={styleTemplate.expandIcon} />
+          </View>
         </View>
-      </View>
-      {date && !expanded && (
-        <Text style={styleTemplate.valueText}>{moment.tz(date, moment.tz.guess()).format(dateFormat)}</Text>
-      )}
-      {expanded && (
-        <View style={{ flex: 1, alignItems: 'center' }}>
-          <DatePicker
-            date={date}
-            minimumDate={minimumDate}
-            onChange={onChange}
-          />
-        </View>
-      )}
-    </TouchableOpacity>
+        {date && !open && (
+          <Text style={styleTemplate.valueText}>{moment.tz(date, moment.tz.guess()).format(dateFormat)}</Text>
+        )}
+      </TouchableOpacity>
+      <DatePicker
+        modal
+        open={open}
+        minimumDate={minimumDate}
+        minuteInterval={5}
+        date={date || new Date()}
+        mode='datetime'
+        confirmText={`Set ${label}`}
+        onConfirm={handleOnConfirm}
+        onCancel={handleOnCancel}
+      />
+    </>
   )
 }
