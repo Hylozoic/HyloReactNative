@@ -1,4 +1,4 @@
-import { caribbeanGreen, treePoppy } from 'style/colors'
+import { alabaster, caribbeanGreen, rhino, treePoppy } from 'style/colors'
 
 export default {
   addButton: {
@@ -11,17 +11,19 @@ export default {
     color: caribbeanGreen
   },
   fileLabel: {
+    backgroundColor: alabaster,
+    borderRadius: 10,
+    padding: 14,
     flexDirection: 'row',
-    alignItems: 'center',
-    paddingBottom: 12,
-    paddingRight: 16
+    alignItems: 'center'
   },
   fileLabelText: {
+    color: rhino,
     fontFamily: 'Circular-Book',
-    fontSize: 13
+    fontSize: 16
   },
   fileIcon: {
-    fontSize: 18,
+    fontSize: 24,
     color: treePoppy,
     marginRight: 4
   }
