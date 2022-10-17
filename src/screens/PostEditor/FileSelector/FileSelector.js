@@ -64,7 +64,7 @@ function renderFileButton (url, buttonIndex, onRemove) {
   return (
     <PopupMenuButton
       key={url}
-      actions={[['Remove image', () => onRemove(url)]]}
+      actions={[['Remove File', () => onRemove(url)]]}
       destructiveButtonIndex={0}
     >
       <FileLabel url={url} />
