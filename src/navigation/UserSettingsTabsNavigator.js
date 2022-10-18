@@ -6,7 +6,6 @@ import { isIOS } from 'util/platform'
 import { ModalHeader } from 'navigation/headers'
 import { caribbeanGreen, ghost, rhino30, rhino80, white } from 'style/colors'
 import logout from 'store/actions/logout'
-import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import UserSettingsWebView from 'screens/UserSettingsWebView'
 import BlockedUsers from 'screens/BlockedUsers'
@@ -31,18 +30,8 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
         textTransform: 'none'
       },
       tabBarScrollEnabled: true,
-      tabBarStyle: (
-        isIOS
-        ? {
-            display: 'flex',
-            backgroundColor: white
-          }
-        : {
-            display: 'flex',
-            backgroundColor: white,
-            borderTopWidth: StyleSheet.hairlineWidth
-          }
-      )
+      tabBarStyle: styles.tabBarStyle,
+      swipeEnabled: false
     }
   }
 
@@ -55,19 +44,16 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
       header: headerProps => (
         <ModalHeader
           {...headerProps}
+          // Hides "X button
+          headerLeft={() => {}}
+          // // Bring the below back while hiding `TabBar`
+          // // to force reload of User after settings changed:
           // headerLeftConfirm={true}
           // headerLeftCloseIcon={false}
-          headerLeft={() => {}}
-          headerLeftOnPress={() => {
-            dispatch(fetchCurrentUser())
-            navigation.navigate('Home Tab')
-          }}
-          // headerTitle = {props => (
-          //   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          //     <Avatar style={{ marginRight: 8 }} avatarUrl={currentUser?.avatarUrl} dimension={30} />
-          //     <Text style={{ fontSize: 16, fontWeight: 'bold', color: white }}>Settings</Text>
-          //   </View>
-          // )}
+          // headerLeftOnPress={() => {
+          //   dispatch(fetchCurrentUser())
+          //   navigation.navigate('Home Tab')
+          // }}
           headerRightButtonLabel='Logout'
           headerRightButtonOnPress={() => confirmDiscardChanges({
             title: '',
@@ -81,8 +67,6 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
     })
   }, [navigation, route])
 
-  // `initialParams` below used to be used for route generation but are not deprecated
-  // routes should be made only in `linking/index`
   return (
     <UserSettings.Navigator {...navigatorProps}>
       <UserSettings.Screen
@@ -130,10 +114,22 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
       <UserSettings.Screen
         name='Blocked Users'
         component={BlockedUsers}
-        initialParams={{
-          path: 'settings/blocked-users'
-        }}
       />
     </UserSettings.Navigator>
+  )
+}
+
+const styles = {
+  tabBarStyle: (
+    isIOS
+      ? {
+          display: 'flex',
+          backgroundColor: white
+        }
+      : {
+          display: 'flex',
+          backgroundColor: white,
+          borderTopWidth: StyleSheet.hairlineWidth
+        }
   )
 }

@@ -29,18 +29,8 @@ export default function GroupSettingsTabsNavigator ({ navigation, route }) {
         textTransform: 'none'
       },
       tabBarScrollEnabled: true,
-      tabBarStyle: (
-        isIOS
-        ? {
-            display: 'flex',
-            backgroundColor: rhino05
-          }
-        : {
-            display: 'flex',
-            backgroundColor: rhino05,
-            borderTopWidth: StyleSheet.hairlineWidth
-          }
-      )
+      tabBarStyle: styles.tabBarStyle,
+      swipeEnabled: false
     }
   }
 
@@ -123,5 +113,20 @@ export default function GroupSettingsTabsNavigator ({ navigation, route }) {
         }}
       />
     </GroupSettings.Navigator>
+  )
+}
+
+const styles = {
+  tabBarStyle: (
+    isIOS
+      ? {
+          display: 'flex',
+          backgroundColor: rhino05
+        }
+      : {
+          display: 'flex',
+          backgroundColor: rhino05,
+          borderTopWidth: StyleSheet.hairlineWidth
+        }
   )
 }

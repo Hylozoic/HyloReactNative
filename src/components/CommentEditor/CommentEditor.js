@@ -138,7 +138,7 @@ export const CommentEditor = forwardRef(function CommentEditor ({
           containerStyle={styles.htmlEditor}
           customEditorCSS={`
             padding: 8px;
-            max-height: 200px;
+            max-height: 150px;
           `}
         />
         <CommentSubmitButton
