@@ -76,9 +76,9 @@ export default function MapWebView ({ navigation }) {
       /*
 
         Required for emulator with the map but may be disadventageous for actual
-        devices as this has the effect of disabling hardware acceleration.
+        devices as this has the effect of disabling hardware acceleration:
 
-        https://github.com/react-native-webview/react-native-webview/issues/575#issuecomment-800997520
+        ref. https://github.com/react-native-webview/react-native-webview/issues/575#issuecomment-800997520
 
         * Map still may not render on some older Android OS versions / devices
           adding a check for Android API version here and switching value
