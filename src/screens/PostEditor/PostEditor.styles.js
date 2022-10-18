@@ -82,6 +82,7 @@ export default {
     color: amaranth
   },
   detailsInputWrapper: {
+    paddingBottom: 10
   },
   textInputPlaceholder: {
     fontSize: 16,
