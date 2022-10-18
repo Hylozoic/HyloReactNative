@@ -10,6 +10,7 @@ export default StyleSheet.create({
 
     // Card Box Shadow from Web:
     // 0 4px 10px rgba(35, 65, 91, 0.3)
+    // https://ethercreative.github.io/react-native-shadow-generator
     shadowColor: 'rgba(35, 65, 91, 0.3)',
     shadowOffset: {
       width: 0,

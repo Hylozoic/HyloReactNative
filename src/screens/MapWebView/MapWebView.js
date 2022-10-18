@@ -73,9 +73,17 @@ export default function MapWebView ({ navigation }) {
       ref={webViewRef}
       path={path}
       onMessage={handleMessage}
-      // Required for emulator with the map but may be disadventageous for actual
-      // devices as this has the effect of disabling hardware acceleration.
-      androidLayerType='software'
+      /*
+
+        Required for emulator with the map but may be disadventageous for actual
+        devices as this has the effect of disabling hardware acceleration.
+
+        * Map still may not render on some older Android OS versions / devices
+          adding a check for Android API version here and switching value
+          to 'software' for API < 28'ish API may fix those cases.
+
+      */
+      androidLayerType='hardware'
     />
   )
 }
