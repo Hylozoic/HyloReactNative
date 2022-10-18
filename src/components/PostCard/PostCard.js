@@ -29,8 +29,6 @@ export default class PostCard extends React.PureComponent {
     groups: array,
     imageUrls: array,
     topics: array,
-    fetchPost: func,
-    expanded: bool,
     showMember: func,
     showTopic: func
   }
@@ -122,7 +120,8 @@ const styles = {
     backgroundColor: 'white'
   },
   groups: {
-    paddingHorizontal: 12
+    paddingHorizontal: 12,
+    paddingBottom: 10
   },
   imageMargin: {
     marginBottom: 12
