@@ -8,7 +8,7 @@ export const CREATE_PROJECT = `${MODULE_NAME}/CREATE_PROJECT`
 export const UPDATE_POST = `${MODULE_NAME}/UPDATE_POST`
 export const UPDATE_POST_PENDING = `${UPDATE_POST}_PENDING`
 
-export const MAX_TITLE_LENGTH = 100
+export const MAX_TITLE_LENGTH = 50
 
 export function createPost (post) {
   const {
