@@ -611,6 +611,10 @@ export function Toolbar ({
           <Icon name='Announcement' style={styles.bottomBarAnnouncementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} />
         </TouchableOpacity>
       )}
+      {/* Extra `View` used to maintain flexbox layout of File and Image icons to the right */}
+      {!(!post?.id && canModerate) && (
+        <Text style={styles.bottomBarAnnouncement}></Text>
+      )}
       <TouchableOpacity onPress={onShowFilePicker}>
         <Icon
           name='Paperclip'
