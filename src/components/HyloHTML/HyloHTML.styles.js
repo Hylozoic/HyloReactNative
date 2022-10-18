@@ -16,7 +16,7 @@ export const tagsStyles = {
     marginBottom: '0.8em'
   },
   a: {
-    color: '#0275d8',
+    color: 'rgba(44, 64, 89, 0.7)',
     textDecorationLine: 'none'
   },
   ul: {

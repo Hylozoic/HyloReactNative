@@ -4,11 +4,11 @@ import { isIOS } from 'util/platform'
 const postPromptShape = {
   position: 'absolute',
   height: 52,
-  borderRadius: 4,
+  borderRadius: 2,
   left: 0,
   right: 0,
   bottom: -26,
-  marginHorizontal: 16
+  marginHorizontal: 12
 }
 
 const hasTextShadow = {
@@ -77,7 +77,7 @@ export default {
     paddingVertical: 8,
     backgroundColor: white,
     borderWidth: isIOS ? 0 : 1,
-    borderColor: capeCod10,
+    borderColor: capeCod10
   },
   promptShadow: {
     ...postPromptShape,
@@ -97,8 +97,7 @@ export default {
   },
   promptText: {
     color: capeCod40,
-    fontSize: 14,
-    fontStyle: 'italic'
+    fontSize: 14
   },
   unsubscribeButton: {
     width: 130,

@@ -5,7 +5,7 @@ const feedMargin = 16
 
 export default {
   container: {
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(225, 229, 233, 0.3)',
     flex: 1
   },
   listControls: {

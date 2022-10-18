@@ -1,10 +1,11 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { get, find, filter, sortBy } from 'lodash/fp'
+import LinearGradient from 'react-native-linear-gradient'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
 import { RESPONSES } from 'store/models/EventInvitation'
-import { caribbeanGreen, rhino30, rhino60, slateGrey80 } from 'style/colors'
+import { caribbeanGreen, rhino30, rhino60, slateGrey80, postCardLinearGradientColors } from 'style/colors'
 
 export default class PostFooter extends React.PureComponent {
   render () {
@@ -15,7 +16,7 @@ export default class PostFooter extends React.PureComponent {
       eventInvitations,
       members,
       myVote,
-      showActivityLabel,
+      forDetails,
       style,
       type,
       vote,
@@ -72,8 +73,8 @@ export default class PostFooter extends React.PureComponent {
 
     return (
       <>
-        {showActivityLabel && <Text style={styles.activityLabel}>ACTIVITY</Text>}
-        <View style={[styles.container, style]}>
+        <View style={styles.dashedBorder} />
+        <LinearGradient style={[styles.container, style]} colors={postCardLinearGradientColors}>
           <View style={styles.comments}>
             {avatarUrls.slice(0, 3).map((avatarUrl, index) => {
               return (
@@ -93,7 +94,10 @@ export default class PostFooter extends React.PureComponent {
             <Icon name='ArrowUp' style={[styles.votes.icon, voteStyle]} />
             <Text style={[styles.votes.text, voteStyle]}>{votesTotal}</Text>
           </TouchableOpacity>
-        </View>
+        </LinearGradient>
+        {forDetails && (
+          <View style={styles.dashedBorder} />
+        )}
       </>
     )
   }
@@ -145,9 +149,18 @@ const styles = {
     alignItems: 'center',
     paddingLeft: 12
   },
+  dashedBorder: {
+    height: 1,
+    width: '100%',
+    borderRadius: 1,
+    borderWidth: 1,
+    borderColor: 'rgba(54, 61, 60, 0.1)',
+    borderStyle: 'dashed'
+  },
   activityLabel: {
     color: rhino60,
     fontSize: 12,
+    paddingTop: 10,
     paddingLeft: 12,
     fontWeight: 'bold',
     fontFamily: 'Circular-Book',
@@ -159,7 +172,7 @@ const styles = {
     alignItems: 'center'
   },
   commentsText: {
-    paddingLeft: 0,
+    paddingLeft: 5,
     color: rhino30,
     fontSize: 13,
     fontFamily: 'Circular-Book'

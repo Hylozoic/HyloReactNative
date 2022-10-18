@@ -5,142 +5,96 @@ import {
   rhino30,
   white,
   rhino80,
-  rhino60
+  rhino60,
+  rhino,
+  amaranth
 } from 'style/colors'
 
-const typeSelectorDefaults = {
+const typeSelectorIOSDefaults = {
   fontSize: 14,
   fontWeight: 'bold',
   borderRadius: 5,
   borderWidth: 0,
   color: white,
-  padding: isIOS ? 20 : 10,
-  paddingLeft: 20,
-  paddingRight: 20
+  padding: isIOS ? 15 : 5,
+  paddingLeft: 15,
+  paddingRight: 15
 }
+
+const typeSelectAndroidDefaults = {
+  ...typeSelectorIOSDefaults,
+  padding: 10
+}
+
+export const typeSelectorStyles = postType => ({
+  icon: {
+    fontSize: 24,
+    marginTop: 12,
+    marginRight: 20,
+    color: POST_TYPES[postType].primaryColor
+  },
+  inputIOS: {
+    ...typeSelectorIOSDefaults,
+    backgroundColor: POST_TYPES[postType].backgroundColor,
+    color: POST_TYPES[postType].primaryColor
+  },
+  inputAndroid: {
+    ...typeSelectAndroidDefaults,
+    backgroundColor: POST_TYPES[postType].backgroundColor,
+    color: POST_TYPES[postType].primaryColor
+  }
+})
 
 export default {
   scrollContainer: {
     flex: 1,
     backgroundColor: 'white',
-    paddingHorizontal: 18
+    paddingHorizontal: 16
   },
   scrollContent: {
     paddingVertical: 12,
     paddingBottom: 200
   },
   textInputWrapper: {
+    // paddingVertical: 10,
     borderBottomWidth: 0.5,
     borderColor: rhino30
   },
   textInput: {
-    paddingVertical: 10,
     fontSize: 16,
+    textAlignVertical: 'top',
+    color: 'rgba(44, 64, 89, 0.7)',
     fontFamily: 'Circular-Book',
     margin: 0,
     padding: 0
   },
+  titleInputWrapper: {
+    paddingBottom: isIOS ? 10 : 0
+  },
+  titleInput: {
+    color: rhino,
+    fontSize: 19,
+    fontFamily: 'Circular-Medium',
+    padding: 0
+  },
+  titleInputError: {
+    fontSize: 14,
+    color: amaranth
+  },
+  detailsInputWrapper: {
+  },
   textInputPlaceholder: {
-    height: isIOS ? 22 : null,
     fontSize: 16,
     fontFamily: 'Circular-Book',
     color: rhino30
   },
   section: {
-    marginBottom: 12,
-    paddingBottom: 12
+    marginBottom: 10,
+    paddingBottom: 10
   },
   sectionLabel: {
     color: rhino80,
     fontFamily: 'Circular-Bold'
-  },
-
-  // Type Selector
-  typeSelector: {
-    row: {
-      marginTop: 0
-    },
-    icon: {
-      fontSize: 24,
-      marginTop: isIOS ? 16 : 12,
-      marginRight: 20,
-      color: rhino60
-    },
-    discussion: {
-      inputIOS: {
-        ...typeSelectorDefaults,
-        backgroundColor: POST_TYPES['discussion'].backgroundColor,
-        color: POST_TYPES['discussion'].primaryColor
-      },
-      inputAndroid: {
-        ...typeSelectorDefaults,
-        backgroundColor: POST_TYPES['discussion'].backgroundColor,
-        color: POST_TYPES['discussion'].primaryColor
-      },
-    },
-    event: {
-      inputIOS: {
-        ...typeSelectorDefaults,
-        backgroundColor: POST_TYPES['event'].backgroundColor,
-        color: POST_TYPES['event'].primaryColor
-      },
-      inputAndroid: {
-        ...typeSelectorDefaults,
-        backgroundColor: POST_TYPES['event'].backgroundColor,
-        color: POST_TYPES['event'].primaryColor
-      }
-    },
-    offer: {
-      inputIOS: {
-        ...typeSelectorDefaults,
-        backgroundColor: POST_TYPES['offer'].backgroundColor,
-        color: POST_TYPES['offer'].primaryColor
-      },
-      inputAndroid: {
-        ...typeSelectorDefaults,
-        backgroundColor: POST_TYPES['offer'].backgroundColor,
-        color: POST_TYPES['offer'].primaryColor
-      }
-    },
-    resource: {
-      inputIOS: {
-        ...typeSelectorDefaults,
-        backgroundColor: POST_TYPES['resource'].backgroundColor,
-        color: POST_TYPES['resource'].primaryColor
-      },
-      inputAndroid: {
-        ...typeSelectorDefaults,
-        backgroundColor: POST_TYPES['resource'].backgroundColor,
-        color: POST_TYPES['resource'].primaryColor
-      }
-    },
-    project: {
-      inputIOS: {
-        ...typeSelectorDefaults,
-        backgroundColor: POST_TYPES['project'].backgroundColor,
-        color: POST_TYPES['project'].primaryColor
-      },
-      inputAndroid: {
-        ...typeSelectorDefaults,
-        backgroundColor: POST_TYPES['project'].backgroundColor,
-        color: POST_TYPES['project'].primaryColor
-      }
-    },
-    request: {
-      inputIOS: {
-        ...typeSelectorDefaults,
-        backgroundColor: POST_TYPES['request'].backgroundColor,
-        color: POST_TYPES['request'].primaryColor
-      },
-      inputAndroid: {
-        ...typeSelectorDefaults,
-        backgroundColor: POST_TYPES['request'].backgroundColor,
-        color: POST_TYPES['request'].primaryColor
-      }
-    }
-  },
-  detailsEditor: {
-    minHeight: 50
   },
   topics: {
     justifyContent: 'center',
@@ -152,6 +106,7 @@ export default {
     fontSize: 16
   },
   pressSelection: {
+    backgroundColor: white,
     paddingVertical: 10,
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -159,7 +114,7 @@ export default {
     flexDirection: 'row'
   },
   pressSelectionLeft: {
-    color: rhino80,
+    color: caribbeanGreen,
     fontFamily: 'Circular-Bold'
   },
   pressSelectionRight: {
@@ -240,7 +195,7 @@ export default {
   bottomBarIcons: {
     flexDirection: 'row',
     flex: 1,
-    justifyContent: 'flex-end'
+    justifyContent: 'space-between'
   },
   bottomBarIcon: {
     paddingRight: 5,
@@ -250,19 +205,11 @@ export default {
   bottomBarIconLoading: {
     color: rhino30
   },
-  annoucementIcon: {
+  bottomBarAnnouncement: {
+    flex: 1
+    // alignSelf: 'flex-start',
+  },
+  bottomBarAnnouncementIcon: {
     fontSize: 46
-  },
-  errorView: {
-    marginTop: -18,
-    marginBottom: -23,
-    zIndex: 999
-  },
-  errorBubble: {
-    color: 'white',
-    backgroundColor: 'red'
-  },
-  errorRow: {
-    backgroundColor: 'red'
   }
 }

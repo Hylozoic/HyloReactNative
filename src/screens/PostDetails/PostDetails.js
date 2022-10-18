@@ -214,7 +214,7 @@ export function PostCardForDetails ({
         eventInvitations={post.eventInvitations}
         votesTotal={post.votesTotal}
         myVote={post.myVote}
-        showActivityLabel
+        forDetails
       />
     </View>
   )

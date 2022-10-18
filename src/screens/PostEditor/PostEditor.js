@@ -37,9 +37,8 @@ import DatePicker from 'react-native-date-picker'
 import ImagePicker from 'components/ImagePicker'
 import ImageSelector from './ImageSelector'
 import HyloEditorWebView from 'screens/HyloEditorWebView'
-import ErrorBubble from 'components/ErrorBubble'
 import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
-import styles from './PostEditor.styles'
+import styles, { typeSelectorStyles } from './PostEditor.styles'
 
 export default function (props) {
   const isFocused = useIsFocused()
@@ -399,27 +398,15 @@ export class PostEditor extends React.Component {
       groups, startTime, endTime, location, locationObject, topicsPicked
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
-    const toolbarProps = {
-      post,
-      canModerate,
-      filePickerPending,
-      announcementEnabled,
-      toggleAnnoucement: this.toggleAnnoucement,
-      showFilePicker: this.handleShowFilePicker,
-      addImage: this.handleAddImage,
-      showAlert: this.showAlert
-    }
 
     return (
       <>
-        <View style={[styles.typeSelector.row]}>
-          <TypeSelector
-            disabled={isSaving}
-            onValueChange={this.handleTypeOnChange}
-            placeholder={{}}
-            value={type}
-          />
-        </View>
+        <TypeSelector
+          disabled={isSaving}
+          onValueChange={this.handleTypeOnChange}
+          placeholder={{}}
+          value={type}
+        />
         <ScrollView
           ref={this.scrollViewRef}
           keyboardShouldPersistTaps='never'
@@ -429,44 +416,39 @@ export class PostEditor extends React.Component {
           overScrollMode='never'
         >
           <View style={styles.scrollContent}>
-            <Text style={styles.sectionLabel}>Title</Text>
-            <View style={[styles.section, styles.textInputWrapper]}>
+            <View style={[styles.titleInputWrapper]}>
+
               <TextInput
-                style={styles.textInput}
+                style={[styles.titleInput]}
                 editable={!isSaving}
                 onChangeText={this.handleUpdateTitle}
                 placeholder={titlePlaceholders[type]}
                 placeholderTextColor={rhino30}
                 underlineColorAndroid='transparent'
                 value={title}
+                multiline
+                numberOfLines={2}
+                blurOnSubmit
                 maxLength={MAX_TITLE_LENGTH}
               />
+              {titleLengthError && (
+                <Text style={styles.titleInputError}>😬 {MAX_TITLE_LENGTH} characters max</Text>
+              )}
             </View>
-            {titleLengthError && (
-              <View style={styles.errorView}>
-                <ErrorBubble
-                  customStyles={styles.errorBubble}
-                  errorRowStyle={styles.errorRow}
-                  text={`Title can't have more than ${MAX_TITLE_LENGTH} characters.`}
-                  topRightArrow
-                />
-              </View>
-            )}
 
-            <Text style={styles.sectionLabel}>Details</Text>
-            <View style={[styles.section, styles.textInputWrapper, styles.textInput]}>
+            <View style={[styles.textInputWrapper, styles.detailsInputWrapper]}>
               <HyloEditorWebView
-                placeholder={detailsPlaceholder}
+                placeholder='Add a description'
                 contentHTML={post?.details}
                 // groupIds={groupOptions && groupOptions.map(g => g.id)}
                 onChange={this.handleDetailsOnChange}
                 onAddTopic={!topicsPicked && this.handleAddTopic}
                 readOnly={postLoading || isSaving}
-                widthOffset={24}
                 ref={this.detailsEditorRef}
+                widthOffset={18}
                 customEditorCSS={`
-                  min-height: 50px;
-                  max-height: 140px;
+                  min-height: 100px;
+                  max-height: 200px;
                 `}
               />
             </View>
@@ -484,8 +466,6 @@ export class PostEditor extends React.Component {
                 <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.topicAdd} /></View>
               </View>
               <Topics onPress={this.handleRemoveTopic} topics={topics} />
-              {/* {topics.length < 1 &&
-                <Text style={styles.textInputPlaceholder}>{topicsPlaceholder}</Text>} */}
             </TouchableOpacity>
 
             {type === 'project' && (
@@ -553,7 +533,16 @@ export class PostEditor extends React.Component {
               />
             </TouchableOpacity>
 
-            <Toolbar {...toolbarProps} />
+            <Toolbar
+              post={post}
+              canModerate={canModerate}
+              filePickerPending={filePickerPending}
+              announcementEnabled={announcementEnabled}
+              toggleAnnoucement={this.toggleAnnoucement}
+              onShowFilePicker={this.handleShowFilePicker}
+              onAddImage={this.handleAddImage}
+              showAlert={this.showAlert}
+            />
 
             {!isEmpty(imageUrls) && (
               <ImageSelector
@@ -585,28 +574,25 @@ const titlePlaceholders = {
   request: 'What do you need help with?',
   offer: 'How do you want to help?',
   resource: 'What resource is available?',
-  project: 'What is your project called?'
+  project: 'What is your project called?',
+  event: 'What is your event called?'
 }
-
-const detailsPlaceholder = 'What else should we know?'
-
-const topicsPlaceholder = 'Add topics.'
 
 export function TypeSelector (props) {
   return (
     <RNPickerSelect
       {...props}
-      style={styles.typeSelector[props.value]}
+      style={typeSelectorStyles(props.value)}
       useNativeAndroidPickerStyle={false}
       items={
-        ['Discussion', 'Event', 'Offer', 'Resource', 'Project', 'Request'].map(type => ({
+        ['Discussion', 'Request', 'Offer', 'Resource', 'Project', 'Event'].map(type => ({
           label: type.toUpperCase(),
           value: type.toLowerCase(),
-          color: styles.typeSelector[type.toLowerCase()].inputIOS.color
+          color: typeSelectorStyles(type.toLowerCase()).inputIOS.color
         }))
       }
       Icon={() => (
-        <Icon name='ArrowDown' style={styles.typeSelector.icon} />
+        <Icon name='ArrowDown' style={typeSelectorStyles(props.value).icon} />
       )}
     />
   )
@@ -614,11 +600,16 @@ export function TypeSelector (props) {
 
 export function Toolbar ({
   post, canModerate, filePickerPending, announcementEnabled,
-  toggleAnnoucement, showFilePicker, addImage, showAlert
+  toggleAnnoucement, onShowFilePicker, onAddImage, showAlert
 }) {
   return (
     <View style={styles.bottomBarIcons}>
-      <TouchableOpacity onPress={showFilePicker}>
+      {!post?.id && canModerate && (
+        <TouchableOpacity onPress={toggleAnnoucement} style={styles.bottomBarAnnouncement}>
+          <Icon name='Announcement' style={styles.bottomBarAnnouncementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} />
+        </TouchableOpacity>
+      )}
+      <TouchableOpacity onPress={onShowFilePicker}>
         <Icon
           name='Paperclip'
           style={[styles.bottomBarIcon, filePickerPending && styles.bottomBarIconLoading]}
@@ -630,14 +621,9 @@ export function Toolbar ({
         type='post'
         id={post?.id}
         selectionLimit={10}
-        onChoice={addImage}
+        onChoice={onAddImage}
         onError={showAlert}
       />
-      {isEmpty(post) && canModerate && (
-        <TouchableOpacity onPress={toggleAnnoucement}>
-          <Icon name='Announcement' style={styles.annoucementIcon} color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'} />
-        </TouchableOpacity>
-      )}
     </View>
   )
 }

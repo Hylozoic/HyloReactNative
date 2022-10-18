@@ -66,6 +66,14 @@ export const bannerlinearGradientColors = [
   'rgba(0, 0, 0, 0.6)'
 ]
 
+// PostCard Footer gradient from Web
+// linear-gradient(180deg, rgba(225, 229, 233, 0.3) 0%, rgba(225, 229, 233, 0) 100%)
+export const postCardLinearGradientColors = [
+  'rgba(225, 229, 233, 0.3)',
+  'rgba(225, 229, 233, 0)'
+]
+
+
 export function fakeAlpha (color, alpha, background = '#ffffff') {
   const fg = tinycolor(color).toRgb()
   const bg = tinycolor(background).toRgb()

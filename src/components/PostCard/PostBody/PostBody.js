@@ -8,7 +8,7 @@ import HyloHTML from 'components/HyloHTML'
 import LinkPreview from 'components/PostCard/LinkPreview'
 import Icon from 'components/Icon'
 import PopupMenuButton from 'components/PopupMenuButton'
-import { caribbeanGreen, white, white20onCaribbeanGreen } from 'style/colors'
+import { caribbeanGreen, rhino, white, white20onCaribbeanGreen } from 'style/colors'
 
 const MAX_DETAILS_LENGTH = 144
 
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase'
   },
   title: {
-    color: '#363D3C',
+    color: rhino,
     fontSize: 19,
     fontFamily: 'Circular-Medium',
     marginBottom: 8,
