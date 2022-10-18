@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useImperativeHandle } from 'react'
 import { Dimensions } from 'react-native'
 import { WebViewMessageTypes } from 'hylo-shared'
+import { isIOS } from 'util/platform'
 import HyloWebView, { sendMessageFromWebView, parseWebViewMessage } from 'screens/HyloWebView'
 
 const DEFAULT_WIDTH_OFFSET_IOS = 18
@@ -8,19 +9,21 @@ const EMPTY_STATE = '<p></p>'
 
 export function HyloEditorWebView ({
   contentHTML: providedContentHTML,
-  placeholder,
-  readOnly,
   groupIds,
-  showMenu,
-  onUpdate,
   onAddTopic,
   onAddLink,
   onEnter,
+  onUpdate,
+  placeholder,
+  readOnly,
+  renderLoading = () => {},
+  showMenu,
+  widthOffset = 0,
+  // Only send `customEditorCSS`
+  // but here are all style options
   style,
   containerStyle,
-  customEditorCSS = '',
-  customStyle = '',
-  widthOffset = 0
+  customEditorCSS = ''
 }, ref) {
   const webViewRef = useRef()
   const [path] = useState('hyloApp/editor')
@@ -125,25 +128,35 @@ export function HyloEditorWebView ({
   return React.createElement(HyloWebView, {
     path,
     onMessage: handleMessage,
-    startInLoadingState: false,
+    renderLoading,
+    // Seems to help but when it's relied upon (e.g. PostEditor height)
+    // it causes 2 resizes and could probably be handled better otherwise
+    automaticallyAdjustContentInsets: false,
     customStyle: `
       .ProseMirror {
         height: auto;
-        overflow: scroll;
+        overflow: auto;
         ${customEditorCSS}
       }
 
-      ${customStyle}
+      /* Fix for disappearing vertical scrollbar in Android */
+
+      .ProseMirror::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      .ProseMirror::-webkit-scrollbar-thumb {
+        width: 4px;
+        background: #CCC;
+      }
     `,
-    // Related to getting auto-height right and scrolling:
-    scrollEnabled: false,
-    nestedScrollEnabled: true,
-    // This is critical for Android, but works fine when `false` on iOS ?
+    containerStyle,
+    hideKeyboardAccessoryView: true,
+    ref: webViewRef,
+    // This is critical for Android, but works fine when `false` on iOS and is better
+    // for predictable sizing.
     // also ref: https://github.com/iou90/react-native-autoheight-webview/issues/242
-    scalesPageToFit: true,
-    // Seems to help but when it's relied upon (e.g. PostEditor height)
-    // it causes 2 resizes and could probably be handled better otherwise
-    // automaticallyAdjustContentInsets: true,
+    scalesPageToFit: !isIOS,
     // they needed to be slightly different and that seems to work fine.
     style: [style, {
       // Note: See docs for `AutoHeightWebView`. Their recommendation for iOS:
@@ -152,11 +165,20 @@ export function HyloEditorWebView ({
       // Currently using a manually set `widthOffset` in `PostEditor` and `CommentEditor`
       width: Dimensions.get('window').width - DEFAULT_WIDTH_OFFSET_IOS - widthOffset
     }],
-    containerStyle,
-    ref: webViewRef,
-    showsVerticalScrollIndicator: true,
-    hideKeyboardAccessoryView: true
+    showsVerticalScrollIndicator: true
   })
 }
 
 export default React.forwardRef(HyloEditorWebView)
+
+// The way out of the Android disappearing vertical scrollbar maze!
+// .ProseMirror::-webkit-scrollbar {
+//   width: 5px;
+// }
+// .ProseMirror::-webkit-scrollbar-thumb {
+//   width: 10px;
+//   background: #AAA;
+// }
+
+// May still be needed on .ProseMirror, but probably not
+// height: auto;

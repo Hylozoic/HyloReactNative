@@ -52,9 +52,10 @@ export default {
   },
 
   submitButton: {
-    fontSize: 24,
-    lineHeight: 22,
+    fontSize: 26,
+    lineHeight: 24,
     marginLeft: 8,
+    marginRight: 4,
     color: gunsmoke
   },
 

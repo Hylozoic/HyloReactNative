@@ -39,9 +39,14 @@ const HyloWebView = forwardRef(function HyloWebView ({
         uri,
         headers: { cookie }
       }}
+      // FOR DEBUGGING ONLY: Never leave on in a production build...
+      // cacheMode='LOAD_NO_CACHE'
       geolocationEnabled
+      nestedScrollEnabled
+      // Probably needs to remain false for AutoHeight
+      scrollEnabled={false}
       sharedCookiesEnabled
-      viewportContent='width=device-width, user-scalable=no'
+      startInLoadingState
       // eslint-disable-next-line react-native/no-inline-styles
       style={[style, {
         // Avoids a known issue which can cause Android crashes
@@ -49,6 +54,8 @@ const HyloWebView = forwardRef(function HyloWebView ({
         opacity: 0.99,
         minHeight: 1
       }]}
+      // Recommended setting from AutoHeightWebView docs but doesn't work for us:
+      // viewportContent='width=device-width, user-scalable=no'
       {...forwardedProps}
     />
   )

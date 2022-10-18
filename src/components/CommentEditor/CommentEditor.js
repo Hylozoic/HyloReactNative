@@ -60,7 +60,7 @@ export const CommentEditor = forwardRef(function CommentEditor ({
   const handleDone = useCallback(() => {
     clearReplyingTo()
     editorRef?.current.clearContent()
-    // editorRef?.current.blur()
+    editorRef?.current.blur()
   }, [clearReplyingTo])
 
   const handleCancel = useCallback(() => {
@@ -98,13 +98,14 @@ export const CommentEditor = forwardRef(function CommentEditor ({
     editorRef.current = newEditorRef
   }, [])
 
+  // This is what is causing the bouncing
   useEffect(() => {
     if (replyingTo?.parentComment) {
       editorRef?.current.setContent(`<p>${TextHelpers.mentionHTML(replyingTo.creator)}&nbsp;</p>`)
       setTimeout(() => editorRef?.current.focus('end'), 100)
     } else {
       editorRef?.current.clearContent()
-      setTimeout(() => editorRef?.current.focus('end'), 100)
+      // setTimeout(() => editorRef?.current.focus('end'), 100)
     }
   }, [replyingTo?.id, replyingTo?.parentComment, replyingTo?.creator])
 
@@ -134,7 +135,7 @@ export const CommentEditor = forwardRef(function CommentEditor ({
           // groupIds={[groupId]}
           readOnly={submitting}
           ref={setEditorRef}
-          widthOffset={30}
+          widthOffset={isIOS ? 34 : 38}
           containerStyle={styles.htmlEditor}
           customEditorCSS={`
             padding: 8px;

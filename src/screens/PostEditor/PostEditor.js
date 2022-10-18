@@ -425,6 +425,7 @@ export class PostEditor extends React.Component {
                 placeholder={titlePlaceholders[type]}
                 placeholderTextColor={rhino30}
                 underlineColorAndroid='transparent'
+                autoCorrect={false}
                 value={title}
                 multiline
                 numberOfLines={2}
