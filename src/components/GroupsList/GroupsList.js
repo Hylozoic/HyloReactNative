@@ -7,10 +7,11 @@ import { caribbeanGreen } from 'style/colors'
 export default function GroupsList ({
   groups = [],
   columns = 2,
+  style,
   ...forwardedProps
 }) {
   return chunk(columns, groups).map(groupsRow => (
-    <View style={[styles.groupRow, styles.row]} key={groupsRow[0]?.id}>
+    <View style={[styles.groupRow, styles.row, style]} key={groupsRow[0]?.id}>
       {groupsRow.map(group => (
         <GroupCell group={group} {...forwardedProps} key={group?.id} />
       ))}
@@ -23,7 +24,7 @@ export function GroupCell ({ group, onPress, onRemove, RemoveIcon }) {
   const imageSource = { uri: avatarUrl || DEFAULT_AVATAR }
 
   return (
-    <>
+    <View style={styles.groupCellContainer}>
       <TouchableOpacity style={[styles.groupCell, styles.row]} onPress={() => onPress && onPress(group?.slug)}>
         <Image source={imageSource} style={styles.groupAvatar} />
         <Text style={[styles.linkText, styles.groupCell, !RemoveIcon && styles.linkTextSmaller]} numberOfLines={1}>{name}</Text>
@@ -31,13 +32,13 @@ export function GroupCell ({ group, onPress, onRemove, RemoveIcon }) {
       {RemoveIcon && (
         <TouchableOpacity
           style={styles.removeIcon}
-          hitSlop={{ top: 20, right: 20, left: 20, bottom: 20 }}
+          hitSlop={{ top: 5, right: 5, left: 5, bottom: 5 }}
           onPress={() => onRemove(group?.slug)}
         >
           <RemoveIcon />
         </TouchableOpacity>
       )}
-    </>
+    </View>
   )
 }
 
@@ -59,6 +60,11 @@ const styles = {
   linkTextSmaller: {
     fontSize: 13
   },
+  groupCellContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
   groupCell: {
     marginRight: 0,
     flex: 1
@@ -70,7 +76,6 @@ const styles = {
     marginRight: 9
   },
   removeIcon: {
-    fontSize: 20,
-    marginRight: 15
+    marginRight: 20
   }
 }

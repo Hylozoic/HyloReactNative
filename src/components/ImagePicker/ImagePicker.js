@@ -55,6 +55,7 @@ export default function ImagePicker (props) {
   const MenuElement = (disabled || pending)
     ? View
     : PopupMenuButton
+
   const imagePickerOptions = [
     ['Choose from library', showPicker],
     ['Take photo', showPickerCamera]
@@ -62,7 +63,10 @@ export default function ImagePicker (props) {
 
   return (
     <MenuElement actions={imagePickerOptions} style={style}>
-      {props.children || <Icon name='AddImage' style={[styles.icon, pending ? iconStyleLoading : iconStyle]} />}
+      {!props.children && props.renderPicker && props.renderPicker(pending)}
+      {!props.renderPicker && (props.children || (
+        <Icon name='AddImage' style={[styles.icon, pending ? iconStyleLoading : iconStyle]} />
+      ))}
     </MenuElement>
   )
 }

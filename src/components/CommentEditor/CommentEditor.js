@@ -14,6 +14,7 @@ import styles from './CommentEditor.styles'
 import { useDispatch } from 'react-redux'
 import Icon from 'components/Icon'
 import { firstName } from 'store/models/Person'
+import { rhino, rhino10 } from 'style/colors'
 
 export const KeyboardAccessoryCommentEditor = forwardRef(function KeyboardAccessoryCommentEditor ({
   renderScrollable,
@@ -33,6 +34,8 @@ export const KeyboardAccessoryCommentEditor = forwardRef(function KeyboardAccess
               ...styles.keyboardAccessoryContainerStyle,
               paddingBottom: isModal ? safeAreaInsets.bottom : 0
             }}
+            // These offsets are needed for iOS as it seems the tabbar may
+            // be included in the calculations before it is hidden.
             spaceBetweenKeyboardAndAccessoryView={isIOS ? -tabBarHeight : 0}
             contentOffsetKeyboardOpened={isIOS ? -tabBarHeight : 0}
             renderScrollable={renderScrollable}

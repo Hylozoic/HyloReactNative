@@ -7,7 +7,7 @@ export default function Loading ({
   size = 'small'
 }) {
   return (
-    <View style={[style, styles.container]}>
+    <View style={[styles.container, style]}>
       {/*
         NOTE: 'color' prop is required due to RN bug in 0.63.4.
         Without it being explcitely set the indicator will be invisble in Android.

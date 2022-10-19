@@ -126,9 +126,6 @@ export default React.memo(function PostHeader ({
   // const handleCopy = () => Clipboard.setString(TextHelpers.presentHTMLToText(post.details))
 
   const actionSheetActions = filter(x => x[1], [
-    [pinned ? 'Unpin' : 'Pin', pinPost, {
-      icon: <Icon name='Pin' style={[styles.actionSheetIcon, { fontSize: 30 }]} />
-    }],
     ['Edit this Post', editPost, {
       icon: <FontAwesome5Icon name='pencil-alt' style={styles.actionSheetIcon} />
     }],
@@ -138,6 +135,9 @@ export default React.memo(function PostHeader ({
     ['Flag this Post', flagPost, {
       icon: <FontAwesome5Icon name='flag' style={styles.actionSheetIcon} />,
       destructive: true
+    }],
+    [pinned ? 'Unpin' : 'Pin', pinPost, {
+      icon: <Icon name='Pin' style={[styles.actionSheetIcon, { fontSize: 30 }]} />
     }],
     ['Remove Post From Group', removePostWithConfirm, {
       icon: <FontAwesome5Icon name='trash-alt' style={styles.actionSheetIcon} />,

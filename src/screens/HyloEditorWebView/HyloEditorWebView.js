@@ -134,26 +134,37 @@ export function HyloEditorWebView ({
     automaticallyAdjustContentInsets: false,
     customStyle: `
       .ProseMirror {
+        /* May be needed, but probably not as this is default */
         height: auto;
-        overflow: auto;
+        overflow-y: scroll;
         ${customEditorCSS}
       }
 
-      /* Fix for disappearing vertical scrollbar in Android */
+      /*
+        Fix for disappearing vertical scrollbar in Android
+        having "overflow: auto" above was partial cause.
+
+        If we can make "scalesToFitPage: false" work on Android
+        this hack should be able to be dropped.
+      */
 
       .ProseMirror::-webkit-scrollbar {
-        width: 4px;
+        width: 5px;
       }
 
       .ProseMirror::-webkit-scrollbar-thumb {
-        width: 4px;
-        background: #CCC;
+        width: 5px;
+        border-radius: 1rem;
+        background: #AAA;
       }
     `,
     containerStyle,
     hideKeyboardAccessoryView: true,
     ref: webViewRef,
-    // This is critical for Android, but works fine when `false` on iOS and is better
+    // For debugging:
+    // onSizeUpdated: size => console.log(size.height),
+
+    // `true` seems critical for Android, but works fine when `false` on iOS and is better
     // for predictable sizing.
     // also ref: https://github.com/iou90/react-native-autoheight-webview/issues/242
     scalesPageToFit: !isIOS,
@@ -165,20 +176,10 @@ export function HyloEditorWebView ({
       // Currently using a manually set `widthOffset` in `PostEditor` and `CommentEditor`
       width: Dimensions.get('window').width - DEFAULT_WIDTH_OFFSET_IOS - widthOffset
     }],
+    // Not sure this matters and is the default for AutoHeight,
+    // setting here in case we set a different default for HyloWebView
     showsVerticalScrollIndicator: true
   })
 }
 
 export default React.forwardRef(HyloEditorWebView)
-
-// The way out of the Android disappearing vertical scrollbar maze!
-// .ProseMirror::-webkit-scrollbar {
-//   width: 5px;
-// }
-// .ProseMirror::-webkit-scrollbar-thumb {
-//   width: 10px;
-//   background: #AAA;
-// }
-
-// May still be needed on .ProseMirror, but probably not
-// height: auto;
