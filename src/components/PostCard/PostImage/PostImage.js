@@ -69,13 +69,14 @@ const styles = {
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-    padding: 8
+    justifyContent: 'flex-end'
   },
   backgroundImage: {
     resizeMode: 'cover'
   },
   thumbnailWrapper: {
+    paddingTop: 6,
+    paddingRight: 8,
     marginLeft: 8,
     marginTop: 8
   },

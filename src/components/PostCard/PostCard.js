@@ -122,8 +122,5 @@ const styles = {
   groups: {
     paddingHorizontal: 12,
     paddingBottom: 10
-  },
-  imageMargin: {
-    marginBottom: 12
   }
 }
