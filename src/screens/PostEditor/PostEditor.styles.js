@@ -5,7 +5,6 @@ import {
   rhino30,
   white,
   rhino80,
-  rhino60,
   rhino,
   amaranth
 } from 'style/colors'
@@ -13,47 +12,54 @@ import {
 const typeSelectorIOSDefaults = {
   fontSize: 14,
   fontWeight: 'bold',
+  letterSpacing: 0.2,
   borderRadius: 5,
-  borderWidth: 0,
+  borderWidth: 1,
   color: white,
-  padding: isIOS ? 15 : 5,
-  paddingLeft: 15,
-  paddingRight: 15
+  padding: isIOS ? 10 : 2,
+  paddingLeft: 8,
+  paddingRight: 30,
+  marginHorizontal: 10,
+  marginBottom: isIOS ? 10 : 3,
+  alignItems: 'center'
+  // justifyContent: 'flex-start'
 }
 
 const typeSelectAndroidDefaults = {
-  ...typeSelectorIOSDefaults,
-  padding: 10
+  ...typeSelectorIOSDefaults
 }
 
 export const typeSelectorStyles = postType => ({
   icon: {
-    fontSize: 24,
-    marginTop: 12,
-    marginRight: 20,
+    fontSize: 22,
+    marginTop: 2,
+    marginLeft: 0,
+    marginRight: 15,
     color: POST_TYPES[postType].primaryColor
   },
   inputIOS: {
     ...typeSelectorIOSDefaults,
-    backgroundColor: POST_TYPES[postType].backgroundColor,
+    backgroundColor: white,
+    borderColor: POST_TYPES[postType].primaryColor,
     color: POST_TYPES[postType].primaryColor
   },
   inputAndroid: {
     ...typeSelectAndroidDefaults,
-    backgroundColor: POST_TYPES[postType].backgroundColor,
+    backgroundColor: white,
+    borderColor: POST_TYPES[postType].primaryColor,
     color: POST_TYPES[postType].primaryColor
   }
 })
 
 export default {
   scrollContainer: {
-    flex: 1,
-    backgroundColor: 'white',
-    paddingHorizontal: 16
+    // flex: 1,
+    backgroundColor: 'white'
+    // paddingHorizontal: 16
   },
   scrollContent: {
     paddingVertical: 12,
-    paddingBottom: 200
+    paddingBottom: 50
   },
   textInputWrapper: {
     // paddingVertical: 10,
@@ -69,7 +75,8 @@ export default {
     padding: 0
   },
   titleInputWrapper: {
-    paddingBottom: isIOS ? 10 : 0
+    paddingBottom: isIOS ? 10 : 0,
+    paddingHorizontal: 10
   },
   titleInput: {
     color: rhino,
@@ -82,7 +89,8 @@ export default {
     color: amaranth
   },
   detailsInputWrapper: {
-    paddingBottom: 10
+    paddingBottom: isIOS ? 10 : 0,
+    paddingHorizontal: 10
   },
   textInputPlaceholder: {
     fontSize: 16,
@@ -102,45 +110,9 @@ export default {
     display: 'flex',
     flexDirection: 'column'
   },
-  topicAdd: {
-    color: caribbeanGreen,
-    fontSize: 16
-  },
-  pressSelection: {
-    backgroundColor: white,
-    paddingVertical: 10,
-    alignItems: 'center',
-    justifyContent: 'space-between',
+  topicPillBox: {
     display: 'flex',
     flexDirection: 'row'
-  },
-  pressSelectionLeft: {
-    color: caribbeanGreen,
-    fontFamily: 'Circular-Bold'
-  },
-  pressSelectionRight: {
-    height: 25,
-    width: 25,
-    marginHorizontal: 10,
-    borderColor: caribbeanGreen,
-    borderRadius: 100,
-    borderWidth: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  // Same as textInput without top padding
-  pressSelectionText: {
-    paddingVertical: 0,
-    paddingBottom: 5,
-    fontSize: 16,
-    color: caribbeanGreen,
-    fontFamily: 'Circular-Book',
-    margin: 0,
-    padding: 0
-  },
-  pressDisabled: {
-    color: rhino30
   },
   topicPill: {
     display: 'flex',
@@ -149,17 +121,15 @@ export default {
     borderRadius: 4,
     borderWidth: 1,
     borderColor: rhino30,
-    marginVertical: 10,
+    marginTop: 5,
     marginRight: 5,
-    paddingVertical: 5,
-    paddingHorizontal: 8
-  },
-  topicPillBox: {
-    display: 'flex',
-    flexDirection: 'row'
+    paddingVertical: 4,
+    paddingHorizontal: 7,
+    paddingRight: 5,
+    fontSize: 14
   },
   topicRemove: {
-    color: rhino30,
+    color: amaranth,
     fontSize: 16,
     marginLeft: 10
   },
@@ -174,32 +144,73 @@ export default {
     flexDirection: 'row',
     marginBottom: 0
   },
+  pressSelectionSection: {
+    borderBottomWidth: 0.5,
+    borderColor: rhino30,
+    paddingVertical: 10,
+    flex: 1,
+    justifyContent: 'center',
+    // backgroundColor: rhino30,
+    // marginBottom: 10,
+    // paddingBottom: isIOS ? 10 : 0
+  },
+  pressSelection: {
+    // backgroundColor: white,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    display: 'flex',
+    flexDirection: 'row',
+    paddingHorizontal: 10
+  },
+  pressSelectionLeft: {
+    color: caribbeanGreen,
+    // color: white,
+    fontFamily: 'Circular-Bold'
+  },
+  pressSelectionRight: {
+    height: 25,
+    width: 25,
+    borderColor: caribbeanGreen,
+    borderRadius: 100,
+    borderWidth: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  pressSelectionRightIcon: {
+    color: caribbeanGreen,
+    fontSize: 16
+  },
+  pressSelectionValue: {
+    margin: 0,
+    padding: 20,
+    paddingTop: 10,
+    paddingBottom: 5,
+    fontSize: 14,
+    color: caribbeanGreen,
+    fontFamily: 'Circular-Book'
+  },
+  pressDisabled: {
+    color: rhino30
+  },
   groupRemoveIcon: {
     color: rhino30,
-    fontSize: 16,
-    marginLeft: 10
+    fontSize: 20
   },
   imageSelector: {
     marginBottom: 10
   },
   bottomBar: {
-    flexDirection: 'row',
-    // borderTopWidth: StyleSheet.hairlineWidth,
-    // borderTopColor: capeCod40,
-    // backgroundColor: capeCod05,
-    // padding: isIOS ? 8 : 4,
-    // paddingBottom: isIOS ? 30 : 4,
-    // paddingLeft: isIOS ? 20 : 10,
-    // marginHorizontal: -16
-
-  },
-  bottomBarIcons: {
-    flexDirection: 'row',
     flex: 1,
-    justifyContent: 'space-between'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 10
+  },
+  bottomBarRight: {
+    flexDirection: 'row',
+    paddingRight: 20
   },
   bottomBarIcon: {
-    paddingRight: 5,
     fontSize: 46,
     color: caribbeanGreen
   },
@@ -208,9 +219,9 @@ export default {
   },
   bottomBarAnnouncement: {
     flex: 1
-    // alignSelf: 'flex-start',
   },
   bottomBarAnnouncementIcon: {
+    paddingLeft: 20,
     fontSize: 46
   }
 }
