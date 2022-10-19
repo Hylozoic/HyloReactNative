@@ -16,11 +16,11 @@ const typeSelectorIOSDefaults = {
   borderRadius: 5,
   borderWidth: 1,
   color: white,
-  padding: isIOS ? 10 : 2,
+  padding: isIOS ? 15 : 2,
   paddingLeft: 8,
   paddingRight: 30,
   marginHorizontal: 10,
-  marginBottom: isIOS ? 10 : 3,
+  marginBottom: isIOS ? 0 : 3,
   alignItems: 'center'
   // justifyContent: 'flex-start'
 }
