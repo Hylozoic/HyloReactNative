@@ -10,17 +10,17 @@ import {
 } from 'style/colors'
 
 const typeSelectorIOSDefaults = {
-  fontSize: 14,
+  fontSize: 16,
   fontWeight: 'bold',
   letterSpacing: 0.2,
   borderRadius: 5,
   borderWidth: 1,
   color: white,
-  padding: isIOS ? 15 : 2,
+  padding: isIOS ? 10 : 2,
   paddingLeft: 8,
   paddingRight: 30,
   marginHorizontal: 10,
-  marginBottom: isIOS ? 0 : 3,
+  marginBottom: isIOS ? 10 : 3,
   alignItems: 'center'
   // justifyContent: 'flex-start'
 }
@@ -31,8 +31,8 @@ const typeSelectAndroidDefaults = {
 
 export const typeSelectorStyles = postType => ({
   icon: {
-    fontSize: 22,
-    marginTop: isIOS ? 6 : 5,
+    fontSize: 23,
+    marginTop: isIOS ? 7 : 5,
     marginLeft: 0,
     marginRight: 15,
     color: POST_TYPES[postType].primaryColor

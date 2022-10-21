@@ -409,7 +409,7 @@ export class PostEditor extends React.Component {
         : 'Save'
     const styles1 = {
       headerContainer: {
-        height: 45,
+        height: 60,
         borderBottomWidth: 1,
         borderBottomColor: rhino30
       },
@@ -418,7 +418,9 @@ export class PostEditor extends React.Component {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: 5
+        paddingTop: 5,
+        paddingLeft: 10,
+        paddingRight: 10
       },
       headerCancelLink: {
         color: pictonBlue
@@ -428,24 +430,17 @@ export class PostEditor extends React.Component {
         borderColor: 'transparent',
         // marginLeft: 'auto',
         // marginRight: 10,
-        // marginBottom: 20,
+        // marginVertical: 10,
         height: 35,
-        fontSize: 16
+        fontSize: 19
       }
     }
     return (
       <View style={styles1.headerContainer}>
         <View style={styles1.header}>
           <TouchableOpacity onPress={this.handleOnCancel}>
-            <HeaderLeftCloseIcon color={rhino30} onPress={this.handleCancel} />
-            {/* <Text style={styles1.headerCancelLink}>Cancel</Text> */}
+            <HeaderLeftCloseIcon style={{ fontSize: 30 }} color={rhino30} onPress={this.handleCancel} />
           </TouchableOpacity>
-          <TypeSelector
-            disabled={isSaving}
-            onValueChange={this.handleTypeOnChange}
-            placeholder={{}}
-            value={type}
-          />
           <Button
             style={styles1.headerSaveButton}
             onPress={this.handleSave}
@@ -473,12 +468,12 @@ export class PostEditor extends React.Component {
         overScrollMode='never'
       >
         <View style={styles.scrollContent}>
-          {/* <TypeSelector
+          <TypeSelector
             disabled={isSaving}
             onValueChange={this.handleTypeOnChange}
             placeholder={{}}
             value={type}
-          /> */}
+          />
 
           <View style={[styles.titleInputWrapper]}>
             <TextInput
