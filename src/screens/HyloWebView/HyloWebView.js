@@ -9,6 +9,7 @@ const HyloWebView = forwardRef(function HyloWebView ({
   route,
   onShouldStartLoadWithRequest = () => true,
   style,
+  source,
   ...forwardedProps
 }, webViewRef) {
   const [cookie, setCookie] = useState()
@@ -16,8 +17,8 @@ const HyloWebView = forwardRef(function HyloWebView ({
 
   useEffect(() => {
     const path = pathProp || route?.params?.path
-    setUri(`${process.env.HYLO_WEB_BASE_URL}${path ? `/${path}` : ''}?layoutFlags=hyloApp`)
-  }, [pathProp, route?.params?.path])
+    setUri(source?.uri || `${process.env.HYLO_WEB_BASE_URL}${path ? `/${path}` : ''}?layoutFlags=hyloApp`)
+  }, [source?.uri, pathProp, route?.params?.path])
 
   useFocusEffect(
     useCallback(() => {

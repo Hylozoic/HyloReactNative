@@ -15,6 +15,10 @@ module.exports = {
     })
   },
   resolver: {
+    // Needs this if we want to try
+    // and load a static HTML file with local JS, CSS, and TTF references.
+    // * May need to makes-sure to carry-over defaults
+    // assetExts: ['html', 'css', 'jpg', 'png', 'ttf'],
     sourceExts: ['js', 'json', 'ts', 'tsx', 'cjs']
   }
 }
