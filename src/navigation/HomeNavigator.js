@@ -12,8 +12,8 @@ import MemberProfile from 'screens/MemberProfile'
 import MembersComponent from 'screens/Members'
 import PostDetails from 'screens/PostDetails'
 import ProjectMembers from 'screens/ProjectMembers/ProjectMembers'
-import TopicsComponent from 'screens/Topics'
 import MapWebView from 'screens/MapWebView/MapWebView'
+import AllTopicsWebView from 'screens/AllTopicsWebView/AllTopicsWebView'
 
 const HomeTab = createStackNavigator()
 export default function HomeNavigator () {
@@ -39,7 +39,7 @@ export default function HomeNavigator () {
       <HomeTab.Screen name='Member Details' component={MemberDetails} />
       <HomeTab.Screen name='Group Relationships' component={Groups} />
       <HomeTab.Screen name='Group Detail' component={GroupDetailWebView} />
-      <HomeTab.Screen name='Topics' component={TopicsComponent} />
+      <HomeTab.Screen name='Topics' component={AllTopicsWebView} />
       <HomeTab.Screen name='Map' component={MapWebView} />
     </HomeTab.Navigator>
   )
