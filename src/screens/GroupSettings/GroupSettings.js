@@ -151,14 +151,19 @@ export class GroupBanner extends React.Component {
     bannerLocalUri: null
   }
 
-  onChoice ({ local, remote }, prefix) {
-    const localKey = `${prefix}LocalUri`
-    const remoteKey = `${prefix}Url`
-    this.setState({
-      [localKey]: local
-    })
+  handleBannerImageUpload ({ local, remote }, prefix) {
+    // TODO: Show loading indicator over local image until remote is available
+    // and don't `updateGroupSettings` until remote image is available.
+    // See use in PostEditor.
+    if (remote) {
+      const localKey = `${prefix}LocalUri`
+      const remoteKey = `${prefix}Url`
+      this.setState({
+        [localKey]: local
+      })
 
-    this.props.updateGroupSettings({ [remoteKey]: remote })
+      this.props.updateGroupSettings({ [remoteKey]: remote })
+    }
   }
 
   render () {
@@ -189,7 +194,7 @@ export class GroupBanner extends React.Component {
           type='groupBanner'
           style={styles.bannerImagePicker}
           id={id}
-          onChoice={choice => this.onChoice(choice, 'banner')}
+          onChoice={choice => this.handleBannerImageUpload(choice, 'banner')}
           onPendingChange={pending => this.setState({ bannerPickerPending: pending })}
         >
           <Image source={bannerSource} style={styles.bannerImage} />
@@ -201,7 +206,7 @@ export class GroupBanner extends React.Component {
             title='Change Avatar'
             type='groupAvatar'
             id={id}
-            onChoice={choice => this.onChoice(choice, 'avatar')}
+            onChoice={choice => this.handleBannerImageUpload(choice, 'avatar')}
             onPendingChange={pending => this.setState({ avatarPickerPending: pending })}
           >
             <View style={styles.avatarWrapper}>

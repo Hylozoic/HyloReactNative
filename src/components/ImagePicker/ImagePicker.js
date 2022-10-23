@@ -5,7 +5,7 @@ import { launchImageLibrary, launchCamera } from 'react-native-image-picker'
 import PopupMenuButton from 'components/PopupMenuButton'
 
 /*
-Example usage:
+  Example usage:
 
   <ImagePicker
     title='Pick an image'
@@ -15,8 +15,9 @@ Example usage:
     {state.imagePickerPending ? showOneThing : showAnother}
   </ImagePicker>
 
-if you don't pass any children, icons of an image and a clock will be shown for
-non-pending and pending states respectively
+  NOTE: `onChoice` will be called twice, once with only a `local` image URI. and a second
+  time with a value also for `remote` which indicates that uploading to the server has completed.
+  `pending` will remain true until the upload is complete.
 */
 
 export default function ImagePicker (props) {
@@ -111,6 +112,9 @@ export async function showImagePicker ({
               name: asset.fileName,
               type: asset.type
             }
+
+            onChoice && onChoice({ local: asset.uri, remote: null })
+
             const { payload, error } = await upload(type, id, file)
 
             if (error) {

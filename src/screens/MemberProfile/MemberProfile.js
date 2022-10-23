@@ -101,14 +101,19 @@ export class MemberBanner extends React.Component {
     bannerLocalUri: null
   }
 
-  onChoice ({ local, remote }, prefix) {
-    const localKey = `${prefix}LocalUri`
-    const remoteKey = `${prefix}Url`
-    this.setState({
-      [localKey]: local
-    })
+  handleBannerImageUpload ({ local, remote }, prefix) {
+    // TODO: Show loading indicator over local image until remote is available
+    // and don't `updateGroupSettings` until remote image is available.
+    // See use in PostEditor.
+    if (remote) {
+      const localKey = `${prefix}LocalUri`
+      const remoteKey = `${prefix}Url`
+      this.setState({
+        [localKey]: local
+      })
 
-    this.props.updateUserSettings({ [remoteKey]: remote })
+      this.props.updateUserSettings({ [remoteKey]: remote })
+    }
   }
 
   render () {
@@ -140,7 +145,7 @@ export class MemberBanner extends React.Component {
           type='userBanner'
           style={styles.bannerImagePicker}
           id={id}
-          onChoice={choice => this.onChoice(choice, 'banner')}
+          onChoice={choice => this.handleBannerImageUpload(choice, 'banner')}
           onPendingChange={pending => this.setState({ bannerPickerPending: pending })}
           disabled={!isMe}
         >
@@ -153,7 +158,7 @@ export class MemberBanner extends React.Component {
             title='Change Avatar'
             type='userAvatar'
             id={id}
-            onChoice={choice => this.onChoice(choice, 'avatar')}
+            onChoice={choice => this.handleBannerImageUpload(choice, 'avatar')}
             onPendingChange={pending => this.setState({ avatarPickerPending: pending })}
             disabled={!isMe}
           >

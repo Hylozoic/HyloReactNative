@@ -28,9 +28,14 @@ export default function SignupUploadAvatar ({ navigation }) {
     })
   })
 
-  const onChoice = ({ local, remote }) => {
-    setAvatarUrl(remote)
-    setAvatarImageSource({ uri: local })
+  const handleAvatarImageUpload = ({ local, remote }) => {
+    // TODO: Show loading indicator over local image until remote is available
+    // and don't `updateGroupSettings` until remote image is available.
+    // See use in PostEditor.
+    if (remote) {
+      setAvatarUrl(remote)
+      setAvatarImageSource({ uri: local })
+    }
   }
 
   const saveAndNext = async () => {
@@ -50,7 +55,7 @@ export default function SignupUploadAvatar ({ navigation }) {
             type='userAvatar'
             cameraType='front'
             id={currentUser.id}
-            onChoice={choice => onChoice(choice)}
+            onChoice={handleAvatarImageUpload}
             onPendingChange={pending => setImagePickerPending(pending)}
           >
             {avatarImageSource && !imagePickerPending

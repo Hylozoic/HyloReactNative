@@ -16,11 +16,11 @@ const typeSelectorIOSDefaults = {
   borderRadius: 5,
   borderWidth: 1,
   color: white,
-  padding: isIOS ? 10 : 2,
+  padding: isIOS ? 6 : 2,
   paddingLeft: 8,
   paddingRight: 30,
-  marginHorizontal: 10,
-  marginBottom: isIOS ? 10 : 3,
+  marginHorizontal: 0,
+  marginBottom: isIOS ? 0 : 0,
   alignItems: 'center'
   // justifyContent: 'flex-start'
 }
@@ -34,7 +34,7 @@ export const typeSelectorStyles = postType => ({
     fontSize: 23,
     marginTop: isIOS ? 7 : 5,
     marginLeft: 0,
-    marginRight: 15,
+    marginRight: 5,
     color: POST_TYPES[postType].primaryColor
   },
   inputIOS: {
@@ -52,14 +52,40 @@ export const typeSelectorStyles = postType => ({
 })
 
 export default {
-  scrollContainer: {
-    // flex: 1,
-    backgroundColor: 'white'
-    // paddingHorizontal: 16
+  headerContainer: {
+    height: 60,
+    borderBottomWidth: 1,
+    borderBottomColor: rhino30
   },
-  scrollContent: {
-    paddingVertical: 12,
-    paddingBottom: 50
+  header: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingTop: 5,
+    paddingLeft: 10,
+    paddingRight: 10
+  },
+  headerCloseIcon: {
+    padding: 0,
+    fontSize: 34
+  },
+  headerSaveButton: {
+    width: '25%',
+    borderColor: 'transparent',
+    // marginLeft: 'auto',
+    // marginRight: 10,
+    // marginVertical: 10,
+    height: 35,
+    fontSize: 18
+  },
+  formWrapper: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  formContent: {
+    paddingVertical: 12
   },
   textInputWrapper: {
     // paddingVertical: 10,
@@ -191,14 +217,16 @@ export default {
     fontFamily: 'Circular-Book'
   },
   pressDisabled: {
-    color: rhino30
+    color: rhino30,
+    borderColor: rhino30
   },
   groupRemoveIcon: {
     color: rhino30,
     fontSize: 20
   },
   imageSelector: {
-    marginBottom: 10
+    marginBottom: 10,
+    flex: 1
   },
   bottomBar: {
     flex: 1,

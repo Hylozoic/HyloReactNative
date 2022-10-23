@@ -1,4 +1,5 @@
 import { Dimensions } from 'react-native'
+import { black10onRhino } from 'style/colors'
 
 export default imageCount => {
   const containerWidth = Dimensions.get('window').width - 25
@@ -22,6 +23,13 @@ export default imageCount => {
       height: imageWidth,
       resizeMode: 'cover',
       borderRadius: 4
+    },
+    imageLoading: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: black10onRhino,
+      opacity: 0.5
     }
   }
 }

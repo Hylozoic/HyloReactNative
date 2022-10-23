@@ -1,13 +1,13 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, { useState } from 'react'
 import {
-  FlatList,
+  Alert,
+  KeyboardAvoidingView,
   ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
-  Alert
+  View
 } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select'
 import { useIsFocused } from '@react-navigation/native'
@@ -17,7 +17,7 @@ import { Validators } from 'hylo-shared'
 import { isIOS } from 'util/platform'
 import { showToast, hideToast } from 'util/toast'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
-import { pictonBlue, rhino30, white } from 'style/colors'
+import { amaranth, caribbeanGreen, rhino30, white } from 'style/colors'
 // import { ModalHeader } from 'navigation/headers'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 // TODO: Convert all 3 of the below to LocationPicker style calls
@@ -63,7 +63,11 @@ export class PostEditor extends React.Component {
       title: post?.title || '',
       type: post?.type || 'discussion',
       groups: post?.groups || [],
-      imageUrls: post?.imageUrls || [],
+      images: post?.imageUrls
+        ? post
+          .imageUrls
+          .map(imageUrl => ({ remote: imageUrl, local: imageUrl }))
+        : [],
       fileUrls: post?.fileUrls || [],
       topics: post?.topics || [],
       members: post?.members || [],
@@ -82,6 +86,7 @@ export class PostEditor extends React.Component {
       locationObject: post?.locationObject,
       startTimeExpanded: false,
       endTimeExpanded: false,
+      isValid: post?.id,
       isSaving: false
     }
   }
@@ -110,18 +115,6 @@ export class PostEditor extends React.Component {
     return nextProps.isFocused
   }
 
-  handleDetailsOnChange = details => {
-    this.setState({ details })
-  }
-
-  handleTypeOnChange = type => {
-    this.setState({ type }, this.renderReactNavigationHeader)
-  }
-
-  setIsSaving = isSaving => {
-    this.setState({ isSaving }, this.renderReactNavigationHeader)
-  }
-
   save = async () => {
     if (!this.detailsEditorRef?.current) {
       this.setIsSaving(false)
@@ -133,7 +126,7 @@ export class PostEditor extends React.Component {
       navigation, post
     } = this.props
     const {
-      fileUrls, imageUrls, title,
+      fileUrls, images, title,
       topics, type, announcementEnabled, members,
       groups, startTime, endTime, location,
       locationObject
@@ -145,7 +138,7 @@ export class PostEditor extends React.Component {
       groups,
       memberIds: members.map(m => m.id),
       fileUrls: uniq(fileUrls),
-      imageUrls: uniq(imageUrls),
+      imageUrls: uniq(images.filter(image => image.remote).map(image => image.remote)),
       title,
       sendAnnouncement: announcementEnabled,
       topicNames: topics.map(t => t.name),
@@ -156,18 +149,6 @@ export class PostEditor extends React.Component {
     }
 
     try {
-      if (!postData.title) {
-        throw new Error('Title cannot be blank')
-      }
-
-      if (postData.title.length >= MAX_TITLE_LENGTH) {
-        throw new Error(`Title cannot be more than ${MAX_TITLE_LENGTH} characters`)
-      }
-
-      if (isEmpty(postData.groups)) {
-        throw new Error('You must select a group')
-      }
-
       const saveAction = postData.id
         ? updatePost
         : postData.type === 'project'
@@ -190,7 +171,7 @@ export class PostEditor extends React.Component {
 
   handleSave = () => {
     const { announcementEnabled } = this.state
-    // this.setState({ isSaving: true })
+
     this.setIsSaving(true)
 
     if (announcementEnabled) {
@@ -214,67 +195,58 @@ export class PostEditor extends React.Component {
   }
 
   handleCancel = () => {
-    confirmDiscardChanges({ onDiscard: () => this.props.navigation.goBack() })
-    // confirmDiscardChanges({
-    //   title: '',
-    //   confirmationMessage: "We're almost done, are you sure you want to cancel signing-up?",
-    //   disgardButtonText: 'Yes',
-    //   continueButtonText: 'No',
-    //   onDiscard: () => {
-    //     dispatch(logout())
-    //     navigation.navigate('Signup Intro')
-    //   }
-    // })
-  }
-
-  handleAddImage = ({ local, remote }) => {
-    // TODO: use `local` to avoid unnecessary network activity
-    this.setState({
-      imageUrls: uniq(this.state.imageUrls.concat(remote))
+    confirmDiscardChanges({
+      onDiscard: () => this.props.navigation.goBack(),
+      title: 'Are you sure?',
+      confirmationMessage: 'If you made changes they will be lost.'
     })
   }
 
-  handleRemoveImage = url => {
-    this.setState(() => ({
-      imageUrls: this.state.imageUrls.filter(u => u !== url)
-    }))
+  setIsSaving = isSaving => {
+    this.setState({ isSaving }, this.setIsValid)
   }
 
-  handleAddFile = ({ local, remote }) => {
-    this.setState(() => ({
-      fileUrls: uniq(this.state.fileUrls.concat(remote))
-    }))
+  setIsValid = (updatedState = {}) => {
+    const { type, title, groups, startTime, endTime } = Object.assign(
+      {},
+      this.state,
+      updatedState
+    )
+
+    if (
+      (!title || title.length < 1) ||
+      isEmpty(groups) ||
+      (type === 'event' && (!startTime || !endTime))
+    ) {
+      this.setState({ isValid: false }, this.renderReactNavigationHeader)
+    } else {
+      this.setState({ isValid: true }, this.renderReactNavigationHeader)
+    }
   }
 
-  handleAddGroup = group => {
-    this.setState(state => ({
-      groups: uniqBy(
-        c => c.id,
-        [...this.state.groups, group]
-      )
-    }))
+  handleUpdateType = type => {
+    this.setState({ type }, this.setIsValid)
   }
 
-  handleRemoveGroup = groupSlug => {
-    this.setState(state => ({
-      groups: state.groups.filter(group => group.slug !== groupSlug)
-    }))
+  handleUpdateTitle = title => {
+    switch (title.length >= MAX_TITLE_LENGTH) {
+      case true:
+        this.setState({ titleLengthError: true }, this.setIsValid)
+        break
+      case false:
+        this.setState({ title, titleLengthError: false }, this.setIsValid)
+        break
+    }
   }
 
-  handleRemoveFile = url => {
-    this.setState({
-      fileUrls: this.state.fileUrls.filter(u => u !== url)
-    })
+  handleUpdateDetails = details => {
+    this.setState({ details }, this.setIsValid)
   }
-
-  showAlert = msg => Alert.alert(msg)
-
-  ignoreHash = name => name[0] === '#' ? name.slice(1) : name
 
   // Assumptions:
-  //  - a maximum of three topics per post are allowed
-  //  - topics must be unique
-  //  - priority is given to topics already on the post (preserve order)
+  // - maximum of three topics per post are allowed
+  // - topics must be unique
+  // - priority is given to topics already on the post (preserve order)
   handleAddTopic = (providedTopic, picked) => {
     const topic = { ...providedTopic, name: this.ignoreHash(providedTopic.name) }
 
@@ -291,29 +263,56 @@ export class PostEditor extends React.Component {
     topicsPicked: true
   })
 
-  toggleAnnoucement = () => {
-    this.toast && hideToast(this.toast)
-    this.toast = showToast(`announcement ${!this.state.announcementEnabled ? 'on' : 'off'}`, { isError: this.state.announcementEnabled })
-    this.setState({ announcementEnabled: !this.state.announcementEnabled })
+  handlePickLocation = locationObject => {
+    this.setState(() => ({ location: locationObject.fullText, locationObject }))
   }
 
-  handleUpdateTitle = title => {
-    switch (title.length >= MAX_TITLE_LENGTH) {
-      case true:
-        this.setState({ titleLengthError: true })
-        break
-      case false:
-        this.setState({ titleLengthError: false })
-        this.setState({ title })
-        break
+  handleUpdateProjectMembers = members => this.setState(state => ({ members }))
+
+  handleAddGroup = group => {
+    const groups = uniqBy(c => c.id, [...this.state.groups, group])
+
+    this.setState({ groups }, this.setIsValid)
+  }
+
+  handleRemoveGroup = groupSlug => {
+    this.setState(state => ({
+      groups: state.groups.filter(group => group.slug !== groupSlug)
+    }))
+  }
+
+  handleAddImage = ({ local, remote }) => {
+    let { images = [] } = this.state
+    const existingImageIndex = images.findIndex(image => image.local === local)
+
+    if (existingImageIndex >= 0) {
+      images[existingImageIndex].remote = remote
+    } else {
+      images = [...images, { local, remote }]
     }
+
+    // NOTE: `uniqBy` de-duping of local file uploads here won't do
+    // anything at least in iOS, as each file selection is copied into
+    // a unique `tmp` location on the device each time it's selected.
+    this.setState({ images: uniqBy('local', images) })
   }
 
-  updateMembers = members => this.setState(state => ({ members }))
+  handleRemoveImage = ({ local }) => {
+    this.setState(() => ({
+      images: this.state.images.filter(image => image.local !== local)
+    }))
+  }
 
-  handleDatePickerExpand = key => () => {
-    this.scrollViewRef.current.scrollTo({ x: 20 })
-    // this.scrollViewRef.current.scroll()
+  handleAddFile = ({ local, remote }) => {
+    this.setState(() => ({
+      fileUrls: uniq(this.state.fileUrls.concat(remote))
+    }))
+  }
+
+  handleRemoveFile = url => {
+    this.setState({
+      fileUrls: this.state.fileUrls.filter(u => u !== url)
+    })
   }
 
   handleShowProjectMembersEditor = () => {
@@ -325,7 +324,7 @@ export class PostEditor extends React.Component {
       searchPlaceholder: 'Type in the names of people to add to project',
       ItemRowComponent: ItemChooserItemRow,
       initialItems: members,
-      updateItems: this.updateMembers,
+      updateItems: this.handleUpdateProjectMembers,
       fetchSearchSuggestions: scopedFetchPeopleAutocomplete,
       getSearchSuggestions: scopedGetPeopleAutocomplete(screenTitle)
     })
@@ -369,10 +368,6 @@ export class PostEditor extends React.Component {
     })
   }
 
-  handlePickLocation = locationObject => {
-    this.setState(() => ({ location: locationObject.fullText, locationObject }))
-  }
-
   handleShowFilePicker = async () => {
     this.setState({ filePickerPending: true })
     await fileSelectorShowFilePicker({
@@ -386,6 +381,19 @@ export class PostEditor extends React.Component {
     })
   }
 
+  toggleAnnoucement = () => {
+    this.toast && hideToast(this.toast)
+    this.toast = showToast(
+      `announcement ${!this.state.announcementEnabled ? 'on' : 'off'}`,
+      { isError: this.state.announcementEnabled }
+    )
+    this.setState({ announcementEnabled: !this.state.announcementEnabled })
+  }
+
+  showAlert = msg => Alert.alert(msg)
+
+  ignoreHash = name => name[0] === '#' ? name.slice(1) : name
+
   renderReactNavigationHeader = () => {
     const { navigation } = this.props
 
@@ -396,53 +404,28 @@ export class PostEditor extends React.Component {
   }
 
   renderHeader = () => {
-    const { isSaving, isNewPost, type } = this.state
-    // const { navigation } = this.props
-    const subject = capitalize(this.state?.type || '')
-    const title = isNewPost
-      ? `New ${subject}`
-      : `Edit ${subject}`
+    const { isValid, isSaving, isNewPost, type } = this.state
     const headerRightButtonLabel = isSaving
       ? 'Saving...'
       : isNewPost
         ? 'Post'
         : 'Save'
-    const styles1 = {
-      headerContainer: {
-        height: 60,
-        borderBottomWidth: 1,
-        borderBottomColor: rhino30
-      },
-      header: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingTop: 5,
-        paddingLeft: 10,
-        paddingRight: 10
-      },
-      headerCancelLink: {
-        color: pictonBlue
-      },
-      headerSaveButton: {
-        width: '25%',
-        borderColor: 'transparent',
-        // marginLeft: 'auto',
-        // marginRight: 10,
-        // marginVertical: 10,
-        height: 35,
-        fontSize: 19
-      }
-    }
+
     return (
-      <View style={styles1.headerContainer}>
-        <View style={styles1.header}>
+      <View style={styles.headerContainer}>
+        <View style={styles.header}>
           <TouchableOpacity onPress={this.handleOnCancel}>
-            <HeaderLeftCloseIcon style={{ fontSize: 30 }} color={rhino30} onPress={this.handleCancel} />
+            <HeaderLeftCloseIcon style={styles.headerCloseIcon} color={rhino30} onPress={this.handleCancel} />
           </TouchableOpacity>
+          <TypeSelector
+            disabled={isSaving}
+            onValueChange={this.handleUpdateType}
+            placeholder={{}}
+            value={type}
+          />
+          <Text>{isValid ? 'YES' : 'NO'}</Text>
           <Button
-            style={styles1.headerSaveButton}
+            style={styles.headerSaveButton}
             onPress={this.handleSave}
             text={headerRightButtonLabel}
           />
@@ -461,20 +444,8 @@ export class PostEditor extends React.Component {
     const canHaveTimeframe = type !== 'discussion'
 
     return (
-      <ScrollView
-        ref={this.scrollViewRef}
-        style={styles.scrollContainer}
-        // May crash Android due to WebView editor without this
-        overScrollMode='never'
-      >
-        <View style={styles.scrollContent}>
-          <TypeSelector
-            disabled={isSaving}
-            onValueChange={this.handleTypeOnChange}
-            placeholder={{}}
-            value={type}
-          />
-
+      <>
+        <View style={styles.formContent}>
           <View style={[styles.titleInputWrapper]}>
             <TextInput
               style={[styles.titleInput]}
@@ -500,7 +471,7 @@ export class PostEditor extends React.Component {
               placeholder='Add a description'
               contentHTML={post?.details}
               // groupIds={groupOptions && groupOptions.map(g => g.id)}
-              onChange={this.handleDetailsOnChange}
+              onChange={this.handleUpdateDetails}
               onAddTopic={!topicsPicked && this.handleAddTopic}
               readOnly={postLoading || isSaving}
               ref={this.detailsEditorRef}
@@ -540,7 +511,7 @@ export class PostEditor extends React.Component {
                 label='Start Time'
                 date={startTime}
                 minimumDate={new Date()}
-                onSelect={date => this.setState({ startTime: date })}
+                onSelect={startTime => this.setState({ startTime }, this.setIsValid)}
               />
               <DatePickerWithLabel
                 style={styles.pressSelectionSection}
@@ -548,7 +519,7 @@ export class PostEditor extends React.Component {
                 disabled={!startTime}
                 date={endTime}
                 minimumDate={startTime || new Date()}
-                onSelect={date => this.setState({ endTime: date })}
+                onSelect={endTime => this.setState({ endTime }, this.setIsValid)}
               />
             </>
           )}
@@ -597,20 +568,21 @@ export class PostEditor extends React.Component {
             showAlert={this.showAlert}
           />
         </View>
-      </ScrollView>
+        {this.renderFilesAndImages()}
+      </>
     )
   }
 
   renderFilesAndImages = () => {
-    const { fileUrls, imageUrls } = this.state
+    const { fileUrls, images } = this.state
 
     return (
       <>
-        {!isEmpty(imageUrls) && (
+        {!isEmpty(images) && (
           <ImageSelector
             onAdd={this.handleAddImage}
             onRemove={this.handleRemoveImage}
-            imageUrls={imageUrls}
+            images={images}
             style={styles.imageSelector}
             type='post'
           />
@@ -630,13 +602,21 @@ export class PostEditor extends React.Component {
 
   render () {
     return (
-      <FlatList
-        keyboardShouldPersistTaps='never'
-        keyboardDismissMode={isIOS ? 'interactive' : 'on-drag'}
-        ListHeaderComponent={this.renderForm}
-        ListFooterComponent={this.renderFilesAndImages}
-        data={[]}
-      />
+      <KeyboardAvoidingView
+        style={styles.formWrapper}
+        behavior={isIOS ? 'padding' : null}
+        keyboardVerticalOffset={isIOS ? 110 : 80}
+      >
+        <ScrollView
+          ref={this.scrollViewRef}
+          keyboardShouldPersistTaps='never'
+          keyboardDismissMode={isIOS ? 'interactive' : 'on-drag'}
+          // Avoids a known issue on Android with overscroll and WebViews
+          overScrollMode='never'
+        >
+          {this.renderForm()}
+        </ScrollView>
+      </KeyboardAvoidingView>
     )
   }
 }
@@ -686,7 +666,7 @@ export function Toolbar ({
             <Icon
               name='Announcement'
               style={styles.bottomBarAnnouncementIcon}
-              color={announcementEnabled ? 'caribbeanGreen' : 'rhino30'}
+              color={announcementEnabled ? amaranth : caribbeanGreen}
             />
           </TouchableOpacity>
         )}
@@ -791,8 +771,8 @@ export function DatePickerWithLabel ({
           <Text style={[styleTemplate.labelText, disabled && styleTemplate.disabled]}>
             {label}
           </Text>
-          <View style={styleTemplate.expandIconWrapper}>
-            <Icon name='ArrowDown' style={styleTemplate.expandIcon} />
+          <View style={[styleTemplate.expandIconWrapper, disabled && styleTemplate.disabled]}>
+            <Icon name='ArrowDown' style={[styleTemplate.expandIcon, disabled && styleTemplate.disabled]} />
           </View>
         </View>
         {date && !open && (
@@ -813,6 +793,14 @@ export function DatePickerWithLabel ({
     </>
   )
 }
+
+// <FlatList
+//   keyboardShouldPersistTaps='never'
+//   keyboardDismissMode={isIOS ? 'interactive' : 'on-drag'}
+//   ListHeaderComponent={this.renderForm}
+//   ListFooterComponent={this.renderFilesAndImages}
+//   data={[]}
+// />
 
 // renderReactNavigationHeader = () => {
 //   const { isSaving, isNewPost } = this.state
