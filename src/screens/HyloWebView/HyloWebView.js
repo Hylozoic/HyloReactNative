@@ -17,6 +17,7 @@ const HyloWebView = forwardRef(function HyloWebView ({
 
   useEffect(() => {
     const path = pathProp || route?.params?.path
+    // NOTE: `?layoutFlags=hyloApp` to be replaced by `window.ReactNativeWebView = true`
     setUri(source?.uri || `${process.env.HYLO_WEB_BASE_URL}${path ? `/${path}` : ''}?layoutFlags=hyloApp`)
   }, [source?.uri, pathProp, route?.params?.path])
 
@@ -33,19 +34,40 @@ const HyloWebView = forwardRef(function HyloWebView ({
   if (!cookie) return <Loading />
 
   return (
-    // Note: This used to be wrapped in a `KeyboardFriendView`. Seems to be ok or better without it.
     <AutoHeightWebView
+      geolocationEnabled
       ref={webViewRef}
       source={{
         uri,
         headers: { cookie }
       }}
-      // FOR DEBUGGING ONLY: Never leave on in a production build...
-      // cacheMode='LOAD_NO_CACHE'
-      geolocationEnabled
+      // To replace `HyloApp` layout flag
+      injectedJavaScript='window.ReactNativeWebView = true'
       nestedScrollEnabled
-      // Probably needs to remain false for AutoHeight
+      /*
+      // NOTE: The following is deprecated in favor of managing `WebViewMessageTypes.NAVIGATION`
+      // events in combination with overriding HyloWeb navigation events when
+      // `window.ReactNativeWebView` is true.
+
+      onShouldStartLoadWithRequest={params => {
+        const { url } = params
+
+        // Opens full URLs in external browser if not the
+        // initial URI specified on load of the WebView
+        if (url === uri) return true
+        if (url !== uri && url.slice(0, 4) === 'http') {
+          Linking.openURL(url)
+          return false
+        }
+
+        return onShouldStartLoadWithRequest(params)
+      }}
+
+      */
+      scalesPageToFit={false}
+      // Needs to remain false for AutoHeight
       scrollEnabled={false}
+      setSupportMultipleWindows={false}
       sharedCookiesEnabled
       startInLoadingState
       // eslint-disable-next-line react-native/no-inline-styles

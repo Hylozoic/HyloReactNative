@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 import { Image, View, Text, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import { capitalize, isEmpty } from 'lodash/fp'
 import { useDispatch, useSelector } from 'react-redux'
 import LinearGradient from 'react-native-linear-gradient'
@@ -41,14 +42,13 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
   const currentUser = useSelector(getMe)
   const memberships = useSelector(getMemberships)
   const currentUserHasMemberships = !isEmpty(memberships)
-  const group = useSelector(getCurrentGroup)
-  const groupTopic = useSelector(state => getGroupTopic(state, { topicName, slug: group?.slug }))
+  const currentGroup = useSelector(getCurrentGroup)
+  const groupTopic = useSelector(state => getGroupTopic(state, { topicName, slug: currentGroup?.slug }))
   const topic = groupTopic?.topic?.ref
   const topicSubscribed = groupTopic?.isSubscribed
   const topicPostsTotal = groupTopic?.postsTotal
   const topicFollowersTotal = groupTopic?.followersTotal
-  const goToGroup = groupSlug => makeGoToGroup(navigation, dispatch)(groupSlug, memberships, group.slug)
-  const goToPostEditor = (params = {}) => navigation.navigate('Edit Post', { groupId: group.id, ...params })
+  const goToGroup = groupSlug => makeGoToGroup(navigation, dispatch)(groupSlug, memberships, currentGroup.slug)
   const goToPostDetails = id => navigation.navigate('Post Details', { id })
   const goToCreateGroup = () => navigation.navigate('Create Group')
   const goToMember = id => navigation.navigate('Member', { id })
@@ -57,23 +57,23 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
     if (topic?.name) {
       navigation.setParams({ topicName: selectedTopicName })
     } else {
-      navigation.push('Topic Feed', { groupId: group.id, topicName: selectedTopicName })
+      navigation.push('Topic Feed', { groupId: currentGroup.id, topicName: selectedTopicName })
     }
   }
 
   useEffect(() => {
-    topicName && group?.slug && dispatch(fetchGroupTopic(topicName, group.slug))
-  }, [topicName, group?.slug])
+    topicName && currentGroup?.slug && dispatch(fetchGroupTopic(topicName, currentGroup.slug))
+  }, [dispatch, topicName, currentGroup?.slug])
 
   useEffect(() => {
     navigation.setOptions({
-      title: headerTitle(group, feedType)
+      title: headerTitle(currentGroup, feedType)
     })
-  }, [topicName, group?.id, feedType])
+  }, [navigation, topicName, currentGroup, currentGroup?.id, feedType])
 
   if (!currentUser) return <Loading style={{ flex: 1 }} />
 
-  if (!currentUserHasMemberships && group?.id !== PUBLIC_GROUP_ID) {
+  if (!currentUserHasMemberships && currentGroup?.id !== PUBLIC_GROUP_ID) {
     return (
       <CreateGroupNotice
         goToCreateGroup={goToCreateGroup}
@@ -82,23 +82,22 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
     )
   }
 
-  if (!group) return null
+  if (!currentGroup) return null
 
-  const setTopicSubscribe = () => topicName && group.id && dispatch(setTopicSubscribeAction(topic.id, group.id, !topicSubscribed))
+  const setTopicSubscribe = () => topicName && currentGroup.id && dispatch(setTopicSubscribeAction(topic.id, currentGroup.id, !topicSubscribed))
   const name = topicName
     ? '#' + topicName
-    : group.name
-  const image = group.bannerUrl
-    ? { uri: group.bannerUrl }
+    : currentGroup.name
+  const image = currentGroup.bannerUrl
+    ? { uri: currentGroup.bannerUrl }
     : null
   const pluralFollowers = (topicFollowersTotal !== 1)
   const pluralPosts = (topicPostsTotal !== 1)
-  const showPostPrompt = !feedType && !topicName
   const feedListHeader = (
     <View
       style={[
         styles.bannerContainer,
-        showPostPrompt ? styles.bannerContainerWithPostPrompt : {}
+        styles.bannerContainerWithPostPrompt
       ]}
     >
       <Image source={image} style={styles.image} />
@@ -123,15 +122,12 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
       {!isUndefined(topicSubscribed) && (
         <SubscribeButton active={topicSubscribed} onPress={setTopicSubscribe} />
       )}
-      {feedType && (
-        <Button
-          style={styles.newPostButton}
-          text={`Create ${capitalize(feedType)}`}
-          onPress={() => goToPostEditor({ type: feedType })}
-        />
-      )}
-      {!feedType && <PostPrompt currentUser={currentUser} newPost={goToPostEditor} />}
-      {!!currentUser && !feedType && <View style={styles.promptShadow} />}
+      <PostPrompt
+        currentUser={currentUser}
+        currentGroup={currentGroup}
+        currentTopicName={topicName}
+        currentType={feedType}
+      />
     </View>
   )
 
@@ -139,7 +135,7 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
     <>
       <FeedList
         scrollRef={ref}
-        group={group}
+        group={currentGroup}
         showPost={goToPostDetails}
         goToGroup={goToGroup}
         header={feedListHeader}
@@ -150,21 +146,45 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
         topicName={topicName}
         feedType={feedType}
       />
-      {!topicName && group && (
-        <SocketSubscriber type='group' id={group.id} />
+      {!topicName && currentGroup && (
+        <SocketSubscriber type='group' id={currentGroup.id} />
       )}
     </>
   )
 }
 
-export function PostPrompt ({ currentUser, newPost }) {
+export function postPromptString (type = '', { firstName }) {
+  const postPrompts = {
+    offer: `Hi ${firstName}, what would you like to share?`,
+    request: `Hi ${firstName}, what are you looking for?`,
+    project: `Hi ${firstName}, what would you like to create?`,
+    event: `Hi ${firstName}, want to create an event?`,
+    default: `Hi ${firstName}, what's on your mind?`
+  }
+
+  return postPrompts[type] || postPrompts.default
+}
+
+export function PostPrompt ({ currentUser, currentGroup, currentType, currentTopicName }) {
+  const navigation = useNavigation()
+
   if (!currentUser) return null
+
+  const handleOpenPostEditor = () => (
+    navigation.navigate('Edit Post', {
+      type: currentType,
+      groupId: currentGroup.id,
+      topicName: currentTopicName
+    })
+  )
+
   const { avatarUrl } = currentUser
+
   return (
     <View style={styles.postPrompt}>
-      <TouchableOpacity onPress={newPost} style={styles.promptButton}>
+      <TouchableOpacity onPress={handleOpenPostEditor} style={styles.promptButton}>
         <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
-        <Text style={styles.promptText}>Hi {currentUser.firstName()}, what's on your mind?</Text>
+        <Text style={styles.promptText}>{postPromptString(currentType, { firstName: currentUser.firstName() })}</Text>
       </TouchableOpacity>
     </View>
   )
