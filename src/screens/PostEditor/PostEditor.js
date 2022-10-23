@@ -423,9 +423,9 @@ export class PostEditor extends React.Component {
             placeholder={{}}
             value={type}
           />
-          <Text>{isValid ? 'YES' : 'NO'}</Text>
           <Button
             style={styles.headerSaveButton}
+            disabled={isSaving || !isValid}
             onPress={this.handleSave}
             text={headerRightButtonLabel}
           />

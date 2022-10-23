@@ -6,7 +6,9 @@ import {
   white,
   rhino80,
   rhino,
-  amaranth
+  amaranth,
+  azureRadiance,
+  white80onCaribbeanGreen
 } from 'style/colors'
 
 const typeSelectorIOSDefaults = {
@@ -77,7 +79,14 @@ export default {
     // marginRight: 10,
     // marginVertical: 10,
     height: 35,
-    fontSize: 18
+    fontSize: 18,
+    disabledColor: white,
+    disabledBackgroundColor: white80onCaribbeanGreen
+  },
+  headerSaveButtonDisabled: {
+    backgroundColor: azureRadiance,
+    // borderColor: rhino30,
+    // color: rhino30
   },
   formWrapper: {
     flex: 1,
