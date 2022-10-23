@@ -61,15 +61,34 @@ export default {
   //
   topicInfo: {
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    justifyContent: 'flex-end',
+    alignItems: 'flex-start'
   },
-  subName: {
+  topicInfoText: {
     flexWrap: 'wrap',
     fontSize: 16,
     fontFamily: 'Circular',
     color: white,
     paddingRight: 10,
     backgroundColor: 'transparent'
+  },
+  unsubscribeButton: {
+    width: 110,
+    color: caribbeanGreen,
+    backgroundColor: white,
+    borderColor: caribbeanGreen,
+    marginLeft: 'auto',
+    height: 25,
+    fontSize: 12
+  },
+  subscribeButton: {
+    width: 110,
+    color: white,
+    backgroundColor: caribbeanGreen,
+    borderColor: caribbeanGreen,
+    marginLeft: 'auto',
+    height: 25,
+    fontSize: 12
   },
   postPrompt: {
     ...postPromptShape,
@@ -97,28 +116,6 @@ export default {
   },
   promptText: {
     color: capeCod40,
-    fontSize: 14
-  },
-  unsubscribeButton: {
-    width: 130,
-    color: caribbeanGreen,
-    backgroundColor: white,
-    borderColor: 'transparent',
-    marginLeft: 'auto',
-    marginRight: 10,
-    marginBottom: 20,
-    height: 35,
-    fontSize: 14
-  },
-  subscribeButton: {
-    width: 130,
-    color: white,
-    backgroundColor: caribbeanGreen,
-    borderColor: 'transparent',
-    marginLeft: 'auto',
-    marginRight: 10,
-    marginBottom: 20,
-    height: 35,
     fontSize: 14
   },
   newPostButton: {

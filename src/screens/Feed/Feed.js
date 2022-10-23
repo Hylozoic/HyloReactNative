@@ -109,19 +109,22 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
           </Text>
           {topicName && (
             <View style={styles.topicInfo}>
-              <Text style={styles.subName}>
+              <Text style={styles.topicInfoText}>
                 <Icon name='Star' /> {topicFollowersTotal || 0} subscriber{pluralFollowers && 's'}
               </Text>
-              <Text style={styles.subName}>
+              <Text style={styles.topicInfoText}>
                 <Icon name='Post' /> {topicPostsTotal || 0} post{pluralPosts && 's'}
               </Text>
+              {!isUndefined(topicSubscribed) && (
+                <SubscribeButton active={topicSubscribed} onPress={setTopicSubscribe} />
+              )}
             </View>
           )}
         </View>
       </View>
-      {!isUndefined(topicSubscribed) && (
+      {/* {!isUndefined(topicSubscribed) && (
         <SubscribeButton active={topicSubscribed} onPress={setTopicSubscribe} />
-      )}
+      )} */}
       <PostPrompt
         currentUser={currentUser}
         currentGroup={currentGroup}
