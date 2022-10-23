@@ -8,7 +8,6 @@ import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getMe from 'store/selectors/getMe'
 import upload from 'store/actions/upload'
 import fetchPost from 'store/actions/fetchPost'
-import { createTopicTag } from 'components/InlineEditor/InlineEditor'
 import {
   createPost,
   createProject,
@@ -26,8 +25,6 @@ export function mapStateToProps (state, props) {
   const post = getPresentedPost(state, { id: postId })
   // Setup new post with defaults from routing
   const selectedTopicName = get('route.params.topicName', props)
-  console.log('!!! selectedTopicName', props.route)
-  const selectedTopicTag = createTopicTag({ name: selectedTopicName })
   const providedType = get('route.params.type', props)
   const mapCoordinateLat = getRouteParam('lat', props?.route)
   const mapCoordinateLng = getRouteParam('lng', props?.route)

@@ -55,7 +55,7 @@ export default function RootNavigator () {
 
   const navigatorProps = {
     screenOptions: {
-      cardStyle: { backgroundColor: white }
+      cardStyle: { backgroundColor: white },
     }
   }
 
