@@ -37,15 +37,8 @@ export default function GroupNavigation ({ navigation }) {
     })
   }
 
-  // Map is last item in menu
+  // The last item in menu
   navItems.push({ label: 'Map', iconName: 'Globe', onPress: () => navigate('Map') })
-
-  const NavItem = ({ label, iconName, onPress }) => (
-    <TouchableOpacity style={styles.navItem} onPress={onPress} key={label}>
-      <Icon style={styles.navItemIcon} name={iconName} />
-      <Text style={styles.navItemLabel}>{label}</Text>
-    </TouchableOpacity>
-  )
 
   return (
     <ScrollView style={styles.container}>
@@ -61,3 +54,10 @@ export default function GroupNavigation ({ navigation }) {
     </ScrollView>
   )
 }
+
+const NavItem = ({ label, iconName, onPress }) => (
+  <TouchableOpacity style={styles.navItem} onPress={onPress} key={label}>
+    <Icon style={styles.navItemIcon} name={iconName} />
+    <Text style={styles.navItemLabel}>{label}</Text>
+  </TouchableOpacity>
+)

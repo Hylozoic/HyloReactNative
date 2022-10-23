@@ -415,7 +415,11 @@ export class PostEditor extends React.Component {
       <View style={styles.headerContainer}>
         <View style={styles.header}>
           <TouchableOpacity onPress={this.handleOnCancel}>
-            <HeaderLeftCloseIcon style={styles.headerCloseIcon} color={rhino30} onPress={this.handleCancel} />
+            <HeaderLeftCloseIcon
+              style={styles.headerCloseIcon}
+              color={rhino30}
+              onPress={this.handleCancel}
+            />
           </TouchableOpacity>
           <TypeSelector
             disabled={isSaving}
@@ -439,7 +443,7 @@ export class PostEditor extends React.Component {
     const {
       isSaving, topics, title, type, filePickerPending, announcementEnabled,
       titleLengthError, members, groups, startTime, endTime, location,
-      locationObject, topicsPicked
+      locationObject, topicsPicked, fileUrls, images
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
 
@@ -546,7 +550,7 @@ export class PostEditor extends React.Component {
               <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.pressSelectionRightIcon} /></View>
             </View>
             <GroupsList
-              style={[styles.pressSelectionValue, { paddingRight: 30 }]}
+              style={[styles.pressSelectionValue, { paddingRight: 40 }]}
               groups={groups}
               columns={1}
               onPress={this.handleShowGroupsEditor}
@@ -557,7 +561,7 @@ export class PostEditor extends React.Component {
             />
           </TouchableOpacity>
 
-          <Toolbar
+          <BottomBar
             post={post}
             canModerate={canModerate}
             filePickerPending={filePickerPending}
@@ -568,16 +572,6 @@ export class PostEditor extends React.Component {
             showAlert={this.showAlert}
           />
         </View>
-        {this.renderFilesAndImages()}
-      </>
-    )
-  }
-
-  renderFilesAndImages = () => {
-    const { fileUrls, images } = this.state
-
-    return (
-      <>
         {!isEmpty(images) && (
           <ImageSelector
             onAdd={this.handleAddImage}
@@ -626,13 +620,13 @@ const titlePlaceholders = {
   request: 'What are you looking for help with?',
   offer: 'What help can you offer?',
   resource: 'What resource is available?',
-  project: 'What would you like to call your project',
+  project: 'What would you like to call your project?',
   event: 'What is your event called?'
 }
 
 export function TypeSelector (props) {
   return (
-    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-start'}}>
+    <View style={styles.typeSelectorWrapper}>
       <RNPickerSelect
         {...props}
         style={typeSelectorStyles(props.value)}
@@ -653,11 +647,11 @@ export function TypeSelector (props) {
   )
 }
 
-// TODO: Tidy this up
-export function Toolbar ({
+export function BottomBar ({
   post, canModerate, filePickerPending, announcementEnabled,
   toggleAnnoucement, onShowFilePicker, onAddImage, showAlert
 }) {
+  // TODO: Tidy-up the styling below, move it into the stylesheet
   return (
     <View style={styles.bottomBar}>
       <View style={styles.bottomBarLeft}>
@@ -716,6 +710,7 @@ export function Toolbar ({
 
 export function Topics ({ onPress, topics }) {
   if (topics.length < 1) return null
+
   return (
     <ScrollView horizontal style={[styles.pressSelectionValue, styles.topicPillBox]}>
       {topics.map((t, i) => (
@@ -786,7 +781,9 @@ export function DatePickerWithLabel ({
         minuteInterval={5}
         date={date || new Date()}
         mode='datetime'
-        confirmText={`Set ${label}`}
+        title={label}
+        confirmText='Set'
+        cancelText='Clear'
         onConfirm={handleOnConfirm}
         onCancel={handleOnCancel}
       />
@@ -794,6 +791,8 @@ export function DatePickerWithLabel ({
   )
 }
 
+// Other layout option for reference in the case of scroll issues:
+//
 // <FlatList
 //   keyboardShouldPersistTaps='never'
 //   keyboardDismissMode={isIOS ? 'interactive' : 'on-drag'}
@@ -802,6 +801,7 @@ export function DatePickerWithLabel ({
 //   data={[]}
 // />
 
+// Using our "standard" React Navigation modal header:
 // renderReactNavigationHeader = () => {
 //   const { isSaving, isNewPost } = this.state
 //   const { navigation } = this.props
@@ -823,7 +823,7 @@ export function DatePickerWithLabel ({
 //   }
 //   navigation.setOptions({
 //     headerShown: false,
-
+//
 //     header: props => {
 //       const { isSaving, type } = this.state
 //       const styles1 = {
@@ -837,7 +837,7 @@ export function DatePickerWithLabel ({
 //           fontSize: 14
 //         }
 //       }
-
+//
 //       return (
 //         <ModalHeader {...props} {...headerProps} />
 //       )

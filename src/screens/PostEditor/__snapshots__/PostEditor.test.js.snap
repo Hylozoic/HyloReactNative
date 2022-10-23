@@ -116,12 +116,6 @@ exports[`PostEditor renders a new editor correctly 1`] = `
       </TouchableOpacity>
     </View>
   </ScrollView>
-  <Toolbar
-    addImage={[Function]}
-    announcementEnabled={false}
-    showAlert={[Function]}
-    toggleAnnoucement={[Function]}
-  />
 </React.Fragment>
 `;
 
@@ -1033,27 +1027,6 @@ exports[`PostEditor renders with a post 1`] = `
       </View>
     </View>
   </ScrollView>
-  <Toolbar
-    addImage={[Function]}
-    announcementEnabled={false}
-    post={
-      Object {
-        "details": "myDetails",
-        "groups": Array [
-          Object {
-            "id": 1,
-            "name": "Group 1",
-          },
-        ],
-        "imageUrls": Array [
-          "http://foo.com/foo.png",
-          "http://baz.com/baz.png",
-        ],
-      }
-    }
-    showAlert={[Function]}
-    toggleAnnoucement={[Function]}
-  />
 </React.Fragment>
 `;
 

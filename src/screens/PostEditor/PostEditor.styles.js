@@ -6,9 +6,7 @@ import {
   white,
   rhino80,
   rhino,
-  amaranth,
-  azureRadiance,
-  white80onCaribbeanGreen
+  amaranth
 } from 'style/colors'
 
 const typeSelectorIOSDefaults = {
@@ -74,19 +72,15 @@ export default {
   },
   headerSaveButton: {
     width: '25%',
-    borderColor: 'transparent',
-    // marginLeft: 'auto',
-    // marginRight: 10,
-    // marginVertical: 10,
-    height: 35,
+    height: 39,
     fontSize: 18,
-    disabledColor: white,
-    disabledBackgroundColor: white80onCaribbeanGreen
+    disabledColor: rhino30,
+    disabledBackgroundColor: white
   },
-  headerSaveButtonDisabled: {
-    backgroundColor: azureRadiance,
-    // borderColor: rhino30,
-    // color: rhino30
+  typeSelectorWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-start'
   },
   formWrapper: {
     flex: 1,
@@ -184,13 +178,9 @@ export default {
     borderColor: rhino30,
     paddingVertical: 10,
     flex: 1,
-    justifyContent: 'center',
-    // backgroundColor: rhino30,
-    // marginBottom: 10,
-    // paddingBottom: isIOS ? 10 : 0
+    justifyContent: 'center'
   },
   pressSelection: {
-    // backgroundColor: white,
     alignItems: 'center',
     justifyContent: 'space-between',
     display: 'flex',
@@ -198,8 +188,7 @@ export default {
     paddingHorizontal: 10
   },
   pressSelectionLeft: {
-    color: caribbeanGreen,
-    // color: white,
+    color: rhino80,
     fontFamily: 'Circular-Bold'
   },
   pressSelectionRight: {
@@ -218,7 +207,8 @@ export default {
   },
   pressSelectionValue: {
     margin: 0,
-    padding: 20,
+    // padding: 20,
+    paddingHorizontal: 10,
     paddingTop: 10,
     paddingBottom: 5,
     fontSize: 14,
@@ -241,11 +231,11 @@ export default {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 10
+    paddingTop: 10,
+    paddingHorizontal: 10
   },
   bottomBarRight: {
-    flexDirection: 'row',
-    paddingRight: 20
+    flexDirection: 'row'
   },
   bottomBarIcon: {
     fontSize: 46,
@@ -258,7 +248,7 @@ export default {
     flex: 1
   },
   bottomBarAnnouncementIcon: {
-    paddingLeft: 20,
+    paddingLeft: 0,
     fontSize: 46
   }
 }

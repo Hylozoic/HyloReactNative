@@ -26,6 +26,7 @@ export function mapStateToProps (state, props) {
   const post = getPresentedPost(state, { id: postId })
   // Setup new post with defaults from routing
   const selectedTopicName = get('route.params.topicName', props)
+  console.log('!!! selectedTopicName', props.route)
   const selectedTopicTag = createTopicTag({ name: selectedTopicName })
   const providedType = get('route.params.type', props)
   const mapCoordinateLat = getRouteParam('lat', props?.route)
@@ -33,7 +34,7 @@ export function mapStateToProps (state, props) {
   const mapCoordinate = mapCoordinateLat && { lat: mapCoordinateLat, lng: mapCoordinateLng }
   const defaultPost = selectedTopicName
     ? {
-        details: selectedTopicTag + ' ',
+        topics: [{ name: selectedTopicName }],
         groups: currentGroup && [currentGroup]
       }
     : {
