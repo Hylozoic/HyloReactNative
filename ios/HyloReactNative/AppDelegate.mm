@@ -13,6 +13,10 @@
 #import <RNGoogleSignin/RNGoogleSignin.h>
 #import <IntercomModule.h>
 
+// Fixes Expo build but not clear why or what is the cause:
+// ref https://github.com/expo/expo/issues/15749
+#import <React/CoreModulesPlugins.h>
+
 #if RCT_NEW_ARCH_ENABLED
 #import <React/CoreModulesPlugins.h>
 #import <React/RCTCxxBridgeDelegate.h>
