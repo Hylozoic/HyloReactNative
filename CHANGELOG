@@ -4,6 +4,17 @@ All notable changes to HyloReactNative (the Hylo mobile app) will be documented 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### [3.2.x-4.2.0] - 2022-10-24
+### Added
+- `HyloWebViewEditor`: A WebView of `HyloMobileEditor` on Web. Replaces `InlineEditor` and includes rich text and interactive mention and topic suggestions
+- A mostly re-written Post Editor incorporating the new HyloEditor and improved UX throughout. Some new/updated features include: local image loading while being uploaded to server, modal Start and End time selection (vs inline),  updated prompts per Post Type, etc.
+- Refreshed Post Card and Post Details views to better reflect updated UI on Web
+- New WebView'd Topics selector
+- Long Press menus for Comments (delete, reply, etc)
+- New ActionSheet-style menus on Android to replace previous Android default "drop down menu"-style
+
+...
+
 ## [3.2.0]
 ### Added
 - More advanced type selector for Post Editor
