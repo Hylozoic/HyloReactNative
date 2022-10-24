@@ -17,8 +17,7 @@ const HyloWebView = forwardRef(function HyloWebView ({
 
   useEffect(() => {
     const path = pathProp || route?.params?.path
-    // NOTE: `?layoutFlags=hyloApp` to be replaced by `window.ReactNativeWebView = true`
-    setUri(source?.uri || `${process.env.HYLO_WEB_BASE_URL}${path ? `/${path}` : ''}?layoutFlags=hyloApp`)
+    setUri(source?.uri || `${process.env.HYLO_WEB_BASE_URL}${path ? `/${path}` : ''}`)
   }, [source?.uri, pathProp, route?.params?.path])
 
   useFocusEffect(
@@ -35,19 +34,15 @@ const HyloWebView = forwardRef(function HyloWebView ({
 
   return (
     <AutoHeightWebView
+      customScript='window.HyloWebView = true;'
       geolocationEnabled
-      ref={webViewRef}
-      source={{
-        uri,
-        headers: { cookie }
-      }}
-      // To replace `HyloApp` layout flag
-      injectedJavaScript='window.ReactNativeWebView = true'
       nestedScrollEnabled
       /*
-      // NOTE: The following is deprecated in favor of managing `WebViewMessageTypes.NAVIGATION`
-      // events in combination with overriding HyloWeb navigation events when
-      // `window.ReactNativeWebView` is true.
+
+      // NOTE: The following is deprecated in favor of listening for the WebView
+      // post message type `WebViewMessageTypes.NAVIGATION` in combination with
+      // overriding HyloWeb navigation events in HyloWeb when `window.ReactNativeWebView`
+      // is true.
 
       onShouldStartLoadWithRequest={params => {
         const { url } = params
@@ -64,11 +59,16 @@ const HyloWebView = forwardRef(function HyloWebView ({
       }}
 
       */
+      ref={webViewRef}
       scalesPageToFit={false}
       // Needs to remain false for AutoHeight
       scrollEnabled={false}
       setSupportMultipleWindows={false}
       sharedCookiesEnabled
+      source={{
+        uri,
+        headers: { cookie }
+      }}
       startInLoadingState
       // eslint-disable-next-line react-native/no-inline-styles
       style={[style, {
@@ -77,7 +77,7 @@ const HyloWebView = forwardRef(function HyloWebView ({
         opacity: 0.99,
         minHeight: 1
       }]}
-      // Recommended setting from AutoHeightWebView docs but doesn't work for us:
+      // Recommended setting from AutoHeightWebView docs, but didn't work for us:
       // viewportContent='width=device-width, user-scalable=no'
       {...forwardedProps}
     />
