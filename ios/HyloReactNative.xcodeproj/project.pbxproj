@@ -26,10 +26,12 @@
 		3DBCEDB571264869809C3C05 /* Circular-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 995AC51966ED47B09EBC10A5 /* Circular-Medium.ttf */; };
 		43EE6D6E598A4552B6062E3A /* hylo-evo-icons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8761286F5FF34598A810C0A7 /* hylo-evo-icons.ttf */; };
 		4D1FC215F453FC12DA35D766 /* libPods-HyloReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 543BBBA2F84E6B3C9241DC32 /* libPods-HyloReactNative.a */; };
+		637747734D88ECFE599E302B /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54B9A90DFD9932D805BE57D /* ExpoModulesProvider.swift */; };
 		6473B41DA7624F5D8B9BA1E2 /* Circular-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4D93958F51D4D5FBA5AB7C4 /* Circular-BlackItalic.ttf */; };
 		871D668B360442ED964EE3D2 /* Circular-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 132848DAF02E4203BC2960D5 /* Circular-Book.ttf */; };
 		A7707633807C4690B665AFD9 /* Circular-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38F55B6534E24B54AA299F61 /* Circular-BoldItalic.ttf */; };
 		C5089836066BA8FE9EFB27CD /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 207B2EF69668D310421BFD8D /* libPods-OneSignalNotificationServiceExtension.a */; };
+		E7A7CF76710FEF6D76ED3817 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72412BC5A55A3374AF8AAEEC /* ExpoModulesProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +102,7 @@
 		4CC5B89951114076879B1C07 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		543BBBA2F84E6B3C9241DC32 /* libPods-HyloReactNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HyloReactNative.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66B892497C954574886DBD13 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		72412BC5A55A3374AF8AAEEC /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-HyloReactNative/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		74B41D4024D34ADC81198EFB /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		8761286F5FF34598A810C0A7 /* hylo-evo-icons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "hylo-evo-icons.ttf"; path = "../assets/fonts/hylo-evo-icons.ttf"; sourceTree = "<group>"; };
 		8CA9549025514EB1BF681585 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = ../assets/fonts/SimpleLineIcons.ttf; sourceTree = "<group>"; };
@@ -113,6 +116,7 @@
 		BCB6A8B3031B4206AB9BB066 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = ../assets/fonts/Zocial.ttf; sourceTree = "<group>"; };
 		C49A433D83C6448A9E45D6D7 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = ../assets/fonts/EvilIcons.ttf; sourceTree = "<group>"; };
 		C4D93958F51D4D5FBA5AB7C4 /* Circular-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Circular-BlackItalic.ttf"; path = "../assets/fonts/Circular-BlackItalic.ttf"; sourceTree = "<group>"; };
+		C54B9A90DFD9932D805BE57D /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-HyloReactNative-HyloReactNativeTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		C7797BD8F9797FF0F780950D /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		D7F9F56B416841F59EB18D68 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = ../assets/fonts/Ionicons.ttf; sourceTree = "<group>"; };
 		EC1A1FAA5BE04FE0BBD7E198 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = ../assets/fonts/Octicons.ttf; sourceTree = "<group>"; };
@@ -210,6 +214,22 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		1899D1EA2DF45766A3310877 /* HyloReactNativeTests */ = {
+			isa = PBXGroup;
+			children = (
+				C54B9A90DFD9932D805BE57D /* ExpoModulesProvider.swift */,
+			);
+			name = HyloReactNativeTests;
+			sourceTree = "<group>";
+		};
+		24D87D920C3CD8486FC98ADF /* HyloReactNative */ = {
+			isa = PBXGroup;
+			children = (
+				72412BC5A55A3374AF8AAEEC /* ExpoModulesProvider.swift */,
+			);
+			name = HyloReactNative;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +261,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				1626E6AB2BC44E4E2D32CB96 /* Pods */,
 				F2AC2F9F21624F0EAA048CF7 /* Resources */,
+				8D96B4F9ACE91984E7934712 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -255,6 +276,15 @@
 				04BF1DDE248F357F00ECC3A2 /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8D96B4F9ACE91984E7934712 /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				24D87D920C3CD8486FC98ADF /* HyloReactNative */,
+				1899D1EA2DF45766A3310877 /* HyloReactNativeTests */,
+			);
+			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 		F2AC2F9F21624F0EAA048CF7 /* Resources */ = {
@@ -633,6 +663,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* HyloReactNativeTests.m in Sources */,
+				637747734D88ECFE599E302B /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,6 +682,7 @@
 				04F54BA224F4D59500031D32 /* File.swift in Sources */,
 				04C29B0628F8CF6D009A9FCD /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				E7A7CF76710FEF6D76ED3817 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,7 +717,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = HyloReactNativeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -696,6 +728,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -717,7 +750,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = L4KZBPS2F3;
 				INFOPLIST_FILE = HyloReactNativeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -728,6 +761,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -762,6 +796,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.hylo.HyloA.OneSignalNotificationServiceExtension";
@@ -800,6 +835,7 @@
 				);
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.hylo.HyloA.OneSignalNotificationServiceExtension";
@@ -837,6 +873,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA;
 				PRODUCT_NAME = Hylo;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development com.hylo.HyloA";
@@ -873,6 +910,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hylo.HyloA;
 				PRODUCT_NAME = Hylo;
 				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.hylo.HyloA";
