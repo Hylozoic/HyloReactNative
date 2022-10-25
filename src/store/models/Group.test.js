@@ -1,4 +1,4 @@
-import orm from './index' // this initializes redux-orm
+import orm from 'store/models' // this initializes redux-orm
 
 it('can be created', () => {
   const group = { id: '1' }

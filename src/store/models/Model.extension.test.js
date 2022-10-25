@@ -14,30 +14,45 @@ Dog.fields = {
   id: attr(),
   legs: many('Limb')
 }
+let orm
+
+beforeAll(() => {
+  orm = new ORM({ stateSelector: state => state.orm })
+  orm.register(Dog, Limb)
+})
+
+describe('safeGet', () => {
+  let session
+
+  beforeEach(() => {
+    session = orm.session(orm.getEmptyState())
+    session.Dog.create({ id: 1, legs: [1, 2], name: 'Sender' })
+    session.Dog.create({ id: 2, legs: [1, 2], name: 'Fury' })
+    session.Dog.create({ id: 3, legs: [1, 2], name: 'Milo' })
+    times(4, i => session.Limb.create({ id: i + 1 }))
+  })
+
+  it('works', () => {
+    expect(session.Dog.safeGet({})).toBe(null)
+    expect(session.Dog.safeGet()).toBe(null)
+    expect(session.Dog.safeGet({ id: null })).toBe(null)
+    expect(session.Dog.safeGet({ id: 5 })).toBe(null)
+    expect(session.Dog.safeGet({ id: 2 })).toEqual(session.Dog.withId(2))
+    expect(session.Dog.safeGet({ id: null, name: 'Fury' })).toEqual(session.Dog.withId(2))
+  })
+})
 
 it('adds a function', () => {
   expect(typeof new Dog({}).updateAppending).toEqual('function')
 })
 
 describe('updateAppending', () => {
-  let orm, session
-
-  beforeAll(() => {
-    orm = new ORM({ stateSelector: state => state.orm })
-    orm.register(Dog, Limb)
-  })
+  let session
 
   beforeEach(() => {
     session = orm.session(orm.getEmptyState())
-    session.Dog.create({ id: 1, legs: [1, 2], name: 'sender' })
+    session.Dog.create({ id: 1, legs: [1, 2] })
     times(4, i => session.Limb.create({ id: i + 1 }))
-  })
-
-  it('handles safeget', () => {
-    expect(session.Dog.safeGet({})).toBeFalsy()
-    expect(session.Dog.safeGet()).toBeFalsy()
-    expect(session.Dog.safeGet({ id: 1 })).toEqual(session.Dog.withId(1))
-    expect(session.Dog.safeGet({ id: null, name: 'sender' })).toEqual(session.Dog.withId(1))
   })
 
   it('appends ids for many-to-many relations', () => {

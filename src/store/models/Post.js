@@ -60,33 +60,36 @@ Post.fields = {
     as: 'locationObject'
   }),
   details: attr(),
+  linkPreview: fk('LinkPreview', 'posts'),
   creator: fk('Person', 'posts'),
   followers: many({
     to: 'Person',
     relatedName: 'postsFollowing',
     through: 'PostFollower',
-    throughFields: ['post', 'follower']
+    throughFields: [ 'post', 'follower' ]
   }),
   groups: many('Group'),
-  postMemberships: many('PostMembership'),
   groupsTotal: attr(),
+  postMemberships: many('PostMembership'),
   commenters: many({
     to: 'Person',
     relatedName: 'postsCommented',
     through: 'PostCommenter',
-    throughFields: ['post', 'commenter']
+    throughFields: [ 'post', 'commenter' ]
   }),
   members: many({
     to: 'Person',
     relatedName: 'projectsJoined',
     through: 'ProjectMember',
-    throughFields: ['post', 'member']
+    throughFields: [ 'post', 'member' ]
   }),
   commentersTotal: attr(),
   createdAt: attr(),
   startsAt: attr(),
   endsAt: attr(),
   fulfilledAt: attr(),
+  donationsLink: attr(),
+  projectManagementLink: attr(),
   votesTotal: attr(),
   myVote: attr(),
   topics: many('Topic'),
@@ -142,5 +145,5 @@ export const POST_PROP_TYPES = {
   imageUrl: PropTypes.string,
   linkPreview: PropTypes.object,
   groups: PropTypes.array,
-  isPublic: PropTypes.boolean
+  isPublic: PropTypes.bool
 }
