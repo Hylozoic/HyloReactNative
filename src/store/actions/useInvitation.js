@@ -4,10 +4,11 @@ import { USE_INVITATION } from 'store/constants'
 
 export default function useInvitation (inviteCodes = {}) {
   const { invitationToken, accessCode } = inviteCodes
+
   return {
     type: USE_INVITATION,
     graphql: {
-      query: `mutation ($invitationToken: String, $accessCode: String) {
+      query: `mutation UseInvitation ($invitationToken: String, $accessCode: String) {
         useInvitation (invitationToken: $invitationToken, accessCode: $accessCode) {
           membership {
             id
