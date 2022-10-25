@@ -1,6 +1,6 @@
 import { get } from 'lodash/fp'
-import { AnalyticsEvents } from 'hylo-shared'
 import { USE_INVITATION } from 'store/constants'
+import { AnalyticsEvents } from 'hylo-shared'
 
 export default function useInvitation (inviteCodes = {}) {
   const { invitationToken, accessCode } = inviteCodes
@@ -8,35 +8,37 @@ export default function useInvitation (inviteCodes = {}) {
   return {
     type: USE_INVITATION,
     graphql: {
-      query: `mutation UseInvitation ($invitationToken: String, $accessCode: String) {
-        useInvitation (invitationToken: $invitationToken, accessCode: $accessCode) {
-          membership {
-            id
-            role
-            group {
+      query: `
+        mutation UseInvitation ($invitationToken: String, $accessCode: String) {
+          useInvitation (invitationToken: $invitationToken, accessCode: $accessCode) {
+            membership {
               id
-              accessibility
-              name
-              settings {
-                allowGroupInvites
-                askJoinQuestions
-                askGroupToGroupJoinQuestions
-                publicMemberDirectory
-                showSuggestedSkills
+              role
+              group {
+                id
+                accessibility
+                name
+                settings {
+                  allowGroupInvites
+                  askJoinQuestions
+                  askGroupToGroupJoinQuestions
+                  publicMemberDirectory
+                  showSuggestedSkills
+                }
+                slug
+                visibility
               }
-              slug
-              visibility
+              person {
+                id
+              }
+              settings {
+                showJoinForm
+              }
             }
-            person {
-              id
-            }
-            settings {
-              showJoinForm
-            }
+            error
           }
-          error
         }
-      }`,
+      `,
       variables: {
         invitationToken,
         accessCode
