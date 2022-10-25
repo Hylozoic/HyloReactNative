@@ -1,29 +1,26 @@
-// import presentTopic from 'store/presenters/presentTopic'
+import presentTopic from 'store/presenters/presentTopic'
 
-import { RESPONSES } from 'store/models/EventInvitation'
-
-export default (post, groupId) => {
+export default function presentPost (post, groupId) {
   if (!post) return null
 
-  const postMembership = post.postMemberships.filter(p =>
-    Number(p.group) === Number(groupId)).toRefArray()[0]
+  const postMembership = post.postMemberships.toRefArray().find(p =>
+    Number(p.group) === Number(groupId))
   const pinned = postMembership && postMembership.pinned
 
   return {
     ...post.ref,
-    creator: post.creator?.ref,
+    creator: post.creator,
     linkPreview: post.linkPreview,
+    location: post.location,
     isPublic: post.isPublic,
-    commenters: post.commenters.toRefArray(),
-    groups: post.groups.toRefArray(),
-    fileAttachments: post.attachments.filter(a => a.type === 'file').toRefArray(),
-    fileUrls: post.getFileUrls(),
-    imageUrls: post.getImageUrls(),
+    commenters: post.commenters.toModelArray(),
+    groups: post.groups.toModelArray(),
+    attachments: post.attachments
+      .orderBy('position').toModelArray(),
+    fileAttachments: post.attachments
+      .orderBy('position').filter(a => a.type === 'file').toModelArray(),
     pinned,
-    myEventResponse: post.myEventResponse || RESPONSES.NO,
-    // From Web, not yet tested/used
-    // topics: post.topics.toModelArray().map(topic => presentTopic(topic, {})),
-    topics: post.topics.toRefArray(),
+    topics: post.topics.toModelArray().map(topic => presentTopic(topic, {})),
     members: post.members.toModelArray().map(person => {
       return {
         ...person.ref,

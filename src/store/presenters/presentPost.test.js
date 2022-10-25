@@ -7,9 +7,10 @@ describe('presentPost', () => {
   const session = orm.session(orm.getEmptyState())
 
   const group = session.Group.create({ id: groupId })
-  session.Person.create({ id: '10' })
   const postMembership = session.PostMembership.create({ group, pinned: true })
-  session.Post.create({ id: postId, postMemberships: [postMembership], creator: '10' })
+  const person = session.Person.create({ name: 'Mr Person' })
+  const eventInvitation = session.EventInvitation.create({ response: 'yes', person, event: postId })
+  session.Post.create({ id: postId, postMemberships: [postMembership], eventInvitations: [eventInvitation] })
 
   it('matches the snapshot', () => {
     const post = session.Post.withId(postId)
