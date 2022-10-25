@@ -1,5 +1,5 @@
-import optimisticMiddleware from './optimistic'
-import { SET_STATE } from '../constants'
+import optimisticMiddleware from 'store/middleware/optimisticMiddleware'
+import { SET_STATE } from 'store/constants'
 
 describe('optimisticMiddleware', () => {
   let next, initialState, store, middleware
@@ -14,7 +14,7 @@ describe('optimisticMiddleware', () => {
   })
 
   it('continues the chain for a non optimistic action', () => {
-    const action = { type: 'FOO', payload: { id: 3 } }
+    let action = { type: 'FOO', payload: { id: 3 } }
     middleware(next)(action)
     expect(next).toHaveBeenCalled()
   })
