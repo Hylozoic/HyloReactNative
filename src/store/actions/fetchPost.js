@@ -1,28 +1,24 @@
 import { get } from 'lodash/fp'
-import { FETCH_POST, FETCH_COMMENTS } from 'store/constants'
-import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
+import {
+  FETCH_POST,
+  FETCH_COMMENTS
+} from 'store/constants'
+import postQuery from 'graphql/queries/postQuery'
 
-export default function fetchPost (id, opts = {
-  withComments: false
-}) {
+export default function fetchPost (id, query = postQuery) {
   return {
     type: FETCH_POST,
     graphql: {
-      query: `query ($id: ID) {
-        post(id: $id) {
-          ${postFieldsFragment(opts.withComments)}
-        }
-      }`,
+      query,
       variables: {
         id
       }
     },
     meta: {
-      afterInteractions: true,
       extractModel: 'Post',
       extractQueryResults: {
-        getItems: get('payload.data.post.comments'),
-        getType: () => FETCH_COMMENTS
+        getType: () => FETCH_COMMENTS,
+        getItems: get('payload.data.post.comments')
       }
     }
   }
