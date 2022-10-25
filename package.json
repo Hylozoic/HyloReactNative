@@ -4,10 +4,7 @@
   "private": true,
   "scripts": {
     "android": "adb reverse tcp:3001 tcp:3001 && adb reverse tcp:3000 tcp:3000 && react-native run-android",
-    "android:device": "adb reverse tcp:3001 tcp:3001 && adb reverse tcp:3000 tcp:3000 && react-native run-android",
-    "android:build": "yarn run android:prod && yarn run android:usb",
-    "android:prod": "cd android && ./gradlew assembleRelease",
-    "android:usb": "adb -d install -r android/app/build/outputs/apk/app-release.apk",
+    "android:build": "cd android && ./gradlew app:assembleRelease",
     "codecov": "codecov -t b30663d3-771b-4b16-b030-0a0a56b335e3",
     "configure": "./scripts/configure.sh",
     "coverage:diff": "node ../jest-diff-coverage && open coverage/lcov-report/index.html",
