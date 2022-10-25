@@ -1,5 +1,4 @@
-export default `
-query (
+export default `query (
   $groupSlug: String,
   $autocomplete: String,
   $isDefault: Boolean,
@@ -46,5 +45,4 @@ query (
       }
     }
   }
-}
-`
+}`
