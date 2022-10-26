@@ -28,7 +28,6 @@ Object {
     "search": "",
     "sortBy": "join",
   },
-  "ModeratorSettings": Array [],
   "NewMessage": Object {
     "message": "",
   },
@@ -36,10 +35,6 @@ Object {
   "SearchPage": Object {
     "filter": "all",
     "search": "",
-  },
-  "SkillEditor": Object {
-    "skill": "",
-    "userSkills": Array [],
   },
   "SocketListener": Object {},
   "Topics": Object {

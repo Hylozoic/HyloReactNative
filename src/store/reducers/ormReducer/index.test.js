@@ -1,11 +1,15 @@
 import orm from 'store/models'
 import ormReducer from './index'
+/* eslint-disable no-fallthrough */
 import {
-  SET_TOPIC_SUBSCRIBE_PENDING
-} from 'screens/Feed/Feed.store'
-import {
+  DELETE_COMMENT_PENDING,
+  FETCH_CURRENT_USER,
+  JOIN_PROJECT_PENDING,
+  LEAVE_PROJECT_PENDING,
+  TOGGLE_GROUP_TOPIC_SUBSCRIBE_PENDING,
+  USE_INVITATION,
   VOTE_ON_POST_PENDING
-} from 'components/PostCard/PostFooter/PostFooter.store'
+} from 'store/constants'
 import {
   UPDATE_THREAD_READ_TIME_PENDING
 } from 'screens/Thread/Thread.store'
@@ -13,28 +17,14 @@ import {
   UPDATE_LAST_VIEWED_PENDING
 } from 'screens/ThreadList/ThreadList.store'
 import {
-  UPDATE_NEW_NOTIFICATION_COUNT_PENDING
-} from 'screens/NotificationsList/NotificationsList.store'
+  CREATE_GROUP
+} from 'screens/CreateGroupFlow/CreateGroupFlow.store'
 import {
   RESET_NEW_POST_COUNT_PENDING
 } from 'store/actions/resetNewPostCount'
 import {
-  PIN_POST_PENDING
-} from 'components/PostCard/PostHeader/PostHeader.store'
-import {
-  CREATE_GROUP
-} from 'screens/CreateGroupFlow/CreateGroupFlow.store'
-import {
-  UPDATE_MEMBERSHIP_SETTINGS_PENDING, UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING
-} from 'screens/NotificationSettings/NotificationSettings.store'
-import {
-  DELETE_COMMENT_PENDING,
-  JOIN_PROJECT_PENDING,
-  LEAVE_PROJECT_PENDING,
-  FETCH_CURRENT_USER,
-  UPDATE_USER_SETTINGS_PENDING,
-  USE_INVITATION
-} from 'store/constants'
+  UPDATE_NEW_NOTIFICATION_COUNT_PENDING
+} from 'screens/NotificationsList/NotificationsList.store'
 
 it('responds to an action with meta.extractModel', () => {
   const state = orm.getEmptyState()
@@ -107,11 +97,10 @@ it('handles SET_TOPIC_SUBSCRIBE_PENDING', () => {
     topic: '1', group: '1', isSubscribed: false, followersTotal: 3
   })
   const action = {
-    type: SET_TOPIC_SUBSCRIBE_PENDING,
+    type: TOGGLE_GROUP_TOPIC_SUBSCRIBE_PENDING,
     meta: {
       topicId: '1',
-      groupId: '1',
-      isSubscribing: true
+      groupId: '1'
     }
   }
 
@@ -324,38 +313,6 @@ describe('on FETCH_CURRENT_USER', () => {
   })
 })
 
-describe('on PIN_POST_PENDING', () => {
-  const session = orm.session(orm.getEmptyState())
-  const group = session.Group.create({ id: '1', slug: 'foo' })
-  const postId = 123
-  const postMembership = session.PostMembership.create({
-    pinned: false,
-    group: group
-  })
-
-  session.Post.create({
-    id: postId,
-    groups: [group],
-    postMemberships: [postMembership]
-  })
-
-  const action = {
-    type: PIN_POST_PENDING,
-    meta: {
-      postId,
-      groupId: group.id
-    }
-  }
-
-  it('updates the postMembership', () => {
-    const newState = ormReducer(session.state, action)
-    const newSession = orm.session(newState)
-
-    const postMembership = newSession.Post.withId(postId).postMemberships.toModelArray()[0]
-    expect(postMembership.pinned).toEqual(true)
-  })
-})
-
 describe('on UPDATE_THREAD_READ_TIME_PENDING', () => {
   const session = orm.session(orm.getEmptyState())
   const id = 123
@@ -418,58 +375,6 @@ describe('handles CREATE_GROUP', () => {
     const newSession = orm.session(ormReducer(session.state, action))
     const membershipsAfterAction = newSession.Me.first().memberships
     expect(membershipsAfterAction.count()).toEqual(1)
-  })
-})
-
-describe('on UPDATE_MEMBERSHIP_SETTINGS_PENDING', () => {
-  it('should update the membership settings', () => {
-    const session = orm.mutableSession(orm.getEmptyState())
-    const meId = 'meId'
-    const groupId = 'groupId'
-    const membershipId = 'membershipId'
-    session.Me.create({ id: meId })
-    session.Group.create({ id: groupId, name: 'group 1' })
-    session.Membership.create({ id: membershipId, group: groupId, person: meId, settings: {} })
-
-    const action = {
-      type: UPDATE_MEMBERSHIP_SETTINGS_PENDING,
-      meta: {
-        settings: {
-          sendEmail: true
-        },
-        groupId
-      }
-    }
-
-    const newSession = orm.session(ormReducer(session.state, action))
-    const membershipAfterAction = newSession.Membership.safeWithId(membershipId)
-    expect(membershipAfterAction.settings.sendEmail).toEqual(true)
-  })
-})
-
-describe('on UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING', () => {
-  it('should update all the memberships settings', () => {
-    const session = orm.mutableSession(orm.getEmptyState())
-    const meId = 'meId'
-    session.Me.create({ id: meId })
-    session.Membership.create({ person: meId, settings: {} })
-    session.Membership.create({ person: meId, settings: {} })
-    session.Membership.create({ person: meId, settings: {} })
-
-    const action = {
-      type: UPDATE_ALL_MEMBERSHIP_SETTINGS_PENDING,
-      meta: {
-        settings: {
-          sendEmail: true
-        }
-      }
-    }
-
-    const newSession = orm.session(ormReducer(session.state, action))
-    const membershipsAfterAction = newSession.Membership.all().toModelArray()
-    membershipsAfterAction.map(membership => {
-      expect(membership.settings.sendEmail).toEqual(true)
-    })
   })
 })
 

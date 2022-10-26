@@ -1,5 +1,5 @@
 import { castArray } from 'lodash'
-import ModelExtractor from './index'
+import ModelExtractor from 'store/reducers/ModelExtractor'
 
 // extract immediately instead of creating new actions
 export default function extractModelsFromAction (action, session) {

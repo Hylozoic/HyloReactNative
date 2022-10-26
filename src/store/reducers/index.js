@@ -12,12 +12,9 @@ import FeedList from 'components/FeedList/FeedList.store'
 import ItemChooser from 'screens/ItemChooser/ItemChooser.store'
 import MemberFeed from 'screens/MemberProfile/MemberFeed/MemberFeed.store'
 import Members from 'screens/Members/Members.store'
-import ModeratorSettings from 'screens/ModeratorSettings/ModeratorSettings.store'
 import NewMessage from 'screens/NewMessage/NewMessage.store'
 import PeopleTyping from 'components/PeopleTyping/PeopleTyping.store'
-import SkillEditor from 'components/SkillEditor/SkillEditor.store'
 import SocketListener from 'components/SocketListener/SocketListener.store'
-import Topics from 'screens/Topics/Topics.store'
 import CreateGroupFlow from 'screens/CreateGroupFlow/CreateGroupFlow.store'
 import SearchPage from 'screens/SearchPage/SearchPage.store'
 
@@ -34,13 +31,10 @@ export const createCombinedReducers = () => combineReducers({
   ItemChooser,
   MemberFeed,
   Members,
-  ModeratorSettings,
   NewMessage,
   PeopleTyping,
   SearchPage,
-  SkillEditor,
   SocketListener,
-  Topics,
   CreateGroupFlow
 })
 

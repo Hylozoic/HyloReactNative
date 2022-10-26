@@ -175,7 +175,7 @@ Object {
       "modelName": "Post",
     },
   },
-  "type": "PostEditor/CREATE_POST",
+  "type": "CREATE_POST",
 }
 `;
 
@@ -358,7 +358,7 @@ Object {
       "modelName": "Post",
     },
   },
-  "type": "PostEditor/CREATE_POST",
+  "type": "CREATE_POST",
 }
 `;
 
@@ -587,6 +587,6 @@ Object {
       "modelName": "Post",
     },
   },
-  "type": "PostEditor/UPDATE_POST",
+  "type": "UPDATE_POST",
 }
 `;
