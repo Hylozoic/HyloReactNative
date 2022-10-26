@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { voteOnPost } from './PostFooter.store.js'
+import voteOnPost from 'store/actions/voteOnPost'
 
 export function mapDispatchToProps (dispatch, { id, myVote }) {
   return {

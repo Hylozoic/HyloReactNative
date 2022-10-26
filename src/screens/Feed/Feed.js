@@ -11,11 +11,9 @@ import getRouteParam from 'store/selectors/getRouteParam'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getMe from 'store/selectors/getMe'
 import getMemberships from 'store/selectors/getMemberships'
-import {
-  fetchGroupTopic,
-  getGroupTopic,
-  setTopicSubscribe as setTopicSubscribeAction
-} from './Feed.store'
+import toggleGroupTopicSubscribeAction from 'store/actions/toggleGroupTopicSubscribe'
+import fetchGroupTopic from 'store/actions/fetchGroupTopic'
+import getGroupTopic from 'store/selectors'
 import Loading from 'components/Loading'
 import FeedList from 'components/FeedList'
 import Button from 'components/Button'
@@ -84,7 +82,7 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
 
   if (!currentGroup) return null
 
-  const setTopicSubscribe = () => topicName && currentGroup.id && dispatch(setTopicSubscribeAction(topic.id, currentGroup.id, !topicSubscribed))
+  const toggleTopicSubscribe = () => topicName && currentGroup.id && dispatch(toggleGroupTopicSubscribeAction(topic))
   const name = topicName
     ? '#' + topicName
     : currentGroup.name
@@ -116,15 +114,12 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
                 <Icon name='Post' /> {topicPostsTotal || 0} post{pluralPosts && 's'}
               </Text>
               {!isUndefined(topicSubscribed) && (
-                <SubscribeButton active={topicSubscribed} onPress={setTopicSubscribe} />
+                <SubscribeButton active={topicSubscribed} onPress={toggleTopicSubscribe} />
               )}
             </View>
           )}
         </View>
       </View>
-      {/* {!isUndefined(topicSubscribed) && (
-        <SubscribeButton active={topicSubscribed} onPress={setTopicSubscribe} />
-      )} */}
       <PostPrompt
         currentUser={currentUser}
         currentGroup={currentGroup}

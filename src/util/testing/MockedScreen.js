@@ -1,7 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { TRenderEngineProvider } from 'react-native-render-html'
-import { HlyoHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
+import { HyloHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 const Stack = createStackNavigator()
@@ -14,7 +14,7 @@ export default function MockedScreen ({
   if (children) {
     return (
       <TRenderEngineProvider>
-        <HlyoHTMLConfigProvider>
+        <HyloHTMLConfigProvider>
           {/* <Stack.Navigator> */}
             <Tabs.Navigator>
               <Tabs.Screen name='MockedScreen' {...otherProps}>
@@ -22,20 +22,20 @@ export default function MockedScreen ({
               </Tabs.Screen>
             </Tabs.Navigator>
           {/* </Stack.Navigator> */}
-        </HlyoHTMLConfigProvider>
+        </HyloHTMLConfigProvider>
       </TRenderEngineProvider>
     )
   } else {
     return (
       <TRenderEngineProvider>
-        <HlyoHTMLConfigProvider>
+        <HyloHTMLConfigProvider>
           <Stack.Navigator>
             <Stack.Screen
               name='MockedScreen'
               {...otherProps}
             />
           </Stack.Navigator>
-        </HlyoHTMLConfigProvider>
+        </HyloHTMLConfigProvider>
       </TRenderEngineProvider>
     )
   }

@@ -318,7 +318,7 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
         }
       }
     >
-      <HlyoHTMLConfigProvider>
+      <HyloHTMLConfigProvider>
         <ForwardRef(NavigationContainerInner)>
           <Feed
             currentUser={
@@ -341,7 +341,7 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
             topicName="amazing"
           />
         </ForwardRef(NavigationContainerInner)>
-      </HlyoHTMLConfigProvider>
+      </HyloHTMLConfigProvider>
     </Provider>
   </TRenderEngineProvider>
 </SafeAreaProvider>
@@ -429,7 +429,7 @@ exports[`renders correctly if currentUserHasMemberships is false 1`] = `
         }
       }
     >
-      <HlyoHTMLConfigProvider>
+      <HyloHTMLConfigProvider>
         <ForwardRef(NavigationContainerInner)>
           <Feed
             currentUser={
@@ -451,7 +451,7 @@ exports[`renders correctly if currentUserHasMemberships is false 1`] = `
             topicName="amazing"
           />
         </ForwardRef(NavigationContainerInner)>
-      </HlyoHTMLConfigProvider>
+      </HyloHTMLConfigProvider>
     </Provider>
   </TRenderEngineProvider>
 </SafeAreaProvider>

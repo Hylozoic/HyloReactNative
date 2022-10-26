@@ -10,13 +10,20 @@ export default function TopicRow ({ item, onPress }) {
         <Text style={styles.hashtag}>#</Text><Text style={styles.topicName}>{item.name}</Text>
       </View>
       {item.followersTotal === undefined
-        ? <View style={styles.topicDetails}><Text style={styles.detailText}>create new</Text></View>
-        : <View style={styles.topicDetails}>
-          <Icon name='Star' style={styles.detailIcon} />
-          <Text style={styles.detailText}>{item.followersTotal} subscribers</Text>
-          <Icon name='Post' style={styles.detailIcon} />
-          <Text style={styles.detailText}>{item.postsTotal} posts</Text>
-        </View>}
+        ? (
+          <View style={styles.topicDetails}>
+            <Text style={styles.detailText}>create new</Text>
+          </View>
+          )
+        : (
+          <View style={styles.topicDetails}>
+            <Icon name='Star' style={styles.detailIcon} />
+            <Text style={styles.detailText}>{item.followersTotal} subscribers</Text>
+            <Icon name='Post' style={styles.detailIcon} />
+            <Text style={styles.detailText}>{item.postsTotal} posts</Text>
+          </View>
+          )
+      }
     </TouchableOpacity>
   )
 }

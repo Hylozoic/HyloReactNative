@@ -1,7 +1,8 @@
 import {
   ormSessionReducer,
   DELETE_POST_PENDING,
-  REMOVE_POST_PENDING
+  REMOVE_POST_PENDING,
+  PIN_POST_PENDING
 } from './PostHeader.store'
 import orm from 'store/models'
 
@@ -41,5 +42,20 @@ describe('ormSessionReducer', () => {
     expect(session.Post.withId(11).groups.toRefArray()).toHaveLength(1)
     ormSessionReducer(session, action)
     expect(session.Post.withId(11).groups.toRefArray()).toHaveLength(0)
+  })
+
+  it('handles PIN_POST_PENDING', () => {
+    const action = {
+      type: PIN_POST_PENDING,
+      meta: {
+        postId: 12,
+        groupId: group.id
+      }
+    }
+
+    expect(session.Post.withId(12).groups.toRefArray()).toHaveLength(1)
+    ormSessionReducer(session, action)
+    const postMembership = session.Post.withId(12).postMemberships.toModelArray()[0]
+    expect(postMembership.pinned).toEqual(true)
   })
 })
