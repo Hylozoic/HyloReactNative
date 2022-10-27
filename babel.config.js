@@ -19,7 +19,8 @@ module.exports = {
           '.android.js',
           '.android.tsx',
           '.ios.js',
-          '.ios.tsx'
+          '.ios.tsx',
+          '.graphql'
         ],
         root: ['./src'],
         alias: {
@@ -28,6 +29,7 @@ module.exports = {
         }
       }
     ],
+    'import-graphql',
     'react-native-reanimated/plugin'
   ],
   env: {

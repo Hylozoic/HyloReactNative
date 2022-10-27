@@ -22,27 +22,13 @@ import {
   FETCH_CHILD_COMMENTS,
   FETCH_COMMENTS
 } from 'store/constants'
-// import {
-//   FETCH_NETWORK_SETTINGS,
-//   FETCH_MODERATORS,
-//   FETCH_GROUPS
-// } from 'routes/NetworkSettings/NetworkSettings.store'
 import {
-  RECEIVE_POST
-} from 'components/SocketListener/SocketListener.store'
-import {
-  CREATE_TOPIC
-} from 'components/CreateTopic/CreateTopic.store'
-import {
-  REMOVE_POST_PENDING
-} from 'components/PostCard/PostHeader/PostHeader.store'
-import {
+  RECEIVE_POST,
   RECEIVE_THREAD
 } from 'components/SocketListener/SocketListener.store'
 import {
-  FETCH_POSTS_MAP,
-  FETCH_POSTS_MAP_DRAWER
-} from 'routes/MapExplorer/MapExplorer.store'
+  REMOVE_POST_PENDING
+} from 'components/PostCard/PostHeader/PostHeader.store'
 
 // reducer
 
@@ -101,13 +87,6 @@ export default function (state = {}, action) {
         }
       })
 
-    case CREATE_TOPIC:
-      root = {
-        isDefault: meta.data.isDefault,
-        ...payload.data.createTopic
-      }
-      return matchNewTopicIntoQueryResults(state, root)
-
     case DROP_QUERY_RESULTS:
       return {
         ...state,
@@ -163,8 +142,6 @@ export function matchNewPostIntoQueryResults (state, { id, isPublic, type, group
     }
 
     return reduce((innerMemo, params) => {
-      innerMemo = prependIdForCreate(innerMemo, FETCH_POSTS_MAP, params, id)
-      innerMemo = prependIdForCreate(innerMemo, FETCH_POSTS_MAP_DRAWER, params, id)
       return prependIdForCreate(innerMemo, FETCH_POSTS, params, id)
     }, memo, queriesToMatch)
   }, state, groups)

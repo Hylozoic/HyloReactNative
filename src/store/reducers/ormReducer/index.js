@@ -5,7 +5,6 @@ import {
   ADD_MODERATOR_PENDING,
   CANCEL_GROUP_RELATIONSHIP_INVITE,
   CANCEL_JOIN_REQUEST,
-  CREATE_COMMENT_PENDING,
   CREATE_COMMENT,
   CREATE_JOIN_REQUEST,
   DELETE_COMMENT_PENDING,
@@ -15,6 +14,7 @@ import {
   FETCH_MESSAGES_PENDING,
   FETCH_POSTS_PENDING,
   INVITE_CHILD_TO_JOIN_PARENT_GROUP,
+  INVITE_PEOPLE_TO_EVENT_PENDING,
   JOIN_PROJECT_PENDING,
   LEAVE_GROUP,
   LEAVE_PROJECT_PENDING,
@@ -54,7 +54,7 @@ import {
 
 import orm from 'store/models'
 import clearCacheFor from './clearCacheFor'
-import { find, values, pick, find } from 'lodash/fp'
+import { find, values, pick } from 'lodash/fp'
 import extractModelsFromAction from '../ModelExtractor/extractModelsFromAction'
 import { isPromise } from 'util/index'
 
@@ -183,30 +183,6 @@ export default function ormReducer (state = orm.getEmptyState(), action) {
     //   break
     // }
 
-    case LEAVE_GROUP: {
-      const me = Me.first()
-      let membership = find(m => m.group.id === meta.id, me.memberships.toModelArray())
-
-      if (membership) membership.delete()
-
-      membership = Membership.safeGet({ group: meta.id, person: me.id })
-
-      if (membership) membership.delete()
-      break
-    }
-
-    case MARK_ACTIVITY_READ: {
-      if (Activity.idExists(meta.id)) {
-        Activity.withId(meta.id).update({ unread: false })
-      }
-      break
-    }
-
-    case MARK_ALL_ACTIVITIES_READ: {
-      Activity.all().update({ unread: false })
-      break
-    }
-
     case DELETE_COMMENT_PENDING: {
       const comment = Comment.withId(meta.id)
       const post = comment.post
@@ -324,6 +300,18 @@ export default function ormReducer (state = orm.getEmptyState(), action) {
       break
     }
 
+    case MARK_ACTIVITY_READ: {
+      if (Activity.idExists(meta.id)) {
+        Activity.withId(meta.id).update({ unread: false })
+      }
+      break
+    }
+
+    case MARK_ALL_ACTIVITIES_READ: {
+      Activity.all().update({ unread: false })
+      break
+    }
+
     case PROCESS_STRIPE_TOKEN_PENDING: {
       post = Post.withId(meta.postId)
       const totalContributions = Number(post.totalContributions) + Number(meta.amount)
@@ -371,17 +359,6 @@ export default function ormReducer (state = orm.getEmptyState(), action) {
     case RESPOND_TO_EVENT_PENDING: {
       const event = Post.withId(meta.id)
       event.update({ myEventResponse: meta.response })
-      break
-    }
-
-    case SET_TOPIC_SUBSCRIBE_PENDING: {
-      const groupTopic = GroupTopic.get({
-        topic: meta.topicId, group: meta.groupId
-      })
-      groupTopic.update({
-        followersTotal: groupTopic.followersTotal + (meta.isSubscribing ? 1 : -1),
-        isSubscribed: !!meta.isSubscribing
-      })
       break
     }
 

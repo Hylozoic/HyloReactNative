@@ -1,7 +1,7 @@
 import { find, get, includes } from 'lodash/fp'
 import PropTypes from 'prop-types'
 import { attr, fk, many, Model } from 'redux-orm'
-import featureFlag from 'config/featureFlags'
+import featureFlag from '../../config/featureFlags'
 import { toRefArray } from 'util/reduxOrmMigration'
 
 export function firstName (user) {

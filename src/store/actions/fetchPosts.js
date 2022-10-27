@@ -1,22 +1,23 @@
 import { get } from 'lodash/fp'
-import { isContextGroup } from 'store/models/Group'
+// import { isContextGroup } from 'store/models/Group'
 import { FETCH_POSTS } from 'store/constants'
 import postsQueryFragment from 'graphql/fragments/postsQueryFragment'
 import groupViewPostsQueryFragment from 'graphql/fragments/groupViewPostsQueryFragment'
 
-export default function fetchPosts ({ afterTime, beforeTime, context, filter, offset, order, search, slug, sortBy, topic }) {
+// NOTE: All of the below is currently tracking `hylo-evo/src/routes/Stream.store.js`
+export default function fetchPosts ({ activePostsOnly, afterTime, beforeTime, collectionToFilterOut, context, filter, first, forCollection, offset, order, search, slug, sortBy, topic, topics, types }) {
   let query, extractModel, getItems
 
-  if (isContextGroup(slug)) {
-    query = postsQuery
-    extractModel = 'Post'
-    getItems = get('payload.data.posts')
-    context = slug
-  } else {
+  if (context === 'groups') {
     query = groupQuery
     extractModel = 'Group'
     getItems = get('payload.data.group.posts')
-    context = 'groups'
+  } else if (context === 'all' || context === 'public') {
+    query = postsQuery
+    extractModel = 'Post'
+    getItems = get('payload.data.posts')
+  } else {
+    throw new Error(`FETCH_POSTS with context=${context} is not implemented`)
   }
 
   return {
@@ -24,17 +25,22 @@ export default function fetchPosts ({ afterTime, beforeTime, context, filter, of
     graphql: {
       query,
       variables: {
+        activePostsOnly,
         afterTime,
         beforeTime,
-        filter,
-        first: 20,
-        offset,
+        collectionToFilterOut,
         context,
+        filter,
+        first: first || 20,
+        forCollection,
+        offset,
         order,
         search,
         slug,
         sortBy,
-        topic
+        topic,
+        topics,
+        types
       }
     },
     meta: {
@@ -47,18 +53,24 @@ export default function fetchPosts ({ afterTime, beforeTime, context, filter, of
   }
 }
 
-const groupQuery = `query (
+const groupQuery = `query GroupPostsQuery (
+  $activePostsOnly: Boolean,
   $afterTime: Date,
   $beforeTime: Date,
   $boundingBox: [PointInput],
+  $collectionToFilterOut: ID,
   $filter: String,
   $first: Int,
+  $forCollection: ID,
+  $isFulfilled: Boolean,
   $offset: Int,
   $order: String,
   $search: String,
   $slug: String,
   $sortBy: String,
-  $topic: ID
+  $topic: ID,
+  $topics: [ID],
+  $types: [String]
 ) {
   group(slug: $slug, updateLastViewed: true) {
     id
@@ -77,19 +89,25 @@ const groupQuery = `query (
   }
 }`
 
-const postsQuery = `query (
+const postsQuery = `query PostsQuery (
+  $activePostsOnly: Boolean,
   $afterTime: Date,
   $beforeTime: Date,
   $boundingBox: [PointInput],
+  $collectionToFilterOut: ID,
   $context: String,
   $filter: String,
   $first: Int,
+  $forCollection: ID,
   $groupSlugs: [String],
+  $isFulfilled: Boolean,
   $offset: Int,
   $order: String,
   $search: String,
   $sortBy: String,
   $topic: ID,
+  $topics: [ID],
+  $types: [String]
 ) {
   ${postsQueryFragment}
 }`

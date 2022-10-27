@@ -1,4 +1,4 @@
-import { INITIAL_SUBCOMMENTS_DISPLAYED } from 'routes/PostDetail/Comments/Comment/Comment'
+export const INITIAL_SUBCOMMENTS_DISPLAYED = 4
 
 // :TODO: clean this up and use proper query fragments?
 const CommentFieldsFragment = `

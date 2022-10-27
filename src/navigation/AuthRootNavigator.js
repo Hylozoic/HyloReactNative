@@ -19,14 +19,13 @@ import { ModalHeader } from 'navigation/headers'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
 import DrawerNavigator from 'navigation/DrawerNavigator'
 import GroupDetailWebView from 'screens/GroupDetailWebView'
-import GroupSettingsTabsNavigator from 'screens/GroupSettingsTabsNavigator'
+import GroupSettingsTabsNavigator from 'navigation/GroupSettingsTabsNavigator'
 import LoadingScreen from 'screens/LoadingScreen'
 import MemberProfile from 'screens/MemberProfile'
 import NewMessage from 'screens/NewMessage'
 import PostDetails from 'screens/PostDetails'
 import PostEditor from 'screens/PostEditor'
 import NotificationsList from 'screens/NotificationsList'
-import PendingInvites from 'screens/PendingInvites'
 import Thread from 'screens/Thread'
 import ThreadParticipants from 'screens/ThreadParticipants'
 import { white } from 'style/colors'
@@ -141,7 +140,6 @@ export default function AuthRootNavigator () {
               title: 'Participants'
             }}
           />
-          <AuthRoot.Screen name='Pending Invites' component={PendingInvites} />
           <AuthRoot.Screen name={modalScreenName('Notifications')} component={NotificationsList} />
         </AuthRoot.Group>
       </AuthRoot.Navigator>
