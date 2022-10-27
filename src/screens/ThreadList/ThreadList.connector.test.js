@@ -1,5 +1,7 @@
 import { mapStateToProps, mergeProps } from './ThreadList.connector'
 
+jest.mock('store/selectors/getMe', () => () => {})
+
 test('mapStateToProps', () => {
   const state = {
     pending: {},

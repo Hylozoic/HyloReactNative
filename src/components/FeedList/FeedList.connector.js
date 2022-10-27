@@ -24,8 +24,8 @@ export function mapStateToProps (state, props) {
   const timeframe = getTimeframe(state, props)
   let queryProps = getQueryProps(state, {
     group,
-    // This is an important divergence from what is happening on `hylo-evo#Stream.connector` and `store`
-    // Should align them, but for now this fixes it:
+    // NOTE: This is an important divergence from what is happening in `hylo-evo#Stream.connector`
+    // and `store`. Should align them but this fixes it for now:
     context: isContextGroup(group?.slug)
       ? group.slug
       : 'groups',

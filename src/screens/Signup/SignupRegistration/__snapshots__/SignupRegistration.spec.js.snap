@@ -189,7 +189,6 @@ exports[`default render matches snapshot 1`] = `
                 onGestureHandlerStateChange={[Function]}
               >
                 <View
-                  pointerEvents="box-none"
                   style={
                     [
                       {

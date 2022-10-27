@@ -1,5 +1,4 @@
 import { get } from 'lodash/fp'
-// import { isContextGroup } from 'store/models/Group'
 import { FETCH_POSTS } from 'store/constants'
 import postsQueryFragment from 'graphql/fragments/postsQueryFragment'
 import groupViewPostsQueryFragment from 'graphql/fragments/groupViewPostsQueryFragment'

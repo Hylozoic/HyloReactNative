@@ -269,7 +269,6 @@ exports[`MemberList server search fetches new results when search provided 1`] =
                 onGestureHandlerStateChange={[Function]}
               >
                 <View
-                  pointerEvents="box-none"
                   style={
                     [
                       {
