@@ -1,23 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ListControl renders correctly 1`] = `
-<PopupMenuButton
-  actions={
-    Array [
-      Array [
-        "All",
-        [Function],
-      ],
-      Array [
-        "Test Item 1",
-        [Function],
-      ],
-      Array [
-        "Test Item 2",
-        [Function],
-      ],
-    ]
-  }
+<TouchableOpacity
+  onPress={[Function]}
 >
   <Text>
     All
@@ -25,5 +10,5 @@ exports[`ListControl renders correctly 1`] = `
   <Icon
     name="ArrowDown"
   />
-</PopupMenuButton>
+</TouchableOpacity>
 `;

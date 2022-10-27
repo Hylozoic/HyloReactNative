@@ -5,11 +5,11 @@ exports[`renders as expected 1`] = `
   <_default
     hideSortOptions={true}
     members={
-      Array [
-        Object {
+      [
+        {
           "id": "member1",
         },
-        Object {
+        {
           "id": "member2",
         },
       ]

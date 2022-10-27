@@ -2,7 +2,7 @@
 
 exports[`getPerson returns the person 1`] = `
 SessionBoundModel {
-  "_fields": Object {
+  "_fields": {
     "id": 31,
   },
 }

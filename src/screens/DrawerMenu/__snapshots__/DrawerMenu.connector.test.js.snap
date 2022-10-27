@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mapDispatchToProps matches the last snapshot 1`] = `Object {}`;
+exports[`mapDispatchToProps matches the last snapshot 1`] = `{}`;
 
 exports[`mapStateToProps matches the latest snapshot 1`] = `
-Object {
+{
   "avatarUrl": undefined,
   "canModerateCurrentGroup": undefined,
   "currentGroup": SessionBoundModel {
-    "_fields": Object {
+    "_fields": {
       "avatarUrl": "someUrl",
       "id": "7",
       "name": "someName",
@@ -16,39 +16,39 @@ Object {
   },
   "currentGroupId": "7",
   "currentUser": SessionBoundModel {
-    "_fields": Object {
+    "_fields": {
       "id": "33",
       "name": "meUser",
     },
     "id": "33",
   },
-  "myGroups": Array [],
+  "myGroups": [],
   "name": "meUser",
-  "topGroups": Array [
-    Object {
+  "topGroups": [
+    {
       "avatarUrl": undefined,
       "bannerUrl": undefined,
-      "childGroups": Object {
+      "childGroups": {
         "toModelArray": [Function],
       },
       "headerAvatarUrl": undefined,
       "id": "public",
       "name": "Public Groups & Posts",
-      "parentGroups": Object {
+      "parentGroups": {
         "toModelArray": [Function],
       },
       "slug": "public",
     },
-    Object {
+    {
       "avatarUrl": undefined,
       "bannerUrl": undefined,
-      "childGroups": Object {
+      "childGroups": {
         "toModelArray": [Function],
       },
       "headerAvatarUrl": undefined,
       "id": "all",
       "name": "All My Groups",
-      "parentGroups": Object {
+      "parentGroups": {
         "toModelArray": [Function],
       },
       "slug": "all",
@@ -58,9 +58,9 @@ Object {
 `;
 
 exports[`mergeProps matches snapshot 1`] = `
-Object {
+{
   "canModerateCurrentGroup": true,
-  "currentUser": Object {
+  "currentUser": {
     "id": "anyid",
   },
   "goToCreateGroup": [Function],
@@ -69,7 +69,7 @@ Object {
   "goToInvitePeople": [Function],
   "goToMyProfile": [Function],
   "name": "Roy Rogers",
-  "navigation": Object {
+  "navigation": {
     "closeDrawer": [MockFunction],
     "navigate": [MockFunction],
   },
@@ -77,9 +77,9 @@ Object {
 `;
 
 exports[`mergeProps matches snapshot 2`] = `
-Object {
+{
   "canModerateCurrentGroup": false,
-  "currentUser": Object {
+  "currentUser": {
     "id": "anyid",
   },
   "goToCreateGroup": [Function],
@@ -88,7 +88,7 @@ Object {
   "goToInvitePeople": [Function],
   "goToMyProfile": [Function],
   "name": "Roy Rogers",
-  "navigation": Object {
+  "navigation": {
     "closeDrawer": [MockFunction],
     "navigate": [MockFunction],
   },

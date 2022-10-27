@@ -1,0 +1,202 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sets updateLastViewed to true when fetching for a group 1`] = `
+{
+  "graphql": {
+    "query": "query GroupPostsQuery (
+  $activePostsOnly: Boolean,
+  $afterTime: Date,
+  $beforeTime: Date,
+  $boundingBox: [PointInput],
+  $collectionToFilterOut: ID,
+  $filter: String,
+  $first: Int,
+  $forCollection: ID,
+  $isFulfilled: Boolean,
+  $offset: Int,
+  $order: String,
+  $search: String,
+  $slug: String,
+  $sortBy: String,
+  $topic: ID,
+  $topics: [ID],
+  $types: [String]
+) {
+  group(slug: $slug, updateLastViewed: true) {
+    id
+    slug
+    name
+    locationObject {
+      center {
+        lat
+        lng
+      }
+    }
+    avatarUrl
+    bannerUrl
+    postCount
+    
+posts: viewPosts(
+  activePostsOnly: $activePostsOnly,
+  afterTime: $afterTime,
+  beforeTime: $beforeTime,
+  boundingBox: $boundingBox,
+  collectionToFilterOut: $collectionToFilterOut,
+  filter: $filter,
+  first: $first,
+  forCollection: $forCollection,
+  isFulfilled: $isFulfilled,
+  offset: $offset,
+  order: $order,
+  sortBy: $sortBy,
+  search: $search,
+  topic: $topic,
+  topics: $topics,
+  types: $types
+) {
+  hasMore
+  total
+  items {
+    
+  id
+  announcement
+  title
+  details
+  type
+  creator {
+    id
+    name
+    avatarUrl
+  }
+  createdAt
+  updatedAt
+  isPublic
+  fulfilledAt
+  startTime
+  endTime
+  donationsLink
+  projectManagementLink
+  myEventResponse
+  commenters(first: 3) {
+    id
+    name
+    avatarUrl
+  }
+  commentersTotal
+  
+  linkPreview {
+    description
+    id
+    imageUrl
+    title
+    url
+  }
+  linkPreviewFeatured
+  location
+  locationObject {
+    id
+    addressNumber
+    addressStreet
+    bbox {
+      lat
+      lng
+    }
+    center {
+      lat
+      lng
+    }
+    city
+    country
+    fullText
+    locality
+    neighborhood
+    region
+  }
+  votesTotal
+  myVote
+  groups {
+    id
+    name
+    slug
+  }
+  attachments {
+    type
+    url
+    position
+    id
+  }
+  postMemberships {
+    id
+    pinned
+    group {
+      id
+    }
+  }
+  topics {
+    id
+    name
+    postsTotal
+    followersTotal
+  }
+  members {
+    total
+    hasMore
+    items {
+      id
+      name
+      avatarUrl
+      bio
+      tagline
+      location
+    }
+  }
+  eventInvitations {
+    total
+    hasMore
+    items {
+      id
+      response
+      person {
+        id
+        name
+        avatarUrl
+        bio
+        tagline
+        location
+      }
+    }
+  }
+
+  }
+}
+  }
+}",
+    "variables": {
+      "activePostsOnly": undefined,
+      "afterTime": undefined,
+      "beforeTime": undefined,
+      "collectionToFilterOut": undefined,
+      "context": "groups",
+      "filter": undefined,
+      "first": 20,
+      "forCollection": undefined,
+      "offset": undefined,
+      "order": undefined,
+      "search": undefined,
+      "slug": "anything",
+      "sortBy": undefined,
+      "topic": undefined,
+      "topics": undefined,
+      "types": undefined,
+    },
+  },
+  "meta": {
+    "extractModel": "Group",
+    "extractQueryResults": {
+      "getItems": [Function],
+    },
+    "slug": "anything",
+  },
+  "type": "FETCH_POSTS",
+}
+`;

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`mapDispatchToProps returns the right keys 1`] = `
-Object {
+{
   "blockUser": [Function],
   "fetchPerson": [Function],
   "goToGroup": [Function],
@@ -11,23 +11,23 @@ Object {
 `;
 
 exports[`mapStateToProps maps the state to the props 1`] = `
-Object {
-  "currentGroup": Object {
+{
+  "currentGroup": {
     "avatarUrl": undefined,
     "bannerUrl": undefined,
-    "childGroups": Object {
+    "childGroups": {
       "toModelArray": [Function],
     },
     "headerAvatarUrl": undefined,
     "id": "public",
     "name": "Public Groups & Posts",
-    "parentGroups": Object {
+    "parentGroups": {
       "toModelArray": [Function],
     },
     "slug": "public",
   },
   "currentUser": SessionBoundModel {
-    "_fields": Object {
+    "_fields": {
       "id": "1",
     },
     "id": "1",
@@ -42,8 +42,8 @@ Object {
   "id": 123,
   "isBlocked": false,
   "isMe": false,
-  "memberships": Array [],
-  "navigation": Object {
+  "memberships": [],
+  "navigation": {
     "navigate": [MockFunction],
   },
   "person": null,
@@ -51,9 +51,9 @@ Object {
 `;
 
 exports[`mergeProps returns the right keys 1`] = `
-Object {
+{
   "canFlag": true,
-  "currentUser": Object {
+  "currentUser": {
     "id": 1,
   },
   "fetchPerson": [Function],
@@ -61,11 +61,11 @@ Object {
   "goToMemberProfile": [Function],
   "id": 78,
   "isMe": true,
-  "navigation": Object {
+  "navigation": {
     "navigate": [Function],
   },
   "onPressMessages": [Function],
-  "person": Object {
+  "person": {
     "id": 78,
   },
   "updateUserSettings": [MockFunction],

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches the last snapshot for mapDispatchToProps 1`] = `
-Object {
+{
   "fetchMore": [Function],
   "fetchNotifications": [Function],
   "goToCreateGroup": [Function],
@@ -12,22 +12,22 @@ Object {
 `;
 
 exports[`matches the last snapshot for mapDispatchToProps 2`] = `
-Array [
-  Array [
-    Object {
-      "graphql": Object {
+[
+  [
+    {
+      "graphql": {
         "query": "mutation ($changes: MeInput) {
         updateMe(changes: $changes) {
           id
         }
       }",
-        "variables": Object {
-          "changes": Object {
+        "variables": {
+          "changes": {
             "newNotificationCount": 0,
           },
         },
       },
-      "meta": Object {
+      "meta": {
         "optimistic": true,
       },
       "type": "NotificationsList/UPDATE_NEW_NOTIFICATION_COUNT",
@@ -37,20 +37,20 @@ Array [
 `;
 
 exports[`matches the last snapshot for mapStateToProps 1`] = `
-Object {
+{
   "currentUserHasMemberships": false,
   "hasMore": false,
-  "notifications": Array [
-    Object {
+  "notifications": [
+    {
       "activityId": "1",
-      "actor": Object {
+      "actor": {
         "avatarUrl": "https://wombat.com",
         "name": "Wombat McAardvark",
       },
       "avatarSeparator": false,
       "createdAt": "",
       "id": "1",
-      "reasons": Array [
+      "reasons": [
         "announcement",
       ],
       "unread": false,

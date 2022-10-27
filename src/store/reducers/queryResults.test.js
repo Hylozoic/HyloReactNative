@@ -7,7 +7,7 @@ import queryResults, {
   makeQueryResultsModelSelector,
   matchNewThreadIntoQueryResults
 } from './queryResults'
-import { FETCH_MEMBERS } from 'routes/Members/Members.store'
+import { FETCH_MEMBERS } from 'screens/Members/Members.store'
 import {
   REMOVE_POST_PENDING
 } from 'components/PostCard/PostHeader/PostHeader.store'

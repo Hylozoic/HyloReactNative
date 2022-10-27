@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`gets all groups on current user 1`] = `
-Array [
+[
   SessionBoundModel {
-    "_fields": Object {
+    "_fields": {
       "group": "group1Id",
       "id": "membership1Id",
       "person": "meId",
     },
   },
   SessionBoundModel {
-    "_fields": Object {
+    "_fields": {
       "group": "group2Id",
       "id": "membership2Id",
       "person": "meId",

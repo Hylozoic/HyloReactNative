@@ -11,7 +11,7 @@ exports[`PostRow renders correctly 1`] = `
       <PostCard
         goToGroup={[Function]}
         post={
-          Object {
+          {
             "id": 1,
           }
         }

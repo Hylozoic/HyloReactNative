@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`fetchSearchResults matches snapshot 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "query ($search: String, $type: String, $offset: Int) {
         search(term: $search, first: 10, type: $type, offset: $offset) {
           total
@@ -41,6 +41,8 @@ Object {
   fulfilledAt
   startTime
   endTime
+  donationsLink
+  projectManagementLink
   myEventResponse
   commenters(first: 3) {
     id
@@ -48,13 +50,13 @@ Object {
     avatarUrl
   }
   commentersTotal
-  commentsTotal
   
   linkPreview {
+    description
     id
+    imageUrl
     title
     url
-    imageUrl
   }
   linkPreviewFeatured
   location
@@ -83,9 +85,6 @@ Object {
     id
     name
     slug
-    settings {
-      publicMemberDirectory
-    }
   }
   attachments {
     type
@@ -165,15 +164,15 @@ Object {
           }
         }
       }",
-    "variables": Object {
+    "variables": {
       "offset": 20,
       "search": "lae",
       "type": "comment",
     },
   },
-  "meta": Object {
+  "meta": {
     "extractModel": "SearchResult",
-    "extractQueryResults": Object {
+    "extractQueryResults": {
       "getItems": [Function],
     },
   },

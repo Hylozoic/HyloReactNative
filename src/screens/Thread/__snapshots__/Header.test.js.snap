@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header matches the last snapshot 1`] = `
-Object {
+{
   "headerTintColor": "#808c9b",
   "headerTitle": <Title
     onPress={[Function]}

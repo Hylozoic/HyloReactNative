@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`noncircular works as expected 1`] = `
-Object {
+{
   "ok": "yay",
-  "wow": Object {
-    "z": Object {
+  "wow": {
+    "z": {
       "x": "removed circular reference",
     },
   },

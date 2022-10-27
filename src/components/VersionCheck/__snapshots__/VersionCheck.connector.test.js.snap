@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`alerts with a forced version update 1`] = `
-Array [
-  Array [
+[
+  [
     "Force title",
     "Force message",
-    Array [
-      Object {
+    [
+      {
         "onPress": [Function],
         "text": "Update Now",
       },
     ],
-    Object {
+    {
       "cancelable": false,
     },
   ],
@@ -19,20 +19,20 @@ Array [
 `;
 
 exports[`alerts with a suggested version update 1`] = `
-Array [
-  Array [
+[
+  [
     "Suggest title",
     "Suggest message",
-    Array [
-      Object {
+    [
+      {
         "onPress": [Function],
         "text": "Update Now",
       },
-      Object {
+      {
         "text": "Cancel",
       },
     ],
-    Object {
+    {
       "cancelable": false,
     },
   ],

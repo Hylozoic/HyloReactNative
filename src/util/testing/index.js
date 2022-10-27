@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { TRenderEngineProvider } from 'react-native-render-html'
-import { createInitialState } from 'store'
+import { getEmptyState } from 'store'
 import orm from 'store/models'
 import { HyloHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
 
@@ -15,7 +15,7 @@ export function createMockStore (state = {}) {
   }
 }
 
-const emptyState = createInitialState()
+const emptyState = getEmptyState()
 
 // Basic utility CurrentUserState -- to be further abstracted
 export function createInitialStateWithCurrentUser () {
@@ -27,7 +27,7 @@ export function createInitialStateWithCurrentUser () {
     name: 'Current User'
   })
 
-  return createInitialState({
+  return getEmptyState({
     orm: session.state
   })
 }
@@ -43,11 +43,11 @@ export function TestRoot ({
     <SafeAreaProvider>
       <TRenderEngineProvider>
         <Provider store={store}>
-          <HyloHTMLConfigProvider>
-            <NavigationContainer>
+          <NavigationContainer>
+            <HyloHTMLConfigProvider>
               {children}
-            </NavigationContainer>
-          </HyloHTMLConfigProvider>
+            </HyloHTMLConfigProvider>
+          </NavigationContainer>
         </Provider>
       </TRenderEngineProvider>
     </SafeAreaProvider>

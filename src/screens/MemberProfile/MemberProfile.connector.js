@@ -24,7 +24,6 @@ export function mapStateToProps (state, props) {
   const isMe = Number(get('id', currentUser)) === Number(get('id', person))
   const navigation = props.navigation
   const { navigate } = navigation
-
   const editing = get('route.params.editing', props)
   const isBlocked = !!getBlockedUsers(state).find(i => get('id', i) === id)
   const goToDetails = () => navigate('Member Details', { id })

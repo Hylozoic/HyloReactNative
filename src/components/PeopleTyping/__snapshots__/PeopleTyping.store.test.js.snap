@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`action creators matches the last snapshot for addUserTyping 1`] = `
-Object {
-  "payload": Object {
+{
+  "payload": {
     "id": "1",
     "name": "Proteus",
   },
@@ -11,8 +11,8 @@ Object {
 `;
 
 exports[`action creators matches the last snapshot for clearUserTyping 1`] = `
-Object {
-  "payload": Object {
+{
+  "payload": {
     "id": "1",
   },
   "type": "PeopleTyping/CLEAR_USER_TYPING",

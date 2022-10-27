@@ -4,12 +4,12 @@ import middleware from 'store/middleware'
 
 export const initialState = {}
 
-export function createInitialState (state = initialState) {
+export function getEmptyState (state = initialState) {
   return createRootReducer()(state, { type: '' })
 }
 
 export function createStore (state = initialState) {
-  const emptyState = createInitialState(state)
+  const emptyState = getEmptyState(state)
   const store = (undefined === global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
     ? reduxCreateStore(createRootReducer(), emptyState, compose(applyMiddleware(...middleware)))
     : reduxCreateStore(createRootReducer(), emptyState,

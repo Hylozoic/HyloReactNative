@@ -1,11 +1,10 @@
 import { pick } from 'lodash/fp'
-import { getEmptyState } from '..'
+import { getEmptyState } from 'store'
 import { LOGOUT, RESET_STORE } from '../constants'
 
 export const KEYS_PRESERVED_ON_RESET = [
-  'pending',
-  'locationHistory',
-  'mixpanel'
+  'session',
+  'SocketListener'
 ]
 
 export default function (state = null, action) {

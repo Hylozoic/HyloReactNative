@@ -6,6 +6,7 @@ import {
   FETCH_CURRENT_USER,
   JOIN_PROJECT_PENDING,
   LEAVE_PROJECT_PENDING,
+  RESET_NEW_POST_COUNT_PENDING,
   TOGGLE_GROUP_TOPIC_SUBSCRIBE_PENDING,
   USE_INVITATION,
   VOTE_ON_POST_PENDING
@@ -19,9 +20,6 @@ import {
 import {
   CREATE_GROUP
 } from 'screens/CreateGroupFlow/CreateGroupFlow.store'
-import {
-  RESET_NEW_POST_COUNT_PENDING
-} from 'store/actions/resetNewPostCount'
 import {
   UPDATE_NEW_NOTIFICATION_COUNT_PENDING
 } from 'screens/NotificationsList/NotificationsList.store'
@@ -91,25 +89,6 @@ it('ignores an action with meta.extractModel that is a promise', () => {
   expect(newState).toEqual(state)
 })
 
-it('handles SET_TOPIC_SUBSCRIBE_PENDING', () => {
-  const session = orm.session(orm.getEmptyState())
-  session.GroupTopic.create({
-    topic: '1', group: '1', isSubscribed: false, followersTotal: 3
-  })
-  const action = {
-    type: TOGGLE_GROUP_TOPIC_SUBSCRIBE_PENDING,
-    meta: {
-      topicId: '1',
-      groupId: '1'
-    }
-  }
-
-  const newState = ormReducer(session.state, action)
-  const newSession = orm.session(newState)
-  expect(newSession.GroupTopic.first().followersTotal).toBe(4)
-  expect(newSession.GroupTopic.first().isSubscribed).toBeTruthy()
-})
-
 describe('handles VOTE_ON_POST_PENDING', () => {
   it('up vote', () => {
     const session = orm.session(orm.getEmptyState())
@@ -148,42 +127,6 @@ describe('handles VOTE_ON_POST_PENDING', () => {
     const newState = ormReducer(session.state, downVoteAction)
     const newSession = orm.session(newState)
     expect(newSession.Post.first().myVote).toBeFalsy()
-  })
-})
-
-describe('handles USE_INVITATION', () => {
-  it('should link the new Membership to MeMemberships', () => {
-    const session = orm.mutableSession(orm.getEmptyState())
-    const meId = 'meId'
-    const group1Id = 'group1Id'
-    const group2Id = 'group2Id'
-    const membership1Id = 'membership1Id'
-    const membership2Id = 'membership2Id'
-
-    session.Me.create({ id: meId })
-    session.Group.create({ id: group1Id, name: 'group 1' })
-    session.Group.create({ id: group2Id, name: 'group 2' })
-    session.Membership.create({ id: membership1Id, group: group1Id, person: meId })
-    session.Membership.create({ id: membership2Id, group: group2Id, person: meId }) // const me = session.Me.first()
-
-    const data = {
-      membership: {
-        id: membership1Id
-      }
-    }
-
-    const action = {
-      type: USE_INVITATION,
-      payload: {
-        getData: () => data,
-        data: { useInvitation: data }
-      }
-    }
-    const memberships = session.Me.first().memberships
-    expect(memberships.count()).toEqual(0)
-    const newSession = orm.session(ormReducer(session.state, action))
-    const membershipsAfterAction = newSession.Me.first().memberships
-    expect(membershipsAfterAction.count()).toEqual(1)
   })
 })
 
@@ -256,27 +199,6 @@ describe('on UPDATE_NEW_NOTIFICATION_COUNT_PENDING', () => {
     const newSession = orm.session(ormReducer(session.state, action))
     expect(newSession.Me.first().newNotificationCount).toEqual(0)
   })
-})
-
-describe('on RESET_NEW_POST_COUNT_PENDING', () => {
-  const action = {
-    type: RESET_NEW_POST_COUNT_PENDING,
-    meta: {
-      graphql: {
-        variables: {
-          id: 1
-        }
-      }
-    }
-  }
-
-  const session = orm.session(orm.getEmptyState())
-  session.Me.create({ id: 1 })
-  session.Group.create({ id: 1, name: 'group 1' })
-  session.Membership.create({ id: 1, group: 1, person: 1 })
-  expect(session.Membership.first().newPostCount).toEqual(undefined)
-  const newSession = orm.session(ormReducer(session.state, action))
-  expect(newSession.Membership.first().newPostCount).toEqual(0)
 })
 
 describe('on FETCH_CURRENT_USER', () => {
@@ -400,26 +322,3 @@ describe('handles JOIN_PROJECT_PENDING', () => {
   })
 })
 
-describe('handles LEAVE_PROJECT_PENDING', () => {
-  it('should remove project member', () => {
-    const session = orm.mutableSession(orm.getEmptyState())
-    const projectMemberId = 'projectMemberId'
-    const postId = '10'
-    session.Me.create({ id: projectMemberId })
-    session.Post.create({
-      id: postId,
-      type: 'project'
-    })
-    session.ProjectMember.create({ post: postId, member: projectMemberId })
-    expect(session.ProjectMember.all().count()).toEqual(1)
-    const action = {
-      type: LEAVE_PROJECT_PENDING,
-      meta: {
-        id: postId
-      }
-    }
-    const newSession = orm.session(ormReducer(session.state, action))
-    // const projectMembershipsAfterAction = newSession.ProjectMember.all().toRefArray()
-    expect(newSession.ProjectMember.all().count()).toEqual(0)
-  })
-})

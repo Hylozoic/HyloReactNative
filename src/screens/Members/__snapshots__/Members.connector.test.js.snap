@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`makeFetchOpts handles a group 1`] = `
-Object {
+{
   "search": "fee",
   "slug": "comslug",
   "sortBy": "join",
@@ -9,7 +9,7 @@ Object {
 `;
 
 exports[`makeFetchOpts handles no group 1`] = `
-Object {
+{
   "search": "fee",
   "slug": undefined,
   "sortBy": "join",
@@ -17,7 +17,7 @@ Object {
 `;
 
 exports[`mapDispatchToProps returns the right keys 1`] = `
-Object {
+{
   "fetchMembers": [Function],
   "setSearch": [Function],
   "setSort": [Function],
@@ -26,32 +26,32 @@ Object {
 `;
 
 exports[`mapStateToProps handles null value for lastViewedGroup 1`] = `
-Object {
+{
   "canModerate": true,
   "currentUser": SessionBoundModel {
-    "_fields": Object {
+    "_fields": {
       "id": 123,
     },
     "id": 123,
   },
-  "fetchOpts": Object {
+  "fetchOpts": {
     "search": undefined,
     "slug": "tom",
     "sortBy": undefined,
   },
   "group": SessionBoundModel {
-    "_fields": Object {
+    "_fields": {
       "id": 10,
       "slug": "tom",
     },
   },
   "hasMore": undefined,
-  "members": Array [],
+  "members": [],
   "pending": undefined,
   "search": undefined,
   "slug": "tom",
   "sortBy": undefined,
-  "sortKeys": Object {
+  "sortKeys": {
     "join": "Newest",
     "location": "Location",
     "name": "Name",

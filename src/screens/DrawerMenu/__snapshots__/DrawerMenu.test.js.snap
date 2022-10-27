@@ -7,7 +7,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
   >
     <MockLinearGradient
       colors={
-        Array [
+        [
           "rgba(0, 0, 0, 0)",
           "rgba(0, 0, 0, 0.1)",
           "rgba(0, 0, 0, 0.3)",
@@ -18,7 +18,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     <View>
       <Image
         source={
-          Object {
+          {
             "uri": "someurl",
           }
         }
@@ -43,13 +43,13 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
     SectionSeparatorComponent={[Function]}
     renderSectionHeader={[Function]}
     sections={
-      Array [
-        Object {
+      [
+        {
           "data": undefined,
           "keyExtractor": [Function],
           "renderItem": [Function],
         },
-        Object {
+        {
           "data": undefined,
           "keyExtractor": [Function],
           "renderItem": [Function],
@@ -71,7 +71,7 @@ exports[`GroupRow hides badge when no newPostCount 1`] = `
   >
     <Image
       source={
-        Object {
+        {
           "uri": "foo.png",
         }
       }
@@ -93,7 +93,7 @@ exports[`GroupRow highlights when matching currentGroupId 1`] = `
   >
     <Image
       source={
-        Object {
+        {
           "uri": "foo.png",
         }
       }
@@ -115,7 +115,7 @@ exports[`GroupRow matches the last snapshot 1`] = `
   >
     <Image
       source={
-        Object {
+        {
           "uri": "foo.png",
         }
       }
@@ -146,7 +146,7 @@ exports[`SectionHeader matches the last snapshot 1`] = `
 exports[`TextButton renders 1`] = `
 <TouchableOpacity
   hitSlop={
-    Object {
+    {
       "bottom": 10,
       "left": 10,
       "right": 15,

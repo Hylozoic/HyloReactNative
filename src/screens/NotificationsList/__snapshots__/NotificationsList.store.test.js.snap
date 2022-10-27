@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`action creators matches the last snapshot from fetchNotifications 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "query ($first: Int, $offset: Int) {
-        notifications (first: $first, offset: $offset, order: \\"desc\\") {
+        notifications (first: $first, offset: $offset, order: "desc") {
           total
           hasMore
           items {
@@ -39,6 +39,8 @@ Object {
   fulfilledAt
   startTime
   endTime
+  donationsLink
+  projectManagementLink
   myEventResponse
   commenters(first: 3) {
     id
@@ -46,10 +48,9 @@ Object {
     avatarUrl
   }
   commentersTotal
-  commentsTotal
-  comments(first: 10, order: \\"desc\\") {
-      items {
-        
+  comments(first: 10, order: "desc") {
+    items {
+      
   id
   text
   creator {
@@ -68,9 +69,9 @@ Object {
   }
   createdAt
 
-        childComments(first: 10, order: \\"desc\\") {
-          items {
-            
+      childComments(first: 4, order: "desc") {
+        items {
+          
   id
   text
   creator {
@@ -89,22 +90,23 @@ Object {
   }
   createdAt
 
-            post {
-              id
-            }
+          post {
+            id
           }
-          total
-          hasMore
         }
+        total
+        hasMore
       }
-      total
-      hasMore
     }
+    total
+    hasMore
+  }
   linkPreview {
+    description
     id
+    imageUrl
     title
     url
-    imageUrl
   }
   linkPreviewFeatured
   location
@@ -133,9 +135,6 @@ Object {
     id
     name
     slug
-    settings {
-      publicMemberDirectory
-    }
   }
   attachments {
     type
@@ -200,15 +199,15 @@ Object {
           }
         }
       }",
-    "variables": Object {
+    "variables": {
       "first": 20,
       "offset": 0,
     },
   },
-  "meta": Object {
+  "meta": {
     "afterInteractions": true,
     "extractModel": "Notification",
-    "extractQueryResults": Object {
+    "extractQueryResults": {
       "getItems": [Function],
     },
     "resetCount": true,
@@ -218,18 +217,18 @@ Object {
 `;
 
 exports[`action creators matches the last snapshot from markActivityRead 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "mutation ($id: ID) {
         markActivityRead(id: $id) {
           id
         }
       }",
-    "variables": Object {
+    "variables": {
       "id": "1",
     },
   },
-  "meta": Object {
+  "meta": {
     "id": "1",
     "optimistic": true,
   },
@@ -238,15 +237,15 @@ Object {
 `;
 
 exports[`action creators matches the last snapshot from markAllActivitiesRead 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "mutation {
         markAllActivitiesRead {
           success
         }
       }",
   },
-  "meta": Object {
+  "meta": {
     "optimistic": true,
   },
   "type": "NotificationsList/MARK_ALL_ACTIVITIES_READ",
@@ -254,20 +253,20 @@ Object {
 `;
 
 exports[`action creators matches the last snapshot from updateNewNotificationCount 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "mutation ($changes: MeInput) {
         updateMe(changes: $changes) {
           id
         }
       }",
-    "variables": Object {
-      "changes": Object {
+    "variables": {
+      "changes": {
         "newNotificationCount": 0,
       },
     },
   },
-  "meta": Object {
+  "meta": {
     "optimistic": true,
   },
   "type": "NotificationsList/UPDATE_NEW_NOTIFICATION_COUNT",
@@ -275,7 +274,7 @@ Object {
 `;
 
 exports[`selectors/refiners refineActivity matches the previous ACTION_ANNOUNCEMENT snapshot 1`] = `
-Object {
+{
   "body": "wrote: This post should have a really long title. It should not even come close to …",
   "header": "posted an announcement",
   "nameInHeader": true,
@@ -284,7 +283,7 @@ Object {
 `;
 
 exports[`selectors/refiners refineActivity matches the previous ACTION_APPROVED_JOIN_REQUEST snapshot 1`] = `
-Object {
+{
   "body": "approved your request to join",
   "group": "Aardvarks Alert",
   "header": "Join Request Approved",
@@ -293,7 +292,7 @@ Object {
 `;
 
 exports[`selectors/refiners refineActivity matches the previous ACTION_COMMENT snapshot 1`] = `
-Object {
+{
   "body": "wrote: Rich Churcher",
   "header": "New Comment on",
   "onPress": [Function],
@@ -302,7 +301,7 @@ Object {
 `;
 
 exports[`selectors/refiners refineActivity matches the previous ACTION_COMMENT_MENTION snapshot 1`] = `
-Object {
+{
   "body": "wrote: Rich Churcher",
   "header": "mentioned you in a comment on",
   "nameInHeader": true,
@@ -312,7 +311,7 @@ Object {
 `;
 
 exports[`selectors/refiners refineActivity matches the previous ACTION_JOIN_REQUEST snapshot 1`] = `
-Object {
+{
   "body": "asked to join",
   "group": "Aardvarks Alert",
   "header": "New join request",
@@ -322,7 +321,7 @@ Object {
 `;
 
 exports[`selectors/refiners refineActivity matches the previous ACTION_MENTION snapshot 1`] = `
-Object {
+{
   "body": "wrote: So detailed.",
   "header": "mentioned you",
   "nameInHeader": true,
@@ -331,7 +330,7 @@ Object {
 `;
 
 exports[`selectors/refiners refineActivity matches the previous ACTION_TAG snapshot 1`] = `
-Object {
+{
   "body": "wrote: So detailed.",
   "header": "New Post in",
   "onPress": [Function],

@@ -3,15 +3,15 @@
 exports[`calls fetchGroupTopic on componentDidMount 1`] = `
 <View
   style={
-    Object {
+    {
       "flex": 1,
     }
   }
 >
   <View
     style={
-      Array [
-        Object {
+      [
+        {
           "flex": 1,
         },
         undefined,
@@ -20,8 +20,8 @@ exports[`calls fetchGroupTopic on componentDidMount 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "backgroundColor": "rgb(242, 242, 242)",
             "flex": 1,
           },
@@ -55,7 +55,7 @@ exports[`calls fetchGroupTopic on componentDidMount 1`] = `
             <View
               pointerEvents="none"
               style={
-                Object {
+                {
                   "height": 0,
                 }
               }
@@ -63,7 +63,7 @@ exports[`calls fetchGroupTopic on componentDidMount 1`] = `
             <View
               pointerEvents="box-none"
               style={
-                Object {
+                {
                   "alignItems": "stretch",
                   "flex": 1,
                   "flexDirection": "row",
@@ -99,7 +99,7 @@ exports[`calls fetchGroupTopic on componentDidMount 1`] = `
       <RNSScreenContainer
         onLayout={[Function]}
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
@@ -109,7 +109,7 @@ exports[`calls fetchGroupTopic on componentDidMount 1`] = `
           collapsable={false}
           forwardedRef={[Function]}
           gestureResponseDistance={
-            Object {
+            {
               "bottom": -1,
               "end": -1,
               "start": -1,
@@ -134,12 +134,12 @@ exports[`calls fetchGroupTopic on componentDidMount 1`] = `
             onTransition={[Function]}
             pointerEvents="box-none"
             style={
-              Array [
-                Object {
+              [
+                {
                   "display": "flex",
                   "overflow": undefined,
                 },
-                Object {
+                {
                   "bottom": 0,
                   "left": 0,
                   "position": "absolute",
@@ -149,10 +149,10 @@ exports[`calls fetchGroupTopic on componentDidMount 1`] = `
               ]
             }
             transitionSpec={
-              Object {
-                "close": Object {
+              {
+                "close": {
                   "animation": "spring",
-                  "config": Object {
+                  "config": {
                     "damping": 500,
                     "mass": 3,
                     "overshootClamping": true,
@@ -161,9 +161,9 @@ exports[`calls fetchGroupTopic on componentDidMount 1`] = `
                     "stiffness": 1000,
                   },
                 },
-                "open": Object {
+                "open": {
                   "animation": "spring",
-                  "config": Object {
+                  "config": {
                     "damping": 500,
                     "mass": 3,
                     "overshootClamping": true,
@@ -182,19 +182,22 @@ exports[`calls fetchGroupTopic on componentDidMount 1`] = `
               <View
                 collapsable={false}
                 forwardedRef={[Function]}
+                handlerTag={1}
+                handlerType="PanGestureHandler"
                 needsOffscreenAlphaCompositing={false}
                 onGestureHandlerEvent={[Function]}
                 onGestureHandlerStateChange={[Function]}
               >
                 <View
+                  pointerEvents="box-none"
                   style={
-                    Array [
-                      Object {
+                    [
+                      {
                         "flex": 1,
                         "overflow": "hidden",
                       },
-                      Array [
-                        Object {
+                      [
+                        {
                           "backgroundColor": "rgb(242, 242, 242)",
                         },
                         undefined,
@@ -204,7 +207,7 @@ exports[`calls fetchGroupTopic on componentDidMount 1`] = `
                 >
                   <View
                     style={
-                      Object {
+                      {
                         "flex": 1,
                         "flexDirection": "column-reverse",
                       }
@@ -212,7 +215,7 @@ exports[`calls fetchGroupTopic on componentDidMount 1`] = `
                   >
                     <View
                       style={
-                        Object {
+                        {
                           "flex": 1,
                         }
                       }
@@ -240,31 +243,31 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
 <SafeAreaProvider>
   <TRenderEngineProvider
     baseStyle={
-      Object {
+      {
         "fontSize": 14,
       }
     }
-    classesStyles={Object {}}
-    customHTMLElementModels={Object {}}
+    classesStyles={{}}
+    customHTMLElementModels={{}}
     emSize={14}
     enableCSSInlineProcessing={true}
     enableUserAgentStyles={true}
     fallbackFonts={
-      Object {
+      {
         "monospace": "Menlo",
         "sans-serif": "system",
         "serif": "Times New Roman",
       }
     }
     htmlParserOptions={
-      Object {
+      {
         "decodeEntities": true,
       }
     }
-    ignoredDomTags={Array []}
-    ignoredStyles={Array []}
+    ignoredDomTags={[]}
+    ignoredStyles={[]}
     systemFonts={
-      Array [
+      [
         "San Francisco",
         "Arial",
         "ArialHebrew",
@@ -307,22 +310,22 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
         "Zapfino",
       ]
     }
-    tagsStyles={Object {}}
+    tagsStyles={{}}
   >
     <Provider
       store={
-        Object {
+        {
           "dispatch": [MockFunction],
           "getState": [MockFunction],
           "subscribe": [MockFunction],
         }
       }
     >
-      <HyloHTMLConfigProvider>
-        <ForwardRef(NavigationContainerInner)>
+      <ForwardRef(NavigationContainerInner)>
+        <HyloHTMLConfigProvider>
           <Feed
             currentUser={
-              Object {
+              {
                 "id": "2",
               }
             }
@@ -330,18 +333,18 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
             editPost={[Function]}
             goToGroup={[Function]}
             group={
-              Object {
+              {
                 "id": "1",
               }
             }
-            navigation={Object {}}
+            navigation={{}}
             newPost={[Function]}
-            route={Object {}}
+            route={{}}
             showPost={[Function]}
             topicName="amazing"
           />
-        </ForwardRef(NavigationContainerInner)>
-      </HyloHTMLConfigProvider>
+        </HyloHTMLConfigProvider>
+      </ForwardRef(NavigationContainerInner)>
     </Provider>
   </TRenderEngineProvider>
 </SafeAreaProvider>
@@ -351,31 +354,31 @@ exports[`renders correctly if currentUserHasMemberships is false 1`] = `
 <SafeAreaProvider>
   <TRenderEngineProvider
     baseStyle={
-      Object {
+      {
         "fontSize": 14,
       }
     }
-    classesStyles={Object {}}
-    customHTMLElementModels={Object {}}
+    classesStyles={{}}
+    customHTMLElementModels={{}}
     emSize={14}
     enableCSSInlineProcessing={true}
     enableUserAgentStyles={true}
     fallbackFonts={
-      Object {
+      {
         "monospace": "Menlo",
         "sans-serif": "system",
         "serif": "Times New Roman",
       }
     }
     htmlParserOptions={
-      Object {
+      {
         "decodeEntities": true,
       }
     }
-    ignoredDomTags={Array []}
-    ignoredStyles={Array []}
+    ignoredDomTags={[]}
+    ignoredStyles={[]}
     systemFonts={
-      Array [
+      [
         "San Francisco",
         "Arial",
         "ArialHebrew",
@@ -418,22 +421,22 @@ exports[`renders correctly if currentUserHasMemberships is false 1`] = `
         "Zapfino",
       ]
     }
-    tagsStyles={Object {}}
+    tagsStyles={{}}
   >
     <Provider
       store={
-        Object {
+        {
           "dispatch": [MockFunction],
           "getState": [MockFunction],
           "subscribe": [MockFunction],
         }
       }
     >
-      <HyloHTMLConfigProvider>
-        <ForwardRef(NavigationContainerInner)>
+      <ForwardRef(NavigationContainerInner)>
+        <HyloHTMLConfigProvider>
           <Feed
             currentUser={
-              Object {
+              {
                 "id": "2",
               }
             }
@@ -441,17 +444,17 @@ exports[`renders correctly if currentUserHasMemberships is false 1`] = `
             editPost={[Function]}
             goToGroup={[Function]}
             group={
-              Object {
+              {
                 "id": "1",
               }
             }
-            navigation={Object {}}
+            navigation={{}}
             newPost={[Function]}
             showPost={[Function]}
             topicName="amazing"
           />
-        </ForwardRef(NavigationContainerInner)>
-      </HyloHTMLConfigProvider>
+        </HyloHTMLConfigProvider>
+      </ForwardRef(NavigationContainerInner)>
     </Provider>
   </TRenderEngineProvider>
 </SafeAreaProvider>

@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`on FETCH_CURRENT_USER creates the Person 1`] = `
-Object {
+{
   "avatarUrl": "m.png",
   "id": 123,
   "location": "Spain",
   "name": "Maurice",
-  "settings": Object {
+  "settings": {
     "setting1": 1,
     "setting2": 2,
   },

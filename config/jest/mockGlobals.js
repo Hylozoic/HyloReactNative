@@ -43,6 +43,11 @@ jest.mock('mixpanel-react-native', () => ({
   }))
 }))
 
+jest.mock('react-native-screens', () => ({
+  ...jest.requireActual('react-native-screens'),
+  enableScreens: jest.fn()
+}))
+
 jest.mock('@intercom/intercom-react-native', () => {}, { virtual: true })
 
 jest.mock('react-native-device-info', () => ({
@@ -86,12 +91,3 @@ jest.mock('react-native-onesignal', () => ({
 jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter.js', () =>
   require('react-native/Libraries/EventEmitter/__mocks__/NativeEventEmitter.js')
 )
-
-// https://github.com/rt2zz/redux-persist/issues/1243#issuecomment-692609748
-jest.mock('redux-persist', () => {
-  const real = jest.requireActual('redux-persist')
-  return {
-    ...real,
-    persistReducer: jest.fn().mockImplementation((config, reducers) => reducers)
-  }
-})

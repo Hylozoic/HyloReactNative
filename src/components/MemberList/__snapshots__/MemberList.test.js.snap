@@ -11,7 +11,7 @@ exports[`MemberList renders with default props with default non-server search 1`
           placeholder="Search Members"
         />
         <PopupMenuButton
-          actions={Array []}
+          actions={[]}
         >
           <Text />
           <Icon
@@ -22,12 +22,12 @@ exports[`MemberList renders with default props with default non-server search 1`
     </View>
   }
   data={
-    Array [
-      Object {
+    [
+      {
         "id": "1",
         "name": "Loren",
       },
-      Object {
+      {
         "id": "2",
         "name": "Robbie",
       },
@@ -51,7 +51,7 @@ exports[`MemberList runs call for new results if server search 1`] = `
           placeholder="Search Members"
         />
         <PopupMenuButton
-          actions={Array []}
+          actions={[]}
         >
           <Text />
           <Icon
@@ -62,12 +62,12 @@ exports[`MemberList runs call for new results if server search 1`] = `
     </View>
   }
   data={
-    Array [
-      Object {
+    [
+      {
         "id": "1",
         "name": "Loren",
       },
-      Object {
+      {
         "id": "2",
         "name": "Robbie",
       },

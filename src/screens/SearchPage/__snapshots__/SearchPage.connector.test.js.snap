@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`mapDispatchToProps matches last snapshot 1`] = `
-Object {
+{
   "fetchSearchResults": [Function],
   "setSearchFilter": [Function],
   "setSearchTerm": [Function],
@@ -9,19 +9,19 @@ Object {
 `;
 
 exports[`mapStateToProps matches last snapshot 1`] = `
-Object {
+{
   "filter": "all",
   "goToPerson": [Function],
   "goToPost": [Function],
   "hasMore": undefined,
   "pending": false,
-  "searchResults": Array [],
+  "searchResults": [],
   "searchTerm": "",
 }
 `;
 
 exports[`mergeProps matches last snapshot 1`] = `
-Object {
+{
   "fetchMoreSearchResults": [Function],
   "fetchSearchResults": [Function],
   "filter": "all",
@@ -29,7 +29,7 @@ Object {
   "goToPost": [Function],
   "hasMore": undefined,
   "pending": false,
-  "searchResults": Array [],
+  "searchResults": [],
   "searchTerm": "",
   "setSearchFilter": [Function],
   "setSearchTerm": [Function],

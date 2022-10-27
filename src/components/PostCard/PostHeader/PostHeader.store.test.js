@@ -5,6 +5,7 @@ import {
   PIN_POST_PENDING
 } from './PostHeader.store'
 import orm from 'store/models'
+import ormReducer from 'store/reducers/ormReducer'
 
 describe('ormSessionReducer', () => {
   let session, group
@@ -43,19 +44,32 @@ describe('ormSessionReducer', () => {
     ormSessionReducer(session, action)
     expect(session.Post.withId(11).groups.toRefArray()).toHaveLength(0)
   })
-
+  
   it('handles PIN_POST_PENDING', () => {
+    const postMembership = session.PostMembership.create({
+      pinned: false,
+      group
+    })
+    const postId = 123
+  
+    session.Post.create({
+      id: postId,
+      groups: [group],
+      postMemberships: [postMembership]
+    })
+  
     const action = {
       type: PIN_POST_PENDING,
       meta: {
-        postId: 12,
+        postId,
         groupId: group.id
       }
     }
 
-    expect(session.Post.withId(12).groups.toRefArray()).toHaveLength(1)
-    ormSessionReducer(session, action)
-    const postMembership = session.Post.withId(12).postMemberships.toModelArray()[0]
-    expect(postMembership.pinned).toEqual(true)
+    const newState = ormReducer(session.state, action)
+    const newSession = orm.session(newState)
+
+    const newPostMembership = newSession.Post.withId(postId).postMemberships.toModelArray()[0]
+    expect(newPostMembership.pinned).toEqual(true)
   })
 })

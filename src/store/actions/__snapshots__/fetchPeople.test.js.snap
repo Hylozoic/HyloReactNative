@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches the last snapshot 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "All the lonely people / Where do they all come from?",
-    "variables": Object {
+    "variables": {
       "autocomplete": "Tchaikovs",
       "first": 100,
-      "groupIds": Array [],
+      "groupIds": [],
       "offset": 0,
     },
   },
-  "meta": Object {
+  "meta": {
     "extractModel": "Group",
-    "extractQueryResults": Object {
+    "extractQueryResults": {
       "getItems": [Function],
     },
   },
