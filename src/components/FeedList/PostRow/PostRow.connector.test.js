@@ -63,7 +63,12 @@ describe('makeMapStateToProps', () => {
         isPinned: true,
         imageUrls: ['someImageUrl'],
         fileUrls: [],
-        post: { creator: '3', id: '10' },
+        post: {
+          '_fields': {
+            creator: '3',
+              id: '10'
+          }
+        },
         topics: [{ id: '2', name: 'namer', slug: 'slugger' }]
       }
     )

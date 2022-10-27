@@ -40,6 +40,7 @@ describe('mapStateToProps', () => {
       sortBy: initialState.sortBy,
       timeframe: 'future',
       queryProps: {
+        context: 'groups',
         sortBy: 'updated'
       }
     })
@@ -60,6 +61,7 @@ describe('mapStateToProps', () => {
       sortBy: initialState.sortBy,
       timeframe: 'future',
       queryProps: {
+        context: 'groups',
         slug: 'foo',
         sortBy: 'updated'
       }

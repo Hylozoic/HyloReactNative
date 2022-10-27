@@ -102,7 +102,7 @@ exports[`mergeProps maps 1`] = `
   "joinProject": [Function],
   "leaveProject": [Function],
   "navigation": {
-    "navigate": [MockFunction],
+    "navigate": [Function],
   },
   "post": {
     "id": "testpost",

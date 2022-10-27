@@ -21,7 +21,7 @@
     "clean-auto": "react-native clean-project-auto"
   },
   "dependencies": {
-    "@expo/react-native-action-sheet": "^3.14.0",
+    "@expo/react-native-action-sheet": "^4.0.0",
     "@flyerhq/react-native-keyboard-accessory-view": "^2.4.0",
     "@intercom/intercom-react-native": "^3.0.5",
     "@invertase/react-native-apple-authentication": "^2.1.5",
@@ -88,15 +88,15 @@
     "tinycolor2": "^1.4.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.3",
-    "@babel/eslint-parser": "^7.17.0",
-    "@babel/runtime": "^7.17.2",
-    "@react-native-community/eslint-config": "^3.0.1",
+    "@babel/core": "^7.19.6",
+    "@babel/eslint-parser": "^7.19.1",
+    "@babel/runtime": "^7.19.4",
+    "@react-native-community/eslint-config": "^3.1.0",
     "@react-navigation/devtools": "^6.0.10",
     "@testing-library/jest-native": "^5.1.2",
     "@testing-library/react-native": "11.3.0",
     "babel-jest": "^29.2.2",
-    "babel-plugin-inline-dotenv": "^1.6.0",
+    "babel-plugin-inline-dotenv": "^1.7.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-remove-style": "^0.1.0",
     "babel-plugin-syntax-jsx": "^6.18.0",
@@ -119,8 +119,8 @@
     "jest-serializer-graphql": "^1.0.0",
     "jest-watch-typeahead": "^2.2.0",
     "metro-react-native-babel-preset": "^0.73.2",
-    "msw": "^0.38.1",
-    "patch-package": "^6.4.7",
+    "msw": "^0.47.4",
+    "patch-package": "^6.5.0",
     "postinstall-postinstall": "^2.1.0",
     "react-native-clean-project": "^4.0.1",
     "react-native-version": "^4.0.0",
@@ -133,7 +133,7 @@
     "validator": "^8.0.0"
   },
   "jest": {
-    "preset": "react-native",
+    "preset": "@testing-library/react-native",
     "setupFiles": [
       "<rootDir>/config/jest/mockGlobals.js",
       "./node_modules/react-native-gesture-handler/jestSetup.js"
@@ -159,7 +159,7 @@
       "<rootDir>[/\\\\](android|ios|node_modules|scripts|assets|)[/\\\\]"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?@react-native|react-native|@react-native-community|@react-navigation|rn-round-checkbox|@invertase|@flyerhq/react-native-keyboard-accessory-view|@react-native-picker)"
+      "node_modules/(?!(jest-)?@react-native|react-native|@react-native-community|@react-navigation|react-native-render-html|@invertase/react-native-apple-authentication|@flyerhq/react-native-keyboard-accessory-view|@react-native-picker)"
     ],
     "watchPlugins": [
       "jest-watch-typeahead/filename",

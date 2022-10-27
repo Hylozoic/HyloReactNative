@@ -43,11 +43,11 @@ export function TestRoot ({
     <SafeAreaProvider>
       <TRenderEngineProvider>
         <Provider store={store}>
-          <NavigationContainer>
-            <HyloHTMLConfigProvider>
+          <HyloHTMLConfigProvider>
+            <NavigationContainer>
               {children}
-            </HyloHTMLConfigProvider>
-          </NavigationContainer>
+            </NavigationContainer>
+          </HyloHTMLConfigProvider>
         </Provider>
       </TRenderEngineProvider>
     </SafeAreaProvider>

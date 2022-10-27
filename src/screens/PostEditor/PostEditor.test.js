@@ -109,7 +109,7 @@ describe('PostEditor', () => {
         </Stack.Navigator>
       </TestRoot>
     )
-    const { getByText, getByPlaceholderText, toJSON, debug } = render(component)
+    const { getByText, getByPlaceholderText, toJSON } = render(component)
     fireEvent.changeText(
       getByPlaceholderText("What's on your mind?"),
       'title of this post'
@@ -121,8 +121,7 @@ describe('PostEditor', () => {
     })
 
     expect(fetchPost).toHaveBeenCalled()
-    console.log('!!! debug()', debug())
-    // expect(toJSON()).toMatchSnapshot()
+    expect(toJSON()).toMatchSnapshot()
   })
 
   it('calls alert when announcementEnabled', async () => {

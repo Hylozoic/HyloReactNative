@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`mapStateToProps 1`] = `
-Object {
+{
   "currentUser": undefined,
   "hasMore": undefined,
   "isConnected": true,

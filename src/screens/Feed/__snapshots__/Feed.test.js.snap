@@ -321,8 +321,8 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
         }
       }
     >
-      <ForwardRef(NavigationContainerInner)>
-        <HyloHTMLConfigProvider>
+      <HyloHTMLConfigProvider>
+        <ForwardRef(NavigationContainerInner)>
           <Feed
             currentUser={
               {
@@ -343,8 +343,8 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
             showPost={[Function]}
             topicName="amazing"
           />
-        </HyloHTMLConfigProvider>
-      </ForwardRef(NavigationContainerInner)>
+        </ForwardRef(NavigationContainerInner)>
+      </HyloHTMLConfigProvider>
     </Provider>
   </TRenderEngineProvider>
 </SafeAreaProvider>
@@ -432,8 +432,8 @@ exports[`renders correctly if currentUserHasMemberships is false 1`] = `
         }
       }
     >
-      <ForwardRef(NavigationContainerInner)>
-        <HyloHTMLConfigProvider>
+      <HyloHTMLConfigProvider>
+        <ForwardRef(NavigationContainerInner)>
           <Feed
             currentUser={
               {
@@ -453,8 +453,8 @@ exports[`renders correctly if currentUserHasMemberships is false 1`] = `
             showPost={[Function]}
             topicName="amazing"
           />
-        </HyloHTMLConfigProvider>
-      </ForwardRef(NavigationContainerInner)>
+        </ForwardRef(NavigationContainerInner)>
+      </HyloHTMLConfigProvider>
     </Provider>
   </TRenderEngineProvider>
 </SafeAreaProvider>

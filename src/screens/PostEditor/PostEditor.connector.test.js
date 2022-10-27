@@ -56,7 +56,7 @@ describe('PostEditor mapStateToProps', () => {
   })
 
   it('returns groups', () => {
-    expect(mapStateToProps(state, props).post.groups).toEqual([group1.ref, group2.ref])
+    expect(mapStateToProps(state, props).post.groups).toEqual([group1, group2])
   })
 
   it('returns a post', () => {
@@ -65,7 +65,7 @@ describe('PostEditor mapStateToProps', () => {
 
   it('sets groups from post', () => {
     const stateProps = mapStateToProps(state, props)
-    expect(stateProps.post.groups).toEqual([group1.ref, group2.ref])
+    expect(stateProps.post.groups).toEqual([group1, group2])
   })
 })
 
