@@ -4,6 +4,7 @@ import { get } from 'lodash/fp'
 import {
   makeGetQueryResults, makeQueryResultsModelSelector
 } from 'store/reducers/queryResults'
+import gql from 'graphql-tag'
 
 export const MODULE_NAME = 'MemberFeed'
 export const SET_CHOICE = `${MODULE_NAME}/SET_CHOICE`
@@ -15,26 +16,29 @@ export function fetchMemberPosts ({ id, first = 10, offset }) {
   return {
     type: FETCH_MEMBER_POSTS,
     graphql: {
-      query: `query MemberPosts (
-        $boundingBox: [PointInput],
-        $filter: String,
-        $first: Int,
-        $groupSlugs: [String],
-        $id: ID,
-        $offset: Int,
-        $context: String,
-        $search: String,
-        $sortBy: String,
-        $topic: ID
-        $order: String
-        $afterTime: Date
-        $beforeTime: Date
-      ) {
-        person (id: $id) {
-          id
-          ${postsQueryFragment}
+      query: gql`
+        query MemberPosts (
+          $activePostsOnly: Boolean,
+          $boundingBox: [PointInput],
+          $filter: String,
+          $first: Int,
+          $groupSlugs: [String],
+          $id: ID,
+          $offset: Int,
+          $context: String,
+          $search: String,
+          $sortBy: String,
+          $topic: ID
+          $order: String
+          $afterTime: Date
+          $beforeTime: Date
+        ) {
+          person (id: $id) {
+            id
+            ${postsQueryFragment}
+          }
         }
-      }`,
+      `,
       variables: { id, first, offset }
     },
     meta: {

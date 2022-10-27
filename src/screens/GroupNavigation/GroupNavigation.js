@@ -37,8 +37,8 @@ export default function GroupNavigation ({ navigation }) {
     })
   }
 
-  // The last item in menu
   navItems.push({ label: 'Map', iconName: 'Globe', onPress: () => navigate('Map') })
+  navItems.push({ label: 'About', iconName: 'Info', onPress: () => navigate('Group Detail', { groupSlug: currentGroup?.slug }) })
 
   return (
     <ScrollView style={styles.container}>

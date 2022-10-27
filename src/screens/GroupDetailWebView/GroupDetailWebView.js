@@ -69,7 +69,9 @@ export default function GroupDetailWebView ({ navigation, route }) {
   return (
     <HyloWebView
       ref={webViewRef}
-      path={`groups/${groupSlug}/about`}
+      path={`groups/${groupSlug}/explore/group/${groupSlug}`}
+      // NOTE: Change back to this path once it is doing the expected thing on Web
+      // path={`groups/${groupSlug}/about`}
       onMessage={handleMessage}
     />
   )
