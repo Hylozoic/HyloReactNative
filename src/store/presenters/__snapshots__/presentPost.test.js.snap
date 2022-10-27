@@ -2,20 +2,23 @@
 
 exports[`presentPost matches the snapshot 1`] = `
 Object {
+  "attachments": Array [],
   "commenters": Array [],
-  "creator": Object {
-    "id": "10",
-  },
-  "eventInvitations": Array [],
+  "creator": null,
+  "eventInvitations": Array [
+    Object {
+      "id": 0,
+      "name": "Mr Person",
+      "response": "yes",
+    },
+  ],
   "fileAttachments": Array [],
-  "fileUrls": Array [],
   "groups": Array [],
   "id": 324,
-  "imageUrls": Array [],
   "isPublic": undefined,
-  "linkPreview": undefined,
+  "linkPreview": null,
+  "location": undefined,
   "members": Array [],
-  "myEventResponse": "no",
   "pinned": true,
   "topics": Array [],
 }
