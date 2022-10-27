@@ -136,14 +136,14 @@ describe('selectors/refiners', () => {
       expect(navigation.navigate).toHaveBeenCalledWith(modalScreenName('Post Details'), { id: '333' })
     })
 
-    it('matches the previous ACTION_TOPIC snapshot', () => {
+    it('matches the previous ACTION_TAG snapshot', () => {
       session.Activity.withId('1').update({ action: 'tag', meta: { reasons: ['tag: aardvark'] } })
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       expect(actual).toMatchSnapshot()
     })
 
-    it('navigates to Post Detail for ACTION_TOPIC', () => {
+    it('navigates to Post Detail for ACTION_TAG', () => {
       session.Activity.withId('1').update({ action: 'tag', meta: { reasons: ['tag: aardvark'] } })
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)

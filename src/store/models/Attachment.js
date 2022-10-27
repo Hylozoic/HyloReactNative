@@ -20,8 +20,3 @@ Attachment.fields = {
   comment: fk('Comment', 'attachments'),
   createdAt: attr()
 }
-
-Attachment.Type = {
-  IMAGE: 'image',
-  FILE: 'file'
-}

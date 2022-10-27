@@ -1,6 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`behaves as expected 1`] = `
+exports[`works for GroupTopic 1`] = `
+Object {
+  "graphql": Object {
+    "query": "mutation($id: ID, $data: GroupTopicFollowInput) {
+    updateGroupTopicFollow(id: $id, data: $data) {
+      success
+    }
+  }",
+    "variables": Object {
+      "data": Object {
+        "newPostCount": 0,
+      },
+      "id": 5,
+    },
+  },
+  "meta": Object {
+    "id": 5,
+    "optimistic": true,
+    "type": "GroupTopic",
+  },
+  "type": "RESET_NEW_POST_COUNT",
+}
+`;
+
+exports[`works for Membership 1`] = `
 Object {
   "graphql": Object {
     "query": "mutation($id: ID, $data: MembershipInput) {
@@ -12,11 +36,11 @@ Object {
       "data": Object {
         "newPostCount": 0,
       },
-      "id": 1,
+      "id": 5,
     },
   },
   "meta": Object {
-    "id": 1,
+    "id": 5,
     "optimistic": true,
     "type": "Membership",
   },

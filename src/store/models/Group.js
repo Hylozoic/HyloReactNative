@@ -1,10 +1,10 @@
-import { Image } from 'react-native'
 import { attr, many, Model, fk } from 'redux-orm'
 import { ALL_GROUPS_CONTEXT_SLUG, PUBLIC_CONTEXT_SLUG } from 'hylo-shared'
 import allGroupsBannerImage from 'assets/all-groups-banner.png'
 import allGroupsAvatarUrl from 'assets/All_Groups2.png'
 import allGroupshHeaderAvatarUrl from 'assets/All_Groups.png'
 import publicGroupAvatarUrl from 'assets/public.png'
+
 export const GROUP_ACCESSIBILITY = {
   Closed: 0,
   Restricted: 1,
@@ -66,32 +66,28 @@ export function visibilityIcon (v) {
   }
 }
 
-export const accessibilityString = accessibility => {
-  return Object.keys(GROUP_ACCESSIBILITY).find(
-    key => GROUP_ACCESSIBILITY[key] === accessibility
-  )
+export const accessibilityString = (accessibility) => {
+  return Object.keys(GROUP_ACCESSIBILITY).find(key => GROUP_ACCESSIBILITY[key] === accessibility)
 }
 
-export const visibilityString = visibility => {
-  return Object.keys(GROUP_VISIBILITY).find(
-    key => GROUP_VISIBILITY[key] === visibility
-  )
+export const visibilityString = (visibility) => {
+  return Object.keys(GROUP_VISIBILITY).find(key => GROUP_VISIBILITY[key] === visibility)
 }
 
 export const LOCATION_PRECISION = {
-  precise: 'Display exact location',
-  near: 'Display only nearest city and show nearby location on the map',
-  region: "Display only nearest city and don't show on the map"
+  'precise': 'Display exact location',
+  'near': 'Display only nearest city and show nearby location on the map',
+  'region': 'Display only nearest city and don\'t show on the map'
 }
 
-export class GroupModerator extends Model {}
+export class GroupModerator extends Model { }
 GroupModerator.modelName = 'GroupModerator'
 GroupModerator.fields = {
   group: fk('Group', 'groupmoderators'),
   moderator: fk('Person', 'groupmoderators')
 }
 
-export class GroupJoinQuestion extends Model {}
+export class GroupJoinQuestion extends Model { }
 GroupJoinQuestion.modelName = 'GroupJoinQuestion'
 GroupJoinQuestion.fields = {
   id: attr(),
@@ -100,7 +96,7 @@ GroupJoinQuestion.fields = {
   group: fk('Group')
 }
 
-export class GroupToGroupJoinQuestion extends Model {}
+export class GroupToGroupJoinQuestion extends Model { }
 GroupToGroupJoinQuestion.modelName = 'GroupToGroupJoinQuestion'
 GroupToGroupJoinQuestion.fields = {
   id: attr(),
@@ -119,26 +115,14 @@ GroupTopic.fields = {
 export class GroupRelationship extends Model {}
 GroupRelationship.modelName = 'GroupRelationship'
 GroupRelationship.fields = {
-  parentGroup: fk({
-    to: 'Group',
-    as: 'parentGroup',
-    relatedName: 'childRelationships'
-  }),
-  childGroup: fk({
-    to: 'Group',
-    as: 'childGroup',
-    relatedName: 'parentRelationships'
-  })
+  parentGroup: fk({ to: 'Group', as: 'parentGroup', relatedName: 'childRelationships' }),
+  childGroup: fk({ to: 'Group', as: 'childGroup', relatedName: 'parentRelationships' })
 }
 
 export class GroupPrerequisite extends Model {}
 GroupPrerequisite.modelName = 'GroupPrerequisite'
 GroupPrerequisite.fields = {
-  prerequisiteGroup: fk({
-    to: 'Group',
-    as: 'prerequisiteGroup',
-    relatedName: 'antireqs'
-  }),
+  prerequisiteGroup: fk({ to: 'Group', as: 'prerequisiteGroup', relatedName: 'antireqs' }),
   forGroup: fk({ to: 'Group', as: 'forGroup', relatedName: 'prereqs' })
 }
 
@@ -203,7 +187,7 @@ Group.fields = {
     to: 'Group',
     relatedName: 'antirequisiteGroups',
     through: 'GroupPrerequisite',
-    throughFields: ['prerequisiteGroup', 'forGroup']
+    throughFields: [ 'prerequisiteGroup', 'forGroup' ]
   }),
   settings: attr(),
   slug: attr(),
@@ -217,11 +201,8 @@ Group.fields = {
   widgets: many('Widget')
 }
 
-export const DEFAULT_BANNER =
-  'https://d3ngex8q79bk55.cloudfront.net/misc/default_community_banner.jpg'
-export const DEFAULT_AVATAR =
-  'https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png'
-
+export const DEFAULT_BANNER = 'https://d3ngex8q79bk55.cloudfront.net/misc/default_community_banner.jpg'
+export const DEFAULT_AVATAR = 'https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png'
 export const ALL_GROUP_ID = ALL_GROUPS_CONTEXT_SLUG
 export const ALL_GROUP_AVATAR_PATH = '/assets/white-merkaba.png'
 export const ALL_GROUP = {
@@ -251,3 +232,4 @@ export const PUBLIC_GROUP = {
 // Move into hylo-shared (PathsHelper?)
 export const isContextGroup = slug =>
   [ALL_GROUPS_CONTEXT_SLUG, PUBLIC_CONTEXT_SLUG].includes(slug)
+

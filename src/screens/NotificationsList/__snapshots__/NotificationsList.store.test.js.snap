@@ -330,7 +330,7 @@ Object {
 }
 `;
 
-exports[`selectors/refiners refineActivity matches the previous ACTION_TOPIC snapshot 1`] = `
+exports[`selectors/refiners refineActivity matches the previous ACTION_TAG snapshot 1`] = `
 Object {
   "body": "wrote: So detailed.",
   "header": "New Post in",
