@@ -5,8 +5,6 @@ import { FETCH_THREADS } from 'store/constants'
 import getMe from 'store/selectors/getMe'
 import { getThreads, getThreadsHasMore, updateLastViewed } from './ThreadList.store'
 
-jest.mock('store/selectors/getMe', () => () => {})
-
 export function mapStateToProps (state, props) {
   const threads = getThreads(state, props)
   const currentUser = getMe(state)

@@ -9,6 +9,7 @@ export default function fetchForCurrentUser () {
       query: MeQuery
     },
     meta: {
+      afterInteractions: true,
       extractModel: [
         {
           getRoot: get('me'),

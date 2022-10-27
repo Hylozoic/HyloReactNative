@@ -9,14 +9,11 @@ export function getEmptyState (state = initialState) {
 }
 
 export function createStore (state = initialState) {
-  const emptyState = getEmptyState(state)
-  const store = (undefined === global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
-    ? reduxCreateStore(createRootReducer(), emptyState, compose(applyMiddleware(...middleware)))
-    : reduxCreateStore(createRootReducer(), emptyState,
-      global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
-        applyMiddleware(...middleware)
-      )
-    )
+  const store = reduxCreateStore(
+    createRootReducer(),
+    getEmptyState(state),
+    compose(applyMiddleware(...middleware))
+  )
 
   // Enable Webpack hot module replacement for reducers
   if (module.hot) {
