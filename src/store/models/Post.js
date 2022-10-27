@@ -1,5 +1,4 @@
 import { attr, fk, many, Model } from 'redux-orm'
-import Attachment from './Attachment'
 import { get } from 'lodash/fp'
 import PropTypes from 'prop-types'
 import { butterflyBush, caribbeanGreen, fakeAlpha, flushOrange, gold, pictonBlue, sunsetOrange } from 'style/colors'
@@ -31,7 +30,7 @@ class Post extends Model {
   }
 
   images () {
-    return this.attachments.filter(x => x.type === Attachment.Type.IMAGE)
+    return this.attachments.filter(x => x.type === 'image')
   }
 
   getImageUrls () {
@@ -39,7 +38,7 @@ class Post extends Model {
   }
 
   files () {
-    return this.attachments.filter(x => x.type === Attachment.Type.FILE)
+    return this.attachments.filter(x => x.type === 'file')
   }
 
   getFileUrls () {
