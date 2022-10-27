@@ -82,7 +82,7 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
 
   if (!currentGroup) return null
 
-  const toggleTopicSubscribe = () => topicName && currentGroup.id && dispatch(toggleGroupTopicSubscribeAction(topic))
+  const toggleTopicSubscribe = () => groupTopic && currentGroup.id && dispatch(toggleGroupTopicSubscribeAction(groupTopic))
   const name = topicName
     ? '#' + topicName
     : currentGroup.name
