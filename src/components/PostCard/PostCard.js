@@ -51,11 +51,12 @@ export default class PostCard extends React.PureComponent {
       isPinned,
       post,
       respondToEvent,
-      showGroups,
+      showGroups: providedShowGroups,
       showMember,
       showTopic,
       topics
     } = this.props
+    const showGroups = providedShowGroups || groups?.length > 1
     const slug = get('0.slug', groups)
 
     return (
