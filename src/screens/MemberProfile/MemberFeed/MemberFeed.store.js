@@ -19,19 +19,24 @@ export function fetchMemberPosts ({ id, first = 10, offset }) {
       query: gql`
         query MemberPosts (
           $activePostsOnly: Boolean,
-          $boundingBox: [PointInput],
-          $filter: String,
-          $first: Int,
-          $groupSlugs: [String],
-          $id: ID,
-          $offset: Int,
-          $context: String,
-          $search: String,
-          $sortBy: String,
-          $topic: ID
-          $order: String
           $afterTime: Date
           $beforeTime: Date
+          $boundingBox: [PointInput],
+          $collectionToFilterOut: ID
+          $filter: String
+          $first: Int,
+          $forCollection: ID
+          $groupSlugs: [String]
+          $id: ID
+          $isFulfilled: Boolean
+          $offset: Int,
+          $context: String,
+          $order: String
+          $sortBy: String,
+          $search: String,
+          $topic: ID
+          $topics: [ID]
+          $types: [String]
         ) {
           person (id: $id) {
             id
