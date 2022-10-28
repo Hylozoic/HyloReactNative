@@ -5,6 +5,7 @@ import {
   makeGetQueryResults, makeQueryResultsModelSelector
 } from 'store/reducers/queryResults'
 import gql from 'graphql-tag'
+import presentPost from 'store/presenters/presentPost'
 
 export const MODULE_NAME = 'MemberFeed'
 export const SET_CHOICE = `${MODULE_NAME}/SET_CHOICE`
@@ -182,13 +183,7 @@ export const getHasMoreMemberPosts = createSelector(getMemberPostResults, get('h
 export const getMemberPosts = makeQueryResultsModelSelector(
   getMemberPostResults,
   'Post',
-  post => ({
-    ...post.ref,
-    creator: post.creator,
-    commenters: post.commenters.toRefArray(),
-    groups: post.groups.toRefArray(),
-    topics: post.topics.toRefArray()
-  })
+  post => presentPost(post)
 )
 
 const getMemberCommentResults = makeGetQueryResults(FETCH_MEMBER_COMMENTS)
@@ -201,7 +196,7 @@ export const getMemberComments = makeQueryResultsModelSelector(
   comment => ({
     ...comment.ref,
     creator: comment.creator,
-    post: comment.post
+    post: presentPost(comment.post)
   })
 )
 
@@ -213,7 +208,7 @@ export const getMemberUpvotes = makeQueryResultsModelSelector(
   getMemberUpvotesResults,
   'Vote',
   vote => ({
-    ...vote.post.ref,
+    ...presentPost(vote.post),
     creator: vote.post.creator,
     commenters: vote.post.commenters.toModelArray(),
     groups: vote.post.groups.toModelArray()
