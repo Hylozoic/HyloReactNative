@@ -21,7 +21,7 @@ describe('mapStateToProps', () => {
       pending: {},
       [MODULE_NAME]: initialState,
       queryResults: {
-        [buildKey(FETCH_POSTS, { ...initialState, slug: 'foo' })]: {
+        [buildKey(FETCH_POSTS, { ...initialState, context: 'groups', slug: 'foo' })]: {
           ids: ['1', '3', '2'],
           hasMore: true
         }
@@ -47,7 +47,9 @@ describe('mapStateToProps', () => {
   })
 
   it('returns posts in the correct order', () => {
-    expect(mapStateToProps(state, { group: { slug: 'foo', id: 10 } })).toEqual({
+    const result = mapStateToProps(state, { group: { slug: 'foo', id: 10 } })
+
+    expect(result).toEqual({
       postIds: [
         '1',
         '3',

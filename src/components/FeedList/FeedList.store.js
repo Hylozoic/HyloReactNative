@@ -97,12 +97,21 @@ export const getQueryProps = createCachedSelector(
   (_, props) => props.order,
   (_, props) => props.afterTime,
   (_, props) => props.beforeTime,
-  (context, group, sortBy, filter, topicName, order, afterTime, beforeTime) => {
+  (
+    context,
+    group,
+    sortBy,
+    filter,
+    topicName,
+    order,
+    afterTime,
+    beforeTime
+  ) => {
     return omitBy(x => isNull(x) || isUndefined(x), {
       context,
+      slug: get('slug', group),
       sortBy,
       filter,
-      slug: get('slug', group),
       topic: topicName,
       order,
       afterTime,
@@ -110,5 +119,5 @@ export const getQueryProps = createCachedSelector(
     })
   }
 )(
-  (_, props) => `${get('group.id', props)}:${get('topicName', props)}`
+  (_, props) => `${get('context', props)}:${get('group.id', props)}:${get('topicName', props)}`
 )
