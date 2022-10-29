@@ -69,8 +69,6 @@ const HyloWebView = forwardRef(function HyloWebView ({
         uri,
         headers: { cookie }
       }}
-      startInLoadingState
-      // eslint-disable-next-line react-native/no-inline-styles
       style={[style, {
         // Avoids a known issue which can cause Android crashes
         // ref. https://github.com/iou90/react-native-autoheight-webview/issues/191

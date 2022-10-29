@@ -17,6 +17,7 @@ export default {
   navItem: {
     color: rhino05,
     flexDirection: 'row',
+    alignItems: 'center',
     paddingBottom: 13
   },
   navItemIcon: {

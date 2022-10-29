@@ -46,6 +46,15 @@ import styles, { typeSelectorStyles } from './PostEditor.styles'
 import HeaderLeftCloseIcon from 'navigation/headers/HeaderLeftCloseIcon'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
 
+const titlePlaceholders = {
+  discussion: "What's on your mind?",
+  request: 'What are you looking for help with?',
+  offer: 'What help can you offer?',
+  resource: 'What resource is available?',
+  project: 'What would you like to call your project?',
+  event: 'What is your event called?'
+}
+
 export default function (props) {
   const isFocused = useIsFocused()
 
@@ -615,15 +624,6 @@ export class PostEditor extends React.Component {
   }
 }
 
-const titlePlaceholders = {
-  discussion: "What's on your mind?",
-  request: 'What are you looking for help with?',
-  offer: 'What help can you offer?',
-  resource: 'What resource is available?',
-  project: 'What would you like to call your project?',
-  event: 'What is your event called?'
-}
-
 export function TypeSelector (props) {
   return (
     <View style={styles.typeSelectorWrapper}>
@@ -667,7 +667,8 @@ export function BottomBar ({
       </View>
       <View style={styles.bottomBarRight}>
         <TouchableOpacity
-          onPress={onShowFilePicker}>
+          onPress={onShowFilePicker}
+        >
           {filePickerPending && (
             <Loading
               size={30}
