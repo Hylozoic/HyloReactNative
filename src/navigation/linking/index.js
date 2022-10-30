@@ -58,29 +58,18 @@ export const routesConfig = {
   '/hylo-editor':                                            `${AUTH_ROOT_SCREEN_NAME}/HyloEditor`,
 
   // /members
-  '/members/:id':                                            `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Member')}`,
   '/members':                                                `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Members`,
 
-  // special group routes (/all, /public)
+  // context group routes (/all, /public)
   '/:groupSlug(all|public)':                                 `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`,
   '/:groupSlug(all|public)/post/:id':                        `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Post Details`,
-  '/:groupSlug(all|public)/:streamType(events|explore|groups|map|members|projects|settings|stream|topics)/post/:id':
-    `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
-  '/:groupSlug(all|public)/post/:id/edit':                   `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
-  '/:groupSlug(all|public)/:streamType(events|explore|groups|map|members|projects|settings|stream|topics)/post/:id/edit':
-    `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
   '/:groupSlug(all)/members/:id':                            `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Member`,
   '/:groupSlug(all)/topics/:topicName':                      `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Topic Feed`,
 
   // map routes
   '/:groupSlug(all|public)/map':                             `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Map`,
-  '/:groupSlug(all|public)/map/post/:id':                    `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
-  '/:ignored(all|public)/map/group/:groupSlug':              `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Group Detail')}`,
   '/:context(groups)/:groupSlug/map':                        `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Map`,
-  '/:context(groups)/:groupSlug/map/post/:id':               `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
   '/:context(groups)/:groupSlug/map/create':                 `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
-  '/:context(groups)/:groupSlug/detail':                     `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Group Detail')}`,
-  '/:context(groups)/:ignored/map/group/:groupSlug':         `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Group Detail')}`,
 
   // /groups
   '/:context(groups)/:groupSlug/settings/invite':            `${AUTH_ROOT_SCREEN_NAME}/Group Settings/Invite`,
@@ -94,15 +83,7 @@ export const routesConfig = {
   '/:context(groups)/:groupSlug/members/:id':                `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Member`,
   '/:context(groups)/:groupSlug':                            `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`,
   '/:context(groups)/:groupSlug/post/:id':                   `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Post Details`,
-  '/:context(groups)/:groupSlug/:streamType(events|explore|groups|map|members|projects|settings|stream|topics)/post/:id':
-    `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
   '/:context(groups)/:groupSlug/post/:id/edit':              `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
-  '/:context(groups)/:groupSlug/:streamType(events|explore|groups|map|members|projects|settings|stream|topics)/post/:id/edit':
-    `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
-
-  // /post
-  '/post/:id':                                               `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
-  '/post/:id/edit':                                          `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
 
   // /settings
   '/settings':                                               `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Settings Tab/Edit Profile`,
@@ -115,6 +96,12 @@ export const routesConfig = {
   '/messages/new':                                           `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('New Message')}`,
   '/messages/:id':                                           `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Thread')}`,
   '/messages':                                               `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Messages Tab/Messages`,
+
+  // catch-alls
+  '(.*)/group/:groupSlug':                                   `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Group Detail')}`,
+  '(.*)/members/:id':                                        `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Member')}`,
+  '(.*)/post/:id':                                           `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
+  '(.*)/post/:id/edit':                                      `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
 
   '/':                                                       `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`
 }
@@ -131,13 +118,10 @@ export async function openURL (providedUrlOrPath, options = {}) {
     const { length, [length - 2]: prefix, [length - 1]: suffix } = pathname.split('/')
 
     switch (prefix) {
-      case 'members':
-      case 'm':
-      case 'u': {
+      case 'members': {
         return navigateToLinkingPath(PathHelpers.mentionPath(suffix, options?.groupSlug || PUBLIC_CONTEXT_SLUG))
       }
-      case 'topics':
-      case 'tag': {
+      case 'topics': {
         return navigateToLinkingPath(PathHelpers.topicPath(suffix, options?.groupSlug || PUBLIC_CONTEXT_SLUG))
       }
     }

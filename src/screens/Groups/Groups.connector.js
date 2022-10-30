@@ -43,12 +43,10 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     goToGroup: group => {
-      // Make a hylo-shared `PathHelper`, reconcile with Web
       navigateToLinkingPath(`/groups/${group.slug}`, true)
     },
     goToGroupDetail: group => {
-      // Make a hylo-share `PathHelper`, reconcile with Web
-      openURL(`/groups/${group.slug}/detail`)
+      openURL(`/group/${group.slug}`)
     }
   }
 }

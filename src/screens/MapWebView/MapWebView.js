@@ -50,8 +50,9 @@ export default function MapWebView ({ navigation }) {
     },
     '(.*)/group/:groupSlug([a-zA-Z0-9-]+)': ({ routeParams }) => {
       const { groupSlug } = routeParams
+      const linkingPath = `/group/${groupSlug}`
 
-      navigateToLinkingPath(`/groups/${groupSlug}/detail`)
+      navigateToLinkingPath(linkingPath + search)
     }
   })
 
