@@ -15,6 +15,7 @@ build/
 !default.perspectivev3
 xcuserdata
 ios/.xcode.env.local
+xcodebuild-output.log
 *.xccheckout
 *.moved-aside
 DerivedData
