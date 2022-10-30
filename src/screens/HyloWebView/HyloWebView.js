@@ -123,7 +123,7 @@ const allowedWebRoutesJavascriptCreator = loadedPath => allowRoutesParam => {
   const allowedWebRoutesRegExpsLiteralString = JSON.parse(JSON.stringify(allowedWebRoutesRegExps.map(a => a.toString())))
 
   return `
-    setTimeout(() => {
+    if (window.ReactNativeWebView.reactRouterHistory) {
       window.ReactNativeWebView.reactRouterHistory.block(({ pathname, search }) => {
         const allowedWebRoutesRegExps = [${allowedWebRoutesRegExpsLiteralString}]
         const allowedRoute = allowedWebRoutesRegExps.some(allowedRoutePathRegExp => {
@@ -138,7 +138,7 @@ const allowedWebRoutesJavascriptCreator = loadedPath => allowRoutesParam => {
         }))
 
         return false
-      });
-    }, 200)
+      })
+    }
   `
 }
