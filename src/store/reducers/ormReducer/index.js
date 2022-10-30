@@ -229,19 +229,19 @@ export default function ormReducer (state = orm.getEmptyState(), action) {
       break
     }
 
-    case FETCH_POSTS_PENDING: {
-      // When looking at group for first time, immediately set lastViewedAt so we know first view has happened
-      // This is so that we can go to /explore page on first view then every time after go to regular home page
-      if (meta.slug) {
-        group = Group.safeGet({ slug: meta.slug })
-        me = Me.first()
-        if (!me) break
-        membership = Membership.safeGet({ group: group.id, person: me.id })
-        if (!membership) break
-        membership && membership.update({ lastViewedAt: (new Date()).toISOString() }) // now non-members can possibly see the posts of a group, so in that instance, don't update
-      }
-      break
-    }
+    // case FETCH_POSTS_PENDING: {
+    //   // When looking at group for first time, immediately set lastViewedAt so we know first view has happened
+    //   // This is so that we can go to /explore page on first view then every time after go to regular home page
+    //   if (meta.slug) {
+    //     group = Group.safeGet({ slug: meta.slug })
+    //     me = Me.first()
+    //     if (!me) break
+    //     membership = Membership.safeGet({ group: group.id, person: me.id })
+    //     if (!membership) break
+    //     membership && membership.update({ lastViewedAt: (new Date()).toISOString() }) // now non-members can possibly see the posts of a group, so in that instance, don't update
+    //   }
+    //   break
+    // }
 
     case INVITE_CHILD_TO_JOIN_PARENT_GROUP: {
       const newGroupRelationship = payload.data.inviteGroupToJoinParent.groupRelationship

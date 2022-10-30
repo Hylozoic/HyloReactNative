@@ -2,12 +2,17 @@ import React, { useCallback, forwardRef, useState, useEffect } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import Loading from 'components/Loading'
 import AutoHeightWebView from 'react-native-autoheight-webview'
+import { WebViewMessageTypes } from 'hylo-shared'
 import { getSessionCookie } from 'util/session'
+import { match, pathToRegexp } from 'path-to-regexp'
+import { parseWebViewMessage } from '.'
 
 const HyloWebView = forwardRef(function HyloWebView ({
+  allowedWebRoutes = [],
+  onMessage: providedOnMessage,
+  nativeRouteHandler,
   path: pathProp,
   route,
-  onShouldStartLoadWithRequest = () => true,
   style,
   source,
   ...forwardedProps
@@ -17,7 +22,7 @@ const HyloWebView = forwardRef(function HyloWebView ({
 
   useEffect(() => {
     const path = pathProp || route?.params?.path
-    setUri(source?.uri || `${process.env.HYLO_WEB_BASE_URL}${path ? `/${path}` : ''}`)
+    setUri(source?.uri || `${process.env.HYLO_WEB_BASE_URL}${path || ''}`)
   }, [source?.uri, pathProp, route?.params?.path])
 
   useFocusEffect(
@@ -30,12 +35,40 @@ const HyloWebView = forwardRef(function HyloWebView ({
     }, [])
   )
 
+  const handleMessage = message => {
+    const { type, data } = parseWebViewMessage(message)
+
+    switch (type) {
+      case WebViewMessageTypes.NAVIGATION: {
+        if (nativeRouteHandler) {
+          const { pathname, search } = data
+          const nativeRouteHandlers = nativeRouteHandler({ pathname, search })
+
+          for (const pathMatcher in nativeRouteHandlers) {
+            const matched = match(pathMatcher)(pathname)
+
+            if (matched) {
+              return nativeRouteHandlers[pathMatcher]({ routeParams: matched.params, pathname, search })
+            }
+          }
+        }
+      }
+    }
+
+    providedOnMessage && providedOnMessage(message)
+  }
+
   if (!cookie) return <Loading />
 
   return (
     <AutoHeightWebView
-      customScript='window.HyloWebView = true;'
+      customScript={`
+        window.HyloWebView = true;
+
+        ${allowedWebRoutesJavascriptCreator(pathProp)(allowedWebRoutes)}
+      `}
       geolocationEnabled
+      onMessage={handleMessage}
       nestedScrollEnabled
       /*
 
@@ -83,3 +116,29 @@ const HyloWebView = forwardRef(function HyloWebView ({
 })
 
 export default HyloWebView
+
+const allowedWebRoutesJavascriptCreator = loadedPath => allowRoutesParam => {
+  const allowedWebRoutes = [loadedPath, ...allowRoutesParam]
+  const allowedWebRoutesRegExps = allowedWebRoutes.map(allowedRoute => pathToRegexp(allowedRoute))
+  const allowedWebRoutesRegExpsLiteralString = JSON.parse(JSON.stringify(allowedWebRoutesRegExps.map(a => a.toString())))
+
+  return `
+    setTimeout(() => {
+      window.ReactNativeWebView.reactRouterHistory.block(({ pathname, search }) => {
+        const allowedWebRoutesRegExps = [${allowedWebRoutesRegExpsLiteralString}]
+        const allowedRoute = allowedWebRoutesRegExps.some(allowedRoutePathRegExp => {
+          return allowedRoutePathRegExp.test(pathname)
+        })
+
+        if (allowedRoute) return true
+
+        window.ReactNativeWebView.postMessage(JSON.stringify({
+          type: '${WebViewMessageTypes.NAVIGATION}',
+          data: { pathname, search }
+        }))
+
+        return false
+      });
+    }, 200)
+  `
+}

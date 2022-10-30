@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useEffect } from 'react'
+import React, { useCallback, useRef, useEffect, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import { WebViewMessageTypes } from 'hylo-shared'
 import { navigateToLinkingPath } from 'navigation/linking'
@@ -6,7 +6,6 @@ import HyloWebView, { parseWebViewMessage } from 'screens/HyloWebView'
 import { useDispatch } from 'react-redux'
 import fetchGroupModerators from 'store/actions/fetchGroupModerators'
 import fetchGroupDetails from 'store/actions/fetchGroupDetails'
-// import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 
 export default function GroupDetailWebView ({ navigation, route }) {
   const dispatch = useDispatch()
@@ -24,12 +23,12 @@ export default function GroupDetailWebView ({ navigation, route }) {
   // Fetch moderators for "Opportunities to Connect" / Message to all moderators feature
   useEffect(() => {
     dispatch(fetchGroupModerators({ slug: groupSlug }))
-  }, [])
+  }, [groupSlug])
 
   const joinGroup = async groupToJoinSlug => {
-    // TODO: This fixes some things but takes too long. Look into reducers so that
-    // Membership update propogates everywhere, including in Feed if currently on this
-    // group.
+    // Re-fetching CurrentUser fixes some things, but takes too long. Look into reducers
+    // such that the Membership update propagates everywhere, including in Feed if
+    // currently on this group:
     // await dispatch(fetchCurrentUser())
     await dispatch(fetchGroupDetails({ slug: groupToJoinSlug }))
     navigateToLinkingPath(`/groups/${groupToJoinSlug}`)
@@ -44,34 +43,31 @@ export default function GroupDetailWebView ({ navigation, route }) {
 
         return joinGroup(groupSlug)
       }
-      case WebViewMessageTypes.NAVIGATION: {
-        const { pathname, search } = data
-
-        // Matches: `groups/my-awesome-group/members/<member-id>` or `/all|pubic/members/<member-id>`
-        // re-writes linking to go to "Member Details - Modal" in the "all" context
-        if (pathname.match(/\/groups\/*.+\/members\/*.+$/)) {
-          const memberModalPath = '/' + pathname.split('/').slice(3, 5).join('/')
-
-          navigateToLinkingPath(memberModalPath)
-        // Matches: `/groups/our-awesome-group/map/post/<post-id>`, `/(all|public)/post/<post-id>`
-        } else if (pathname.match(/\/post|\/members/)) {
-          const postModalPath = '/' + pathname.split('/').slice(3, 5).join('/')
-
-          navigateToLinkingPath(postModalPath)
-        // "Opportunities to Connect" / Message to moderators
-        } else if (pathname.match(/\/messages\/new$/)) {
-          navigateToLinkingPath(pathname + search)
-        }
-      }
     }
   }
+
+  const allowedWebRoutes = [
+    '(.*)/explore/group/(.*)'
+  ]
+
+  const nativeRouteHandler = ({ pathname, search }) => ({
+    '(.*)/:type(post|members)/:id': ({ routeParams }) => {
+      const { type, id } = routeParams
+      const linkingPath = `${type}/${id}`
+
+      navigateToLinkingPath(linkingPath + search)
+    },
+    '(.*)': () => {
+      navigateToLinkingPath(pathname + search)
+    }
+  })
 
   return (
     <HyloWebView
       ref={webViewRef}
-      path={`groups/${groupSlug}/explore/group/${groupSlug}`}
-      // NOTE: Change back to this path once it is doing the expected thing on Web
-      // path={`groups/${groupSlug}/about`}
+      path={`/groups/${groupSlug}/explore`}
+      allowedWebRoutes={allowedWebRoutes}
+      nativeRouteHandler={nativeRouteHandler}
       onMessage={handleMessage}
     />
   )

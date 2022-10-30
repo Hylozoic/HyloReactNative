@@ -88,7 +88,6 @@ describe('MemberList', () => {
         <TestRoot>
           <MockedScreen>
             {screenProps => {
-              {/* console.log('!!! screenProps, testProps', screenProps, 'XXXX', testProps) */}
               return <MemberList {...screenProps} {...testProps} />
             }}
           </MockedScreen>

@@ -8,24 +8,18 @@ import HyloWebView, { parseWebViewMessage } from 'screens/HyloWebView'
 export default function AllTopicsWebView () {
   const currentGroup = useSelector(getCurrentGroup)
   const path = currentGroup?.slug === 'all'
-    ? `${currentGroup?.slug}/topics`
-    : `groups/${currentGroup?.slug}/topics`
+    ? `/${currentGroup?.slug}/topics`
+    : `/groups/${currentGroup?.slug}/topics`
 
-  const handleMessage = message => {
-    const { type, data } = parseWebViewMessage(message)
-
-    switch (type) {
-      case WebViewMessageTypes.NAVIGATION: {
-        navigateToLinkingPath(data.pathname)
-      }
-    }
-  }
+  const nativeRouteHandler = ({ pathname, search }) => ({
+    '(.*)': () => navigateToLinkingPath(pathname + search)
+  })
 
   return (
     <HyloWebView
       hideKeyboardAccessoryView
+      nativeRouteHandler={nativeRouteHandler}
       path={path}
-      onMessage={handleMessage}
     />
   )
 }

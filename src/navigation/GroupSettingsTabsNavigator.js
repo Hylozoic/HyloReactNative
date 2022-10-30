@@ -2,12 +2,12 @@ import React, { useLayoutEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import fetchGroupSettings from 'store/actions/fetchGroupSettings'
 import { isIOS } from 'util/platform'
+import fetchGroupSettings from 'store/actions/fetchGroupSettings'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import Avatar from 'components/Avatar'
-import { caribbeanGreen, rhino05, rhino30, rhino60, white } from 'style/colors'
 import GroupSettingsWebView from 'screens/GroupSettingsWebView'
-import getCurrentGroup from 'store/selectors/getCurrentGroup';
+import { caribbeanGreen, rhino05, rhino30, rhino60, white } from 'style/colors'
 
 const GroupSettings = createMaterialTopTabNavigator()
 export default function GroupSettingsTabsNavigator ({ navigation, route }) {
@@ -55,56 +55,56 @@ export default function GroupSettingsTabsNavigator ({ navigation, route }) {
         name='Settings'
         component={GroupSettingsWebView}
         initialParams={{
-          path: `groups/${selectedGroup?.slug}/settings`
+          path: `/groups/${selectedGroup?.slug}/settings`
         }}
       />
       <GroupSettings.Screen
         name='Moderators'
         component={GroupSettingsWebView}
         initialParams={{
-          path: `groups/${selectedGroup?.slug}/settings/moderators`
+          path: `/groups/${selectedGroup?.slug}/settings/moderators`
         }}
       />
       <GroupSettings.Screen
         name='Topics'
         component={GroupSettingsWebView}
         initialParams={{
-          path: `groups/${selectedGroup?.slug}/settings/topics`
+          path: `/groups/${selectedGroup?.slug}/settings/topics`
         }}
       />
       <GroupSettings.Screen
         name='Invite'
         component={GroupSettingsWebView}
         initialParams={{
-          path: `groups/${selectedGroup?.slug}/settings/invite`
+          path: `/groups/${selectedGroup?.slug}/settings/invite`
         }}
       />
       <GroupSettings.Screen
         name='Join Requests'
         component={GroupSettingsWebView}
         initialParams={{
-          path: `groups/${selectedGroup?.slug}/settings/requests`
+          path: `/groups/${selectedGroup?.slug}/settings/requests`
         }}
       />
       <GroupSettings.Screen
         name='Related Groups'
         component={GroupSettingsWebView}
         initialParams={{
-          path: `groups/${selectedGroup?.slug}/settings/relationships`
+          path: `/groups/${selectedGroup?.slug}/settings/relationships`
         }}
       />
       <GroupSettings.Screen
         name='Export Data'
         component={GroupSettingsWebView}
         initialParams={{
-          path: `groups/${selectedGroup?.slug}/settings/export`
+          path: `/groups/${selectedGroup?.slug}/settings/export`
         }}
       />
       <GroupSettings.Screen
         name='Delete'
         component={GroupSettingsWebView}
         initialParams={{
-          path: `groups/${selectedGroup?.slug}/settings/delete`
+          path: `/groups/${selectedGroup?.slug}/settings/delete`
         }}
       />
     </GroupSettings.Navigator>

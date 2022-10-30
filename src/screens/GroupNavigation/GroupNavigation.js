@@ -19,6 +19,7 @@ export default function GroupNavigation ({ navigation }) {
   const navItems = [
     { label: 'Create', iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
     { label: 'Stream', iconName: 'Stream', onPress: () => navigate('Feed') },
+    { label: 'Explore', iconName: 'Binoculars', onPress: () => navigate('Group Detail', { groupSlug: currentGroup?.slug }) },
     { label: 'Projects', iconName: 'Projects', onPress: () => navigate('Projects') },
     { label: 'Events', iconName: 'Events', onPress: () => navigate('Events') }
   ]
@@ -38,7 +39,6 @@ export default function GroupNavigation ({ navigation }) {
   }
 
   navItems.push({ label: 'Map', iconName: 'Globe', onPress: () => navigate('Map') })
-  navItems.push({ label: 'About', iconName: 'Info', onPress: () => navigate('Group Detail', { groupSlug: currentGroup?.slug }) })
 
   return (
     <ScrollView style={styles.container}>
