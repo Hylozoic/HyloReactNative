@@ -27,7 +27,7 @@ import { modalScreenName } from './helpers'
 // will be set as the `returnToPath` and not navigated to until after
 // the user is authorized (see `getAuthState`).
 //
-// NOTE: The linking route paths below are equivilant to `exact` route paths in
+// NOTE: The linking route paths below are equivalent to `exact` route paths in
 // React Router (web)
 
 export const DEFAULT_APP_HOST = 'https://hylo.com'
@@ -121,7 +121,7 @@ export const routesConfig = {
 
 // Could potentially be entirely replaced by `navigateToLinkingPath` below
 // by adding these legacy routes in the routing above. The key differentiating
-// feature besides the rourtes is the ability to provide a `groupSlug`.
+// feature besides the routes is the ability to provide a `groupSlug`.
 export async function openURL (providedUrlOrPath, options = {}) {
   const urlOrPath = providedUrlOrPath.trim()
   const linkingURL = new URL(urlOrPath, DEFAULT_APP_HOST)
