@@ -198,7 +198,7 @@ describe('PostEditor', () => {
     expect(instance.state.announcementEnabled).toBeFalsy()
   })
 
-  it('has image methods', async () => {
+  it('has attachment methods', async () => {
     let renderer
     await act(async () => {
       renderer = TestRenderer.create(
@@ -221,8 +221,8 @@ describe('PostEditor', () => {
     const instance = component.instance
 
     await act(async () => {
-      await instance.handleAddImage({ local: 'la', remote: 'http://foo.com/foo.png' })
-      await instance.handleAddImage({ local: 'lala', remote: 'http://bar.com/bar.png' })
+      await instance.handleAddAttachmentForKey('images')({ local: 'la', remote: 'http://foo.com/foo.png' })
+      await instance.handleAddAttachmentForKey('images')({ local: 'lala', remote: 'http://bar.com/bar.png' })
     })
 
     expect(instance.state.images).toEqual([
@@ -230,76 +230,10 @@ describe('PostEditor', () => {
       { local: 'lala', remote: 'http://bar.com/bar.png' }
     ])
 
-    act(() => instance.handleRemoveImage({ local: 'la' }))
+    act(() => instance.handleRemoveAttachmentForKey('images')({ local: 'la' }))
 
     expect(instance.state.images).toEqual([
       { local: 'lala', remote: 'http://bar.com/bar.png' }
-    ])
-  })
-
-  it('showsAlert', async () => {
-    let renderer
-    await act(async () => {
-      renderer = TestRenderer.create(
-        <TestRoot>
-          <MockedScreen>
-            {screenProps => (
-              <PostEditor
-                isFocused
-                fetchPost={jest.fn()}
-                imageUrls={['http://foo.com/foo.png']}
-                post={mockPost}
-                {...screenProps}
-              />
-            )}
-          </MockedScreen>
-        </TestRoot>
-      )
-    })
-    const root = renderer.root
-    const component = root.findByType(PostEditor)
-    const instance = component.instance
-
-    instance.showAlert('alert message')
-
-    expect(Alert.alert).toHaveBeenCalledWith('alert message')
-  })
-
-  it('has file methods', async () => {
-    let renderer
-    await act(async () => {
-      renderer = TestRenderer.create(
-        <TestRoot>
-          <MockedScreen>
-            {screenProps => (
-              <PostEditor
-                isFocused
-                fetchPost={jest.fn()}
-                postId={mockPost.id}
-                post={mockPost}
-                {...screenProps}
-              />
-            )}
-          </MockedScreen>
-        </TestRoot>
-      )
-    })
-    const root = renderer.root
-    const component = root.findByType(PostEditor)
-    const instance = component.instance
-
-    await instance.handleAddFile({ remote: 'http://foo.com/foo.pdf' })
-    await instance.handleAddFile({ remote: 'http://bar.com/bar.pdf' })
-
-    expect(instance.state.fileUrls).toEqual([
-      'http://foo.com/foo.pdf',
-      'http://bar.com/bar.pdf'
-    ])
-
-    await instance.handleRemoveFile('http://foo.com/foo.pdf')
-
-    expect(instance.state.fileUrls).toEqual([
-      'http://bar.com/bar.pdf'
     ])
   })
 

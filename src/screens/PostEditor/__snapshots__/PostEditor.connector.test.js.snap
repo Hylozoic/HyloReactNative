@@ -237,6 +237,7 @@ exports[`PostEditor mapStateToProps maps 1`] = `
     },
     "eventInvitations": [],
     "fileAttachments": [],
+    "fileUrls": [],
     "groups": [
       SessionBoundModel {
         "_fields": {
@@ -250,6 +251,10 @@ exports[`PostEditor mapStateToProps maps 1`] = `
       },
     ],
     "id": "1",
+    "imageUrls": [
+      "bar.png",
+      "foo.png",
+    ],
     "isPublic": undefined,
     "linkPreview": null,
     "location": undefined,

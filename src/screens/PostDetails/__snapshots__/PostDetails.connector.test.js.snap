@@ -56,6 +56,9 @@ exports[`mapsStateToProps 1`] = `
         },
       },
     ],
+    "fileUrls": [
+      "http://foo.com/foo.pdf",
+    ],
     "groups": [
       SessionBoundModel {
         "_fields": {
@@ -65,6 +68,9 @@ exports[`mapsStateToProps 1`] = `
       },
     ],
     "id": "1",
+    "imageUrls": [
+      "http://foo.com/bar.png",
+    ],
     "isPublic": undefined,
     "linkPreview": null,
     "location": undefined,
