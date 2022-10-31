@@ -77,7 +77,11 @@ export class PostEditor extends React.Component {
           .imageUrls
           .map(imageUrl => ({ remote: imageUrl, local: imageUrl }))
         : [],
-      fileUrls: post?.fileUrls || [],
+      files: post?.fileUrls
+        ? post
+          .fileUrls
+          .map(fileUrl => ({ remote: fileUrl, local: fileUrl }))
+        : [],
       topics: post?.topics || [],
       members: post?.members || [],
       topicsPicked: false,
@@ -148,7 +152,7 @@ export class PostEditor extends React.Component {
       navigation, post
     } = this.props
     const {
-      fileUrls, images, title,
+      files, images, title,
       topics, type, announcementEnabled, members,
       groups, startTime, endTime, location,
       locationObject
@@ -159,7 +163,7 @@ export class PostEditor extends React.Component {
       details: this.detailsEditorRef.current.getHTML(),
       groups,
       memberIds: members.map(m => m.id),
-      fileUrls: uniq(fileUrls),
+      fileUrls: uniq(files.filter(file => file.remote).map(file => file.remote)),
       imageUrls: uniq(images.filter(image => image.remote).map(image => image.remote)),
       title,
       sendAnnouncement: announcementEnabled,
@@ -226,13 +230,17 @@ export class PostEditor extends React.Component {
   }
 
   setIsValid = (updatedState = {}) => {
-    const { type, title, groups, startTime, endTime } = Object.assign(
+    const { type, title, groups, startTime, endTime, images, files } = Object.assign(
       {},
       this.state,
       updatedState
     )
+    const imagesLoading = images.find(image => !image?.remote)
+    const filesLoading = files.find(file => !file?.remote)
 
     if (
+      imagesLoading ||
+      filesLoading ||
       (!title || title.length < 1) ||
       isEmpty(groups) ||
       (type === 'event' && (!startTime || !endTime))
@@ -300,38 +308,29 @@ export class PostEditor extends React.Component {
     }))
   }
 
-  handleAddImage = ({ local, remote }) => {
-    let { images = [] } = this.state
-    const existingImageIndex = images.findIndex(image => image.local === local)
+  handleAddAttachmentForKey = key => ({ local, remote }) => {
+    let attachmentsForKey = this.state[key] || []
+    const existingIndex = attachmentsForKey.findIndex(attachment => attachment.local === local)
 
-    if (existingImageIndex >= 0) {
-      images[existingImageIndex].remote = remote
+    if (existingIndex >= 0) {
+      attachmentsForKey[existingIndex].remote = remote
     } else {
-      images = [...images, { local, remote }]
+      attachmentsForKey = [...attachmentsForKey, { local, remote }]
     }
 
     // NOTE: `uniqBy` de-duping of local file uploads here won't do
     // anything at least in iOS, as each file selection is copied into
     // a unique `tmp` location on the device each time it's selected.
-    this.setState({ images: uniqBy('local', images) })
+    this.setState({ [key]: uniqBy('local', attachmentsForKey) }, this.setIsValid)
   }
 
-  handleRemoveImage = ({ local }) => {
-    this.setState(() => ({
-      images: this.state.images.filter(image => image.local !== local)
-    }))
+  handleRemoveAttachmentForKey = key => ({ local }) => {
+    this.setState({ [key]: this.state[key].filter(attachment => attachment.local !== local) }, this.setIsValid)
   }
 
-  handleAddFile = ({ local, remote }) => {
-    this.setState(() => ({
-      fileUrls: uniq(this.state.fileUrls.concat(remote))
-    }))
-  }
-
-  handleRemoveFile = url => {
-    this.setState({
-      fileUrls: this.state.fileUrls.filter(u => u !== url)
-    })
+  handleAttachmentUploadErrorForKey = key => (errorMessage, attachment) => {
+    this.handleRemoveAttachmentForKey(key)(attachment)
+    Alert.alert(errorMessage)
   }
 
   handleShowProjectMembersEditor = () => {
@@ -393,14 +392,17 @@ export class PostEditor extends React.Component {
       upload: this.props.upload,
       type: 'post',
       id: this.props?.post?.id,
-      onAdd: this.handleAddFile,
-      onError: this.showAlert,
-      onComplete: () => this.setState({ filePickerPending: false }),
-      onCancel: () => this.setState({ filePickerPending: false })
+      onAdd: this.handleAddAttachmentForKey('files'),
+      onError: () => {
+        this.setState({ filePickerPending: false }, this.setIsValid)
+        this.handleAttachmentUploadErrorForKey('files')
+      },
+      onComplete: () => this.setState({ filePickerPending: false }, this.setIsValid),
+      onCancel: () => this.setState({ filePickerPending: false }, this.setIsValid)
     })
   }
 
-  toggleAnnoucement = () => {
+  toggleAnnouncement = () => {
     this.toast && hideToast(this.toast)
     this.toast = showToast(
       `announcement ${!this.state.announcementEnabled ? 'on' : 'off'}`,
@@ -408,8 +410,6 @@ export class PostEditor extends React.Component {
     )
     this.setState({ announcementEnabled: !this.state.announcementEnabled })
   }
-
-  showAlert = msg => Alert.alert(msg)
 
   ignoreHash = name => name[0] === '#' ? name.slice(1) : name
 
@@ -462,7 +462,7 @@ export class PostEditor extends React.Component {
     const {
       isSaving, topics, title, type, filePickerPending, announcementEnabled,
       titleLengthError, members, groups, startTime, endTime, location,
-      locationObject, topicsPicked, fileUrls, images
+      locationObject, topicsPicked, files, images
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
 
@@ -585,27 +585,27 @@ export class PostEditor extends React.Component {
             canModerate={canModerate}
             filePickerPending={filePickerPending}
             announcementEnabled={announcementEnabled}
-            toggleAnnoucement={this.toggleAnnoucement}
+            toggleAnnouncement={this.toggleAnnouncement}
             onShowFilePicker={this.handleShowFilePicker}
-            onAddImage={this.handleAddImage}
-            showAlert={this.showAlert}
+            onAddImage={this.handleAddAttachmentForKey('images')}
+            onError={this.handleAttachmentUploadErrorForKey('images')}
           />
         </View>
         {!isEmpty(images) && (
           <ImageSelector
-            onAdd={this.handleAddImage}
-            onRemove={this.handleRemoveImage}
+            onAdd={this.handleAddAttachmentForKey('images')}
+            onRemove={this.handleRemoveAttachmentForKey('images')}
             images={images}
             style={styles.imageSelector}
             type='post'
           />
         )}
 
-        {!isEmpty(fileUrls) && (
+        {!isEmpty(files) && (
           <View>
             <FileSelector
-              onRemove={this.handleRemoveFile}
-              fileUrls={fileUrls}
+              onRemove={this.handleRemoveAttachmentForKey('files')}
+              files={files}
             />
           </View>
         )}
@@ -659,14 +659,14 @@ export function TypeSelector (props) {
 
 export function BottomBar ({
   post, canModerate, filePickerPending, announcementEnabled,
-  toggleAnnoucement, onShowFilePicker, onAddImage, showAlert
+  toggleAnnouncement, onShowFilePicker, onAddImage, onError
 }) {
   // TODO: Tidy-up the styling below, move it into the stylesheet
   return (
     <View style={styles.bottomBar}>
       <View style={styles.bottomBarLeft}>
         {!post?.id && canModerate && (
-          <TouchableOpacity onPress={toggleAnnoucement} style={styles.bottomBarAnnouncement}>
+          <TouchableOpacity onPress={toggleAnnouncement} style={styles.bottomBarAnnouncement}>
             <Icon
               name='Announcement'
               style={styles.bottomBarAnnouncementIcon}
@@ -676,9 +676,7 @@ export function BottomBar ({
         )}
       </View>
       <View style={styles.bottomBarRight}>
-        <TouchableOpacity
-          onPress={onShowFilePicker}
-        >
+        <TouchableOpacity onPress={onShowFilePicker}>
           {filePickerPending && (
             <Loading
               size={30}
@@ -697,7 +695,7 @@ export function BottomBar ({
           id={post?.id}
           selectionLimit={10}
           onChoice={onAddImage}
-          onError={showAlert}
+          onError={onError}
           renderPicker={loading => {
             if (!loading) {
               return (

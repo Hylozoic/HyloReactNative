@@ -1,21 +1,21 @@
 import React from 'react'
+import { last } from 'lodash/fp'
 import PopupMenuButton from 'components/PopupMenuButton'
 import { Text, View } from 'react-native'
 import Icon from 'components/Icon'
 import DocumentPicker from 'react-native-document-picker'
 import styles from './FileSelector.styles'
-import { basename } from 'util/index'
 
 export function cleanName (url) {
-  return decodeURIComponent(basename(url))
+  return decodeURIComponent(last(url.split('/')))
 }
 
 export default function FileSelector (props) {
-  const { fileUrls = [], onRemove } = props
+  const { files = [], onRemove } = props
 
   return (
     <View>
-      {fileUrls.map((url, index) => renderFileButton(url, index, onRemove))}
+      {files.map((file, index) => renderFileButton(file, index, onRemove))}
     </View>
   )
 }
@@ -46,10 +46,13 @@ export async function showFilePicker ({
             name: document.name,
             type: document.type
           }
+
+          onAdd && onAdd({ local: document.uri, remote: null })
+
           const { payload, error } = await upload(type, id, file)
 
           if (error) {
-            onError && onError(payload.message)
+            onError && onError(payload.message, { local: document.uri, remote: null })
           } else {
             onAdd && onAdd({ local: document.uri, remote: payload.url })
           }
@@ -61,7 +64,6 @@ export async function showFilePicker ({
 
     onComplete && onComplete(uploadedFiles)
   } catch (error) {
-    // TODO: Always onComplete?
     if (DocumentPicker.isCancel(error)) {
       onCancel && onCancel()
     } else {
@@ -70,14 +72,14 @@ export async function showFilePicker ({
   }
 }
 
-function renderFileButton (url, buttonIndex, onRemove) {
+function renderFileButton (file, buttonIndex, onRemove) {
   return (
     <PopupMenuButton
-      key={url}
-      actions={[['Remove File', () => onRemove(url)]]}
+      key={file.local}
+      actions={[['Remove File', () => onRemove(file)]]}
       destructiveButtonIndex={0}
     >
-      <FileLabel url={url} />
+      <FileLabel url={file.local} />
     </PopupMenuButton>
   )
 }

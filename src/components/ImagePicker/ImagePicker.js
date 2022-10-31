@@ -118,7 +118,7 @@ export async function showImagePicker ({
             const { payload, error } = await upload(type, id, file)
 
             if (error) {
-              onError && onError(payload.message)
+              onError && onError(payload.message, { local: asset.uri, remote: null })
             } else {
               onChoice && onChoice({ local: asset.uri, remote: payload.url })
             }

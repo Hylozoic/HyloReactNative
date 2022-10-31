@@ -97,7 +97,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
           onAddImage={[Function]}
           onShowFilePicker={[Function]}
           showAlert={[Function]}
-          toggleAnnoucement={[Function]}
+          toggleAnnouncement={[Function]}
         />
       </View>
     </React.Fragment>
@@ -983,7 +983,7 @@ exports[`PostEditor renders with a post 1`] = `
             }
           }
           showAlert={[Function]}
-          toggleAnnoucement={[Function]}
+          toggleAnnouncement={[Function]}
         />
       </View>
       <ImageSelector
