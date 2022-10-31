@@ -1,4 +1,4 @@
-import { white, white40onCaribbeanGreen } from 'style/colors'
+import { white, white40onCaribbeanGreen, white80 } from 'style/colors'
 import defaultStyles from '../SignupFlow.styles'
 
 const styles = {
@@ -31,6 +31,18 @@ const styles = {
   },
   codeFieldCellFocused: {
     borderColor: white
+  },
+  resendCodeLink: {
+    marginTop: 30,
+    padding: 10,
+    borderRadius: 100,
+    alignItems: 'center'
+  },
+  resendCodeLinkText: {
+    justifyContent: 'center',
+    color: white80,
+    fontWeight: 'bold',
+    fontSize: 14
   }
 }
 

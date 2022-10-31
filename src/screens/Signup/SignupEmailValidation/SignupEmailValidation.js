@@ -1,17 +1,20 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { ScrollView, View, Text } from 'react-native'
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native'
 import { useFocusEffect } from '@react-navigation/core'
 import { useDispatch } from 'react-redux'
 import {
   CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell
 } from 'react-native-confirmation-code-field'
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import errorMessages from 'util/errorMessages'
 import verifyEmail from 'store/actions/verifyEmail'
+import sendEmailVerification from 'store/actions/sendEmailVerification'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
+import Loading from 'components/Loading'
 import FormattedError from 'components/FormattedError'
 import controlStyles from 'components/SettingControl/SettingControl.styles'
-import Loading from 'components/Loading'
 import styles from './SignupEmailValidation.styles'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const CODE_LENGTH = 6
 
@@ -32,6 +35,18 @@ export default function SignupEmailValidation ({ navigation, route }) {
     value: verificationCode,
     setValue: setVerificationCode
   })
+
+  const resendCode = async () => {
+    try {
+      setLoading(true)
+
+      await dispatch(sendEmailVerification(email))
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const submit = async () => {
     try {
@@ -113,6 +128,9 @@ export default function SignupEmailValidation ({ navigation, route }) {
               )}
             />
           )}
+          <TouchableOpacity onPress={resendCode} style={styles.resendCodeLink}>
+            <Text style={styles.resendCodeLinkText}><FontAwesome5Icon name='redo-alt' /> Resend code</Text>
+          </TouchableOpacity>
         </View>
         <FormattedError error={error} styles={controlStyles} />
       </ScrollView>
