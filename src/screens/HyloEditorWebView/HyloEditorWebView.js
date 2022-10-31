@@ -26,7 +26,7 @@ export function HyloEditorWebView ({
   customEditorCSS = ''
 }, ref) {
   const webViewRef = useRef()
-  const [path] = useState('hyloApp/editor')
+  const [path] = useState('/hyloApp/editor')
   const [isEmpty, setIsEmpty] = useState(true)
   const [contentHTML, setContentHTML] = useState()
   const [loaded, setLoaded] = useState()

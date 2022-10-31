@@ -48,7 +48,8 @@ const HyloWebView = forwardRef(function HyloWebView ({
             const matched = match(pathMatcher)(pathname)
 
             if (matched) {
-              return nativeRouteHandlers[pathMatcher]({ routeParams: matched.params, pathname, search })
+              nativeRouteHandlers[pathMatcher]({ routeParams: matched.params, pathname, search })
+              break
             }
           }
         }
