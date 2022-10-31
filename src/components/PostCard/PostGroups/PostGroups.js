@@ -1,78 +1,72 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { isEmpty } from 'lodash/fp'
-import Icon from 'components/Icon'
-import GroupsList from 'components/GroupsList'
 import { Text, View, TouchableOpacity } from 'react-native'
-import { rhino30, caribbeanGreen } from 'style/colors'
 import { PUBLIC_GROUP } from 'store/models/Group'
+import GroupsList from 'components/GroupsList'
+import Icon from 'components/Icon'
+import { rhino30, caribbeanGreen } from 'style/colors'
 
-export default class PostGroups extends React.PureComponent {
-  static defaultState = {
-    expanded: false
+export default function PostGroups ({
+  goToGroup,
+  groups: providedGroups,
+  includePublic,
+  style
+}) {
+  const [expanded, setExpanded] = useState(false)
+  const toggleExpanded = () => setExpanded(!expanded)
+
+  const groups = includePublic
+    ? [...providedGroups, PUBLIC_GROUP]
+    : providedGroups
+
+  // don't show if there are no groups or there is exactly 1 group and the flag isn't set
+  if (isEmpty(groups)) {
+    return null
   }
 
-  constructor (props) {
-    super(props)
-    this.state = PostGroups.defaultState
-  }
-
-  toggleExpanded = () => {
-    this.setState({
-      expanded: !this.state.expanded
-    })
-  }
-
-  render () {
-    const { groups: providedGroups, goToGroup, includePublic, style } = this.props
-    const { expanded } = this.state
-    const groups = includePublic
-      ? [...providedGroups, PUBLIC_GROUP]
-      : providedGroups
-
-    // don't show if there are no groups or there is exactly 1 group and the flag isn't set
-    if (isEmpty(groups)) {
-      return null
-    }
-
-    const content = (
+  return (
+    <View style={[style, expanded && styles.expanded]}>
       <View style={styles.row}>
         <Text style={styles.reminderText}>Posted In: </Text>
-        <GroupsListSummary groups={groups} expandFunc={this.toggleExpanded} goToGroup={goToGroup} />
-        <TouchableOpacity onPress={this.toggleExpanded} style={styles.arrowButton}>
-          <Icon name='ArrowDown' style={styles.arrowIcon} />
+        {!expanded && (
+          <GroupsListSummary
+            expandFunc={toggleExpanded}
+            groups={groups}
+            goToGroup={goToGroup}
+          />
+        )}
+        <TouchableOpacity onPress={toggleExpanded} style={styles.arrowButton}>
+          <Icon
+            name={expanded ? 'ArrowUp' : 'ArrowDown'}
+            style={styles.arrowIcon}
+          />
         </TouchableOpacity>
       </View>
-    )
-    const expandedContent = (
-      <>
-        <View style={styles.row}>
-          <Text style={styles.reminderText}>Posted In: </Text>
-          <TouchableOpacity onPress={this.toggleExpanded} style={styles.arrowButton}>
-            <Icon name='ArrowUp' style={styles.arrowIcon} />
-          </TouchableOpacity>
-        </View>
-        <GroupsList groups={groups} onPress={goToGroup} />
-      </>
-    )
-
-    return (
-      <View style={[style, expanded && styles.expanded]}>
-        {expanded ? expandedContent : content}
-      </View>
-    )
-  }
+      {expanded && <GroupsList groups={groups} onPress={goToGroup} />}
+    </View>
+  )
 }
 
 export function GroupsListSummary ({ groups, goToGroup, expandFunc }) {
   const moreGroups = groups.length > 1
-  const othersText = n => n === 1 ? '1 other' : `${n} others`
+  const othersText = n => (n === 1 ? '1 other' : `${n} others`)
+
   return (
     <View style={[styles.groupList, styles.row]}>
-      <TouchableOpacity onPress={() => goToGroup && goToGroup(groups[0].slug)} style={{ flex: -1 }}><Text style={styles.linkText} numberOfLines={1}>{groups[0].name}</Text></TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => goToGroup && goToGroup(groups[0].slug)}
+        style={{ flex: -1 }}
+      >
+        <Text style={styles.linkText} numberOfLines={1}>
+          {groups[0].name}
+        </Text>
+      </TouchableOpacity>
       {moreGroups && (
         <View style={[styles.row, { flex: 0 }]}>
           <Text style={[styles.reminderText]}> and </Text>
-          <TouchableOpacity onPress={expandFunc}><Text style={styles.linkText}>{othersText(groups.length - 1)}</Text></TouchableOpacity>
+          <TouchableOpacity onPress={expandFunc}>
+            <Text style={styles.linkText}>{othersText(groups.length - 1)}</Text>
+          </TouchableOpacity>
         </View>
       )}
     </View>

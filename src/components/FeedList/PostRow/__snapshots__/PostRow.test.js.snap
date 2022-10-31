@@ -16,7 +16,6 @@ exports[`PostRow renders correctly 1`] = `
           }
         }
         respondToEvent={[Function]}
-        showGroups={true}
       />
     </View>
   </TouchableOpacity>

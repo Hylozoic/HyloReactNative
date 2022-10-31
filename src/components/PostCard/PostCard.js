@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React from 'react'
 import { View } from 'react-native'
 import PostHeader from './PostHeader'
@@ -9,118 +8,88 @@ import PostGroups from './PostGroups'
 import { get } from 'lodash/fp'
 import { capeCod10 } from 'style/colors'
 import Files from 'components/Files'
-import { shape, any, object, string, func, array, bool } from 'prop-types'
 
-export default class PostCard extends React.PureComponent {
-  static propTypes = {
-    post: shape({
-      id: any,
-      type: string,
-      imageUrl: string,
-      name: string,
-      details: string,
-      upVotes: string,
-      updatedAt: string,
-      linkPreview: object
-    }),
-    creator: object,
-    isPinned: bool,
-    commenters: array,
-    groups: array,
-    imageUrls: array,
-    topics: array,
-    showMember: func,
-    showTopic: func
-  }
+export default function PostCard ({
+  commenters,
+  creator,
+  fileUrls,
+  goToGroup,
+  groups,
+  hideDetails,
+  hideMenu,
+  imageUrls,
+  isPinned,
+  post = {},
+  respondToEvent,
+  showGroups = true,
+  showMember,
+  showTopic,
+  topics
+}) {
+  const slug = get('0.slug', groups)
 
-  static defaultProps = {
-    post: {},
-    showGroups: true
-  }
-
-  render () {
-    const {
-      commenters,
-      creator,
-      goToGroup,
-      groups,
-      hideDetails,
-      hideMenu,
-      imageUrls,
-      fileUrls,
-      isPinned,
-      post,
-      respondToEvent,
-      showGroups,
-      showMember,
-      showTopic,
-      topics
-    } = this.props
-    const slug = get('0.slug', groups)
-
-    return (
-      <View style={styles.container}>
-        <PostHeader
-          postId={post.id}
-          creator={creator}
-          date={post.createdAt}
-          type={post.type}
-          topics={topics}
+  return (
+    <View style={styles.container}>
+      <PostHeader
+        announcement={post.announcement}
+        creator={creator}
+        date={post.createdAt}
+        hideMenu={hideMenu}
+        pinned={isPinned}
+        postId={post.id}
+        showMember={showMember}
+        showTopic={showTopic}
+        slug={slug}
+        topics={topics}
+        type={post.type}
+      />
+      <PostImage imageUrls={imageUrls} />
+      <PostBody
+        details={post.details}
+        endTime={post.endTime}
+        hideDetails={hideDetails}
+        linkPreview={post.linkPreview}
+        linkPreviewFeatured={post.linkPreviewFeatured}
+        myEventResponse={post.myEventResponse}
+        respondToEvent={respondToEvent}
+        shouldTruncate
+        slug={slug}
+        startTime={post.startTime}
+        title={post.title}
+        type={post.type}
+      />
+      <Files urls={fileUrls} style={{ marginBottom: 10 }} />
+      {showGroups && (
+        <PostGroups
+          goToGroup={goToGroup}
+          groups={groups}
+          includePublic={post.isPublic}
           slug={slug}
-          pinned={isPinned}
-          showMember={showMember}
-          showTopic={showTopic}
-          announcement={post.announcement}
-          hideMenu={hideMenu}
+          style={styles.groups}
         />
-        <PostImage imageUrls={imageUrls} />
-        <PostBody
-          details={post.details}
-          endTime={post.endTime}
-          hideDetails={hideDetails}
-          linkPreview={post.linkPreview}
-          linkPreviewFeatured={post.linkPreviewFeatured}
-          myEventResponse={post.myEventResponse}
-          respondToEvent={respondToEvent}
-          shouldTruncate
-          slug={slug}
-          startTime={post.startTime}
-          title={post.title}
-          type={post.type}
-        />
-        <Files urls={fileUrls} style={{ marginBottom: 10 }} />
-        {showGroups && (
-          <PostGroups
-            style={styles.groups}
-            groups={groups}
-            includePublic={post.isPublic}
-            slug={slug}
-            goToGroup={goToGroup}
-          />
-        )}
-        <PostFooter
-          id={post.id}
-          commenters={commenters}
-          commentersTotal={post.commentersTotal}
-          members={post.members}
-          eventInvitations={post.eventInvitations}
-          votesTotal={post.votesTotal}
-          myVote={post.myVote}
-        />
-      </View>
-    )
-  }
+      )}
+      <PostFooter
+        commenters={commenters}
+        commentersTotal={post.commentersTotal}
+        eventInvitations={post.eventInvitations}
+        id={post.id}
+        members={post.members}
+        myVote={post.myVote}
+        votesTotal={post.votesTotal}
+      />
+    </View>
+  )
 }
 
 const styles = {
   container: {
-    borderWidth: 1,
+    backgroundColor: 'white',
     borderColor: capeCod10,
     borderRadius: 4,
-    backgroundColor: 'white'
+    borderWidth: 1
   },
   groups: {
-    paddingHorizontal: 12,
-    paddingBottom: 10
+    paddingBottom: 10,
+    paddingHorizontal: 12
   }
 }

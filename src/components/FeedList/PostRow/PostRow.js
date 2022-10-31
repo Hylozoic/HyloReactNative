@@ -1,43 +1,51 @@
-/* eslint-disable camelcase */
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import styles from './PostRow.styles'
 import PostCard from 'components/PostCard'
 
-export default class PostRow extends React.PureComponent {
-  showPost = () => this.props.showPost(this.props.post.id)
+export default function PostRow ({
+  commenters,
+  creator,
+  fileUrls,
+  goToGroup,
+  groups,
+  imageUrls,
+  isPinned,
+  post,
+  respondToEvent,
+  showGroups,
+  showMember,
+  showPost,
+  showTopic,
+  topics
+}) {
+  if (!post) return null
 
-  render () {
-    const {
-      post, commenters, groups, creator, topics, imageUrls, fileUrls,
-      isPinned, showMember, showTopic, goToGroup, showGroups,
-      respondToEvent
-    } = this.props
-
-    if (!post) return null
-
-    return (
-      <View style={styles.postRow}>
-        <TouchableOpacity delayPressIn={50} activeOpacity={0.6} onPress={this.showPost}>
-          <View>
-            <PostCard
-              post={post}
-              commenters={commenters}
-              groups={groups}
-              topics={topics}
-              creator={creator}
-              imageUrls={imageUrls}
-              fileUrls={fileUrls}
-              isPinned={isPinned}
-              showMember={showMember}
-              respondToEvent={response => respondToEvent(post.id, response)}
-              showTopic={showTopic}
-              goToGroup={goToGroup}
-              showGroups={showGroups}
-            />
-          </View>
-        </TouchableOpacity>
-      </View>
-    )
-  }
+  return (
+    <View style={styles.postRow}>
+      <TouchableOpacity
+        activeOpacity={0.6}
+        delayPressIn={50}
+        onPress={() => showPost(post.id)}
+      >
+        <View>
+          <PostCard
+            commenters={commenters}
+            creator={creator}
+            fileUrls={fileUrls}
+            goToGroup={goToGroup}
+            groups={groups}
+            imageUrls={imageUrls}
+            isPinned={isPinned}
+            post={post}
+            respondToEvent={response => respondToEvent(post.id, response)}
+            showGroups={showGroups}
+            showMember={showMember}
+            showTopic={showTopic}
+            topics={topics}
+          />
+        </View>
+      </TouchableOpacity>
+    </View>
+  )
 }
