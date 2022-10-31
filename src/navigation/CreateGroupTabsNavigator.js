@@ -1,7 +1,11 @@
 import React from 'react'
+import { isEmpty } from 'lodash/fp'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { useSelector } from 'react-redux'
 import { WorkflowModalHeader } from 'navigation/headers'
 import CreateGroupTabBar from 'screens/CreateGroupFlow/CreateGroupTabBar'
+import { GROUP_ACCESSIBILITY } from 'store/models/Group'
+import getMemberships from 'store/selectors/getMemberships'
 // Screens
 import CreateGroupName from 'screens/CreateGroupFlow/CreateGroupName'
 import CreateGroupUrl from 'screens/CreateGroupFlow/CreateGroupUrl'
@@ -12,6 +16,11 @@ import { white20onCaribbeanGreen } from 'style/colors'
 
 const CreateGroupTabs = createBottomTabNavigator()
 export default function CreateGroupTabsNavigator () {
+  const memberships = useSelector(getMemberships)
+  const parentGroupOptions = memberships
+    .filter(m => m.hasModeratorRole || m.group.accessibility === GROUP_ACCESSIBILITY.Open)
+  const hasParentGroupOptions = !isEmpty(parentGroupOptions)
+  const totalSteps = hasParentGroupOptions ? 5 : 4
   const navigatorProps = {
     tabBar: props => <CreateGroupTabBar {...props} />,
     // NOTE: This is how to have back button functionality
@@ -37,27 +46,29 @@ export default function CreateGroupTabsNavigator () {
       <CreateGroupTabs.Screen
         name='CreateGroupName'
         component={CreateGroupName}
-        options={{ title: 'STEP 1/5', headerLeftCloseIcon: true }}
+        options={{ title: `STEP 1/${totalSteps}`, headerLeftCloseIcon: true }}
       />
       <CreateGroupTabs.Screen
         name='CreateGroupUrl'
         component={CreateGroupUrl}
-        options={{ title: 'STEP 2/5' }}
+        options={{ title: `STEP 2/${totalSteps}` }}
       />
       <CreateGroupTabs.Screen
         name='CreateGroupVisibilityAccessibility'
         component={CreateGroupVisibilityAccessibility}
-        options={{ title: 'STEP 3/5' }}
+        options={{ title: `STEP 3/${totalSteps}` }}
       />
-      <CreateGroupTabs.Screen
-        name='CreateGroupParentGroups'
-        component={CreateGroupParentGroups}
-        options={{ title: 'STEP 4/5' }}
-      />
+      {hasParentGroupOptions && (
+        <CreateGroupTabs.Screen
+          name='CreateGroupParentGroups'
+          component={CreateGroupParentGroups}
+          options={{ title: `STEP ${totalSteps - 1}/${totalSteps}` }}
+        />
+      )}
       <CreateGroupTabs.Screen
         name='CreateGroupReview'
         component={CreateGroupReview}
-        options={{ title: 'STEP 5/5' }}
+        options={{ title: `STEP ${totalSteps}/${totalSteps}` }}
       />
     </CreateGroupTabs.Navigator>
   )
