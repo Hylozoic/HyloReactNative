@@ -75,7 +75,8 @@ const styles = {
     resizeMode: 'cover'
   },
   thumbnailWrapper: {
-    margin: 8
+    margin: 8,
+    marginLeft: 0
   },
   thumbnail: {
     width: 48,
