@@ -1,4 +1,4 @@
-import { white40onCaribbeanGreen } from 'style/colors'
+import { black10onRhino, white40onCaribbeanGreen } from 'style/colors'
 import styles from '../SignupFlow.styles'
 
 const imagePickerChild = {
@@ -25,6 +25,10 @@ export default {
   imagePickerBackground: {
     ...imagePickerChild,
     backgroundColor: white40onCaribbeanGreen,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  imageLoading: {
     alignItems: 'center',
     justifyContent: 'center'
   },

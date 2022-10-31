@@ -63,7 +63,7 @@ export default {
     color: caribbeanGreen,
     backgroundColor: white,
     disabledColor: white,
-    disabledBackgroundColor: rhino30  
+    disabledBackgroundColor: rhino30
   },
 
   // 

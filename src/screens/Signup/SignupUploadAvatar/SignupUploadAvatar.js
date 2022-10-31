@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
-import { ScrollView, View, Image, Text } from 'react-native'
+import { ScrollView, View, Text, ImageBackground, ActivityIndicator } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import getMe from 'store/selectors/getMe'
 import updateUserSettings from 'store/actions/updateUserSettings'
@@ -29,18 +29,14 @@ export default function SignupUploadAvatar ({ navigation }) {
   })
 
   const handleAvatarImageUpload = ({ local, remote }) => {
-    // TODO: Show loading indicator over local image until remote is available
-    // and don't `updateGroupSettings` until remote image is available.
-    // See use in PostEditor.
-    if (remote) {
-      setAvatarUrl(remote)
-      setAvatarImageSource({ uri: local })
-    }
+    setAvatarImageSource({ uri: local })
+    setAvatarUrl(remote || local)
   }
 
   const saveAndNext = async () => {
     const response = await dispatch(updateUserSettings({ avatarUrl }))
     const responseError = response.payload.getData()?.error
+
     if (!responseError) navigation.navigate('SignupSetLocation')
   }
 
@@ -58,25 +54,27 @@ export default function SignupUploadAvatar ({ navigation }) {
             onChoice={handleAvatarImageUpload}
             onPendingChange={pending => setImagePickerPending(pending)}
           >
-            {avatarImageSource && !imagePickerPending
-              ? <Image style={styles.image} source={avatarImageSource} />
-              : (
-                <View style={styles.imagePickerBackground}>
-                  {imagePickerPending ? <Loading /> : <Icon name='AddImage' style={styles.cameraIcon} />}
-                </View>
-              )
-            }
+            {avatarImageSource && (
+              <ImageBackground style={styles.imagePickerBackground} imageStyle={styles.image} source={avatarImageSource}>
+                {imagePickerPending && (
+                  <View style={styles.imageLoading}>
+                    <ActivityIndicator size='large' />
+                  </View>
+                )}
+              </ImageBackground>
+            )}
+            {!avatarImageSource && (
+              <View style={styles.imagePickerBackground}>
+                {imagePickerPending ? <Loading /> : <Icon name='AddImage' style={styles.cameraIcon} />}
+              </View>
+            )}
           </ImagePicker>
         </View>
       </ScrollView>
       <View style={styles.bottomBar}>
-        {/* <Button
-          style={styles.backButton}
-          text='< Back'
-          onPress={() => navigation.goBack()}
-        /> */}
         <Button
           style={styles.continueButton}
+          disabled={imagePickerPending}
           text='Continue'
           onPress={saveAndNext}
         />
