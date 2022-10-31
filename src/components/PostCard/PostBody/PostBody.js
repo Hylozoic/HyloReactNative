@@ -8,6 +8,7 @@ import HyloHTML from 'components/HyloHTML'
 import LinkPreview from 'components/PostCard/LinkPreview'
 import Icon from 'components/Icon'
 import PopupMenuButton from 'components/PopupMenuButton'
+// import VideoPlayerWebView from 'components/VideoPlayerWebView'
 import { caribbeanGreen, rhino, white, white20onCaribbeanGreen } from 'style/colors'
 
 const MAX_DETAILS_LENGTH = 144
@@ -43,6 +44,7 @@ export default function PostBody ({
       {(linkPreview?.url && linkPreviewFeatured) && (
         <LinkPreview {...linkPreview} />
       )}
+      {/* <VideoPlayerWebView url={linkPreview.url} /> */}
       <HyloHTML
         html={presentedDetails}
         baseStyle={{ marginBottom: 8 }}

@@ -165,6 +165,7 @@ export function PostCardForDetails ({
         details={post.details}
         endTime={post.endTime}
         linkPreview={post.linkPreview}
+        linkPreviewFeatured={post.linkPreviewFeatured}
         myEventResponse={post.myEventResponse}
         respondToEvent={respondToEvent}
         slug={slug}

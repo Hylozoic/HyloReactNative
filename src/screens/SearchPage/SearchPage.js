@@ -36,7 +36,7 @@ export default class SearchPage extends React.Component {
     this.props.fetchMoreSearchResults()
   }
 
-  onRefresh = () => {
+  handleRefresh = () => {
     const { refreshing } = this.state
     if (refreshing) return null
     this.setState({ refreshing: true })
@@ -83,7 +83,7 @@ export default class SearchPage extends React.Component {
               goToPost={goToPost}
               goToPerson={goToPerson}
             />}
-          onRefresh={this.onRefresh}
+          onRefresh={this.handleRefresh}
           refreshing={refreshing}
           keyExtractor={(item) => item.id}
           onEndReached={() => this.fetchMore()}
@@ -106,8 +106,13 @@ export function TabBar ({ filter, setSearchFilter }) {
   return (
     <View style={styles.tabBar}>
       {tabs.map(({ id, label }) => (
-        <Tab key={id} id={id} label={label}
-          filter={filter} setSearchFilter={setSearchFilter} />
+        <Tab
+          filter={filter}
+          id={id}
+          key={id}
+          label={label}
+          setSearchFilter={setSearchFilter}
+        />
       ))}
     </View>
   )
