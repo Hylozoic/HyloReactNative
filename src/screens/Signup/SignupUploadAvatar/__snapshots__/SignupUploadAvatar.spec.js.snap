@@ -253,13 +253,17 @@ exports[`default render matches snapshot 1`] = `
                                 onResponderTerminationRequest={[Function]}
                                 onStartShouldSetResponder={[Function]}
                               >
-                                <Image
-                                  source={
-                                    {
-                                      "uri": undefined,
+                                <View
+                                  accessibilityIgnoresInvertColors={true}
+                                >
+                                  <Image
+                                    source={
+                                      {
+                                        "uri": undefined,
+                                      }
                                     }
-                                  }
-                                />
+                                  />
+                                </View>
                               </View>
                             </View>
                           </View>
@@ -267,6 +271,11 @@ exports[`default render matches snapshot 1`] = `
                         <View>
                           <View>
                             <View
+                              accessibilityState={
+                                {
+                                  "disabled": false,
+                                }
+                              }
                               accessible={true}
                               collapsable={false}
                               focusable={true}
