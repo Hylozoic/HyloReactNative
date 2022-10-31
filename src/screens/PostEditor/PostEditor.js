@@ -118,11 +118,24 @@ export class PostEditor extends React.Component {
       }
     }
 
+    this.removeBeforeRemove = this.props.navigation.addListener('beforeRemove', (e) => {
+      e.preventDefault()
+      confirmDiscardChanges({
+        onDiscard: () => this.props.navigation.dispatch(e.data.action),
+        title: 'Are you sure?',
+        confirmationMessage: 'If you made changes they will be lost.'
+      })
+    })
+
     this.renderReactNavigationHeader()
   }
 
   shouldComponentUpdate (nextProps, nextState) {
     return nextProps.isFocused
+  }
+
+  componentWillUnmount () {
+    this.removeBeforeRemove()
   }
 
   save = async () => {
@@ -204,11 +217,8 @@ export class PostEditor extends React.Component {
   }
 
   handleCancel = () => {
-    confirmDiscardChanges({
-      onDiscard: () => this.props.navigation.goBack(),
-      title: 'Are you sure?',
-      confirmationMessage: 'If you made changes they will be lost.'
-    })
+    // Note: Delegated to dismiss event listener
+    this.props.navigation.goBack()
   }
 
   setIsSaving = isSaving => {
