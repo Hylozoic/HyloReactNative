@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, Alert, FlatList } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { TextHelpers } from 'hylo-shared'
 import { get, filter, isEmpty } from 'lodash/fp'
-// import Clipboard from '@react-native-community/clipboard'
+import Clipboard from '@react-native-community/clipboard'
 import useHyloActionSheet from 'hooks/useHyloActionSheet'
 import getMe from 'store/selectors/getMe'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
@@ -93,6 +93,8 @@ export default React.memo(function PostHeader ({
     type: 'post'
   }
 
+  const copyLink = () => Clipboard.setString(`${process.env.HYLO_WEB_BASE_URL}/post/${postId}`)
+
   const flagPost = canFlag
     ? () => setFlaggingVisible(true)
     : null
@@ -126,6 +128,9 @@ export default React.memo(function PostHeader ({
   // const handleCopy = () => Clipboard.setString(TextHelpers.presentHTMLToText(post.details))
 
   const actionSheetActions = filter(x => x[1], [
+    ['Copy Link', copyLink, {
+      icon: <Icon name='Copy' style={styles.actionSheetIcon} />
+    }],
     ['Edit this Post', editPost, {
       icon: <FontAwesome5Icon name='pencil-alt' style={styles.actionSheetIcon} />
     }],
