@@ -36,46 +36,6 @@ describe('getThread', () => {
   })
 })
 
-describe('presentation', () => {
-  let session
-
-  beforeEach(() => {
-    session = orm.mutableSession(orm.getEmptyState())
-    session.Message.create({ id: '4', messageThread: '1', creator: '8' })
-    session.Message.create({ id: '10', messageThread: '1', creator: '8' })
-    session.Message.create({ id: '1', messageThread: '1', creator: '9' })
-    session.Message.create({ id: '200', messageThread: '1', creator: '8' })
-    session.Person.create({ id: '8', name: 'Bob', avatarUrl: 'https://wombat.com/test.jpg' })
-    session.Person.create({ id: '9', name: 'Sue', avatarUrl: 'https://aardvark.com/test.jpg' })
-    session.MessageThread.create({ id: '1', participants: ['8', '9'] })
-  })
-
-  it('orders by id (descending) for the inverted list', () => {
-    const props = { route: { params: { id: '1' } } }
-    const state = { orm: session.state }
-    const messages = store.getAndPresentMessages(state, props)
-    expect(messages.map(m => m.id)).toEqual(['200', '10', '4', '1'])
-  })
-
-  it('removes currentUser from title', () => {
-    const props = { route: { params: { id: '1' } } }
-    const state = { orm: session.state }
-    const thread = store.getThread(state, props)
-    const presented = store.presentThread(thread, '8')
-    expect(presented.title).toEqual('Sue')
-  })
-
-  it('adds "You" as title if there are no other participants', () => {
-    session.MessageThread.create({ id: '2', participants: ['8'] })
-
-    const props = { route: { params: { id: '2' } } }
-    const state = { orm: session.state }
-    const thread = store.getThread(state, props)
-    const presented = store.presentThread(thread, '8')
-    expect(presented.title).toEqual('You')
-  })
-})
-
 describe('updateThreadReadTime', () => {
   it('should match the last snapshot', () => {
     expect(store.updateThreadReadTime('1')).toMatchSnapshot()

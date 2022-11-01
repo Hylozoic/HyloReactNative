@@ -17,19 +17,30 @@ exports[`mapDispatchToProps creates actions 2`] = `
   [
     {
       "graphql": {
-        "query": "mutation ($messageThreadId: String, $text: String) {
-        createMessage(data: {messageThreadId: $messageThreadId, text: $text}) {
-          id
-          text
-          createdAt
-          creator {
-            id
-          }
-          messageThread {
-            id
-          }
-        }
-      }",
+        "query": "mutation CreateMessageMutation($messageThreadId: String, $text: String, $createdAt: Date) {
+            createMessage(
+              data: {messageThreadId: $messageThreadId, text: $text, createdAt: $createdAt}
+            ) {
+              id
+              text
+              createdAt
+              creator {
+                id
+                name
+                avatarUrl
+              }
+              messageThread {
+                id
+                createdAt
+                updatedAt
+                participants {
+                  id
+                  name
+                  avatarUrl
+                }
+              }
+            }
+          }",
         "variables": {
           "messageThreadId": 77,
           "optimistic": true,
@@ -37,10 +48,13 @@ exports[`mapDispatchToProps creates actions 2`] = `
         },
       },
       "meta": {
+        "analytics": "Direct Message Sent",
+        "extractModel": "Message",
+        "forNewThread": undefined,
+        "messageText": "some text",
         "messageThreadId": 77,
         "optimistic": true,
         "tempId": "messageThread77_1",
-        "text": "some text",
       },
       "type": "Thread/CREATE_MESSAGE",
     },
@@ -48,30 +62,30 @@ exports[`mapDispatchToProps creates actions 2`] = `
   [
     {
       "graphql": {
-        "query": "
-        query ($id: ID, $cursor: ID, $messagePageSize: Int) {
-          messageThread (id: $id) {
-            id
-            messages(first: $messagePageSize, cursor: $cursor, order: "desc") {
-              items {
-                id
-                createdAt
-                text
-                creator {
+        "query": "query MessageThreadMessagesQuery($id: ID, $cursor: ID, $messagePageSize: Int = 20) {
+            messageThread(id: $id) {
+              id
+              messages(first: $messagePageSize, cursor: $cursor, order: \\"desc\\") {
+                hasMore
+                total
+                items {
+                  createdAt
                   id
+                  text
+                  creator {
+                    id
+                    name
+                    avatarUrl
+                  }
                 }
               }
-              total
-              hasMore
+              participants {
+                avatarUrl
+                id
+                name
+              }
             }
-            participants {
-              id
-              name
-              avatarUrl
-            }
-          }
-        }
-      ",
+          }",
         "variables": {
           "cursor": 3,
           "id": 77,
@@ -93,30 +107,30 @@ exports[`mapDispatchToProps creates actions 2`] = `
   [
     {
       "graphql": {
-        "query": "
-        query ($id: ID, $cursor: ID, $messagePageSize: Int) {
-          messageThread (id: $id) {
-            id
-            messages(first: $messagePageSize, cursor: $cursor, order: "desc") {
-              items {
-                id
-                createdAt
-                text
-                creator {
+        "query": "query MessageThreadMessagesQuery($id: ID, $cursor: ID, $messagePageSize: Int = 20) {
+            messageThread(id: $id) {
+              id
+              messages(first: $messagePageSize, cursor: $cursor, order: \\"desc\\") {
+                hasMore
+                total
+                items {
+                  createdAt
                   id
+                  text
+                  creator {
+                    id
+                    name
+                    avatarUrl
+                  }
                 }
               }
-              total
-              hasMore
+              participants {
+                avatarUrl
+                id
+                name
+              }
             }
-            participants {
-              id
-              name
-              avatarUrl
-            }
-          }
-        }
-      ",
+          }",
         "variables": {
           "id": 77,
           "messagePageSize": 20,
@@ -158,11 +172,14 @@ exports[`mapStateToProps returns the right keys 1`] = `
   "currentUserId": undefined,
   "groupId": "public",
   "hasMore": undefined,
-  "id": undefined,
+  "id": 1,
   "isConnected": undefined,
-  "messages": undefined,
-  "participants": undefined,
+  "messages": [],
   "pending": undefined,
-  "title": undefined,
+  "thread": SessionBoundModel {
+    "_fields": {
+      "id": 1,
+    },
+  },
 }
 `;

@@ -1,4 +1,5 @@
 import { mapStateToProps, mapDispatchToProps } from './Thread.connector'
+import orm from 'store/models'
 import { ALL_GROUP_ID } from 'store/models/Group'
 
 jest.mock('util/websockets', () => ({
@@ -9,12 +10,20 @@ jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
 
 jest.mock('store/selectors/getCurrentUserId', () => () => {})
 
+let ormSession
+
 describe('mapStateToProps', () => {
+  beforeAll(() => {
+    ormSession = orm.session(orm.getEmptyState())
+  })
+
   it('returns the right keys', () => {
+    ormSession.MessageThread.create({ id: 1 })
     const state = {
       queryResults: [],
       pending: [],
-      SocketListener: {}
+      SocketListener: {},
+      orm: ormSession.state
     }
     const props = {
       route: {

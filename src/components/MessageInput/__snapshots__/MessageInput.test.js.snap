@@ -10,7 +10,7 @@ exports[`matches the last snapshot 1`] = `
     placeholderTextColor="#c0c6cd"
     style={
       {
-        "flex": 2,
+        "flex": 1,
         "fontFamily": "Circular-Book",
         "fontSize": 14,
         "height": 22,

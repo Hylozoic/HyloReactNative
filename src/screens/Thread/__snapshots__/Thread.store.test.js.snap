@@ -3,16 +3,27 @@
 exports[`createMessage should match the last snapshot 1`] = `
 {
   "graphql": {
-    "query": "mutation ($messageThreadId: String, $text: String) {
-        createMessage(data: {messageThreadId: $messageThreadId, text: $text}) {
+    "query": "mutation CreateMessageMutation($messageThreadId: String, $text: String, $createdAt: Date) {
+        createMessage(
+          data: {messageThreadId: $messageThreadId, text: $text, createdAt: $createdAt}
+        ) {
           id
           text
           createdAt
           creator {
             id
+            name
+            avatarUrl
           }
           messageThread {
             id
+            createdAt
+            updatedAt
+            participants {
+              id
+              name
+              avatarUrl
+            }
           }
         }
       }",
@@ -23,10 +34,13 @@ exports[`createMessage should match the last snapshot 1`] = `
     },
   },
   "meta": {
+    "analytics": "Direct Message Sent",
+    "extractModel": "Message",
+    "forNewThread": undefined,
+    "messageText": "So much message.",
     "messageThreadId": "1",
     "optimistic": true,
     "tempId": "messageThread1_1",
-    "text": "So much message.",
   },
   "type": "Thread/CREATE_MESSAGE",
 }
@@ -35,30 +49,30 @@ exports[`createMessage should match the last snapshot 1`] = `
 exports[`fetchMessages should match the last snapshot 1`] = `
 {
   "graphql": {
-    "query": "
-        query ($id: ID, $cursor: ID, $messagePageSize: Int) {
-          messageThread (id: $id) {
-            id
-            messages(first: $messagePageSize, cursor: $cursor, order: "desc") {
-              items {
-                id
-                createdAt
-                text
-                creator {
-                  id
-                }
-              }
-              total
-              hasMore
-            }
-            participants {
+    "query": "query MessageThreadMessagesQuery($id: ID, $cursor: ID, $messagePageSize: Int = 20) {
+        messageThread(id: $id) {
+          id
+          messages(first: $messagePageSize, cursor: $cursor, order: \\"desc\\") {
+            hasMore
+            total
+            items {
+              createdAt
               id
-              name
-              avatarUrl
+              text
+              creator {
+                id
+                name
+                avatarUrl
+              }
             }
           }
+          participants {
+            avatarUrl
+            id
+            name
+          }
         }
-      ",
+      }",
     "variables": {
       "cursor": 10,
       "id": "1",
