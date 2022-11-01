@@ -1,11 +1,10 @@
 import { Platform, StyleSheet } from 'react-native'
-
-import { mercury } from 'style/colors'
+import { alabaster, mercury } from 'style/colors'
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: alabaster // flag-messages-background-color
   },
   input: {
     height: Platform.isIOS ? 22 : null,

@@ -7,7 +7,7 @@ import getMe from 'store/selectors/getMe'
 // Helper Components
 import Icon from 'components/Icon'
 import Avatar from 'components/Avatar'
-import { caribbeanGreen, gainsboro, gunsmoke, rhino05, rhino10, white } from 'style/colors'
+import { black10OnCaribbeanGreen, gainsboro, gunsmoke, rhino05, rhino10, white } from 'style/colors'
 // Screens
 import HomeNavigator from 'navigation/HomeNavigator'
 import SearchNavigator from 'navigation/SearchNavigator'
@@ -45,8 +45,8 @@ export default function TabsNavigator () {
       tabBarIcon: ({ focused }) => (
         <Icon
           name={route.name.split(' Tab')[0]}
-          size={30}
-          color={focused ? caribbeanGreen : gunsmoke}
+          size={32}
+          color={focused ? black10OnCaribbeanGreen : gunsmoke}
           style={{ paddingTop: isIOS ? 0 : 5 }}
         />
       ),
@@ -69,7 +69,7 @@ export default function TabsNavigator () {
             <Avatar
               style={{
                 borderWidth: 2,
-                borderColor: focused ? caribbeanGreen : rhino05
+                borderColor: focused ? black10OnCaribbeanGreen : rhino05
               }}
               dimension={34}
               hasBorder

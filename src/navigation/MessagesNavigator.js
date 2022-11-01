@@ -6,7 +6,7 @@ import { ModalHeader } from 'navigation/headers'
 import NewMessage from 'screens/NewMessage'
 import Thread from 'screens/Thread'
 import ThreadList from 'screens/ThreadList'
-import { rhino, rhino10 } from 'style/colors'
+import { alabaster, rhino } from 'style/colors'
 // import Icon from 'components/Icon'
 // import { TouchableOpacity } from 'react-native-gesture-handler'
 
@@ -15,7 +15,7 @@ export default function MessagesNavigator () {
   const navigatorProps = {
     screenOptions: {
       headerStyle: { backgroundColor: rhino },
-      headerTitleStyle: { color: rhino10 }
+      headerTitleStyle: { color: alabaster } // flag-messages-background-color
     }
   }
 

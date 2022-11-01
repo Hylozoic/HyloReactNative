@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native'
-import { caribbeanGreen, rhino30, limedSpruce, nevada, rhino60, rhino05 } from 'style/colors'
+import { rhino30, limedSpruce, nevada, rhino60, rhino05, rhino, alabaster } from 'style/colors'
 
 export default {
   threadCard: {
     flex: 1,
     flexDirection: 'row',
     paddingTop: 8,
-    backgroundColor: 'white'
+    backgroundColor: alabaster // flag-messages-background-color
   },
   highlight: {
     backgroundColor: rhino05
@@ -45,7 +45,7 @@ export default {
     borderColor: rhino30
   },
   count: {
-    backgroundColor: caribbeanGreen,
+    backgroundColor: rhino,
     borderRadius: 100,
     height: 34,
     width: 34,
@@ -55,7 +55,7 @@ export default {
     justifyContent: 'center'
   },
   countText: {
-    color: 'white',
+    color: alabaster, // flag-messages-background-color
     textAlign: 'center',
     fontFamily: 'Circular-Bold',
     overflow: 'hidden',

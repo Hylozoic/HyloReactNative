@@ -9,7 +9,7 @@ import { bool, func, string } from 'prop-types'
 import { throttle } from 'lodash'
 
 import Icon from 'components/Icon'
-import { caribbeanGreen, rhino30 } from 'style/colors'
+import { azureRadiance, rhino30 } from 'style/colors'
 import styles from './MessageInput.style'
 
 const IS_TYPING_THROTTLE = 3000
@@ -105,7 +105,7 @@ export default class extends React.PureComponent {
     }
     const { style } = this.props
     const { submittable } = this.state
-    const iconStyle = { ...styles.sendButton, color: submittable ? caribbeanGreen : rhino30 }
+    const iconStyle = { ...styles.sendButton, color: submittable ? azureRadiance : rhino30 }
 
     return (
       <View style={[styles.container, style]}>

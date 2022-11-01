@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { capeCod, rhino30 } from 'style/colors'
+import { alabaster, capeCod, rhino30 } from 'style/colors'
 
 export default StyleSheet.create({
   body: {
@@ -11,7 +11,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 5,
     paddingHorizontal: 10,
-    backgroundColor: 'white',
+    backgroundColor: alabaster // flag-messages-background-color
   },
   date: {
     fontSize: 12,
