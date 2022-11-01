@@ -1,6 +1,6 @@
 {
   "name": "HyloReactNative",
-  "version": "5.1.0-beta.0",
+  "version": "5.1.0-beta.1",
   "private": true,
   "scripts": {
     "android": "adb reverse tcp:3001 tcp:3001 && adb reverse tcp:3000 tcp:3000 && react-native run-android",
