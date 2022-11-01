@@ -6,7 +6,6 @@ import {
   getAndPresentMessages,
   getHasMoreMessages,
   getThread,
-  presentThread,
   updateThreadReadTime
 } from './Thread.store'
 import getCurrentUserId from 'store/selectors/getCurrentUserId'
@@ -17,17 +16,17 @@ import confirmNavigate from 'util/confirmNavigate'
 export function mapStateToProps (state, props) {
   const currentUserId = getCurrentUserId(state)
   const groupId = getCurrentGroupId(state)
-  const { id, title, participants } = presentThread(getThread(state, props), currentUserId) || {}
+  const thread = getThread(state, props)
   const messages = getAndPresentMessages(state, props)
+
   return {
-    id,
+    id: thread.id,
+    thread,
     currentUserId,
     groupId,
-    hasMore: getHasMoreMessages(state, { id }),
+    hasMore: getHasMoreMessages(state, { id: thread.id }),
     messages,
-    participants,
     pending: state.pending[FETCH_MESSAGES],
-    title,
     isConnected: state.SocketListener.connected
   }
 }
