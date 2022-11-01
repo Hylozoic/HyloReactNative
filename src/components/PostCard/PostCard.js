@@ -40,6 +40,7 @@ export default function PostCard ({
         showMember={showMember}
         showTopic={showTopic}
         slug={slug}
+        title={post.title}
         topics={topics}
         type={post.type}
       />

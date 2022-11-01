@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { View, Text, TouchableOpacity, Alert, FlatList } from 'react-native'
+import { View, Share, Text, TouchableOpacity, Alert, FlatList } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { TextHelpers } from 'hylo-shared'
 import { get, filter, isEmpty } from 'lodash/fp'
@@ -22,20 +22,21 @@ import Icon from 'components/Icon'
 import { rhino30, rhino50, caribbeanGreen } from 'style/colors'
 
 export default React.memo(function PostHeader ({
-  postId,
+  announcement,
+  closeOnDelete,
   creator,
   date,
-  type,
-  slug,
-  showTopic,
-  showMember,
-  closeOnDelete,
-  pinned,
-  topics,
-  announcement,
-  hideMenu,
   hideDateRow,
-  smallAvatar
+  hideMenu,
+  pinned,
+  postId,
+  showMember,
+  showTopic,
+  slug,
+  smallAvatar,
+  title,
+  topics,
+  type
 }) {
   const navigation = useNavigation()
   const { showHyloActionSheet } = useHyloActionSheet()
@@ -93,6 +94,14 @@ export default React.memo(function PostHeader ({
     type: 'post'
   }
 
+  const share = () => Share.share({
+    message: `"${title}" by ${creator.name} on hylo.com: ${process.env.HYLO_WEB_BASE_URL}/post/${postId}`,
+    url: `${process.env.HYLO_WEB_BASE_URL}/post/${postId}`
+  }, {
+    dialogTitle: `Share "${title}" by ${creator.name}`,
+    subject: `"${title}" by ${creator.name} on hylo.com`
+  })
+
   const copyLink = () => Clipboard.setString(`${process.env.HYLO_WEB_BASE_URL}/post/${postId}`)
 
   const flagPost = canFlag
@@ -128,15 +137,15 @@ export default React.memo(function PostHeader ({
   // const handleCopy = () => Clipboard.setString(TextHelpers.presentHTMLToText(post.details))
 
   const actionSheetActions = filter(x => x[1], [
+    ['Share', share, {
+      icon: <FontAwesome5Icon name='share' style={styles.actionSheetIcon} />
+    }],
     ['Copy Link', copyLink, {
       icon: <Icon name='Copy' style={styles.actionSheetIcon} />
     }],
     ['Edit this Post', editPost, {
       icon: <FontAwesome5Icon name='pencil-alt' style={styles.actionSheetIcon} />
     }],
-    // ['Copy', handleCopy, {
-    //   icon: <FontAwesome5Icon style={styles.actionSheetIcon} name='copy' />
-    // }],
     ['Flag this Post', flagPost, {
       icon: <FontAwesome5Icon name='flag' style={styles.actionSheetIcon} />,
       destructive: true
@@ -219,8 +228,6 @@ export default React.memo(function PostHeader ({
 })
 
 export function PostLabel ({ type }) {
-  // Prevent redboxing on missing type in styles object
-  // TODO: is this the default style we want to use?
   const labelTypeStyle = get(type, labelStyles) || labelStyles.discussion
   const boxStyle = [labelStyles.box, labelTypeStyle.box]
   const textStyle = [labelStyles.text, labelTypeStyle.text]

@@ -145,20 +145,21 @@ export function PostCardForDetails ({
   return (
     <View style={styles.postCard}>
       <PostHeader
-        postId={post.id}
-        creator={post.creator}
-        date={post.createdAt}
-        type={post.type}
-        editPost={editPost}
-        groups={post.groups}
-        slug={slug}
-        pinned={post.pinned}
-        topics={post.topics}
-        showTopic={showTopic}
-        showMember={showMember}
-        goToGroup={goToGroup}
         announcement={post.announcement}
         closeOnDelete
+        creator={post.creator}
+        date={post.createdAt}
+        editPost={editPost}
+        goToGroup={goToGroup}
+        groups={post.groups}
+        pinned={post.pinned}
+        postId={post.id}
+        showMember={showMember}
+        showTopic={showTopic}
+        slug={slug}
+        title={post.title}
+        topics={post.topics}
+        type={post.type}
       />
       <PostImage
         creator={post.creator}
@@ -181,17 +182,17 @@ export function PostCardForDetails ({
       <Files urls={post.fileUrls} style={{ marginBottom: 10 }} />
       {isProject && (
         <ProjectMembersSummary
+          dimension={34}
           members={post.members}
           onPress={goToMembers}
-          dimension={34}
           style={styles.projectMembersContainer}
         />
       )}
       {isProject && (
         <JoinProjectButton
-          style={styles.projectJoinButton}
           leaving={isMember}
           onPress={isMember ? leaveProject : joinProject}
+          style={styles.projectJoinButton}
         />
       )}
       {!!location && (
@@ -202,25 +203,25 @@ export function PostCardForDetails ({
       )}
       {showGroups && (
         <PostGroups
+          goToGroup={goToGroup}
           groups={post.groups}
           includePublic={post.isPublic}
           slug={slug}
           style={[styles.infoRow]}
-          goToGroup={goToGroup}
         />
       )}
       <PostFooter
-        style={styles.postFooter}
-        id={post.id}
-        type={post.type}
-        currentUser={currentUser}
         commenters={post.commenters}
         commentersTotal={post.commentersTotal}
-        members={post.members}
+        currentUser={currentUser}
         eventInvitations={post.eventInvitations}
-        votesTotal={post.votesTotal}
-        myVote={post.myVote}
         forDetails
+        id={post.id}
+        members={post.members}
+        myVote={post.myVote}
+        style={styles.postFooter}
+        type={post.type}
+        votesTotal={post.votesTotal}
       />
     </View>
   )
