@@ -1,11 +1,20 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { View, ScrollView, Text, TouchableOpacity } from 'react-native'
+import { modalScreenName } from 'navigation/linking/helpers'
+import { getThread } from '../Thread/Thread.store'
+import getCurrentUserId from 'store/selectors/getCurrentUserId'
 import Loading from 'components/Loading'
 import Avatar from 'components/Avatar'
 import { isEmpty } from 'lodash/fp'
 import styles from './ThreadParticipants.styles'
 
-export default function ThreadParticipants ({ participants, goToParticipant }) {
+export default function ThreadParticipants ({ threadId, navigation }) {
+  const currentUserId = useSelector(getCurrentUserId)
+  const thread = useSelector(state => getThread(state, { route: { params: { id: threadId } } }))
+  const participants = thread && thread.participants.filter(p => p.id !== currentUserId).toRefArray()
+  const goToParticipant = id => navigation.navigate(modalScreenName('Member'), { id })
+
   if (isEmpty(participants)) {
     return (
       <View style={styles.container}>

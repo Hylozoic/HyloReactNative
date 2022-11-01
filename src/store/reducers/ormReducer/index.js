@@ -160,10 +160,6 @@ export default function ormReducer (state = orm.getEmptyState(), action) {
     }
 
     case CREATE_MESSAGE: {
-      // remove the temporary message and then create the real one -- we do this
-      // here instead of using meta.extractModel so it all happens in a single
-      // reduce. we can't just update the temporary message because redux-orm
-      // doesn't support updating ID's
       Message.withId(meta.tempId).delete()
       const message = payload.data.createMessage
       MessageThread.withId(message.messageThread.id).newMessageReceived()

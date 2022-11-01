@@ -4,10 +4,11 @@ import { capeCod } from 'style/colors'
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'white',
-    paddingTop: 12,
-    paddingHorizontal: 15
+    // flex: 1,
+    // backgroundColor: 'white',
+    // paddingTop: 12,
+    // paddingHorizontal: 15,
+    // justifyContent: 'flex-end'
   },
   participantRow: {
     flexDirection: 'row',

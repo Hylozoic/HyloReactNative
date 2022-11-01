@@ -1,30 +1,18 @@
 import { uniqueId } from 'lodash/fp'
 import { AnalyticsEvents } from 'hylo-shared'
+import FindOrCreateThreadMutation from 'graphql/mutations/FindOrCreateThreadMutation.graphql'
+import CreateMessageMutation from 'graphql/mutations/CreateMessageMutation.graphql'
 
 export const MODULE_NAME = 'NewMessage'
 export const SET_MESSAGE = `${MODULE_NAME}/SET_MESSAGE`
 export const CREATE_MESSAGE = `${MODULE_NAME}/CREATE_MESSAGE`
 export const FIND_OR_CREATE_THREAD = `${MODULE_NAME}/FIND_OR_CREATE_THREAD`
 
-const findOrCreateThreadQuery =
-`mutation ($participantIds: [String]) {
-  findOrCreateThread(data: {participantIds: $participantIds}) {
-    id
-    createdAt
-    updatedAt
-    participants {
-      id
-      name
-      avatarUrl
-    }
-  }
-}`
-
 export function findOrCreateThread (participantIds) {
   return {
     type: FIND_OR_CREATE_THREAD,
     graphql: {
-      query: findOrCreateThreadQuery,
+      query: FindOrCreateThreadMutation,
       variables: { participantIds }
     },
     meta: { extractModel: 'MessageThread' }
@@ -35,19 +23,7 @@ export function createMessage (messageThreadId, text, forNewThread) {
   return {
     type: CREATE_MESSAGE,
     graphql: {
-      query: `mutation ($messageThreadId: String, $text: String) {
-        createMessage(data: {messageThreadId: $messageThreadId, text: $text}) {
-          id
-          text
-          createdAt
-          creator {
-            id
-          }
-          messageThread {
-            id
-          }
-        }
-      }`,
+      query: CreateMessageMutation,
       variables: {
         messageThreadId,
         text
