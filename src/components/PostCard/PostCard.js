@@ -43,7 +43,11 @@ export default function PostCard ({
         topics={topics}
         type={post.type}
       />
-      <PostImage imageUrls={imageUrls} />
+      <PostImage
+        creator={creator}
+        imageUrls={imageUrls}
+        title={post.title}
+      />
       <PostBody
         details={post.details}
         endTime={post.endTime}

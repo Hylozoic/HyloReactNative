@@ -1,59 +1,82 @@
-import React from 'react'
-import { isEmpty, memoize } from 'lodash'
+import React, { useState } from 'react'
+import { isEmpty } from 'lodash'
 import {
   Dimensions,
   Image,
   ImageBackground,
-  Linking,
   TouchableHighlight,
   TouchableOpacity,
   View
 } from 'react-native'
+import ImageViewer from 'components/ImageViewer'
 
-export default class PostImage extends React.PureComponent {
-  makeOpenURL = memoize(url => () => Linking.openURL(url))
+export default function PostImage ({ imageUrls, title, creator, linked }) {
+  const [imageViewerVisible, setImageViewerVisible] = useState(false)
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 
-  render () {
-    const { imageUrls, linked } = this.props
+  const toggleImageViewerVisible = () => setImageViewerVisible(!imageViewerVisible)
 
-    if (isEmpty(imageUrls)) return null
+  if (isEmpty(imageUrls)) return null
 
-    if (linked) {
-      return (
+  if (linked) {
+    const images = imageUrls.map(imageUrl => ({ uri: imageUrl }))
+    const showImage = imageIndex => () => {
+      setSelectedImageIndex(imageIndex)
+      toggleImageViewerVisible()
+    }
+
+    return (
+      <>
         <View>
-          <TouchableOpacity onPress={this.makeOpenURL(imageUrls[0])}>
+          <TouchableOpacity onPress={showImage(0)}>
             <ImageBackground
               style={[styles.background, styles.container]}
               imageStyle={styles.backgroundImage}
               source={{ uri: imageUrls[0] }}
             >
-              {imageUrls.length > 0 && imageUrls.slice(1).map(uri =>
-                <TouchableHighlight
-                  onPress={this.makeOpenURL(uri)} key={uri}
-                  style={styles.thumbnailWrapper}
-                >
-                  <Image source={{ uri }} style={styles.thumbnail} />
-                </TouchableHighlight>)}
+              {imageUrls.length > 0 &&
+                imageUrls.slice(1).map((uri, index) => (
+                  <TouchableHighlight
+                    onPress={showImage(index + 1)}
+                    key={uri}
+                    style={styles.thumbnailWrapper}
+                  >
+                    <Image source={{ uri }} style={styles.thumbnail} />
+                  </TouchableHighlight>
+                ))}
             </ImageBackground>
           </TouchableOpacity>
         </View>
-      )
-    }
-
-    return (
-      <ImageBackground
-        style={styles.background}
-        imageStyle={styles.backgroundImage}
-        source={{ uri: imageUrls[0] }}
-      >
-        {imageUrls.length > 0 && imageUrls.slice(1).map(uri =>
-          <Image
-            key={uri} source={{ uri }}
-            style={[styles.thumbnail, styles.thumbnailWrapper]}
-          />)}
-      </ImageBackground>
+        <ImageViewer
+          images={images}
+          title={title}
+          creator={creator}
+          visible={imageViewerVisible}
+          imageIndex={selectedImageIndex}
+          onRequestClose={toggleImageViewerVisible}
+        />
+      </>
     )
   }
+
+  return (
+    <ImageBackground
+      style={styles.background}
+      imageStyle={styles.backgroundImage}
+      source={{ uri: imageUrls[0] }}
+    >
+      {imageUrls.length > 0 &&
+        imageUrls
+          .slice(1)
+          .map(uri => (
+            <Image
+              key={uri}
+              source={{ uri }}
+              style={[styles.thumbnail, styles.thumbnailWrapper]}
+            />
+          ))}
+    </ImageBackground>
+  )
 }
 
 // this is from fudging and looking at how it turns out. since it's fixed, the

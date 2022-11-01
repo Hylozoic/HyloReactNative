@@ -160,7 +160,12 @@ export function PostCardForDetails ({
         announcement={post.announcement}
         closeOnDelete
       />
-      <PostImage imageUrls={post.imageUrls} linked />
+      <PostImage
+        creator={post.creator}
+        imageUrls={post.imageUrls}
+        linked
+        title={post.title}
+      />
       <PostBody
         details={post.details}
         endTime={post.endTime}
