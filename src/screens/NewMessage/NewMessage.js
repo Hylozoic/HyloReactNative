@@ -38,6 +38,7 @@ export default function NewMessage (props) {
     createMessageAction
   ], state))
   const isModal = isModalScreen(props.route?.name)
+  console.log('!!! isModal', isModal, props.route?.name)
   const prompt = props.route?.params?.prompt
   const recentContacts = useSelector(state => scopedGetRecentContacts(null, { scope: MODULE_NAME })(state, props))
   const initialParticipantIds = !isArray(props.route?.params?.participants)
@@ -50,9 +51,9 @@ export default function NewMessage (props) {
     const messageThreadId = get('payload.data.findOrCreateThread.id', resp)
     const { error } = await dispatch(createMessageAction(messageThreadId, text, true))
     if (!error) {
-      isModal
-        ? props.navigation.goBack()
-        : navigateToLinkingPath(`/messages/${messageThreadId}`)
+      // isModal
+      props.navigation.goBack()
+      navigateToLinkingPath(`/messages/${messageThreadId}`)
     }
   }
 
