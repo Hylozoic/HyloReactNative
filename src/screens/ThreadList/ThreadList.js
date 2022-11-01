@@ -28,8 +28,6 @@ export class ThreadList extends Component {
     if (isEmpty(threads) && hasMore !== false) return fetchThreads()
   }
 
-  _keyExtractor = (item, index) => item.id.toString()
-
   render () {
     const {
       threads,
@@ -52,7 +50,7 @@ export class ThreadList extends Component {
         )}
         <FlatList
           data={threads}
-          keyExtractor={this._keyExtractor}
+          keyExtractor={item => item.id.toString()}
           onEndReached={fetchMoreThreads}
           onRefresh={refreshThreads}
           refreshing={pendingRefresh}

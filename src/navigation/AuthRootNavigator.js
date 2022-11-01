@@ -27,7 +27,6 @@ import PostDetails from 'screens/PostDetails'
 import PostEditor from 'screens/PostEditor'
 import NotificationsList from 'screens/NotificationsList'
 import Thread from 'screens/Thread'
-import ThreadParticipants from 'screens/ThreadParticipants'
 import { white } from 'style/colors'
 import { HyloHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
 
@@ -133,13 +132,6 @@ export default function AuthRootNavigator () {
             options={{ title: 'New Message' }}
           />
           <AuthRoot.Screen name={modalScreenName('Thread')} component={Thread} />
-          <AuthRoot.Screen
-            name={modalScreenName('ThreadParticipants')}
-            component={ThreadParticipants}
-            options={{
-              title: 'Participants'
-            }}
-          />
           <AuthRoot.Screen name={modalScreenName('Notifications')} component={NotificationsList} />
         </AuthRoot.Group>
       </AuthRoot.Navigator>

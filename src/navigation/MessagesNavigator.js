@@ -6,16 +6,16 @@ import { ModalHeader } from 'navigation/headers'
 import NewMessage from 'screens/NewMessage'
 import Thread from 'screens/Thread'
 import ThreadList from 'screens/ThreadList'
-import ThreadParticipants from 'screens/ThreadParticipants'
-import { ghost, rhino80 } from 'style/colors'
+import { rhino, rhino10 } from 'style/colors'
+// import Icon from 'components/Icon'
+// import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const Messages = createStackNavigator()
 export default function MessagesNavigator () {
   const navigatorProps = {
     screenOptions: {
-      headerMode: 'float',
-      headerStyle: { backgroundColor: ghost },
-      headerTitleStyle: { color: rhino80 }
+      headerStyle: { backgroundColor: rhino },
+      headerTitleStyle: { color: rhino10 }
     }
   }
 
@@ -29,6 +29,7 @@ export default function MessagesNavigator () {
             <ModalHeader
               {...headerProps}
               headerLeft={() => {}}
+              // headerRight={() => <TouchableOpacity style={{ marginRight: 20 }} onPress={() => headerProps.navigation.navigate('New Message')}><Icon size={22} color={rhino05} name='Plus' /></TouchableOpacity>}
               headerRightButtonLabel='New'
               headerRightButtonOnPress={() => headerProps.navigation.navigate('New Message')}
             />
@@ -43,19 +44,6 @@ export default function MessagesNavigator () {
             <ModalHeader
               {...headerProps}
               headerLeftCloseIcon={false}
-            />
-          )
-        }}
-      />
-      <Messages.Screen
-        name='ThreadParticipants'
-        component={ThreadParticipants}
-        options={{
-          header: headerProps => (
-            <ModalHeader
-              {...headerProps}
-              headerLeftCloseIcon={false}
-              title='Participants'
             />
           )
         }}

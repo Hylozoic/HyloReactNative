@@ -1,10 +1,9 @@
 import React from 'react'
-import { FlatList, Text, TouchableOpacity } from 'react-native'
+import { FlatList } from 'react-native'
 import { throttle, debounce } from 'lodash'
 import { get } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
 import { getSocket } from 'util/websockets'
-import { modalScreenName } from 'navigation/linking/helpers'
 import Loading from 'components/Loading'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import MessageCard from 'components/MessageCard'
@@ -12,8 +11,9 @@ import MessageInput from 'components/MessageInput'
 import NotificationOverlay from 'components/NotificationOverlay'
 import PeopleTyping from 'components/PeopleTyping'
 import SocketSubscriber from 'components/SocketSubscriber'
-import { pictonBlue } from 'style/colors'
+import ThreadHeaderTitle from './ThreadHeaderTitle'
 import styles from './Thread.styles'
+import { rhino10 } from 'style/colors'
 
 const BOTTOM_THRESHOLD = 10
 
@@ -33,12 +33,16 @@ export default class Thread extends React.Component {
   }
 
   setHeader () {
-    const { navigation, id, title } = this.props
-    title && navigation.setOptions({
-      headerTitle: ({ style }) => (
-        <TouchableOpacity onPress={() => navigation.navigate(modalScreenName('ThreadParticipants'), { id })}>
-          <Text style={{ ...style, color: pictonBlue }}>{title}</Text>
-        </TouchableOpacity>
+    const { navigation, thread, currentUserId } = this.props
+
+    navigation.setOptions({
+      headerTitleStyle: { color: rhino10 },
+      headerTitle: () => (
+        <ThreadHeaderTitle
+          thread={thread}
+          currentUserId={currentUserId}
+          navigation={navigation}
+        />
       )
     })
   }
@@ -90,8 +94,8 @@ export default class Thread extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    const { title, id, messages: { length } } = this.props
-    if (prevProps.title !== title) this.setHeader()
+    const { id, messages: { length } } = this.props
+
     if (this.shouldScroll) this.scrollToBottom()
 
     if (prevProps.id !== id) {
@@ -101,6 +105,8 @@ export default class Thread extends React.Component {
       // immediately so we don't try to send you a push notification about it.
       this.markAsRead()
     }
+
+    this.setHeader()
   }
 
   async componentWillUnmount () {
