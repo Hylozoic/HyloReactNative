@@ -1,7 +1,7 @@
-import { capeCod } from 'style/colors'
+import { capeCod, rhino30, rhino05 } from 'style/colors'
 import { isIOS } from 'util/platform'
 
-const feedMargin = 16
+const feedMargin = 12
 
 export default {
   container: {
@@ -25,7 +25,7 @@ export default {
     color: capeCod
   },
   downArrow: {
-    top: isIOS ? 2 : 4,
+    top: isIOS ? 1 : 4,
     marginLeft: 4
   }
 }

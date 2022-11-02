@@ -32,7 +32,7 @@ const typeSelectAndroidDefaults = {
 export const typeSelectorStyles = postType => ({
   icon: {
     fontSize: 23,
-    marginTop: isIOS ? 7 : 5,
+    marginTop: isIOS ? 6 : 5,
     marginLeft: 0,
     marginRight: 5,
     color: POST_TYPES[postType].primaryColor

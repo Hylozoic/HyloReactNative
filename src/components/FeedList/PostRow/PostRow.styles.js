@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-const feedMargin = 12
+const feedMargin = 0
 
 export default StyleSheet.create({
   postRow: {

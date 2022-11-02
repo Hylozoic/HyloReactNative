@@ -18,6 +18,7 @@ import VersionCheck from 'components/VersionCheck'
 import RootNavigator from 'navigation/RootNavigator'
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { baseStyle, tagsStyles, classesStyles } from 'components/HyloHTML/HyloHTML.styles'
+// import FastImage from 'react-native-fast-image'
 
 if (!isDev) {
   Sentry.init({ dsn: process.env.SENTRY_DSN_URL })
@@ -41,6 +42,10 @@ if (Platform.OS === 'android') {
 AppRegistry.registerComponent(appName, () => App)
 
 enableScreens()
+
+// Uncomment in dev to start fresh:
+// FastImage.clearDiskCache()
+// FastImage.clearMemoryCache()
 
 export default function App () {
   const [appState, setAppState] = useState(AppState.currentState)

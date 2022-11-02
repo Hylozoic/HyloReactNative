@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, TouchableOpacity } from 'react-native'
 import { find } from 'lodash/fp'
-import { capeCod } from 'style/colors'
+import { capeCod, rhino, rhino30, rhino60, rhino80 } from 'style/colors'
 import { isIOS } from 'util/platform'
 import useHyloActionSheet from 'hooks/useHyloActionSheet'
 import Icon from 'components/Icon'
@@ -32,8 +32,8 @@ const styles = {
     flexDirection: 'row'
   },
   optionText: {
-    fontSize: 12,
-    color: capeCod
+    fontSize: 14,
+    color: rhino
   },
   downArrow: {
     top: isIOS ? 2 : 4,
