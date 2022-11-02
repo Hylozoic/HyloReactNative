@@ -1,106 +1,109 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
+import { useDispatch } from 'react-redux'
 import { get, find, filter, sortBy } from 'lodash/fp'
 import LinearGradient from 'react-native-linear-gradient'
+import { RESPONSES } from 'store/models/EventInvitation'
+import voteOnPost from 'store/actions/voteOnPost'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
-import { RESPONSES } from 'store/models/EventInvitation'
 import { caribbeanGreen, rhino30, rhino60, slateGrey80, postCardLinearGradientColors } from 'style/colors'
 
-export default class PostFooter extends React.PureComponent {
-  render () {
-    const {
-      commenters,
-      commentersTotal,
-      currentUser,
-      eventInvitations,
-      members,
-      myVote,
-      forDetails,
-      style,
-      type,
-      vote,
-      votesTotal
-    } = this.props
-    const voteStyle = myVote ? styles.votes.active : styles.votes.inactive
+export default function PostFooter ({
+  commenters,
+  commentersTotal,
+  currentUser,
+  eventInvitations,
+  members,
+  myVote,
+  forDetails,
+  style,
+  type,
+  votesTotal,
+  postId
+}) {
+  const dispatch = useDispatch()
 
-    const eventAttendees = filter(ei => ei.response === RESPONSES.YES, eventInvitations)
+  const vote = () => dispatch(voteOnPost(postId, !myVote))
 
-    let peopleRowResult
+  const voteStyle = myVote ? styles.votes.active : styles.votes.inactive
 
-    switch (type) {
-      case 'project':
-        peopleRowResult = peopleSetup(
-          members,
-          members.length,
-          get('id', currentUser),
-          {
-            emptyMessage: 'No project members',
-            phraseSingular: 'is a member',
-            mePhraseSingular: 'are a member',
-            pluralPhrase: 'are members'
-          }
-        )
-        break
-      case 'event':
-        peopleRowResult = peopleSetup(
-          eventAttendees,
-          eventAttendees.length,
-          get('id', currentUser),
-          {
-            emptyMessage: 'No one is attending yet',
-            phraseSingular: 'is attending',
-            mePhraseSingular: 'are attending',
-            pluralPhrase: 'attending'
-          }
-        )
-        break
-      default:
-        peopleRowResult = peopleSetup(
-          commenters,
-          commentersTotal,
-          get('id', currentUser),
-          {
-            emptyMessage: 'Be the first to comment',
-            phraseSingular: 'commented',
-            mePhraseSingular: 'commented',
-            pluralPhrase: 'commented'
-          }
-        )
-    }
+  const eventAttendees = filter(ei => ei.response === RESPONSES.YES, eventInvitations)
 
-    const { caption, avatarUrls } = peopleRowResult
+  let peopleRowResult
 
-    return (
-      <>
-        <View style={styles.dashedBorder} />
-        <LinearGradient style={[styles.container, style]} colors={postCardLinearGradientColors}>
-          <View style={styles.comments}>
-            {avatarUrls.slice(0, 3).map((avatarUrl, index) => {
-              return (
-                <Avatar
-                  key={index}
-                  avatarUrl={avatarUrl}
-                  size='small'
-                  hasBorder
-                  hasOverlap={index > 0}
-                  zIndex={3 - index}
-                />
-              )
-            })}
-            <Text style={styles.commentsText}>{caption}</Text>
-          </View>
-          <TouchableOpacity style={styles.votes.container} onPress={vote}>
-            <Icon name='ArrowUp' style={[styles.votes.icon, voteStyle]} />
-            <Text style={[styles.votes.text, voteStyle]}>{votesTotal}</Text>
-          </TouchableOpacity>
-        </LinearGradient>
-        {forDetails && (
-          <View style={styles.dashedBorder} />
-        )}
-      </>
-    )
+  switch (type) {
+    case 'project':
+      peopleRowResult = peopleSetup(
+        members,
+        members.length,
+        get('id', currentUser),
+        {
+          emptyMessage: 'No project members',
+          phraseSingular: 'is a member',
+          mePhraseSingular: 'are a member',
+          pluralPhrase: 'are members'
+        }
+      )
+      break
+    case 'event':
+      peopleRowResult = peopleSetup(
+        eventAttendees,
+        eventAttendees.length,
+        get('id', currentUser),
+        {
+          emptyMessage: 'No one is attending yet',
+          phraseSingular: 'is attending',
+          mePhraseSingular: 'are attending',
+          pluralPhrase: 'attending'
+        }
+      )
+      break
+    default:
+      peopleRowResult = peopleSetup(
+        commenters,
+        commentersTotal,
+        get('id', currentUser),
+        {
+          emptyMessage: 'Be the first to comment',
+          phraseSingular: 'commented',
+          mePhraseSingular: 'commented',
+          pluralPhrase: 'commented'
+        }
+      )
   }
+
+  const { caption, avatarUrls } = peopleRowResult
+
+  return (
+    <>
+      <View style={styles.dashedBorder} />
+      <LinearGradient style={[styles.container, style]} colors={postCardLinearGradientColors}>
+        <View style={styles.comments}>
+          {avatarUrls.slice(0, 3).map((avatarUrl, index) => {
+            return (
+              <Avatar
+                key={index}
+                avatarUrl={avatarUrl}
+                size='small'
+                hasBorder
+                hasOverlap={index > 0}
+                zIndex={3 - index}
+              />
+            )
+          })}
+          <Text style={styles.commentsText}>{caption}</Text>
+        </View>
+        <TouchableOpacity style={styles.votes.container} onPress={vote}>
+          <Icon name='ArrowUp' style={[styles.votes.icon, voteStyle]} />
+          <Text style={[styles.votes.text, voteStyle]}>{votesTotal}</Text>
+        </TouchableOpacity>
+      </LinearGradient>
+      {forDetails && (
+        <View style={styles.dashedBorder} />
+      )}
+    </>
+  )
 }
 
 export const peopleSetup = (

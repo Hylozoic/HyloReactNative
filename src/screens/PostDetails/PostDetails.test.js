@@ -1,7 +1,6 @@
 import React from 'react'
-import ReactShallowRenderer from 'react-test-renderer/shallow'
-import TestRenderer, { act } from 'react-test-renderer'
-import { PostDetails, JoinProjectButton } from './PostDetails'
+import TestRenderer from 'react-test-renderer'
+import { PostDetails } from './PostDetails'
 import { TestRoot } from 'util/testing'
 import MockedScreen from 'util/testing/MockedScreen'
 import orm from 'store/models'
@@ -68,35 +67,15 @@ const state = {
 }
 
 // TODO: Needs a little work since significant refactor of most of this component into `CommentEditor`
-// describe('PostDetails', () => {
-//   it('renders correctly', () => {
-//     const renderer = TestRenderer.create(
-//       <TestRoot state={state}>
-//         <MockedScreen>
-//           {() => <PostDetails {...props} />}
-//         </MockedScreen>
-//       </TestRoot>
-//     )
-//     expect(renderer.toJSON()).toMatchSnapshot()
-//   })
-// })
-
-describe('JoinProjectButton', () => {
-  it('renders as expected', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(
-      <JoinProjectButton onPress={() => {}} />
+describe('PostDetails', () => {
+  it('renders correctly', () => {
+    const renderer = TestRenderer.create(
+      <TestRoot state={state}>
+        <MockedScreen>
+          {() => <PostDetails {...props} />}
+        </MockedScreen>
+      </TestRoot>
     )
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('renders as expected when leaving', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(
-      <JoinProjectButton onPress={() => {}} leaving />
-    )
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
+    expect(renderer.toJSON()).toMatchSnapshot()
   })
 })

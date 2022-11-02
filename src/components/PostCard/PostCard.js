@@ -2,18 +2,16 @@ import React from 'react'
 import { View } from 'react-native'
 import PostHeader from './PostHeader'
 import PostBody from './PostBody'
-import ImageAttachments from 'components/ImageAttachments'
-import PostFooter from './PostFooter'
 import PostGroups from './PostGroups'
-import { get } from 'lodash/fp'
-import { capeCod10 } from 'style/colors'
+import PostFooter from './PostFooter'
+import ImageAttachments from 'components/ImageAttachments'
 import Files from 'components/Files'
+import { capeCod10 } from 'style/colors'
 
 export default function PostCard ({
   goToGroup,
   hideDetails,
   hideMenu,
-  isPinned,
   post = {},
   respondToEvent,
   showGroups = true,
@@ -29,7 +27,7 @@ export default function PostCard ({
         creator={post.creator}
         date={post.createdAt}
         hideMenu={hideMenu}
-        pinned={isPinned}
+        pinned={post.pinned}
         postId={post.id}
         showMember={showMember}
         showTopic={showTopic}
@@ -68,7 +66,7 @@ export default function PostCard ({
         commenters={post.commenters}
         commentersTotal={post.commentersTotal}
         eventInvitations={post.eventInvitations}
-        id={post.id}
+        postId={post.id}
         members={post.members}
         myVote={post.myVote}
         votesTotal={post.votesTotal}

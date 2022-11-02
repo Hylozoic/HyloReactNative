@@ -1,11 +1,12 @@
 import presentTopic from 'store/presenters/presentTopic'
 
-export default function presentPost (post, groupId) {
+export default function presentPost (post, forGroupId) {
   if (!post) return null
 
-  const postMembership = post.postMemberships.toRefArray().find(p =>
-    Number(p.group) === Number(groupId))
-  const pinned = postMembership && postMembership.pinned
+  const groupPostMembership = post.postMemberships.toRefArray().find(postMembership => {
+    return Number(postMembership.group) === Number(forGroupId)
+  })
+  const pinnedInGroup = groupPostMembership && groupPostMembership.pinned
 
   return {
     ...post.ref,
@@ -33,7 +34,7 @@ export default function presentPost (post, groupId) {
         skills: person.skills.toRefArray()
       }
     }),
-    pinned,
+    pinned: pinnedInGroup,
     topics: post.topics.toModelArray().map(topic => presentTopic(topic, {}))
   }
 }

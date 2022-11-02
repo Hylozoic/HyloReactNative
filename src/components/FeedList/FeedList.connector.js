@@ -13,30 +13,41 @@ import {
   getQueryProps
 } from './FeedList.store'
 import { FETCH_POSTS } from 'store/constants'
+import { ALL_GROUP_ID, isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
+import getMe from 'store/selectors/getMe'
 import fetchPosts from 'store/actions/fetchPosts'
 import resetNewPostCount from 'store/actions/resetNewPostCount'
-import { ALL_GROUP_ID, isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
 
 export function mapStateToProps (state, props) {
-  const { group, topicName } = props
-  const sortBy = getSort(state, props)
-  const filter = props?.feedType || getFilter(state, props)
+  const { forGroup, topicName } = props
+  const currentUser = getMe(state, props)
+
+  const defaultPostType = get('settings.streamPostType', currentUser) || undefined
+  const defaultSortBy = get('settings.streamSortBy', currentUser) || 'updated'
+
+  const postTypeFilter = props?.feedType || getFilter(state, props) || defaultPostType
+  const sortBy = getSort(state, props) || defaultSortBy
+
   const timeframe = getTimeframe(state, props)
-  let queryProps = getQueryProps(state, {
-    group,
-    // NOTE: This is an important divergence from what is happening in `hylo-evo#Stream.connector`
-    // and `store`. Should align them but this fixes it for now:
-    context: isContextGroup(group?.slug)
-      ? group.slug
+
+  let fetchPostParam = getQueryProps(state, {
+    // For Custom Streams, not yet implemented
+    activePostsOnly: false,
+    // forCollection: customView?.type === 'collection' ? customView?.collectionId : null,
+    // Can be one of: ['groups', 'all', 'public']
+    context: isContextGroup(forGroup?.slug)
+      ? forGroup.slug
       : 'groups',
+    slug: forGroup?.slug,
+    topicName,
     sortBy,
-    filter,
-    topicName
+    // Can be any of the Post Types:
+    filter: postTypeFilter
   })
 
   if (props.feedType === 'event') {
-    queryProps = {
-      ...queryProps,
+    fetchPostParam = {
+      ...fetchPostParam,
       order: timeframe === 'future' ? 'asc' : 'desc',
       afterTime: timeframe === 'future' ? new Date().toISOString() : null,
       beforeTime: timeframe === 'past' ? new Date().toISOString() : null
@@ -44,20 +55,18 @@ export function mapStateToProps (state, props) {
   }
 
   const pending = state.pending[FETCH_POSTS]
-  const groupId = get('group.id', props)
-  const postIds = getPostIds(state, queryProps)
-  const hasMore = getHasMorePosts(state, queryProps)
+  const postIds = getPostIds(state, fetchPostParam)
+  const hasMore = getHasMorePosts(state, fetchPostParam)
 
   return {
     postIds,
-    groupId,
     sortBy,
-    filter,
+    filter: postTypeFilter,
     timeframe,
     hasMore,
     pending: !!pending,
     pendingRefresh: !!(pending && pending.extractQueryResults.reset),
-    queryProps // this is just here so mergeProps can use it
+    fetchPostParam
   }
 }
 
@@ -72,17 +81,17 @@ export function shouldResetNewPostCount ({ slug, sortBy, filter, topic }) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { hasMore, pending, postIds, queryProps } = stateProps
-  const { group } = ownProps
+  const { hasMore, pending, postIds, fetchPostParam } = stateProps
+  const { forGroup } = ownProps
   const { fetchPosts } = dispatchProps
   const fetchMorePosts = hasMore && !pending
-    ? () => fetchPosts({ ...queryProps, offset: postIds.length })
+    ? () => fetchPosts({ ...fetchPostParam, offset: postIds.length })
     : () => {}
   const fetchPostsAndResetCount = (params, opts) => {
     const promises = [fetchPosts(params, opts)]
-    const groupId = get('id', group)
-    if (shouldResetNewPostCount(queryProps)) {
-      promises.push(dispatchProps.resetNewPostCount(groupId, 'Membership'))
+    const forGroupId = get('id', forGroup)
+    if (shouldResetNewPostCount(fetchPostParam)) {
+      promises.push(dispatchProps.resetNewPostCount(forGroupId, 'Membership'))
     }
     return Promise.all(promises)
   }
@@ -91,8 +100,8 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    fetchPosts: () => fetchPostsAndResetCount(queryProps),
-    refreshPosts: () => fetchPostsAndResetCount(queryProps, { reset: true }),
+    fetchPosts: () => fetchPostsAndResetCount(fetchPostParam),
+    refreshPosts: () => fetchPostsAndResetCount(fetchPostParam, { reset: true }),
     fetchMorePosts
   }
 }

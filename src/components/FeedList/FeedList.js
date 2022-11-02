@@ -9,12 +9,46 @@ import Loading from 'components/Loading'
 import { isContextGroup } from 'store/models/Group'
 import styles from './FeedList.styles'
 
-export default function (props) {
+// tracks from: `hylo-evo/src/components/StreamViewControls/StreamViewControls.js`
+export const POST_TYPE_OPTIONS = [
+  { id: null, label: 'All Posts' },
+  { id: 'discussion', label: 'Discussions' },
+  { id: 'event', label: 'Events' },
+  { id: 'offer', label: 'Offers' },
+  { id: 'project', label: 'Projects' },
+  { id: 'request', label: 'Requests' },
+  { id: 'resource', label: 'Resources' }
+]
+
+// tracks: `hylo/hylo-evo/src/util/constants.js`
+export const STREAM_SORT_OPTIONS = [
+  { id: 'updated', label: 'Latest activity' },
+  { id: 'created', label: 'Post Date' },
+  { id: 'votes', label: 'Popular' }
+]
+
+// Not currently used
+// tracks: `hylo/hylo-evo/src/util/constants.js`
+export const COLLECTION_SORT_OPTIONS = [
+  { id: 'order', label: 'Manual' },
+  { id: 'updated', label: 'Latest activity' },
+  { id: 'created', label: 'Post Date' },
+  { id: 'votes', label: 'Popular' }
+]
+
+// tracks: `hylo-evo/src/routes/Events/Events.js`
+export const EVENT_STREAM_TIMEFRAME_OPTIONS = [
+  { id: 'future', label: 'Upcoming Events' },
+  { id: 'past', label: 'Past Events' }
+]
+
+export default function FeedList (props) {
   const isFocused = useIsFocused()
-  return <FeedList {...props} isFocused={isFocused} />
+
+  return <FeedListClassComponent {...props} isFocused={isFocused} />
 }
 
-export class FeedList extends React.Component {
+export class FeedListClassComponent extends React.Component {
   fetchOrShowCached () {
     const { hasMore, postIds, fetchPosts } = this.props
 
@@ -37,7 +71,7 @@ export class FeedList extends React.Component {
       prevProps.sortBy !== this.props.sortBy ||
       prevProps.filter !== this.props.filter ||
       prevProps.timeframe !== this.props.timeframe ||
-      prevProps.group?.id !== this.props.group?.id ||
+      prevProps.forGroup?.id !== this.props.forGroup?.id ||
       prevProps.topicName !== this.props.topicName
     ) {
       this.fetchOrShowCached()
@@ -77,13 +111,13 @@ export class FeedList extends React.Component {
               {this.props.header}
               {!feedType && (
                 <View style={[styles.listControls]}>
-                  <ListControl selected={sortBy} onChange={setSort} options={sortOptions} />
-                  <ListControl selected={filter} onChange={setFilter} options={filterOptions} />
+                  <ListControl selected={sortBy} onChange={setSort} options={STREAM_SORT_OPTIONS} />
+                  <ListControl selected={filter} onChange={setFilter} options={POST_TYPE_OPTIONS} />
                 </View>
               )}
               {feedType === 'event' && (
                 <View style={[styles.listControls]}>
-                  <ListControl selected={timeframe} onChange={setTimeframe} options={eventTimeframeOptions} />
+                  <ListControl selected={timeframe} onChange={setTimeframe} options={EVENT_STREAM_TIMEFRAME_OPTIONS} />
                 </View>
               )}
             </View>
@@ -101,7 +135,7 @@ export class FeedList extends React.Component {
 
 export function renderPostRow ({
   postId,
-  group,
+  forGroup,
   showPost,
   showMember,
   showTopic,
@@ -110,8 +144,8 @@ export function renderPostRow ({
   return (
     <PostRow
       postId={postId}
-      groupId={group?.id}
-      showGroups={!group?.id || isContextGroup(group?.slug)}
+      forGroupId={forGroup?.id}
+      showGroups={!forGroup?.id || isContextGroup(forGroup?.slug)}
       showPost={showPost}
       showMember={showMember}
       showTopic={showTopic}
@@ -119,24 +153,3 @@ export function renderPostRow ({
     />
   )
 }
-
-export const filterOptions = [
-  { id: null, label: 'All' },
-  { id: 'discussion', label: 'Discussions' },
-  { id: 'event', label: 'Events' },
-  { id: 'offer', label: 'Offers' },
-  { id: 'project', label: 'Projects' },
-  { id: 'request', label: 'Requests' },
-  { id: 'resource', label: 'Resources' }
-]
-
-export const sortOptions = [
-  { id: 'updated', label: 'Latest Activity' },
-  { id: 'created', label: 'Post Date' },
-  { id: 'votes', label: 'Popular' }
-]
-
-export const eventTimeframeOptions = [
-  { id: 'future', label: 'Upcoming Events' },
-  { id: 'past', label: 'Past Events' }
-]

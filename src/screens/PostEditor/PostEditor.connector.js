@@ -22,7 +22,7 @@ export function mapStateToProps (state, props) {
   const groupOptions = props.groupOptions ||
     (currentUser && currentUser.memberships.toModelArray().map(m => m.group.ref))
   const postId = getRouteParam('id', props?.route)
-  const post = getPresentedPost(state, { id: postId })
+  const post = getPresentedPost(state, { postId })
   // Setup new post with defaults from routing
   const selectedTopicName = get('route.params.topicName', props)
   const providedType = get('route.params.type', props)

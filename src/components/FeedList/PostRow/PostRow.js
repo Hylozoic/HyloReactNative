@@ -9,12 +9,13 @@ import styles from './PostRow.styles'
 export default function PostRow ({
   goToGroup,
   postId,
+  forGroupId,
   showGroups,
   showMember,
   showPost,
   showTopic
 }) {
-  const post = useSelector(state => getPresentedPost(state, { id: postId }))
+  const post = useSelector(state => getPresentedPost(state, { postId, forGroupId }))
   const handleRespondToEvent = response => respondToEvent(post.id, response)
 
   if (!post) return null

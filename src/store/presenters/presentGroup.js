@@ -3,6 +3,7 @@ import presentTopic from 'store/presenters/presentTopic'
 
 export default function presentGroup (group) {
   if (!group) return null
+
   return {
     ...group.ref,
     activeProjects: group.activeProjects ? group.activeProjects.toModelArray().map(p => {

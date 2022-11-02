@@ -25,9 +25,9 @@ import Icon from 'components/Icon'
 import { bannerlinearGradientColors } from 'style/colors'
 import styles from './Feed.styles'
 
-export function headerTitle (group, feedType) {
+export function headerTitle (currentGroup, feedType) {
   let title
-  title = group?.name
+  title = currentGroup?.name
   title = feedType ? capitalize(feedType + 's') : title
   return title
 }
@@ -123,7 +123,7 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
       </View>
       <PostPrompt
         currentUser={currentUser}
-        currentGroup={currentGroup}
+        forGroup={currentGroup}
         currentTopicName={topicName}
         currentType={feedType}
       />
@@ -134,7 +134,7 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
     <>
       <FeedList
         scrollRef={ref}
-        group={currentGroup}
+        forGroup={currentGroup}
         showPost={goToPostDetails}
         goToGroup={goToGroup}
         header={feedListHeader}
@@ -164,7 +164,7 @@ export function postPromptString (type = '', { firstName }) {
   return postPrompts[type] || postPrompts.default
 }
 
-export function PostPrompt ({ currentUser, currentGroup, currentType, currentTopicName }) {
+export function PostPrompt ({ currentUser, forGroup, currentType, currentTopicName }) {
   const navigation = useNavigation()
 
   if (!currentUser) return null
@@ -172,7 +172,7 @@ export function PostPrompt ({ currentUser, currentGroup, currentType, currentTop
   const handleOpenPostEditor = () => (
     navigation.navigate('Edit Post', {
       type: currentType,
-      groupId: currentGroup.id,
+      groupId: forGroup.id,
       topicName: currentTopicName
     })
   )

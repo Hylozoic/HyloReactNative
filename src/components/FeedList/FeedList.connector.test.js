@@ -105,7 +105,7 @@ describe('mergeProps', () => {
         expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
           sortBy: 'updated'
         }, undefined)
-        expect(dispatchProps.resetNewPostCount).toHaveBeenCalledWith(ownProps.group.id, 'Membership')
+        expect(dispatchProps.resetNewPostCount).toHaveBeenCalledWith(ownProps.currentGroup.id, 'Membership')
       })
   })
 

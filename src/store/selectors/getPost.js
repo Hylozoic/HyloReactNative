@@ -6,15 +6,15 @@ import { get } from 'lodash/fp'
 
 const getPost = ormCreateSelector(
   orm,
-  (state, props) => props.id,
-  (session, id) => session?.Post.safeGet({ id })
+  (_, props) => props.postId,
+  (session, postId) => session?.Post.safeGet({ id: postId })
 )
 
 export default getPost
 
 export const getPresentedPost = createSelector(
   getPost,
-  (state, props) => get('id', props),
-  (state, props) => get('groupId', props),
-  (post, id, groupId) => presentPost(post, groupId)
+  (_, props) => get('postId', props),
+  (_, props) => get('forGroupId', props),
+  (post, postId, forGroupId) => presentPost(post, forGroupId)
 )

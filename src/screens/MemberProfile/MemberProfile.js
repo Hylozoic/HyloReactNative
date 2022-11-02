@@ -12,7 +12,8 @@ import styles from './MemberProfile.styles'
 
 export const setHeader = ({ route, navigation, currentGroup }) => {
   if (isModalScreen(route.name)) return
-  navigation.setOptions({ title: currentGroup.name  })
+
+  navigation.setOptions({ title: currentGroup.name })
 }
 
 export const blockUserWithNav = async ({ navigation, person, blockUser }) => {
@@ -178,10 +179,13 @@ export function EditButton ({ isLoading, style }) {
     <View style={[styles.editButton, style]}>
       {isLoading
         ? <Text style={styles.editButtonText}>loading</Text>
-        : <View style={{ flexDirection: 'row' }}>
-          <EntypoIcon name='edit' style={styles.editIcon} />
-          <Text style={styles.editButtonText}>edit</Text>
-        </View>}
+        : (
+          <View style={{ flexDirection: 'row' }}>
+            <EntypoIcon name='edit' style={styles.editIcon} />
+            <Text style={styles.editButtonText}>edit</Text>
+          </View>
+          )
+      }
     </View>
   )
 }

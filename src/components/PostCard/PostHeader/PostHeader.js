@@ -10,7 +10,7 @@ import FlagContent from 'components/FlagContent'
 import Icon from 'components/Icon'
 import styles, { labelStyles } from './PostHeader.styles'
 
-export default React.memo(function PostHeader ({
+export default function PostHeader ({
   announcement,
   closeOnDelete,
   creator,
@@ -114,7 +114,7 @@ export default React.memo(function PostHeader ({
       </View>
     </View>
   )
-})
+}
 
 export function PostLabel ({ type }) {
   const labelTypeStyle = get(type, labelStyles) || labelStyles.discussion

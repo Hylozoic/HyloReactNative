@@ -9,6 +9,7 @@ import ormReducer from 'store/reducers/ormReducer'
 
 describe('ormSessionReducer', () => {
   let session, group
+
   beforeEach(() => {
     session = orm.session(orm.getEmptyState())
     group = session.Group.create({ id: 20, slug: 'postheadertest' })
@@ -51,13 +52,13 @@ describe('ormSessionReducer', () => {
       group
     })
     const postId = 123
-  
+
     session.Post.create({
       id: postId,
       groups: [group],
       postMemberships: [postMembership]
     })
-  
+
     const action = {
       type: PIN_POST_PENDING,
       meta: {
