@@ -141,13 +141,35 @@ exports[`renders correctly with no group (all groups default) 1`] = `
           >
             <View>
               <View>
-                <Image
-                  source={
-                    {
-                      "uri": "foo.gif",
-                    }
+                <View
+                  style={
+                    [
+                      {
+                        "overflow": "hidden",
+                      },
+                      undefined,
+                    ]
                   }
-                />
+                >
+                  <FastImageView
+                    defaultSource={null}
+                    resizeMode="cover"
+                    source={
+                      {
+                        "uri": "foo.gif",
+                      }
+                    }
+                    style={
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  />
+                </View>
               </View>
             </View>
             <Text>
@@ -176,13 +198,35 @@ exports[`renders correctly with no group (all groups default) 1`] = `
           >
             <View>
               <View>
-                <Image
-                  source={
-                    {
-                      "uri": "bar.png",
-                    }
+                <View
+                  style={
+                    [
+                      {
+                        "overflow": "hidden",
+                      },
+                      undefined,
+                    ]
                   }
-                />
+                >
+                  <FastImageView
+                    defaultSource={null}
+                    resizeMode="cover"
+                    source={
+                      {
+                        "uri": "bar.png",
+                      }
+                    }
+                    style={
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  />
+                </View>
               </View>
             </View>
             <Text>
@@ -217,13 +261,35 @@ exports[`renders correctly with no group (all groups default) 1`] = `
           >
             <View>
               <View>
-                <Image
-                  source={
-                    {
-                      "uri": "baz.png",
-                    }
+                <View
+                  style={
+                    [
+                      {
+                        "overflow": "hidden",
+                      },
+                      undefined,
+                    ]
                   }
-                />
+                >
+                  <FastImageView
+                    defaultSource={null}
+                    resizeMode="cover"
+                    source={
+                      {
+                        "uri": "baz.png",
+                      }
+                    }
+                    style={
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  />
+                </View>
               </View>
             </View>
             <Text>
@@ -249,13 +315,35 @@ exports[`renders correctly with no group (all groups default) 1`] = `
           >
             <View>
               <View>
-                <Image
-                  source={
-                    {
-                      "uri": "bonk.jpg",
-                    }
+                <View
+                  style={
+                    [
+                      {
+                        "overflow": "hidden",
+                      },
+                      undefined,
+                    ]
                   }
-                />
+                >
+                  <FastImageView
+                    defaultSource={null}
+                    resizeMode="cover"
+                    source={
+                      {
+                        "uri": "bonk.jpg",
+                      }
+                    }
+                    style={
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  />
+                </View>
               </View>
             </View>
             <Text>
@@ -475,13 +563,35 @@ exports[`renders with invite button when a moderator 1`] = `
           >
             <View>
               <View>
-                <Image
-                  source={
-                    {
-                      "uri": "foo.gif",
-                    }
+                <View
+                  style={
+                    [
+                      {
+                        "overflow": "hidden",
+                      },
+                      undefined,
+                    ]
                   }
-                />
+                >
+                  <FastImageView
+                    defaultSource={null}
+                    resizeMode="cover"
+                    source={
+                      {
+                        "uri": "foo.gif",
+                      }
+                    }
+                    style={
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  />
+                </View>
               </View>
             </View>
             <Text>
@@ -510,13 +620,35 @@ exports[`renders with invite button when a moderator 1`] = `
           >
             <View>
               <View>
-                <Image
-                  source={
-                    {
-                      "uri": "bar.png",
-                    }
+                <View
+                  style={
+                    [
+                      {
+                        "overflow": "hidden",
+                      },
+                      undefined,
+                    ]
                   }
-                />
+                >
+                  <FastImageView
+                    defaultSource={null}
+                    resizeMode="cover"
+                    source={
+                      {
+                        "uri": "bar.png",
+                      }
+                    }
+                    style={
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  />
+                </View>
               </View>
             </View>
             <Text>
@@ -551,13 +683,35 @@ exports[`renders with invite button when a moderator 1`] = `
           >
             <View>
               <View>
-                <Image
-                  source={
-                    {
-                      "uri": "baz.png",
-                    }
+                <View
+                  style={
+                    [
+                      {
+                        "overflow": "hidden",
+                      },
+                      undefined,
+                    ]
                   }
-                />
+                >
+                  <FastImageView
+                    defaultSource={null}
+                    resizeMode="cover"
+                    source={
+                      {
+                        "uri": "baz.png",
+                      }
+                    }
+                    style={
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  />
+                </View>
               </View>
             </View>
             <Text>
@@ -583,13 +737,35 @@ exports[`renders with invite button when a moderator 1`] = `
           >
             <View>
               <View>
-                <Image
-                  source={
-                    {
-                      "uri": "bonk.jpg",
-                    }
+                <View
+                  style={
+                    [
+                      {
+                        "overflow": "hidden",
+                      },
+                      undefined,
+                    ]
                   }
-                />
+                >
+                  <FastImageView
+                    defaultSource={null}
+                    resizeMode="cover"
+                    source={
+                      {
+                        "uri": "bonk.jpg",
+                      }
+                    }
+                    style={
+                      {
+                        "bottom": 0,
+                        "left": 0,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      }
+                    }
+                  />
+                </View>
               </View>
             </View>
             <Text>

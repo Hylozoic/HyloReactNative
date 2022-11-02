@@ -17,13 +17,35 @@ exports[`MessageRow calls showThread 1`] = `
     <View>
       <View>
         <View>
-          <Image
-            source={
-              {
-                "uri": "blah",
-              }
+          <View
+            style={
+              [
+                {
+                  "overflow": "hidden",
+                },
+                undefined,
+              ]
             }
-          />
+          >
+            <FastImageView
+              defaultSource={null}
+              resizeMode="cover"
+              source={
+                {
+                  "uri": "blah",
+                }
+              }
+              style={
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            />
+          </View>
         </View>
       </View>
       <View>

@@ -4,7 +4,7 @@ import { Dimensions, TouchableHighlight } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { ImageViewerButton } from 'components/ImageViewer/ImageViewer'
 
-export default function PostImage ({ images, title, creator, linked }) {
+export default function ImageAttachments ({ images, title, creator, linked }) {
   if (isEmpty(images)) return null
 
   if (linked) {

@@ -13,7 +13,7 @@ import PostBody from 'components/PostCard/PostBody'
 import PostFooter from 'components/PostCard/PostFooter'
 import PostGroups from 'components/PostCard/PostGroups'
 import PostHeader from 'components/PostCard/PostHeader'
-import PostImage from 'components/PostCard/PostImage'
+import ImageAttachments from 'components/ImageAttachments'
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './PostDetails.styles'
@@ -162,7 +162,7 @@ export function PostCardForDetails ({
         topics={post.topics}
         type={post.type}
       />
-      <PostImage
+      <ImageAttachments
         creator={post.creator}
         images={images}
         linked

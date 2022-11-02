@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import PostHeader from './PostHeader'
 import PostBody from './PostBody'
-import PostImage from './PostImage'
+import ImageAttachments from 'components/ImageAttachments'
 import PostFooter from './PostFooter'
 import PostGroups from './PostGroups'
 import { get } from 'lodash/fp'
@@ -45,7 +45,7 @@ export default function PostCard ({
         topics={topics}
         type={post.type}
       />
-      <PostImage
+      <ImageAttachments
         creator={creator}
         images={images}
         title={post.title}

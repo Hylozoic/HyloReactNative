@@ -13,7 +13,7 @@ import HyloHTML from 'components/HyloHTML'
 import Icon from 'components/Icon'
 import styles from './Comment.styles'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
-import PostImage from 'components/PostCard/PostImage'
+import ImageAttachments from 'components/ImageAttachments'
 
 export default function Comment ({
   comment,
@@ -139,7 +139,7 @@ export default function Comment ({
             )}
           </View>
         </View>
-        <PostImage
+        <ImageAttachments
           creator={comment.creator}
           images={images}
           linked

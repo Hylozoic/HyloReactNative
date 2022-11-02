@@ -24,13 +24,35 @@ exports[`renders correctly with a current user 1`] = `
       onStartShouldSetResponder={[Function]}
     >
       <View>
-        <Image
-          source={
-            {
-              "uri": "foo.png",
-            }
+        <View
+          style={
+            [
+              {
+                "overflow": "hidden",
+              },
+              undefined,
+            ]
           }
-        />
+        >
+          <FastImageView
+            defaultSource={null}
+            resizeMode="cover"
+            source={
+              {
+                "uri": "foo.png",
+              }
+            }
+            style={
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          />
+        </View>
       </View>
     </View>
   </View>
@@ -105,13 +127,35 @@ exports[`renders correctly with all=true, and no group or user 1`] = `
       onStartShouldSetResponder={[Function]}
     >
       <View>
-        <Image
-          source={
-            {
-              "uri": "foo.png",
-            }
+        <View
+          style={
+            [
+              {
+                "overflow": "hidden",
+              },
+              undefined,
+            ]
           }
-        />
+        >
+          <FastImageView
+            defaultSource={null}
+            resizeMode="cover"
+            source={
+              {
+                "uri": "foo.png",
+              }
+            }
+            style={
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          />
+        </View>
       </View>
     </View>
   </View>
