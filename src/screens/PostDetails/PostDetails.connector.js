@@ -20,6 +20,7 @@ export function mapStateToProps (state, props) {
   const isProject = get('type', post) === 'project'
   const memberships = getMemberships(state)
   return {
+    postId,
     post,
     isProject,
     currentUser,
@@ -33,7 +34,7 @@ export function mapDispatchToProps (dispatch) {
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { post, currentGroup, memberships } = stateProps
+  const { postId, post, currentGroup, memberships } = stateProps
   const { dispatch } = dispatchProps
   const { navigation, route } = ownProps
 
@@ -41,12 +42,12 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...stateProps,
     ...dispatchProps,
     ...ownProps,
-    fetchPost: () => dispatch(fetchPost(post.id)),
-    joinProject: () => dispatch(joinProject(post.id)),
-    leaveProject: () => dispatch(leaveProject(post.id)),
+    fetchPost: () => dispatch(fetchPost(postId)),
+    joinProject: () => dispatch(joinProject(postId)),
+    leaveProject: () => dispatch(leaveProject(postId)),
     goToGroup: groupId => makeGoToGroup(navigation, dispatch)(groupId, memberships, currentGroup.id),
-    editPost: () => navigation.navigate('Edit Post', { id: post.id }),
-    goToMembers: () => navigation.navigate('Project Members', { id: post.id, members: get('members', post) }),
+    editPost: () => navigation.navigate('Edit Post', { id: postId }),
+    goToMembers: () => navigation.navigate('Project Members', { id: postId, members: get('members', post) }),
     showMember: id => {
       if (isModalScreen(route.name)) {
         return navigation.navigate(modalScreenName('Member'), { id })
@@ -55,7 +56,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
       }
     },
     showTopic: topicName => navigation.navigate('Topic Feed', { topicName }),
-    respondToEvent: response => dispatch(respondToEvent(post.id, response))
+    respondToEvent: response => dispatch(respondToEvent(postId, response))
   }
 }
 
