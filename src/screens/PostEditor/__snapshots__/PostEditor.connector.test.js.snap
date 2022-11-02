@@ -259,6 +259,7 @@ exports[`PostEditor mapStateToProps maps 1`] = `
     "linkPreview": null,
     "location": undefined,
     "members": [],
+    "myEventResponse": undefined,
     "pinned": undefined,
     "topics": [],
   },

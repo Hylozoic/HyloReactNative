@@ -1,6 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ScrollView, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import { useFocusEffect } from '@react-navigation/core'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -101,7 +102,7 @@ export default function Login () {
         {bannerError && <Text style={styles.bannerError}>{bannerError}</Text>}
         {(!bannerError && bannerMessage) && <Text style={styles.bannerMessage}>{bannerMessage}</Text>}
 
-        <Image
+        <FastImage
           style={styles.logo}
           source={require('assets/merkaba-green-on-white.png')}
         />

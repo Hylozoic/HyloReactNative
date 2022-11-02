@@ -1,6 +1,7 @@
 import React from 'react'
 import { chunk } from 'lodash/fp'
-import { TouchableOpacity, Text, Image, View } from 'react-native'
+import { TouchableOpacity, Text, View } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import { DEFAULT_AVATAR } from 'store/models/Group'
 import { caribbeanGreen } from 'style/colors'
 
@@ -26,7 +27,7 @@ export function GroupCell ({ group, onPress, onRemove, RemoveIcon }) {
   return (
     <View style={styles.groupCellContainer}>
       <TouchableOpacity style={[styles.groupCell, styles.row]} onPress={() => onPress && onPress(group?.slug)}>
-        <Image source={imageSource} style={styles.groupAvatar} />
+        <FastImage source={imageSource} style={styles.groupAvatar} />
         <Text style={[styles.linkText, styles.groupCell, !RemoveIcon && styles.linkTextSmaller]} numberOfLines={1}>{name}</Text>
       </TouchableOpacity>
       {RemoveIcon && (

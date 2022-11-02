@@ -2,7 +2,7 @@
 
 exports[`GroupRow handles high member count and moderator role 1`] = `
 <View>
-  <Image
+  <FastImage
     source={
       {
         "uri": undefined,
@@ -30,7 +30,7 @@ exports[`GroupRow handles high member count and moderator role 1`] = `
 
 exports[`GroupRow matches the last snapshot 1`] = `
 <View>
-  <Image
+  <FastImage
     source={
       {
         "uri": undefined,

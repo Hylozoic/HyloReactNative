@@ -75,6 +75,7 @@ exports[`mapsStateToProps 1`] = `
     "linkPreview": null,
     "location": undefined,
     "members": [],
+    "myEventResponse": undefined,
     "pinned": undefined,
     "topics": [],
   },

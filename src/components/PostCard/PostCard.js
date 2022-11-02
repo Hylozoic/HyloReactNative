@@ -10,43 +10,35 @@ import { capeCod10 } from 'style/colors'
 import Files from 'components/Files'
 
 export default function PostCard ({
-  commenters,
-  creator,
-  fileUrls,
   goToGroup,
-  groups,
   hideDetails,
   hideMenu,
-  imageUrls,
   isPinned,
   post = {},
   respondToEvent,
   showGroups = true,
   showMember,
-  showTopic,
-  topics
+  showTopic
 }) {
-  const slug = get('0.slug', groups)
-  const images = imageUrls && imageUrls.map(uri => ({ uri }))
+  const images = post.imageUrls && post.imageUrls.map(uri => ({ uri }))
 
   return (
     <View style={styles.container}>
       <PostHeader
         announcement={post.announcement}
-        creator={creator}
+        creator={post.creator}
         date={post.createdAt}
         hideMenu={hideMenu}
         pinned={isPinned}
         postId={post.id}
         showMember={showMember}
         showTopic={showTopic}
-        slug={slug}
         title={post.title}
-        topics={topics}
+        topics={post.topics}
         type={post.type}
       />
       <ImageAttachments
-        creator={creator}
+        creator={post.creator}
         images={images}
         title={post.title}
       />
@@ -59,23 +51,21 @@ export default function PostCard ({
         myEventResponse={post.myEventResponse}
         respondToEvent={respondToEvent}
         shouldTruncate
-        slug={slug}
         startTime={post.startTime}
         title={post.title}
         type={post.type}
       />
-      <Files urls={fileUrls} style={{ marginBottom: 10 }} />
+      <Files urls={post.fileUrls} style={{ marginBottom: 10 }} />
       {showGroups && (
         <PostGroups
           goToGroup={goToGroup}
-          groups={groups}
+          groups={post.groups}
           includePublic={post.isPublic}
-          slug={slug}
           style={styles.groups}
         />
       )}
       <PostFooter
-        commenters={commenters}
+        commenters={post.commenters}
         commentersTotal={post.commentersTotal}
         eventInvitations={post.eventInvitations}
         id={post.id}

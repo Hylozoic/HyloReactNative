@@ -3,9 +3,9 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ScrollView,
-  Image
+  ScrollView
 } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import { useIsFocused } from '@react-navigation/native'
 import { debounce, find, isEmpty, pick } from 'lodash/fp'
@@ -296,7 +296,7 @@ export function GroupRow ({ membership, goToGroup, editing }) {
 
   return (
     <View style={styles.groupRow}>
-      <Image source={{ uri: group.avatarUrl }} style={styles.groupAvatar} />
+      <FastImage source={{ uri: group.avatarUrl }} style={styles.groupAvatar} />
       <TouchableOpacity onPress={() => goToGroup(group.slug)} disabled={editing}>
         <Text style={styles.groupName}>{group.name}</Text>
       </TouchableOpacity>

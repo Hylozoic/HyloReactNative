@@ -454,13 +454,35 @@ exports[`renders with invite button when a moderator 1`] = `
       >
         <View>
           <View>
-            <Image
-              source={
-                {
-                  "uri": undefined,
-                }
+            <View
+              style={
+                [
+                  {
+                    "overflow": "hidden",
+                  },
+                  undefined,
+                ]
               }
-            />
+            >
+              <FastImageView
+                defaultSource={null}
+                resizeMode="cover"
+                source={
+                  {
+                    "uri": undefined,
+                  }
+                }
+                style={
+                  {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  }
+                }
+              />
+            </View>
             <div
               colors={
                 [

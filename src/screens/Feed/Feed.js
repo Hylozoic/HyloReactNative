@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react'
-import { Image, View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import { useNavigation } from '@react-navigation/native'
 import { capitalize, isEmpty } from 'lodash/fp'
 import { useDispatch, useSelector } from 'react-redux'
@@ -98,7 +99,7 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
         styles.bannerContainerWithPostPrompt
       ]}
     >
-      <Image source={image} style={styles.image} />
+      <FastImage source={image} style={styles.image} />
       <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
       <View style={styles.titleRow}>
         <View style={styles.title}>

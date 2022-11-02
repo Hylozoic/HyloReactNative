@@ -38,7 +38,9 @@ export class PostDetails extends React.Component {
 
   setHeader = () => {
     const { navigation, currentGroup, isModal } = this.props
+
     if (isModal) return
+
     navigation.setOptions({ title: currentGroup?.name })
   }
 
@@ -61,10 +63,8 @@ export class PostDetails extends React.Component {
   }
 
   renderPostDetails = (panHandlers) => {
-    const { post, currentUser, currentGroup, respondToEvent, showMember, isModal } = this.props
+    const { post, currentGroup, respondToEvent, showMember, isModal } = this.props
     const firstGroupSlug = get('groups.0.slug', post)
-    const isMember = find(member => member.id === currentUser.id, post.members)
-    const location = post.location || (post.locationObject && post.locationObject.fullText)
     const showGroups = isModal || post?.groups.find(g => g.slug !== currentGroup?.slug)
 
     return (
@@ -77,8 +77,6 @@ export class PostDetails extends React.Component {
             showGroups={showGroups}
             respondToEvent={respondToEvent}
             showTopic={this.onShowTopic}
-            isMember={isMember}
-            location={location}
           />
         )}
         onSelect={this.handleSetSelectedComment}
@@ -90,8 +88,6 @@ export class PostDetails extends React.Component {
   }
 
   render () {
-    // ??? Follow-up: `PostDetails#replyingToComment` is also `Comments#selectedComment`
-    // but `Comments#selectedComment` is not `PostDetails#replyingToComment`
     const { selectedComment } = this.state
     const { post, isModal } = this.props
     const groupId = get('groups.0.id', post)
@@ -138,8 +134,7 @@ export function PostCardForDetails ({
   showTopic,
   showGroups
 }) {
-  const slug = get('groups.0.slug', post)
-  const isMember = find(member => member.id === currentUser.id, post.members)
+  const isProjectMember = find(member => member.id === currentUser.id, post.members)
   const location = post.location || (post.locationObject && post.locationObject.fullText)
   const images = post.imageUrls && post.imageUrls.map(uri => ({ uri }))
 
@@ -157,7 +152,6 @@ export function PostCardForDetails ({
         postId={post.id}
         showMember={showMember}
         showTopic={showTopic}
-        slug={slug}
         title={post.title}
         topics={post.topics}
         type={post.type}
@@ -175,7 +169,6 @@ export function PostCardForDetails ({
         linkPreviewFeatured={post.linkPreviewFeatured}
         myEventResponse={post.myEventResponse}
         respondToEvent={respondToEvent}
-        slug={slug}
         startTime={post.startTime}
         title={post.title}
         type={post.type}
@@ -191,8 +184,8 @@ export function PostCardForDetails ({
       )}
       {isProject && (
         <JoinProjectButton
-          leaving={isMember}
-          onPress={isMember ? leaveProject : joinProject}
+          leaving={isProjectMember}
+          onPress={isProjectMember ? leaveProject : joinProject}
           style={styles.projectJoinButton}
         />
       )}
@@ -207,7 +200,6 @@ export function PostCardForDetails ({
           goToGroup={goToGroup}
           groups={post.groups}
           includePublic={post.isPublic}
-          slug={slug}
           style={[styles.infoRow]}
         />
       )}

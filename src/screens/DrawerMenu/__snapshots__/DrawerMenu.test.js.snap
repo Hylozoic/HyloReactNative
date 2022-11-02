@@ -2,7 +2,7 @@
 
 exports[`DrawerMenu matches the last snapshot 1`] = `
 <View>
-  <ImageBackground
+  <FastImage
     source={null}
   >
     <MockLinearGradient
@@ -16,7 +16,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
       }
     />
     <View>
-      <Image
+      <FastImage
         source={
           {
             "uri": "someurl",
@@ -38,7 +38,7 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
         />
       </View>
     </View>
-  </ImageBackground>
+  </FastImage>
   <SectionList
     SectionSeparatorComponent={[Function]}
     renderSectionHeader={[Function]}
@@ -69,7 +69,7 @@ exports[`GroupRow hides badge when no newPostCount 1`] = `
   <TouchableOpacity
     onPress={[Function]}
   >
-    <Image
+    <FastImage
       source={
         {
           "uri": "foo.png",
@@ -91,7 +91,7 @@ exports[`GroupRow highlights when matching currentGroupId 1`] = `
   <TouchableOpacity
     onPress={[Function]}
   >
-    <Image
+    <FastImage
       source={
         {
           "uri": "foo.png",
@@ -113,7 +113,7 @@ exports[`GroupRow matches the last snapshot 1`] = `
   <TouchableOpacity
     onPress={[Function]}
   >
-    <Image
+    <FastImage
       source={
         {
           "uri": "foo.png",

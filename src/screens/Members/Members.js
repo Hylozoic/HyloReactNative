@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import LinearGradient from 'react-native-linear-gradient'
 import { get, pick } from 'lodash/fp'
 import { useIsFocused } from '@react-navigation/native'
@@ -60,7 +61,7 @@ export class Members extends React.Component {
 export function Banner ({ name, bannerUrl, showInviteButton, handleInviteOnPress }) {
   return (
     <View style={styles.bannerContainer}>
-      <Image source={{ uri: bannerUrl }} style={styles.image} />
+      <FastImage source={{ uri: bannerUrl }} style={styles.image} />
       <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
       <View style={styles.titleRow}>
         <Text style={styles.name}>{name}</Text>

@@ -3,7 +3,7 @@ import {
   DELETE_POST_PENDING,
   REMOVE_POST_PENDING,
   PIN_POST_PENDING
-} from './PostHeader.store'
+} from 'hooks/usePostActionSheet.store'
 import orm from 'store/models'
 import ormReducer from 'store/reducers/ormReducer'
 

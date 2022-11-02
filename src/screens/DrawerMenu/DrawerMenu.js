@@ -1,8 +1,6 @@
 import React from 'react'
-import {
-  Image, Text, TouchableOpacity,
-  View, SectionList, ImageBackground
-} from 'react-native'
+import { Text, TouchableOpacity, View, SectionList } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import styles from './DrawerMenu.styles'
 import Button from 'components/Button'
 import LinearGradient from 'react-native-linear-gradient'
@@ -41,10 +39,10 @@ export default function DrawerMenu ({
   return (
     <View style={styles.container}>
       {currentGroup && (
-        <ImageBackground source={groupBannerImage} style={styles.headerBackgroundImage}>
+        <FastImage source={groupBannerImage} style={styles.headerBackgroundImage}>
           <LinearGradient style={styles.headerBannerGradient} colors={bannerlinearGradientColors} />
           <View style={[styles.headerContent]}>
-            <Image source={{ uri: currentGroup.avatarUrl }} style={styles.headerAvatar} />
+            <FastImage source={{ uri: currentGroup.avatarUrl }} style={styles.headerAvatar} />
             <Text style={styles.headerText}>{currentGroup.name}</Text>
             {canModerateCurrentGroup && (
               <View style={styles.currentGroupButtons}>
@@ -63,7 +61,7 @@ export default function DrawerMenu ({
               </View>
             )}
           </View>
-        </ImageBackground>
+        </FastImage>
       )}
       <SectionList
         renderSectionHeader={SectionHeader}
@@ -106,7 +104,7 @@ export function GroupRow ({ group, goToGroup, currentGroupId, addPadding, isMemb
     <View style={[styles.groupRow, addPadding && styles.defaultPadding]}>
       <TouchableOpacity onPress={() => goToGroup(group)} style={styles.rowTouchable}>
         {!!avatarUrl &&
-          <Image source={{ uri: avatarUrl }} style={styles.groupAvatar} />}
+          <FastImage source={{ uri: avatarUrl }} style={styles.groupAvatar} />}
         <Text
           style={[styles.groupRowText, highlight && styles.highlight, isMember && styles.isMember]}
           ellipsizeMode='tail'

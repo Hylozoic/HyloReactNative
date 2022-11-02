@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Image, Text, ScrollView, View, ImageBackground, TouchableOpacity, TextInput } from 'react-native'
+import { Text, ScrollView, View, TouchableOpacity, TextInput } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import { useDispatch, useSelector } from 'react-redux'
 import LinearGradient from 'react-native-linear-gradient'
 import { bannerlinearGradientColors } from 'style/colors'
@@ -78,13 +79,13 @@ export default function GroupDetail ({ navigation, route }) {
 
   return (
     <ScrollView style={styles.container}>
-      <ImageBackground style={styles.headerBackgroundImage} source={groupBannerImage}>
+      <FastImage style={styles.headerBackgroundImage} source={groupBannerImage}>
         <LinearGradient style={styles.headerBannerGradient} colors={bannerlinearGradientColors} />
         <View style={styles.headerContent}>
-          <Image style={styles.headerAvatar} source={{ uri: group.avatarUrl }} />
+          <FastImage style={styles.headerAvatar} source={{ uri: group.avatarUrl }} />
           <Text style={styles.headerText}>{group.name}</Text>
         </View>  
-      </ImageBackground>
+      </FastImage>
       <View style={styles.mainContent}>
         <Text style={styles.groupDescription}>{group.description}</Text>
         {isMember && <>

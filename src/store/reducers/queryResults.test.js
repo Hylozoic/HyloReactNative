@@ -10,7 +10,7 @@ import queryResults, {
 import { FETCH_MEMBERS } from 'screens/Members/Members.store'
 import {
   REMOVE_POST_PENDING
-} from 'components/PostCard/PostHeader/PostHeader.store'
+} from 'hooks/usePostActionSheet.store'
 
 const variables = { context: 'groups', slug: 'foo', sortBy: 'name' }
 

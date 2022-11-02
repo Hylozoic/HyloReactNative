@@ -28,7 +28,7 @@ import {
 } from 'components/SocketListener/SocketListener.store'
 import {
   REMOVE_POST_PENDING
-} from 'components/PostCard/PostHeader/PostHeader.store'
+} from 'hooks/usePostActionSheet.store'
 
 // reducer
 

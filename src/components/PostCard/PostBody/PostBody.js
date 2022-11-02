@@ -23,7 +23,6 @@ export default function PostBody ({
   linkPreviewFeatured,
   myEventResponse,
   respondToEvent,
-  slug,
   shouldTruncate
 }) {
   const presentedDetails = useMemo(() => {

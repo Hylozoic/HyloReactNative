@@ -10,7 +10,7 @@ export {
 
 export {
   ormSessionReducer as postHeaderReducer
-} from 'components/PostCard/PostHeader/PostHeader.store'
+} from 'hooks/usePostActionSheet.store'
 
 export {
   default as pushNotificationReducer

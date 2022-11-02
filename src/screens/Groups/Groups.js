@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { View, Image, Text, SectionList, TouchableOpacity } from 'react-native'
+import { View, Text, SectionList, TouchableOpacity } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import { visibilityIcon, accessibilityIcon } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getMemberships from 'store/selectors/getMemberships'
@@ -102,7 +103,7 @@ export function GroupRow ({ group, goToGroup, goToGroupDetail }) {
   return (
     <TouchableOpacity onPress={() => onPressFunc(group)} style={styles.groupRow}>
       {!!avatarUrl && (
-        <Image source={{ uri: avatarUrl }} style={styles.groupAvatar} />
+        <FastImage source={{ uri: avatarUrl }} style={styles.groupAvatar} />
       )}
       <View style={styles.groupRowRight}>
         <Text style={styles.groupRowText} ellipsizeMode='tail' numberOfLines={1}>

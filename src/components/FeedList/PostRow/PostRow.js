@@ -1,24 +1,22 @@
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
-import styles from './PostRow.styles'
+import { useSelector } from 'react-redux'
+import respondToEvent from 'store/actions/respondToEvent'
+import { getPresentedPost } from 'store/selectors/getPost'
 import PostCard from 'components/PostCard'
+import styles from './PostRow.styles'
 
 export default function PostRow ({
-  commenters,
-  creator,
-  fileUrls,
   goToGroup,
-  groups,
-  imageUrls,
-  isPinned,
-  post,
-  respondToEvent,
+  postId,
   showGroups,
   showMember,
   showPost,
-  showTopic,
-  topics
+  showTopic
 }) {
+  const post = useSelector(state => getPresentedPost(state, { id: postId }))
+  const handleRespondToEvent = response => respondToEvent(post.id, response)
+
   if (!post) return null
 
   return (
@@ -30,19 +28,12 @@ export default function PostRow ({
       >
         <View>
           <PostCard
-            commenters={commenters}
-            creator={creator}
-            fileUrls={fileUrls}
             goToGroup={goToGroup}
-            groups={groups}
-            imageUrls={imageUrls}
-            isPinned={isPinned}
             post={post}
-            respondToEvent={response => respondToEvent(post.id, response)}
+            respondToEvent={handleRespondToEvent}
             showGroups={showGroups}
             showMember={showMember}
             showTopic={showTopic}
-            topics={topics}
           />
         </View>
       </TouchableOpacity>

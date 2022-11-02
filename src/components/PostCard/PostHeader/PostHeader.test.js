@@ -39,7 +39,6 @@ it('renders correctly with a current user', () => {
         creator={creator}
         pinned={false}
         postId={20}
-        slug='olympus'
         date={new Date(new Date().getTime() - 60000 * 10)}
       />
     </TestRoot>

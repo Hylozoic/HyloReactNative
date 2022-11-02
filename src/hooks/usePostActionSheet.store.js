@@ -1,4 +1,4 @@
-export const MODULE_NAME = 'PostHeader'
+export const MODULE_NAME = 'PostActionSheet'
 
 // Constants
 export const DELETE_POST = `${MODULE_NAME}/DELETE_POST`

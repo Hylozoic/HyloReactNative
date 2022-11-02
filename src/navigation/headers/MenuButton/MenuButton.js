@@ -1,6 +1,7 @@
 import React from 'react'
-import { View, Image } from 'react-native'
+import { View } from 'react-native'
 import { HeaderBackButton } from '@react-navigation/elements'
+import FastImage from 'react-native-fast-image'
 import Icon from 'components/Icon'
 import styles from './MenuButton.styles.js'
 
@@ -27,7 +28,7 @@ export default function MenuButton ({
           {!canGoBack
             ? <Icon name='Hamburger' style={styles.menuIcon} />
             : <Icon name='ArrowForward' style={styles.backIcon} />}
-          <Image source={{ uri: avatarUrl }} style={styles.avatar} />
+          <FastImage source={{ uri: avatarUrl }} style={styles.avatar} />
         </View>
       )}
     />

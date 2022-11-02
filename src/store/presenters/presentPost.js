@@ -9,31 +9,31 @@ export default function presentPost (post, groupId) {
 
   return {
     ...post.ref,
-    creator: post.creator,
-    linkPreview: post.linkPreview,
-    location: post.location,
-    isPublic: post.isPublic,
-    commenters: post.commenters.toModelArray(),
-    groups: post.groups.toModelArray(),
     attachments: post.attachments
       .orderBy('position').toModelArray(),
+    creator: post.creator,
+    commenters: post.commenters.toModelArray(),
+    eventInvitations: post.eventInvitations.toModelArray().map(eventInvitation => {
+      return {
+        response: eventInvitation.response,
+        ...eventInvitation.person.ref
+      }
+    }),
     fileAttachments: post.attachments
       .orderBy('position').filter(a => a.type === 'file').toModelArray(),
     fileUrls: post.getFileUrls(),
+    groups: post.groups.toModelArray(),
     imageUrls: post.getImageUrls(),
-    pinned,
-    topics: post.topics.toModelArray().map(topic => presentTopic(topic, {})),
+    isPublic: post.isPublic,
+    linkPreview: post.linkPreview,
+    location: post.location,
     members: post.members.toModelArray().map(person => {
       return {
         ...person.ref,
         skills: person.skills.toRefArray()
       }
     }),
-    eventInvitations: post.eventInvitations.toModelArray().map(eventInvitation => {
-      return {
-        response: eventInvitation.response,
-        ...eventInvitation.person.ref
-      }
-    })
+    pinned,
+    topics: post.topics.toModelArray().map(topic => presentTopic(topic, {}))
   }
 }
