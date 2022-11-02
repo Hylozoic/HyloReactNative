@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Image } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import { string } from 'prop-types'
 
 export default class SpaceFillingImage extends React.PureComponent {
@@ -58,12 +59,14 @@ export default class SpaceFillingImage extends React.PureComponent {
     }
     return (
       <View onLayout={this.handleSetContainerWidth} style={[style, styles.container]}>
-        {imageWidth < containerWidth && <Image
-          style={blurredImageStyle}
-          blurRadius={2}
-          source={{ uri: imageUrl }}
-                                        />}
-        <Image style={imageStyle} source={{ uri: imageUrl }} />
+        {imageWidth < containerWidth && (
+          <FastImage
+            style={blurredImageStyle}
+            blurRadius={2}
+            source={{ uri: imageUrl }}
+          />
+        )}
+        <FastImage style={imageStyle} source={{ uri: imageUrl }} />
       </View>
     )
   }

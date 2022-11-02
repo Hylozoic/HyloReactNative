@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Image, View } from 'react-native'
+import { View } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import { memoize } from 'lodash'
 import defaultAvatar from 'assets/default-user-avatar.png'
 
@@ -10,7 +11,7 @@ export default function Avatar ({ size, hasBorder, hasOverlap, avatarUrl, zIndex
 
   return (
     <View style={[styles.container, { zIndex }, style]}>
-      <Image style={styles.image} source={source} />
+      <FastImage style={styles.image} source={source} />
     </View>
   )
 }

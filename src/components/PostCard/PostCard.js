@@ -27,6 +27,7 @@ export default function PostCard ({
   topics
 }) {
   const slug = get('0.slug', groups)
+  const images = imageUrls && imageUrls.map(uri => ({ uri }))
 
   return (
     <View style={styles.container}>
@@ -46,7 +47,7 @@ export default function PostCard ({
       />
       <PostImage
         creator={creator}
-        imageUrls={imageUrls}
+        images={images}
         title={post.title}
       />
       <PostBody

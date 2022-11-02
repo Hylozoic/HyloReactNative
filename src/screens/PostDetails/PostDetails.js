@@ -141,6 +141,7 @@ export function PostCardForDetails ({
   const slug = get('groups.0.slug', post)
   const isMember = find(member => member.id === currentUser.id, post.members)
   const location = post.location || (post.locationObject && post.locationObject.fullText)
+  const images = post.imageUrls && post.imageUrls.map(uri => ({ uri }))
 
   return (
     <View style={styles.postCard}>
@@ -163,7 +164,7 @@ export function PostCardForDetails ({
       />
       <PostImage
         creator={post.creator}
-        imageUrls={post.imageUrls}
+        images={images}
         linked
         title={post.title}
       />

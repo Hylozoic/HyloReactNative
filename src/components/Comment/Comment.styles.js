@@ -60,7 +60,7 @@ export default {
     fontSize: 20,
     color: slateGrey80
   },
-  imageAttachemnt: {
+  imageAttachment: {
     height: 200,
     width: '100%',
     borderRadius: 10

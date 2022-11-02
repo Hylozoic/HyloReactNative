@@ -1,81 +1,58 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { isEmpty } from 'lodash'
-import {
-  Dimensions,
-  Image,
-  ImageBackground,
-  TouchableHighlight,
-  TouchableOpacity,
-  View
-} from 'react-native'
-import ImageViewer from 'components/ImageViewer'
+import { Dimensions, TouchableHighlight } from 'react-native'
+import FastImage from 'react-native-fast-image'
+import { ImageViewerButton } from 'components/ImageViewer/ImageViewer'
 
-export default function PostImage ({ imageUrls, title, creator, linked }) {
-  const [imageViewerVisible, setImageViewerVisible] = useState(false)
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
-
-  const toggleImageViewerVisible = () => setImageViewerVisible(!imageViewerVisible)
-
-  if (isEmpty(imageUrls)) return null
+export default function PostImage ({ images, title, creator, linked }) {
+  if (isEmpty(images)) return null
 
   if (linked) {
-    const images = imageUrls.map(imageUrl => ({ uri: imageUrl }))
-    const showImage = imageIndex => () => {
-      setSelectedImageIndex(imageIndex)
-      toggleImageViewerVisible()
-    }
-
     return (
       <>
-        <View>
-          <TouchableOpacity onPress={showImage(0)}>
-            <ImageBackground
-              style={[styles.background, styles.container]}
-              imageStyle={styles.backgroundImage}
-              source={{ uri: imageUrls[0] }}
-            >
-              {imageUrls.length > 0 &&
-                imageUrls.slice(1).map((uri, index) => (
-                  <TouchableHighlight
-                    onPress={showImage(index + 1)}
-                    key={uri}
-                    style={styles.thumbnailWrapper}
-                  >
-                    <Image source={{ uri }} style={styles.thumbnail} />
-                  </TouchableHighlight>
-                ))}
-            </ImageBackground>
-          </TouchableOpacity>
-        </View>
-        <ImageViewer
+        <ImageViewerButton
           images={images}
           title={title}
           creator={creator}
-          visible={imageViewerVisible}
-          imageIndex={selectedImageIndex}
-          onRequestClose={toggleImageViewerVisible}
+          renderImages={showImageAtIndex => (
+            <FastImage
+              style={[styles.background, styles.container]}
+              imageStyle={styles.backgroundImage}
+              source={images[0]}
+            >
+              {images.slice(1).map((image, index) => (
+                <TouchableHighlight
+                  onPress={showImageAtIndex(index + 1)}
+                  key={image.uri}
+                  style={styles.thumbnailWrapper}
+                >
+                  <FastImage
+                    source={image}
+                    style={styles.thumbnail}
+                  />
+                </TouchableHighlight>
+              ))}
+            </FastImage>
+          )}
         />
       </>
     )
   }
 
   return (
-    <ImageBackground
+    <FastImage
       style={styles.background}
       imageStyle={styles.backgroundImage}
-      source={{ uri: imageUrls[0] }}
+      source={images[0]}
     >
-      {imageUrls.length > 0 &&
-        imageUrls
-          .slice(1)
-          .map(uri => (
-            <Image
-              key={uri}
-              source={{ uri }}
-              style={[styles.thumbnail, styles.thumbnailWrapper]}
-            />
-          ))}
-    </ImageBackground>
+      {images.slice(1).map(image => (
+        <FastImage
+          key={image.uri}
+          source={image}
+          style={[styles.thumbnail, styles.thumbnailWrapper]}
+        />
+      ))}
+    </FastImage>
   )
 }
 

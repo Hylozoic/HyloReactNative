@@ -1,9 +1,8 @@
 import React from 'react'
-import { Image, Text, View, Alert, TouchableOpacity } from 'react-native'
+import { Text, View, Alert, TouchableOpacity } from 'react-native'
 import { filter } from 'lodash/fp'
 import Clipboard from '@react-native-community/clipboard'
 import { TextHelpers } from 'hylo-shared'
-import { openURL } from 'navigation/linking'
 import { useDispatch, useSelector } from 'react-redux'
 import useHyloActionSheet from 'hooks/useHyloActionSheet'
 import deleteCommentAction from 'store/actions/deleteComment'
@@ -14,6 +13,7 @@ import HyloHTML from 'components/HyloHTML'
 import Icon from 'components/Icon'
 import styles from './Comment.styles'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
+import PostImage from 'components/PostCard/PostImage'
 
 export default function Comment ({
   comment,
@@ -93,9 +93,8 @@ export default function Comment ({
     )
   }
 
-  const imageAttachments = filter({ type: 'image' }, comment?.attachments)
-  // NOTE: Currently no UI for adding comment file attachments
-  // const fileAttachments = filter({ type: 'file' }, comment?.attachments)
+  const images = filter({ type: 'image' }, comment?.attachments)
+    .map(image => ({ uri: image.url }))
 
   const handleOnPress = () => {
     if (onPress) return onPress()
@@ -140,11 +139,13 @@ export default function Comment ({
             )}
           </View>
         </View>
-        {imageAttachments && imageAttachments.map(({ url }, i) => (
-          <TouchableOpacity onPress={() => openURL(url)} key={i}>
-            <Image source={{ uri: url }} resizeMode='cover' style={styles.imageAttachemnt} />
-          </TouchableOpacity>
-        ))}
+        <PostImage
+          creator={comment.creator}
+          images={images}
+          linked
+          style={styles.imageAttachment}
+          title={TextHelpers.presentHTMLToText(comment.text, { truncate: 100 })}
+        />
         <View style={styles.body}>
           <HyloHTML html={text} />
         </View>

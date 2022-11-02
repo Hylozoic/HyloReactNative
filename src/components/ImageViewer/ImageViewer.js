@@ -1,8 +1,62 @@
+import React, { useState } from 'react'
+import { isEmpty } from 'lodash/fp'
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  TouchableOpacity,
+  TouchableHighlight
+} from 'react-native'
 import Avatar from 'components/Avatar'
-import React from 'react'
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native'
 import ImageView from 'react-native-image-viewing'
 import { rhino30, white } from 'style/colors'
+
+export function ImageViewerButton ({
+  creator,
+  images,
+  title,
+  renderImages,
+  children,
+  ...touchableHighlightProps
+}) {
+  const [imageViewerVisible, setImageViewerVisible] = useState(false)
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
+
+  if (isEmpty(images) || !(renderImages || children)) return null
+
+  const toggleImageViewerVisible = () => setImageViewerVisible(!imageViewerVisible)
+  const showImageViewerAtIndex = imageIndex => {
+    return () => {
+      setSelectedImageIndex(imageIndex)
+      toggleImageViewerVisible()
+    }
+  }
+
+  return (
+    <>
+      {renderImages && (
+        <TouchableHighlight {...touchableHighlightProps} onPress={showImageViewerAtIndex(0)}>
+          {renderImages(showImageViewerAtIndex)}
+        </TouchableHighlight>
+      )}
+      {!renderImages && children && (
+        <TouchableHighlight {...touchableHighlightProps} onPress={showImageViewerAtIndex(0)}>
+          {children}
+        </TouchableHighlight>
+      )}
+      <ImageViewer
+        images={images}
+        title={title}
+        creator={creator}
+        visible={imageViewerVisible}
+        imageIndex={selectedImageIndex}
+        onRequestClose={toggleImageViewerVisible}
+      />
+    </>
+
+  )
+}
 
 export default function ImageViewer ({
   creator,
@@ -37,31 +91,37 @@ export default function ImageViewer ({
   )
 }
 
-const HIT_SLOP = { top: 16, left: 16, bottom: 16, right: 16 }
-
-const ImageViewerHeader = ({ creator, onRequestClose, title }) => (
-  <SafeAreaView style={headerStyles.root}>
-    <View style={headerStyles.container}>
-      <View style={headerStyles.postDetails}>
-        <View style={headerStyles.postDetailsTop}>
-          <Avatar avatarUrl={creator.avatarUrl} dimension={28} />
-          <View style={headerStyles.postDetailsNameAndDate}>
-            <Text style={headerStyles.postDetailsName}>{creator.name}</Text>
-            <Text style={headerStyles.postDetailsDate}>3w ago</Text>
+const ImageViewerHeader = ({ creator, onRequestClose, title }) => {
+  return (
+    <SafeAreaView style={headerStyles.root}>
+      <View style={headerStyles.container}>
+        <View style={headerStyles.postDetails}>
+          <View style={headerStyles.postDetailsTop}>
+            {creator && (
+              <>
+                <Avatar avatarUrl={creator.avatarUrl} dimension={28} />
+                <View style={headerStyles.postDetailsNameAndDate}>
+                  <Text style={headerStyles.postDetailsName}>{creator.name}</Text>
+                  <Text style={headerStyles.postDetailsDate}>3w ago</Text>
+                </View>
+              </>
+            )}
           </View>
+          {title && (
+            <Text style={headerStyles.postDetailsTitle}>{title}</Text>
+          )}
         </View>
-        <Text style={headerStyles.postDetailsTitle}>{title}</Text>
+        <TouchableOpacity
+          style={headerStyles.closeButton}
+          onPress={onRequestClose}
+          hitSlop={{ top: 16, left: 16, bottom: 16, right: 16 }}
+        >
+          <Text style={headerStyles.closeText}>✕</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        style={headerStyles.closeButton}
-        onPress={onRequestClose}
-        hitSlop={HIT_SLOP}
-      >
-        <Text style={headerStyles.closeText}>✕</Text>
-      </TouchableOpacity>
-    </View>
-  </SafeAreaView>
-)
+    </SafeAreaView>
+  )
+}
 
 const headerStyles = StyleSheet.create({
   root: {
