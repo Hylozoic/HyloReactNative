@@ -47,6 +47,15 @@ PODS:
     - Intercom (~> 12.4.3)
     - React-Core
   - libevent (2.1.12)
+  - libwebp (1.2.3):
+    - libwebp/demux (= 1.2.3)
+    - libwebp/mux (= 1.2.3)
+    - libwebp/webp (= 1.2.3)
+  - libwebp/demux (1.2.3):
+    - libwebp/webp
+  - libwebp/mux (1.2.3):
+    - libwebp/demux
+  - libwebp/webp (1.2.3)
   - Mixpanel-swift (4.0.2):
     - Mixpanel-swift/Complete (= 4.0.2)
   - Mixpanel-swift/Complete (4.0.2)
@@ -408,6 +417,10 @@ PODS:
     - React-Core
   - RNDeviceInfo (10.3.0):
     - React-Core
+  - RNFastImage (8.6.3):
+    - React-Core
+    - SDWebImage (~> 5.11.1)
+    - SDWebImageWebPCoder (~> 0.8.4)
   - RNGestureHandler (2.8.0):
     - React-Core
   - RNGoogleSignin (8.0.1):
@@ -448,6 +461,12 @@ PODS:
     - Sentry (= 7.29.0)
   - RNVectorIcons (9.2.0):
     - React-Core
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
+  - SDWebImageWebPCoder (0.8.5):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.10)
   - Sentry (7.29.0):
     - Sentry/Core (= 7.29.0)
   - Sentry/Core (7.29.0)
@@ -511,6 +530,7 @@ DEPENDENCIES:
   - "RNCClipboard (from `../node_modules/@react-native-community/clipboard`)"
   - "RNCPicker (from `../node_modules/@react-native-community/picker`)"
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
+  - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -531,8 +551,11 @@ SPEC REPOS:
     - GTMSessionFetcher
     - Intercom
     - libevent
+    - libwebp
     - Mixpanel-swift
     - OneSignalXCFramework
+    - SDWebImage
+    - SDWebImageWebPCoder
     - Sentry
 
 EXTERNAL SOURCES:
@@ -644,6 +667,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/picker"
   RNDeviceInfo:
     :path: "../node_modules/react-native-device-info"
+  RNFastImage:
+    :path: "../node_modules/react-native-fast-image"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNGoogleSignin:
@@ -678,6 +703,7 @@ SPEC CHECKSUMS:
   Intercom: 43bfacc55b1c93cce9ec569833696d3f15678430
   intercom-react-native: b2a48297f0ed988970c819133cabe8c965080003
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
+  libwebp: 60305b2e989864154bd9be3d772730f08fc6a59c
   Mixpanel-swift: 91fc28834402720682f4cce760e95571fbb388c3
   MixpanelReactNative: f509f0674e7f80a7a294ff5afa88ac1e8ec61640
   OneSignalXCFramework: 81ceac017a290f23793443323090cfbe888f74ea
@@ -726,12 +752,15 @@ SPEC CHECKSUMS:
   RNCClipboard: 41d8d918092ae8e676f18adada19104fa3e68495
   RNCPicker: 914b557e20b3b8317b084aca9ff4b4edb95f61e4
   RNDeviceInfo: 4701f0bf2a06b34654745053db0ce4cb0c53ada7
+  RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
   RNGestureHandler: 62232ba8f562f7dea5ba1b3383494eb5bf97a4d3
   RNGoogleSignin: ec96ded826fcdca71ab5f58b1d086e969cabe67b
   RNReanimated: 9d50cc094df0b3846db3a7954208b466d342ca7d
   RNScreens: 34cc502acf1b916c582c60003dc3089fa01dc66d
   RNSentry: 35d1debe8bc2c6c3d838ed74194302f63e2171f8
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   Sentry: 4272663eb0eda312024d795ca3f5a562a8ce5e18
   Yoga: 2ed968a4f060a92834227c036279f2736de0fce3
 
