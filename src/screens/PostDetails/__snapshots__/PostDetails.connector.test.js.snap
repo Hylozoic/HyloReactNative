@@ -17,7 +17,6 @@ exports[`mapsStateToProps 1`] = `
     "slug": "public",
   },
   "currentUser": undefined,
-  "id": "1",
   "isProject": false,
   "memberships": [],
   "post": {
@@ -75,7 +74,6 @@ exports[`mapsStateToProps 1`] = `
     "linkPreview": null,
     "location": undefined,
     "members": [],
-    "myEventResponse": undefined,
     "pinned": undefined,
     "topics": [],
   },
