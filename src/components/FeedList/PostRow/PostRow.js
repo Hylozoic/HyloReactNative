@@ -1,6 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import respondToEvent from 'store/actions/respondToEvent'
 import { getPresentedPost } from 'store/selectors/getPost'
 import PostCard from 'components/PostCard'
@@ -15,8 +15,10 @@ export default function PostRow ({
   showPost,
   showTopic
 }) {
+  const dispatch = useDispatch()
   const post = useSelector(state => getPresentedPost(state, { postId, forGroupId }))
-  const handleRespondToEvent = response => respondToEvent(post.id, response)
+
+  const handleRespondToEvent = response => dispatch(respondToEvent(post.id, response))
 
   if (!post) return null
 
@@ -27,16 +29,14 @@ export default function PostRow ({
         delayPressIn={50}
         onPress={() => showPost(post.id)}
       >
-        <View>
-          <PostCard
-            goToGroup={goToGroup}
-            post={post}
-            respondToEvent={handleRespondToEvent}
-            showGroups={showGroups}
-            showMember={showMember}
-            showTopic={showTopic}
-          />
-        </View>
+        <PostCard
+          goToGroup={goToGroup}
+          post={post}
+          respondToEvent={handleRespondToEvent}
+          showGroups={showGroups}
+          showMember={showMember}
+          showTopic={showTopic}
+        />
       </TouchableOpacity>
     </View>
   )
