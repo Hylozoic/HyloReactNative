@@ -22,7 +22,7 @@ export function mapStateToProps (state, props) {
   const { forGroup, topicName } = props
   const currentUser = getMe(state, props)
 
-  const defaultPostType = get('settings.streamPostType', currentUser) || undefined
+  const defaultPostType = get('settings.streamPostType', currentUser) || null
   const defaultSortBy = get('settings.streamSortBy', currentUser) || 'updated'
 
   const postTypeFilter = props?.feedType || getFilter(state, props) || defaultPostType

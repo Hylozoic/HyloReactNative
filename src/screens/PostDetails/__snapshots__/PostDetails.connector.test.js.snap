@@ -77,6 +77,7 @@ exports[`mapsStateToProps 1`] = `
     "pinned": undefined,
     "topics": [],
   },
+  "postId": "1",
 }
 `;
 
@@ -86,7 +87,7 @@ exports[`mergeProps editPost 1`] = `
   [
     "Edit Post",
     {
-      "id": "testpost",
+      "id": undefined,
     },
   ],
 ]

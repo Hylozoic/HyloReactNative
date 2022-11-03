@@ -45,13 +45,15 @@ export class Members extends React.Component {
             'showMember',
             'fetchMoreMembers'], this.props)}
         >
-          {group && <Banner
-            bannerUrl={group.bannerUrl}
-            name={group.name}
-            group={group}
-            handleInviteOnPress={this.goToInvitePeople}
-            showInviteButton={showInviteButton}
-          />}
+          {group && (
+            <Banner
+              bannerUrl={group.bannerUrl}
+              name={group.name}
+              group={group}
+              handleInviteOnPress={this.goToInvitePeople}
+              showInviteButton={showInviteButton}
+            />
+          )}
         </MemberList>
       </View>
     )

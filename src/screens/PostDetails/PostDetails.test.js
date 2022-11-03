@@ -1,6 +1,6 @@
 import React from 'react'
 import TestRenderer from 'react-test-renderer'
-import { PostDetails } from './PostDetails'
+import PostDetails from './PostDetails'
 import { TestRoot } from 'util/testing'
 import MockedScreen from 'util/testing/MockedScreen'
 import orm from 'store/models'

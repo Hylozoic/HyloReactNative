@@ -1,5 +1,5 @@
 import React from 'react'
 
-module.exports = function MockLinearGradient (props) {
-  return <div {...props}>MockLinearGradient</div>
+module.exports = function MockLinearGradient ({ children, ...forwardedProps }) {
+  return <div {...forwardedProps}>{children}</div>
 }

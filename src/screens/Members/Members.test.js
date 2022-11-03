@@ -1,10 +1,8 @@
-import 'react-native'
 import React from 'react'
 import TestRenderer from 'react-test-renderer'
-import Members, { Banner, Member } from './Members'
-
-import '@react-navigation/native'
-jest.mock('@react-navigation/native')
+import { TestRoot } from 'util/testing'
+import MockedScreen from 'util/testing/MockedScreen'
+import Members from './Members'
 
 it('renders correctly with no group (all groups default)', () => {
   const members = [
@@ -14,8 +12,17 @@ it('renders correctly with no group (all groups default)', () => {
     { id: '4', name: 'Bonk Gundsdottir', avatarUrl: 'bonk.jpg' },
     { id: '5', avatarUrl: 'woof.png' }
   ]
-  const renderer = TestRenderer.create(<Members members={members} />)
-  expect(renderer).toMatchSnapshot()
+  const { toJSON } = TestRenderer.create(
+    <TestRoot>
+      <MockedScreen>
+        {screenProps => (
+          <Members members={members} {...screenProps} />
+        )}
+      </MockedScreen>
+    </TestRoot>
+  )
+
+  expect(toJSON()).toMatchSnapshot()
 })
 
 it('renders with invite button when a moderator', () => {
@@ -26,7 +33,15 @@ it('renders with invite button when a moderator', () => {
     { id: '4', name: 'Bonk Gundsdottir', avatarUrl: 'bonk.jpg' },
     { id: '5', avatarUrl: 'woof.png' }
   ]
+  const { toJSON } = TestRenderer.create(
+    <TestRoot>
+      <MockedScreen>
+        {screenProps => (
+          <Members canModerate group={{ allowGroupInvites: true }} members={members} {...screenProps} />
+        )}
+      </MockedScreen>
+    </TestRoot>
+  )
 
-  const renderer = TestRenderer.create(<Members canModerate group={{}} members={members} />)
-  expect(renderer).toMatchSnapshot()
+  expect(toJSON()).toMatchSnapshot()
 })

@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders as expected 1`] = `
-<React.Fragment>
-  <View />
-  <MockLinearGradient
+[
+  <View />,
+  <div
     colors={
       [
         "rgba(225, 229, 233, 0.3)",
@@ -12,33 +12,114 @@ exports[`renders as expected 1`] = `
     }
   >
     <View>
-      <Avatar
-        avatarUrl="a.png"
-        hasBorder={true}
-        hasOverlap={false}
-        size="small"
-        zIndex={3}
-      />
-      <Avatar
-        avatarUrl="b.png"
-        hasBorder={true}
-        hasOverlap={true}
-        size="small"
-        zIndex={2}
-      />
-      <Avatar
-        avatarUrl="c.png"
-        hasBorder={true}
-        hasOverlap={true}
-        size="small"
-        zIndex={1}
-      />
+      <View>
+        <View
+          style={
+            [
+              {
+                "overflow": "hidden",
+              },
+              undefined,
+            ]
+          }
+        >
+          <FastImageView
+            defaultSource={null}
+            resizeMode="cover"
+            source={
+              {
+                "uri": "a.png",
+              }
+            }
+            style={
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          />
+        </View>
+      </View>
+      <View>
+        <View
+          style={
+            [
+              {
+                "overflow": "hidden",
+              },
+              undefined,
+            ]
+          }
+        >
+          <FastImageView
+            defaultSource={null}
+            resizeMode="cover"
+            source={
+              {
+                "uri": "b.png",
+              }
+            }
+            style={
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          />
+        </View>
+      </View>
+      <View>
+        <View
+          style={
+            [
+              {
+                "overflow": "hidden",
+              },
+              undefined,
+            ]
+          }
+        >
+          <FastImageView
+            defaultSource={null}
+            resizeMode="cover"
+            source={
+              {
+                "uri": "c.png",
+              }
+            }
+            style={
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          />
+        </View>
+      </View>
       <Text>
         You, You and 17 others commented
       </Text>
     </View>
-    <TouchableOpacity
-      onPress={[Function]}
+    <View
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
     >
       <Icon
         name="ArrowUp"
@@ -46,7 +127,7 @@ exports[`renders as expected 1`] = `
       <Text>
         71
       </Text>
-    </TouchableOpacity>
-  </MockLinearGradient>
-</React.Fragment>
+    </View>
+  </div>,
+]
 `;

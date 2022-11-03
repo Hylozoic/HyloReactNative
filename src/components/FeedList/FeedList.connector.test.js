@@ -30,8 +30,7 @@ describe('mapStateToProps', () => {
   })
 
   it('returns empty posts and default query props if no results exist', () => {
-    expect(mapStateToProps(state, { id: 'bar' })).toEqual({
-      groupId: undefined,
+    expect(mapStateToProps(state, { forGroup: { id: 'bar' } })).toEqual({
       postIds: [],
       hasMore: undefined,
       pending: false,
@@ -39,7 +38,7 @@ describe('mapStateToProps', () => {
       filter: initialState.filter,
       sortBy: initialState.sortBy,
       timeframe: 'future',
-      queryProps: {
+      fetchPostParam: {
         context: 'groups',
         sortBy: 'updated'
       }
@@ -47,7 +46,7 @@ describe('mapStateToProps', () => {
   })
 
   it('returns posts in the correct order', () => {
-    const result = mapStateToProps(state, { group: { slug: 'foo', id: 10 } })
+    const result = mapStateToProps(state, { forGroup: { slug: 'foo', id: 10 } })
 
     expect(result).toEqual({
       postIds: [
@@ -57,12 +56,11 @@ describe('mapStateToProps', () => {
       ],
       hasMore: true,
       pending: false,
-      groupId: 10,
       pendingRefresh: false,
       filter: initialState.filter,
       sortBy: initialState.sortBy,
       timeframe: 'future',
-      queryProps: {
+      fetchPostParam: {
         context: 'groups',
         slug: 'foo',
         sortBy: 'updated'
@@ -83,7 +81,7 @@ describe('mapStateToProps', () => {
 describe('mergeProps', () => {
   it('sets up fetchPostsAndResetCount', () => {
     const stateProps = {
-      queryProps: {
+      fetchPostParam: {
         sortBy: defaultSortBy
       }
     }
@@ -94,7 +92,7 @@ describe('mergeProps', () => {
     }
 
     const ownProps = {
-      group: {
+      forGroup: {
         id: 1
       }
     }
@@ -105,13 +103,13 @@ describe('mergeProps', () => {
         expect(dispatchProps.fetchPosts).toHaveBeenCalledWith({
           sortBy: 'updated'
         }, undefined)
-        expect(dispatchProps.resetNewPostCount).toHaveBeenCalledWith(ownProps.currentGroup.id, 'Membership')
+        expect(dispatchProps.resetNewPostCount).toHaveBeenCalledWith(ownProps.forGroup.id, 'Membership')
       })
   })
 
   it('sets up fetchPostsAndResetCount without calling resetNewPostCount', () => {
     const stateProps = {
-      queryProps: {
+      fetchPostParam: {
         sortBy: defaultSortBy,
         filter: 'some filter'
       }
@@ -124,7 +122,8 @@ describe('mergeProps', () => {
 
     const ownProps = {
       group: {
-        id: 1
+        id: 1,
+        slug: 'test-group'
       }
     }
 
@@ -144,7 +143,7 @@ describe('mergeProps', () => {
       filter: 'request',
       hasMore: true,
       postIds: [1, 2, 3, 4],
-      queryProps: {
+      fetchPostParam: {
         slug: 'food',
         sortBy: 'latest',
         filter: 'request',
@@ -184,7 +183,7 @@ describe('mergeProps', () => {
       {
         ...stateProps,
         hasMore: false,
-        queryProps: {
+        fetchPostParam: {
           filter: 'foo',
           sortBy: 'bar',
           slug: ALL_GROUP_ID
