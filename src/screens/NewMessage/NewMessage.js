@@ -42,18 +42,20 @@ export default function NewMessage (props) {
   const prompt = props.route?.params?.prompt
   const recentContacts = useSelector(state => scopedGetRecentContacts(null, { scope: MODULE_NAME })(state, props))
   const initialParticipantIds = !isArray(props.route?.params?.participants)
-    ? props.route?.params?.participants.split(',')
+    ? props.route?.params?.participants?.split(',')
     : props.route?.params?.participants || []
   const initialParticipants = useSelector(state => getPeople(state, { personIds: initialParticipantIds }))
 
   const createMessage = async text => {
-    const resp = await dispatch(findOrCreateThread(participants.map(p => p.id)))
-    const messageThreadId = get('payload.data.findOrCreateThread.id', resp)
+    const response = await dispatch(findOrCreateThread(participants.map(p => p.id)))
+    const messageThreadId = get('payload.data.findOrCreateThread.id', response)
     const { error } = await dispatch(createMessageAction(messageThreadId, text, true))
+
     if (!error) {
       // isModal
       props.navigation.goBack()
-      navigateToLinkingPath(`/messages/${messageThreadId}`)
+      // navigateToLinkingPath(`/messages/${messageThreadId}`)
+      props.navigation.navigate('Thread', { id: messageThreadId })
     }
   }
 

@@ -94,7 +94,7 @@ export const routesConfig = {
 
   // /messages
   '/messages/new':                                           `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('New Message')}`,
-  '/messages/:id':                                           `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Thread')}`,
+  '/messages/:id':                                           `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Messages Tab$/Thread`,
   '/messages':                                               `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Messages Tab/Messages`,
 
   // catch-alls

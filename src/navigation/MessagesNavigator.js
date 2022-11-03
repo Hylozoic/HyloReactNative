@@ -14,6 +14,26 @@ const Messages = createStackNavigator()
 export default function MessagesNavigator () {
   const navigatorProps = {
     screenOptions: {
+      transitionSpec: {
+        open: {
+          animation: 'spring',
+          stiffness: 1000,
+          damping: 500,
+          mass: 3,
+          overshootClamping: true,
+          restDisplacementThreshold: 0.01,
+          restSpeedThreshold: 0.01
+        },
+        close: {
+          animation: 'spring',
+          stiffness: 1000,
+          damping: 500,
+          mass: 3,
+          overshootClamping: true,
+          restDisplacementThreshold: 0.01,
+          restSpeedThreshold: 0.01
+        }
+      },
       headerStyle: { backgroundColor: rhino },
       headerTitleStyle: { color: alabaster } // flag-messages-background-color
     }
