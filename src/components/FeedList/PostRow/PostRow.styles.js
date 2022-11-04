@@ -4,7 +4,7 @@ const feedMargin = 0
 
 export default StyleSheet.create({
   postRow: {
-    paddingBottom: 15,
+    paddingBottom: 12,
     marginRight: feedMargin,
     marginLeft: feedMargin,
 

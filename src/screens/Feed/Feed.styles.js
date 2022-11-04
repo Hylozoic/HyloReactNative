@@ -7,9 +7,7 @@ const postPromptShape = {
   borderRadius: 2,
   left: 0,
   right: 0,
-  bottom: -26,
-  // Mirrored Feed margin, which was removed
-  // marginHorizontal: 12
+  bottom: -26
 }
 
 const hasTextShadow = {

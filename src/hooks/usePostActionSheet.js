@@ -16,9 +16,10 @@ import {
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import Icon from 'components/Icon'
 import { isContextGroup } from 'store/models/Group'
+import { postUrl as postUrlCreator } from 'util/navigation'
 
 export default function usePostActionSheet ({
-  baseUrl = process.env.HYLO_WEB_BASE_URL,
+  baseHostURL = process.env.HYLO_WEB_BASE_URL,
   closeOnDelete,
   creator,
   pinned,
@@ -35,6 +36,9 @@ export default function usePostActionSheet ({
 
   const createActionSheetActions = () => {
     const isCreator = currentUser && creator && currentUser.id === creator.id
+    const postUrl = isContextGroup(currentGroup)
+      ? postUrlCreator(postId, { context: currentGroup.slug })
+      : postUrlCreator(postId, { groupSlug: currentGroup.slug })
 
     const editPost = isCreator
       ? () => navigation.navigate('Edit Post', { id: postId })
@@ -60,14 +64,14 @@ export default function usePostActionSheet ({
       : null
 
     const share = () => Share.share({
-      message: `"${title}" by ${creator.name} on hylo.com: ${baseUrl}/post/${postId}`,
-      url: `${baseUrl}/post/${postId}`
+      message: `"${title}" by ${creator.name} on hylo.com: ${baseHostURL}${postUrl}`,
+      url: `${baseHostURL}${postUrl}`
     }, {
       dialogTitle: `Share "${title}" by ${creator.name}`,
       subject: `"${title}" by ${creator.name} on hylo.com`
     })
 
-    const copyLink = () => Clipboard.setString(`${baseUrl}/post/${postId}`)
+    const copyLink = () => Clipboard.setString(`${baseHostURL}${postUrl}`)
 
     const flagPost = !isCreator
       ? () => setFlaggingVisible(true)

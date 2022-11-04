@@ -88,10 +88,8 @@ export default function AuthRootNavigator () {
     loading,
     returnToOnAuthPath,
     isModal,
-    groupFromGroupSlugRouteParam,
     groupFromGroupSlugRouteParam?.id,
     currentlySelectedGroup?.id,
-    lastViewedGroup,
     lastViewedGroup?.id,
     dispatch
   ])

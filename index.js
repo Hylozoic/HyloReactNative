@@ -43,7 +43,8 @@ AppRegistry.registerComponent(appName, () => App)
 
 enableScreens()
 
-// Uncomment in dev to start fresh:
+// Useful to debug in dev to diagnose any potential image loading issues,
+// or simply to start fresh:
 // FastImage.clearDiskCache()
 // FastImage.clearMemoryCache()
 

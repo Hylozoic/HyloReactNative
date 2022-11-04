@@ -43,6 +43,7 @@ export default function fetchPosts ({ activePostsOnly, afterTime, beforeTime, co
       }
     },
     meta: {
+      afterInteractions: true,
       slug,
       extractModel,
       extractQueryResults: {
