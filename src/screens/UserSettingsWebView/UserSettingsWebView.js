@@ -19,6 +19,7 @@ export default function UserSettingsWebView ({ path: pathProp, route }) {
         return data.groupId && dispatch({ type: LEAVE_GROUP, meta: { id: data.groupId } })
       }
 
+      // TODO: Convert to `nativeRouteHandler` prop on HyloWebView
       case WebViewMessageTypes.NAVIGATION: {
         const { pathname } = data
 
