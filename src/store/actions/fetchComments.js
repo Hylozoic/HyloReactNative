@@ -21,6 +21,7 @@ export function fetchChildComments (commentId, opts = {}) {
       }
     },
     meta: {
+      afterInteractions: true,
       extractModel: 'Comment',
       extractQueryResults: {
         getItems: get('payload.data.comment.childComments')

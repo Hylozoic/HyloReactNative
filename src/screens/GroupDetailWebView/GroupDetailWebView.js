@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useEffect, useState } from 'react'
+import React, { useCallback, useRef, useEffect } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import { WebViewMessageTypes } from 'hylo-shared'
 import { navigateToLinkingPath } from 'navigation/linking'
@@ -6,6 +6,8 @@ import HyloWebView, { parseWebViewMessage } from 'screens/HyloWebView'
 import { useDispatch } from 'react-redux'
 import fetchGroupModerators from 'store/actions/fetchGroupModerators'
 import fetchGroupDetails from 'store/actions/fetchGroupDetails'
+import ModalHeaderTransparent from 'navigation/headers/ModalHeaderTransparent'
+import { isModalScreen } from 'navigation/linking/helpers'
 
 export default function GroupDetailWebView ({ navigation, route }) {
   const dispatch = useDispatch()
@@ -14,12 +16,11 @@ export default function GroupDetailWebView ({ navigation, route }) {
 
   useFocusEffect(
     useCallback(() => {
-      navigation.setOptions({
-        title: groupSlug
-      })
+      isModalScreen(route?.name)
+        ? navigation.setOptions(ModalHeaderTransparent({ navigation }))
+        : navigation.setOptions({ title: groupSlug })
     }, [groupSlug, navigation])
   )
-
   // Fetch moderators for "Opportunities to Connect" / Message to all moderators feature
   useEffect(() => {
     dispatch(fetchGroupModerators({ slug: groupSlug }))

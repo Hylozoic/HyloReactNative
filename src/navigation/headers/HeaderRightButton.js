@@ -5,6 +5,7 @@ import { havelockBlue, ghost } from 'style/colors'
 export default function HeaderRightButton ({
   label,
   onPress,
+  style,
   disabled = false
 }) {
   if (typeof onPress !== 'function') throw new Error('HeaderRightButton: onPress is not a function.')
@@ -16,7 +17,7 @@ export default function HeaderRightButton ({
       hitSlop={{ top: 7, bottom: 7, left: 7, right: 7 }}
       disabled={disabled}
     >
-      <Text style={[styles.button, disabled && styles.disabled]}>{label}</Text>
+      <Text style={[styles.button, style, disabled && styles.disabled]}>{label}</Text>
     </TouchableOpacity>
   )
 }

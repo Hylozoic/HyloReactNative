@@ -4,7 +4,8 @@ import {
   getActionFromState,
   subscribe,
   getInitialURL,
-  getStateFromPath as getStateFromPathDefault
+  getStateFromPath as getStateFromPathDefault,
+  CommonActions
 } from '@react-navigation/native'
 import { match } from 'path-to-regexp'
 import { URL } from 'react-native-url-polyfill'
@@ -16,18 +17,22 @@ import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
 import { navigationRef } from 'navigation/linking/helpers'
 import { modalScreenName } from './helpers'
 
-// Hylo Custom link routing config and related utilities:
-//
-// The current version of `react-navigation` doesn't have a way to map multiple paths
-// to the same screen. The below way of mapping screens to paths is being used in to
-// construct and, otherwise in alternate to, the default `config.screens` config.
-//
-// All routes are always available but routes that begin with `AUTH_ROOT_SCREEN_NAME`
-// will be set as the `returnToPath` and not navigated to until after
-// the user is authorized (see `getAuthState`).
-//
-// NOTE: The linking route paths below are equivalent to `exact` route paths in
-// React Router (web)
+/*
+
+Hylo Custom link routing config and related utilities:
+
+The current version of `react-navigation` doesn't have a way to map multiple paths
+to the same screen. The below way of mapping screens to paths is being used in to
+construct and, otherwise in alternate to, the default `config.screens` config.
+
+All routes are always available but routes that begin with `AUTH_ROOT_SCREEN_NAME`
+will be set as the `returnToPath` and not navigated to until after
+the user is authorized (see `getAuthState`).
+
+NOTE: The linking route paths below are equivalent to `exact` route paths in
+React Router (web)
+
+*/
 
 export const DEFAULT_APP_HOST = 'https://hylo.com'
 
@@ -47,8 +52,8 @@ export const NON_AUTH_ROOT_SCREEN_NAME = 'NonAuthRoot'
 // Even though these are already on the respective navigators,
 // they need to be specified again when linking.
 export const initialRouteNamesConfig = {
-  'Home Tab': 'Group Navigation',
-  'Messages Tab': 'Messages'
+  'Home Tab': ['Group Navigation', 'Feed'],
+  'Messages Tab': ['Messages']
 }
 
 /* eslint-disable key-spacing */
@@ -85,7 +90,7 @@ export const routesToScreenPaths = {
   '/:context(groups)/:groupSlug/topics/:topicName':          `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Topic Feed`,
   '/:context(groups)/:groupSlug/members/:id':                `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Member`,
   '/:context(groups)/:groupSlug/members':                    `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Members`,
-  '/:context(groups)/:groupSlug':                            `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab`,
+  '/:context(groups)/:groupSlug':                            `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`,
   '/:context(groups)/:groupSlug/post/:id':                   `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Post Details`,
   '/:context(groups)/:groupSlug/post/:id/edit':              `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
 
@@ -146,6 +151,13 @@ export const navigateToLinkingPath = async (providedUrl, reset) => {
 
   if (stateForPath) {
     const actionForPath = getActionFromState(stateForPath)
+    if (reset) {
+      return navigationRef.dispatch(
+        CommonActions.reset({
+          routes: [actionForPath.payload]
+        })
+      )
+    }
 
     return navigationRef.dispatch(actionForPath)
   } else {
@@ -196,9 +208,17 @@ function addInitialRouteNamesIntoState (stateWithoutInitials, initialRouteNamesM
     state?.routes?.forEach(route => {
       if (!route.state?.routes) return route
 
-      route.state.routes = route?.name && Object.keys(initialRouteNamesMap).includes(route.name)
-        ? [{ name: initialRouteNamesMap[route.name] }, ...route.state.routes]
-        : route.state.routes
+      if (route?.name && Object.keys(initialRouteNamesMap).includes(route.name)) {
+        route.state.routes = [
+          ...initialRouteNamesMap[route.name].map(name => ({
+            name,
+            // CAUTION: This basically assumes that the target screen will be the only thing initially in the state
+            // at this point, which I think is always true with our current linking setup
+            params: route.state.routes[route.state.routes.length - 1].params
+          })),
+          ...route.state.routes
+        ]
+      }
 
       return recurseObject(route)
     })

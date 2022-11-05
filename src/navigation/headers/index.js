@@ -92,6 +92,8 @@ export function ModalHeader ({
   headerRightButtonLabel = 'Save',
   headerRightButtonOnPress,
   headerRightButtonDisabled,
+  headerRightButtonStyle,
+  headerTransparent = false,
   statusBarOptions = {
     backgroundColor: rhino05,
     barStyle: 'dark-content'
@@ -102,6 +104,7 @@ export function ModalHeader ({
   const headerTitleStyleColor = otherProps.headerTitleStyle?.color ||
     (options.headerTitleStyle?.color ?? black10onRhino)
   const props = {
+    headerTransparent: typeof options.headerTransparent !== 'undefined' ? options.headerTransparent : headerTransparent,
     headerStatusBarHeight: options.headerStatusBarHeight ?? (options.presentation ? 0 : undefined),
     headerStyle: {
       backgroundColor: rhino10,
@@ -115,7 +118,7 @@ export function ModalHeader ({
       color: headerTitleStyleColor,
       fontFamily: 'Circular-Bold'
     },
-    headerLeft: headerLeft || (props => {
+    headerLeft: headerLeft || options.headerLeft || (props => {
       // get go back function from navigation
       const headerLeftOnPress = options.headerLeftOnPress ||
         providedHeaderLeftOnPress ||
@@ -135,9 +138,10 @@ export function ModalHeader ({
     }),
     headerRight: headerRight || (() => headerRightButtonOnPress && (
       <HeaderRightButton
+        disabled={headerRightButtonDisabled}
         label={headerRightButtonLabel}
         onPress={headerRightButtonOnPress}
-        disabled={headerRightButtonDisabled}
+        style={headerRightButtonStyle}
       />
     ))
   }

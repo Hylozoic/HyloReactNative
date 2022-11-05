@@ -10,12 +10,7 @@ import FlagContent from 'components/FlagContent'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from 'assets/default-user-banner.jpg'
 import styles from './MemberProfile.styles'
-
-export const setHeader = ({ route, navigation, currentGroup }) => {
-  if (isModalScreen(route.name)) return
-
-  navigation.setOptions({ title: currentGroup.name })
-}
+import ModalHeaderTransparent from 'navigation/headers/ModalHeaderTransparent'
 
 export const blockUserWithNav = async ({ navigation, person, blockUser }) => {
   await blockUser(person.id)
@@ -45,14 +40,26 @@ export default function MemberProfile ({
 
   const [flaggingVisible, setFlaggingVisible] = useState(false)
 
+  const setHeader = () => {
+    isModalScreen(route.name)
+      ? navigation.setOptions(ModalHeaderTransparent({ navigation }))
+      : navigation.setOptions({ title: currentGroup.name })
+  }
+
+  const handleBlockUser = async () => {
+    await blockUser(person.id)
+
+    navigation.goBack()
+  }
+
   useEffect(() => {
     if (isBlocked) return navigation.goBack()
     fetchPerson()
-    setHeader({ route, navigation, currentGroup })
+    setHeader()
   }, [id])
 
   useEffect(() => {
-    setHeader({ route, navigation, currentGroup })
+    setHeader()
   }, [currentGroup?.name])
 
   if (!person) return <Loading />
@@ -74,7 +81,7 @@ export default function MemberProfile ({
         <MemberHeader
           person={person}
           flagMember={canFlag && (() => setFlaggingVisible(true))}
-          blockUser={() => blockUser({ navigation, person, blockUser })}
+          blockUser={handleBlockUser}
           onPressMessages={onPressMessages}
           isMe={isMe}
           goToEdit={goToEdit}

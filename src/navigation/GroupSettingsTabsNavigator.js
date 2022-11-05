@@ -8,7 +8,7 @@ import fetchGroupSettings from 'store/actions/fetchGroupSettings'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import GroupSettingsWebView from 'screens/GroupSettingsWebView'
 import Avatar from 'components/Avatar'
-import { caribbeanGreen, rhino05, rhino30, rhino60, white } from 'style/colors'
+import { alabaster, rhino, rhino40, rhino60, white } from 'style/colors'
 
 const GroupSettings = createMaterialTopTabNavigator()
 export default function GroupSettingsTabsNavigator () {
@@ -19,11 +19,14 @@ export default function GroupSettingsTabsNavigator () {
   const groupName = selectedGroup?.name
   const navigatorProps = {
     screenOptions: {
-      tabBarActiveTintColor: caribbeanGreen,
-      tabBarInactiveTintColor: rhino30,
-      tabBarIndicatorStyle: { backgroundColor: caribbeanGreen },
+      tabBarActiveTintColor: rhino,
+      tabBarInactiveTintColor: rhino40,
+      tabBarIndicatorStyle: {
+        backgroundColor: 'transparent'
+      },
       tabBarLabelStyle: {
-        fontSize: 16,
+        fontFamily: 'Circular-Bold',
+        fontSize: 14,
         textTransform: 'none'
       },
       tabBarScrollEnabled: true,
@@ -119,11 +122,11 @@ const styles = {
     isIOS
       ? {
           display: 'flex',
-          backgroundColor: rhino05
+          backgroundColor: alabaster
         }
       : {
           display: 'flex',
-          backgroundColor: rhino05,
+          backgroundColor: alabaster,
           borderTopWidth: StyleSheet.hairlineWidth
         }
   )

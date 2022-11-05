@@ -45,7 +45,7 @@ describe('ormSessionReducer', () => {
     ormSessionReducer(session, action)
     expect(session.Post.withId(11).groups.toRefArray()).toHaveLength(0)
   })
-  
+
   it('handles PIN_POST_PENDING', () => {
     const postMembership = session.PostMembership.create({
       pinned: false,

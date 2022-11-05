@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { isIOS } from 'util/platform'
 import { ModalHeader } from 'navigation/headers'
-import { caribbeanGreen, ghost, rhino30, rhino80, white } from 'style/colors'
+import { alabaster, bigStone, capeCod, ghost, rhino, rhino20, rhino30, rhino40, suvaGrey, white } from 'style/colors'
 import logout from 'store/actions/logout'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import UserSettingsWebView from 'screens/UserSettingsWebView'
@@ -15,13 +15,14 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
   const dispatch = useDispatch()
   const navigatorProps = {
     screenOptions: {
-      tabBarActiveTintColor: caribbeanGreen,
-      tabBarInactiveTintColor: rhino30,
+      tabBarActiveTintColor: rhino,
+      tabBarInactiveTintColor: rhino40,
       tabBarIndicatorStyle: {
-        backgroundColor: caribbeanGreen
+        backgroundColor: 'transparent'
       },
       tabBarLabelStyle: {
-        fontSize: 16,
+        fontFamily: 'Circular-Bold',
+        fontSize: 14,
         textTransform: 'none'
       },
       tabBarScrollEnabled: true,
@@ -34,10 +35,11 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
     navigation.setOptions({
       title: 'Settings',
       headerShown: true,
-      headerStyle: { backgroundColor: ghost },
-      headerTitleStyle: { color: rhino80 },
+      headerStyle: { backgroundColor: capeCod },
+      headerTitleStyle: { color: rhino30 },
       header: headerProps => (
         <ModalHeader
+          headerTransparent={false}
           {...headerProps}
           // Hides "X button
           headerLeft={() => {}}
@@ -49,6 +51,7 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
           //   dispatch(fetchCurrentUser())
           //   navigation.navigate('Home Tab')
           // }}
+          // headerRight={()=> <Button text="Logout"></Button>}
           headerRightButtonLabel='Logout'
           headerRightButtonOnPress={() => confirmDiscardChanges({
             title: '',
@@ -57,6 +60,7 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
             disgardButtonText: 'Yes',
             onDiscard: async () => dispatch(logout())
           })}
+          headerRightButtonStyle={{ color: alabaster }}
         />
       )
     })
@@ -119,11 +123,11 @@ const styles = {
     isIOS
       ? {
           display: 'flex',
-          backgroundColor: white
+          backgroundColor: alabaster
         }
       : {
           display: 'flex',
-          backgroundColor: white,
+          backgroundColor: alabaster,
           borderTopWidth: StyleSheet.hairlineWidth
         }
   )
