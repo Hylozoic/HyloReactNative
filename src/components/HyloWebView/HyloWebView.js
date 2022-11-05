@@ -70,7 +70,7 @@ const HyloWebView = forwardRef(function HyloWebView ({
       customScript={`
         window.HyloWebView = true;
 
-        ${handledWebRoutesJavascriptCreator(pathProp)(handledWebRoutes)}
+        ${pathProp && handledWebRoutesJavascriptCreator(pathProp)(handledWebRoutes)}
       `}
       geolocationEnabled
       onMessage={handleMessage}

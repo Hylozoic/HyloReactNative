@@ -10,6 +10,10 @@ export default function UserSettingsWebView ({ path: pathProp, route }) {
   const webViewRef = useRef(null)
   // const [unsaved, setUnsaved] = useState(false)
   const path = pathProp || route?.params?.path
+  const source = route?.params.uri && { uri: route?.params.uri }
+  const sourceOrPath = source
+    ? { source}
+    : { path }
 
   const messageHandler = ({ type, data }) => {
     switch (type) {
@@ -33,7 +37,7 @@ export default function UserSettingsWebView ({ path: pathProp, route }) {
   return (
     <HyloWebView
       ref={webViewRef}
-      path={path}
+      {...sourceOrPath}
       messageHandler={messageHandler}
       nativeRouteHandler={nativeRouteHandler}
     />
