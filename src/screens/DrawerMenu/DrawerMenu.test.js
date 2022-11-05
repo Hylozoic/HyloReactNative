@@ -1,9 +1,15 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import ReactTestRenderer from 'react-test-renderer'
+import TestRenderer from 'react-test-renderer'
 import DrawerMenu, { SectionHeader, NetworkRow, GroupRow, TextButton } from './DrawerMenu'
 import { ALL_GROUP } from 'store/models/Group'
+import { TestRoot } from 'util/testing'
+
+// jest.mock('react-native', () => ({
+//   ...jest.requireActual('react-native'),
+//   BackHandler: { addEventListener: jest.fn(), mockOnBackPress: jest.fn() }
+// }))
 
 describe('DrawerMenu', () => {
   const minProps = {
@@ -33,9 +39,15 @@ describe('DrawerMenu', () => {
       }]
     }
     const renderer = new ReactShallowRenderer()
-    renderer.render(<DrawerMenu {...minProps} {...props} />)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
+    // const { toJSON } = TestRenderer.create(
+    renderer.render(
+      <TestRoot>
+        <DrawerMenu {...minProps} {...props} />
+      </TestRoot>
+    )
+
+    // expect(toJSON()).toMatchSnapshot()
+    expect(renderer.getRenderOutput()).toMatchSnapshot()
   })
 })
 
