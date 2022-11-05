@@ -18,7 +18,6 @@ exports[`mapsStateToProps 1`] = `
   },
   "currentUser": undefined,
   "isProject": false,
-  "memberships": [],
   "post": {
     "attachments": [
       SessionBoundModel {
@@ -101,7 +100,6 @@ exports[`mergeProps maps 1`] = `
   "dispatch": [MockFunction],
   "editPost": [Function],
   "fetchPost": [Function],
-  "goToGroup": [Function],
   "goToMembers": [Function],
   "id": "testpost",
   "isFocused": true,

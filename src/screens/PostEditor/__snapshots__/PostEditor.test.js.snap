@@ -227,6 +227,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
                 onGestureHandlerStateChange={[Function]}
               >
                 <View
+                  pointerEvents="box-none"
                   style={
                     [
                       {
@@ -704,6 +705,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
                 onGestureHandlerStateChange={[Function]}
               >
                 <View
+                  pointerEvents="box-none"
                   style={
                     [
                       {

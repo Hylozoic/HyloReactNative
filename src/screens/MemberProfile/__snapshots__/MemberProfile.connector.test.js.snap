@@ -1,15 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mapDispatchToProps returns the right keys 1`] = `
-{
-  "blockUser": [Function],
-  "fetchPerson": [Function],
-  "goToGroup": [Function],
-  "logout": [Function],
-  "updateUserSettings": [Function],
-}
-`;
-
 exports[`mapStateToProps maps the state to the props 1`] = `
 {
   "currentGroup": {
@@ -42,7 +32,6 @@ exports[`mapStateToProps maps the state to the props 1`] = `
   "id": 123,
   "isBlocked": false,
   "isMe": false,
-  "memberships": [],
   "navigation": {
     "navigate": [MockFunction],
   },
@@ -57,7 +46,6 @@ exports[`mergeProps returns the right keys 1`] = `
     "id": 1,
   },
   "fetchPerson": [Function],
-  "goToGroup": [Function],
   "goToMemberProfile": [Function],
   "id": 78,
   "isMe": true,

@@ -5,7 +5,6 @@ exports[`mapDispatchToProps maps the action generators 1`] = `
   "fetchMemberComments": [Function],
   "fetchMemberPosts": [Function],
   "fetchMemberUpvotes": [Function],
-  "goToGroup": [Function],
   "respondToEvent": [Function],
   "setChoice": [Function],
   "showMember": [Function],

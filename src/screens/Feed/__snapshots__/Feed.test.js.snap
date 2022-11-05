@@ -189,6 +189,7 @@ exports[`calls fetchGroupTopic on componentDidMount 1`] = `
                 onGestureHandlerStateChange={[Function]}
               >
                 <View
+                  pointerEvents="box-none"
                   style={
                     [
                       {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text } from 'react-native'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
+import { TestRoot } from 'util/testing'
 import MemberFeed, { ContentRow, FeedTab } from './MemberFeed'
 
 describe('MemberProfile', () => {
@@ -9,15 +10,19 @@ describe('MemberProfile', () => {
       { id: 1 }, { id: 2 }, { id: 3 }
     ]
     const renderer = new ReactShallowRenderer()
-    renderer.render(<MemberFeed
-      items={items}
-      itemType='Comment'
-      choice='Comments'
-      setChoice={() => {}}
-      header={<Text>header</Text>}
-      fetchMoreItems={() => {}}
-      pending
-                    />)
+    renderer.render(
+      <TestRoot>
+        <MemberFeed
+          items={items}
+          itemType='Comment'
+          choice='Comments'
+          setChoice={() => {}}
+          header={<Text>header</Text>}
+          fetchMoreItems={() => {}}
+          pending
+        />
+      </TestRoot>
+    )
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()

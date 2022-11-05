@@ -189,6 +189,7 @@ exports[`PostDetails renders correctly 1`] = `
                 onGestureHandlerStateChange={[Function]}
               >
                 <View
+                  pointerEvents="box-none"
                   style={
                     [
                       {

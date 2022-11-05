@@ -187,6 +187,7 @@ exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
         },
       },
       "meta": {
+        "afterInteractions": true,
         "extractModel": "Post",
         "extractQueryResults": {
           "getItems": [Function],

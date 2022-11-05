@@ -42,15 +42,6 @@ describe('mapStateToProps', () => {
   })
 })
 
-describe('mapDispatchToProps', () => {
-  it('returns the right keys', () => {
-    const props = {
-      navigation: { navigate: jest.fn() }
-    }
-    expect(mapDispatchToProps({}, props)).toMatchSnapshot()
-  })
-})
-
 describe('makeOnPressMessages', () => {
   let navigation
 

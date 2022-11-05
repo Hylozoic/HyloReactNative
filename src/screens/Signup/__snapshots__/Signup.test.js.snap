@@ -189,6 +189,7 @@ exports[`renders with defaults 1`] = `
                 onGestureHandlerStateChange={[Function]}
               >
                 <View
+                  pointerEvents="box-none"
                   style={
                     [
                       {
