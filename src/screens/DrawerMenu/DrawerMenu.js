@@ -1,20 +1,48 @@
 import React from 'react'
 import { Text, TouchableOpacity, View, SectionList } from 'react-native'
+import { useSelector } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
+import { PUBLIC_GROUP, ALL_GROUP } from 'store/models/Group'
+import getMemberships from 'store/selectors/getMemberships'
+import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
+import getCanModerate from 'store/selectors/getCanModerate'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import FastImage from 'react-native-fast-image'
 import styles from './DrawerMenu.styles'
 import Button from 'components/Button'
 import LinearGradient from 'react-native-linear-gradient'
 import { bannerlinearGradientColors } from 'style/colors'
+import useChangeToGroup from 'hooks/useChangeToGroup'
 
-export default function DrawerMenu ({
-  topGroups, myGroups, goToGroup,
-  currentGroup, currentGroupId, canModerateCurrentGroup,
-  goToCreateGroup, goToGroupSettings, goToInvitePeople
-}) {
+const topGroups = [
+  PUBLIC_GROUP,
+  ALL_GROUP
+]
+
+export default function DrawerMenu () {
+  const navigation = useNavigation()
+  const currentGroup = useSelector(getCurrentGroup)
+  const currentGroupId = useSelector(getCurrentGroupId)
+  const memberships = useSelector(getMemberships)
+  const canModerateCurrentGroup = useSelector(getCanModerate)
+
+  const myGroups = memberships
+    .map(m => m.group.ref)
+    .sort((a, b) => a.name.localeCompare(b.name))
+
+  const goToCreateGroup = () => {
+    navigation.navigate('Create Group', { screen: 'CreateGroupName', params: { reset: true } })
+  }
+  const goToGroupSettings = () => canModerateCurrentGroup &&
+    navigation.navigate('Group Settings')
+  const goToInvitePeople = () => canModerateCurrentGroup &&
+      navigation.navigate('Group Settings', { screen: 'Invite' })
+  const changeToGroup = useChangeToGroup()
+
   const renderItem = ({ item }) => (
     <GroupRow
       group={item}
-      goToGroup={goToGroup}
+      changeToGroup={changeToGroup}
       currentGroupId={currentGroupId}
       addPadding
     />
@@ -96,13 +124,13 @@ export function SectionHeader ({ section }) {
   )
 }
 
-export function GroupRow ({ group, goToGroup, currentGroupId, addPadding, isMember = true }) {
+export function GroupRow ({ group, changeToGroup, currentGroupId, addPadding, isMember = true }) {
   const { id, avatarUrl, name } = group
   const newPostCount = Math.min(99, group.newPostCount)
   const highlight = id === currentGroupId
   return (
     <View style={[styles.groupRow, addPadding && styles.defaultPadding]}>
-      <TouchableOpacity onPress={() => goToGroup(group)} style={styles.rowTouchable}>
+      <TouchableOpacity onPress={() => changeToGroup(group?.slug, false)} style={styles.rowTouchable}>
         {!!avatarUrl &&
           <FastImage source={{ uri: avatarUrl }} style={styles.groupAvatar} />}
         <Text

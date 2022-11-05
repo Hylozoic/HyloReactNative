@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { isEmpty } from 'lodash/fp'
 import {
   View,
@@ -46,12 +46,12 @@ export function ImageViewerButton ({
         </TouchableHighlight>
       )}
       <ImageViewer
-        images={images}
-        title={title}
         creator={creator}
-        visible={imageViewerVisible}
         imageIndex={selectedImageIndex}
+        images={images}
         onRequestClose={toggleImageViewerVisible}
+        title={title}
+        visible
       />
     </>
 

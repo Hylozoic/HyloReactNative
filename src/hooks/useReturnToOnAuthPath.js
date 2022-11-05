@@ -5,7 +5,7 @@ import { navigateToLinkingPath } from 'navigation/linking'
 import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
 import getReturnToOnAuthPath from 'store/selectors/getReturnToOnAuthPath'
 
-export default function useReturnToOnAuth (loading = false) {
+export default function useReturnToOnAuthPath (loading = false) {
   const returnToOnAuthPath = useSelector(getReturnToOnAuthPath)
   const dispatch = useDispatch()
 

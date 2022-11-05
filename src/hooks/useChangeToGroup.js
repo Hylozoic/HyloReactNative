@@ -22,7 +22,10 @@ export default function useChangeToGroup () {
       [PUBLIC_GROUP_ID, ALL_GROUP_ID].includes(groupSlug)
 
     if (canViewGroup) {
-      const goToGroup = () => navigation.navigate('Group Navigation', { groupSlug })
+      const goToGroup = () => {
+        navigation.navigate('Group Navigation', { groupSlug })
+        navigation.navigate('Feed')
+      }
 
       confirm
         ? confirmNavigate(goToGroup, {
