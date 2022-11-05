@@ -9,7 +9,7 @@ import fetchGroupDetails from 'store/actions/fetchGroupDetails'
 import ModalHeaderTransparent from 'navigation/headers/ModalHeaderTransparent'
 import { isModalScreen } from 'navigation/linking/helpers'
 
-export default function GroupDetailWebView ({ navigation, route }) {
+export default function GroupExploreWebView ({ navigation, route }) {
   const dispatch = useDispatch()
   const webViewRef = useRef(null)
   const groupSlug = route.params.groupSlug

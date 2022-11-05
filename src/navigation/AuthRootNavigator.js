@@ -5,7 +5,7 @@ import { modalScreenName } from 'navigation/linking/helpers'
 import { ModalHeader } from 'navigation/headers'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
 import DrawerNavigator from 'navigation/DrawerNavigator'
-import GroupDetailWebView from 'screens/GroupDetailWebView'
+import GroupExploreWebView from 'screens/GroupExploreWebView'
 import GroupSettingsTabsNavigator from 'navigation/GroupSettingsTabsNavigator'
 import LoadingScreen from 'screens/LoadingScreen'
 import MemberProfile from 'screens/MemberProfile'
@@ -73,7 +73,7 @@ export default function AuthRootNavigator () {
             options={{ title: 'Member' }}
           />
           <AuthRoot.Screen
-            name={modalScreenName('Group Detail')} component={GroupDetailWebView}
+            name={modalScreenName('Group Detail')} component={GroupExploreWebView}
             options={{ title: 'Group Details' }}
           />
           <AuthRoot.Screen name='Edit Post' component={PostEditor} options={{ headerShown: false }} />
