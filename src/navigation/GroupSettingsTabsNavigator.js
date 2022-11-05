@@ -1,17 +1,20 @@
 import React, { useLayoutEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { isIOS } from 'util/platform'
 import fetchGroupSettings from 'store/actions/fetchGroupSettings'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import Avatar from 'components/Avatar'
 import GroupSettingsWebView from 'screens/GroupSettingsWebView'
+import Avatar from 'components/Avatar'
 import { caribbeanGreen, rhino05, rhino30, rhino60, white } from 'style/colors'
 
 const GroupSettings = createMaterialTopTabNavigator()
-export default function GroupSettingsTabsNavigator ({ navigation, route }) {
+export default function GroupSettingsTabsNavigator () {
   const dispatch = useDispatch()
+  const navigation = useNavigation()
+  const route = useRoute()
   const selectedGroup = useSelector(getCurrentGroup)
   const groupName = selectedGroup?.name
   const navigatorProps = {

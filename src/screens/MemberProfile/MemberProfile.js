@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Text, View, Image, TouchableOpacity } from 'react-native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { isModalScreen } from 'navigation/linking/helpers'
 import Loading from 'components/Loading'
 import MemberFeed from './MemberFeed'
@@ -36,11 +37,12 @@ export default function MemberProfile ({
   blockUser,
   person,
   updateUserSettings,
-  navigation,
-  route,
   fetchPerson,
   currentGroup
 }) {
+  const navigation = useNavigation()
+  const route = useRoute()
+
   const [flaggingVisible, setFlaggingVisible] = useState(false)
 
   useEffect(() => {

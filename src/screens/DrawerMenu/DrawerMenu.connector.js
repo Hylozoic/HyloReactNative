@@ -42,7 +42,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
     ...dispatchProps,
     ...ownProps,
     goToGroup: group => {
-      navigateToLinkingPath(`/groups/${group.slug}`)
+      navigation.navigate('Group Navigation', { groupSlug: group?.slug })
     },
     goToMyProfile: () => {
       navigation.navigate('Members', { screen: 'Member', params: { id: currentUser.id } })

@@ -1,27 +1,27 @@
 import React, { useRef, useEffect } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import FastImage from 'react-native-fast-image'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { capitalize, isEmpty } from 'lodash/fp'
 import { useDispatch, useSelector } from 'react-redux'
 import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
+import useChangeToGroup from 'hooks/useChangeToGroup'
 import { PUBLIC_GROUP_ID } from 'store/models/Group'
-import makeGoToGroup from 'store/actions/makeGoToGroup'
-import getRouteParam from 'store/selectors/getRouteParam'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import getGroupTopic from 'store/selectors/getGroupTopic'
 import getMe from 'store/selectors/getMe'
 import getMemberships from 'store/selectors/getMemberships'
+import getRouteParam from 'store/selectors/getRouteParam'
 import toggleGroupTopicSubscribeAction from 'store/actions/toggleGroupTopicSubscribe'
 import fetchGroupTopic from 'store/actions/fetchGroupTopic'
-import getGroupTopic from 'store/selectors/getGroupTopic'
-import Loading from 'components/Loading'
-import FeedList from 'components/FeedList'
+import Avatar from 'components/Avatar'
 import Button from 'components/Button'
 import CreateGroupNotice from 'components/CreateGroupNotice'
-import SocketSubscriber from 'components/SocketSubscriber'
-import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
+import FeedList from 'components/FeedList'
+import Loading from 'components/Loading'
+import SocketSubscriber from 'components/SocketSubscriber'
 import { bannerlinearGradientColors } from 'style/colors'
 import styles from './Feed.styles'
 
@@ -32,9 +32,12 @@ export function headerTitle (currentGroup, feedType) {
   return title
 }
 
-export default function Feed ({ topicName: providedTopicName, route, navigation }) {
+export default function Feed ({ topicName: providedTopicName }) {
   const ref = useRef(null)
+  const navigation = useNavigation()
+  const route = useRoute()
   const dispatch = useDispatch()
+  const changeToGroup = useChangeToGroup()
   const feedType = getRouteParam('feedType', route)
   const topicName = providedTopicName || getRouteParam('topicName', route)
 
@@ -47,7 +50,6 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
   const topicSubscribed = groupTopic?.isSubscribed
   const topicPostsTotal = groupTopic?.postsTotal
   const topicFollowersTotal = groupTopic?.followersTotal
-  const goToGroup = groupSlug => makeGoToGroup(navigation, dispatch)(groupSlug, memberships, currentGroup.slug)
   const goToPostDetails = id => navigation.navigate('Post Details', { id })
   const goToCreateGroup = () => navigation.navigate('Create Group')
   const goToMember = id => navigation.navigate('Member', { id })
@@ -136,7 +138,7 @@ export default function Feed ({ topicName: providedTopicName, route, navigation 
         scrollRef={ref}
         forGroup={currentGroup}
         showPost={goToPostDetails}
-        goToGroup={goToGroup}
+        goToGroup={changeToGroup}
         header={feedListHeader}
         route={route}
         navigation={navigation}

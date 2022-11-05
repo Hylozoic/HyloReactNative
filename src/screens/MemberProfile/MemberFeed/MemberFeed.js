@@ -4,6 +4,7 @@ import PostCard from 'components/PostCard'
 import Comment from 'components/Comment'
 import Loading from 'components/Loading'
 import styles from './MemberFeed.styles'
+import useChangeToGroup from 'hooks/useChangeToGroup'
 
 export default function MemberFeed ({
   id,
@@ -17,10 +18,11 @@ export default function MemberFeed ({
   pending,
   showPost,
   showTopic,
-  showMember,
-  goToGroup
+  showMember
 }) {
   useEffect(() => { fetchItems() }, [id, choice])
+
+  const changeToGroup = useChangeToGroup()
 
   return (
     <View style={styles.superContainer}>
@@ -38,7 +40,7 @@ export default function MemberFeed ({
             showPost={showPost}
             showTopic={showTopic}
             showMember={showMember}
-            goToGroup={goToGroup}
+            goToGroup={changeToGroup}
           />
         )}
       />

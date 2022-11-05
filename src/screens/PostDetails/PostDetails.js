@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
 import { get } from 'lodash/fp'
 import { isModalScreen } from 'navigation/linking/helpers'
+import useChangeToGroup from 'hooks/useChangeToGroup'
 import { KeyboardAccessoryCommentEditor } from 'components/CommentEditor/CommentEditor'
 import Comments from 'components/Comments'
 import Loading from 'components/Loading'
@@ -55,7 +56,7 @@ export class PostDetailsClassComponent extends React.Component {
   }
 
   renderPostDetails = (panHandlers) => {
-    const { post, currentGroup, respondToEvent, showMember, isModal } = this.props
+    const { post, currentGroup, respondToEvent, showMember, isModal, changeToGroup } = this.props
     const firstGroupSlug = get('groups.0.slug', post)
     const showGroups = isModal || post?.groups.find(g => g.slug !== currentGroup?.slug)
 
@@ -66,6 +67,7 @@ export class PostDetailsClassComponent extends React.Component {
         header={(
           <PostCardForDetails
             {...this.props}
+            goToGroup={changeToGroup}
             showGroups={showGroups}
             respondToEvent={respondToEvent}
             showTopic={this.onShowTopic}
@@ -106,8 +108,14 @@ export class PostDetailsClassComponent extends React.Component {
 export default function PostDetails (props) {
   const isModal = isModalScreen(props.route?.name)
   const isFocused = useIsFocused()
+  const changeToGroup = useChangeToGroup()
 
   return (
-    <PostDetailsClassComponent {...props} isModal={isModal} isFocused={isFocused} />
+    <PostDetailsClassComponent
+      {...props}
+      isModal={isModal}
+      isFocused={isFocused}
+      changeToGroup={changeToGroup}
+    />
   )
 }

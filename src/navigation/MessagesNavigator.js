@@ -13,6 +13,7 @@ import { alabaster, rhino } from 'style/colors'
 const Messages = createStackNavigator()
 export default function MessagesNavigator () {
   const navigatorProps = {
+    initialRouteName: 'Messages',
     screenOptions: {
       transitionSpec: {
         open: {
@@ -64,6 +65,7 @@ export default function MessagesNavigator () {
             <ModalHeader
               {...headerProps}
               headerLeftCloseIcon={false}
+              // headerLeftOnPress={() => headerProps.navigation.navigate('Messages')}
             />
           )
         }}

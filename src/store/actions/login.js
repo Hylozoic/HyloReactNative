@@ -24,6 +24,17 @@ export default function login (email, password) {
                 streamSortBy
                 streamPostType
               }
+              memberships {
+                id
+                lastViewedAt
+                person {
+                  id
+                }
+                group {
+                  id
+                  slug
+                }
+              }
             }
             error
           }
