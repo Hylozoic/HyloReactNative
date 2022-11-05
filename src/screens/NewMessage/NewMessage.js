@@ -7,7 +7,6 @@ import {
 } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { get, isArray } from 'lodash/fp'
-import { navigateToLinkingPath } from 'navigation/linking'
 import getPeople from 'store/selectors/getPeople'
 import isPendingFor from 'store/selectors/isPendingFor'
 import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
@@ -27,7 +26,6 @@ import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Loading from 'components/Loading'
 import PersonPickerItemRow from 'screens/ItemChooser/PersonPickerItemRow'
 import styles from './NewMessage.styles'
-import { isModalScreen } from 'navigation/linking/helpers'
 
 export default function NewMessage (props) {
   const dispatch = useDispatch()
@@ -37,8 +35,6 @@ export default function NewMessage (props) {
     findOrCreateThread,
     createMessageAction
   ], state))
-  const isModal = isModalScreen(props.route?.name)
-  console.log('!!! isModal', isModal, props.route?.name)
   const prompt = props.route?.params?.prompt
   const recentContacts = useSelector(state => scopedGetRecentContacts(null, { scope: MODULE_NAME })(state, props))
   const initialParticipantIds = !isArray(props.route?.params?.participants)
@@ -52,9 +48,6 @@ export default function NewMessage (props) {
     const { error } = await dispatch(createMessageAction(messageThreadId, text, true))
 
     if (!error) {
-      // isModal
-      props.navigation.goBack()
-      // navigateToLinkingPath(`/messages/${messageThreadId}`)
       props.navigation.navigate('Thread', { id: messageThreadId })
     }
   }

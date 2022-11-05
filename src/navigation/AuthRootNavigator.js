@@ -1,20 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { useDispatch, useSelector } from 'react-redux'
-import { get, isEmpty } from 'lodash/fp'
-import OneSignal from 'react-native-onesignal'
-import { navigateToLinkingPath } from 'navigation/linking'
-import { isModalScreen, modalScreenName } from 'navigation/linking/helpers'
-import getGroup from 'store/selectors/getGroup'
-import getLastViewedGroup from 'store/selectors/getLastViewedGroup'
-import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import { useRoute } from '@react-navigation/native'
-import registerDevice from 'store/actions/registerDevice'
-import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
-import getReturnToOnAuthPath from 'store/selectors/getReturnToOnAuthPath'
-import selectGroupAction from 'store/actions/selectGroup'
+import { modalScreenName } from 'navigation/linking/helpers'
 import { ModalHeader } from 'navigation/headers'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
 import DrawerNavigator from 'navigation/DrawerNavigator'
@@ -29,20 +16,14 @@ import NotificationsList from 'screens/NotificationsList'
 import Thread from 'screens/Thread'
 import { white } from 'style/colors'
 import { HyloHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
+import { useDispatch } from 'react-redux'
+import fetchCurrentUser from 'store/actions/fetchCurrentUser'
+import OneSignal from 'react-native-onesignal'
+import registerDevice from 'store/actions/registerDevice'
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
-  const route = useRoute()
-  const routeParams = route?.params
-  const isModal = isModalScreen(route?.name) || isModalScreen(route?.params?.screen)
-  // TODO: Replace with a dynamic nested object search or ?
-  const groupSlugRouteParam = get('params.params.params.params.groupSlug', routeParams)
-  const groupFromGroupSlugRouteParam = useSelector(state => getGroup(state, { slug: groupSlugRouteParam }))
-  const currentlySelectedGroup = useSelector(getCurrentGroup)
-  const lastViewedGroup = useSelector(getLastViewedGroup)
-  const returnToOnAuthPath = useSelector(getReturnToOnAuthPath)
   const dispatch = useDispatch()
-
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -65,34 +46,6 @@ export default function AuthRootNavigator () {
       setLoading(false)
     })()
   }, [])
-
-  useEffect(() => {
-    (async function () {
-      if (!loading) {
-        if (!isModal) {
-          const groupToSelect = groupFromGroupSlugRouteParam || lastViewedGroup
-
-          if (currentlySelectedGroup?.id !== groupToSelect?.id) {
-            dispatch(selectGroupAction(groupToSelect.id))
-            await navigateToLinkingPath(`groups/${groupToSelect.slug}`)
-          }
-        }
-
-        if (!isEmpty(returnToOnAuthPath)) {
-          dispatch(setReturnToOnAuthPath())
-          navigateToLinkingPath(returnToOnAuthPath)
-        }
-      }
-    })()
-  }, [
-    loading,
-    returnToOnAuthPath,
-    isModal,
-    groupFromGroupSlugRouteParam?.id,
-    currentlySelectedGroup?.id,
-    lastViewedGroup?.id,
-    dispatch
-  ])
 
   const navigatorProps = {
     screenOptions: {

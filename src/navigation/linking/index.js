@@ -1,11 +1,10 @@
 import { Linking } from 'react-native'
-import { isEmpty, set } from 'lodash/fp'
+import { isEmpty, cloneDeepWith } from 'lodash/fp'
 import {
   getActionFromState,
   subscribe,
   getInitialURL,
-  getStateFromPath as getStateFromPathDefault,
-  CommonActions
+  getStateFromPath as getStateFromPathDefault
 } from '@react-navigation/native'
 import { match } from 'path-to-regexp'
 import { URL } from 'react-native-url-polyfill'
@@ -45,8 +44,15 @@ export const prefixes = [
 export const AUTH_ROOT_SCREEN_NAME = 'AuthRoot'
 export const NON_AUTH_ROOT_SCREEN_NAME = 'NonAuthRoot'
 
+// Even though these are already on the respective navigators,
+// they need to be specified again when linking.
+export const initialRouteNamesConfig = {
+  'Home Tab': 'Group Navigation',
+  'Messages Tab': 'Messages'
+}
+
 /* eslint-disable key-spacing */
-export const routesConfig = {
+export const routesToScreenPaths = {
   '/login':                                                  `${NON_AUTH_ROOT_SCREEN_NAME}/Login`,
   '/signup/:step(verify-email)':                             `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/SignupEmailValidation`,
   '/signup/:step?':                                          `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/Signup Intro`,
@@ -58,7 +64,7 @@ export const routesConfig = {
   '/hylo-editor':                                            `${AUTH_ROOT_SCREEN_NAME}/HyloEditor`,
 
   // context group routes (/all, /public)
-  '/:groupSlug(all|public)':                                 `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`,
+  '/:groupSlug(all|public)':                                 `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab`,
   '/:groupSlug(all|public)/post/:id':                        `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Post Details`,
   '/:groupSlug(all)/members/:id':                            `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Member`,
   '/:groupSlug(all)/topics/:topicName':                      `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Topic Feed`,
@@ -79,7 +85,7 @@ export const routesConfig = {
   '/:context(groups)/:groupSlug/topics/:topicName':          `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Topic Feed`,
   '/:context(groups)/:groupSlug/members/:id':                `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Member`,
   '/:context(groups)/:groupSlug/members':                    `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Members`,
-  '/:context(groups)/:groupSlug':                            `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`,
+  '/:context(groups)/:groupSlug':                            `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab`,
   '/:context(groups)/:groupSlug/post/:id':                   `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Post Details`,
   '/:context(groups)/:groupSlug/post/:id/edit':              `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
 
@@ -91,8 +97,8 @@ export const routesConfig = {
   '/settings/:section?':                                     `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Settings Tab/Edit Profile`,
 
   // /messages
-  '/messages/new':                                           `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('New Message')}`,
-  '/messages/:id':                                           `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Messages Tab$/Thread`,
+  '/messages/new':                                           `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Messages Tab/New Message`,
+  '/messages/:id':                                           `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Messages Tab/Thread`,
   '/messages':                                               `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Messages Tab/Messages`,
 
   // catch-alls
@@ -132,20 +138,6 @@ export async function openURL (providedUrlOrPath, options = {}) {
   }
 }
 
-const screenLevelInState = (navState, targetScreenName = 'Feed', level = 0) => {
-  level += 1
-
-  if (navState?.screen === targetScreenName || navState?.name === targetScreenName) {
-    return level
-  }
-
-  if (navState?.params) {
-    return screenLevelInState(navState.params, targetScreenName, level)
-  } else {
-    return 0
-  }
-}
-
 // This could possibly be replaced by updating the logic applied by Linking.openURL
 export const navigateToLinkingPath = async (providedUrl, reset) => {
   const linkingURL = new URL(providedUrl, DEFAULT_APP_HOST)
@@ -153,23 +145,7 @@ export const navigateToLinkingPath = async (providedUrl, reset) => {
   const stateForPath = getStateFromPath(linkingPath)
 
   if (stateForPath) {
-    let actionForPath = getActionFromState(stateForPath)
-
-    if (reset) {
-      const feedScreenLevel = screenLevelInState(actionForPath.payload, 'Feed')
-
-      if (feedScreenLevel !== 0) {
-        // This maintains `Group Navigation` as the the initial screen while on Home Tab
-        // in particular when navigating to the `Feed` from links.
-        // Same as this, but dynamic: `actionForPath.pyload.params.params.params.params.initial = false`
-        actionForPath = set(`payload${'.params'.repeat(feedScreenLevel - 1)}.initial`, false, actionForPath)
-      }
-      return navigationRef.dispatch(
-        CommonActions.reset({
-          routes: [actionForPath.payload]
-        })
-      )
-    }
+    const actionForPath = getActionFromState(stateForPath)
 
     return navigationRef.dispatch(actionForPath)
   } else {
@@ -189,7 +165,7 @@ export const navigateToLinkingPath = async (providedUrl, reset) => {
   // }
 }
 
-export function getScreenPathWithParamsFromPath (incomingPathAndQuerystring, routes = routesConfig) {
+export function getScreenPathWithParamsFromPath (incomingPathAndQuerystring, routes = routesToScreenPaths) {
   const {
     pathname: incomingPathname,
     search: incomingQuerystring
@@ -215,8 +191,24 @@ export function getScreenPathWithParamsFromPath (incomingPathAndQuerystring, rou
   }
 }
 
+function addInitialRouteNamesIntoState (stateWithoutInitials, initialRouteNamesMap = initialRouteNamesConfig) {
+  function recurseObject (state) {
+    state?.routes?.forEach(route => {
+      if (!route.state?.routes) return route
+
+      route.state.routes = route?.name && Object.keys(initialRouteNamesMap).includes(route.name)
+        ? [{ name: initialRouteNamesMap[route.name] }, ...route.state.routes]
+        : route.state.routes
+
+      return recurseObject(route)
+    })
+  }
+
+  return cloneDeepWith(recurseObject, stateWithoutInitials)
+}
+
 export const getStateFromPath = path => {
-  const screenPathWithParams = getScreenPathWithParamsFromPath(path, routesConfig)
+  const screenPathWithParams = getScreenPathWithParamsFromPath(path, routesToScreenPaths)
   const isAuthorized = getAuthorized(store.getState())
 
   // 404 handling
@@ -225,10 +217,16 @@ export const getStateFromPath = path => {
   // Set `returnToOnAuthPath` for routes requiring auth when not auth'd
   if (!isAuthorized && screenPathWithParams.match(new RegExp(`^${AUTH_ROOT_SCREEN_NAME}`))) {
     store.dispatch(setReturnToOnAuthPath(path))
+
     return null
   }
 
-  return getStateFromPathDefault(screenPathWithParams)
+  const stateFromPath = getStateFromPathDefault(screenPathWithParams)
+  const stateWithInitialRouteNames = addInitialRouteNamesIntoState(stateFromPath)
+
+  // console.log('!!!! stateWithInitialRouteNames', JSON.stringify(stateWithInitialRouteNames, null, 2))
+
+  return stateWithInitialRouteNames
 }
 
 // React Navigation linking config
