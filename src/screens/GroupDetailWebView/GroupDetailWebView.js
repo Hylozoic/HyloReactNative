@@ -35,9 +35,7 @@ export default function GroupDetailWebView ({ navigation, route }) {
     navigateToLinkingPath(`/groups/${groupToJoinSlug}`)
   }
 
-  const handleMessage = message => {
-    const { type, data } = parseWebViewMessage(message)
-
+  const messageHandler = ({ type, data }) => {
     switch (type) {
       case WebViewMessageTypes.JOINED_GROUP: {
         const { groupSlug } = data
@@ -47,7 +45,7 @@ export default function GroupDetailWebView ({ navigation, route }) {
     }
   }
 
-  const allowedWebRoutes = [
+  const handledWebRoutes = [
     '(.*)/explore/group/(.*)'
   ]
 
@@ -67,9 +65,23 @@ export default function GroupDetailWebView ({ navigation, route }) {
     <HyloWebView
       ref={webViewRef}
       path={`/groups/${groupSlug}/explore`}
-      allowedWebRoutes={allowedWebRoutes}
+      handledWebRoutes={handledWebRoutes}
       nativeRouteHandler={nativeRouteHandler}
-      onMessage={handleMessage}
+      messageHandler={messageHandler}
+      onNavigationStateChange={(navState) => {
+        if (navState.canGoBack) {
+          navigation.setParams({
+            headerLeftInfo: {
+              title: '',
+              onPress: () => webViewRef.current.goBack()
+            }
+          })
+        } else {
+          navigation.setParams({
+            headerLeftInfo: null
+          })
+        }
+      }}
     />
   )
 }

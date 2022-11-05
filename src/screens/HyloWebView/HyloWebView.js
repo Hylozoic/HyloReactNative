@@ -8,8 +8,8 @@ import { match, pathToRegexp } from 'path-to-regexp'
 import { parseWebViewMessage } from '.'
 
 const HyloWebView = forwardRef(function HyloWebView ({
-  allowedWebRoutes = [],
-  onMessage: providedOnMessage,
+  handledWebRoutes = [],
+  messageHandler,
   nativeRouteHandler,
   path: pathProp,
   route,
@@ -36,27 +36,31 @@ const HyloWebView = forwardRef(function HyloWebView ({
   )
 
   const handleMessage = message => {
-    const { type, data } = parseWebViewMessage(message)
+    const parsedMessage = parseWebViewMessage(message)
+    const { type, data } = parsedMessage
 
     switch (type) {
       case WebViewMessageTypes.NAVIGATION: {
         if (nativeRouteHandler) {
-          const { pathname, search } = data
-          const nativeRouteHandlers = nativeRouteHandler({ pathname, search })
+          const { handled, pathname, search } = data
 
-          for (const pathMatcher in nativeRouteHandlers) {
-            const matched = match(pathMatcher)(pathname)
+          if (!handled) {
+            const nativeRouteHandlers = nativeRouteHandler({ pathname, search })
 
-            if (matched) {
-              nativeRouteHandlers[pathMatcher]({ routeParams: matched.params, pathname, search })
-              break
+            for (const pathMatcher in nativeRouteHandlers) {
+              const matched = match(pathMatcher)(pathname)
+
+              if (matched) {
+                nativeRouteHandlers[pathMatcher]({ routeParams: matched.params, pathname, search })
+                break
+              }
             }
           }
         }
       }
     }
 
-    providedOnMessage && providedOnMessage(message)
+    messageHandler && messageHandler(parsedMessage)
   }
 
   if (!cookie) return <Loading />
@@ -66,7 +70,7 @@ const HyloWebView = forwardRef(function HyloWebView ({
       customScript={`
         window.HyloWebView = true;
 
-        ${allowedWebRoutesJavascriptCreator(pathProp)(allowedWebRoutes)}
+        ${handledWebRoutesJavascriptCreator(pathProp)(handledWebRoutes)}
       `}
       geolocationEnabled
       onMessage={handleMessage}
@@ -120,27 +124,25 @@ const HyloWebView = forwardRef(function HyloWebView ({
 
 export default HyloWebView
 
-const allowedWebRoutesJavascriptCreator = loadedPath => allowRoutesParam => {
-  const allowedWebRoutes = [loadedPath, ...allowRoutesParam]
-  const allowedWebRoutesRegExps = allowedWebRoutes.map(allowedRoute => pathToRegexp(allowedRoute))
-  const allowedWebRoutesRegExpsLiteralString = JSON.parse(JSON.stringify(allowedWebRoutesRegExps.map(a => a.toString())))
+const handledWebRoutesJavascriptCreator = loadedPath => allowRoutesParam => {
+  const handledWebRoutes = [loadedPath, ...allowRoutesParam]
+  const handledWebRoutesRegExps = handledWebRoutes.map(allowedRoute => pathToRegexp(allowedRoute))
+  const handledWebRoutesRegExpsLiteralString = JSON.parse(JSON.stringify(handledWebRoutesRegExps.map(a => a.toString())))
 
   return `
     if (window.ReactNativeWebView.reactRouterHistory) {
       window.ReactNativeWebView.reactRouterHistory.block(({ pathname, search }) => {
-        const allowedWebRoutesRegExps = [${allowedWebRoutesRegExpsLiteralString}]
-        const allowedRoute = allowedWebRoutesRegExps.some(allowedRoutePathRegExp => {
+        const handledWebRoutesRegExps = [${handledWebRoutesRegExpsLiteralString}]
+        const handled = handledWebRoutesRegExps.some(allowedRoutePathRegExp => {
           return allowedRoutePathRegExp.test(pathname)
         })
 
-        if (allowedRoute) return true
-
         window.ReactNativeWebView.postMessage(JSON.stringify({
           type: '${WebViewMessageTypes.NAVIGATION}',
-          data: { pathname, search }
+          data: { handled, pathname, search }
         }))
 
-        return false
+        return handled
       })
     }
   `

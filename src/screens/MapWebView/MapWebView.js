@@ -37,7 +37,7 @@ export default function MapWebView ({ navigation }) {
     }, [group?.slug])
   )
 
-  const allowedWebRoutes = [
+  const handledWebRoutes = [
     // To keep saved search retrieval from resetting group context in the App:
     '/map'
   ]
@@ -70,7 +70,7 @@ export default function MapWebView ({ navigation }) {
           to 'software' for API < 28'ish API may fix those cases.
 
       */
-      allowedWebRoutes={allowedWebRoutes}
+      handledWebRoutes={handledWebRoutes}
       androidLayerType='hardware'
       nativeRouteHandler={nativeRouteHandler}
       path={path}

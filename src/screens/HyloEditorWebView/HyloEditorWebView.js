@@ -31,9 +31,7 @@ export function HyloEditorWebView ({
   const [contentHTML, setContentHTML] = useState()
   const [loaded, setLoaded] = useState()
 
-  const handleMessage = message => {
-    const { type, data } = parseWebViewMessage(message)
-
+  const messageHandler = ({ type, data }) => {
     switch (type) {
       case WebViewMessageTypes.EDITOR.LOADED: {
         setLoaded(true)
@@ -127,7 +125,7 @@ export function HyloEditorWebView ({
 
   return React.createElement(HyloWebView, {
     path,
-    onMessage: handleMessage,
+    messageHandler,
     renderLoading,
     // Seems to help but when it's relied upon (e.g. PostEditor height)
     // it causes 2 resizes and could probably be handled better otherwise

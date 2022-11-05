@@ -11,24 +11,12 @@ export default function UserSettingsWebView ({ path: pathProp, route }) {
   // const [unsaved, setUnsaved] = useState(false)
   const path = pathProp || route?.params?.path
 
-  const handleMessage = message => {
-    const { type, data } = parseWebViewMessage(message)
-
+  const messageHandler = ({ type, data }) => {
     switch (type) {
       case WebViewMessageTypes.LEFT_GROUP: {
         return data.groupId && dispatch({ type: LEAVE_GROUP, meta: { id: data.groupId } })
       }
 
-      // TODO: Convert to `nativeRouteHandler` prop on HyloWebView
-      case WebViewMessageTypes.NAVIGATION: {
-        const { pathname } = data
-
-        if (pathname.match(/\/login/)) {
-          dispatch(logout())
-        }
-
-        break
-      }
       // TODO: See https://github.com/Hylozoic/hylo-evo/tree/user-settings-webview-improvements
       // case 'USER_SETTINGS.SET_EDIT_PROFILE_UNSAVED': {
       //   console.log('!~~~ setting unsaved', data)
@@ -38,11 +26,16 @@ export default function UserSettingsWebView ({ path: pathProp, route }) {
     }
   }
 
+  const nativeRouteHandler = () => ({
+    '/login': () => dispatch(logout())
+  })
+
   return (
     <HyloWebView
       ref={webViewRef}
       path={path}
-      onMessage={handleMessage}
+      messageHandler={messageHandler}
+      nativeRouteHandler={nativeRouteHandler}
     />
   )
 }
