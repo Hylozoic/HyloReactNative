@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useImperativeHandle } from 'react'
 import { Dimensions } from 'react-native'
 import { WebViewMessageTypes } from 'hylo-shared'
 import { isIOS } from 'util/platform'
-import HyloWebView, { sendMessageFromWebView, parseWebViewMessage } from 'screens/HyloWebView'
+import HyloWebView, { sendMessageFromWebView } from 'components/HyloWebView'
 
 const DEFAULT_WIDTH_OFFSET_IOS = 18
 const EMPTY_STATE = '<p></p>'

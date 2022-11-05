@@ -9,12 +9,11 @@ import { isEmpty } from 'lodash/fp'
 import { isIOS } from 'util/platform'
 import { TextHelpers } from 'hylo-shared'
 import createComment from 'store/actions/createComment'
-import HyloEditorWebView from 'screens/HyloEditorWebView'
+import HyloEditorWebView from 'components/HyloEditorWebView'
 import styles from './CommentEditor.styles'
 import { useDispatch } from 'react-redux'
 import Icon from 'components/Icon'
 import { firstName } from 'store/models/Person'
-import { rhino, rhino10 } from 'style/colors'
 
 export const KeyboardAccessoryCommentEditor = forwardRef(function KeyboardAccessoryCommentEditor ({
   renderScrollable,
@@ -49,7 +48,6 @@ export const KeyboardAccessoryCommentEditor = forwardRef(function KeyboardAccess
 })
 
 export const CommentEditor = forwardRef(function CommentEditor ({
-  groupId,
   postId,
   replyingTo,
   scrollToReplyingTo,

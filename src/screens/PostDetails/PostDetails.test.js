@@ -9,6 +9,7 @@ import orm from 'store/models'
 //       https://gist.github.com/krawaller/e5d40217658fa132f3c3904987e467cd
 
 jest.mock('components/SocketSubscriber', () => () => null)
+// jest.mock('components/HyloEditorWebview', () => () => null)
 jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
 
 const post = {

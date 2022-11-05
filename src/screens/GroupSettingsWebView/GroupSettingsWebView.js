@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import HyloWebView from 'screens/HyloWebView'
+import HyloWebView from 'components/HyloWebView'
 import RNRestart from 'react-native-restart'
 
 export default function GroupSettingsWebView ({ path: pathProp, route }) {

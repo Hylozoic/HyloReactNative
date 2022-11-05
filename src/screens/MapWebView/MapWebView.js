@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { navigateToLinkingPath } from 'navigation/linking'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
-import HyloWebView from 'screens/HyloWebView'
+import HyloWebView from 'components/HyloWebView'
 
 // Matches actual group paths (e.g. not /all or /public)
 export const MATCHER_GROUP_SLUG = '[a-zA-Z0-9-]+$'

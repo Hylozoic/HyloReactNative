@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { WebViewMessageTypes } from 'hylo-shared'
 import logout from 'store/actions/logout'
 import { LEAVE_GROUP } from 'store/constants'
-import HyloWebView, { parseWebViewMessage } from 'screens/HyloWebView'
+import HyloWebView from 'components/HyloWebView'
 
 export default function UserSettingsWebView ({ path: pathProp, route }) {
   const dispatch = useDispatch()

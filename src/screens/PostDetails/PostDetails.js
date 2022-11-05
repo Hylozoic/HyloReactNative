@@ -19,6 +19,8 @@ export class PostDetailsClassComponent extends React.Component {
   commentsRef = React.createRef()
 
   componentDidMount () {
+    console.log('!!! rendering post details')
+
     this.props.fetchPost()
     this.setHeader()
   }

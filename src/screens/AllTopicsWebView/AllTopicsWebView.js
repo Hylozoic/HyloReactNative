@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { navigateToLinkingPath } from 'navigation/linking'
-import HyloWebView from 'screens/HyloWebView'
+import HyloWebView from 'components/HyloWebView'
 
 export default function AllTopicsWebView () {
   const currentGroup = useSelector(getCurrentGroup)
