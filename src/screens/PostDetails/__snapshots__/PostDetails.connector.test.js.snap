@@ -138,7 +138,7 @@ exports[`mergeProps showTopic 1`] = `
 [
   "navigate",
   [
-    "Topic Feed",
+    "Feed",
     {
       "topicName": "mytopicname",
     },

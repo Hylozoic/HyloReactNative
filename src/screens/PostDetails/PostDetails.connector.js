@@ -51,7 +51,7 @@ export function mergeProps (stateProps, dispatchProps, ownProps) {
         return navigation.navigate('Member', { id })
       }
     },
-    showTopic: topicName => navigation.navigate('Topic Feed', { topicName }),
+    showTopic: topicName => navigation.navigate('Feed', { topicName }),
     respondToEvent: response => dispatch(respondToEvent(postId, response))
   }
 }

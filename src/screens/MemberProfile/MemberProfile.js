@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Text, View, Image, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { isModalScreen } from 'navigation/linking/helpers'
 import Loading from 'components/Loading'
@@ -159,7 +160,7 @@ export class MemberBanner extends React.Component {
           onPendingChange={pending => this.setState({ bannerPickerPending: pending })}
           disabled={!isMe}
         >
-          <Image source={bannerSource} style={styles.bannerImage} />
+          <FastImage source={bannerSource} style={styles.bannerImage} />
           {isMe && <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />}
         </ImagePicker>
         <View style={styles.avatarW3}>
@@ -173,7 +174,7 @@ export class MemberBanner extends React.Component {
             disabled={!isMe}
           >
             <View style={styles.avatarWrapper}>
-              <Image source={avatarSource} style={styles.avatarImage} />
+              <FastImage source={avatarSource} style={styles.avatarImage} />
               {isMe && <EditButton isLoading={avatarPickerPending} style={styles.avatarEditButton} />}
             </View>
           </ImagePicker>

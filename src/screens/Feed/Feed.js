@@ -58,7 +58,7 @@ export default function Feed ({ topicName: providedTopicName }) {
     if (topic?.name) {
       navigation.setParams({ topicName: selectedTopicName })
     } else {
-      navigation.push('Topic Feed', { groupId: currentGroup.id, topicName: selectedTopicName })
+      navigation.push('Feed', { groupId: currentGroup.id, topicName: selectedTopicName })
     }
   }
 

@@ -15,6 +15,7 @@ export default function MenuButton ({
   let onPress = canGoBack
     ? navigation.goBack
     : navigation.openDrawer
+
   if (canGoBack && !navigation.canGoBack()) {
     onPress = () => navigation.navigate('Group Navigation')
   }

@@ -64,7 +64,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     }, dispatch),
     showMember: id => navigation.navigate('Member', { id }),
     showPost: id => navigation.navigate(modalScreenName('Post Details'), { id }),
-    showTopic: topicName => navigation.navigate('Topic Feed', { topicName })
+    showTopic: topicName => navigation.navigate('Feed', { topicName })
   }
 }
 
