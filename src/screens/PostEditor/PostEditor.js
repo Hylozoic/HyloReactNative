@@ -498,7 +498,7 @@ export class PostEditor extends React.Component {
               onAddTopic={!topicsPicked && this.handleAddTopic}
               readOnly={postLoading || isSaving}
               ref={this.detailsEditorRef}
-              widthOffset={18}
+              widthOffset={0}
               // Not setting a max height until ScrollView interaction is worked out better
               customEditorCSS={`
                 min-height: 90px;

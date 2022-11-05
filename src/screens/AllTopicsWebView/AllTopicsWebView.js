@@ -1,9 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { WebViewMessageTypes } from 'hylo-shared'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { navigateToLinkingPath } from 'navigation/linking'
-import HyloWebView, { parseWebViewMessage } from 'screens/HyloWebView'
+import HyloWebView from 'screens/HyloWebView'
 
 export default function AllTopicsWebView () {
   const currentGroup = useSelector(getCurrentGroup)
@@ -17,7 +16,6 @@ export default function AllTopicsWebView () {
 
   return (
     <HyloWebView
-      hideKeyboardAccessoryView
       nativeRouteHandler={nativeRouteHandler}
       path={path}
     />
