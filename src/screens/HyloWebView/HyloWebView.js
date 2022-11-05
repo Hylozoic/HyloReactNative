@@ -71,6 +71,7 @@ const HyloWebView = forwardRef(function HyloWebView ({
       geolocationEnabled
       onMessage={handleMessage}
       nestedScrollEnabled
+      hideKeyboardAccessoryView
       /*
 
       // NOTE: The following is deprecated in favor of listening for the WebView
@@ -109,8 +110,9 @@ const HyloWebView = forwardRef(function HyloWebView ({
         opacity: 0.99,
         minHeight: 1
       }]}
-      // Recommended setting from AutoHeightWebView docs, but didn't work for us:
-      // viewportContent='width=device-width, user-scalable=no'
+      // Recommended setting from AutoHeightWebView docs, with disclaimer about a
+      // potential Android issue. It helpfully disables iOS zoom feature.
+      viewportContent='width=device-width, user-scalable=no'
       {...forwardedProps}
     />
   )
