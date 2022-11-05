@@ -20,11 +20,11 @@ export function mapStateToProps (state, props) {
   const messages = getAndPresentMessages(state, props)
 
   return {
-    id: thread.id,
+    id: thread?.id,
     thread,
     currentUserId,
     groupId,
-    hasMore: getHasMoreMessages(state, { id: thread.id }),
+    hasMore: getHasMoreMessages(state, { id: thread?.id }),
     messages,
     pending: state.pending[FETCH_MESSAGES],
     isConnected: state.SocketListener.connected
