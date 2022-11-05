@@ -36,7 +36,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
             onChange={[Function]}
             placeholder="Add a description"
             readOnly={false}
-            widthOffset={18}
+            widthOffset={0}
           />
         </View>
         <TouchableOpacity
@@ -924,7 +924,7 @@ exports[`PostEditor renders with a post 1`] = `
             onChange={[Function]}
             placeholder="Add a description"
             readOnly={false}
-            widthOffset={18}
+            widthOffset={0}
           />
         </View>
         <TouchableOpacity
