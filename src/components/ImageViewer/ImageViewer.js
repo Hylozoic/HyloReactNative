@@ -51,7 +51,7 @@ export function ImageViewerButton ({
         images={images}
         onRequestClose={toggleImageViewerVisible}
         title={title}
-        visible
+        visible={imageViewerVisible}
       />
     </>
 
