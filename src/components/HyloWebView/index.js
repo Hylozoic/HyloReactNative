@@ -5,8 +5,6 @@ export function parseWebViewMessage (messageOrEvent) {
 }
 
 export function sendMessageFromWebView (webViewRef, type, data, delay) {
-  // console.log('!!!!! sendMessageFromWebView', type, data)
-
   if (!webViewRef) {
     throw new Error('The first parameter `webViewRef` is empty or not valid')
   }
