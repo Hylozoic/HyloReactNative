@@ -34,7 +34,7 @@ export default function useChangeToGroup () {
         })
         : goToGroup()
     } else {
-      navigation.navigate(modalScreenName('Group Detail'), { groupSlug })
+      navigation.navigate(modalScreenName('Group Explore'), { groupSlug })
     }
   }
 }

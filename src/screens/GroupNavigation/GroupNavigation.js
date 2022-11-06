@@ -28,7 +28,7 @@ export default function GroupNavigation () {
     {
       label: 'Explore',
       iconName: 'Binoculars',
-      onPress: () => navigate('Group Detail', { groupSlug: currentGroup?.slug }),
+      onPress: () => navigate('Group Explore', { groupSlug: currentGroup?.slug }),
       hidden: isContextGroup(currentGroup?.slug)
     },
     { label: 'Projects', iconName: 'Projects', onPress: () => navigate('Projects') },

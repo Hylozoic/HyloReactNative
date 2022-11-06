@@ -73,8 +73,8 @@ export default function AuthRootNavigator () {
             options={{ title: 'Member' }}
           />
           <AuthRoot.Screen
-            name={modalScreenName('Group Detail')} component={GroupExploreWebView}
-            options={{ title: 'Group Details' }}
+            name={modalScreenName('Group Explore')} component={GroupExploreWebView}
+            options={{ title: 'Explore' }}
           />
           <AuthRoot.Screen name='Edit Post' component={PostEditor} options={{ headerShown: false }} />
           <AuthRoot.Screen name='Group Settings' component={GroupSettingsTabsNavigator} />

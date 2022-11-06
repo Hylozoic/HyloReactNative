@@ -67,7 +67,7 @@ export default function GroupDetail ({ navigation, route }) {
     setLoading(false)
   }
 
-  const goToGroupDetail = group => navigation.navigate('Group Detail', { groupSlug: group?.slug })
+  const goToGroupExplore = group => navigation.navigate('Group Detail', { groupSlug: group?.slug })
 
   const goToGroup = group => navigation.navigate(isModal ? 'Map' : 'Feed', { groupSlug: group?.slug })
 
@@ -98,8 +98,8 @@ export default function GroupDetail ({ navigation, route }) {
               <Text>{group.name} is only accessible to members of the following group(s). To join {group.name} visit each of the groups below and become a member:</Text>
               {group.prerequisiteGroups.map((prereqGroup, index) => (
                 <View key={index}>
-                  <TouchableOpacity onPress={() => goToGroupDetail(prereqGroup)}>
-                    <GroupRow key={prereqGroup.id} group={prereqGroup} goToGroupDetail={goToGroupDetail} />
+                  <TouchableOpacity onPress={() => goToGroupExplore(prereqGroup)}>
+                    <GroupRow key={prereqGroup.id} group={prereqGroup} goToGroupExplore={goToGroupExplore} />
                   </TouchableOpacity>
                 </View>
               ))}

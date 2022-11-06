@@ -57,7 +57,7 @@ export default function HomeNavigator () {
       <HomeTab.Screen name='Member' key='Member' component={MemberProfile} />
       <HomeTab.Screen name='Member Details' component={MemberDetails} />
       <HomeTab.Screen name='Group Relationships' component={Groups} />
-      <HomeTab.Screen name='Group Detail' component={GroupExploreWebView} />
+      <HomeTab.Screen name='Group Explore' component={GroupExploreWebView} />
       <HomeTab.Screen name='Topics' component={AllTopicsWebView} />
       <HomeTab.Screen name='Map' component={MapWebView} />
     </HomeTab.Navigator>

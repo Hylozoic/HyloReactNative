@@ -42,8 +42,8 @@ export default function Groups () {
   }))
   const [loading, setLoading] = useState(true)
   const changeToGroup = useChangeToGroup()
-  const goToGroupDetail = groupSlug =>
-    navigation.navigate(modalScreenName('Group Detail'), { groupSlug })
+  const goToGroupExplore = groupSlug =>
+    navigation.navigate(modalScreenName('Group Explore'), { groupSlug })
 
   useFocusEffect(() => {
     navigation.setOptions({ title: currentGroup.name })
@@ -75,7 +75,7 @@ export default function Groups () {
     <GroupRow
       group={item}
       goToGroup={changeToGroup}
-      goToGroupDetail={goToGroupDetail}
+      goToGroupExplore={goToGroupExplore}
       addPadding
     />
   )
@@ -113,11 +113,11 @@ export default function Groups () {
   )
 }
 
-export function GroupRow ({ group, goToGroup, goToGroupDetail }) {
+export function GroupRow ({ group, goToGroup, goToGroupExplore }) {
   const { avatarUrl, description, name, memberCount, childGroups } = group
   const childGroupsCount = childGroups?.count()
   const isMember = useSelector(getMemberships).find(m => m.group.id === group.id) || false
-  const onPressFunc = isMember ? goToGroup : goToGroupDetail
+  const onPressFunc = isMember ? goToGroup : goToGroupExplore
   const statusText = group.memberStatus === 'member'
     ? 'Member'
     : group.memberStatus === 'requested'
