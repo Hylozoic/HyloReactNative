@@ -1,18 +1,21 @@
 import React from 'react'
-import ReactShallowRenderer from 'react-test-renderer/shallow'
+import { render } from '@testing-library/react-native'
+import { TestRoot } from 'util/testing'
 import MenuButton from './MenuButton'
+import MockedScreen from 'util/testing/MockedScreen'
 
 describe('MenuButton', () => {
   it('renders correctly', () => {
-    const renderer = new ReactShallowRenderer()
-    const props = {
-      navigation: {
-        openDrawer: jest.fn(),
-        goBack: jest.fn()
-      }
-    }
-    renderer.render(<MenuButton {...props} />)
-    const actual = renderer.getRenderOutput()
-    expect(actual).toMatchSnapshot()
+    const { toJSON } = render(
+      <TestRoot>
+        <MockedScreen>
+          {screenProps => (
+            <MenuButton {...screenProps} />
+          )}
+        </MockedScreen>
+      </TestRoot>
+    )
+
+    expect(toJSON()).toMatchSnapshot()
   })
 })

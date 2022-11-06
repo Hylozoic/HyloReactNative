@@ -18,6 +18,7 @@ import Button from 'components/Button'
 import { GroupRow } from 'screens/Groups/Groups'
 import styles from './GroupDetail.styles'
 
+/* DEPRECATED: Replaced by WebView `GroupExplorWebView` */
 export default function GroupDetail ({ navigation, route }) {
   const dispatch = useDispatch()
   const isModal = isModalScreen(route?.name)

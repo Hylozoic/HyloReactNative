@@ -1,17 +1,18 @@
 import React from 'react'
 import { View } from 'react-native'
+import { useSelector } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
 import { HeaderBackButton } from '@react-navigation/elements'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import FastImage from 'react-native-fast-image'
 import Icon from 'components/Icon'
 import styles from './MenuButton.styles.js'
 
-export default function MenuButton ({
-  currentContext,
-  canGoBack,
-  navigation
-}) {
-  const avatarUrl = currentContext?.headerAvatarUrl ||
-    currentContext?.avatarUrl
+export default function MenuButton ({ canGoBack }) {
+  const navigation = useNavigation()
+  const currentGroup = useSelector(getCurrentGroup)
+  const avatarUrl = currentGroup?.headerAvatarUrl ||
+    currentGroup?.avatarUrl
   let onPress = canGoBack
     ? navigation.goBack
     : navigation.openDrawer
