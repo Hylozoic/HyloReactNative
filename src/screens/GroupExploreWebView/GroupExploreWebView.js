@@ -1,26 +1,34 @@
-import React, { useCallback, useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import { WebViewMessageTypes } from 'hylo-shared'
 import { navigateToLinkingPath } from 'navigation/linking'
 import HyloWebView from 'components/HyloWebView'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import fetchGroupModerators from 'store/actions/fetchGroupModerators'
 import fetchGroupDetails from 'store/actions/fetchGroupDetails'
 import ModalHeaderTransparent from 'navigation/headers/ModalHeaderTransparent'
 import { isModalScreen } from 'navigation/linking/helpers'
+import getGroup from 'store/selectors/getGroup'
 
 export default function GroupExploreWebView ({ navigation, route }) {
   const dispatch = useDispatch()
   const webViewRef = useRef(null)
   const groupSlug = route.params.groupSlug
+  const currentGroup = useSelector(state => getGroup(state, { slug: groupSlug }))
+  const [canGoBack, setCanGoBack] = useState(false)
 
   useFocusEffect(
-    useCallback(() => {
+    () => {
       isModalScreen(route?.name)
         ? navigation.setOptions(ModalHeaderTransparent({ navigation }))
-        : navigation.setOptions({ title: groupSlug })
-    }, [groupSlug, navigation])
+        : navigation.setOptions({
+          title: currentGroup?.name,
+          headerLeftOnPress:
+            canGoBack ? webViewRef.current.goBack : navigation.goBack
+        })
+    }
   )
+
   // Fetch moderators for "Opportunities to Connect" / Message to all moderators feature
   useEffect(() => {
     dispatch(fetchGroupModerators({ slug: groupSlug }))
@@ -32,6 +40,7 @@ export default function GroupExploreWebView ({ navigation, route }) {
     // currently on this group:
     // await dispatch(fetchCurrentUser())
     await dispatch(fetchGroupDetails({ slug: groupToJoinSlug }))
+
     navigateToLinkingPath(`/groups/${groupToJoinSlug}`)
   }
 
@@ -68,19 +77,9 @@ export default function GroupExploreWebView ({ navigation, route }) {
       handledWebRoutes={handledWebRoutes}
       nativeRouteHandler={nativeRouteHandler}
       messageHandler={messageHandler}
-      onNavigationStateChange={(navState) => {
-        if (navState.canGoBack) {
-          navigation.setParams({
-            headerLeftInfo: {
-              title: '',
-              onPress: () => webViewRef.current.goBack()
-            }
-          })
-        } else {
-          navigation.setParams({
-            headerLeftInfo: null
-          })
-        }
+      // TODO: Consider adding this to the `HyloWebView` standard API
+      onNavigationStateChange={({ canGoBack: providedCanGoBack }) => {
+        setCanGoBack(providedCanGoBack)
       }}
     />
   )

@@ -54,12 +54,26 @@ export default function TabStackHeader ({
     headerStyle: {
       backgroundColor: rhino80
     },
-    headerLeft: headerLeft || options.headerLeft || (() => (
-      <>
-        <FocusAwareStatusBar barStyle='light-content' backgroundColor={rhino80} />
-        <MenuButton canGoBack={canGoBack} navigation={navigation} />
-      </>
-    )),
+    headerLeft: headerLeft || options.headerLeft || (() => {
+      let onPress = options.headerLeftOnPress
+
+      if (!onPress) {
+        onPress = canGoBack
+          ? navigation.goBack
+          : navigation.openDrawer
+
+        if (canGoBack && !navigation.canGoBack()) {
+          onPress = () => navigation.navigate('Group Navigation')
+        }
+      }
+
+      return (
+        <>
+          <FocusAwareStatusBar barStyle='light-content' backgroundColor={rhino80} />
+          <MenuButton canGoBack={canGoBack} onPress={onPress} />
+        </>
+      )
+    }),
     headerRight: headerRight || (() => (
       <View
         style={{
@@ -90,18 +104,10 @@ export function NotificationsIcon ({ showNotifications }) {
   )
 }
 
-export function MenuButton ({ canGoBack }) {
-  const navigation = useNavigation()
+export function MenuButton ({ canGoBack, onPress }) {
   const currentGroup = useSelector(getCurrentGroup)
   const avatarUrl = currentGroup?.headerAvatarUrl ||
     currentGroup?.avatarUrl
-  let onPress = canGoBack
-    ? navigation.goBack
-    : navigation.openDrawer
-
-  if (canGoBack && !navigation.canGoBack()) {
-    onPress = () => navigation.navigate('Group Navigation')
-  }
 
   return (
     <HeaderBackButton
