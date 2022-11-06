@@ -1,12 +1,11 @@
-import HeaderRightButton from 'navigation/headers/HeaderRightButton'
-import { caribbeanGreen, rhino, rhino05, rhino10, rhino20, rhino80, white, amaranth, pictonBlue, gunsmoke, rhino60, bigStone } from 'style/colors'
+import { rhino20, rhino80, white, amaranth, pictonBlue } from 'style/colors'
 
 const styles = {
   container: {
     backgroundColor: white,
     flex: 1
   },
-  
+
   // Header
   headerBackgroundImage: {},
   headerBannerGradient: {
@@ -71,7 +70,7 @@ const styles = {
     backgroundColor: pictonBlue
   },
 
-  // 
+  //
   joinStatusBox: {
     backgroundColor: amaranth,
     padding: 10,

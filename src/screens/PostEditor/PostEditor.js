@@ -18,7 +18,6 @@ import { isIOS } from 'util/platform'
 import { showToast, hideToast } from 'util/toast'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
 import { amaranth, caribbeanGreen, rhino30, white } from 'style/colors'
-// import { ModalHeader } from 'navigation/headers'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 // TODO: Convert all 3 of the below to LocationPicker style calls
 // ProjectMembers Chooser

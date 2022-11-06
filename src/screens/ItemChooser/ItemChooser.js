@@ -7,7 +7,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 import { isEqual, isFunction, debounce } from 'lodash/fp'
-import { ModalHeader } from 'navigation/headers'
+import ModalHeader from 'navigation/headers/ModalHeader'
 import SearchBar from 'components/SearchBar'
 import styles from './ItemChooser.styles'
 

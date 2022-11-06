@@ -1,7 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 // Helper Components
-import { ModalHeader } from 'navigation/headers'
+import ModalHeader from 'navigation/headers/ModalHeader'
 // Screens
 import NewMessage from 'screens/NewMessage'
 import Thread from 'screens/Thread'

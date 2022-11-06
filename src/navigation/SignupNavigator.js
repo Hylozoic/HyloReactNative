@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { WorkflowModalHeader } from 'navigation/headers'
+import WorkflowModalHeader from 'navigation/headers/WorkflowModalHeader'
 import SignupComponent from 'screens/Signup'
 import SignupEmailValidation from 'screens/Signup/SignupEmailValidation'
 import SignupRegistration from 'screens/Signup/SignupRegistration'
@@ -8,9 +8,6 @@ import SignupUploadAvatar from 'screens/Signup/SignupUploadAvatar'
 import SignupSetLocation from 'screens/Signup/SignupSetLocation'
 import ItemChooser from 'screens/ItemChooser'
 import { white, white20onCaribbeanGreen } from 'style/colors'
-import { useFocusEffect, useNavigation } from '@react-navigation/native'
-import getAuthState, { AuthState } from 'store/selectors/getAuthState'
-import { useSelector } from 'react-redux'
 
 const Signup = createStackNavigator()
 export default function SignupNavigator () {

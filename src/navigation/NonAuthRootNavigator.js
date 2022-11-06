@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { createStackNavigator } from '@react-navigation/stack'
-import { ModalHeader } from 'navigation/headers'
+import ModalHeader from 'navigation/headers/ModalHeader'
 import Login from 'screens/Login'
 import ForgotPassword from 'screens/ForgotPassword'
 import SignupNavigator from 'navigation/SignupNavigator'

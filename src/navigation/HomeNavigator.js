@@ -1,7 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 // Helper Components
-import { TabStackHeader } from 'navigation/headers'
+import TabStackHeader from 'navigation/headers/TabStackHeader'
 // Screens
 import Feed from 'screens/Feed'
 import GroupExploreWebView from 'screens/GroupExploreWebView'

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
-import { ModalHeader } from 'navigation/headers'
+import ModalHeader from 'navigation/headers/ModalHeader'
 import NotificationCard from 'components/NotificationCard'
 import CreateGroupNotice from 'components/CreateGroupNotice'
 import styles from './NotificationsList.styles'

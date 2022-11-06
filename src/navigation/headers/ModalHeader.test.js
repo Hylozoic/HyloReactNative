@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import HeaderRightButton from './HeaderRightButton'
+import { HeaderRightButton } from './ModalHeader'
 
 jest.mock('util/platform', () => ({ isIOS: true }))
 

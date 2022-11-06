@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { ModalHeader } from './headers'
+import ModalHeader from 'navigation/headers/ModalHeader'
 import SearchPage from 'screens/SearchPage'
 import { alabaster, black10OnCaribbeanGreen } from 'style/colors'
 
