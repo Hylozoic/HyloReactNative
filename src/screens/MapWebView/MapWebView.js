@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import { useSelector } from 'react-redux'
+import { navigateToLinkingPath } from 'navigation/linking'
 import { modalScreenName } from 'hooks/useIsModalScreen'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
@@ -39,7 +40,8 @@ export default function MapWebView ({ navigation }) {
 
   const handledWebRoutes = [
     // To keep saved search retrieval from resetting group context in the App:
-    '/map'
+    '(.*)/map',
+    '(.*)/map/create'
   ]
   const nativeRouteHandler = () => ({
     '(.*)/:type(post|members)/:id': ({ routeParams }) => {
@@ -60,6 +62,9 @@ export default function MapWebView ({ navigation }) {
       const { groupSlug } = routeParams
 
       navigation.navigate(modalScreenName('Group Explore'), { groupSlug })
+    },
+    '(.*)': ({ pathname, search }) => {
+      navigateToLinkingPath(pathname + search)
     }
   })
 

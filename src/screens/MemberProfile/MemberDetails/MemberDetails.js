@@ -10,6 +10,7 @@ import EntypoIcon from 'react-native-vector-icons/Entypo'
 import { useIsFocused } from '@react-navigation/native'
 import { debounce, find, isEmpty, pick } from 'lodash/fp'
 import { Validators } from 'hylo-shared'
+import useChangeToGroup from 'hooks/useChangeToGroup'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import { openURL } from 'navigation/linking'
 import ModalHeader from 'navigation/headers/ModalHeader'
@@ -136,7 +137,7 @@ export class MemberDetails extends React.Component {
   render () {
     const {
       goToEdit, goToEditAccount, goToManageNotifications, goToBlockedUsers,
-      goToGroup, goToSkills, isMe, person, onPressMessages, navigation
+      goToSkills, isMe, person, onPressMessages, navigation
     } = this.props
     const { editing, errors } = this.state
     const personEdits = this.state.person
@@ -172,7 +173,6 @@ export class MemberDetails extends React.Component {
         />
         <MemberGroups
           memberships={person.memberships.toModelArray()}
-          goToGroup={goToGroup}
           editing={editing}
         />
         <MemberAffiliations
@@ -237,7 +237,8 @@ export function MemberSkills ({ skills, editable, goToSkills }) {
   )
 }
 
-export function MemberGroups ({ memberships, goToGroup, editing }) {
+export function MemberGroups ({ memberships, editing }) {
+  const changeToGroup = useChangeToGroup()
   if (isEmpty(memberships)) return null
 
   return (
@@ -246,7 +247,7 @@ export function MemberGroups ({ memberships, goToGroup, editing }) {
       {memberships.map(membership => (
         <GroupRow
           membership={membership} key={membership.id}
-          goToGroup={goToGroup} editing={editing}
+          goToGroup={changeToGroup} editing={editing}
         />
       ))}
     </View>
@@ -287,7 +288,8 @@ export function MemberAffiliation ({ affiliation }) {
   )
 }
 
-export function GroupRow ({ membership, goToGroup, editing }) {
+export function GroupRow ({ membership, editing }) {
+  const changeToGroup = useChangeToGroup()
   const { group, hasModeratorRole } = membership
   const formatCount = count => {
     if (count < 1000) return `${count}`
@@ -298,7 +300,7 @@ export function GroupRow ({ membership, goToGroup, editing }) {
   return (
     <View style={styles.groupRow}>
       <FastImage source={{ uri: group.avatarUrl }} style={styles.groupAvatar} />
-      <TouchableOpacity onPress={() => goToGroup(group.slug)} disabled={editing}>
+      <TouchableOpacity onPress={() => changeToGroup(group.slug)} disabled={editing}>
         <Text style={styles.groupName}>{group.name}</Text>
       </TouchableOpacity>
       {hasModeratorRole && <Icon name='Star' style={styles.starIcon} />}

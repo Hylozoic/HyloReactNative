@@ -92,6 +92,8 @@ export const routesToScreenPaths = {
   '(.*)/group/:groupSlug':                                   `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Group Explore')}`,
   '(.*)/members/:id':                                        `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Member')}`,
   '(.*)/post/:id':                                           `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
+  '(.*)/create/group':                                       `${AUTH_ROOT_SCREEN_NAME}/Create Group`,
+  '(.*)/create/post':                                        `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
   '(.*)/post/:id/edit':                                      `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
 
   '/':                                                       `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`
@@ -100,6 +102,7 @@ export const routesToScreenPaths = {
 // Even though these are already on the respective navigators,
 // they need to be specified again when linking.
 export const initialRouteNamesConfig = {
+  [AUTH_ROOT_SCREEN_NAME]: ['Drawer'],
   'Home Tab': ['Group Navigation', 'Feed'],
   'Messages Tab': ['Messages']
 }
@@ -244,6 +247,7 @@ function addInitialRouteNamesIntoState (stateWithoutInitials, initialRouteNamesM
           ...initialRouteNamesMap[route.name]
             .filter(initialRouteName => {
               const routeNamesAlreadyPresent = route.state.routes.map(route => route.name)
+
               return !routeNamesAlreadyPresent.includes(initialRouteName)
             })
             .map(initialRouteName => ({

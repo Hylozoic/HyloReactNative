@@ -43,13 +43,6 @@ export default function PostHeader ({
 
   const showTopics = !isEmpty(topics)
 
-  // Used to generate a link to this post from the backend.
-  const linkData = {
-    slug: currentGroup?.slug,
-    id: postId,
-    type: 'post'
-  }
-
   return (
     <View style={styles.container}>
       <View style={styles.avatarSpacing}>
@@ -107,8 +100,12 @@ export default function PostHeader ({
         {flaggingVisible && (
           <FlagContent
             type='post'
-            linkData={linkData}
-            onClose={() => this.setState({ flaggingVisible: false })}
+            linkData={{
+              slug: currentGroup?.slug,
+              id: postId,
+              type: 'post'
+            }}
+            onClose={() => setFlaggingVisible(false)}
           />
         )}
       </View>

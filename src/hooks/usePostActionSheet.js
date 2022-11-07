@@ -115,17 +115,11 @@ export default function usePostActionSheet ({
 
     */
     return filter(x => x[1], [
-      ['Share', share, {
-        icon: <FontAwesome5Icon name='share' style={styles.actionSheetIcon} />
-      }],
-      ['Copy Link', copyLink, {
-        icon: <Icon name='Copy' style={styles.actionSheetIcon} />
-      }],
       ['Edit', editPost, {
         icon: <FontAwesome5Icon name='pencil-alt' style={styles.actionSheetIcon} />
       }],
-      ['Flag', flagPost, {
-        icon: <FontAwesome5Icon name='flag' style={styles.actionSheetIcon} />,
+      ['Delete', deletePostWithConfirm, {
+        icon: <FontAwesome5Icon name='trash-alt' style={styles.actionSheetIcon} />,
         destructive: true
       }],
       [pinned ? 'Unpin' : 'Pin', pinPost, {
@@ -135,8 +129,14 @@ export default function usePostActionSheet ({
         icon: <FontAwesome5Icon name='trash-alt' style={styles.actionSheetIcon} />,
         destructive: true
       }],
-      ['Delete', deletePostWithConfirm, {
-        icon: <FontAwesome5Icon name='trash-alt' style={styles.actionSheetIcon} />,
+      ['Share', share, {
+        icon: <FontAwesome5Icon name='share' style={styles.actionSheetIcon} />
+      }],
+      ['Copy Link', copyLink, {
+        icon: <Icon name='Copy' style={styles.actionSheetIcon} />
+      }],
+      ['Flag', flagPost, {
+        icon: <FontAwesome5Icon name='flag' style={styles.actionSheetIcon} />,
         destructive: true
       }]
     ])

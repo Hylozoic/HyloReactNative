@@ -2,7 +2,7 @@ import React from 'react'
 import ModalHeader from './ModalHeader'
 import { white, caribbeanGreen, white60onCaribbeanGreen } from 'style/colors'
 
-export const WorkflowModalHeader = props => {
+export default function WorkflowModalHeader (props) {
   return (
     <ModalHeader
       headerBackTitleVisible={false}
