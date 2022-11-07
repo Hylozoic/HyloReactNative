@@ -1,7 +1,6 @@
 import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import { modalScreenName } from 'navigation/linking/helpers'
 import NotificationCard from './NotificationCard'
 
 describe('NotificationCard', () => {
@@ -15,9 +14,7 @@ describe('NotificationCard', () => {
         avatarUrl: 'https://wombat.com/test.jpg',
         name: 'Wombat Aardvark'
       },
-      createdAt: '1 mo ago',
-      onPress: () => {}
-      // onPress: () => modalScreenName('Post Details'), { id: '1' }
+      createdAt: '1 mo ago'
     }
   })
 
@@ -77,8 +74,7 @@ describe('NotificationCard', () => {
       body: 'requested to join',
       group: 'Hydroponic Gardening',
       header: 'New join request',
-      nameInHeader: true,
-      onPress: () => navigate('Group Settings')
+      nameInHeader: true
     }
     const renderer = new ReactShallowRenderer()
     renderer.render(<NotificationCard notification={notification} />)
@@ -90,8 +86,7 @@ describe('NotificationCard', () => {
       ...notificationBase,
       body: 'approved your request to join',
       group: 'Hydroponic Gardening',
-      header: 'Join Request Approved',
-      onPress: () => navigate('Feed', { groupId: '2' })
+      header: 'Join Request Approved'
     }
     const renderer = new ReactShallowRenderer()
     renderer.render(<NotificationCard notification={notification} />)

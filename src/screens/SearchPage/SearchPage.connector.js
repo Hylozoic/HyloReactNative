@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { debounce } from 'lodash/fp'
-import { modalScreenName } from 'navigation/linking/helpers'
+import { modalScreenName } from 'hooks/useIsModalScreen'
 import {
   fetchSearchResults,
   setSearchTerm,

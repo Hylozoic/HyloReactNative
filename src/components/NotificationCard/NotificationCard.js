@@ -77,7 +77,6 @@ NotificationCard.propTypes = {
     body: string,
     header: string,
     nameInHeader: bool,
-    onPress: func,
     title: string,
     topic: string,
     unread: bool

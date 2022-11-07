@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Text, ScrollView, View, TouchableOpacity, TextInput } from 'react-native'
-import FastImage from 'react-native-fast-image'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import FastImage from 'react-native-fast-image'
 import LinearGradient from 'react-native-linear-gradient'
-import { bannerlinearGradientColors } from 'style/colors'
-import { isModalScreen } from 'navigation/linking/helpers'
+import useIsModalScreen from 'hooks/useIsModalScreen'
 import { GROUP_ACCESSIBILITY } from 'store/models/Group'
 import fetchGroupDetailsAction from 'store/actions/fetchGroupDetails'
 import createJoinRequestAction from 'store/actions/createJoinRequest'
@@ -13,15 +13,18 @@ import getGroup from 'store/selectors/getGroup'
 import getMyJoinRequests from 'store/selectors/getMyJoinRequests'
 import getMemberships from 'store/selectors/getMemberships'
 import presentGroup from 'store/presenters/presentGroup'
+import { GroupRow } from 'screens/Groups/Groups'
 import Loading from 'components/Loading'
 import Button from 'components/Button'
-import { GroupRow } from 'screens/Groups/Groups'
+import { bannerlinearGradientColors } from 'style/colors'
 import styles from './GroupDetail.styles'
 
-/* DEPRECATED: Replaced by WebView `GroupExplorWebView` */
-export default function GroupDetail ({ navigation, route }) {
+/* DEPRECATED: Replaced by `GroupExplorerWebView` */
+export default function GroupDetail () {
   const dispatch = useDispatch()
-  const isModal = isModalScreen(route?.name)
+  const route = useRoute()
+  const navigation = useNavigation()
+  const isModalScreen = useIsModalScreen()
   const groupSlug = route.params.groupSlug
   const group = useSelector(state => presentGroup(getGroup(state, { slug: groupSlug })))
   const hasPendingRequest = useSelector(getMyJoinRequests).find(joinRequest => joinRequest.group.slug === groupSlug)
@@ -53,7 +56,7 @@ export default function GroupDetail ({ navigation, route }) {
     }
     setLoading(true)
     await dispatch(joinRequestAction(group.id))
-    navigation.navigate(isModal ? 'Map' : 'Feed', { groupSlug: group.slug })
+    navigation.navigate(isModalScreen ? 'Map' : 'Feed', { groupSlug: group.slug })
     setLoading(false)
   }
 
@@ -69,7 +72,7 @@ export default function GroupDetail ({ navigation, route }) {
 
   const goToGroupExplore = group => navigation.navigate('Group Detail', { groupSlug: group?.slug })
 
-  const goToGroup = group => navigation.navigate(isModal ? 'Map' : 'Feed', { groupSlug: group?.slug })
+  const goToGroup = group => navigation.navigate(isModalScreen ? 'Map' : 'Feed', { groupSlug: group?.slug })
 
   const canJoin = !hasPendingRequest &&
     [GROUP_ACCESSIBILITY.Open, GROUP_ACCESSIBILITY.Restricted].includes(group.accessibility)

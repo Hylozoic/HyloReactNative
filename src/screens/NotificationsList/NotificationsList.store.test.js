@@ -1,6 +1,6 @@
 import orm from 'store/models'
 import * as store from './NotificationsList.store'
-import { modalScreenName } from 'navigation/linking/helpers'
+import { modalScreenName } from 'hooks/useIsModalScreen'
 
 describe('action creators', () => {
   it('matches the last snapshot from fetchNotifications', () => {

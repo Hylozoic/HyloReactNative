@@ -46,13 +46,9 @@ const currentUser = {
 const props = {
   post,
   currentUser,
-  editPost: jest.fn(),
   pending: false,
   fetchPost: jest.fn(),
-  showMember: jest.fn(),
-  showTopic: jest.fn(),
   createComment: jest.fn(async () => ({ success: true })),
-  goToGroup: jest.fn(),
   navigation: {
     setOptions: jest.fn(),
     setParams: jest.fn(),
@@ -80,3 +76,52 @@ describe('PostDetails', () => {
     expect(renderer.toJSON()).toMatchSnapshot()
   })
 })
+
+// From deprecated connector, the state construction here might still be useful
+// for elaborating the above test:
+
+// let state, props, stateProps, dispatchProps
+
+// const session = orm.session(orm.getEmptyState())
+// session.Group.create({ id: '2', name: 'Home' })
+// session.Person.create({ id: '10' })
+// session.Post.create({ id: '1', groups: ['2'], creator: '10' })
+// session.Attachment.create({
+//   id: '1',
+//   post: '1',
+//   type: 'file',
+//   url: 'http://foo.com/foo.pdf'
+// })
+// session.Attachment.create({
+//   id: '2',
+//   post: '1',
+//   type: 'image',
+//   url: 'http://foo.com/bar.png'
+// })
+
+// state = {
+//   orm: session.state,
+//   CommentEditor: {
+//     1: 'draft comment text'
+//   }
+// }
+
+// props = {
+//   isFocused: true,
+//   route: {
+//     params: { id: '1' }
+//   },
+//   navigation: {
+//     navigate: (...args) => (['navigate', args])
+//   }
+// }
+
+// stateProps = {
+//   id: 'testpost',
+//   post: { id: 'testpost' },
+//   currentUser: { id: 'currentuser' }
+// }
+
+// dispatchProps = {
+//   dispatch: jest.fn((...args) => ['dispatch', args])
+// }

@@ -1,5 +1,5 @@
 import sessionReducer from './sessionReducer'
-import { LOGIN, SELECT_GROUP } from 'store/constants'
+import { LOGIN, SET_CURRENT_GROUP_ID } from 'store/constants'
 
 describe('on LOGIN', () => {
   it('stores login email as default', () => {
@@ -16,12 +16,12 @@ describe('on LOGIN', () => {
   })
 })
 
-describe('on SELECT_GROUP', () => {
+describe('on SET_CURRENT_GROUP_ID', () => {
   it('returns the payload', () => {
     const state = {
     }
     const action = {
-      type: SELECT_GROUP,
+      type: SET_CURRENT_GROUP_ID,
       payload: '123'
     }
     expect(sessionReducer(state, action))

@@ -1,17 +1,21 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { WebViewMessageTypes } from 'hylo-shared'
 import { navigateToLinkingPath } from 'navigation/linking'
+import useIsModalScreen from 'hooks/useIsModalScreen'
 import HyloWebView from 'components/HyloWebView'
 import { useDispatch, useSelector } from 'react-redux'
 import fetchGroupModerators from 'store/actions/fetchGroupModerators'
 import fetchGroupDetails from 'store/actions/fetchGroupDetails'
 import ModalHeaderTransparent from 'navigation/headers/ModalHeaderTransparent'
-import { isModalScreen } from 'navigation/linking/helpers'
 import getGroup from 'store/selectors/getGroup'
 
-export default function GroupExploreWebView ({ navigation, route }) {
+export default function GroupExploreWebView () {
   const dispatch = useDispatch()
+  const route = useRoute()
+  const navigation = useNavigation()
+  const isModalScreen = useIsModalScreen()
   const webViewRef = useRef(null)
   const groupSlug = route.params.groupSlug
   const currentGroup = useSelector(state => getGroup(state, { slug: groupSlug }))
@@ -19,7 +23,7 @@ export default function GroupExploreWebView ({ navigation, route }) {
 
   useFocusEffect(
     () => {
-      isModalScreen(route?.name)
+      isModalScreen
         ? navigation.setOptions(ModalHeaderTransparent({ navigation }))
         : navigation.setOptions({
           title: currentGroup?.name,

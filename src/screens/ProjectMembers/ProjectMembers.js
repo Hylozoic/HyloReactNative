@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import { modalScreenName } from 'navigation/linking/helpers'
+import { modalScreenName } from 'hooks/useIsModalScreen'
 import MemberList from 'components/MemberList/MemberList'
 import styles from './ProjectMembers.styles'
 

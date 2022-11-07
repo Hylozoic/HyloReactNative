@@ -1,8 +1,13 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { useSelector } from 'react-redux'
-import { find } from 'lodash/fp'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
+import { find, get } from 'lodash/fp'
+import useChangeToGroup from 'hooks/useChangeToGroup'
 import getMe from 'store/selectors/getMe'
+import joinProjectAction from 'store/actions/joinProject'
+import leaveProjectAction from 'store/actions/leaveProject'
+import respondToEventAction from 'store/actions/respondToEvent'
 import Button from 'components/Button'
 import Files from 'components/Files'
 import Icon from 'components/Icon'
@@ -13,21 +18,24 @@ import PostHeader from 'components/PostCard/PostHeader'
 import ImageAttachments from 'components/ImageAttachments'
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import styles from 'screens/PostDetails/PostDetails.styles'
+import useGoToMember from 'hooks/useGoToMember'
+import useGoToTopic from 'hooks/useGoToTopic'
 
-export default function PostCardForDetails ({
-  editPost,
-  goToGroup,
-  goToMembers,
-  isProject,
-  joinProject,
-  leaveProject,
-  post,
-  respondToEvent,
-  showGroups,
-  showMember,
-  showTopic
-}) {
+export default function PostCardForDetails ({ post, showGroups = true }) {
+  const dispatch = useDispatch()
+  const navigation = useNavigation
   const currentUser = useSelector(getMe)
+  const changeToGroup = useChangeToGroup()
+  const goToMember = useGoToMember()
+  const goToTopic = useGoToTopic()
+
+  const handleRespondToEvent = response => dispatch(respondToEventAction(post.id, response))
+  const joinProject = () => dispatch(joinProjectAction(post.id))
+  const leaveProject = () => dispatch(leaveProjectAction(post.id))
+  const editPost = () => navigation.navigate('Edit Post', { id: post.id })
+  const openProjectMembersModal = () => navigation.navigate('Project Members', { id: post.id, members: get('members', post) })
+
+  const isProject = get('type', post) === 'project'
   const isProjectMember = find(member => member.id === currentUser.id, post.members)
   const locationFullText = post.location || (post.locationObject && post.locationObject.fullText)
   const images = post.imageUrls && post.imageUrls.map(uri => ({ uri }))
@@ -40,12 +48,12 @@ export default function PostCardForDetails ({
         creator={post.creator}
         date={post.createdAt}
         editPost={editPost}
-        goToGroup={goToGroup}
+        goToGroup={changeToGroup}
         groups={post.groups}
         pinned={post.pinned}
         postId={post.id}
-        showMember={showMember}
-        showTopic={showTopic}
+        showMember={goToMember}
+        showTopic={goToTopic}
         title={post.title}
         topics={post.topics}
         type={post.type}
@@ -62,7 +70,7 @@ export default function PostCardForDetails ({
         linkPreview={post.linkPreview}
         linkPreviewFeatured={post.linkPreviewFeatured}
         myEventResponse={post.myEventResponse}
-        respondToEvent={respondToEvent}
+        respondToEvent={handleRespondToEvent}
         startTime={post.startTime}
         title={post.title}
         type={post.type}
@@ -72,7 +80,7 @@ export default function PostCardForDetails ({
         <ProjectMembersSummary
           dimension={34}
           members={post.members}
-          onPress={goToMembers}
+          onPress={openProjectMembersModal}
           style={styles.projectMembersContainer}
         />
       )}
@@ -91,7 +99,7 @@ export default function PostCardForDetails ({
       )}
       {showGroups && (
         <PostGroups
-          goToGroup={goToGroup}
+          goToGroup={changeToGroup}
           groups={post.groups}
           includePublic={post.isPublic}
           style={[styles.infoRow]}

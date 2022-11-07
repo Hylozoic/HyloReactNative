@@ -1,5 +1,5 @@
 import { LOGIN_WITH_APPLE, LOGIN_WITH_FACEBOOK, LOGIN_WITH_GOOGLE } from 'components/SocialAuth/actions'
-import { LOGIN, LOGIN_BY_TOKEN, SELECT_GROUP } from 'store/constants'
+import { LOGIN, LOGIN_BY_TOKEN, SET_CURRENT_GROUP_ID } from 'store/constants'
 
 export const initialState = {
   defaultLoginEmail: null,
@@ -20,7 +20,7 @@ export default function sessionReducer (state = initialState, action) {
       }
     }
 
-    case SELECT_GROUP: {
+    case SET_CURRENT_GROUP_ID: {
       return {
         ...state,
         groupId: payload

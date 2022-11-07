@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 import FastImage from 'react-native-fast-image'
-import { useNavigation, useRoute } from '@react-navigation/native'
-import { isModalScreen } from 'navigation/linking/helpers'
+import { useNavigation } from '@react-navigation/native'
+import useIsModalScreen from 'hooks/useIsModalScreen'
 import Loading from 'components/Loading'
 import MemberFeed from './MemberFeed'
 import MemberHeader from './MemberHeader'
@@ -37,12 +37,12 @@ export default function MemberProfile ({
   currentGroup
 }) {
   const navigation = useNavigation()
-  const route = useRoute()
+  const isModalScreen = useIsModalScreen()
 
   const [flaggingVisible, setFlaggingVisible] = useState(false)
 
   const setHeader = () => {
-    isModalScreen(route.name)
+    isModalScreen
       ? navigation.setOptions(ModalHeaderTransparent({ navigation }))
       : navigation.setOptions({ title: currentGroup.name })
   }

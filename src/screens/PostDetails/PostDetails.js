@@ -1,121 +1,96 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
-import { useIsFocused } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { get } from 'lodash/fp'
-import { isModalScreen } from 'navigation/linking/helpers'
-import useChangeToGroup from 'hooks/useChangeToGroup'
+import useIsModalScreen from 'hooks/useIsModalScreen'
+import fetchPostAction from 'store/actions/fetchPost'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import { getPresentedPost } from 'store/selectors/getPost'
+import getRouteParam from 'store/selectors/getRouteParam'
 import { KeyboardAccessoryCommentEditor } from 'components/CommentEditor/CommentEditor'
 import Comments from 'components/Comments'
 import Loading from 'components/Loading'
 import PostCardForDetails from 'components/PostCard/PostCardForDetails'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './PostDetails.styles'
+import { useDispatch, useSelector } from 'react-redux'
+import useGoToMember from 'hooks/useGoToMember'
 
-export class PostDetailsClassComponent extends React.Component {
-  state = {
-    selectedComment: null
+// TODO: Probably don't need to do this anymore for this screen, but confirm:
+// const isFocused = useIsFocused()
+// shouldComponentUpdate (nextProps) { return !!nextProps.isFocused }
+export default function PostDetails () {
+  const dispatch = useDispatch()
+  const navigation = useNavigation()
+  const route = useRoute()
+  const postId = getRouteParam('id', route)
+  const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
+  const currentGroup = useSelector(getCurrentGroup)
+
+  const commentsRef = React.useRef()
+  const isModalScreen = useIsModalScreen()
+  const goToMember = useGoToMember()
+
+  const [selectedComment, setSelectedComment] = useState(null)
+  const groupId = get('groups.0.id', post)
+
+  const fetchPost = () => dispatch(fetchPostAction(postId))
+
+  const setHeader = () => {
+    !isModalScreen && navigation.setOptions({ title: currentGroup?.name })
+  }
+  const clearSelectedComment = () => {
+    setSelectedComment(null)
+    commentsRef.current && commentsRef.current.clearHighlightedComment()
   }
 
-  commentsRef = React.createRef()
-
-  componentDidMount () {
-    this.props.fetchPost()
-    this.setHeader()
+  const scrollToSelectedComment = () => {
+    commentsRef.current && commentsRef.current.scrollToComment(selectedComment)
   }
 
-  componentDidUpdate (prevProps) {
-    if (prevProps.currentGroup?.slug !== this.props.currentGroup?.slug) {
-      this.setHeader()
-    }
-  }
+  useEffect(() => {
+    fetchPost()
+    setHeader()
+  }, [])
 
-  setHeader = () => {
-    const { navigation, currentGroup, isModal } = this.props
+  useEffect(() => { setHeader() }, [currentGroup?.slug])
 
-    if (isModal) return
-
-    navigation.setOptions({ title: currentGroup?.name })
-  }
-
-  shouldComponentUpdate (nextProps) {
-    return !!nextProps.isFocused
-  }
-
-  onShowTopic = (topicId) =>
-    this.props.showTopic(topicId, get('post.groups.0.id', this.props))
-
-  handleSetSelectedComment = selectedComment => this.setState({ selectedComment })
-
-  clearSelectedComment = () => {
-    this.setState({ selectedComment: null })
-    this.commentsRef.current && this.commentsRef.current.clearHighlightedComment()
-  }
-
-  scrollToSelectedComment = () => {
-    this.commentsRef.current && this.commentsRef.current.scrollToComment(this.state.selectedComment)
-  }
-
-  renderPostDetails = (panHandlers) => {
-    const { post, currentGroup, respondToEvent, showMember, isModal, changeToGroup } = this.props
+  const renderPostDetails = panHandlers => {
     const firstGroupSlug = get('groups.0.slug', post)
-    const showGroups = isModal || post?.groups.find(g => g.slug !== currentGroup?.slug)
+    const showGroups = isModalScreen || post?.groups.find(g => g.slug !== currentGroup?.slug)
 
     return (
       <Comments
-        ref={this.commentsRef}
+        ref={commentsRef}
         postId={post.id}
         header={(
           <PostCardForDetails
-            {...this.props}
-            goToGroup={changeToGroup}
+            post={post}
             showGroups={showGroups}
-            respondToEvent={respondToEvent}
-            showTopic={this.onShowTopic}
           />
         )}
-        onSelect={this.handleSetSelectedComment}
+        onSelect={setSelectedComment}
         slug={firstGroupSlug}
-        showMember={showMember}
+        showMember={goToMember}
         panHandlers={panHandlers}
       />
     )
   }
 
-  render () {
-    const { selectedComment } = this.state
-    const { post, isModal } = this.props
-    const groupId = get('groups.0.id', post)
-
-    if (!post?.creator || !post?.title) return <Loading />
-
-    return (
-      <View style={styles.container}>
-        <KeyboardAccessoryCommentEditor
-          renderScrollable={this.renderPostDetails}
-          isModal={isModal}
-          postId={post.id}
-          groupId={groupId}
-          replyingTo={selectedComment}
-          scrollToReplyingTo={this.scrollToSelectedComment}
-          clearReplyingTo={this.clearSelectedComment}
-        />
-        <SocketSubscriber type='post' id={post.id} />
-      </View>
-    )
-  }
-}
-
-export default function PostDetails (props) {
-  const isModal = isModalScreen(props.route?.name)
-  const isFocused = useIsFocused()
-  const changeToGroup = useChangeToGroup()
+  if (!post?.creator || !post?.title) return <Loading />
 
   return (
-    <PostDetailsClassComponent
-      {...props}
-      isModal={isModal}
-      isFocused={isFocused}
-      changeToGroup={changeToGroup}
-    />
+    <View style={styles.container}>
+      <KeyboardAccessoryCommentEditor
+        renderScrollable={renderPostDetails}
+        isModal={isModalScreen}
+        postId={post.id}
+        groupId={groupId}
+        replyingTo={selectedComment}
+        scrollToReplyingTo={scrollToSelectedComment}
+        clearReplyingTo={clearSelectedComment}
+      />
+      <SocketSubscriber type='post' id={post.id} />
+    </View>
   )
 }

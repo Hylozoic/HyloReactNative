@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
-import { modalScreenName } from 'navigation/linking/helpers'
+import { modalScreenName } from 'hooks/useIsModalScreen'
 import { firstName } from 'store/models/Person'
 import Avatar from 'components/Avatar'
 import PeopleListModal from 'components/PeopleListModal'

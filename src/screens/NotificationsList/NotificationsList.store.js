@@ -5,7 +5,7 @@ import { TextHelpers } from 'hylo-shared'
 import orm from 'store/models'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
 import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
-import { modalScreenName } from 'navigation/linking/helpers'
+import { modalScreenName } from 'hooks/useIsModalScreen'
 import {
   ACTION_NEW_COMMENT,
   ACTION_TAG,

@@ -4,9 +4,10 @@ import { RenderHTMLConfigProvider, RenderHTMLSource } from 'react-native-render-
 import WebView from 'react-native-webview'
 import iframe, { iframeModel } from '@native-html/iframe-plugin'
 import { useSelector } from 'react-redux'
-import { PathHelpers } from 'hylo-shared'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import { openURL, navigateToLinkingPath } from 'navigation/linking'
+import { openURL } from 'navigation/linking'
+import useGoToMember from 'hooks/useGoToMember'
+import useGoToTopic from 'hooks/useGoToTopic'
 
 const wrapInHTMLDoc = source => {
   return `
@@ -34,17 +35,16 @@ const defaultTextProps = {
 }
 
 const SpanRenderer = ({ TDefaultRenderer, ...props }) => {
-  const currentlySelectedGroup = useSelector(getCurrentGroup)
-  const currentGroupSlug = currentlySelectedGroup?.slug
-
+  const goToMember = useGoToMember()
+  const goToTopic = useGoToTopic()
   const handlePress = () => {
     const textNode = props.tnode
 
     if (textNode.hasClass('mention')) {
-      return navigateToLinkingPath(PathHelpers.mentionPath(textNode.attributes['data-id'], currentGroupSlug))
+      return goToMember(textNode.attributes['data-id'])
     }
     if (textNode.hasClass('topic')) {
-      return navigateToLinkingPath(PathHelpers.topicPath(textNode.attributes['data-id'], currentGroupSlug))
+      return goToTopic(textNode.attributes['data-id'])
     }
   }
 

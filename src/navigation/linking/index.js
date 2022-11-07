@@ -12,20 +12,21 @@ import { URL } from 'react-native-url-polyfill'
 import * as queryString from 'query-string'
 import { PathHelpers, PUBLIC_CONTEXT_SLUG } from 'hylo-shared'
 import store from 'store'
+import { modalScreenName } from 'hooks/useIsModalScreen'
 import { getAuthorized } from 'store/selectors/getAuthState'
 import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
 import { navigationRef } from 'navigation/linking/helpers'
-import { modalScreenName } from './helpers'
 
 /*
 
 Hylo Custom link routing config and related utilities:
 
 The current version of `react-navigation` doesn't have a way to map multiple paths
-to the same screen. The below way of mapping screens to paths is being used in to
-construct and, otherwise in alternate to, the default `config.screens` config.
+to the same screen. The below way of mapping screens to paths is being used to
+construct and, otherwise in alternate to, the default `linking.config.screens` config.
+See: https://reactnavigation.org/docs/configuring-links/
 
-All routes are always available but routes that begin with `AUTH_ROOT_SCREEN_NAME`
+All routes are always available, but routes that begin with `AUTH_ROOT_SCREEN_NAME`
 will be set as the `returnToPath` and not navigated to until after
 the user is authorized (see `getAuthState`).
 
@@ -34,27 +35,8 @@ React Router (web)
 
 */
 
-export const DEFAULT_APP_HOST = 'https://hylo.com'
-
-export const prefixes = [
-  DEFAULT_APP_HOST,
-  'http://hylo.com',
-  'http://www.hylo.com',
-  'https://www.hylo.com',
-  'http://staging.hylo.com',
-  'https://staging.hylo.com',
-  'hyloapp://'
-]
-
 export const AUTH_ROOT_SCREEN_NAME = 'AuthRoot'
 export const NON_AUTH_ROOT_SCREEN_NAME = 'NonAuthRoot'
-
-// Even though these are already on the respective navigators,
-// they need to be specified again when linking.
-export const initialRouteNamesConfig = {
-  'Home Tab': ['Group Navigation', 'Feed'],
-  'Messages Tab': ['Messages']
-}
 
 /* eslint-disable key-spacing */
 export const routesToScreenPaths = {
@@ -115,14 +97,55 @@ export const routesToScreenPaths = {
   '/':                                                       `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`
 }
 
+// Even though these are already on the respective navigators,
+// they need to be specified again when linking.
+export const initialRouteNamesConfig = {
+  'Home Tab': ['Group Navigation', 'Feed'],
+  'Messages Tab': ['Messages']
+}
+
+export const DEFAULT_APP_HOST = 'https://hylo.com'
+
+export const prefixes = [
+  DEFAULT_APP_HOST,
+  'http://hylo.com',
+  'http://www.hylo.com',
+  'https://www.hylo.com',
+  'http://staging.hylo.com',
+  'https://staging.hylo.com',
+  'hyloapp://'
+]
+
+// tracks: `hylo/hylo-evo/src/server/proxy/constants.js#staticPages`
+export const staticPages = [
+  '',
+  '/help',
+  '/help/markdown',
+  '/about',
+  '/about/careers',
+  '/about/contact',
+  '/about/team',
+  '/evolve',
+  '/invite-expired',
+  '/subscribe',
+  '/styleguide',
+  '/team',
+  '/terms',
+  '/terms/privacy',
+  '/newapp'
+]
+
 // Could potentially be entirely replaced by `navigateToLinkingPath` below
-// by adding these legacy routes in the routing above. The key differentiating
-// feature besides the routes is the ability to provide a `groupSlug`.
+// The key differentiating feature besides the routes is the ability to provide
+// a `groupSlug` which is used in the case of the HyloEditorWebView
 export async function openURL (providedUrlOrPath, options = {}) {
   const urlOrPath = providedUrlOrPath.trim()
   const linkingURL = new URL(urlOrPath, DEFAULT_APP_HOST)
 
-  if (prefixes.includes(linkingURL.origin)) {
+  if (
+    prefixes.includes(linkingURL.origin) &&
+    !staticPages.includes(linkingURL.pathname.toLowerCase())
+  ) {
     const pathname = linkingURL.pathname.toLowerCase()
     const { length, [length - 2]: prefix, [length - 1]: suffix } = pathname.split('/')
 
@@ -149,8 +172,6 @@ export const navigateToLinkingPath = async (providedUrl, reset) => {
   const linkingPath = `${linkingURL.pathname}${linkingURL.search}`
   const stateForPath = getStateFromPath(linkingPath)
 
-  console.log('!!! result state in navigateToLinkingPath', JSON.stringify(stateForPath, null, 2))
-
   if (stateForPath) {
     const actionForPath = getActionFromState(stateForPath)
 
@@ -166,18 +187,6 @@ export const navigateToLinkingPath = async (providedUrl, reset) => {
   } else {
     return null
   }
-  // Note: If issues with `isReady` on initial app load of `initialURL` wrap all of
-  // the above as below:
-  //
-  // const linkingFunc = () => {
-  // // ALL OF THE ABOVE HERE
-  // }
-  //
-  // if (navigationRef.isReady()) {
-  //   linkingFunc()
-  // } else {
-  //   window.setTimeout(linkingFunc, 100)
-  // }
 }
 
 export function getScreenPathWithParamsFromPath (incomingPathAndQuerystring, routes = routesToScreenPaths) {
@@ -206,6 +215,25 @@ export function getScreenPathWithParamsFromPath (incomingPathAndQuerystring, rou
   }
 }
 
+/*
+
+CAUTION: This mostly assumes that the target screen will be the only thing
+initially in the state at this point. This always true with our current
+React Navigation use.
+
+However, this may be brittle with certain React Navigation elaborations including
+if we begin to maintain a deeper navigation history which includes multiple
+instances of the same screen in the history (e.g. Feed > Post Details > Feed)
+
+Ideally we'd not need this at all and use the React Navigation provided method
+for configuring linking to require a single initial screen. We are not able to use
+the standard linking configuration as it having multiple paths to a single screen
+in that configuration is not possible (* or very awkward to configure and maintain).
+
+* Injecting the initial screens could potentially be better achieved through a more
+idiomatic deep traversal and merging of the React Navigation state object.
+
+*/
 function addInitialRouteNamesIntoState (stateWithoutInitials, initialRouteNamesMap = initialRouteNamesConfig) {
   function recurseObject (state) {
     state?.routes?.forEach(route => {
@@ -213,12 +241,15 @@ function addInitialRouteNamesIntoState (stateWithoutInitials, initialRouteNamesM
 
       if (route?.name && Object.keys(initialRouteNamesMap).includes(route.name)) {
         route.state.routes = [
-          ...initialRouteNamesMap[route.name].map(name => ({
-            name,
-            // CAUTION: This basically assumes that the target screen will be the only thing initially in the state
-            // at this point, which I think is always true with our current linking setup
-            params: route.state.routes[route.state.routes.length - 1].params
-          })),
+          ...initialRouteNamesMap[route.name]
+            .filter(initialRouteName => {
+              const routeNamesAlreadyPresent = route.state.routes.map(route => route.name)
+              return !routeNamesAlreadyPresent.includes(initialRouteName)
+            })
+            .map(initialRouteName => ({
+              name: initialRouteName,
+              params: route.state.routes[route.state.routes.length - 1].params
+            })),
           ...route.state.routes
         ]
       }
@@ -246,8 +277,6 @@ export const getStateFromPath = path => {
 
   const stateFromPath = getStateFromPathDefault(screenPathWithParams)
   const stateWithInitialRouteNames = addInitialRouteNamesIntoState(stateFromPath)
-
-  // console.log('!!!! stateWithInitialRouteNames', JSON.stringify(stateWithInitialRouteNames, null, 2))
 
   return stateWithInitialRouteNames
 }

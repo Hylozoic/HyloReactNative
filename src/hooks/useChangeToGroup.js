@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useSelector } from 'react-redux'
 import confirmNavigate from 'util/confirmNavigate'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
-import { modalScreenName } from 'navigation/linking/helpers'
+import { modalScreenName } from 'hooks/useIsModalScreen'
 import getMemberships from 'store/selectors/getMemberships'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 
@@ -24,7 +24,6 @@ export default function useChangeToGroup () {
     if (canViewGroup) {
       const goToGroup = () => {
         navigation.navigate('Group Navigation', { groupSlug })
-        navigation.navigate('Feed')
       }
 
       confirm

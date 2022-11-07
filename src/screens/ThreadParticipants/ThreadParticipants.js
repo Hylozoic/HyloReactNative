@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { View, ScrollView, Text, TouchableOpacity } from 'react-native'
-import { modalScreenName } from 'navigation/linking/helpers'
+import { modalScreenName } from 'hooks/useIsModalScreen'
 import { getThread } from '../Thread/Thread.store'
 import getCurrentUserId from 'store/selectors/getCurrentUserId'
 import Loading from 'components/Loading'

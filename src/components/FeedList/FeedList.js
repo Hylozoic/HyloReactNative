@@ -9,7 +9,7 @@ import Loading from 'components/Loading'
 import { isContextGroup } from 'store/models/Group'
 import styles from './FeedList.styles'
 
-// tracks from: `hylo-evo/src/components/StreamViewControls/StreamViewControls.js`
+// tracks: `hylo-evo/src/components/StreamViewControls/StreamViewControls.js`
 export const POST_TYPE_OPTIONS = [
   { id: null, label: 'All Posts' },
   { id: 'discussion', label: 'Discussions' },

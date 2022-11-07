@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import { modalScreenName } from 'navigation/linking/helpers'
+import { modalScreenName } from 'hooks/useIsModalScreen'
 import ModalHeader from 'navigation/headers/ModalHeader'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
 import DrawerNavigator from 'navigation/DrawerNavigator'

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`on SELECT_GROUP returns the payload 1`] = `
+exports[`on SET_CURRENT_GROUP_ID returns the payload 1`] = `
 {
   "groupId": "123",
 }
