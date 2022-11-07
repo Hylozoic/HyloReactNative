@@ -3,6 +3,7 @@ import { FlatList, View } from 'react-native'
 import { isEmpty } from 'lodash/fp'
 import { didPropsChange } from 'util/index'
 import { useIsFocused } from '@react-navigation/native'
+import { NO_POST_FILTER } from './FeedList.store'
 import PostRow from './PostRow'
 import ListControl from 'components/ListControl'
 import Loading from 'components/Loading'
@@ -11,7 +12,7 @@ import styles from './FeedList.styles'
 
 // tracks: `hylo-evo/src/components/StreamViewControls/StreamViewControls.js`
 export const POST_TYPE_OPTIONS = [
-  { id: null, label: 'All Posts' },
+  { id: NO_POST_FILTER, label: 'All Posts' },
   { id: 'discussion', label: 'Discussions' },
   { id: 'event', label: 'Events' },
   { id: 'offer', label: 'Offers' },

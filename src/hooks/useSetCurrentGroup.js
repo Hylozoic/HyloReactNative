@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { get } from 'lodash/fp'
+import { ALL_GROUP_ID } from 'store/models/Group'
 import getGroup from 'store/selectors/getGroup'
 import getLastViewedGroup from 'store/selectors/getLastViewedGroup'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
@@ -23,10 +24,9 @@ export default function useSetCurrentGroup (loading = false) {
         (currentGroup?.slug !== groupFromRouteParam?.slug)
       ) {
         await dispatch(setCurrentGroupId(groupFromRouteParam.id))
-        navigation.navigate('Feed')
-      } else if (currentGroup?.slug !== lastViewedGroup?.slug) {
-        await dispatch(setCurrentGroupId(lastViewedGroup.id))
-        navigation.navigate('Feed')
+      } else if (!currentGroup) {
+        await dispatch(setCurrentGroupId(lastViewedGroup.id || ALL_GROUP_ID))
+        navigation.navigate('Home Tab', { screen: 'Feed', initial: false })
       }
     })()
   }, [

@@ -7,30 +7,6 @@ import Avatar from 'components/Avatar'
 import PeopleListModal from 'components/PeopleListModal'
 import { rhino10 } from 'style/colors'
 
-const styles = {
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 40
-  },
-  title: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  participantNames: {
-    paddingLeft: 10,
-    color: rhino10,
-    fontSize: 18,
-    fontFamily: 'Circular-Bold'
-  }
-}
-
-export function participantNamesSummary (names) {
-  if (names.length < 3) return names.join(' & ')
-  return `${names[0]} & ${names.length - 1} others`
-}
-
 export default function ThreadHeaderTitle ({ thread, currentUserId, navigation }) {
   const [modalIsVisible, setModalIsVisible] = useState(false)
   const toggleModalIsVisible = () => setModalIsVisible(!modalIsVisible)
@@ -41,11 +17,16 @@ export default function ThreadHeaderTitle ({ thread, currentUserId, navigation }
   const avatarUrls = otherParticipants.map(p => p.avatarUrl)
   const names = otherParticipants.length > 1 ? otherParticipants.map(firstName) : [otherParticipants[0].name]
   const goToParticipant = ({ id }) => navigation.navigate(modalScreenName('Member'), { id })
+  const handleOnPress = () => {
+    otherParticipants.length > 1
+      ? toggleModalIsVisible()
+      : goToParticipant(otherParticipants[0])
+  }
 
   return (
     <>
       <View style={styles.container}>
-        <TouchableOpacity onPress={toggleModalIsVisible}>
+        <TouchableOpacity onPress={handleOnPress}>
           <View style={styles.title}>
             {avatarUrls.slice(0, 3).map((avatarUrl, index) => {
               return (
@@ -71,4 +52,28 @@ export default function ThreadHeaderTitle ({ thread, currentUserId, navigation }
       </View>
     </>
   )
+}
+
+export function participantNamesSummary (names) {
+  if (names.length < 3) return names.join(' & ')
+  return `${names[0]} & ${names.length - 1} others`
+}
+
+const styles = {
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 40
+  },
+  title: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  participantNames: {
+    paddingLeft: 10,
+    color: rhino10,
+    fontSize: 18,
+    fontFamily: 'Circular-Bold'
+  }
 }

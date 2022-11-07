@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
 import { fetchPerson } from './MemberProfile.store'
-import { navigateToLinkingPath, openURL } from 'navigation/linking'
+import { openURL } from 'navigation/linking'
 import blockUser from 'store/actions/blockUser'
 import getMe from 'store/selectors/getMe'
 import getPerson from 'store/selectors/getPerson'
@@ -58,9 +58,9 @@ export function makeOnPressMessages (currentUser, person, navigation) {
 
   const { messageThreadId } = person
 
-  if (messageThreadId) return () => navigateToLinkingPath(`/messages/${messageThreadId}`)
+  if (messageThreadId) return () => navigation.navigate('Messages Tab', { screen: 'Thread', initial: false, params: { id: messageThreadId } })
 
-  return () => navigateToLinkingPath(`/messages/new?participants=${person.id}`)
+  return () => navigation.navigate('Messages Tab', { screen: 'New Message', initial: false, params: { participants: person.id } })
 }
 
 export function mergeProps (stateProps, dispatchProps, ownProps) {

@@ -65,9 +65,17 @@ export default function GroupExploreWebView () {
   const nativeRouteHandler = ({ pathname, search }) => ({
     '(.*)/:type(post|members)/:id': ({ routeParams }) => {
       const { type, id } = routeParams
-      const linkingPath = `${type}/${id}`
 
-      navigateToLinkingPath(linkingPath + search)
+      switch (type) {
+        case 'post': {
+          navigation.navigate('Post Details', { id })
+          break
+        }
+        case 'members': {
+          navigation.navigate('Member', { id })
+          break
+        }
+      }
     },
     '(.*)': () => {
       navigateToLinkingPath(pathname + search)

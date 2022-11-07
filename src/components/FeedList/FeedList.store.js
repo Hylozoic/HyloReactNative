@@ -10,18 +10,19 @@ export const SET_FILTER = `${MODULE_NAME}/SET_FILTER`
 export const SET_SORT = `${MODULE_NAME}/SET_SORT`
 export const SET_TIMEFRAME = `${MODULE_NAME}/SET_TIMEFRAME`
 
-export const defaultFilter = null
+export const NO_POST_FILTER = 'NONE'
 export const defaultSortBy = 'updated'
 export const defaultTimeframe = 'future'
 
 export const initialState = {
-  filter: defaultFilter,
+  filter: NO_POST_FILTER,
   sortBy: defaultSortBy,
   timeframe: defaultTimeframe
 }
 
 export default function reducer (state = initialState, action) {
   const { error, type, payload } = action
+
   if (error) return state
 
   switch (type) {

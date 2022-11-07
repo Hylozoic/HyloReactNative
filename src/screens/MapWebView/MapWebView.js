@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import { useSelector } from 'react-redux'
-import { navigateToLinkingPath } from 'navigation/linking'
+import { modalScreenName } from 'hooks/useIsModalScreen'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import HyloWebView from 'components/HyloWebView'
@@ -41,18 +41,25 @@ export default function MapWebView ({ navigation }) {
     // To keep saved search retrieval from resetting group context in the App:
     '/map'
   ]
-  const nativeRouteHandler = ({ pathname, search }) => ({
+  const nativeRouteHandler = () => ({
     '(.*)/:type(post|members)/:id': ({ routeParams }) => {
       const { type, id } = routeParams
-      const linkingPath = `${type}/${id}`
 
-      navigateToLinkingPath(linkingPath + search)
+      switch (type) {
+        case 'post': {
+          navigation.navigate('Post Details', { id })
+          break
+        }
+        case 'members': {
+          navigation.navigate('Member', { id })
+          break
+        }
+      }
     },
     '(.*)/group/:groupSlug([a-zA-Z0-9-]+)': ({ routeParams }) => {
       const { groupSlug } = routeParams
-      const linkingPath = `/group/${groupSlug}`
 
-      navigateToLinkingPath(linkingPath + search)
+      navigation.navigate(modalScreenName('Group Explore'), { groupSlug })
     }
   })
 

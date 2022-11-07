@@ -10,7 +10,8 @@ import {
   getPostIds,
   getHasMorePosts,
   defaultSortBy,
-  getQueryProps
+  getQueryProps,
+  NO_POST_FILTER
 } from './FeedList.store'
 import { FETCH_POSTS } from 'store/constants'
 import { ALL_GROUP_ID, isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
@@ -27,7 +28,6 @@ export function mapStateToProps (state, props) {
 
   const postTypeFilter = props?.feedType || getFilter(state, props) || defaultPostType
   const sortBy = getSort(state, props) || defaultSortBy
-
   const timeframe = getTimeframe(state, props)
 
   let fetchPostParam = getQueryProps(state, {
@@ -42,7 +42,7 @@ export function mapStateToProps (state, props) {
     topicName,
     sortBy,
     // Can be any of the Post Types:
-    filter: postTypeFilter
+    filter: postTypeFilter === NO_POST_FILTER ? null : postTypeFilter
   })
 
   if (props.feedType === 'event') {

@@ -78,7 +78,7 @@ export default function MessagesNavigator () {
             <ModalHeader
               {...headerProps}
               headerLeftCloseIcon={false}
-              headerLeftOnPress={() => headerProps.navigation.navigate('Messages')}
+              // headerLeftOnPress={() => headerProps.navigation.navigate('Messages')}
             />
           )
         }}

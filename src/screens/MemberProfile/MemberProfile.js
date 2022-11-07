@@ -135,7 +135,7 @@ export class MemberBanner extends React.Component {
       ? { uri: avatarLocalUri }
       : avatarUrl && { uri: avatarUrl }
 
-    // This is a suprisingly annoying piece of logic. Basically, prefer
+    // This is a surprisingly annoying piece of logic. Basically, prefer
     // displaying `bannerLocalUri`, then `bannerUrl`, then `defaultBanner`.
     // However, don't display `defaultBanner` only to be replaced with
     // `bannerUrl` after the request finishes! The trick to it is this:

@@ -52,7 +52,7 @@ export default class Thread extends React.Component {
     const socket = await getSocket()
     socket.on('reconnect', reconnectFetchMessages)
     this.scrollToBottom()
-    fetchMessages()
+    await fetchMessages()
     this.markAsRead()
     this.setHeader()
   }

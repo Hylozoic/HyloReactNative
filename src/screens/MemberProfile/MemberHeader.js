@@ -31,8 +31,7 @@ export default function MemberHeader ({
   if (!person) return null
 
   const { name, tagline } = person
-  const locationText = get('location', person)
-    || get('locationObject.fullText', person)
+  const locationText = get('location', person) || get('locationObject.fullText', person)
   const blockUser = blockUserWithConfirmationFun(props.blockUser, name)
   const isAxolotl = AXOLOTL_ID === get('id', person)
   const showLocationPicker = () => {
@@ -59,14 +58,25 @@ export default function MemberHeader ({
           isMe={isMe}
         />
         <View style={styles.icons}>
-          {!isMe &&<TouchableOpacity onPress={onPressMessages}>
-            <Icon name='Messages' style={styles.icon} />
-          </TouchableOpacity>}
-          <MemberMenu {...{
-            flagMember, isMe, saveChanges, editable, blockUser,
-            isAxolotl, goToEdit, goToEditAccount,
-            goToManageNotifications, goToBlockedUsers
-          }} />
+          {!isMe && (
+            <TouchableOpacity onPress={onPressMessages}>
+              <Icon name='Messages' style={styles.icon} />
+            </TouchableOpacity>
+          )}
+          <MemberMenu
+            {...{
+              flagMember,
+              isMe,
+              saveChanges,
+              editable,
+              blockUser,
+              isAxolotl,
+              goToEdit,
+              goToEditAccount,
+              goToManageNotifications,
+              goToBlockedUsers
+            }}
+          />
         </View>
       </View>
       <Control

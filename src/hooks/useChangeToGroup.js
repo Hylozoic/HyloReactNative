@@ -24,6 +24,7 @@ export default function useChangeToGroup () {
     if (canViewGroup) {
       const goToGroup = () => {
         navigation.navigate('Group Navigation', { groupSlug })
+        navigation.navigate('Feed', { initial: false })
       }
 
       confirm

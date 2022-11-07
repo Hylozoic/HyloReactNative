@@ -1,10 +1,9 @@
-import React from 'react'
 import { Text, TouchableOpacity } from 'react-native'
 import { find } from 'lodash/fp'
-import { capeCod, rhino, rhino30, rhino60, rhino80 } from 'style/colors'
 import { isIOS } from 'util/platform'
 import useHyloActionSheet from 'hooks/useHyloActionSheet'
 import Icon from 'components/Icon'
+import { rhino } from 'style/colors'
 
 export default function ListControl ({ selected, options, onChange }) {
   const { showHyloActionSheet } = useHyloActionSheet()
