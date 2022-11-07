@@ -9,7 +9,6 @@ import GroupExploreWebView from 'screens/GroupExploreWebView'
 import GroupSettingsTabsNavigator from 'navigation/GroupSettingsTabsNavigator'
 import LoadingScreen from 'screens/LoadingScreen'
 import MemberProfile from 'screens/MemberProfile'
-import NewMessage from 'screens/NewMessage'
 import PostDetails from 'screens/PostDetails'
 import PostEditor from 'screens/PostEditor'
 import NotificationsList from 'screens/NotificationsList'
@@ -78,10 +77,6 @@ export default function AuthRootNavigator () {
           />
           <AuthRoot.Screen name='Edit Post' component={PostEditor} options={{ headerShown: false }} />
           <AuthRoot.Screen name='Group Settings' component={GroupSettingsTabsNavigator} />
-          <AuthRoot.Screen
-            name={modalScreenName('New Message')} component={NewMessage}
-            options={{ title: 'New Message' }}
-          />
           <AuthRoot.Screen name={modalScreenName('Thread')} component={Thread} />
           <AuthRoot.Screen name={modalScreenName('Notifications')} component={NotificationsList} />
         </AuthRoot.Group>
