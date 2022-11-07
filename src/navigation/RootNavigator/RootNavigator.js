@@ -68,7 +68,7 @@ export default function RootNavigator () {
           RNBootSplash.hide({ fade: true })
         }}
         // To get a map of the current navigation state:
-        // onStateChange={state => console.log('!!! onStateChange:', state.routes)}
+        // onStateChange={state => console.log('!!! onStateChange:', JSON.stringify(state.routes, null, 2))}
       >
         <Root.Navigator {...navigatorProps}>
           {isAuthorized && (

@@ -172,7 +172,7 @@ export async function openURL (providedUrlOrPath, options = {}) {
 // This could possibly be replaced by updating the logic applied by Linking.openURL
 export const navigateToLinkingPath = async (providedUrl, reset) => {
   const linkingURL = new URL(providedUrl, DEFAULT_APP_HOST)
-  const linkingPath = `${linkingURL.pathname}${linkingURL.search}`
+  const linkingPath = linkingURL.pathname + linkingURL.search
   const stateForPath = getStateFromPath(linkingPath)
 
   if (stateForPath) {
