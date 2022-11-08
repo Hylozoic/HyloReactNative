@@ -23,4 +23,6 @@ export default function useNavigateToInitialURL (loading, wait = 0) {
       })()
     }
   }, [loading])
+
+  return null
 }
