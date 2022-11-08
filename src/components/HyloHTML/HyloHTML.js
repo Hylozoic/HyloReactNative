@@ -76,7 +76,7 @@ export function HyloHTMLConfigProvider ({ children }) {
   const currentlySelectedGroup = useSelector(getCurrentGroup)
 
   const handleLinkPress = useCallback(
-    async (_, href) => openURL(href, { groupSlug: currentlySelectedGroup?.slug }),
+    async (_, href) => openURL(href),
     [currentlySelectedGroup?.slug]
   )
 

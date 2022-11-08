@@ -63,6 +63,13 @@ export default function MapWebView ({ navigation }) {
 
       navigation.navigate(modalScreenName('Group Explore'), { groupSlug })
     },
+    // TODO: This is probably best here but currently doing the below as a test case of `navigateToLinkingPath`
+    // '(.*)/create/post': ({ routeParams }) => {
+    //   const { newPostType } = routeParams
+
+    //   webViewRef?.current?.goBack()
+    //   navigation.navigate('Edit Post', { type: newPostType })
+    // },
     '(.*)': ({ pathname, search }) => {
       navigateToLinkingPath(pathname + search)
     }
