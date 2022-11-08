@@ -9,8 +9,7 @@ import RNBootSplash from 'react-native-bootsplash'
 import customLinking, {
   navigateToLinkingPath,
   AUTH_ROOT_SCREEN_NAME,
-  NON_AUTH_ROOT_SCREEN_NAME,
-  initialNavigationState
+  NON_AUTH_ROOT_SCREEN_NAME
 } from 'navigation/linking'
 import checkLogin from 'store/actions/checkLogin'
 import { getAuthorized } from 'store/selectors/getAuthState'
@@ -65,7 +64,6 @@ export default function RootNavigator () {
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}
-        initialState={initialNavigationState}
         onReady={params => {
           RNBootSplash.hide({ fade: true })
         }}

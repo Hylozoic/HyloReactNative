@@ -1,9 +1,8 @@
 import { Linking } from 'react-native'
-import { isEmpty, cloneDeepWith } from 'lodash/fp'
+import { isEmpty } from 'lodash/fp'
 import {
   getActionFromState,
   subscribe,
-  getInitialURL,
   getStateFromPath as getStateFromPathDefault,
   CommonActions
 } from '@react-navigation/native'
@@ -39,7 +38,7 @@ export const AUTH_ROOT_SCREEN_NAME = 'AuthRoot'
 export const NON_AUTH_ROOT_SCREEN_NAME = 'NonAuthRoot'
 
 /* eslint-disable key-spacing */
-export const routesToScreenPaths = {
+export const routingConfig = {
   '/login':                                                  `${NON_AUTH_ROOT_SCREEN_NAME}/Login`,
   '/signup/:step(verify-email)':                             `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/SignupEmailValidation`,
   '/signup/:step?':                                          `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/Signup Intro`,
@@ -101,6 +100,8 @@ export const routesToScreenPaths = {
 
 // Even though these are already on the respective navigators,
 // they need to be specified again when linking.
+// NOTE/TODO: Though initial screens are an array currently, only the first screen name will be used
+// according to the limitations of using React Navigation Linking Screen Config. Sad trumpet.
 export const initialRouteNamesConfig = {
   [AUTH_ROOT_SCREEN_NAME]: ['Drawer'],
   'Home Tab': ['Group Navigation', 'Feed'],
@@ -141,9 +142,8 @@ export const staticPages = [
 // Could potentially be entirely replaced by `navigateToLinkingPath` below
 // The key differentiating feature besides the routes is the ability to provide
 // a `groupSlug` which is used in the case of the HyloEditorWebView
-export async function openURL (providedUrlOrPath, options = {}) {
-  const urlOrPath = providedUrlOrPath.trim()
-  const linkingURL = new URL(urlOrPath, DEFAULT_APP_HOST)
+export async function openURL (providedURLOrPath, options = {}) {
+  const linkingURL = new URL(providedURLOrPath.trim(), DEFAULT_APP_HOST)
 
   if (
     prefixes.includes(linkingURL.origin) &&
@@ -164,14 +164,14 @@ export async function openURL (providedUrlOrPath, options = {}) {
     return navigateToLinkingPath(pathname)
   }
 
-  if (await Linking.canOpenURL(urlOrPath)) {
-    return Linking.openURL(urlOrPath)
+  if (await Linking.canOpenURL(linkingURL)) {
+    return Linking.openURL(linkingURL)
   }
 }
 
 // This could possibly be replaced by updating the logic applied by Linking.openURL
-export const navigateToLinkingPath = async (providedUrl, reset) => {
-  const linkingURL = new URL(providedUrl, DEFAULT_APP_HOST)
+export const navigateToLinkingPath = async (providedPath, reset) => {
+  const linkingURL = new URL(providedPath.trim(), DEFAULT_APP_HOST)
   const linkingPath = linkingURL.pathname + linkingURL.search
   const stateForPath = getStateFromPath(linkingPath)
 
@@ -192,11 +192,11 @@ export const navigateToLinkingPath = async (providedUrl, reset) => {
   }
 }
 
-export function getScreenPathWithParamsFromPath (incomingPathAndQuerystring, routes = routesToScreenPaths) {
+export function screenAndRoutePathFromPath (path, routes = routingConfig) {
   const {
     pathname: incomingPathname,
     search: incomingQuerystring
-  } = new URL(incomingPathAndQuerystring, DEFAULT_APP_HOST)
+  } = new URL(path, DEFAULT_APP_HOST)
 
   for (const pathMatcher in routes) {
     const pathMatch = match(pathMatcher)(incomingPathname)
@@ -208,15 +208,132 @@ export function getScreenPathWithParamsFromPath (incomingPathAndQuerystring, rou
       if (!isEmpty(incomingQuerystring)) routeParams.push(incomingQuerystring.substring(1))
       if (!isEmpty(pathMatch.params)) routeParams.push(queryString.stringify(pathMatch.params))
 
-      // For now required by JoinGroup
-      routeParams.push(`originalLinkingPath=${encodeURIComponent(incomingPathAndQuerystring)}`)
+      // Needed for JoinGroup
+      routeParams.push(`originalLinkingPath=${encodeURIComponent(path)}`)
 
       const routeParamsQueryString = routeParams.join('&')
 
-      return `${screenPath}?${routeParamsQueryString}`
+      return {
+        screenPath: `${screenPath}?${routeParamsQueryString}`,
+        routePath: `${incomingPathname}?${routeParamsQueryString}`
+      }
     }
   }
 }
+
+export function linkingConfigForScreenPath (screenPath) {
+  const screenPathSegments = screenPath.split('/')
+  const makeScreenConfig = (screenNames, screenConfig = {}) => {
+    const screenName = screenNames.pop()
+    const initialRouteName = Object.keys(initialRouteNamesConfig).includes(screenName)
+
+    if (initialRouteName) {
+      screenConfig.initialRouteName = initialRouteNamesConfig[screenName][0]
+    }
+
+    if (Object.keys(screenConfig).length === 0) {
+      screenConfig = {
+        screens: {
+          [screenName]: '*'
+        }
+      }
+    } else {
+      screenConfig = {
+        screens: {
+          [screenName]: screenConfig
+        }
+      }
+    }
+
+    return screenNames.length > 0
+      ? makeScreenConfig(screenNames, screenConfig)
+      : screenConfig
+  }
+
+  return makeScreenConfig(screenPathSegments)
+}
+
+export const getStateFromPath = path => {
+  const { routePath, screenPath } = screenAndRoutePathFromPath(path, routingConfig)
+  const screenConfig = linkingConfigForScreenPath(screenPath)
+  const isAuthorized = getAuthorized(store.getState())
+
+  // 404 handling
+  if (!routePath) return null
+
+  // Set `returnToOnAuthPath` for routes requiring auth when not auth'd
+  if (!isAuthorized && routePath.match(new RegExp(`^${AUTH_ROOT_SCREEN_NAME}`))) {
+    store.dispatch(setReturnToOnAuthPath(path))
+
+    return null
+  }
+
+  return getStateFromPathDefault(routePath, screenConfig)
+}
+
+// React Navigation linking config
+export default {
+  prefixes,
+  subscribe,
+  getStateFromPath,
+  getPathFromState: () => {}
+}
+
+// The actual initial state we want?
+// export const initialNavigationState = {
+//   routes: [
+//     {
+//       [AUTH_ROOT_SCREEN_NAME]: {
+//         name: 'Drawer',
+//         routes: [
+//           {
+//             name: 'Tabs',
+//             routes: [
+//               {
+//                 name: 'Home Tab',
+//                 routes: [
+//                   { name: 'Group Navigation' }
+//                 ]
+//               },
+//               {
+//                 name: 'Messages Tab',
+//                 routes: [
+//                   { name: 'Messages' }
+//                 ]
+//               }
+//             ]
+//           }
+//         ]
+//       }
+//     }
+//   ]
+// }
+
+// const experimentalExtraScreenConfig = {
+//   screens: {
+//     [AUTH_ROOT_SCREEN_NAME]: {
+//       initialRouteName: 'Drawer',
+//       screens: {
+//         Drawer: {
+//           initialRouteName: 'Tabs',
+//           screens: {
+//             Tabs: {
+//               initialRouteName: 'Home Tab',
+//               screens: {
+//                 'Home Tab': {
+//                   initialRouteName: 'Feed'
+//                 },
+//                 'Messages Tab': {
+//                   initialRouteName: 'Messages'
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 
 /*
 
@@ -237,59 +354,30 @@ in that configuration is not possible (* or very awkward to configure and mainta
 idiomatic deep traversal and merging of the React Navigation state object.
 
 */
-function addInitialRouteNamesIntoState (stateWithoutInitials, initialRouteNamesMap = initialRouteNamesConfig) {
-  function recurseObject (state) {
-    state?.routes?.forEach(route => {
-      if (!route.state?.routes) return route
+// function addInitialRouteNamesIntoState (stateWithoutInitials, initialRouteNamesMap = initialRouteNamesConfig) {
+//   function recurseObject (state) {
+//     state?.routes?.forEach(route => {
+//       if (!route.state?.routes) return route
 
-      if (route?.name && Object.keys(initialRouteNamesMap).includes(route.name)) {
-        route.state.routes = [
-          ...initialRouteNamesMap[route.name]
-            .filter(initialRouteName => {
-              const routeNamesAlreadyPresent = route.state.routes.map(route => route.name)
+//       if (route?.name && Object.keys(initialRouteNamesMap).includes(route.name)) {
+//         route.state.routes = [
+//           ...initialRouteNamesMap[route.name]
+//             .filter(initialRouteName => {
+//               const routeNamesAlreadyPresent = route.state.routes.map(route => route.name)
 
-              return !routeNamesAlreadyPresent.includes(initialRouteName)
-            })
-            .map(initialRouteName => ({
-              name: initialRouteName,
-              params: route.state.routes[route.state.routes.length - 1].params
-            })),
-          ...route.state.routes
-        ]
-      }
+//               return !routeNamesAlreadyPresent.includes(initialRouteName)
+//             })
+//             .map(initialRouteName => ({
+//               name: initialRouteName,
+//               params: route.state.routes[route.state.routes.length - 1].params
+//             })),
+//           ...route.state.routes
+//         ]
+//       }
 
-      return recurseObject(route)
-    })
-  }
+//       return recurseObject(route)
+//     })
+//   }
 
-  return cloneDeepWith(recurseObject, stateWithoutInitials)
-}
-
-export const getStateFromPath = path => {
-  const screenPathWithParams = getScreenPathWithParamsFromPath(path, routesToScreenPaths)
-  const isAuthorized = getAuthorized(store.getState())
-
-  // 404 handling
-  if (!screenPathWithParams) return null
-
-  // Set `returnToOnAuthPath` for routes requiring auth when not auth'd
-  if (!isAuthorized && screenPathWithParams.match(new RegExp(`^${AUTH_ROOT_SCREEN_NAME}`))) {
-    store.dispatch(setReturnToOnAuthPath(path))
-
-    return null
-  }
-
-  const stateFromPath = getStateFromPathDefault(screenPathWithParams)
-  const stateWithInitialRouteNames = addInitialRouteNamesIntoState(stateFromPath)
-
-  return stateWithInitialRouteNames
-}
-
-// React Navigation linking config
-export default {
-  prefixes,
-  subscribe,
-  getInitialURL,
-  getStateFromPath,
-  getPathFromState: () => {}
-}
+//   return cloneDeepWith(recurseObject, stateWithoutInitials)
+// }

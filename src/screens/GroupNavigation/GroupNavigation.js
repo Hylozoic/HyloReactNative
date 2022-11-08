@@ -8,6 +8,7 @@ import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import Icon from 'components/Icon'
 import styles from './GroupNavigation.styles'
+import useNavigateToInitialURL from 'hooks/useNavigateToInitialURL'
 
 export default function GroupNavigation () {
   const navigation = useNavigation()
@@ -16,6 +17,7 @@ export default function GroupNavigation () {
   const parentGroups = useSelector(getParentGroups)
 
   useSetCurrentGroup()
+  useNavigateToInitialURL()
 
   useFocusEffect(() => {
     navigation.setOptions({ title: currentGroup?.name })

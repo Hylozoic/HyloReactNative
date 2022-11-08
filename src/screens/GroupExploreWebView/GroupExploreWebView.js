@@ -1,8 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/core'
 import { useNavigation, useRoute } from '@react-navigation/native'
+import { URL } from 'react-native-url-polyfill'
 import { WebViewMessageTypes } from 'hylo-shared'
-import { navigateToLinkingPath } from 'navigation/linking'
+import { DEFAULT_APP_HOST, navigateToLinkingPath } from 'navigation/linking'
 import useIsModalScreen from 'hooks/useIsModalScreen'
 import HyloWebView from 'components/HyloWebView'
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,6 +20,7 @@ export default function GroupExploreWebView () {
   const webViewRef = useRef(null)
   const groupSlug = route.params.groupSlug
   const currentGroup = useSelector(state => getGroup(state, { slug: groupSlug }))
+  const [path, setPath] = useState()
   const [canGoBack, setCanGoBack] = useState(false)
 
   useFocusEffect(
@@ -35,7 +37,10 @@ export default function GroupExploreWebView () {
 
   // Fetch moderators for "Opportunities to Connect" / Message to all moderators feature
   useEffect(() => {
-    dispatch(fetchGroupModerators({ slug: groupSlug }))
+    if (groupSlug) {
+      setPath(`/groups/${groupSlug}/explore`)
+      dispatch(fetchGroupModerators({ slug: groupSlug }))
+    }
   }, [groupSlug])
 
   const joinGroup = async groupToJoinSlug => {
@@ -82,16 +87,21 @@ export default function GroupExploreWebView () {
     }
   })
 
+  if (!groupSlug) return null
+
   return (
     <HyloWebView
       ref={webViewRef}
-      path={`/groups/${groupSlug}/explore`}
+      path={path}
       handledWebRoutes={handledWebRoutes}
       nativeRouteHandler={nativeRouteHandler}
       messageHandler={messageHandler}
       // TODO: Consider adding this to the `HyloWebView` standard API
-      onNavigationStateChange={({ canGoBack: providedCanGoBack }) => {
-        setCanGoBack(providedCanGoBack)
+      onNavigationStateChange={({ url, canGoBack: providedCanGoBack }) => {
+        const { pathname } = new URL(url, DEFAULT_APP_HOST)
+
+        // NOTE: Currently ignores possible changes to querystring (`search`)
+        setCanGoBack(providedCanGoBack && pathname !== path)
       }}
     />
   )
