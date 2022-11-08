@@ -103,9 +103,9 @@ export const routingConfig = {
 // NOTE/TODO: Though initial screens are an array currently, only the first screen name will be used
 // according to the limitations of using React Navigation Linking Screen Config. Sad trumpet.
 export const initialRouteNamesConfig = {
-  [AUTH_ROOT_SCREEN_NAME]: ['Drawer'],
-  'Home Tab': ['Group Navigation', 'Feed'],
-  'Messages Tab': ['Messages']
+  [AUTH_ROOT_SCREEN_NAME]: 'Drawer',
+  'Home Tab': 'Group Navigation',
+  'Messages Tab': 'Messages'
 }
 
 export const DEFAULT_APP_HOST = 'https://hylo.com'
@@ -228,7 +228,7 @@ export function linkingConfigForScreenPath (screenPath) {
     const initialRouteName = Object.keys(initialRouteNamesConfig).includes(screenName)
 
     if (initialRouteName) {
-      screenConfig.initialRouteName = initialRouteNamesConfig[screenName][0]
+      screenConfig.initialRouteName = initialRouteNamesConfig[screenName]
     }
 
     if (Object.keys(screenConfig).length === 0) {
