@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import loginByToken from 'store/actions/loginByToken'
 import loginByJWT from 'store/actions/loginByJWT'
 import { getAuthorized } from 'store/selectors/getAuthState'
-import { navigateToLinkingPath } from 'navigation/linking'
+import { openURL } from 'hooks/useOpenURL'
 import { StackActions, useFocusEffect, useRoute } from '@react-navigation/native'
 import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
 import checkLogin from 'store/actions/checkLogin'
@@ -38,7 +38,7 @@ export default function LoginByTokenHandler () {
           }
         } catch (e) {
           console.log('!!! error', e)
-          navigateToLinkingPath('/login?bannerError=invalid-link')
+          openURL('/login?bannerError=invalid-link')
         }
       })()
     }, [dispatch, isAuthorized, jwt, loginToken, userID, returnToURLFromLink])
@@ -49,7 +49,7 @@ export default function LoginByTokenHandler () {
     if (navigationRef.canGoBack()) {
       navigationRef.dispatch(StackActions.pop())
     } else if (isAuthorized) {
-      navigateToLinkingPath('/', true)
+      openURL('/', true)
     }
   }, [isAuthorized])
 

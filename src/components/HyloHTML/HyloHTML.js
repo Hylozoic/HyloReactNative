@@ -5,7 +5,7 @@ import WebView from 'react-native-webview'
 import iframe, { iframeModel } from '@native-html/iframe-plugin'
 import { useSelector } from 'react-redux'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import { openURL } from 'navigation/linking'
+import { openURL } from 'hooks/useOpenURL'
 import useGoToMember from 'hooks/useGoToMember'
 import useGoToTopic from 'hooks/useGoToTopic'
 

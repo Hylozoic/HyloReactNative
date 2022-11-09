@@ -1,5 +1,5 @@
 import React, { useCallback, forwardRef, useState, useEffect } from 'react'
-import { useFocusEffect } from '@react-navigation/core'
+import { useFocusEffect } from '@react-navigation/native'
 import Loading from 'components/Loading'
 import AutoHeightWebView from 'react-native-autoheight-webview'
 import { WebViewMessageTypes } from 'hylo-shared'

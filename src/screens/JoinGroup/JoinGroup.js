@@ -5,7 +5,7 @@ import { every, isEmpty } from 'lodash/fp'
 import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
 import getRouteParam from 'store/selectors/getRouteParam'
 import { getAuthorized } from 'store/selectors/getAuthState'
-import { navigateToLinkingPath } from 'navigation/linking'
+import { openURL } from 'hooks/useOpenURL'
 import useInvitation from 'store/actions/useInvitation'
 import checkInvitation from 'store/actions/checkInvitation'
 import LoadingScreen from 'screens/LoadingScreen'
@@ -40,7 +40,7 @@ export default function JoinGroup (props) {
             const groupSlug = newMembership?.group?.slug
 
             if (groupSlug) {
-              navigateToLinkingPath(`/groups/${groupSlug}`, true)
+              openURL(`/groups/${groupSlug}`, true)
             } else {
               throw new Error('Join group was unsuccessful')
             }
@@ -50,14 +50,14 @@ export default function JoinGroup (props) {
 
             if (isValidInvite) {
               dispatch(setReturnToOnAuthPath(route.params?.originalLinkingPath))
-              navigateToLinkingPath('/signup?message=Signup or login to join this group.', true)
+              openURL('/signup?message=Signup or login to join this group.', true)
             } else {
-              navigateToLinkingPath('/signup?error=invite-expired', true)
+              openURL('/signup?error=invite-expired', true)
             }
           }
         } catch (error) {
           console.log('!!! error', error)
-          navigation.canGoBack() ? navigation.goBack() : navigateToLinkingPath('/')
+          navigation.canGoBack() ? navigation.goBack() : openURL('/')
         }
       })()
     }, [])

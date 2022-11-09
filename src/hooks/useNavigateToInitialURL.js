@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Linking } from 'react-native'
-import { openURL } from 'navigation/linking'
+import { openURL } from 'hooks/useOpenURL'
 import { useDispatch, useSelector } from 'react-redux'
 import { INITIAL_URL_HANDLED } from 'store/constants'
 

@@ -1,13 +1,4 @@
-import { Linking } from 'react-native'
-import {
-  getActionFromState,
-  subscribe,
-  CommonActions
-} from '@react-navigation/native'
-import getStateFromPath from './getStateFromPath'
-import { URL } from 'react-native-url-polyfill'
 import { modalScreenName } from 'hooks/useIsModalScreen'
-import { navigationRef } from 'navigation/linking/helpers'
 
 /*
 
@@ -17,7 +8,7 @@ The current version of `react-navigation` doesn't have a way to map multiple pat
 to the same screen. The below way of mapping screens to paths is being used to
 construct and, otherwise in alternate to, `linking.config.screens`.
 
-See: https://reactnavigation.org/docs/configuring-links/
+See: `navigation/linking/getStateFromPath.js` here, and https://reactnavigation.org/docs/configuring-links
 
 All routes are always available, but routes that begin with `AUTH_ROOT_SCREEN_NAME`
 will be set as the `returnToPath` and not navigated to until after
@@ -110,49 +101,3 @@ export const prefixes = [
   'https://staging.hylo.com',
   'hyloapp://'
 ]
-
-// Could potentially be entirely replaced by `navigateToLinkingPath` below
-export async function openURL (providedURLOrPath) {
-  const linkingURL = new URL(providedURLOrPath.trim(), DEFAULT_APP_HOST)
-
-  if (prefixes.includes(linkingURL.origin)) {
-    const pathname = linkingURL.pathname.toLowerCase()
-
-    return navigateToLinkingPath(pathname)
-  }
-
-  if (await Linking.canOpenURL(linkingURL)) {
-    return Linking.openURL(linkingURL)
-  }
-}
-
-// This could possibly be replaced by updating the logic applied by Linking.openURL
-export const navigateToLinkingPath = async (providedPath, reset) => {
-  const linkingURL = new URL(providedPath.trim(), DEFAULT_APP_HOST)
-  const linkingPath = linkingURL.pathname + linkingURL.search
-  const stateForPath = getStateFromPath(linkingPath)
-
-  if (stateForPath) {
-    const actionForPath = getActionFromState(stateForPath)
-
-    if (reset) {
-      return navigationRef.dispatch(
-        CommonActions.reset({
-          routes: [actionForPath.payload]
-        })
-      )
-    }
-
-    return navigationRef.dispatch(actionForPath)
-  } else {
-    return null
-  }
-}
-
-// React Navigation linking config
-export default {
-  prefixes,
-  subscribe,
-  getStateFromPath,
-  getPathFromState: () => {}
-}

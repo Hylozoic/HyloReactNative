@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useFocusEffect } from '@react-navigation/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { View, Text, SectionList, TouchableOpacity } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { modalScreenName } from 'hooks/useIsModalScreen'

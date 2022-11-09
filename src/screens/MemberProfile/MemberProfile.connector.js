@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { get } from 'lodash/fp'
 import { fetchPerson } from './MemberProfile.store'
-import { openURL } from 'navigation/linking'
+import { openURL } from 'hooks/useOpenURL'
 import blockUser from 'store/actions/blockUser'
 import getMe from 'store/selectors/getMe'
 import getPerson from 'store/selectors/getPerson'

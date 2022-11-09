@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native'
-import { useFocusEffect } from '@react-navigation/core'
+import { useFocusEffect } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 import {
   CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell

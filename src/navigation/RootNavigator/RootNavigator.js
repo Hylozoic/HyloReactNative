@@ -7,10 +7,10 @@ import { navigationRef } from 'navigation/linking/helpers'
 import OneSignal from 'react-native-onesignal'
 import RNBootSplash from 'react-native-bootsplash'
 import customLinking, {
-  navigateToLinkingPath,
   AUTH_ROOT_SCREEN_NAME,
   NON_AUTH_ROOT_SCREEN_NAME
 } from 'navigation/linking'
+import { openURL } from 'hooks/useOpenURL'
 import checkLogin from 'store/actions/checkLogin'
 import { getAuthorized } from 'store/selectors/getAuthState'
 import { white } from 'style/colors'
@@ -47,7 +47,7 @@ export default function RootNavigator () {
   useEffect(() => {
     return OneSignal.setNotificationOpenedHandler(({ notification }) => {
       const path = notification?.additionalData?.path
-      navigateToLinkingPath(path)
+      openURL(path)
     })
   }, [])
 
@@ -62,7 +62,7 @@ export default function RootNavigator () {
   return (
     <View style={styles.rootContainer}>
       <NavigationContainer
-        linking={customLinking}
+        // linking={customLinking}
         ref={navigationRef}
         onReady={params => {
           RNBootSplash.hide({ fade: true })

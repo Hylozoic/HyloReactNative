@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isEmpty } from 'lodash/fp'
-import { navigateToLinkingPath } from 'navigation/linking'
+import { openURL } from 'hooks/useOpenURL'
 import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
 import getReturnToOnAuthPath from 'store/selectors/getReturnToOnAuthPath'
 
@@ -14,7 +14,7 @@ export default function useReturnToOnAuthPath (loading = false) {
       if (!loading) {
         if (!isEmpty(returnToOnAuthPath)) {
           dispatch(setReturnToOnAuthPath())
-          navigateToLinkingPath(returnToOnAuthPath)
+          openURL(returnToOnAuthPath)
         }
       }
     })()

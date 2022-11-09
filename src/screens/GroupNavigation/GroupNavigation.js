@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Text, ScrollView, View, TouchableOpacity } from 'react-native'
-import { useFocusEffect, useNavigation } from '@react-navigation/core'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'

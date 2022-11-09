@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef } from 'react'
-import { useFocusEffect } from '@react-navigation/core'
 import { useSelector } from 'react-redux'
-import { navigateToLinkingPath } from 'navigation/linking'
+import { useFocusEffect } from '@react-navigation/native'
+import { openURL } from 'hooks/useOpenURL'
 import { modalScreenName } from 'hooks/useIsModalScreen'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
@@ -63,7 +63,7 @@ export default function MapWebView ({ navigation }) {
 
       navigation.navigate(modalScreenName('Group Explore'), { groupSlug })
     },
-    // TODO: This is probably best here but currently doing the below as a test case of `navigateToLinkingPath`
+    // TODO: This is probably best here but currently doing the below as a test case of `openURL`
     // '(.*)/create/post': ({ routeParams }) => {
     //   const { newPostType } = routeParams
 
@@ -71,7 +71,7 @@ export default function MapWebView ({ navigation }) {
     //   navigation.navigate('Edit Post', { type: newPostType })
     // },
     '(.*)': ({ pathname, search }) => {
-      navigateToLinkingPath(pathname + search)
+      openURL(pathname + search)
     }
   })
 

@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { useFocusEffect } from '@react-navigation/core'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { URL } from 'react-native-url-polyfill'
 import { WebViewMessageTypes } from 'hylo-shared'
-import { DEFAULT_APP_HOST, navigateToLinkingPath } from 'navigation/linking'
+import { DEFAULT_APP_HOST } from 'navigation/linking'
+import { openURL } from 'hooks/useOpenURL'
 import useIsModalScreen from 'hooks/useIsModalScreen'
 import HyloWebView from 'components/HyloWebView'
 import { useDispatch, useSelector } from 'react-redux'
@@ -50,7 +50,7 @@ export default function GroupExploreWebView () {
     // await dispatch(fetchCurrentUser())
     await dispatch(fetchGroupDetails({ slug: groupToJoinSlug }))
 
-    navigateToLinkingPath(`/groups/${groupToJoinSlug}`)
+    openURL(`/groups/${groupToJoinSlug}`)
   }
 
   const messageHandler = ({ type, data }) => {
@@ -83,7 +83,7 @@ export default function GroupExploreWebView () {
       }
     },
     '(.*)': () => {
-      navigateToLinkingPath(pathname + search)
+      openURL(pathname + search)
     }
   })
 

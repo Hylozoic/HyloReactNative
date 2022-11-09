@@ -1,11 +1,11 @@
 import orm from 'store/models'
-import { openURL } from 'navigation/linking'
-import { mapStateToProps, mapDispatchToProps, makeOnPressMessages, mergeProps } from './MemberProfile.connector'
+import { openURL } from 'hooks/useOpenURL'
+import { mapStateToProps, makeOnPressMessages, mergeProps } from './MemberProfile.connector'
 import { FETCH_PERSON } from './MemberProfile.store'
 
 jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
-jest.mock('navigation/linking', () => {
-  const originalModule = jest.requireActual('navigation/linking')
+jest.mock('hooks/useOpenURL', () => {
+  const originalModule = jest.requireActual('hooks/useOpenURL')
 
   return {
     __esModule: true,
@@ -57,7 +57,7 @@ describe('makeOnPressMessages', () => {
     expect(navigation.navigate).toHaveBeenCalledWith('Messages Tab')
   })
 
-  // TODO: Re-write these tests to use a mocked `navigateToLinkingPath`
+  // TODO: Re-write these tests to use a mocked `openURL`
   // it('navigates to existing thread when there is one', () => {
   //   const messageThreadId = 99
   //   const onPressMessages = makeOnPressMessages({ id: 1 }, { id: 2, messageThreadId }, navigation)

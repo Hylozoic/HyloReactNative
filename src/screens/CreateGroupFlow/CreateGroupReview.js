@@ -4,7 +4,7 @@ import {
   Text, View, TextInput, ScrollView, TouchableOpacity
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { navigateToLinkingPath } from 'navigation/linking'
+import { openURL } from 'hooks/useOpenURL'
 import ErrorBubble from 'components/ErrorBubble'
 import { accessibilityDescription, visibilityDescription } from 'store/models/Group'
 import Avatar from 'components/Avatar'
@@ -37,7 +37,7 @@ export default function CreateGroupReview () {
 
       if (newGroup) {
         dispatch(clearCreateGroupStore())
-        navigateToLinkingPath(`/groups/${newGroup.slug}`)
+        openURL(`/groups/${newGroup.slug}`)
       } else {
         setError('Group may have been created, but there was an error. Please contact Hylo support.')
       }

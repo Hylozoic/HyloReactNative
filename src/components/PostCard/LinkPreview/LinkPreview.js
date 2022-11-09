@@ -1,7 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, Text } from 'react-native'
 import { URL } from 'react-native-url-polyfill'
-import { openURL } from 'navigation/linking'
+import { openURL } from 'hooks/useOpenURL'
 import SpaceFillingImage from 'components/SpaceFillingImage'
 
 export default function LinkPreview ({ title, url, imageUrl }) {
