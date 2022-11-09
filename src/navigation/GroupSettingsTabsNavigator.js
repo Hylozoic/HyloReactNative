@@ -72,6 +72,20 @@ export default function GroupSettingsTabsNavigator () {
         }}
       />
       <GroupSettings.Screen
+        name='Privacy & Access'
+        component={GroupSettingsWebView}
+        initialParams={{
+          path: `/groups/${selectedGroup?.slug}/settings/privacy`
+        }}
+      />
+      <GroupSettings.Screen
+        name='Custom Views'
+        component={GroupSettingsWebView}
+        initialParams={{
+          path: `/groups/${selectedGroup?.slug}/settings/views`
+        }}
+      />
+      <GroupSettings.Screen
         name='Topics'
         component={GroupSettingsWebView}
         initialParams={{
