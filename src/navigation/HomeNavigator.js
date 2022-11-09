@@ -23,7 +23,6 @@ export default function HomeNavigator () {
     initialRouteName: 'Group Navigation',
     screenOptions: {
       animationEnabled: initialURLHandled,
-      lazy: true,
       transitionSpec: {
         open: {
           animation: 'spring',

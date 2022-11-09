@@ -32,7 +32,7 @@ export default function CreateGroupUrl ({ navigation }) {
         dispatch(setWorkflowOptions({ disableContinue: true }))
         return false
       }
-  
+
       if (!slugValidatorRegex.test(slug)) {
         setError(invalidSlugMessage)
         return false

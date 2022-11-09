@@ -18,7 +18,6 @@ export default function MessagesNavigator () {
     initialRouteName: 'Messages',
     screenOptions: {
       animationEnabled: initialURLHandled,
-      lazy: true,
       transitionSpec: {
         open: {
           animation: 'spring',

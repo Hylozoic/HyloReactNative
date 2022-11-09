@@ -18,14 +18,6 @@ const Tabs = createBottomTabNavigator()
 export default function TabsNavigator () {
   const navigatorProps = {
     screenOptions: ({ route }) => ({
-      //
-      // NOTE: This is required so the home tab is available
-      //       when path linking into the app to a child tab.
-      //
-      //       Lazy loading so make sure to check for focus
-      //       before fetching for the initial screen on
-      //       any Tab stack.
-      lazy: true,
       // TODO: Required for Android, not iOS
       // Set only for Android as it makes undesirable animation in iOS
       tabBarHideOnKeyboard: !isIOS,

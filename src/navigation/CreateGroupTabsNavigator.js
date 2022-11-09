@@ -25,8 +25,10 @@ export default function CreateGroupTabsNavigator () {
     tabBar: props => <CreateGroupTabBar {...props} />,
     // NOTE: This is how to have back button functionality
     // backBehavior: 'order',
-    animationEnabled: false,
     screenOptions: {
+      // animationEnabled: false,
+      animationTypeForReplace: 'push',
+      lazy: false,
       header: headerProps => {
         const close = () => headerProps.navigation.navigate('Drawer')
         return (
