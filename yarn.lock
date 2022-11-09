@@ -5026,15 +5026,15 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-hylo-shared@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/hylo-shared/-/hylo-shared-5.0.0.tgz#7cc76a87d092947b9c78aafb270e059d29866e41"
-  integrity sha512-72wTvmE1VfZEZ6Hk6jdrmXz4ocF66Y6FkHFDjqRwO9KYe5FSRwOY9tImperx12sB8GZY+Ss1R8sn0JF8IhOyyA==
+hylo-shared@5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/hylo-shared/-/hylo-shared-5.1.1.tgz#a3f1f9cc5cae21e3fa3ab8a1d3ff8ad5abd1b422"
+  integrity sha512-PoADiqgPfFCtdv+Zq7VHrqgOaeSdcbUWmsDt9Q399dVz5rlPP1Pq2lTlt4vjSmPfdI6wbXeWOafN9Kj2xNSzrQ==
   dependencies:
     coordinate-parser "^1.0.7"
     html-to-text "^8.1.0"
     lodash "~4.17.21"
-    marked "^4.0.12"
+    marked "^4.2.1"
     pretty-date "^0.2.0"
     querystring "^0.2.1"
     trunc-html "^1.1.2"
@@ -6492,10 +6492,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-marked@^4.0.12:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-4.1.1.tgz#2f709a4462abf65a283f2453dc1c42ab177d302e"
-  integrity sha512-0cNMnTcUJPxbA6uWmCmjWz4NJRe/0Xfk2NhXCUHjew9qJzFN20krFnsUe7QynwqOwa5m1fZ4UDg0ycKFVC0ccw==
+marked@^4.2.1:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-4.2.2.tgz#1d2075ad6cdfe42e651ac221c32d949a26c0672a"
+  integrity sha512-JjBTFTAvuTgANXx82a5vzK9JLSMoV6V3LBVn4Uhdso6t7vXrGx7g1Cd2r6NYSsxrYbQGFCMqBDhFHyK5q2UvcQ==
 
 memoize-one@^5.0.0:
   version "5.2.1"
@@ -8020,6 +8020,11 @@ react-native-screens@^3.18.2:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
+
+react-native-share@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-8.0.0.tgz#95520a16fca151822ce8a3b00240cf3a17eacb97"
+  integrity sha512-IFUKcWQ1/VgtsQmuC3EKaIPMhKqssTblwCojtTB4dehWJ2ZUPsIstPXJGqcmWqg7/S3cLNfCLvxf/tVaZvptxw==
 
 react-native-tab-view@^3.3.0:
   version "3.3.0"

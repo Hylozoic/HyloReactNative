@@ -1,10 +1,12 @@
-import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Share, Alert } from 'react-native'
+import { Alert } from 'react-native'
+import Share from 'react-native-share'
 import { useNavigation } from '@react-navigation/native'
 import { filter, isEmpty } from 'lodash/fp'
 import Clipboard from '@react-native-community/clipboard'
+import { AnalyticsEvents } from 'hylo-shared'
 import useHyloActionSheet from 'hooks/useHyloActionSheet'
+import useMixpanelTrack from 'hooks/useMixpanelTrack'
 import getMe from 'store/selectors/getMe'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getCanModerate from 'store/selectors/getCanModerate'
@@ -29,6 +31,7 @@ export default function usePostActionSheet ({
 }) {
   const navigation = useNavigation()
   const { showHyloActionSheet } = useHyloActionSheet()
+  const mixpanelTrack = useMixpanelTrack()
   const dispatch = useDispatch()
   const currentGroup = useSelector(getCurrentGroup)
   const currentUser = useSelector(getMe)
@@ -63,13 +66,23 @@ export default function usePostActionSheet ({
       ? () => dispatch(pinPostAction(postId, currentGroup.id))
       : null
 
-    const share = () => Share.share({
-      message: `"${title}" by ${creator.name} on hylo.com: ${baseHostURL}${postUrl}`,
-      url: `${baseHostURL}${postUrl}`
-    }, {
-      dialogTitle: `Share "${title}" by ${creator.name}`,
-      subject: `"${title}" by ${creator.name} on hylo.com`
-    })
+    const share = async () => {
+      try {
+        await Share.open({
+          message: `"${title}" by ${creator.name} on hylo.com: ${baseHostURL}${postUrl}`
+          // Used only by iOS and will repeat the URL in some contexts if we also include
+          // it in the message. Refine this area as later effort.
+          // url: `${baseHostURL}${postUrl}`
+        }, {
+          dialogTitle: `Share "${title}" by ${creator.name}`,
+          subject: `"${title}" by ${creator.name} on hylo.com`
+        })
+
+        mixpanelTrack(AnalyticsEvents.POST_SHARED)
+      } catch (e) {
+        console.log(e)
+      }
+    }
 
     const copyLink = () => Clipboard.setString(`${baseHostURL}${postUrl}`)
 
