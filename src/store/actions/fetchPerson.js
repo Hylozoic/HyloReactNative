@@ -8,6 +8,9 @@ export default function fetchPerson (id, query = personQuery) {
       query,
       variables: { id }
     },
-    meta: { extractModel: 'Person' }
+    meta: {
+      extractModel: 'Person',
+      afterInteractions: true
+    }
   }
 }

@@ -6,18 +6,19 @@ import {
   TouchableOpacity
 } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { get, isArray } from 'lodash/fp'
 import getPeople from 'store/selectors/getPeople'
 import isPendingFor from 'store/selectors/isPendingFor'
 import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
-import scopedFetchRecentContacts from 'store/actions/scopedFetchRecentContacts'
+import { getRecentContacts } from 'store/selectors/getContactList'
 import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomplete'
-import scopedGetRecentContacts from 'store/selectors/scopedGetRecentContacts'
 import {
   createMessage as createMessageAction,
-  findOrCreateThread,
-  MODULE_NAME
+  findOrCreateThread as findOrCreateThreadAction
 } from './NewMessage.store.js'
+import fetchPersonAction from 'store/actions/fetchPerson'
+import fetchRecentContactsAction from 'store/actions/fetchRecentContacts'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
 import Button from 'components/Button'
@@ -27,28 +28,43 @@ import Loading from 'components/Loading'
 import PersonPickerItemRow from 'screens/ItemChooser/PersonPickerItemRow'
 import styles from './NewMessage.styles'
 
-export default function NewMessage (props) {
+export default function NewMessage () {
   const dispatch = useDispatch()
+  const route = useRoute()
+  const navigation = useNavigation()
   const [participants, updateParticipants] = useState([])
   const pending = useSelector(state => isPendingFor([
-    scopedFetchRecentContacts(MODULE_NAME),
-    findOrCreateThread,
+    fetchRecentContactsAction,
+    fetchPersonAction,
+    findOrCreateThreadAction,
     createMessageAction
   ], state))
-  const prompt = props.route?.params?.prompt
-  const recentContacts = useSelector(state => scopedGetRecentContacts(null, { scope: MODULE_NAME })(state, props))
-  const initialParticipantIds = !isArray(props.route?.params?.participants)
-    ? props.route?.params?.participants?.split(',')
-    : props.route?.params?.participants || []
+  const prompt = route?.params?.prompt
+  const recentContacts = useSelector(getRecentContacts)
+  const initialParticipantIds = !isArray(route?.params?.participants)
+    ? route?.params?.participants?.split(',')
+    : route?.params?.participants || []
   const initialParticipants = useSelector(state => getPeople(state, { personIds: initialParticipantIds }))
+  const loadedInitialParticipantIds = initialParticipants?.map(p => p.id)
+
+  useEffect(() => {
+    if (initialParticipants) updateParticipants(initialParticipants)
+
+    dispatch(fetchRecentContactsAction())
+    initialParticipantIds?.forEach(initialParticipantId => {
+      if (!loadedInitialParticipantIds?.includes(initialParticipantId)) {
+        dispatch(fetchPersonAction(initialParticipantId))
+      }
+    })
+  }, [])
 
   const createMessage = async text => {
-    const response = await dispatch(findOrCreateThread(participants.map(p => p.id)))
+    const response = await dispatch(findOrCreateThreadAction(participants.map(p => p.id)))
     const messageThreadId = get('payload.data.findOrCreateThread.id', response)
     const { error } = await dispatch(createMessageAction(messageThreadId, text, true))
 
     if (!error) {
-      props.navigation.navigate('Thread', { id: messageThreadId })
+      navigation.navigate('Thread', { id: messageThreadId })
     }
   }
 
@@ -72,13 +88,8 @@ export default function NewMessage (props) {
       defaultSuggestedItemsLabel: 'Recent Contacts',
       defaultSuggestedItems: recentContacts
     }
-    props.navigation.navigate('ItemChooser', chooserProps)
+    navigation.navigate('ItemChooser', chooserProps)
   }, [recentContacts, participants])
-
-  useEffect(() => {
-    dispatch(scopedFetchRecentContacts(MODULE_NAME)())
-    if (initialParticipants) updateParticipants(initialParticipants)
-  }, [dispatch])
 
   if (pending) return <Loading />
 
