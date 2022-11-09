@@ -17,14 +17,14 @@ import {
 export default function getStateFromPath (providedPath) {
   // Not sure this is necessary, but has been
   // historically been there so keeping it for now
-  const groomedPath = providedPath.trim().toLowerCase()
+  const groomedPath = providedPath.trim()
   const routeMatch = getRouteMatchForPath(groomedPath)
 
   // 404 handling
   if (!routeMatch) return null
 
-  const { path, screenPath } = getScreenPathForRouteMatch(routeMatch, routingConfig)
-  const screenConfig = linkingConfigForScreenPath(screenPath)
+  const { path, screenPath } = getRouteMatch(routeMatch, routingConfig)
+  const screenConfig = getScreenConfigFromScreenPath(screenPath)
   const isAuthorized = getAuthorized(store.getState())
 
   // Set `returnToOnAuthPath` for routes requiring auth when not auth'd
@@ -38,7 +38,8 @@ export default function getStateFromPath (providedPath) {
 }
 
 export function getRouteMatchForPath (providedPath, routes = routingConfig) {
-  const { pathname, search } = new URL(providedPath, DEFAULT_APP_HOST)
+  const url = new URL(providedPath, DEFAULT_APP_HOST)
+  const pathname = url.pathname.toLowerCase()
 
   for (const linkingPathMatcher in routes) {
     const pathMatch = match(linkingPathMatcher)(pathname)
@@ -48,7 +49,7 @@ export function getRouteMatchForPath (providedPath, routes = routingConfig) {
 
       return {
         pathname,
-        search,
+        search: url.search,
         pathMatch,
         screenPath
       }
@@ -56,7 +57,7 @@ export function getRouteMatchForPath (providedPath, routes = routingConfig) {
   }
 }
 
-export function getScreenPathForRouteMatch (routeMatch) {
+export function getRouteMatch (routeMatch) {
   if (routeMatch) {
     const {
       pathname,
@@ -79,7 +80,7 @@ export function getScreenPathForRouteMatch (routeMatch) {
   }
 }
 
-export function linkingConfigForScreenPath (screenPath) {
+export function getScreenConfigFromScreenPath (screenPath) {
   const screenPathSegments = screenPath.split('/')
   const makeScreenConfig = (screenNames, screenConfig = {}) => {
     const screenName = screenNames.pop()
