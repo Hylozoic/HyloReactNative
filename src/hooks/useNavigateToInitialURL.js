@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 import { Linking } from 'react-native'
-import { openURL } from 'hooks/useOpenURL'
+import { useOpenURL } from 'hooks/useOpenURL'
 import { useDispatch, useSelector } from 'react-redux'
 import { INITIAL_URL_HANDLED } from 'store/constants'
 
 export default function useNavigateToInitialURL (loading, wait = 0) {
   const dispatch = useDispatch()
+  const openURL = useOpenURL()
   const initialURLHandled = useSelector(state => state.session.initialURLHandled)
 
   useEffect(() => {
@@ -13,13 +14,14 @@ export default function useNavigateToInitialURL (loading, wait = 0) {
       (async function () {
         const initialURL = await Linking.getInitialURL()
 
-        dispatch({ type: INITIAL_URL_HANDLED, payload: true })
-
-        setTimeout(() => {
-          if (initialURL) {
+        if (initialURL) {
+          setTimeout(() => {
+            dispatch({ type: INITIAL_URL_HANDLED, payload: true })
             openURL(initialURL)
-          }
-        }, wait)
+          }, wait)
+        } else {
+          dispatch({ type: INITIAL_URL_HANDLED, payload: true })
+        }
       })()
     }
   }, [loading])

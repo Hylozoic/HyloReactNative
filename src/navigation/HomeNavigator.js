@@ -1,5 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
+import useInitialURLHandled from 'hooks/useInitialURLHandled'
 // Helper Components
 import TabStackHeader from 'navigation/headers/TabStackHeader'
 // Screens
@@ -17,9 +18,12 @@ import AllTopicsWebView from 'screens/AllTopicsWebView/AllTopicsWebView'
 
 const HomeTab = createStackNavigator()
 export default function HomeNavigator () {
+  const initialURLHandled = useInitialURLHandled()
   const navigatorProps = {
     initialRouteName: 'Group Navigation',
     screenOptions: {
+      animationEnabled: initialURLHandled,
+      lazy: true,
       transitionSpec: {
         open: {
           animation: 'spring',

@@ -2,6 +2,7 @@ import React, { useCallback, forwardRef, useState, useEffect } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 import Loading from 'components/Loading'
 import AutoHeightWebView from 'react-native-autoheight-webview'
+import * as QueryString from 'query-string'
 import { WebViewMessageTypes } from 'hylo-shared'
 import { getSessionCookie } from 'util/session'
 import { match, pathToRegexp } from 'path-to-regexp'
@@ -46,12 +47,18 @@ const HyloWebView = forwardRef(function HyloWebView ({
 
           if (!handled) {
             const nativeRouteHandlers = nativeRouteHandler({ pathname, search })
+            const searchParams = QueryString.parse(search)
 
             for (const pathMatcher in nativeRouteHandlers) {
               const matched = match(pathMatcher)(pathname)
 
               if (matched) {
-                nativeRouteHandlers[pathMatcher]({ routeParams: matched.params, pathname, search })
+                nativeRouteHandlers[pathMatcher]({
+                  routeParams: matched.params,
+                  pathname,
+                  search,
+                  searchParams
+                })
                 break
               }
             }

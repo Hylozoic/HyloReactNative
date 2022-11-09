@@ -8,6 +8,7 @@ const Search = createStackNavigator()
 export default function SearchNavigator () {
   const navigatorProps = {
     screenOptions: {
+      lazy: true,
       headerStyle: { backgroundColor: black10OnCaribbeanGreen },
       headerTitleStyle: { color: alabaster },
       header: headerProps => (

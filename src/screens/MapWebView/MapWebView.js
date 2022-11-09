@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useFocusEffect } from '@react-navigation/native'
-import { openURL } from 'hooks/useOpenURL'
+import { useOpenURL } from 'hooks/useOpenURL'
 import { modalScreenName } from 'hooks/useIsModalScreen'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import HyloWebView from 'components/HyloWebView'
+import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
 
 // Matches actual group paths (e.g. not /all or /public)
 export const MATCHER_GROUP_SLUG = '[a-zA-Z0-9-]+$'
@@ -17,7 +18,10 @@ export const MATCHER_GROUP_ALL_AND_PUBLIC_ROOT_PATH = `/(${ALL_GROUP_ID}|${PUBLI
 export default function MapWebView ({ navigation }) {
   const webViewRef = useRef(null)
   const group = useSelector(getCurrentGroup)
+  const openURL = useOpenURL()
   const [path, setPath] = useState()
+
+  useSetCurrentGroup()
 
   useFocusEffect(
     useCallback(() => {
@@ -59,17 +63,12 @@ export default function MapWebView ({ navigation }) {
       }
     },
     '(.*)/group/:groupSlug([a-zA-Z0-9-]+)': ({ routeParams }) => {
-      const { groupSlug } = routeParams
-
-      navigation.navigate(modalScreenName('Group Explore'), { groupSlug })
+      navigation.navigate(modalScreenName('Group Explore'), routeParams)
     },
-    // TODO: This is probably best here but currently doing the below as a test case of `openURL`
-    // '(.*)/create/post': ({ routeParams }) => {
-    //   const { newPostType } = routeParams
-
-    //   webViewRef?.current?.goBack()
-    //   navigation.navigate('Edit Post', { type: newPostType })
-    // },
+    '(.*)/create/post': ({ searchParams }) => {
+      webViewRef?.current?.goBack()
+      navigation.navigate('Edit Post', { type: searchParams?.newPostType, ...searchParams })
+    },
     '(.*)': ({ pathname, search }) => {
       openURL(pathname + search)
     }

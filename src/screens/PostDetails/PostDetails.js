@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
+import { useDispatch, useSelector } from 'react-redux'
 import { get } from 'lodash/fp'
+import useGoToMember from 'hooks/useGoToMember'
+import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
 import useIsModalScreen from 'hooks/useIsModalScreen'
 import fetchPostAction from 'store/actions/fetchPost'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
@@ -13,8 +16,6 @@ import Loading from 'components/Loading'
 import PostCardForDetails from 'components/PostCard/PostCardForDetails'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './PostDetails.styles'
-import { useDispatch, useSelector } from 'react-redux'
-import useGoToMember from 'hooks/useGoToMember'
 
 // TODO: Probably don't need to do this anymore for this screen, but confirm:
 // const isFocused = useIsFocused()
@@ -47,6 +48,8 @@ export default function PostDetails () {
   const scrollToSelectedComment = () => {
     commentsRef.current && commentsRef.current.scrollToComment(selectedComment)
   }
+
+  useSetCurrentGroup()
 
   useEffect(() => {
     fetchPost()

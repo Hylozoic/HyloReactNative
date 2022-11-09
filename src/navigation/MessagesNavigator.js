@@ -1,5 +1,6 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
+import useInitialURLHandled from 'hooks/useInitialURLHandled'
 // Helper Components
 import ModalHeader from 'navigation/headers/ModalHeader'
 // Screens
@@ -12,9 +13,12 @@ import { alabaster, rhino } from 'style/colors'
 
 const Messages = createStackNavigator()
 export default function MessagesNavigator () {
+  const initialURLHandled = useInitialURLHandled()
   const navigatorProps = {
     initialRouteName: 'Messages',
     screenOptions: {
+      animationEnabled: initialURLHandled,
+      lazy: true,
       transitionSpec: {
         open: {
           animation: 'spring',

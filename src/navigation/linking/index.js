@@ -1,5 +1,5 @@
 import { modalScreenName } from 'hooks/useIsModalScreen'
-
+import getStateFromPath from 'navigation/linking/getStateFromPath'
 /*
 
 Hylo Custom link routing config and related utilities:
@@ -105,5 +105,6 @@ export const prefixes = [
 // Used for the `linking` prop of `NavigationContainer`.
 // As we have replaced and handled most everything we use, this is probably not necessary
 export default {
-  prefixes
+  prefixes,
+  getStateFromPath
 }
