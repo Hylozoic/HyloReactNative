@@ -25,6 +25,7 @@ export const NON_AUTH_ROOT_SCREEN_NAME = 'NonAuthRoot'
 /* eslint-disable key-spacing */
 export const routingConfig = {
   '/login':                                                  `${NON_AUTH_ROOT_SCREEN_NAME}/Login`,
+  '/reset-password':                                         `${NON_AUTH_ROOT_SCREEN_NAME}/ForgotPassword`,
   '/signup/:step(verify-email)':                             `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/SignupEmailValidation`,
   '/signup/:step?':                                          `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/Signup Intro`,
   '/signup':                                                 `${NON_AUTH_ROOT_SCREEN_NAME}/Signup/Signup Intro`,
