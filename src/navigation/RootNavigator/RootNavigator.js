@@ -62,7 +62,7 @@ export default function RootNavigator () {
   return (
     <View style={styles.rootContainer}>
       <NavigationContainer
-        // linking={customLinking}
+        linking={customLinking}
         ref={navigationRef}
         onReady={params => {
           RNBootSplash.hide({ fade: true })

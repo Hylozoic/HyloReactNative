@@ -101,3 +101,9 @@ export const prefixes = [
   'https://staging.hylo.com',
   'hyloapp://'
 ]
+
+// Used for the `linking` prop of `NavigationContainer`.
+// As we have replaced and handled most everything we use, this is probably not necessary
+export default {
+  prefixes
+}
