@@ -55,6 +55,9 @@ export default function MemberProfile ({
 
   useEffect(() => {
     if (isBlocked) return navigation.goBack()
+
+    // TODO: Make async with `loading` state and catch case
+    // where person not found or inaccessible
     fetchPerson()
     setHeader()
   }, [id])

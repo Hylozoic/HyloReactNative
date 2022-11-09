@@ -1,7 +1,7 @@
 import orm from 'store/models'
 import { openURL } from 'hooks/useOpenURL'
 import { mapStateToProps, makeOnPressMessages, mergeProps } from './MemberProfile.connector'
-import { FETCH_PERSON } from './MemberProfile.store'
+import { FETCH_PERSON } from 'store/constants'
 
 jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
 jest.mock('hooks/useOpenURL', () => {
