@@ -1,6 +1,9 @@
 import tinycolor from 'tinycolor2'
 
 // when adding a color, use http://chir.ag/projects/name-that-color/ to name it.
+export const athensGray = '#FAFBFC'
+export const athensGrayDark = '#E1E5EA'
+export const athensGrayMedium = '#F1F2F4'
 export const alabaster = '#F8F8F8'
 export const amaranth = '#EE4266'
 export const azureRadiance = '#007AFF'
@@ -8,6 +11,7 @@ export const bigStone = '#142132'
 export const black = 'black'
 export const butterflyBush = '#664BA5'
 export const capeCod = '#363D3C'
+export const doveGray = '#717171'
 export const caribbeanGreen = '#0DC39F'
 export const derby = '#FFEEDA'
 export const flushOrange = '#FC8000'
@@ -34,10 +38,14 @@ export const treePoppy = '#FF9D21'
 // above, on a white background. use these where possible, to avoid any impact
 // to mobile performance.
 // You can calculate this using: http://tdekoning.github.io/rgba-converter/
+export const athensGrayDark50 = fakeAlpha(athensGrayDark, 0.5)
+
 export const capeCod05 = fakeAlpha(capeCod, 0.05)
 export const capeCod10 = fakeAlpha(capeCod, 0.1)
 export const capeCod20 = fakeAlpha(capeCod, 0.2)
 export const capeCod40 = fakeAlpha(capeCod, 0.4)
+export const doveGray50 = fakeAlpha(capeCod, 0.5)
+export const doveGray75 = fakeAlpha(capeCod, 0.75)
 export const rhino05 = fakeAlpha(rhino, 0.05)
 export const rhino10 = fakeAlpha(rhino, 0.1)
 export const rhino20 = fakeAlpha(rhino, 0.2)

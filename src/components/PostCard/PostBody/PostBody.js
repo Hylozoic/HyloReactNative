@@ -40,7 +40,7 @@ export default function PostBody ({
           <EventRSVP myEventResponse={isEmpty(myEventResponse) ? RESPONSES.NO : myEventResponse} respondToEvent={respondToEvent} />
         )}
       </View>
-      {(linkPreview?.url && linkPreviewFeatured) && (
+      {linkPreviewFeatured && (
         <LinkPreview {...linkPreview} />
       )}
       {/* <VideoPlayerWebView url={linkPreview.url} /> */}
@@ -48,7 +48,7 @@ export default function PostBody ({
         html={presentedDetails}
         baseStyle={{ marginBottom: 8 }}
       />
-      {(linkPreview?.url && !linkPreviewFeatured) && (
+      {!linkPreviewFeatured && (
         <LinkPreview {...linkPreview} />
       )}
     </View>

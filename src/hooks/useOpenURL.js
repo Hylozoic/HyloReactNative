@@ -33,7 +33,7 @@ export async function openURL (providedPathOrURL, reset, navigation = navigation
     } else {
       return null
     }
-  } else if (await Linking.canOpenURL(linkingURL)) {
-    return Linking.openURL(linkingURL)
+  } else if (await Linking.canOpenURL(providedPathOrURL)) {
+    return Linking.openURL(providedPathOrURL)
   }
 }

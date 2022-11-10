@@ -17,9 +17,20 @@ import PostCardForDetails from 'components/PostCard/PostCardForDetails'
 import SocketSubscriber from 'components/SocketSubscriber'
 import styles from './PostDetails.styles'
 
-// TODO: Probably don't need to do this anymore for this screen, but confirm:
-// const isFocused = useIsFocused()
-// shouldComponentUpdate (nextProps) { return !!nextProps.isFocused }
+/*
+
+TODO: Confirm that we're ok not checking for focus:
+
+Confirm by testing for scenarios where many of this screen could be mounted
+in the navigation stack at once. Modals are one possible case, but I don't
+think there is currently much chances for that.
+
+Relevant removed code from the class component:
+
+const isFocused = useIsFocused()
+shouldComponentUpdate (nextProps) { return !!nextProps.isFocused }
+
+*/
 export default function PostDetails () {
   const dispatch = useDispatch()
   const navigation = useNavigation()
