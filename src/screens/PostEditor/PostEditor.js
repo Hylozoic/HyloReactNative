@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select'
 import { useIsFocused } from '@react-navigation/native'
-import { get, uniq, uniqBy, isEmpty, capitalize } from 'lodash/fp'
+import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
 import moment from 'moment-timezone'
 import { Validators } from 'hylo-shared'
 import { isIOS } from 'util/platform'
@@ -41,6 +41,7 @@ import ImageSelector from './ImageSelector'
 import ItemChooserItemRow from 'screens/ItemChooser/ItemChooserItemRow'
 import Loading from 'components/Loading'
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
+import Topics from 'components/Topics'
 import styles, { typeSelectorStyles } from './PostEditor.styles'
 import HeaderLeftCloseIcon from 'navigation/headers/HeaderLeftCloseIcon'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
@@ -513,7 +514,7 @@ export class PostEditor extends React.Component {
               <Text style={styles.pressSelectionLeft}>Topics</Text>
               <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.pressSelectionRightIcon} /></View>
             </View>
-            <Topics onPress={this.handleRemoveTopic} topics={topics} />
+            <Topics style={styles.pressSelectionValue} onPress={this.handleRemoveTopic} topics={topics} />
           </TouchableOpacity>
 
           {type === 'project' && (
@@ -716,27 +717,6 @@ export function BottomBar ({
   )
 }
 
-export function Topics ({ onPress, topics }) {
-  if (topics.length < 1) return null
-
-  return (
-    <ScrollView horizontal style={[styles.pressSelectionValue, styles.topicPillBox]}>
-      {topics.map((t, i) => (
-        <TopicPill key={i} topic={t} onPress={onPress(t)} />
-      ))}
-    </ScrollView>
-  )
-}
-
-export function TopicPill ({ topic, topic: { name }, onPress }) {
-  return (
-    <TouchableOpacity onPress={onPress} style={styles.topicPill}>
-      <Text style={styles.topicText}>#{name.toLowerCase()}</Text>
-      <Icon name='Ex' style={styles.topicRemove} />
-    </TouchableOpacity>
-  )
-}
-
 export function DatePickerWithLabel ({
   date,
   minimumDate,
@@ -798,57 +778,3 @@ export function DatePickerWithLabel ({
     </>
   )
 }
-
-// Other layout option for reference in the case of scroll issues:
-//
-// <FlatList
-//   keyboardShouldPersistTaps='never'
-//   keyboardDismissMode={isIOS ? 'interactive' : 'on-drag'}
-//   ListHeaderComponent={this.renderForm}
-//   ListFooterComponent={this.renderFilesAndImages}
-//   data={[]}
-// />
-
-// Using our "standard" React Navigation modal header:
-// renderReactNavigationHeader = () => {
-//   const { isSaving, isNewPost } = this.state
-//   const { navigation } = this.props
-//   const subject = capitalize(this.state?.type || '')
-//   const title = isNewPost
-//     ? `New ${subject}`
-//     : `Edit ${subject}`
-//   const headerRightButtonLabel = isSaving
-//     ? 'Saving...'
-//     : isNewPost
-//       ? 'Post'
-//       : 'Save'
-//   const headerProps = {
-//     title,
-//     headerLeftConfirm: true,
-//     headerRightButtonLabel,
-//     headerRightButtonOnPress: this.handleSave,
-//     headerRightButtonDisabled: isSaving
-//   }
-//   navigation.setOptions({
-//     headerShown: false,
-//
-//     header: props => {
-//       const { isSaving, type } = this.state
-//       const styles1 = {
-//         headerSaveButton: {
-//           width: '25%',
-//           borderColor: 'transparent',
-//           marginLeft: 'auto',
-//           marginRight: 10,
-//           marginBottom: 20,
-//           height: 35,
-//           fontSize: 14
-//         }
-//       }
-//
-//       return (
-//         <ModalHeader {...props} {...headerProps} />
-//       )
-//     }
-//   })
-// }

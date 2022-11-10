@@ -139,34 +139,6 @@ export default {
     display: 'flex',
     flexDirection: 'column'
   },
-  topicPillBox: {
-    display: 'flex',
-    flexDirection: 'row'
-  },
-  topicPill: {
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'row',
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: rhino30,
-    marginTop: 5,
-    marginRight: 5,
-    paddingVertical: 4,
-    paddingHorizontal: 7,
-    paddingRight: 5,
-    fontSize: 14
-  },
-  topicRemove: {
-    color: amaranth,
-    fontSize: 16,
-    marginLeft: 10
-  },
-  topicText: {
-    color: caribbeanGreen,
-    fontFamily: 'Circular-Bold',
-    fontSize: 16
-  },
   members: {
     alignItems: 'center',
     display: 'flex',
