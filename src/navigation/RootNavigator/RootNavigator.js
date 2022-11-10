@@ -64,7 +64,7 @@ export default function RootNavigator () {
       <NavigationContainer
         linking={customLinking}
         ref={navigationRef}
-        onReady={params => {
+        onReady={() => {
           RNBootSplash.hide({ fade: true })
         }}
         // To get a map of the current navigation state:

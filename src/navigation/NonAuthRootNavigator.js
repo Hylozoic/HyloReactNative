@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { createStackNavigator } from '@react-navigation/stack'
+import useOpenInitialURL from 'hooks/useOpenInitialURL'
 import ModalHeader from 'navigation/headers/ModalHeader'
 import Login from 'screens/Login'
 import ForgotPassword from 'screens/ForgotPassword'
 import SignupNavigator from 'navigation/SignupNavigator'
-import { white } from 'style/colors'
 import { getAuthenticated } from 'store/selectors/getAuthState'
 import { useNavigation } from '@react-navigation/native'
+import { white } from 'style/colors'
 
 const NonAuthRoot = createStackNavigator()
 export default function NonAuthRootNavigator () {
@@ -22,6 +23,8 @@ export default function NonAuthRootNavigator () {
   useEffect(() => {
     if (isAuthenticated) navigation.navigate('Signup')
   }, [isAuthenticated])
+
+  useOpenInitialURL()
 
   const navigatorProps = {
     screenOptions: {

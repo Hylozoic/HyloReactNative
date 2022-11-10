@@ -1,6 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import useInitialURLHandled from 'hooks/useInitialURLHandled'
+import { isEmpty } from 'lodash/fp'
 // Helper Components
 import TabStackHeader from 'navigation/headers/TabStackHeader'
 // Screens
@@ -21,6 +22,17 @@ export default function HomeNavigator () {
   const initialURLHandled = useInitialURLHandled()
   const navigatorProps = {
     initialRouteName: 'Group Navigation',
+    // screenListeners: {
+    //   state: (e) => {
+    //     const routes = e.data.state.routes
+    //     const groupSlugs = routes
+    //       .map(route => route.params?.groupSlug)
+    //       .filter(s => !isEmpty(s))
+    //     // if (!isEmpty(groupSlugs)) {
+    //     console.log('!!! SLUGS:', groupSlugs)
+    //     // }
+    //   }
+    // },
     screenOptions: {
       animationEnabled: initialURLHandled,
       transitionSpec: {

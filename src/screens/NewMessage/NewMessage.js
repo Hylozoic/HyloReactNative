@@ -7,9 +7,8 @@ import {
 } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { get, isArray } from 'lodash/fp'
+import { get, isArray, isEmpty } from 'lodash/fp'
 import getPeople from 'store/selectors/getPeople'
-import isPendingFor from 'store/selectors/isPendingFor'
 import scopedFetchPeopleAutocomplete from 'store/actions/scopedFetchPeopleAutocomplete'
 import { getRecentContacts } from 'store/selectors/getContactList'
 import scopedGetPeopleAutocomplete from 'store/selectors/scopedGetPeopleAutocomplete'
@@ -17,7 +16,6 @@ import {
   createMessage as createMessageAction,
   findOrCreateThread as findOrCreateThreadAction
 } from './NewMessage.store.js'
-import fetchPersonAction from 'store/actions/fetchPerson'
 import fetchRecentContactsAction from 'store/actions/fetchRecentContacts'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
@@ -27,36 +25,61 @@ import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Loading from 'components/Loading'
 import PersonPickerItemRow from 'screens/ItemChooser/PersonPickerItemRow'
 import styles from './NewMessage.styles'
+import useGraphqlAction from 'hooks/useGraphqlAction'
+import gql from 'graphql-tag'
 
-export default function NewMessage () {
+export default function NewMessage (props) {
   const dispatch = useDispatch()
   const route = useRoute()
   const navigation = useNavigation()
-  const [participants, updateParticipants] = useState([])
-  const pending = useSelector(state => isPendingFor([
-    fetchRecentContactsAction,
-    fetchPersonAction,
-    findOrCreateThreadAction,
-    createMessageAction
-  ], state))
+  const graphqlQuery = useGraphqlAction()
+  const [participants, setParticipants] = useState([])
+  const [loading, setLoading] = useState(true)
   const prompt = route?.params?.prompt
   const recentContacts = useSelector(getRecentContacts)
   const initialParticipantIds = !isArray(route?.params?.participants)
     ? route?.params?.participants?.split(',')
     : route?.params?.participants || []
-  const initialParticipants = useSelector(state => getPeople(state, { personIds: initialParticipantIds }))
-  const loadedInitialParticipantIds = initialParticipants?.map(p => p.id)
+  const initialParticipantsFromStore = useSelector(state => getPeople(state, { personIds: initialParticipantIds }))
 
-  useEffect(() => {
-    if (initialParticipants) updateParticipants(initialParticipants)
+  const fetchInitialParticipants = () => {
+    setLoading(true)
 
-    dispatch(fetchRecentContactsAction())
-    initialParticipantIds?.forEach(initialParticipantId => {
-      if (!loadedInitialParticipantIds?.includes(initialParticipantId)) {
-        dispatch(fetchPersonAction(initialParticipantId))
-      }
-    })
-  }, [])
+    async function asyncFunc () {
+      const initialParticipants = await Promise.all(
+        initialParticipantIds
+          ?.filter(initialParticipantId =>
+            !initialParticipantsFromStore.map(p => p.id).includes(initialParticipantId)
+          )
+          .map(async initialParticipantId => {
+            const person = await graphqlQuery(gql`
+              query Participant ($id: ID) {
+                person (id: $id) {
+                  id
+                  name
+                  avatarUrl
+                }
+              }
+            `, { id: initialParticipantId })
+
+            return person
+          })
+      )
+
+      setParticipants(
+        [
+          ...initialParticipantsFromStore,
+          ...initialParticipants
+        ].filter(p => !isEmpty(p))
+      )
+      dispatch(fetchRecentContactsAction())
+      setLoading(false)
+    }
+
+    asyncFunc()
+  }
+
+  useEffect(fetchInitialParticipants, [])
 
   const createMessage = async text => {
     const response = await dispatch(findOrCreateThreadAction(participants.map(p => p.id)))
@@ -64,16 +87,16 @@ export default function NewMessage () {
     const { error } = await dispatch(createMessageAction(messageThreadId, text, true))
 
     if (!error) {
-      navigation.navigate('Thread', { id: messageThreadId })
+      navigation.replace('Thread', { id: messageThreadId })
     }
   }
 
   const addParticipant = participant => {
-    updateParticipants([...participants, participant])
+    setParticipants([...participants, participant])
   }
 
   const handleRemoveParticipant = participant => {
-    updateParticipants(participants.filter(p => p.id !== participant.id))
+    setParticipants(participants.filter(p => p.id !== participant.id))
   }
 
   const openParticipantChooser = useCallback(() => {
@@ -91,7 +114,7 @@ export default function NewMessage () {
     navigation.navigate('ItemChooser', chooserProps)
   }, [recentContacts, participants])
 
-  if (pending) return <Loading />
+  if (loading) return <Loading />
 
   const emptyParticipantsList = participants.length === 0
 

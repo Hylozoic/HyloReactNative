@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import orm from './ormReducer'
 import pending from './pending'
 import session from './sessionReducer'
+import initialURL from './initialURL'
 import queryResults from './queryResults'
 import mixpanel from './mixpanel'
 import returnToOnAuthPath from './returnToOnAuthPathReducer'
@@ -22,6 +23,7 @@ export const createCombinedReducers = () => combineReducers({
   // Global store
   orm,
   pending,
+  initialURL,
   session,
   queryResults,
   mixpanel,

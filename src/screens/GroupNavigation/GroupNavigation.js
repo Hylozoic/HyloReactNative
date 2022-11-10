@@ -2,13 +2,13 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Text, ScrollView, View, TouchableOpacity } from 'react-native'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import useOpenInitialURL from 'hooks/useOpenInitialURL'
 import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import Icon from 'components/Icon'
 import styles from './GroupNavigation.styles'
-import useNavigateToInitialURL from 'hooks/useNavigateToInitialURL'
 
 export default function GroupNavigation () {
   const navigation = useNavigation()
@@ -17,7 +17,7 @@ export default function GroupNavigation () {
   const parentGroups = useSelector(getParentGroups)
 
   useSetCurrentGroup()
-  useNavigateToInitialURL()
+  useOpenInitialURL()
 
   useFocusEffect(() => {
     navigation.setOptions({ title: currentGroup?.name })
