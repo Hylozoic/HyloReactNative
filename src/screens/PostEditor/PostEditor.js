@@ -285,10 +285,12 @@ export class PostEditor extends React.Component {
     }
   }
 
-  handleRemoveTopic = topicName => () => this.setState({
-    topics: this.state.topics.filter(t => t !== topicName),
-    topicsPicked: true
-  })
+  handleRemoveTopic = topic => {
+    this.setState({
+      topics: this.state.topics.filter(t => t.id !== topic.id),
+      topicsPicked: true
+    })
+  }
 
   handlePickLocation = locationObject => {
     this.setState(() => ({ location: locationObject.fullText, locationObject }))
@@ -514,7 +516,12 @@ export class PostEditor extends React.Component {
               <Text style={styles.pressSelectionLeft}>Topics</Text>
               <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.pressSelectionRightIcon} /></View>
             </View>
-            <Topics style={styles.pressSelectionValue} onPress={this.handleRemoveTopic} topics={topics} />
+            <Topics
+              style={styles.pressSelectionValue}
+              onPress={this.handleShowTopicsPicker}
+              onPressRemove={this.handleRemoveTopic}
+              topics={topics}
+            />
           </TouchableOpacity>
 
           {type === 'project' && (
