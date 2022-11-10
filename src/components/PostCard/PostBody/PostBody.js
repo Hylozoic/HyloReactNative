@@ -40,17 +40,17 @@ export default function PostBody ({
           <EventRSVP myEventResponse={isEmpty(myEventResponse) ? RESPONSES.NO : myEventResponse} respondToEvent={respondToEvent} />
         )}
       </View>
-      {linkPreviewFeatured && (
+      {/* {linkPreviewFeatured && (
         <LinkPreview {...linkPreview} />
-      )}
+      )} */}
       {/* <VideoPlayerWebView url={linkPreview.url} /> */}
       <HyloHTML
         html={presentedDetails}
         baseStyle={{ marginBottom: 8 }}
       />
-      {!linkPreviewFeatured && (
-        <LinkPreview {...linkPreview} />
-      )}
+      {/* {!linkPreviewFeatured && ( */}
+      <LinkPreview {...linkPreview} />
+      {/* )} */}
     </View>
   )
 }
