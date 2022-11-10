@@ -8,8 +8,6 @@ import NewMessage from 'screens/NewMessage'
 import Thread from 'screens/Thread'
 import ThreadList from 'screens/ThreadList'
 import { alabaster, rhino } from 'style/colors'
-// import Icon from 'components/Icon'
-// import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const Messages = createStackNavigator()
 export default function MessagesNavigator () {
@@ -53,6 +51,7 @@ export default function MessagesNavigator () {
             <ModalHeader
               {...headerProps}
               headerLeft={() => {}}
+              // For a more custom "New Message" button:
               // headerRight={() => <TouchableOpacity style={{ marginRight: 20 }} onPress={() => headerProps.navigation.navigate('New Message')}><Icon size={22} color={rhino05} name='Plus' /></TouchableOpacity>}
               headerRightButtonLabel='New'
               headerRightButtonOnPress={() => headerProps.navigation.navigate('New Message')}
@@ -68,7 +67,6 @@ export default function MessagesNavigator () {
             <ModalHeader
               {...headerProps}
               headerLeftCloseIcon={false}
-              // headerLeftOnPress={() => headerProps.navigation.navigate('Messages')}
             />
           )
         }}
@@ -81,7 +79,6 @@ export default function MessagesNavigator () {
             <ModalHeader
               {...headerProps}
               headerLeftCloseIcon={false}
-              // headerLeftOnPress={() => headerProps.navigation.navigate('Messages')}
             />
           )
         }}

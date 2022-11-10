@@ -40,43 +40,47 @@ export default function NewMessage (props) {
   const initialParticipantIds = !isArray(route?.params?.participants)
     ? route?.params?.participants?.split(',')
     : route?.params?.participants || []
-  const initialParticipantsFromStore = useSelector(state => getPeople(state, { personIds: initialParticipantIds }))
+  const initialParticipantsFromStore = useSelector(state => getPeople(state, { personIds: initialParticipantIds })) || []
 
   const fetchInitialParticipants = () => {
     setLoading(true)
 
-    async function asyncFunc () {
-      const initialParticipants = await Promise.all(
-        initialParticipantIds
-          ?.filter(initialParticipantId =>
-            !initialParticipantsFromStore.map(p => p.id).includes(initialParticipantId)
-          )
-          .map(async initialParticipantId => {
-            const person = await graphqlQuery(gql`
-              query Participant ($id: ID) {
-                person (id: $id) {
-                  id
-                  name
-                  avatarUrl
+    if (initialParticipantIds) {
+      async function asyncFunc () {
+        const participantsToFetch = initialParticipantIds?.filter(initialParticipantId =>
+          !initialParticipantsFromStore.map(p => p.id).includes(initialParticipantId)
+        )
+        const fetchedParticipants = await Promise.all(
+          participantsToFetch.map(
+            async initialParticipantId => {
+              const person = await graphqlQuery(gql`
+                query Participant ($id: ID) {
+                  person (id: $id) {
+                    id
+                    name
+                    avatarUrl
+                  }
                 }
-              }
-            `, { id: initialParticipantId })
+              `, { id: initialParticipantId })
 
-            return person
-          })
-      )
+              return person
+            }
+          )
+        )
 
-      setParticipants(
-        [
-          ...initialParticipantsFromStore,
-          ...initialParticipants
-        ].filter(p => !isEmpty(p))
-      )
-      dispatch(fetchRecentContactsAction())
-      setLoading(false)
+        setParticipants(
+          [
+            ...initialParticipantsFromStore,
+            ...fetchedParticipants
+          ].filter(p => !isEmpty(p))
+        )
+      }
+
+      asyncFunc()
     }
 
-    asyncFunc()
+    dispatch(fetchRecentContactsAction())
+    setLoading(false)
   }
 
   useEffect(fetchInitialParticipants, [])
@@ -91,7 +95,7 @@ export default function NewMessage (props) {
     }
   }
 
-  const addParticipant = participant => {
+  const handleAddParticipant = participant => {
     setParticipants([...participants, participant])
   }
 
@@ -106,7 +110,7 @@ export default function NewMessage (props) {
       fetchSearchSuggestions: scopedFetchPeopleAutocomplete,
       getSearchSuggestions: scopedGetPeopleAutocomplete(screenTitle),
       initialItems: participants,
-      pickItem: addParticipant,
+      pickItem: handleAddParticipant,
       ItemRowComponent: PersonPickerItemRow,
       defaultSuggestedItemsLabel: 'Recent Contacts',
       defaultSuggestedItems: recentContacts
