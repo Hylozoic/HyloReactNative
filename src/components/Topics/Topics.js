@@ -7,7 +7,8 @@ export default function Topics ({
   onPressRemove,
   topics,
   style,
-  pillStyle
+  pillStyle,
+  textStyle
 }) {
   if (topics.length < 1) return null
 
@@ -16,6 +17,7 @@ export default function Topics ({
       {topics.map((topic, index) => (
         <TopicPill
           style={pillStyle}
+          textStyle={textStyle}
           topic={topic}
           onPress={onPress}
           onPressRemove={onPressRemove}
@@ -29,6 +31,7 @@ export default function Topics ({
 export function TopicPill ({
   topic, topic: { name },
   style,
+  textStyle,
   onPress,
   onPressRemove
 }) {
@@ -41,10 +44,12 @@ export function TopicPill ({
 
   return (
     <TouchableOpacity onPress={handleOnPress} style={[styles.topicPill, style]}>
-      <Text style={styles.topicText}>#{name}</Text>
-      <TouchableOpacity onPress={handleOnPressRemove}>
-        <Icon name='Ex' style={styles.topicRemove} />
-      </TouchableOpacity>
+      <Text style={[styles.topicText, textStyle]}>#{name}</Text>
+      {onPressRemove && (
+        <TouchableOpacity onPress={handleOnPressRemove}>
+          <Icon name='Ex' style={styles.topicRemove} />
+        </TouchableOpacity>
+      )}
     </TouchableOpacity>
   )
 }
@@ -61,12 +66,10 @@ const styles = {
     borderRadius: 4,
     borderWidth: 1,
     borderColor: rhino30,
-    marginTop: 5,
     marginRight: 5,
     paddingVertical: 4,
     paddingHorizontal: 7,
-    paddingRight: 5,
-    fontSize: 14
+    paddingRight: 5
   },
   topicRemove: {
     color: amaranth,
@@ -76,6 +79,6 @@ const styles = {
   topicText: {
     color: caribbeanGreen,
     fontFamily: 'Circular-Bold',
-    fontSize: 16
+    fontSize: 12
   }
 }

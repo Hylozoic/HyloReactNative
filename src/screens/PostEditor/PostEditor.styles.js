@@ -139,6 +139,12 @@ export default {
     display: 'flex',
     flexDirection: 'column'
   },
+  topicPillStyle: {
+    marginTop: 5
+  },
+  topicTextStyle: {
+    fontSize: 14
+  },
   members: {
     alignItems: 'center',
     display: 'flex',

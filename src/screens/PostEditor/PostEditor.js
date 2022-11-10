@@ -518,6 +518,8 @@ export class PostEditor extends React.Component {
             </View>
             <Topics
               style={styles.pressSelectionValue}
+              pillStyle={styles.topicPillStyle}
+              textStyle={styles.topicTextStyle}
               onPress={this.handleShowTopicsPicker}
               onPressRemove={this.handleRemoveTopic}
               topics={topics}
