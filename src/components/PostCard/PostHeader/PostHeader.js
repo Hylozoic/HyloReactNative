@@ -36,27 +36,21 @@ export default function PostHeader ({
     setFlaggingVisible
   })
   const currentGroup = useSelector(getCurrentGroup)
-
-  const { avatarUrl, name, tagline } = creator
-
+  const { avatarUrl, name } = creator
   const handleShowMember = () => showMember && showMember(creator.id)
-
   const showTopics = !isEmpty(topics)
 
   return (
     <View style={styles.container}>
       <View style={styles.avatarSpacing}>
         <TouchableOpacity onPress={handleShowMember}>
-          {!!avatarUrl && <Avatar avatarUrl={avatarUrl} dimension={smallAvatar && 20} />}
+          {!!avatarUrl && <Avatar avatarUrl={avatarUrl} dimension={smallAvatar ? 20 : 30} />}
         </TouchableOpacity>
       </View>
       <View style={styles.meta}>
         <TouchableOpacity onPress={handleShowMember}>
           {name && (
-            <Text style={styles.username}>{name}</Text>
-          )}
-          {!!tagline && (
-            <Text style={styles.metaText}>{tagline}</Text>
+            <Text style={styles.username}>{name}dddd</Text>
           )}
         </TouchableOpacity>
         {!hideDateRow && (
@@ -117,6 +111,7 @@ export function PostLabel ({ type }) {
   const labelTypeStyle = get(type, labelStyles) || labelStyles.discussion
   const boxStyle = [labelStyles.box, labelTypeStyle.box]
   const textStyle = [labelStyles.text, labelTypeStyle.text]
+
   return (
     <View style={boxStyle}>
       <Text style={textStyle}>

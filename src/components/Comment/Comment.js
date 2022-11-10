@@ -19,7 +19,7 @@ export default function Comment ({
   comment,
   clearHighlighted,
   displayPostTitle,
-  hideMenu = true,
+  showMenu = false,
   highlighted,
   onPress,
   onReply,
@@ -98,8 +98,7 @@ export default function Comment ({
 
   const handleOnPress = () => {
     if (onPress) return onPress()
-
-    return handleReply()
+    // return handleReply()
   }
 
   return (
@@ -129,7 +128,7 @@ export default function Comment ({
                 <Icon style={styles.replyLinkIcon} name='Replies' />
               </TouchableOpacity>
             )}
-            {!hideMenu && (
+            {(showMenu || isCreator) && (
               <TouchableOpacity
                 onPress={showActionSheet}
                 hitSlop={{ top: 20, bottom: 10, left: 0, right: 15 }}

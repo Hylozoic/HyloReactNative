@@ -4,7 +4,10 @@ import { rhino30, rhino50, caribbeanGreen } from 'style/colors'
 export const styles = {
   container: {
     flexDirection: 'row',
-    marginBottom: 10
+    paddingBottom: 6,
+    marginBottom: 10,
+    borderBottomColor: 'rgba(235, 235, 235, 1.0)',
+    borderBottomWidth: 1
   },
   meta: {
     paddingTop: 7 + 9,
@@ -74,7 +77,7 @@ export const styles = {
   },
   moreIcon: {
     fontSize: 20,
-    paddingLeft: 10,
+    paddingLeft: 5,
     paddingRight: 5,
     color: rhino50
   },
@@ -93,7 +96,7 @@ export const labelStyles = {
     paddingBottom: 3,
     paddingLeft: 6,
     paddingRight: 6,
-    marginRight: 4,
+    marginRight: 0,
     marginTop: 1
   },
   text: {
