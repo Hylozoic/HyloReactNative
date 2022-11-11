@@ -223,7 +223,11 @@ export default {
     color: rhino30
   },
   bottomBarAnnouncement: {
-    flex: 1
+    flex: 1,
+    borderRadius: 10
+  },
+  bottomBarAnnouncementEnabled: {
+    backgroundColor: caribbeanGreen
   },
   bottomBarAnnouncementIcon: {
     paddingLeft: 0,

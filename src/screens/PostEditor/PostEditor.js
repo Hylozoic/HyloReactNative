@@ -675,11 +675,17 @@ export function BottomBar ({
     <View style={styles.bottomBar}>
       <View style={styles.bottomBarLeft}>
         {!post?.id && canModerate && (
-          <TouchableOpacity onPress={toggleAnnouncement} style={styles.bottomBarAnnouncement}>
+          <TouchableOpacity
+            onPress={toggleAnnouncement}
+            style={[
+              styles.bottomBarAnnouncement,
+              announcementEnabled && styles.bottomBarAnnouncementEnabled
+            ]}
+          >
             <Icon
               name='Announcement'
               style={styles.bottomBarAnnouncementIcon}
-              color={announcementEnabled ? amaranth : caribbeanGreen}
+              color={announcementEnabled ? white : caribbeanGreen}
             />
           </TouchableOpacity>
         )}
