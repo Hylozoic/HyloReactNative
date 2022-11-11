@@ -1,5 +1,5 @@
 import { Dimensions } from 'react-native'
-import { black10onRhino } from 'style/colors'
+import { athensGrayMedium, black10onRhino } from 'style/colors'
 
 export default imageCount => {
   const containerWidth = Dimensions.get('window').width - 25
@@ -15,7 +15,7 @@ export default imageCount => {
 
   return {
     imageGrid: {
-      paddingHorizontal: 10
+      paddingHorizontal: 10,
     },
     image: {
       marginRight: imageMargin,

@@ -1,4 +1,4 @@
-import { alabaster, caribbeanGreen, rhino, treePoppy } from 'style/colors'
+import { alabaster, athensGrayMedium, caribbeanGreen, rhino, treePoppy } from 'style/colors'
 
 export default {
   addButton: {
@@ -11,7 +11,6 @@ export default {
     color: caribbeanGreen
   },
   fileLabel: {
-    backgroundColor: alabaster,
     borderRadius: 10,
     padding: 14,
     flexDirection: 'row',

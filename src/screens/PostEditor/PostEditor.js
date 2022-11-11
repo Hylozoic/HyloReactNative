@@ -4,6 +4,7 @@ import {
   Alert,
   KeyboardAvoidingView,
   ScrollView,
+  Switch,
   Text,
   TextInput,
   TouchableOpacity,
@@ -17,7 +18,7 @@ import { Validators } from 'hylo-shared'
 import { isIOS } from 'util/platform'
 import { showToast, hideToast } from 'util/toast'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
-import { amaranth, caribbeanGreen, rhino30, white } from 'style/colors'
+import { caribbeanGreen, rhino30, white } from 'style/colors'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 // TODO: Convert all 3 of the below to LocationPicker style calls
 // ProjectMembers Chooser
@@ -469,125 +470,135 @@ export class PostEditor extends React.Component {
     const canHaveTimeframe = type !== 'discussion'
 
     return (
-      <>
-        <View style={styles.formContent}>
-          <View style={[styles.titleInputWrapper]}>
-            <TextInput
-              style={[styles.titleInput]}
-              editable={!isSaving}
-              onChangeText={this.handleUpdateTitle}
-              placeholder={titlePlaceholders[type]}
-              placeholderTextColor={rhino30}
-              underlineColorAndroid='transparent'
-              autoCorrect={false}
-              value={title}
-              multiline
-              numberOfLines={2}
-              blurOnSubmit
-              maxLength={MAX_TITLE_LENGTH}
-            />
-            {titleLengthError && (
-              <Text style={styles.titleInputError}>😬 {MAX_TITLE_LENGTH} characters max</Text>
-            )}
-          </View>
+      <View style={styles.formContent}>
+        <View style={[styles.titleInputWrapper]}>
+          <TextInput
+            style={[styles.titleInput]}
+            editable={!isSaving}
+            onChangeText={this.handleUpdateTitle}
+            placeholder={titlePlaceholders[type]}
+            placeholderTextColor={rhino30}
+            underlineColorAndroid='transparent'
+            autoCorrect={false}
+            value={title}
+            multiline
+            numberOfLines={2}
+            blurOnSubmit
+            maxLength={MAX_TITLE_LENGTH}
+          />
+          {titleLengthError && (
+            <Text style={styles.titleInputError}>😬 {MAX_TITLE_LENGTH} characters max</Text>
+          )}
+        </View>
 
-          <View style={[styles.textInputWrapper, styles.detailsInputWrapper]}>
-            <HyloEditorWebView
-              placeholder='Add a description'
-              contentHTML={post?.details}
-              // groupIds={groupOptions && groupOptions.map(g => g.id)}
-              onChange={this.handleUpdateDetails}
-              onAddTopic={!topicsPicked && this.handleAddTopic}
-              readOnly={postLoading || isSaving}
-              ref={this.detailsEditorRef}
-              widthOffset={0}
-              // Not setting a max height until ScrollView interaction is worked out better
-              customEditorCSS={`
-                min-height: 90px;
-              `}
-            />
-          </View>
+        <View style={[styles.textInputWrapper, styles.detailsInputWrapper]}>
+          <HyloEditorWebView
+            placeholder='Add a description'
+            contentHTML={post?.details}
+            // groupIds={groupOptions && groupOptions.map(g => g.id)}
+            onChange={this.handleUpdateDetails}
+            onAddTopic={!topicsPicked && this.handleAddTopic}
+            readOnly={postLoading || isSaving}
+            ref={this.detailsEditorRef}
+            widthOffset={0}
+            // Not setting a max height until ScrollView interaction is worked out better
+            customEditorCSS={`
+              min-height: 90px;
+            `}
+          />
+        </View>
 
-          <TouchableOpacity
-            style={[styles.pressSelectionSection, styles.topics]}
+        <TouchableOpacity
+          style={[styles.pressSelectionSection, styles.topics]}
+          onPress={this.handleShowTopicsPicker}
+        >
+          <View style={styles.pressSelection}>
+            <Text style={styles.pressSelectionLeft}>Topics</Text>
+            <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.pressSelectionRightIcon} /></View>
+          </View>
+          <Topics
+            style={styles.pressSelectionValue}
+            pillStyle={styles.topicPillStyle}
+            textStyle={styles.topicTextStyle}
             onPress={this.handleShowTopicsPicker}
-          >
+            onPressRemove={this.handleRemoveTopic}
+            topics={topics}
+          />
+        </TouchableOpacity>
+
+        {type === 'project' && (
+          <TouchableOpacity style={styles.pressSelectionSection} onPress={this.handleShowProjectMembersEditor}>
             <View style={styles.pressSelection}>
-              <Text style={styles.pressSelectionLeft}>Topics</Text>
+              <Text style={styles.pressSelectionLeft}>Project Members</Text>
               <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.pressSelectionRightIcon} /></View>
             </View>
-            <Topics
-              style={styles.pressSelectionValue}
-              pillStyle={styles.topicPillStyle}
-              textStyle={styles.topicTextStyle}
-              onPress={this.handleShowTopicsPicker}
-              onPressRemove={this.handleRemoveTopic}
-              topics={topics}
+            {members.length > 0 && <ProjectMembersSummary style={styles.pressSelectionValue} members={members} />}
+          </TouchableOpacity>
+        )}
+
+        {canHaveTimeframe && (
+          <>
+            <DatePickerWithLabel
+              style={styles.pressSelectionSection}
+              label='Start Time'
+              date={startTime}
+              minimumDate={new Date()}
+              onSelect={startTime => this.setState({ startTime }, this.setIsValid)}
             />
-          </TouchableOpacity>
+            <DatePickerWithLabel
+              style={styles.pressSelectionSection}
+              label='End Time'
+              disabled={!startTime}
+              date={endTime}
+              minimumDate={startTime || new Date()}
+              onSelect={endTime => this.setState({ endTime }, this.setIsValid)}
+            />
+          </>
+        )}
 
-          {type === 'project' && (
-            <TouchableOpacity style={styles.pressSelectionSection} onPress={this.handleShowProjectMembersEditor}>
-              <View style={styles.pressSelection}>
-                <Text style={styles.pressSelectionLeft}>Project Members</Text>
-                <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.pressSelectionRightIcon} /></View>
-              </View>
-              {members.length > 0 && <ProjectMembersSummary style={styles.pressSelectionValue} members={members} />}
-            </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.pressSelectionSection, styles.topics]}
+          onPress={this.handleShowLocationPicker}
+        >
+          <View style={styles.pressSelection}>
+            <Text style={styles.pressSelectionLeft}>Location</Text>
+            <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View>
+          </View>
+          {(location || locationObject) && (
+            <Text style={styles.pressSelectionValue}>{location || locationObject.fullText}</Text>
           )}
+        </TouchableOpacity>
 
-          {canHaveTimeframe && (
-            <>
-              <DatePickerWithLabel
-                style={styles.pressSelectionSection}
-                label='Start Time'
-                date={startTime}
-                minimumDate={new Date()}
-                onSelect={startTime => this.setState({ startTime }, this.setIsValid)}
-              />
-              <DatePickerWithLabel
-                style={styles.pressSelectionSection}
-                label='End Time'
-                disabled={!startTime}
-                date={endTime}
-                minimumDate={startTime || new Date()}
-                onSelect={endTime => this.setState({ endTime }, this.setIsValid)}
-              />
-            </>
-          )}
-
-          <TouchableOpacity
-            style={[styles.pressSelectionSection, styles.topics]}
-            onPress={this.handleShowLocationPicker}
-          >
-            <View style={styles.pressSelection}>
-              <Text style={styles.pressSelectionLeft}>Location</Text>
-              <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View>
-            </View>
-            {(location || locationObject) && (
-              <Text style={styles.pressSelectionValue}>{location || locationObject.fullText}</Text>
-            )}
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.pressSelectionSection}
+        <TouchableOpacity
+          style={styles.pressSelectionSection}
+          onPress={this.handleShowGroupsEditor}
+        >
+          <View style={styles.pressSelection}>
+            <Text style={styles.pressSelectionLeft}>Post In</Text>
+            <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.pressSelectionRightIcon} /></View>
+          </View>
+          <GroupsList
+            style={[styles.pressSelectionValue, { paddingRight: 40 }]}
+            groups={groups}
+            columns={1}
             onPress={this.handleShowGroupsEditor}
-          >
-            <View style={styles.pressSelection}>
-              <Text style={styles.pressSelectionLeft}>Post In</Text>
-              <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.pressSelectionRightIcon} /></View>
-            </View>
-            <GroupsList
-              style={[styles.pressSelectionValue, { paddingRight: 40 }]}
-              groups={groups}
-              columns={1}
-              onPress={this.handleShowGroupsEditor}
-              onRemove={this.handleRemoveGroup}
-              RemoveIcon={() => (
-                <Icon name='Ex' style={styles.groupRemoveIcon} />
-              )}
-            />
-          </TouchableOpacity>
+            onRemove={this.handleRemoveGroup}
+            RemoveIcon={() => (
+              <Icon name='Ex' style={styles.groupRemoveIcon} />
+            )}
+          />
+        </TouchableOpacity>
+
+        <View style={styles.footer}>
+          <View style={[styles.pressSelection, styles.buttonBar]}>
+            <Text style={styles.pressSelectionLeft}>Public</Text>
+            <Switch />
+          </View>
+
+          <View style={[styles.pressSelection, styles.buttonBar]}>
+            <Text style={styles.pressSelectionLeft}>Announcement</Text>
+            <Switch />
+          </View>
 
           <BottomBar
             post={post}
@@ -600,12 +611,13 @@ export class PostEditor extends React.Component {
             onError={this.handleAttachmentUploadErrorForKey('images')}
           />
         </View>
+
         {!isEmpty(images) && (
           <ImageSelector
             onAdd={this.handleAddAttachmentForKey('images')}
             onRemove={this.handleRemoveAttachmentForKey('images')}
             images={images}
-            style={styles.imageSelector}
+            style={[styles.imageSelector]}
             type='post'
           />
         )}
@@ -618,7 +630,7 @@ export class PostEditor extends React.Component {
             />
           </View>
         )}
-      </>
+      </View>
     )
   }
 
@@ -672,63 +684,65 @@ export function BottomBar ({
 }) {
   // TODO: Tidy-up the styling below, move it into the stylesheet
   return (
-    <View style={styles.bottomBar}>
-      <View style={styles.bottomBarLeft}>
-        {!post?.id && canModerate && (
-          <TouchableOpacity
-            onPress={toggleAnnouncement}
-            style={[
-              styles.bottomBarAnnouncement,
-              announcementEnabled && styles.bottomBarAnnouncementEnabled
-            ]}
-          >
-            <Icon
-              name='Announcement'
-              style={styles.bottomBarAnnouncementIcon}
-              color={announcementEnabled ? white : caribbeanGreen}
-            />
-          </TouchableOpacity>
-        )}
-      </View>
-      <View style={styles.bottomBarRight}>
-        <TouchableOpacity onPress={onShowFilePicker}>
-          {filePickerPending && (
-            <Loading
-              size={30}
-              style={[styles.bottomBarIcon, { marginRight: 15, padding: 8 }, styles.bottomBarIconLoading]}
-            />
-          )}
-          {!filePickerPending && (
-            <Icon
-              name='Paperclip'
-              style={[styles.bottomBarIcon, { marginRight: 20 }]}
-            />
-          )}
-        </TouchableOpacity>
-        <ImagePicker
-          type='post'
-          id={post?.id}
-          selectionLimit={10}
-          onChoice={onAddImage}
-          onError={onError}
-          renderPicker={loading => {
-            if (!loading) {
-              return (
-                <Icon name='AddImage' style={styles.bottomBarIcon} />
-              )
-            } else {
-              return (
-                <Loading
-                  size={30}
-                  style={[styles.bottomBarIcon, { padding: 8 }, styles.bottomBarIconLoading]}
-                />
-              )
-            }
-          }}
-        />
+    <>
+      <View style={styles.buttonBar}>
+        <View style={styles.buttonBarLeft}>
 
+          <ImagePicker
+            type='post'
+            id={post?.id}
+            selectionLimit={10}
+            onChoice={onAddImage}
+            onError={onError}
+            renderPicker={loading => {
+              if (!loading) {
+                return (
+                  <Icon name='AddImage' style={styles.buttonBarIcon} />
+                )
+              } else {
+                return (
+                  <Loading
+                    size={30}
+                    style={[styles.buttonBarIcon, { padding: 8 }, styles.buttonBarIconLoading]}
+                  />
+                )
+              }
+            }}
+          />
+
+          <TouchableOpacity onPress={onShowFilePicker}>
+            {filePickerPending && (
+              <Loading
+                size={30}
+                style={[styles.buttonBarIcon, { padding: 8 }, styles.buttonBarIconLoading]}
+              />
+            )}
+            {!filePickerPending && (
+              <Icon
+                name='Paperclip'
+                style={styles.buttonBarIcon}
+              />
+            )}
+          </TouchableOpacity>
+
+          {!post?.id && canModerate && (
+            <TouchableOpacity
+              onPress={toggleAnnouncement}
+              style={[
+                styles.buttonBarAnnouncement,
+                announcementEnabled && styles.buttonBarAnnouncementEnabled
+              ]}
+            >
+              <Icon
+                name='Announcement'
+                style={styles.buttonBarAnnouncementIcon}
+                color={announcementEnabled ? white : caribbeanGreen}
+              />
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
-    </View>
+    </>
   )
 }
 

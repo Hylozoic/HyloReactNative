@@ -6,7 +6,8 @@ import {
   white,
   rhino80,
   rhino,
-  amaranth
+  amaranth,
+  athensGrayMedium
 } from 'style/colors'
 
 const typeSelectorIOSDefaults = {
@@ -205,32 +206,36 @@ export default {
     marginBottom: 10,
     flex: 1
   },
-  bottomBar: {
+  footer: {
+    backgroundColor: athensGrayMedium
+  },
+  buttonBar: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     paddingTop: 10,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    backgroundColor: athensGrayMedium
   },
-  bottomBarRight: {
+  buttonBarLeft: {
     flexDirection: 'row'
   },
-  bottomBarIcon: {
+  buttonBarIcon: {
     fontSize: 46,
     color: caribbeanGreen
   },
-  bottomBarIconLoading: {
+  buttonBarIconLoading: {
     color: rhino30
   },
-  bottomBarAnnouncement: {
-    flex: 1,
-    borderRadius: 10
+  buttonBarAnnouncement: {
+    borderRadius: 10,
+    marginTop: -4
   },
-  bottomBarAnnouncementEnabled: {
+  buttonBarAnnouncementEnabled: {
     backgroundColor: caribbeanGreen
   },
-  bottomBarAnnouncementIcon: {
-    paddingLeft: 0,
+  buttonBarAnnouncementIcon: {
     fontSize: 46
   }
 }
