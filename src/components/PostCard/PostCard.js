@@ -15,6 +15,7 @@ export default function PostCard ({
   goToGroup,
   hideDetails,
   hideMenu,
+  onPress,
   post = {},
   respondToEvent,
   showGroups = true,
@@ -48,6 +49,8 @@ export default function PostCard ({
         <ImageAttachments
           creator={post.creator}
           images={images}
+          onlyLongPress
+          onPress={onPress}
           style={styles.images}
           title={post.title}
         >

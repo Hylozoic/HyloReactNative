@@ -141,9 +141,8 @@ export default function Comment ({
         <ImageAttachments
           creator={comment.creator}
           images={images}
-          style={styles.imageAttachment}
+          firstImageStyle={styles.imageAttachment}
           title={TextHelpers.presentHTMLToText(comment.text, { truncate: 100 })}
-          viewer
         />
         <View style={styles.body}>
           <HyloHTML html={text} />

@@ -7,69 +7,52 @@ import { ImageViewerButton } from 'components/ImageViewer/ImageViewer'
 export default function ImageAttachments ({
   children,
   creator,
+  firstImageStyle,
   images,
+  onlyLongPress,
+  onPress,
   style,
-  title,
-  viewer
+  title
 }) {
   if (isEmpty(images)) return null
 
-  if (viewer) {
-    return (
-      <>
-        <ImageViewerButton
-          images={images}
-          title={title}
-          creator={creator}
-          style={style}
-          renderImages={showImageAtIndex => (
-            <FastImage
-              imageStyle={styles.backgroundImage}
-              source={images[0]}
-            >
-              <View style={styles.container}>
-                <View>{children}</View>
-                <View style={styles.background}>
-                  {images.slice(1).map((image, index) => (
-                    <TouchableHighlight
-                      onPress={showImageAtIndex(index + 1)}
-                      key={image.uri}
-                      style={styles.thumbnailWrapper}
-                    >
-                      <FastImage
-                        source={image}
-                        style={styles.thumbnail}
-                      />
-                    </TouchableHighlight>
-                  ))}
-                </View>
-              </View>
-            </FastImage>
-          )}
-        />
-      </>
-    )
-  }
-
   return (
-    <FastImage
-      imageStyle={styles.backgroundImage}
-      source={images[0]}
-      style={style}
-    >
-      <View style={styles.container}>
-        <View>{children}</View>
-        <View style={styles.background}>
-          {images.slice(1).map(image => (
-            <FastImage
-              key={image.uri}
-              source={image}
-              style={[styles.thumbnail, styles.thumbnailWrapper]}
-            />
-          ))}
-        </View>
-      </View>
-    </FastImage>
+    <>
+      <ImageViewerButton
+        images={images}
+        title={title}
+        creator={creator}
+        onlyLongPress={onlyLongPress}
+        onPress={onPress}
+        style={style}
+        renderImages={(pressableHandlersAtIndex) => (
+          <FastImage
+            style={firstImageStyle}
+            imageStyle={[styles.backgroundImage]}
+            source={images[0]}
+          >
+            <View style={styles.container}>
+              <View>{children}</View>
+              <View style={styles.background}>
+                {images.slice(1).map((image, index) => (
+                  <TouchableHighlight
+                    {...pressableHandlersAtIndex(index + 1)}
+                    // {...makePressHandlers(showImageAtIndex(index + 1))}
+                    key={image.uri}
+                    style={styles.thumbnailWrapper}
+                  >
+                    <FastImage
+                      source={image}
+                      style={styles.thumbnail}
+                    />
+                  </TouchableHighlight>
+                ))}
+              </View>
+            </View>
+          </FastImage>
+        )}
+      />
+    </>
   )
 }
 
@@ -91,7 +74,9 @@ const styles = {
     justifyContent: 'flex-end'
   },
   backgroundImage: {
-    resizeMode: 'cover'
+    resizeMode: 'cover',
+    borderRadius: 10,
+    overflow: 'hidden'
   },
   thumbnailWrapper: {
     margin: 8,

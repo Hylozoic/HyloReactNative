@@ -174,6 +174,7 @@ export function PostCard ({ post, goToPost }) {
         showDetails={goToThisPost}
         showMember={goToThisPost}
         goToGroup={goToThisPost}
+        onPress={goToThisPost}
         post={post}
         groups={groups}
         hideMenu

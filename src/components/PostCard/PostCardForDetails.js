@@ -72,7 +72,6 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
           images={images}
           style={styles.images}
           title={post.title}
-          viewer
         >
           <Topics
             topics={post.topics}

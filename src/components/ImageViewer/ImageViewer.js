@@ -17,6 +17,8 @@ export function ImageViewerButton ({
   images,
   title,
   renderImages,
+  onPress,
+  onlyLongPress,
   ...touchableHighlightProps
 }) {
   const [imageViewerVisible, setImageViewerVisible] = useState(false)
@@ -25,18 +27,34 @@ export function ImageViewerButton ({
   if (isEmpty(images) || !renderImages) return null
 
   const toggleImageViewerVisible = () => setImageViewerVisible(!imageViewerVisible)
-  const showImageViewerAtIndex = imageIndex => {
+  const makeShowImageViewerAtIndex = imageIndex => {
     return () => {
       setSelectedImageIndex(imageIndex)
       toggleImageViewerVisible()
     }
   }
 
+  const makePressHandlersForIndex = imageIndex => {
+    const pressHandlers = {}
+
+    if (onlyLongPress) {
+      pressHandlers.onLongPress = makeShowImageViewerAtIndex(imageIndex)
+    } else {
+      pressHandlers.onPress = makeShowImageViewerAtIndex(imageIndex)
+    }
+
+    if (onPress && onlyLongPress) {
+      pressHandlers.onPress = onPress
+    }
+
+    return pressHandlers
+  }
+
   return (
     <>
       {renderImages && (
-        <TouchableHighlight {...touchableHighlightProps} onPress={showImageViewerAtIndex(0)}>
-          {renderImages(showImageViewerAtIndex)}
+        <TouchableHighlight {...touchableHighlightProps} {...makePressHandlersForIndex(0, onlyLongPress)}>
+          {renderImages(makePressHandlersForIndex)}
         </TouchableHighlight>
       )}
       <ImageViewer

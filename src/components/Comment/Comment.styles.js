@@ -61,8 +61,6 @@ export default {
     color: slateGrey80
   },
   imageAttachment: {
-    height: 200,
-    width: '100%',
     borderRadius: 10
   },
   body: {

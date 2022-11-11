@@ -99,6 +99,7 @@ export function ContentRow ({
             showGroups
             showMember={showMember}
             showTopic={showTopic}
+            onPress={showPost}
             post={item}
             respondToEvent={response => respondToEvent(item.id, response)}
             creator={item.creator}

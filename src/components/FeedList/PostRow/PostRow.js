@@ -32,6 +32,7 @@ export default function PostRow ({
         <PostCard
           goToGroup={goToGroup}
           post={post}
+          onPress={() => showPost(post.id)}
           respondToEvent={handleRespondToEvent}
           showGroups={showGroups}
           showMember={showMember}
