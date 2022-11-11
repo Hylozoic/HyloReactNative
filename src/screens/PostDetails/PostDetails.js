@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View } from 'react-native'
+import { View, Alert } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { get } from 'lodash/fp'
@@ -63,8 +63,23 @@ export default function PostDetails () {
   useSetCurrentGroup()
 
   useEffect(() => {
-    fetchPost()
-    setHeader()
+    (async function () {
+      try {
+        const response = await fetchPost()
+
+        if (!response?.payload?.getData()) {
+          throw new Error('not found')
+        }
+      } catch (e) {
+        Alert.alert(
+          "Sorry, we couldn't find that post",
+          "It may have been removed, or you don't have permission to view it",
+          [{ text: 'Ok', onPress: () => navigation.replace('Feed')}]
+        )
+      }
+
+      setHeader()
+    })()
   }, [])
 
   useEffect(() => { setHeader() }, [currentGroup?.slug])
