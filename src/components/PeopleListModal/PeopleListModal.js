@@ -45,7 +45,13 @@ export function TopDownModal ({
   )
 }
 
-export default function PeopleListModal ({ people, onPressPerson: providedOnPressPerson, isVisible, toggleModal, children }) {
+export default function PeopleListModal ({
+  people,
+  onPressPerson: providedOnPressPerson,
+  isVisible,
+  toggleModal,
+  children
+}) {
   if (isEmpty(people)) return null
 
   const onPressPerson = (person) => {

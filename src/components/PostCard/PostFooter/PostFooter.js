@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { useDispatch } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
 import { get, find, filter, isEmpty, sortBy } from 'lodash/fp'
 import LinearGradient from 'react-native-linear-gradient'
 import { RESPONSES } from 'store/models/EventInvitation'
 import voteOnPost from 'store/actions/voteOnPost'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
-import { caribbeanGreen, rhino30, postCardLinearGradientColors, white } from 'style/colors'
+import PeopleListModal from 'components/PeopleListModal'
+import { caribbeanGreen, postCardLinearGradientColors, white, rhino40 } from 'style/colors'
 
 export default function PostFooter ({
   commenters,
@@ -23,7 +25,10 @@ export default function PostFooter ({
   postId
 }) {
   const dispatch = useDispatch()
-
+  const navigation = useNavigation()
+  const [peopleModalVisible, setPeopleModalVisible] = useState(false)
+  const togglePeopleModal = () => setPeopleModalVisible(!peopleModalVisible)
+  const goToMember = person => navigation.navigate('Member', { id: person.id })
   const vote = () => dispatch(voteOnPost(postId, !myVote))
 
   const voteStyle = myVote
@@ -75,13 +80,23 @@ export default function PostFooter ({
       )
   }
 
-  const { caption, avatarUrls } = peopleRowResult
+  const { caption, avatarUrls, sortedPeople, pluralPhrase } = peopleRowResult
 
   return (
     <>
       <View style={styles.dashedBorder} />
       <LinearGradient style={[styles.container, style]} colors={postCardLinearGradientColors}>
-        <View style={styles.comments}>
+        <PeopleListModal
+          people={sortedPeople}
+          onPressPerson={goToMember}
+          toggleModal={togglePeopleModal}
+          isVisible={peopleModalVisible}
+        >
+          {/* <View>
+            <Text style={{ fontFamily: 'Circular-Bold' }}>{pluralPhrase}</Text>
+          </View> */}
+        </PeopleListModal>
+        <TouchableOpacity onLongPress={togglePeopleModal} style={styles.comments}>
           {avatarUrls.slice(0, 3).map((avatarUrl, index) => {
             return (
               <Avatar
@@ -95,7 +110,7 @@ export default function PostFooter ({
             )
           })}
           <Text style={[styles.commentsText, !isEmpty(avatarUrls) && styles.commentsTextWithAvatars]}>{caption}</Text>
-        </View>
+        </TouchableOpacity>
         <TouchableOpacity style={[styles.votes.container, voteStyle]} onPress={vote}>
           <Icon name='ArrowUp' style={[styles.votes.icon, voteStyle]} />
           <Text style={[styles.votes.text, voteStyle]}>{votesTotal}</Text>
@@ -144,7 +159,7 @@ export const peopleSetup = (
   }
   const caption = `${names} ${phrase}`
   const avatarUrls = people.map(p => p.avatarUrl)
-  return { caption, avatarUrls }
+  return { caption, avatarUrls, sortedPeople, pluralPhrase }
 }
 
 const styles = {
@@ -167,7 +182,7 @@ const styles = {
     alignItems: 'center'
   },
   commentsText: {
-    color: rhino30,
+    color: rhino40,
     fontSize: 13,
     fontFamily: 'Circular-Book'
   },

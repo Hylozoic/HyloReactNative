@@ -1,5 +1,5 @@
 import { POST_TYPES } from 'store/models/Post'
-import { capeCod10, rhino60, rhino30, caribbeanGreen, white } from 'style/colors'
+import { capeCod10, rhino60, caribbeanGreen, white } from 'style/colors'
 
 export default {
   container: {
@@ -18,24 +18,9 @@ export default {
   files: {
     marginBottom: 12
   },
-  infoRow: {
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    borderTopWidth: 1,
-    borderColor: capeCod10,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  infoRowLabel: {
-    fontSize: 13,
-    color: rhino30,
-    fontFamily: 'Circular-Book',
-    marginRight: 5
-  },
   locationRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    // backgroundColor: 'rgba(225, 229, 233, 0.3)',
     paddingVertical: 5,
     paddingHorizontal: 12
   },
@@ -46,11 +31,6 @@ export default {
   locationText: {
     fontSize: 12,
     color: rhino60
-  },
-  infoRowInfo: {
-    fontSize: 13,
-    color: rhino60,
-    fontFamily: 'Circular-Book'
   },
   projectJoinButton: {
     backgroundColor: POST_TYPES.project.backgroundColor,

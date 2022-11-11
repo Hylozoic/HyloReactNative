@@ -4,7 +4,7 @@ import { Text, View, TouchableOpacity } from 'react-native'
 import { PUBLIC_GROUP } from 'store/models/Group'
 import GroupsList from 'components/GroupsList'
 import Icon from 'components/Icon'
-import { rhino30, caribbeanGreen } from 'style/colors'
+import { rhino30, caribbeanGreen, rhino40 } from 'style/colors'
 
 export default function PostGroups ({
   goToGroup,
@@ -26,24 +26,24 @@ export default function PostGroups ({
 
   return (
     <View style={[style, expanded && styles.expanded]}>
-      <View style={styles.row}>
-        <Text style={styles.reminderText}>Posted In: </Text>
-        {!expanded && (
-          <GroupsListSummary
-            expandFunc={toggleExpanded}
-            groups={groups}
-            goToGroup={goToGroup}
-          />
-        )}
-        <TouchableOpacity onPress={toggleExpanded} style={styles.arrowButton}>
+      <TouchableOpacity onPress={toggleExpanded}>
+        <View style={styles.row}>
+          <Text style={styles.reminderText}>Posted In: </Text>
+          {!expanded && (
+            <GroupsListSummary
+              expandFunc={toggleExpanded}
+              groups={groups}
+              goToGroup={goToGroup}
+            />
+          )}
           <Icon
             name={expanded ? 'ArrowUp' : 'ArrowDown'}
             style={styles.arrowIcon}
           />
-        </TouchableOpacity>
-      </View>
+        </View>
+      </TouchableOpacity>
       {expanded && (
-        <GroupsList style={style} groups={groups} onPress={goToGroup} />
+        <GroupsList style={[style, { backgroundColor: 'transparent' }]} groups={groups} onPress={goToGroup} />
       )}
     </View>
   )
@@ -62,7 +62,7 @@ export function GroupsListSummary ({ groups, goToGroup, expandFunc }) {
       </TouchableOpacity>
       {moreGroups && (
         <View style={[styles.row]}>
-          <Text style={[styles.reminderText]}> and {othersText(groups.length - 1)}</Text>
+          <Text style={styles.reminderText}> and {othersText(groups.length - 1)}</Text>
         </View>
       )}
     </View>
@@ -87,11 +87,12 @@ const styles = {
     fontFamily: 'Circular-Book'
   },
   arrowIcon: {
-    color: rhino30,
+    color: rhino40,
+    marginLeft: 7,
     fontSize: 16
   },
   reminderText: {
-    color: rhino30,
+    color: rhino40,
     fontSize: 12,
     fontFamily: 'Circular-Book'
   }

@@ -41,7 +41,7 @@ const postFieldsFragment = withComments => `
   donationsLink
   projectManagementLink
   myEventResponse
-  commenters(first: 3) {
+  commenters(first: 20) {
     id
     name
     avatarUrl
