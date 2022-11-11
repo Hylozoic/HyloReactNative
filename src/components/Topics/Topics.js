@@ -1,6 +1,6 @@
 import { ScrollView, Text, TouchableOpacity } from 'react-native'
 import Icon from 'components/Icon'
-import { amaranth, caribbeanGreen, rhino30 } from 'style/colors'
+import { amaranth, caribbeanGreen, rhino30, white } from 'style/colors'
 
 export default function Topics ({
   onPress,
@@ -10,7 +10,7 @@ export default function Topics ({
   pillStyle,
   textStyle
 }) {
-  if (topics.length < 1) return null
+  if (!topics || topics.length < 1) return null
 
   return (
     <ScrollView horizontal style={[styles.topicPillBox, style]}>
@@ -43,7 +43,7 @@ export function TopicPill ({
     : () => {}
 
   return (
-    <TouchableOpacity onPress={handleOnPress} style={[styles.topicPill, style]}>
+    <TouchableOpacity onPress={handleOnPress} activeOpacity={0.6} style={[styles.topicPill, style]}>
       <Text style={[styles.topicText, textStyle]}>#{name}</Text>
       {onPressRemove && (
         <TouchableOpacity onPress={handleOnPressRemove}>
@@ -63,11 +63,12 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
+    backgroundColor: white,
     borderRadius: 4,
     borderWidth: 1,
     borderColor: rhino30,
     marginRight: 5,
-    paddingVertical: 4,
+    paddingVertical: 3,
     paddingHorizontal: 7,
     paddingRight: 5
   },

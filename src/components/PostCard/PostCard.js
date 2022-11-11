@@ -1,12 +1,15 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
+import { LocationHelpers } from 'hylo-shared'
 import PostHeader from './PostHeader'
 import PostBody from './PostBody'
 import PostGroups from './PostGroups'
 import PostFooter from './PostFooter'
 import ImageAttachments from 'components/ImageAttachments'
 import Files from 'components/Files'
-import { capeCod10 } from 'style/colors'
+import Icon from 'components/Icon'
+import Topics from 'components/Topics'
+import styles from 'components/PostCard/PostCard.styles'
 
 export default function PostCard ({
   goToGroup,
@@ -16,9 +19,10 @@ export default function PostCard ({
   respondToEvent,
   showGroups = true,
   showMember,
-  showTopic
+  showTopic: goToTopic
 }) {
   const images = post.imageUrls && post.imageUrls.map(uri => ({ uri }))
+  const locationText = LocationHelpers.generalLocationString(post.locationObject, post.location)
 
   return (
     <View style={styles.container}>
@@ -30,16 +34,36 @@ export default function PostCard ({
         pinned={post.pinned}
         postId={post.id}
         showMember={showMember}
-        showTopic={showTopic}
         title={post.title}
-        topics={post.topics}
         type={post.type}
       />
-      <ImageAttachments
-        creator={post.creator}
-        images={images}
-        title={post.title}
-      />
+      {!images && (
+        <Topics
+          topics={post.topics}
+          onPress={t => goToTopic(t.name)}
+          style={styles.topics}
+        />
+      )}
+      {images && (
+        <ImageAttachments
+          creator={post.creator}
+          images={images}
+          style={styles.images}
+          title={post.title}
+        >
+          <Topics
+            topics={post.topics}
+            onPress={t => goToTopic(t.name)}
+            style={[styles.topics, styles.topicsOnImage]}
+          />
+        </ImageAttachments>
+      )}
+      {!!locationText && (
+        <View style={styles.locationRow}>
+          <Icon style={styles.locationIcon} name='Location' />
+          <Text style={styles.locationText} selectable>{locationText}</Text>
+        </View>
+      )}
       <PostBody
         details={post.details}
         endTime={post.endTime}
@@ -53,7 +77,7 @@ export default function PostCard ({
         title={post.title}
         type={post.type}
       />
-      <Files urls={post.fileUrls} style={{ marginBottom: 10 }} />
+      <Files urls={post.fileUrls} style={styles.files} />
       {showGroups && (
         <PostGroups
           goToGroup={goToGroup}
@@ -73,17 +97,4 @@ export default function PostCard ({
       />
     </View>
   )
-}
-
-const styles = {
-  container: {
-    backgroundColor: 'white',
-    borderColor: capeCod10,
-    borderRadius: 4,
-    borderWidth: 1
-  },
-  groups: {
-    paddingBottom: 10,
-    paddingHorizontal: 12
-  }
 }

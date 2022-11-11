@@ -15,7 +15,7 @@ import Comments from 'components/Comments'
 import Loading from 'components/Loading'
 import PostCardForDetails from 'components/PostCard/PostCardForDetails'
 import SocketSubscriber from 'components/SocketSubscriber'
-import styles from './PostDetails.styles'
+import { white } from 'style/colors'
 
 /*
 
@@ -107,4 +107,11 @@ export default function PostDetails () {
       <SocketSubscriber type='post' id={post.id} />
     </View>
   )
+}
+
+const styles = {
+  container: {
+    flex: 1,
+    backgroundColor: white
+  }
 }

@@ -1,37 +1,49 @@
 import React from 'react'
+import { Dimensions, TouchableHighlight, View } from 'react-native'
 import { isEmpty } from 'lodash'
-import { Dimensions, TouchableHighlight } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { ImageViewerButton } from 'components/ImageViewer/ImageViewer'
 
-export default function ImageAttachments ({ images, title, creator, linked }) {
+export default function ImageAttachments ({
+  children,
+  creator,
+  images,
+  style,
+  title,
+  viewer
+}) {
   if (isEmpty(images)) return null
 
-  if (linked) {
+  if (viewer) {
     return (
       <>
         <ImageViewerButton
           images={images}
           title={title}
           creator={creator}
+          style={style}
           renderImages={showImageAtIndex => (
             <FastImage
-              style={[styles.background, styles.container]}
               imageStyle={styles.backgroundImage}
               source={images[0]}
             >
-              {images.slice(1).map((image, index) => (
-                <TouchableHighlight
-                  onPress={showImageAtIndex(index + 1)}
-                  key={image.uri}
-                  style={styles.thumbnailWrapper}
-                >
-                  <FastImage
-                    source={image}
-                    style={styles.thumbnail}
-                  />
-                </TouchableHighlight>
-              ))}
+              <View style={styles.container}>
+                <View>{children}</View>
+                <View style={styles.background}>
+                  {images.slice(1).map((image, index) => (
+                    <TouchableHighlight
+                      onPress={showImageAtIndex(index + 1)}
+                      key={image.uri}
+                      style={styles.thumbnailWrapper}
+                    >
+                      <FastImage
+                        source={image}
+                        style={styles.thumbnail}
+                      />
+                    </TouchableHighlight>
+                  ))}
+                </View>
+              </View>
             </FastImage>
           )}
         />
@@ -41,17 +53,22 @@ export default function ImageAttachments ({ images, title, creator, linked }) {
 
   return (
     <FastImage
-      style={styles.background}
       imageStyle={styles.backgroundImage}
       source={images[0]}
+      style={style}
     >
-      {images.slice(1).map(image => (
-        <FastImage
-          key={image.uri}
-          source={image}
-          style={[styles.thumbnail, styles.thumbnailWrapper]}
-        />
-      ))}
+      <View style={styles.container}>
+        <View>{children}</View>
+        <View style={styles.background}>
+          {images.slice(1).map(image => (
+            <FastImage
+              key={image.uri}
+              source={image}
+              style={[styles.thumbnail, styles.thumbnailWrapper]}
+            />
+          ))}
+        </View>
+      </View>
     </FastImage>
   )
 }
@@ -62,13 +79,15 @@ export default function ImageAttachments ({ images, title, creator, linked }) {
 const backgroundHeight = Dimensions.get('window').width * 0.62
 
 const styles = {
+  container: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: backgroundHeight
+  },
   background: {
-    width: '100%',
-    height: backgroundHeight,
-    marginBottom: 12,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
     justifyContent: 'flex-end'
   },
   backgroundImage: {
@@ -76,7 +95,7 @@ const styles = {
   },
   thumbnailWrapper: {
     margin: 8,
-    marginLeft: 0
+    marginLeft: 4
   },
   thumbnail: {
     width: 48,

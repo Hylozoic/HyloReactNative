@@ -36,13 +36,11 @@ export default function usePostActionSheet ({
   const currentGroup = useSelector(getCurrentGroup)
   const currentUser = useSelector(getMe)
   const canModerate = useSelector(getCanModerate)
-
   const createActionSheetActions = () => {
     const isCreator = currentUser && creator && currentUser.id === creator.id
-    const postUrl = isContextGroup(currentGroup)
+    const postUrl = isContextGroup(currentGroup.slug)
       ? postUrlCreator(postId, { context: currentGroup.slug })
       : postUrlCreator(postId, { groupSlug: currentGroup.slug })
-
     const editPost = isCreator
       ? () => navigation.navigate('Edit Post', { id: postId })
       : null
@@ -58,11 +56,11 @@ export default function usePostActionSheet ({
       }
     }
 
-    const handleRemovePost = currentGroup && !isCreator && canModerate && !isContextGroup(currentGroup)
+    const handleRemovePost = currentGroup && !isCreator && canModerate && !isContextGroup(currentGroup.slug)
       ? () => dispatch(removePostAction(postId, currentGroup?.slug))
       : null
 
-    const pinPost = currentGroup && canModerate && !isContextGroup(currentGroup)
+    const pinPost = currentGroup && canModerate && !isContextGroup(currentGroup).slug
       ? () => dispatch(pinPostAction(postId, currentGroup.id))
       : null
 

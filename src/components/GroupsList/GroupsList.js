@@ -54,12 +54,12 @@ const styles = {
   },
   linkText: {
     color: caribbeanGreen,
-    fontSize: 16,
+    fontSize: 14,
     paddingRight: 10,
     fontFamily: 'Circular-Book'
   },
   linkTextSmaller: {
-    fontSize: 13
+    fontSize: 12
   },
   groupCellContainer: {
     flex: 1,

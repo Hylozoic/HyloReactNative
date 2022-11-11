@@ -3,13 +3,19 @@ import { capeCod10, rhino60, rhino30, caribbeanGreen, white } from 'style/colors
 
 export default {
   container: {
-    flex: 1,
-    backgroundColor: white
+    backgroundColor: white,
+    borderColor: capeCod10,
+    borderRadius: 4,
+    borderWidth: 1
   },
-  postCard: {
+  detailsContainer: {
     marginBottom: 16
   },
-  imageMargin: {
+  images: {
+    marginTop: -8,
+    marginBottom: 12
+  },
+  files: {
     marginBottom: 12
   },
   infoRow: {
@@ -26,8 +32,20 @@ export default {
     fontFamily: 'Circular-Book',
     marginRight: 5
   },
+  locationRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    // backgroundColor: 'rgba(225, 229, 233, 0.3)',
+    paddingVertical: 5,
+    paddingHorizontal: 12
+  },
   locationIcon: {
-    marginRight: 5
+    marginRight: 5,
+    color: rhino60
+  },
+  locationText: {
+    fontSize: 12,
+    color: rhino60
   },
   infoRowInfo: {
     fontSize: 13,
@@ -48,5 +66,17 @@ export default {
   },
   memberCount: {
     color: caribbeanGreen
+  },
+  topics: {
+    paddingHorizontal: 7,
+    paddingBottom: 10
+  },
+  topicsOnImage: {
+    marginTop: 8
+  },
+  groups: {
+    backgroundColor: 'rgba(225, 229, 233, 0.3)',
+    paddingVertical: 5,
+    paddingHorizontal: 12
   }
 }

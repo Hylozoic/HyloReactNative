@@ -1,13 +1,13 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { useDispatch } from 'react-redux'
-import { get, find, filter, sortBy } from 'lodash/fp'
+import { get, find, filter, isEmpty, sortBy } from 'lodash/fp'
 import LinearGradient from 'react-native-linear-gradient'
 import { RESPONSES } from 'store/models/EventInvitation'
 import voteOnPost from 'store/actions/voteOnPost'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
-import { caribbeanGreen, rhino30, rhino60, slateGrey80, postCardLinearGradientColors } from 'style/colors'
+import { caribbeanGreen, rhino30, postCardLinearGradientColors, white } from 'style/colors'
 
 export default function PostFooter ({
   commenters,
@@ -26,7 +26,9 @@ export default function PostFooter ({
 
   const vote = () => dispatch(voteOnPost(postId, !myVote))
 
-  const voteStyle = myVote ? styles.votes.active : styles.votes.inactive
+  const voteStyle = myVote
+    ? styles.votes.active
+    : styles.votes.inactive
 
   const eventAttendees = filter(ei => ei.response === RESPONSES.YES, eventInvitations)
 
@@ -92,9 +94,9 @@ export default function PostFooter ({
               />
             )
           })}
-          <Text style={styles.commentsText}>{caption}</Text>
+          <Text style={[styles.commentsText, !isEmpty(avatarUrls) && styles.commentsTextWithAvatars]}>{caption}</Text>
         </View>
-        <TouchableOpacity style={styles.votes.container} onPress={vote}>
+        <TouchableOpacity style={[styles.votes.container, voteStyle]} onPress={vote}>
           <Icon name='ArrowUp' style={[styles.votes.icon, voteStyle]} />
           <Text style={[styles.votes.text, voteStyle]}>{votesTotal}</Text>
         </TouchableOpacity>
@@ -147,7 +149,6 @@ export const peopleSetup = (
 
 const styles = {
   container: {
-    height: 40,
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: 12
@@ -160,48 +161,42 @@ const styles = {
     borderColor: 'rgba(54, 61, 60, 0.1)',
     borderStyle: 'dashed'
   },
-  activityLabel: {
-    color: rhino60,
-    fontSize: 12,
-    paddingTop: 10,
-    paddingLeft: 12,
-    fontWeight: 'bold',
-    fontFamily: 'Circular-Book',
-    marginRight: 8
-  },
   comments: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center'
   },
   commentsText: {
-    paddingLeft: 5,
     color: rhino30,
     fontSize: 13,
     fontFamily: 'Circular-Book'
+  },
+  commentsTextWithAvatars: {
+    paddingLeft: 5
   },
   votes: {
     container: {
       paddingRight: 14,
       paddingLeft: 14,
-      height: 40,
       flexDirection: 'row',
-      alignItems: 'center'
+      paddingVertical: 6,
+      alignItems: 'center',
+      height: '100%'
     },
     icon: {
       fontSize: 18,
       marginRight: 4
     },
     text: {
-      fontSize: 14
-    },
-    active: {
-      color: caribbeanGreen,
+      fontSize: 12,
       fontFamily: 'Circular-Bold'
     },
+    active: {
+      backgroundColor: caribbeanGreen,
+      color: white
+    },
     inactive: {
-      color: slateGrey80,
-      fontFamily: 'Circular-Book'
+      color: caribbeanGreen
     }
   }
 }

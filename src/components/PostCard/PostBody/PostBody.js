@@ -37,7 +37,10 @@ export default function PostBody ({
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <PostTitle title={title} />
         {type === 'event' && !!respondToEvent && (
-          <EventRSVP myEventResponse={isEmpty(myEventResponse) ? RESPONSES.NO : myEventResponse} respondToEvent={respondToEvent} />
+          <EventRSVP
+            myEventResponse={isEmpty(myEventResponse) ? RESPONSES.NO : myEventResponse}
+            respondToEvent={respondToEvent}
+          />
         )}
       </View>
       {/* {linkPreviewFeatured && (

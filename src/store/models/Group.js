@@ -233,4 +233,3 @@ export const PUBLIC_GROUP = {
 // Move into hylo-shared (PathsHelper?)
 export const isContextGroup = slug =>
   [ALL_GROUPS_CONTEXT_SLUG, PUBLIC_CONTEXT_SLUG].includes(slug)
-

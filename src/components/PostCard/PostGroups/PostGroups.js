@@ -42,7 +42,9 @@ export default function PostGroups ({
           />
         </TouchableOpacity>
       </View>
-      {expanded && <GroupsList groups={groups} onPress={goToGroup} />}
+      {expanded && (
+        <GroupsList style={style} groups={groups} onPress={goToGroup} />
+      )}
     </View>
   )
 }
@@ -53,20 +55,14 @@ export function GroupsListSummary ({ groups, goToGroup, expandFunc }) {
 
   return (
     <View style={[styles.groupList, styles.row]}>
-      <TouchableOpacity
-        onPress={() => goToGroup && goToGroup(groups[0].slug)}
-        style={{ flex: -1 }}
-      >
+      <TouchableOpacity onPress={() => goToGroup && goToGroup(groups[0].slug)}>
         <Text style={styles.linkText} numberOfLines={1}>
           {groups[0].name}
         </Text>
       </TouchableOpacity>
       {moreGroups && (
-        <View style={[styles.row, { flex: 0 }]}>
-          <Text style={[styles.reminderText]}> and </Text>
-          <TouchableOpacity onPress={expandFunc}>
-            <Text style={styles.linkText}>{othersText(groups.length - 1)}</Text>
-          </TouchableOpacity>
+        <View style={[styles.row]}>
+          <Text style={[styles.reminderText]}> and {othersText(groups.length - 1)}</Text>
         </View>
       )}
     </View>
@@ -79,7 +75,6 @@ const styles = {
     alignItems: 'stretch'
   },
   row: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center'
   },
@@ -88,19 +83,16 @@ const styles = {
   },
   linkText: {
     color: caribbeanGreen,
-    fontSize: 13,
+    fontSize: 12,
     fontFamily: 'Circular-Book'
-  },
-  arrowButton: {
-    marginLeft: 'auto'
   },
   arrowIcon: {
     color: rhino30,
-    fontSize: 18
+    fontSize: 16
   },
   reminderText: {
     color: rhino30,
-    fontSize: 13,
+    fontSize: 12,
     fontFamily: 'Circular-Book'
   }
 }

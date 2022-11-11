@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, FlatList } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { useSelector } from 'react-redux'
-import { get, isEmpty } from 'lodash/fp'
+import { get } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
 import usePostActionSheet from 'hooks/usePostActionSheet'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
@@ -15,15 +15,13 @@ export default function PostHeader ({
   closeOnDelete,
   creator,
   date,
-  hideDateRow,
   hideMenu,
   pinned,
   postId,
   showMember,
-  showTopic,
   smallAvatar,
+  style,
   title,
-  topics,
   type
 }) {
   const [flaggingVisible, setFlaggingVisible] = useState(false)
@@ -38,40 +36,21 @@ export default function PostHeader ({
   const currentGroup = useSelector(getCurrentGroup)
   const { avatarUrl, name } = creator
   const handleShowMember = () => showMember && showMember(creator.id)
-  const showTopics = !isEmpty(topics)
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View style={styles.avatarSpacing}>
         <TouchableOpacity onPress={handleShowMember}>
-          {!!avatarUrl && <Avatar avatarUrl={avatarUrl} dimension={smallAvatar ? 20 : 30} />}
+          {!!avatarUrl && <Avatar avatarUrl={avatarUrl} dimension={smallAvatar ? 20 : 20} />}
         </TouchableOpacity>
       </View>
-      <View style={styles.meta}>
+      <View style={styles.nameAndDate}>
         <TouchableOpacity onPress={handleShowMember}>
           {name && (
-            <Text style={styles.username}>{name}dddd</Text>
+            <Text style={styles.name}>{name}</Text>
           )}
         </TouchableOpacity>
-        {!hideDateRow && (
-          <View style={styles.dateRow}>
-            <Text style={styles.metaText}>{TextHelpers.humanDate(date)}</Text>
-            {!!showTopics && (
-              <FlatList
-                data={topics}
-                style={styles.topicList}
-                horizontal
-                keyExtractor={item => item.id}
-                showsHorizontalScrollIndicator={false}
-                renderItem={({ item }) => (
-                  <TouchableOpacity onPress={() => showTopic && showTopic(item.name)}>
-                    <Text style={styles.topicLabel}>#{item.name}</Text>
-                  </TouchableOpacity>
-                )}
-              />
-            )}
-          </View>
-        )}
+        <Text style={styles.date}>{TextHelpers.humanDate(date)}</Text>
       </View>
       <View style={styles.upperRight}>
         {pinned && (

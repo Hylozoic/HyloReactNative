@@ -17,13 +17,12 @@ export function ImageViewerButton ({
   images,
   title,
   renderImages,
-  children,
   ...touchableHighlightProps
 }) {
   const [imageViewerVisible, setImageViewerVisible] = useState(false)
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 
-  if (isEmpty(images) || !(renderImages || children)) return null
+  if (isEmpty(images) || !renderImages) return null
 
   const toggleImageViewerVisible = () => setImageViewerVisible(!imageViewerVisible)
   const showImageViewerAtIndex = imageIndex => {
@@ -38,11 +37,6 @@ export function ImageViewerButton ({
       {renderImages && (
         <TouchableHighlight {...touchableHighlightProps} onPress={showImageViewerAtIndex(0)}>
           {renderImages(showImageViewerAtIndex)}
-        </TouchableHighlight>
-      )}
-      {!renderImages && children && (
-        <TouchableHighlight {...touchableHighlightProps} onPress={showImageViewerAtIndex(0)}>
-          {children}
         </TouchableHighlight>
       )}
       <ImageViewer

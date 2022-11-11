@@ -1,44 +1,34 @@
 import { POST_TYPES } from 'store/models/Post'
-import { rhino30, rhino50, caribbeanGreen } from 'style/colors'
+import { rhino30, rhino50, caribbeanGreen, rhino40 } from 'style/colors'
 
 export const styles = {
   container: {
     flexDirection: 'row',
-    paddingBottom: 6,
-    marginBottom: 10,
+    marginBottom: 8,
     borderBottomColor: 'rgba(235, 235, 235, 1.0)',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    paddingVertical: 9,
+    paddingHorizontal: 9
   },
-  meta: {
-    paddingTop: 7 + 9,
+  nameAndDate: {
     paddingRight: 7,
     flex: 1,
-    justifyContent: 'space-around'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
-  avatarSpacing: {
-    paddingTop: 7 + 9,
-    paddingLeft: 7 + 5,
-    paddingRight: 7
-  },
-  avatarNudge: {
-    paddingTop: 18
-  },
-  username: {
-    fontSize: 14,
+  name: {
+    fontSize: 13,
     color: '#363D3C',
     fontFamily: 'Circular-Bold'
   },
-  usernameNudge: {
-    top: 10
-  },
-  dateRow: {
-    flexDirection: 'row',
-    flex: 1
-  },
-  metaText: {
+  date: {
+    marginLeft: 8,
     fontSize: 12,
-    color: rhino30,
+    color: rhino40,
     fontFamily: 'Circular-Book'
+  },
+  avatarSpacing: {
+    paddingRight: 7
   },
   spacer: {
     fontSize: 12,
@@ -63,10 +53,6 @@ export const styles = {
     color: caribbeanGreen
   },
   upperRight: {
-    position: 'absolute',
-    paddingTop: 14,
-    paddingRight: 6,
-    right: 0,
     flexDirection: 'row',
     alignItems: 'flex-start'
   },
@@ -78,7 +64,6 @@ export const styles = {
   moreIcon: {
     fontSize: 20,
     paddingLeft: 5,
-    paddingRight: 5,
     color: rhino50
   },
   announcementIcon: {

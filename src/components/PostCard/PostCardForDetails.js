@@ -3,7 +3,10 @@ import { View, Text } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import { find, get } from 'lodash/fp'
+import { LocationHelpers } from 'hylo-shared'
 import useChangeToGroup from 'hooks/useChangeToGroup'
+import useGoToMember from 'hooks/useGoToMember'
+import useGoToTopic from 'hooks/useGoToTopic'
 import getMe from 'store/selectors/getMe'
 import joinProjectAction from 'store/actions/joinProject'
 import leaveProjectAction from 'store/actions/leaveProject'
@@ -11,15 +14,14 @@ import respondToEventAction from 'store/actions/respondToEvent'
 import Button from 'components/Button'
 import Files from 'components/Files'
 import Icon from 'components/Icon'
+import ImageAttachments from 'components/ImageAttachments'
 import PostBody from 'components/PostCard/PostBody'
 import PostFooter from 'components/PostCard/PostFooter'
 import PostGroups from 'components/PostCard/PostGroups'
 import PostHeader from 'components/PostCard/PostHeader'
-import ImageAttachments from 'components/ImageAttachments'
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
-import styles from 'screens/PostDetails/PostDetails.styles'
-import useGoToMember from 'hooks/useGoToMember'
-import useGoToTopic from 'hooks/useGoToTopic'
+import Topics from 'components/Topics'
+import styles from 'components/PostCard/PostCard.styles'
 
 export default function PostCardForDetails ({ post, showGroups = true }) {
   const dispatch = useDispatch()
@@ -37,11 +39,11 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
 
   const isProject = get('type', post) === 'project'
   const isProjectMember = find(member => member.id === currentUser.id, post.members)
-  const locationFullText = post.location || (post.locationObject && post.locationObject.fullText)
+  const locationText = LocationHelpers.generalLocationString(post.locationObject, post.location)
   const images = post.imageUrls && post.imageUrls.map(uri => ({ uri }))
 
   return (
-    <View style={styles.postCard}>
+    <View style={styles.detailsContainer}>
       <PostHeader
         announcement={post.announcement}
         closeOnDelete
@@ -53,17 +55,38 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
         pinned={post.pinned}
         postId={post.id}
         showMember={goToMember}
-        showTopic={goToTopic}
+        style={{ paddingVertical: 14 }}
         title={post.title}
-        topics={post.topics}
         type={post.type}
       />
-      <ImageAttachments
-        creator={post.creator}
-        images={images}
-        linked
-        title={post.title}
-      />
+      {!images && (
+        <Topics
+          topics={post.topics}
+          onPress={t => goToTopic(t.name)}
+          style={styles.topics}
+        />
+      )}
+      {images && (
+        <ImageAttachments
+          creator={post.creator}
+          images={images}
+          style={styles.images}
+          title={post.title}
+          viewer
+        >
+          <Topics
+            topics={post.topics}
+            onPress={t => goToTopic(t.name)}
+            style={[styles.topics, styles.topicsOnImage]}
+          />
+        </ImageAttachments>
+      )}
+      {!!locationText && (
+        <View style={styles.locationRow}>
+          <Icon style={styles.locationIcon} name='Location' />
+          <Text style={styles.locationText} selectable>{locationText}</Text>
+        </View>
+      )}
       <PostBody
         details={post.details}
         endTime={post.endTime}
@@ -75,7 +98,7 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
         title={post.title}
         type={post.type}
       />
-      <Files urls={post.fileUrls} style={{ marginBottom: 10 }} />
+      <Files urls={post.fileUrls} style={styles.files} />
       {isProject && (
         <ProjectMembersSummary
           dimension={34}
@@ -91,18 +114,12 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
           style={styles.projectJoinButton}
         />
       )}
-      {!!locationFullText && (
-        <View style={styles.infoRow}>
-          <Icon style={styles.locationIcon} name='Location' />
-          <Text style={styles.infoRowInfo} selectable>{locationFullText}</Text>
-        </View>
-      )}
       {showGroups && (
         <PostGroups
           goToGroup={changeToGroup}
           groups={post.groups}
           includePublic={post.isPublic}
-          style={[styles.infoRow]}
+          style={[styles.groups]}
         />
       )}
       <PostFooter
