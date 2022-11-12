@@ -3,7 +3,7 @@
 exports[`BlockedUsers matches the last snapshot 1`] = `
 <ScrollView
   contentContainerStyle={
-    Object {
+    {
       "paddingTop": 20,
     }
   }
@@ -11,7 +11,7 @@ exports[`BlockedUsers matches the last snapshot 1`] = `
   <BlockedUserRow
     unBlockUser={[Function]}
     user={
-      Object {
+      {
         "id": 1,
         "name": "Blocker User 1",
       }
@@ -20,7 +20,7 @@ exports[`BlockedUsers matches the last snapshot 1`] = `
   <BlockedUserRow
     unBlockUser={[Function]}
     user={
-      Object {
+      {
         "id": 2,
         "name": "Blocker User 2",
       }

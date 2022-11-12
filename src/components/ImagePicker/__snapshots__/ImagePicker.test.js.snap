@@ -6,7 +6,7 @@ exports[`ImagePicker Specification default render matches snapshot 1`] = `
   collapsable={false}
   focusable={true}
   hitSlop={
-    Object {
+    {
       "bottom": 5,
       "left": 5,
       "right": 5,

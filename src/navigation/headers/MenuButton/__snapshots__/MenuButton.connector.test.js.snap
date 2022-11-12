@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`mapStateToProps returns the right keys 1`] = `
-Object {
-  "currentContext": Object {
+{
+  "currentContext": {
     "avatarUrl": undefined,
     "bannerUrl": undefined,
-    "childGroups": Object {
+    "childGroups": {
       "toModelArray": [Function],
     },
     "headerAvatarUrl": undefined,
     "id": "public",
     "name": "Public Groups & Posts",
-    "parentGroups": Object {
+    "parentGroups": {
       "toModelArray": [Function],
     },
     "slug": "public",

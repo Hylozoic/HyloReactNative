@@ -1,6 +1,8 @@
 import { modalScreenName } from 'navigation/linking/helpers'
 import { mapStateToProps } from './ThreadParticipants.connector'
 
+jest.mock('store/selectors/getCurrentUserId', () => () => 'mockId')
+
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {
     const props = {

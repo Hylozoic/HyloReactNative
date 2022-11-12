@@ -6,26 +6,34 @@ import orm from 'store/models'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
 import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
 import { modalScreenName } from 'navigation/linking/helpers'
-
 import {
   ACTION_NEW_COMMENT,
-  ACTION_TOPIC,
+  ACTION_TAG,
   ACTION_JOIN_REQUEST,
   ACTION_APPROVED_JOIN_REQUEST,
   ACTION_MENTION,
   ACTION_COMMENT_MENTION,
   ACTION_ANNOUNCEMENT,
-  NOTIFICATIONS_WHITELIST
+  ACTION_NEW_POST
 } from 'store/models/Notification'
 
+export const NOTIFICATIONS_WHITELIST = [
+  ACTION_NEW_COMMENT,
+  ACTION_TAG,
+  ACTION_JOIN_REQUEST,
+  ACTION_APPROVED_JOIN_REQUEST,
+  ACTION_MENTION,
+  ACTION_COMMENT_MENTION,
+  ACTION_ANNOUNCEMENT,
+  ACTION_NEW_POST
+]
+export const NOTIFICATION_TEXT_MAX = 76
 export const MODULE_NAME = 'NotificationsList'
 export const FETCH_NOTIFICATIONS = `${MODULE_NAME}/FETCH_NOTIFICATIONS`
 export const MARK_ACTIVITY_READ = `${MODULE_NAME}/MARK_ACTIVITY_READ`
 export const MARK_ALL_ACTIVITIES_READ = `${MODULE_NAME}/MARK_ALL_ACTIVITIES_READ`
 export const UPDATE_NEW_NOTIFICATION_COUNT = `${MODULE_NAME}/UPDATE_NEW_NOTIFICATION_COUNT`
 export const UPDATE_NEW_NOTIFICATION_COUNT_PENDING = `${UPDATE_NEW_NOTIFICATION_COUNT}_PENDING`
-
-export const NOTIFICATION_TEXT_MAX = 76
 
 export function fetchNotifications (first = 20, offset = 0) {
   return {
@@ -165,7 +173,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
         nameInHeader: true
       }
 
-    case ACTION_TOPIC: {
+    case ACTION_TAG: {
       const topicReason = find(r => r.startsWith('tag: '), meta.reasons)
       const topic = topicReason.split(': ')[1]
       return {

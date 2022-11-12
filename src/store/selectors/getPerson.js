@@ -3,8 +3,8 @@ import orm from 'store/models'
 
 const getPerson = ormCreateSelector(
   orm,
-  (state, { personId }) => personId,
-  ({ Person }, id) => Person.idExists(id) ? Person.withId(id) : null
+  (state, props) => props.personId,
+  ({ Person }, personId) => Person.idExists(personId) ? Person.withId(personId) : null
 )
 
 export default getPerson

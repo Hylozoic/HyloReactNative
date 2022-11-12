@@ -8,7 +8,7 @@ exports[`CommentCard matches the last snapshot 1`] = `
     <Memo(PostHeader)
       announcement={false}
       creator={
-        Object {
+        {
           "id": 3,
         }
       }
@@ -27,14 +27,14 @@ exports[`CommentCard matches the last snapshot 1`] = `
     />
   </View>
   <View />
-  <Memo(Connect(Comment))
+  <Comment
     comment={
-      Object {
+      {
         "id": 1,
-        "post": Object {
+        "post": {
           "announcement": false,
           "createdAt": 123,
-          "creator": Object {
+          "creator": {
             "id": 3,
           },
           "id": 2,
@@ -76,7 +76,7 @@ exports[`PostCard matches the last snapshot 1`] = `
 >
   <PostCard
     creator={
-      Object {
+      {
         "id": 2,
       }
     }
@@ -84,8 +84,8 @@ exports[`PostCard matches the last snapshot 1`] = `
     hideDetails={true}
     hideMenu={true}
     post={
-      Object {
-        "creator": Object {
+      {
+        "creator": {
           "id": 2,
         },
         "id": 1,
@@ -125,7 +125,7 @@ exports[`SearchPage matches the last snapshot 1`] = `
       </View>
     }
     data={
-      Array [
+      [
         1,
         2,
         3,
@@ -144,7 +144,7 @@ exports[`SearchResult works with Comment 1`] = `
 <View>
   <CommentCard
     comment={
-      Object {
+      {
         "id": 1,
       }
     }
@@ -159,7 +159,7 @@ exports[`SearchResult works with Person 1`] = `
   <PersonCard
     goToPerson={[Function]}
     person={
-      Object {
+      {
         "id": 1,
       }
     }
@@ -172,7 +172,7 @@ exports[`SearchResult works with Post 1`] = `
   <PostCard
     goToPost={[Function]}
     post={
-      Object {
+      {
         "id": 1,
       }
     }
@@ -183,7 +183,7 @@ exports[`SearchResult works with Post 1`] = `
 exports[`Tab matches the last snapshot 1`] = `
 <TouchableOpacity
   hitSlop={
-    Object {
+    {
       "bottom": 15,
       "left": 15,
       "right": 15,

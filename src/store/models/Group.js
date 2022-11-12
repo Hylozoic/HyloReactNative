@@ -12,6 +12,11 @@ export const GROUP_ACCESSIBILITY = {
   Open: 2
 }
 
+export const GROUP_TYPES = {
+  default: null,
+  farm: 'farm'
+}
+
 export function accessibilityDescription (a) {
   switch (a) {
     case GROUP_ACCESSIBILITY.Closed:
@@ -30,7 +35,7 @@ export function accessibilityIcon (a) {
     case GROUP_ACCESSIBILITY.Restricted:
       return 'Hand'
     case GROUP_ACCESSIBILITY.Open:
-      return 'Open-Door'
+      return 'Enter-Door'
   }
 }
 
@@ -68,6 +73,12 @@ export const accessibilityString = (accessibility) => {
 
 export const visibilityString = (visibility) => {
   return Object.keys(GROUP_VISIBILITY).find(key => GROUP_VISIBILITY[key] === visibility)
+}
+
+export const LOCATION_PRECISION = {
+  'precise': 'Display exact location',
+  'near': 'Display only nearest city and show nearby location on the map',
+  'region': 'Display only nearest city and don\'t show on the map'
 }
 
 export class GroupModerator extends Model { }
@@ -142,9 +153,11 @@ Group.fields = {
     to: 'Group',
     relatedName: 'parentGroups',
     through: 'GroupRelationship',
-    throughFields: [ 'childGroup', 'parentGroup' ]
+    throughFields: ['childGroup', 'parentGroup']
   }),
+  customViews: many('CustomView'),
   feedOrder: attr(),
+  geoShape: attr(),
   groupToGroupJoinQuestions: many('GroupToGroupJoinQuestion'),
   id: attr(),
   joinQuestions: many('GroupJoinQuestion'),
@@ -159,8 +172,10 @@ Group.fields = {
     to: 'Person',
     relatedName: 'moderatedGroups',
     through: 'GroupModerator',
-    throughFields: [ 'group', 'moderator' ]
+    throughFields: ['group', 'moderator']
   }),
+  moderatorDescriptor: attr(),
+  moderatorDescriptorPlural: attr(),
   name: attr(),
   openOffersAndRequests: many({
     to: 'Post',
@@ -183,14 +198,12 @@ Group.fields = {
     as: 'upcomingEvents',
     relatedName: 'eventGroups'
   }),
-  visibility: attr()
-  // Not certain we will use Widgets on Mobile?
-  // widgets: many('Widget')
+  visibility: attr(),
+  widgets: many('Widget')
 }
 
 export const DEFAULT_BANNER = 'https://d3ngex8q79bk55.cloudfront.net/misc/default_community_banner.jpg'
 export const DEFAULT_AVATAR = 'https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png'
-
 export const ALL_GROUP_ID = ALL_GROUPS_CONTEXT_SLUG
 export const ALL_GROUP_AVATAR_PATH = '/assets/white-merkaba.png'
 export const ALL_GROUP = {
@@ -201,7 +214,7 @@ export const ALL_GROUP = {
   bannerUrl: Image.resolveAssetSource(allGroupsBannerImage).uri,
   name: 'All My Groups',
   parentGroups: { toModelArray: () => [] },
-  childGroups: { toModelArray: () => [] },
+  childGroups: { toModelArray: () => [] }
 }
 
 export const PUBLIC_GROUP_ID = PUBLIC_CONTEXT_SLUG
@@ -218,4 +231,6 @@ export const PUBLIC_GROUP = {
 }
 
 // Move into hylo-shared (PathsHelper?)
-export const isContextGroup = slug => [ALL_GROUPS_CONTEXT_SLUG, PUBLIC_CONTEXT_SLUG].includes(slug)
+export const isContextGroup = slug =>
+  [ALL_GROUPS_CONTEXT_SLUG, PUBLIC_CONTEXT_SLUG].includes(slug)
+

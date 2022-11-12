@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`fetchGroupSettings 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "
         query ($id: ID) {
           group (id: $id) {
@@ -62,11 +62,11 @@ Object {
           }
         }
       ",
-    "variables": Object {
+    "variables": {
       "id": 10,
     },
   },
-  "meta": Object {
+  "meta": {
     "extractModel": "Group",
     "id": 10,
   },

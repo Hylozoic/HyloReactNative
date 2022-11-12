@@ -12,7 +12,7 @@ exports[`renders correctly with no group (all groups default) 1`] = `
             placeholder="Search Members"
           />
           <PopupMenuButton
-            actions={Array []}
+            actions={[]}
           >
             <Text />
             <Icon
@@ -23,37 +23,37 @@ exports[`renders correctly with no group (all groups default) 1`] = `
       </View>
     }
     data={
-      Array [
-        Object {
+      [
+        {
           "avatarUrl": "foo.gif",
           "bio": "Hello!",
           "id": "1",
           "location": "here",
           "name": "Foo Lane",
         },
-        Object {
+        {
           "avatarUrl": "bar.png",
           "bio": "Not a stork",
           "id": "2",
           "location": "there",
           "name": "Bar Jones",
         },
-        Object {
+        {
           "avatarUrl": "baz.png",
           "bio": "Could be",
           "id": "3",
           "name": "Baz Chu",
         },
-        Object {
+        {
           "avatarUrl": "bonk.jpg",
           "id": "4",
           "name": "Bonk Gundsdottir",
         },
-        Object {
+        {
           "avatarUrl": "woof.png",
           "id": "5",
         },
-        Object {
+        {
           "id": -1,
         },
       ]
@@ -72,8 +72,8 @@ exports[`renders correctly with no group (all groups default) 1`] = `
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    viewabilityConfigCallbackPairs={Array []}
+    stickyHeaderIndices={[]}
+    viewabilityConfigCallbackPairs={[]}
   >
     <View>
       <View
@@ -100,7 +100,7 @@ exports[`renders correctly with no group (all groups default) 1`] = `
               collapsable={false}
               focusable={true}
               hitSlop={
-                Object {
+                {
                   "bottom": 5,
                   "left": 5,
                   "right": 5,
@@ -143,7 +143,7 @@ exports[`renders correctly with no group (all groups default) 1`] = `
               <View>
                 <Image
                   source={
-                    Object {
+                    {
                       "uri": "foo.gif",
                     }
                   }
@@ -178,7 +178,7 @@ exports[`renders correctly with no group (all groups default) 1`] = `
               <View>
                 <Image
                   source={
-                    Object {
+                    {
                       "uri": "bar.png",
                     }
                   }
@@ -219,7 +219,7 @@ exports[`renders correctly with no group (all groups default) 1`] = `
               <View>
                 <Image
                   source={
-                    Object {
+                    {
                       "uri": "baz.png",
                     }
                   }
@@ -251,7 +251,7 @@ exports[`renders correctly with no group (all groups default) 1`] = `
               <View>
                 <Image
                   source={
-                    Object {
+                    {
                       "uri": "bonk.jpg",
                     }
                   }
@@ -287,7 +287,7 @@ exports[`renders with invite button when a moderator 1`] = `
     ListHeaderComponent={
       <View>
         <Banner
-          group={Object {}}
+          group={{}}
           handleInviteOnPress={[Function]}
           showInviteButton={true}
         />
@@ -297,7 +297,7 @@ exports[`renders with invite button when a moderator 1`] = `
             placeholder="Search Members"
           />
           <PopupMenuButton
-            actions={Array []}
+            actions={[]}
           >
             <Text />
             <Icon
@@ -308,37 +308,37 @@ exports[`renders with invite button when a moderator 1`] = `
       </View>
     }
     data={
-      Array [
-        Object {
+      [
+        {
           "avatarUrl": "foo.gif",
           "bio": "Hello!",
           "id": "1",
           "location": "here",
           "name": "Foo Lane",
         },
-        Object {
+        {
           "avatarUrl": "bar.png",
           "bio": "Not a stork",
           "id": "2",
           "location": "there",
           "name": "Bar Jones",
         },
-        Object {
+        {
           "avatarUrl": "baz.png",
           "bio": "Could be",
           "id": "3",
           "name": "Baz Chu",
         },
-        Object {
+        {
           "avatarUrl": "bonk.jpg",
           "id": "4",
           "name": "Bonk Gundsdottir",
         },
-        Object {
+        {
           "avatarUrl": "woof.png",
           "id": "5",
         },
-        Object {
+        {
           "id": -1,
         },
       ]
@@ -357,8 +357,8 @@ exports[`renders with invite button when a moderator 1`] = `
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    viewabilityConfigCallbackPairs={Array []}
+    stickyHeaderIndices={[]}
+    viewabilityConfigCallbackPairs={[]}
   >
     <View>
       <View
@@ -368,14 +368,14 @@ exports[`renders with invite button when a moderator 1`] = `
           <View>
             <Image
               source={
-                Object {
+                {
                   "uri": undefined,
                 }
               }
             />
             <div
               colors={
-                Array [
+                [
                   "rgba(0, 0, 0, 0)",
                   "rgba(0, 0, 0, 0.1)",
                   "rgba(0, 0, 0, 0.3)",
@@ -434,7 +434,7 @@ exports[`renders with invite button when a moderator 1`] = `
               collapsable={false}
               focusable={true}
               hitSlop={
-                Object {
+                {
                   "bottom": 5,
                   "left": 5,
                   "right": 5,
@@ -477,7 +477,7 @@ exports[`renders with invite button when a moderator 1`] = `
               <View>
                 <Image
                   source={
-                    Object {
+                    {
                       "uri": "foo.gif",
                     }
                   }
@@ -512,7 +512,7 @@ exports[`renders with invite button when a moderator 1`] = `
               <View>
                 <Image
                   source={
-                    Object {
+                    {
                       "uri": "bar.png",
                     }
                   }
@@ -553,7 +553,7 @@ exports[`renders with invite button when a moderator 1`] = `
               <View>
                 <Image
                   source={
-                    Object {
+                    {
                       "uri": "baz.png",
                     }
                   }
@@ -585,7 +585,7 @@ exports[`renders with invite button when a moderator 1`] = `
               <View>
                 <Image
                   source={
-                    Object {
+                    {
                       "uri": "bonk.jpg",
                     }
                   }

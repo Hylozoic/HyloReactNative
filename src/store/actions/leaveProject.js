@@ -1,4 +1,4 @@
-import { LEAVE_PROJECT } from '../constants'
+import { LEAVE_PROJECT } from 'store/constants'
 
 export default function (id) {
   return {

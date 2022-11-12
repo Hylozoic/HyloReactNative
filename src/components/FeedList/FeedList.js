@@ -67,7 +67,7 @@ export class FeedList extends React.Component {
         <FlatList
           ref={scrollRef}
           data={postIds}
-          renderItem={({ item }) => renderItem({ ...this.props, item })}
+          renderItem={({ item }) => renderPostRow({ ...this.props, postId: item })}
           onRefresh={refreshPosts}
           refreshing={!!pendingRefresh}
           keyExtractor={this.keyExtractor}
@@ -99,8 +99,8 @@ export class FeedList extends React.Component {
   }
 }
 
-export function renderItem ({
-  item,
+export function renderPostRow ({
+  postId,
   group,
   showPost,
   showMember,
@@ -109,7 +109,7 @@ export function renderItem ({
 }) {
   return (
     <PostRow
-      postId={item}
+      postId={postId}
       groupId={group?.id}
       showGroups={!group?.id || isContextGroup(group?.slug)}
       showPost={showPost}

@@ -16,7 +16,7 @@ exports[`ParticipantRow matches the last snapshot 1`] = `
 exports[`ThreadParticipants matches the last snapshot 1`] = `
 <ScrollView
   contentContainerStyle={
-    Object {
+    {
       "backgroundColor": "white",
       "flex": 1,
       "paddingHorizontal": 15,
@@ -27,7 +27,7 @@ exports[`ThreadParticipants matches the last snapshot 1`] = `
   <ParticipantRow
     goToParticipant={[Function]}
     participant={
-      Object {
+      {
         "id": 1,
       }
     }
@@ -35,7 +35,7 @@ exports[`ThreadParticipants matches the last snapshot 1`] = `
   <ParticipantRow
     goToParticipant={[Function]}
     participant={
-      Object {
+      {
         "id": 2,
       }
     }

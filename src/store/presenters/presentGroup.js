@@ -1,3 +1,6 @@
+import presentCollection from 'store/presenters/presentCollection'
+import presentTopic from 'store/presenters/presentTopic'
+
 export default function presentGroup (group) {
   if (!group) return null
   return {
@@ -15,6 +18,13 @@ export default function presentGroup (group) {
         primaryImage: a.attachments.length > 0 ? a.attachments[0].url : false
       }
     }) : [],
+    customViews: group.customViews ? group.customViews.toModelArray().map(cv => {
+      return {
+        ...cv.ref,
+        collection: cv.collection ? presentCollection(cv.collection) : null,
+        topics: cv.topics.toModelArray().map(topic => presentTopic(topic, {}))
+      }
+    }) : [],
     groupToGroupJoinQuestions: group.groupToGroupJoinQuestions ? group.groupToGroupJoinQuestions.toRefArray() : [],
     groupTopics: group.groupTopics ? group.groupTopics.toModelArray().map(groupTopic => {
       return {
@@ -24,6 +34,7 @@ export default function presentGroup (group) {
     }) : [],
     joinQuestions: group.joinQuestions ? group.joinQuestions.toRefArray() : [],
     members: group.members ? group.members.toModelArray() : [],
+    moderators: group.moderators ? group.moderators.toModelArray() : [],
     openOffersAndRequests: group.openOffersAndRequests ? group.openOffersAndRequests.toModelArray().map(p => {
       return {
         ...p.ref,
@@ -43,6 +54,6 @@ export default function presentGroup (group) {
         primaryImage: p.attachments.length > 0 ? p.attachments[0].url : false
       }
     }) : [],
-    // widgets: group.widgets ? group.widgets.toRefArray() : []
+    widgets: group.widgets ? group.widgets.toRefArray() : []
   }
 }

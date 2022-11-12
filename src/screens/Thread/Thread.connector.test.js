@@ -7,6 +7,8 @@ jest.mock('util/websockets', () => ({
 
 jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
 
+jest.mock('store/selectors/getCurrentUserId', () => () => {})
+
 describe('mapStateToProps', () => {
   it('returns the right keys', () => {
     const state = {

@@ -108,6 +108,7 @@ export class PostEditor extends React.Component {
         pollingFindOrCreateLocation(locationObject, this.handlePickLocation)
       }
     }
+
     this.renderReactNavigationHeader()
   }
 
@@ -120,7 +121,6 @@ export class PostEditor extends React.Component {
       this.setIsSaving(false)
       return
     }
-
     const {
       createPost, createProject, updatePost,
       navigation, post

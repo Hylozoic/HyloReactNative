@@ -19,20 +19,17 @@ import { ModalHeader } from 'navigation/headers'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
 import DrawerNavigator from 'navigation/DrawerNavigator'
 import GroupDetailWebView from 'screens/GroupDetailWebView'
+import GroupSettingsTabsNavigator from 'navigation/GroupSettingsTabsNavigator'
 import LoadingScreen from 'screens/LoadingScreen'
 import MemberProfile from 'screens/MemberProfile'
 import NewMessage from 'screens/NewMessage'
 import PostDetails from 'screens/PostDetails'
 import PostEditor from 'screens/PostEditor'
-import GroupSettingsTabsNavigator from 'navigation/GroupSettingsTabsNavigator'
-import MemberSkillEditor from 'screens/MemberProfile/MemberSkillEditor'
 import NotificationsList from 'screens/NotificationsList'
-import NotificationSettings from 'screens/NotificationSettings'
-import PendingInvites from 'screens/PendingInvites'
 import Thread from 'screens/Thread'
 import ThreadParticipants from 'screens/ThreadParticipants'
 import { white } from 'style/colors'
-import { HlyoHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
+import { HyloHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
@@ -109,7 +106,7 @@ export default function AuthRootNavigator () {
   if (loading) return <LoadingScreen />
 
   return (
-    <HlyoHTMLConfigProvider>
+    <HyloHTMLConfigProvider>
       <AuthRoot.Navigator {...navigatorProps}>
         <AuthRoot.Screen name='Drawer' component={DrawerNavigator} options={{ headerShown: false }} />
         <AuthRoot.Screen
@@ -131,8 +128,6 @@ export default function AuthRootNavigator () {
           />
           <AuthRoot.Screen name='Edit Post' component={PostEditor} options={{ headerShown: false }} />
           <AuthRoot.Screen name='Group Settings' component={GroupSettingsTabsNavigator} />
-          {/* Not used anymore */}
-          <AuthRoot.Screen name='Edit Your Skills' component={MemberSkillEditor} />
           <AuthRoot.Screen
             name={modalScreenName('New Message')} component={NewMessage}
             options={{ title: 'New Message' }}
@@ -145,11 +140,9 @@ export default function AuthRootNavigator () {
               title: 'Participants'
             }}
           />
-          <AuthRoot.Screen name='Pending Invites' component={PendingInvites} />
           <AuthRoot.Screen name={modalScreenName('Notifications')} component={NotificationsList} />
-          <AuthRoot.Screen name='Notification Settings' component={NotificationSettings} />
         </AuthRoot.Group>
       </AuthRoot.Navigator>
-    </HlyoHTMLConfigProvider>
+    </HyloHTMLConfigProvider>
   )
 }

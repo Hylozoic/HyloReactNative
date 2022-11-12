@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { get, isUndefined } from 'lodash/fp'
-import fetchThreads, { FETCH_THREADS } from 'store/actions/fetchThreads'
+import fetchThreads from 'store/actions/fetchThreads'
+import { FETCH_THREADS } from 'store/constants'
 import getMe from 'store/selectors/getMe'
 import { getThreads, getThreadsHasMore, updateLastViewed } from './ThreadList.store'
 

@@ -14,7 +14,7 @@ export default function (props) {
 }
 
 export class Members extends React.Component {
-  goToInvitePeople = () => this.props.navigation.navigate('Group Settings', { screen: 'Invite Members' })
+  goToInvitePeople = () => this.props.navigation.navigate('Group Settings', { screen: 'Invite' })
 
   shouldComponentUpdate (nextProps) {
     // TODO: test if children render...

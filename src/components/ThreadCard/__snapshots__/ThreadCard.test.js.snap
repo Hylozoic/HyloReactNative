@@ -51,7 +51,7 @@ exports[`renders correctly 1`] = `
 <View>
   <ThreadAvatars
     avatarUrls={
-      Array [
+      [
         "fred.png",
       ]
     }

@@ -9,7 +9,7 @@ exports[`matches the last snapshot 1`] = `
     placeholder="Wombats..."
     placeholderTextColor="#c0c6cd"
     style={
-      Object {
+      {
         "flex": 2,
         "fontFamily": "Circular-Book",
         "fontSize": 14,

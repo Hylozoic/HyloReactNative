@@ -2,6 +2,7 @@ import 'react-native'
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import Comment, { CommentMenu } from './Comment'
+import { TestRoot } from 'util/testing'
 
 it('renders correctly', () => {
   const comment = {
@@ -19,7 +20,9 @@ it('renders correctly', () => {
 
   const renderer = new ReactShallowRenderer()
   renderer.render(
-    <Comment comment={comment} deleteComment={jest.fn()} handleReply={jest.fn()} style={style} />
+    <TestRoot>
+      <Comment comment={comment} deleteComment={jest.fn()} handleReply={jest.fn()} style={style} />
+    </TestRoot>
   )
   const actual = renderer.getRenderOutput()
 
@@ -46,35 +49,11 @@ it('shows the post title when displayPostTitle is true', () => {
 
   const renderer = new ReactShallowRenderer()
   renderer.render(
-    <Comment comment={comment} style={style} handleReply={jest.fn()} displayPostTitle />
+    <TestRoot>
+      <Comment comment={comment} style={style} handleReply={jest.fn()} displayPostTitle />
+    </TestRoot>
   )
   const actual = renderer.getRenderOutput()
 
   expect(actual).toMatchSnapshot()
-})
-
-describe('commentMenu', () => {
-  it('renders correctly', () => {
-    const menuItems = {
-      deleteComment: {
-        label: 'Delete Comment',
-        action: jest.fn()
-      }
-    }
-    const renderer = new ReactShallowRenderer()
-    renderer.render(
-      <CommentMenu menuItems={menuItems} />
-    )
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toMatchSnapshot()
-  })
-
-  it('returns null when menuItems is not empty', () => {
-    const renderer = new ReactShallowRenderer()
-    renderer.render(<CommentMenu menuItems={{}} />)
-    const actual = renderer.getRenderOutput()
-
-    expect(actual).toBeNull()
-  })
 })

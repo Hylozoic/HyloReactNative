@@ -10,11 +10,6 @@ import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import UserSettingsWebView from 'screens/UserSettingsWebView'
 import BlockedUsers from 'screens/BlockedUsers'
 
-// Existing User Settings screens built not currently in use:
-// import UserSettingsComponent from 'screens/UserSettings'
-// import ModeratorSettings from 'screens/ModeratorSettings'
-// import InvitePeople from 'screens/InvitePeople'
-
 const UserSettings = createMaterialTopTabNavigator()
 export default function UserSettingsTabsNavigator ({ navigation, route }) {
   const dispatch = useDispatch()

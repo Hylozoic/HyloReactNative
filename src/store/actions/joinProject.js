@@ -1,4 +1,4 @@
-import { JOIN_PROJECT } from '../constants'
+import { JOIN_PROJECT } from 'store/constants'
 
 export default function (id) {
   return {

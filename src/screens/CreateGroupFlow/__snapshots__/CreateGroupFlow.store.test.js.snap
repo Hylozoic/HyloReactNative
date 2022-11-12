@@ -1,72 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`clearCreateGroupStore matches snapshot 1`] = `
-Object {
+{
   "type": "CreateGroupFlow/CLEAR_CREATE_GROUP_STORE",
 }
 `;
 
 exports[`createGroup matches snapshot 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "
         mutation ($data: GroupInput) {
           createGroup(data: $data) {
             
   id
+  aboutVideoUri
   accessibility
   avatarUrl
   bannerUrl
+  customViews {
+    items {
+      id
+      activePostsOnly
+      collectionId
+      defaultSort
+      defaultViewMode
+      externalLink
+      groupId
+      isActive
+      icon
+      name
+      order
+      postTypes
+      topics {
+        id
+        name
+      }
+      type
+    }
+  }
   description
+  geoShape
+  location
+  memberCount
+  moderatorDescriptor
+  moderatorDescriptorPlural
   name
   settings {
     allowGroupInvites
+    askGroupToGroupJoinQuestions
     askJoinQuestions
+    hideExtensionData
+    locationDisplayPrecision
     publicMemberDirectory
+    showSuggestedSkills
   }
   slug
+  type
+  typeDescriptor
+  typeDescriptorPlural
   visibility
-  parentGroups {
-    items {
-      id
-      accessibility
-      avatarUrl
-      name
-      slug
-      visibility
-      childGroups(first: 300) {
-        items {
-          id
-        }
-      }
-    }
-  }
   childGroups {
     items {
       id
       accessibility
       avatarUrl
+      bannerUrl
+      geoShape
+      memberCount
       name
       slug
       visibility
     }
   }
-  memberCount
-  members(first: 8, sortBy: \\"name\\", order: \\"desc\\") {
-    items {
-      id
-      name
-      avatarUrl
-    }
-  }
-  moderators {
-    items {
-      id
-      name
-      avatarUrl
-    }
-  }
-  location
   locationObject {
     id
     addressNumber
@@ -86,14 +92,49 @@ Object {
     neighborhood
     region
   }
+  members(first: 8, sortBy: "name", order: "desc") {
+    items {
+      id
+      name
+      avatarUrl
+    }
+  }
+  moderators {
+    items {
+      id
+      name
+      avatarUrl
+    }
+  }
+  parentGroups {
+    items {
+      id
+      accessibility
+      avatarUrl
+      bannerUrl
+      geoShape
+      name
+      slug
+      visibility
+    }
+  }
+  
   
   joinQuestions {
-      items {
-        id
-        questionId
-        text
-      }
+    items {
+      id
+      questionId
+      text
     }
+  }
+  suggestedSkills {
+    items {
+      id
+      name
+    }
+  }
+  
+  
   
 
             memberships {
@@ -113,21 +154,21 @@ Object {
           }
         }
       ",
-    "variables": Object {
-      "data": Object {
+    "variables": {
+      "data": {
         "name": "group name",
         "slug": "group_name",
       },
     },
   },
-  "meta": Object {
+  "meta": {
     "analytics": "Group Created",
-    "extractModel": Array [
-      Object {
+    "extractModel": [
+      {
         "getRoot": [Function],
         "modelName": "Group",
       },
-      Object {
+      {
         "getRoot": [Function],
         "modelName": "Membership",
       },
@@ -138,8 +179,8 @@ Object {
 `;
 
 exports[`fetchGroupExists matches snapshot 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "
         query ($slug: String) {
           groupExists (slug: $slug) {
@@ -147,7 +188,7 @@ Object {
           }
         }
       ",
-    "variables": Object {
+    "variables": {
       "slug": "group_name",
     },
   },

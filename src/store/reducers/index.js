@@ -1,68 +1,58 @@
 import { combineReducers } from 'redux'
-import { pick } from 'lodash/fp'
-import ormReducer from './ormReducer'
+import orm from './ormReducer'
 import pending from './pending'
+import session from './sessionReducer'
 import queryResults from './queryResults'
-import sessionReducer from './sessionReducer'
-import returnToOnAuthPathReducer from './returnToOnAuthPathReducer'
-import mixpanelReducer from './mixpanel'
+import mixpanel from './mixpanel'
+import returnToOnAuthPath from './returnToOnAuthPathReducer'
+import resetStore from './resetStore'
+import { handleSetState, composeReducers } from './util'
+// Local store
 import FeedList from 'components/FeedList/FeedList.store'
 import ItemChooser from 'screens/ItemChooser/ItemChooser.store'
 import MemberFeed from 'screens/MemberProfile/MemberFeed/MemberFeed.store'
 import Members from 'screens/Members/Members.store'
-import ModeratorSettings from 'screens/ModeratorSettings/ModeratorSettings.store'
 import NewMessage from 'screens/NewMessage/NewMessage.store'
 import PeopleTyping from 'components/PeopleTyping/PeopleTyping.store'
-import SkillEditor from 'components/SkillEditor/SkillEditor.store'
 import SocketListener from 'components/SocketListener/SocketListener.store'
-import Topics from 'screens/Topics/Topics.store'
 import CreateGroupFlow from 'screens/CreateGroupFlow/CreateGroupFlow.store'
 import SearchPage from 'screens/SearchPage/SearchPage.store'
-import { LOGOUT, RESET_STORE } from 'store/constants'
 
-export const appReducer = combineReducers({
-  orm: ormReducer,
+export const createCombinedReducers = () => combineReducers({
+  // Global store
+  orm,
   pending,
+  session,
   queryResults,
-  session: sessionReducer,
-  returnToOnAuthPath: returnToOnAuthPathReducer,
-  mixpanel: mixpanelReducer,
+  mixpanel,
+  returnToOnAuthPath,
+  // Local store (Component)
   FeedList,
   ItemChooser,
   MemberFeed,
   Members,
-  ModeratorSettings,
   NewMessage,
   PeopleTyping,
   SearchPage,
-  SkillEditor,
   SocketListener,
-  Topics,
   CreateGroupFlow
 })
 
-const composeReducers = (...reducers) => (state, action) =>
-  reducers.reduce((newState, reducer) => reducer(newState, action), state)
+export default function createRootReducer () {
+  return composeReducers(
+    createCombinedReducers(),
+    /*
 
-export const KEYS_PRESERVED_ON_RESET = [
-  'session',
-  'SocketListener'
-]
+      DANGEROUS: These mutate and/or reset the entire state object
 
-export function rootReducer (state, action) {
-  const { type, error } = action
+      Not sure why then need to added using our `composeReducers`
+      utility function with appears to do the same things as redux's
+      `combineReducers`. If I remember right correctly this is so these
+      somehow run in a 2nd reducer cycle to eliminate an infinite reducer
+      update condition? Not convinced they can't just go at the bottom above ^
 
-  if (error) return state
-
-  if (type === LOGOUT) {
-    return appReducer(undefined, action)
-  }
-
-  if (type === RESET_STORE) {
-    return appReducer(pick(KEYS_PRESERVED_ON_RESET, state), action)
-  }
-
-  return appReducer(state, action)
+    */
+    resetStore,
+    handleSetState
+  )
 }
-
-export default composeReducers(rootReducer)

@@ -1,10 +1,10 @@
 import { createLogger } from 'redux-logger'
 import { compact } from 'lodash'
 import afterInteractionsMiddleware from './afterInteractions'
-import apiMiddleware from './api'
+import apiMiddleware from './apiMiddleware'
 import graphQLMiddleware from './graphqlMiddleware'
-import optimisticMiddleware from './optimistic'
-import pendingMiddleware from './pending'
+import optimisticMiddleware from './optimisticMiddleware'
+import pendingMiddleware from './pendingMiddleware'
 import promiseMiddleware from 'redux-promise'
 import userFetchedMiddleware from './userFetchedMiddleware'
 import userBlockingMiddleware from './userBlockingMiddleware'
@@ -21,9 +21,10 @@ const middleware = compact([
   userFetchedMiddleware,
   userBlockingMiddleware,
   mixpanelMiddleware,
-  isDev && createLogger({
-    collapsed: (getState, action, logEntry) => !logEntry.error
-  })
+  isDev &&
+    createLogger({
+      collapsed: (getState, action, logEntry) => !logEntry.error
+    })
 ])
 
 export default middleware

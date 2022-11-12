@@ -91,82 +91,88 @@ exports[`PostGroups matches last snapshot when expanded 1`] = `
     </View>
   </View>
   <View>
-    <View
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-    >
-      <Image
-        source={
-          Object {
-            "uri": "foo.png",
-          }
-        }
-      />
-      <Text
-        numberOfLines={1}
+    <View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
       >
-        One
-      </Text>
+        <Image
+          source={
+            {
+              "uri": "foo.png",
+            }
+          }
+        />
+        <Text
+          numberOfLines={1}
+        >
+          One
+        </Text>
+      </View>
     </View>
-    <View
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-    >
-      <Image
-        source={
-          Object {
-            "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
-          }
-        }
-      />
-      <Text
-        numberOfLines={1}
+    <View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
       >
-        Two
-      </Text>
+        <Image
+          source={
+            {
+              "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
+            }
+          }
+        />
+        <Text
+          numberOfLines={1}
+        >
+          Two
+        </Text>
+      </View>
     </View>
   </View>
   <View>
-    <View
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-    >
-      <Image
-        source={
-          Object {
-            "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
-          }
-        }
-      />
-      <Text
-        numberOfLines={1}
+    <View>
+      <View
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
       >
-        Three
-      </Text>
+        <Image
+          source={
+            {
+              "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
+            }
+          }
+        />
+        <Text
+          numberOfLines={1}
+        >
+          Three
+        </Text>
+      </View>
     </View>
   </View>
 </View>

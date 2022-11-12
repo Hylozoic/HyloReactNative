@@ -1,5 +1,4 @@
-export const RESET_NEW_POST_COUNT = 'RESET_NEW_POST_COUNT'
-export const RESET_NEW_POST_COUNT_PENDING = 'RESET_NEW_POST_COUNT_PENDING'
+import { RESET_NEW_POST_COUNT } from 'store/constants'
 
 export default function resetNewPostCount (id, type) {
   if (!['GroupTopic', 'Membership'].includes(type)) {
@@ -21,8 +20,8 @@ export default function resetNewPostCount (id, type) {
   }
 }
 
-const GroupTopicQuery = `mutation($id: ID, $data: GroupTopicInput) {
-    updateGroupTopic(id: $id, data: $data) {
+const GroupTopicQuery = `mutation($id: ID, $data: GroupTopicFollowInput) {
+    updateGroupTopicFollow(id: $id, data: $data) {
       success
     }
   }`

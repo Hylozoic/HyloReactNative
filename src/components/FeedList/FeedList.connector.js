@@ -15,7 +15,7 @@ import {
 import { FETCH_POSTS } from 'store/constants'
 import fetchPosts from 'store/actions/fetchPosts'
 import resetNewPostCount from 'store/actions/resetNewPostCount'
-import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
+import { ALL_GROUP_ID, isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
 
 export function mapStateToProps (state, props) {
   const { group, topicName } = props
@@ -24,6 +24,11 @@ export function mapStateToProps (state, props) {
   const timeframe = getTimeframe(state, props)
   let queryProps = getQueryProps(state, {
     group,
+    // This is an important divergence from what is happening on `hylo-evo#Stream.connector` and `store`
+    // Should align them, but for now this fixes it:
+    context: isContextGroup(group?.slug)
+      ? group.slug
+      : 'groups',
     sortBy,
     filter,
     topicName

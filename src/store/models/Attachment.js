@@ -1,9 +1,8 @@
 import { attr, fk, Model } from 'redux-orm'
-import { basename } from 'util/index'
 
 class Attachment extends Model {
   toString () {
-    return `Attachment (${this.type}): ${this.url}`
+    return `Attachment (${this.type}): ${this.name}`
   }
 }
 
@@ -20,13 +19,4 @@ Attachment.fields = {
   post: fk('Post', 'attachments'),
   comment: fk('Comment', 'attachments'),
   createdAt: attr()
-}
-
-Attachment.Type = {
-  IMAGE: 'image',
-  FILE: 'file'
-}
-
-export function cleanName (url) {
-  return decodeURIComponent(basename(url))
 }

@@ -5,8 +5,9 @@ export default function fetchCurrentUser () {
   return {
     type: FETCH_CURRENT_USER,
     graphql: {
+      // TODO: Reconcile with hylo-evo MeQuery
       query: gql`
-        query MeQuery {
+        query MeQueryApp {
           me {
             id
             name

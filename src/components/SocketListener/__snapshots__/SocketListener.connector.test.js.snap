@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`returns the expected value 1`] = `
-Object {
+{
   "addUserTyping": [Function],
   "clearUserTyping": [Function],
   "group": SessionBoundModel {
-    "_fields": Object {
+    "_fields": {
       "id": "7",
     },
   },
@@ -19,8 +19,8 @@ Object {
 `;
 
 exports[`returns the expected value 2`] = `
-Object {
-  "payload": Object {
+{
+  "payload": {
     "id": "11",
     "name": "Joe",
   },
@@ -29,8 +29,8 @@ Object {
 `;
 
 exports[`returns the expected value 3`] = `
-Object {
-  "payload": Object {
+{
+  "payload": {
     "id": "11",
   },
   "type": "PeopleTyping/CLEAR_USER_TYPING",
@@ -38,13 +38,13 @@ Object {
 `;
 
 exports[`returns the expected value 4`] = `
-Object {
-  "meta": Object {
+{
+  "meta": {
     "extractModel": "Comment",
   },
-  "payload": Object {
-    "data": Object {
-      "comment": Object {
+  "payload": {
+    "data": {
+      "comment": {
         "id": "1",
         "text": "hi",
       },
@@ -55,14 +55,14 @@ Object {
 `;
 
 exports[`returns the expected value 5`] = `
-Object {
-  "meta": Object {
+{
+  "meta": {
     "bumpUnreadCount": true,
     "extractModel": "Message",
   },
-  "payload": Object {
-    "data": Object {
-      "message": Object {
+  "payload": {
+    "data": {
+      "message": {
         "createdAt": "2017-10-11T00:00:00.000Z UTC (MockDate: GMT-0700)",
         "id": "1",
         "text": "hi",
@@ -74,13 +74,13 @@ Object {
 `;
 
 exports[`returns the expected value 6`] = `
-Object {
-  "meta": Object {
+{
+  "meta": {
     "extractModel": "Notification",
   },
-  "payload": Object {
-    "data": Object {
-      "notification": Object {
+  "payload": {
+    "data": {
+      "notification": {
         "id": "1",
         "text": "hi",
       },
@@ -91,13 +91,13 @@ Object {
 `;
 
 exports[`returns the expected value 7`] = `
-Object {
-  "meta": Object {
+{
+  "meta": {
     "extractModel": "Post",
   },
-  "payload": Object {
-    "data": Object {
-      "post": Object {
+  "payload": {
+    "data": {
+      "post": {
         "id": "1",
         "title": "hi",
       },
@@ -108,17 +108,17 @@ Object {
 `;
 
 exports[`returns the expected value 8`] = `
-Object {
-  "meta": Object {
+{
+  "meta": {
     "extractModel": "MessageThread",
   },
-  "payload": Object {
-    "data": Object {
-      "thread": Object {
+  "payload": {
+    "data": {
+      "thread": {
         "createdAt": "2017-10-11T00:00:00.000Z UTC (MockDate: GMT-0700)",
         "id": "1",
-        "messages": Array [
-          Object {
+        "messages": [
+          {
             "createdAt": "2017-10-11T00:00:00.000Z UTC (MockDate: GMT-0700)",
             "creator": undefined,
             "id": "1",

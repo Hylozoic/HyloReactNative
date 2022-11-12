@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches snapshot with groupId 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "
 query (
   $id: ID,
@@ -46,7 +46,7 @@ query (
   }
 }
 ",
-    "variables": Object {
+    "variables": {
       "autocomplete": "a",
       "first": 7,
       "id": 765,
@@ -56,9 +56,9 @@ query (
       "subscribed": true,
     },
   },
-  "meta": Object {
+  "meta": {
     "extractModel": "Group",
-    "extractQueryResults": Object {
+    "extractQueryResults": {
       "getItems": [Function],
     },
   },
@@ -67,8 +67,8 @@ query (
 `;
 
 exports[`matches snapshot without groupId 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "
 query (
   $first: Int,
@@ -108,7 +108,7 @@ query (
 
 }
 ",
-    "variables": Object {
+    "variables": {
       "autocomplete": "",
       "first": 20,
       "id": null,
@@ -118,9 +118,9 @@ query (
       "subscribed": false,
     },
   },
-  "meta": Object {
+  "meta": {
     "extractModel": "GroupTopic",
-    "extractQueryResults": Object {
+    "extractQueryResults": {
       "getItems": [Function],
     },
   },

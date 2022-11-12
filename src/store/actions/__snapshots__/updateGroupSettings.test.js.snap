@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`updateGroupSettings 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "mutation ($id: ID, $changes: GroupInput) {
         updateGroupSettings(id: $id, changes: $changes) {
           id
@@ -20,16 +20,16 @@ Object {
           }
         }
       }",
-    "variables": Object {
-      "changes": Object {
+    "variables": {
+      "changes": {
         "description": "some desc",
         "name": "blah",
       },
       "id": 123,
     },
   },
-  "meta": Object {
-    "changes": Object {
+  "meta": {
+    "changes": {
       "description": "some desc",
       "name": "blah",
     },

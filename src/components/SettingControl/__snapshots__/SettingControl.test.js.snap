@@ -20,7 +20,7 @@ exports[`matches last snapshot 1`] = `
   <View>
     <TouchableOpacity
       hitSlop={
-        Object {
+        {
           "bottom": 10,
           "left": 10,
           "right": 10,
@@ -38,7 +38,7 @@ exports[`matches last snapshot 1`] = `
     <View>
       <TouchableOpacity
         hitSlop={
-          Object {
+          {
             "bottom": 10,
             "left": 10,
             "right": 10,
@@ -58,51 +58,51 @@ exports[`matches last snapshot 1`] = `
   <FormattedError
     error="This is not a real name"
     syles={
-      Object {
-        "buttonText": Object {
+      {
+        "buttonText": {
           "color": "#0DC39F",
           "fontFamily": "Circular-Medium",
           "fontSize": 16,
         },
-        "control": Object {
+        "control": {
           "position": "relative",
         },
-        "editIcon": Object {
+        "editIcon": {
           "fontSize": 20,
           "opacity": 0.5,
         },
-        "error": Object {
+        "error": {
           "backgroundColor": "#EE4266",
           "borderRadius": 100,
           "paddingHorizontal": 10,
           "paddingVertical": 8,
         },
-        "errorText": Object {
+        "errorText": {
           "color": "#FFFFFF",
           "fontSize": 12,
         },
-        "errorTriangle": Object {
+        "errorTriangle": {
           "backgroundColor": "#EE4266",
         },
-        "errorWrapper": Object {
+        "errorWrapper": {
           "alignItems": "center",
           "marginBottom": 10,
         },
-        "eyeIcon": Object {
+        "eyeIcon": {
           "color": "#6edbc5",
           "fontSize": 20,
           "marginRight": 10,
         },
-        "highlight": Object {
+        "highlight": {
           "backgroundColor": "#99EEFF",
           "borderRadius": 4,
         },
-        "label": Object {
+        "label": {
           "color": "#9ee7d9",
           "fontFamily": "Circular-Bold",
           "fontSize": 14,
         },
-        "textInput": Object {
+        "textInput": {
           "borderBottomColor": "#6edbc5",
           "borderBottomWidth": 1,
           "color": "white",
@@ -111,7 +111,7 @@ exports[`matches last snapshot 1`] = `
           "marginBottom": 15,
           "paddingBottom": 6,
         },
-        "toggles": Object {
+        "toggles": {
           "flexDirection": "row",
           "position": "absolute",
           "right": 0,
@@ -119,7 +119,7 @@ exports[`matches last snapshot 1`] = `
         },
       }
     }
-    theme={Object {}}
+    theme={{}}
   />
 </View>
 `;

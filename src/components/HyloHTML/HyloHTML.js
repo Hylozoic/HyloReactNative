@@ -72,7 +72,7 @@ const renderers = {
   p: CustomPRenderer
 }
 
-export function HlyoHTMLConfigProvider ({ children }) {
+export function HyloHTMLConfigProvider ({ children }) {
   const currentlySelectedGroup = useSelector(getCurrentGroup)
 
   const handleLinkPress = useCallback(

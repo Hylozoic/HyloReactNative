@@ -5,10 +5,10 @@ exports[`ContentRow shows a Comment when itemType is comment 1`] = `
   onPress={[Function]}
 >
   <View>
-    <Memo(Connect(Comment))
+    <Comment
       comment={
-        Object {
-          "post": Object {
+        {
+          "post": {
             "id": 2,
           },
         }
@@ -27,7 +27,7 @@ exports[`ContentRow shows a PostCard when itemType is post 1`] = `
   <View>
     <PostCard
       post={
-        Object {
+        {
           "id": 2,
         }
       }
@@ -52,48 +52,35 @@ exports[`MemberProfile matches the last snapshot 1`] = `
 <View>
   <FlatList
     ListFooterComponent={
-      <View>
-        <Loading />
-      </View>
+      <FooterComponent
+        pending={true}
+      />
     }
     ListHeaderComponent={
-      <View>
-        <Text>
-          header
-        </Text>
-        <View>
-          <FeedTab
-            chosen={false}
-            onPress={[Function]}
-            option="Posts"
-          />
-          <FeedTab
-            chosen={true}
-            onPress={[Function]}
-            option="Comments"
-          />
-          <FeedTab
-            chosen={false}
-            onPress={[Function]}
-            option="Upvotes"
-          />
-        </View>
-      </View>
+      <HeaderComponent
+        choice="Comments"
+        header={
+          <Text>
+            header
+          </Text>
+        }
+        setChoice={[Function]}
+      />
     }
     contentContainerStyle={
-      Object {
+      {
         "backgroundColor": "white",
       }
     }
     data={
-      Array [
-        Object {
+      [
+        {
           "id": 1,
         },
-        Object {
+        {
           "id": 2,
         },
-        Object {
+        {
           "id": 3,
         },
       ]

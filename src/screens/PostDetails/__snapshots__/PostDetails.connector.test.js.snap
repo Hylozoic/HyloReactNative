@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`mapsStateToProps 1`] = `
-Object {
-  "currentGroup": Object {
+{
+  "currentGroup": {
     "avatarUrl": undefined,
     "bannerUrl": undefined,
-    "childGroups": Object {
+    "childGroups": {
       "toModelArray": [Function],
     },
     "headerAvatarUrl": undefined,
     "id": "public",
     "name": "Public Groups & Posts",
-    "parentGroups": Object {
+    "parentGroups": {
       "toModelArray": [Function],
     },
     "slug": "public",
@@ -19,50 +19,68 @@ Object {
   "currentUser": undefined,
   "id": "1",
   "isProject": false,
-  "memberships": Array [],
-  "post": Object {
-    "commenters": Array [],
-    "creator": Object {
-      "id": "10",
-    },
-    "eventInvitations": Array [],
-    "fileAttachments": Array [
-      Object {
-        "id": "1",
-        "post": "1",
-        "type": "file",
-        "url": "http://foo.com/foo.pdf",
+  "memberships": [],
+  "post": {
+    "attachments": [
+      SessionBoundModel {
+        "_fields": {
+          "id": "1",
+          "post": "1",
+          "type": "file",
+          "url": "http://foo.com/foo.pdf",
+        },
+      },
+      SessionBoundModel {
+        "_fields": {
+          "id": "2",
+          "post": "1",
+          "type": "image",
+          "url": "http://foo.com/bar.png",
+        },
       },
     ],
-    "fileUrls": Array [
-      "http://foo.com/foo.pdf",
+    "commenters": [],
+    "creator": SessionBoundModel {
+      "_fields": {
+        "id": "10",
+      },
+    },
+    "eventInvitations": [],
+    "fileAttachments": [
+      SessionBoundModel {
+        "_fields": {
+          "id": "1",
+          "post": "1",
+          "type": "file",
+          "url": "http://foo.com/foo.pdf",
+        },
+      },
     ],
-    "groups": Array [
-      Object {
-        "id": "2",
-        "name": "Home",
+    "groups": [
+      SessionBoundModel {
+        "_fields": {
+          "id": "2",
+          "name": "Home",
+        },
       },
     ],
     "id": "1",
-    "imageUrls": Array [
-      "http://foo.com/bar.png",
-    ],
     "isPublic": undefined,
-    "linkPreview": undefined,
-    "members": Array [],
-    "myEventResponse": "no",
+    "linkPreview": null,
+    "location": undefined,
+    "members": [],
     "pinned": undefined,
-    "topics": Array [],
+    "topics": [],
   },
 }
 `;
 
 exports[`mergeProps editPost 1`] = `
-Array [
+[
   "navigate",
-  Array [
+  [
     "Edit Post",
-    Object {
+    {
       "id": "testpost",
     },
   ],
@@ -70,8 +88,8 @@ Array [
 `;
 
 exports[`mergeProps maps 1`] = `
-Object {
-  "currentUser": Object {
+{
+  "currentUser": {
     "id": "currentuser",
   },
   "dispatch": [MockFunction],
@@ -83,15 +101,15 @@ Object {
   "isFocused": true,
   "joinProject": [Function],
   "leaveProject": [Function],
-  "navigation": Object {
-    "navigate": [MockFunction],
+  "navigation": {
+    "navigate": [Function],
   },
-  "post": Object {
+  "post": {
     "id": "testpost",
   },
   "respondToEvent": [Function],
-  "route": Object {
-    "params": Object {
+  "route": {
+    "params": {
       "id": "1",
     },
   },
@@ -101,11 +119,11 @@ Object {
 `;
 
 exports[`mergeProps showMember 1`] = `
-Array [
+[
   "navigate",
-  Array [
+  [
     "Member",
-    Object {
+    {
       "id": 1,
     },
   ],
@@ -113,11 +131,11 @@ Array [
 `;
 
 exports[`mergeProps showTopic 1`] = `
-Array [
+[
   "navigate",
-  Array [
+  [
     "Topic Feed",
-    Object {
+    {
       "topicName": "mytopicname",
     },
   ],

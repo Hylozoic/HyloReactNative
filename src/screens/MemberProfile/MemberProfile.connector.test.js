@@ -1,10 +1,20 @@
 import orm from 'store/models'
+import { openURL } from 'navigation/linking'
 import { mapStateToProps, mapDispatchToProps, makeOnPressMessages, mergeProps } from './MemberProfile.connector'
 import { FETCH_PERSON } from './MemberProfile.store'
 
-let ormSession
-
 jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
+jest.mock('navigation/linking', () => {
+  const originalModule = jest.requireActual('navigation/linking')
+
+  return {
+    __esModule: true,
+    ...originalModule,
+    openURL: jest.fn()
+  }
+})
+
+let ormSession
 
 describe('mapStateToProps', () => {
   beforeAll(() => {
@@ -28,7 +38,7 @@ describe('mapStateToProps', () => {
     expect(navigation.navigate).toHaveBeenCalledWith('Member Details', { id })
     navigation.navigate.mockClear()
     props.goToEdit()
-    expect(navigation.navigate).toHaveBeenCalledWith('Edit Profile')
+    expect(openURL).toHaveBeenCalledWith('/settings')
   })
 })
 

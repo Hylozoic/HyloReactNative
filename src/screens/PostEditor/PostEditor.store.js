@@ -1,12 +1,12 @@
 import { get } from 'lodash/fp'
 import { TextHelpers, AnalyticsEvents } from 'hylo-shared'
+import {
+  CREATE_POST,
+  CREATE_PROJECT,
+  UPDATE_POST,
+  UPDATE_POST_PENDING
+} from 'store/constants'
 import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
-
-export const MODULE_NAME = 'PostEditor'
-export const CREATE_POST = `${MODULE_NAME}/CREATE_POST`
-export const CREATE_PROJECT = `${MODULE_NAME}/CREATE_PROJECT`
-export const UPDATE_POST = `${MODULE_NAME}/UPDATE_POST`
-export const UPDATE_POST_PENDING = `${UPDATE_POST}_PENDING`
 
 export const MAX_TITLE_LENGTH = 50
 
@@ -67,7 +67,7 @@ export function createPost (post) {
       variables: {
         type,
         title,
-        details: details,
+        details,
         groupIds,
         startTime,
         endTime,
@@ -230,7 +230,7 @@ export function updatePost (post) {
         id,
         type,
         title,
-        details: details,
+        details,
         groupIds,
         startTime,
         endTime,

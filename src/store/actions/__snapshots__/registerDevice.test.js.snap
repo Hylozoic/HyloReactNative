@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`behaves as expected 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "
         mutation ($playerId: String, $platform: String, $version: String) {
           registerDevice(playerId: $playerId, platform: $platform, version: $version) {
@@ -10,7 +10,7 @@ Object {
           }
         }
       ",
-    "variables": Object {
+    "variables": {
       "platform": "ios_dev",
       "playerId": "foo",
       "version": "2",

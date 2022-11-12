@@ -39,7 +39,7 @@ beforeAll(() => {
       params: { id: '1' }
     },
     navigation: {
-      navigate: jest.fn((...args) => ['navigate', args])
+      navigate: (...args) => (['navigate', args])
     }
   }
 
@@ -70,7 +70,7 @@ describe('mergeProps', () => {
   })
 
   it('showTopic', () => {
-    expect(mergedProps.showTopic('mytopicname', 4)).toMatchSnapshot()
+    expect(mergedProps.showTopic('mytopicname')).toMatchSnapshot()
   })
 
   it('showMember', () => {

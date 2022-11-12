@@ -9,11 +9,6 @@ import { caribbeanGreen, rhino05, rhino30, rhino60, white } from 'style/colors'
 import GroupSettingsWebView from 'screens/GroupSettingsWebView'
 import getCurrentGroup from 'store/selectors/getCurrentGroup';
 
-// Existing settings screens built not currently in use:
-// import GroupSettingsComponent from 'screens/GroupSettings'
-// import ModeratorSettings from 'screens/ModeratorSettings'
-// import InvitePeople from 'screens/InvitePeople'
-
 const GroupSettings = createMaterialTopTabNavigator()
 export default function GroupSettingsTabsNavigator ({ navigation, route }) {
   const dispatch = useDispatch()

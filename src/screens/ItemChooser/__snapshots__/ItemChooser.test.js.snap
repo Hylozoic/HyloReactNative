@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ItemChooser #setupItemSections for chooser renders current selection if intialItems is defined (no headers) 1`] = `
-Array [
-  Object {
-    "data": Array [
-      Object {
+[
+  {
+    "data": [
+      {
         "chosen": true,
         "id": "1",
       },
-      Object {
+      {
         "chosen": true,
         "id": "2",
       },
-      Object {
+      {
         "chosen": true,
         "id": "3",
       },
@@ -23,23 +23,23 @@ Array [
 `;
 
 exports[`ItemChooser #setupItemSections for chooser renders current selection with header if initialItems and addedItems are defined  1`] = `
-Array [
-  Object {
-    "data": Array [
-      Object {
+[
+  {
+    "data": [
+      {
         "chosen": false,
         "id": "1",
       },
     ],
     "label": "Current Selection",
   },
-  Object {
-    "data": Array [
-      Object {
+  {
+    "data": [
+      {
         "chosen": true,
         "id": "2",
       },
-      Object {
+      {
         "chosen": true,
         "id": "3",
       },
@@ -50,27 +50,27 @@ Array [
 `;
 
 exports[`ItemChooser #setupItemSections for chooser renders sections 1`] = `
-Array [
-  Object {
-    "data": Array [
-      Object {
+[
+  {
+    "data": [
+      {
         "chosen": false,
         "id": "1",
       },
-      Object {
+      {
         "chosen": false,
         "id": "2",
       },
-      Object {
+      {
         "chosen": false,
         "id": "3",
       },
     ],
     "label": "Current Selection",
   },
-  Object {
-    "data": Array [
-      Object {
+  {
+    "data": [
+      {
         "chosen": true,
         "id": "5",
       },
@@ -81,18 +81,18 @@ Array [
 `;
 
 exports[`ItemChooser #setupItemSections for chooser renders suggested items when search term supplied 1`] = `
-Array [
-  Object {
-    "data": Array [
-      Object {
+[
+  {
+    "data": [
+      {
         "chosen": true,
         "id": "1",
       },
-      Object {
+      {
         "chosen": false,
         "id": "2",
       },
-      Object {
+      {
         "chosen": false,
         "id": "3",
       },
@@ -102,18 +102,18 @@ Array [
 `;
 
 exports[`ItemChooser #setupItemSections for chooser renders suggested items when search term supplied 2`] = `
-Array [
-  Object {
-    "data": Array [
-      Object {
+[
+  {
+    "data": [
+      {
         "chosen": true,
         "id": "1",
       },
-      Object {
+      {
         "chosen": false,
         "id": "2",
       },
-      Object {
+      {
         "chosen": false,
         "id": "3",
       },
@@ -123,18 +123,18 @@ Array [
 `;
 
 exports[`ItemChooser #setupItemSections for picker renders default suggested items 1`] = `
-Array [
-  Object {
-    "data": Array [
-      Object {
+[
+  {
+    "data": [
+      {
         "chosen": false,
         "id": "1",
       },
-      Object {
+      {
         "chosen": false,
         "id": "2",
       },
-      Object {
+      {
         "chosen": false,
         "id": "3",
       },
@@ -144,16 +144,16 @@ Array [
 ]
 `;
 
-exports[`ItemChooser #setupItemSections for picker renders sections 1`] = `Array []`;
+exports[`ItemChooser #setupItemSections for picker renders sections 1`] = `[]`;
 
 exports[`ItemChooser #setupItemSections for picker renders suggested items when search term supplied 1`] = `
-Array [
-  Object {
-    "data": Array [
-      Object {
+[
+  {
+    "data": [
+      {
         "id": "2",
       },
-      Object {
+      {
         "id": "3",
       },
     ],
@@ -182,7 +182,7 @@ exports[`ItemChooser full renders as expected 1`] = `
   </View>
   <RCTScrollView
     ListFooterComponent={<View />}
-    data={Array []}
+    data={[]}
     getItem={[Function]}
     getItemCount={[Function]}
     keyExtractor={[Function]}
@@ -196,7 +196,7 @@ exports[`ItemChooser full renders as expected 1`] = `
     onScrollEndDrag={[Function]}
     renderItem={[Function]}
     scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
+    stickyHeaderIndices={[]}
   >
     <View>
       <View
@@ -217,25 +217,25 @@ exports[`ItemChooser shallow renders as expected 1`] = `
     clearSearchTerm={[Function]}
     fetchSearchSuggestions={[Function]}
     getSearchSuggestions={[Function]}
-    initialItems={Array []}
+    initialItems={[]}
     navigation={
-      Object {
+      {
         "setOptions": [MockFunction],
         "setParams": [MockFunction],
       }
     }
     onFocus={[MockFunction]}
     route={
-      Object {
-        "params": Object {
+      {
+        "params": {
           "ItemRowComponent": [Function],
           "fetchSearchSuggestions": [Function],
           "getSearchSuggestions": [Function],
-          "initialItems": Array [
-            Object {
+          "initialItems": [
+            {
               "id": "member1",
             },
-            Object {
+            {
               "id": "member2",
             },
           ],
@@ -246,7 +246,7 @@ exports[`ItemChooser shallow renders as expected 1`] = `
     }
     searchPlaceholder="Begin type to searching"
     setSearchTerm={[Function]}
-    suggestedItems={Array []}
+    suggestedItems={[]}
   />
   <SectionList
     ListFooterComponent={<View />}
@@ -254,7 +254,7 @@ exports[`ItemChooser shallow renders as expected 1`] = `
     keyboardShouldPersistTaps="handled"
     renderItem={[Function]}
     renderSectionHeader={[Function]}
-    sections={Array []}
+    sections={[]}
     stickySectionHeadersEnabled={true}
   />
 </View>

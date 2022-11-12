@@ -1,6 +1,5 @@
 import { get } from 'lodash/fp'
 import groupTopicsQueryFragment from 'graphql/fragments/groupTopicsQueryFragment'
-import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 
 export const FETCH_GROUP_TOPICS = 'FETCH_GROUP_TOPICS'
 
@@ -38,7 +37,7 @@ export default function fetchGroupTopics (groupId, {
   subscribed = false, first = 20, offset = 0, sortBy, autocomplete = ''
 }) {
   let query, extractModel, getItems
-  if (groupId && ![ALL_GROUP_ID, PUBLIC_GROUP_ID].includes(groupId)) {
+  if (groupId) {
     query = groupQuery
     extractModel = 'Group'
     getItems = get('payload.data.group.groupTopics')

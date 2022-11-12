@@ -1,22 +1,19 @@
 import { applyMiddleware, createStore as reduxCreateStore, compose } from 'redux'
-import rootReducer from 'store/reducers'
+import createRootReducer from 'store/reducers'
 import middleware from 'store/middleware'
 
 export const initialState = {}
 
-export function createInitialState (state = initialState) {
-  return rootReducer(state, { type: '' })
+export function getEmptyState (state = initialState) {
+  return createRootReducer()(state, { type: '' })
 }
 
 export function createStore (state = initialState) {
-  const emptyState = createInitialState(state)
-  const store = (undefined === global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
-    ? reduxCreateStore(rootReducer, emptyState, compose(applyMiddleware(...middleware)))
-    : reduxCreateStore(rootReducer, emptyState,
-      global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(
-        applyMiddleware(...middleware)
-      )
-    )
+  const store = reduxCreateStore(
+    createRootReducer(),
+    getEmptyState(state),
+    compose(applyMiddleware(...middleware))
+  )
 
   // Enable Webpack hot module replacement for reducers
   if (module.hot) {

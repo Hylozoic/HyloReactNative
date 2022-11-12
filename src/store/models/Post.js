@@ -1,5 +1,4 @@
 import { attr, fk, many, Model } from 'redux-orm'
-import Attachment from './Attachment'
 import { get } from 'lodash/fp'
 import PropTypes from 'prop-types'
 import { butterflyBush, caribbeanGreen, fakeAlpha, flushOrange, gold, pictonBlue, sunsetOrange } from 'style/colors'
@@ -31,7 +30,7 @@ class Post extends Model {
   }
 
   images () {
-    return this.attachments.filter(x => x.type === Attachment.Type.IMAGE)
+    return this.attachments.filter(x => x.type === 'image')
   }
 
   getImageUrls () {
@@ -39,7 +38,7 @@ class Post extends Model {
   }
 
   files () {
-    return this.attachments.filter(x => x.type === Attachment.Type.FILE)
+    return this.attachments.filter(x => x.type === 'file')
   }
 
   getFileUrls () {
@@ -60,33 +59,36 @@ Post.fields = {
     as: 'locationObject'
   }),
   details: attr(),
+  linkPreview: fk('LinkPreview', 'posts'),
   creator: fk('Person', 'posts'),
   followers: many({
     to: 'Person',
     relatedName: 'postsFollowing',
     through: 'PostFollower',
-    throughFields: ['post', 'follower']
+    throughFields: [ 'post', 'follower' ]
   }),
   groups: many('Group'),
-  postMemberships: many('PostMembership'),
   groupsTotal: attr(),
+  postMemberships: many('PostMembership'),
   commenters: many({
     to: 'Person',
     relatedName: 'postsCommented',
     through: 'PostCommenter',
-    throughFields: ['post', 'commenter']
+    throughFields: [ 'post', 'commenter' ]
   }),
   members: many({
     to: 'Person',
     relatedName: 'projectsJoined',
     through: 'ProjectMember',
-    throughFields: ['post', 'member']
+    throughFields: [ 'post', 'member' ]
   }),
   commentersTotal: attr(),
   createdAt: attr(),
   startsAt: attr(),
   endsAt: attr(),
   fulfilledAt: attr(),
+  donationsLink: attr(),
+  projectManagementLink: attr(),
   votesTotal: attr(),
   myVote: attr(),
   topics: many('Topic'),
@@ -142,5 +144,5 @@ export const POST_PROP_TYPES = {
   imageUrl: PropTypes.string,
   linkPreview: PropTypes.object,
   groups: PropTypes.array,
-  isPublic: PropTypes.boolean
+  isPublic: PropTypes.bool
 }

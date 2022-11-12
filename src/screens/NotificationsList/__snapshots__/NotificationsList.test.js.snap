@@ -4,10 +4,10 @@ exports[`NotificationsList matches the last snapshot 1`] = `
 <View>
   <RCTScrollView
     data={
-      Array [
-        Object {
+      [
+        {
           "activityId": "1",
-          "actor": Object {
+          "actor": {
             "avatarUrl": "https://wombat.com",
             "name": "Wombat McAardvark",
           },
@@ -33,8 +33,8 @@ exports[`NotificationsList matches the last snapshot 1`] = `
     removeClippedSubviews={false}
     renderItem={[Function]}
     scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    viewabilityConfigCallbackPairs={Array []}
+    stickyHeaderIndices={[]}
+    viewabilityConfigCallbackPairs={[]}
   >
     <View>
       <View
@@ -58,7 +58,7 @@ exports[`NotificationsList matches the last snapshot 1`] = `
                 <View>
                   <Image
                     source={
-                      Object {
+                      {
                         "uri": "https://wombat.com",
                       }
                     }
@@ -96,9 +96,9 @@ exports[`NotificationsList matches the last snapshot for NotificationRow 1`] = `
   >
     <NotificationCard
       notification={
-        Object {
+        {
           "activityId": "1",
-          "actor": Object {
+          "actor": {
             "avatarUrl": "https://wombat.com",
             "name": "Wombat McAardvark",
           },
@@ -121,7 +121,7 @@ exports[`NotificationsList matches the renders CreateGroupNotice if user does no
   </Text>
   <Image
     source={
-      Object {
+      {
         "testUri": "../../../assets/hey-axolotl.png",
       }
     }

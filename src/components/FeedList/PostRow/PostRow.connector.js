@@ -24,7 +24,7 @@ export const makeMapStateToProps = () => {
   const mapStateToProps = (state, props) => {
     const post = getPost(state, { id: props.postId })
     return {
-      post: post,
+      post,
       commenters: post && getPostCommenters(state, { id: props.postId }),
       groups: post && getPostGroups(state, { id: props.postId }),
       creator: post && getPostCreator(state, { id: props.postId }),

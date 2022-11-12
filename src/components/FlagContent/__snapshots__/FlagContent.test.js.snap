@@ -36,24 +36,24 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
         </View>
         <RCTScrollView
           data={
-            Array [
-              Object {
+            [
+              {
                 "id": "inappropriate",
                 "title": "Inappropriate Content",
               },
-              Object {
+              {
                 "id": "spam",
                 "title": "Spam",
               },
-              Object {
+              {
                 "id": "offensive",
                 "title": "Offensive",
               },
-              Object {
+              {
                 "id": "illegal",
                 "title": "Illegal",
               },
-              Object {
+              {
                 "id": "other",
                 "title": "Other",
               },
@@ -72,8 +72,8 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
           removeClippedSubviews={false}
           renderItem={[Function]}
           scrollEventThrottle={50}
-          stickyHeaderIndices={Array []}
-          viewabilityConfigCallbackPairs={Array []}
+          stickyHeaderIndices={[]}
+          viewabilityConfigCallbackPairs={[]}
         >
           <View>
             <View
@@ -211,24 +211,24 @@ exports[`FlagContent changes title based on type 1`] = `
         </View>
         <FlatList
           data={
-            Array [
-              Object {
+            [
+              {
                 "id": "inappropriate",
                 "title": "Inappropriate Content",
               },
-              Object {
+              {
                 "id": "spam",
                 "title": "Spam",
               },
-              Object {
+              {
                 "id": "offensive",
                 "title": "Offensive",
               },
-              Object {
+              {
                 "id": "illegal",
                 "title": "Illegal",
               },
-              Object {
+              {
                 "id": "other",
                 "title": "Other",
               },
@@ -270,24 +270,24 @@ exports[`FlagContent matches the last snapshot 1`] = `
         </View>
         <FlatList
           data={
-            Array [
-              Object {
+            [
+              {
                 "id": "inappropriate",
                 "title": "Inappropriate Content",
               },
-              Object {
+              {
                 "id": "spam",
                 "title": "Spam",
               },
-              Object {
+              {
                 "id": "offensive",
                 "title": "Offensive",
               },
-              Object {
+              {
                 "id": "illegal",
                 "title": "Illegal",
               },
-              Object {
+              {
                 "id": "other",
                 "title": "Other",
               },

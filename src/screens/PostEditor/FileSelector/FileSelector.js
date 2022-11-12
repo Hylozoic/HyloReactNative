@@ -4,7 +4,11 @@ import { Text, View } from 'react-native'
 import Icon from 'components/Icon'
 import DocumentPicker from 'react-native-document-picker'
 import styles from './FileSelector.styles'
-import { cleanName } from 'store/models/Attachment'
+import { basename } from 'util/index'
+
+export function cleanName (url) {
+  return decodeURIComponent(basename(url))
+}
 
 export default function FileSelector (props) {
   const { fileUrls = [], onRemove } = props
@@ -17,8 +21,14 @@ export default function FileSelector (props) {
 }
 
 export async function showFilePicker ({
-  allowMultiSelection = true, id, onAdd, onCancel,
-  onComplete, onError, type, upload
+  allowMultiSelection = true,
+  id,
+  onAdd,
+  onCancel,
+  onComplete,
+  onError,
+  type,
+  upload
 }) {
   try {
     const documents = await DocumentPicker.pickMultiple({
@@ -76,10 +86,7 @@ export function FileLabel ({ url }) {
   return (
     <View style={styles.fileLabel}>
       <Icon name='Document' style={styles.fileIcon} />
-      <Text
-        style={styles.fileLabelText}
-        numberOfLines={2}
-      >
+      <Text style={styles.fileLabelText} numberOfLines={2}>
         {cleanName(url)}
       </Text>
     </View>

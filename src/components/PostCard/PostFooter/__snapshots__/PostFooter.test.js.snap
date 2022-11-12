@@ -2,10 +2,15 @@
 
 exports[`renders as expected 1`] = `
 <React.Fragment>
-  <Text>
-    ACTIVITY
-  </Text>
-  <View>
+  <View />
+  <MockLinearGradient
+    colors={
+      [
+        "rgba(225, 229, 233, 0.3)",
+        "rgba(225, 229, 233, 0)",
+      ]
+    }
+  >
     <View>
       <Avatar
         avatarUrl="a.png"
@@ -42,6 +47,6 @@ exports[`renders as expected 1`] = `
         71
       </Text>
     </TouchableOpacity>
-  </View>
+  </MockLinearGradient>
 </React.Fragment>
 `;

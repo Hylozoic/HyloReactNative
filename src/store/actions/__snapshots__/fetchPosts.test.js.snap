@@ -1,20 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`sets updateLastViewed to true when fetching for a group 1`] = `
-Object {
-  "graphql": Object {
-    "query": "query (
+{
+  "graphql": {
+    "query": "query GroupPostsQuery (
+  $activePostsOnly: Boolean,
   $afterTime: Date,
   $beforeTime: Date,
   $boundingBox: [PointInput],
+  $collectionToFilterOut: ID,
   $filter: String,
   $first: Int,
+  $forCollection: ID,
+  $isFulfilled: Boolean,
   $offset: Int,
   $order: String,
   $search: String,
   $slug: String,
   $sortBy: String,
-  $topic: ID
+  $topic: ID,
+  $topics: [ID],
+  $types: [String]
 ) {
   group(slug: $slug, updateLastViewed: true) {
     id
@@ -31,16 +37,22 @@ Object {
     postCount
     
 posts: viewPosts(
+  activePostsOnly: $activePostsOnly,
   afterTime: $afterTime,
   beforeTime: $beforeTime,
   boundingBox: $boundingBox,
+  collectionToFilterOut: $collectionToFilterOut,
   filter: $filter,
   first: $first,
+  forCollection: $forCollection,
+  isFulfilled: $isFulfilled,
   offset: $offset,
   order: $order,
   sortBy: $sortBy,
   search: $search,
-  topic: $topic
+  topic: $topic,
+  topics: $topics,
+  types: $types
 ) {
   hasMore
   total
@@ -62,6 +74,8 @@ posts: viewPosts(
   fulfilledAt
   startTime
   endTime
+  donationsLink
+  projectManagementLink
   myEventResponse
   commenters(first: 3) {
     id
@@ -69,13 +83,13 @@ posts: viewPosts(
     avatarUrl
   }
   commentersTotal
-  commentsTotal
   
   linkPreview {
+    description
     id
+    imageUrl
     title
     url
-    imageUrl
   }
   linkPreviewFeatured
   location
@@ -104,9 +118,6 @@ posts: viewPosts(
     id
     name
     slug
-    settings {
-      publicMemberDirectory
-    }
   }
   attachments {
     type
@@ -160,23 +171,28 @@ posts: viewPosts(
 }
   }
 }",
-    "variables": Object {
+    "variables": {
+      "activePostsOnly": undefined,
       "afterTime": undefined,
       "beforeTime": undefined,
+      "collectionToFilterOut": undefined,
       "context": "groups",
       "filter": undefined,
       "first": 20,
+      "forCollection": undefined,
       "offset": undefined,
       "order": undefined,
       "search": undefined,
       "slug": "anything",
       "sortBy": undefined,
       "topic": undefined,
+      "topics": undefined,
+      "types": undefined,
     },
   },
-  "meta": Object {
+  "meta": {
     "extractModel": "Group",
-    "extractQueryResults": Object {
+    "extractQueryResults": {
       "getItems": [Function],
     },
     "slug": "anything",

@@ -6,28 +6,28 @@ exports[`renders multiple images 1`] = `
 >
   <Image
     source={
-      Object {
+      {
         "uri": "http://foo.com/bar.png",
       }
     }
   />
   <Image
     source={
-      Object {
+      {
         "uri": "http://foo.com/baz.png",
       }
     }
   />
   <Image
     source={
-      Object {
+      {
         "uri": "http://foo.com/quz.png",
       }
     }
   />
   <Image
     source={
-      Object {
+      {
         "uri": "http://foo.com/qux.png",
       }
     }
@@ -54,7 +54,7 @@ exports[`renders multiple images that can be tapped to open in browser 1`] = `
     >
       <Image
         source={
-          Object {
+          {
             "uri": "http://foo.com/bar.png",
           }
         }
@@ -72,7 +72,7 @@ exports[`renders multiple images that can be tapped to open in browser 1`] = `
       >
         <Image
           source={
-            Object {
+            {
               "uri": "http://foo.com/baz.png",
             }
           }
@@ -91,7 +91,7 @@ exports[`renders multiple images that can be tapped to open in browser 1`] = `
       >
         <Image
           source={
-            Object {
+            {
               "uri": "http://foo.com/quz.png",
             }
           }
@@ -110,7 +110,7 @@ exports[`renders multiple images that can be tapped to open in browser 1`] = `
       >
         <Image
           source={
-            Object {
+            {
               "uri": "http://foo.com/qux.png",
             }
           }
@@ -127,7 +127,7 @@ exports[`returns ImageBackground 1`] = `
 >
   <Image
     source={
-      Object {
+      {
         "uri": "http://foo.com/bar.png",
       }
     }

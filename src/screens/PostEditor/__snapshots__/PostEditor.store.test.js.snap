@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`createPost should match the last snapshot 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "mutation (
         $type: String
         $title: String
@@ -50,6 +50,8 @@ Object {
   fulfilledAt
   startTime
   endTime
+  donationsLink
+  projectManagementLink
   myEventResponse
   commenters(first: 3) {
     id
@@ -57,13 +59,13 @@ Object {
     avatarUrl
   }
   commentersTotal
-  commentsTotal
   
   linkPreview {
+    description
     id
+    imageUrl
     title
     url
-    imageUrl
   }
   linkPreviewFeatured
   location
@@ -92,9 +94,6 @@ Object {
     id
     name
     slug
-    settings {
-      publicMemberDirectory
-    }
   }
   attachments {
     type
@@ -146,42 +145,42 @@ Object {
 
         }
       }",
-    "variables": Object {
+    "variables": {
       "announcement": undefined,
       "details": "details",
       "endTime": "endTime",
-      "fileUrls": Array [],
-      "groupIds": Array [
+      "fileUrls": [],
+      "groupIds": [
         undefined,
       ],
-      "imageUrls": Array [],
+      "imageUrls": [],
       "location": undefined,
       "locationId": undefined,
-      "memberIds": Array [],
+      "memberIds": [],
       "startTime": "startTime",
       "title": "title",
-      "topicNames": Array [],
+      "topicNames": [],
       "type": "post",
     },
   },
-  "meta": Object {
-    "analytics": Object {
+  "meta": {
+    "analytics": {
       "detailsLength": 7,
       "eventName": "Post Created",
       "isAnnouncement": undefined,
     },
-    "extractModel": Object {
+    "extractModel": {
       "getRoot": [Function],
       "modelName": "Post",
     },
   },
-  "type": "PostEditor/CREATE_POST",
+  "type": "CREATE_POST",
 }
 `;
 
 exports[`createProject should match the last snapshot 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "mutation (
         $type: String
         $title: String
@@ -229,6 +228,8 @@ Object {
   fulfilledAt
   startTime
   endTime
+  donationsLink
+  projectManagementLink
   myEventResponse
   commenters(first: 3) {
     id
@@ -236,13 +237,13 @@ Object {
     avatarUrl
   }
   commentersTotal
-  commentsTotal
   
   linkPreview {
+    description
     id
+    imageUrl
     title
     url
-    imageUrl
   }
   linkPreviewFeatured
   location
@@ -271,9 +272,6 @@ Object {
     id
     name
     slug
-    settings {
-      publicMemberDirectory
-    }
   }
   attachments {
     type
@@ -325,46 +323,46 @@ Object {
 
         }
       }",
-    "variables": Object {
+    "variables": {
       "announcement": undefined,
       "details": "details",
       "endTime": "endTime",
-      "fileUrls": Array [],
-      "groupIds": Array [
+      "fileUrls": [],
+      "groupIds": [
         undefined,
       ],
-      "imageUrls": Array [],
+      "imageUrls": [],
       "location": undefined,
       "locationId": undefined,
-      "memberIds": Array [
+      "memberIds": [
         1,
         2,
         3,
       ],
       "startTime": "startTime",
       "title": "title",
-      "topicNames": Array [],
+      "topicNames": [],
       "type": "post",
     },
   },
-  "meta": Object {
-    "analytics": Object {
+  "meta": {
+    "analytics": {
       "detailsLength": 7,
       "eventName": "Post Created",
       "isAnnouncement": undefined,
     },
-    "extractModel": Object {
+    "extractModel": {
       "getRoot": [Function],
       "modelName": "Post",
     },
   },
-  "type": "PostEditor/CREATE_POST",
+  "type": "CREATE_POST",
 }
 `;
 
 exports[`updatePost should match the last snapshot 1`] = `
-Object {
-  "graphql": Object {
+{
+  "graphql": {
     "query": "mutation ($id: ID
         $type: String
         $title: String
@@ -410,6 +408,8 @@ Object {
   fulfilledAt
   startTime
   endTime
+  donationsLink
+  projectManagementLink
   myEventResponse
   commenters(first: 3) {
     id
@@ -417,10 +417,9 @@ Object {
     avatarUrl
   }
   commentersTotal
-  commentsTotal
-  comments(first: 10, order: \\"desc\\") {
-      items {
-        
+  comments(first: 10, order: "desc") {
+    items {
+      
   id
   text
   creator {
@@ -439,9 +438,9 @@ Object {
   }
   createdAt
 
-        childComments(first: 10, order: \\"desc\\") {
-          items {
-            
+      childComments(first: 4, order: "desc") {
+        items {
+          
   id
   text
   creator {
@@ -460,22 +459,23 @@ Object {
   }
   createdAt
 
-            post {
-              id
-            }
+          post {
+            id
           }
-          total
-          hasMore
         }
+        total
+        hasMore
       }
-      total
-      hasMore
     }
+    total
+    hasMore
+  }
   linkPreview {
+    description
     id
+    imageUrl
     title
     url
-    imageUrl
   }
   linkPreviewFeatured
   location
@@ -504,9 +504,6 @@ Object {
     id
     name
     slug
-    settings {
-      publicMemberDirectory
-    }
   }
   attachments {
     type
@@ -558,35 +555,35 @@ Object {
 
         }
       }",
-    "variables": Object {
+    "variables": {
       "details": "details",
       "endTime": "endTime",
-      "fileUrls": Array [],
-      "groupIds": Array [
+      "fileUrls": [],
+      "groupIds": [
         undefined,
       ],
       "id": 1,
-      "imageUrls": Array [],
+      "imageUrls": [],
       "location": undefined,
       "locationId": undefined,
-      "memberIds": Array [],
+      "memberIds": [],
       "startTime": "startTime",
       "title": "title",
-      "topicNames": Array [],
+      "topicNames": [],
       "type": "post",
     },
   },
-  "meta": Object {
-    "analytics": Object {
+  "meta": {
+    "analytics": {
       "detailsLength": 7,
       "eventName": "Post Updated",
     },
-    "extractModel": Object {
+    "extractModel": {
       "append": false,
       "getRoot": [Function],
       "modelName": "Post",
     },
   },
-  "type": "PostEditor/UPDATE_POST",
+  "type": "UPDATE_POST",
 }
 `;

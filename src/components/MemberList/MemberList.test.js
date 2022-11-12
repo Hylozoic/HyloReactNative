@@ -3,8 +3,10 @@ import React from 'react'
 
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
-import { simulate } from 'util/testing'
+import { simulate, TestRoot } from 'util/testing'
 import { MemberList } from './MemberList'
+import MockedScreen from 'util/testing/MockedScreen'
+import { render } from '@testing-library/react-native'
 
 const lodash = jest.requireActual('lodash/fp')
 lodash.debounce = (_, fn) => fn
@@ -78,15 +80,22 @@ describe('MemberList', () => {
       const testProps = {
         isServerSearch: true,
         search: 'test',
-        fetchMembers: jest.fn(),
+        fetchMembers: jest.fn(() => ([])),
         isFocused: true
       }
-      const renderer = ReactTestRenderer.create(
-        <MemberList {...testProps} />
-      )
 
+      const { toJSON, debug } = render(
+        <TestRoot>
+          <MockedScreen>
+            {screenProps => {
+              {/* console.log('!!! screenProps, testProps', screenProps, 'XXXX', testProps) */}
+              return <MemberList {...screenProps} {...testProps} />
+            }}
+          </MockedScreen>
+        </TestRoot>
+      )
       expect(testProps.fetchMembers).toHaveBeenCalled()
-      expect(renderer).toMatchSnapshot()
+      expect(toJSON()).toMatchSnapshot()
     })
   })
 

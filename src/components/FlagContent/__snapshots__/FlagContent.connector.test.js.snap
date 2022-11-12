@@ -1,31 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`mapDispatchToProps maps the action generators 1`] = `
-Object {
+{
   "submitFlagContent": [Function],
 }
 `;
 
 exports[`mapDispatchToProps maps the action generators 2`] = `
-Array [
-  Array [
-    Object {
-      "graphql": Object {
+[
+  [
+    {
+      "graphql": {
         "query": "mutation ($category: String, $reason: String, $linkData: LinkDataInput) {
         flagInappropriateContent(data: {category: $category, reason: $reason, linkData: $linkData}) {
           success
         }
       }",
-        "variables": Object {
+        "variables": {
           "category": "other",
-          "linkData": Object {
+          "linkData": {
             "id": 20,
             "type": "post",
           },
           "reason": "A Reason",
         },
       },
-      "meta": Object {
+      "meta": {
         "optimistic": true,
       },
       "type": "FlagContent/FLAG_CONTENT",

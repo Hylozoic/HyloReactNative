@@ -35,7 +35,7 @@ export default function Signup () {
   const [email, providedSetEmail] = useState(route.params?.email)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
-  // WIP: Positive mesage for `checkInvitation` result
+  // WIP: Positive message for `checkInvitation` result
   // const [message, setMessage] = useState(route.params?.message)
   const [bannerError, setBannerError] = useState()
   const [canSubmit, setCanSubmit] = useState(!loading && email)
