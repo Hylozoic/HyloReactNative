@@ -17,7 +17,7 @@ import { Validators } from 'hylo-shared'
 import { isIOS } from 'util/platform'
 import { showToast, hideToast } from 'util/toast'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
-import { amaranth, caribbeanGreen, rhino30, white } from 'style/colors'
+import { caribbeanGreen, rhino30, white } from 'style/colors'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 // TODO: Convert all 3 of the below to LocationPicker style calls
 // ProjectMembers Chooser
@@ -171,7 +171,7 @@ export class PostEditor extends React.Component {
       startTime: startTime && startTime.getTime(),
       endTime: endTime && endTime.getTime(),
       location,
-      locationId: locationObject && locationObject.id !== 'NEW' && locationObject.id
+      locationId: (locationObject && locationObject?.id) ? locationObject.id : null
     }
 
     try {
@@ -293,7 +293,10 @@ export class PostEditor extends React.Component {
   }
 
   handlePickLocation = locationObject => {
-    this.setState(() => ({ location: locationObject.fullText, locationObject }))
+    this.setState(() => ({
+      location: locationObject.fullText,
+      locationObject: (locationObject && locationObject?.id !== 'NEW') ? locationObject : null
+    }))
   }
 
   handleUpdateProjectMembers = members => this.setState(state => ({ members }))
