@@ -7,7 +7,8 @@ import {
   rhino80,
   rhino,
   amaranth,
-  athensGrayMedium
+  athensGrayMedium,
+  white80onCaribbeanGreen
 } from 'style/colors'
 
 const typeSelectorIOSDefaults = {
@@ -86,10 +87,18 @@ export default {
   formWrapper: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: athensGrayMedium
+
   },
-  formContent: {
-    paddingVertical: 12
+  formContainer: {
+  },
+  formTop: {
+    backgroundColor: white,
+    paddingTop: 12
+  },
+  formBottom: {
+    paddingBottom: 12
   },
   textInputWrapper: {
     // paddingVertical: 10,
@@ -160,13 +169,21 @@ export default {
     justifyContent: 'center'
   },
   pressSelection: {
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    display: 'flex',
-    flexDirection: 'row',
     paddingHorizontal: 10
   },
+  pressSelectionSectionPublicSelected: {
+    backgroundColor: white80onCaribbeanGreen,
+    color: caribbeanGreen
+  },
   pressSelectionLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  },
+  pressSelectionLeftText: {
     color: rhino80,
     fontFamily: 'Circular-Bold'
   },
@@ -184,9 +201,12 @@ export default {
     color: caribbeanGreen,
     fontSize: 16
   },
+  pressSelectionSwitch: {
+    flexGrow: 0,
+    transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }]
+  },
   pressSelectionValue: {
     margin: 0,
-    // padding: 20,
     paddingHorizontal: 10,
     paddingTop: 10,
     paddingBottom: 5,
@@ -203,11 +223,8 @@ export default {
     fontSize: 20
   },
   imageSelector: {
-    marginBottom: 10,
+    paddingTop: 10,
     flex: 1
-  },
-  footer: {
-    backgroundColor: athensGrayMedium
   },
   buttonBar: {
     flex: 1,
