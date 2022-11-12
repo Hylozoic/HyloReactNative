@@ -173,7 +173,7 @@ export class PostEditor extends React.Component {
       startTime: startTime && startTime.getTime(),
       endTime: endTime && endTime.getTime(),
       location,
-      locationId: locationObject && locationObject?.id ? locationObject.id : null
+      locationId: (locationObject && locationObject?.id) ? locationObject.id : null
     }
 
     try {
@@ -296,7 +296,10 @@ export class PostEditor extends React.Component {
   }
 
   handlePickLocation = locationObject => {
-    this.setState(() => ({ location: locationObject.fullText, locationObject: locationObject?.id !== 'NEW' && locationObject }))
+    this.setState(() => ({
+      location: locationObject.fullText,
+      locationObject: (locationObject && locationObject?.id !== 'NEW') ? locationObject : null
+    }))
   }
 
   handleUpdateProjectMembers = members => this.setState(state => ({ members }))
