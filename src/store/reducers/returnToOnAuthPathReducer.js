@@ -11,7 +11,7 @@ export default function returnToOnAuthPathReducer (state = initialState, { type,
         : payload
     }
 
-    // Handles the case the of logout action firing and then NonAuthLayout capturing
+    // Handles the case of the logout action firing and then NonAuthLayout capturing
     // the current auth'd URL as the `returnToOnAuthPath`. There may be a better way to handle
     // this, but this works for now.
     case LOGOUT: {

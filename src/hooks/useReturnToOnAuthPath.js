@@ -11,11 +11,9 @@ export default function useReturnToOnAuthPath (loading = false) {
 
   useEffect(() => {
     (async function () {
-      if (!loading) {
-        if (!isEmpty(returnToOnAuthPath)) {
-          dispatch(setReturnToOnAuthPath())
-          openURL(returnToOnAuthPath)
-        }
+      if (!loading && !isEmpty(returnToOnAuthPath)) {
+        await dispatch(setReturnToOnAuthPath())
+        await openURL(returnToOnAuthPath)
       }
     })()
   }, [

@@ -26,7 +26,7 @@ export default function useSetCurrentGroup (loading = false) {
         await dispatch(setCurrentGroupId(groupFromRouteParam.id))
       } else if (!currentGroup) {
         await dispatch(setCurrentGroupId(lastViewedGroup?.id || ALL_GROUP_ID))
-        navigation.navigate('Home Tab', { screen: 'Feed', initial: false })
+        await navigation.navigate('Home Tab', { screen: 'Feed', initial: false })
       }
     })()
   }, [
