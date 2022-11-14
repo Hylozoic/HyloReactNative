@@ -60,7 +60,7 @@ export default function PostDetails () {
     commentsRef.current && commentsRef.current.scrollToComment(selectedComment)
   }
 
-  useSetCurrentGroup()
+  useSetCurrentGroup(isModalScreen)
 
   useEffect(() => {
     (async function () {

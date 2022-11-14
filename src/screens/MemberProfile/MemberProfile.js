@@ -54,7 +54,7 @@ export default function MemberProfile ({
     navigation.goBack()
   }
 
-  useSetCurrentGroup()
+  useSetCurrentGroup(isModalScreen)
 
   useEffect(() => {
     if (isBlocked) return navigation.goBack()

@@ -19,14 +19,16 @@ export default function useSetCurrentGroup (loading = false) {
 
   useEffect(() => {
     (async function () {
-      if (
-        groupFromRouteParam &&
-        (currentGroup?.slug !== groupFromRouteParam?.slug)
-      ) {
-        await dispatch(setCurrentGroupId(groupFromRouteParam.id))
-      } else if (!currentGroup) {
-        await dispatch(setCurrentGroupId(lastViewedGroup?.id || ALL_GROUP_ID))
-        await navigation.navigate('Home Tab', { screen: 'Feed', initial: false })
+      if (!loading) {
+        if (
+          groupFromRouteParam &&
+          (currentGroup?.slug !== groupFromRouteParam?.slug)
+        ) {
+          await dispatch(setCurrentGroupId(groupFromRouteParam.id))
+        } else if (!currentGroup) {
+          await dispatch(setCurrentGroupId(lastViewedGroup?.id || ALL_GROUP_ID))
+          await navigation.navigate('Home Tab', { screen: 'Feed', initial: false })
+        }
       }
     })()
   }, [

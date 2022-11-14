@@ -4,7 +4,7 @@ import { URL } from 'react-native-url-polyfill'
 import { WebViewMessageTypes } from 'hylo-shared'
 import { DEFAULT_APP_HOST } from 'navigation/linking'
 import { openURL } from 'hooks/useOpenURL'
-import useIsModalScreen from 'hooks/useIsModalScreen'
+import useIsModalScreen, { modalScreenName } from 'hooks/useIsModalScreen'
 import HyloWebView from 'components/HyloWebView'
 import { useDispatch, useSelector } from 'react-redux'
 import fetchGroupModerators from 'store/actions/fetchGroupModerators'
@@ -24,7 +24,7 @@ export default function GroupExploreWebView () {
   const [path, setPath] = useState()
   const [canGoBack, setCanGoBack] = useState(false)
 
-  useSetCurrentGroup()
+  useSetCurrentGroup(isModalScreen)
 
   useFocusEffect(
     () => {
@@ -84,6 +84,9 @@ export default function GroupExploreWebView () {
           break
         }
       }
+    },
+    '/groups/:groupSlug': ({ routeParams }) => {
+      navigation.navigate(modalScreenName('Group Explore'), routeParams)
     },
     '(.*)': () => {
       openURL(pathname + search)
