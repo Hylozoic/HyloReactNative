@@ -37,7 +37,7 @@ export default function Members ({
           'setSearch',
           'fetchMembers',
           'showMember',
-          'fetchMoreMembers'], ...forwardedProps)}
+          'fetchMoreMembers'], forwardedProps)}
       >
         {group && (
           <Banner
