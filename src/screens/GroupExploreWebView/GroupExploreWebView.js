@@ -11,6 +11,7 @@ import fetchGroupModerators from 'store/actions/fetchGroupModerators'
 import fetchGroupDetails from 'store/actions/fetchGroupDetails'
 import ModalHeaderTransparent from 'navigation/headers/ModalHeaderTransparent'
 import getGroup from 'store/selectors/getGroup'
+import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
 
 export default function GroupExploreWebView () {
   const dispatch = useDispatch()
@@ -22,6 +23,8 @@ export default function GroupExploreWebView () {
   const currentGroup = useSelector(state => getGroup(state, { slug: groupSlug }))
   const [path, setPath] = useState()
   const [canGoBack, setCanGoBack] = useState(false)
+
+  useSetCurrentGroup()
 
   useFocusEffect(
     () => {
