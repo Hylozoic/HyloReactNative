@@ -17,7 +17,7 @@ import { Validators } from 'hylo-shared'
 import { isIOS } from 'util/platform'
 import { showToast, hideToast } from 'util/toast'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
-import { caribbeanGreen, rhino30, white } from 'style/colors'
+import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 // TODO: Convert all 3 of the below to LocationPicker style calls
 // ProjectMembers Chooser
@@ -31,8 +31,8 @@ import TopicRow from 'screens/TopicList/TopicRow'
 import GroupChooserItemRow from 'screens/ItemChooser/GroupChooserItemRow'
 import GroupsList from 'components/GroupsList'
 // Components
-import Button from 'components/Button'
 import DatePicker from 'react-native-date-picker'
+import Button from 'components/Button'
 import FileSelector, { showFilePicker as fileSelectorShowFilePicker } from './FileSelector'
 import HyloEditorWebView from 'components/HyloEditorWebView'
 import Icon from 'components/Icon'
@@ -45,6 +45,7 @@ import Topics from 'components/Topics'
 import styles, { typeSelectorStyles } from './PostEditor.styles'
 import HeaderLeftCloseIcon from 'navigation/headers/HeaderLeftCloseIcon'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
+import { caribbeanGreen, rhino30, white } from 'style/colors'
 
 const titlePlaceholders = {
   discussion: "What's on your mind?",
@@ -57,6 +58,8 @@ const titlePlaceholders = {
 
 export default function (props) {
   const isFocused = useIsFocused()
+
+  useSetCurrentGroup()
 
   return <PostEditor {...props} isFocused={isFocused} />
 }
