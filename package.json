@@ -51,7 +51,7 @@
     "query-string": "^7.1.1",
     "re-reselect": "^4.0.1",
     "react": "18.2.0",
-    "react-native": "0.70.3",
+    "react-native": "0.70.5",
     "react-native-autoheight-webview": "^1.6.5",
     "react-native-background-timer": "^2.4.1",
     "react-native-bootsplash": "4.3.2",
