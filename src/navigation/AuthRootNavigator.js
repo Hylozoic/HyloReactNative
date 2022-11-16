@@ -46,13 +46,13 @@ export default function AuthRootNavigator () {
     })()
   }, [])
 
+  if (loading) return <LoadingScreen />
+
   const navigatorProps = {
     screenOptions: {
       cardStyle: { backgroundColor: white }
     }
   }
-
-  if (loading) return <LoadingScreen />
 
   return (
     <HyloHTMLConfigProvider>

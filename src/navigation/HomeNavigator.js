@@ -1,7 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { createStackNavigator } from '@react-navigation/stack'
-import useInitialURLHandled from 'hooks/useInitialURLHandled'
 import { isEmpty } from 'lodash/fp'
+import useCurrentGroup from 'hooks/useCurrentGroup'
+import useOpenInitialURL from 'hooks/useOpenInitialURL'
+import useReturnToOnAuthPath from 'hooks/useReturnToOnAuthPath'
 // Helper Components
 import TabStackHeader from 'navigation/headers/TabStackHeader'
 // Screens
@@ -19,22 +22,26 @@ import AllTopicsWebView from 'screens/AllTopicsWebView/AllTopicsWebView'
 
 const HomeTab = createStackNavigator()
 export default function HomeNavigator () {
-  const initialURLHandled = useInitialURLHandled()
+  const initialURL = useSelector(state => state.initialURL)
+  const [, setCurrentGroup] = useCurrentGroup()
+
+  useOpenInitialURL()
+  useReturnToOnAuthPath()
+
   const navigatorProps = {
     initialRouteName: 'Group Navigation',
-    // screenListeners: {
-    //   state: (e) => {
-    //     const routes = e.data.state.routes
-    //     const groupSlugs = routes
-    //       .map(route => route.params?.groupSlug)
-    //       .filter(s => !isEmpty(s))
-    //     // if (!isEmpty(groupSlugs)) {
-    //     console.log('!!! SLUGS:', groupSlugs)
-    //     // }
-    //   }
-    // },
+    screenListeners: {
+      state: (e) => {
+        const routes = e.data.state.routes
+        const groupSlugs = routes
+          .map(route => route.params?.groupSlug)
+          .filter(s => !isEmpty(s))
+
+        setCurrentGroup(!isEmpty(groupSlugs) && groupSlugs[groupSlugs.length - 1])
+      }
+    },
     screenOptions: {
-      animationEnabled: initialURLHandled,
+      animationEnabled: !initialURL,
       transitionSpec: {
         open: {
           animation: 'spring',

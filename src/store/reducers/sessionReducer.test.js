@@ -1,5 +1,5 @@
 import sessionReducer from './sessionReducer'
-import { LOGIN, SET_CURRENT_GROUP_ID } from 'store/constants'
+import { LOGIN, SET_CURRENT_GROUP_SLUG } from 'store/constants'
 
 describe('on LOGIN', () => {
   it('stores login email as default', () => {
@@ -16,13 +16,13 @@ describe('on LOGIN', () => {
   })
 })
 
-describe('on SET_CURRENT_GROUP_ID', () => {
+describe('on SET_CURRENT_GROUP_SLUG', () => {
   it('returns the payload', () => {
     const state = {
     }
     const action = {
-      type: SET_CURRENT_GROUP_ID,
-      payload: '123'
+      type: SET_CURRENT_GROUP_SLUG,
+      payload: 'test-current-group-slug'
     }
     expect(sessionReducer(state, action))
       .toMatchSnapshot()

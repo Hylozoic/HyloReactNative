@@ -32,7 +32,7 @@ export default function NewMessage (props) {
   const dispatch = useDispatch()
   const route = useRoute()
   const navigation = useNavigation()
-  const graphqlQuery = useGraphqlAction()
+  const graphqlAction = useGraphqlAction()
   const [participants, setParticipants] = useState([])
   const [loading, setLoading] = useState(true)
   const prompt = route?.params?.prompt
@@ -40,7 +40,9 @@ export default function NewMessage (props) {
   const initialParticipantIds = !isArray(route?.params?.participants)
     ? route?.params?.participants?.split(',')
     : route?.params?.participants || []
-  const initialParticipantsFromStore = useSelector(state => getPeople(state, { personIds: initialParticipantIds })) || []
+  const initialParticipantsFromStore = useSelector(
+    state => getPeople(state, { personIds: initialParticipantIds })
+  ) || []
 
   const fetchInitialParticipants = () => {
     setLoading(true)
@@ -53,7 +55,7 @@ export default function NewMessage (props) {
         const fetchedParticipants = await Promise.all(
           participantsToFetch.map(
             async initialParticipantId => {
-              const person = await graphqlQuery(gql`
+              const person = await graphqlAction(gql`
                 query Participant ($id: ID) {
                   person (id: $id) {
                     id

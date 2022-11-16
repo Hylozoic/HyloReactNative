@@ -6,7 +6,6 @@ import { capitalize, isEmpty } from 'lodash/fp'
 import { useDispatch, useSelector } from 'react-redux'
 import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
-import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
 import useChangeToGroup from 'hooks/useChangeToGroup'
 import { PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
@@ -62,8 +61,6 @@ export default function Feed ({ topicName: providedTopicName }) {
       navigation.push('Feed', { groupId: currentGroup.id, topicName: selectedTopicName })
     }
   }
-
-  useSetCurrentGroup()
 
   useEffect(() => {
     topicName && currentGroup?.slug && dispatch(fetchGroupTopic(topicName, currentGroup.slug))

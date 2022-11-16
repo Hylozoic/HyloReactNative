@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`on SET_CURRENT_GROUP_ID returns the payload 1`] = `
+exports[`on SET_CURRENT_GROUP_SLUG returns the payload 1`] = `
 {
-  "groupId": "123",
+  "groupSlug": "test-current-group-slug",
 }
 `;

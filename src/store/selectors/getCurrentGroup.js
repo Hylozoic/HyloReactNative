@@ -1,11 +1,11 @@
-import getCurrentGroupId from './getCurrentGroupId'
+import getCurrentGroupSlug from './getCurrentGroupSlug'
 import { createSelector } from 'reselect'
 import getGroup from './getGroup'
 
 const getCurrentGroup = createSelector(
   state => state,
-  getCurrentGroupId,
-  (state, currentGroupId) => getGroup(state, { id: currentGroupId })
+  getCurrentGroupSlug,
+  (state, currentGroupSlug) => getGroup(state, { slug: currentGroupSlug })
 )
 
 export default getCurrentGroup

@@ -3,7 +3,6 @@ import { View, Text } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import LinearGradient from 'react-native-linear-gradient'
 import { get, pick } from 'lodash/fp'
-import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
 import Button from 'components/Button'
 import MemberList from 'components/MemberList'
 import { bannerlinearGradientColors } from 'style/colors'
@@ -17,8 +16,6 @@ export default function Members ({
 }) {
   const goToInvitePeople = () => navigation.navigate('Group Settings', { screen: 'Invite' })
   const showInviteButton = get('allowGroupInvites', group) || canModerate
-
-  useSetCurrentGroup()
 
   return (
     <View style={styles.container}>

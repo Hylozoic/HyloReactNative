@@ -45,7 +45,7 @@ export default function SignupSetLocation ({ navigation }) {
       initialSearchTerm: locationText,
       onPick: pickedLocation => {
         setLocation(pickedLocation?.fullText)
-        setLocationId(pickedLocation?.id)
+        pickedLocation?.id !== 'NEW' && setLocationId(pickedLocation?.id)
       }
     })
   }

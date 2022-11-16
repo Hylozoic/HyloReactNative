@@ -3,7 +3,7 @@ import { TestRoot } from 'util/testing'
 import PostBody from './PostBody'
 import { render } from '@testing-library/react-native'
 
-jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
+jest.mock('store/selectors/getCurrentGroupSlug', () => () => 'public')
 
 it('matches the last snapshot', async () => {
   const post = {

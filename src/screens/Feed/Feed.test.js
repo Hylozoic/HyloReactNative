@@ -6,7 +6,7 @@ import { render } from '@testing-library/react-native'
 import { TestRoot } from 'util/testing'
 import Feed from './Feed'
 
-jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
+jest.mock('store/selectors/getCurrentGroupSlug', () => () => 'public')
 
 it('renders correctly if currentUserHasMemberships', () => {
   const group = {

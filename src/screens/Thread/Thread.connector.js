@@ -9,13 +9,11 @@ import {
   updateThreadReadTime
 } from './Thread.store'
 import getCurrentUserId from 'store/selectors/getCurrentUserId'
-import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
 import { sendIsTyping } from 'util/websockets'
 import confirmNavigate from 'util/confirmNavigate'
 
 export function mapStateToProps (state, props) {
   const currentUserId = getCurrentUserId(state)
-  const groupId = getCurrentGroupId(state)
   const thread = getThread(state, props)
   const messages = getAndPresentMessages(state, props)
 
@@ -23,7 +21,6 @@ export function mapStateToProps (state, props) {
     id: thread?.id,
     thread,
     currentUserId,
-    groupId,
     hasMore: getHasMoreMessages(state, { id: thread?.id }),
     messages,
     pending: state.pending[FETCH_MESSAGES],
@@ -41,20 +38,10 @@ export function mapDispatchToProps (dispatch, { navigation, route }) {
     sendIsTyping: () => sendIsTyping(threadId, true),
     updateThreadReadTime: () => dispatch(updateThreadReadTime(threadId)),
     showMember: id => confirmNavigate(() => navigation.navigate('Member', { id })),
-    showTopic: groupId => topicName => {
-      confirmNavigate(() => navigation.navigate('Feed', { groupId, topicName }))
+    showTopic: topicName => {
+      confirmNavigate(() => navigation.navigate('Feed', { topicName }))
     }
   }
 }
 
-export function mergeProps (stateProps, dispatchProps, ownProps) {
-  const { groupId } = stateProps
-  return {
-    ...ownProps,
-    ...dispatchProps,
-    ...stateProps,
-    showTopic: dispatchProps.showTopic(groupId)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)
+export default connect(mapStateToProps, mapDispatchToProps)

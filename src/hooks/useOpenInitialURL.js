@@ -8,20 +8,18 @@ export default function useOpenInitialURL (loading, wait = 0) {
   const openURL = useOpenURL()
   const initialURL = useSelector(state => state.initialURL)
 
-  useEffect(() => {
+  const openInitialURL = async () => {
     if (!loading && initialURL) {
-      (async function () {
-        if (initialURL) {
-          setTimeout(() => {
-            dispatch({ type: SET_INITIAL_URL, payload: null })
-
-            console.log('!!! going to initialURL')
-            openURL(initialURL)
-          }, wait)
-        } else {
-          dispatch({ type: SET_INITIAL_URL, payload: null })
-        }
-      })()
+      setTimeout(() => {
+        dispatch({ type: SET_INITIAL_URL, payload: null })
+        openURL(initialURL)
+      }, wait)
+    } else {
+      dispatch({ type: SET_INITIAL_URL, payload: null })
     }
+  }
+
+  useEffect(() => {
+    openInitialURL()
   }, [loading, initialURL])
 }

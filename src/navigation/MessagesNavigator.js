@@ -1,6 +1,5 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import useInitialURLHandled from 'hooks/useInitialURLHandled'
 // Helper Components
 import ModalHeader from 'navigation/headers/ModalHeader'
 // Screens
@@ -8,14 +7,15 @@ import NewMessage from 'screens/NewMessage'
 import Thread from 'screens/Thread'
 import ThreadList from 'screens/ThreadList'
 import { alabaster, rhino } from 'style/colors'
+import { useSelector } from 'react-redux'
 
 const Messages = createStackNavigator()
 export default function MessagesNavigator () {
-  const initialURLHandled = useInitialURLHandled()
+  const initialURL = useSelector(state => state.initialURL)
   const navigatorProps = {
     initialRouteName: 'Messages',
     screenOptions: {
-      animationEnabled: initialURLHandled,
+      animationEnabled: !initialURL,
       transitionSpec: {
         open: {
           animation: 'spring',

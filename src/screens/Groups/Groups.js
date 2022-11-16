@@ -5,7 +5,6 @@ import { View, Text, SectionList, TouchableOpacity } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { modalScreenName } from 'hooks/useIsModalScreen'
 import useChangeToGroup from 'hooks/useChangeToGroup'
-import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
 import { visibilityIcon, accessibilityIcon } from 'store/models/Group'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
@@ -44,8 +43,6 @@ export default function Groups () {
   const changeToGroup = useChangeToGroup()
   const goToGroupExplore = groupSlug =>
     navigation.navigate(modalScreenName('Group Explore'), { groupSlug })
-
-  useSetCurrentGroup()
 
   useFocusEffect(() => {
     navigation.setOptions({ title: currentGroup.name })

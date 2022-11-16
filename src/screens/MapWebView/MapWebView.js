@@ -5,7 +5,6 @@ import { modalScreenName } from 'hooks/useIsModalScreen'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import HyloWebView from 'components/HyloWebView'
-import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
 
 // Matches actual group paths (e.g. not /all or /public)
 export const MATCHER_GROUP_SLUG = '[a-zA-Z0-9-]+$'
@@ -20,8 +19,6 @@ export default function MapWebView ({ navigation }) {
   const openURL = useOpenURL()
   const [path, setPath] = useState()
   const [canGoBack, setCanGoBack] = useState(false)
-
-  useSetCurrentGroup()
 
   useEffect(() => {
     navigation.setOptions({

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { isEqual } from 'lodash'
 import { isDev } from 'config'
 import { getSocket, socketUrl } from 'util/websockets'

@@ -10,7 +10,7 @@ import orm from 'store/models'
 
 jest.mock('components/SocketSubscriber', () => () => null)
 // jest.mock('components/HyloEditorWebview', () => () => null)
-jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
+jest.mock('store/selectors/getCurrentGroupSlug', () => () => 'public')
 
 const post = {
   id: '91',

@@ -12,7 +12,6 @@ import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from 'assets/default-user-banner.jpg'
 import styles from './MemberProfile.styles'
 import ModalHeaderTransparent from 'navigation/headers/ModalHeaderTransparent'
-import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
 
 export const blockUserWithNav = async ({ navigation, person, blockUser }) => {
   await blockUser(person.id)
@@ -53,8 +52,6 @@ export default function MemberProfile ({
 
     navigation.goBack()
   }
-
-  useSetCurrentGroup(isModalScreen)
 
   useEffect(() => {
     if (isBlocked) return navigation.goBack()

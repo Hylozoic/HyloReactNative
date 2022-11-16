@@ -4,7 +4,6 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { get } from 'lodash/fp'
 import useGoToMember from 'hooks/useGoToMember'
-import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
 import useIsModalScreen from 'hooks/useIsModalScreen'
 import fetchPostAction from 'store/actions/fetchPost'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
@@ -59,8 +58,6 @@ export default function PostDetails () {
   const scrollToSelectedComment = () => {
     commentsRef.current && commentsRef.current.scrollToComment(selectedComment)
   }
-
-  useSetCurrentGroup(isModalScreen)
 
   useEffect(() => {
     (async function () {

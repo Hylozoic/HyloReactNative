@@ -1,9 +1,8 @@
 import React, { useLayoutEffect } from 'react'
 import { StyleSheet } from 'react-native'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { isIOS } from 'util/platform'
-import useInitialURLHandled from 'hooks/useInitialURLHandled'
 import ModalHeader from 'navigation/headers/ModalHeader'
 import { alabaster, capeCod, rhino, rhino30, rhino40 } from 'style/colors'
 import logout from 'store/actions/logout'
@@ -13,11 +12,11 @@ import BlockedUsers from 'screens/BlockedUsers'
 
 const UserSettings = createMaterialTopTabNavigator()
 export default function UserSettingsTabsNavigator ({ navigation, route }) {
-  const initialURLHandled = useInitialURLHandled()
+  const initialURL = useSelector(state => state.initialURL)
   const dispatch = useDispatch()
   const navigatorProps = {
     screenOptions: {
-      animationEnabled: initialURLHandled,
+      animationEnabled: !initialURL,
       lazy: true,
       tabBarActiveTintColor: rhino,
       tabBarInactiveTintColor: rhino40,
