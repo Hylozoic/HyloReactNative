@@ -41,8 +41,6 @@ export default function MapWebView ({ navigation }) {
   }, [group?.slug, canGoBack])
 
   const handledWebRoutes = [
-    // To keep saved search retrieval from resetting group context in the App:
-    '(.*)/map',
     '(.*)/map/create'
   ]
   const nativeRouteHandler = () => ({
@@ -59,6 +57,9 @@ export default function MapWebView ({ navigation }) {
           break
         }
       }
+    },
+    '/groups/:groupSlug([a-zA-Z0-9-]+)': ({ routeParams }) => {
+      navigation.replace('Map', routeParams)
     },
     '(.*)/group/:groupSlug([a-zA-Z0-9-]+)': ({ routeParams }) => {
       navigation.navigate(modalScreenName('Group Explore'), routeParams)

@@ -438,13 +438,11 @@ export class PostEditor extends React.Component {
     return (
       <View style={styles.headerContainer}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={this.handleOnCancel}>
-            <HeaderLeftCloseIcon
-              style={styles.headerCloseIcon}
-              color={rhino30}
-              onPress={this.handleCancel}
-            />
-          </TouchableOpacity>
+          <HeaderLeftCloseIcon
+            style={styles.headerCloseIcon}
+            color={rhino30}
+            onPress={this.handleCancel}
+          />
           <TypeSelector
             disabled={isSaving}
             onValueChange={this.handleUpdateType}
