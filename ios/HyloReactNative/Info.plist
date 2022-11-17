@@ -78,13 +78,11 @@
 		<true />
 	</dict>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We would like to access your location to provide notifications of nearby resources.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Allow access to your location for use in geo-coding notifications when running in the background</string>
+	<string>Allow access to your current location to center the map feature, searches, and location selection when creating a post. Background access is optional and used for notifications of nearby resources when the app is in the background</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow access to your location for use in geo-coding notifications when using application</string>
+	<string>Allow access to your current location to center the map feature, searches, and location selection when creating a post</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Send photos to help resolve app issues</string>
+	<string>Allow images to posts and comments, and to help resolve app issues, and for</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Take photos to add to your posts</string>
 	<key>UIAppFonts</key>
