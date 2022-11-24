@@ -161,7 +161,7 @@ export default function Signup () {
               Your data is safe with Hylo. By clicking the "Sign Up" button above you are agreeing to these terms:
             </Text>
             <TouchableOpacity onPress={() => openURL('https://www.hylo.com/terms')}>
-              <Text style={{ ...styles.loginButton, ...styles.termsText }}>https://www.hylo.com/terms</Text>
+              <Text style={{ ...styles.loginButton, ...styles.termsText }}>Terms of Service + Privacy Policy</Text>
             </TouchableOpacity>
           </View>
         </View>

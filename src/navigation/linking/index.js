@@ -107,6 +107,25 @@ export const prefixes = [
   'hyloapp://'
 ]
 
+// flag-shared
+export const staticPages = [
+  '',
+  '/help',
+  '/help/markdown',
+  '/about',
+  '/about/careers',
+  '/about/contact',
+  '/about/team',
+  '/evolve',
+  '/invite-expired',
+  '/subscribe',
+  '/styleguide',
+  '/team',
+  '/terms',
+  '/terms/privacy',
+  '/newapp'
+]
+
 // Used for the `linking` prop of `NavigationContainer`.
 // As we have replaced and handled most everything we use, this is probably not necessary
 export default {
