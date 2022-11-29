@@ -15,7 +15,7 @@ import {
 
 // This is a very custom way of handling deep links in React Navigation
 export default function getStateFromPath (providedPath) {
-  // Not sure this is necessary, but has been
+  // Not sure this trim is ever necessary, has been
   // historically been there so keeping it for now
   const groomedPath = providedPath.trim()
   const routeMatch = getRouteMatchForPath(groomedPath)
