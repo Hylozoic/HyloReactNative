@@ -9,7 +9,7 @@ export default function useGoToTopic () {
     if (isModalScreen) {
       return null
     } else {
-      return navigation.navigate('Feed', { topicName })
+      return navigation.navigate('Chat', { topicName })
     }
   }
 }
