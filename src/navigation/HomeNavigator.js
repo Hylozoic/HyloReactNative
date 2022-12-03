@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { createStackNavigator } from '@react-navigation/stack'
 import { isEmpty } from 'lodash/fp'
 import useCurrentGroup from 'hooks/useCurrentGroup'
 import useOpenInitialURL from 'hooks/useOpenInitialURL'
 import useReturnToOnAuthPath from 'hooks/useReturnToOnAuthPath'
+import getReturnToOnAuthPath from 'store/selectors/getReturnToOnAuthPath'
 // Helper Components
 import TabStackHeader from 'navigation/headers/TabStackHeader'
 // Screens
@@ -21,12 +22,19 @@ import MapWebView from 'screens/MapWebView/MapWebView'
 import AllTopicsWebView from 'screens/AllTopicsWebView/AllTopicsWebView'
 
 const HomeTab = createStackNavigator()
-export default function HomeNavigator () {
+export default function HomeNavigator ({ navigation }) {
   const initialURL = useSelector(state => state.initialURL)
+  const returnToOnAuthPath = useSelector(getReturnToOnAuthPath)
   const [, setCurrentGroup] = useCurrentGroup()
 
   useOpenInitialURL()
   useReturnToOnAuthPath()
+
+  useEffect(() => {
+    if (!initialURL && !returnToOnAuthPath) {
+      setTimeout(() => navigation.navigate('Feed'), 400)
+    }
+  }, [])
 
   const navigatorProps = {
     initialRouteName: 'Group Navigation',
