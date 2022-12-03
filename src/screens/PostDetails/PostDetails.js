@@ -103,7 +103,7 @@ export default function PostDetails () {
     )
   }
 
-  if (!post?.creator || !post?.title) return <Loading />
+  if (!post?.creator) return <Loading />
 
   return (
     <View style={styles.container}>

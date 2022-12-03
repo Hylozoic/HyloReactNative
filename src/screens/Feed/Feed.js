@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
 import useChangeToGroup from 'hooks/useChangeToGroup'
+import useGoToTopic from 'hooks/useGoToTopic'
 import { PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getGroupTopic from 'store/selectors/getGroupTopic'
@@ -38,6 +39,7 @@ export default function Feed ({ topicName: providedTopicName }) {
   const route = useRoute()
   const dispatch = useDispatch()
   const changeToGroup = useChangeToGroup()
+  const goToTopicDefault = useGoToTopic()
   const feedType = getRouteParam('feedType', route)
   const topicName = providedTopicName || getRouteParam('topicName', route)
 
@@ -55,10 +57,11 @@ export default function Feed ({ topicName: providedTopicName }) {
   const goToMember = id => navigation.navigate('Member', { id })
   const goToTopic = selectedTopicName => {
     if (selectedTopicName === topic?.name) return
+
     if (topic?.name) {
       navigation.setParams({ topicName: selectedTopicName })
     } else {
-      navigation.push('Feed', { groupId: currentGroup.id, topicName: selectedTopicName })
+      goToTopicDefault(selectedTopicName)
     }
   }
 
