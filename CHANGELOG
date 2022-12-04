@@ -4,6 +4,10 @@ All notable changes to HyloReactNative (the Hylo mobile app) will be documented 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### [5.1.3] - 2022-12-03
+### Fixed
+- Members not loading on initial navigation to screen
+
 ### [5.1.2] - 2022-12-03
 ### Fixed
 - Terms of Service and Privacy Policy links on Login and Signup screens as per Facebook review

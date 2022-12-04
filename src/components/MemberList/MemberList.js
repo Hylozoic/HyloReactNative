@@ -4,9 +4,9 @@ import {
   keys, isEmpty, debounce, size
 } from 'lodash/fp'
 import {
-  View, FlatList, Text, TouchableOpacity, TextInput
+  View, FlatList, Text, TouchableOpacity
 } from 'react-native'
-import { useScrollToTop } from '@react-navigation/native'
+import { useIsFocused, useScrollToTop } from '@react-navigation/native'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
@@ -135,10 +135,11 @@ export class MemberList extends React.Component {
 
 export default function (props) {
   const ref = React.useRef(null)
+  const isFocused = useIsFocused()
 
   useScrollToTop(ref)
 
-  return <MemberList {...props} scrollRef={ref} />
+  return <MemberList {...props} isFocused={isFocused} scrollRef={ref} />
 }
 
 export function Member ({ member, showMember }) {
