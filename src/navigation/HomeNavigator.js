@@ -27,14 +27,14 @@ export default function HomeNavigator ({ navigation }) {
   const returnToOnAuthPath = useSelector(getReturnToOnAuthPath)
   const [, setCurrentGroup] = useCurrentGroup()
 
-  useOpenInitialURL()
-  useReturnToOnAuthPath()
-
   useEffect(() => {
     if (!initialURL && !returnToOnAuthPath) {
       setTimeout(() => navigation.navigate('Feed'), 400)
     }
   }, [])
+
+  useOpenInitialURL()
+  useReturnToOnAuthPath()
 
   const navigatorProps = {
     initialRouteName: 'Group Navigation',
