@@ -41,7 +41,7 @@ exports[`mapStateToProps handles null value for lastViewedGroup 1`] = `
   },
   "group": SessionBoundModel {
     "_fields": {
-      "id": 10,
+      "id": "10",
       "slug": "tom",
     },
   },

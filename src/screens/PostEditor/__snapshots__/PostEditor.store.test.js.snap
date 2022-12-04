@@ -53,7 +53,7 @@ exports[`createPost should match the last snapshot 1`] = `
   donationsLink
   projectManagementLink
   myEventResponse
-  commenters(first: 3) {
+  commenters(first: 20) {
     id
     name
     avatarUrl
@@ -231,7 +231,7 @@ exports[`createProject should match the last snapshot 1`] = `
   donationsLink
   projectManagementLink
   myEventResponse
-  commenters(first: 3) {
+  commenters(first: 20) {
     id
     name
     avatarUrl
@@ -411,7 +411,7 @@ exports[`updatePost should match the last snapshot 1`] = `
   donationsLink
   projectManagementLink
   myEventResponse
-  commenters(first: 3) {
+  commenters(first: 20) {
     id
     name
     avatarUrl

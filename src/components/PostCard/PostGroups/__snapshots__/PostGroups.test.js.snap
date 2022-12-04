@@ -2,33 +2,23 @@
 
 exports[`PostGroups matches last snapshot 1`] = `
 <View>
-  <View>
-    <Text>
-      Posted In: 
-    </Text>
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+  >
     <View>
-      <View
-        accessible={true}
-        collapsable={false}
-        focusable={true}
-        onClick={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-      >
-        <Text
-          numberOfLines={1}
-        >
-          One
-        </Text>
-      </View>
+      <Text>
+        Posted In: 
+      </Text>
       <View>
-        <Text>
-           and 
-        </Text>
         <View
           accessible={true}
           collapsable={false}
@@ -41,24 +31,19 @@ exports[`PostGroups matches last snapshot 1`] = `
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
         >
+          <Text
+            numberOfLines={1}
+          >
+            One
+          </Text>
+        </View>
+        <View>
           <Text>
+             and 
             2 others
           </Text>
         </View>
       </View>
-    </View>
-    <View
-      accessible={true}
-      collapsable={false}
-      focusable={true}
-      onClick={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-    >
       <Icon
         name="ArrowDown"
       />

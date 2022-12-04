@@ -42,7 +42,7 @@ exports[`action creators matches the last snapshot from fetchNotifications 1`] =
   donationsLink
   projectManagementLink
   myEventResponse
-  commenters(first: 3) {
+  commenters(first: 20) {
     id
     name
     avatarUrl
