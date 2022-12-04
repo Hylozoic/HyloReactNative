@@ -413,7 +413,7 @@ exports[`renders with defaults 1`] = `
                                   onStartShouldSetResponder={[Function]}
                                 >
                                   <Text>
-                                    https://www.hylo.com/terms
+                                    Terms of Service + Privacy Policy
                                   </Text>
                                 </View>
                               </View>

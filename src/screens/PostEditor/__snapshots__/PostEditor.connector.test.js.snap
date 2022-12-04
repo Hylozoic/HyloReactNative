@@ -38,7 +38,7 @@ exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
   donationsLink
   projectManagementLink
   myEventResponse
-  commenters(first: 3) {
+  commenters(first: 20) {
     id
     name
     avatarUrl

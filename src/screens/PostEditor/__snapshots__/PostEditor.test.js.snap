@@ -54,6 +54,17 @@ exports[`PostEditor renders a new editor correctly 1`] = `
           </View>
           <Topics
             onPress={[Function]}
+            onPressRemove={[Function]}
+            pillStyle={
+              {
+                "marginTop": 5,
+              }
+            }
+            textStyle={
+              {
+                "fontSize": 14,
+              }
+            }
             topics={[]}
           />
         </TouchableOpacity>
@@ -501,7 +512,15 @@ exports[`PostEditor renders correctly while saving 1`] = `
                             <View
                               accessible={true}
                               collapsable={false}
-                              focusable={false}
+                              focusable={true}
+                              hitSlop={
+                                {
+                                  "bottom": 7,
+                                  "left": 7,
+                                  "right": 7,
+                                  "top": 7,
+                                }
+                              }
                               onClick={[Function]}
                               onResponderGrant={[Function]}
                               onResponderMove={[Function]}
@@ -510,31 +529,10 @@ exports[`PostEditor renders correctly while saving 1`] = `
                               onResponderTerminationRequest={[Function]}
                               onStartShouldSetResponder={[Function]}
                             >
-                              <View
-                                accessible={true}
-                                collapsable={false}
-                                focusable={true}
-                                hitSlop={
-                                  {
-                                    "bottom": 7,
-                                    "left": 7,
-                                    "right": 7,
-                                    "top": 7,
-                                  }
-                                }
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <Icon
-                                  color="#c0c6cd"
-                                  name="Ex"
-                                />
-                              </View>
+                              <Icon
+                                color="#c0c6cd"
+                                name="Ex"
+                              />
                             </View>
                             <View>
                               <View>
@@ -942,6 +940,17 @@ exports[`PostEditor renders with a post 1`] = `
           </View>
           <Topics
             onPress={[Function]}
+            onPressRemove={[Function]}
+            pillStyle={
+              {
+                "marginTop": 5,
+              }
+            }
+            textStyle={
+              {
+                "fontSize": 14,
+              }
+            }
             topics={[]}
           />
         </TouchableOpacity>

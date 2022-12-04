@@ -4,14 +4,25 @@ exports[`LinkPreview matches snapshot 1`] = `
 <TouchableOpacity
   onPress={[Function]}
 >
-  <SpaceFillingImage
-    imageUrl="rarara.com/ra.png"
+  <FastImage
+    source={
+      {
+        "uri": "rarara.com/ra.png",
+      }
+    }
   />
-  <Text>
-    Good Link
-  </Text>
-  <Text>
-    GOODLINK.COM
-  </Text>
+  <View>
+    <Text>
+      Good Link
+    </Text>
+    <Text
+      numberOfLines={2}
+    />
+    <Text
+      numberOfLines={1}
+    >
+      GOODLINK.COM
+    </Text>
+  </View>
 </TouchableOpacity>
 `;

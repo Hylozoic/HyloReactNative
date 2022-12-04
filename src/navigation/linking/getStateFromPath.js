@@ -30,7 +30,7 @@ export default function getStateFromPath (providedPath) {
 
   // Set `returnToOnAuthPath` for routes requiring auth when not auth'd
   if (!isAuthorized && screenPath.match(new RegExp(`^${AUTH_ROOT_SCREEN_NAME}`))) {
-    store.dispatch(setReturnToOnAuthPath(path))
+    store.dispatch(setReturnToOnAuthPath(providedPath))
 
     return null
   }
