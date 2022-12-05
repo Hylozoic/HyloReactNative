@@ -33,7 +33,7 @@
           <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         <!-- Deep linking intent-filter moved from MainActivity to react-native-boot-splash as per setup instructions -->
-        <intent-filter>
+        <intent-filter android:autoVerify="true">
           <action android:name="android.intent.action.VIEW" />
           <category android:name="android.intent.category.DEFAULT" />
           <category android:name="android.intent.category.BROWSABLE" />
