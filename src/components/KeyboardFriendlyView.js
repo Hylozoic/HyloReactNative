@@ -6,10 +6,12 @@ export default function KeyboardFriendlyView ({ children, ...props }) {
   const allProps = {
     ...props,
     behavior: isIOS ? 'padding' : '',
-    keyboardVerticalOffset: isIOS ? 74 : 64,
+    keyboardVerticalOffset: isIOS ? 94 : 64,
     enabled: true
   }
-  return <KeyboardAvoidingView {...allProps}>
-    {children}
-  </KeyboardAvoidingView>
+  return (
+    <KeyboardAvoidingView {...allProps}>
+      {children}
+    </KeyboardAvoidingView>
+  )
 }

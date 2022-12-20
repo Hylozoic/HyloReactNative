@@ -7,7 +7,6 @@ export default StyleSheet.create({
     backgroundColor: alabaster // flag-messages-background-color
   },
   input: {
-    height: Platform.isIOS ? 22 : null,
     fontSize: 14,
     fontFamily: 'Circular-Book',
     paddingBottom: 4,

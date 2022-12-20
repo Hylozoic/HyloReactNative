@@ -105,6 +105,11 @@ const HyloWebView = forwardRef(function HyloWebView ({
       }}
 
       */
+      originWhitelist={[
+        'https://www.hylo*',
+        'https://staging.hylo*',
+        'http://localhost*'
+      ]}
       ref={webViewRef}
       scalesPageToFit={false}
       // Needs to remain false for AutoHeight
