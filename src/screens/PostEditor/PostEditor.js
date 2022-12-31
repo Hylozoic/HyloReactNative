@@ -391,6 +391,14 @@ export class PostEditor extends React.Component {
     })
   }
 
+  handleDonationLinkURL = value => {
+    this.setState({ donationLinkURL: value })
+  }
+
+  handleProjectManagementToolURL = value => {
+    this.setState({ projectManagementToolURL: value })
+  }
+
   handleShowFilePicker = async () => {
     this.setState({ filePickerPending: true })
     await fileSelectorShowFilePicker({
@@ -461,7 +469,7 @@ export class PostEditor extends React.Component {
   }
 
   renderForm = () => {
-    const { canModerate, post, postLoading } = this.props
+    const { canModerate, donationLinkURL, post, postLoading, projectManagementToolURL } = this.props
     const {
       isSaving, topics, title, type, filePickerPending, announcementEnabled,
       titleLengthError, members, groups, startTime, endTime, location,
@@ -558,19 +566,6 @@ export class PostEditor extends React.Component {
           )}
 
           <TouchableOpacity
-            style={[styles.pressSelectionSection, styles.topics]}
-            onPress={this.handleShowLocationPicker}
-          >
-            <View style={styles.pressSelection}>
-              <Text style={styles.pressSelectionLeft}>Location</Text>
-              <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View>
-            </View>
-            {(location || locationObject) && (
-              <Text style={styles.pressSelectionValue}>{location || locationObject.fullText}</Text>
-            )}
-          </TouchableOpacity>
-
-          <TouchableOpacity
             style={styles.pressSelectionSection}
             onPress={this.handleShowGroupsEditor}
           >
@@ -587,6 +582,57 @@ export class PostEditor extends React.Component {
               RemoveIcon={() => (
                 <Icon name='Ex' style={styles.groupRemoveIcon} />
               )}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.pressSelectionSection, styles.topics]}
+            onPress={this.handleShowLocationPicker}
+          >
+            <View style={styles.pressSelection}>
+              <Text style={styles.pressSelectionLeft}>Location</Text>
+              <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View>
+            </View>
+            {(location || locationObject) && (
+              <Text style={styles.pressSelectionValue}>{location || locationObject.fullText}</Text>
+            )}
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.pressSelectionSection, styles.topics]}
+            onPress={this.handleShowLocationPicker}
+          >
+            <View style={styles.pressSelection}>
+              <Text style={styles.pressSelectionLeft}>Donation Link</Text>
+              {/* <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View> */}
+            </View>
+            <TextInput
+              style={styles.pressSelectionValue}
+              onChangeText={this.handleDonationLinkURL}
+              returnKeyType='next'
+              autoCapitalize='none'
+              value={donationLinkURL}
+              autoCorrect={false}
+              underlineColorAndroid='transparent'
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.pressSelectionSection, styles.topics]}
+            onPress={this.handleShowLocationPicker}
+          >
+            <View style={styles.pressSelection}>
+              <Text style={styles.pressSelectionLeft}>Project Management</Text>
+              {/* <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View> */}
+            </View>
+            <TextInput
+              style={styles.pressSelectionValue}
+              onChangeText={this.handleProjectManagementToolURL}
+              returnKeyType='next'
+              autoCapitalize='none'
+              value={projectManagementToolURL}
+              autoCorrect={false}
+              underlineColorAndroid='transparent'
             />
           </TouchableOpacity>
 

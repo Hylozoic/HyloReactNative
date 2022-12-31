@@ -20,6 +20,6 @@ module.exports = {
     // * May need to makes-sure to carry-over defaults
     // assetExts: ['html', 'css', 'jpg', 'png', 'ttf', 'graphql'],
     assetExts: ['png', 'jpg', 'graphql'],
-    sourceExts: ['js', 'json', 'ts', 'tsx', 'cjs']
+    sourceExts: ['js', 'json', 'ts', 'tsx', 'cjs', 'svg']
   }
 }

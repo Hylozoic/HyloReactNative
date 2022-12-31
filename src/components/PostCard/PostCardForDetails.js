@@ -1,9 +1,10 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigation } from '@react-navigation/native'
+import { Link, useNavigation } from '@react-navigation/native'
 import { find, get } from 'lodash/fp'
 import { LocationHelpers } from 'hylo-shared'
+import { openURL } from 'hooks/useOpenURL'
 import useChangeToGroup from 'hooks/useChangeToGroup'
 import useGoToMember from 'hooks/useGoToMember'
 import useGoToTopic from 'hooks/useGoToTopic'
@@ -22,6 +23,7 @@ import PostHeader from 'components/PostCard/PostHeader'
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import Topics from 'components/Topics'
 import styles from 'components/PostCard/PostCard.styles'
+import { SvgUri } from 'react-native-svg'
 
 export default function PostCardForDetails ({ post, showGroups = true }) {
   const dispatch = useDispatch()
@@ -30,6 +32,13 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
   const changeToGroup = useChangeToGroup()
   const goToMember = useGoToMember()
   const goToTopic = useGoToTopic()
+
+  const projectManagementToolMatch = post.projectManagementLink &&
+    post.projectManagementLink.match(/asana|trello|airtable|clickup|confluence|teamwork|notion|wrike|zoho/)
+  const projectManagementTool = projectManagementToolMatch && projectManagementToolMatch[0]
+  const donationServiceMatch = post.donationsLink &&
+    post.donationsLink.match(/cash|clover|gofundme|opencollective|paypal|squareup|venmo/)
+  const donationService = donationServiceMatch && donationServiceMatch[0]
 
   const handleRespondToEvent = response => dispatch(respondToEventAction(post.id, response))
   const joinProject = () => dispatch(joinProjectAction(post.id))
@@ -105,6 +114,32 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
           onPress={openProjectMembersModal}
           style={styles.projectMembersContainer}
         />
+      )}
+      {isProject && post.projectManagementLink && projectManagementTool && (
+        <View>
+          <Text>
+            This project is being managed on <SvgUri uri={`https://www.hylo.com/assets/pm-tools/${projectManagementTool}.svg`} />
+          </Text>
+          <TouchableOpacity onPress={() => openURL(post.projectManagementLink)}>
+            <Text>View tasks</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+      {isProject && post.projectManagementLink && !projectManagementTool && (
+        <View>
+          <Text>View project management tool</Text>
+          <TouchableOpacity onPress={() => openURL(post.projectManagementLink)}>
+            <Text>View tasks</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+      {post.donationsLink && donationService && (
+        <View>
+          <Text>
+            Support this project on <SvgUri uri={`https://www.hylo.com/assets/payment-services/${donationService}.svg`} />
+          </Text>
+          <Link styleName='join-project-button' to={post.donationsLink}>Contribute</Link>
+        </View>
       )}
       {isProject && (
         <JoinProjectButton
