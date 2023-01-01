@@ -13,7 +13,7 @@ import RNPickerSelect from 'react-native-picker-select'
 import { useIsFocused } from '@react-navigation/native'
 import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
 import moment from 'moment-timezone'
-import { Validators } from 'hylo-shared'
+import { Validators, TextHelpers } from 'hylo-shared'
 import { isIOS } from 'util/platform'
 import { showToast, hideToast } from 'util/toast'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
@@ -97,6 +97,8 @@ export class PostEditor extends React.Component {
         : null,
       location: post?.location,
       locationObject: post?.locationObject,
+      donationLink: post?.donationLink,
+      projectManagementLink: post?.projectManagementLink,
       startTimeExpanded: false,
       endTimeExpanded: false,
       isValid: post?.id,
@@ -155,7 +157,7 @@ export class PostEditor extends React.Component {
       files, images, title,
       topics, type, announcementEnabled, members,
       groups, startTime, endTime, location,
-      locationObject
+      locationObject, donationsLinkURL, projectManagementURL
     } = this.state
     const postData = {
       id: post.id,
@@ -171,6 +173,8 @@ export class PostEditor extends React.Component {
       startTime: startTime && startTime.getTime(),
       endTime: endTime && endTime.getTime(),
       location,
+      projectManagementLink: projectManagementURL,
+      donationsLink: donationsLinkURL,
       locationId: (locationObject && locationObject?.id) ? locationObject.id : null
     }
 
@@ -230,7 +234,10 @@ export class PostEditor extends React.Component {
   }
 
   setIsValid = (updatedState = {}) => {
-    const { type, title, groups, startTime, endTime, images, files } = Object.assign(
+    const {
+      type, title, groups, startTime, endTime, images, files,
+      donationsLinkURL, projectManagementURL
+    } = Object.assign(
       {},
       this.state,
       updatedState
@@ -243,7 +250,10 @@ export class PostEditor extends React.Component {
       filesLoading ||
       (!title || title.length < 1) ||
       isEmpty(groups) ||
-      (type === 'event' && (!startTime || !endTime))
+      (type === 'event' && (!startTime || !endTime)) ||
+      (donationsLinkURL && !TextHelpers.sanitizeURL(donationsLinkURL)) ||
+      (projectManagementURL && !TextHelpers.sanitizeURL(projectManagementURL))
+
     ) {
       this.setState({ isValid: false }, this.renderReactNavigationHeader)
     } else {
@@ -392,11 +402,11 @@ export class PostEditor extends React.Component {
   }
 
   handleDonationLinkURL = value => {
-    this.setState({ donationLinkURL: value })
+    this.setState({ donationsLinkURL: value }, this.setIsValid)
   }
 
   handleProjectManagementToolURL = value => {
-    this.setState({ projectManagementToolURL: value })
+    this.setState({ projectManagementURL: value }, this.setIsValid)
   }
 
   handleShowFilePicker = async () => {
@@ -469,11 +479,11 @@ export class PostEditor extends React.Component {
   }
 
   renderForm = () => {
-    const { canModerate, donationLinkURL, post, postLoading, projectManagementToolURL } = this.props
+    const { canModerate, post, postLoading } = this.props
     const {
       isSaving, topics, title, type, filePickerPending, announcementEnabled,
-      titleLengthError, members, groups, startTime, endTime, location,
-      locationObject, topicsPicked, files, images
+      titleLengthError, members, groups, startTime, endTime, location, donationsLinkURL,
+      locationObject, projectManagementURL, topicsPicked, files, images
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
 
@@ -611,7 +621,7 @@ export class PostEditor extends React.Component {
               onChangeText={this.handleDonationLinkURL}
               returnKeyType='next'
               autoCapitalize='none'
-              value={donationLinkURL}
+              value={donationsLinkURL}
               autoCorrect={false}
               underlineColorAndroid='transparent'
             />
@@ -630,7 +640,7 @@ export class PostEditor extends React.Component {
               onChangeText={this.handleProjectManagementToolURL}
               returnKeyType='next'
               autoCapitalize='none'
-              value={projectManagementToolURL}
+              value={projectManagementURL}
               autoCorrect={false}
               underlineColorAndroid='transparent'
             />
