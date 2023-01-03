@@ -8,11 +8,9 @@ import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getMe from 'store/selectors/getMe'
 import upload from 'store/actions/upload'
 import fetchPost from 'store/actions/fetchPost'
-import {
-  createPost,
-  createProject,
-  updatePost
-} from './PostEditor.store'
+import createPost from 'store/actions/createPost'
+import createProject from 'store/actions/createProject'
+import updatePost from 'store/actions/updatePost'
 import getRouteParam from 'store/selectors/getRouteParam'
 import { pollingFindOrCreateLocation as providedPollingFindOrCreateLocation } from 'screens/LocationPicker/LocationPicker.store'
 

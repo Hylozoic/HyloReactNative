@@ -97,7 +97,7 @@ export class PostEditor extends React.Component {
         : null,
       location: post?.location,
       locationObject: post?.locationObject,
-      donationLink: post?.donationLink,
+      donationsLink: post?.donationsLink,
       projectManagementLink: post?.projectManagementLink,
       startTimeExpanded: false,
       endTimeExpanded: false,
@@ -157,7 +157,7 @@ export class PostEditor extends React.Component {
       files, images, title,
       topics, type, announcementEnabled, members,
       groups, startTime, endTime, location,
-      locationObject, donationsLinkURL, projectManagementURL
+      locationObject, donationsLink, projectManagementLink
     } = this.state
     const postData = {
       id: post.id,
@@ -173,8 +173,8 @@ export class PostEditor extends React.Component {
       startTime: startTime && startTime.getTime(),
       endTime: endTime && endTime.getTime(),
       location,
-      projectManagementLink: projectManagementURL,
-      donationsLink: donationsLinkURL,
+      projectManagementLink,
+      donationsLink,
       locationId: (locationObject && locationObject?.id) ? locationObject.id : null
     }
 
@@ -236,7 +236,7 @@ export class PostEditor extends React.Component {
   setIsValid = (updatedState = {}) => {
     const {
       type, title, groups, startTime, endTime, images, files,
-      donationsLinkURL, projectManagementURL
+      donationsLink, projectManagementLink
     } = Object.assign(
       {},
       this.state,
@@ -251,8 +251,8 @@ export class PostEditor extends React.Component {
       (!title || title.length < 1) ||
       isEmpty(groups) ||
       (type === 'event' && (!startTime || !endTime)) ||
-      (donationsLinkURL && !TextHelpers.sanitizeURL(donationsLinkURL)) ||
-      (projectManagementURL && !TextHelpers.sanitizeURL(projectManagementURL))
+      (donationsLink && !TextHelpers.sanitizeURL(donationsLink)) ||
+      (projectManagementLink && !TextHelpers.sanitizeURL(projectManagementLink))
 
     ) {
       this.setState({ isValid: false }, this.renderReactNavigationHeader)
@@ -401,12 +401,12 @@ export class PostEditor extends React.Component {
     })
   }
 
-  handleDonationLinkURL = value => {
-    this.setState({ donationsLinkURL: value }, this.setIsValid)
+  handleDonationsLink = donationsLink => {
+    this.setState({ donationsLink }, this.setIsValid)
   }
 
-  handleProjectManagementToolURL = value => {
-    this.setState({ projectManagementURL: value }, this.setIsValid)
+  handleProjectManagementLink = projectManagementLink => {
+    this.setState({ projectManagementLink }, this.setIsValid)
   }
 
   handleShowFilePicker = async () => {
@@ -482,8 +482,8 @@ export class PostEditor extends React.Component {
     const { canModerate, post, postLoading } = this.props
     const {
       isSaving, topics, title, type, filePickerPending, announcementEnabled,
-      titleLengthError, members, groups, startTime, endTime, location, donationsLinkURL,
-      locationObject, projectManagementURL, topicsPicked, files, images
+      titleLengthError, members, groups, startTime, endTime, location, donationsLink,
+      locationObject, projectManagementLink, topicsPicked, files, images
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
 
@@ -618,10 +618,10 @@ export class PostEditor extends React.Component {
             </View>
             <TextInput
               style={styles.pressSelectionValue}
-              onChangeText={this.handleDonationLinkURL}
+              onChangeText={this.handleDonationsLink}
               returnKeyType='next'
               autoCapitalize='none'
-              value={donationsLinkURL}
+              value={donationsLink}
               autoCorrect={false}
               underlineColorAndroid='transparent'
             />
@@ -637,10 +637,10 @@ export class PostEditor extends React.Component {
             </View>
             <TextInput
               style={styles.pressSelectionValue}
-              onChangeText={this.handleProjectManagementToolURL}
+              onChangeText={this.handleProjectManagementLink}
               returnKeyType='next'
               autoCapitalize='none'
-              value={projectManagementURL}
+              value={projectManagementLink}
               autoCorrect={false}
               underlineColorAndroid='transparent'
             />
