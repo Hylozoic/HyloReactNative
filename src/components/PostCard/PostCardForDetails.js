@@ -33,9 +33,9 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
   const goToMember = useGoToMember()
   const goToTopic = useGoToTopic()
 
-  const projectManagementToolMatch = post.projectManagementLink &&
+  const projectManagementMatch = post.projectManagementLink &&
     post.projectManagementLink.match(/asana|trello|airtable|clickup|confluence|teamwork|notion|wrike|zoho/)
-  const projectManagementTool = projectManagementToolMatch && projectManagementToolMatch[0]
+  const projectManagement = projectManagementMatch && projectManagementMatch[0]
   const donationServiceMatch = post.donationsLink &&
     post.donationsLink.match(/cash|clover|gofundme|opencollective|paypal|squareup|venmo/)
   const donationService = donationServiceMatch && donationServiceMatch[0]
@@ -115,17 +115,27 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
           style={styles.projectMembersContainer}
         />
       )}
-      {isProject && post.projectManagementLink && projectManagementTool && (
+      {isProject && post.donationsLink && donationsLink && (
         <View>
           <Text>
-            This project is being managed on <SvgUri uri={`https://www.hylo.com/assets/pm-tools/${projectManagementTool}.svg`} />
+            This project is being managed on <SvgUri uri={`https://www.hylo.com/assets/pm-tools/${projectManagement}.svg`} />
           </Text>
           <TouchableOpacity onPress={() => openURL(post.projectManagementLink)}>
             <Text>View tasks</Text>
           </TouchableOpacity>
         </View>
       )}
-      {isProject && post.projectManagementLink && !projectManagementTool && (
+      {isProject && post.projectManagementLink && projectManagement && (
+        <View>
+          <Text>
+            This project is being managed on <SvgUri uri={`https://www.hylo.com/assets/pm-tools/${projectManagement}.svg`} />
+          </Text>
+          <TouchableOpacity onPress={() => openURL(post.projectManagementLink)}>
+            <Text>View tasks</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+      {isProject && post.projectManagementLink && !projectManagement && (
         <View>
           <Text>View project management tool</Text>
           <TouchableOpacity onPress={() => openURL(post.projectManagementLink)}>
