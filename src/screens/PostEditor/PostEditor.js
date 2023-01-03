@@ -173,8 +173,8 @@ export class PostEditor extends React.Component {
       startTime: startTime && startTime.getTime(),
       endTime: endTime && endTime.getTime(),
       location,
-      projectManagementLink,
-      donationsLink,
+      projectManagementLink: TextHelpers.sanitizeURL(projectManagementLink),
+      donationsLink: TextHelpers.sanitizeURL(donationsLink),
       locationId: (locationObject && locationObject?.id) ? locationObject.id : null
     }
 
@@ -608,10 +608,7 @@ export class PostEditor extends React.Component {
             )}
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[styles.pressSelectionSection, styles.topics]}
-            onPress={this.handleShowLocationPicker}
-          >
+          <View style={[styles.pressSelectionSection, styles.topics]}>
             <View style={styles.pressSelection}>
               <Text style={styles.pressSelectionLeft}>Donation Link</Text>
               {/* <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View> */}
@@ -625,15 +622,11 @@ export class PostEditor extends React.Component {
               autoCorrect={false}
               underlineColorAndroid='transparent'
             />
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity
-            style={[styles.pressSelectionSection, styles.topics]}
-            onPress={this.handleShowLocationPicker}
-          >
+          <View style={[styles.pressSelectionSection, styles.topics]}>
             <View style={styles.pressSelection}>
               <Text style={styles.pressSelectionLeft}>Project Management</Text>
-              {/* <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View> */}
             </View>
             <TextInput
               style={styles.pressSelectionValue}
@@ -644,7 +637,7 @@ export class PostEditor extends React.Component {
               autoCorrect={false}
               underlineColorAndroid='transparent'
             />
-          </TouchableOpacity>
+          </View>
 
           <BottomBar
             post={post}
