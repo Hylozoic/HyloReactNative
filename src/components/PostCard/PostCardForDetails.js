@@ -1,9 +1,10 @@
 import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import { find, get } from 'lodash/fp'
 import { LocationHelpers } from 'hylo-shared'
+import { DEFAULT_APP_HOST } from 'navigation/linking'
 import { openURL } from 'hooks/useOpenURL'
 import useChangeToGroup from 'hooks/useChangeToGroup'
 import useGoToMember from 'hooks/useGoToMember'
@@ -35,10 +36,13 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
 
   const projectManagementToolMatch = post.projectManagementLink &&
     post.projectManagementLink.match(/asana|trello|airtable|clickup|confluence|teamwork|notion|wrike|zoho/)
-  const projectManagementTool = projectManagementToolMatch && projectManagementToolMatch[0]
+  const projectManagementLinkSvgUri = projectManagementToolMatch &&
+    `${DEFAULT_APP_HOST}/assets/pm-tools/${projectManagementToolMatch[0]}.svg`
+
   const donationServiceMatch = post.donationsLink &&
     post.donationsLink.match(/cash|clover|gofundme|opencollective|paypal|squareup|venmo/)
-  const donationService = donationServiceMatch && donationServiceMatch[0]
+  const donationServiceSvgUri = donationServiceMatch &&
+    `${DEFAULT_APP_HOST}/assets/payment-services/${donationServiceMatch[0]}.svg`
 
   const handleRespondToEvent = response => dispatch(respondToEventAction(post.id, response))
   const joinProject = () => dispatch(joinProjectAction(post.id))
@@ -117,33 +121,35 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
       )}
       {isProject && post.projectManagementLink && (
         <View>
-          {projectManagementTool && (
+          {projectManagementLinkSvgUri && (
             <Text>
-              This project is being managed on <SvgUri uri={`https://www.hylo.com/assets/pm-tools/${projectManagementTool}.svg`} />
+              This project is being managed on <SvgUri width='50' uri={projectManagementLinkSvgUri} />
             </Text>
           )}
-          {!projectManagementTool && (
+          {!projectManagementLinkSvgUri && (
             <Text>View project management tool</Text>
           )}
           <Button
+            style={{ width: 100 }}
             onPress={() => openURL(post.projectManagementLink)}
             text='View tasks'
           />
         </View>
       )}
       {post.donationsLink && (
-        <View>
-          {donationService && (
+        <View style={{ justifyContent: 'space-between' }}>
+          {donationServiceSvgUri && (
             <Text>
-              Support this project on <SvgUri uri={`https://www.hylo.com/assets/payment-services/${donationService}.svg`} />
+              Support this project on <SvgUri width='50' uri={donationServiceSvgUri} />
             </Text>
           )}
-          {!donationService && (
+          {!donationServiceSvgUri && (
             <Text>
               Support this project
             </Text>
           )}
           <Button
+            style={{ width: 100 }}
             onPress={() => openURL(post.donationsLink)}
             text='Contribute'
           />
