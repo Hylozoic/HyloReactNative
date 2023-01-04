@@ -120,28 +120,34 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
         />
       )}
       {isProject && post.projectManagementLink && (
-        <View>
+        <View style={styles.donationsLink}>
           {projectManagementLinkSvgUri && (
-            <Text>
-              This project is being managed on <SvgUri width='50' uri={projectManagementLinkSvgUri} />
-            </Text>
+            <>
+              <Text>
+                This project is being managed on
+              </Text>
+              <View style={{ flex: 1, paddingLeft: 5 }}><SvgUri width='50' uri={projectManagementLinkSvgUri} /></View>
+            </>
           )}
           {!projectManagementLinkSvgUri && (
             <Text>View project management tool</Text>
           )}
           <Button
-            style={{ width: 100 }}
+            style={{ width: 80, height: 25, fontSize: 11 }}
             onPress={() => openURL(post.projectManagementLink)}
             text='View tasks'
           />
         </View>
       )}
       {post.donationsLink && (
-        <View style={{ justifyContent: 'space-between' }}>
+        <View style={styles.donationsLink}>
           {donationServiceSvgUri && (
-            <Text>
-              Support this project on <SvgUri width='50' uri={donationServiceSvgUri} />
-            </Text>
+            <>
+              <Text>
+                Support this project on
+              </Text>
+              <View style={{ flex: 1, paddingLeft: 5 }}><SvgUri width='50' uri={donationServiceSvgUri} /></View>
+            </>
           )}
           {!donationServiceSvgUri && (
             <Text>
@@ -149,7 +155,7 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
             </Text>
           )}
           <Button
-            style={{ width: 100 }}
+            style={{ width: 80, height: 25, fontSize: 11 }}
             onPress={() => openURL(post.donationsLink)}
             text='Contribute'
           />

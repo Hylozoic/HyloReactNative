@@ -44,6 +44,19 @@ export default {
     paddingHorizontal: 12,
     paddingVertical: 10
   },
+  projectManagementLink: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 12
+  },
+  donationsLink: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 12,
+    marginBottom: 10
+  },
   memberCount: {
     color: caribbeanGreen
   },
