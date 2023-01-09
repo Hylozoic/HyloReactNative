@@ -88,7 +88,7 @@ export default function GroupDetail () {
         <View style={styles.headerContent}>
           <FastImage style={styles.headerAvatar} source={{ uri: group.avatarUrl }} />
           <Text style={styles.headerText}>{group.name}</Text>
-        </View>  
+        </View>
       </FastImage>
       <View style={styles.mainContent}>
         <Text style={styles.groupDescription}>{group.description}</Text>
