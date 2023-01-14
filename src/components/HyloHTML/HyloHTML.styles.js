@@ -53,6 +53,9 @@ export const classesStyles = {
     color: '#0DC39F',
     textDecorationLine: 'none'
   },
+  'mention-current-user': {
+    color: '#FFB949'
+  },
   topic: {
     color: '#0DC39F',
     textDecorationLine: 'none'
