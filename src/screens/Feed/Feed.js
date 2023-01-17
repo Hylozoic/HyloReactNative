@@ -10,6 +10,7 @@ import useChangeToGroup from 'hooks/useChangeToGroup'
 import useGoToTopic from 'hooks/useGoToTopic'
 import { PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import getCustomView from 'store/selectors/getCustomView'
 import getGroupTopic from 'store/selectors/getGroupTopic'
 import getMe from 'store/selectors/getMe'
 import getMemberships from 'store/selectors/getMemberships'
@@ -38,10 +39,25 @@ export default function Feed ({ topicName: providedTopicName }) {
   const navigation = useNavigation()
   const route = useRoute()
   const dispatch = useDispatch()
+
+  const customViewId = getRouteParam('customViewId', route)
+  const customView = useSelector(state => getCustomView(state, { customViewId }))
+  const feedType = getRouteParam('feedType', route)
+
   const changeToGroup = useChangeToGroup()
   const goToTopicDefault = useGoToTopic()
-  const feedType = getRouteParam('feedType', route)
   const topicName = providedTopicName || getRouteParam('topicName', route)
+
+  console.log('!!! customViewType', customView)
+
+  const customViewType = customView?.type
+  const customPostTypes = customViewType === 'stream' ? customView?.postTypes : null
+  const customViewMode = customView?.defaultViewMode
+  const customViewName = customView?.name
+  const customViewIcon = customView?.icon
+  const activePostsOnly = customViewType === 'stream' ? customView?.activePostsOnly : false
+  const customViewTopics = customViewType === 'stream' ? customView?.topics : null
+  const customViewSort = customView?.defaultSort
 
   const currentUser = useSelector(getMe)
   const memberships = useSelector(getMemberships)
