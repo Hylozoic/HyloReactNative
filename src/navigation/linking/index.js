@@ -39,6 +39,7 @@ export const routingConfig = {
   // context group routes (/all, /public)
   '/:groupSlug(all|public)':                                 `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab`,
   '/:groupSlug(all|public)/post/:id':                        `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Post Details`,
+  '/:groupSlug(all|public)/post/:id/comments/:commentId':    `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Post Details`,
   '/:groupSlug(all)/members/:id':                            `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Member`,
   '/:groupSlug(all)/topics/:topicName':                      `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Feed`,
 
@@ -62,6 +63,7 @@ export const routingConfig = {
   '/:context(groups)/:groupSlug/explore':                    `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Group Explore`,
   '/:context(groups)/:groupSlug/create':                      `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
   '/:context(groups)/:groupSlug/post/:id':                   `${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Post Details`,
+  '/:context(groups)/:groupSlug/post/:id/comments/:commentId':`${AUTH_ROOT_SCREEN_NAME}/Drawer/Tabs/Home Tab/Post Details`,
   '/:context(groups)/:groupSlug/post/:id/edit':              `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
 
   // /settings
@@ -81,6 +83,7 @@ export const routingConfig = {
   '(.*)/group/:groupSlug/explore':                           `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Group Explore')}`,
   '(.*)/members/:id':                                        `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Member')}`,
   '(.*)/post/:id':                                           `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
+  '(.*)/post/:id/comments/:commentId':                       `${AUTH_ROOT_SCREEN_NAME}/${modalScreenName('Post Details')}`,
   '(.*)/create/group':                                       `${AUTH_ROOT_SCREEN_NAME}/Create Group`,
   '(.*)/create/post':                                        `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
   '(.*)/post/:id/edit':                                      `${AUTH_ROOT_SCREEN_NAME}/Edit Post`,
