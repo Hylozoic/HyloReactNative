@@ -7,7 +7,7 @@ exports[`createPost should match the last snapshot 1`] = `
         $type: String
         $title: String
         $details: String
-        $groupIds: [String]
+        $groupIds: [ID]
         $startTime: Date
         $endTime: Date
         $location: String
@@ -185,7 +185,7 @@ exports[`createProject should match the last snapshot 1`] = `
         $type: String
         $title: String
         $details: String
-        $groupIds: [String]
+        $groupIds: [ID]
         $startTime: Date
         $endTime: Date
         $location: String
@@ -367,7 +367,7 @@ exports[`updatePost should match the last snapshot 1`] = `
         $type: String
         $title: String
         $details: String
-        $groupIds: [String]
+        $groupIds: [ID]
         $startTime: Date
         $endTime: Date
         $location: String
