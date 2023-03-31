@@ -48,7 +48,7 @@ export default function Feed ({ topicName: providedTopicName }) {
   const goToTopicDefault = useGoToTopic()
   const topicName = providedTopicName || getRouteParam('topicName', route)
 
-  console.log('!!! customViewType', customView)
+  console.log('!!! customViewType 222', customView)
 
   const customViewType = customView?.type
   const customPostTypes = customViewType === 'stream' ? customView?.postTypes : null

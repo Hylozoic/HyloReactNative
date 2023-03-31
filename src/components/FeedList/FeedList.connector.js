@@ -30,6 +30,19 @@ export function mapStateToProps (state, props) {
   const sortBy = getSort(state, props) || defaultSortBy
   const timeframe = getTimeframe(state, props)
 
+  // Custom views code from hylo-evo - Stream.connector.js
+  // const customView = getCustomView(state, props)
+  // const customViewType = customView?.type
+  // const customPostTypes = customViewType === 'stream' ? customView?.postTypes : null
+  // const customViewMode = customView?.defaultViewMode
+  // const customViewName = customView?.name
+  // const customViewIcon = customView?.icon
+  // const activePostsOnly = customViewType === 'stream' ? customView?.activePostsOnly : false
+  // const customViewTopics = customViewType === 'stream' ? customView?.topics : null
+  // const customViewSort = customView?.defaultSort
+  // const viewName = customViewName
+  // const viewIcon = customViewIcon
+
   let fetchPostParam = getQueryProps(state, {
     // For Custom Streams, not yet implemented
     activePostsOnly: false,
