@@ -72,14 +72,14 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
         title={post.title}
         type={post.type}
       />
-      {!images && (
+      {(!images || images.length === 0) && (
         <Topics
           topics={post.topics}
           onPress={t => goToTopic(t.name)}
           style={styles.topics}
         />
       )}
-      {images && (
+      {(images && images.length > 0) && (
         <ImageAttachments
           creator={post.creator}
           images={images}
