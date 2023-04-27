@@ -94,7 +94,8 @@ export class FeedListClassComponent extends React.Component {
       sortBy,
       feedType,
       filter,
-      timeframe
+      timeframe,
+      customPostTypes
     } = this.props
 
     return (
@@ -113,7 +114,7 @@ export class FeedListClassComponent extends React.Component {
               {!feedType && (
                 <View style={[styles.listControls]}>
                   <ListControl selected={sortBy} onChange={setSort} options={STREAM_SORT_OPTIONS} />
-                  <ListControl selected={filter} onChange={setFilter} options={POST_TYPE_OPTIONS} />
+                  {!customPostTypes && <ListControl selected={filter} onChange={setFilter} options={POST_TYPE_OPTIONS} />}
                 </View>
               )}
               {feedType === 'event' && (

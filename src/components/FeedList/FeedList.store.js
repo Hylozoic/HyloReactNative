@@ -95,6 +95,7 @@ export const getQueryProps = createCachedSelector(
   (_, props) => props.sortBy,
   (_, props) => props.filter,
   (_, props) => props.topicName,
+  (_, props) => props.types,
   (_, props) => props.order,
   (_, props) => props.afterTime,
   (_, props) => props.beforeTime,
@@ -104,6 +105,7 @@ export const getQueryProps = createCachedSelector(
     sortBy,
     filter,
     topicName,
+    types,
     order,
     afterTime,
     beforeTime
@@ -113,6 +115,7 @@ export const getQueryProps = createCachedSelector(
       slug,
       sortBy,
       filter,
+      types,
       topic: topicName,
       order,
       afterTime,

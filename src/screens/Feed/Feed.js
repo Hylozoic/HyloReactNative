@@ -48,16 +48,17 @@ export default function Feed ({ topicName: providedTopicName }) {
   const goToTopicDefault = useGoToTopic()
   const topicName = providedTopicName || getRouteParam('topicName', route)
 
-  console.log('!!! customViewType 222', customView)
-
   const customViewType = customView?.type
   const customPostTypes = customViewType === 'stream' ? customView?.postTypes : null
-  const customViewMode = customView?.defaultViewMode
+  // Note: Custom View Mode = grid, etc. Not implemented in App
+  // const customViewMode = customView?.defaultViewMode
   const customViewName = customView?.name
   const customViewIcon = customView?.icon
   const activePostsOnly = customViewType === 'stream' ? customView?.activePostsOnly : false
-  const customViewTopics = customViewType === 'stream' ? customView?.topics : null
+  const customViewTopics = customViewType === 'stream' ? customView?.topics.toRefArray() : null
   const customViewSort = customView?.defaultSort
+  // Sort is respected
+  const customViewCollectionId = customView?.collectionId
 
   const currentUser = useSelector(getMe)
   const memberships = useSelector(getMemberships)
@@ -125,7 +126,7 @@ export default function Feed ({ topicName: providedTopicName }) {
       <View style={styles.titleRow}>
         <View style={styles.title}>
           <Text style={styles.name} numberOfLines={3}>
-            {name}
+            {customViewName || name}
           </Text>
           {topicName && (
             <View style={styles.topicInfo}>
@@ -165,6 +166,8 @@ export default function Feed ({ topicName: providedTopicName }) {
         showTopic={goToTopic}
         topicName={topicName}
         feedType={feedType}
+        // Custom Views
+        customPostTypes={customPostTypes}
       />
       {!topicName && currentGroup && (
         <SocketSubscriber type='group' id={currentGroup.id} />

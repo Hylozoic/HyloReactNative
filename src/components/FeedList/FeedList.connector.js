@@ -20,7 +20,7 @@ import fetchPosts from 'store/actions/fetchPosts'
 import resetNewPostCount from 'store/actions/resetNewPostCount'
 
 export function mapStateToProps (state, props) {
-  const { forGroup, topicName } = props
+  const { forGroup, topicName, customPostTypes } = props
   const currentUser = getMe(state, props)
 
   const defaultPostType = get('settings.streamPostType', currentUser) || null
@@ -54,6 +54,7 @@ export function mapStateToProps (state, props) {
     slug: forGroup?.slug,
     topicName,
     sortBy,
+    types: customPostTypes,
     // Can be any of the Post Types:
     filter: postTypeFilter === NO_POST_FILTER ? null : postTypeFilter
   })
