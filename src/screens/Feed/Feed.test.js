@@ -7,6 +7,9 @@ import { TestRoot } from 'util/testing'
 import Feed from './Feed'
 
 jest.mock('store/selectors/getCurrentGroupSlug', () => () => 'public')
+jest.mock('react-native-share', () => ({
+  default: jest.fn()
+}))
 
 it('renders correctly if currentUserHasMemberships', () => {
   const group = {

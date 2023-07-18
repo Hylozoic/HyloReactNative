@@ -4,6 +4,10 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import { TestRoot } from 'util/testing'
 import PostRow from './PostRow'
 
+jest.mock('react-native-share', () => ({
+  default: jest.fn()
+}))
+
 describe('PostRow', () => {
   it('renders correctly', () => {
     const post = {

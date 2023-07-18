@@ -2,6 +2,10 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import { JoinProjectButton } from './PostCardForDetails'
 
+jest.mock('react-native-share', () => ({
+  default: jest.fn()
+}))
+
 describe('JoinProjectButton', () => {
   it('renders as expected', () => {
     const renderer = new ReactShallowRenderer()

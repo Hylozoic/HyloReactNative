@@ -4,6 +4,10 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import FeedList from './FeedList'
 import { TestRoot } from 'util/testing'
 
+jest.mock('react-native-share', () => ({
+  default: jest.fn()
+}))
+
 describe('FeedList', () => {
   it('renders correctly', () => {
     const renderer = new ReactShallowRenderer()

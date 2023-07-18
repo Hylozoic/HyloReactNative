@@ -83,6 +83,7 @@ exports[`PostCard matches the last snapshot 1`] = `
     goToGroup={[Function]}
     hideDetails={true}
     hideMenu={true}
+    onPress={[Function]}
     post={
       {
         "creator": {
