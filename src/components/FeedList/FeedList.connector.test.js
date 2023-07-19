@@ -16,7 +16,7 @@ describe('mapStateToProps', () => {
       session.Post.create({ id: i.toString(), groups: ['1'] })
     }, 5)
 
-    console.log("BUILLLLDS", buildKey(FETCH_POSTS, { ...initialState, context: 'groups', slug: 'foo' }))
+    console.log("buildKey", buildKey(FETCH_POSTS, { ...initialState, context: 'groups', slug: 'foo' }))
 
     state = {
       orm: session.state,
@@ -42,8 +42,7 @@ describe('mapStateToProps', () => {
       timeframe: 'future',
       fetchPostParam: {
         context: 'groups',
-        sortBy: 'updated',
-        filter: 'NONE'
+        sortBy: 'updated'
       }
     })
   })
