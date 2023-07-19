@@ -202,7 +202,7 @@ exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
 
 exports[`PostEditor mapStateToProps maps 1`] = `
 {
-  "canModerate": true,
+  "canModerate": undefined,
   "groupOptions": [
     {
       "id": "7",

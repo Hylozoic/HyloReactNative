@@ -23,6 +23,8 @@ export function mapStateToProps (state, props) {
   const { forGroup, topicName } = props
   const currentUser = getMe(state, props)
 
+  console.log(forGroup, 'FOR GROUP')
+
   const defaultPostType = get('settings.streamPostType', currentUser) || null
   const defaultSortBy = get('settings.streamSortBy', currentUser) || 'updated'
 
@@ -42,8 +44,10 @@ export function mapStateToProps (state, props) {
     topicName,
     sortBy,
     // Can be any of the Post Types:
-    filter: postTypeFilter === NO_POST_FILTER ? null : postTypeFilter
+    filter: postTypeFilter === NO_POST_FILTER ? "NONE" : postTypeFilter
   })
+
+  console.log("FETCH POST PARAM, HAS TO BE IDENTICAL?", fetchPostParam)
 
   if (props.feedType === 'event') {
     fetchPostParam = {
@@ -58,6 +62,16 @@ export function mapStateToProps (state, props) {
   const postIds = getPostIds(state, fetchPostParam)
   const hasMore = getHasMorePosts(state, fetchPostParam)
 
+  // console.log({
+  //   postIds,
+  //   sortBy,
+  //   filter: postTypeFilter,
+  //   timeframe,
+  //   hasMore,
+  //   pending: !!pending,
+  //   pendingRefresh: !!(pending && pending.extractQueryResults.reset),
+  //   fetchPostParam
+  // }, 'FeedList.connector.js')
   return {
     postIds,
     sortBy,
