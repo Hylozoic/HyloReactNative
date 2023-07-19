@@ -5,6 +5,10 @@ import PostHeader, { PostMenu, PostLabel } from './PostHeader'
 import { render } from '@testing-library/react-native'
 import { createInitialStateWithCurrentUser, TestRoot } from 'util/testing'
 
+jest.mock('react-native-share', () => ({
+  default: jest.fn()
+}))
+
 it('renders correctly with all=true, and no group or user', () => {
   const creator = {
     id: 24,

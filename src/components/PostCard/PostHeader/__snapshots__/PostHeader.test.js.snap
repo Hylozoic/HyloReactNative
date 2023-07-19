@@ -72,15 +72,10 @@ exports[`renders correctly with a current user 1`] = `
       <Text>
         Zeus
       </Text>
-      <Text>
-        Go!
-      </Text>
     </View>
-    <View>
-      <Text>
-        10m ago
-      </Text>
-    </View>
+    <Text>
+      10m ago
+    </Text>
   </View>
   <View>
     <View
@@ -175,91 +170,10 @@ exports[`renders correctly with all=true, and no group or user 1`] = `
       <Text>
         Zeus
       </Text>
-      <Text>
-        Go!
-      </Text>
     </View>
-    <View>
-      <Text>
-        10m ago
-      </Text>
-      <RCTScrollView
-        data={
-          [
-            {
-              "id": "1",
-              "name": "topic1",
-            },
-            {
-              "id": "2",
-              "name": "topic2",
-            },
-          ]
-        }
-        getItem={[Function]}
-        getItemCount={[Function]}
-        horizontal={true}
-        keyExtractor={[Function]}
-        onContentSizeChange={[Function]}
-        onLayout={[Function]}
-        onMomentumScrollBegin={[Function]}
-        onMomentumScrollEnd={[Function]}
-        onScroll={[Function]}
-        onScrollBeginDrag={[Function]}
-        onScrollEndDrag={[Function]}
-        removeClippedSubviews={false}
-        renderItem={[Function]}
-        scrollEventThrottle={50}
-        showsHorizontalScrollIndicator={false}
-        stickyHeaderIndices={[]}
-        viewabilityConfigCallbackPairs={[]}
-      >
-        <View>
-          <View
-            onLayout={[Function]}
-          >
-            <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-            >
-              <Text>
-                #
-                topic1
-              </Text>
-            </View>
-          </View>
-          <View
-            onLayout={[Function]}
-          >
-            <View
-              accessible={true}
-              collapsable={false}
-              focusable={true}
-              onClick={[Function]}
-              onResponderGrant={[Function]}
-              onResponderMove={[Function]}
-              onResponderRelease={[Function]}
-              onResponderTerminate={[Function]}
-              onResponderTerminationRequest={[Function]}
-              onStartShouldSetResponder={[Function]}
-            >
-              <Text>
-                #
-                topic2
-              </Text>
-            </View>
-          </View>
-        </View>
-      </RCTScrollView>
-    </View>
+    <Text>
+      10m ago
+    </Text>
   </View>
   <View>
     <Icon

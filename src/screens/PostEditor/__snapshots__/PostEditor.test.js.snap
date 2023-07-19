@@ -73,20 +73,6 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         >
           <View>
             <Text>
-              Location
-            </Text>
-            <View>
-              <Icon
-                name="ArrowDown"
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={[Function]}
-        >
-          <View>
-            <Text>
               Post In
             </Text>
             <View>
@@ -103,6 +89,48 @@ exports[`PostEditor renders a new editor correctly 1`] = `
             onRemove={[Function]}
           />
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <Text>
+              Location
+            </Text>
+            <View>
+              <Icon
+                name="ArrowDown"
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <View>
+          <View>
+            <Text>
+              Donation Link
+            </Text>
+          </View>
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            onChangeText={[Function]}
+            returnKeyType="next"
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <View>
+          <View>
+            <Text>
+              Project Management
+            </Text>
+          </View>
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            onChangeText={[Function]}
+            returnKeyType="next"
+            underlineColorAndroid="transparent"
+          />
+        </View>
         <BottomBar
           announcementEnabled={false}
           onAddImage={[Function]}
@@ -339,29 +367,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                               >
                                 <View>
                                   <Text>
-                                    Location
-                                  </Text>
-                                  <View>
-                                    <Icon
-                                      name="ArrowDown"
-                                    />
-                                  </View>
-                                </View>
-                              </View>
-                              <View
-                                accessible={true}
-                                collapsable={false}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <View>
-                                  <Text>
                                     Post In
                                   </Text>
                                   <View>
@@ -445,6 +450,57 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                     </View>
                                   </View>
                                 </View>
+                              </View>
+                              <View
+                                accessible={true}
+                                collapsable={false}
+                                focusable={true}
+                                onClick={[Function]}
+                                onResponderGrant={[Function]}
+                                onResponderMove={[Function]}
+                                onResponderRelease={[Function]}
+                                onResponderTerminate={[Function]}
+                                onResponderTerminationRequest={[Function]}
+                                onStartShouldSetResponder={[Function]}
+                              >
+                                <View>
+                                  <Text>
+                                    Location
+                                  </Text>
+                                  <View>
+                                    <Icon
+                                      name="ArrowDown"
+                                    />
+                                  </View>
+                                </View>
+                              </View>
+                              <View>
+                                <View>
+                                  <Text>
+                                    Donation Link
+                                  </Text>
+                                </View>
+                                <TextInput
+                                  autoCapitalize="none"
+                                  autoCorrect={false}
+                                  onChangeText={[Function]}
+                                  returnKeyType="next"
+                                  underlineColorAndroid="transparent"
+                                />
+                              </View>
+                              <View>
+                                <View>
+                                  <Text>
+                                    Project Management
+                                  </Text>
+                                </View>
+                                <TextInput
+                                  autoCapitalize="none"
+                                  autoCorrect={false}
+                                  onChangeText={[Function]}
+                                  returnKeyType="next"
+                                  underlineColorAndroid="transparent"
+                                />
                               </View>
                               <View>
                                 <View />
@@ -959,20 +1015,6 @@ exports[`PostEditor renders with a post 1`] = `
         >
           <View>
             <Text>
-              Location
-            </Text>
-            <View>
-              <Icon
-                name="ArrowDown"
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={[Function]}
-        >
-          <View>
-            <Text>
               Post In
             </Text>
             <View>
@@ -996,6 +1038,48 @@ exports[`PostEditor renders with a post 1`] = `
             onRemove={[Function]}
           />
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <Text>
+              Location
+            </Text>
+            <View>
+              <Icon
+                name="ArrowDown"
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <View>
+          <View>
+            <Text>
+              Donation Link
+            </Text>
+          </View>
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            onChangeText={[Function]}
+            returnKeyType="next"
+            underlineColorAndroid="transparent"
+          />
+        </View>
+        <View>
+          <View>
+            <Text>
+              Project Management
+            </Text>
+          </View>
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            onChangeText={[Function]}
+            returnKeyType="next"
+            underlineColorAndroid="transparent"
+          />
+        </View>
         <BottomBar
           announcementEnabled={false}
           onAddImage={[Function]}
