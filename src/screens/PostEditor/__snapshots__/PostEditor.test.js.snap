@@ -103,34 +103,6 @@ exports[`PostEditor renders a new editor correctly 1`] = `
             </View>
           </View>
         </TouchableOpacity>
-        <View>
-          <View>
-            <Text>
-              Donation Link
-            </Text>
-          </View>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            onChangeText={[Function]}
-            returnKeyType="next"
-            underlineColorAndroid="transparent"
-          />
-        </View>
-        <View>
-          <View>
-            <Text>
-              Project Management
-            </Text>
-          </View>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            onChangeText={[Function]}
-            returnKeyType="next"
-            underlineColorAndroid="transparent"
-          />
-        </View>
         <BottomBar
           announcementEnabled={false}
           onAddImage={[Function]}
@@ -473,34 +445,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                     />
                                   </View>
                                 </View>
-                              </View>
-                              <View>
-                                <View>
-                                  <Text>
-                                    Donation Link
-                                  </Text>
-                                </View>
-                                <TextInput
-                                  autoCapitalize="none"
-                                  autoCorrect={false}
-                                  onChangeText={[Function]}
-                                  returnKeyType="next"
-                                  underlineColorAndroid="transparent"
-                                />
-                              </View>
-                              <View>
-                                <View>
-                                  <Text>
-                                    Project Management
-                                  </Text>
-                                </View>
-                                <TextInput
-                                  autoCapitalize="none"
-                                  autoCorrect={false}
-                                  onChangeText={[Function]}
-                                  returnKeyType="next"
-                                  underlineColorAndroid="transparent"
-                                />
                               </View>
                               <View>
                                 <View />
@@ -1052,34 +996,6 @@ exports[`PostEditor renders with a post 1`] = `
             </View>
           </View>
         </TouchableOpacity>
-        <View>
-          <View>
-            <Text>
-              Donation Link
-            </Text>
-          </View>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            onChangeText={[Function]}
-            returnKeyType="next"
-            underlineColorAndroid="transparent"
-          />
-        </View>
-        <View>
-          <View>
-            <Text>
-              Project Management
-            </Text>
-          </View>
-          <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            onChangeText={[Function]}
-            returnKeyType="next"
-            underlineColorAndroid="transparent"
-          />
-        </View>
         <BottomBar
           announcementEnabled={false}
           onAddImage={[Function]}
