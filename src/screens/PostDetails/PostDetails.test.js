@@ -12,6 +12,10 @@ jest.mock('components/SocketSubscriber', () => () => null)
 // jest.mock('components/HyloEditorWebview', () => () => null)
 jest.mock('store/selectors/getCurrentGroupSlug', () => () => 'public')
 
+jest.mock('react-native-share', () => ({
+  default: jest.fn()
+}))
+
 const post = {
   id: '91',
   creator: {

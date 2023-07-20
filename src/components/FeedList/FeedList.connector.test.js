@@ -16,12 +16,14 @@ describe('mapStateToProps', () => {
       session.Post.create({ id: i.toString(), groups: ['1'] })
     }, 5)
 
+    console.log("buildKey", buildKey(FETCH_POSTS, { ...initialState, context: 'groups', slug: 'foo', filter: null }))
+
     state = {
       orm: session.state,
       pending: {},
       [MODULE_NAME]: initialState,
       queryResults: {
-        [buildKey(FETCH_POSTS, { ...initialState, context: 'groups', slug: 'foo' })]: {
+        [buildKey(FETCH_POSTS, { ...initialState, context: 'groups', slug: 'foo', filter: null })]: {
           ids: ['1', '3', '2'],
           hasMore: true
         }
@@ -46,7 +48,7 @@ describe('mapStateToProps', () => {
   })
 
   it('returns posts in the correct order', () => {
-    const result = mapStateToProps(state, { forGroup: { slug: 'foo', id: 10 } })
+    const result = mapStateToProps(state, { forGroup: { slug: 'foo', sortBy: 'updated' } })
 
     expect(result).toEqual({
       postIds: [

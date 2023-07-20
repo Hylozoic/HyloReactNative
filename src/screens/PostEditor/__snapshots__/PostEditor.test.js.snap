@@ -73,20 +73,6 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         >
           <View>
             <Text>
-              Location
-            </Text>
-            <View>
-              <Icon
-                name="ArrowDown"
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={[Function]}
-        >
-          <View>
-            <Text>
               Post In
             </Text>
             <View>
@@ -102,6 +88,20 @@ exports[`PostEditor renders a new editor correctly 1`] = `
             onPress={[Function]}
             onRemove={[Function]}
           />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <Text>
+              Location
+            </Text>
+            <View>
+              <Icon
+                name="ArrowDown"
+              />
+            </View>
+          </View>
         </TouchableOpacity>
         <BottomBar
           announcementEnabled={false}
@@ -339,29 +339,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                               >
                                 <View>
                                   <Text>
-                                    Location
-                                  </Text>
-                                  <View>
-                                    <Icon
-                                      name="ArrowDown"
-                                    />
-                                  </View>
-                                </View>
-                              </View>
-                              <View
-                                accessible={true}
-                                collapsable={false}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <View>
-                                  <Text>
                                     Post In
                                   </Text>
                                   <View>
@@ -443,6 +420,29 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                         name="Ex"
                                       />
                                     </View>
+                                  </View>
+                                </View>
+                              </View>
+                              <View
+                                accessible={true}
+                                collapsable={false}
+                                focusable={true}
+                                onClick={[Function]}
+                                onResponderGrant={[Function]}
+                                onResponderMove={[Function]}
+                                onResponderRelease={[Function]}
+                                onResponderTerminate={[Function]}
+                                onResponderTerminationRequest={[Function]}
+                                onStartShouldSetResponder={[Function]}
+                              >
+                                <View>
+                                  <Text>
+                                    Location
+                                  </Text>
+                                  <View>
+                                    <Icon
+                                      name="ArrowDown"
+                                    />
                                   </View>
                                 </View>
                               </View>
@@ -959,20 +959,6 @@ exports[`PostEditor renders with a post 1`] = `
         >
           <View>
             <Text>
-              Location
-            </Text>
-            <View>
-              <Icon
-                name="ArrowDown"
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={[Function]}
-        >
-          <View>
-            <Text>
               Post In
             </Text>
             <View>
@@ -995,6 +981,20 @@ exports[`PostEditor renders with a post 1`] = `
             onPress={[Function]}
             onRemove={[Function]}
           />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <Text>
+              Location
+            </Text>
+            <View>
+              <Icon
+                name="ArrowDown"
+              />
+            </View>
+          </View>
         </TouchableOpacity>
         <BottomBar
           announcementEnabled={false}

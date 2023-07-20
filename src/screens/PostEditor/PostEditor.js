@@ -608,36 +608,40 @@ export class PostEditor extends React.Component {
             )}
           </TouchableOpacity>
 
-          <View style={[styles.pressSelectionSection, styles.topics]}>
-            <View style={styles.pressSelection}>
-              <Text style={styles.pressSelectionLeft}>Donation Link</Text>
-              {/* <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View> */}
+          {type === 'project' && (
+            <View style={[styles.pressSelectionSection, styles.topics]}>
+              <View style={styles.pressSelection}>
+                <Text style={styles.pressSelectionLeft}>Donation Link</Text>
+                {/* <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View> */}
+              </View>
+              <TextInput
+                style={styles.pressSelectionValue}
+                onChangeText={this.handleDonationsLink}
+                returnKeyType='next'
+                autoCapitalize='none'
+                value={donationsLink}
+                autoCorrect={false}
+                underlineColorAndroid='transparent'
+              />
             </View>
-            <TextInput
-              style={styles.pressSelectionValue}
-              onChangeText={this.handleDonationsLink}
-              returnKeyType='next'
-              autoCapitalize='none'
-              value={donationsLink}
-              autoCorrect={false}
-              underlineColorAndroid='transparent'
-            />
-          </View>
+          )}
 
-          <View style={[styles.pressSelectionSection, styles.topics]}>
-            <View style={styles.pressSelection}>
-              <Text style={styles.pressSelectionLeft}>Project Management</Text>
+          {type === 'project' && (
+            <View style={[styles.pressSelectionSection, styles.topics]}>
+              <View style={styles.pressSelection}>
+                <Text style={styles.pressSelectionLeft}>Project Management</Text>
+              </View>
+              <TextInput
+                style={styles.pressSelectionValue}
+                onChangeText={this.handleProjectManagementLink}
+                returnKeyType='next'
+                autoCapitalize='none'
+                value={projectManagementLink}
+                autoCorrect={false}
+                underlineColorAndroid='transparent'
+              />
             </View>
-            <TextInput
-              style={styles.pressSelectionValue}
-              onChangeText={this.handleProjectManagementLink}
-              returnKeyType='next'
-              autoCapitalize='none'
-              value={projectManagementLink}
-              autoCorrect={false}
-              underlineColorAndroid='transparent'
-            />
-          </View>
+          )}
 
           <BottomBar
             post={post}
