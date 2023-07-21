@@ -2,11 +2,47 @@ import { POST_TYPES } from 'store/models/Post'
 import { capeCod10, rhino60, caribbeanGreen, white } from 'style/colors'
 
 export default {
+  childPost: {
+    fontFamily: 'Inter',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    fontSize: 12,
+    lineHeight: 15,
+    color: 'blue',
+    opacity: 0.6,
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingRight: 12,
+    width: '100%'
+  },
+  childPostIcon: {
+    lineHeight: 8,
+    fontSize: 14,
+    marginRight: 12,
+    fontWeight: 500
+  },
+  childPostInner: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: 'grey',
+    borderTopLeftRadius: 6,
+    borderTopRightRadius: 6,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    paddingBottom: 4,
+    paddingRight: 4,
+    paddingLeft: 4
+  },
   container: {
     backgroundColor: white,
     borderColor: capeCod10,
     borderRadius: 4,
-    borderWidth: 1
+    borderWidth: 1,
+    position: 'relative'
   },
   detailsContainer: {
     marginBottom: 16

@@ -17,7 +17,7 @@ export default function PostRow ({
 }) {
   const dispatch = useDispatch()
   const post = useSelector(state => getPresentedPost(state, { postId, forGroupId }))
-
+  const groupIds = post.groups.map(group => group.id)
   const handleRespondToEvent = response => dispatch(respondToEvent(post.id, response))
 
   if (!post) return null
@@ -37,6 +37,9 @@ export default function PostRow ({
           showGroups={showGroups}
           showMember={showMember}
           showTopic={showTopic}
+          childPost={forGroupId !== 'all' && !groupIds.includes(forGroupId)}
+          // childPost
+
         />
       </TouchableOpacity>
     </View>
