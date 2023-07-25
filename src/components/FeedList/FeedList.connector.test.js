@@ -16,8 +16,6 @@ describe('mapStateToProps', () => {
       session.Post.create({ id: i.toString(), groups: ['1'] })
     }, 5)
 
-    console.log("buildKey", buildKey(FETCH_POSTS, { ...initialState, context: 'groups', slug: 'foo', filter: null }))
-
     state = {
       orm: session.state,
       pending: {},
