@@ -38,8 +38,6 @@ export default function PostRow ({
           showMember={showMember}
           showTopic={showTopic}
           childPost={forGroupId !== 'all' && !groupIds.includes(forGroupId)}
-          // childPost
-
         />
       </TouchableOpacity>
     </View>
