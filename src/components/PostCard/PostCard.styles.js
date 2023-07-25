@@ -19,10 +19,8 @@ export default {
     width: '100%'
   },
   childPostIcon: {
-    lineHeight: 8,
-    fontSize: 14,
-    marginRight: 12,
-    fontWeight: 500
+    fontWeight: 500,
+    marginRight: 2
   },
   childPostInner: {
     backgroundColor: '#FFFFFF',
@@ -36,6 +34,9 @@ export default {
     paddingBottom: 4,
     paddingRight: 4,
     paddingLeft: 4
+  },
+  childPostText: {
+    fontWeight: 'bold'
   },
   container: {
     backgroundColor: white,

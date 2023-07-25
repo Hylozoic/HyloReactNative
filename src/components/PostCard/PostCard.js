@@ -31,7 +31,7 @@ export default function PostCard ({
       {childPost && (
         <View style={styles.childPost}>
           <View style={styles.childPostInner}>
-            <Icon name='Subgroup' styleName={styles.childPostIcon} /><Text>{' '}post from child group</Text>
+            <Icon name='Subgroup' style={styles.childPostIcon} /><Text style={styles.childPostText}>{' '}post from child group</Text>
           </View>
         </View>)}
       <View style={styles.container}>
