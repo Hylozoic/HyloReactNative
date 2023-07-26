@@ -21,6 +21,7 @@ export default function verifyEmail (email, code, token) {
                 dmNotifications
                 commentNotifications
                 signupInProgress
+                streamChildPosts
                 streamViewMode
                 streamSortBy
                 streamPostType

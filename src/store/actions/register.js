@@ -21,6 +21,7 @@ export default function register (name, password) {
                 dmNotifications
                 commentNotifications
                 signupInProgress
+                streamChildPosts
                 streamViewMode
                 streamSortBy
                 streamPostType

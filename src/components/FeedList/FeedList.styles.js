@@ -8,6 +8,16 @@ export default {
     backgroundColor: 'rgba(225, 229, 233, 0.3)',
     flex: 1
   },
+  childGroupToggle: {
+    marginRight: 12,
+    backgroundColor: 'red',
+    width: 24,
+    height: 24,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 4
+  },
   listControls: {
     paddingTop: 12,
     paddingBottom: 4,
@@ -27,5 +37,10 @@ export default {
   downArrow: {
     top: isIOS ? 1 : 4,
     marginLeft: 4
+  },
+  steamControlRightSide: {
+    flexDirection: 'row',
+    display: 'flex',
+    alignItems: 'baseline'
   }
 }
