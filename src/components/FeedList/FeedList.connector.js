@@ -26,7 +26,6 @@ export function mapStateToProps (state, props) {
 
   const defaultPostType = get('settings.streamPostType', currentUser) || null
   const defaultSortBy = get('settings.streamSortBy', currentUser) || 'updated'
-
   const childPostInclusion = get('settings.streamChildPosts', currentUser) || 'yes'
 
   const postTypeFilter = props?.feedType || getFilter(state, props) || defaultPostType
@@ -63,7 +62,6 @@ export function mapStateToProps (state, props) {
   const hasMore = getHasMorePosts(state, fetchPostParam)
 
   return {
-    childPostInclusion,
     postIds,
     sortBy,
     filter: postTypeFilter,
@@ -75,8 +73,7 @@ export function mapStateToProps (state, props) {
   }
 }
 
-const mapDispatchToProps = { setFilter, setSort, setTimeframe, fetchPosts, resetNewPostCount, updateUserSettings
-}
+const mapDispatchToProps = { setFilter, setSort, setTimeframe, fetchPosts, resetNewPostCount, updateUserSettings }
 
 export function shouldResetNewPostCount ({ slug, sortBy, filter, topic }) {
   return slug !== ALL_GROUP_ID &&

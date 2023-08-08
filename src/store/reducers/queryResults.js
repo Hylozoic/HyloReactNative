@@ -273,6 +273,7 @@ export const queryParamWhitelist = [
   'id',
   'commentId',
   'context',
+  'childGroupInclusion',
   'collectionToFilterOut',
   'farmQuery',
   'filter',

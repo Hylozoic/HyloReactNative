@@ -4,11 +4,13 @@ import postsQueryFragment from 'graphql/fragments/postsQueryFragment'
 import groupViewPostsQueryFragment from 'graphql/fragments/groupViewPostsQueryFragment'
 
 // NOTE: All of the below is currently tracking `hylo-evo/src/routes/Stream.store.js`
-export default function fetchPosts ({ activePostsOnly, afterTime, beforeTime, collectionToFilterOut, context, filter, first, forCollection, offset, order, search, slug, sortBy, topic, topics, types }) {
+export default function fetchPosts ({ activePostsOnly, afterTime, beforeTime, childPostInclusion = 'yes', collectionToFilterOut, context, filter, first, forCollection, offset, order, search, slug, sortBy, topic, topics, types }) {
   let query, extractModel, getItems
 
+  console.log('fetchPosts', { childPostInclusion })
+
   if (context === 'groups') {
-    query = groupQuery
+    query = groupQuery(childPostInclusion === 'yes')
     extractModel = 'Group'
     getItems = get('payload.data.group.posts')
   } else if (context === 'all' || context === 'public') {
@@ -18,7 +20,7 @@ export default function fetchPosts ({ activePostsOnly, afterTime, beforeTime, co
   } else {
     throw new Error(`FETCH_POSTS with context=${context} is not implemented`)
   }
-
+  console.log('fetchPosts does get called', {childPostInclusion})
   return {
     type: FETCH_POSTS,
     graphql: {
@@ -27,6 +29,7 @@ export default function fetchPosts ({ activePostsOnly, afterTime, beforeTime, co
         activePostsOnly,
         afterTime,
         beforeTime,
+        childPostInclusion,
         collectionToFilterOut,
         context,
         filter,
@@ -52,8 +55,9 @@ export default function fetchPosts ({ activePostsOnly, afterTime, beforeTime, co
     }
   }
 }
+// probably need to update this
 
-const groupQuery = `query GroupPostsQuery (
+const groupQuery = childPostInclusion => `query GroupPostsQuery (
   $activePostsOnly: Boolean,
   $afterTime: Date,
   $beforeTime: Date,
@@ -85,9 +89,10 @@ const groupQuery = `query GroupPostsQuery (
     avatarUrl
     bannerUrl
     postCount
-    ${groupViewPostsQueryFragment}
+    ${groupViewPostsQueryFragment(childPostInclusion)}
   }
 }`
+
 
 const postsQuery = `query PostsQuery (
   $activePostsOnly: Boolean,
