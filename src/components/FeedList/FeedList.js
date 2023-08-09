@@ -60,13 +60,8 @@ export class FeedListClassComponent extends React.Component {
     }
   }
 
-  state = {
-    childPostInclusion: ''
-  }
-
   componentDidMount () {
     this.props.isFocused && this.fetchOrShowCached()
-    this.setState({ childPostInclusion: this.props.childPostInclusion })
   }
 
   shouldComponentUpdate (nextProps) {
@@ -80,7 +75,8 @@ export class FeedListClassComponent extends React.Component {
       prevProps.filter !== this.props.filter ||
       prevProps.timeframe !== this.props.timeframe ||
       prevProps.forGroup?.id !== this.props.forGroup?.id ||
-      prevProps.topicName !== this.props.topicName
+      prevProps.topicName !== this.props.topicName ||
+      prevProps.fetchPostParam.childPostInclusion !== this.props.fetchPostParam.childPostInclusion
     ) {
       this.fetchOrShowCached()
     }
@@ -89,7 +85,7 @@ export class FeedListClassComponent extends React.Component {
   keyExtractor = (item) => `post${item}`
 
   handleChildPostToggle = () => {
-    const childPostInclusion = this.props.childPostInclusion === 'yes' ? 'no' : 'yes'
+    const childPostInclusion = this.props.fetchPostParam.childPostInclusion === 'yes' ? 'no' : 'yes'
     this.props.updateUserSettings({ settings: { streamChildPosts: childPostInclusion } })
       // .then(() => {
       //   this.forceUpdate()
@@ -98,7 +94,7 @@ export class FeedListClassComponent extends React.Component {
 
   render () {
     const {
-      childPostInclusion,
+      fetchPostParam,
       postIds,
       pendingRefresh,
       refreshPosts,
@@ -113,14 +109,14 @@ export class FeedListClassComponent extends React.Component {
       timeframe
     } = this.props
 
-    const extraToggleStyles = childPostInclusion === 'yes'
+    const extraToggleStyles = fetchPostParam.childPostInclusion === 'yes'
       ? {
           backgroundColor: pictonBlue
         }
       : {
           backgroundColor: '#FFFFFF'
         }
-
+    console.log({ yay: fetchPostParam.childPostInclusion})
     return (
       <View style={styles.container}>
         <FlatList
@@ -139,7 +135,7 @@ export class FeedListClassComponent extends React.Component {
                   <ListControl selected={sortBy} onChange={setSort} options={STREAM_SORT_OPTIONS} />
                   <View style={styles.steamControlRightSide}>
                     <TouchableOpacity onPress={this.handleChildPostToggle}>
-                      <View style={{ ...styles.childGroupToggle, ...extraToggleStyles }}><Icon name='Subgroup' color={childPostInclusion === 'yes' ? '#FFFFFF' : pictonBlue} /></View>
+                      <View style={{ ...styles.childGroupToggle, ...extraToggleStyles }}><Icon name='Subgroup' color={fetchPostParam.childPostInclusion === 'yes' ? '#FFFFFF' : pictonBlue} /></View>
                     </TouchableOpacity>
                     <ListControl selected={filter} onChange={setFilter} options={POST_TYPE_OPTIONS} />
                   </View>

@@ -11,12 +11,11 @@ export default {
   childGroupToggle: {
     marginRight: 12,
     backgroundColor: 'red',
-    width: 24,
-    height: 24,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 4
+    borderRadius: 4,
+    padding: 6
   },
   listControls: {
     paddingTop: 12,
