@@ -18,7 +18,9 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "node scripts/test.js",
     "clean": "react-native-clean-project",
-    "clean-auto": "react-native clean-project-auto"
+    "clean-auto": "react-native clean-project-auto",
+    "check-dependencies": "rnx-align-deps",
+    "fix-dependencies": "rnx-align-deps --write"
   },
   "dependencies": {
     "@expo/react-native-action-sheet": "^4.0.1",
@@ -100,6 +102,7 @@
     "@babel/runtime": "^7.19.4",
     "@react-native-community/eslint-config": "^3.1.0",
     "@react-navigation/devtools": "^6.0.10",
+    "@rnx-kit/align-deps": "^2.2.4",
     "@testing-library/jest-native": "^5.1.2",
     "@testing-library/react-native": "11.3.0",
     "babel-jest": "^29.2.2",
@@ -190,5 +193,34 @@
       "jest",
       "test"
     ]
+  },
+  "rnx-kit": {
+    "kitType": "app",
+    "alignDeps": {
+      "requirements": [
+        "react-native@0.70"
+      ],
+      "capabilities": [
+        "animation",
+        "babel-preset-react-native",
+        "core",
+        "core-android",
+        "core-ios",
+        "gestures",
+        "hooks",
+        "html",
+        "jest",
+        "modal",
+        "navigation/native",
+        "navigation/stack",
+        "react",
+        "react-test-renderer",
+        "safe-area",
+        "screens",
+        "storage",
+        "svg",
+        "webview"
+      ]
+    }
   }
 }
