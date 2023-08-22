@@ -20,6 +20,7 @@ export default function updateUserSettings (changes) {
               dmNotifications
               commentNotifications
               signupInProgress
+              streamChildPosts
               streamViewMode
               streamSortBy
               streamPostType
@@ -32,6 +33,8 @@ export default function updateUserSettings (changes) {
       }
     },
     meta: {
+      optimistic: true,
+      changes,
       extractModel: [
         {
           getRoot: get('updateMe'),

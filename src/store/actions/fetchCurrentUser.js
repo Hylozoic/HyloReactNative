@@ -60,6 +60,7 @@ export default function fetchCurrentUser () {
               dmNotifications
               commentNotifications
               signupInProgress
+              streamChildPosts
               streamViewMode
               streamSortBy
               streamPostType
