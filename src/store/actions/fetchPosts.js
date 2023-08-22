@@ -4,11 +4,11 @@ import postsQueryFragment from 'graphql/fragments/postsQueryFragment'
 import groupViewPostsQueryFragment from 'graphql/fragments/groupViewPostsQueryFragment'
 
 // NOTE: All of the below is currently tracking `hylo-evo/src/routes/Stream.store.js`
-export default function fetchPosts ({ activePostsOnly, afterTime, beforeTime, collectionToFilterOut, context, filter, first, forCollection, offset, order, search, slug, sortBy, topic, topics, types }) {
+export default function fetchPosts ({ activePostsOnly, afterTime, beforeTime, childPostInclusion = 'yes', collectionToFilterOut, context, filter, first, forCollection, offset, order, search, slug, sortBy, topic, topics, types }) {
   let query, extractModel, getItems
 
   if (context === 'groups') {
-    query = groupQuery
+    query = groupQuery(childPostInclusion === 'yes')
     extractModel = 'Group'
     getItems = get('payload.data.group.posts')
   } else if (context === 'all' || context === 'public') {
@@ -27,6 +27,7 @@ export default function fetchPosts ({ activePostsOnly, afterTime, beforeTime, co
         activePostsOnly,
         afterTime,
         beforeTime,
+        childPostInclusion,
         collectionToFilterOut,
         context,
         filter,
@@ -53,7 +54,7 @@ export default function fetchPosts ({ activePostsOnly, afterTime, beforeTime, co
   }
 }
 
-const groupQuery = `query GroupPostsQuery (
+const groupQuery = childPostInclusion => `query GroupPostsQuery (
   $activePostsOnly: Boolean,
   $afterTime: Date,
   $beforeTime: Date,
@@ -85,7 +86,7 @@ const groupQuery = `query GroupPostsQuery (
     avatarUrl
     bannerUrl
     postCount
-    ${groupViewPostsQueryFragment}
+    ${groupViewPostsQueryFragment(childPostInclusion)}
   }
 }`
 
