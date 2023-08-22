@@ -104,20 +104,20 @@ android {
             }
         }
     }
-    // buildTypes {
-    //     debug {
-    //         signingConfig signingConfigs.debug
-    //     }
-    //     release {
-    //         // NOTE below is default from React Native. We are not yet using 
-    //         // Google auto-signed releases.
-    //         // Caution! In production, you need to generate your own keystore file.
-    //         // see https://reactnative.dev/docs/signed-apk-android.
-    //         signingConfig signingConfigs.debug
-    //         minifyEnabled enableProguardInReleaseBuilds
-    //         proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-    //     }
-    // }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            // NOTE below is default from React Native. We are not yet using 
+            // Google auto-signed releases.
+            // Caution! In production, you need to generate your own keystore file.
+            // see https://reactnative.dev/docs/signed-apk-android.
+            signingConfig signingConfigs.debug
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
 }
 
 dependencies {
