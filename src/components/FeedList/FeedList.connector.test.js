@@ -21,7 +21,7 @@ describe('mapStateToProps', () => {
       pending: {},
       [MODULE_NAME]: initialState,
       queryResults: {
-        [buildKey(FETCH_POSTS, { ...initialState, context: 'groups', slug: 'foo', filter: null })]: {
+        [buildKey(FETCH_POSTS, { ...initialState, context: 'groups', slug: 'foo', filter: null, childPostInclusion: 'yes' })]: {
           ids: ['1', '3', '2'],
           hasMore: true
         }
@@ -39,6 +39,7 @@ describe('mapStateToProps', () => {
       sortBy: initialState.sortBy,
       timeframe: 'future',
       fetchPostParam: {
+        childPostInclusion: 'yes',
         context: 'groups',
         sortBy: 'updated'
       }
@@ -61,6 +62,7 @@ describe('mapStateToProps', () => {
       sortBy: initialState.sortBy,
       timeframe: 'future',
       fetchPostParam: {
+        childPostInclusion: 'yes',
         context: 'groups',
         slug: 'foo',
         sortBy: 'updated'
