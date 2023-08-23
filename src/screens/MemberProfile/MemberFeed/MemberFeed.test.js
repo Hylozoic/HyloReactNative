@@ -4,6 +4,10 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import { TestRoot } from 'util/testing'
 import MemberFeed, { ContentRow, FeedTab } from './MemberFeed'
 
+jest.mock('react-native-share', () => ({
+  default: jest.fn()
+}))
+
 describe('MemberProfile', () => {
   it('matches the last snapshot', () => {
     const items = [

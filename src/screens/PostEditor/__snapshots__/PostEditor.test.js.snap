@@ -73,20 +73,6 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         >
           <View>
             <Text>
-              Location
-            </Text>
-            <View>
-              <Icon
-                name="ArrowDown"
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={[Function]}
-        >
-          <View>
-            <Text>
               Post In
             </Text>
             <View>
@@ -102,6 +88,20 @@ exports[`PostEditor renders a new editor correctly 1`] = `
             onPress={[Function]}
             onRemove={[Function]}
           />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <Text>
+              Location
+            </Text>
+            <View>
+              <Icon
+                name="ArrowDown"
+              />
+            </View>
+          </View>
         </TouchableOpacity>
         <BottomBar
           announcementEnabled={false}
@@ -156,7 +156,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
         <RNSScreen
           activityState={0}
           collapsable={false}
-          forwardedRef={[Function]}
           gestureResponseDistance={
             {
               "bottom": -1,
@@ -165,10 +164,30 @@ exports[`PostEditor renders correctly while saving 1`] = `
               "top": -1,
             }
           }
+          onGestureCancel={[Function]}
           pointerEvents="box-none"
+          sheetAllowedDetents="large"
+          sheetCornerRadius={-1}
+          sheetExpandsWhenScrolledToEdge={true}
+          sheetGrabberVisible={false}
+          sheetLargestUndimmedDetent="all"
+          style={
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
         >
           <View
             collapsable={false}
+            style={
+              {
+                "opacity": 1,
+              }
+            }
           />
           <View
             accessibilityElementsHidden={true}
@@ -227,15 +246,24 @@ exports[`PostEditor renders correctly while saving 1`] = `
             <View
               collapsable={false}
               pointerEvents="box-none"
+              style={
+                {
+                  "flex": 1,
+                }
+              }
             >
               <View
                 collapsable={false}
-                forwardedRef={[Function]}
                 handlerTag={1}
                 handlerType="PanGestureHandler"
                 needsOffscreenAlphaCompositing={false}
                 onGestureHandlerEvent={[Function]}
                 onGestureHandlerStateChange={[Function]}
+                style={
+                  {
+                    "flex": 1,
+                  }
+                }
               >
                 <View
                   pointerEvents="box-none"
@@ -303,6 +331,23 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                 </View>
                               </View>
                               <View
+                                accessibilityState={
+                                  {
+                                    "busy": undefined,
+                                    "checked": undefined,
+                                    "disabled": undefined,
+                                    "expanded": undefined,
+                                    "selected": undefined,
+                                  }
+                                }
+                                accessibilityValue={
+                                  {
+                                    "max": undefined,
+                                    "min": undefined,
+                                    "now": undefined,
+                                    "text": undefined,
+                                  }
+                                }
                                 accessible={true}
                                 collapsable={false}
                                 focusable={true}
@@ -326,29 +371,23 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                 </View>
                               </View>
                               <View
-                                accessible={true}
-                                collapsable={false}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <View>
-                                  <Text>
-                                    Location
-                                  </Text>
-                                  <View>
-                                    <Icon
-                                      name="ArrowDown"
-                                    />
-                                  </View>
-                                </View>
-                              </View>
-                              <View
+                                accessibilityState={
+                                  {
+                                    "busy": undefined,
+                                    "checked": undefined,
+                                    "disabled": undefined,
+                                    "expanded": undefined,
+                                    "selected": undefined,
+                                  }
+                                }
+                                accessibilityValue={
+                                  {
+                                    "max": undefined,
+                                    "min": undefined,
+                                    "now": undefined,
+                                    "text": undefined,
+                                  }
+                                }
                                 accessible={true}
                                 collapsable={false}
                                 focusable={true}
@@ -373,6 +412,23 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                 <View>
                                   <View>
                                     <View
+                                      accessibilityState={
+                                        {
+                                          "busy": undefined,
+                                          "checked": undefined,
+                                          "disabled": undefined,
+                                          "expanded": undefined,
+                                          "selected": undefined,
+                                        }
+                                      }
+                                      accessibilityValue={
+                                        {
+                                          "max": undefined,
+                                          "min": undefined,
+                                          "now": undefined,
+                                          "text": undefined,
+                                        }
+                                      }
                                       accessible={true}
                                       collapsable={false}
                                       focusable={true}
@@ -420,6 +476,23 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                       </Text>
                                     </View>
                                     <View
+                                      accessibilityState={
+                                        {
+                                          "busy": undefined,
+                                          "checked": undefined,
+                                          "disabled": undefined,
+                                          "expanded": undefined,
+                                          "selected": undefined,
+                                        }
+                                      }
+                                      accessibilityValue={
+                                        {
+                                          "max": undefined,
+                                          "min": undefined,
+                                          "now": undefined,
+                                          "text": undefined,
+                                        }
+                                      }
                                       accessible={true}
                                       collapsable={false}
                                       focusable={true}
@@ -446,10 +519,67 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                   </View>
                                 </View>
                               </View>
+                              <View
+                                accessibilityState={
+                                  {
+                                    "busy": undefined,
+                                    "checked": undefined,
+                                    "disabled": undefined,
+                                    "expanded": undefined,
+                                    "selected": undefined,
+                                  }
+                                }
+                                accessibilityValue={
+                                  {
+                                    "max": undefined,
+                                    "min": undefined,
+                                    "now": undefined,
+                                    "text": undefined,
+                                  }
+                                }
+                                accessible={true}
+                                collapsable={false}
+                                focusable={true}
+                                onClick={[Function]}
+                                onResponderGrant={[Function]}
+                                onResponderMove={[Function]}
+                                onResponderRelease={[Function]}
+                                onResponderTerminate={[Function]}
+                                onResponderTerminationRequest={[Function]}
+                                onStartShouldSetResponder={[Function]}
+                              >
+                                <View>
+                                  <Text>
+                                    Location
+                                  </Text>
+                                  <View>
+                                    <Icon
+                                      name="ArrowDown"
+                                    />
+                                  </View>
+                                </View>
+                              </View>
                               <View>
                                 <View />
                                 <View>
                                   <View
+                                    accessibilityState={
+                                      {
+                                        "busy": undefined,
+                                        "checked": undefined,
+                                        "disabled": undefined,
+                                        "expanded": undefined,
+                                        "selected": undefined,
+                                      }
+                                    }
+                                    accessibilityValue={
+                                      {
+                                        "max": undefined,
+                                        "min": undefined,
+                                        "now": undefined,
+                                        "text": undefined,
+                                      }
+                                    }
                                     accessible={true}
                                     collapsable={false}
                                     focusable={true}
@@ -466,6 +596,23 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                     />
                                   </View>
                                   <View
+                                    accessibilityState={
+                                      {
+                                        "busy": undefined,
+                                        "checked": undefined,
+                                        "disabled": undefined,
+                                        "expanded": undefined,
+                                        "selected": undefined,
+                                      }
+                                    }
+                                    accessibilityValue={
+                                      {
+                                        "max": undefined,
+                                        "min": undefined,
+                                        "now": undefined,
+                                        "text": undefined,
+                                      }
+                                    }
                                     accessible={true}
                                     collapsable={false}
                                     focusable={true}
@@ -510,6 +657,23 @@ exports[`PostEditor renders correctly while saving 1`] = `
                         <View>
                           <View>
                             <View
+                              accessibilityState={
+                                {
+                                  "busy": undefined,
+                                  "checked": undefined,
+                                  "disabled": undefined,
+                                  "expanded": undefined,
+                                  "selected": undefined,
+                                }
+                              }
+                              accessibilityValue={
+                                {
+                                  "max": undefined,
+                                  "min": undefined,
+                                  "now": undefined,
+                                  "text": undefined,
+                                }
+                              }
                               accessible={true}
                               collapsable={false}
                               focusable={true}
@@ -537,6 +701,23 @@ exports[`PostEditor renders correctly while saving 1`] = `
                             <View>
                               <View>
                                 <View
+                                  accessibilityState={
+                                    {
+                                      "busy": undefined,
+                                      "checked": undefined,
+                                      "disabled": undefined,
+                                      "expanded": undefined,
+                                      "selected": undefined,
+                                    }
+                                  }
+                                  accessibilityValue={
+                                    {
+                                      "max": undefined,
+                                      "min": undefined,
+                                      "now": undefined,
+                                      "text": undefined,
+                                    }
+                                  }
                                   accessible={true}
                                   collapsable={false}
                                   focusable={true}
@@ -585,7 +766,19 @@ exports[`PostEditor renders correctly while saving 1`] = `
                               <View
                                 accessibilityState={
                                   {
+                                    "busy": undefined,
+                                    "checked": undefined,
                                     "disabled": true,
+                                    "expanded": undefined,
+                                    "selected": undefined,
+                                  }
+                                }
+                                accessibilityValue={
+                                  {
+                                    "max": undefined,
+                                    "min": undefined,
+                                    "now": undefined,
+                                    "text": undefined,
                                   }
                                 }
                                 accessible={true}
@@ -621,7 +814,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
         <RNSScreen
           activityState={2}
           collapsable={false}
-          forwardedRef={[Function]}
           gestureResponseDistance={
             {
               "bottom": -1,
@@ -630,10 +822,30 @@ exports[`PostEditor renders correctly while saving 1`] = `
               "top": -1,
             }
           }
+          onGestureCancel={[Function]}
           pointerEvents="box-none"
+          sheetAllowedDetents="large"
+          sheetCornerRadius={-1}
+          sheetExpandsWhenScrolledToEdge={true}
+          sheetGrabberVisible={false}
+          sheetLargestUndimmedDetent="all"
+          style={
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
         >
           <View
             collapsable={false}
+            style={
+              {
+                "opacity": 1,
+              }
+            }
           />
           <View
             accessibilityElementsHidden={false}
@@ -692,15 +904,25 @@ exports[`PostEditor renders correctly while saving 1`] = `
             <View
               collapsable={false}
               pointerEvents="box-none"
+              style={
+                {
+                  "flex": 1,
+                  "marginTop": 44,
+                }
+              }
             >
               <View
                 collapsable={false}
-                forwardedRef={[Function]}
                 handlerTag={2}
                 handlerType="PanGestureHandler"
                 needsOffscreenAlphaCompositing={false}
                 onGestureHandlerEvent={[Function]}
                 onGestureHandlerStateChange={[Function]}
+                style={
+                  {
+                    "flex": 1,
+                  }
+                }
               >
                 <View
                   pointerEvents="box-none"
@@ -744,6 +966,16 @@ exports[`PostEditor renders correctly while saving 1`] = `
       <View
         collapsable={false}
         pointerEvents="box-none"
+        style={
+          {
+            "height": 44,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+            "zIndex": 1,
+          }
+        }
       >
         <View
           accessibilityElementsHidden={false}
@@ -755,14 +987,52 @@ exports[`PostEditor renders correctly while saving 1`] = `
           <View
             collapsable={false}
             pointerEvents="box-none"
+            style={
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "transform": [
+                  {
+                    "translateX": 0,
+                  },
+                ],
+                "zIndex": 0,
+              }
+            }
           >
             <View
               collapsable={false}
+              style={
+                {
+                  "backgroundColor": "rgb(255, 255, 255)",
+                  "borderBottomColor": "rgb(216, 216, 216)",
+                  "flex": 1,
+                  "shadowColor": "rgb(216, 216, 216)",
+                  "shadowOffset": {
+                    "height": 0.5,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.85,
+                  "shadowRadius": 0,
+                }
+              }
             />
           </View>
           <View
             collapsable={false}
             pointerEvents="box-none"
+            style={
+              {
+                "height": 44,
+                "maxHeight": undefined,
+                "minHeight": undefined,
+                "opacity": undefined,
+                "transform": undefined,
+              }
+            }
           >
             <View
               pointerEvents="none"
@@ -785,10 +1055,41 @@ exports[`PostEditor renders correctly while saving 1`] = `
               <View
                 collapsable={false}
                 pointerEvents="box-none"
+                style={
+                  {
+                    "alignItems": "flex-start",
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                    "marginStart": 0,
+                    "transform": [
+                      {
+                        "translateX": 0,
+                      },
+                    ],
+                  }
+                }
               >
                 <View
                   accessibilityLabel="MockedScreen, back"
                   accessibilityRole="button"
+                  accessibilityState={
+                    {
+                      "busy": undefined,
+                      "checked": undefined,
+                      "disabled": undefined,
+                      "expanded": undefined,
+                      "selected": undefined,
+                    }
+                  }
+                  accessibilityValue={
+                    {
+                      "max": undefined,
+                      "min": undefined,
+                      "now": undefined,
+                      "text": undefined,
+                    }
+                  }
                   accessible={true}
                   collapsable={false}
                   focusable={true}
@@ -852,6 +1153,13 @@ exports[`PostEditor renders correctly while saving 1`] = `
                       collapsable={false}
                       numberOfLines={1}
                       onLayout={[Function]}
+                      style={
+                        {
+                          "color": "rgb(0, 122, 255)",
+                          "fontSize": 17,
+                          "letterSpacing": 0.35,
+                        }
+                      }
                     >
                       MockedScreen
                     </Text>
@@ -861,6 +1169,18 @@ exports[`PostEditor renders correctly while saving 1`] = `
               <View
                 collapsable={false}
                 pointerEvents="box-none"
+                style={
+                  {
+                    "justifyContent": "center",
+                    "marginHorizontal": 16,
+                    "maxWidth": 160,
+                    "transform": [
+                      {
+                        "translateX": 0,
+                      },
+                    ],
+                  }
+                }
               >
                 <Text
                   accessibilityRole="header"
@@ -868,6 +1188,13 @@ exports[`PostEditor renders correctly while saving 1`] = `
                   collapsable={false}
                   numberOfLines={1}
                   onLayout={[Function]}
+                  style={
+                    {
+                      "color": "rgb(28, 28, 30)",
+                      "fontSize": 17,
+                      "fontWeight": "600",
+                    }
+                  }
                 >
                   Post Details
                 </Text>
@@ -875,6 +1202,20 @@ exports[`PostEditor renders correctly while saving 1`] = `
               <View
                 collapsable={false}
                 pointerEvents="box-none"
+                style={
+                  {
+                    "alignItems": "flex-end",
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                    "marginEnd": 0,
+                    "transform": [
+                      {
+                        "translateX": 0,
+                      },
+                    ],
+                  }
+                }
               />
             </View>
           </View>
@@ -959,20 +1300,6 @@ exports[`PostEditor renders with a post 1`] = `
         >
           <View>
             <Text>
-              Location
-            </Text>
-            <View>
-              <Icon
-                name="ArrowDown"
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={[Function]}
-        >
-          <View>
-            <Text>
               Post In
             </Text>
             <View>
@@ -995,6 +1322,20 @@ exports[`PostEditor renders with a post 1`] = `
             onPress={[Function]}
             onRemove={[Function]}
           />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <Text>
+              Location
+            </Text>
+            <View>
+              <Icon
+                name="ArrowDown"
+              />
+            </View>
+          </View>
         </TouchableOpacity>
         <BottomBar
           announcementEnabled={false}

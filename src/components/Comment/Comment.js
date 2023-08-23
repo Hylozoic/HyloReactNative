@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, Alert, TouchableOpacity } from 'react-native'
 import { filter } from 'lodash/fp'
-import Clipboard from '@react-native-community/clipboard'
+import Clipboard from '@react-native-clipboard/clipboard'
 import { TextHelpers } from 'hylo-shared'
 import { useDispatch, useSelector } from 'react-redux'
 import useHyloActionSheet from 'hooks/useHyloActionSheet'

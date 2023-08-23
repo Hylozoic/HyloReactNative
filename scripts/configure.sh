@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Force script to be called from root (which is 1 level up from the directory with this script)
-cd "$(dirname "$0")"
+cd "$(dirname "$0")" || exit
 cd ../
 
 echo "Root Directory $PWD"
@@ -10,21 +10,21 @@ export $(cat .env | grep -v ^# | xargs)
 
 if [ -z ${FACEBOOK_APP_ID_DEBUG+x} ]; then echo "ERROR: Missing appropriate config in .env. eg: FACEBOOK_APP_ID_DEBUG"; exit 1; else echo "Configuring Project:"; fi
 
-mytmpdir=`mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir'`
-git clone -b android https://github.com/Hylozoic/code-signing.git $mytmpdir/android
-git clone -b ios https://github.com/Hylozoic/code-signing.git $mytmpdir/ios
+mytmpdir=$(mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
+git clone -b android https://github.com/Hylozoic/code-signing.git "$mytmpdir"/android
+git clone -b ios https://github.com/Hylozoic/code-signing.git "$mytmpdir"/ios
 
 echo "Applying android/app/google-services.json"
-cp $mytmpdir/android/google-services.json android/app/
+cp "$mytmpdir"/android/google-services.json android/app/
 echo "Applying android/app/debug.keystore"
-cp $mytmpdir/android/debug.keystore android/app/
+cp "$mytmpdir"/android/debug.keystore android/app/
 echo "Applying android/app/hylo-release-original.keystore"
-cp $mytmpdir/android/hylo-release-original.keystore android/app/
+cp "$mytmpdir"/android/hylo-release-original.keystore android/app/
 echo "Applying android/app/hylo-release-key-2017-08.keystore"
-cp $mytmpdir/android/hylo-release-key-2017-08.keystore android/app/
+cp "$mytmpdir"/android/hylo-release-key-2017-08.keystore android/app/
 
 echo "Applying ios/GoogleService-Info.plist"
-cp $mytmpdir/ios/GoogleService-Info.plist ios/
+cp "$mytmpdir"/ios/GoogleService-Info.plist ios/
 
 trap 'rm -rf "$mytmpdir"' EXIT
 

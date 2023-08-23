@@ -10,7 +10,7 @@ describe('fetchPerson', () => {
           id: '12345'
         }
       },
-      meta: { extractModel: 'Person' }
+      meta: { extractModel: 'Person', afterInteractions: true, }
     }
     const { query, variables } = expected.graphql
     const actual = fetchPerson(variables.id, query)
