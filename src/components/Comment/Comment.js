@@ -18,6 +18,7 @@ import ImageAttachments from 'components/ImageAttachments'
 export default function Comment ({
   comment,
   clearHighlighted,
+  commentIdFromParams,
   displayPostTitle,
   showMenu = false,
   highlighted,
@@ -33,7 +34,6 @@ export default function Comment ({
   const { showHyloActionSheet } = useHyloActionSheet()
   const currentUser = useSelector(getMe)
   const group = useSelector(state => getGroup(state, { slug }))
-
   const canModerate = currentUser && currentUser.canModerate(group)
   const isCreator = currentUser && (comment.creator.id === currentUser.id)
 
@@ -103,7 +103,7 @@ export default function Comment ({
 
   return (
     <TouchableOpacity onPress={handleOnPress} onLongPress={showActionSheet}>
-      <View style={[styles.container, highlighted && styles.highlighted, style]}>
+      <View style={[styles.container, highlighted && styles.highlighted, style, commentIdFromParams === comment.id && styles.commentIdFromParams]}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => showMember(creator.id)}>
             <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />

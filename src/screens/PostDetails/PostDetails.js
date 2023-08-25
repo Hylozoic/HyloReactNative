@@ -58,7 +58,7 @@ export default function PostDetails () {
   const scrollToSelectedComment = () => {
     commentsRef.current && commentsRef.current.scrollToComment(selectedComment)
   }
-
+  console.log(route, 'route')
   useEffect(() => {
     (async function () {
       try {
@@ -89,6 +89,7 @@ export default function PostDetails () {
       <Comments
         ref={commentsRef}
         postId={post.id}
+        commentIdFromParams={route.params?.commentId}
         header={(
           <PostCardForDetails
             post={post}

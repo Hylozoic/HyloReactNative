@@ -115,8 +115,6 @@ export class FeedListClassComponent extends React.Component {
           backgroundColor: '#FFFFFF'
         }
 
-    console.log(postIds, 'postIds')
-    console.log({ yay: fetchPostParam.childPostInclusion})
     return (
       <View style={styles.container}>
         <FlatList
