@@ -52,7 +52,6 @@ export default {
     flexDirection: 'row'
   },
   commentIdFromParams: {
-    // border: 1px $color-mango-yellow solid;
     borderRadius: 2,
     borderWidth: 1,
     borderColor: '#FDD549'
