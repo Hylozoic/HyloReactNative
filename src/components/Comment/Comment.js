@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Text, View, Alert, TouchableOpacity } from 'react-native'
 import { filter } from 'lodash/fp'
 import Clipboard from '@react-native-clipboard/clipboard'
@@ -100,6 +100,12 @@ export default function Comment ({
     if (onPress) return onPress()
     // return handleReply()
   }
+
+  useEffect(() => {
+    if (comment && commentIdFromParams === comment.id) {
+      scrollTo(0.5)
+    }
+  }, [])
 
   return (
     <TouchableOpacity onPress={handleOnPress} onLongPress={showActionSheet}>

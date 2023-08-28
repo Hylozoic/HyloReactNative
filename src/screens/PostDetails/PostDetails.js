@@ -58,7 +58,7 @@ export default function PostDetails () {
   const scrollToSelectedComment = () => {
     commentsRef.current && commentsRef.current.scrollToComment(selectedComment)
   }
-  console.log(route, 'route')
+
   useEffect(() => {
     (async function () {
       try {

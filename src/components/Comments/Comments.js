@@ -21,6 +21,7 @@ function Comments ({
   style = {},
   showMember,
   slug,
+  commentIdFromParams,
   panHandlers,
   onSelect
 }, ref) {
@@ -33,6 +34,7 @@ function Comments ({
   }))
   const [highlightedComment, setHighlightedComment] = useState()
   const commentsListRef = useRef()
+  const [shutUp, setShutUp] = useState(false)
 
   const scrollToComment = useCallback((comment, viewPosition = 0.2) => {
     const parentCommentId = comment.parentComment || comment.id
@@ -41,7 +43,8 @@ function Comments ({
     const sectionIndex = section.comment.sectionIndex
     const itemIndex = section.data.find(subComment =>
       subCommentId === subComment.id)?.itemIndex || section.data.length + 1
-    commentsListRef?.current.scrollToLocation({ sectionIndex, itemIndex, viewPosition })
+      console.log(sectionIndex, itemIndex, viewPosition, 'WEWEWEWEW')
+    commentsListRef?.current.scrollToLocation({ sectionIndex, itemIndex, viewPosition, animated: true })
   }, [sections])
 
   const selectComment = useCallback(comment => {
@@ -59,6 +62,22 @@ function Comments ({
   useEffect(() => {
     dispatch(fetchCommentsAction({ postId }))
   }, [dispatch, postId])
+
+  // useEffect(() => {
+  //   if (commentIdFromParams && comments.length > 0) {
+  //     let allComments = [...comments]
+  //     comments.forEach((comment, index) => {
+  //       allComments = allComments.concat(comment.subComments)
+  //     })
+
+  //     const comment = allComments.find(c => c.id === commentIdFromParams)
+  //     console.log(comment.id, 'ahahaha')
+  //     if (comment && !shutUp) {
+  //       scrollToComment(comment, 0.9)
+  //       setShutUp(true)
+  //     }
+  //   }
+  // }, [commentIdFromParams])
 
   const Header = () => (
     <>
@@ -83,6 +102,7 @@ function Comments ({
           onReply={selectComment}
           scrollTo={viewPosition => scrollToComment(comment, viewPosition)}
           setHighlighted={() => setHighlightedComment(comment)}
+          commentIdFromParams={commentIdFromParams}
           showMember={showMember}
           slug={slug}
           key={comment.id}
@@ -101,6 +121,7 @@ function Comments ({
         scrollTo={viewPosition => scrollToComment(comment, viewPosition)}
         setHighlighted={() => setHighlightedComment(comment)}
         showMember={showMember}
+        commentIdFromParams={commentIdFromParams}
         slug={slug}
         style={styles.subComment}
         key={comment.id}
@@ -121,7 +142,21 @@ function Comments ({
       sections={sections}
       keyExtractor={comment => comment.id}
       initialScrollIndex={0}
+      getItemLayout={(data, index) => ({
+        length: 50,
+        offset: 50 * index,
+        index
+      })}
       // keyboardShouldPersistTaps='handled'
+      onScrollToIndexFailed={(error) => {
+        console.log('ARE YOU OK BOWIE')
+        this.commentsListRef.scrollToOffset({ offset: error.averageItemLength * error.index, animated: false })
+        setTimeout(() => {
+          if (this.state.data.length !== 0 && this.commentsListRef !== null) {
+            this.commentsListRef.scrollToIndex({ index: error.index, animated: true })
+          }
+        }, 100)
+      }}
       keyboardShouldPersistTaps='never'
       keyboardDismissMode={isIOS ? 'interactive' : 'on-drag'}
       {...panHandlers}
