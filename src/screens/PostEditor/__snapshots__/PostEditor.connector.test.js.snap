@@ -127,6 +127,18 @@ exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
   }
   votesTotal
   myVote
+  myReactions {
+    emojiFull
+    id
+  }
+  postReactions {
+    emojiFull
+    id
+    user {
+      id
+      name
+    }
+  }
   groups {
     id
     name

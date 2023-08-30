@@ -94,6 +94,18 @@ const postFieldsFragment = withComments => `
   }
   votesTotal
   myVote
+  myReactions {
+    emojiFull
+    id
+  }
+  postReactions {
+    emojiFull
+    id
+    user {
+      id
+      name
+    }
+  }
   groups {
     id
     name

@@ -5,20 +5,24 @@ import { decode } from 'html-entities'
 import { TextHelpers } from 'hylo-shared'
 import { humanResponse, RESPONSES } from 'store/models/EventInvitation'
 import HyloHTML from 'components/HyloHTML'
+import EmojiRow from 'components/EmojiRow'
 import LinkPreview from 'components/PostCard/LinkPreview'
 import Icon from 'components/Icon'
 import PopupMenuButton from 'components/PopupMenuButton'
 // import VideoPlayerWebView from 'components/VideoPlayerWebView'
 import { caribbeanGreen, rhino, white, white20onCaribbeanGreen } from 'style/colors'
+//
 
 const MAX_DETAILS_LENGTH = 144
 
 export default function PostBody ({
   type,
   title,
+  currentUser,
   details,
   startTime,
   endTime,
+  post,
   linkPreview,
   linkPreviewFeatured,
   myEventResponse,
@@ -53,6 +57,12 @@ export default function PostBody ({
       />
       {/* {!linkPreviewFeatured && ( */}
       <LinkPreview {...linkPreview} />
+      <View>
+        <EmojiRow
+          post={post}
+          currentUser={currentUser}
+        />
+      </View>
       {/* )} */}
     </View>
   )

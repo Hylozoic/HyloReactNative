@@ -250,5 +250,6 @@ exports[`matches the last snapshot 1`] = `
       </View>
     </View>
   </View>
+  <View />
 </View>
 `;

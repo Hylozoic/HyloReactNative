@@ -1119,6 +1119,13 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@babel/runtime@^7.16.7":
+  version "7.22.11"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.22.11.tgz#7a9ba3bbe406ad6f9e8dd4da2ece453eb23a77a4"
+  integrity sha512-ee7jVNlWN09+KftVOu9n7S8gQzD/Z6hN/I8VBRXW4P1+Xe7kJGXMwu8vds4aGIMHZnNbdpSWCfZZtinytpcAvA==
+  dependencies:
+    regenerator-runtime "^0.14.0"
+
 "@babel/template@^7.0.0", "@babel/template@^7.22.5", "@babel/template@^7.3.3":
   version "7.22.5"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.22.5.tgz#0c8c4d944509875849bd0344ff0050756eefc6ec"
@@ -1164,6 +1171,16 @@
   integrity sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A==
   dependencies:
     "@types/hammerjs" "^2.0.36"
+
+"@emoji-mart/data@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@emoji-mart/data/-/data-1.1.2.tgz#777c976f8f143df47cbb23a7077c9ca9fe5fc513"
+  integrity sha512-1HP8BxD2azjqWJvxIaWAMyTySeZY0Osr83ukYjltPVkNXeJvTz7yDrPLBtnrD5uqJ3tg4CcLuuBW09wahqL/fg==
+
+"@emoji-mart/react@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@emoji-mart/react/-/react-1.1.1.tgz#ddad52f93a25baf31c5383c3e7e4c6e05554312a"
+  integrity sha512-NMlFNeWgv1//uPsvLxvGQoIerPuVdXwK/EUek8OOkJ6wVOWPUizRBJU0hDqWZCOROVpfBgCemaC3m6jDOXi03g==
 
 "@eslint-community/eslint-utils@^4.2.0":
   version "4.4.0"
@@ -4035,6 +4052,15 @@ deprecated-react-native-prop-types@^2.3.0:
     invariant "*"
     prop-types "*"
 
+deprecated-react-native-prop-types@^4.0.0:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/deprecated-react-native-prop-types/-/deprecated-react-native-prop-types-4.2.1.tgz#8cc990ff5319fec8306e7e8f30389a92978a7231"
+  integrity sha512-ef9AXisRrRhxuxd7d+noOEeGTtxIPVkfOQWf9WZUWuOqI+gs7P7hKTi49Rgb/dfvkmFULhwxO2UqAkH4nJsMfw==
+  dependencies:
+    "@react-native/normalize-colors" "*"
+    invariant "*"
+    prop-types "*"
+
 destroy@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.2.0.tgz#4803735509ad8be552934c67df614f94e66fa015"
@@ -4175,6 +4201,25 @@ emittery@^0.13.1:
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/emittery/-/emittery-0.13.1.tgz#c04b8c3457490e0847ae51fced3af52d338e3dad"
   integrity sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==
+
+emoji-datasource-apple@^15.0.1:
+  version "15.0.1"
+  resolved "https://registry.yarnpkg.com/emoji-datasource-apple/-/emoji-datasource-apple-15.0.1.tgz#c89026ae6b91f8825b7b624f51312f023faa2a45"
+  integrity sha512-8HAp6NHycqZ0yCzzngeUUJAwQ6OiwXHNH22NbVBSzDMbebaap9zP5//mlRbwqyOfweq7foGAcCvnNH/aEOcjWw==
+
+emoji-mart-native@^0.6.5-beta:
+  version "0.6.5-beta"
+  resolved "https://registry.yarnpkg.com/emoji-mart-native/-/emoji-mart-native-0.6.5-beta.tgz#1f336a2e90f235467c06139a3b1912363e4a12c9"
+  integrity sha512-t8gGNJCKIAm+T14GSAjN6jnIAk/QxQksAA9j9YcOFYkP0RuuCEhxVfpQ4Exm1itNGHbQT6nuvau+ZuvWESKULQ==
+  dependencies:
+    "@babel/runtime" "^7.16.7"
+    deprecated-react-native-prop-types "^4.0.0"
+    prop-types "^15.6.0"
+
+emoji-mart@^5.5.2:
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/emoji-mart/-/emoji-mart-5.5.2.tgz#3ddbaf053139cf4aa217650078bc1c50ca8381af"
+  integrity sha512-Sqc/nso4cjxhOwWJsp9xkVm8OF5c+mJLZJFoFfzRuKO+yWiN7K8c96xmtughYb0d/fZ8UC6cLIQ/p4BR6Pv3/A==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -6259,6 +6304,11 @@ jest-snapshot@^29.6.3:
     pretty-format "^29.6.3"
     semver "^7.5.3"
 
+jest-transform-stub@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/jest-transform-stub/-/jest-transform-stub-2.0.0.tgz#19018b0851f7568972147a5d60074b55f0225a7d"
+  integrity sha512-lspHaCRx/mBbnm3h4uMMS3R5aZzMwyNpNIJLXj4cEsV0mIUtS4IjYJLSoyjRCtnxb6RIGJ4NL2quZzfIeNhbkg==
+
 jest-util@^27.2.0:
   version "27.5.1"
   resolved "https://registry.yarnpkg.com/jest-util/-/jest-util-27.5.1.tgz#3ba9771e8e31a0b85da48fe0b0891fb86c01c2f9"
@@ -8111,7 +8161,7 @@ prompts@^2.0.1, prompts@^2.4.0:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@*, prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@*, prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==

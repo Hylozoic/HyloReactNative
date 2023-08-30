@@ -81,6 +81,18 @@ exports[`fetchSearchResults matches snapshot 1`] = `
   }
   votesTotal
   myVote
+  myReactions {
+    emojiFull
+    id
+  }
+  postReactions {
+    emojiFull
+    id
+    user {
+      id
+      name
+    }
+  }
   groups {
     id
     name
