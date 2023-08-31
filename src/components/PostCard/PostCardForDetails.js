@@ -184,7 +184,7 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
         forDetails
         postId={post.id}
         members={post.members}
-        myVote={post.myVote}
+        peopleReactedTotal={post.peopleReactedTotal}
         style={styles.postFooter}
         type={post.type}
         votesTotal={post.votesTotal}

@@ -30,7 +30,7 @@ const post = {
   commenters: [{ id: 9, name: 'Jebobo Crustacean' }, { id: 7, name: 'Lobster Science' }],
   commentsTotal: 12,
   votesTotal: 8,
-  myVote: true,
+  peopleReactedTotal: true,
   type: 'request',
   fileUrls: [
     'http://foo.com/foo.pdf',

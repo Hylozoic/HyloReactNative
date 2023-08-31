@@ -25,6 +25,7 @@ export default {
   headerRight: {
     paddingTop: 3,
     flexDirection: 'row',
+    gap: 10,
     alignItems: 'flex-start'
   },
   highlighted: {

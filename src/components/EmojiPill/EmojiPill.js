@@ -5,7 +5,6 @@ import { TouchableOpacity } from 'react-native'
 export default function EmojiPill ({ emojiFull, onClick = () => {}, count, selected, toolTip }) {
   let pillStyle = { ...styles.tagPill }
   if (selected) pillStyle = { ...pillStyle, ...styles.selected }
-  if (selected)console.log(selected, 'selected', pillStyle)
   return (
     <TouchableOpacity onPress={() => onClick(emojiFull)}>
       <Pill

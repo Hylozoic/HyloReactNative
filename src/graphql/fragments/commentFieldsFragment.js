@@ -15,5 +15,17 @@ attachments {
 parentComment {
   id
 }
+myReactions {
+  emojiFull
+  id
+}
+commentReactions {
+  emojiFull
+  id
+  user {
+    id
+    name
+  }
+}
 createdAt
 `

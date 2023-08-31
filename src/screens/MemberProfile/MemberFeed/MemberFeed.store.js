@@ -120,6 +120,7 @@ export function fetchMemberUpvotes ({ id, first = 20, offset }) {
                   avatarUrl
                 }
                 commentersTotal
+                commentsTotal
                 groups {
                   id
                   name

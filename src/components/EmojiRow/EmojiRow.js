@@ -9,7 +9,8 @@ export default function EmojiRow (props) {
     className,
     comment,
     currentUser,
-    post
+    post,
+    includePicker = true
   } = props
   const { reactOnEntity, removeReactOnFromEntity } = useReactionActions()
 
@@ -33,6 +34,7 @@ export default function EmojiRow (props) {
 
     return accum
   }, {})
+
   return (
     <View className={className}>
       {entityReactions && <View style={styles.footerReactions}>
@@ -46,7 +48,7 @@ export default function EmojiRow (props) {
             toolTip={reaction.userList.join('<br>')}
           />
         ))}
-        {currentUser ? <EmojiPicker myEmojis={myEmojis} handleReaction={handleReaction} handleRemoveReaction={handleRemoveReaction} /> : ''}
+        {(currentUser && includePicker) ? <EmojiPicker includePicker={includePicker} myEmojis={myEmojis} handleReaction={handleReaction} handleRemoveReaction={handleRemoveReaction} /> : ''}
       </View>}
     </View>
   )
