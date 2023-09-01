@@ -153,7 +153,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
         body: `wrote: ${truncateHTML(comment.text)}`,
         header: 'mentioned you in a comment on',
         nameInHeader: true,
-        onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
+        onPress: () => navigate(modalScreenName('Post Details'), { id: post.id, commentId: comment.id }),
         title: post.title
       }
 
@@ -161,7 +161,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
       return {
         body: `wrote: ${truncateHTML(comment.text)}`,
         header: 'New Comment on',
-        onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
+        onPress: () => navigate(modalScreenName('Post Details'), { id: post.id, commentId: comment.id }),
         title: post.title
       }
 

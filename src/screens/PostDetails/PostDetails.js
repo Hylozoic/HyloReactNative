@@ -89,6 +89,7 @@ export default function PostDetails () {
       <Comments
         ref={commentsRef}
         postId={post.id}
+        commentIdFromParams={route.params?.commentId}
         header={(
           <PostCardForDetails
             post={post}

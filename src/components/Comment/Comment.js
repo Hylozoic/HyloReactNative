@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Text, View, Alert, TouchableOpacity } from 'react-native'
 import { filter } from 'lodash/fp'
 import Clipboard from '@react-native-clipboard/clipboard'
@@ -33,7 +33,6 @@ export default function Comment ({
   const { showHyloActionSheet } = useHyloActionSheet()
   const currentUser = useSelector(getMe)
   const group = useSelector(state => getGroup(state, { slug }))
-
   const canModerate = currentUser && currentUser.canModerate(group)
   const isCreator = currentUser && (comment.creator.id === currentUser.id)
 

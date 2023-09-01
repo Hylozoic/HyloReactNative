@@ -4,9 +4,10 @@ export default {
   container: {
     flexDirection: 'column',
     flex: 1,
-    padding: 15,
+    padding: 10,
     paddingTop: 3,
-    paddingBottom: 3
+    paddingBottom: 3,
+    marginRight: 10
   },
   avatar: {
     marginRight: 10
@@ -48,7 +49,12 @@ export default {
     fontSize: 12
   },
   replyLink: {
-    flexDirection: 'row',
+    flexDirection: 'row'
+  },
+  commentIdFromParams: {
+    borderRadius: 2,
+    borderWidth: 1,
+    borderColor: '#FDD549'
   },
   // replyLinkText: {
   //   fontSize: 12,

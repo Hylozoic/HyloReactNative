@@ -14,6 +14,7 @@ import {
 } from 'store/selectors/getComments'
 import fetchCommentsAction from 'store/actions/fetchComments'
 import { FETCH_COMMENTS } from 'store/constants'
+import findCommentById from 'util/findComment'
 
 function Comments ({
   postId,
@@ -21,12 +22,14 @@ function Comments ({
   style = {},
   showMember,
   slug,
+  commentIdFromParams,
   panHandlers,
   onSelect
 }, ref) {
   const dispatch = useDispatch()
   const comments = useSelector(state => getComments(state, { postId })) || []
   const pending = useSelector(state => state.pending[FETCH_COMMENTS])
+  const [scrolled, setScrolled] = useState(false)
   const sections = comments.map(comment => ({
     comment: omit(['subComments'], comment),
     data: comment.subComments
@@ -41,12 +44,12 @@ function Comments ({
     const sectionIndex = section.comment.sectionIndex
     const itemIndex = section.data.find(subComment =>
       subCommentId === subComment.id)?.itemIndex || section.data.length + 1
-    commentsListRef?.current.scrollToLocation({ sectionIndex, itemIndex, viewPosition })
+    commentsListRef?.current.scrollToLocation({ sectionIndex, itemIndex, viewPosition, animated: true })
   }, [sections])
 
   const selectComment = useCallback(comment => {
     setHighlightedComment(comment)
-    scrollToComment(comment)
+    scrollToComment(comment, 0.5)
     onSelect(comment)
   }, [setHighlightedComment, scrollToComment, onSelect])
 
@@ -59,6 +62,16 @@ function Comments ({
   useEffect(() => {
     dispatch(fetchCommentsAction({ postId }))
   }, [dispatch, postId])
+
+  useEffect(() => {
+    if (comments && commentIdFromParams && !scrolled) {
+      const comment = findCommentById(comments, commentIdFromParams)
+      setHighlightedComment(comment)
+      scrollToComment(comment, 0.5) // when calling this here (instead of in the comment component), it only seems to be working for android, not IOS :(
+      // also tried the above functionality with just hitting selectComment(comment), didn't seem to work
+      setScrolled(true) // I think the comments selector is not memoized and is one of the selectors that is causing the extra rerenders.
+    }
+  }, [comments, commentIdFromParams, scrolled])
 
   const Header = () => (
     <>
@@ -121,7 +134,20 @@ function Comments ({
       sections={sections}
       keyExtractor={comment => comment.id}
       initialScrollIndex={0}
+      getItemLayout={(data, index) => ({
+        length: 50,
+        offset: 50 * index,
+        index
+      })}
       // keyboardShouldPersistTaps='handled'
+      onScrollToIndexFailed={(error) => {
+        this.commentsListRef.scrollToOffset({ offset: error.averageItemLength * error.index, animated: false })
+        setTimeout(() => {
+          if (this.state.data.length !== 0 && this.commentsListRef !== null) {
+            this.commentsListRef.scrollToIndex({ index: error.index, animated: true })
+          }
+        }, 100)
+      }}
       keyboardShouldPersistTaps='never'
       keyboardDismissMode={isIOS ? 'interactive' : 'on-drag'}
       {...panHandlers}
