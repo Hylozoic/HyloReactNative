@@ -18,7 +18,6 @@ import ImageAttachments from 'components/ImageAttachments'
 export default function Comment ({
   comment,
   clearHighlighted,
-  commentIdFromParams,
   displayPostTitle,
   showMenu = false,
   highlighted,
@@ -101,15 +100,9 @@ export default function Comment ({
     // return handleReply()
   }
 
-  useEffect(() => {
-    if (comment && commentIdFromParams === comment.id) {
-      scrollTo(0.5)
-    }
-  }, [])
-
   return (
     <TouchableOpacity onPress={handleOnPress} onLongPress={showActionSheet}>
-      <View style={[styles.container, highlighted && styles.highlighted, style, commentIdFromParams === comment.id && styles.commentIdFromParams]}>
+      <View style={[styles.container, highlighted && styles.highlighted, style]}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => showMember(creator.id)}>
             <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />

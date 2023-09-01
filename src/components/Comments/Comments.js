@@ -14,6 +14,7 @@ import {
 } from 'store/selectors/getComments'
 import fetchCommentsAction from 'store/actions/fetchComments'
 import { FETCH_COMMENTS } from 'store/constants'
+import findCommentById from 'util/findComment'
 
 function Comments ({
   postId,
@@ -28,6 +29,7 @@ function Comments ({
   const dispatch = useDispatch()
   const comments = useSelector(state => getComments(state, { postId })) || []
   const pending = useSelector(state => state.pending[FETCH_COMMENTS])
+  const [scrolled, setScrolled] = useState(false)
   const sections = comments.map(comment => ({
     comment: omit(['subComments'], comment),
     data: comment.subComments
@@ -47,7 +49,7 @@ function Comments ({
 
   const selectComment = useCallback(comment => {
     setHighlightedComment(comment)
-    scrollToComment(comment)
+    scrollToComment(comment, 0.5)
     onSelect(comment)
   }, [setHighlightedComment, scrollToComment, onSelect])
 
@@ -60,6 +62,16 @@ function Comments ({
   useEffect(() => {
     dispatch(fetchCommentsAction({ postId }))
   }, [dispatch, postId])
+
+  useEffect(() => {
+    if (comments && commentIdFromParams && !scrolled) {
+      const comment = findCommentById(comments, commentIdFromParams)
+      setHighlightedComment(comment)
+      scrollToComment(comment, 0.5) // when calling this here (instead of in the comment component), it only seems to be working for android, not IOS :(
+      // also tried the above functionality with just hitting selectComment(comment), didn't seem to work
+      setScrolled(true) // I think the comments selector is not memoized and is one of the selectors that is causing the extra rerenders.
+    }
+  }, [comments, commentIdFromParams, scrolled])
 
   const Header = () => (
     <>
@@ -84,7 +96,6 @@ function Comments ({
           onReply={selectComment}
           scrollTo={viewPosition => scrollToComment(comment, viewPosition)}
           setHighlighted={() => setHighlightedComment(comment)}
-          commentIdFromParams={commentIdFromParams}
           showMember={showMember}
           slug={slug}
           key={comment.id}
@@ -103,7 +114,6 @@ function Comments ({
         scrollTo={viewPosition => scrollToComment(comment, viewPosition)}
         setHighlighted={() => setHighlightedComment(comment)}
         showMember={showMember}
-        commentIdFromParams={commentIdFromParams}
         slug={slug}
         style={styles.subComment}
         key={comment.id}
