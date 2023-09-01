@@ -6,11 +6,9 @@ export default function Pill ({
   id,
   label,
   onRemove,
-  className,
   displayColor = 'rgba(s, 239, 241, 1.0)',
   style,
-  editable,
-  onClick
+  editable
 }) {
   const [removing, setRemoving] = useState(false)
   const deletePill = () => {
@@ -22,7 +20,6 @@ export default function Pill ({
       }
     }
   }
-  // const providedOnClick = (e) => { e.stopPropagation(); e.preventDefault(); onClick(id, label) }
   const mouseOut = () => setRemoving(false)
 
   const pillStyles = [
@@ -32,12 +29,9 @@ export default function Pill ({
   return (
     <View
       style={pillStyles}
-      className={className}
       onMouseLeave={mouseOut}
     >
-      <View
-        // onClick={providedOnClick} this needs to be swapped out for a TouchableOpacity
-      >
+      <View>
         <Text style={{ color: displayColor }}>{label}</Text>
       </View>
       {editable &&

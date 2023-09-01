@@ -6,7 +6,6 @@ import useReactionActions from 'hooks/useReactionActions'
 
 export default function EmojiRow (props) {
   const {
-    className,
     comment,
     currentUser,
     post,
@@ -36,7 +35,7 @@ export default function EmojiRow (props) {
   }, {})
 
   return (
-    <View className={className}>
+    <View>
       {entityReactions && <View style={styles.footerReactions}>
         {Object.values(usersReactions).map(reaction => (
           <EmojiPill

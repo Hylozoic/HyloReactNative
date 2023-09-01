@@ -1,6 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react-native'
 import { TestRoot } from 'util/testing'
+import MockedScreen from 'util/testing/MockedScreen'
 import PostFooter from './PostFooter'
 
 it('renders as expected', async () => {
