@@ -176,14 +176,14 @@ export function matchNewThreadIntoQueryResults (state, { id, type }) {
 }
 
 export function matchSubCommentsIntoQueryResults (state, { data }) {
-  const toplevelComments = get(`post.comments.items`, data)
+  const toplevelComments = get('post.comments.items', data)
 
   if (toplevelComments) {
     toplevelComments.forEach(comment => {
       state = updateIds(state,
         FETCH_CHILD_COMMENTS,
         { id: comment.id },
-        get(`childComments`, comment) || {}
+        get('childComments', comment) || {}
       )
     })
   }
@@ -273,6 +273,7 @@ export const queryParamWhitelist = [
   'id',
   'commentId',
   'context',
+  'childPostInclusion',
   'collectionToFilterOut',
   'farmQuery',
   'filter',

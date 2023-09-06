@@ -18,6 +18,7 @@ import { ALL_GROUP_ID, isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Grou
 import getMe from 'store/selectors/getMe'
 import fetchPosts from 'store/actions/fetchPosts'
 import resetNewPostCount from 'store/actions/resetNewPostCount'
+import updateUserSettings from 'store/actions/updateUserSettings'
 
 export function mapStateToProps (state, props) {
   const { forGroup, topicName, customPostTypes } = props
@@ -25,6 +26,7 @@ export function mapStateToProps (state, props) {
 
   const defaultPostType = get('settings.streamPostType', currentUser) || null
   const defaultSortBy = get('settings.streamSortBy', currentUser) || 'updated'
+  const childPostInclusion = get('settings.streamChildPosts', currentUser) || 'yes'
 
   const postTypeFilter = props?.feedType || getFilter(state, props) || defaultPostType
   const sortBy = getSort(state, props) || defaultSortBy
@@ -46,6 +48,7 @@ export function mapStateToProps (state, props) {
   let fetchPostParam = getQueryProps(state, {
     // For Custom Streams, not yet implemented
     activePostsOnly: false,
+    childPostInclusion,
     // forCollection: customView?.type === 'collection' ? customView?.collectionId : null,
     // Can be one of: ['groups', 'all', 'public']
     context: isContextGroup(forGroup?.slug)
@@ -84,7 +87,7 @@ export function mapStateToProps (state, props) {
   }
 }
 
-const mapDispatchToProps = { setFilter, setSort, setTimeframe, fetchPosts, resetNewPostCount }
+const mapDispatchToProps = { setFilter, setSort, setTimeframe, fetchPosts, resetNewPostCount, updateUserSettings }
 
 export function shouldResetNewPostCount ({ slug, sortBy, filter, topic }) {
   return slug !== ALL_GROUP_ID &&

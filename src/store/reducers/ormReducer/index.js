@@ -32,7 +32,7 @@ import {
   // UPDATE_POST_PENDING,
   UPDATE_POST,
   UPDATE_THREAD_READ_TIME,
-  // UPDATE_USER_SETTINGS_PENDING as UPDATE_USER_SETTINGS_GLOBAL_PENDING,
+  UPDATE_USER_SETTINGS_PENDING as UPDATE_USER_SETTINGS_GLOBAL_PENDING,
   UPDATE_WIDGET,
   USE_INVITATION,
   VOTE_ON_POST_PENDING
@@ -436,18 +436,18 @@ export default function ormReducer (state = orm.getEmptyState(), action) {
       break
     }
 
-    // case UPDATE_USER_SETTINGS_GLOBAL_PENDING: {
-    //   me = Me.first()
-    //   const changes = {
-    //     ...meta.changes,
-    //     settings: {
-    //       ...me.settings,
-    //       ...meta.changes.settings
-    //     }
-    //   }
-    //   me.update(changes)
-    //   break
-    // }
+    case UPDATE_USER_SETTINGS_GLOBAL_PENDING: {
+      me = Me.first()
+      const changes = {
+        ...meta.changes,
+        settings: {
+          ...me.settings,
+          ...meta.changes.settings
+        }
+      }
+      me.update(changes)
+      break
+    }
 
     case UPDATE_THREAD_READ_TIME_PENDING: {
       const thread = MessageThread.safeWithId(meta.id)

@@ -175,6 +175,7 @@ posts: viewPosts(
       "activePostsOnly": undefined,
       "afterTime": undefined,
       "beforeTime": undefined,
+      "childPostInclusion": "yes",
       "collectionToFilterOut": undefined,
       "context": "groups",
       "filter": undefined,
