@@ -51,7 +51,7 @@ export default function Feed ({ topicName: providedTopicName }) {
   const customViewType = customView?.type
   const customPostTypes = customViewType === 'stream' ? customView?.postTypes : null
   const customViewName = customView?.name
-  // const customViewIcon = customView?.icon
+  const customViewIcon = customView?.icon
   // Note: Custom View Mode = grid, etc. Not implemented in App
   // const customViewMode = customView?.defaultViewMode
 
@@ -120,6 +120,11 @@ export default function Feed ({ topicName: providedTopicName }) {
       <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
       <View style={styles.titleRow}>
         <View style={styles.title}>
+          {customViewIcon && (
+            <View style={styles.customViewIconContainer}>
+              <Icon name={customViewIcon} style={styles.customViewIcon} />
+            </View>
+          )}
           <Text style={styles.name} numberOfLines={3}>
             {customViewName || name}
           </Text>
