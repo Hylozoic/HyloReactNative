@@ -109,7 +109,7 @@ export default function Comment ({
 
   return (
     <TouchableOpacity onPress={handleOnPress} onLongPress={showActionSheet}>
-      <View style={[styles.container, highlighted && styles.highlighted, style, commentIdFromParams === comment.id && styles.commentIdFromParams]}>
+      <View style={[styles.container, (highlighted || commentIdFromParams === comment.id) && styles.highlighted, style]}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => showMember(creator.id)}>
             <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />

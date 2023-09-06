@@ -51,11 +51,6 @@ export default {
   replyLink: {
     flexDirection: 'row'
   },
-  commentIdFromParams: {
-    borderRadius: 2,
-    borderWidth: 1,
-    borderColor: '#FDD549'
-  },
   // replyLinkText: {
   //   fontSize: 12,
   //   color: slateGrey80,
