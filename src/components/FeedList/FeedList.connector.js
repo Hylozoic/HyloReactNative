@@ -58,7 +58,7 @@ export function mapStateToProps (state, props) {
     slug: forGroup?.slug,
     topicName,
     sortBy,
-    topics: customViewTopics?.toModelArray().map(t => t.id) || [],
+    topics: customViewTopics?.toModelArray().map(t => t.id) || null,
     types: customPostTypes,
     // Can be any of the Post Types:
     filter: postTypeFilter === NO_POST_FILTER ? null : postTypeFilter
