@@ -50,15 +50,10 @@ export default function Feed ({ topicName: providedTopicName }) {
 
   const customViewType = customView?.type
   const customPostTypes = customViewType === 'stream' ? customView?.postTypes : null
+  const customViewName = customView?.name
+  // const customViewIcon = customView?.icon
   // Note: Custom View Mode = grid, etc. Not implemented in App
   // const customViewMode = customView?.defaultViewMode
-  const customViewName = customView?.name
-  const customViewIcon = customView?.icon
-  const activePostsOnly = customViewType === 'stream' ? customView?.activePostsOnly : false
-  const customViewTopics = customViewType === 'stream' ? customView?.topics.toRefArray() : null
-  const customViewSort = customView?.defaultSort
-  // Sort is respected
-  const customViewCollectionId = customView?.collectionId
 
   const currentUser = useSelector(getMe)
   const memberships = useSelector(getMemberships)
@@ -164,6 +159,7 @@ export default function Feed ({ topicName: providedTopicName }) {
         navigation={navigation}
         showMember={goToMember}
         showTopic={goToTopic}
+        customView={customView}
         topicName={topicName}
         feedType={feedType}
         // Custom Views

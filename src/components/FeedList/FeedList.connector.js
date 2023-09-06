@@ -21,7 +21,7 @@ import resetNewPostCount from 'store/actions/resetNewPostCount'
 import updateUserSettings from 'store/actions/updateUserSettings'
 
 export function mapStateToProps (state, props) {
-  const { forGroup, topicName, customPostTypes } = props
+  const { forGroup, topicName, customView } = props
   const currentUser = getMe(state, props)
 
   const defaultPostType = get('settings.streamPostType', currentUser) || null
@@ -29,27 +29,23 @@ export function mapStateToProps (state, props) {
   const childPostInclusion = get('settings.streamChildPosts', currentUser) || 'yes'
 
   const postTypeFilter = props?.feedType || getFilter(state, props) || defaultPostType
-  const sortBy = getSort(state, props) || defaultSortBy
+  const customViewSort = customView?.defaultSort
+  const sortBy = customViewSort || getSort(state, props) || defaultSortBy
   const timeframe = getTimeframe(state, props)
+  const activePostsOnly = customView?.activePostsOnly
+  // TODO: The below logic tied to customView.type could
+  // be removed and handled by ignoring empty arrays for
+  // these two keys.
+  const customViewType = customView?.type
+  const customPostTypes = customViewType === 'stream' ? customView?.postTypes : null
+  const customViewTopics = customViewType === 'stream' ? customView?.topics : null
 
-  // Custom views code from hylo-evo - Stream.connector.js
-  // const customView = getCustomView(state, props)
-  // const customViewType = customView?.type
-  // const customPostTypes = customViewType === 'stream' ? customView?.postTypes : null
-  // const customViewMode = customView?.defaultViewMode
-  // const customViewName = customView?.name
-  // const customViewIcon = customView?.icon
-  // const activePostsOnly = customViewType === 'stream' ? customView?.activePostsOnly : false
-  // const customViewTopics = customViewType === 'stream' ? customView?.topics : null
-  // const customViewSort = customView?.defaultSort
-  // const viewName = customViewName
-  // const viewIcon = customViewIcon
+  const customViewCollectionId = customView?.collectionId
 
   let fetchPostParam = getQueryProps(state, {
-    // For Custom Streams, not yet implemented
-    activePostsOnly: false,
+    activePostsOnly,
     childPostInclusion,
-    // forCollection: customView?.type === 'collection' ? customView?.collectionId : null,
+    forCollection: customViewCollectionId,
     // Can be one of: ['groups', 'all', 'public']
     context: isContextGroup(forGroup?.slug)
       ? forGroup.slug
@@ -57,6 +53,7 @@ export function mapStateToProps (state, props) {
     slug: forGroup?.slug,
     topicName,
     sortBy,
+    topics: customViewTopics?.toModelArray().map(t => t.id) || [],
     types: customPostTypes,
     // Can be any of the Post Types:
     filter: postTypeFilter === NO_POST_FILTER ? null : postTypeFilter
