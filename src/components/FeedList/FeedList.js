@@ -25,6 +25,7 @@ export const POST_TYPE_OPTIONS = [
 
 // tracks: `hylo/hylo-evo/src/util/constants.js`
 export const STREAM_SORT_OPTIONS = [
+  { id: 'order', label: 'Manual' },
   { id: 'updated', label: 'Latest activity' },
   { id: 'created', label: 'Post Date' },
   { id: 'votes', label: 'Popular' }
@@ -114,7 +115,6 @@ export class FeedListClassComponent extends React.Component {
       : {
           backgroundColor: '#FFFFFF'
         }
-
     return (
       <View style={styles.container}>
         <FlatList

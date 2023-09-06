@@ -30,7 +30,12 @@ export function mapStateToProps (state, props) {
 
   const postTypeFilter = props?.feedType || getFilter(state, props) || defaultPostType
   const customViewSort = customView?.defaultSort
-  const sortBy = customViewSort || getSort(state, props) || defaultSortBy
+
+  let sortBy = customViewSort || getSort(state, props) || defaultSortBy
+  // Only custom views can be sorted by manual order
+  if (!customView && sortBy === 'order') {
+    sortBy = 'updated'
+  }
   const timeframe = getTimeframe(state, props)
   const activePostsOnly = customView?.activePostsOnly
   // TODO: The below logic tied to customView.type could
