@@ -80,7 +80,6 @@ export class FeedListClassComponent extends React.Component {
     ) {
       this.fetchOrShowCached()
     }
-    // fix for childPostInclusion
   }
 
   handleChildPostToggle = () => {
