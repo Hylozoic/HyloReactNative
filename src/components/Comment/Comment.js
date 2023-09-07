@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Text, View, Alert, TouchableOpacity } from 'react-native'
 import { filter } from 'lodash/fp'
 import Clipboard from '@react-native-clipboard/clipboard'
@@ -18,7 +18,6 @@ import ImageAttachments from 'components/ImageAttachments'
 export default function Comment ({
   comment,
   clearHighlighted,
-  commentIdFromParams,
   displayPostTitle,
   showMenu = false,
   highlighted,
@@ -101,15 +100,9 @@ export default function Comment ({
     // return handleReply()
   }
 
-  useEffect(() => {
-    if (comment && commentIdFromParams === comment.id) {
-      scrollTo(0.5)
-    }
-  }, [])
-
   return (
     <TouchableOpacity onPress={handleOnPress} onLongPress={showActionSheet}>
-      <View style={[styles.container, (highlighted || commentIdFromParams === comment.id) && styles.highlighted, style]}>
+      <View style={[styles.container, highlighted && styles.highlighted, style]}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => showMember(creator.id)}>
             <Avatar avatarUrl={creator.avatarUrl} style={styles.avatar} />

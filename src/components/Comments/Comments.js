@@ -17,11 +17,11 @@ import { FETCH_COMMENTS } from 'store/constants'
 
 function Comments ({
   postId,
+  selectedCommentId,
   header: providedHeader = null,
   style = {},
   showMember,
   slug,
-  commentIdFromParams,
   panHandlers,
   onSelect
 }, ref) {
@@ -61,6 +61,22 @@ function Comments ({
     dispatch(fetchCommentsAction({ postId }))
   }, [dispatch, postId])
 
+  useEffect(() => {
+    if (!pending && selectedCommentId) {
+      comments.forEach(comment => {
+        if (comment.id === selectedCommentId) {
+          selectComment(comment)
+        } else {
+          comment.subComments.forEach(subComment => {
+            if (selectedCommentId === subComment.id) {
+              selectComment(subComment)
+            }
+          })
+        }
+      })
+    }
+  }, [pending, selectedCommentId])
+
   const Header = () => (
     <>
       {providedHeader}
@@ -84,7 +100,6 @@ function Comments ({
           onReply={selectComment}
           scrollTo={viewPosition => scrollToComment(comment, viewPosition)}
           setHighlighted={() => setHighlightedComment(comment)}
-          commentIdFromParams={commentIdFromParams}
           showMember={showMember}
           slug={slug}
           key={comment.id}
@@ -103,7 +118,6 @@ function Comments ({
         scrollTo={viewPosition => scrollToComment(comment, viewPosition)}
         setHighlighted={() => setHighlightedComment(comment)}
         showMember={showMember}
-        commentIdFromParams={commentIdFromParams}
         slug={slug}
         style={styles.subComment}
         key={comment.id}
