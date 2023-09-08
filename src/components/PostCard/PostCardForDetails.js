@@ -6,6 +6,7 @@ import { find, get } from 'lodash/fp'
 import { LocationHelpers } from 'hylo-shared'
 import { DEFAULT_APP_HOST } from 'navigation/linking'
 import { openURL } from 'hooks/useOpenURL'
+import EmojiRow from 'components/EmojiRow'
 import useChangeToGroup from 'hooks/useChangeToGroup'
 import useGoToMember from 'hooks/useGoToMember'
 import useGoToTopic from 'hooks/useGoToTopic'
@@ -110,6 +111,13 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
         title={post.title}
         type={post.type}
       />
+      <View style={{ paddingLeft: 6, flex: 1, flexDirection: 'row', alignItems: 'baseline', gap: 1 }}>
+        <EmojiRow
+          includePicker
+          post={post}
+          currentUser={currentUser}
+        />
+      </View>
       <Files urls={post.fileUrls} style={styles.files} />
       {isProject && (
         <ProjectMembersSummary
