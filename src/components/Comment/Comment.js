@@ -80,6 +80,9 @@ export default function Comment ({
     ['Reply', handleReply, {
       icon: <Icon name='Replies' style={styles.actionSheetIcon} />
     }],
+    ['React', () => setShowEmojiPicker(!showEmojiPicker), {
+      icon: <Icon name='Smiley' style={styles.actionSheetIcon} />
+    }],
     ['Copy', handleCopy, {
       icon: <FontAwesome5Icon name='copy' style={styles.actionSheetIcon} />
     }],
