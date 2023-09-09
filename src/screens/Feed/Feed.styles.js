@@ -28,6 +28,20 @@ export default {
   bannerContainerWithPostPrompt: {
     marginBottom: 34
   },
+  customViewIcon: {
+    fontSize: 16,
+    color: 'rgba(44, 64, 89, 0.6)'
+  },
+  customViewIconContainer: {
+    width: 30,
+    height: 30,
+    borderRadius: 25,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 8,
+    backgroundColor: 'rgb(255, 255, 255)'
+  },
   image: {
     height: 142,
     width: '100%',
@@ -47,7 +61,8 @@ export default {
     alignItems: 'flex-end'
   },
   title: {
-    flex: 1
+    flex: 1,
+    flexDirection: 'row',
   },
   name: {
     fontSize: 24,

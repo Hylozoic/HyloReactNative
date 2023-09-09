@@ -48,16 +48,12 @@ export default function Feed ({ topicName: providedTopicName }) {
   const goToTopicDefault = useGoToTopic()
   const topicName = providedTopicName || getRouteParam('topicName', route)
 
-  console.log('!!! customViewType', customView)
-
   const customViewType = customView?.type
   const customPostTypes = customViewType === 'stream' ? customView?.postTypes : null
-  const customViewMode = customView?.defaultViewMode
   const customViewName = customView?.name
   const customViewIcon = customView?.icon
-  const activePostsOnly = customViewType === 'stream' ? customView?.activePostsOnly : false
-  const customViewTopics = customViewType === 'stream' ? customView?.topics : null
-  const customViewSort = customView?.defaultSort
+  // Note: Custom View Mode = grid, etc. Not implemented in App
+  // const customViewMode = customView?.defaultViewMode
 
   const currentUser = useSelector(getMe)
   const memberships = useSelector(getMemberships)
@@ -124,8 +120,13 @@ export default function Feed ({ topicName: providedTopicName }) {
       <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
       <View style={styles.titleRow}>
         <View style={styles.title}>
+          {customViewIcon && (
+            <View style={styles.customViewIconContainer}>
+              <Icon name={customViewIcon} style={styles.customViewIcon} />
+            </View>
+          )}
           <Text style={styles.name} numberOfLines={3}>
-            {name}
+            {customViewName || name}
           </Text>
           {topicName && (
             <View style={styles.topicInfo}>
@@ -163,8 +164,11 @@ export default function Feed ({ topicName: providedTopicName }) {
         navigation={navigation}
         showMember={goToMember}
         showTopic={goToTopic}
+        customView={customView}
         topicName={topicName}
         feedType={feedType}
+        // Custom Views
+        customPostTypes={customPostTypes}
       />
       {!topicName && currentGroup && (
         <SocketSubscriber type='group' id={currentGroup.id} />
