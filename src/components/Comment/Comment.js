@@ -9,6 +9,7 @@ import useReactionActions from 'hooks/useReactionActions'
 import deleteCommentAction from 'store/actions/deleteComment'
 import getGroup from 'store/selectors/getGroup'
 import getMe from 'store/selectors/getMe'
+import { getPresentedPost } from 'store/selectors/getPost'
 import Avatar from 'components/Avatar'
 import EmojiRow from 'components/EmojiRow'
 import EmojiPicker from 'components/EmojiPicker'
@@ -40,7 +41,8 @@ export default function Comment ({
   const group = useSelector(state => getGroup(state, { slug }))
   const canModerate = currentUser && currentUser.canModerate(group)
   const isCreator = currentUser && (comment.creator.id === currentUser.id)
-  const { creator, text, createdAt, post } = comment
+  const { creator, text, createdAt, post: postId } = comment
+  const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: group?.id }))
   const postTitle = displayPostTitle && post?.title && TextHelpers.truncateText(post.title, 40)
   const myReactions = (comment && comment.myReactions) || []
   const myEmojis = myReactions.map((reaction) => reaction.emojiFull)
