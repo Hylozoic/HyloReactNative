@@ -8,10 +8,7 @@ it('renders as expected', async () => {
   const { toJSON } = render(
     <TestRoot>
       <PostFooter
-        myVote
-        votesTotal={71}
         commentersTotal={19}
-        vote={() => {}}
         type='request'
         currentUser={{}}
         members={[]}

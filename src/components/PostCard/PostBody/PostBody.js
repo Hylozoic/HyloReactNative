@@ -5,6 +5,7 @@ import { decode } from 'html-entities'
 import { TextHelpers } from 'hylo-shared'
 import { humanResponse, RESPONSES } from 'store/models/EventInvitation'
 import HyloHTML from 'components/HyloHTML'
+import EmojiRow from 'components/EmojiRow'
 import LinkPreview from 'components/PostCard/LinkPreview'
 import Icon from 'components/Icon'
 import PopupMenuButton from 'components/PopupMenuButton'
@@ -16,11 +17,13 @@ const MAX_DETAILS_LENGTH = 144
 export default function PostBody ({
   type,
   title,
+  currentUser,
   details,
   startTime,
   endTime,
+  post,
   linkPreview,
-  linkPreviewFeatured,
+  // linkPreviewFeatured,
   myEventResponse,
   respondToEvent,
   shouldTruncate
@@ -53,6 +56,12 @@ export default function PostBody ({
       />
       {/* {!linkPreviewFeatured && ( */}
       <LinkPreview {...linkPreview} />
+      <View>
+        <EmojiRow
+          post={post}
+          currentUser={currentUser}
+        />
+      </View>
       {/* )} */}
     </View>
   )

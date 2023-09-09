@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import { get, find, filter, isEmpty, sortBy } from 'lodash/fp'
 import LinearGradient from 'react-native-linear-gradient'
 import { RESPONSES } from 'store/models/EventInvitation'
-import voteOnPost from 'store/actions/voteOnPost'
 import Avatar from 'components/Avatar'
-import Icon from 'components/Icon'
 import PeopleListModal from 'components/PeopleListModal'
-import { caribbeanGreen, postCardLinearGradientColors, white, rhino40 } from 'style/colors'
+import { postCardLinearGradientColors, rhino40 } from 'style/colors'
 
 export default function PostFooter ({
   commenters,
@@ -17,23 +14,14 @@ export default function PostFooter ({
   currentUser,
   eventInvitations,
   members,
-  myVote,
   forDetails,
   style,
-  type,
-  votesTotal,
-  postId
+  type
 }) {
-  const dispatch = useDispatch()
   const navigation = useNavigation()
   const [peopleModalVisible, setPeopleModalVisible] = useState(false)
   const togglePeopleModal = () => setPeopleModalVisible(!peopleModalVisible)
   const goToMember = person => navigation.navigate('Member', { id: person.id })
-  const vote = () => dispatch(voteOnPost(postId, !myVote))
-
-  const voteStyle = myVote
-    ? styles.votes.active
-    : styles.votes.inactive
 
   const eventAttendees = filter(ei => ei.response === RESPONSES.YES, eventInvitations)
 
@@ -80,7 +68,7 @@ export default function PostFooter ({
       )
   }
 
-  const { caption, avatarUrls, sortedPeople, pluralPhrase } = peopleRowResult
+  const { caption, avatarUrls, sortedPeople } = peopleRowResult
 
   return (
     <>
@@ -110,10 +98,6 @@ export default function PostFooter ({
             )
           })}
           <Text style={[styles.commentsText, !isEmpty(avatarUrls) && styles.commentsTextWithAvatars]}>{caption}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.votes.container, voteStyle]} onPress={vote}>
-          <Icon name='ArrowUp' style={[styles.votes.icon, voteStyle]} />
-          <Text style={[styles.votes.text, voteStyle]}>{votesTotal}</Text>
         </TouchableOpacity>
       </LinearGradient>
       {forDetails && (
@@ -188,30 +172,5 @@ const styles = {
   },
   commentsTextWithAvatars: {
     paddingLeft: 5
-  },
-  votes: {
-    container: {
-      paddingRight: 14,
-      paddingLeft: 14,
-      flexDirection: 'row',
-      paddingVertical: 6,
-      alignItems: 'center',
-      height: '100%'
-    },
-    icon: {
-      fontSize: 18,
-      marginRight: 4
-    },
-    text: {
-      fontSize: 12,
-      fontFamily: 'Circular-Bold'
-    },
-    active: {
-      backgroundColor: caribbeanGreen,
-      color: white
-    },
-    inactive: {
-      color: caribbeanGreen
-    }
   }
 }

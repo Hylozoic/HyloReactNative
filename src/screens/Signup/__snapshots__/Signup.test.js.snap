@@ -341,14 +341,14 @@ exports[`renders with defaults 1`] = `
                               <Image
                                 source={
                                   {
-                                    "testUri": "../../../assets/signin_background.png",
+                                    "process": [Function],
                                   }
                                 }
                               />
                               <Image
                                 source={
                                   {
-                                    "testUri": "../../../assets/merkaba_white.png",
+                                    "process": [Function],
                                   }
                                 }
                               />

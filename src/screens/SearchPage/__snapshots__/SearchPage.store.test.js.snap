@@ -50,6 +50,7 @@ exports[`fetchSearchResults matches snapshot 1`] = `
     avatarUrl
   }
   commentersTotal
+  commentsTotal
   
   linkPreview {
     description
@@ -80,7 +81,19 @@ exports[`fetchSearchResults matches snapshot 1`] = `
     region
   }
   votesTotal
-  myVote
+  peopleReactedTotal
+  myReactions {
+    emojiFull
+    id
+  }
+  postReactions {
+    emojiFull
+    id
+    user {
+      id
+      name
+    }
+  }
   groups {
     id
     name
