@@ -36,19 +36,28 @@ export default function EmojiRow (props) {
 
   return (
     <View>
-      {entityReactions && <View style={styles.footerReactions}>
-        {Object.values(usersReactions).map(reaction => (
-          <EmojiPill
-            onClick={currentUser ? reaction.loggedInUser ? handleRemoveReaction : handleReaction : null}
-            key={reaction.emojiFull}
-            emojiFull={reaction.emojiFull}
-            count={reaction.userList.length}
-            selected={reaction.loggedInUser}
-            toolTip={reaction.userList.join('<br>')}
-          />
-        ))}
-        {(currentUser && includePicker) ? <EmojiPicker includePicker={includePicker} myEmojis={myEmojis} handleReaction={handleReaction} handleRemoveReaction={handleRemoveReaction} /> : ''}
-      </View>}
+      {entityReactions && (
+        <View style={styles.footerReactions}>
+          {Object.values(usersReactions).map(reaction => (
+            <EmojiPill
+              onClick={currentUser ? reaction.loggedInUser ? handleRemoveReaction : handleReaction : null}
+              key={reaction.emojiFull}
+              emojiFull={reaction.emojiFull}
+              count={reaction.userList.length}
+              selected={reaction.loggedInUser}
+              toolTip={reaction.userList.join('<br>')}
+            />
+          ))}
+          {(currentUser && includePicker) && (
+            <EmojiPicker
+              includePicker={includePicker}
+              myEmojis={myEmojis}
+              handleReaction={handleReaction}
+              handleRemoveReaction={handleRemoveReaction}
+            />
+          )}
+        </View>
+      )}
     </View>
   )
 }
