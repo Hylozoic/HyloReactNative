@@ -131,12 +131,11 @@ export class FeedListClassComponent extends React.Component {
               {!feedType && (
                 <View style={[styles.listControls]}>
                   <ListControl selected={sortBy} onChange={setSort} options={STREAM_SORT_OPTIONS} />
-                  {!customPostTypes && <ListControl selected={filter} onChange={setFilter} options={POST_TYPE_OPTIONS} />}
                   <View style={styles.steamControlRightSide}>
                     <TouchableOpacity onPress={this.handleChildPostToggle}>
                       <View style={{ ...styles.childGroupToggle, ...extraToggleStyles }}><Icon name='Subgroup' color={fetchPostParam.childPostInclusion === 'yes' ? '#FFFFFF' : pictonBlue} /></View>
                     </TouchableOpacity>
-                    <ListControl selected={filter} onChange={setFilter} options={POST_TYPE_OPTIONS} />
+                    {!customPostTypes && <ListControl selected={filter} onChange={setFilter} options={POST_TYPE_OPTIONS} />}
                   </View>
                 </View>
               )}
