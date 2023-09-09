@@ -25,6 +25,7 @@ export const POST_TYPE_OPTIONS = [
 
 // tracks: `hylo/hylo-evo/src/util/constants.js`
 export const STREAM_SORT_OPTIONS = [
+  { id: 'order', label: 'Manual' },
   { id: 'updated', label: 'Latest activity' },
   { id: 'created', label: 'Post Date' },
   { id: 'votes', label: 'Popular' }
@@ -103,7 +104,8 @@ export class FeedListClassComponent extends React.Component {
       sortBy,
       feedType,
       filter,
-      timeframe
+      timeframe,
+      customPostTypes
     } = this.props
 
     const extraToggleStyles = fetchPostParam.childPostInclusion === 'yes'
@@ -113,7 +115,6 @@ export class FeedListClassComponent extends React.Component {
       : {
           backgroundColor: '#FFFFFF'
         }
-
     return (
       <View style={styles.container}>
         <FlatList
@@ -130,6 +131,7 @@ export class FeedListClassComponent extends React.Component {
               {!feedType && (
                 <View style={[styles.listControls]}>
                   <ListControl selected={sortBy} onChange={setSort} options={STREAM_SORT_OPTIONS} />
+                  {!customPostTypes && <ListControl selected={filter} onChange={setFilter} options={POST_TYPE_OPTIONS} />}
                   <View style={styles.steamControlRightSide}>
                     <TouchableOpacity onPress={this.handleChildPostToggle}>
                       <View style={{ ...styles.childGroupToggle, ...extraToggleStyles }}><Icon name='Subgroup' color={fetchPostParam.childPostInclusion === 'yes' ? '#FFFFFF' : pictonBlue} /></View>
