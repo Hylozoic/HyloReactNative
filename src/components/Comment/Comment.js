@@ -172,7 +172,16 @@ export default function Comment ({
             currentUser={currentUser}
             comment={comment}
           />
-          {showEmojiPicker ? <EmojiPicker useModal myEmojis={myEmojis} modalOpened={showEmojiPicker} handleReaction={handleReaction} onRequestClose={() => setShowEmojiPicker(!showEmojiPicker)} handleRemoveReaction={handleRemoveReaction} /> : ''}
+          {showEmojiPicker && (
+            <EmojiPicker
+              useModal
+              myEmojis={myEmojis}
+              modalOpened={showEmojiPicker}
+              handleReaction={handleReaction}
+              onRequestClose={() => setShowEmojiPicker(!showEmojiPicker)}
+              handleRemoveReaction={handleRemoveReaction}
+            />
+          )}
         </View>
       </View>
     </TouchableOpacity>
