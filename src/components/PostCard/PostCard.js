@@ -105,6 +105,7 @@ export default function PostCard ({
           commenters={post.commenters}
           commentersTotal={post.commentersTotal}
           eventInvitations={post.eventInvitations}
+          onPress={onPress}
           postId={post.id}
           members={post.members}
         />

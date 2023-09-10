@@ -56,13 +56,11 @@ export default function PostBody ({
       />
       {/* {!linkPreviewFeatured && ( */}
       <LinkPreview {...linkPreview} />
-      <View>
-        <EmojiRow
-          post={post}
-          currentUser={currentUser}
-        />
-      </View>
       {/* )} */}
+      <EmojiRow
+        post={post}
+        currentUser={currentUser}
+      />
     </View>
   )
 }

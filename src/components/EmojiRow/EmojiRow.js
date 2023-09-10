@@ -14,6 +14,7 @@ export default function EmojiRow (props) {
   const { reactOnEntity, removeReactOnFromEntity } = useReactionActions()
 
   if (!post) return null
+
   const entityType = comment ? 'comment' : 'post'
   const myReactions = (comment ? comment.myReactions : post.myReactions) || []
   const entityReactions = (comment ? comment.commentReactions : post.postReactions) || []
@@ -34,29 +35,29 @@ export default function EmojiRow (props) {
     return accum
   }, {})
 
+  if (!entityReactions) {
+    return null
+  }
+
   return (
-    <View>
-      {entityReactions && (
-        <View style={styles.footerReactions}>
-          {Object.values(usersReactions).map(reaction => (
-            <EmojiPill
-              onClick={currentUser ? reaction.loggedInUser ? handleRemoveReaction : handleReaction : null}
-              key={reaction.emojiFull}
-              emojiFull={reaction.emojiFull}
-              count={reaction.userList.length}
-              selected={reaction.loggedInUser}
-              toolTip={reaction.userList.join('<br>')}
-            />
-          ))}
-          {(currentUser && includePicker) && (
-            <EmojiPicker
-              includePicker={includePicker}
-              myEmojis={myEmojis}
-              handleReaction={handleReaction}
-              handleRemoveReaction={handleRemoveReaction}
-            />
-          )}
-        </View>
+    <View style={styles.footerReactions}>
+      {Object.values(usersReactions).map(reaction => (
+        <EmojiPill
+          onClick={currentUser ? reaction.loggedInUser ? handleRemoveReaction : handleReaction : null}
+          key={reaction.emojiFull}
+          emojiFull={reaction.emojiFull}
+          count={reaction.userList.length}
+          selected={reaction.loggedInUser}
+          toolTip={reaction.userList.join('<br>')}
+        />
+      ))}
+      {(currentUser && includePicker) && (
+        <EmojiPicker
+          includePicker={includePicker}
+          myEmojis={myEmojis}
+          handleReaction={handleReaction}
+          handleRemoveReaction={handleRemoveReaction}
+        />
       )}
     </View>
   )
@@ -69,7 +70,6 @@ const styles = {
     gap: 4,
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
     height: 'auto',
     flexWrap: 'wrap'
   }

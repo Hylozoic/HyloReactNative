@@ -14,6 +14,7 @@ export default function PostFooter ({
   currentUser,
   eventInvitations,
   members,
+  onPress,
   forDetails,
   style,
   type
@@ -79,12 +80,8 @@ export default function PostFooter ({
           onPressPerson={goToMember}
           toggleModal={togglePeopleModal}
           isVisible={peopleModalVisible}
-        >
-          {/* <View>
-            <Text style={{ fontFamily: 'Circular-Bold' }}>{pluralPhrase}</Text>
-          </View> */}
-        </PeopleListModal>
-        <TouchableOpacity onLongPress={togglePeopleModal} style={styles.comments}>
+        />
+        <TouchableOpacity onPress={onPress} onLongPress={togglePeopleModal} style={styles.comments}>
           {avatarUrls.slice(0, 3).map((avatarUrl, index) => {
             return (
               <Avatar
@@ -150,7 +147,8 @@ const styles = {
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 12
+    paddingLeft: 12,
+    paddingVertical: 8
   },
   dashedBorder: {
     height: 1,
