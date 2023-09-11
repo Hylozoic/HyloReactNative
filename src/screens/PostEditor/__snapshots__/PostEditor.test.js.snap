@@ -1107,7 +1107,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
                     fadeDuration={0}
                     source={
                       {
-                        "testUri": "../../@react-navigation/elements/lib/commonjs/assets/back-icon.png",
+                        "process": [Function],
                       }
                     }
                     style={

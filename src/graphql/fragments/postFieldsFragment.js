@@ -18,6 +18,18 @@ const CommentFieldsFragment = `
   parentComment {
     id
   }
+  myReactions {
+    emojiFull
+    id
+  }
+  commentReactions {
+    emojiFull
+    id
+    user {
+      id
+      name
+    }
+  }
   createdAt
 `
 
@@ -47,6 +59,7 @@ const postFieldsFragment = withComments => `
     avatarUrl
   }
   commentersTotal
+  commentsTotal
   ${withComments ? `comments(first: 10, order: "desc") {
     items {
       ${CommentFieldsFragment}
@@ -93,7 +106,19 @@ const postFieldsFragment = withComments => `
     region
   }
   votesTotal
-  myVote
+  peopleReactedTotal
+  myReactions {
+    emojiFull
+    id
+  }
+  postReactions {
+    emojiFull
+    id
+    user {
+      id
+      name
+    }
+  }
   groups {
     id
     name

@@ -10,6 +10,7 @@ import Files from 'components/Files'
 import Icon from 'components/Icon'
 import Topics from 'components/Topics'
 import styles from 'components/PostCard/PostCard.styles'
+import { useCurrentUser } from 'hooks/useCurrentUser'
 
 export default function PostCard ({
   goToGroup,
@@ -25,6 +26,7 @@ export default function PostCard ({
 }) {
   const images = post.imageUrls && post.imageUrls.map(uri => ({ uri }))
   const locationText = LocationHelpers.generalLocationString(post.locationObject, post.location)
+  const currentUser = useCurrentUser()
 
   return (
     <>
@@ -77,6 +79,8 @@ export default function PostCard ({
         )}
         <PostBody
           details={post.details}
+          post={post}
+          currentUser={currentUser}
           endTime={post.endTime}
           hideDetails={hideDetails}
           linkPreview={post.linkPreview}
@@ -101,10 +105,9 @@ export default function PostCard ({
           commenters={post.commenters}
           commentersTotal={post.commentersTotal}
           eventInvitations={post.eventInvitations}
+          onPress={onPress}
           postId={post.id}
           members={post.members}
-          myVote={post.myVote}
-          votesTotal={post.votesTotal}
         />
       </View>
     </>

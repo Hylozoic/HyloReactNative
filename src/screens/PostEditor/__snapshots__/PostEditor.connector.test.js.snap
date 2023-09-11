@@ -44,6 +44,7 @@ exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
     avatarUrl
   }
   commentersTotal
+  commentsTotal
   comments(first: 10, order: "desc") {
     items {
       
@@ -62,6 +63,18 @@ exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
   }
   parentComment {
     id
+  }
+  myReactions {
+    emojiFull
+    id
+  }
+  commentReactions {
+    emojiFull
+    id
+    user {
+      id
+      name
+    }
   }
   createdAt
 
@@ -83,6 +96,18 @@ exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
   }
   parentComment {
     id
+  }
+  myReactions {
+    emojiFull
+    id
+  }
+  commentReactions {
+    emojiFull
+    id
+    user {
+      id
+      name
+    }
   }
   createdAt
 
@@ -126,7 +151,19 @@ exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
     region
   }
   votesTotal
-  myVote
+  peopleReactedTotal
+  myReactions {
+    emojiFull
+    id
+  }
+  postReactions {
+    emojiFull
+    id
+    user {
+      id
+      name
+    }
+  }
   groups {
     id
     name
