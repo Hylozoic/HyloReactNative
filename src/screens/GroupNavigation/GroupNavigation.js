@@ -1,29 +1,30 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Text, ScrollView, View, TouchableOpacity } from 'react-native'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
-import useOpenInitialURL from 'hooks/useOpenInitialURL'
-import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
+import { openURL } from 'hooks/useOpenURL'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
+import fetchGroupDetailsAction from 'store/actions/fetchGroupDetails'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import getCurrentGroupSlug from 'store/selectors/getCurrentGroupSlug'
 import Icon from 'components/Icon'
 import styles from './GroupNavigation.styles'
 
 export default function GroupNavigation () {
+  const dispatch = useDispatch()
   const navigation = useNavigation()
+  const currentGroupSlug = useSelector(getCurrentGroupSlug)
   const currentGroup = useSelector(getCurrentGroup)
   const childGroups = useSelector(getChildGroups)
   const parentGroups = useSelector(getParentGroups)
-
-  useSetCurrentGroup()
-  useOpenInitialURL()
+  const { navigate } = navigation
+  const customViews = (currentGroup && currentGroup.customViews && currentGroup.customViews.toRefArray()) || []
 
   useFocusEffect(() => {
     navigation.setOptions({ title: currentGroup?.name })
   })
 
-  const { navigate } = navigation
   const navItems = [
     { label: 'Create', iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
     { label: 'Stream', iconName: 'Stream', onPress: () => navigate('Feed') },
@@ -47,7 +48,16 @@ export default function GroupNavigation () {
       onPress: () => navigate('Group Relationships'),
       hidden: !(childGroups?.length > 0 || parentGroups?.length > 0)
     },
-    { label: 'Map', iconName: 'Globe', onPress: () => navigate('Map') }
+    { label: 'Map', iconName: 'Globe', onPress: () => navigate('Map') },
+    ...customViews.filter(customView => customView.name && (customView.type !== 'externalLink' || customView.externalLink)).map(customView => ({
+      label: customView.name,
+      iconName: customView.icon,
+      // onPress: customView.type !== 'externalLink' ? `${rootPath}/custom/${customView.id}` : false,
+      onPress: customView.type === 'externalLink'
+        ? () => openURL(customView.externalLink)
+        : () => navigate('Feed', { customViewId: customView?.id })
+    }))
+
   ]
 
   const shownNavItems = navItems.filter(navItem => !navItem?.hidden)

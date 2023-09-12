@@ -1,6 +1,6 @@
 import { Linking } from 'react-native'
 import { getActionFromState, CommonActions, useNavigation } from '@react-navigation/native'
-import { prefixes, DEFAULT_APP_HOST } from 'navigation/linking'
+import { prefixes, DEFAULT_APP_HOST, staticPages } from 'navigation/linking'
 import getStateFromPath from 'navigation/linking/getStateFromPath'
 import { URL } from 'react-native-url-polyfill'
 import { navigationRef } from 'navigation/linking/helpers'
@@ -14,7 +14,10 @@ export function useOpenURL () {
 export async function openURL (providedPathOrURL, reset, navigation = navigationRef) {
   const linkingURL = new URL(providedPathOrURL, DEFAULT_APP_HOST)
 
-  if (prefixes.includes(linkingURL.origin)) {
+  if (
+    prefixes.includes(linkingURL.origin) &&
+    !staticPages.includes(linkingURL.pathname)
+  ) {
     const linkingPath = linkingURL.pathname + linkingURL.search
     const stateForPath = getStateFromPath(linkingPath)
 

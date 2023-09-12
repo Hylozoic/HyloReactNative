@@ -1,12 +1,10 @@
-import React, { useState, useCallback, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useFocusEffect } from '@react-navigation/native'
 import { useOpenURL } from 'hooks/useOpenURL'
 import { modalScreenName } from 'hooks/useIsModalScreen'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import HyloWebView from 'components/HyloWebView'
-import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
 
 // Matches actual group paths (e.g. not /all or /public)
 export const MATCHER_GROUP_SLUG = '[a-zA-Z0-9-]+$'
@@ -20,31 +18,29 @@ export default function MapWebView ({ navigation }) {
   const group = useSelector(getCurrentGroup)
   const openURL = useOpenURL()
   const [path, setPath] = useState()
+  const [canGoBack, setCanGoBack] = useState(false)
 
-  useSetCurrentGroup()
+  useEffect(() => {
+    navigation.setOptions({
+      title: group?.name,
+      // Disables going back by pull right on this screen
+      gestureEnabled: false,
+      headerLeftOnPress: canGoBack ? webViewRef.current.goBack : navigation.goBack
+    })
 
-  useFocusEffect(
-    useCallback(() => {
-      navigation.setOptions({
-        title: group?.name,
-        // Disables going back by pull right on this screen
-        gestureEnabled: false
-      })
-      // Disables swipeEnabled on DrawerNavigator
-      navigation.getParent()?.getParent()?.setOptions({ swipeEnabled: false })
-      if ([ALL_GROUP_ID, PUBLIC_GROUP_ID].includes(group?.slug)) {
-        setPath(() => `/${group?.slug}/map`)
-      } else {
-        setPath(() => `/groups/${group?.slug}/map`)
-      }
-      // Re-enables swipeEnabled on DrawerNavigator when screen blurs
-      return () => navigation.getParent()?.getParent()?.setOptions({ swipeEnabled: true })
-    }, [group?.slug])
-  )
+    // Disables swipeEnabled on DrawerNavigator
+    navigation.getParent()?.getParent()?.setOptions({ swipeEnabled: false })
+    if ([ALL_GROUP_ID, PUBLIC_GROUP_ID].includes(group?.slug)) {
+      setPath(() => `/${group?.slug}/map`)
+    } else {
+      setPath(() => `/groups/${group?.slug}/map`)
+    }
+
+    // Re-enables swipeEnabled on DrawerNavigator when screen blurs
+    return () => navigation.getParent()?.getParent()?.setOptions({ swipeEnabled: true })
+  }, [group?.slug, canGoBack])
 
   const handledWebRoutes = [
-    // To keep saved search retrieval from resetting group context in the App:
-    '(.*)/map',
     '(.*)/map/create'
   ]
   const nativeRouteHandler = () => ({
@@ -61,6 +57,9 @@ export default function MapWebView ({ navigation }) {
           break
         }
       }
+    },
+    '/groups/:groupSlug([a-zA-Z0-9-]+)': ({ routeParams }) => {
+      navigation.replace('Map', routeParams)
     },
     '(.*)/group/:groupSlug([a-zA-Z0-9-]+)': ({ routeParams }) => {
       navigation.navigate(modalScreenName('Group Explore'), routeParams)
@@ -91,6 +90,9 @@ export default function MapWebView ({ navigation }) {
       handledWebRoutes={handledWebRoutes}
       androidLayerType='hardware'
       nativeRouteHandler={nativeRouteHandler}
+      onNavigationStateChange={({ url, canGoBack: providedCanGoBack }) => {
+        setCanGoBack(providedCanGoBack)
+      }}
       path={path}
       ref={webViewRef}
     />

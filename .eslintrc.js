@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   extends: [
     'prettier',
-    '@react-native-community',
+    '@react-native',
     'standard',
     'standard-jsx',
     'standard-react'

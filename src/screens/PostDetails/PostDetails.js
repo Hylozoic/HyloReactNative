@@ -4,7 +4,6 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { get } from 'lodash/fp'
 import useGoToMember from 'hooks/useGoToMember'
-import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
 import useIsModalScreen from 'hooks/useIsModalScreen'
 import fetchPostAction from 'store/actions/fetchPost'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
@@ -60,8 +59,6 @@ export default function PostDetails () {
     commentsRef.current && commentsRef.current.scrollToComment(selectedComment)
   }
 
-  useSetCurrentGroup()
-
   useEffect(() => {
     (async function () {
       try {
@@ -106,7 +103,7 @@ export default function PostDetails () {
     )
   }
 
-  if (!post?.creator || !post?.title) return <Loading />
+  if (!post?.creator) return <Loading />
 
   return (
     <View style={styles.container}>

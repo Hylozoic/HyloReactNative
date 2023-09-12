@@ -6,10 +6,11 @@ import { capitalize, isEmpty } from 'lodash/fp'
 import { useDispatch, useSelector } from 'react-redux'
 import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
-import useSetCurrentGroup from 'hooks/useSetCurrentGroup'
 import useChangeToGroup from 'hooks/useChangeToGroup'
+import useGoToTopic from 'hooks/useGoToTopic'
 import { PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import getCustomView from 'store/selectors/getCustomView'
 import getGroupTopic from 'store/selectors/getGroupTopic'
 import getMe from 'store/selectors/getMe'
 import getMemberships from 'store/selectors/getMemberships'
@@ -38,9 +39,21 @@ export default function Feed ({ topicName: providedTopicName }) {
   const navigation = useNavigation()
   const route = useRoute()
   const dispatch = useDispatch()
-  const changeToGroup = useChangeToGroup()
+
+  const customViewId = getRouteParam('customViewId', route)
+  const customView = useSelector(state => getCustomView(state, { customViewId }))
   const feedType = getRouteParam('feedType', route)
+
+  const changeToGroup = useChangeToGroup()
+  const goToTopicDefault = useGoToTopic()
   const topicName = providedTopicName || getRouteParam('topicName', route)
+
+  const customViewType = customView?.type
+  const customPostTypes = customViewType === 'stream' ? customView?.postTypes : null
+  const customViewName = customView?.name
+  const customViewIcon = customView?.icon
+  // Note: Custom View Mode = grid, etc. Not implemented in App
+  // const customViewMode = customView?.defaultViewMode
 
   const currentUser = useSelector(getMe)
   const memberships = useSelector(getMemberships)
@@ -56,14 +69,13 @@ export default function Feed ({ topicName: providedTopicName }) {
   const goToMember = id => navigation.navigate('Member', { id })
   const goToTopic = selectedTopicName => {
     if (selectedTopicName === topic?.name) return
+
     if (topic?.name) {
       navigation.setParams({ topicName: selectedTopicName })
     } else {
-      navigation.push('Feed', { groupId: currentGroup.id, topicName: selectedTopicName })
+      goToTopicDefault(selectedTopicName)
     }
   }
-
-  useSetCurrentGroup()
 
   useEffect(() => {
     topicName && currentGroup?.slug && dispatch(fetchGroupTopic(topicName, currentGroup.slug))
@@ -108,8 +120,13 @@ export default function Feed ({ topicName: providedTopicName }) {
       <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
       <View style={styles.titleRow}>
         <View style={styles.title}>
+          {customViewIcon && (
+            <View style={styles.customViewIconContainer}>
+              <Icon name={customViewIcon} style={styles.customViewIcon} />
+            </View>
+          )}
           <Text style={styles.name} numberOfLines={3}>
-            {name}
+            {customViewName || name}
           </Text>
           {topicName && (
             <View style={styles.topicInfo}>
@@ -147,8 +164,11 @@ export default function Feed ({ topicName: providedTopicName }) {
         navigation={navigation}
         showMember={goToMember}
         showTopic={goToTopic}
+        customView={customView}
         topicName={topicName}
         feedType={feedType}
+        // Custom Views
+        customPostTypes={customPostTypes}
       />
       {!topicName && currentGroup && (
         <SocketSubscriber type='group' id={currentGroup.id} />

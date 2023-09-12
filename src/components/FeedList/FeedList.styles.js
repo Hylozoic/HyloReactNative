@@ -1,4 +1,4 @@
-import { capeCod, rhino30, rhino05 } from 'style/colors'
+import { capeCod } from 'style/colors'
 import { isIOS } from 'util/platform'
 
 const feedMargin = 12
@@ -7,6 +7,15 @@ export default {
   container: {
     backgroundColor: 'rgba(225, 229, 233, 0.3)',
     flex: 1
+  },
+  childGroupToggle: {
+    marginRight: 12,
+    backgroundColor: 'red',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 4,
+    padding: 6
   },
   listControls: {
     paddingTop: 12,
@@ -27,5 +36,10 @@ export default {
   downArrow: {
     top: isIOS ? 1 : 4,
     marginLeft: 4
+  },
+  steamControlRightSide: {
+    flexDirection: 'row',
+    display: 'flex',
+    alignItems: 'baseline'
   }
 }

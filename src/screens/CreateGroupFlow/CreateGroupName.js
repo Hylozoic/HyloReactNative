@@ -1,22 +1,22 @@
-import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useFocusEffect } from '@react-navigation/native'
 import { Text, View, ScrollView, TextInput } from 'react-native'
-import ErrorBubble from 'components/ErrorBubble'
-import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
+import getRouteParam from 'store/selectors/getRouteParam'
+import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import {
   getGroupData, getEdited, updateGroupData, setWorkflowOptions,
   clearCreateGroupStore
 } from './CreateGroupFlow.store'
+import ErrorBubble from 'components/ErrorBubble'
 import styles from './CreateGroupFlow.styles'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
-import getRouteParam from 'store/selectors/getRouteParam'
 
 export default function CreateGroupName ({ route }) {
   const dispatch = useDispatch()
   // Add current group in as pre-selected as a parent group for Parent Groups Step
   const edited = useSelector(getEdited)
-  const currentGroupId = useSelector(getCurrentGroupId)
+  const currentGroup = useSelector(getCurrentGroup)
   const groupData = useSelector(getGroupData)
   const [groupName, setGroupName] = useState()
   const [error, setError] = useState()
@@ -42,10 +42,10 @@ export default function CreateGroupName ({ route }) {
   }, [groupName]))
 
   useFocusEffect(useCallback(() => {
-    if (!edited && ![ALL_GROUP_ID, PUBLIC_GROUP_ID].includes(currentGroupId)) {
-      dispatch(updateGroupData({ parentIds: [currentGroupId] }))
+    if (!edited && ![ALL_GROUP_ID, PUBLIC_GROUP_ID].includes(currentGroup?.id)) {
+      dispatch(updateGroupData({ parentIds: [currentGroup?.id] }))
     }
-  }, [edited, currentGroupId]))
+  }, [edited, currentGroup?.id]))
 
   return (
     <View style={styles.container}>

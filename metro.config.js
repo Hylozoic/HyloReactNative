@@ -1,11 +1,12 @@
-/**
- * Metro configuration for React Native
- * https://github.com/facebook/react-native
- *
- * @format
- */
+const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
 
-module.exports = {
+/**
+ * Metro configuration
+ * https://facebook.github.io/metro/docs/configuration
+ *
+ * @type {import('metro-config').MetroConfig}
+ */
+const config = {
   transformer: {
     getTransformOptions: async () => ({
       transform: {
@@ -20,6 +21,8 @@ module.exports = {
     // * May need to makes-sure to carry-over defaults
     // assetExts: ['html', 'css', 'jpg', 'png', 'ttf', 'graphql'],
     assetExts: ['png', 'jpg', 'graphql'],
-    sourceExts: ['js', 'json', 'ts', 'tsx', 'cjs']
+    sourceExts: ['js', 'json', 'ts', 'tsx', 'cjs', 'svg']
   }
-}
+};
+
+module.exports = mergeConfig(getDefaultConfig(__dirname), config);

@@ -18,22 +18,39 @@ import { ALL_GROUP_ID, isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Grou
 import getMe from 'store/selectors/getMe'
 import fetchPosts from 'store/actions/fetchPosts'
 import resetNewPostCount from 'store/actions/resetNewPostCount'
+import updateUserSettings from 'store/actions/updateUserSettings'
 
 export function mapStateToProps (state, props) {
-  const { forGroup, topicName } = props
+  const { forGroup, topicName, customView } = props
   const currentUser = getMe(state, props)
 
   const defaultPostType = get('settings.streamPostType', currentUser) || null
   const defaultSortBy = get('settings.streamSortBy', currentUser) || 'updated'
+  const childPostInclusion = get('settings.streamChildPosts', currentUser) || 'yes'
 
   const postTypeFilter = props?.feedType || getFilter(state, props) || defaultPostType
-  const sortBy = getSort(state, props) || defaultSortBy
+  const customViewSort = customView?.defaultSort
+
+  let sortBy = customViewSort || getSort(state, props) || defaultSortBy
+  // Only custom views can be sorted by manual order
+  if (!customView && sortBy === 'order') {
+    sortBy = 'updated'
+  }
   const timeframe = getTimeframe(state, props)
+  const activePostsOnly = customView?.activePostsOnly
+  // TODO: The below logic tied to customView.type could
+  // be removed and handled by ignoring empty arrays for
+  // these two keys.
+  const customViewType = customView?.type
+  const customPostTypes = customViewType === 'stream' ? customView?.postTypes : null
+  const customViewTopics = customViewType === 'stream' ? customView?.topics : null
+
+  const customViewCollectionId = customView?.collectionId
 
   let fetchPostParam = getQueryProps(state, {
-    // For Custom Streams, not yet implemented
-    activePostsOnly: false,
-    // forCollection: customView?.type === 'collection' ? customView?.collectionId : null,
+    activePostsOnly,
+    childPostInclusion,
+    forCollection: customViewCollectionId,
     // Can be one of: ['groups', 'all', 'public']
     context: isContextGroup(forGroup?.slug)
       ? forGroup.slug
@@ -41,6 +58,8 @@ export function mapStateToProps (state, props) {
     slug: forGroup?.slug,
     topicName,
     sortBy,
+    topics: customViewTopics?.toModelArray().map(t => t.id) || null,
+    types: customPostTypes,
     // Can be any of the Post Types:
     filter: postTypeFilter === NO_POST_FILTER ? null : postTypeFilter
   })
@@ -70,7 +89,7 @@ export function mapStateToProps (state, props) {
   }
 }
 
-const mapDispatchToProps = { setFilter, setSort, setTimeframe, fetchPosts, resetNewPostCount }
+const mapDispatchToProps = { setFilter, setSort, setTimeframe, fetchPosts, resetNewPostCount, updateUserSettings }
 
 export function shouldResetNewPostCount ({ slug, sortBy, filter, topic }) {
   return slug !== ALL_GROUP_ID &&

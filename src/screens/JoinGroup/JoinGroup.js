@@ -40,7 +40,7 @@ export default function JoinGroup (props) {
             const groupSlug = newMembership?.group?.slug
 
             if (groupSlug) {
-              openURL(`/groups/${groupSlug}`, true)
+              openURL(`/groups/${groupSlug}/explore`, true)
             } else {
               throw new Error('Join group was unsuccessful')
             }

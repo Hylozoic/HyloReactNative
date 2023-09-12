@@ -60,6 +60,7 @@ export default function fetchCurrentUser () {
               dmNotifications
               commentNotifications
               signupInProgress
+              streamChildPosts
               streamViewMode
               streamSortBy
               streamPostType
@@ -102,6 +103,27 @@ export default function fetchCurrentUser () {
                 accessibility
                 avatarUrl
                 bannerUrl
+                customViews {
+                  items {
+                    id
+                    activePostsOnly
+                    collectionId
+                    defaultSort
+                    defaultViewMode
+                    externalLink
+                    groupId
+                    isActive
+                    icon
+                    name
+                    order
+                    postTypes
+                    topics {
+                      id
+                      name
+                    }
+                    type
+                  }
+                }
                 description
                 id
                 name

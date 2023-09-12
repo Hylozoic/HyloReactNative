@@ -3,7 +3,7 @@ import { openURL } from 'hooks/useOpenURL'
 import { mapStateToProps, makeOnPressMessages, mergeProps } from './MemberProfile.connector'
 import { FETCH_PERSON } from 'store/constants'
 
-jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
+jest.mock('store/selectors/getCurrentGroupSlug', () => () => 'public')
 jest.mock('hooks/useOpenURL', () => {
   const originalModule = jest.requireActual('hooks/useOpenURL')
 

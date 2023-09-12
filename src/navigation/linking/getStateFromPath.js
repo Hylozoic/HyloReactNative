@@ -15,7 +15,7 @@ import {
 
 // This is a very custom way of handling deep links in React Navigation
 export default function getStateFromPath (providedPath) {
-  // Not sure this is necessary, but has been
+  // Not sure this trim is ever necessary, has been
   // historically been there so keeping it for now
   const groomedPath = providedPath.trim()
   const routeMatch = getRouteMatchForPath(groomedPath)
@@ -23,13 +23,14 @@ export default function getStateFromPath (providedPath) {
   // 404 handling
   if (!routeMatch) return null
 
-  const { path, screenPath } = getRouteMatch(routeMatch, routingConfig)
-  const screenConfig = getScreenConfigFromScreenPath(screenPath)
+  const { path, screenPath } = addParamsToScreenPath(routeMatch, routingConfig)
+
+  const screenConfig = buildScreenConfigFromScreenPath(screenPath)
   const isAuthorized = getAuthorized(store.getState())
 
   // Set `returnToOnAuthPath` for routes requiring auth when not auth'd
   if (!isAuthorized && screenPath.match(new RegExp(`^${AUTH_ROOT_SCREEN_NAME}`))) {
-    store.dispatch(setReturnToOnAuthPath(path))
+    store.dispatch(setReturnToOnAuthPath(providedPath))
 
     return null
   }
@@ -57,7 +58,7 @@ export function getRouteMatchForPath (providedPath, routes = routingConfig) {
   }
 }
 
-export function getRouteMatch (routeMatch) {
+export function addParamsToScreenPath (routeMatch) {
   if (routeMatch) {
     const {
       pathname,
@@ -80,7 +81,7 @@ export function getRouteMatch (routeMatch) {
   }
 }
 
-export function getScreenConfigFromScreenPath (screenPath) {
+export function buildScreenConfigFromScreenPath (screenPath) {
   const screenPathSegments = screenPath.split('/')
   const makeScreenConfig = (screenNames, screenConfig = {}) => {
     const screenName = screenNames.pop()

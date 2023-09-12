@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { createStackNavigator } from '@react-navigation/stack'
-import useInitialURLHandled from 'hooks/useInitialURLHandled'
 import { isEmpty } from 'lodash/fp'
+import useCurrentGroup from 'hooks/useCurrentGroup'
+import useOpenInitialURL from 'hooks/useOpenInitialURL'
+import useReturnToOnAuthPath from 'hooks/useReturnToOnAuthPath'
+import getReturnToOnAuthPath from 'store/selectors/getReturnToOnAuthPath'
 // Helper Components
 import TabStackHeader from 'navigation/headers/TabStackHeader'
 // Screens
+import AllTopicsWebView from 'screens/AllTopicsWebView'
+import ChatRoom from 'screens/ChatRoomWebView'
 import Feed from 'screens/Feed'
 import GroupExploreWebView from 'screens/GroupExploreWebView'
 import GroupNavigation from 'screens/GroupNavigation'
@@ -15,26 +21,36 @@ import MembersComponent from 'screens/Members'
 import PostDetails from 'screens/PostDetails'
 import ProjectMembers from 'screens/ProjectMembers/ProjectMembers'
 import MapWebView from 'screens/MapWebView/MapWebView'
-import AllTopicsWebView from 'screens/AllTopicsWebView/AllTopicsWebView'
 
 const HomeTab = createStackNavigator()
-export default function HomeNavigator () {
-  const initialURLHandled = useInitialURLHandled()
+export default function HomeNavigator ({ navigation }) {
+  const initialURL = useSelector(state => state.initialURL)
+  const returnToOnAuthPath = useSelector(getReturnToOnAuthPath)
+  const [, setCurrentGroup] = useCurrentGroup()
+
+  useEffect(() => {
+    if (!initialURL && !returnToOnAuthPath) {
+      setTimeout(() => navigation.navigate('Feed'), 400)
+    }
+  }, [])
+
+  useOpenInitialURL()
+  useReturnToOnAuthPath()
+
   const navigatorProps = {
     initialRouteName: 'Group Navigation',
-    // screenListeners: {
-    //   state: (e) => {
-    //     const routes = e.data.state.routes
-    //     const groupSlugs = routes
-    //       .map(route => route.params?.groupSlug)
-    //       .filter(s => !isEmpty(s))
-    //     // if (!isEmpty(groupSlugs)) {
-    //     console.log('!!! SLUGS:', groupSlugs)
-    //     // }
-    //   }
-    // },
+    screenListeners: {
+      state: (e) => {
+        const routes = e.data.state.routes
+        const groupSlugs = routes
+          .map(route => route.params?.groupSlug)
+          .filter(s => !isEmpty(s))
+
+        setCurrentGroup(!isEmpty(groupSlugs) && groupSlugs[groupSlugs.length - 1])
+      }
+    },
     screenOptions: {
-      animationEnabled: initialURLHandled,
+      animationEnabled: !initialURL,
       transitionSpec: {
         open: {
           animation: 'spring',
@@ -75,6 +91,7 @@ export default function HomeNavigator () {
       <HomeTab.Screen name='Group Explore' component={GroupExploreWebView} />
       <HomeTab.Screen name='Topics' component={AllTopicsWebView} />
       <HomeTab.Screen name='Map' component={MapWebView} />
+      <HomeTab.Screen name='Chat' component={ChatRoom} />
     </HomeTab.Navigator>
   )
 }

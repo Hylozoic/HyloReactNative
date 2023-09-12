@@ -14,7 +14,7 @@ import RNPickerSelect from 'react-native-picker-select'
 import { useIsFocused } from '@react-navigation/native'
 import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
 import moment from 'moment-timezone'
-import { Validators } from 'hylo-shared'
+import { Validators, TextHelpers } from 'hylo-shared'
 import { isIOS } from 'util/platform'
 import { showToast, hideToast } from 'util/toast'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
@@ -32,8 +32,8 @@ import TopicRow from 'screens/TopicList/TopicRow'
 import GroupChooserItemRow from 'screens/ItemChooser/GroupChooserItemRow'
 import GroupsList from 'components/GroupsList'
 // Components
-import Button from 'components/Button'
 import DatePicker from 'react-native-date-picker'
+import Button from 'components/Button'
 import FileSelector, { showFilePicker as fileSelectorShowFilePicker } from './FileSelector'
 import HyloEditorWebView from 'components/HyloEditorWebView'
 import Icon from 'components/Icon'
@@ -46,6 +46,7 @@ import Topics from 'components/Topics'
 import styles, { typeSelectorStyles } from './PostEditor.styles'
 import HeaderLeftCloseIcon from 'navigation/headers/HeaderLeftCloseIcon'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
+import { caribbeanGreen, rhino30, white } from 'style/colors'
 
 const titlePlaceholders = {
   discussion: "What's on your mind?",
@@ -98,6 +99,8 @@ export class PostEditor extends React.Component {
         : null,
       location: post?.location,
       locationObject: post?.locationObject,
+      donationsLink: post?.donationsLink,
+      projectManagementLink: post?.projectManagementLink,
       publicPost: false,
       startTimeExpanded: false,
       endTimeExpanded: false,
@@ -157,7 +160,7 @@ export class PostEditor extends React.Component {
       files, images, title,
       topics, type, announcementEnabled, members,
       groups, startTime, endTime, location,
-      locationObject
+      locationObject, donationsLink, projectManagementLink
     } = this.state
     const postData = {
       id: post.id,
@@ -173,6 +176,8 @@ export class PostEditor extends React.Component {
       startTime: startTime && startTime.getTime(),
       endTime: endTime && endTime.getTime(),
       location,
+      projectManagementLink: TextHelpers.sanitizeURL(projectManagementLink),
+      donationsLink: TextHelpers.sanitizeURL(donationsLink),
       locationId: (locationObject && locationObject?.id) ? locationObject.id : null
     }
 
@@ -233,7 +238,10 @@ export class PostEditor extends React.Component {
   }
 
   setIsValid = (updatedState = {}) => {
-    const { type, title, groups, startTime, endTime, images, files } = Object.assign(
+    const {
+      type, title, groups, startTime, endTime, images, files,
+      donationsLink, projectManagementLink
+    } = Object.assign(
       {},
       this.state,
       updatedState
@@ -246,7 +254,10 @@ export class PostEditor extends React.Component {
       filesLoading ||
       (!title || title.length < 1) ||
       isEmpty(groups) ||
-      (type === 'event' && (!startTime || !endTime))
+      (type === 'event' && (!startTime || !endTime)) ||
+      (donationsLink && !TextHelpers.sanitizeURL(donationsLink)) ||
+      (projectManagementLink && !TextHelpers.sanitizeURL(projectManagementLink))
+
     ) {
       this.setState({ isValid: false }, this.renderReactNavigationHeader)
     } else {
@@ -398,6 +409,14 @@ export class PostEditor extends React.Component {
     })
   }
 
+  handleDonationsLink = donationsLink => {
+    this.setState({ donationsLink }, this.setIsValid)
+  }
+
+  handleProjectManagementLink = projectManagementLink => {
+    this.setState({ projectManagementLink }, this.setIsValid)
+  }
+
   handleShowFilePicker = async () => {
     this.setState({ filePickerPending: true })
     await fileSelectorShowFilePicker({
@@ -445,13 +464,11 @@ export class PostEditor extends React.Component {
     return (
       <View style={styles.headerContainer}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={this.handleOnCancel}>
-            <HeaderLeftCloseIcon
-              style={styles.headerCloseIcon}
-              color={rhino30}
-              onPress={this.handleCancel}
-            />
-          </TouchableOpacity>
+          <HeaderLeftCloseIcon
+            style={styles.headerCloseIcon}
+            color={rhino30}
+            onPress={this.handleCancel}
+          />
           <TypeSelector
             disabled={isSaving}
             onValueChange={this.handleUpdateType}
@@ -473,8 +490,8 @@ export class PostEditor extends React.Component {
     const { canModerate, post, postLoading } = this.props
     const {
       isSaving, topics, title, type, filePickerPending, announcementEnabled,
-      titleLengthError, members, groups, startTime, endTime, location,
-      locationObject, publicPost, topicsPicked, files, images
+      titleLengthError, members, groups, startTime, endTime, location, donationsLink,
+      locationObject, projectManagementLink, publicPost, topicsPicked, files, images
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
 
@@ -600,6 +617,54 @@ export class PostEditor extends React.Component {
               )}
             />
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.pressSelectionSection, styles.topics]}
+            onPress={this.handleShowLocationPicker}
+          >
+            <View style={styles.pressSelection}>
+              <Text style={styles.pressSelectionLeft}>Location</Text>
+              <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View>
+            </View>
+            {(location || locationObject) && (
+              <Text style={styles.pressSelectionValue}>{location || locationObject.fullText}</Text>
+            )}
+          </TouchableOpacity>
+
+          {type === 'project' && (
+            <View style={[styles.pressSelectionSection, styles.topics]}>
+              <View style={styles.pressSelection}>
+                <Text style={styles.pressSelectionLeft}>Donation Link</Text>
+                {/* <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View> */}
+              </View>
+              <TextInput
+                style={styles.pressSelectionValue}
+                onChangeText={this.handleDonationsLink}
+                returnKeyType='next'
+                autoCapitalize='none'
+                value={donationsLink}
+                autoCorrect={false}
+                underlineColorAndroid='transparent'
+              />
+            </View>
+          )}
+
+          {type === 'project' && (
+            <View style={[styles.pressSelectionSection, styles.topics]}>
+              <View style={styles.pressSelection}>
+                <Text style={styles.pressSelectionLeft}>Project Management</Text>
+              </View>
+              <TextInput
+                style={styles.pressSelectionValue}
+                onChangeText={this.handleProjectManagementLink}
+                returnKeyType='next'
+                autoCapitalize='none'
+                value={projectManagementLink}
+                autoCorrect={false}
+                underlineColorAndroid='transparent'
+              />
+            </View>
+          )}
         </View>
 
         {/*  Form Bottom */}

@@ -90,7 +90,8 @@ Post.fields = {
   donationsLink: attr(),
   projectManagementLink: attr(),
   votesTotal: attr(),
-  myVote: attr(),
+  peopleReactedTotal: attr(),
+  // do I have to fix this for reacts?
   topics: many('Topic'),
   isPublic: attr()
 }

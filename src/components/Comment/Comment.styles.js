@@ -4,9 +4,10 @@ export default {
   container: {
     flexDirection: 'column',
     flex: 1,
-    padding: 15,
+    padding: 10,
     paddingTop: 3,
-    paddingBottom: 3
+    paddingBottom: 3,
+    marginRight: 10
   },
   avatar: {
     marginRight: 10
@@ -23,6 +24,7 @@ export default {
   },
   headerRight: {
     paddingTop: 3,
+    gap: 10,
     flexDirection: 'row',
     alignItems: 'flex-start'
   },

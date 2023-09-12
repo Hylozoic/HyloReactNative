@@ -7,7 +7,7 @@ const details = 'details'
 let group1, group2
 let props, state
 
-jest.mock('store/selectors/getCurrentGroupId', () => () => 7)
+jest.mock('store/selectors/getCurrentGroupSlug', () => () => 7)
 
 describe('PostEditor mapStateToProps', () => {
   beforeEach(() => {

@@ -32,6 +32,11 @@ exports[`renders with defaults 1`] = `
       <View
         collapsable={false}
         pointerEvents="box-none"
+        style={
+          {
+            "zIndex": 1,
+          }
+        }
       >
         <View
           accessibilityElementsHidden={false}
@@ -43,14 +48,48 @@ exports[`renders with defaults 1`] = `
           <View
             collapsable={false}
             pointerEvents="box-none"
+            style={
+              {
+                "bottom": 0,
+                "left": 0,
+                "opacity": 1,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+                "zIndex": 0,
+              }
+            }
           >
             <View
               collapsable={false}
+              style={
+                {
+                  "backgroundColor": "rgb(255, 255, 255)",
+                  "borderBottomColor": "rgb(216, 216, 216)",
+                  "flex": 1,
+                  "shadowColor": "rgb(216, 216, 216)",
+                  "shadowOffset": {
+                    "height": 0.5,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.85,
+                  "shadowRadius": 0,
+                }
+              }
             />
           </View>
           <View
             collapsable={false}
             pointerEvents="box-none"
+            style={
+              {
+                "height": 44,
+                "maxHeight": undefined,
+                "minHeight": undefined,
+                "opacity": undefined,
+                "transform": undefined,
+              }
+            }
           >
             <View
               pointerEvents="none"
@@ -73,10 +112,28 @@ exports[`renders with defaults 1`] = `
               <View
                 collapsable={false}
                 pointerEvents="box-none"
+                style={
+                  {
+                    "alignItems": "flex-start",
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                    "marginStart": 0,
+                    "opacity": 1,
+                  }
+                }
               />
               <View
                 collapsable={false}
                 pointerEvents="box-none"
+                style={
+                  {
+                    "justifyContent": "center",
+                    "marginHorizontal": 16,
+                    "maxWidth": 288,
+                    "opacity": 1,
+                  }
+                }
               >
                 <Text
                   accessibilityRole="header"
@@ -84,6 +141,13 @@ exports[`renders with defaults 1`] = `
                   collapsable={false}
                   numberOfLines={1}
                   onLayout={[Function]}
+                  style={
+                    {
+                      "color": "rgb(28, 28, 30)",
+                      "fontSize": 17,
+                      "fontWeight": "600",
+                    }
+                  }
                 >
                   Signup
                 </Text>
@@ -91,6 +155,16 @@ exports[`renders with defaults 1`] = `
               <View
                 collapsable={false}
                 pointerEvents="box-none"
+                style={
+                  {
+                    "alignItems": "flex-end",
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "justifyContent": "center",
+                    "marginEnd": 0,
+                    "opacity": 1,
+                  }
+                }
               />
             </View>
           </View>
@@ -107,7 +181,6 @@ exports[`renders with defaults 1`] = `
         <RNSScreen
           activityState={2}
           collapsable={false}
-          forwardedRef={[Function]}
           gestureResponseDistance={
             {
               "bottom": -1,
@@ -116,10 +189,30 @@ exports[`renders with defaults 1`] = `
               "top": -1,
             }
           }
+          onGestureCancel={[Function]}
           pointerEvents="box-none"
+          sheetAllowedDetents="large"
+          sheetCornerRadius={-1}
+          sheetExpandsWhenScrolledToEdge={true}
+          sheetGrabberVisible={false}
+          sheetLargestUndimmedDetent="all"
+          style={
+            {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
         >
           <View
             collapsable={false}
+            style={
+              {
+                "opacity": 1,
+              }
+            }
           />
           <View
             accessibilityElementsHidden={false}
@@ -178,15 +271,32 @@ exports[`renders with defaults 1`] = `
             <View
               collapsable={false}
               pointerEvents="box-none"
+              style={
+                {
+                  "flex": 1,
+                }
+              }
             >
               <View
                 collapsable={false}
-                forwardedRef={[Function]}
                 handlerTag={1}
                 handlerType="PanGestureHandler"
                 needsOffscreenAlphaCompositing={false}
                 onGestureHandlerEvent={[Function]}
                 onGestureHandlerStateChange={[Function]}
+                style={
+                  {
+                    "flex": 1,
+                    "transform": [
+                      {
+                        "translateX": 0,
+                      },
+                      {
+                        "translateX": 0,
+                      },
+                    ],
+                  }
+                }
               >
                 <View
                   pointerEvents="box-none"
@@ -231,14 +341,14 @@ exports[`renders with defaults 1`] = `
                               <Image
                                 source={
                                   {
-                                    "testUri": "../../../assets/signin_background.png",
+                                    "process": [Function],
                                   }
                                 }
                               />
                               <Image
                                 source={
                                   {
-                                    "testUri": "../../../assets/merkaba_white.png",
+                                    "process": [Function],
                                   }
                                 }
                               />
@@ -266,7 +376,19 @@ exports[`renders with defaults 1`] = `
                                 <View
                                   accessibilityState={
                                     {
+                                      "busy": undefined,
+                                      "checked": undefined,
                                       "disabled": true,
+                                      "expanded": undefined,
+                                      "selected": undefined,
+                                    }
+                                  }
+                                  accessibilityValue={
+                                    {
+                                      "max": undefined,
+                                      "min": undefined,
+                                      "now": undefined,
+                                      "text": undefined,
                                     }
                                   }
                                   accessible={true}
@@ -299,6 +421,23 @@ exports[`renders with defaults 1`] = `
                                 />
                                 <View>
                                   <View
+                                    accessibilityState={
+                                      {
+                                        "busy": undefined,
+                                        "checked": undefined,
+                                        "disabled": undefined,
+                                        "expanded": undefined,
+                                        "selected": undefined,
+                                      }
+                                    }
+                                    accessibilityValue={
+                                      {
+                                        "max": undefined,
+                                        "min": undefined,
+                                        "now": undefined,
+                                        "text": undefined,
+                                      }
+                                    }
                                     accessible={true}
                                     collapsable={false}
                                     focusable={true}
@@ -324,6 +463,23 @@ exports[`renders with defaults 1`] = `
                                 </View>
                                 <View>
                                   <View
+                                    accessibilityState={
+                                      {
+                                        "busy": undefined,
+                                        "checked": undefined,
+                                        "disabled": undefined,
+                                        "expanded": undefined,
+                                        "selected": undefined,
+                                      }
+                                    }
+                                    accessibilityValue={
+                                      {
+                                        "max": undefined,
+                                        "min": undefined,
+                                        "now": undefined,
+                                        "text": undefined,
+                                      }
+                                    }
                                     accessible={true}
                                     collapsable={false}
                                     focusable={true}
@@ -380,6 +536,23 @@ exports[`renders with defaults 1`] = `
                                   Already have an account? 
                                 </Text>
                                 <View
+                                  accessibilityState={
+                                    {
+                                      "busy": undefined,
+                                      "checked": undefined,
+                                      "disabled": undefined,
+                                      "expanded": undefined,
+                                      "selected": undefined,
+                                    }
+                                  }
+                                  accessibilityValue={
+                                    {
+                                      "max": undefined,
+                                      "min": undefined,
+                                      "now": undefined,
+                                      "text": undefined,
+                                    }
+                                  }
                                   accessible={true}
                                   collapsable={false}
                                   focusable={true}
@@ -401,6 +574,23 @@ exports[`renders with defaults 1`] = `
                                   Your data is safe with Hylo. By clicking the "Sign Up" button above you are agreeing to these terms:
                                 </Text>
                                 <View
+                                  accessibilityState={
+                                    {
+                                      "busy": undefined,
+                                      "checked": undefined,
+                                      "disabled": undefined,
+                                      "expanded": undefined,
+                                      "selected": undefined,
+                                    }
+                                  }
+                                  accessibilityValue={
+                                    {
+                                      "max": undefined,
+                                      "min": undefined,
+                                      "now": undefined,
+                                      "text": undefined,
+                                    }
+                                  }
                                   accessible={true}
                                   collapsable={false}
                                   focusable={true}
@@ -413,7 +603,7 @@ exports[`renders with defaults 1`] = `
                                   onStartShouldSetResponder={[Function]}
                                 >
                                   <Text>
-                                    https://www.hylo.com/terms
+                                    Terms of Service + Privacy Policy
                                   </Text>
                                 </View>
                               </View>

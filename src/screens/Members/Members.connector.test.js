@@ -2,7 +2,7 @@ import { mapStateToProps, mapDispatchToProps, mergeProps, makeFetchOpts } from '
 import { MODULE_NAME } from './Members.store'
 import orm from 'store/models'
 
-jest.mock('store/selectors/getCurrentGroupId', () => () => 10)
+jest.mock('store/selectors/getCurrentGroupSlug', () => () => 'tom')
 
 describe('makeFetchOpts', () => {
   it('handles a group', () => {
@@ -29,7 +29,7 @@ describe('makeFetchOpts', () => {
 describe('mapStateToProps', () => {
   it('handles null value for lastViewedGroup', () => {
     const session = orm.session(orm.getEmptyState())
-    const group = session.Group.create({ id: 10, slug: 'tom' })
+    const group = session.Group.create({ id: '10', slug: 'tom' })
     session.Me.create({
       id: 123,
       memberships: [session.Membership.create({

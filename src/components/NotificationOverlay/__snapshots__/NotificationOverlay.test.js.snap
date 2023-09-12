@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches the last snapshot 1`] = `
-<ForwardRef(AnimatedComponentWrapper)>
+<ForwardRef>
   <TouchableOpacity>
     <Text>
       Consider yourself notified.
     </Text>
   </TouchableOpacity>
-</ForwardRef(AnimatedComponentWrapper)>
+</ForwardRef>
 `;

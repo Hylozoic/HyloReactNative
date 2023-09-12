@@ -10,7 +10,11 @@ import orm from 'store/models'
 
 jest.mock('components/SocketSubscriber', () => () => null)
 // jest.mock('components/HyloEditorWebview', () => () => null)
-jest.mock('store/selectors/getCurrentGroupId', () => () => 'public')
+jest.mock('store/selectors/getCurrentGroupSlug', () => () => 'public')
+
+jest.mock('react-native-share', () => ({
+  default: jest.fn()
+}))
 
 const post = {
   id: '91',
@@ -26,7 +30,7 @@ const post = {
   commenters: [{ id: 9, name: 'Jebobo Crustacean' }, { id: 7, name: 'Lobster Science' }],
   commentsTotal: 12,
   votesTotal: 8,
-  myVote: true,
+  peopleReactedTotal: true,
   type: 'request',
   fileUrls: [
     'http://foo.com/foo.pdf',

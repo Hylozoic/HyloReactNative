@@ -2,9 +2,9 @@ import React from 'react'
 import { Text, TouchableOpacity, View, SectionList } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
+import useChangeToGroup from 'hooks/useChangeToGroup'
 import { PUBLIC_GROUP, ALL_GROUP } from 'store/models/Group'
 import getMemberships from 'store/selectors/getMemberships'
-import getCurrentGroupId from 'store/selectors/getCurrentGroupId'
 import getCanModerate from 'store/selectors/getCanModerate'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import FastImage from 'react-native-fast-image'
@@ -12,7 +12,6 @@ import styles from './DrawerMenu.styles'
 import Button from 'components/Button'
 import LinearGradient from 'react-native-linear-gradient'
 import { bannerlinearGradientColors } from 'style/colors'
-import useChangeToGroup from 'hooks/useChangeToGroup'
 
 const topGroups = [
   PUBLIC_GROUP,
@@ -22,7 +21,6 @@ const topGroups = [
 export default function DrawerMenu () {
   const navigation = useNavigation()
   const currentGroup = useSelector(getCurrentGroup)
-  const currentGroupId = useSelector(getCurrentGroupId)
   const memberships = useSelector(getMemberships)
   const canModerateCurrentGroup = useSelector(getCanModerate)
 
@@ -43,7 +41,7 @@ export default function DrawerMenu () {
     <GroupRow
       group={item}
       changeToGroup={changeToGroup}
-      currentGroupId={currentGroupId}
+      currentGroupSlug={currentGroup?.slug}
       addPadding
     />
   )
@@ -124,10 +122,10 @@ export function SectionHeader ({ section }) {
   )
 }
 
-export function GroupRow ({ group, changeToGroup, currentGroupId, addPadding, isMember = true }) {
+export function GroupRow ({ group, changeToGroup, currentGroupSlug, addPadding, isMember = true }) {
   const { id, avatarUrl, name } = group
   const newPostCount = Math.min(99, group.newPostCount)
-  const highlight = id === currentGroupId
+  const highlight = id === currentGroupSlug
   return (
     <View style={[styles.groupRow, addPadding && styles.defaultPadding]}>
       <TouchableOpacity onPress={() => changeToGroup(group?.slug, false)} style={styles.rowTouchable}>

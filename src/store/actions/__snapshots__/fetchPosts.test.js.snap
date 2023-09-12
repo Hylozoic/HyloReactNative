@@ -77,12 +77,13 @@ posts: viewPosts(
   donationsLink
   projectManagementLink
   myEventResponse
-  commenters(first: 3) {
+  commenters(first: 20) {
     id
     name
     avatarUrl
   }
   commentersTotal
+  commentsTotal
   
   linkPreview {
     description
@@ -113,7 +114,19 @@ posts: viewPosts(
     region
   }
   votesTotal
-  myVote
+  peopleReactedTotal
+  myReactions {
+    emojiFull
+    id
+  }
+  postReactions {
+    emojiFull
+    id
+    user {
+      id
+      name
+    }
+  }
   groups {
     id
     name
@@ -175,6 +188,7 @@ posts: viewPosts(
       "activePostsOnly": undefined,
       "afterTime": undefined,
       "beforeTime": undefined,
+      "childPostInclusion": "yes",
       "collectionToFilterOut": undefined,
       "context": "groups",
       "filter": undefined,

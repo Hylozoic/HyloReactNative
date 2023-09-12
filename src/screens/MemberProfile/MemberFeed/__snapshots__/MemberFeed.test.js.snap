@@ -26,6 +26,7 @@ exports[`ContentRow shows a PostCard when itemType is post 1`] = `
 >
   <View>
     <PostCard
+      onPress={[Function]}
       post={
         {
           "id": 2,

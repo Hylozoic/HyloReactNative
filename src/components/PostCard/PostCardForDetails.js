@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import { find, get } from 'lodash/fp'
 import { LocationHelpers } from 'hylo-shared'
+import { DEFAULT_APP_HOST } from 'navigation/linking'
+import { openURL } from 'hooks/useOpenURL'
 import useChangeToGroup from 'hooks/useChangeToGroup'
 import useGoToMember from 'hooks/useGoToMember'
 import useGoToTopic from 'hooks/useGoToTopic'
@@ -22,6 +24,7 @@ import PostHeader from 'components/PostCard/PostHeader'
 import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import Topics from 'components/Topics'
 import styles from 'components/PostCard/PostCard.styles'
+import { SvgUri } from 'react-native-svg'
 
 export default function PostCardForDetails ({ post, showGroups = true }) {
   const dispatch = useDispatch()
@@ -30,6 +33,16 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
   const changeToGroup = useChangeToGroup()
   const goToMember = useGoToMember()
   const goToTopic = useGoToTopic()
+
+  const projectManagementToolMatch = post.projectManagementLink &&
+    post.projectManagementLink.match(/asana|trello|airtable|clickup|confluence|teamwork|notion|wrike|zoho/)
+  const projectManagementLinkSvgUri = projectManagementToolMatch &&
+    `${DEFAULT_APP_HOST}/assets/pm-tools/${projectManagementToolMatch[0]}.svg`
+
+  const donationServiceMatch = post.donationsLink &&
+    post.donationsLink.match(/cash|clover|gofundme|opencollective|paypal|squareup|venmo/)
+  const donationServiceSvgUri = donationServiceMatch &&
+    `${DEFAULT_APP_HOST}/assets/payment-services/${donationServiceMatch[0]}.svg`
 
   const handleRespondToEvent = response => dispatch(respondToEventAction(post.id, response))
   const joinProject = () => dispatch(joinProjectAction(post.id))
@@ -59,14 +72,14 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
         title={post.title}
         type={post.type}
       />
-      {!images && (
+      {(!images || images.length === 0) && (
         <Topics
           topics={post.topics}
           onPress={t => goToTopic(t.name)}
           style={styles.topics}
         />
       )}
-      {images && (
+      {(images && images.length > 0) && (
         <ImageAttachments
           creator={post.creator}
           images={images}
@@ -96,6 +109,8 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
         startTime={post.startTime}
         title={post.title}
         type={post.type}
+        post={post}
+        currentUser={currentUser}
       />
       <Files urls={post.fileUrls} style={styles.files} />
       {isProject && (
@@ -105,6 +120,48 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
           onPress={openProjectMembersModal}
           style={styles.projectMembersContainer}
         />
+      )}
+      {isProject && post.projectManagementLink && (
+        <View style={styles.donationsLink}>
+          {projectManagementLinkSvgUri && (
+            <>
+              <Text>
+                This project is being managed on
+              </Text>
+              <View style={{ flex: 1, paddingLeft: 5 }}><SvgUri width='50' uri={projectManagementLinkSvgUri} /></View>
+            </>
+          )}
+          {!projectManagementLinkSvgUri && (
+            <Text>View project management tool</Text>
+          )}
+          <Button
+            style={{ width: 80, height: 25, fontSize: 11 }}
+            onPress={() => openURL(post.projectManagementLink)}
+            text='View tasks'
+          />
+        </View>
+      )}
+      {post.donationsLink && (
+        <View style={styles.donationsLink}>
+          {donationServiceSvgUri && (
+            <>
+              <Text>
+                Support this project on
+              </Text>
+              <View style={{ flex: 1, paddingLeft: 5 }}><SvgUri width='50' uri={donationServiceSvgUri} /></View>
+            </>
+          )}
+          {!donationServiceSvgUri && (
+            <Text>
+              Support this project
+            </Text>
+          )}
+          <Button
+            style={{ width: 80, height: 25, fontSize: 11 }}
+            onPress={() => openURL(post.donationsLink)}
+            text='Contribute'
+          />
+        </View>
       )}
       {isProject && (
         <JoinProjectButton
@@ -129,7 +186,7 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
         forDetails
         postId={post.id}
         members={post.members}
-        myVote={post.myVote}
+        peopleReactedTotal={post.peopleReactedTotal}
         style={styles.postFooter}
         type={post.type}
         votesTotal={post.votesTotal}

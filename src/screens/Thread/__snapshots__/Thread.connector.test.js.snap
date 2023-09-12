@@ -170,7 +170,6 @@ exports[`mapDispatchToProps creates actions 3`] = `[]`;
 exports[`mapStateToProps returns the right keys 1`] = `
 {
   "currentUserId": undefined,
-  "groupId": "public",
   "hasMore": undefined,
   "id": 1,
   "isConnected": undefined,
