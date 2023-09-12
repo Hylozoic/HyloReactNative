@@ -17,7 +17,8 @@ export default function createProject (postParams) {
     memberIds = [],
     acceptContributions,
     donationsLink,
-    projectManagementLink
+    projectManagementLink,
+    isPublic
   } = postParams
   const linkPreviewId = linkPreview && linkPreview.id
   const groupIds = groups.map(c => c.id)
@@ -33,6 +34,7 @@ export default function createProject (postParams) {
         $imageUrls: [String]
         $fileUrls: [String]
         $announcement: Boolean
+        $isPublic: Boolean
         $topicNames: [String]
         $memberIds: [ID]
         $acceptContributions: Boolean
@@ -47,6 +49,7 @@ export default function createProject (postParams) {
           imageUrls: $imageUrls
           fileUrls: $fileUrls
           announcement: $announcement
+          isPublic: $isPublic
           topicNames: $topicNames
           memberIds: $memberIds
           acceptContributions: $acceptContributions
@@ -67,7 +70,8 @@ export default function createProject (postParams) {
         memberIds,
         acceptContributions,
         donationsLink,
-        projectManagementLink
+        projectManagementLink,
+        isPublic
       }
     },
     meta: {

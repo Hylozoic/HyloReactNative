@@ -18,7 +18,6 @@ import { Validators, TextHelpers } from 'hylo-shared'
 import { isIOS } from 'util/platform'
 import { showToast, hideToast } from 'util/toast'
 import { MAX_TITLE_LENGTH } from './PostEditor.store'
-import { athensGray, athensGrayDark, athensGrayDark50, athensGrayMedium, caribbeanGreen, rhino30, rhino80, white } from 'style/colors'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 // TODO: Convert all 3 of the below to LocationPicker style calls
 // ProjectMembers Chooser
@@ -46,7 +45,7 @@ import Topics from 'components/Topics'
 import styles, { typeSelectorStyles } from './PostEditor.styles'
 import HeaderLeftCloseIcon from 'navigation/headers/HeaderLeftCloseIcon'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
-import { caribbeanGreen, rhino30, white } from 'style/colors'
+import { caribbeanGreen, rhino30, rhino80, white } from 'style/colors'
 
 const titlePlaceholders = {
   discussion: "What's on your mind?",
@@ -159,7 +158,7 @@ export class PostEditor extends React.Component {
     const {
       files, images, title,
       topics, type, announcementEnabled, members,
-      groups, startTime, endTime, location,
+      groups, startTime, endTime, location, publicPost,
       locationObject, donationsLink, projectManagementLink
     } = this.state
     const postData = {
@@ -170,6 +169,7 @@ export class PostEditor extends React.Component {
       memberIds: members.map(m => m.id),
       fileUrls: uniq(files.filter(file => file.remote).map(file => file.remote)),
       imageUrls: uniq(images.filter(image => image.remote).map(image => image.remote)),
+      isPublic: publicPost,
       title,
       sendAnnouncement: announcementEnabled,
       topicNames: topics.map(t => t.name),
@@ -683,7 +683,7 @@ export class PostEditor extends React.Component {
                 />
                 <Text style={[styles.pressSelectionLeftText, publicPost && styles.pressSelectionSectionPublicSelected]}>Make Public:</Text>
               </View>
-              <View style={styles.pressSelectionRight}>
+              <View style={styles.pressSelectionRightNoBorder}>
                 <Switch
                   trackColor={{ true: caribbeanGreen, false: rhino80 }}
                   onValueChange={this.handleTogglePublicPost}
@@ -743,7 +743,7 @@ export class PostEditor extends React.Component {
 
           <TouchableOpacity
             style={styles.pressSelectionSection}
-            onPress={() => this.setState({ publicPost: !this.state.publicPost })}
+            onPress={this.handleShowFilePicker}
           >
             <View style={styles.pressSelection}>
               <View style={styles.pressSelectionLeft}>

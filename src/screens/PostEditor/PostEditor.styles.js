@@ -197,6 +197,13 @@ export default {
     alignItems: 'center',
     justifyContent: 'center'
   },
+  pressSelectionRightNoBorder: {
+    height: 25,
+    width: 25,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   pressSelectionRightIcon: {
     color: caribbeanGreen,
     fontSize: 16
