@@ -5,16 +5,13 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { openURL } from 'hooks/useOpenURL'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
-import fetchGroupDetailsAction from 'store/actions/fetchGroupDetails'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import getCurrentGroupSlug from 'store/selectors/getCurrentGroupSlug'
 import Icon from 'components/Icon'
+import TopicsNavigation from 'components/TopicsNavigation'
 import styles from './GroupNavigation.styles'
 
 export default function GroupNavigation () {
-  const dispatch = useDispatch()
   const navigation = useNavigation()
-  const currentGroupSlug = useSelector(getCurrentGroupSlug)
   const currentGroup = useSelector(getCurrentGroup)
   const childGroups = useSelector(getChildGroups)
   const parentGroups = useSelector(getParentGroups)
@@ -69,7 +66,8 @@ export default function GroupNavigation () {
         <>
           <View style={styles.divider} />
           <View style={styles.navItems}>
-            <NavItem label='Topics' iconName='Topics' onPress={() => navigate('Topics')} />
+            <NavItem label='Topics' iconName='Topics' onPress={() => {}} />
+            <TopicsNavigation group={currentGroup} />
           </View>
         </>
       )}
