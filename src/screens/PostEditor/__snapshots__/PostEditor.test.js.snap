@@ -146,6 +146,33 @@ exports[`PostEditor renders a new editor correctly 1`] = `
             </View>
           </View>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <View>
+              <Icon
+                color="#56667a"
+                name="Announcement"
+              />
+              <Text>
+                Announcement?
+              </Text>
+            </View>
+            <View>
+              <Switch
+                onValueChange={[Function]}
+                trackColor={
+                  {
+                    "false": "#56667a",
+                    "true": "#0DC39F",
+                  }
+                }
+                value={false}
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
         <TouchableOpacity>
           <View>
             <View>
@@ -721,6 +748,82 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                       />
                                       <Text>
                                         Make Public:
+                                      </Text>
+                                    </View>
+                                    <View>
+                                      <View
+                                        accessibilityState={
+                                          {
+                                            "busy": undefined,
+                                            "checked": undefined,
+                                            "disabled": undefined,
+                                            "expanded": undefined,
+                                            "selected": undefined,
+                                          }
+                                        }
+                                        accessibilityValue={
+                                          {
+                                            "max": undefined,
+                                            "min": undefined,
+                                            "now": undefined,
+                                            "text": undefined,
+                                          }
+                                        }
+                                        accessible={true}
+                                        collapsable={false}
+                                        focusable={true}
+                                        onClick={[Function]}
+                                        onResponderGrant={[Function]}
+                                        onResponderMove={[Function]}
+                                        onResponderRelease={[Function]}
+                                        onResponderTerminate={[Function]}
+                                        onResponderTerminationRequest={[Function]}
+                                        onStartShouldSetResponder={[Function]}
+                                      >
+                                        <Text>
+                                          false
+                                        </Text>
+                                      </View>
+                                    </View>
+                                  </View>
+                                </View>
+                                <View
+                                  accessibilityState={
+                                    {
+                                      "busy": undefined,
+                                      "checked": undefined,
+                                      "disabled": undefined,
+                                      "expanded": undefined,
+                                      "selected": undefined,
+                                    }
+                                  }
+                                  accessibilityValue={
+                                    {
+                                      "max": undefined,
+                                      "min": undefined,
+                                      "now": undefined,
+                                      "text": undefined,
+                                    }
+                                  }
+                                  accessible={true}
+                                  collapsable={false}
+                                  focusable={true}
+                                  onClick={[Function]}
+                                  onResponderGrant={[Function]}
+                                  onResponderMove={[Function]}
+                                  onResponderRelease={[Function]}
+                                  onResponderTerminate={[Function]}
+                                  onResponderTerminationRequest={[Function]}
+                                  onStartShouldSetResponder={[Function]}
+                                >
+                                  <View>
+                                    <View>
+                                      <Icon
+                                        color="#56667a"
+                                        name="Announcement"
+                                      />
+                                      <Text>
+                                        Announcement?
                                       </Text>
                                     </View>
                                     <View>
@@ -1647,6 +1750,33 @@ exports[`PostEditor renders with a post 1`] = `
               />
               <Text>
                 Make Public:
+              </Text>
+            </View>
+            <View>
+              <Switch
+                onValueChange={[Function]}
+                trackColor={
+                  {
+                    "false": "#56667a",
+                    "true": "#0DC39F",
+                  }
+                }
+                value={false}
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <View>
+              <Icon
+                color="#56667a"
+                name="Announcement"
+              />
+              <Text>
+                Announcement?
               </Text>
             </View>
             <View>
