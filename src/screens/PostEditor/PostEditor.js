@@ -693,21 +693,6 @@ export class PostEditor extends React.Component {
               </View>
             </View>
           </TouchableOpacity>
-          {/* {!post?.id && canModerate && (
-            <TouchableOpacity
-              onPress={handleToggleAnnouncement}
-              style={[
-                styles.buttonBarAnnouncement,
-                announcementEnabled && styles.buttonBarAnnouncementEnabled
-              ]}
-            >
-              <Icon
-                name='Announcement'
-                style={styles.buttonBarAnnouncementIcon}
-                color={announcementEnabled ? white : caribbeanGreen}
-              />
-            </TouchableOpacity>
-          )} */}
           <TouchableOpacity
             style={[styles.pressSelectionSection, announcementEnabled && styles.pressSelectionSectionPublicSelected]}
             onPress={this.handleToggleAnnouncement}
@@ -822,48 +807,6 @@ export class PostEditor extends React.Component {
               </View>
             )}
           </TouchableOpacity>
-          {/* <View style={[styles.pressSelection, styles.buttonBar]}>
-            <View style={styles.pressSelectionLeft}>
-              <Icon
-                name='Public'
-                style={{ fontSize: 24, marginRight: 10 }}
-                color={rhino80}
-              />
-              <Text style={styles.pressSelectionLeftText}>Public</Text>
-            </View>
-            <ImagePicker
-              type='post'
-              id={post?.id}
-              selectionLimit={10}
-              onChoice={this.handleAddAttachmentForKey('images')}
-              onError={this.handleAttachmentUploadErrorForKey('images')}
-              renderPicker={loading => {
-                if (!loading) {
-                  return (
-                    <Icon name='AddImage' style={styles.buttonBarIcon} />
-                  )
-                } else {
-                  return (
-                    <Loading
-                      size={30}
-                      style={[styles.buttonBarIcon, { padding: 8 }, styles.buttonBarIconLoading]}
-                    />
-                  )
-                }
-              }}
-            />
-          </View> */}
-{/* 
-          <BottomBar
-            post={post}
-            canModerate={canModerate}
-            filePickerPending={filePickerPending}
-            announcementEnabled={announcementEnabled}
-            handleToggleAnnouncement={this.handleToggleAnnouncement}
-            onShowFilePicker={this.handleShowFilePicker}
-            onAddImage={this.handleAddAttachmentForKey('images')}
-            onError={this.handleAttachmentUploadErrorForKey('images')}
-          /> */}
         </View>
       </View>
     )
@@ -913,73 +856,73 @@ export function TypeSelector (props) {
   )
 }
 
-export function BottomBar ({
-  post, canModerate, filePickerPending, announcementEnabled,
-  handleToggleAnnouncement, onShowFilePicker, onAddImage, onError
-}) {
-  // TODO: Tidy-up the styling below, move it into the stylesheet
-  return (
-    <>
-      <View style={styles.buttonBar}>
-        <View style={styles.buttonBarLeft}>
+// export function BottomBar ({
+//   post, canModerate, filePickerPending, announcementEnabled,
+//   handleToggleAnnouncement, onShowFilePicker, onAddImage, onError
+// }) {
+//   // TODO: Tidy-up the styling below, move it into the stylesheet
+//   return (
+//     <>
+//       <View style={styles.buttonBar}>
+//         <View style={styles.buttonBarLeft}>
 
-          <ImagePicker
-            type='post'
-            id={post?.id}
-            selectionLimit={10}
-            onChoice={onAddImage}
-            onError={onError}
-            renderPicker={loading => {
-              if (!loading) {
-                return (
-                  <Icon name='AddImage' style={styles.buttonBarIcon} />
-                )
-              } else {
-                return (
-                  <Loading
-                    size={30}
-                    style={[styles.buttonBarIcon, { padding: 8 }, styles.buttonBarIconLoading]}
-                  />
-                )
-              }
-            }}
-          />
+//           <ImagePicker
+//             type='post'
+//             id={post?.id}
+//             selectionLimit={10}
+//             onChoice={onAddImage}
+//             onError={onError}
+//             renderPicker={loading => {
+//               if (!loading) {
+//                 return (
+//                   <Icon name='AddImage' style={styles.buttonBarIcon} />
+//                 )
+//               } else {
+//                 return (
+//                   <Loading
+//                     size={30}
+//                     style={[styles.buttonBarIcon, { padding: 8 }, styles.buttonBarIconLoading]}
+//                   />
+//                 )
+//               }
+//             }}
+//           />
 
-          <TouchableOpacity onPress={onShowFilePicker}>
-            {filePickerPending && (
-              <Loading
-                size={30}
-                style={[styles.buttonBarIcon, { padding: 8 }, styles.buttonBarIconLoading]}
-              />
-            )}
-            {!filePickerPending && (
-              <Icon
-                name='Paperclip'
-                style={styles.buttonBarIcon}
-              />
-            )}
-          </TouchableOpacity>
+//           <TouchableOpacity onPress={onShowFilePicker}>
+//             {filePickerPending && (
+//               <Loading
+//                 size={30}
+//                 style={[styles.buttonBarIcon, { padding: 8 }, styles.buttonBarIconLoading]}
+//               />
+//             )}
+//             {!filePickerPending && (
+//               <Icon
+//                 name='Paperclip'
+//                 style={styles.buttonBarIcon}
+//               />
+//             )}
+//           </TouchableOpacity>
 
-          {!post?.id && canModerate && (
-            <TouchableOpacity
-              onPress={handleToggleAnnouncement}
-              style={[
-                styles.buttonBarAnnouncement,
-                announcementEnabled && styles.buttonBarAnnouncementEnabled
-              ]}
-            >
-              <Icon
-                name='Announcement'
-                style={styles.buttonBarAnnouncementIcon}
-                color={announcementEnabled ? white : caribbeanGreen}
-              />
-            </TouchableOpacity>
-          )}
-        </View>
-      </View>
-    </>
-  )
-}
+//           {!post?.id && canModerate && (
+//             <TouchableOpacity
+//               onPress={handleToggleAnnouncement}
+//               style={[
+//                 styles.buttonBarAnnouncement,
+//                 announcementEnabled && styles.buttonBarAnnouncementEnabled
+//               ]}
+//             >
+//               <Icon
+//                 name='Announcement'
+//                 style={styles.buttonBarAnnouncementIcon}
+//                 color={announcementEnabled ? white : caribbeanGreen}
+//               />
+//             </TouchableOpacity>
+//           )}
+//         </View>
+//       </View>
+//     </>
+//   )
+// }
 
 export function DatePickerWithLabel ({
   date,
