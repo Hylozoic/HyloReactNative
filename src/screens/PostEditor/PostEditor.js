@@ -433,7 +433,7 @@ export class PostEditor extends React.Component {
     })
   }
 
-  toggleAnnouncement = () => {
+  handleToggleAnnouncement = () => {
     this.toast && hideToast(this.toast)
     this.toast = showToast(
       `announcement ${!this.state.announcementEnabled ? 'on' : 'off'}`,
@@ -693,7 +693,52 @@ export class PostEditor extends React.Component {
               </View>
             </View>
           </TouchableOpacity>
-
+          {/* {!post?.id && canModerate && (
+            <TouchableOpacity
+              onPress={handleToggleAnnouncement}
+              style={[
+                styles.buttonBarAnnouncement,
+                announcementEnabled && styles.buttonBarAnnouncementEnabled
+              ]}
+            >
+              <Icon
+                name='Announcement'
+                style={styles.buttonBarAnnouncementIcon}
+                color={announcementEnabled ? white : caribbeanGreen}
+              />
+            </TouchableOpacity>
+          )} */}
+          <TouchableOpacity
+            style={[styles.pressSelectionSection, announcementEnabled && styles.pressSelectionSectionPublicSelected]}
+            onPress={this.handleToggleAnnouncement}
+          >
+            <View style={styles.pressSelection}>
+              <View style={styles.pressSelectionLeft}>
+                <Icon
+                  name='Announcement'
+                  style={[{ fontSize: 16, marginRight: 10 }, announcementEnabled && styles.pressSelectionSectionPublicSelected]}
+                  color={rhino80}
+                />
+                <Text style={[styles.pressSelectionLeftText, announcementEnabled && styles.pressSelectionSectionPublicSelected]}>Announcement?</Text>
+              </View>
+              <View style={styles.pressSelectionRightNoBorder}>
+                <Switch
+                  trackColor={{ true: caribbeanGreen, false: rhino80 }}
+                  onValueChange={this.handleToggleAnnouncement}
+                  style={styles.pressSelectionSwitch}
+                  value={announcementEnabled}
+                />
+              </View>
+            </View>
+            {!isEmpty(files) && (
+              <View>
+                <FileSelector
+                  onRemove={this.handleRemoveAttachmentForKey('files')}
+                  files={files}
+                />
+              </View>
+            )}
+          </TouchableOpacity>
           <TouchableOpacity
             style={styles.pressSelectionSection}
           >
@@ -814,7 +859,7 @@ export class PostEditor extends React.Component {
             canModerate={canModerate}
             filePickerPending={filePickerPending}
             announcementEnabled={announcementEnabled}
-            toggleAnnouncement={this.toggleAnnouncement}
+            handleToggleAnnouncement={this.handleToggleAnnouncement}
             onShowFilePicker={this.handleShowFilePicker}
             onAddImage={this.handleAddAttachmentForKey('images')}
             onError={this.handleAttachmentUploadErrorForKey('images')}
@@ -870,7 +915,7 @@ export function TypeSelector (props) {
 
 export function BottomBar ({
   post, canModerate, filePickerPending, announcementEnabled,
-  toggleAnnouncement, onShowFilePicker, onAddImage, onError
+  handleToggleAnnouncement, onShowFilePicker, onAddImage, onError
 }) {
   // TODO: Tidy-up the styling below, move it into the stylesheet
   return (
@@ -917,7 +962,7 @@ export function BottomBar ({
 
           {!post?.id && canModerate && (
             <TouchableOpacity
-              onPress={toggleAnnouncement}
+              onPress={handleToggleAnnouncement}
               style={[
                 styles.buttonBarAnnouncement,
                 announcementEnabled && styles.buttonBarAnnouncementEnabled
