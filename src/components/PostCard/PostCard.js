@@ -40,6 +40,7 @@ export default function PostCard ({
         <PostHeader
           announcement={post.announcement}
           creator={post.creator}
+          currentUser={currentUser}
           date={post.createdAt}
           hideMenu={hideMenu}
           pinned={post.pinned}

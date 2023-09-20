@@ -32,6 +32,15 @@ exports[`action creators matches the last snapshot from fetchNotifications 1`] =
     id
     name
     avatarUrl
+    groupRoles {
+      name
+      emoji
+      active
+      groupId
+    }
+    moderatedGroupMemberships {
+      groupId
+    }
   }
   createdAt
   updatedAt
@@ -58,6 +67,15 @@ exports[`action creators matches the last snapshot from fetchNotifications 1`] =
     id
     name
     avatarUrl
+    groupRoles {
+      name
+      emoji
+      active
+      groupId
+    }
+    moderatedGroupMemberships {
+      groupId
+    }
   }
   attachments {
     id
@@ -91,6 +109,15 @@ exports[`action creators matches the last snapshot from fetchNotifications 1`] =
     id
     name
     avatarUrl
+    groupRoles {
+      name
+      emoji
+      active
+      groupId
+    }
+    moderatedGroupMemberships {
+      groupId
+    }
   }
   attachments {
     id

@@ -34,6 +34,15 @@ exports[`fetchSearchResults matches snapshot 1`] = `
     id
     name
     avatarUrl
+    groupRoles {
+      name
+      emoji
+      active
+      groupId
+    }
+    moderatedGroupMemberships {
+      groupId
+    }
   }
   createdAt
   updatedAt

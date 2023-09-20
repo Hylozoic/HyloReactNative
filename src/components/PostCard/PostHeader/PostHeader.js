@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { get } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
 import usePostActionSheet from 'hooks/usePostActionSheet'
+import BadgeEmoji from 'components/BadgeEmoji'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import Avatar from 'components/Avatar'
 import FlagContent from 'components/FlagContent'
@@ -14,6 +15,7 @@ export default function PostHeader ({
   announcement,
   closeOnDelete,
   creator,
+  currentUser,
   date,
   hideMenu,
   pinned,
@@ -37,11 +39,15 @@ export default function PostHeader ({
   const { avatarUrl, name } = creator
   const handleShowMember = () => showMember && showMember(creator.id)
 
+  const currentGroupId = currentGroup && currentGroup.id
+  const badges = (currentGroupId && creator.groupRoles?.filter(role => role.groupId === currentGroupId)) || []
+  const creatorIsModerator = creator.moderatedGroupMemberships?.find(moderatedMembership => moderatedMembership.groupId === currentGroupId)
+
   return (
     <View style={[styles.container, style]}>
       <View style={styles.avatarSpacing}>
         <TouchableOpacity onPress={handleShowMember}>
-          {!!avatarUrl && <Avatar avatarUrl={avatarUrl} dimension={smallAvatar ? 20 : 20} />}
+          {!!avatarUrl && <Avatar avatarUrl={avatarUrl} dimension={smallAvatar ? 24 : 24} />}
         </TouchableOpacity>
       </View>
       <View style={styles.nameAndDate}>
@@ -50,6 +56,8 @@ export default function PostHeader ({
             <Text style={styles.name}>{name}</Text>
           )}
         </TouchableOpacity>
+        <CondensingBadgeRow badges={badges} creatorIsModerator={creatorIsModerator} currentGroup={currentGroup} postId={postId} />
+
         <Text style={styles.date}>{TextHelpers.humanDate(date)}</Text>
       </View>
       <View style={styles.upperRight}>
@@ -82,6 +90,38 @@ export default function PostHeader ({
           />
         )}
       </View>
+    </View>
+  )
+}
+
+export function CondensingBadgeRow ({ postId, creatorIsModerator, badges, currentGroup }) {
+  const moderatorCount = creatorIsModerator ? 1 : 0
+  const [showAllBadges, setShowAllBadges] = useState(false)
+
+  const handleShowBadges = () => {
+    setShowAllBadges(!showAllBadges)
+    setTimeout(() => setShowAllBadges(false), 5000)
+  }
+  
+  return (
+    <View style={styles.badgeRow}>
+      {creatorIsModerator && (
+        <BadgeEmoji key='mod' expanded emoji='🛡️' isModerator name={currentGroup?.moderatorDescriptor || 'Moderator'} id={postId} />
+      )}
+      {badges.length + moderatorCount <= 3 && badges.map(badge => (
+        <BadgeEmoji key={badge.name} expanded {...badge} id={postId} />
+      ))}
+      {badges.length + moderatorCount > 3 &&
+        <TouchableOpacity hitSlop={5} onPress={handleShowBadges}>
+          <View style={styles.badgePill}>
+            <BadgeEmoji extraStyle={{ height: 20, width: 16 }} key={badges[0].name} expanded {...badges[0]} id={postId} />
+            <Text>+{badges.length - 1} </Text>
+          </View>
+        </TouchableOpacity>}
+      {showAllBadges &&
+        <View style={styles.allBadgesPill}>
+          {badges.map(badge => <BadgeEmoji extraStyle={{ height: 26, width: 26 }} emojiStyle={{ fontSize: 20,lineHeight: 22}} key={badge.name} expanded {...badge} id={postId} />)}
+        </View>}
     </View>
   )
 }

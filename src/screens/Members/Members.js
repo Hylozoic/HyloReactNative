@@ -20,6 +20,7 @@ export default function Members ({
   return (
     <View style={styles.container}>
       <MemberList
+        group={group}
         isServerSearch
         {...pick([
           'isFocused',
