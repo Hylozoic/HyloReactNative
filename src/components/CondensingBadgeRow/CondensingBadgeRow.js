@@ -15,7 +15,7 @@ export default function CondensingBadgeRow ({ postId, creatorIsModerator, badges
   return (
     <View style={[styles.badgeRow, containerStyle]}>
       {creatorIsModerator && (
-        <BadgeEmoji key='mod' emoji='🛡️' isModerator name={currentGroup?.moderatorDescriptor || 'Moderator'} id={postId} />
+        <BadgeEmoji onPress={handleShowBadges} key='mod' emoji='🛡️' isModerator name={currentGroup?.moderatorDescriptor || 'Moderator'} id={postId} />
       )}
       <TouchableOpacity styles={styles.badgeRow} hitSlop={5} onPress={handleShowBadges}>
       {badges.length + moderatorCount <= limit
@@ -32,8 +32,14 @@ export default function CondensingBadgeRow ({ postId, creatorIsModerator, badges
       </TouchableOpacity>
       {showAllBadges &&
         <View style={styles.allBadgesPill}>
+          {creatorIsModerator && (
+            <View key='mod' style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingLeft: 2, paddingRight: 4, gap: 2}}>
+              <BadgeEmoji emoji='🛡️' isModerator name={currentGroup?.moderatorDescriptor || 'Moderator'} extraStyle={{ height: 26, width: 26 }} emojiStyle={{ fontSize: 16,lineHeight: 20}} />
+              <Text>{currentGroup?.moderatorDescriptor || 'Moderator'}</Text>
+            </View>
+          )}
           {badges.map(badge => (
-            <View key={badge.name} style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingLeft: 2, paddingRight: 4}}>
+            <View key={badge.name} style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingLeft: 2, paddingRight: 4, gap: 2}}>
               <BadgeEmoji extraStyle={{ height: 26, width: 26 }} emojiStyle={{ fontSize: 20,lineHeight: 22}} {...badge} id={postId} />
               <Text>{badge.name}</Text>
             </View>))}
@@ -49,6 +55,7 @@ const styles = {
     border: 1,
     padding: 2,
     flex: 1,
+    gap: 2,
     borderColor: white40onCaribbeanGreen,
     position: 'absolute',
     bottom: 30

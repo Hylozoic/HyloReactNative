@@ -56,7 +56,6 @@ export default function PostHeader ({
           )}
         </TouchableOpacity>
         <CondensingBadgeRow badges={badges} creatorIsModerator={creatorIsModerator} currentGroup={currentGroup} postId={postId} />
-
         <Text style={styles.date}>{TextHelpers.humanDate(date)}</Text>
       </View>
       <View style={styles.upperRight}>
