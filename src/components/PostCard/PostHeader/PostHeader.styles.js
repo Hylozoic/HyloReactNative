@@ -1,14 +1,7 @@
 import { POST_TYPES } from 'store/models/Post'
-import { rhino30, rhino50, caribbeanGreen, rhino40, white80onCaribbeanGreen, white40onCaribbeanGreen } from 'style/colors'
+import { rhino30, rhino50, caribbeanGreen, rhino40 } from 'style/colors'
 
 export const styles = {
-  badgeRow: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 1,
-    marginRight: 2
-  },
   container: {
     flexDirection: 'row',
     marginBottom: 8,
@@ -53,31 +46,6 @@ export const styles = {
   topicList: {
     marginLeft: 4,
     flex: 1
-  },
-  allBadgesPill:{
-    backgroundColor: white40onCaribbeanGreen,
-    borderRadius: 30,
-    border: 1,
-    padding: 2,
-    flex: 1,
-    flexDirection: 'row',
-    borderColor: white40onCaribbeanGreen,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    top: -34
-  },
-  badgePill: {
-    backgroundColor: white80onCaribbeanGreen,
-    borderRadius: 30,
-    border: 1,
-    padding: 2,
-    gap: -3,
-    flex: 1,
-    flexDirection: 'row',
-    borderColor: white80onCaribbeanGreen,
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   topicLabel: {
     fontSize: 12,

@@ -14,6 +14,7 @@ import Loading from 'components/Loading'
 import PopupMenuButton from 'components/PopupMenuButton'
 import styles from './MemberList.styles'
 import SearchBar from 'components/SearchBar'
+import CondensingBadgeRow from '../CondensingBadgeRow/CondensingBadgeRow'
 
 export class MemberList extends React.Component {
   static defaultProps = {
@@ -159,14 +160,8 @@ export function Member ({ member, showMember, group }) {
       <Text style={styles.memberName}>{member.name}</Text>
       {!!member.location &&
         <Text style={styles.memberLocation}>{member.location}</Text>}
-      <View style={styles.badgeRow}>
-        {creatorIsModerator && (
-          <BadgeEmoji key='mod' emoji='🛡️' isModerator id={id} />
-        )}
-        {badges.map(badge => (
-          <BadgeEmoji key={badge.emoji} {...badge} id={id} />
-        ))}
-      </View>
+        <CondensingBadgeRow badges={badges} limit={32} creatorIsModerator={creatorIsModerator} currentGroup={group} containerStyle={styles.badgeRow} />
+        {/* The limit is just a unrealistically large number here */}
       <Text style={styles.memberBio} numberOfLines={4}>
         {member.bio}
       </Text>
