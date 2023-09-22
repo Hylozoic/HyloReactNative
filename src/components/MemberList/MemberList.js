@@ -8,11 +8,13 @@ import {
 } from 'react-native'
 import { useIsFocused, useScrollToTop } from '@react-navigation/native'
 import Avatar from 'components/Avatar'
+import BadgeEmoji from 'components/BadgeEmoji'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import PopupMenuButton from 'components/PopupMenuButton'
 import styles from './MemberList.styles'
 import SearchBar from 'components/SearchBar'
+import CondensingBadgeRow from '../CondensingBadgeRow/CondensingBadgeRow'
 
 export class MemberList extends React.Component {
   static defaultProps = {
@@ -82,7 +84,7 @@ export class MemberList extends React.Component {
   render () {
     const { members, isServerSearch } = this.state
     const {
-      children, sortKeys, sortBy, setSort, fetchMoreMembers, pending, hideSortOptions, scrollRef, search
+      children, group, sortKeys, sortBy, setSort, fetchMoreMembers, pending, hideSortOptions, scrollRef, search
     } = this.props
     const onSearch = debounce(300, text => this.search(text))
     const actions = isServerSearch
@@ -119,7 +121,7 @@ export class MemberList extends React.Component {
         numColumns='2'
         renderItem={({ item }) => {
           if (item.name) {
-            return <Member member={item} showMember={this.props.showMember} />
+            return <Member group={group} member={item} showMember={this.props.showMember} />
           } else {
             return <View style={styles.cell} />
           }
@@ -142,7 +144,11 @@ export default function (props) {
   return <MemberList {...props} isFocused={isFocused} scrollRef={ref} />
 }
 
-export function Member ({ member, showMember }) {
+export function Member ({ member, showMember, group }) {
+  const { moderatedGroupMemberships, groupRoles, id } = member
+  const badges = (group && groupRoles.filter(role => role.groupId === group.id)) || []
+  const creatorIsModerator = moderatedGroupMemberships.find(moderatedMembership => moderatedMembership.groupId === group?.id)
+  
   return (
     <TouchableOpacity
       onPress={() => isFunction(showMember) && showMember(member.id)}
@@ -154,6 +160,8 @@ export function Member ({ member, showMember }) {
       <Text style={styles.memberName}>{member.name}</Text>
       {!!member.location &&
         <Text style={styles.memberLocation}>{member.location}</Text>}
+        <CondensingBadgeRow badges={badges} limit={32} creatorIsModerator={creatorIsModerator} currentGroup={group} containerStyle={styles.badgeRow} />
+        {/* The limit is just a unrealistically large number here */}
       <Text style={styles.memberBio} numberOfLines={4}>
         {member.bio}
       </Text>

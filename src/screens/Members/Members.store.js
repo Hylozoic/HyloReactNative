@@ -45,6 +45,15 @@ query ($slug: String, $first: Int, $sortBy: String, $offset: Int, $search: Strin
           region
         }
         tagline
+        groupRoles {
+          name
+          emoji
+          active
+          groupId
+        }
+        moderatedGroupMemberships {
+          groupId
+        }
         skills {
           hasMore
           items {

@@ -28,6 +28,15 @@ exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
     id
     name
     avatarUrl
+    groupRoles {
+      name
+      emoji
+      active
+      groupId
+    }
+    moderatedGroupMemberships {
+      groupId
+    }
   }
   createdAt
   updatedAt
@@ -54,6 +63,15 @@ exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
     id
     name
     avatarUrl
+    groupRoles {
+      name
+      emoji
+      active
+      groupId
+    }
+    moderatedGroupMemberships {
+      groupId
+    }
   }
   attachments {
     id
@@ -87,6 +105,15 @@ exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
     id
     name
     avatarUrl
+    groupRoles {
+      name
+      emoji
+      active
+      groupId
+    }
+    moderatedGroupMemberships {
+      groupId
+    }
   }
   attachments {
     id

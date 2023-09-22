@@ -24,11 +24,15 @@ exports[`MemberList renders with default props with default non-server search 1`
   data={
     [
       {
+        "groupRoles": [],
         "id": "1",
+        "moderatedGroupMemberships": [],
         "name": "Loren",
       },
       {
+        "groupRoles": [],
         "id": "2",
+        "moderatedGroupMemberships": [],
         "name": "Robbie",
       },
     ]
@@ -64,11 +68,15 @@ exports[`MemberList runs call for new results if server search 1`] = `
   data={
     [
       {
+        "groupRoles": [],
         "id": "1",
+        "moderatedGroupMemberships": [],
         "name": "Loren",
       },
       {
+        "groupRoles": [],
         "id": "2",
+        "moderatedGroupMemberships": [],
         "name": "Robbie",
       },
     ]

@@ -6,11 +6,11 @@ import Members from './Members'
 
 it('renders correctly with no group (all groups default)', () => {
   const members = [
-    { id: '1', name: 'Foo Lane', location: 'here', bio: 'Hello!', avatarUrl: 'foo.gif' },
-    { id: '2', name: 'Bar Jones', location: 'there', bio: 'Not a stork', avatarUrl: 'bar.png' },
-    { id: '3', name: 'Baz Chu', bio: 'Could be', avatarUrl: 'baz.png' },
-    { id: '4', name: 'Bonk Gundsdottir', avatarUrl: 'bonk.jpg' },
-    { id: '5', avatarUrl: 'woof.png' }
+    { id: '1', groupRoles: [], moderatedGroupMemberships: [], name: 'Foo Lane', location: 'here', bio: 'Hello!', avatarUrl: 'foo.gif' },
+    { id: '2', groupRoles: [], moderatedGroupMemberships: [], name: 'Bar Jones', location: 'there', bio: 'Not a stork', avatarUrl: 'bar.png' },
+    { id: '3', groupRoles: [], moderatedGroupMemberships: [], name: 'Baz Chu', bio: 'Could be', avatarUrl: 'baz.png' },
+    { id: '4', groupRoles: [], moderatedGroupMemberships: [], name: 'Bonk Gundsdottir', avatarUrl: 'bonk.jpg' },
+    { id: '5', groupRoles: [], moderatedGroupMemberships: [], avatarUrl: 'woof.png' }
   ]
   const { toJSON } = TestRenderer.create(
     <TestRoot>
@@ -27,11 +27,11 @@ it('renders correctly with no group (all groups default)', () => {
 
 it('renders with invite button when a moderator', () => {
   const members = [
-    { id: '1', name: 'Foo Lane', location: 'here', bio: 'Hello!', avatarUrl: 'foo.gif' },
-    { id: '2', name: 'Bar Jones', location: 'there', bio: 'Not a stork', avatarUrl: 'bar.png' },
-    { id: '3', name: 'Baz Chu', bio: 'Could be', avatarUrl: 'baz.png' },
-    { id: '4', name: 'Bonk Gundsdottir', avatarUrl: 'bonk.jpg' },
-    { id: '5', avatarUrl: 'woof.png' }
+    { id: '1', groupRoles: [], moderatedGroupMemberships: [], name: 'Foo Lane', location: 'here', bio: 'Hello!', avatarUrl: 'foo.gif' },
+    { id: '2', groupRoles: [], moderatedGroupMemberships: [], name: 'Bar Jones', location: 'there', bio: 'Not a stork', avatarUrl: 'bar.png' },
+    { id: '3', groupRoles: [], moderatedGroupMemberships: [], name: 'Baz Chu', bio: 'Could be', avatarUrl: 'baz.png' },
+    { id: '4', groupRoles: [], moderatedGroupMemberships: [], name: 'Bonk Gundsdottir', avatarUrl: 'bonk.jpg' },
+    { id: '5', groupRoles: [], moderatedGroupMemberships: [], avatarUrl: 'woof.png' }
   ]
   const { toJSON } = TestRenderer.create(
     <TestRoot>
