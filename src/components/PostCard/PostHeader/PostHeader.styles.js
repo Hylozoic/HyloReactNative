@@ -8,7 +8,8 @@ export const styles = {
     borderBottomColor: 'rgba(235, 235, 235, 1.0)',
     borderBottomWidth: 1,
     paddingVertical: 9,
-    paddingHorizontal: 9
+    paddingHorizontal: 9,
+    alignItems: 'center'
   },
   nameAndDate: {
     paddingRight: 7,
@@ -19,10 +20,11 @@ export const styles = {
   name: {
     fontSize: 13,
     color: '#363D3C',
-    fontFamily: 'Circular-Bold'
+    fontFamily: 'Circular-Bold',
+    marginRight: 4
   },
   date: {
-    marginLeft: 8,
+    marginLeft: 2,
     fontSize: 12,
     color: rhino40,
     fontFamily: 'Circular-Book'

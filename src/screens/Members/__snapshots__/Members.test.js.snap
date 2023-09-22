@@ -356,31 +356,41 @@ exports[`renders correctly with no group (all groups default) 1`] = `
                               {
                                 "avatarUrl": "foo.gif",
                                 "bio": "Hello!",
+                                "groupRoles": [],
                                 "id": "1",
                                 "location": "here",
+                                "moderatedGroupMemberships": [],
                                 "name": "Foo Lane",
                               },
                               {
                                 "avatarUrl": "bar.png",
                                 "bio": "Not a stork",
+                                "groupRoles": [],
                                 "id": "2",
                                 "location": "there",
+                                "moderatedGroupMemberships": [],
                                 "name": "Bar Jones",
                               },
                               {
                                 "avatarUrl": "baz.png",
                                 "bio": "Could be",
+                                "groupRoles": [],
                                 "id": "3",
+                                "moderatedGroupMemberships": [],
                                 "name": "Baz Chu",
                               },
                               {
                                 "avatarUrl": "bonk.jpg",
+                                "groupRoles": [],
                                 "id": "4",
+                                "moderatedGroupMemberships": [],
                                 "name": "Bonk Gundsdottir",
                               },
                               {
                                 "avatarUrl": "woof.png",
+                                "groupRoles": [],
                                 "id": "5",
+                                "moderatedGroupMemberships": [],
                               },
                               {
                                 "id": -1,
@@ -543,6 +553,40 @@ exports[`renders correctly with no group (all groups default) 1`] = `
                                   <Text>
                                     here
                                   </Text>
+                                  <View>
+                                    <View
+                                      accessibilityState={
+                                        {
+                                          "busy": undefined,
+                                          "checked": undefined,
+                                          "disabled": undefined,
+                                          "expanded": undefined,
+                                          "selected": undefined,
+                                        }
+                                      }
+                                      accessibilityValue={
+                                        {
+                                          "max": undefined,
+                                          "min": undefined,
+                                          "now": undefined,
+                                          "text": undefined,
+                                        }
+                                      }
+                                      accessible={true}
+                                      collapsable={false}
+                                      focusable={true}
+                                      hitSlop={5}
+                                      onClick={[Function]}
+                                      onResponderGrant={[Function]}
+                                      onResponderMove={[Function]}
+                                      onResponderRelease={[Function]}
+                                      onResponderTerminate={[Function]}
+                                      onResponderTerminationRequest={[Function]}
+                                      onStartShouldSetResponder={[Function]}
+                                    >
+                                      <View />
+                                    </View>
+                                  </View>
                                   <Text
                                     numberOfLines={4}
                                   >
@@ -617,6 +661,40 @@ exports[`renders correctly with no group (all groups default) 1`] = `
                                   <Text>
                                     there
                                   </Text>
+                                  <View>
+                                    <View
+                                      accessibilityState={
+                                        {
+                                          "busy": undefined,
+                                          "checked": undefined,
+                                          "disabled": undefined,
+                                          "expanded": undefined,
+                                          "selected": undefined,
+                                        }
+                                      }
+                                      accessibilityValue={
+                                        {
+                                          "max": undefined,
+                                          "min": undefined,
+                                          "now": undefined,
+                                          "text": undefined,
+                                        }
+                                      }
+                                      accessible={true}
+                                      collapsable={false}
+                                      focusable={true}
+                                      hitSlop={5}
+                                      onClick={[Function]}
+                                      onResponderGrant={[Function]}
+                                      onResponderMove={[Function]}
+                                      onResponderRelease={[Function]}
+                                      onResponderTerminate={[Function]}
+                                      onResponderTerminationRequest={[Function]}
+                                      onStartShouldSetResponder={[Function]}
+                                    >
+                                      <View />
+                                    </View>
+                                  </View>
                                   <Text
                                     numberOfLines={4}
                                   >
@@ -695,6 +773,40 @@ exports[`renders correctly with no group (all groups default) 1`] = `
                                   <Text>
                                     Baz Chu
                                   </Text>
+                                  <View>
+                                    <View
+                                      accessibilityState={
+                                        {
+                                          "busy": undefined,
+                                          "checked": undefined,
+                                          "disabled": undefined,
+                                          "expanded": undefined,
+                                          "selected": undefined,
+                                        }
+                                      }
+                                      accessibilityValue={
+                                        {
+                                          "max": undefined,
+                                          "min": undefined,
+                                          "now": undefined,
+                                          "text": undefined,
+                                        }
+                                      }
+                                      accessible={true}
+                                      collapsable={false}
+                                      focusable={true}
+                                      hitSlop={5}
+                                      onClick={[Function]}
+                                      onResponderGrant={[Function]}
+                                      onResponderMove={[Function]}
+                                      onResponderRelease={[Function]}
+                                      onResponderTerminate={[Function]}
+                                      onResponderTerminationRequest={[Function]}
+                                      onStartShouldSetResponder={[Function]}
+                                    >
+                                      <View />
+                                    </View>
+                                  </View>
                                   <Text
                                     numberOfLines={4}
                                   >
@@ -766,6 +878,40 @@ exports[`renders correctly with no group (all groups default) 1`] = `
                                   <Text>
                                     Bonk Gundsdottir
                                   </Text>
+                                  <View>
+                                    <View
+                                      accessibilityState={
+                                        {
+                                          "busy": undefined,
+                                          "checked": undefined,
+                                          "disabled": undefined,
+                                          "expanded": undefined,
+                                          "selected": undefined,
+                                        }
+                                      }
+                                      accessibilityValue={
+                                        {
+                                          "max": undefined,
+                                          "min": undefined,
+                                          "now": undefined,
+                                          "text": undefined,
+                                        }
+                                      }
+                                      accessible={true}
+                                      collapsable={false}
+                                      focusable={true}
+                                      hitSlop={5}
+                                      onClick={[Function]}
+                                      onResponderGrant={[Function]}
+                                      onResponderMove={[Function]}
+                                      onResponderRelease={[Function]}
+                                      onResponderTerminate={[Function]}
+                                      onResponderTerminationRequest={[Function]}
+                                      onStartShouldSetResponder={[Function]}
+                                    >
+                                      <View />
+                                    </View>
+                                  </View>
                                   <Text
                                     numberOfLines={4}
                                   />
@@ -1162,31 +1308,41 @@ exports[`renders with invite button when a moderator 1`] = `
                               {
                                 "avatarUrl": "foo.gif",
                                 "bio": "Hello!",
+                                "groupRoles": [],
                                 "id": "1",
                                 "location": "here",
+                                "moderatedGroupMemberships": [],
                                 "name": "Foo Lane",
                               },
                               {
                                 "avatarUrl": "bar.png",
                                 "bio": "Not a stork",
+                                "groupRoles": [],
                                 "id": "2",
                                 "location": "there",
+                                "moderatedGroupMemberships": [],
                                 "name": "Bar Jones",
                               },
                               {
                                 "avatarUrl": "baz.png",
                                 "bio": "Could be",
+                                "groupRoles": [],
                                 "id": "3",
+                                "moderatedGroupMemberships": [],
                                 "name": "Baz Chu",
                               },
                               {
                                 "avatarUrl": "bonk.jpg",
+                                "groupRoles": [],
                                 "id": "4",
+                                "moderatedGroupMemberships": [],
                                 "name": "Bonk Gundsdottir",
                               },
                               {
                                 "avatarUrl": "woof.png",
+                                "groupRoles": [],
                                 "id": "5",
+                                "moderatedGroupMemberships": [],
                               },
                               {
                                 "id": -1,
@@ -1435,6 +1591,40 @@ exports[`renders with invite button when a moderator 1`] = `
                                   <Text>
                                     here
                                   </Text>
+                                  <View>
+                                    <View
+                                      accessibilityState={
+                                        {
+                                          "busy": undefined,
+                                          "checked": undefined,
+                                          "disabled": undefined,
+                                          "expanded": undefined,
+                                          "selected": undefined,
+                                        }
+                                      }
+                                      accessibilityValue={
+                                        {
+                                          "max": undefined,
+                                          "min": undefined,
+                                          "now": undefined,
+                                          "text": undefined,
+                                        }
+                                      }
+                                      accessible={true}
+                                      collapsable={false}
+                                      focusable={true}
+                                      hitSlop={5}
+                                      onClick={[Function]}
+                                      onResponderGrant={[Function]}
+                                      onResponderMove={[Function]}
+                                      onResponderRelease={[Function]}
+                                      onResponderTerminate={[Function]}
+                                      onResponderTerminationRequest={[Function]}
+                                      onStartShouldSetResponder={[Function]}
+                                    >
+                                      <View />
+                                    </View>
+                                  </View>
                                   <Text
                                     numberOfLines={4}
                                   >
@@ -1509,6 +1699,40 @@ exports[`renders with invite button when a moderator 1`] = `
                                   <Text>
                                     there
                                   </Text>
+                                  <View>
+                                    <View
+                                      accessibilityState={
+                                        {
+                                          "busy": undefined,
+                                          "checked": undefined,
+                                          "disabled": undefined,
+                                          "expanded": undefined,
+                                          "selected": undefined,
+                                        }
+                                      }
+                                      accessibilityValue={
+                                        {
+                                          "max": undefined,
+                                          "min": undefined,
+                                          "now": undefined,
+                                          "text": undefined,
+                                        }
+                                      }
+                                      accessible={true}
+                                      collapsable={false}
+                                      focusable={true}
+                                      hitSlop={5}
+                                      onClick={[Function]}
+                                      onResponderGrant={[Function]}
+                                      onResponderMove={[Function]}
+                                      onResponderRelease={[Function]}
+                                      onResponderTerminate={[Function]}
+                                      onResponderTerminationRequest={[Function]}
+                                      onStartShouldSetResponder={[Function]}
+                                    >
+                                      <View />
+                                    </View>
+                                  </View>
                                   <Text
                                     numberOfLines={4}
                                   >
@@ -1587,6 +1811,40 @@ exports[`renders with invite button when a moderator 1`] = `
                                   <Text>
                                     Baz Chu
                                   </Text>
+                                  <View>
+                                    <View
+                                      accessibilityState={
+                                        {
+                                          "busy": undefined,
+                                          "checked": undefined,
+                                          "disabled": undefined,
+                                          "expanded": undefined,
+                                          "selected": undefined,
+                                        }
+                                      }
+                                      accessibilityValue={
+                                        {
+                                          "max": undefined,
+                                          "min": undefined,
+                                          "now": undefined,
+                                          "text": undefined,
+                                        }
+                                      }
+                                      accessible={true}
+                                      collapsable={false}
+                                      focusable={true}
+                                      hitSlop={5}
+                                      onClick={[Function]}
+                                      onResponderGrant={[Function]}
+                                      onResponderMove={[Function]}
+                                      onResponderRelease={[Function]}
+                                      onResponderTerminate={[Function]}
+                                      onResponderTerminationRequest={[Function]}
+                                      onStartShouldSetResponder={[Function]}
+                                    >
+                                      <View />
+                                    </View>
+                                  </View>
                                   <Text
                                     numberOfLines={4}
                                   >
@@ -1658,6 +1916,40 @@ exports[`renders with invite button when a moderator 1`] = `
                                   <Text>
                                     Bonk Gundsdottir
                                   </Text>
+                                  <View>
+                                    <View
+                                      accessibilityState={
+                                        {
+                                          "busy": undefined,
+                                          "checked": undefined,
+                                          "disabled": undefined,
+                                          "expanded": undefined,
+                                          "selected": undefined,
+                                        }
+                                      }
+                                      accessibilityValue={
+                                        {
+                                          "max": undefined,
+                                          "min": undefined,
+                                          "now": undefined,
+                                          "text": undefined,
+                                        }
+                                      }
+                                      accessible={true}
+                                      collapsable={false}
+                                      focusable={true}
+                                      hitSlop={5}
+                                      onClick={[Function]}
+                                      onResponderGrant={[Function]}
+                                      onResponderMove={[Function]}
+                                      onResponderRelease={[Function]}
+                                      onResponderTerminate={[Function]}
+                                      onResponderTerminationRequest={[Function]}
+                                      onStartShouldSetResponder={[Function]}
+                                    >
+                                      <View />
+                                    </View>
+                                  </View>
                                   <Text
                                     numberOfLines={4}
                                   />
