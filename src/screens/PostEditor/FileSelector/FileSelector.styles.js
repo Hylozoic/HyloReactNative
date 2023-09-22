@@ -1,4 +1,4 @@
-import { alabaster, athensGrayMedium, caribbeanGreen, rhino, treePoppy } from 'style/colors'
+import { caribbeanGreen, rhino, treePoppy } from 'style/colors'
 
 export default {
   addButton: {

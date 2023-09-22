@@ -100,7 +100,7 @@ export class PostEditor extends React.Component {
       locationObject: post?.locationObject,
       donationsLink: post?.donationsLink,
       projectManagementLink: post?.projectManagementLink,
-      publicPost: false,
+      isPublic: false,
       startTimeExpanded: false,
       endTimeExpanded: false,
       isValid: post?.id,
@@ -158,7 +158,7 @@ export class PostEditor extends React.Component {
     const {
       files, images, title,
       topics, type, announcementEnabled, members,
-      groups, startTime, endTime, location, publicPost,
+      groups, startTime, endTime, location, isPublic,
       locationObject, donationsLink, projectManagementLink
     } = this.state
     const postData = {
@@ -169,7 +169,7 @@ export class PostEditor extends React.Component {
       memberIds: members.map(m => m.id),
       fileUrls: uniq(files.filter(file => file.remote).map(file => file.remote)),
       imageUrls: uniq(images.filter(image => image.remote).map(image => image.remote)),
-      isPublic: publicPost,
+      isPublic,
       title,
       sendAnnouncement: announcementEnabled,
       topicNames: topics.map(t => t.name),
@@ -353,7 +353,7 @@ export class PostEditor extends React.Component {
   }
 
   handleTogglePublicPost = () => {
-    this.setState({ publicPost: !this.state.publicPost })
+    this.setState({ isPublic: !this.state.isPublic })
   }
 
   handleShowProjectMembersEditor = () => {
@@ -491,7 +491,7 @@ export class PostEditor extends React.Component {
     const {
       isSaving, topics, title, type, filePickerPending, announcementEnabled,
       titleLengthError, members, groups, startTime, endTime, location, donationsLink,
-      locationObject, projectManagementLink, publicPost, topicsPicked, files, images
+      locationObject, projectManagementLink, isPublic, topicsPicked, files, images
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
 
@@ -671,24 +671,24 @@ export class PostEditor extends React.Component {
 
         <View style={styles.formBottom}>
           <TouchableOpacity
-            style={[styles.pressSelectionSection, publicPost && styles.pressSelectionSectionPublicSelected]}
+            style={[styles.pressSelectionSection, isPublic && styles.pressSelectionSectionPublicSelected]}
             onPress={this.handleTogglePublicPost}
           >
             <View style={styles.pressSelection}>
               <View style={styles.pressSelectionLeft}>
                 <Icon
                   name='Public'
-                  style={[{ fontSize: 16, marginRight: 10 }, publicPost && styles.pressSelectionSectionPublicSelected]}
+                  style={[{ fontSize: 16, marginRight: 10 }, isPublic && styles.pressSelectionSectionPublicSelected]}
                   color={rhino80}
                 />
-                <Text style={[styles.pressSelectionLeftText, publicPost && styles.pressSelectionSectionPublicSelected]}>Make Public:</Text>
+                <Text style={[styles.pressSelectionLeftText, isPublic && styles.pressSelectionSectionPublicSelected]}>Make Public:</Text>
               </View>
               <View style={styles.pressSelectionRightNoBorder}>
                 <Switch
                   trackColor={{ true: caribbeanGreen, false: rhino80 }}
                   onValueChange={this.handleTogglePublicPost}
                   style={styles.pressSelectionSwitch}
-                  value={publicPost}
+                  value={isPublic}
                 />
               </View>
             </View>
@@ -855,74 +855,6 @@ export function TypeSelector (props) {
     </View>
   )
 }
-
-// export function BottomBar ({
-//   post, canModerate, filePickerPending, announcementEnabled,
-//   handleToggleAnnouncement, onShowFilePicker, onAddImage, onError
-// }) {
-//   // TODO: Tidy-up the styling below, move it into the stylesheet
-//   return (
-//     <>
-//       <View style={styles.buttonBar}>
-//         <View style={styles.buttonBarLeft}>
-
-//           <ImagePicker
-//             type='post'
-//             id={post?.id}
-//             selectionLimit={10}
-//             onChoice={onAddImage}
-//             onError={onError}
-//             renderPicker={loading => {
-//               if (!loading) {
-//                 return (
-//                   <Icon name='AddImage' style={styles.buttonBarIcon} />
-//                 )
-//               } else {
-//                 return (
-//                   <Loading
-//                     size={30}
-//                     style={[styles.buttonBarIcon, { padding: 8 }, styles.buttonBarIconLoading]}
-//                   />
-//                 )
-//               }
-//             }}
-//           />
-
-//           <TouchableOpacity onPress={onShowFilePicker}>
-//             {filePickerPending && (
-//               <Loading
-//                 size={30}
-//                 style={[styles.buttonBarIcon, { padding: 8 }, styles.buttonBarIconLoading]}
-//               />
-//             )}
-//             {!filePickerPending && (
-//               <Icon
-//                 name='Paperclip'
-//                 style={styles.buttonBarIcon}
-//               />
-//             )}
-//           </TouchableOpacity>
-
-//           {!post?.id && canModerate && (
-//             <TouchableOpacity
-//               onPress={handleToggleAnnouncement}
-//               style={[
-//                 styles.buttonBarAnnouncement,
-//                 announcementEnabled && styles.buttonBarAnnouncementEnabled
-//               ]}
-//             >
-//               <Icon
-//                 name='Announcement'
-//                 style={styles.buttonBarAnnouncementIcon}
-//                 color={announcementEnabled ? white : caribbeanGreen}
-//               />
-//             </TouchableOpacity>
-//           )}
-//         </View>
-//       </View>
-//     </>
-//   )
-// }
 
 export function DatePickerWithLabel ({
   date,
