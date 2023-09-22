@@ -10,7 +10,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
     keyboardShouldPersistTaps="never"
     overScrollMode="never"
   >
-    <React.Fragment>
+    <View>
       <View>
         <View>
           <TextInput
@@ -73,6 +73,20 @@ exports[`PostEditor renders a new editor correctly 1`] = `
         >
           <View>
             <Text>
+              Location
+            </Text>
+            <View>
+              <Icon
+                name="ArrowDown"
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <Text>
               Post In
             </Text>
             <View>
@@ -103,15 +117,110 @@ exports[`PostEditor renders a new editor correctly 1`] = `
             </View>
           </View>
         </TouchableOpacity>
-        <BottomBar
-          announcementEnabled={false}
-          onAddImage={[Function]}
-          onError={[Function]}
-          onShowFilePicker={[Function]}
-          toggleAnnouncement={[Function]}
-        />
       </View>
-    </React.Fragment>
+      <View>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <View>
+              <Icon
+                color="#56667a"
+                name="Public"
+              />
+              <Text>
+                Make Public:
+              </Text>
+            </View>
+            <View>
+              <Switch
+                onValueChange={[Function]}
+                trackColor={
+                  {
+                    "false": "#56667a",
+                    "true": "#0DC39F",
+                  }
+                }
+                value={false}
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <View>
+              <Icon
+                color="#56667a"
+                name="Announcement"
+              />
+              <Text>
+                Announcement?
+              </Text>
+            </View>
+            <View>
+              <Switch
+                onValueChange={[Function]}
+                trackColor={
+                  {
+                    "false": "#56667a",
+                    "true": "#0DC39F",
+                  }
+                }
+                value={false}
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <View>
+            <View>
+              <Icon
+                color="#56667a"
+                name="AddImage"
+              />
+              <Text>
+                Images
+              </Text>
+            </View>
+            <View>
+              <Memo(Connect(ImagePicker))
+                onChoice={[Function]}
+                onError={[Function]}
+                renderPicker={[Function]}
+                selectionLimit={10}
+                type="post"
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <View>
+              <Icon
+                color="#56667a"
+                name="Paperclip"
+              />
+              <Text>
+                Files
+              </Text>
+            </View>
+            <View>
+              <TouchableOpacity
+                onPress={[Function]}
+              >
+                <Icon
+                  name="Plus"
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </View>
   </ScrollView>
 </KeyboardAvoidingView>
 `;
@@ -308,333 +417,610 @@ exports[`PostEditor renders correctly while saving 1`] = `
                           <View>
                             <View>
                               <View>
-                                <TextInput
-                                  autoCorrect={false}
-                                  blurOnSubmit={true}
-                                  editable={false}
-                                  maxLength={50}
-                                  multiline={true}
-                                  numberOfLines={2}
-                                  onChangeText={[Function]}
-                                  placeholder="What's on your mind?"
-                                  placeholderTextColor="#c0c6cd"
-                                  underlineColorAndroid="transparent"
-                                  value="title of this post"
-                                />
-                              </View>
-                              <View>
                                 <View>
-                                  <ActivityIndicator
-                                    color="#818A88"
-                                    size="small"
+                                  <TextInput
+                                    autoCorrect={false}
+                                    blurOnSubmit={true}
+                                    editable={false}
+                                    maxLength={50}
+                                    multiline={true}
+                                    numberOfLines={2}
+                                    onChangeText={[Function]}
+                                    placeholder="What's on your mind?"
+                                    placeholderTextColor="#c0c6cd"
+                                    underlineColorAndroid="transparent"
+                                    value="title of this post"
                                   />
                                 </View>
-                              </View>
-                              <View
-                                accessibilityState={
-                                  {
-                                    "busy": undefined,
-                                    "checked": undefined,
-                                    "disabled": undefined,
-                                    "expanded": undefined,
-                                    "selected": undefined,
-                                  }
-                                }
-                                accessibilityValue={
-                                  {
-                                    "max": undefined,
-                                    "min": undefined,
-                                    "now": undefined,
-                                    "text": undefined,
-                                  }
-                                }
-                                accessible={true}
-                                collapsable={false}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
                                 <View>
-                                  <Text>
-                                    Topics
-                                  </Text>
                                   <View>
-                                    <Icon
-                                      name="Plus"
+                                    <ActivityIndicator
+                                      color="#818A88"
+                                      size="small"
                                     />
                                   </View>
                                 </View>
-                              </View>
-                              <View
-                                accessibilityState={
-                                  {
-                                    "busy": undefined,
-                                    "checked": undefined,
-                                    "disabled": undefined,
-                                    "expanded": undefined,
-                                    "selected": undefined,
+                                <View
+                                  accessibilityState={
+                                    {
+                                      "busy": undefined,
+                                      "checked": undefined,
+                                      "disabled": undefined,
+                                      "expanded": undefined,
+                                      "selected": undefined,
+                                    }
                                   }
-                                }
-                                accessibilityValue={
-                                  {
-                                    "max": undefined,
-                                    "min": undefined,
-                                    "now": undefined,
-                                    "text": undefined,
+                                  accessibilityValue={
+                                    {
+                                      "max": undefined,
+                                      "min": undefined,
+                                      "now": undefined,
+                                      "text": undefined,
+                                    }
                                   }
-                                }
-                                accessible={true}
-                                collapsable={false}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <View>
-                                  <Text>
-                                    Post In
-                                  </Text>
+                                  accessible={true}
+                                  collapsable={false}
+                                  focusable={true}
+                                  onClick={[Function]}
+                                  onResponderGrant={[Function]}
+                                  onResponderMove={[Function]}
+                                  onResponderRelease={[Function]}
+                                  onResponderTerminate={[Function]}
+                                  onResponderTerminationRequest={[Function]}
+                                  onStartShouldSetResponder={[Function]}
+                                >
                                   <View>
-                                    <Icon
-                                      name="Plus"
-                                    />
-                                  </View>
-                                </View>
-                                <View>
-                                  <View>
-                                    <View
-                                      accessibilityState={
-                                        {
-                                          "busy": undefined,
-                                          "checked": undefined,
-                                          "disabled": undefined,
-                                          "expanded": undefined,
-                                          "selected": undefined,
-                                        }
-                                      }
-                                      accessibilityValue={
-                                        {
-                                          "max": undefined,
-                                          "min": undefined,
-                                          "now": undefined,
-                                          "text": undefined,
-                                        }
-                                      }
-                                      accessible={true}
-                                      collapsable={false}
-                                      focusable={true}
-                                      onClick={[Function]}
-                                      onResponderGrant={[Function]}
-                                      onResponderMove={[Function]}
-                                      onResponderRelease={[Function]}
-                                      onResponderTerminate={[Function]}
-                                      onResponderTerminationRequest={[Function]}
-                                      onStartShouldSetResponder={[Function]}
-                                    >
-                                      <View
-                                        style={
-                                          [
-                                            {
-                                              "overflow": "hidden",
-                                            },
-                                            undefined,
-                                          ]
-                                        }
-                                      >
-                                        <FastImageView
-                                          defaultSource={null}
-                                          resizeMode="cover"
-                                          source={
-                                            {
-                                              "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
-                                            }
-                                          }
-                                          style={
-                                            {
-                                              "bottom": 0,
-                                              "left": 0,
-                                              "position": "absolute",
-                                              "right": 0,
-                                              "top": 0,
-                                            }
-                                          }
-                                        />
-                                      </View>
-                                      <Text
-                                        numberOfLines={1}
-                                      >
-                                        Group 1
-                                      </Text>
-                                    </View>
-                                    <View
-                                      accessibilityState={
-                                        {
-                                          "busy": undefined,
-                                          "checked": undefined,
-                                          "disabled": undefined,
-                                          "expanded": undefined,
-                                          "selected": undefined,
-                                        }
-                                      }
-                                      accessibilityValue={
-                                        {
-                                          "max": undefined,
-                                          "min": undefined,
-                                          "now": undefined,
-                                          "text": undefined,
-                                        }
-                                      }
-                                      accessible={true}
-                                      collapsable={false}
-                                      focusable={true}
-                                      hitSlop={
-                                        {
-                                          "bottom": 5,
-                                          "left": 5,
-                                          "right": 5,
-                                          "top": 5,
-                                        }
-                                      }
-                                      onClick={[Function]}
-                                      onResponderGrant={[Function]}
-                                      onResponderMove={[Function]}
-                                      onResponderRelease={[Function]}
-                                      onResponderTerminate={[Function]}
-                                      onResponderTerminationRequest={[Function]}
-                                      onStartShouldSetResponder={[Function]}
-                                    >
+                                    <Text>
+                                      Topics
+                                    </Text>
+                                    <View>
                                       <Icon
-                                        name="Ex"
+                                        name="Plus"
+                                      />
+                                    </View>
+                                  </View>
+                                </View>
+                                <View
+                                  accessibilityState={
+                                    {
+                                      "busy": undefined,
+                                      "checked": undefined,
+                                      "disabled": undefined,
+                                      "expanded": undefined,
+                                      "selected": undefined,
+                                    }
+                                  }
+                                  accessibilityValue={
+                                    {
+                                      "max": undefined,
+                                      "min": undefined,
+                                      "now": undefined,
+                                      "text": undefined,
+                                    }
+                                  }
+                                  accessible={true}
+                                  collapsable={false}
+                                  focusable={true}
+                                  onClick={[Function]}
+                                  onResponderGrant={[Function]}
+                                  onResponderMove={[Function]}
+                                  onResponderRelease={[Function]}
+                                  onResponderTerminate={[Function]}
+                                  onResponderTerminationRequest={[Function]}
+                                  onStartShouldSetResponder={[Function]}
+                                >
+                                  <View>
+                                    <Text>
+                                      Location
+                                    </Text>
+                                    <View>
+                                      <Icon
+                                        name="ArrowDown"
+                                      />
+                                    </View>
+                                  </View>
+                                </View>
+                                <View
+                                  accessibilityState={
+                                    {
+                                      "busy": undefined,
+                                      "checked": undefined,
+                                      "disabled": undefined,
+                                      "expanded": undefined,
+                                      "selected": undefined,
+                                    }
+                                  }
+                                  accessibilityValue={
+                                    {
+                                      "max": undefined,
+                                      "min": undefined,
+                                      "now": undefined,
+                                      "text": undefined,
+                                    }
+                                  }
+                                  accessible={true}
+                                  collapsable={false}
+                                  focusable={true}
+                                  onClick={[Function]}
+                                  onResponderGrant={[Function]}
+                                  onResponderMove={[Function]}
+                                  onResponderRelease={[Function]}
+                                  onResponderTerminate={[Function]}
+                                  onResponderTerminationRequest={[Function]}
+                                  onStartShouldSetResponder={[Function]}
+                                >
+                                  <View>
+                                    <Text>
+                                      Post In
+                                    </Text>
+                                    <View>
+                                      <Icon
+                                        name="Plus"
+                                      />
+                                    </View>
+                                  </View>
+                                  <View>
+                                    <View>
+                                      <View
+                                        accessibilityState={
+                                          {
+                                            "busy": undefined,
+                                            "checked": undefined,
+                                            "disabled": undefined,
+                                            "expanded": undefined,
+                                            "selected": undefined,
+                                          }
+                                        }
+                                        accessibilityValue={
+                                          {
+                                            "max": undefined,
+                                            "min": undefined,
+                                            "now": undefined,
+                                            "text": undefined,
+                                          }
+                                        }
+                                        accessible={true}
+                                        collapsable={false}
+                                        focusable={true}
+                                        onClick={[Function]}
+                                        onResponderGrant={[Function]}
+                                        onResponderMove={[Function]}
+                                        onResponderRelease={[Function]}
+                                        onResponderTerminate={[Function]}
+                                        onResponderTerminationRequest={[Function]}
+                                        onStartShouldSetResponder={[Function]}
+                                      >
+                                        <View
+                                          style={
+                                            [
+                                              {
+                                                "overflow": "hidden",
+                                              },
+                                              undefined,
+                                            ]
+                                          }
+                                        >
+                                          <FastImageView
+                                            defaultSource={null}
+                                            resizeMode="cover"
+                                            source={
+                                              {
+                                                "uri": "https://d3ngex8q79bk55.cloudfront.net/misc/default_community_avatar.png",
+                                              }
+                                            }
+                                            style={
+                                              {
+                                                "bottom": 0,
+                                                "left": 0,
+                                                "position": "absolute",
+                                                "right": 0,
+                                                "top": 0,
+                                              }
+                                            }
+                                          />
+                                        </View>
+                                        <Text
+                                          numberOfLines={1}
+                                        >
+                                          Group 1
+                                        </Text>
+                                        <View
+                                          accessibilityState={
+                                            {
+                                              "busy": undefined,
+                                              "checked": undefined,
+                                              "disabled": undefined,
+                                              "expanded": undefined,
+                                              "selected": undefined,
+                                            }
+                                          }
+                                          accessibilityValue={
+                                            {
+                                              "max": undefined,
+                                              "min": undefined,
+                                              "now": undefined,
+                                              "text": undefined,
+                                            }
+                                          }
+                                          accessible={true}
+                                          collapsable={false}
+                                          focusable={true}
+                                          hitSlop={
+                                            {
+                                              "bottom": 5,
+                                              "left": 5,
+                                              "right": 5,
+                                              "top": 5,
+                                            }
+                                          }
+                                          onClick={[Function]}
+                                          onResponderGrant={[Function]}
+                                          onResponderMove={[Function]}
+                                          onResponderRelease={[Function]}
+                                          onResponderTerminate={[Function]}
+                                          onResponderTerminationRequest={[Function]}
+                                          onStartShouldSetResponder={[Function]}
+                                        >
+                                          <Icon
+                                            name="Ex"
+                                          />
+                                        </View>
+                                      </View>
+                                    </View>
+                                  </View>
+                                </View>
+                                <View
+                                  accessibilityState={
+                                    {
+                                      "busy": undefined,
+                                      "checked": undefined,
+                                      "disabled": undefined,
+                                      "expanded": undefined,
+                                      "selected": undefined,
+                                    }
+                                  }
+                                  accessibilityValue={
+                                    {
+                                      "max": undefined,
+                                      "min": undefined,
+                                      "now": undefined,
+                                      "text": undefined,
+                                    }
+                                  }
+                                  accessible={true}
+                                  collapsable={false}
+                                  focusable={true}
+                                  onClick={[Function]}
+                                  onResponderGrant={[Function]}
+                                  onResponderMove={[Function]}
+                                  onResponderRelease={[Function]}
+                                  onResponderTerminate={[Function]}
+                                  onResponderTerminationRequest={[Function]}
+                                  onStartShouldSetResponder={[Function]}
+                                >
+                                  <View>
+                                    <Text>
+                                      Location
+                                    </Text>
+                                    <View>
+                                      <Icon
+                                        name="ArrowDown"
                                       />
                                     </View>
                                   </View>
                                 </View>
                               </View>
-                              <View
-                                accessibilityState={
-                                  {
-                                    "busy": undefined,
-                                    "checked": undefined,
-                                    "disabled": undefined,
-                                    "expanded": undefined,
-                                    "selected": undefined,
+                              <View>
+                                <View
+                                  accessibilityState={
+                                    {
+                                      "busy": undefined,
+                                      "checked": undefined,
+                                      "disabled": undefined,
+                                      "expanded": undefined,
+                                      "selected": undefined,
+                                    }
                                   }
-                                }
-                                accessibilityValue={
-                                  {
-                                    "max": undefined,
-                                    "min": undefined,
-                                    "now": undefined,
-                                    "text": undefined,
+                                  accessibilityValue={
+                                    {
+                                      "max": undefined,
+                                      "min": undefined,
+                                      "now": undefined,
+                                      "text": undefined,
+                                    }
                                   }
-                                }
-                                accessible={true}
-                                collapsable={false}
-                                focusable={true}
-                                onClick={[Function]}
-                                onResponderGrant={[Function]}
-                                onResponderMove={[Function]}
-                                onResponderRelease={[Function]}
-                                onResponderTerminate={[Function]}
-                                onResponderTerminationRequest={[Function]}
-                                onStartShouldSetResponder={[Function]}
-                              >
-                                <View>
-                                  <Text>
-                                    Location
-                                  </Text>
+                                  accessible={true}
+                                  collapsable={false}
+                                  focusable={true}
+                                  onClick={[Function]}
+                                  onResponderGrant={[Function]}
+                                  onResponderMove={[Function]}
+                                  onResponderRelease={[Function]}
+                                  onResponderTerminate={[Function]}
+                                  onResponderTerminationRequest={[Function]}
+                                  onStartShouldSetResponder={[Function]}
+                                >
                                   <View>
-                                    <Icon
-                                      name="ArrowDown"
-                                    />
+                                    <View>
+                                      <Icon
+                                        color="#56667a"
+                                        name="Public"
+                                      />
+                                      <Text>
+                                        Make Public:
+                                      </Text>
+                                    </View>
+                                    <View>
+                                      <View
+                                        accessibilityState={
+                                          {
+                                            "busy": undefined,
+                                            "checked": undefined,
+                                            "disabled": undefined,
+                                            "expanded": undefined,
+                                            "selected": undefined,
+                                          }
+                                        }
+                                        accessibilityValue={
+                                          {
+                                            "max": undefined,
+                                            "min": undefined,
+                                            "now": undefined,
+                                            "text": undefined,
+                                          }
+                                        }
+                                        accessible={true}
+                                        collapsable={false}
+                                        focusable={true}
+                                        onClick={[Function]}
+                                        onResponderGrant={[Function]}
+                                        onResponderMove={[Function]}
+                                        onResponderRelease={[Function]}
+                                        onResponderTerminate={[Function]}
+                                        onResponderTerminationRequest={[Function]}
+                                        onStartShouldSetResponder={[Function]}
+                                      >
+                                        <Text>
+                                          false
+                                        </Text>
+                                      </View>
+                                    </View>
                                   </View>
                                 </View>
-                              </View>
-                              <View>
-                                <View />
-                                <View>
-                                  <View
-                                    accessibilityState={
-                                      {
-                                        "busy": undefined,
-                                        "checked": undefined,
-                                        "disabled": undefined,
-                                        "expanded": undefined,
-                                        "selected": undefined,
-                                      }
+                                <View
+                                  accessibilityState={
+                                    {
+                                      "busy": undefined,
+                                      "checked": undefined,
+                                      "disabled": undefined,
+                                      "expanded": undefined,
+                                      "selected": undefined,
                                     }
-                                    accessibilityValue={
-                                      {
-                                        "max": undefined,
-                                        "min": undefined,
-                                        "now": undefined,
-                                        "text": undefined,
-                                      }
+                                  }
+                                  accessibilityValue={
+                                    {
+                                      "max": undefined,
+                                      "min": undefined,
+                                      "now": undefined,
+                                      "text": undefined,
                                     }
-                                    accessible={true}
-                                    collapsable={false}
-                                    focusable={true}
-                                    onClick={[Function]}
-                                    onResponderGrant={[Function]}
-                                    onResponderMove={[Function]}
-                                    onResponderRelease={[Function]}
-                                    onResponderTerminate={[Function]}
-                                    onResponderTerminationRequest={[Function]}
-                                    onStartShouldSetResponder={[Function]}
-                                  >
-                                    <Icon
-                                      name="Paperclip"
-                                    />
+                                  }
+                                  accessible={true}
+                                  collapsable={false}
+                                  focusable={true}
+                                  onClick={[Function]}
+                                  onResponderGrant={[Function]}
+                                  onResponderMove={[Function]}
+                                  onResponderRelease={[Function]}
+                                  onResponderTerminate={[Function]}
+                                  onResponderTerminationRequest={[Function]}
+                                  onStartShouldSetResponder={[Function]}
+                                >
+                                  <View>
+                                    <View>
+                                      <Icon
+                                        color="#56667a"
+                                        name="Announcement"
+                                      />
+                                      <Text>
+                                        Announcement?
+                                      </Text>
+                                    </View>
+                                    <View>
+                                      <View
+                                        accessibilityState={
+                                          {
+                                            "busy": undefined,
+                                            "checked": undefined,
+                                            "disabled": undefined,
+                                            "expanded": undefined,
+                                            "selected": undefined,
+                                          }
+                                        }
+                                        accessibilityValue={
+                                          {
+                                            "max": undefined,
+                                            "min": undefined,
+                                            "now": undefined,
+                                            "text": undefined,
+                                          }
+                                        }
+                                        accessible={true}
+                                        collapsable={false}
+                                        focusable={true}
+                                        onClick={[Function]}
+                                        onResponderGrant={[Function]}
+                                        onResponderMove={[Function]}
+                                        onResponderRelease={[Function]}
+                                        onResponderTerminate={[Function]}
+                                        onResponderTerminationRequest={[Function]}
+                                        onStartShouldSetResponder={[Function]}
+                                      >
+                                        <Text>
+                                          false
+                                        </Text>
+                                      </View>
+                                    </View>
                                   </View>
-                                  <View
-                                    accessibilityState={
-                                      {
-                                        "busy": undefined,
-                                        "checked": undefined,
-                                        "disabled": undefined,
-                                        "expanded": undefined,
-                                        "selected": undefined,
-                                      }
+                                </View>
+                                <View
+                                  accessibilityState={
+                                    {
+                                      "busy": undefined,
+                                      "checked": undefined,
+                                      "disabled": undefined,
+                                      "expanded": undefined,
+                                      "selected": undefined,
                                     }
-                                    accessibilityValue={
-                                      {
-                                        "max": undefined,
-                                        "min": undefined,
-                                        "now": undefined,
-                                        "text": undefined,
-                                      }
+                                  }
+                                  accessibilityValue={
+                                    {
+                                      "max": undefined,
+                                      "min": undefined,
+                                      "now": undefined,
+                                      "text": undefined,
                                     }
-                                    accessible={true}
-                                    collapsable={false}
-                                    focusable={true}
-                                    hitSlop={
-                                      {
-                                        "bottom": 5,
-                                        "left": 5,
-                                        "right": 5,
-                                        "top": 5,
-                                      }
+                                  }
+                                  accessible={true}
+                                  collapsable={false}
+                                  focusable={false}
+                                  onClick={[Function]}
+                                  onResponderGrant={[Function]}
+                                  onResponderMove={[Function]}
+                                  onResponderRelease={[Function]}
+                                  onResponderTerminate={[Function]}
+                                  onResponderTerminationRequest={[Function]}
+                                  onStartShouldSetResponder={[Function]}
+                                >
+                                  <View>
+                                    <View>
+                                      <Icon
+                                        color="#56667a"
+                                        name="AddImage"
+                                      />
+                                      <Text>
+                                        Images
+                                      </Text>
+                                    </View>
+                                    <View>
+                                      <View
+                                        accessibilityState={
+                                          {
+                                            "busy": undefined,
+                                            "checked": undefined,
+                                            "disabled": undefined,
+                                            "expanded": undefined,
+                                            "selected": undefined,
+                                          }
+                                        }
+                                        accessibilityValue={
+                                          {
+                                            "max": undefined,
+                                            "min": undefined,
+                                            "now": undefined,
+                                            "text": undefined,
+                                          }
+                                        }
+                                        accessible={true}
+                                        collapsable={false}
+                                        focusable={true}
+                                        hitSlop={
+                                          {
+                                            "bottom": 5,
+                                            "left": 5,
+                                            "right": 5,
+                                            "top": 5,
+                                          }
+                                        }
+                                        onClick={[Function]}
+                                        onResponderGrant={[Function]}
+                                        onResponderMove={[Function]}
+                                        onResponderRelease={[Function]}
+                                        onResponderTerminate={[Function]}
+                                        onResponderTerminationRequest={[Function]}
+                                        onStartShouldSetResponder={[Function]}
+                                      >
+                                        <Icon
+                                          name="Plus"
+                                        />
+                                      </View>
+                                    </View>
+                                  </View>
+                                </View>
+                                <View
+                                  accessibilityState={
+                                    {
+                                      "busy": undefined,
+                                      "checked": undefined,
+                                      "disabled": undefined,
+                                      "expanded": undefined,
+                                      "selected": undefined,
                                     }
-                                    onClick={[Function]}
-                                    onResponderGrant={[Function]}
-                                    onResponderMove={[Function]}
-                                    onResponderRelease={[Function]}
-                                    onResponderTerminate={[Function]}
-                                    onResponderTerminationRequest={[Function]}
-                                    onStartShouldSetResponder={[Function]}
-                                  >
-                                    <Icon
-                                      name="AddImage"
-                                    />
+                                  }
+                                  accessibilityValue={
+                                    {
+                                      "max": undefined,
+                                      "min": undefined,
+                                      "now": undefined,
+                                      "text": undefined,
+                                    }
+                                  }
+                                  accessible={true}
+                                  collapsable={false}
+                                  focusable={true}
+                                  onClick={[Function]}
+                                  onResponderGrant={[Function]}
+                                  onResponderMove={[Function]}
+                                  onResponderRelease={[Function]}
+                                  onResponderTerminate={[Function]}
+                                  onResponderTerminationRequest={[Function]}
+                                  onStartShouldSetResponder={[Function]}
+                                >
+                                  <View>
+                                    <View>
+                                      <Icon
+                                        color="#56667a"
+                                        name="Paperclip"
+                                      />
+                                      <Text>
+                                        Files
+                                      </Text>
+                                    </View>
+                                    <View>
+                                      <View
+                                        accessibilityState={
+                                          {
+                                            "busy": undefined,
+                                            "checked": undefined,
+                                            "disabled": undefined,
+                                            "expanded": undefined,
+                                            "selected": undefined,
+                                          }
+                                        }
+                                        accessibilityValue={
+                                          {
+                                            "max": undefined,
+                                            "min": undefined,
+                                            "now": undefined,
+                                            "text": undefined,
+                                          }
+                                        }
+                                        accessible={true}
+                                        collapsable={false}
+                                        focusable={true}
+                                        onClick={[Function]}
+                                        onResponderGrant={[Function]}
+                                        onResponderMove={[Function]}
+                                        onResponderRelease={[Function]}
+                                        onResponderTerminate={[Function]}
+                                        onResponderTerminationRequest={[Function]}
+                                        onStartShouldSetResponder={[Function]}
+                                      >
+                                        <Icon
+                                          name="Plus"
+                                        />
+                                      </View>
+                                    </View>
                                   </View>
                                 </View>
                               </View>
@@ -1236,7 +1622,7 @@ exports[`PostEditor renders with a post 1`] = `
     keyboardShouldPersistTaps="never"
     overScrollMode="never"
   >
-    <React.Fragment>
+    <View>
       <View>
         <View>
           <TextInput
@@ -1300,6 +1686,20 @@ exports[`PostEditor renders with a post 1`] = `
         >
           <View>
             <Text>
+              Location
+            </Text>
+            <View>
+              <Icon
+                name="ArrowDown"
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <Text>
               Post In
             </Text>
             <View>
@@ -1337,47 +1737,127 @@ exports[`PostEditor renders with a post 1`] = `
             </View>
           </View>
         </TouchableOpacity>
-        <BottomBar
-          announcementEnabled={false}
-          onAddImage={[Function]}
-          onError={[Function]}
-          onShowFilePicker={[Function]}
-          post={
-            {
-              "details": "myDetails",
-              "groups": [
-                {
-                  "id": 1,
-                  "name": "Group 1",
-                },
-              ],
-              "imageUrls": [
-                "http://foo.com/foo.png",
-                "http://baz.com/baz.png",
-              ],
-            }
-          }
-          toggleAnnouncement={[Function]}
-        />
       </View>
-      <ImageSelector
-        images={
-          [
-            {
-              "local": "http://foo.com/foo.png",
-              "remote": "http://foo.com/foo.png",
-            },
-            {
-              "local": "http://baz.com/baz.png",
-              "remote": "http://baz.com/baz.png",
-            },
-          ]
-        }
-        onAdd={[Function]}
-        onRemove={[Function]}
-        type="post"
-      />
-    </React.Fragment>
+      <View>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <View>
+              <Icon
+                color="#56667a"
+                name="Public"
+              />
+              <Text>
+                Make Public:
+              </Text>
+            </View>
+            <View>
+              <Switch
+                onValueChange={[Function]}
+                trackColor={
+                  {
+                    "false": "#56667a",
+                    "true": "#0DC39F",
+                  }
+                }
+                value={false}
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <View>
+              <Icon
+                color="#56667a"
+                name="Announcement"
+              />
+              <Text>
+                Announcement?
+              </Text>
+            </View>
+            <View>
+              <Switch
+                onValueChange={[Function]}
+                trackColor={
+                  {
+                    "false": "#56667a",
+                    "true": "#0DC39F",
+                  }
+                }
+                value={false}
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <View>
+            <View>
+              <Icon
+                color="#56667a"
+                name="AddImage"
+              />
+              <Text>
+                Images
+              </Text>
+            </View>
+            <View>
+              <Memo(Connect(ImagePicker))
+                onChoice={[Function]}
+                onError={[Function]}
+                renderPicker={[Function]}
+                selectionLimit={10}
+                type="post"
+              />
+            </View>
+          </View>
+          <ImageSelector
+            images={
+              [
+                {
+                  "local": "http://foo.com/foo.png",
+                  "remote": "http://foo.com/foo.png",
+                },
+                {
+                  "local": "http://baz.com/baz.png",
+                  "remote": "http://baz.com/baz.png",
+                },
+              ]
+            }
+            onAdd={[Function]}
+            onRemove={[Function]}
+            type="post"
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={[Function]}
+        >
+          <View>
+            <View>
+              <Icon
+                color="#56667a"
+                name="Paperclip"
+              />
+              <Text>
+                Files
+              </Text>
+            </View>
+            <View>
+              <TouchableOpacity
+                onPress={[Function]}
+              >
+                <Icon
+                  name="Plus"
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </View>
   </ScrollView>
 </KeyboardAvoidingView>
 `;
