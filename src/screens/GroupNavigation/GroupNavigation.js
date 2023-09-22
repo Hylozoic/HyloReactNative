@@ -66,7 +66,7 @@ export default function GroupNavigation () {
         <>
           <View style={styles.divider} />
           <View style={styles.navItems}>
-            <NavItem label='Topics' iconName='Topics' onPress={() => {}} />
+            <NavItem label='Topics' iconName='Topics' onPress={() => navigate('Topics')} />
             <TopicsNavigation group={currentGroup} />
           </View>
         </>

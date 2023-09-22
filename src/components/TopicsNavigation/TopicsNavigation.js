@@ -1,10 +1,10 @@
 import { Text, View, TouchableOpacity } from 'react-native'
+import Badge from 'components/Badge'
 import Icon from 'components/Icon'
-import { rhino05, slateGrey80 } from 'style/colors'
+import Loading from 'components/Loading/Loading'
 import useEnsureGroupTopics from 'hooks/useEnsureGroupTopics'
 import { openURL } from 'hooks/useOpenURL'
-import Badge from 'components/Badge'
-import Loading from 'components/Loading/Loading'
+import { rhino05, slateGrey80 } from 'style/colors'
 
 export default function TopicsNavigation ({ group }) {
   const { pending, topics } = useEnsureGroupTopics({ groupId: group?.id, groupSlug: group?.slug })

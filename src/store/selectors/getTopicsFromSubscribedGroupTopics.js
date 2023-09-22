@@ -40,12 +40,6 @@ export const getSubscribedGroupTopics = ormCreateSelector(
 
       return sortBy(getTopicName, pinnedGroupTopics).concat(sortBy(getTopicName, groupTopics))
     }
-    // Disabling this for now, since its not needed
-    // const allGroupTopics = session.GroupTopic
-    //   .toModelArray()
-    //   .map(ct => omit(['visibility'], { ...ct.ref, topic: ct.topic })) // remove visibility tracking at all topics level
-    // console.log('CHECKPOINT CHARLIE', allGroupTopics)
-    // return sortBy(getTopicName, mergeGroupTopics(allGroupTopics))
   }
 )
 
