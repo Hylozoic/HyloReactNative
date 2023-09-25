@@ -17,8 +17,8 @@ describe('MemberList', () => {
     const testProps = {
       navigation: {},
       members: [
-        { id: '1', name: 'Loren' },
-        { id: '2', name: 'Robbie' }
+        { id: '1', groupRoles: [], moderatedGroupMemberships: [], name: 'Loren' },
+        { id: '2', groupRoles: [], moderatedGroupMemberships: [], name: 'Robbie' }
       ]
     }
 
@@ -32,14 +32,14 @@ describe('MemberList', () => {
   it('sets new list members if provided members list changes', () => {
     const props = {
       members: [
-        { id: '1', name: 'Member 1' },
-        { id: '2', name: 'Member 2' }
+        { id: '1', groupRoles: [], moderatedGroupMemberships: [], name: 'Member 1' },
+        { id: '2', groupRoles: [], moderatedGroupMemberships: [], name: 'Member 2' }
       ]
     }
     const prevProps = {
       members: [
-        { id: '1', name: 'Member1' },
-        { id: '2', name: 'Member 2' }
+        { id: '1', groupRoles: [], moderatedGroupMemberships: [], name: 'Member1' },
+        { id: '2', groupRoles: [], moderatedGroupMemberships: [], name: 'Member 2' }
       ]
     }
     const instance = ReactTestRenderer.create(
@@ -57,8 +57,8 @@ describe('MemberList', () => {
   it('runs search when typing', () => {
     const props = {
       members: [
-        { id: '1', name: 'asdf' },
-        { id: '2', name: 'hjkl' }
+        { id: '1', groupRoles: [], moderatedGroupMemberships: [], name: 'asdf' },
+        { id: '2', groupRoles: [], moderatedGroupMemberships: [], name: 'hjkl' }
       ]
     }
     const renderer = ReactTestRenderer.create(
@@ -118,8 +118,8 @@ describe('MemberList', () => {
     const testProps = {
       isServerSearch: true,
       members: [
-        { id: '1', name: 'Loren' },
-        { id: '2', name: 'Robbie' }
+        { id: '1', groupRoles: [], moderatedGroupMemberships: [], name: 'Loren' },
+        { id: '2', groupRoles: [], moderatedGroupMemberships: [], name: 'Robbie' }
       ]
     }
 

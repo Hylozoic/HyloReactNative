@@ -188,12 +188,12 @@ describe('PostEditor', () => {
 
     expect(instance.toast).not.toBeDefined()
     await act(async () => {
-      await instance.toggleAnnouncement()
+      await instance.handleToggleAnnouncement()
     })
     expect(instance.toast).toBeDefined()
     expect(instance.state.announcementEnabled).toBeTruthy()
     await act(async () => {
-      await instance.toggleAnnouncement()
+      await instance.handleToggleAnnouncement()
     })
     expect(instance.state.announcementEnabled).toBeFalsy()
   })

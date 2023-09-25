@@ -24,6 +24,7 @@ export default {
   },
   headerRight: {
     paddingTop: 3,
+    gap: 10,
     flexDirection: 'row',
     alignItems: 'flex-start'
   },

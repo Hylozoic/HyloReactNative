@@ -35,7 +35,8 @@ const styles = {
     borderWidth: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    padding: 6
+    padding: 6,
+    marginBottom: 8
   },
   linkImage: {
     borderRadius: 4,

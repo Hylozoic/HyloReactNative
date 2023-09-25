@@ -29,16 +29,16 @@ export function GroupCell ({ group, onPress, onRemove, RemoveIcon }) {
       <TouchableOpacity style={[styles.groupCell, styles.row]} onPress={() => onPress && onPress(group?.slug)}>
         <FastImage source={imageSource} style={styles.groupAvatar} />
         <Text style={[styles.linkText, styles.groupCell, !RemoveIcon && styles.linkTextSmaller]} numberOfLines={1}>{name}</Text>
+        {RemoveIcon && (
+          <TouchableOpacity
+            style={styles.removeIcon}
+            hitSlop={{ top: 5, right: 5, left: 5, bottom: 5 }}
+            onPress={() => onRemove(group?.slug)}
+          >
+            <RemoveIcon />
+          </TouchableOpacity>
+        )}
       </TouchableOpacity>
-      {RemoveIcon && (
-        <TouchableOpacity
-          style={styles.removeIcon}
-          hitSlop={{ top: 5, right: 5, left: 5, bottom: 5 }}
-          onPress={() => onRemove(group?.slug)}
-        >
-          <RemoveIcon />
-        </TouchableOpacity>
-      )}
     </View>
   )
 }
@@ -75,8 +75,5 @@ const styles = {
     width: 20,
     borderRadius: 4,
     marginRight: 9
-  },
-  removeIcon: {
-    marginRight: 20
   }
 }

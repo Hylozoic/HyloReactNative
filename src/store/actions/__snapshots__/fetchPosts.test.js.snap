@@ -67,6 +67,15 @@ posts: viewPosts(
     id
     name
     avatarUrl
+    groupRoles {
+      name
+      emoji
+      active
+      groupId
+    }
+    moderatedGroupMemberships {
+      groupId
+    }
   }
   createdAt
   updatedAt
@@ -83,6 +92,7 @@ posts: viewPosts(
     avatarUrl
   }
   commentersTotal
+  commentsTotal
   
   linkPreview {
     description
@@ -113,7 +123,19 @@ posts: viewPosts(
     region
   }
   votesTotal
-  myVote
+  peopleReactedTotal
+  myReactions {
+    emojiFull
+    id
+  }
+  postReactions {
+    emojiFull
+    id
+    user {
+      id
+      name
+    }
+  }
   groups {
     id
     name

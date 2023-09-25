@@ -5,29 +5,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### [5.3.0] - 2023-08-22
-### Added
-Display which posts are coming from child groups #628
-### Changed
-- Updates to latest React Native 0.72.4 to get into compliance with Google requirements to be on Play API 33+ #648
+#### See related Milestone for more detail: https://github.com/Hylozoic/HyloReactNative/milestone/7?closed=1
+- Upgrades to React Native 0.72.4 #648
+- Adds emojis to posts and comments #616
+- Adds Custom links/views for groups to navigation menu #560
+- Adds toggle on stream to switch between showing child group posts or not #630
+- Displays which posts are coming from child groups #628
+- Makes project fields conditional #642 (Fixes [Issue #637](https://github.com/Hylozoic/HyloReactNative/issues/637))
+- Misc bug fixes...
 
 ### [5.2.3] - 2023-03-31
-### Fixed
 - Fixes topics not appearing when no image
 
 ### [5.2.2] - 2023-02-03
-### Fixed
 - Make groupIds be of graphql type ID
 
 ### [5.2.0] - 2022-12-20
-### Added
-- Topic Chatroom Webview
+- Adds Topic Chatroom Webview
 
 ### [5.1.5] - 2022-12-05
-### Fixed
-- Partially addresses #510 and #608 by enabling Android autoVerify on AppLinks. https://www.hylo.com/.well-known/assetlinks.json is validated and now being served.
+- Partially fixes #510 and #608 by enabling Android autoVerify on AppLinks. https://www.hylo.com/.well-known/assetlinks.json is validated and now being served.
 
 ### [5.1.3] - 2022-12-03
-### Fixed
 - Members not loading on initial navigation to screen
 
 ### [5.1.2] - 2022-12-03

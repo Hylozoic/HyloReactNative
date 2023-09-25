@@ -109,6 +109,8 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
         startTime={post.startTime}
         title={post.title}
         type={post.type}
+        post={post}
+        currentUser={currentUser}
       />
       <Files urls={post.fileUrls} style={styles.files} />
       {isProject && (
@@ -184,7 +186,7 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
         forDetails
         postId={post.id}
         members={post.members}
-        myVote={post.myVote}
+        peopleReactedTotal={post.peopleReactedTotal}
         style={styles.postFooter}
         type={post.type}
         votesTotal={post.votesTotal}
