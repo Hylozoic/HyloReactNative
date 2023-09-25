@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState  } from 'react'
 import { Text, View, Alert, TouchableOpacity } from 'react-native'
 import { filter } from 'lodash/fp'
 import Clipboard from '@react-native-clipboard/clipboard'
 import { TextHelpers } from 'hylo-shared'
 import { useDispatch, useSelector } from 'react-redux'
 import useHyloActionSheet from 'hooks/useHyloActionSheet'
+import useReactionActions from 'hooks/useReactionActions'
 import deleteCommentAction from 'store/actions/deleteComment'
 import getGroup from 'store/selectors/getGroup'
 import getMe from 'store/selectors/getMe'
+import { getPresentedPost } from 'store/selectors/getPost'
 import Avatar from 'components/Avatar'
+import EmojiRow from 'components/EmojiRow'
+import EmojiPicker from 'components/EmojiPicker'
 import HyloHTML from 'components/HyloHTML'
 import Icon from 'components/Icon'
 import styles from './Comment.styles'
@@ -32,14 +36,21 @@ export default function Comment ({
 }) {
   const dispatch = useDispatch()
   const { showHyloActionSheet } = useHyloActionSheet()
+  const { reactOnEntity, removeReactOnFromEntity } = useReactionActions()
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false)
   const currentUser = useSelector(getMe)
   const group = useSelector(state => getGroup(state, { slug }))
   const canModerate = currentUser && currentUser.canModerate(group)
   const isCreator = currentUser && (comment.creator.id === currentUser.id)
-
-  const { creator, text, createdAt, post } = comment
+  const { creator, text, createdAt, post: postId } = comment
+  const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: group?.id }))
   const postTitle = displayPostTitle && post?.title && TextHelpers.truncateText(post.title, 40)
+  const myReactions = (comment && comment.myReactions) || []
+  const myEmojis = myReactions.map((reaction) => reaction.emojiFull)
+  const groupIds = post.groups.map(g => g.id)
 
+  const handleReaction = (emojiFull) => reactOnEntity({ commentId: comment?.id, emojiFull, entityType: 'comment', groupIds, postId: post })
+  const handleRemoveReaction = (emojiFull) => removeReactOnFromEntity({ commentId: comment?.id, emojiFull, entityType: 'comment', postId: post })
   const handleReply = onReply && (() => onReply(comment))
   const handleRemove = (!isCreator && canModerate) && (
     () => Alert.alert(
@@ -68,6 +79,9 @@ export default function Comment ({
   const commentMenuActions = [
     ['Reply', handleReply, {
       icon: <Icon name='Replies' style={styles.actionSheetIcon} />
+    }],
+    ['React', () => setShowEmojiPicker(!showEmojiPicker), {
+      icon: <Icon name='Smiley' style={styles.actionSheetIcon} />
     }],
     ['Copy', handleCopy, {
       icon: <FontAwesome5Icon name='copy' style={styles.actionSheetIcon} />
@@ -125,10 +139,17 @@ export default function Comment ({
           </View>
           <View style={styles.headerMiddle} />
           <View style={styles.headerRight}>
+            <TouchableOpacity
+              style={styles.replyLink}
+              hitSlop={{ top: 15, left: 10, bottom: 20, right: 10 }}
+              onPress={() => setShowEmojiPicker(!showEmojiPicker)}
+            >
+              <Icon style={styles.replyLinkIcon} name='Smiley' />
+            </TouchableOpacity>
             {handleReply && (
               <TouchableOpacity
                 style={styles.replyLink}
-                hitSlop={{ top: 15, left: 20, bottom: 20, right: 20 }}
+                hitSlop={{ top: 15, left: 10, bottom: 20, right: 10 }}
                 onPress={handleReply}
               >
                 <Icon style={styles.replyLinkIcon} name='Replies' />
@@ -152,6 +173,22 @@ export default function Comment ({
         />
         <View style={styles.body}>
           <HyloHTML html={text} />
+          <EmojiRow
+            includePicker={false}
+            post={post}
+            currentUser={currentUser}
+            comment={comment}
+          />
+          {showEmojiPicker && (
+            <EmojiPicker
+              useModal
+              myEmojis={myEmojis}
+              modalOpened={showEmojiPicker}
+              handleReaction={handleReaction}
+              onRequestClose={() => setShowEmojiPicker(!showEmojiPicker)}
+              handleRemoveReaction={handleRemoveReaction}
+            />
+          )}
         </View>
       </View>
     </TouchableOpacity>

@@ -89,47 +89,6 @@ it('ignores an action with meta.extractModel that is a promise', () => {
   expect(newState).toEqual(state)
 })
 
-describe('handles VOTE_ON_POST_PENDING', () => {
-  it('up vote', () => {
-    const session = orm.session(orm.getEmptyState())
-    session.Post.create({
-      id: '10',
-      myVote: false
-    })
-    const upVoteAction = {
-      type: VOTE_ON_POST_PENDING,
-      meta: {
-        postId: '10',
-        isUpvote: true
-      }
-    }
-
-    const newState = ormReducer(session.state, upVoteAction)
-    const newSession = orm.session(newState)
-    expect(newSession.Post.first().myVote).toBeTruthy()
-  })
-
-  it('down vote', () => {
-    const session = orm.session(orm.getEmptyState())
-    session.Post.create({
-      id: '22',
-      myVote: true
-    })
-
-    const downVoteAction = {
-      type: VOTE_ON_POST_PENDING,
-      meta: {
-        postId: '22',
-        isUpvote: false
-      }
-    }
-
-    const newState = ormReducer(session.state, downVoteAction)
-    const newSession = orm.session(newState)
-    expect(newSession.Post.first().myVote).toBeFalsy()
-  })
-})
-
 describe('DELETE_COMMENT_PENDING', () => {
   let session
 

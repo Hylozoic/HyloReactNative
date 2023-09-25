@@ -25,6 +25,7 @@ export const POST_TYPE_OPTIONS = [
 
 // tracks: `hylo/hylo-evo/src/util/constants.js`
 export const STREAM_SORT_OPTIONS = [
+  { id: 'order', label: 'Manual' },
   { id: 'updated', label: 'Latest activity' },
   { id: 'created', label: 'Post Date' },
   { id: 'votes', label: 'Popular' }
@@ -80,7 +81,6 @@ export class FeedListClassComponent extends React.Component {
     ) {
       this.fetchOrShowCached()
     }
-    // fix for childPostInclusion
   }
 
   handleChildPostToggle = () => {
@@ -104,7 +104,8 @@ export class FeedListClassComponent extends React.Component {
       sortBy,
       feedType,
       filter,
-      timeframe
+      timeframe,
+      customPostTypes
     } = this.props
 
     const extraToggleStyles = fetchPostParam.childPostInclusion === 'yes'
@@ -135,7 +136,7 @@ export class FeedListClassComponent extends React.Component {
                     <TouchableOpacity onPress={this.handleChildPostToggle}>
                       <View style={{ ...styles.childGroupToggle, ...extraToggleStyles }}><Icon name='Subgroup' color={fetchPostParam.childPostInclusion === 'yes' ? '#FFFFFF' : pictonBlue} /></View>
                     </TouchableOpacity>
-                    <ListControl selected={filter} onChange={setFilter} options={POST_TYPE_OPTIONS} />
+                    {!customPostTypes && <ListControl selected={filter} onChange={setFilter} options={POST_TYPE_OPTIONS} />}
                   </View>
                 </View>
               )}

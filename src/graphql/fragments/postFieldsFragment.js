@@ -8,6 +8,15 @@ const CommentFieldsFragment = `
     id
     name
     avatarUrl
+    groupRoles {
+      name
+      emoji
+      active
+      groupId
+    }
+    moderatedGroupMemberships {
+      groupId
+    }
   }
   attachments {
     id
@@ -17,6 +26,18 @@ const CommentFieldsFragment = `
   }
   parentComment {
     id
+  }
+  myReactions {
+    emojiFull
+    id
+  }
+  commentReactions {
+    emojiFull
+    id
+    user {
+      id
+      name
+    }
   }
   createdAt
 `
@@ -31,6 +52,15 @@ const postFieldsFragment = withComments => `
     id
     name
     avatarUrl
+    groupRoles {
+      name
+      emoji
+      active
+      groupId
+    }
+    moderatedGroupMemberships {
+      groupId
+    }
   }
   createdAt
   updatedAt
@@ -47,6 +77,7 @@ const postFieldsFragment = withComments => `
     avatarUrl
   }
   commentersTotal
+  commentsTotal
   ${withComments ? `comments(first: 10, order: "desc") {
     items {
       ${CommentFieldsFragment}
@@ -93,7 +124,19 @@ const postFieldsFragment = withComments => `
     region
   }
   votesTotal
-  myVote
+  peopleReactedTotal
+  myReactions {
+    emojiFull
+    id
+  }
+  postReactions {
+    emojiFull
+    id
+    user {
+      id
+      name
+    }
+  }
   groups {
     id
     name

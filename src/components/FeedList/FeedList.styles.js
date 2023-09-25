@@ -1,4 +1,4 @@
-import { capeCod, rhino30, rhino05 } from 'style/colors'
+import { capeCod } from 'style/colors'
 import { isIOS } from 'util/platform'
 
 const feedMargin = 12

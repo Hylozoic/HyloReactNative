@@ -1,6 +1,13 @@
 import { capeCod, rhino, rhino50, ghost } from 'style/colors'
 
 export default {
+  badgeRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 4,
+    justifyContent: 'center',
+    marginTop: 4
+  },
   listControls: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -74,6 +81,6 @@ export default {
     fontFamily: 'Circular-Book',
     color: rhino50,
     textAlign: 'center',
-    padding: 10
+    padding: 4
   }
 }

@@ -6,7 +6,9 @@ cd ../
 
 echo "Root Directory $PWD"
 
-export $(cat .env | grep -v ^# | xargs)
+set -a            
+source .env
+set +a
 
 if [ -z ${FACEBOOK_APP_ID_DEBUG+x} ]; then echo "ERROR: Missing appropriate config in .env. eg: FACEBOOK_APP_ID_DEBUG"; exit 1; else echo "Configuring Project:"; fi
 

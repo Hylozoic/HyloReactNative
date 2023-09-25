@@ -4,6 +4,7 @@ import {
   Alert,
   KeyboardAvoidingView,
   ScrollView,
+  Switch,
   Text,
   TextInput,
   TouchableOpacity,
@@ -44,7 +45,7 @@ import Topics from 'components/Topics'
 import styles, { typeSelectorStyles } from './PostEditor.styles'
 import HeaderLeftCloseIcon from 'navigation/headers/HeaderLeftCloseIcon'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
-import { caribbeanGreen, rhino30, white } from 'style/colors'
+import { caribbeanGreen, rhino30, rhino80, white } from 'style/colors'
 
 const titlePlaceholders = {
   discussion: "What's on your mind?",
@@ -99,6 +100,7 @@ export class PostEditor extends React.Component {
       locationObject: post?.locationObject,
       donationsLink: post?.donationsLink,
       projectManagementLink: post?.projectManagementLink,
+      isPublic: false,
       startTimeExpanded: false,
       endTimeExpanded: false,
       isValid: post?.id,
@@ -156,7 +158,7 @@ export class PostEditor extends React.Component {
     const {
       files, images, title,
       topics, type, announcementEnabled, members,
-      groups, startTime, endTime, location,
+      groups, startTime, endTime, location, isPublic,
       locationObject, donationsLink, projectManagementLink
     } = this.state
     const postData = {
@@ -167,6 +169,7 @@ export class PostEditor extends React.Component {
       memberIds: members.map(m => m.id),
       fileUrls: uniq(files.filter(file => file.remote).map(file => file.remote)),
       imageUrls: uniq(images.filter(image => image.remote).map(image => image.remote)),
+      isPublic,
       title,
       sendAnnouncement: announcementEnabled,
       topicNames: topics.map(t => t.name),
@@ -195,6 +198,7 @@ export class PostEditor extends React.Component {
 
       navigation.navigate('Post Details', { id })
     } catch (e) {
+      console.log('!!!! error saving post', e)
       this.setIsSaving(false)
     }
   }
@@ -348,6 +352,10 @@ export class PostEditor extends React.Component {
     Alert.alert(errorMessage)
   }
 
+  handleTogglePublicPost = () => {
+    this.setState({ isPublic: !this.state.isPublic })
+  }
+
   handleShowProjectMembersEditor = () => {
     const { navigation } = this.props
     const { members } = this.state
@@ -425,7 +433,7 @@ export class PostEditor extends React.Component {
     })
   }
 
-  toggleAnnouncement = () => {
+  handleToggleAnnouncement = () => {
     this.toast && hideToast(this.toast)
     this.toast = showToast(
       `announcement ${!this.state.announcementEnabled ? 'on' : 'off'}`,
@@ -483,13 +491,16 @@ export class PostEditor extends React.Component {
     const {
       isSaving, topics, title, type, filePickerPending, announcementEnabled,
       titleLengthError, members, groups, startTime, endTime, location, donationsLink,
-      locationObject, projectManagementLink, topicsPicked, files, images
+      locationObject, projectManagementLink, isPublic, topicsPicked, files, images
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
 
     return (
-      <>
-        <View style={styles.formContent}>
+      <View style={styles.formContainer}>
+
+        {/*  Form Top */}
+
+        <View style={styles.formTop}>
           <View style={[styles.titleInputWrapper]}>
             <TextInput
               style={[styles.titleInput]}
@@ -520,7 +531,6 @@ export class PostEditor extends React.Component {
               readOnly={postLoading || isSaving}
               ref={this.detailsEditorRef}
               widthOffset={0}
-              // Not setting a max height until ScrollView interaction is worked out better
               customEditorCSS={`
                 min-height: 90px;
               `}
@@ -532,7 +542,7 @@ export class PostEditor extends React.Component {
             onPress={this.handleShowTopicsPicker}
           >
             <View style={styles.pressSelection}>
-              <Text style={styles.pressSelectionLeft}>Topics</Text>
+              <Text style={styles.pressSelectionLeftText}>Topics</Text>
               <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.pressSelectionRightIcon} /></View>
             </View>
             <Topics
@@ -548,7 +558,7 @@ export class PostEditor extends React.Component {
           {type === 'project' && (
             <TouchableOpacity style={styles.pressSelectionSection} onPress={this.handleShowProjectMembersEditor}>
               <View style={styles.pressSelection}>
-                <Text style={styles.pressSelectionLeft}>Project Members</Text>
+                <Text style={styles.pressSelectionLeftText}>Project Members</Text>
                 <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.pressSelectionRightIcon} /></View>
               </View>
               {members.length > 0 && <ProjectMembersSummary style={styles.pressSelectionValue} members={members} />}
@@ -576,15 +586,28 @@ export class PostEditor extends React.Component {
           )}
 
           <TouchableOpacity
+            style={[styles.pressSelectionSection, styles.topics]}
+            onPress={this.handleShowLocationPicker}
+          >
+            <View style={styles.pressSelection}>
+              <Text style={styles.pressSelectionLeftText}>Location</Text>
+              <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View>
+            </View>
+            {(location || locationObject) && (
+              <Text style={styles.pressSelectionValue}>{location || locationObject.fullText}</Text>
+            )}
+          </TouchableOpacity>
+
+          <TouchableOpacity
             style={styles.pressSelectionSection}
             onPress={this.handleShowGroupsEditor}
           >
             <View style={styles.pressSelection}>
-              <Text style={styles.pressSelectionLeft}>Post In</Text>
+              <Text style={styles.pressSelectionLeftText}>Post In</Text>
               <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.pressSelectionRightIcon} /></View>
             </View>
             <GroupsList
-              style={[styles.pressSelectionValue, { paddingRight: 40 }]}
+              style={[styles.pressSelectionValue]}
               groups={groups}
               columns={1}
               onPress={this.handleShowGroupsEditor}
@@ -642,37 +665,150 @@ export class PostEditor extends React.Component {
               />
             </View>
           )}
-
-          <BottomBar
-            post={post}
-            canModerate={canModerate}
-            filePickerPending={filePickerPending}
-            announcementEnabled={announcementEnabled}
-            toggleAnnouncement={this.toggleAnnouncement}
-            onShowFilePicker={this.handleShowFilePicker}
-            onAddImage={this.handleAddAttachmentForKey('images')}
-            onError={this.handleAttachmentUploadErrorForKey('images')}
-          />
         </View>
-        {!isEmpty(images) && (
-          <ImageSelector
-            onAdd={this.handleAddAttachmentForKey('images')}
-            onRemove={this.handleRemoveAttachmentForKey('images')}
-            images={images}
-            style={styles.imageSelector}
-            type='post'
-          />
-        )}
 
-        {!isEmpty(files) && (
-          <View>
-            <FileSelector
-              onRemove={this.handleRemoveAttachmentForKey('files')}
-              files={files}
-            />
-          </View>
-        )}
-      </>
+        {/*  Form Bottom */}
+
+        <View style={styles.formBottom}>
+          <TouchableOpacity
+            style={[styles.pressSelectionSection, isPublic && styles.pressSelectionSectionPublicSelected]}
+            onPress={this.handleTogglePublicPost}
+          >
+            <View style={styles.pressSelection}>
+              <View style={styles.pressSelectionLeft}>
+                <Icon
+                  name='Public'
+                  style={[{ fontSize: 16, marginRight: 10 }, isPublic && styles.pressSelectionSectionPublicSelected]}
+                  color={rhino80}
+                />
+                <Text style={[styles.pressSelectionLeftText, isPublic && styles.pressSelectionSectionPublicSelected]}>Make Public:</Text>
+              </View>
+              <View style={styles.pressSelectionRightNoBorder}>
+                <Switch
+                  trackColor={{ true: caribbeanGreen, false: rhino80 }}
+                  onValueChange={this.handleTogglePublicPost}
+                  style={styles.pressSelectionSwitch}
+                  value={isPublic}
+                />
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.pressSelectionSection, announcementEnabled && styles.pressSelectionSectionPublicSelected]}
+            onPress={this.handleToggleAnnouncement}
+          >
+            <View style={styles.pressSelection}>
+              <View style={styles.pressSelectionLeft}>
+                <Icon
+                  name='Announcement'
+                  style={[{ fontSize: 16, marginRight: 10 }, announcementEnabled && styles.pressSelectionSectionPublicSelected]}
+                  color={rhino80}
+                />
+                <Text style={[styles.pressSelectionLeftText, announcementEnabled && styles.pressSelectionSectionPublicSelected]}>Announcement?</Text>
+              </View>
+              <View style={styles.pressSelectionRightNoBorder}>
+                <Switch
+                  trackColor={{ true: caribbeanGreen, false: rhino80 }}
+                  onValueChange={this.handleToggleAnnouncement}
+                  style={styles.pressSelectionSwitch}
+                  value={announcementEnabled}
+                />
+              </View>
+            </View>
+            {!isEmpty(files) && (
+              <View>
+                <FileSelector
+                  onRemove={this.handleRemoveAttachmentForKey('files')}
+                  files={files}
+                />
+              </View>
+            )}
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.pressSelectionSection}
+          >
+            <View style={styles.pressSelection}>
+              <View style={styles.pressSelectionLeft}>
+                <Icon
+                  name='AddImage'
+                  style={{ padding: 0, margin: 0, fontSize: 24, marginRight: 5 }}
+                  color={rhino80}
+                />
+                <Text style={styles.pressSelectionLeftText}>Images</Text>
+              </View>
+              <View style={styles.pressSelectionRight}>
+                <ImagePicker
+                  type='post'
+                  id={post?.id}
+                  selectionLimit={10}
+                  onChoice={this.handleAddAttachmentForKey('images')}
+                  onError={this.handleAttachmentUploadErrorForKey('images')}
+                  renderPicker={loading => {
+                    if (!loading) {
+                      return (
+                        <Icon name='Plus' style={styles.pressSelectionRightIcon} />
+                      )
+                    } else {
+                      return (
+                        <Loading
+                          size={30}
+                          style={[styles.pressSelectionRightIcon, { padding: 8 }, styles.buttonBarIconLoading]}
+                        />
+                      )
+                    }
+                  }}
+                />
+              </View>
+            </View>
+            {!isEmpty(images) && (
+              <ImageSelector
+                onAdd={this.handleAddAttachmentForKey('images')}
+                onRemove={this.handleRemoveAttachmentForKey('images')}
+                images={images}
+                style={[styles.imageSelector]}
+                type='post'
+              />
+            )}
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.pressSelectionSection}
+            onPress={this.handleShowFilePicker}
+          >
+            <View style={styles.pressSelection}>
+              <View style={styles.pressSelectionLeft}>
+                <Icon
+                  name='Paperclip'
+                  style={{ padding: 0, margin: 0, fontSize: 24, marginRight: 5 }}
+                  color={rhino80}
+                />
+                <Text style={styles.pressSelectionLeftText}>Files</Text>
+              </View>
+              <View style={styles.pressSelectionRight}>
+                <TouchableOpacity onPress={this.handleShowFilePicker}>
+                  {filePickerPending && (
+                    <Loading
+                      size={30}
+                      style={[styles.buttonBarIcon, { padding: 8 }, styles.buttonBarIconLoading]}
+                    />
+                  )}
+                  {!filePickerPending && (
+                    <Icon name='Plus' style={styles.pressSelectionRightIcon} />
+                  )}
+                </TouchableOpacity>
+              </View>
+            </View>
+            {!isEmpty(files) && (
+              <View>
+                <FileSelector
+                  onRemove={this.handleRemoveAttachmentForKey('files')}
+                  files={files}
+                />
+              </View>
+            )}
+          </TouchableOpacity>
+        </View>
+      </View>
     )
   }
 
@@ -720,72 +856,6 @@ export function TypeSelector (props) {
   )
 }
 
-export function BottomBar ({
-  post, canModerate, filePickerPending, announcementEnabled,
-  toggleAnnouncement, onShowFilePicker, onAddImage, onError
-}) {
-  // TODO: Tidy-up the styling below, move it into the stylesheet
-  return (
-    <View style={styles.bottomBar}>
-      <View style={styles.bottomBarLeft}>
-        {!post?.id && canModerate && (
-          <TouchableOpacity
-            onPress={toggleAnnouncement}
-            style={[
-              styles.bottomBarAnnouncement,
-              announcementEnabled && styles.bottomBarAnnouncementEnabled
-            ]}
-          >
-            <Icon
-              name='Announcement'
-              style={styles.bottomBarAnnouncementIcon}
-              color={announcementEnabled ? white : caribbeanGreen}
-            />
-          </TouchableOpacity>
-        )}
-      </View>
-      <View style={styles.bottomBarRight}>
-        <TouchableOpacity onPress={onShowFilePicker}>
-          {filePickerPending && (
-            <Loading
-              size={30}
-              style={[styles.bottomBarIcon, { marginRight: 15, padding: 8 }, styles.bottomBarIconLoading]}
-            />
-          )}
-          {!filePickerPending && (
-            <Icon
-              name='Paperclip'
-              style={[styles.bottomBarIcon, { marginRight: 20 }]}
-            />
-          )}
-        </TouchableOpacity>
-        <ImagePicker
-          type='post'
-          id={post?.id}
-          selectionLimit={10}
-          onChoice={onAddImage}
-          onError={onError}
-          renderPicker={loading => {
-            if (!loading) {
-              return (
-                <Icon name='AddImage' style={styles.bottomBarIcon} />
-              )
-            } else {
-              return (
-                <Loading
-                  size={30}
-                  style={[styles.bottomBarIcon, { padding: 8 }, styles.bottomBarIconLoading]}
-                />
-              )
-            }
-          }}
-        />
-
-      </View>
-    </View>
-  )
-}
-
 export function DatePickerWithLabel ({
   date,
   minimumDate,
@@ -797,7 +867,7 @@ export function DatePickerWithLabel ({
     disabled: styles.pressDisabled,
     expandIconWrapper: styles.pressSelectionRight,
     expandIcon: styles.pressSelectionRightIcon,
-    labelText: styles.pressSelectionLeft,
+    labelText: styles.pressSelectionLeftText,
     labelWrapper: styles.pressSelection,
     valueText: styles.pressSelectionValue
   },

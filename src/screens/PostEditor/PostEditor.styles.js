@@ -6,7 +6,9 @@ import {
   white,
   rhino80,
   rhino,
-  amaranth
+  amaranth,
+  athensGrayMedium,
+  white80onCaribbeanGreen
 } from 'style/colors'
 
 const typeSelectorIOSDefaults = {
@@ -85,10 +87,18 @@ export default {
   formWrapper: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: athensGrayMedium
+
   },
-  formContent: {
-    paddingVertical: 12
+  formContainer: {
+  },
+  formTop: {
+    backgroundColor: white,
+    paddingTop: 12
+  },
+  formBottom: {
+    paddingBottom: 12
   },
   textInputWrapper: {
     // paddingVertical: 10,
@@ -159,13 +169,21 @@ export default {
     justifyContent: 'center'
   },
   pressSelection: {
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    display: 'flex',
-    flexDirection: 'row',
     paddingHorizontal: 10
   },
+  pressSelectionSectionPublicSelected: {
+    backgroundColor: white80onCaribbeanGreen,
+    color: caribbeanGreen
+  },
   pressSelectionLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  },
+  pressSelectionLeftText: {
     color: rhino80,
     fontFamily: 'Circular-Bold'
   },
@@ -179,13 +197,23 @@ export default {
     alignItems: 'center',
     justifyContent: 'center'
   },
+  pressSelectionRightNoBorder: {
+    height: 25,
+    width: 25,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   pressSelectionRightIcon: {
     color: caribbeanGreen,
     fontSize: 16
   },
+  pressSelectionSwitch: {
+    flexGrow: 0,
+    transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }]
+  },
   pressSelectionValue: {
     margin: 0,
-    // padding: 20,
     paddingHorizontal: 10,
     paddingTop: 10,
     paddingBottom: 5,
@@ -202,35 +230,36 @@ export default {
     fontSize: 20
   },
   imageSelector: {
-    marginBottom: 10,
+    paddingTop: 10,
     flex: 1
   },
-  bottomBar: {
+  buttonBar: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     paddingTop: 10,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    backgroundColor: athensGrayMedium
   },
-  bottomBarRight: {
+  buttonBarLeft: {
     flexDirection: 'row'
   },
-  bottomBarIcon: {
+  buttonBarIcon: {
     fontSize: 46,
     color: caribbeanGreen
   },
-  bottomBarIconLoading: {
+  buttonBarIconLoading: {
     color: rhino30
   },
-  bottomBarAnnouncement: {
-    flex: 1,
-    borderRadius: 10
+  buttonBarAnnouncement: {
+    borderRadius: 10,
+    marginTop: -4
   },
-  bottomBarAnnouncementEnabled: {
+  buttonBarAnnouncementEnabled: {
     backgroundColor: caribbeanGreen
   },
-  bottomBarAnnouncementIcon: {
-    paddingLeft: 0,
+  buttonBarAnnouncementIcon: {
     fontSize: 46
   }
 }

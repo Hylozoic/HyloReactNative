@@ -162,7 +162,7 @@ exports[`NotificationsList matches the renders CreateGroupNotice if user does no
   <Image
     source={
       {
-        "testUri": "../../../assets/hey-axolotl.png",
+        "process": [Function],
       }
     }
   />

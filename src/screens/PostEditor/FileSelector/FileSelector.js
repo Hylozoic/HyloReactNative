@@ -84,9 +84,9 @@ function renderFileButton (file, buttonIndex, onRemove) {
   )
 }
 
-export function FileLabel ({ url }) {
+export function FileLabel ({ url, style }) {
   return (
-    <View style={styles.fileLabel}>
+    <View style={[styles.fileLabel, style]}>
       <Icon name='Document' style={styles.fileIcon} />
       <Text style={styles.fileLabelText} numberOfLines={2}>
         {cleanName(url)}
