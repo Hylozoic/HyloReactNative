@@ -17,11 +17,11 @@ import { FETCH_COMMENTS } from 'store/constants'
 
 function Comments ({
   postId,
+  selectedCommentId,
   header: providedHeader = null,
   style = {},
   showMember,
   slug,
-  commentIdFromParams,
   panHandlers,
   onSelect
 }, ref) {
@@ -45,6 +45,20 @@ function Comments ({
     commentsListRef?.current.scrollToLocation({ sectionIndex, itemIndex, viewPosition, animated: true })
   }, [sections])
 
+  const scrollToCommentById = useCallback((commentId) => {
+    comments.forEach(comment => {
+      if (comment.id === selectedCommentId) {
+        selectComment(comment)
+      } else {
+        comment.subComments.forEach(subComment => {
+          if (selectedCommentId === subComment.id) {
+            selectComment(subComment)
+          }
+        })
+      }
+    })
+  })
+
   const selectComment = useCallback(comment => {
     setHighlightedComment(comment)
     scrollToComment(comment)
@@ -60,6 +74,12 @@ function Comments ({
   useEffect(() => {
     dispatch(fetchCommentsAction({ postId }))
   }, [dispatch, postId])
+
+  useEffect(() => {
+    if (!pending && selectedCommentId) {
+      scrollToCommentById(selectedCommentId)
+    }
+  }, [pending, selectedCommentId])
 
   const Header = () => (
     <>
@@ -84,7 +104,6 @@ function Comments ({
           onReply={selectComment}
           scrollTo={viewPosition => scrollToComment(comment, viewPosition)}
           setHighlighted={() => setHighlightedComment(comment)}
-          commentIdFromParams={commentIdFromParams}
           showMember={showMember}
           slug={slug}
           key={comment.id}
@@ -103,13 +122,14 @@ function Comments ({
         scrollTo={viewPosition => scrollToComment(comment, viewPosition)}
         setHighlighted={() => setHighlightedComment(comment)}
         showMember={showMember}
-        commentIdFromParams={commentIdFromParams}
         slug={slug}
         style={styles.subComment}
         key={comment.id}
       />
     )
   }
+
+  if (pending) return <Loading />
 
   return (
     <SectionList
@@ -131,12 +151,13 @@ function Comments ({
       })}
       // keyboardShouldPersistTaps='handled'
       onScrollToIndexFailed={(error) => {
-        this.commentsListRef.scrollToOffset({ offset: error.averageItemLength * error.index, animated: false })
-        setTimeout(() => {
-          if (this.state.data.length !== 0 && this.commentsListRef !== null) {
-            this.commentsListRef.scrollToIndex({ index: error.index, animated: true })
-          }
-        }, 100)
+        console.log('!!!! error', error)
+        // this.commentsListRef.scrollToOffset({ offset: error.averageItemLength * error.index, animated: false })
+        // setTimeout(() => {
+        //   if (this.state.data.length !== 0 && this.commentsListRef !== null) {
+        //     this.commentsListRef.scrollToIndex({ index: error.index, animated: true })
+        //   }
+        // }, 100)
       }}
       keyboardShouldPersistTaps='never'
       keyboardDismissMode={isIOS ? 'interactive' : 'on-drag'}
