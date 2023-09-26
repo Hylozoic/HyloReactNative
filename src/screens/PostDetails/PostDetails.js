@@ -3,6 +3,7 @@ import { View, Alert } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { get } from 'lodash/fp'
+import { AnalyticsEvents } from 'hylo-shared'
 import useGoToMember from 'hooks/useGoToMember'
 import useIsModalScreen from 'hooks/useIsModalScreen'
 import fetchPostAction from 'store/actions/fetchPost'
@@ -15,6 +16,7 @@ import Loading from 'components/Loading'
 import PostCardForDetails from 'components/PostCard/PostCardForDetails'
 import SocketSubscriber from 'components/SocketSubscriber'
 import { white } from 'style/colors'
+import trackAnalyticsEvent from 'store/actions/trackAnalyticsEvent'
 
 /*
 
@@ -58,6 +60,17 @@ export default function PostDetails () {
   const scrollToSelectedComment = () => {
     commentsRef.current && commentsRef.current.scrollToComment(selectedComment)
   }
+
+  useEffect(() => {
+    if (!post) return
+    dispatch(trackAnalyticsEvent(AnalyticsEvents.POST_OPENED, {
+      postId: post.id,
+      groupId: post.groups.map(g => g.id),
+      isPublic: post.isPublic,
+      topics: post.topics?.map(t => t.name),
+      type: post.type
+    }))
+  }, [post])
 
   useEffect(() => {
     (async function () {
@@ -110,7 +123,7 @@ export default function PostDetails () {
       <KeyboardAccessoryCommentEditor
         renderScrollable={renderPostDetails}
         isModal={isModalScreen}
-        postId={post.id}
+        post={post}
         groupId={groupId}
         replyingTo={selectedComment}
         scrollToReplyingTo={scrollToSelectedComment}

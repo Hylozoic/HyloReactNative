@@ -48,7 +48,7 @@ export const KeyboardAccessoryCommentEditor = forwardRef(function KeyboardAccess
 })
 
 export const CommentEditor = forwardRef(function CommentEditor ({
-  postId,
+  post,
   replyingTo,
   scrollToReplyingTo,
   clearReplyingTo
@@ -81,7 +81,7 @@ export const CommentEditor = forwardRef(function CommentEditor ({
       const { error } = await dispatch(createComment({
         text: commentHTML,
         parentCommentId: replyingTo?.parentComment || replyingTo?.id || null,
-        postId
+        post
       }))
 
       setSubmitting(false)
@@ -92,7 +92,7 @@ export const CommentEditor = forwardRef(function CommentEditor ({
         handleDone()
       }
     }
-  }, [handleDone, postId, replyingTo?.id, replyingTo?.parentComment, dispatch])
+  }, [handleDone, post, replyingTo?.id, replyingTo?.parentComment, dispatch])
 
   const setEditorRef = useCallback(newEditorRef => {
     setHasContent(!newEditorRef?.isEmpty)

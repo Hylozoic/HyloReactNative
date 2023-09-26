@@ -1,4 +1,6 @@
 import getMe from '../selectors/getMe'
+import getMyMemberships from '../selectors/getMyMemberships'
+import getGroupFromParamsOrCurrent from '../selectors/getGroupFromParamsOrCurrent'
 import getMixpanel from '../selectors/getMixpanel'
 import Intercom from '@intercom/intercom-react-native'
 import { isProduction } from 'config'
@@ -29,6 +31,17 @@ async function identifyMixpanelUser (state) {
     $email: user.email,
     $location: user.location
   })
+  const memberships = getMyMemberships(state)
+  mixpanel.set_group('groupId', memberships.map(m => m.group.id))
+  const currentGroup = getGroupFromParamsOrCurrent(state)
+  if (currentGroup?.id) {
+    // Setup group profile info
+    mixpanel.get_group('groupId', currentGroup.id).set({
+      $location: currentGroup.location,
+      $name: currentGroup.name,
+      type: currentGroup.type
+    })
+  }
 }
 
 function registerIntercomUser (state) {
