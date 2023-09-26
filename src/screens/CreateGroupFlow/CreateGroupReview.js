@@ -23,18 +23,18 @@ export default function CreateGroupReview () {
   const parentGroups = useSelector(getNewGroupParentGroups)
   const [error, setError] = useState(null)
 
+
   useEffect(() => {
     return navigation.addListener('tabPress', async event => {
       event.preventDefault()
       await submit()
     })
-  }, [navigation])
+  }, [navigation, groupData])
 
   const submit = async () => {
     try {
       const graphqlResponse = await dispatch(createGroup(groupData))
       const newGroup = graphqlResponse.payload?.getData()
-
       if (newGroup) {
         dispatch(clearCreateGroupStore())
         openURL(`/groups/${newGroup.slug}`)
@@ -63,6 +63,21 @@ export default function CreateGroupReview () {
             <TextInput
               style={stepStyles.reviewTextInput}
               value={groupData.name}
+              underlineColorAndroid='transparent'
+              editable={false}
+              selectTextOnFocus={false}
+            />
+          </View>
+
+          <View style={styles.textInputContainer}>
+            <View style={stepStyles.itemHeader}>
+              <Text style={stepStyles.textInputLabel}>What is the purpose of this group</Text>
+              <EditButton onPress={() => navigation.navigate('CreateGroupPurpose')} />
+            </View>
+            <TextInput
+              style={stepStyles.reviewTextInput}
+              multiline
+              value={groupData.purpose}
               underlineColorAndroid='transparent'
               editable={false}
               selectTextOnFocus={false}
