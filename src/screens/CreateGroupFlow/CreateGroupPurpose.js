@@ -63,6 +63,7 @@ export default function CreateGroupPurpose ({ route }) {
               autoCorrect={false}
               underlineColorAndroid='transparent'
               maxLength={500}
+              multiline
             />
           </View>
           {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}

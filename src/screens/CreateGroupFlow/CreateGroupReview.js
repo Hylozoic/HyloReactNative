@@ -71,13 +71,12 @@ export default function CreateGroupReview () {
 
           <View style={styles.textInputContainer}>
             <View style={stepStyles.itemHeader}>
-              <Text style={stepStyles.textInputLabel}>What is the purpose of this group</Text>
-              <EditButton onPress={() => navigation.navigate('CreateGroupPurpose')} />
+              <Text style={stepStyles.textInputLabel}>What's the URL of your group?</Text>
+              <EditButton onPress={() => navigation.navigate('CreateGroupUrl')} />
             </View>
             <TextInput
               style={stepStyles.reviewTextInput}
-              multiline
-              value={groupData.purpose}
+              value={formatDomainWithUrl(groupData.slug)}
               underlineColorAndroid='transparent'
               editable={false}
               selectTextOnFocus={false}
@@ -86,12 +85,13 @@ export default function CreateGroupReview () {
 
           <View style={styles.textInputContainer}>
             <View style={stepStyles.itemHeader}>
-              <Text style={stepStyles.textInputLabel}>What's the URL of your group?</Text>
-              <EditButton onPress={() => navigation.navigate('CreateGroupUrl')} />
+              <Text style={stepStyles.textInputLabel}>What is the purpose of this group</Text>
+              <EditButton onPress={() => navigation.navigate('CreateGroupPurpose')} />
             </View>
             <TextInput
               style={stepStyles.reviewTextInput}
-              value={formatDomainWithUrl(groupData.slug)}
+              multiline
+              value={groupData.purpose}
               underlineColorAndroid='transparent'
               editable={false}
               selectTextOnFocus={false}

@@ -53,13 +53,13 @@ export default function CreateGroupTabsNavigator () {
         options={{ title: `STEP 1/${totalSteps}`, headerLeftCloseIcon: true }}
       />
       <CreateGroupTabs.Screen
-        name='CreateGroupPurpose'
-        component={CreateGroupPurpose}
+        name='CreateGroupUrl'
+        component={CreateGroupUrl}
         options={{ title: `STEP 2/${totalSteps}` }}
       />
       <CreateGroupTabs.Screen
-        name='CreateGroupUrl'
-        component={CreateGroupUrl}
+        name='CreateGroupPurpose'
+        component={CreateGroupPurpose}
         options={{ title: `STEP 3/${totalSteps}` }}
       />
       <CreateGroupTabs.Screen
