@@ -1,9 +1,7 @@
 import getMe from '../selectors/getMe'
-import getMyMemberships from '../selectors/getMyMemberships'
-import getGroupFromParamsOrCurrent from '../selectors/getGroupFromParamsOrCurrent'
 import getMixpanel from '../selectors/getMixpanel'
 import Intercom from '@intercom/intercom-react-native'
-import { isProduction } from 'config'
+// import { isProduction } from 'config' // I think we should still make these calls in dev, but using the test mixpanel project
 
 export default function userFetchedMiddleware ({ getState }) {
   return next => async action => {
@@ -13,9 +11,10 @@ export default function userFetchedMiddleware ({ getState }) {
     const userFetched = !wasMe && isMe
     if (userFetched) {
       const state = getState()
+
       // Do these things with the currentUser the first time it's fetched in a session
-      isProduction && await identifyMixpanelUser(state)
-      isProduction && registerIntercomUser(state)
+      await identifyMixpanelUser(state)
+      registerIntercomUser(state)
     }
     return result
   }
@@ -24,24 +23,13 @@ export default function userFetchedMiddleware ({ getState }) {
 async function identifyMixpanelUser (state) {
   const user = getMe(state)
   const mixpanel = getMixpanel(state)
-  await mixpanel.initialize()
+  await mixpanel.init()
   mixpanel.identify(user.id)
-  mixpanel.set({
+  mixpanel.people.set({
     $name: user.name,
     $email: user.email,
     $location: user.location
   })
-  const memberships = getMyMemberships(state)
-  mixpanel.set_group('groupId', memberships.map(m => m.group.id))
-  const currentGroup = getGroupFromParamsOrCurrent(state)
-  if (currentGroup?.id) {
-    // Setup group profile info
-    mixpanel.get_group('groupId', currentGroup.id).set({
-      $location: currentGroup.location,
-      $name: currentGroup.name,
-      type: currentGroup.type
-    })
-  }
 }
 
 function registerIntercomUser (state) {
