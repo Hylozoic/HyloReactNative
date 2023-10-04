@@ -32,6 +32,7 @@ const groupFieldsFragment = ({ withTopics, withJoinQuestions, withPrerequisites,
   moderatorDescriptor
   moderatorDescriptorPlural
   name
+  purpose
   settings {
     allowGroupInvites
     askGroupToGroupJoinQuestions

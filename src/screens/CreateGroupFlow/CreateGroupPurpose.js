@@ -12,35 +12,30 @@ import ErrorBubble from 'components/ErrorBubble'
 import styles from './CreateGroupFlow.styles'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 
-export default function CreateGroupName ({ route }) {
-  
+export default function CreateGroupPurpose ({ route }) {
   const dispatch = useDispatch()
   // Add current group in as pre-selected as a parent group for Parent Groups Step
   const edited = useSelector(getEdited)
   const currentGroup = useSelector(getCurrentGroup)
   const groupData = useSelector(getGroupData)
-  const [groupName, setGroupName] = useState()
+  const [groupPurpose, setGroupPurpose] = useState()
   const [error, setError] = useState()
 
   useEffect(() => {
     const reset = getRouteParam('reset', route)
     if (reset) {
       dispatch(clearCreateGroupStore())
-      setGroupName('')
+      setGroupPurpose('')
     } else {
-      setGroupName(groupData?.name)
+      setGroupPurpose(groupData?.purpose)
     }
   }, [])
 
   useFocusEffect(useCallback(() => {
-    if (!groupName || groupName.length === 0) {
-      dispatch(setWorkflowOptions({ disableContinue: true }))
-    } else {
-      dispatch(updateGroupData({ name: groupName }))
-      setError()
-      dispatch(setWorkflowOptions({ disableContinue: false }))
-    }
-  }, [groupName]))
+    dispatch(updateGroupData({ purpose: groupPurpose }))
+    setError()
+    dispatch(setWorkflowOptions({ disableContinue: false }))
+  }, [groupPurpose]))
 
   useFocusEffect(useCallback(() => {
     if (!edited && ![ALL_GROUP_ID, PUBLIC_GROUP_ID].includes(currentGroup?.id)) {
@@ -52,21 +47,23 @@ export default function CreateGroupName ({ route }) {
     <View style={styles.container}>
       <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
         <View style={styles.header}>
-          <Text style={styles.heading}>Let's get started!</Text>
-          <Text style={styles.description}>All good things start somewhere! Let's kick things off with a catchy name for your group.</Text>
+          <Text style={styles.heading}>Group Purpose</Text>
+          <Text style={styles.description}>Your purpose statement is a concise summary of why your group exists and what you hope to accomplish. A clear and specific purpose helps align members of your group to coordinate effectively to achieve your goals.</Text>
+          <Text style={styles.description}>Aim for one or two sentences.</Text>
         </View>
         <View style={styles.content}>
           <View style={styles.textInputContainer}>
-            <Text style={styles.textInputLabel}>What's the name of your group?</Text>
+            <Text style={styles.textInputLabel}>What's the purpose of the group?</Text>
             <TextInput
               style={styles.textInput}
-              onChangeText={setGroupName}
+              onChangeText={setGroupPurpose}
               returnKeyType='next'
               autoCapitalize='none'
-              value={groupName}
+              value={groupPurpose}
               autoCorrect={false}
               underlineColorAndroid='transparent'
-              maxLength={60}
+              maxLength={500}
+              multiline
             />
           </View>
           {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}

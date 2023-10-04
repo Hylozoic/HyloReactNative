@@ -14,6 +14,7 @@ exports[`fetchGroupSettings 1`] = `
             location
             invitePath
             name
+            purpose
             settings {
               allowGroupInvites
               askJoinQuestions

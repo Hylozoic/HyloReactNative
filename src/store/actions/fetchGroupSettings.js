@@ -15,6 +15,7 @@ export default function fetchGroupSettings (id) {
             location
             invitePath
             name
+            purpose
             settings {
               allowGroupInvites
               askJoinQuestions
