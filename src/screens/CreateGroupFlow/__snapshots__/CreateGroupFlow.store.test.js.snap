@@ -46,6 +46,7 @@ exports[`createGroup matches snapshot 1`] = `
   moderatorDescriptor
   moderatorDescriptorPlural
   name
+  purpose
   settings {
     allowGroupInvites
     askGroupToGroupJoinQuestions

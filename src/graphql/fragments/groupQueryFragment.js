@@ -37,6 +37,7 @@ export default () => {
     moderatorDescriptor
     moderatorDescriptorPlural
     name
+    purpose
     settings {
       allowGroupInvites
       askGroupToGroupJoinQuestions

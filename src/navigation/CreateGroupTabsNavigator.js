@@ -10,17 +10,19 @@ import getMemberships from 'store/selectors/getMemberships'
 import CreateGroupName from 'screens/CreateGroupFlow/CreateGroupName'
 import CreateGroupUrl from 'screens/CreateGroupFlow/CreateGroupUrl'
 import CreateGroupVisibilityAccessibility from 'screens/CreateGroupFlow/CreateGroupVisibilityAccessibility'
+import CreateGroupPurpose from 'screens/CreateGroupFlow/CreateGroupPurpose'
 import CreateGroupParentGroups from 'screens/CreateGroupFlow/CreateGroupParentGroups'
 import CreateGroupReview from 'screens/CreateGroupFlow/CreateGroupReview'
 import { white20onCaribbeanGreen } from 'style/colors'
 
 const CreateGroupTabs = createBottomTabNavigator()
+
 export default function CreateGroupTabsNavigator () {
   const memberships = useSelector(getMemberships)
   const parentGroupOptions = memberships
     .filter(m => m.hasModeratorRole || m.group.accessibility === GROUP_ACCESSIBILITY.Open)
   const hasParentGroupOptions = !isEmpty(parentGroupOptions)
-  const totalSteps = hasParentGroupOptions ? 5 : 4
+  const totalSteps = hasParentGroupOptions ? 6 : 5
   const navigatorProps = {
     tabBar: props => <CreateGroupTabBar {...props} />,
     // NOTE: This is how to have back button functionality
@@ -56,9 +58,14 @@ export default function CreateGroupTabsNavigator () {
         options={{ title: `STEP 2/${totalSteps}` }}
       />
       <CreateGroupTabs.Screen
+        name='CreateGroupPurpose'
+        component={CreateGroupPurpose}
+        options={{ title: `STEP 3/${totalSteps}` }}
+      />
+      <CreateGroupTabs.Screen
         name='CreateGroupVisibilityAccessibility'
         component={CreateGroupVisibilityAccessibility}
-        options={{ title: `STEP 3/${totalSteps}` }}
+        options={{ title: `STEP 4/${totalSteps}` }}
       />
       {hasParentGroupOptions && (
         <CreateGroupTabs.Screen

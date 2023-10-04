@@ -24,7 +24,8 @@ export default {
     paddingBottom: 10
   },
   description: {
-    color: white80onCaribbeanGreen
+    color: white80onCaribbeanGreen,
+    marginBottom: 4
   },
   button: {
     width: 134,
