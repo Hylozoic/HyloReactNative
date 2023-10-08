@@ -101,7 +101,7 @@ export function ContentRow ({
             showTopic={showTopic}
             onPress={showPost}
             post={item}
-            respondToEvent={response => respondToEvent(item.id, response)}
+            respondToEvent={response => respondToEvent(item, response)}
             creator={item.creator}
             commenters={item.commenters}
             groups={item.groups}

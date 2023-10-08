@@ -5456,10 +5456,10 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-hylo-shared@5.1.3:
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/hylo-shared/-/hylo-shared-5.1.3.tgz#d8ee4772ea805307ebb8280df7a8c331979a13ed"
-  integrity sha512-SWNKZ6v6bAj0H7zPh26w08zwYYvtgOmcdvkh/RuSedHpGwJynGGbvyOGhBDrd0Oo6bfS+0uw5xyYGMd88BUtsw==
+hylo-shared@5.2.5:
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/hylo-shared/-/hylo-shared-5.2.5.tgz#7db07a00072047adc1de3567cc33d67fef9113a3"
+  integrity sha512-FCh56lMedDStxNzR7ijn41Rv742qapcnMUM6A4TJ6Tsh+GUvLHIS928H2Tt1ST3C3lwP6egaiO1edCYsjX8Hmg==
   dependencies:
     coordinate-parser "^1.0.7"
     html-to-text "^8.1.0"
@@ -7424,7 +7424,7 @@ minimist@^1.2.0, minimist@^1.2.6:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.8.tgz#c1a464e7693302e082a075cee0c057741ac4772c"
   integrity sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==
 
-mixpanel-react-native@^2.1.0:
+mixpanel-react-native@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/mixpanel-react-native/-/mixpanel-react-native-2.3.1.tgz#43cd7565dfbc1cafde71de6cca008fd56d06f7eb"
   integrity sha512-BfkZNkokPIttPW0uTEivm6B8iPUO+pwASFz1IEzyVDSNqaUYOXi66RL0K/ouHPqXJc80rnIuNnDjZ3FtFV9CVQ==

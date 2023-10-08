@@ -1,4 +1,5 @@
 import { get } from 'lodash/fp'
+import { AnalyticsEvents } from 'hylo-shared'
 import { REGISTER } from 'store/constants'
 
 export default function register (name, password) {
@@ -40,7 +41,10 @@ export default function register (name, password) {
           getRoot: get('register.me'),
           modelName: 'Me'
         }
-      ]
+      ],
+      analytics: {
+        eventName: AnalyticsEvents.SIGNUP_REGISTERED
+      }
     }
   }
 }
