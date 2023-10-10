@@ -44,7 +44,7 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
   const donationServiceSvgUri = donationServiceMatch &&
     `${DEFAULT_APP_HOST}/assets/payment-services/${donationServiceMatch[0]}.svg`
 
-  const handleRespondToEvent = response => dispatch(respondToEventAction(post.id, response))
+  const handleRespondToEvent = response => dispatch(respondToEventAction(post, response))
   const joinProject = () => dispatch(joinProjectAction(post.id))
   const leaveProject = () => dispatch(leaveProjectAction(post.id))
   const editPost = () => navigation.navigate('Edit Post', { id: post.id })

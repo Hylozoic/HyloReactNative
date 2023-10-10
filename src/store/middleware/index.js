@@ -7,6 +7,7 @@ import optimisticMiddleware from './optimisticMiddleware'
 import pendingMiddleware from './pendingMiddleware'
 import promiseMiddleware from 'redux-promise'
 import userFetchedMiddleware from './userFetchedMiddleware'
+import groupFetchedMiddleware from './groupFetchedMiddleware'
 import userBlockingMiddleware from './userBlockingMiddleware'
 import mixpanelMiddleware from './mixpanelMiddleware'
 import { isDev } from 'config'
@@ -19,6 +20,7 @@ const middleware = compact([
   pendingMiddleware,
   promiseMiddleware,
   userFetchedMiddleware,
+  groupFetchedMiddleware,
   userBlockingMiddleware,
   mixpanelMiddleware,
   isDev &&

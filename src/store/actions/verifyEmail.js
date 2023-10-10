@@ -1,4 +1,5 @@
 import { get } from 'lodash/fp'
+import { AnalyticsEvents } from 'hylo-shared'
 import { VERIFY_EMAIL } from 'store/constants'
 
 export default function verifyEmail (email, code, token) {
@@ -42,7 +43,11 @@ export default function verifyEmail (email, code, token) {
           getRoot: get('verifyEmail.me'),
           modelName: 'Me'
         }
-      ]
+      ],
+      analytics: {
+        eventName: AnalyticsEvents.SIGNUP_EMAIL_VERIFIED,
+        email
+      }
     }
   }
 }
