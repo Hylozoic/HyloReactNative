@@ -18,7 +18,7 @@ export default function PostRow ({
   const dispatch = useDispatch()
   const post = useSelector(state => getPresentedPost(state, { postId, forGroupId }))
   const groupIds = post.groups.map(group => group.id)
-  const handleRespondToEvent = response => dispatch(respondToEvent(post.id, response))
+  const handleRespondToEvent = response => dispatch(respondToEvent(post, response))
 
   if (!post) return null
 

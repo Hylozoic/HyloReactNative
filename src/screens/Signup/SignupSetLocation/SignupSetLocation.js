@@ -2,9 +2,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import { ScrollView, View, Text } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
+import { AnalyticsEvents } from 'hylo-shared'
 import useCurrentLocation from 'hooks/useCurrentLocation'
 import getMe from 'store/selectors/getMe'
 import checkLogin from 'store/actions/checkLogin'
+import trackAnalyticsEvent from 'store/actions/trackAnalyticsEvent'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
@@ -28,6 +30,7 @@ export default function SignupSetLocation ({ navigation }) {
         // onCancel: This will have the effect of fully Authorizing the user
         // and they will be forwarded to `AuthRoot`
         dispatch(updateUserSettings({ settings: { signupInProgress: false } }))
+        dispatch(trackAnalyticsEvent(AnalyticsEvents.SIGNUP_COMPLETE))
       }
     })
   })
@@ -35,6 +38,7 @@ export default function SignupSetLocation ({ navigation }) {
   const finish = async () => {
     controlRef.current && controlRef.current.blur()
     await dispatch(updateUserSettings({ location, locationId, settings: { signupInProgress: false } }))
+    await dispatch(trackAnalyticsEvent(AnalyticsEvents.SIGNUP_COMPLETE))
     await dispatch(checkLogin())
   }
 

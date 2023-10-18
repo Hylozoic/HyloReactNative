@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 import { ScrollView, View, Text, ImageBackground, ActivityIndicator } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
+import { AnalyticsEvents } from 'hylo-shared'
 import getMe from 'store/selectors/getMe'
+import trackAnalyticsEvent from 'store/actions/trackAnalyticsEvent'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import ImagePicker from 'components/ImagePicker'
@@ -24,6 +26,7 @@ export default function SignupUploadAvatar ({ navigation }) {
         // onCancel: This will have the effect of fully Authorizing the user
         // and they will be forwarded to `AuthRoot`
         dispatch(updateUserSettings({ settings: { signupInProgress: false } }))
+        dispatch(trackAnalyticsEvent(AnalyticsEvents.SIGNUP_COMPLETE))
       }
     })
   })
