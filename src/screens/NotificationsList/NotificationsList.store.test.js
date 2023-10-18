@@ -148,7 +148,7 @@ describe('selectors/refiners', () => {
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith(modalScreenName('Post Details'), { id: '333' })
+      expect(navigation.navigate).toHaveBeenCalledWith('Chat', { postId: '333', topicName: 'aardvark' })
     })
 
     it('matches the previous ACTION_JOIN_REQUEST snapshot', () => {
