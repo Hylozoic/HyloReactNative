@@ -1,4 +1,4 @@
-import React, { useCallback, forwardRef, useState, useEffect } from 'react'
+import React, { useCallback, forwardRef, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 import Loading from 'components/Loading'
 import getRouteParam from 'store/selectors/getRouteParam'
@@ -23,10 +23,15 @@ const HyloWebView = forwardRef(function HyloWebView ({
   const [uri, setUri] = useState()
   const postId = getRouteParam('postId', route)
 
-  useEffect(() => {
-    const path = pathProp || route?.params?.path
-    setUri((source?.uri || `${process.env.HYLO_WEB_BASE_URL}${path || ''}`) + (postId ? `?postId=${postId}` : ''))
-  }, [source?.uri, pathProp, route?.params?.path])
+  useFocusEffect(
+    useCallback(() => {
+      const path = pathProp || route?.params?.path
+      setUri((source?.uri || `${process.env.HYLO_WEB_BASE_URL}${path || ''}`) + (postId ? `?postId=${postId}` : ''))
+      return () => {
+        setUri(undefined)
+      }
+    }, [source?.uri, pathProp, route?.params?.path])
+  )
 
   useFocusEffect(
     useCallback(() => {
