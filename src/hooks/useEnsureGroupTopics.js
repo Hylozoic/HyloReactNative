@@ -12,7 +12,7 @@ export default function useEnsureGroupTopics ({ groupId, groupSlug }) {
 
   useEffect(() => {
     if (!pending && groupId && (!topics || !topics.length > 0)) {
-      dispatch(fetchGroupTopics(groupId, { sortBy: 'num_followers' }))
+      dispatch(fetchGroupTopics(groupId, { sortBy: 'num_followers', first: 100 }))
     }
   }, [dispatch, groupId, groupSlug])
 
