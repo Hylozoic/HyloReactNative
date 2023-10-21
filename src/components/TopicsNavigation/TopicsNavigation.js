@@ -32,7 +32,7 @@ const TopicItem = ({ label, iconName, onPress, topic }) => (
     </View>
     <View style={[styles.topicSubItem, styles.topicRightSide]}>
       {topic.newPostCount > 0 && <Badge count={topic.newPostCount} />}
-      {topic.isSubscribed && (<Icon style={styles.topicItemIcon} name='Pin' />)}
+      {(topic.visibility === 2) && (<Icon style={styles.topicItemIcon} name='Pin' />)}
     </View>
   </TouchableOpacity>
 )

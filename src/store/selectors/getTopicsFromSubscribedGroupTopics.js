@@ -32,7 +32,7 @@ export const getSubscribedGroupTopics = ormCreateSelector(
     let groupTopics
     if (groupId) {
       groupTopics = session.GroupTopic
-        .filter({ group: groupId, visibility: 1 })
+        .filter({ group: groupId, visibility: 1, isSubscribed: true })
         .toModelArray()
 
       const pinnedGroupTopics = session.GroupTopic
