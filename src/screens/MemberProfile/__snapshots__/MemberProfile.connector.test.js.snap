@@ -10,7 +10,7 @@ exports[`mapStateToProps maps the state to the props 1`] = `
     },
     "headerAvatarUrl": undefined,
     "id": "public",
-    "name": "Public Groups & Posts",
+    "name": "Public Stream",
     "parentGroups": {
       "toModelArray": [Function],
     },

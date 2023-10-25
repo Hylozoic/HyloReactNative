@@ -149,7 +149,7 @@ exports[`calls fetchGroupTopic on componentDidMount 1`] = `
                     }
                   }
                 >
-                  Public Groups & Posts
+                  Public Stream
                 </Text>
               </View>
               <View

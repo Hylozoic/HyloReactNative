@@ -218,14 +218,14 @@ export const ALL_GROUP = {
 }
 
 export const PUBLIC_GROUP_ID = PUBLIC_CONTEXT_SLUG
-export const PUBLIC_GROUP_AVATAR_PATH = '/public.svg'
+export const PUBLIC_GROUP_AVATAR_PATH = '/assets/public.png'
 export const PUBLIC_GROUP = {
   id: PUBLIC_GROUP_ID,
   slug: PUBLIC_GROUP_ID,
   headerAvatarUrl: Image.resolveAssetSource(allGroupshHeaderAvatarUrl).uri,
   avatarUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
   bannerUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
-  name: 'Public Groups & Posts',
+  name: 'Public Stream',
   parentGroups: { toModelArray: () => [] },
   childGroups: { toModelArray: () => [] }
 }

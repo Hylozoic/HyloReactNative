@@ -1,22 +1,22 @@
 import React from 'react'
-import { Text, TouchableOpacity, View, SectionList } from 'react-native'
+import { Text, TouchableOpacity, View, SectionList, Image } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
+import FastImage from 'react-native-fast-image'
+import LinearGradient from 'react-native-linear-gradient'
+
 import useChangeToGroup from 'hooks/useChangeToGroup'
 import { PUBLIC_GROUP, ALL_GROUP } from 'store/models/Group'
 import getMemberships from 'store/selectors/getMemberships'
 import getCanModerate from 'store/selectors/getCanModerate'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import FastImage from 'react-native-fast-image'
 import styles from './DrawerMenu.styles'
 import Button from 'components/Button'
-import LinearGradient from 'react-native-linear-gradient'
 import { bannerlinearGradientColors } from 'style/colors'
 
-const topGroups = [
-  PUBLIC_GROUP,
-  ALL_GROUP
-]
+// import groupExplorerUrl from 'assets/group-explorer.png'
+import earthUrl from 'assets/earth.png'
+import myHomeUrl from 'assets/my-home.png'
 
 export default function DrawerMenu () {
   const navigation = useNavigation()
@@ -37,6 +37,46 @@ export default function DrawerMenu () {
       navigation.navigate('Group Settings', { screen: 'Invite' })
   const changeToGroup = useChangeToGroup()
 
+  const navigateToPublicStream = () => {
+    navigation.navigate('Group Navigation', { groupSlug: PUBLIC_GROUP.slug })
+    navigation.navigate('Feed', { initial: false })
+  }
+
+  const navigateToPublicMap = () => {
+    navigation.navigate('Map', { groupSlug: PUBLIC_GROUP.slug })
+  }
+
+  // Comment-in once proper group explorer webview is available
+  // const navigateToPublicGroups = () => {
+  //   navigation.navigate('Group Explore') // this is not the groupexplorer webview...
+  // }
+
+  const navigateToMyHome = () => {
+    navigation.navigate('Group Navigation', { myHome: true })
+    navigation.navigate('My Posts', { initial: false })
+  }
+
+  const publicMap = {
+    name: 'Public Map',
+    navigateTo: navigateToPublicMap,
+    id: 'publicMap',
+    avatarUrl: Image.resolveAssetSource(earthUrl).uri
+  }
+
+  // Comment-in once proper group explorer webview is available
+  // const publicGroups = {
+  //   name: 'Explore Groups',
+  //   navigateTo: navigateToPublicGroups,
+  //   id: 'publicGroups',
+  //   avatarUrl: Image.resolveAssetSource(groupExplorerUrl).uri
+  // }
+
+  const publicRoutes = [
+    { ...PUBLIC_GROUP, navigateTo: navigateToPublicStream },
+    // publicGroups,
+    publicMap
+  ]
+
   const renderItem = ({ item }) => (
     <GroupRow
       group={item}
@@ -45,15 +85,33 @@ export default function DrawerMenu () {
       addPadding
     />
   )
+
+  const renderNavItem = ({ item }) => (
+    <NavRow
+      item={item}
+      currentGroupSlug={currentGroup?.slug}
+      addPadding
+    />
+  )
   const keyExtractor = item => 'c' + item.id
   const listSections = [
     {
-      data: topGroups,
-      renderItem,
+      data: [{
+        name: 'My Home',
+        navigateTo: navigateToMyHome,
+        id: 'myHome',
+        avatarUrl: Image.resolveAssetSource(myHomeUrl).uri
+      }],
+      renderItem: renderNavItem,
       keyExtractor
     },
     {
-      data: myGroups,
+      data: publicRoutes,
+      renderItem: renderNavItem,
+      keyExtractor
+    },
+    {
+      data: [ALL_GROUP, ...myGroups],
       renderItem,
       keyExtractor
     }
@@ -143,6 +201,25 @@ export function GroupRow ({ group, changeToGroup, currentGroupSlug, addPadding, 
             <Text style={styles.badgeText}>{newPostCount}</Text>
           </View>
         )}
+      </TouchableOpacity>
+    </View>
+  )
+}
+
+export function NavRow ({ item, addPadding }) {
+  const { avatarUrl, name, navigateTo } = item
+  return (
+    <View style={[styles.groupRow, addPadding && styles.defaultPadding]}>
+      <TouchableOpacity onPress={() => navigateTo()} style={styles.rowTouchable}>
+        {!!avatarUrl &&
+          <FastImage source={{ uri: avatarUrl }} style={styles.groupAvatar} />}
+        <Text
+          style={styles.groupRowText}
+          ellipsizeMode='tail'
+          numberOfLines={1}
+        >
+          {name}
+        </Text>
       </TouchableOpacity>
     </View>
   )

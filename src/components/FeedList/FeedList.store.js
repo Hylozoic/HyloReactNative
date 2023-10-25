@@ -95,8 +95,13 @@ export const getHasMorePosts = createSelector(getPostResults, get('hasMore'))
 // to clobber the cache between each other.
 export const getQueryProps = createCachedSelector(
   (_, props) => props.activePostsOnly,
+  (_, props) => props.announcementOnly,
   (_, props) => props.context,
+  (_, props) => props.createdBy,
   (_, props) => props.forCollection,
+  (_, props) => props.mentionsOf,
+  (_, props) => props.myHome,
+  (_, props) => props.interactedWithBy,
   (_, props) => props.slug,
   (_, props) => props.sortBy,
   (_, props) => props.filter,
@@ -109,8 +114,13 @@ export const getQueryProps = createCachedSelector(
   (_, props) => props.childPostInclusion,
   (
     activePostsOnly,
+    announcementOnly,
     context,
+    createdBy,
     forCollection,
+    mentionsOf,
+    myHome,
+    interactedWithBy,
     slug,
     sortBy,
     filter,
@@ -124,8 +134,13 @@ export const getQueryProps = createCachedSelector(
   ) => {
     return omitBy(x => isNull(x) || isUndefined(x), {
       activePostsOnly,
+      announcementOnly,
       context,
+      createdBy,
       forCollection,
+      mentionsOf,
+      myHome,
+      interactedWithBy,
       slug,
       sortBy,
       filter,
@@ -144,6 +159,7 @@ export const getQueryProps = createCachedSelector(
       get('context', props),
       get('slug', props),
       get('topicName', props),
+      get('myHome', props),
       get('forCollection', props),
       (get('topics', props) || []).join('.'),
       (get('types', props) || []).join('.')

@@ -22,7 +22,7 @@ export default function MapWebView ({ navigation }) {
 
   useEffect(() => {
     navigation.setOptions({
-      title: group?.name,
+      title: group?.id === PUBLIC_GROUP_ID ? 'Public Map' : group?.name,
       // Disables going back by pull right on this screen
       gestureEnabled: false,
       headerLeftOnPress: canGoBack ? webViewRef.current.goBack : navigation.goBack

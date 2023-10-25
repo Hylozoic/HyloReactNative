@@ -18,7 +18,7 @@ export default function GroupExploreWebView () {
   const navigation = useNavigation()
   const isModalScreen = useIsModalScreen()
   const webViewRef = useRef(null)
-  const groupSlug = route.params.groupSlug
+  const groupSlug = route?.params?.groupSlug
   const currentGroup = useSelector(state => getGroup(state, { slug: groupSlug }))
   const [path, setPath] = useState()
   const [canGoBack, setCanGoBack] = useState(false)

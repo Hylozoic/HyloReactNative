@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { Text, ScrollView, View, TouchableOpacity } from 'react-native'
-import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { openURL } from 'hooks/useOpenURL'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
@@ -12,57 +12,66 @@ import styles from './GroupNavigation.styles'
 
 export default function GroupNavigation () {
   const navigation = useNavigation()
+  const route = useRoute()
   const currentGroup = useSelector(getCurrentGroup)
   const childGroups = useSelector(getChildGroups)
   const parentGroups = useSelector(getParentGroups)
   const { navigate } = navigation
   const customViews = (currentGroup && currentGroup.customViews && currentGroup.customViews.toRefArray()) || []
+  const myHome = route?.params?.myHome
 
   useFocusEffect(() => {
-    navigation.setOptions({ title: currentGroup?.name })
+    navigation.setOptions({ title: myHome ? 'My Home' : currentGroup?.name })
   })
 
-  const navItems = [
-    { label: 'Create', iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
-    { label: 'Stream', iconName: 'Stream', onPress: () => navigate('Feed') },
-    {
-      label: 'Explore',
-      iconName: 'Binoculars',
-      onPress: () => navigate('Group Explore', { groupSlug: currentGroup?.slug }),
-      hidden: isContextGroup(currentGroup?.slug)
-    },
-    { label: 'Projects', iconName: 'Projects', onPress: () => navigate('Projects') },
-    { label: 'Events', iconName: 'Events', onPress: () => navigate('Events') },
-    {
-      label: 'Members',
-      iconName: 'Members',
-      onPress: () => navigate('Members'),
-      hidden: isContextGroup(currentGroup?.slug)
-    },
-    {
-      label: 'Groups',
-      iconName: 'Groups',
-      onPress: () => navigate('Group Relationships'),
-      hidden: !(childGroups?.length > 0 || parentGroups?.length > 0)
-    },
-    { label: 'Map', iconName: 'Globe', onPress: () => navigate('Map') },
-    ...customViews.filter(customView => customView.name && (customView.type !== 'externalLink' || customView.externalLink)).map(customView => ({
-      label: customView.name,
-      iconName: customView.icon,
-      // onPress: customView.type !== 'externalLink' ? `${rootPath}/custom/${customView.id}` : false,
-      onPress: customView.type === 'externalLink'
-        ? () => openURL(customView.externalLink)
-        : () => navigate('Feed', { customViewId: customView?.id })
-    }))
-
-  ]
+  const navItems = myHome
+    ? [
+        { label: 'Create', iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
+        { label: 'My Posts', iconName: 'Posticon', onPress: () => navigate('My Posts') },
+        { label: 'Interactions', iconName: 'Support', onPress: () => navigate('Interactions') },
+        { label: 'Mentions', iconName: 'Email', onPress: () => navigate('Mentions') },
+        { label: 'Announcements', iconName: 'Announcement', onPress: () => navigate('Announcements') }
+      ]
+    : [
+        { label: 'Create', iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
+        { label: 'Stream', iconName: 'Stream', onPress: () => navigate('Feed') },
+        {
+          label: 'Explore',
+          iconName: 'Binoculars',
+          onPress: () => navigate('Group Explore', { groupSlug: currentGroup?.slug }),
+          hidden: isContextGroup(currentGroup?.slug)
+        },
+        { label: 'Projects', iconName: 'Projects', onPress: () => navigate('Projects') },
+        { label: 'Events', iconName: 'Events', onPress: () => navigate('Events') },
+        {
+          label: 'Members',
+          iconName: 'Members',
+          onPress: () => navigate('Members'),
+          hidden: isContextGroup(currentGroup?.slug)
+        },
+        {
+          label: 'Groups',
+          iconName: 'Groups',
+          onPress: () => navigate('Group Relationships'),
+          hidden: !(childGroups?.length > 0 || parentGroups?.length > 0)
+        },
+        { label: 'Map', iconName: 'Globe', onPress: () => navigate('Map') },
+        ...customViews.filter(customView => customView.name && (customView.type !== 'externalLink' || customView.externalLink)).map(customView => ({
+          label: customView.name,
+          iconName: customView.icon,
+          // onPress: customView.type !== 'externalLink' ? `${rootPath}/custom/${customView.id}` : false,
+          onPress: customView.type === 'externalLink'
+            ? () => openURL(customView.externalLink)
+            : () => navigate('Feed', { customViewId: customView?.id })
+        }))
+      ]
 
   const shownNavItems = navItems.filter(navItem => !navItem?.hidden)
 
   return (
     <ScrollView style={styles.container}>
       {shownNavItems.map(item => <NavItem {...item} key={item.label} />)}
-      {currentGroup?.id !== PUBLIC_GROUP_ID && (
+      {currentGroup?.id !== PUBLIC_GROUP_ID && !myHome && (
         <>
           <View style={styles.divider} />
           <View style={styles.navItems}>
