@@ -44,7 +44,7 @@ export default function Feed ({ topicName: providedTopicName }) {
   const customViewId = getRouteParam('customViewId', route)
   const customView = useSelector(state => getCustomView(state, { customViewId }))
   const feedType = getRouteParam('feedType', route)
-  const myHome = getRouteParam('myHome', route)
+  const myHome = route?.params?.myHome
   const changeToGroup = useChangeToGroup()
   const goToTopicDefault = useGoToTopic()
   const topicName = providedTopicName || getRouteParam('topicName', route)

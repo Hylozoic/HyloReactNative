@@ -35,6 +35,7 @@ export default function TabStackHeader ({
   ...otherProps
 }) {
   const canGoBack = !rootsScreenNames.includes(route?.name)
+  const myHome = route?.params?.myHome
   const props = {
     headerBackTitleVisible: false,
     title: getFocusedRouteNameFromRoute(route) || getHeaderTitle(options, route.name),

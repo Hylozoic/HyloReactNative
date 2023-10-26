@@ -14,7 +14,7 @@ import {
   NO_POST_FILTER
 } from './FeedList.store'
 import { FETCH_POSTS } from 'store/constants'
-import { ALL_GROUP_ID, isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
+import { ALL_GROUP_ID, isContextGroup, MY_CONTEXT_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import getMe from 'store/selectors/getMe'
 import fetchPosts from 'store/actions/fetchPosts'
 import resetNewPostCount from 'store/actions/resetNewPostCount'
@@ -100,6 +100,7 @@ const mapDispatchToProps = { setFilter, setSort, setTimeframe, fetchPosts, reset
 export function shouldResetNewPostCount ({ slug, sortBy, filter, topic }) {
   return slug !== ALL_GROUP_ID &&
     slug !== PUBLIC_GROUP_ID &&
+    slug !== MY_CONTEXT_ID &&
     !topic &&
     sortBy === defaultSortBy &&
     !filter

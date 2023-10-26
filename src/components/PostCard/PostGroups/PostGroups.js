@@ -4,7 +4,7 @@ import { Text, View, TouchableOpacity } from 'react-native'
 import { PUBLIC_GROUP } from 'store/models/Group'
 import GroupsList from 'components/GroupsList'
 import Icon from 'components/Icon'
-import { rhino30, caribbeanGreen, rhino40 } from 'style/colors'
+import { caribbeanGreen, rhino40 } from 'style/colors'
 
 export default function PostGroups ({
   goToGroup,

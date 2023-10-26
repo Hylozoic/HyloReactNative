@@ -3,6 +3,7 @@ import { attr, many, Model, fk } from 'redux-orm'
 import { ALL_GROUPS_CONTEXT_SLUG, PUBLIC_CONTEXT_SLUG } from 'hylo-shared'
 import allGroupsBannerImage from 'assets/all-groups-banner.png'
 import allGroupsAvatarUrl from 'assets/All_Groups2.png'
+import myHomeAvatarUrl from 'assets/my-home.png'
 import allGroupshHeaderAvatarUrl from 'assets/All_Groups.png'
 import publicGroupAvatarUrl from 'assets/public.png'
 
@@ -226,6 +227,19 @@ export const PUBLIC_GROUP = {
   avatarUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
   bannerUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
   name: 'Public Stream',
+  parentGroups: { toModelArray: () => [] },
+  childGroups: { toModelArray: () => [] }
+}
+
+export const MY_CONTEXT_ID = 'my'
+export const MY_CONTEXT_AVATAR_PATH = '/assets/my-home.png'
+export const MY_CONTEXT_GROUP = {
+  id: MY_CONTEXT_ID,
+  slug: MY_CONTEXT_ID,
+  headerAvatarUrl: Image.resolveAssetSource(myHomeAvatarUrl).uri,
+  avatarUrl: Image.resolveAssetSource(myHomeAvatarUrl).uri,
+  bannerUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
+  name: 'My Home',
   parentGroups: { toModelArray: () => [] },
   childGroups: { toModelArray: () => [] }
 }
