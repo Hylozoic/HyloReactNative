@@ -58,6 +58,7 @@ import clearCacheFor from './clearCacheFor'
 import { find, values, pick } from 'lodash/fp'
 import extractModelsFromAction from '../ModelExtractor/extractModelsFromAction'
 import { isPromise } from 'util/index'
+import { UPDATE_MEMBERSHIP_SETTINGS_PENDING } from 'store/actions/updateMembershipSettings'
 
 export default function ormReducer (state = orm.getEmptyState(), action) {
   const session = orm.session(state)
@@ -425,6 +426,20 @@ export default function ormReducer (state = orm.getEmptyState(), action) {
     //   post.update({ topics: [] })
     //   break
     // }
+
+    case UPDATE_MEMBERSHIP_SETTINGS_PENDING: {
+      me = Me.first()
+      membership = Membership.safeGet({ group: meta.groupId, person: me.id })
+
+      if (!membership) break
+      membership.update({
+        settings: {
+          ...membership.settings,
+          ...meta.settings
+        }
+      })
+      break
+    }
 
     case UPDATE_POST: {
       // This is needed right now to make sure posts update in real time on the landing page

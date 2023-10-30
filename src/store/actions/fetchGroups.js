@@ -82,6 +82,7 @@ query (
       avatarUrl
       bannerUrl
       name
+      purpose
       type
       settings {
         allowGroupInvites

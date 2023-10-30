@@ -24,6 +24,7 @@ import Icon from 'components/Icon'
 import FeedList from 'components/FeedList'
 import Loading from 'components/Loading'
 import SocketSubscriber from 'components/SocketSubscriber'
+import GroupWelcomeModal from 'components/GroupWelcomeModal'
 import { bannerlinearGradientColors } from 'style/colors'
 import styles from './Feed.styles'
 
@@ -154,6 +155,8 @@ export default function Feed ({ topicName: providedTopicName }) {
 
   return (
     <>
+      <GroupWelcomeModal groupId={currentGroup?.id} />
+      {/* This GroupWelcomeModal needs to be placed in each of the HomeTab.screens when it has more content */}
       <FeedList
         scrollRef={ref}
         forGroup={currentGroup}

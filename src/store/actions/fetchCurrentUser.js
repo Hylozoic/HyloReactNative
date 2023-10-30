@@ -95,6 +95,7 @@ export default function fetchCurrentUser () {
               settings {
                 sendEmail
                 sendPushNotifications
+                showJoinForm
               }
               person {
                 id
@@ -127,6 +128,7 @@ export default function fetchCurrentUser () {
                 description
                 id
                 name
+                purpose
                 slug
                 visibility
                 childGroups(first: 300) {
