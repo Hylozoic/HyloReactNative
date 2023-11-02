@@ -3,6 +3,7 @@ import * as sessionReducers from './sessionReducers'
 import {
   ACCEPT_GROUP_RELATIONSHIP_INVITE,
   ADD_MODERATOR_PENDING,
+  ADD_SKILL,
   CANCEL_GROUP_RELATIONSHIP_INVITE,
   CANCEL_JOIN_REQUEST,
   CREATE_COMMENT,
@@ -25,6 +26,7 @@ import {
   REMOVE_MODERATOR_PENDING,
   REMOVE_REACT_ON_POST_PENDING,
   REMOVE_REACT_ON_COMMENT_PENDING,
+  REMOVE_SKILL_PENDING,
   REQUEST_FOR_CHILD_TO_JOIN_PARENT_GROUP,
   RESET_NEW_POST_COUNT_PENDING,
   RESPOND_TO_EVENT_PENDING,
@@ -107,6 +109,15 @@ export default function ormReducer (state = orm.getEmptyState(), action) {
     case ADD_MODERATOR_PENDING: {
       person = Person.withId(meta.personId)
       Group.withId(meta.groupId).updateAppending({ moderators: [person] })
+      break
+    }
+
+    case ADD_SKILL: {
+      const skill = payload.data.addSkill
+      person = Person.withId(Me.first().id)
+      person.updateAppending({ skills: [Skill.create(skill)] })
+      me = Me.first()
+      me.updateAppending({ skills: [Skill.create(skill)] })
       break
     }
 
@@ -325,6 +336,19 @@ export default function ormReducer (state = orm.getEmptyState(), action) {
         m.id !== meta.personId)
         .toModelArray()
       group.update({ moderators })
+      break
+    }
+
+    case REMOVE_SKILL_PENDING: {
+      // Remove from the Me object and the Person object to be safe, catch in case they dont exist there
+      try {
+        person = Person.withId(Me.first().id)
+        person.skills.remove(meta.skillId)
+      } catch (e) {}
+      try {
+        me = Me.first()
+        me.skills.remove(meta.skillId)
+      } catch (e) {}
       break
     }
 

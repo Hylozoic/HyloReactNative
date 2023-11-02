@@ -61,6 +61,14 @@ exports[`createGroup matches snapshot 1`] = `
   typeDescriptor
   typeDescriptorPlural
   visibility
+  agreements {
+    items {
+      id
+      description
+      order
+      title
+    }
+  }
   childGroups {
     items {
       id

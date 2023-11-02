@@ -34,7 +34,7 @@ export function TopDownModal ({
       onBackButtonPress={toggleModal}
       onSwipeComplete={toggleModal}
       style={[styles.modal, style]}
-      swipeDirection={['down']}
+      swipeDirection={['right']}
       transparent
       {...forwardedProps}
     >

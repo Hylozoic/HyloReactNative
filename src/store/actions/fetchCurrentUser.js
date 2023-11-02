@@ -131,6 +131,14 @@ export default function fetchCurrentUser () {
                 purpose
                 slug
                 visibility
+                agreements {
+                  items {
+                    id
+                    description
+                    order
+                    title
+                  }
+                }
                 childGroups(first: 300) {
                   items {
                     accessibility
@@ -143,8 +151,12 @@ export default function fetchCurrentUser () {
                     visibility
                     settings {
                       allowGroupInvites
+                      askGroupToGroupJoinQuestions
                       askJoinQuestions
+                      hideExtensionData
+                      locationDisplayPrecision
                       publicMemberDirectory
+                      showSuggestedSkills
                     }
                   }
                 }
@@ -182,6 +194,12 @@ export default function fetchCurrentUser () {
                 }
                 settings {
                   allowGroupInvites
+                }
+                suggestedSkills {
+                  items {
+                    id
+                    name
+                  }
                 }
               }
             }          

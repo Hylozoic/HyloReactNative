@@ -37,7 +37,7 @@ exports[`renders as expected 1`] = `
       }
       swipeDirection={
         [
-          "down",
+          "right",
         ]
       }
       swipeThreshold={100}

@@ -8,8 +8,12 @@ exports[`updateGroupSettings 1`] = `
           id
           settings {
             allowGroupInvites
+            askGroupToGroupJoinQuestions
             askJoinQuestions
+            hideExtensionData
+            locationDisplayPrecision
             publicMemberDirectory
+            showSuggestedSkills
           }
           joinQuestions {
             items {

@@ -47,6 +47,14 @@ const groupFieldsFragment = ({ withTopics, withJoinQuestions, withPrerequisites,
   typeDescriptor
   typeDescriptorPlural
   visibility
+  agreements {
+    items {
+      id
+      description
+      order
+      title
+    }
+  }
   childGroups {
     items {
       id
