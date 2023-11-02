@@ -156,7 +156,6 @@ export default function Feed ({ topicName: providedTopicName }) {
   return (
     <>
       <GroupWelcomeModal groupId={currentGroup?.id} />
-      {/* This GroupWelcomeModal needs to be placed in each of the HomeTab.screens when it has more content */}
       <FeedList
         scrollRef={ref}
         forGroup={currentGroup}

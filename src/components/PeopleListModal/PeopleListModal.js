@@ -24,7 +24,6 @@ export function TopDownModal ({
   toggleModal,
   children,
   style,
-  containerStyle,
   ...forwardedProps
 }) {
   return (
@@ -34,11 +33,11 @@ export function TopDownModal ({
       onBackButtonPress={toggleModal}
       onSwipeComplete={toggleModal}
       style={[styles.modal, style]}
-      swipeDirection={['right']}
+      swipeDirection={['down']}
       transparent
       {...forwardedProps}
     >
-      <View style={[styles.container, containerStyle]}>
+      <View style={[styles.container]}>
         <TouchableOpacity onPress={toggleModal}><Icon name='Ex' style={styles.closeIcon} /></TouchableOpacity>
         {children}
       </View>

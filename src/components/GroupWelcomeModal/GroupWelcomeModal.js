@@ -17,7 +17,7 @@ import { caribbeanGreen, rhino } from 'style/colors'
 import Pill from 'components/Pill'
 import { useNavigation } from '@react-navigation/native'
 
-export default function GroupWelcomeModal ({ isVisible, groupId }) {
+export default function GroupWelcomeModal ({ groupId }) {
   const dispatch = useDispatch()
   const currentMemberships = useSelector(state => getMyMemberships(state))
   const currentUser = useSelector(getMe)
