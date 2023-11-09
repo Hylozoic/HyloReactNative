@@ -51,6 +51,7 @@ export default function ChatRoom () {
         handledWebRoutes={handledWebRoutes}
         nativeRouteHandler={nativeRouteHandler}
         path={path}
+        route={route}
       />
     </KeyboardFriendlyView>
   )

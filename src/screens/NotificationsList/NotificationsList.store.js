@@ -179,7 +179,9 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
       return {
         body: `wrote: ${truncateHTML(post.details)}`,
         header: 'New Post in',
-        onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
+        onPress: () => {
+          navigate('Chat', { topicName: topic, postId: post.id })
+        },
         topic
       }
     }
