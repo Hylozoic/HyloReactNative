@@ -185,7 +185,7 @@ export function postPromptString (type = '', { firstName }) {
     request: `Hi ${firstName}, what are you looking for?`,
     project: `Hi ${firstName}, what would you like to create?`,
     event: `Hi ${firstName}, want to create an event?`,
-    default: `Hi ${firstName}, what's on your mind?`
+    default: `Hi ${firstName}, press here to post`
   }
 
   return postPrompts[type] || postPrompts.default

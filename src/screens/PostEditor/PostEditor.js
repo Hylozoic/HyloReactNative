@@ -48,7 +48,7 @@ import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import { caribbeanGreen, rhino30, rhino80, white } from 'style/colors'
 
 const titlePlaceholders = {
-  discussion: "What's on your mind?",
+  discussion: 'Create a post',
   request: 'What are you looking for help with?',
   offer: 'What help can you offer?',
   resource: 'What resource is available?',
