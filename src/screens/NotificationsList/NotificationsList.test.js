@@ -55,7 +55,8 @@ describe('NotificationsList', () => {
     shallowRenderer.render(<NotificationsList {...props} />)
     const actual = shallowRenderer.getRenderOutput()
 
-    expect(actual).toEqual(<Loading />)
+    const loadingComponent = actual.props.children[0].props.children // Accessing the Loading component within the structure
+    expect(loadingComponent).toEqual(<Loading />)
   })
 
   it('returns a message when no notifications are available', () => {

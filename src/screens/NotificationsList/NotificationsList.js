@@ -34,6 +34,15 @@ export class NotificationsList extends Component {
     updateNewNotificationCount()
   }
 
+  componentDidUpdate (prevProps) {
+    const { fetchNotifications, updateNewNotificationCount } = this.props
+    if (!prevProps.isFocused && this.props.isFocused) {
+      this.setHeader()
+      fetchNotifications()
+      updateNewNotificationCount()
+    }
+  }
+
   UNSAFE_componentWillReceiveProps (nextProps) {
     if (!this.props.pending && nextProps.pending) {
       this.setState({ ready: true })
@@ -52,10 +61,6 @@ export class NotificationsList extends Component {
     const { hasMore, markActivityRead, notifications, pending, currentUserHasMemberships, goToCreateGroup } = this.props
     const { ready } = this.state
 
-    if (!ready || (pending && notifications.length === 0)) {
-      return <Loading />
-    }
-
     if (!currentUserHasMemberships) {
       return (
         <CreateGroupNotice
@@ -71,6 +76,12 @@ export class NotificationsList extends Component {
 
     return (
       <View style={styles.notificationsList}>
+        {
+          pending &&
+            <View style={styles.loadingContainer}>
+              <Loading />
+            </View>
+        }
         <FlatList
           data={notifications}
           keyExtractor={this.keyExtractor}
