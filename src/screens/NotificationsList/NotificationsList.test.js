@@ -49,13 +49,14 @@ describe('NotificationsList', () => {
     expect(renderer.toJSON()).toMatchSnapshot()
   })
 
-  it('returns Loading with no notifications when pending is true', () => {
+  it('Shows Loading when pending is true', () => {
     props.pending = true
     props.notifications = []
     shallowRenderer.render(<NotificationsList {...props} />)
     const actual = shallowRenderer.getRenderOutput()
 
-    expect(actual).toEqual(<Loading />)
+    const loadingComponent = actual.props.children[0].props.children // Accessing the Loading component within the structure
+    expect(loadingComponent).toEqual(<Loading />)
   })
 
   it('returns a message when no notifications are available', () => {
