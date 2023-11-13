@@ -111,7 +111,7 @@ describe('PostEditor', () => {
     )
     const { getByText, getByPlaceholderText, toJSON } = render(component)
     fireEvent.changeText(
-      getByPlaceholderText("What's on your mind?"),
+      getByPlaceholderText('Create a post'),
       'title of this post'
     )
     fireEvent.press(getByText('Save'))
