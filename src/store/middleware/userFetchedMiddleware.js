@@ -35,10 +35,8 @@ async function identifyMixpanelUser (state) {
 function registerIntercomUser (state) {
   const user = getMe(state)
   Intercom.setUserHash(user.hash)
-  Intercom.registerIdentifiedUser({
-    userId: user.id
-  })
-  Intercom.updateUser({
+  Intercom.loginUserWithUserAttributes({
+    userId: user.id,
     name: user.name,
     email: user.email
   })

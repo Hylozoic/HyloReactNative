@@ -1,13 +1,14 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Intercom from '@intercom/intercom-react-native'
 import { isIOS } from 'util/platform'
 import getMe from 'store/selectors/getMe'
 // Helper Components
 import Icon from 'components/Icon'
 import Avatar from 'components/Avatar'
-import { black10OnCaribbeanGreen, gainsboro, gunsmoke, rhino05, rhino10, white } from 'style/colors'
+import { black10OnCaribbeanGreen, gainsboro, gunsmoke, rhino05, rhino10, rhino60, white } from 'style/colors'
 // Screens
 import HomeNavigator from 'navigation/HomeNavigator'
 import SearchNavigator from 'navigation/SearchNavigator'
@@ -48,11 +49,31 @@ export default function TabsNavigator () {
   }
   const currentUser = useSelector(getMe)
 
+  const handleSupportTabPress = () => {
+    Intercom.present()
+  }
+
   return (
     <Tabs.Navigator {...navigatorProps}>
       <Tabs.Screen name='Home Tab' component={HomeNavigator} />
       <Tabs.Screen name='Search Tab' component={SearchNavigator} />
       <Tabs.Screen name='Messages Tab' component={MessagesNavigator} />
+      <Tabs.Screen
+        name='Support Tab'
+        component={HomeNavigator} // it will never navigate to this but we need to pass a valid component here anyway
+        listeners={{
+          tabPress: (e) => {
+            handleSupportTabPress()
+
+            e.preventDefault()
+          }
+        }}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Text style={{ fontSize: 28, fontFamily: 'Circular-Bold', color: focused ? black10OnCaribbeanGreen : rhino60 }}>?</Text>
+          )
+        }}
+      />
       <Tabs.Screen
         name='Settings Tab'
         component={UserSettingsTabsNavigator}

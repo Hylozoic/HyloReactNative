@@ -27,7 +27,7 @@
     "@emoji-mart/react": "^1.1.1",
     "@expo/react-native-action-sheet": "^4.0.1",
     "@flyerhq/react-native-keyboard-accessory-view": "^2.4.0",
-    "@intercom/intercom-react-native": "^3.0.5",
+    "@intercom/intercom-react-native": "^6.2.0",
     "@invertase/react-native-apple-authentication": "^2.2.2",
     "@native-html/iframe-plugin": "^2.6.1",
     "@react-native-async-storage/async-storage": "^1.17.10",

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { modalScreenName } from 'hooks/useIsModalScreen'
@@ -19,6 +18,7 @@ import { useDispatch } from 'react-redux'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import OneSignal from 'react-native-onesignal'
 import registerDevice from 'store/actions/registerDevice'
+import { fetchNotifications, updateNewNotificationCount } from 'screens/NotificationsList/NotificationsList.store'
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
@@ -44,6 +44,8 @@ export default function AuthRootNavigator () {
 
       setLoading(false)
     })()
+    dispatch(fetchNotifications())
+    dispatch(updateNewNotificationCount())
   }, [])
 
   if (loading) return <LoadingScreen />
