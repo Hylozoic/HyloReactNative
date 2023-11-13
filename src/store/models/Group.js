@@ -6,6 +6,10 @@ import allGroupsAvatarUrl from 'assets/All_Groups2.png'
 import myHomeAvatarUrl from 'assets/my-home.png'
 import allGroupshHeaderAvatarUrl from 'assets/All_Groups.png'
 import publicGroupAvatarUrl from 'assets/public.png'
+import GREEN_HERO_BANNER_PATH from 'assets/green-hero.jpg'
+import GREEN_ICON_AVATAR_PATH from 'assets/green-icon.jpg'
+import PURPLE_HERO_BANNER_PATH from 'assets/purple-hero.jpg'
+import PURPLE_ICON_AVATAR_PATH from 'assets/purple-icon.jpg'
 
 export const GROUP_ACCESSIBILITY = {
   Closed: 0,
@@ -219,13 +223,12 @@ export const ALL_GROUP = {
 }
 
 export const PUBLIC_GROUP_ID = PUBLIC_CONTEXT_SLUG
-export const PUBLIC_GROUP_AVATAR_PATH = '/assets/public.png'
 export const PUBLIC_GROUP = {
   id: PUBLIC_GROUP_ID,
   slug: PUBLIC_GROUP_ID,
-  headerAvatarUrl: Image.resolveAssetSource(allGroupshHeaderAvatarUrl).uri,
+  headerAvatarUrl: Image.resolveAssetSource(GREEN_ICON_AVATAR_PATH).uri,
   avatarUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
-  bannerUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
+  bannerUrl: Image.resolveAssetSource(GREEN_HERO_BANNER_PATH).uri,
   name: 'Public Stream',
   parentGroups: { toModelArray: () => [] },
   childGroups: { toModelArray: () => [] }
@@ -236,9 +239,9 @@ export const MY_CONTEXT_AVATAR_PATH = '/assets/my-home.png'
 export const MY_CONTEXT_GROUP = {
   id: MY_CONTEXT_ID,
   slug: MY_CONTEXT_ID,
-  headerAvatarUrl: Image.resolveAssetSource(myHomeAvatarUrl).uri,
+  headerAvatarUrl: Image.resolveAssetSource(PURPLE_ICON_AVATAR_PATH).uri,
   avatarUrl: Image.resolveAssetSource(myHomeAvatarUrl).uri,
-  bannerUrl: Image.resolveAssetSource(publicGroupAvatarUrl).uri,
+  bannerUrl: Image.resolveAssetSource(PURPLE_HERO_BANNER_PATH).uri,
   name: 'My Home',
   parentGroups: { toModelArray: () => [] },
   childGroups: { toModelArray: () => [] }
