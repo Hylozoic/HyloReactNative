@@ -108,6 +108,8 @@ export class FeedListClassComponent extends React.Component {
       customPostTypes
     } = this.props
 
+    const context = fetchPostParam?.context
+
     const extraToggleStyles = fetchPostParam.childPostInclusion === 'yes'
       ? {
           backgroundColor: pictonBlue
@@ -132,9 +134,10 @@ export class FeedListClassComponent extends React.Component {
                 <View style={[styles.listControls]}>
                   <ListControl selected={sortBy} onChange={setSort} options={STREAM_SORT_OPTIONS} />
                   <View style={styles.steamControlRightSide}>
-                    <TouchableOpacity onPress={this.handleChildPostToggle}>
-                      <View style={{ ...styles.childGroupToggle, ...extraToggleStyles }}><Icon name='Subgroup' color={fetchPostParam.childPostInclusion === 'yes' ? '#FFFFFF' : pictonBlue} /></View>
-                    </TouchableOpacity>
+                    {!['my', 'public'].includes(context) &&
+                      <TouchableOpacity onPress={this.handleChildPostToggle}>
+                        <View style={{ ...styles.childGroupToggle, ...extraToggleStyles }}><Icon name='Subgroup' color={fetchPostParam.childPostInclusion === 'yes' ? '#FFFFFF' : pictonBlue} /></View>
+                      </TouchableOpacity>}
                     {!customPostTypes && <ListControl selected={filter} onChange={setFilter} options={POST_TYPE_OPTIONS} />}
                   </View>
                 </View>
@@ -159,6 +162,7 @@ export class FeedListClassComponent extends React.Component {
 
 export function renderPostRow ({
   postId,
+  fetchPostParam,
   forGroup,
   showPost,
   showMember,
@@ -167,6 +171,7 @@ export function renderPostRow ({
 }) {
   return (
     <PostRow
+      context={fetchPostParam?.context}
       postId={postId}
       forGroupId={forGroup?.id}
       showGroups={!forGroup?.id || isContextGroup(forGroup?.slug)}

@@ -14,14 +14,14 @@ import {
   NO_POST_FILTER
 } from './FeedList.store'
 import { FETCH_POSTS } from 'store/constants'
-import { ALL_GROUP_ID, isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
+import { ALL_GROUP_ID, isContextGroup, MY_CONTEXT_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import getMe from 'store/selectors/getMe'
 import fetchPosts from 'store/actions/fetchPosts'
 import resetNewPostCount from 'store/actions/resetNewPostCount'
 import updateUserSettings from 'store/actions/updateUserSettings'
 
 export function mapStateToProps (state, props) {
-  const { forGroup, topicName, customView } = props
+  const { forGroup, topicName, customView, myHome } = props
   const currentUser = getMe(state, props)
 
   const defaultPostType = get('settings.streamPostType', currentUser) || null
@@ -51,11 +51,12 @@ export function mapStateToProps (state, props) {
     activePostsOnly,
     childPostInclusion,
     forCollection: customViewCollectionId,
-    // Can be one of: ['groups', 'all', 'public']
+    // Can be one of: ['groups', 'all', 'public', 'my']
     context: isContextGroup(forGroup?.slug)
       ? forGroup.slug
-      : 'groups',
-    slug: forGroup?.slug,
+      : myHome ? 'my' : 'groups',
+    myHome,
+    slug: myHome ? undefined : forGroup?.slug,
     topicName,
     sortBy,
     topics: customViewTopics?.toModelArray().map(t => t.id) || null,
@@ -63,6 +64,11 @@ export function mapStateToProps (state, props) {
     // Can be any of the Post Types:
     filter: postTypeFilter === NO_POST_FILTER ? null : postTypeFilter
   })
+
+  if (myHome === 'Mentions') fetchPostParam.mentionsOf = [currentUser.id]
+  if (myHome === 'Announcements') fetchPostParam.announcementsOnly = true
+  if (myHome === 'Interactions') fetchPostParam.interactedWithBy = [currentUser.id]
+  if (myHome === 'My Posts') fetchPostParam.createdBy = [currentUser.id]
 
   if (props.feedType === 'event') {
     fetchPostParam = {
@@ -94,6 +100,7 @@ const mapDispatchToProps = { setFilter, setSort, setTimeframe, fetchPosts, reset
 export function shouldResetNewPostCount ({ slug, sortBy, filter, topic }) {
   return slug !== ALL_GROUP_ID &&
     slug !== PUBLIC_GROUP_ID &&
+    slug !== MY_CONTEXT_ID &&
     !topic &&
     sortBy === defaultSortBy &&
     !filter

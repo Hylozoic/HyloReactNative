@@ -27,7 +27,8 @@ import SocketSubscriber from 'components/SocketSubscriber'
 import { bannerlinearGradientColors } from 'style/colors'
 import styles from './Feed.styles'
 
-export function headerTitle (currentGroup, feedType) {
+export function headerTitle (currentGroup, feedType, myHome) {
+  if (myHome) return myHome
   let title
   title = currentGroup?.name
   title = feedType ? capitalize(feedType + 's') : title
@@ -43,7 +44,7 @@ export default function Feed ({ topicName: providedTopicName }) {
   const customViewId = getRouteParam('customViewId', route)
   const customView = useSelector(state => getCustomView(state, { customViewId }))
   const feedType = getRouteParam('feedType', route)
-
+  const myHome = route?.params?.myHome
   const changeToGroup = useChangeToGroup()
   const goToTopicDefault = useGoToTopic()
   const topicName = providedTopicName || getRouteParam('topicName', route)
@@ -83,9 +84,9 @@ export default function Feed ({ topicName: providedTopicName }) {
 
   useEffect(() => {
     navigation.setOptions({
-      title: headerTitle(currentGroup, feedType)
+      title: headerTitle(currentGroup, feedType, myHome)
     })
-  }, [navigation, topicName, currentGroup, currentGroup?.id, feedType])
+  }, [navigation, topicName, currentGroup, currentGroup?.id, feedType, myHome])
 
   if (!currentUser) return <Loading style={{ flex: 1 }} />
 
@@ -126,7 +127,7 @@ export default function Feed ({ topicName: providedTopicName }) {
             </View>
           )}
           <Text style={styles.name} numberOfLines={3}>
-            {customViewName || name}
+            {customViewName || myHome || name}
           </Text>
           {topicName && (
             <View style={styles.topicInfo}>
@@ -167,6 +168,7 @@ export default function Feed ({ topicName: providedTopicName }) {
         customView={customView}
         topicName={topicName}
         feedType={feedType}
+        myHome={myHome}
         // Custom Views
         customPostTypes={customPostTypes}
       />

@@ -3,15 +3,39 @@ import { FETCH_POSTS } from 'store/constants'
 import postsQueryFragment from 'graphql/fragments/postsQueryFragment'
 import groupViewPostsQueryFragment from 'graphql/fragments/groupViewPostsQueryFragment'
 
-// NOTE: All of the below is currently tracking `hylo-evo/src/routes/Stream.store.js`
-export default function fetchPosts ({ activePostsOnly, afterTime, beforeTime, childPostInclusion = 'yes', collectionToFilterOut, context, filter, first, forCollection, offset, order, search, slug, sortBy, topic, topics, types }) {
+// NOTE: All of the below is currently (as of 10/23) tracking `hylo-evo/src/routes/Stream.store.js`
+export default function fetchPosts ({
+  activePostsOnly,
+  afterTime,
+  announcementsOnly,
+  beforeTime,
+  childPostInclusion = 'yes',
+  collectionToFilterOut,
+  context,
+  createdBy,
+  cursor,
+  filter,
+  first,
+  forCollection,
+  interactedWithBy,
+  mentionsOf,
+  myHome,
+  offset,
+  order,
+  search,
+  slug,
+  sortBy,
+  topic,
+  topics,
+  types
+}) {
   let query, extractModel, getItems
 
   if (context === 'groups') {
     query = groupQuery(childPostInclusion === 'yes')
     extractModel = 'Group'
     getItems = get('payload.data.group.posts')
-  } else if (context === 'all' || context === 'public') {
+  } else if (context === 'all' || context === 'public' || context === 'my') {
     query = postsQuery
     extractModel = 'Post'
     getItems = get('payload.data.posts')
@@ -26,13 +50,18 @@ export default function fetchPosts ({ activePostsOnly, afterTime, beforeTime, ch
       variables: {
         activePostsOnly,
         afterTime,
+        announcementsOnly,
         beforeTime,
         childPostInclusion,
         collectionToFilterOut,
         context,
+        createdBy,
+        cursor,
         filter,
         first: first || 20,
         forCollection,
+        interactedWithBy,
+        mentionsOf,
         offset,
         order,
         search,
@@ -93,15 +122,19 @@ const groupQuery = childPostInclusion => `query GroupPostsQuery (
 const postsQuery = `query PostsQuery (
   $activePostsOnly: Boolean,
   $afterTime: Date,
+  $announcementsOnly: Boolean,
   $beforeTime: Date,
   $boundingBox: [PointInput],
   $collectionToFilterOut: ID,
   $context: String,
+  $createdBy: [ID],
   $filter: String,
   $first: Int,
   $forCollection: ID,
   $groupSlugs: [String],
+  $interactedWithBy: [ID],
   $isFulfilled: Boolean,
+  $mentionsOf: [ID],
   $offset: Int,
   $order: String,
   $search: String,

@@ -7,6 +7,7 @@ import PostCard from 'components/PostCard'
 import styles from './PostRow.styles'
 
 export default function PostRow ({
+  context,
   goToGroup,
   postId,
   forGroupId,
@@ -37,7 +38,7 @@ export default function PostRow ({
           showGroups={showGroups}
           showMember={showMember}
           showTopic={showTopic}
-          childPost={forGroupId !== 'all' && forGroupId !== 'public' && !groupIds.includes(forGroupId)}
+          childPost={forGroupId !== 'all' && forGroupId !== 'public' && context !== 'my' && !groupIds.includes(forGroupId)}
         />
       </TouchableOpacity>
     </View>

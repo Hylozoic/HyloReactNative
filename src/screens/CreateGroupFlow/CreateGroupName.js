@@ -10,7 +10,7 @@ import {
 } from './CreateGroupFlow.store'
 import ErrorBubble from 'components/ErrorBubble'
 import styles from './CreateGroupFlow.styles'
-import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
+import { ALL_GROUP_ID, MY_CONTEXT_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 
 export default function CreateGroupName ({ route }) {
   
@@ -43,7 +43,7 @@ export default function CreateGroupName ({ route }) {
   }, [groupName]))
 
   useFocusEffect(useCallback(() => {
-    if (!edited && ![ALL_GROUP_ID, PUBLIC_GROUP_ID].includes(currentGroup?.id)) {
+    if (!edited && ![ALL_GROUP_ID, PUBLIC_GROUP_ID, MY_CONTEXT_ID].includes(currentGroup?.id)) {
       dispatch(updateGroupData({ parentIds: [currentGroup?.id] }))
     }
   }, [edited, currentGroup?.id]))
