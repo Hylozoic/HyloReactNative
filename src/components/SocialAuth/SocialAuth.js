@@ -1,11 +1,10 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Text, View } from 'react-native'
-import { loginWithApple, loginWithFacebook, loginWithGoogle } from './actions'
+import { loginWithApple, loginWithGoogle } from './actions'
 import checkLogin from 'store/actions/checkLogin'
 import { isIOS } from 'util/platform'
 import AppleLoginButton from './AppleLoginButton'
-import FbLoginButton from './FbLoginButton'
 import GoogleLoginButton from './GoogleLoginButton'
 import { rhino60 } from 'style/colors'
 
@@ -48,12 +47,6 @@ export default function SocialAuth ({ onStart, onComplete, forSignup }) {
       <GoogleLoginButton
         style={styles.socialLoginButton}
         onLoginFinished={socialLoginMaker(loginWithGoogle)}
-        createErrorNotification={onComplete}
-        signup={forSignup}
-      />
-      <FbLoginButton
-        style={styles.socialLoginButton}
-        onLoginFinished={socialLoginMaker(loginWithFacebook)}
         createErrorNotification={onComplete}
         signup={forSignup}
       />

@@ -1,5 +1,4 @@
 import { isEmpty } from 'lodash'
-import { LoginManager as FacebookLoginManager } from 'react-native-fbsdk-next'
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
 import Intercom from '@intercom/intercom-react-native'
 import { LOGOUT } from 'store/constants'
@@ -19,7 +18,6 @@ export default function logout () {
         try {
           clearSessionCookie()
           Intercom.logout()
-          FacebookLoginManager.logOut()
           if (!isEmpty(await GoogleSignin.getCurrentUser())) {
             await GoogleSignin.signOut()
           }
