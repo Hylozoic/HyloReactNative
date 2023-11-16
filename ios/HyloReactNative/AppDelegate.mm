@@ -42,7 +42,7 @@
     options:options
   ];
 
-  return handledFB || handledGG || handledRCT;
+  return handledGG || handledRCT;
 }
 
 // Hylo url/linking and app open/continuation related
