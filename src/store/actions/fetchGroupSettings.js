@@ -9,6 +9,14 @@ export default function fetchGroupSettings (id) {
           group (id: $id) {
             id
             accessibility
+            agreements {
+              items {
+                id
+                description
+                order
+                title
+              }
+            }
             avatarUrl
             bannerUrl
             description
@@ -18,8 +26,12 @@ export default function fetchGroupSettings (id) {
             purpose
             settings {
               allowGroupInvites
+              askGroupToGroupJoinQuestions
               askJoinQuestions
+              hideExtensionData
+              locationDisplayPrecision
               publicMemberDirectory
+              showSuggestedSkills
             }
             slug
             visibility

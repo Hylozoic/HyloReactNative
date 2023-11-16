@@ -52,6 +52,14 @@ export default () => {
     typeDescriptor
     typeDescriptorPlural
     visibility
+    agreements {
+      items {
+        id
+        description
+        order
+        title
+      }
+    }
     activeProjects: posts(filter: "project", sortBy: "updated", order: "desc", first: 4) {
       items {
         id

@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import Icon from 'components/Icon'
 
 export default function Pill ({
   id,
   label,
   onRemove,
-  displayColor = 'rgba(s, 239, 241, 1.0)',
+  displayColor = 'rgba(112, 239, 241, 1.0)',
   style,
-  editable
+  editable,
+  pressable
 }) {
   const [removing, setRemoving] = useState(false)
   const deletePill = () => {
@@ -27,19 +28,21 @@ export default function Pill ({
   ]
 
   return (
-    <View
-      style={pillStyles}
-      onMouseLeave={mouseOut}
-    >
-      <View>
-        <Text style={{ color: displayColor }}>{label}</Text>
+    <TouchableOpacity hitSlop={2} onPress={pressable}>
+      <View
+        style={pillStyles}
+        onMouseLeave={mouseOut}
+      >
+        <View>
+          <Text style={{ color: displayColor }}>{label}</Text>
+        </View>
+        {editable &&
+          <Icon
+            name='Ex'
+            onClick={deletePill}
+          />}
       </View>
-      {editable &&
-        <Icon
-          name='Ex'
-          onClick={deletePill}
-        />}
-    </View>
+    </TouchableOpacity>
   )
 }
 

@@ -37,7 +37,7 @@ export function TopDownModal ({
       transparent
       {...forwardedProps}
     >
-      <View style={styles.container}>
+      <View style={[styles.container]}>
         <TouchableOpacity onPress={toggleModal}><Icon name='Ex' style={styles.closeIcon} /></TouchableOpacity>
         {children}
       </View>

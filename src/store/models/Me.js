@@ -78,10 +78,10 @@ export default Me
 
 Me.modelName = 'Me'
 Me.fields = {
+  blockedUsers: many('Person'),
+  intercomHash: attr(),
   isAdmin: attr(),
   name: attr(),
-  posts: many('Post'),
-  intercomHash: attr(),
   groupInvitesPending: many('Invitation'),
   joinRequests: many('JoinRequest'),
   location: attr(),
@@ -97,6 +97,7 @@ Me.fields = {
   memberships: many('Membership'),
 
   messageThreads: many('MessageThread'),
+  posts: many('Post'),
   notifications: many('Notification'),
   skills: many('Skill'),
   skillsToLearn: many({
@@ -104,6 +105,5 @@ Me.fields = {
     relatedName: 'personLearning',
     through: 'MySkillsToLearn',
     throughFields: [ 'me', 'skillToLearn' ]
-  }),
-  blockedUsers: many('Person')
+  })
 }

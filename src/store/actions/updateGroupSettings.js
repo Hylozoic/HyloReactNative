@@ -9,8 +9,12 @@ export default function updateGroupSettings (id, changes) {
           id
           settings {
             allowGroupInvites
+            askGroupToGroupJoinQuestions
             askJoinQuestions
+            hideExtensionData
+            locationDisplayPrecision
             publicMemberDirectory
+            showSuggestedSkills
           }
           joinQuestions {
             items {
