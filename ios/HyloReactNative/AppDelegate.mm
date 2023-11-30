@@ -5,7 +5,6 @@
 
 // Added libraries
 #import "RNBootSplash.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
 #import <IntercomModule.h>
 
@@ -18,11 +17,6 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
 
-  // Facebook SDK
-  [[FBSDKApplicationDelegate sharedInstance]
-    application:application
-    didFinishLaunchingWithOptions:launchOptions
-  ];
   // Intercom
   [IntercomModule
     initialize:@"ios_sdk-b11cb526589263a9890b895d40b934bffa876c43"
@@ -37,11 +31,6 @@
   openURL:(NSURL *)url
   options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
-  BOOL handledFB = [[FBSDKApplicationDelegate sharedInstance]
-    application:application
-    openURL:url
-    options:options
-  ];
   BOOL handledGG = [RNGoogleSignin
     application:application
     openURL:url
@@ -53,7 +42,7 @@
     options:options
   ];
 
-  return handledFB || handledGG || handledRCT;
+  return handledGG || handledRCT;
 }
 
 // Hylo url/linking and app open/continuation related
