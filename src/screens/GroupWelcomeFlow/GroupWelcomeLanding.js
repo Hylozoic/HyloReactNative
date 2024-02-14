@@ -75,7 +75,7 @@ export default function GroupWelcomeLanding ({ route }) {
       group.id,
       { joinQuestionsAnsweredAt: new Date(), showJoinForm: false },
       true,
-      questionAnswers.map(q => ({ questionId: q.questionId, answer: q.answer }))
+      questionAnswers ? questionAnswers.map(q => ({ questionId: q.questionId, answer: q.answer })) : []
     )).then(() => navigation.goBack())
     return null
   }

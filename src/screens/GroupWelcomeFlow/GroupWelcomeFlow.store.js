@@ -101,7 +101,7 @@ export function getRouteNames (group) {
   if (!isEmpty(agreements)) {
     routeNames.push(GROUP_WELCOME_AGREEMENTS)
   }
-  if (!isEmpty(joinQuestions)) {
+  if (settings.askJoinQuestions && !isEmpty(joinQuestions)) {
     routeNames.push(GROUP_WELCOME_JOIN_QUESTIONS)
   }
   if (!isEmpty(suggestedSkills) && settings?.showSuggestedSkills) {
