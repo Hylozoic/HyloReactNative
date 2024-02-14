@@ -1,3 +1,3 @@
-import component from './GroupWelcomeModal'
+import component from './GroupWelcomeCheck'
 
 export default component
