@@ -48,6 +48,7 @@ exports[`createGroup matches snapshot 1`] = `
   name
   purpose
   settings {
+    agreementsLastUpdatedAt
     allowGroupInvites
     askGroupToGroupJoinQuestions
     askJoinQuestions
@@ -154,6 +155,8 @@ exports[`createGroup matches snapshot 1`] = `
                   id
                 }
                 settings {
+                  agreementsAcceptedAt
+                  joinQuestionsAnsweredAt
                   sendEmail
                   showJoinForm
                   sendPushNotifications

@@ -6,7 +6,7 @@ import getRouteParam from 'store/selectors/getRouteParam'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import HyloWebView from 'components/HyloWebView'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
-import GroupWelcomeModal from 'components/GroupWelcomeModal/GroupWelcomeModal'
+import GroupWelcomeCheck from 'components/GroupWelcomeCheck'
 
 export default function ChatRoom () {
   const navigation = useNavigation()
@@ -46,7 +46,7 @@ export default function ChatRoom () {
 
   return (
     <KeyboardFriendlyView style={{ flex: 1 }}>
-      <GroupWelcomeModal groupId={currentGroup?.id} />
+      <GroupWelcomeCheck groupId={currentGroup?.id} />
       <HyloWebView
         handledWebRoutes={handledWebRoutes}
         nativeRouteHandler={nativeRouteHandler}

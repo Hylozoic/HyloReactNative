@@ -24,7 +24,7 @@ import Icon from 'components/Icon'
 import FeedList from 'components/FeedList'
 import Loading from 'components/Loading'
 import SocketSubscriber from 'components/SocketSubscriber'
-import GroupWelcomeModal from 'components/GroupWelcomeModal'
+import GroupWelcomeCheck from 'components/GroupWelcomeCheck'
 import { bannerlinearGradientColors } from 'style/colors'
 import styles from './Feed.styles'
 
@@ -156,7 +156,7 @@ export default function Feed ({ topicName: providedTopicName }) {
 
   return (
     <>
-      <GroupWelcomeModal groupId={currentGroup?.id} />
+      <GroupWelcomeCheck groupId={currentGroup?.id} />
       <FeedList
         scrollRef={ref}
         forGroup={currentGroup}

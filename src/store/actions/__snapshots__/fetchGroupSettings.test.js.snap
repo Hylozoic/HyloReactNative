@@ -24,6 +24,7 @@ exports[`fetchGroupSettings 1`] = `
             name
             purpose
             settings {
+              agreementsLastUpdatedAt
               allowGroupInvites
               askGroupToGroupJoinQuestions
               askJoinQuestions

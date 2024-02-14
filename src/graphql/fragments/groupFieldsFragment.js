@@ -34,6 +34,7 @@ const groupFieldsFragment = ({ withTopics, withJoinQuestions, withPrerequisites,
   name
   purpose
   settings {
+    agreementsLastUpdatedAt
     allowGroupInvites
     askGroupToGroupJoinQuestions
     askJoinQuestions
@@ -145,6 +146,7 @@ const groupFieldsFragment = ({ withTopics, withJoinQuestions, withPrerequisites,
       id
       name
       settings {
+        agreementsLastUpdatedAt
         allowGroupInvites
         askGroupToGroupJoinQuestions
         askJoinQuestions

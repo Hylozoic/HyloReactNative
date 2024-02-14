@@ -8,6 +8,7 @@ export default function updateGroupSettings (id, changes) {
         updateGroupSettings(id: $id, changes: $changes) {
           id
           settings {
+            agreementsLastUpdatedAt
             allowGroupInvites
             askGroupToGroupJoinQuestions
             askJoinQuestions

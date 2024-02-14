@@ -39,6 +39,7 @@ export default () => {
     name
     purpose
     settings {
+      agreementsLastUpdatedAt
       allowGroupInvites
       askGroupToGroupJoinQuestions
       askJoinQuestions
@@ -109,6 +110,7 @@ export default () => {
         slug
         visibility
         settings {
+          agreementsLastUpdatedAt
           allowGroupInvites
           askGroupToGroupJoinQuestions
           askJoinQuestions
@@ -223,6 +225,7 @@ export default () => {
         slug
         visibility
         settings {
+          agreementsLastUpdatedAt
           allowGroupInvites
           askGroupToGroupJoinQuestions
           askJoinQuestions

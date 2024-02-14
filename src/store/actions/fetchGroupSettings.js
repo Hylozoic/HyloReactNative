@@ -25,6 +25,7 @@ export default function fetchGroupSettings (id) {
             name
             purpose
             settings {
+              agreementsLastUpdatedAt
               allowGroupInvites
               askGroupToGroupJoinQuestions
               askJoinQuestions

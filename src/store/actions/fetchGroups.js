@@ -85,6 +85,7 @@ query (
       purpose
       type
       settings {
+        agreementsLastUpdatedAt
         allowGroupInvites
         askGroupToGroupJoinQuestions
         askJoinQuestions

@@ -93,6 +93,8 @@ export default function fetchCurrentUser () {
               newPostCount
               hasModeratorRole
               settings {
+                agreementsAcceptedAt
+                joinQuestionsAnsweredAt
                 sendEmail
                 sendPushNotifications
                 showJoinForm
@@ -199,6 +201,13 @@ export default function fetchCurrentUser () {
                   items {
                     id
                     name
+                  }
+                }
+                joinQuestions {
+                  items {
+                    id
+                    questionId
+                    text
                   }
                 }
               }
