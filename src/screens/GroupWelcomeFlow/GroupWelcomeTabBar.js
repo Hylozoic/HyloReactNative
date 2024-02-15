@@ -21,7 +21,7 @@ export default function GroupWelcomeTabBar ({ group, acceptedAllAgreements, agre
   const disableContinue = !!workflowOptions?.disableContinue
   const [completeButtonDisabled, setCompleteButtonDisabled] = useState(false)
   const currentMemberships = useSelector(state => getMyMemberships(state))
-  const currentMembership = currentMemberships.find(m => m.group.id === groupId)
+  const currentMembership = currentMemberships.find(m => m.group.id === group.id)
 
   const routeNames = getRouteNames(group, currentMembership)
   const prevStepScreenName = routeNames[currentStepIndex - 1]

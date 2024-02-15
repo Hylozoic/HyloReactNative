@@ -26,10 +26,10 @@ export default function GroupWelcomeLanding ({ route }) {
   const currentGroup = useSelector(state => getGroup(state, { id: groupId }))
   const group = presentGroup(currentGroup)
   const currentStepIndex = useSelector(getCurrentStepIndex)
-  const routeNames = getRouteNames(group)
   const currentUser = useSelector(getMe)
   const currentMemberships = useSelector(state => getMyMemberships(state))
   const currentMembership = currentMemberships.find(m => m.group.id === groupId)
+  const routeNames = getRouteNames(group, currentMembership)
   const addSkill = name => dispatch(addSkillAction(name))
   const removeSkill = skillId => dispatch(removeSkillAction(skillId))
 
