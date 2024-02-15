@@ -95,13 +95,13 @@ export function getCurrentStepIndex (state) {
   return state[MODULE_NAME].currentStepIndex
 }
 
-export function getRouteNames (group) {
+export function getRouteNames (group, currentMembership) {
   const routeNames = [GROUP_WELCOME_LANDING]
   const { agreements, joinQuestions, suggestedSkills, settings } = group
   if (!isEmpty(agreements)) {
     routeNames.push(GROUP_WELCOME_AGREEMENTS)
-  }
-  if (settings.askJoinQuestions && !isEmpty(joinQuestions)) {
+  } 
+  if (settings.askJoinQuestions && !isEmpty(joinQuestions) && !currentMembership?.settings?.joinQuestionsAnsweredAt) {
     routeNames.push(GROUP_WELCOME_JOIN_QUESTIONS)
   }
   if (!isEmpty(suggestedSkills) && settings?.showSuggestedSkills) {
