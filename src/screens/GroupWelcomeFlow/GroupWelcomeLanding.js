@@ -34,7 +34,7 @@ export default function GroupWelcomeLanding ({ route }) {
   const removeSkill = skillId => dispatch(removeSkillAction(skillId))
 
   const { name, avatarUrl, purpose, bannerUrl, description, agreements, joinQuestions } = group
-  const { agreementsAcceptedAt, joinQuestionsAnsweredAt } = currentMembership?.settings || {}
+  const { agreementsAcceptedAt, joinQuestionsAnsweredAt,showJoinForm } = currentMembership?.settings || {}
   const imageSource = { uri: avatarUrl || DEFAULT_AVATAR }
   const bgImageSource = { uri: bannerUrl || DEFAULT_BANNER }
 
@@ -49,6 +49,15 @@ export default function GroupWelcomeLanding ({ route }) {
   // Join Questions logic
   const [questionAnswers, setQuestionAnswers] = useState(joinQuestions.map(q => { return { questionId: q.questionId, text: q.text, answer: '' } }))
   const [allQuestionsAnswered, setAllQuestionsAnswered] = useState(!group?.settings?.askJoinQuestions || !!joinQuestionsAnsweredAt)
+
+  useEffect(() => {
+    if (!showJoinForm &&
+      !agreementsChanged &&
+      (joinQuestionsAnsweredAt ||
+      !group.settings?.askJoinQuestions)) {
+      navigation.navigate('Feed', { groupId, initial: false })
+    }
+  }, [showJoinForm, agreementsChanged, joinQuestionsAnsweredAt])
 
   useEffect(() => {
     if (numAgreements > 0) {
@@ -117,8 +126,9 @@ export default function GroupWelcomeLanding ({ route }) {
 }
 
 function LandingBodyContent ({ description, purpose, joinQuestions, suggestedSkills }) {
-  let backupText = 'Welcome to this group. There are a few things we need to look at before you can participate. After that, the group doesn\'t have a purpose or description, perhaps you could start a discussion about that?'
-  if (isEmpty(joinQuestions) && isEmpty(suggestedSkills)) backupText = 'Welcome to this group. Not a lot of the group details are filled out, so this group might still be getting set up. Perhaps you could start a discussion about what the group description or purpose should be?'
+  // TODO WELCOME: The welcome message on the explore page in EVO has the below as a default. But the customized welcome text lives inside of the welcome widget data. Bonus points for pulling that in here and also using it.
+  const backupText = '"We\'re happy you\'re here! Please take a moment to explore this page to see what\'s alive in our group. Introduce yourself by clicking Create to post a Discussion sharing who you are and what brings you to our group. And don\'t forget to fill out your profile - so likeminded new friends can connect with you!'
+
   return (
     <>
       {!isEmpty(purpose) &&
@@ -133,7 +143,7 @@ function LandingBodyContent ({ description, purpose, joinQuestions, suggestedSki
         </View>}
       {isEmpty(description) && isEmpty(purpose) &&
         <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
-          <Text style={styles.sectionHeading}>Description:</Text>
+          <Text style={styles.sectionHeading}>Welcome to this group:</Text>
           <Text style={styles.purposeText}>{backupText}</Text>
         </View>}
     </>

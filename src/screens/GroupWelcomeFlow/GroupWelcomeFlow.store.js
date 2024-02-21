@@ -100,7 +100,7 @@ export function getRouteNames (group, currentMembership) {
   const { agreements, joinQuestions, suggestedSkills, settings } = group
   if (!isEmpty(agreements)) {
     routeNames.push(GROUP_WELCOME_AGREEMENTS)
-  } 
+  }
   if (settings.askJoinQuestions && !isEmpty(joinQuestions) && !currentMembership?.settings?.joinQuestionsAnsweredAt) {
     routeNames.push(GROUP_WELCOME_JOIN_QUESTIONS)
   }
