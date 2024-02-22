@@ -65,7 +65,7 @@ export default function GroupWelcomeTabBar ({ group, acceptedAllAgreements, agre
     if (onJoinQuestionStepButNotReady) {
       explainerText = 'Please answer all the join questions to continue'
     }
-    const getOutTitle = enforceAgreements ? 'Return Home' : 'Skip'
+    const getOutTitle = enforceAgreements ? 'Exit this Group & Return Home' : 'Skip'
     const getOutFunc = enforceAgreements
       ? () => {
           navigation.navigate('Group Navigation', { groupSlug: ALL_GROUP.slug })
@@ -73,11 +73,11 @@ export default function GroupWelcomeTabBar ({ group, acceptedAllAgreements, agre
         }
       : () => completeWorkflow()
     Alert.alert(
-      'Are you sure?',
+      'Are you sure you want to leave the Group Welcome?',
       explainerText,
       [
         {
-          text: 'Ok, I understand',
+          text: 'Return to Group Welcome',
           onPress: () => {} // noop that closes alert
         },
         {
@@ -135,7 +135,7 @@ export default function GroupWelcomeTabBar ({ group, acceptedAllAgreements, agre
         <Button
           text="Let's Do This!"
           onPress={(onAgreementStepButNotReady || onJoinQuestionStepButNotReady) ? handleBackOut : completeWorkflow}
-          disabled={completeButtonDisabled}
+          disabled={completeButtonDisabled || onAgreementStepButNotReady || onJoinQuestionStepButNotReady}
           style={styles.continueButton}
         />
       )}

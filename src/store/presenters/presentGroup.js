@@ -76,6 +76,7 @@ export default function presentGroup (group) {
         }
       })
       : [],
-    widgets: group.widgets ? group.widgets.toRefArray() : []
+    widgets: group.widgets ? group.widgets.toRefArray() : [],
+    settings: group.settings
   }
 }
