@@ -101,5 +101,7 @@ android/gradle/kotlin-profile/**
 .env.development
 .env.production
 
+.vscode/settings.json
+
 ios/codesigndoc_exports
 .bitrise.secrets.yml

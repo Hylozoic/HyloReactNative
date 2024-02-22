@@ -8,6 +8,14 @@ exports[`fetchGroupSettings 1`] = `
           group (id: $id) {
             id
             accessibility
+            agreements {
+              items {
+                id
+                description
+                order
+                title
+              }
+            }
             avatarUrl
             bannerUrl
             description
@@ -16,9 +24,14 @@ exports[`fetchGroupSettings 1`] = `
             name
             purpose
             settings {
+              agreementsLastUpdatedAt
               allowGroupInvites
+              askGroupToGroupJoinQuestions
               askJoinQuestions
+              hideExtensionData
+              locationDisplayPrecision
               publicMemberDirectory
+              showSuggestedSkills
             }
             slug
             visibility

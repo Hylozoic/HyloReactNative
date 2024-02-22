@@ -39,6 +39,7 @@ export default () => {
     name
     purpose
     settings {
+      agreementsLastUpdatedAt
       allowGroupInvites
       askGroupToGroupJoinQuestions
       askJoinQuestions
@@ -52,6 +53,14 @@ export default () => {
     typeDescriptor
     typeDescriptorPlural
     visibility
+    agreements {
+      items {
+        id
+        description
+        order
+        title
+      }
+    }
     activeProjects: posts(filter: "project", sortBy: "updated", order: "desc", first: 4) {
       items {
         id
@@ -101,6 +110,7 @@ export default () => {
         slug
         visibility
         settings {
+          agreementsLastUpdatedAt
           allowGroupInvites
           askGroupToGroupJoinQuestions
           askJoinQuestions
@@ -215,6 +225,7 @@ export default () => {
         slug
         visibility
         settings {
+          agreementsLastUpdatedAt
           allowGroupInvites
           askGroupToGroupJoinQuestions
           askJoinQuestions

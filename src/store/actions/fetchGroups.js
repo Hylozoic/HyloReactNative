@@ -82,8 +82,10 @@ query (
       avatarUrl
       bannerUrl
       name
+      purpose
       type
       settings {
+        agreementsLastUpdatedAt
         allowGroupInvites
         askGroupToGroupJoinQuestions
         askJoinQuestions

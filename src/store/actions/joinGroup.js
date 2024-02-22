@@ -19,6 +19,8 @@ export default function joinGroup (groupId) {
               id
             }
             settings {
+              agreementsAcceptedAt
+              joinQuestionsAnsweredAt
               showJoinForm
             }
           }

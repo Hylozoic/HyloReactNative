@@ -20,7 +20,8 @@ export const TAB_STACK_ROOTS = [
   'Group Navigation',
   'Messages Tab',
   'Search Tab',
-  'Profile Tab'
+  'Profile Tab',
+  'Group Welcome'
 ]
 
 export default function TabStackHeader ({
@@ -31,11 +32,11 @@ export default function TabStackHeader ({
   headerLeft,
   headerRight,
   // custom
-  rootsScreenNames = TAB_STACK_ROOTS || {},
+  rootsScreenNames = TAB_STACK_ROOTS,
   ...otherProps
 }) {
   const canGoBack = !rootsScreenNames.includes(route?.name)
-  const myHome = route?.params?.myHome
+
   const props = {
     headerBackTitleVisible: false,
     title: getFocusedRouteNameFromRoute(route) || getHeaderTitle(options, route.name),

@@ -19,6 +19,7 @@ export default function useInvitation (inviteCodes = {}) {
                 accessibility
                 name
                 settings {
+                  agreementsLastUpdatedAt
                   allowGroupInvites
                   askJoinQuestions
                   askGroupToGroupJoinQuestions
@@ -32,6 +33,8 @@ export default function useInvitation (inviteCodes = {}) {
                 id
               }
               settings {
+                agreementsAcceptedAt
+                joinQuestionsAnsweredAt
                 showJoinForm
               }
             }

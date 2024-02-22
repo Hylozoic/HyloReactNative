@@ -73,6 +73,8 @@ export function createGroup (groupData) {
                   id
                 }
                 settings {
+                  agreementsAcceptedAt
+                  joinQuestionsAnsweredAt
                   sendEmail
                   showJoinForm
                   sendPushNotifications

@@ -21,6 +21,8 @@ import MembersComponent from 'screens/Members'
 import PostDetails from 'screens/PostDetails'
 import ProjectMembers from 'screens/ProjectMembers/ProjectMembers'
 import MapWebView from 'screens/MapWebView/MapWebView'
+import GroupWelcomeLanding from 'screens/GroupWelcomeFlow/GroupWelcomeLanding'
+import { GROUP_WELCOME_LANDING } from 'screens/GroupWelcomeFlow/GroupWelcomeFlow.store'
 
 const HomeTab = createStackNavigator()
 export default function HomeNavigator ({ navigation }) {
@@ -96,6 +98,7 @@ export default function HomeNavigator ({ navigation }) {
       <HomeTab.Screen name='Announcements' component={Feed} initialParams={{ myHome: 'Announcements' }} />
       <HomeTab.Screen name='Mentions' component={Feed} initialParams={{ myHome: 'Mentions' }} />
       <HomeTab.Screen name='Interactions' component={Feed} initialParams={{ myHome: 'Interactions' }} />
+      <HomeTab.Screen name={GROUP_WELCOME_LANDING} component={GroupWelcomeLanding} />
     </HomeTab.Navigator>
   )
 }

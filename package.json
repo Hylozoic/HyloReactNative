@@ -63,6 +63,7 @@
     "react-native-autoheight-webview": "^1.6.5",
     "react-native-background-timer": "^2.4.1",
     "react-native-bootsplash": "4.3.2",
+    "react-native-bouncy-checkbox": "^3.0.7",
     "react-native-confirmation-code-field": "^7.3.1",
     "react-native-date-picker": "^4.2.6",
     "react-native-device-info": "^10.3.0",
