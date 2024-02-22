@@ -25,4 +25,22 @@ npx react-native generate-bootsplash ./bootsplash_logo.png --background-color "#
 
 ## Additional Docs for Hylo App Dev
 
-The canonical source for documentation is currently at: [Hylo Confluence](https://hylozoic.atlassian.net/wiki/spaces/DEV/pages/425986/Getting+Started).
+#### Deploy vid
+https://www.youtube.com/watch?v=sE60ymB4ZHM
+- 30 min: How to release an app that points to staging
+- 35:50 min: Installing the release into a stimulator
+- 48 min: discussion on breaking changes in NODE and EVO
+
+#### Deploy todo list
+
+- Merge changes to dev
+- Make sure tests are passing *
+- Make sure CHANGELOG is up to date, including anticipated version (5.4.0) today
+- Run `npm version patch|minor|major`
+- `git push --tags`
+- Wait for Bitrise build
+- Check Bitrise build, did it build successfully?
+- Install and manually test Bitrise builds. For iOS install from TestFlight, for Android manually install APK file on physical device (or emulator if no physical device available)
+- Prepare release notes appropriate for stores from CHANGELOG / Github Issues
+- Login to Apple Developer account and submit app for review / release
+- Login to Google Play Store Console and submit app for review / release
