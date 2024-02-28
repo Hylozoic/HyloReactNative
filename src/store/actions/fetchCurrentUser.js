@@ -196,6 +196,7 @@ export default function fetchCurrentUser () {
                 }
                 settings {
                   allowGroupInvites
+                  askJoinQuestions
                 }
                 suggestedSkills {
                   items {
