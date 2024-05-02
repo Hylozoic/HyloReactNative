@@ -1,12 +1,10 @@
 import React, { useMemo } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { useDispatch } from 'react-redux'
-// import ReactTooltip from 'react-native-tooltip'
 import { PROPOSAL_STATUS_CASUAL, PROPOSAL_STATUS_COMPLETED, PROPOSAL_STATUS_DISCUSSION, PROPOSAL_STATUS_VOTING, PROPOSAL_TYPE_MULTI_UNRESTRICTED, PROPOSAL_TYPE_SINGLE } from 'store/models/Post'
 import { addProposalVote, removeProposalVote, swapProposalVote } from 'store/actions/proposals'
 import QuorumBar from 'components/QuorumBar/QuorumBar'
 import Avatar from 'components/Avatar'
-// import RoundImageRow from 'components/RoundImageRow'
 
 const calcNumberOfVoters = (votes) => {
   return votes.reduce((acc, vote) => {
