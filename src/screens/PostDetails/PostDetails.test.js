@@ -29,7 +29,6 @@ const post = {
   details: 'Lo',
   commenters: [{ id: 9, name: 'Jebobo Crustacean' }, { id: 7, name: 'Lobster Science' }],
   commentsTotal: 12,
-  votesTotal: 8,
   peopleReactedTotal: true,
   type: 'request',
   fileUrls: [

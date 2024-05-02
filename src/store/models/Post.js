@@ -3,6 +3,16 @@ import { get } from 'lodash/fp'
 import PropTypes from 'prop-types'
 import { butterflyBush, caribbeanGreen, fakeAlpha, flushOrange, gold, pictonBlue, sunsetOrange } from 'style/colors'
 
+// proposal status
+export const PROPOSAL_STATUS_DISCUSSION = 'discussion'
+export const PROPOSAL_STATUS_VOTING = 'voting'
+export const PROPOSAL_STATUS_CASUAL = 'casual'
+export const PROPOSAL_STATUS_COMPLETED = 'completed'
+
+// Proposal types
+export const PROPOSAL_TYPE_SINGLE = 'single'
+export const PROPOSAL_TYPE_MULTI_UNRESTRICTED = 'multi-unrestricted'
+
 export class PostFollower extends Model {}
 PostFollower.modelName = 'PostFollower'
 PostFollower.fields = {
@@ -89,7 +99,6 @@ Post.fields = {
   fulfilledAt: attr(),
   donationsLink: attr(),
   projectManagementLink: attr(),
-  votesTotal: attr(),
   peopleReactedTotal: attr(),
   // do I have to fix this for reacts?
   topics: many('Topic'),

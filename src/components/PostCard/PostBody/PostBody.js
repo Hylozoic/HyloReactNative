@@ -9,6 +9,7 @@ import EmojiRow from 'components/EmojiRow'
 import LinkPreview from 'components/PostCard/LinkPreview'
 import Icon from 'components/Icon'
 import PopupMenuButton from 'components/PopupMenuButton'
+import PostBodyProposal from '../PostBodyProposal/PostBodyProposal'
 // import VideoPlayerWebView from 'components/VideoPlayerWebView'
 import { caribbeanGreen, rhino, white, white20onCaribbeanGreen } from 'style/colors'
 
@@ -55,6 +56,7 @@ export default function PostBody ({
         baseStyle={{ marginBottom: 8 }}
       />
       {/* {!linkPreviewFeatured && ( */}
+      {type === 'proposal' && <PostBodyProposal {...post} currentUser={currentUser} />}
       <LinkPreview {...linkPreview} />
       {/* )} */}
       <EmojiRow

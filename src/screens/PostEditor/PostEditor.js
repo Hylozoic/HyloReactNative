@@ -53,6 +53,7 @@ const titlePlaceholders = {
   offer: 'What help can you offer?',
   resource: 'What resource is available?',
   project: 'What would you like to call your project?',
+  proposal: 'What is your proposal?',
   event: 'What is your event called?'
 }
 
@@ -470,7 +471,7 @@ export class PostEditor extends React.Component {
             onPress={this.handleCancel}
           />
           <TypeSelector
-            disabled={isSaving}
+            disabled={isSaving || type === 'proposal'}
             onValueChange={this.handleUpdateType}
             placeholder={{}}
             value={type}
@@ -554,6 +555,12 @@ export class PostEditor extends React.Component {
               topics={topics}
             />
           </TouchableOpacity>
+
+          {type === 'proposal' && (
+            <View style={styles.pressSelection}>
+              <Text style={styles.pressSelectionLeftText}>Proposal details can be edited in the web-app</Text>
+            </View>
+          )}
 
           {type === 'project' && (
             <TouchableOpacity style={styles.pressSelectionSection} onPress={this.handleShowProjectMembersEditor}>

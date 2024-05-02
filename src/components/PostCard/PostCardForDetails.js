@@ -189,7 +189,6 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
         peopleReactedTotal={post.peopleReactedTotal}
         style={styles.postFooter}
         type={post.type}
-        votesTotal={post.votesTotal}
       />
     </View>
   )

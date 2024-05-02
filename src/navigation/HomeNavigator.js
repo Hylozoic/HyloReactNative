@@ -86,6 +86,7 @@ export default function HomeNavigator ({ navigation }) {
       <HomeTab.Screen name='Projects' component={Feed} initialParams={{ feedType: 'project' }} />
       <HomeTab.Screen name='Project Members' key='Project Members' component={ProjectMembers} />
       <HomeTab.Screen name='Events' component={Feed} initialParams={{ feedType: 'event' }} />
+      <HomeTab.Screen name='Governance' component={Feed} initialParams={{ feedType: 'proposal' }} />
       <HomeTab.Screen name='Members' component={MembersComponent} />
       <HomeTab.Screen name='Member' key='Member' component={MemberProfile} />
       <HomeTab.Screen name='Member Details' component={MemberDetails} />
