@@ -132,6 +132,11 @@ export const POST_TYPES = {
     map: false
   },
   request: {
+    primaryColor: caribbeanGreen,
+    backgroundColor: fakeAlpha(caribbeanGreen, 0.2),
+    map: true
+  },
+  proposal: {
     primaryColor: butterflyBush,
     backgroundColor: fakeAlpha(butterflyBush, 0.2),
     map: true
