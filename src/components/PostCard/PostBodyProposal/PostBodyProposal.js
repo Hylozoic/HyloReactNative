@@ -54,6 +54,7 @@ const isVotingOpen = (proposalStatus) => proposalStatus === PROPOSAL_STATUS_VOTI
 export default function PostBodyProposal ({
   currentUser,
   proposalStatus,
+  proposalOutcome,
   proposalType,
   proposalOptions,
   proposalVotes,
@@ -156,6 +157,7 @@ export default function PostBodyProposal ({
         )
       })}
       {quorum && <QuorumBar totalVoters={numberOfPossibleVoters} quorum={quorum} actualVoters={proposalVoterCount} proposalStatus={proposalStatus} />}
+      {proposalOutcome && <Text style={styles.proposalOutcome}>Outcome: {proposalOutcome}</Text>}
     </View>
   )
 }
@@ -221,6 +223,19 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     cursor: 'pointer'
+  },
+  proposalOutcome: {
+    padding: 6,
+    backgroundColor: '#F2F2F2',
+    color: '#0074D8',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    background: 'rgba(51, 102, 255, 0.4)',
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderColor: 'rgba(213, 236, 250, 1)',
+    borderRadius: 5
   },
   discussion: {
     borderColor: '#C0C5CD',

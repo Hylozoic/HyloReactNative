@@ -92,6 +92,7 @@ exports[`fetchSearchResults matches snapshot 1`] = `
   }
   peopleReactedTotal
   proposalStatus
+  proposalOutcome
   proposalType
   quorum
   proposalOptions {
