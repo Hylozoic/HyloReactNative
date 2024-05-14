@@ -16,7 +16,8 @@ import { TRenderEngineProvider, defaultSystemFonts } from 'react-native-render-h
 import ErrorBoundary from 'screens/ErrorBoundary'
 import VersionCheck from 'components/VersionCheck'
 import RootNavigator from 'navigation/RootNavigator'
-import { ActionSheetProvider } from '@expo/react-native-action-sheet';
+import './i18n'
+import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 import { baseStyle, tagsStyles, classesStyles } from 'components/HyloHTML/HyloHTML.styles'
 // import FastImage from 'react-native-fast-image'
 

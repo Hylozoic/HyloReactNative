@@ -8,6 +8,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
 import useChangeToGroup from 'hooks/useChangeToGroup'
 import useGoToTopic from 'hooks/useGoToTopic'
+import { useTranslation } from 'react-i18next'
 import { PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getCustomView from 'store/selectors/getCustomView'
@@ -38,6 +39,7 @@ export function headerTitle (currentGroup, feedType, myHome) {
 
 export default function Feed ({ topicName: providedTopicName }) {
   const ref = useRef(null)
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const route = useRoute()
   const dispatch = useDispatch()
@@ -95,7 +97,7 @@ export default function Feed ({ topicName: providedTopicName }) {
     return (
       <CreateGroupNotice
         goToCreateGroup={goToCreateGroup}
-        text='No posts here, try creating your own Group!'
+        text={t('no_posts_here_try_creating_your_own_group')}
       />
     )
   }
@@ -181,13 +183,13 @@ export default function Feed ({ topicName: providedTopicName }) {
   )
 }
 
-export function postPromptString (type = '', { firstName }) {
+export function postPromptString (type = '', { firstName }, t) {
   const postPrompts = {
-    offer: `Hi ${firstName}, what would you like to share?`,
-    request: `Hi ${firstName}, what are you looking for?`,
-    project: `Hi ${firstName}, what would you like to create?`,
-    event: `Hi ${firstName}, want to create an event?`,
-    default: `Hi ${firstName}, press here to post`
+    offer: t('Hi {{firstName}}, what would you like to share?', { firstName }),
+    request: t('Hi {{firstName}}, what are you looking for?', { firstName }),
+    project: t('Hi {{firstName}}, what would you like to create?', { firstName }),
+    event: t('Hi {{firstName}}, want to create an event?', { firstName }),
+    default: t('Hi {{firstName}}, press here to post', { firstName })
   }
 
   return postPrompts[type] || postPrompts.default
@@ -195,6 +197,7 @@ export function postPromptString (type = '', { firstName }) {
 
 export function PostPrompt ({ currentUser, forGroup, currentType, currentTopicName }) {
   const navigation = useNavigation()
+  const { t } = useTranslation()
 
   if (!currentUser) return null
 
@@ -212,7 +215,7 @@ export function PostPrompt ({ currentUser, forGroup, currentType, currentTopicNa
     <View style={styles.postPrompt}>
       <TouchableOpacity onPress={handleOpenPostEditor} style={styles.promptButton}>
         <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
-        <Text style={styles.promptText}>{postPromptString(currentType, { firstName: currentUser.firstName() })}</Text>
+        <Text style={styles.promptText}>{postPromptString(currentType, { firstName: currentUser.firstName() }, t)}</Text>
       </TouchableOpacity>
     </View>
   )

@@ -231,7 +231,6 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    background: 'rgba(51, 102, 255, 0.4)',
     borderWidth: 1,
     borderStyle: 'dashed',
     borderColor: 'rgba(213, 236, 250, 1)',
