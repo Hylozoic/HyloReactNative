@@ -7,6 +7,7 @@ import Button from 'components/Button'
 import MemberList from 'components/MemberList'
 import { bannerlinearGradientColors } from 'style/colors'
 import styles from './Members.styles'
+import { useTranslation } from 'react-i18next'
 
 export default function Members ({
   group,
@@ -52,6 +53,7 @@ export default function Members ({
 }
 
 export function Banner ({ name, bannerUrl, showInviteButton, handleInviteOnPress }) {
+  const { t } = useTranslation()
   return (
     <View style={styles.bannerContainer}>
       <FastImage source={{ uri: bannerUrl }} style={styles.image} />
@@ -61,7 +63,7 @@ export function Banner ({ name, bannerUrl, showInviteButton, handleInviteOnPress
       </View>
       {showInviteButton && (
         <Button
-          text='Invite'
+          text={t('Invite')}
           style={styles.inviteButton}
           iconName='Invite'
           onPress={handleInviteOnPress}

@@ -8,13 +8,13 @@ import {
 } from 'react-native'
 import { useIsFocused, useScrollToTop } from '@react-navigation/native'
 import Avatar from 'components/Avatar'
-import BadgeEmoji from 'components/BadgeEmoji'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import PopupMenuButton from 'components/PopupMenuButton'
 import styles from './MemberList.styles'
 import SearchBar from 'components/SearchBar'
 import CondensingBadgeRow from '../CondensingBadgeRow/CondensingBadgeRow'
+import { useTranslation } from 'react-i18next'
 
 export class MemberList extends React.Component {
   static defaultProps = {
@@ -84,7 +84,7 @@ export class MemberList extends React.Component {
   render () {
     const { members, isServerSearch } = this.state
     const {
-      children, group, sortKeys, sortBy, setSort, fetchMoreMembers, pending, hideSortOptions, scrollRef, search
+      children, group, sortKeys, sortBy, setSort, fetchMoreMembers, pending, hideSortOptions, scrollRef, search, t
     } = this.props
     const onSearch = debounce(300, text => this.search(text))
     const actions = isServerSearch
@@ -100,7 +100,7 @@ export class MemberList extends React.Component {
         {children || null}
         <View style={styles.listControls}>
           <SearchBar
-            placeholder='Search Members'
+            placeholder={t('Search Members')}
             onChangeText={onSearch}
             style={styles.searchWrapper}
           />
@@ -138,10 +138,11 @@ export class MemberList extends React.Component {
 export default function (props) {
   const ref = React.useRef(null)
   const isFocused = useIsFocused()
+  const { t } = useTranslation()
 
   useScrollToTop(ref)
 
-  return <MemberList {...props} isFocused={isFocused} scrollRef={ref} />
+  return <MemberList {...props} isFocused={isFocused} scrollRef={ref} t={t} />
 }
 
 export function Member ({ member, showMember, group }) {

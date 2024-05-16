@@ -6,6 +6,7 @@ import { firstName } from 'store/models/Person'
 import Avatar from 'components/Avatar'
 import PeopleListModal from 'components/PeopleListModal'
 import { rhino10 } from 'style/colors'
+import { useTranslation } from 'react-i18next'
 
 export default function ThreadHeaderTitle ({ thread, currentUserId, navigation }) {
   const [modalIsVisible, setModalIsVisible] = useState(false)
@@ -55,8 +56,9 @@ export default function ThreadHeaderTitle ({ thread, currentUserId, navigation }
 }
 
 export function participantNamesSummary (names) {
+  const { t } = useTranslation()
   if (names.length < 3) return names.join(' & ')
-  return `${names[0]} & ${names.length - 1} others`
+  return `${names[0]} & ${names.length - 1} ${t('others')}`
 }
 
 const styles = {

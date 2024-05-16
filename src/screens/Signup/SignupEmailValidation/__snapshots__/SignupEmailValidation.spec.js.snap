@@ -578,11 +578,13 @@ exports[`default render matches snapshot 1`] = `
                               </Text>
                               <View>
                                 <Text>
-                                  We've sent a 6 digit code to:
+                                  Weve sent a 6 digit code to
+                                  :
                                 </Text>
                                 <Text />
                                 <Text>
-                                  The code will expire shortly, so please enter it here soon.
+                                  The code will expire shortly, so please enter it here soon
+                                  .
                                 </Text>
                               </View>
                             </View>
@@ -701,7 +703,8 @@ exports[`default render matches snapshot 1`] = `
                                   >
                                     
                                   </Text>
-                                   Resend code
+                                   
+                                  Resend code
                                 </Text>
                               </View>
                             </View>

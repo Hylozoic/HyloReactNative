@@ -13,8 +13,10 @@ import Button from 'components/Button'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Loading from 'components/Loading'
 import styles from './SignupRegistration.styles'
+import { useTranslation } from 'react-i18next'
 
 export default function SignupRegistration ({ navigation, route }) {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const passwordControlRef = useRef()
   const confirmPasswordControlRef = useRef()
@@ -26,7 +28,7 @@ export default function SignupRegistration ({ navigation, route }) {
     return pickBy(identity, {
       name: Validators.validateUser.name(name),
       password: Validators.validateUser.password(password),
-      confirmPassword: (password?.length > 8) && (password !== confirmPassword) && 'Passwords must match'
+      confirmPassword: (password?.length > 8) && (password !== confirmPassword) && t('Passwords must match')
     })
   }
 
@@ -58,9 +60,9 @@ export default function SignupRegistration ({ navigation, route }) {
       headerLeftOnPress: () => {
         confirmDiscardChanges({
           title: '',
-          confirmationMessage: "We're almost done, are you sure you want to cancel signing-up?",
-          disgardButtonText: 'Yes',
-          continueButtonText: 'No',
+          confirmationMessage: t("Were almost done, are you sure you want to cancel signing-up?"),
+          disgardButtonText: t('Yes'),
+          continueButtonText: t('No'),
           onDiscard: () => {
             dispatch(logout())
             navigation.navigate('Signup Intro')
@@ -74,9 +76,9 @@ export default function SignupRegistration ({ navigation, route }) {
     <KeyboardFriendlyView style={styles.container}>
       <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
         <View style={styles.header}>
-          <Text style={styles.title}>Let's do this!</Text>
+          <Text style={styles.title}>{t('Lets do this!')}</Text>
           <Text style={styles.subTitle}>
-            Hi <Text style={{ fontWeight: 'bold' }}>{values.email}</Text> we just need to know your name and password and you're account will be created.
+            Hi <Text style={{ fontWeight: 'bold' }}>{values.email}</Text> {t('we just need to know your name and password and youre account will be created')}.
           </Text>
         </View>
         <View style={styles.content}>
@@ -84,7 +86,7 @@ export default function SignupRegistration ({ navigation, route }) {
           {!loading && (
             <>
               <SettingControl
-                label='Your Full Name'
+                label={t('Your Full Name')}
                 value={values.name}
                 onChange={value => handleChange('name', value)}
                 error={errors.name}
@@ -93,7 +95,7 @@ export default function SignupRegistration ({ navigation, route }) {
               />
               <SettingControl
                 ref={passwordControlRef}
-                label='Password (at least 9 characters)'
+                label={t('Password (at least 9 characters)')}
                 value={values.password}
                 onChange={value => handleChange('password', value)}
                 toggleSecureTextEntry
@@ -103,7 +105,7 @@ export default function SignupRegistration ({ navigation, route }) {
               />
               <SettingControl
                 ref={confirmPasswordControlRef}
-                label='Confirm Password'
+                label={t('Confirm Password')}
                 value={values.confirmPassword}
                 onChange={value => handleChange('confirmPassword', value)}
                 toggleSecureTextEntry
@@ -118,7 +120,7 @@ export default function SignupRegistration ({ navigation, route }) {
       <View style={styles.bottomBar}>
         <Button
           style={styles.continueButton}
-          text={loading ? 'Saving...' : 'Continue'}
+          text={loading ? t('Saving-ellipsis') : t('Continue')}
           onPress={handleSubmit}
           disabled={!!loading}
         />

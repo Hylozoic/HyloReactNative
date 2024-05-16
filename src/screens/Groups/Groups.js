@@ -15,8 +15,10 @@ import { MeMembershipsMemberCountQuery } from './Groups.graphql.js'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import styles from './Groups.styles'
+import { useTranslation } from 'react-i18next'
 
 export default function Groups () {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigation = useNavigation()
   const currentGroup = useSelector(getCurrentGroup)
@@ -82,7 +84,7 @@ export default function Groups () {
 
   if (parentGroups.length > 0) {
     listSections.push({
-      title: `${currentGroup.name} is a part of ${parentGroups.length} Group(s)`,
+      title: t('{{currentGroupName}} is a part of {{parentGroupsLength}} Group(s)', { currentGroupName: currentGroup.name, parentGroupsLength: parentGroups.length }),
       data: parentGroups,
       renderItem,
       keyExtractor
@@ -91,7 +93,7 @@ export default function Groups () {
 
   if (childGroups.length > 0) {
     listSections.push({
-      title: `${childGroups.length} Group(s) are a part of ${currentGroup.name}`,
+      title: t('{{childGroupsLength}} Group(s) are a part of {{currentGroupName}}', { childGroupsLength: childGroups.length, currentGroupName: currentGroup.name }),
       data: childGroups,
       renderItem,
       keyExtractor
@@ -113,15 +115,16 @@ export default function Groups () {
 }
 
 export function GroupRow ({ group, goToGroup, goToGroupExplore }) {
+  const { t } = useTranslation()
   const { avatarUrl, description, name, memberCount, childGroups } = group
   const childGroupsCount = childGroups?.count()
   const isMember = useSelector(getMemberships).find(m => m.group.id === group.id) || false
   const onPressFunc = isMember ? goToGroup : goToGroupExplore
   const statusText = group.memberStatus === 'member'
-    ? 'Member'
+    ? t('Member')
     : group.memberStatus === 'requested'
-      ? 'Membership Requested'
-      : 'Not a Member'
+      ? t('Membership Requested')
+      : t('Not a Member')
 
   return (
     <TouchableOpacity onPress={() => onPressFunc(group?.slug)} style={styles.groupRow}>
@@ -138,7 +141,7 @@ export function GroupRow ({ group, goToGroup, goToGroupExplore }) {
           <Text style={styles.groupStatusText}>{statusText}</Text>
         </View>
         <Text style={[styles.groupRowCounts]}>
-          {memberCount} Members {childGroupsCount > 0 ? ` | ${childGroupsCount} Groups` : ''}
+          {memberCount} {t('Members')} {childGroupsCount > 0 ? ` | ${childGroupsCount} ${t('Groups')}` : ''}
         </Text>
         {!!description && (
           <Text style={[styles.groupRowDescription]} ellipsizeMode='tail' numberOfLines={1}>{description}</Text>

@@ -4,6 +4,7 @@ import { isEmpty, filter } from 'lodash/fp'
 import { pictonBlue } from 'style/colors'
 import { isIOS } from 'util/platform'
 import { DefaultTheme } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 
 /*
 
@@ -25,6 +26,7 @@ import { DefaultTheme } from '@react-navigation/native'
   * May wish to convert to https://github.com/react-native-menu/menu soon to support iOS 14 style popup menus
 */
 export default function useHyloActionSheet () {
+  const { t } = useTranslation()
   const { showActionSheetWithOptions } = useActionSheet()
 
   return {
@@ -39,7 +41,7 @@ export default function useHyloActionSheet () {
       actions = [
         ...actions,
         // <Icon name='Ex' key='cancel' style={{ fontSize: 18, margin: 0, padding: 0, color: pictonBlue }} />
-        ['Cancel', null]
+        [t('Cancel'), null]
       ]
 
       const options = actions.map(action => action[0])

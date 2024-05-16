@@ -222,7 +222,8 @@ export function PostPrompt ({ currentUser, forGroup, currentType, currentTopicNa
 }
 
 export function SubscribeButton ({ active, onPress }) {
-  const text = active ? 'Unsubscribe' : 'Subscribe'
+  const { t } = useTranslation()
+  const text = active ? t('Unsubscribe') : t('Subscribe')
   const style = active ? styles.unsubscribeButton : styles.subscribeButton
   return <Button onPress={onPress} style={style} iconName='Star' text={text} />
 }

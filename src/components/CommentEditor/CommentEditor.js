@@ -14,6 +14,7 @@ import styles from './CommentEditor.styles'
 import { useDispatch } from 'react-redux'
 import Icon from 'components/Icon'
 import { firstName } from 'store/models/Person'
+import { useTranslation } from 'react-i18next'
 
 export const KeyboardAccessoryCommentEditor = forwardRef(function KeyboardAccessoryCommentEditor ({
   renderScrollable,
@@ -53,6 +54,7 @@ export const CommentEditor = forwardRef(function CommentEditor ({
   scrollToReplyingTo,
   clearReplyingTo
 }, ref) {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const [hasContent, setHasContent] = useState()
   const editorRef = useRef()
@@ -87,7 +89,7 @@ export const CommentEditor = forwardRef(function CommentEditor ({
       setSubmitting(false)
 
       if (error) {
-        Alert.alert("Your comment couldn't be saved; please try again.")
+        Alert.alert(t('Your comment couldnt be saved please try again'))
       } else {
         handleDone()
       }
@@ -125,14 +127,14 @@ export const CommentEditor = forwardRef(function CommentEditor ({
           </TouchableOpacity>
           <TouchableOpacity onPress={() => { scrollToReplyingTo() }}>
             <Text style={styles.promptText}>
-              Replying to <Text style={styles.promptTextName}>{firstName(replyingTo?.creator)}'s</Text> comment
+              {t('Replying to')} <Text style={styles.promptTextName}>{firstName(replyingTo?.creator)}'s</Text> {t('comment')}
             </Text>
           </TouchableOpacity>
         </View>
       )}
       <View style={styles.editor}>
         <HyloEditorWebView
-          placeholder='Write a comment...'
+          placeholder={t('Write a comment')}
           // groupIds={[groupId]}
           readOnly={submitting}
           ref={setEditorRef}

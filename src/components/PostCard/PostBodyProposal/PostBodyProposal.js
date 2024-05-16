@@ -5,6 +5,7 @@ import { PROPOSAL_STATUS_CASUAL, PROPOSAL_STATUS_COMPLETED, PROPOSAL_STATUS_DISC
 import { addProposalVote, removeProposalVote, swapProposalVote } from 'store/actions/proposals'
 import QuorumBar from 'components/QuorumBar/QuorumBar'
 import Avatar from 'components/Avatar'
+import { useTranslation } from 'react-i18next'
 
 const calcNumberOfVoters = (votes) => {
   return votes.reduce((acc, vote) => {
@@ -65,6 +66,7 @@ export default function PostBodyProposal ({
   groups,
   id
 }) {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const proposalOptionsArray = useMemo(() => proposalOptions?.items || [], [proposalOptions])
@@ -100,15 +102,15 @@ export default function PostBodyProposal ({
     <View style={[styles.proposalBodyContainer, proposalStatus === PROPOSAL_STATUS_DISCUSSION && styles.discussion, proposalStatus === PROPOSAL_STATUS_VOTING && styles.voting, proposalStatus === PROPOSAL_STATUS_CASUAL && styles.casual, proposalStatus === PROPOSAL_STATUS_COMPLETED && styles.completed]}>
       <View style={styles.proposalStatus}>
         <Text style={[proposalStatus === PROPOSAL_STATUS_DISCUSSION && styles.discussion, proposalStatus === PROPOSAL_STATUS_VOTING && styles.voting, proposalStatus === PROPOSAL_STATUS_CASUAL && styles.casual, proposalStatus === PROPOSAL_STATUS_COMPLETED && styles.completed]}>
-          {proposalStatus === PROPOSAL_STATUS_DISCUSSION && 'Discussion in progress'}
-          {proposalStatus === PROPOSAL_STATUS_VOTING && 'Voting open'}
-          {proposalStatus === PROPOSAL_STATUS_COMPLETED && 'Voting ended'}
-          {proposalStatus === PROPOSAL_STATUS_CASUAL && 'Voting open'}
+          {proposalStatus === PROPOSAL_STATUS_DISCUSSION && t('Discussion in progress')}
+          {proposalStatus === PROPOSAL_STATUS_VOTING && t('Voting open')}
+          {proposalStatus === PROPOSAL_STATUS_COMPLETED && t('Voting ended')}
+          {proposalStatus === PROPOSAL_STATUS_CASUAL && t('Voting open')}
         </Text>
       </View>
       <View style={styles.proposalTiming}>
         <Text style={[proposalStatus === PROPOSAL_STATUS_DISCUSSION && styles.discussion, proposalStatus === PROPOSAL_STATUS_VOTING && styles.voting, proposalStatus === PROPOSAL_STATUS_CASUAL && styles.casual, proposalStatus === PROPOSAL_STATUS_COMPLETED && styles.completed]}>
-          {!startTime && 'Open timeframe'}
+          {!startTime && t('Open timeframe')}
           {startTime && proposalStatus !== PROPOSAL_STATUS_COMPLETED && `${new Date(startTime).toLocaleDateString()} - ${new Date(endTime).toLocaleDateString()}`}
           {startTime && proposalStatus === PROPOSAL_STATUS_COMPLETED && `${new Date(endTime).toLocaleDateString()}`}
         </Text>
@@ -157,7 +159,7 @@ export default function PostBodyProposal ({
         )
       })}
       {quorum && <QuorumBar totalVoters={numberOfPossibleVoters} quorum={quorum} actualVoters={proposalVoterCount} proposalStatus={proposalStatus} />}
-      {proposalOutcome && <Text style={styles.proposalOutcome}>Outcome: {proposalOutcome}</Text>}
+      {proposalOutcome && <Text style={styles.proposalOutcome}>{t('Outcome')}: {proposalOutcome}</Text>}
     </View>
   )
 }

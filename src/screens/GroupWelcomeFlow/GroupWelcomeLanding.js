@@ -17,8 +17,10 @@ import GroupWelcomeTabBar from './GroupWelcomeTabBar'
 import { caribbeanGreen, rhino } from 'style/colors'
 import Pill from 'components/Pill'
 import { GROUP_WELCOME_AGREEMENTS, GROUP_WELCOME_JOIN_QUESTIONS, GROUP_WELCOME_SUGGESTED_SKILLS, getCurrentStepIndex, getRouteNames } from './GroupWelcomeFlow.store'
+import { useTranslation } from 'react-i18next'
 
 export default function GroupWelcomeLanding ({ route }) {
+  const { t } = useTranslation()
   const { params } = route
   const { groupId } = params
   const dispatch = useDispatch()
@@ -108,7 +110,7 @@ export default function GroupWelcomeLanding ({ route }) {
               <View style={styles.avatarContainer}>
                 <FastImage source={imageSource} style={styles.groupAvatar} />
               </View>
-              <Text style={styles.heading}>Welcome to:</Text>
+              <Text style={styles.heading}>{t('Welcome to')}:</Text>
             </View>
             <Text style={[styles.heading]}>{name}</Text>
           </ImageBackground>
@@ -126,28 +128,24 @@ export default function GroupWelcomeLanding ({ route }) {
 }
 
 function LandingBodyContent ({ description, purpose }) {
-  // TODO WELCOME: The welcome message on the explore page in EVO has the below as a default. But the customized welcome text lives inside of the welcome widget data. Bonus points for pulling that in here and also using it.
-  const backupText = `Please take a moment to explore and see what’s alive in our group. 
-  
-Introduce yourself by clicking Create, and posting a Discussion to share who you are and what you brings you here. 
-  
-Don’t forget to fill our your profile, so likeminded folks can connect with you`
+  const { t } = useTranslation()
+  const backupText = t('welcome page backup text')
 
   return (
     <>
       {!isEmpty(purpose) &&
         <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
-          <Text style={styles.sectionHeading}>Our Purpose:</Text>
+          <Text style={styles.sectionHeading}>{t('Our Purpose')}:</Text>
           <Text style={styles.purposeText}>{purpose}</Text>
         </View>}
       {!isEmpty(description) &&
         <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
-          <Text style={styles.sectionHeading}>Description:</Text>
+          <Text style={styles.sectionHeading}>{t('Description')}:</Text>
           <Text style={styles.purposeText}>{description}</Text>
         </View>}
       {isEmpty(description) && isEmpty(purpose) &&
         <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
-          <Text style={styles.sectionHeading}>We’re happy you’re here!</Text>
+          <Text style={styles.sectionHeading}>{t('Were happy youre here')}</Text>
           <Text style={styles.purposeText}>{backupText}</Text>
         </View>}
     </>
@@ -155,9 +153,10 @@ Don’t forget to fill our your profile, so likeminded folks can connect with yo
 }
 
 function AgreementsBodyContent ({ agreements, acceptedAgreements, handleCheckAgreement, acceptedAllAgreements, handleCheckAllAgreements, numAgreements }) {
+  const { t } = useTranslation()
   return (
     <View style={{ width: '90%' }}>
-      <Text style={styles.sectionHeading}>Our Agreements:</Text>
+      <Text style={styles.sectionHeading}>{t('Our Agreements')}:</Text>
       {agreements.map((agreement, index) => (
         <View key={index} style={styles.agreementListItem}>
           <Text style={styles.listNumber}>{index + 1}.</Text>
@@ -175,7 +174,7 @@ function AgreementsBodyContent ({ agreements, acceptedAgreements, handleCheckAgr
                 disableBuiltInState
               />
               <TouchableOpacity onPress={() => handleCheckAgreement({ index, checked: !acceptedAgreements[index] })}>
-                <Text style={(acceptedAgreements[index] || acceptedAllAgreements) ? styles.agreementAccepted : styles.acceptanceText}>I agree to the above</Text>
+                <Text style={(acceptedAgreements[index] || acceptedAllAgreements) ? styles.agreementAccepted : styles.acceptanceText}>{t('I agree to the above')}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -193,7 +192,7 @@ function AgreementsBodyContent ({ agreements, acceptedAgreements, handleCheckAgr
             onPress={handleCheckAllAgreements}
             disableBuiltInState
           />
-          <Text style={acceptedAgreements ? styles.agreementAccepted : styles.acceptanceText}>Accept all agreements</Text>
+          <Text style={acceptedAgreements ? styles.agreementAccepted : styles.acceptanceText}>{t('Accept all agreements')}</Text>
         </TouchableOpacity>)}
     </View>
   )
@@ -212,7 +211,7 @@ function JoinQuestionsBodyContent ({ questionAnswers, setQuestionAnswers, setAll
 
   return (
     <View style={{ width: '90%' }}>
-      <Text style={styles.sectionHeading}>Join Questions:</Text>
+      <Text style={styles.sectionHeading}>{t('Join Questions')}:</Text>
       {questionAnswers.map((question, index) => (
         <React.Fragment key={question.questionId}>
           <View key={index} style={styles.agreementListItem}>
@@ -237,6 +236,7 @@ function JoinQuestionsBodyContent ({ questionAnswers, setQuestionAnswers, setAll
 }
 
 function SuggestedSkills ({ addSkill, currentUser, group, removeSkill }) {
+  const { t } = useTranslation()
   const [selectedSkills, setSelectedSkills] = useState(currentUser.skills ? currentUser.skills.toRefArray().map(s => s.id) : [])
   const [pills, setPills] = useState(group.suggestedSkills.map(skill => ({
     ...skill,
@@ -256,7 +256,7 @@ function SuggestedSkills ({ addSkill, currentUser, group, removeSkill }) {
 
   return (
     <View style={styles.joinQuestions}>
-      <Text>Which of the following skills & interests are relevant to you?</Text>
+      <Text>{t('Which of the following skills & interests are relevant to you')}</Text>
       <View style={styles.skillPills}>
         {pills && pills.map(pill => {
           const color = selectedSkills.includes(pill.id) ? caribbeanGreen : rhino

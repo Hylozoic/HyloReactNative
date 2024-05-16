@@ -19,6 +19,7 @@ import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import Icon from 'components/Icon'
 import { isContextGroup } from 'store/models/Group'
 import { postUrl as postUrlCreator } from 'util/navigation'
+import { useTranslation } from 'react-i18next'
 
 export default function usePostActionSheet ({
   baseHostURL = process.env.HYLO_WEB_BASE_URL,
@@ -29,6 +30,7 @@ export default function usePostActionSheet ({
   setFlaggingVisible,
   title
 }) {
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const { showHyloActionSheet } = useHyloActionSheet()
   const mixpanelTrack = useMixpanelTrack()
@@ -67,13 +69,13 @@ export default function usePostActionSheet ({
     const share = async () => {
       try {
         await Share.open({
-          message: `"${title}" by ${creator.name} on hylo.com: ${baseHostURL}${postUrl}`
+          message: `"${title}" ${t('by')} ${creator.name} ${t('on')} hylo.com: ${baseHostURL}${postUrl}`
           // Used only by iOS and will repeat the URL in some contexts if we also include
           // it in the message. Refine this area as later effort.
           // url: `${baseHostURL}${postUrl}`
         }, {
-          dialogTitle: `Share "${title}" by ${creator.name}`,
-          subject: `"${title}" by ${creator.name} on hylo.com`
+          dialogTitle: `${t('Share')} "${title}" ${t('by')} ${creator.name}`,
+          subject: `"${title}" ${t('by')} ${creator.name} ${t('on')} hylo.com`
         })
 
         mixpanelTrack(AnalyticsEvents.POST_SHARED)
@@ -90,27 +92,27 @@ export default function usePostActionSheet ({
 
     const deletePostWithConfirm = handleDeletePost
       ? () => Alert.alert(
-          'Confirm Delete',
-          'Are you sure you want to delete this post?',
+          t('Confirm Delete'),
+          t('Are you sure you want to delete this post?'),
           [
             {
-              text: 'Yes',
+              text: t('Yes'),
               onPress: () => closeOnDelete
                 ? handleDeletePostAndClose()
                 : handleDeletePost()
             },
-            { text: 'Cancel', style: 'cancel' }
+            { text: t('Cancel'), style: 'cancel' }
           ]
         )
       : null
 
     const removePostWithConfirm = handleRemovePost
       ? () => Alert.alert(
-          'Confirm Removal',
-          'Are you sure you want to remove this post from this group?',
+          t('Confirm Removal'),
+          t('Are you sure you want to remove this post from this group?'),
           [
-            { text: 'Yes', onPress: () => handleRemovePost() },
-            { text: 'Cancel', style: 'cancel' }
+            { text: t('Yes'), onPress: () => handleRemovePost() },
+            { text: t('Cancel'), style: 'cancel' }
           ])
       : null
 
@@ -126,27 +128,27 @@ export default function usePostActionSheet ({
 
     */
     return filter(x => x[1], [
-      ['Edit', editPost, {
+      [t('Edit'), editPost, {
         icon: <FontAwesome5Icon name='pencil-alt' style={styles.actionSheetIcon} />
       }],
-      ['Delete', deletePostWithConfirm, {
+      [t('Delete'), deletePostWithConfirm, {
         icon: <FontAwesome5Icon name='trash-alt' style={styles.actionSheetIcon} />,
         destructive: true
       }],
-      [pinned ? 'Unpin' : 'Pin', pinPost, {
+      [pinned ? t('Unpin') : t('Pin'), pinPost, {
         icon: <Icon name='Pin' style={[styles.actionSheetIcon, { fontSize: 30 }]} />
       }],
-      ['Remove From Group', removePostWithConfirm, {
+      [t('Remove From Group'), removePostWithConfirm, {
         icon: <FontAwesome5Icon name='trash-alt' style={styles.actionSheetIcon} />,
         destructive: true
       }],
-      ['Share', share, {
+      [t('Share'), share, {
         icon: <FontAwesome5Icon name='share' style={styles.actionSheetIcon} />
       }],
-      ['Copy Link', copyLink, {
+      [t('Copy Link'), copyLink, {
         icon: <Icon name='Copy' style={styles.actionSheetIcon} />
       }],
-      ['Flag', flagPost, {
+      [t('Flag'), flagPost, {
         icon: <FontAwesome5Icon name='flag' style={styles.actionSheetIcon} />,
         destructive: true
       }]
