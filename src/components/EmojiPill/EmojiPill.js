@@ -2,14 +2,14 @@ import React from 'react'
 import Pill from 'components/Pill'
 import { TouchableOpacity } from 'react-native'
 
-export default function EmojiPill ({ emojiFull, onClick = () => {}, count, selected, toolTip }) {
+export default function EmojiPill ({ emojiFull, onPress = () => {}, count, selected, toolTip }) {
   let pillStyle = { ...styles.tagPill }
   if (selected) pillStyle = { ...pillStyle, ...styles.selected }
   return (
-    <TouchableOpacity onPress={() => onClick(emojiFull)}>
+    <TouchableOpacity onPress={() => onPress(emojiFull)}>
       <Pill
         key={emojiFull}
-        onClick={() => onClick(emojiFull)}
+        onPress={() => onPress(emojiFull)}
         style={pillStyle}
         displayColor={selected ? '#ffffff' : '#000000'}
         label={`${emojiFull} ${count}`}
