@@ -11,6 +11,7 @@ import errorMessages from 'util/errorMessages'
 import SocialAuth from 'components/SocialAuth'
 import styles from './Login.styles'
 import { useTranslation } from 'react-i18next'
+import LocaleSelector from 'components/LocaleSelector/LocaleSelector'
 
 export default function Login () {
   const { t } = useTranslation()
@@ -100,6 +101,12 @@ export default function Login () {
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
       <ScrollView contentContainerStyle={styles.login} style={styles.container}>
+        <View style={styles.localeContainer}>
+          <View style={styles.localeContents}>
+            <LocaleSelector />
+          </View>
+        </View>
+
         {bannerError && <Text style={styles.bannerError}>{bannerError}</Text>}
         {(!bannerError && bannerMessage) && <Text style={styles.bannerMessage}>{bannerMessage}</Text>}
 

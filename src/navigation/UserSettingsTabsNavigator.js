@@ -9,6 +9,7 @@ import logout from 'store/actions/logout'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import UserSettingsWebView from 'screens/UserSettingsWebView'
 import BlockedUsers from 'screens/BlockedUsers'
+import LocaleSelector from 'components/LocaleSelector/LocaleSelector'
 
 const UserSettings = createMaterialTopTabNavigator()
 export default function UserSettingsTabsNavigator ({ navigation, route }) {
@@ -45,7 +46,7 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
           headerTransparent={false}
           {...headerProps}
           // Hides "X button
-          headerLeft={() => {}}
+          headerLeft={() => (<LocaleSelector small dark />)}
           // // Bring the below back while hiding `TabBar`
           // // to force reload of User after settings changed:
           // headerLeftConfirm={true}

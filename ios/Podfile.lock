@@ -433,6 +433,8 @@ PODS:
     - React
   - react-native-image-picker (4.10.3):
     - React-Core
+  - react-native-localization-settings (1.0.2):
+    - React-Core
   - react-native-onesignal (4.5.1):
     - OneSignalXCFramework (= 3.12.4)
     - React (< 1.0.0, >= 0.13.0)
@@ -687,6 +689,7 @@ DEPENDENCIES:
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-geolocation-service (from `../node_modules/react-native-geolocation-service`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
+  - react-native-localization-settings (from `../node_modules/react-native-localization-settings`)
   - react-native-onesignal (from `../node_modules/react-native-onesignal`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-render-html (from `../node_modules/react-native-render-html`)
@@ -815,6 +818,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-geolocation-service"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
+  react-native-localization-settings:
+    :path: "../node_modules/react-native-localization-settings"
   react-native-onesignal:
     :path: "../node_modules/react-native-onesignal"
   react-native-pager-view:
@@ -944,6 +949,7 @@ SPEC CHECKSUMS:
   react-native-document-picker: 69ca2094d8780cfc1e7e613894d15290fdc54bba
   react-native-geolocation-service: 608e1da71a1ac31b4de64d9ef2815f697978c55b
   react-native-image-picker: 60f4246eb5bb7187fc15638a8c1f13abd3820695
+  react-native-localization-settings: 496c6a21eae8e4008358f12b7ab2b388cf4efd85
   react-native-onesignal: 7bd44dbd031d8d57110c0203836ffc37ddead526
   react-native-pager-view: 0ccb8bf60e2ebd38b1f3669fa3650ecce81db2df
   react-native-render-html: 984dfe2294163d04bf5fe25d7c9f122e60e05ebe
