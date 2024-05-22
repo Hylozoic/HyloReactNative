@@ -39,7 +39,7 @@ export default function NotificationCard ({ notification }) {
     unread
   } = notification
   const highlight = unread ? styles.highlight : null
-  console.log(notification?.title)
+
   return (
     <View style={[styles.container, highlight]}>
       <View style={avatarSeparator ? styles.separator : null}>
