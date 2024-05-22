@@ -29,11 +29,11 @@ import GroupWelcomeCheck from 'components/GroupWelcomeCheck'
 import { bannerlinearGradientColors } from 'style/colors'
 import styles from './Feed.styles'
 
-export function headerTitle (currentGroup, feedType, myHome) {
+export function headerTitle (currentGroup, feedType, myHome, t) {
   if (myHome) return myHome
   let title
   title = currentGroup?.name
-  title = feedType ? capitalize(feedType + 's') : title
+  title = feedType ? capitalize(t(feedType) + 's') : title
   return title
 }
 
@@ -87,7 +87,7 @@ export default function Feed ({ topicName: providedTopicName }) {
 
   useEffect(() => {
     navigation.setOptions({
-      title: headerTitle(currentGroup, feedType, myHome)
+      title: headerTitle(currentGroup, feedType, myHome, t)
     })
   }, [navigation, topicName, currentGroup, currentGroup?.id, feedType, myHome])
 

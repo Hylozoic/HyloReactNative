@@ -95,6 +95,10 @@ export class MemberList extends React.Component {
       ? members.concat([{ id: -1 }])
       : members
 
+    t('Newest')
+    t('Name')
+    t('Location')
+    
     const header = (
       <View>
         {children || null}
@@ -106,7 +110,7 @@ export class MemberList extends React.Component {
           />
           {!hideSortOptions && (
             <PopupMenuButton actions={actions} style={styles.sortBy}>
-              <Text style={styles.sortByText}>{sortKeys && sortKeys[sortBy]}</Text>
+              <Text style={styles.sortByText}>{sortKeys && t(sortKeys[sortBy])}</Text>
               <Icon name='ArrowDown' style={styles.downArrow} />
             </PopupMenuButton>
           )}

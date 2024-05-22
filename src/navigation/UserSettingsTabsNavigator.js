@@ -10,10 +10,12 @@ import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import UserSettingsWebView from 'screens/UserSettingsWebView'
 import BlockedUsers from 'screens/BlockedUsers'
 import LocaleSelector from 'components/LocaleSelector/LocaleSelector'
+import { useTranslation } from 'react-i18next'
 
 const UserSettings = createMaterialTopTabNavigator()
 export default function UserSettingsTabsNavigator ({ navigation, route }) {
   const initialURL = useSelector(state => state.initialURL)
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigatorProps = {
     screenOptions: {
@@ -62,7 +64,8 @@ export default function UserSettingsTabsNavigator ({ navigation, route }) {
             confirmationMessage: 'Are you sure you want to logout?',
             continueButtonText: 'Cancel',
             disgardButtonText: 'Yes',
-            onDiscard: async () => dispatch(logout())
+            onDiscard: async () => dispatch(logout()),
+            t
           })}
           headerRightButtonStyle={{ color: alabaster }}
         />

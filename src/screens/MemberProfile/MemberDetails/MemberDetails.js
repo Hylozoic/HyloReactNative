@@ -77,7 +77,8 @@ export class MemberDetails extends React.Component {
               confirmationMessage: t('Are you sure you want to logout?'),
               continueButtonText: t('Cancel'),
               disgardButtonText: t('Yes'),
-              onDiscard: logout
+              onDiscard: logout,
+              t
             })}
           />
       })

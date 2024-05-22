@@ -66,7 +66,8 @@ export default function SignupRegistration ({ navigation, route }) {
           onDiscard: () => {
             dispatch(logout())
             navigation.navigate('Signup Intro')
-          }
+          },
+          t
         })
       }
     })
