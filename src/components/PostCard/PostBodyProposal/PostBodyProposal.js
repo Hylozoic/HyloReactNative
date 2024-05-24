@@ -160,7 +160,7 @@ export default function PostBodyProposal ({
         )
       })}
       {quorum && <QuorumBar totalVoters={numberOfPossibleVoters} quorum={quorum} actualVoters={proposalVoterCount} proposalStatus={proposalStatus} />}
-      {proposalOutcome && <Text style={styles.proposalOutcome}>Outcome: {proposalOutcome}</Text>}
+      {proposalOutcome && fulfilledAt && <Text style={styles.proposalOutcome}>Outcome: {proposalOutcome}</Text>}
     </View>
   )
 }
