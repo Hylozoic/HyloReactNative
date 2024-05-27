@@ -9,7 +9,7 @@ export default function Pill ({
   displayColor = 'rgba(112, 239, 241, 1.0)',
   style,
   editable,
-  pressable
+  onPress
 }) {
   const [removing, setRemoving] = useState(false)
   const deletePill = () => {
@@ -28,7 +28,7 @@ export default function Pill ({
   ]
 
   return (
-    <TouchableOpacity hitSlop={2} onPress={pressable}>
+    <TouchableOpacity hitSlop={2} onPress={onPress}>
       <View
         style={pillStyles}
         onMouseLeave={mouseOut}

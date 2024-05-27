@@ -179,7 +179,6 @@ const styles = {
   completed: {
     borderColor: '#C0C5CD',
     color: '#C0C5CD',
-    cursor: 'default'
   },
   selected: {
     backgroundColor: '#0DC39F',
@@ -188,7 +187,6 @@ const styles = {
   highestVote: {
     backgroundColor: '#0074D8',
     color: 'white',
-    cursor: 'default'
   },
   people: {
     whiteSpace: 'nowrap'
@@ -227,7 +225,6 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    cursor: 'pointer'
   },
   proposalOutcome: {
     padding: 6,
@@ -244,7 +241,6 @@ const styles = {
   discussion: {
     borderColor: '#C0C5CD',
     color: '#C0C5CD',
-    cursor: 'default'
   },
   proposalOptionEmoji: {
     fontSize: 24

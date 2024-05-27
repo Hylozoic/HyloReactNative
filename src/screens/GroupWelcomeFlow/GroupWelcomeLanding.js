@@ -243,7 +243,7 @@ function SuggestedSkills ({ addSkill, currentUser, group, removeSkill }) {
     label: skill.name
   })))
 
-  const handleClick = (skillId) => {
+  const handlePress = (skillId) => {
     const hasSkill = selectedSkills.includes(skillId)
     if (hasSkill) {
       removeSkill(skillId)
@@ -267,7 +267,7 @@ function SuggestedSkills ({ addSkill, currentUser, group, removeSkill }) {
               label={pill.label}
               style={{ borderRadius: 15, borderWidth: 1, borderColor: color, padding: 6, margin: 5 }}
               displayColor={color}
-              pressable={() => handleClick(pill.id)}
+              onPress={() => handlePress(pill.id)}
             />
           )
         })}

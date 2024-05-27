@@ -423,8 +423,8 @@ exports[`selectors/refiners refineActivity matches the previous ACTION_TAG snaps
 {
   "body": "wrote: So detailed.",
   "header": "New Post in",
+  "objectName": "aardvark",
   "onPress": [Function],
-  "topic": "aardvark",
 }
 `;
 
