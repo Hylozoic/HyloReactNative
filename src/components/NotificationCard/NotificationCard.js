@@ -17,9 +17,9 @@ const renderName = ({ actor, nameInHeader }) => nameInHeader
   ? <Text style={styles.name}>{`${actor.name} `}</Text>
   : null
 
-// TODO: render topics as, well, topics
-const renderTopic = topic => topic
-  ? <Text style={styles.name}>{` ${topic}`}</Text>
+// TODO: render channels as, well, channels
+const renderObjectName = channel => channel
+  ? <Text style={styles.name}>{` ${channel}`}</Text>
   : null
 
 const renderTitle = title => title
@@ -34,7 +34,7 @@ export default function NotificationCard ({ notification }) {
     group,
     createdAt,
     header,
-    topic,
+    objectName,
     title,
     unread
   } = notification
@@ -51,7 +51,7 @@ export default function NotificationCard ({ notification }) {
           {renderName(notification)}
           <Text style={[styles.text, styles.emphasize]}>{header}</Text>
           {renderTitle(title)}
-          {renderTopic(topic)}
+          {renderObjectName(objectName)}
         </Text>
         <Text style={styles.text}>
           {renderFirstName(actor)}
@@ -78,7 +78,7 @@ NotificationCard.propTypes = {
     header: string,
     nameInHeader: bool,
     title: string,
-    topic: string,
+    channel: string,
     unread: bool
   })
 }
