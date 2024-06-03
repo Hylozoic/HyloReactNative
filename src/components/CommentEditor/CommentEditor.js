@@ -1,9 +1,5 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { View, Text, TouchableOpacity, Alert, ActivityIndicator } from 'react-native'
-import { BottomTabBarHeightContext } from '@react-navigation/bottom-tabs'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-// ⚠️⚠️⚠️ Deprecated - see https://github.com/facebook/react-native/pull/31402 for native `InputAccessoryView` component (React Native 0.68+) ⚠️⚠️⚠️
-import { KeyboardAccessoryView } from '@flyerhq/react-native-keyboard-accessory-view'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { isEmpty } from 'lodash/fp'
 import { isIOS } from 'util/platform'
@@ -14,38 +10,6 @@ import styles from './CommentEditor.styles'
 import { useDispatch } from 'react-redux'
 import Icon from 'components/Icon'
 import { firstName } from 'store/models/Person'
-
-export const KeyboardAccessoryCommentEditor = forwardRef(function KeyboardAccessoryCommentEditor ({
-  renderScrollable,
-  isModal,
-  ...commentFormProps
-}, ref) {
-  const safeAreaInsets = useSafeAreaInsets()
-
-  return (
-    <BottomTabBarHeightContext.Consumer>
-      {actualTabBarHeight => {
-        const tabBarHeight = (isModal || !actualTabBarHeight) ? 0 : actualTabBarHeight
-
-        return (
-          <KeyboardAccessoryView
-            contentContainerStyle={{
-              ...styles.keyboardAccessoryContainerStyle,
-              paddingBottom: isModal ? safeAreaInsets.bottom : 0
-            }}
-            // These offsets are needed for iOS as it seems the tabbar may
-            // be included in the calculations before it is hidden.
-            spaceBetweenKeyboardAndAccessoryView={isIOS ? -tabBarHeight : 0}
-            contentOffsetKeyboardOpened={isIOS ? -tabBarHeight : 0}
-            renderScrollable={renderScrollable}
-          >
-            <CommentEditor {...commentFormProps} ref={ref} />
-          </KeyboardAccessoryView>
-        )
-      }}
-    </BottomTabBarHeightContext.Consumer>
-  )
-})
 
 export const CommentEditor = forwardRef(function CommentEditor ({
   post,
