@@ -44,3 +44,4 @@ https://www.youtube.com/watch?v=sE60ymB4ZHM
 - Prepare release notes appropriate for stores from CHANGELOG / Github Issues
 - Login to Apple Developer account and submit app for review / release
 - Login to Google Play Store Console and submit app for review / release
+- Once the release is accepted by both the stores run `npm version prereleaase` on `dev` and `git push --tags` to setup the next prereleae build versioning (will bump up on patch version and add `-0` to the end of the version number)

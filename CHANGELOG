@@ -4,6 +4,14 @@ All notable changes to HyloReactNative (the Hylo mobile app) will be documented 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### [5.5.2] - 2024-06-04
+
+- Fixes #720 Search results sometimes crash app #723
+- Fixes crash on getting user details for a deleted user in header of a Message Thread #721
+- Closes #713 - Adds new post notification #714
+- Fixes #708 - Pressing on emoji doesn't do anything #715
+- Update to React Native 0.72.12 #719
+
 ### [5.5.1] - 2023-02-21
 - Redesign Group Welcome
 - Include Agreements into Group Welcome
