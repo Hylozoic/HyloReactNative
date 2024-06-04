@@ -38,6 +38,7 @@ export default function DrawerMenu () {
   }
   const goToGroupSettings = () => canModerateCurrentGroup &&
     navigation.navigate('Group Settings')
+  // TODO RESP: defo invite poepl, not admin/cooridnator
   const goToInvitePeople = () => canModerateCurrentGroup &&
       navigation.navigate('Group Settings', { screen: 'Invite' })
   const changeToGroup = useChangeToGroup()
@@ -132,6 +133,7 @@ export default function DrawerMenu () {
           <View style={[styles.headerContent]}>
             <FastImage source={{ uri: currentGroup.avatarUrl }} style={styles.headerAvatar} />
             <Text style={styles.headerText}>{currentGroup.name}</Text>
+            {/* TODO RESP: Will need to be adjusted for additional responsibilities */}
             {canModerateCurrentGroup && (
               <View style={styles.currentGroupButtons}>
                 <Button

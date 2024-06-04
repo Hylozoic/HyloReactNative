@@ -34,8 +34,8 @@ export default () => {
     geoShape
     location
     memberCount
-    moderatorDescriptor
-    moderatorDescriptorPlural
+    stewardDescriptor
+    stewardDescriptorPlural
     name
     purpose
     settings {
@@ -192,7 +192,7 @@ export default () => {
         name
       }
     }
-    moderators {
+    stewards {
       items {
         id
         avatarUrl

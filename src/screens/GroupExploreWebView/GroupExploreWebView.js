@@ -35,7 +35,7 @@ export default function GroupExploreWebView () {
     }
   )
 
-  // Fetch moderators for "Opportunities to Connect" / Message to all moderators feature
+  // Fetch stewards for "Opportunities to Connect" / Message to all stewards feature
   useEffect(() => {
     if (groupSlug) {
       setPath(`/groups/${groupSlug}/explore`)

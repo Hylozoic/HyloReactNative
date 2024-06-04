@@ -43,7 +43,7 @@ export default function fetchGroupSettings (id) {
                 avatarUrl
               }
             }
-            moderators (first: 100) {
+            stewards (first: 100) {
               hasMore
               items {
                 id

@@ -53,6 +53,7 @@ export default function Comment ({
   const handleReaction = (emojiFull) => reactOnEntity({ commentId: comment?.id, emojiFull, entityType: 'comment', groupIds, postId: post })
   const handleRemoveReaction = (emojiFull) => removeReactOnFromEntity({ commentId: comment?.id, emojiFull, entityType: 'comment', postId: post })
   const handleReply = onReply && (() => onReply(comment))
+  // TODO RESP: defo manage content, not admin/cooridnator
   const handleRemove = (!isCreator && canModerate) && (
     () => Alert.alert(
       t('Moderator: Confirm Delete'),

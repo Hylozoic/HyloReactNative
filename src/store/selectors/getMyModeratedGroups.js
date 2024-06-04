@@ -2,6 +2,7 @@ import { createSelector as ormCreateSelector } from 'redux-orm'
 import orm from 'store/models'
 import getMyMemberships from 'store/selectors/getMyMemberships'
 
+// TODO RESP: does not seem to be in use?
 const getMyModeratedGroups = ormCreateSelector(
   orm,
   getMyMemberships,

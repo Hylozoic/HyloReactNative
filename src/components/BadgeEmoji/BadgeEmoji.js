@@ -1,11 +1,11 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 
-export default function Badge ({ emoji, onPress, isModerator, extraStyle, emojiStyle }) {
+export default function Badge ({ emoji, onPress, isSteward, extraStyle, emojiStyle }) {
   if (!emoji) return null
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={[styles.container, isModerator && styles.isModerator, extraStyle]}>
+      <View style={[styles.container, isSteward && styles.isSteward, extraStyle]}>
         <Text style={[styles.emoji, emojiStyle]}>{emoji}</Text>
       </View>
     </TouchableOpacity>
@@ -30,7 +30,7 @@ const styles = {
     color: 'white',
     position: 'relative'
   },
-  isModerator: {
+  isSteward: {
     backgroundColor: '#ffe8c8',
     borderRadius: 30,
     border: 1,

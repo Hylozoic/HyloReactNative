@@ -43,8 +43,8 @@ exports[`createGroup matches snapshot 1`] = `
   geoShape
   location
   memberCount
-  moderatorDescriptor
-  moderatorDescriptorPlural
+  stewardDescriptor
+  stewardDescriptorPlural
   name
   purpose
   settings {

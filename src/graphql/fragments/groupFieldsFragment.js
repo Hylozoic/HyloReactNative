@@ -29,8 +29,8 @@ const groupFieldsFragment = ({ withTopics, withJoinQuestions, withPrerequisites,
   geoShape
   location
   memberCount
-  moderatorDescriptor
-  moderatorDescriptorPlural
+  stewardDescriptor
+  stewardDescriptorPlural
   name
   purpose
   settings {
@@ -95,7 +95,7 @@ const groupFieldsFragment = ({ withTopics, withJoinQuestions, withPrerequisites,
       avatarUrl
     }
   }
-  moderators {
+  stewards {
     items {
       id
       name

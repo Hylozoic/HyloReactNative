@@ -8,7 +8,6 @@ export default function joinGroup (groupId) {
         mutation ($groupId: ID) {
           joinGroup(groupId: $groupId) {
             id
-            role
             hasModeratorRole
             group {
               id

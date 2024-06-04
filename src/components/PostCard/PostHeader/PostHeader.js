@@ -41,7 +41,7 @@ export default function PostHeader ({
 
   const currentGroupId = currentGroup && currentGroup.id
   const badges = (currentGroupId && creator.groupRoles?.filter(role => role.groupId === currentGroupId)) || []
-  const creatorIsModerator = creator.moderatedGroupMemberships?.find(moderatedMembership => moderatedMembership.groupId === currentGroupId)
+  const creatorIsSteward = creator.moderatedGroupMemberships?.find(moderatedMembership => moderatedMembership.groupId === currentGroupId)
 
   return (
     <View style={[styles.container, style]}>
@@ -56,7 +56,7 @@ export default function PostHeader ({
             <Text style={styles.name}>{name}</Text>
           )}
         </TouchableOpacity>
-        <CondensingBadgeRow badges={badges} creatorIsModerator={creatorIsModerator} currentGroup={currentGroup} postId={postId} />
+        <CondensingBadgeRow badges={badges} creatorIsSteward={creatorIsSteward} currentGroup={currentGroup} postId={postId} />
         <Text style={styles.date}>{TextHelpers.humanDate(date)}</Text>
       </View>
       <View style={styles.upperRight}>

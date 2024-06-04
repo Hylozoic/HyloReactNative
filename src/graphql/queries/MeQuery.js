@@ -111,8 +111,8 @@ export default gql`
         bannerUrl
         name
         memberCount
-        moderatorDescriptor
-        moderatorDescriptorPlural
+        stewardDescriptor
+        stewardDescriptorPlural
         settings {
           showSuggestedSkills
         }

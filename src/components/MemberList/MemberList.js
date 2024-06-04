@@ -152,7 +152,7 @@ export default function (props) {
 export function Member ({ member, showMember, group }) {
   const { moderatedGroupMemberships, groupRoles, id } = member
   const badges = (group && groupRoles.filter(role => role.groupId === group.id)) || []
-  const creatorIsModerator = moderatedGroupMemberships.find(moderatedMembership => moderatedMembership.groupId === group?.id)
+  const creatorIsSteward = moderatedGroupMemberships.find(moderatedMembership => moderatedMembership.groupId === group?.id)
   
   return (
     <TouchableOpacity
@@ -165,7 +165,7 @@ export function Member ({ member, showMember, group }) {
       <Text style={styles.memberName}>{member.name}</Text>
       {!!member.location &&
         <Text style={styles.memberLocation}>{member.location}</Text>}
-        <CondensingBadgeRow badges={badges} limit={32} creatorIsModerator={creatorIsModerator} currentGroup={group} containerStyle={styles.badgeRow} />
+        <CondensingBadgeRow badges={badges} limit={32} creatorIsSteward={creatorIsSteward} currentGroup={group} containerStyle={styles.badgeRow} />
         {/* The limit is just a unrealistically large number here */}
       <Text style={styles.memberBio} numberOfLines={4}>
         {member.bio}

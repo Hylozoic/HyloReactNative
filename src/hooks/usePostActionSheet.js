@@ -58,10 +58,12 @@ export default function usePostActionSheet ({
       }
     }
 
+    // TODO RESP: defo manage content, not admin/cooridnator
     const handleRemovePost = currentGroup && !isCreator && canModerate && !isContextGroup(currentGroup.slug)
       ? () => dispatch(removePostAction(postId, currentGroup?.slug))
       : null
 
+    // TODO RESP: defo manage content, not admin/cooridnator
     const pinPost = currentGroup && canModerate && !isContextGroup(currentGroup).slug
       ? () => dispatch(pinPostAction(postId, currentGroup.id))
       : null

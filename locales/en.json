@@ -4,7 +4,7 @@
   "< Back": "< Back",
   "A link to reset your password has been sent to you at {{email}}": "A link to reset your password has been sent to you at {{email}}",
   "ABOUT ME": "ABOUT ME",
-  "ANNOUNCEMENT-EXPLAINER": "This means that all members of this group will receive an instant email and push notification about this Post. \n (This feature is available to moderators only.)",
+  "ANNOUNCEMENT-EXPLAINER": "This means that all members of this group will receive an instant email and push notification about this Post. \n (This feature is available to stewards only.)",
   "Accept all agreements": "Accept all agreements",
   "Add Participant": "Add Participant",
   "Add a description": "Add a description",

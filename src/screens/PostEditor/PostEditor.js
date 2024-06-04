@@ -492,6 +492,7 @@ export class PostEditor extends React.Component {
   }
 
   renderForm = () => {
+    // TODO RESP: canModerate is not in use???
     const { canModerate, post, postLoading, t } = this.props
     const {
       isSaving, topics, title, type, filePickerPending, announcementEnabled,

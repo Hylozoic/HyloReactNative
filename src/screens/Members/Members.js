@@ -16,6 +16,7 @@ export default function Members ({
   ...forwardedProps
 }) {
   const goToInvitePeople = () => navigation.navigate('Group Settings', { screen: 'Invite' })
+  // TODO RESP: defo invite poeple, not admin/cooridnator
   const showInviteButton = get('allowGroupInvites', group) || canModerate
 
   return (

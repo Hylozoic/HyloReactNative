@@ -3,8 +3,8 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import BadgeEmoji from 'components/BadgeEmoji'
 import { white80onCaribbeanGreen, white40onCaribbeanGreen } from 'style/colors'
 
-export default function CondensingBadgeRow ({ postId, creatorIsModerator, badges, currentGroup, containerStyle, limit = 3 }) {
-  const moderatorCount = creatorIsModerator ? 1 : 0
+export default function CondensingBadgeRow ({ postId, creatorIsSteward, badges, currentGroup, containerStyle, limit = 3 }) {
+  const moderatorCount = creatorIsSteward ? 1 : 0
   const [showAllBadges, setShowAllBadges] = useState(false)
 
   const handleShowBadges = () => {
@@ -14,8 +14,8 @@ export default function CondensingBadgeRow ({ postId, creatorIsModerator, badges
   
   return (
     <View style={[styles.badgeRow, containerStyle]}>
-      {creatorIsModerator && (
-        <BadgeEmoji onPress={handleShowBadges} key='mod' emoji='🛡️' isModerator name={currentGroup?.moderatorDescriptor || 'Moderator'} id={postId} />
+      {creatorIsSteward && (
+        <BadgeEmoji onPress={handleShowBadges} key='mod' emoji='🛡️' isSteward name={currentGroup?.stewardDescriptor || 'Steward'} id={postId} />
       )}
       <TouchableOpacity styles={styles.badgeRow} hitSlop={5} onPress={handleShowBadges}>
       {badges.length + moderatorCount <= limit
@@ -32,10 +32,10 @@ export default function CondensingBadgeRow ({ postId, creatorIsModerator, badges
       </TouchableOpacity>
       {showAllBadges &&
         <View style={styles.allBadgesPill}>
-          {creatorIsModerator && (
+          {creatorIsSteward && (
             <View key='mod' style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingLeft: 2, paddingRight: 4, gap: 2}}>
-              <BadgeEmoji emoji='🛡️' isModerator name={currentGroup?.moderatorDescriptor || 'Moderator'} extraStyle={{ height: 26, width: 26 }} emojiStyle={{ fontSize: 16,lineHeight: 20}} />
-              <Text>{currentGroup?.moderatorDescriptor || 'Moderator'}</Text>
+              <BadgeEmoji emoji='🛡️' isSteward name={currentGroup?.stewardDescriptor || 'Steward'} extraStyle={{ height: 26, width: 26 }} emojiStyle={{ fontSize: 16,lineHeight: 20}} />
+              <Text>{currentGroup?.stewardDescriptor || 'Steward'}</Text>
             </View>
           )}
           {badges.map(badge => (

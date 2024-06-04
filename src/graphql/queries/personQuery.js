@@ -64,7 +64,6 @@ export default
     }
     memberships {
       id
-      role
       hasModeratorRole
       group {
         id
