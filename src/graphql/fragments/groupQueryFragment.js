@@ -61,41 +61,6 @@ export default () => {
         title
       }
     }
-    activeProjects: posts(filter: "project", sortBy: "updated", order: "desc", first: 4) {
-      items {
-        id
-        title
-        createdAt
-        updatedAt
-        creator {
-          id
-          name
-        }
-        members {
-          items {
-            id
-            avatarUrl
-            name
-          }
-        }
-      }
-    }
-    announcements: posts(isAnnouncement: true, sortBy: "created", order: "desc", first: 3) {
-      hasMore
-      items {
-        id
-        title
-        createdAt
-        creator {
-          id
-          name
-        }
-        attachments(type: "image") {
-          position
-          url
-        }
-      }
-    }
     childGroups {
       items {
         id
@@ -200,19 +165,6 @@ export default () => {
         name
       }
     }
-    openOffersAndRequests: posts(types: ["offer", "request"], isFulfilled: false, first: 4) {
-      items {
-        id
-        title
-        type
-        creator {
-          id
-          name
-          avatarUrl
-        }
-        commentsTotal
-      }
-    }
     parentGroups {
       items {
         id
@@ -235,23 +187,6 @@ export default () => {
           showSuggestedSkills
         }
         type
-      }
-    }
-    upcomingEvents: posts(afterTime: "${new Date().toISOString()}", filter: "event", sortBy: "start_time", order: "asc", first: 4) {
-      hasMore
-      items {
-        id
-        title
-        startTime
-        endTime
-        location
-        members {
-          items {
-            id
-            avatarUrl
-            name
-          }
-        }
       }
     }
     widgets {
