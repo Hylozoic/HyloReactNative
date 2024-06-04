@@ -46,7 +46,7 @@ export default function Comment ({
   const postTitle = displayPostTitle && post?.title && TextHelpers.truncateText(post.title, 40)
   const myReactions = (comment && comment.myReactions) || []
   const myEmojis = myReactions.map((reaction) => reaction.emojiFull)
-  const groupIds = post.groups.map(g => g.id)
+  const groupIds = post?.groups.map(g => g.id)
 
   const handleReaction = (emojiFull) => reactOnEntity({ commentId: comment?.id, emojiFull, entityType: 'comment', groupIds, postId: post })
   const handleRemoveReaction = (emojiFull) => removeReactOnFromEntity({ commentId: comment?.id, emojiFull, entityType: 'comment', postId: post })

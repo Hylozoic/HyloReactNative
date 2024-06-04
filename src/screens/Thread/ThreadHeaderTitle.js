@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { modalScreenName } from 'hooks/useIsModalScreen'
@@ -15,12 +14,12 @@ export default function ThreadHeaderTitle ({ thread, currentUserId, navigation }
 
   const otherParticipants = thread.participants.filter(p => p.id !== currentUserId).toRefArray()
   const avatarUrls = otherParticipants.map(p => p.avatarUrl)
-  const names = otherParticipants.length > 1 ? otherParticipants.map(firstName) : [otherParticipants[0].name]
+  const names = otherParticipants.length > 1 ? otherParticipants.map(firstName) : [otherParticipants[0]?.name || 'Deleted User']
   const goToParticipant = ({ id }) => navigation.navigate(modalScreenName('Member'), { id })
   const handleOnPress = () => {
     otherParticipants.length > 1
       ? toggleModalIsVisible()
-      : goToParticipant(otherParticipants[0])
+      : otherParticipants[0] && goToParticipant(otherParticipants[0])
   }
 
   return (
