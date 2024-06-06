@@ -123,7 +123,6 @@ const postFieldsFragment = withComments => `
     neighborhood
     region
   }
-  votesTotal
   peopleReactedTotal
   myReactions {
     emojiFull

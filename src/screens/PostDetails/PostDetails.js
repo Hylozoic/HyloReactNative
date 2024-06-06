@@ -3,13 +3,13 @@ import { View, Alert } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { get } from 'lodash/fp'
+import { useQuery } from 'urql'
 import { AnalyticsEvents } from 'hylo-shared'
 import useGoToMember from 'hooks/useGoToMember'
 import useIsModalScreen from 'hooks/useIsModalScreen'
-import fetchPostAction from 'store/actions/fetchPost'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import { getPresentedPost } from 'store/selectors/getPost'
 import getRouteParam from 'store/selectors/getRouteParam'
+import postQuery from 'graphql/queries/postQuery'
 import { KeyboardAccessoryCommentEditor } from 'components/CommentEditor/CommentEditor'
 import Comments from 'components/Comments'
 import Loading from 'components/Loading'
@@ -37,7 +37,16 @@ export default function PostDetails () {
   const navigation = useNavigation()
   const route = useRoute()
   const postId = getRouteParam('id', route)
-  const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
+
+  const [postResult] = useQuery({
+    query: postQuery,
+    variables: { id: postId }
+  })
+  const { data: postData, fetching: postFetching, error: postError } = postResult
+
+  // const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
+  const post = postData?.post
+
   const currentGroup = useSelector(getCurrentGroup)
 
   const commentsRef = React.useRef()
@@ -47,7 +56,7 @@ export default function PostDetails () {
   const [selectedComment, setSelectedComment] = useState(null)
   const groupId = get('groups.0.id', post)
 
-  const fetchPost = () => dispatch(fetchPostAction(postId))
+  // const fetchPost = () => dispatch(fetchPostAction(postId))
 
   const setHeader = () => {
     !isModalScreen && navigation.setOptions({ title: currentGroup?.name })
@@ -73,23 +82,7 @@ export default function PostDetails () {
   }, [post])
 
   useEffect(() => {
-    (async function () {
-      try {
-        const response = await fetchPost()
-
-        if (!response?.payload?.getData()) {
-          throw new Error('not found')
-        }
-      } catch (e) {
-        Alert.alert(
-          "Sorry, we couldn't find that post",
-          "It may have been removed, or you don't have permission to view it",
-          [{ text: 'Ok', onPress: () => navigation.replace('Feed')}]
-        )
-      }
-
-      setHeader()
-    })()
+    setHeader()
   }, [])
 
   useEffect(() => { setHeader() }, [currentGroup?.slug])
@@ -116,7 +109,23 @@ export default function PostDetails () {
     )
   }
 
-  if (!post?.creator) return <Loading />
+  if (postFetching) return <Loading />
+  if (postError) {
+    Alert.alert(
+      'Sorry, an error occurred when retrieving that post',
+      postError.message,
+      [{ text: 'Ok', onPress: () => navigation.replace('Feed')}]
+    )
+    return null
+  }
+  if (!postData || !postData.post) {
+    Alert.alert(
+      "Sorry, we couldn't find that post",
+      "It may have been removed, or you don't have permission to view it",
+      [{ text: 'Ok', onPress: () => navigation.replace('Feed')}]
+    )
+    return null
+  }
 
   return (
     <View style={styles.container}>

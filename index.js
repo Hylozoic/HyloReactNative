@@ -3,6 +3,8 @@ import { enableScreens } from 'react-native-screens'
 import React, { useEffect, useState } from 'react'
 // Required for react-native-root-toast
 import { RootSiblingParent } from 'react-native-root-siblings'
+import { Provider as UrqlProvider } from 'urql'
+import client from 'graphql/client'
 import { Provider } from 'react-redux'
 import { AppRegistry, Platform, AppState, UIManager } from 'react-native'
 import Timer from 'react-native-background-timer'
@@ -95,8 +97,10 @@ export default function App () {
               systemFonts={[...defaultSystemFonts, 'Circular-Book']}
             >
               <Provider store={store}>
-                <VersionCheck />
-                <RootNavigator />
+                <UrqlProvider value={client}>
+                  <VersionCheck />
+                  <RootNavigator />
+                </UrqlProvider>
               </Provider>
             </TRenderEngineProvider>
           </RootSiblingParent>
