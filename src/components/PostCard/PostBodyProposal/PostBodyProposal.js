@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { PROPOSAL_STATUS_CASUAL, PROPOSAL_STATUS_COMPLETED, PROPOSAL_STATUS_DISCUSSION, PROPOSAL_STATUS_VOTING, VOTING_METHOD_MULTI_UNRESTRICTED, VOTING_METHOD_SINGLE } from 'store/models/Post'
 import { addProposalVote, removeProposalVote, swapProposalVote } from 'store/actions/proposals'
 import QuorumBar from 'components/QuorumBar/QuorumBar'
+import Icon from 'components/Icon'
 import Avatar from 'components/Avatar'
 
 const calcNumberOfVoters = (votes) => {
@@ -79,6 +80,9 @@ export default function PostBodyProposal ({
 
   const votingComplete = proposalStatus === PROPOSAL_STATUS_COMPLETED || fulfilledAt
 
+  // const votePrompt = votingMethod === VOTING_METHOD_SINGLE ? t('select one option') : t('select one or more options')
+  const votePrompt = votingMethod === VOTING_METHOD_SINGLE ? 'Select one' : 'Select one or more'
+
   function handleVote (optionId) {
     if (votingMethod === VOTING_METHOD_SINGLE) {
       if (currentUserVotesOptionIds.includes(optionId)) {
@@ -102,16 +106,17 @@ export default function PostBodyProposal ({
   return (
     <View style={[styles.proposalBodyContainer, proposalStatus === PROPOSAL_STATUS_DISCUSSION && styles.discussion, proposalStatus === PROPOSAL_STATUS_VOTING && styles.voting, proposalStatus === PROPOSAL_STATUS_CASUAL && styles.casual, votingComplete && styles.completed]}>
       <View style={styles.proposalStatus}>
+        {/* {isAnonymousVote && <Icon name='Hidden' styleName='anonymous-voting' dataTip={t('Anonymous voting')} dataTipFor='anon-tt' />} */}
+        {isAnonymousVote && <Icon name='Hidden' styleName='anonymous-voting' dataTip='Anonymous voting' dataTipFor='anon-tt' />}
         <Text style={[proposalStatus === PROPOSAL_STATUS_DISCUSSION && styles.discussion, proposalStatus === PROPOSAL_STATUS_VOTING && styles.voting, proposalStatus === PROPOSAL_STATUS_CASUAL && styles.casual, votingComplete && styles.completed]}>
           {proposalStatus === PROPOSAL_STATUS_DISCUSSION && 'Discussion in progress'}
-          {proposalStatus === PROPOSAL_STATUS_VOTING && 'Voting open'}
+          {proposalStatus === PROPOSAL_STATUS_VOTING && votePrompt}
           {votingComplete && 'Voting ended'}
-          {proposalStatus === PROPOSAL_STATUS_CASUAL && 'Voting open'}
+          {proposalStatus === PROPOSAL_STATUS_CASUAL && !votingComplete && votePrompt}
         </Text>
       </View>
       <View style={styles.proposalTiming}>
         <Text style={[proposalStatus === PROPOSAL_STATUS_DISCUSSION && styles.discussion, proposalStatus === PROPOSAL_STATUS_VOTING && styles.voting, proposalStatus === PROPOSAL_STATUS_CASUAL && styles.casual, votingComplete && styles.completed]}>
-          {!startTime && 'Open timeframe'}
           {startTime && proposalStatus !== PROPOSAL_STATUS_COMPLETED && `${new Date(startTime).toLocaleDateString()} - ${new Date(endTime).toLocaleDateString()}`}
           {startTime && votingComplete && `${new Date(endTime).toLocaleDateString()}`}
         </Text>
@@ -136,9 +141,10 @@ export default function PostBodyProposal ({
             </View>
             <View style={styles.proposalOptionVotesContainer} data-tip={voterNames.join('\n')} data-for='voters-tt'>
               <View style={styles.proposalOptionVoteCount}>
-                <Text style={[votingComplete && styles.completed, proposalStatus === PROPOSAL_STATUS_DISCUSSION && styles.discussion, proposalStatus === PROPOSAL_STATUS_VOTING && styles.voting, proposalStatus === PROPOSAL_STATUS_CASUAL && styles.casual, votingComplete && styles.completed, currentUserVotesOptionIds.includes(option.id) && styles.selected, votingComplete && highestVotedOptions.includes(option.id) && styles.highestVote]}>
-                  {optionVotes.length}
-                </Text>
+                {(!isAnonymousVote || votingComplete) &&
+                  <Text style={[votingComplete && styles.completed, proposalStatus === PROPOSAL_STATUS_DISCUSSION && styles.discussion, proposalStatus === PROPOSAL_STATUS_VOTING && styles.voting, proposalStatus === PROPOSAL_STATUS_CASUAL && styles.casual, votingComplete && styles.completed, currentUserVotesOptionIds.includes(option.id) && styles.selected, votingComplete && highestVotedOptions.includes(option.id) && styles.highestVote]}>
+                    {optionVotes.length}
+                  </Text>}
               </View>
               {!isAnonymousVote &&
                 <View style={styles.proposalOptionVoteAvatars}>
@@ -159,7 +165,7 @@ export default function PostBodyProposal ({
           </TouchableOpacity>
         )
       })}
-      {quorum && <QuorumBar totalVoters={numberOfPossibleVoters} quorum={quorum} actualVoters={proposalVoterCount} proposalStatus={proposalStatus} />}
+      {quorum && quorum > 0 && <QuorumBar totalVoters={numberOfPossibleVoters} quorum={quorum} actualVoters={proposalVoterCount} proposalStatus={proposalStatus} />}
       {proposalOutcome && fulfilledAt && <Text style={styles.proposalOutcome}>Outcome: {proposalOutcome}</Text>}
     </View>
   )
@@ -205,6 +211,10 @@ const styles = {
   },
   proposalStatus: {
     position: 'absolute',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
     top: -16,
     left: 12,
     padding: 6,
