@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { useDispatch } from 'react-redux'
-import { PROPOSAL_STATUS_CASUAL, PROPOSAL_STATUS_COMPLETED, PROPOSAL_STATUS_DISCUSSION, PROPOSAL_STATUS_VOTING, PROPOSAL_TYPE_MULTI_UNRESTRICTED, PROPOSAL_TYPE_SINGLE } from 'store/models/Post'
+import { PROPOSAL_STATUS_CASUAL, PROPOSAL_STATUS_COMPLETED, PROPOSAL_STATUS_DISCUSSION, PROPOSAL_STATUS_VOTING, VOTING_METHOD_MULTI_UNRESTRICTED, VOTING_METHOD_SINGLE } from 'store/models/Post'
 import { addProposalVote, removeProposalVote, swapProposalVote } from 'store/actions/proposals'
 import QuorumBar from 'components/QuorumBar/QuorumBar'
 import Avatar from 'components/Avatar'
@@ -56,7 +56,7 @@ export default function PostBodyProposal ({
   fulfilledAt,
   proposalStatus,
   proposalOutcome,
-  proposalType,
+  votingMethod,
   proposalOptions,
   proposalVotes,
   isAnonymousVote,
@@ -80,7 +80,7 @@ export default function PostBodyProposal ({
   const votingComplete = proposalStatus === PROPOSAL_STATUS_COMPLETED || fulfilledAt
 
   function handleVote (optionId) {
-    if (proposalType === PROPOSAL_TYPE_SINGLE) {
+    if (votingMethod === VOTING_METHOD_SINGLE) {
       if (currentUserVotesOptionIds.includes(optionId)) {
         dispatch(removeProposalVote({ optionId, postId: id }))
       } else if (currentUserVotesOptionIds.length === 0) {
@@ -90,7 +90,7 @@ export default function PostBodyProposal ({
         dispatch(swapProposalVote({ postId: id, addOptionId: optionId, removeOptionId }))
       }
     }
-    if (proposalType === PROPOSAL_TYPE_MULTI_UNRESTRICTED) {
+    if (votingMethod === VOTING_METHOD_MULTI_UNRESTRICTED) {
       if (currentUserVotesOptionIds.includes(optionId)) {
         dispatch(removeProposalVote({ optionId, postId: id }))
       } else {

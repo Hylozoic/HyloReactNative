@@ -9,9 +9,9 @@ export const PROPOSAL_STATUS_VOTING = 'voting'
 export const PROPOSAL_STATUS_CASUAL = 'casual'
 export const PROPOSAL_STATUS_COMPLETED = 'completed'
 
-// Proposal types
-export const PROPOSAL_TYPE_SINGLE = 'single'
-export const PROPOSAL_TYPE_MULTI_UNRESTRICTED = 'multi-unrestricted'
+// Voting methods
+export const VOTING_METHOD_SINGLE = 'single'
+export const VOTING_METHOD_MULTI_UNRESTRICTED = 'multi-unrestricted'
 
 export class PostFollower extends Model {}
 PostFollower.modelName = 'PostFollower'
