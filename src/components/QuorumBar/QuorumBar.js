@@ -11,14 +11,14 @@ const QuorumBar = ({ totalVoters, quorum, actualVoters, proposalStatus }) => {
 
   let quorumStatus = quorumReached ? t('Quorum reached') : t('Quorum')
   if (proposalStatus === PROPOSAL_STATUS_COMPLETED && !quorumReached) quorumStatus = t('Quorum not reached')
-  const bigQuorum = quorum > 90
+  const bigQuorum = quorum > 75
   return (
     <View style={styles.voteProgressContainer}>
       <View style={[styles.actualVoters, { width: `${actualVotersWidth}%` }]}>
-        <Text style={styles.quorumText}>{quorumStatus}</Text>
+        {quorum > 10 && <Text style={styles.quorumText}>{quorumStatus}</Text>}
       </View>
       <View style={[styles.quorumBar, { width: `${quorum}%` }]}>
-        <Text style={[styles.quorumNumber, bigQuorum && styles.bigQuorum, quorumReached && styles.quorumReached]}>{quorum}%</Text>
+        <Text style={[styles.quorumNumber, bigQuorum && styles.bigQuorum, quorumReached && styles.quorumReached]}>{quorum}%: {actualVoters || 0}/{votersForQuorum}</Text>
       </View>
       <View style={styles.totalVotersBar} />
     </View>
@@ -73,7 +73,7 @@ const styles = {
     top: Platform.OS === 'ios' ? 0 : -1,
     color: 'red',
     fontSize: 12,
-    right: -28
+    right: -64
   },
   bigQuorum: {
     right: 10,
