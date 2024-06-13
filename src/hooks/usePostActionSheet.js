@@ -69,13 +69,13 @@ export default function usePostActionSheet ({
     const share = async () => {
       try {
         await Share.open({
-          message: `"${title}" ${t('by')} ${creator.name} ${t('on')} hylo.com: ${baseHostURL}${postUrl}`
+          message: t('shareMessage', { title, name: creator.name, url: `${baseHostURL}${postUrl}` })
           // Used only by iOS and will repeat the URL in some contexts if we also include
           // it in the message. Refine this area as later effort.
           // url: `${baseHostURL}${postUrl}`
         }, {
-          dialogTitle: `${t('Share')} "${title}" ${t('by')} ${creator.name}`,
-          subject: `"${title}" ${t('by')} ${creator.name} ${t('on')} hylo.com`
+          dialogTitle: t('shareDialogTitle', { title, name: creator.name }),
+          subject: t('shareSubject', { title, name: creator.name })
         })
 
         mixpanelTrack(AnalyticsEvents.POST_SHARED)

@@ -214,8 +214,8 @@ export class PostEditor extends React.Component {
 
     if (announcementEnabled) {
       Alert.alert(
-        t('MAKE AN ANNOUNCEMENT'),
-        t('ANNOUNCEMENT-EXPLAINER'),
+        t('makeAnAnnouncement'),
+        t('announcementExplainer'),
         [
           {
             text: t('Send It'),
