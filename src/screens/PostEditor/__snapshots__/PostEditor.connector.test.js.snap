@@ -181,7 +181,7 @@ exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
   peopleReactedTotal
   proposalStatus
   proposalOutcome
-  proposalType
+  votingMethod
   quorum
   proposalOptions {
     total

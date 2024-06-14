@@ -32,7 +32,7 @@ export default function ForgotPassword ({ error }) {
     <ScrollView contentContainerStyle={styles.forgotPassword} style={styles.container}>
       <View style={styles.paddedRow}>
         <Text style={styles.messageText}>
-          {t('Forgot password description')}
+          {t('forgotPasswordDescription')}
         </Text>
       </View>
       {error && (

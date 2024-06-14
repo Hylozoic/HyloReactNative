@@ -140,7 +140,9 @@ export const peopleSetup = (
   } else if (sortedPeople.length === 2) {
     names = `${firstName(sortedPeople[0])} and ${firstName(sortedPeople[1])}`
   } else {
-    names = `${firstName(sortedPeople[0])}, ${firstName(sortedPeople[1])} ${t('and')} ${peopleTotal - 2} ${t('other')}${peopleTotal - 2 > 1 ? 's' : ''}`
+    // names = `${firstName(sortedPeople[0])}, ${firstName(sortedPeople[1])} ${t('and')} ${peopleTotal - 2} ${t('other')}${peopleTotal - 2 > 1 ? 's' : ''}`
+    names = t('manyCommentersInTheFooter', { firstPerson: firstName(sortedPeople[0]), secondPerson: firstName(sortedPeople[1]), count: peopleTotal - 2 })
+    // names = t('manyCommentersInTheFooter', { count: peopleTotal - 2 })
   }
   const caption = `${names} ${phrase}`
   const avatarUrls = people.map(p => p.avatarUrl)

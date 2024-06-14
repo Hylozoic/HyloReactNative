@@ -185,7 +185,7 @@ exports[`action creators matches the last snapshot from fetchNotifications 1`] =
   peopleReactedTotal
   proposalStatus
   proposalOutcome
-  proposalType
+  votingMethod
   quorum
   proposalOptions {
     total
