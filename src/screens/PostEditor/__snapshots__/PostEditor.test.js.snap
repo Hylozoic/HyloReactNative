@@ -1879,7 +1879,7 @@ exports[`TypeButton renders correctly 1`] = `
           "value": "discussion",
         },
         {
-          "color": "#664BA5",
+          "color": "#0DC39F",
           "label": "REQUEST",
           "value": "request",
         },

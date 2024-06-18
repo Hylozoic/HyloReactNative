@@ -132,6 +132,7 @@ export default function fetchCurrentUser () {
                 name
                 purpose
                 slug
+                memberCount
                 visibility
                 agreements {
                   items {
@@ -147,6 +148,7 @@ export default function fetchCurrentUser () {
                     avatarUrl
                     bannerUrl
                     description
+                    memberCount
                     id
                     name
                     slug
@@ -184,6 +186,7 @@ export default function fetchCurrentUser () {
                     bannerUrl
                     description
                     id
+                    memberCount
                     name
                     slug
                     visibility
