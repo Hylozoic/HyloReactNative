@@ -39,6 +39,7 @@ export default function PostDetails () {
   const postId = getRouteParam('id', route)
   const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
   const currentGroup = useSelector(getCurrentGroup)
+  const selectedCommentId = getRouteParam('commentId', route)
 
   const commentsRef = React.useRef()
   const isModalScreen = useIsModalScreen()
@@ -102,6 +103,7 @@ export default function PostDetails () {
       <Comments
         ref={commentsRef}
         postId={post.id}
+        selectedCommentId={selectedCommentId}
         header={(
           <PostCardForDetails
             post={post}

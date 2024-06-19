@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect'
-import { get, reduce } from 'lodash/fp'
+import { createSelector as ormCreateSelector } from 'redux-orm'
+import { reduce } from 'lodash/fp'
 import orm from 'store/models'
 import { FETCH_COMMENTS } from 'store/constants'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
@@ -11,8 +11,8 @@ const normaliseCommentModel = comment => ({
     .orderBy('position').toRefArray()
 })
 
-export const getComments = createSelector(
-  state => orm.session(state.orm),
+export const getComments = ormCreateSelector(
+  orm,
   (_, props) => props.commentId,
   (_, props) => props.postId,
   ({ Comment }, parentComment, post) => {
@@ -44,12 +44,12 @@ export const getComments = createSelector(
 
 const getCommentResults = makeGetQueryResults(FETCH_COMMENTS)
 
-export const getHasMoreComments = createSelector(
-  getCommentResults,
-  get('hasMore')
-)
+export const getHasMoreComments = state => {
+  const commentResults = getCommentResults(state)
+  return commentResults?.hasMore
+}
 
-export const getTotalComments = createSelector(
-  getCommentResults,
-  get('total')
-)
+export const getTotalComments = state => {
+  const commentResults = getCommentResults(state)
+  return commentResults?.total
+}

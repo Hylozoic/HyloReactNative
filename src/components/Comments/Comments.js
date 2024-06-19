@@ -17,6 +17,7 @@ import { FETCH_COMMENTS } from 'store/constants'
 
 function Comments ({
   postId,
+  selectedCommentId,
   header: providedHeader = null,
   style = {},
   showMember,
@@ -41,8 +42,22 @@ function Comments ({
     const sectionIndex = section.comment.sectionIndex
     const itemIndex = section.data.find(subComment =>
       subCommentId === subComment.id)?.itemIndex || section.data.length + 1
-    commentsListRef?.current.scrollToLocation({ sectionIndex, itemIndex, viewPosition })
+    commentsListRef?.current.scrollToLocation({ sectionIndex, itemIndex, viewPosition, animated: true })
   }, [sections])
+
+  const scrollToCommentById = useCallback((commentId) => {
+    comments.forEach(comment => {
+      if (comment.id === selectedCommentId) {
+        selectComment(comment)
+      } else {
+        comment.subComments.forEach(subComment => {
+          if (selectedCommentId === subComment.id) {
+            selectComment(subComment)
+          }
+        })
+      }
+    })
+  })
 
   const selectComment = useCallback(comment => {
     setHighlightedComment(comment)
@@ -59,6 +74,12 @@ function Comments ({
   useEffect(() => {
     dispatch(fetchCommentsAction({ postId }))
   }, [dispatch, postId])
+
+  useEffect(() => {
+    if (!pending && selectedCommentId) {
+      scrollToCommentById(selectedCommentId)
+    }
+  }, [pending, selectedCommentId])
 
   const Header = () => (
     <>
@@ -108,6 +129,8 @@ function Comments ({
     )
   }
 
+  if (pending) return <Loading />
+
   return (
     <SectionList
       style={style}
@@ -121,7 +144,21 @@ function Comments ({
       sections={sections}
       keyExtractor={comment => comment.id}
       initialScrollIndex={0}
+      getItemLayout={(data, index) => ({
+        length: 50,
+        offset: 50 * index,
+        index
+      })}
       // keyboardShouldPersistTaps='handled'
+      onScrollToIndexFailed={(error) => {
+        console.log('!!!! error', error)
+        // this.commentsListRef.scrollToOffset({ offset: error.averageItemLength * error.index, animated: false })
+        // setTimeout(() => {
+        //   if (this.state.data.length !== 0 && this.commentsListRef !== null) {
+        //     this.commentsListRef.scrollToIndex({ index: error.index, animated: true })
+        //   }
+        // }, 100)
+      }}
       keyboardShouldPersistTaps='never'
       keyboardDismissMode={isIOS ? 'interactive' : 'on-drag'}
       {...panHandlers}
