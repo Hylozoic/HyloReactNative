@@ -10,13 +10,14 @@ import fetchPostAction from 'store/actions/fetchPost'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { getPresentedPost } from 'store/selectors/getPost'
 import getRouteParam from 'store/selectors/getRouteParam'
-import { KeyboardAccessoryCommentEditor } from 'components/CommentEditor/CommentEditor'
+import CommentEditor from 'components/CommentEditor/CommentEditor'
 import Comments from 'components/Comments'
 import Loading from 'components/Loading'
 import PostCardForDetails from 'components/PostCard/PostCardForDetails'
 import SocketSubscriber from 'components/SocketSubscriber'
 import { white } from 'style/colors'
 import trackAnalyticsEvent from 'store/actions/trackAnalyticsEvent'
+import { KeyboardAccessoryView } from 'react-native-keyboard-accessory'
 
 /*
 
@@ -94,11 +95,13 @@ export default function PostDetails () {
 
   useEffect(() => { setHeader() }, [currentGroup?.slug])
 
-  const renderPostDetails = panHandlers => {
-    const firstGroupSlug = get('groups.0.slug', post)
-    const showGroups = isModalScreen || post?.groups.find(g => g.slug !== currentGroup?.slug)
+  if (!post?.creator) return <Loading />
 
-    return (
+  const firstGroupSlug = get('groups.0.slug', post)
+  const showGroups = isModalScreen || post?.groups.find(g => g.slug !== currentGroup?.slug)
+
+  return (
+    <View style={styles.container}>
       <Comments
         ref={commentsRef}
         postId={post.id}
@@ -111,24 +114,22 @@ export default function PostDetails () {
         onSelect={setSelectedComment}
         slug={firstGroupSlug}
         showMember={goToMember}
-        panHandlers={panHandlers}
       />
-    )
-  }
-
-  if (!post?.creator) return <Loading />
-
-  return (
-    <View style={styles.container}>
-      <KeyboardAccessoryCommentEditor
-        renderScrollable={renderPostDetails}
-        isModal={isModalScreen}
-        post={post}
-        groupId={groupId}
-        replyingTo={selectedComment}
-        scrollToReplyingTo={scrollToSelectedComment}
-        clearReplyingTo={clearSelectedComment}
-      />
+      <KeyboardAccessoryView
+        style={{ flex: 1, overflow: 'auto' }}
+        alwaysVisible
+        heightProperty='minHeight'
+        avoidKeyboard
+        androidAdjustResize
+      >
+        <CommentEditor
+          post={post}
+          groupId={groupId}
+          replyingTo={selectedComment}
+          scrollToReplyingTo={scrollToSelectedComment}
+          clearReplyingTo={clearSelectedComment}
+        />
+      </KeyboardAccessoryView>
       <SocketSubscriber type='post' id={post.id} />
     </View>
   )

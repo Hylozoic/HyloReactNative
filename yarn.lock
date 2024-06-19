@@ -1237,11 +1237,6 @@
     "@types/hoist-non-react-statics" "^3.3.1"
     hoist-non-react-statics "^3.3.0"
 
-"@flyerhq/react-native-keyboard-accessory-view@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@flyerhq/react-native-keyboard-accessory-view/-/react-native-keyboard-accessory-view-2.4.0.tgz#27fe52f77e2b0ee324bf74154eda79bfebba608f"
-  integrity sha512-LF2WdkMk23bTTpsXPQIyVjWttfo+6DcG0HcgE4kp+ozbVRv2Z1S+K1IRd1CR1LAuvHPnVax3DjrJqsGFTavqvA==
-
 "@formidable-webview/webshell@^2.6.0":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@formidable-webview/webshell/-/webshell-2.6.0.tgz#64704c0b513206e71b23118b3c9d096f0d545005"
@@ -8101,6 +8096,11 @@ react-native-image-viewing@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/react-native-image-viewing/-/react-native-image-viewing-0.2.2.tgz#fb26e57d7d3d9ce4559a3af3d244387c0367242b"
   integrity sha512-osWieG+p/d2NPbAyonOMubttajtYEYiRGQaJA54slFxZ69j1V4/dCmcrVQry47ktVKy8/qpFwCpW1eT6MH5T2Q==
+
+react-native-keyboard-accessory@^0.1.16:
+  version "0.1.16"
+  resolved "https://registry.yarnpkg.com/react-native-keyboard-accessory/-/react-native-keyboard-accessory-0.1.16.tgz#f0babba9e6568c0c2c8f3fd774fcb2b90b8274ba"
+  integrity sha512-zpdaduoGjp/spLtM0XxxyxFpCqFQu3fospy/HeYpaIfsXTqGdT1MIajS8tahDxeG6fHLDrWvEIYA6zWM5jni0w==
 
 react-native-linear-gradient@^2.6.2:
   version "2.8.2"

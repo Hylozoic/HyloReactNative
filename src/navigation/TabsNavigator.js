@@ -21,7 +21,7 @@ export default function TabsNavigator () {
     screenOptions: ({ route }) => ({
       // TODO: Required for Android, not iOS
       // Set only for Android as it makes undesirable animation in iOS
-      tabBarHideOnKeyboard: !isIOS,
+      tabBarHideOnKeyboard: true,
       tabBarShowLabel: true,
       tabBarPressColor: gainsboro,
       tabBarIndicatorStyle: { backgroundColor: white },
