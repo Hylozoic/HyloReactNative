@@ -11,6 +11,7 @@ import Icon from 'components/Icon'
 import Topics from 'components/Topics'
 import styles from 'components/PostCard/PostCard.styles'
 import { useCurrentUser } from 'hooks/useCurrentUser'
+import { useTranslation } from 'react-i18next'
 
 export default function PostCard ({
   goToGroup,
@@ -24,6 +25,7 @@ export default function PostCard ({
   childPost,
   showTopic: goToTopic
 }) {
+  const { t } = useTranslation()
   const images = post.imageUrls && post.imageUrls.map(uri => ({ uri }))
   const locationText = LocationHelpers.generalLocationString(post.locationObject, post.location)
   const currentUser = useCurrentUser()
@@ -33,7 +35,7 @@ export default function PostCard ({
       {childPost && (
         <View style={styles.childPost}>
           <View style={styles.childPostInner}>
-            <Icon name='Subgroup' style={styles.childPostIcon} /><Text style={styles.childPostText}>{' '}post from child group</Text>
+            <Icon name='Subgroup' style={styles.childPostIcon} /><Text style={styles.childPostText}>{' '}{t('post from child group')}</Text>
           </View>
         </View>)}
       <View style={styles.container}>

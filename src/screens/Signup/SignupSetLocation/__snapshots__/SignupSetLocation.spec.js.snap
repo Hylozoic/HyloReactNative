@@ -343,7 +343,8 @@ exports[`default render matches snapshot 1`] = `
                                 Add your location
                               </Text>
                               <Text>
-                                Add your location to see more relevant content and find people and projects near you.
+                                Add your location to see more relevant content and find people and projects near you
+                                .
                               </Text>
                             </View>
                             <View>

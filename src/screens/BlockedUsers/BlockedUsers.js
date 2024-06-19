@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
+import { useTranslation } from 'react-i18next'
 import LoadingScreen from 'screens/LoadingScreen'
 import styles from './BlockedUsers.styles'
 
@@ -13,9 +14,7 @@ export default class BlockedUsers extends React.Component {
 
     if (!blockedUsers || blockedUsers.length < 1) {
       return (
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
-          <Text style={styles.noBlockedUsersMessage}>No members currently blocked.</Text>
-        </ScrollView>
+        <NoBlockedMessage styles={styles} />
       )
     }
 
@@ -28,13 +27,24 @@ export default class BlockedUsers extends React.Component {
   }
 }
 
+function NoBlockedMessage ({ styles }) {
+  const { t } = useTranslation()
+  return (
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <Text style={styles.noBlockedUsersMessage}>{t('No members currently blocked')}</Text>
+    </ScrollView>
+  )
+
+}
+
 export function BlockedUserRow ({ user, unBlockUser }) {
+  const { t } = useTranslation()
   return (
     <View style={styles.settingsRow}>
       <View style={styles.nameRow}>
         <Text style={styles.linkText}>{user.name}</Text>
         <TouchableOpacity onPress={unBlockUser} style={styles.unBlockButton}>
-          <Text style={styles.unBlockButtonText}>Unblock</Text>
+          <Text style={styles.unBlockButtonText}>{t('Unblock')}</Text>
         </TouchableOpacity>
       </View>
     </View>

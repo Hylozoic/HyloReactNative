@@ -6,6 +6,7 @@ import { addProposalVote, removeProposalVote, swapProposalVote } from 'store/act
 import QuorumBar from 'components/QuorumBar/QuorumBar'
 import Icon from 'components/Icon'
 import Avatar from 'components/Avatar'
+import { useTranslation } from 'react-i18next'
 
 const calcNumberOfVoters = (votes) => {
   return votes.reduce((acc, vote) => {
@@ -67,6 +68,7 @@ export default function PostBodyProposal ({
   groups,
   id
 }) {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const proposalOptionsArray = useMemo(() => proposalOptions?.items || [], [proposalOptions])
@@ -109,9 +111,9 @@ export default function PostBodyProposal ({
         {/* {isAnonymousVote && <Icon name='Hidden' styleName='anonymous-voting' dataTip={t('Anonymous voting')} dataTipFor='anon-tt' />} */}
         {isAnonymousVote && <Icon name='Hidden' styleName='anonymous-voting' dataTip='Anonymous voting' dataTipFor='anon-tt' />}
         <Text style={[proposalStatus === PROPOSAL_STATUS_DISCUSSION && styles.discussion, proposalStatus === PROPOSAL_STATUS_VOTING && styles.voting, proposalStatus === PROPOSAL_STATUS_CASUAL && styles.casual, votingComplete && styles.completed]}>
-          {proposalStatus === PROPOSAL_STATUS_DISCUSSION && 'Discussion in progress'}
+          {proposalStatus === PROPOSAL_STATUS_DISCUSSION && t('Discussion in progress')}
+          {votingComplete && t('Voting ended')}
           {proposalStatus === PROPOSAL_STATUS_VOTING && votePrompt}
-          {votingComplete && 'Voting ended'}
           {proposalStatus === PROPOSAL_STATUS_CASUAL && !votingComplete && votePrompt}
         </Text>
       </View>
@@ -166,7 +168,7 @@ export default function PostBodyProposal ({
         )
       })}
       {quorum && quorum > 0 && <QuorumBar totalVoters={numberOfPossibleVoters} quorum={quorum} actualVoters={proposalVoterCount} proposalStatus={proposalStatus} />}
-      {proposalOutcome && fulfilledAt && <Text style={styles.proposalOutcome}>Outcome: {proposalOutcome}</Text>}
+      {proposalOutcome && fulfilledAt && <Text style={styles.proposalOutcome}>{t('Outcome')}: {proposalOutcome}</Text>}
     </View>
   )
 }
@@ -183,7 +185,6 @@ const styles = {
   completed: {
     borderColor: '#C0C5CD',
     color: '#C0C5CD',
-    cursor: 'default'
   },
   selected: {
     backgroundColor: '#0DC39F',
@@ -192,7 +193,6 @@ const styles = {
   highestVote: {
     backgroundColor: '#0074D8',
     color: 'white',
-    cursor: 'default'
   },
   people: {
     whiteSpace: 'nowrap'
@@ -235,7 +235,6 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    cursor: 'pointer'
   },
   proposalOutcome: {
     padding: 6,
@@ -244,7 +243,6 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    background: 'rgba(51, 102, 255, 0.4)',
     borderWidth: 1,
     borderStyle: 'dashed',
     borderColor: 'rgba(213, 236, 250, 1)',
@@ -253,7 +251,6 @@ const styles = {
   discussion: {
     borderColor: '#C0C5CD',
     color: '#C0C5CD',
-    cursor: 'default'
   },
   proposalOptionEmoji: {
     fontSize: 24

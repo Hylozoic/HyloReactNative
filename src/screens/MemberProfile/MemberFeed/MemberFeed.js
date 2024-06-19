@@ -5,6 +5,7 @@ import Comment from 'components/Comment'
 import Loading from 'components/Loading'
 import styles from './MemberFeed.styles'
 import useChangeToGroup from 'hooks/useChangeToGroup'
+import { useTranslation } from 'react-i18next'
 
 export default function MemberFeed ({
   id,
@@ -54,6 +55,11 @@ export const HeaderComponent = ({
   setChoice
 }) => {
   const feedOptions = ['Posts', 'Comments', 'Upvotes']
+  const { t } = useTranslation()
+  // explicit invocation of dynamic content
+  t('Posts')
+  t('Comments')
+  t('Upvotes')
 
   return (
     <View>
@@ -121,9 +127,10 @@ export function ContentRow ({
 }
 
 export function FeedTab ({ option, chosen, onPress }) {
+  const { t } = useTranslation()
   return (
     <TouchableOpacity onPress={onPress}>
-      <Text style={chosen ? styles.chosenOption : styles.option}>{option}</Text>
+      <Text style={chosen ? styles.chosenOption : styles.option}>{t(option)}</Text>
     </TouchableOpacity>
   )
 }

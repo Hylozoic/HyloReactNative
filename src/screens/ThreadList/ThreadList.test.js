@@ -13,6 +13,22 @@ jest.mock('util/websockets', () => {
   }
 })
 
+jest.mock('react-i18next', () => ({
+  ...jest.requireActual('react-i18next'),
+  withTranslation: () => Component => {
+    Component.defaultProps = { ...Component.defaultProps, t: (str) => str }
+    return Component
+  },
+  useTranslation: (domain) => {
+    return {
+      t: (str) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {})
+      }
+    }
+  }
+}))
+
 describe('ThreadList', () => {
   it('renders correctly', () => {
     const threads = [{ id: 1, participants: [{ id: 1, avatarUrl: 'blah' }], lastMessage: { id: 1 } }]
@@ -25,6 +41,7 @@ describe('ThreadList', () => {
     const fetchThreads = jest.fn()
     const renderer = TestRenderer.create(
       <ThreadList
+        t={str => str}
         fetchThreads={fetchThreads}
         hasMore
         isFocused
@@ -41,7 +58,7 @@ describe('ThreadList', () => {
   it('handles pending correctly without threads', () => {
     const renderer = new ReactShallowRenderer()
     const threads = []
-    renderer.render(<ThreadList threads={threads} updateLastViewed={jest.fn()} isFocused pending />)
+    renderer.render(<ThreadList t={str => str} threads={threads} updateLastViewed={jest.fn()} isFocused pending />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -50,6 +67,7 @@ describe('ThreadList', () => {
   it('handles pending correctly with threads', () => {
     const renderer = TestRenderer.create(
       <ThreadList
+        t={str => str}
         fetchThreads={() => {}}
         isFocused
         updateLastViewed={jest.fn()}
@@ -63,6 +81,7 @@ describe('ThreadList', () => {
   it('handles when there are no threads correctly', () => {
     const renderer = TestRenderer.create(
       <ThreadList
+        t={str => str}
         fetchThreads={() => {}}
         isFocused
         updateLastViewed={jest.fn()}
@@ -113,6 +132,7 @@ describe('MessageRow', () => {
 
     const renderer = TestRenderer.create(
       <MessageRow
+        t={str => str}
         showThread={showThread}
         message={message}
         participants={participants}
