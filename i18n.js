@@ -1,6 +1,5 @@
 import i18next from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import { ReactNativeLanguageDetector } from 'react-native-localization-settings';
 import { en, es } from './locales'
 
 const resources = {
@@ -16,7 +15,6 @@ const i18n = i18next.createInstance()
 
 i18n
   .use(initReactI18next)
-  .use(ReactNativeLanguageDetector)
   .init({
     debug: true,
     resources,
