@@ -59,6 +59,7 @@ export default function fetchCurrentUser () {
               digestFrequency
               dmNotifications
               commentNotifications
+              locale
               signupInProgress
               streamChildPosts
               streamViewMode

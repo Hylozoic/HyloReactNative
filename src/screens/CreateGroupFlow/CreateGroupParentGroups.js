@@ -10,9 +10,11 @@ import { white } from 'style/colors'
 import { GROUP_ACCESSIBILITY } from 'store/models/Group'
 import { getGroupData, updateGroupData } from './CreateGroupFlow.store'
 import styles from './CreateGroupFlow.styles'
+import { useTranslation } from 'react-i18next'
 
 export default function CreateGroupParentGroups ({ navigation }) {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const groupData = useSelector(getGroupData)
   const [parentIds, setParentGroupIds] = useState(groupData.parentIds)
   const memberships = useSelector(getMemberships)
@@ -37,8 +39,8 @@ export default function CreateGroupParentGroups ({ navigation }) {
 
   return (
     <KeyboardFriendlyView style={styles.container}>
-      <Text style={styles.heading}>Is this group a member of other groups?</Text>
-      <Text style={stepStyles.subHeading}>Please select below:</Text>
+      <Text style={styles.heading}>{t('Is this group a member of other groups?')}</Text>
+      <Text style={stepStyles.subHeading}>{t('Please select below:')}</Text>
       <FlatList
         style={stepStyles.parentGroupListContainer}
         data={parentGroupOptions}
@@ -47,7 +49,7 @@ export default function CreateGroupParentGroups ({ navigation }) {
         )}
       />
       <TouchableOpacity onPress={clear}>
-        <Text style={stepStyles.clearButton}>Clear</Text>
+        <Text style={stepStyles.clearButton}>{t('Clear')}</Text>
       </TouchableOpacity>
     </KeyboardFriendlyView>
   )

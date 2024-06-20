@@ -9,8 +9,10 @@ import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import Icon from 'components/Icon'
 import TopicsNavigation from 'components/TopicsNavigation'
 import styles from './GroupNavigation.styles'
+import { useTranslation } from 'react-i18next'
 
 export default function GroupNavigation () {
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const route = useRoute()
   const currentGroup = useSelector(getCurrentGroup)
@@ -21,41 +23,41 @@ export default function GroupNavigation () {
   const myHome = route?.params?.myHome
 
   useFocusEffect(() => {
-    navigation.setOptions({ title: myHome ? 'My Home' : currentGroup?.name })
+    navigation.setOptions({ title: myHome ? t('My Home') : currentGroup?.name })
   })
 
   const navItems = myHome
     ? [
-        { label: 'Create', iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
-        { label: 'My Posts', iconName: 'Posticon', onPress: () => navigate('My Posts') },
-        { label: 'Interactions', iconName: 'Support', onPress: () => navigate('Interactions') },
-        { label: 'Mentions', iconName: 'Email', onPress: () => navigate('Mentions') },
-        { label: 'Announcements', iconName: 'Announcement', onPress: () => navigate('Announcements') }
+        { label: t('Create'), iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
+        { label: t('My Posts'), iconName: 'Posticon', onPress: () => navigate('My Posts') },
+        { label: t('Interactions'), iconName: 'Support', onPress: () => navigate('Interactions') },
+        { label: t('Mentions'), iconName: 'Email', onPress: () => navigate('Mentions') },
+        { label: t('Announcements'), iconName: 'Announcement', onPress: () => navigate('Announcements') }
       ]
     : [
-        { label: 'Create', iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
-        { label: 'Stream', iconName: 'Stream', onPress: () => navigate('Feed') },
+        { label: t('Create'), iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
+        { label: t('Stream'), iconName: 'Stream', onPress: () => navigate('Feed') },
         {
-          label: 'Explore',
+          label: t('Explore'),
           iconName: 'Binoculars',
           onPress: () => navigate('Group Explore', { groupSlug: currentGroup?.slug }),
           hidden: isContextGroup(currentGroup?.slug)
         },
-        { label: 'Projects', iconName: 'Projects', onPress: () => navigate('Projects') },
-        { label: 'Events', iconName: 'Events', onPress: () => navigate('Events') },
+        { label: t('Projects'), iconName: 'Projects', onPress: () => navigate('Projects') },
+        { label: t('Events'), iconName: 'Events', onPress: () => navigate('Events') },
         {
-          label: 'Members',
+          label: t('Members'),
           iconName: 'Members',
           onPress: () => navigate('Members'),
           hidden: isContextGroup(currentGroup?.slug)
         },
         {
-          label: 'Groups',
+          label: t('Groups'),
           iconName: 'Groups',
           onPress: () => navigate('Group Relationships'),
           hidden: !(childGroups?.length > 0 || parentGroups?.length > 0)
         },
-        { label: 'Map', iconName: 'Globe', onPress: () => navigate('Map') },
+        { label: t('Map'), iconName: 'Globe', onPress: () => navigate('Map') },
         ...customViews.filter(customView => customView.name && (customView.type !== 'externalLink' || customView.externalLink)).map(customView => ({
           label: customView.name,
           iconName: customView.icon,
@@ -75,7 +77,7 @@ export default function GroupNavigation () {
         <>
           <View style={styles.divider} />
           <View style={styles.navItems}>
-            <NavItem label='Topics' iconName='Topics' onPress={() => navigate('Topics')} />
+            <NavItem label={t('Topics')} iconName='Topics' onPress={() => navigate('Topics')} />
             <TopicsNavigation group={currentGroup} />
           </View>
         </>

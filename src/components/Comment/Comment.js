@@ -18,6 +18,7 @@ import Icon from 'components/Icon'
 import styles from './Comment.styles'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import ImageAttachments from 'components/ImageAttachments'
+import { useTranslation } from 'react-i18next'
 
 export default function Comment ({
   comment,
@@ -33,6 +34,7 @@ export default function Comment ({
   style,
   slug
 }) {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const { showHyloActionSheet } = useHyloActionSheet()
   const { reactOnEntity, removeReactOnFromEntity } = useReactionActions()
@@ -53,22 +55,22 @@ export default function Comment ({
   const handleReply = onReply && (() => onReply(comment))
   const handleRemove = (!isCreator && canModerate) && (
     () => Alert.alert(
-      'Moderator: Confirm Delete',
-      'Are you sure you want to remove this comment?',
+      t('Moderator: Confirm Delete'),
+      t('Are you sure you want to remove this comment?'),
       [
-        { text: 'Yes', onPress: () => dispatch(deleteCommentAction(comment.id)) },
-        { text: 'Cancel', style: 'cancel' }
+        { text: t('Yes'), onPress: () => dispatch(deleteCommentAction(comment.id)) },
+        { text: t('Cancel'), style: 'cancel' }
       ]
     )
   )
   const handleDelete = isCreator && (
     () => {
       Alert.alert(
-        'Confirm Delete',
-        'Are you sure you want to delete this comment?',
+        t('Confirm Delete'),
+        t('Are you sure you want to delete this comment?'),
         [
-          { text: 'Yes', onPress: () => dispatch(deleteCommentAction(comment.id)) },
-          { text: 'Cancel', style: 'cancel' }
+          { text: t('Yes'), onPress: () => dispatch(deleteCommentAction(comment.id)) },
+          { text: t('Cancel'), style: 'cancel' }
         ]
       )
     }
@@ -76,20 +78,20 @@ export default function Comment ({
   const handleCopy = () => Clipboard.setString(TextHelpers.presentHTMLToText(comment.text))
 
   const commentMenuActions = [
-    ['Reply', handleReply, {
+    [t('Reply'), handleReply, {
       icon: <Icon name='Replies' style={styles.actionSheetIcon} />
     }],
-    ['React', () => setShowEmojiPicker(!showEmojiPicker), {
+    [t('React'), () => setShowEmojiPicker(!showEmojiPicker), {
       icon: <Icon name='Smiley' style={styles.actionSheetIcon} />
     }],
-    ['Copy', handleCopy, {
+    [t('Copy'), handleCopy, {
       icon: <FontAwesome5Icon name='copy' style={styles.actionSheetIcon} />
     }],
-    ['Remove', handleRemove, {
+    [t('Remove'), handleRemove, {
       icon: <FontAwesome5Icon name='trash-alt' style={styles.actionSheetIcon} />,
       destructive: true
     }],
-    ['Delete', handleDelete, {
+    [t('Delete'), handleDelete, {
       icon: <FontAwesome5Icon name='trash-alt' style={styles.actionSheetIcon} />,
       destructive: true
     }]
@@ -101,7 +103,7 @@ export default function Comment ({
     showHyloActionSheet(
       { actions: commentMenuActions },
       action => {
-        if (action[0] !== 'Reply') clearHighlighted()
+        if (action[0] !== t('Reply')) clearHighlighted()
       }
     )
   }
@@ -127,7 +129,7 @@ export default function Comment ({
             </TouchableOpacity>
             <Text style={styles.date}>{TextHelpers.humanDate(createdAt)}</Text>
             {displayPostTitle && (
-              <Text style={styles.date}>on "{postTitle}"</Text>
+              <Text style={styles.date}>{t('on')} "{postTitle}"</Text>
             )}
           </View>
           <View style={styles.headerMiddle} />

@@ -25,8 +25,10 @@ import ProjectMembersSummary from 'components/ProjectMembersSummary'
 import Topics from 'components/Topics'
 import styles from 'components/PostCard/PostCard.styles'
 import { SvgUri } from 'react-native-svg'
+import { useTranslation } from 'react-i18next'
 
 export default function PostCardForDetails ({ post, showGroups = true }) {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigation = useNavigation
   const currentUser = useSelector(getMe)
@@ -126,18 +128,18 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
           {projectManagementLinkSvgUri && (
             <>
               <Text>
-                This project is being managed on
+                {t('This project is being managed on')}
               </Text>
               <View style={{ flex: 1, paddingLeft: 5 }}><SvgUri width='50' uri={projectManagementLinkSvgUri} /></View>
             </>
           )}
           {!projectManagementLinkSvgUri && (
-            <Text>View project management tool</Text>
+            <Text>{t('View project management tool')}</Text>
           )}
           <Button
             style={{ width: 80, height: 25, fontSize: 11 }}
             onPress={() => openURL(post.projectManagementLink)}
-            text='View tasks'
+            text={t('View tasks')}
           />
         </View>
       )}
@@ -146,20 +148,20 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
           {donationServiceSvgUri && (
             <>
               <Text>
-                Support this project on
+                {t('Support this project on')}
               </Text>
               <View style={{ flex: 1, paddingLeft: 5 }}><SvgUri width='50' uri={donationServiceSvgUri} /></View>
             </>
           )}
           {!donationServiceSvgUri && (
             <Text>
-              Support this project
+              {t('Support this project')}
             </Text>
           )}
           <Button
             style={{ width: 80, height: 25, fontSize: 11 }}
             onPress={() => openURL(post.donationsLink)}
-            text='Contribute'
+            text={t('Contribute')}
           />
         </View>
       )}
@@ -195,7 +197,8 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
 }
 
 export function JoinProjectButton ({ style, onPress, leaving }) {
-  const text = leaving ? 'Leave Project' : 'Join Project'
+  const { t } = useTranslation()
+  const text = leaving ? t('Leave Project') : t('Join Project')
 
   return (
     <Button

@@ -9,6 +9,22 @@ import { NotificationsList, NotificationRow } from './NotificationsList'
 
 jest.mock('util/platform', () => ({ isIOS: true }))
 
+jest.mock('react-i18next', () => ({
+  ...jest.requireActual('react-i18next'),
+  withTranslation: () => Component => {
+    Component.defaultProps = { ...Component.defaultProps, t: (str) => str }
+    return Component
+  },
+  useTranslation: (domain) => {
+    return {
+      t: (str) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {})
+      }
+    }
+  }
+}))
+
 describe('NotificationsList', () => {
   let props = null
   let shallowRenderer = null
@@ -18,6 +34,7 @@ describe('NotificationsList', () => {
     props = {
       fetchMore: jest.fn(),
       fetchNotifications: () => {},
+      t: str => str,
       updateNewNotificationCount: () => {},
       hasMore: true,
       isFocused: true,

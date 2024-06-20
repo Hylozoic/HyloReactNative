@@ -8,6 +8,7 @@ import PostHeader from 'components/PostCard/PostHeader'
 import { PostTitle } from 'components/PostCard/PostBody/PostBody'
 import UnwrappedCommentCard from 'components/Comment'
 import styles from './SearchPage.styles'
+import { useTranslation } from 'react-i18next'
 
 export default class SearchPage extends React.Component {
   state = {
@@ -103,6 +104,13 @@ const tabs = [
 ]
 
 export function TabBar ({ filter, setSearchFilter }) {
+  const { t } = useTranslation()
+  // Explicit invocations of dynamic values
+  t('All')
+  t('Discussions')
+  t('People')
+  t('Comments')
+
   return (
     <View style={styles.tabBar}>
       {tabs.map(({ id, label }) => (
@@ -110,7 +118,7 @@ export function TabBar ({ filter, setSearchFilter }) {
           filter={filter}
           id={id}
           key={id}
-          label={label}
+          label={t(label)}
           setSearchFilter={setSearchFilter}
         />
       ))}

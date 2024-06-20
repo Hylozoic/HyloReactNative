@@ -20,12 +20,13 @@ import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
 import providedStyles from './Signup.styles'
 import SocialAuth from 'components/SocialAuth'
+import { useTranslation } from 'react-i18next'
 
 const backgroundImage = require('assets/signin_background.png')
 const merkabaImage = require('assets/merkaba_white.png')
-const genericError = new Error('An account may already exist for this email address, Login or try resetting your password.')
 
 export default function Signup () {
+  const { t } = useTranslation()
   const route = useRoute()
   const navigation = useNavigation()
   const currentRouteName = useNavigationState(state => state?.routes[state.index]?.name)
@@ -39,6 +40,7 @@ export default function Signup () {
   // const [message, setMessage] = useState(route.params?.message)
   const [bannerError, setBannerError] = useState()
   const [canSubmit, setCanSubmit] = useState(!loading && email)
+  const genericError = new Error(t('An account may already exist for this email address, Login or try resetting your password'))
 
   const signupRedirect = () => {
     switch (authState) {
@@ -117,7 +119,7 @@ export default function Signup () {
   return (
     <KeyboardFriendlyView style={styles.container}>
       <ScrollView>
-        {loading && <Text style={styles.bannerMessage}>SIGNING UP...</Text>}
+        {loading && <Text style={styles.bannerMessage}>{t('SIGNING UP')}</Text>}
         {bannerError && <Text style={styles.bannerError}>{bannerError}</Text>}
 
         <ImageBackground
@@ -126,11 +128,11 @@ export default function Signup () {
           imageStyle={styles.backgroundImage}
         >
           <Image source={merkabaImage} style={styles.merkabaImage} />
-          <Text style={styles.title}>Welcome to Hylo</Text>
-          <Text style={styles.subTitle}>Stay connected, organized, and engaged with your group.</Text>
+          <Text style={styles.title}>{t('Welcome to Hylo')}</Text>
+          <Text style={styles.subTitle}>{t('Stay connected, organized, and engaged with your group')}.</Text>
         </ImageBackground>
         <View style={styles.content}>
-          <Text style={styles.labelText}>Enter your email below to get started!</Text>
+          <Text style={styles.labelText}>{t('Enter your email below to get started!')}</Text>
           <TextInput
             style={styles.textInput}
             returnKeyType='go'
@@ -145,23 +147,23 @@ export default function Signup () {
           <FormattedError styles={styles} error={error} action='Signup' />
           <Button
             style={styles.signupButton}
-            text={loading ? 'Saving...' : 'Continue'}
+            text={loading ? t('Saving-ellipsis') : t('Continue')}
             onPress={submit}
             disabled={!canSubmit}
           />
           <SocialAuth onStart={handleSocialAuthStart} onComplete={handleSocialAuthComplete} forSignup />
           <View style={styles.login}>
-            <Text style={styles.haveAccount}>Already have an account? </Text>
+            <Text style={styles.haveAccount}>{t('Already have an account?')} </Text>
             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-              <Text style={styles.loginButton}>Log in now</Text>
+              <Text style={styles.loginButton}>{t('Log in now')}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.terms}>
             <Text style={{ ...styles.haveAccount, ...styles.termsText }}>
-              Your data is safe with Hylo. By clicking the "Sign Up" button above you are agreeing to these terms:
+              {t('Your data is safe with Hylo By clicking the Sign Up button above you are agreeing to these terms:')}
             </Text>
             <TouchableOpacity onPress={() => openURL('https://www.hylo.com/terms')}>
-              <Text style={{ ...styles.loginButton, ...styles.termsText }}>Terms of Service + Privacy Policy</Text>
+              <Text style={{ ...styles.loginButton, ...styles.termsText }}>{t('Terms of Service + Privacy Policy')}</Text>
             </TouchableOpacity>
           </View>
         </View>

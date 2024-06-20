@@ -17,6 +17,7 @@ import PostCardForDetails from 'components/PostCard/PostCardForDetails'
 import SocketSubscriber from 'components/SocketSubscriber'
 import { white } from 'style/colors'
 import trackAnalyticsEvent from 'store/actions/trackAnalyticsEvent'
+import { useTranslation } from 'react-i18next'
 
 /*
 
@@ -33,6 +34,7 @@ shouldComponentUpdate (nextProps) { return !!nextProps.isFocused }
 
 */
 export default function PostDetails () {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigation = useNavigation()
   const route = useRoute()
@@ -82,9 +84,9 @@ export default function PostDetails () {
         }
       } catch (e) {
         Alert.alert(
-          "Sorry, we couldn't find that post",
-          "It may have been removed, or you don't have permission to view it",
-          [{ text: 'Ok', onPress: () => navigation.replace('Feed')}]
+          t("Sorry, we couldnt find that post"),
+          t("It may have been removed, or you dont have permission to view it"),
+          [{ text: t('Ok'), onPress: () => navigation.replace('Feed')}]
         )
       }
 

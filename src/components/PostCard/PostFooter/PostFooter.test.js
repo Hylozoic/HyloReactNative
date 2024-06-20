@@ -19,6 +19,7 @@ it('renders as expected', async () => {
           { avatarUrl: 'b.png' },
           { avatarUrl: 'c.png' }
         ]}
+        t={string => string}
       />
     </TestRoot>
   )
