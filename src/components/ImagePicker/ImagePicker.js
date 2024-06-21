@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import Icon from 'components/Icon'
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker'
 import PopupMenuButton from 'components/PopupMenuButton'
+import { useTranslation } from 'react-i18next'
 
 /*
   Example usage:
@@ -22,6 +23,7 @@ import PopupMenuButton from 'components/PopupMenuButton'
 
 export default function ImagePicker (props) {
   const { onPendingChange, style, iconStyle, iconStyleLoading, disabled } = props
+  const { t } = useTranslation()
   const [pending, providedSetPending] = useState(false)
 
   const setPending = newPending => {
@@ -58,8 +60,8 @@ export default function ImagePicker (props) {
     : PopupMenuButton
 
   const imagePickerOptions = [
-    ['Choose from library', showPicker],
-    ['Take photo', showPickerCamera]
+    [t('Choose from library'), showPicker],
+    [t('Take photo'), showPickerCamera]
   ]
 
   return (

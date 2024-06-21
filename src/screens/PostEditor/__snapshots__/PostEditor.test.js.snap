@@ -129,7 +129,7 @@ exports[`PostEditor renders a new editor correctly 1`] = `
                 name="Public"
               />
               <Text>
-                Make Public:
+                Make Public
               </Text>
             </View>
             <View>
@@ -747,7 +747,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                         name="Public"
                                       />
                                       <Text>
-                                        Make Public:
+                                        Make Public
                                       </Text>
                                     </View>
                                     <View>
@@ -1181,7 +1181,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                 <View>
                                   <View>
                                     <Text>
-                                      Saving...
+                                      Saving-ellipsis
                                     </Text>
                                   </View>
                                 </View>
@@ -1749,7 +1749,7 @@ exports[`PostEditor renders with a post 1`] = `
                 name="Public"
               />
               <Text>
-                Make Public:
+                Make Public
               </Text>
             </View>
             <View>

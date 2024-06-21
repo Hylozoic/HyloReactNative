@@ -11,6 +11,7 @@ import styles from './MemberHeader.styles'
 import { AXOLOTL_ID } from 'store/models/Person'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 import Control from 'screens/MemberProfile/Control'
+import { useTranslation } from 'react-i18next'
 
 export default function MemberHeader ({
   person,
@@ -28,6 +29,7 @@ export default function MemberHeader ({
   navigation,
   ...props
 }) {
+  const { t } = useTranslation()
   if (!person) return null
 
   const { name, tagline } = person
@@ -51,7 +53,7 @@ export default function MemberHeader ({
         <Control
           style={styles.name}
           value={name}
-          placeholder='Name'
+          placeholder={t('Name')}
           editable={editable}
           onChangeText={value => updateSetting('name', value)}
           error={errors.name}
@@ -82,7 +84,7 @@ export default function MemberHeader ({
       <Control
         style={styles.location}
         value={locationText}
-        placeholder='Location'
+        placeholder={t('Location')}
         multiline
         editable={editable}
         onPress={showLocationPicker}
@@ -91,7 +93,7 @@ export default function MemberHeader ({
       <Control
         style={styles.tagline}
         value={tagline}
-        placeholder='Short Description'
+        placeholder={t('Short Description')}
         editable={editable}
         onChangeText={value => updateSetting('tagline', value)}
         isMe={isMe}
@@ -101,17 +103,16 @@ export default function MemberHeader ({
 }
 
 export function blockUserWithConfirmationFun (blockUserFun, name) {
+  const { t } = useTranslation()
   return function () {
     return Alert.alert(
-      `Are you sure you want to block ${name}?`,
-      `You will no longer see ${name}\'s activity
-      and they won't see yours.
-      
-      You can unblock this member at any time.
-      Go to Settings > Blocked Users.`,
+      t('Are you sure you want to block {{name}}?', { name }),
+      t('You will no longer see {{name}}s activity and they wont see yours', { name }),
+      '',
+      t('You can unblock this member at any time Go to Settings > Blocked Users'),
       [
-        { text: `Block ${name}`, onPress: (blockedUserId) => blockUserFun(blockedUserId) },
-        { text: 'Cancel', style: 'cancel' }
+        { text: `${t('Block')} ${name}`, onPress: (blockedUserId) => blockUserFun(blockedUserId) },
+        { text: t('Cancel'), style: 'cancel' }
       ])
   }
 }
@@ -121,20 +122,21 @@ export function MemberMenu ({
   isAxolotl, goToEdit, goToEditAccount,
   goToManageNotifications, goToBlockedUsers
 }) {
+  const { t } = useTranslation()
   // If the function is defined, than it's a valid action
   const actions = filter(x => x[1], [
-    ['Edit Profile', isMe && !editable && goToEdit],
-    ['Edit Account', isMe && !editable && goToEditAccount],
-    ['Manage Notifications', isMe && !editable && goToManageNotifications],
-    ['Blocked Users', isMe && !editable && goToBlockedUsers],
-    ['Save Changes', isMe && editable && saveChanges],
-    ['Flag This Member', !isMe && flagMember],
-    ['Block This Member', !isMe && !isAxolotl && blockUser]
+    [t('Edit Profile'), isMe && !editable && goToEdit],
+    [t('Edit Account'), isMe && !editable && goToEditAccount],
+    [t('Manage Notifications'), isMe && !editable && goToManageNotifications],
+    [t('Blocked Users'), isMe && !editable && goToBlockedUsers],
+    [t('Save Changes'), isMe && editable && saveChanges],
+    [t('Flag This Member'), !isMe && flagMember],
+    [t('Block This Member'), !isMe && !isAxolotl && blockUser]
   ])
 
   if (isEmpty(actions)) return null
 
-  const destructiveButtonIndex = get('1.0', actions) === 'Block This Member' ? 1 : -1
+  const destructiveButtonIndex = get('1.0', actions) === t('Block This Member') ? 1 : -1
 
   return (
     <PopupMenuButton

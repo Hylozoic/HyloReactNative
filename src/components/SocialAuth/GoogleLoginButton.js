@@ -1,8 +1,9 @@
 import React from 'react'
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import Button from 'components/Button'
+import { withTranslation } from 'react-i18next'
 
-export default class GoogleLoginButton extends React.Component {
+class GoogleLoginButton extends React.Component {
   static defaultProps = {
     style: {}
   }
@@ -20,6 +21,7 @@ export default class GoogleLoginButton extends React.Component {
   }
 
   signIn = async () => {
+    const { t } = this.props
     try {
       await this.GoogleSignin.hasPlayServices()
       await this.GoogleSignin.signIn()
@@ -29,12 +31,13 @@ export default class GoogleLoginButton extends React.Component {
       this.props.onLoginFinished(accessToken)
     } catch (error) {
       if (error.code !== statusCodes.SIGN_IN_CANCELLED) {
-        this.props.createErrorNotification('Could not sign in with your Google account')
+        this.props.createErrorNotification(t('Could not sign in with your Google account'))
       }
     }
   }
 
   render () {
+    const { t } = this.props
     const style = {
       fontSize: 16,
       width: 160,
@@ -49,8 +52,8 @@ export default class GoogleLoginButton extends React.Component {
       }
     }
     const text = this.props.signup
-      ? 'Sign up with Google'
-      : 'Sign in with Google'
+      ? t('Sign up with Google')
+      : t('Sign in with Google')
 
     return (
       <Button
@@ -62,3 +65,5 @@ export default class GoogleLoginButton extends React.Component {
     )
   }
 }
+
+export default withTranslation()(GoogleLoginButton)

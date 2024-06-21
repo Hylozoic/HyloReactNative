@@ -6,22 +6,24 @@ import NotificationCard from 'components/NotificationCard'
 import CreateGroupNotice from 'components/CreateGroupNotice'
 import styles from './NotificationsList.styles'
 import Loading from 'components/Loading'
+import { useTranslation } from 'react-i18next'
 
 export default function (props) {
   const isFocused = useIsFocused()
-  return <NotificationsList {...props} isFocused={isFocused} />
+  const { t } = useTranslation()
+  return <NotificationsList {...props} isFocused={isFocused} t={t} />
 }
 export class NotificationsList extends Component {
   state = { ready: false }
 
   setHeader = () => {
-    const { navigation, markAllActivitiesRead } = this.props
+    const { navigation, markAllActivitiesRead, t } = this.props
     navigation.setOptions({
-      title: 'Notifications',
+      title: t('Notifications'),
       header: props =>
         <ModalHeader
           {...props}
-          headerRightButtonLabel='Mark as read'
+          headerRightButtonLabel={t('Mark as read')}
           headerRightButtonOnPress={markAllActivitiesRead}
         />
     })
@@ -58,20 +60,20 @@ export class NotificationsList extends Component {
   keyExtractor = item => item.id
 
   render () {
-    const { hasMore, markActivityRead, notifications, pending, currentUserHasMemberships, goToCreateGroup } = this.props
+    const { hasMore, markActivityRead, notifications, pending, currentUserHasMemberships, goToCreateGroup, t } = this.props
     const { ready } = this.state
 
     if (!currentUserHasMemberships) {
       return (
         <CreateGroupNotice
           goToCreateGroup={goToCreateGroup}
-          text='No notifications here, try creating your own Group!'
+          text={t('No notifications here, try creating your own Group!')}
         />
       )
     }
 
     if (ready && !pending && notifications.length === 0) {
-      return <Text style={styles.center}>Nothing new for you!</Text>
+      return <Text style={styles.center}>{t('Nothing new for you!')}</Text>
     }
 
     return (

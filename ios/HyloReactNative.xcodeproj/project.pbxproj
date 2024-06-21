@@ -30,6 +30,7 @@
 		7361C59D4E7232CB86E8B029 /* libPods-HyloReactNative-HyloReactNativeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BE07C4279C1EADA81C262FB /* libPods-HyloReactNative-HyloReactNativeTests.a */; };
 		871D668B360442ED964EE3D2 /* Circular-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 132848DAF02E4203BC2960D5 /* Circular-Book.ttf */; };
 		A7707633807C4690B665AFD9 /* Circular-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38F55B6534E24B54AA299F61 /* Circular-BoldItalic.ttf */; };
+		E9B180F52BFD9D8B006E1D94 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9B180F72BFD9D8B006E1D94 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +117,7 @@
 		C49A433D83C6448A9E45D6D7 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = ../assets/fonts/EvilIcons.ttf; sourceTree = "<group>"; };
 		C4D93958F51D4D5FBA5AB7C4 /* Circular-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Circular-BlackItalic.ttf"; path = "../assets/fonts/Circular-BlackItalic.ttf"; sourceTree = "<group>"; };
 		D7F9F56B416841F59EB18D68 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = ../assets/fonts/Ionicons.ttf; sourceTree = "<group>"; };
+		E9B180F62BFD9D8B006E1D94 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EC1A1FAA5BE04FE0BBD7E198 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = ../assets/fonts/Octicons.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -285,6 +287,7 @@
 				1F472486BCA1418E868E82C2 /* FontAwesome5_Regular.ttf */,
 				74B41D4024D34ADC81198EFB /* FontAwesome5_Solid.ttf */,
 				4CC5B89951114076879B1C07 /* Fontisto.ttf */,
+				E9B180F72BFD9D8B006E1D94 /* Localizable.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				English,
 				en,
 				Base,
+				es,
 			);
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
@@ -434,6 +438,7 @@
 				871D668B360442ED964EE3D2 /* Circular-Book.ttf in Resources */,
 				1FC1D83F47654BAFB0C9B45E /* Circular-BookItalic.ttf in Resources */,
 				3DBCEDB571264869809C3C05 /* Circular-Medium.ttf in Resources */,
+				E9B180F52BFD9D8B006E1D94 /* Localizable.strings in Resources */,
 				12DF135DDA5240B3BE9C9ED5 /* Circular-MediumItalic.ttf in Resources */,
 				046EBCC826CCFC1D008EE5CD /* debug.xcconfig in Resources */,
 				43EE6D6E598A4552B6062E3A /* hylo-evo-icons.ttf in Resources */,
@@ -668,6 +673,17 @@
 			targetProxy = 04BF1DE3248F357F00ECC3A2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E9B180F72BFD9D8B006E1D94 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E9B180F62BFD9D8B006E1D94 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {

@@ -5,8 +5,10 @@ import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import { modalScreenName } from 'hooks/useIsModalScreen'
 import getMemberships from 'store/selectors/getMemberships'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
+import { useTranslation } from 'react-i18next'
 
 export default function useChangeToGroup () {
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const myMemberships = useSelector(getMemberships)
   const currentGroup = useSelector(getCurrentGroup)
@@ -29,8 +31,8 @@ export default function useChangeToGroup () {
 
       confirm
         ? confirmNavigate(goToGroup, {
-          title: 'Changing Groups',
-          confirmationMessage: 'Do you want to change context to this other group?'
+          title: t('Changing Groups'),
+          confirmationMessage: t('Do you want to change context to this other group?')
         })
         : goToGroup()
     } else {

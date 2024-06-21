@@ -3,15 +3,20 @@
     "overrideConfigFile": ".eslintrc.js"
   },
   "i18n-ally.localesPaths": [
-    "ios/Pods/Flipper-Folly/folly/lang",
-    "ios/Pods/Flipper-Boost-iOSX/boost/locale",
-    "ios/Pods/RCT-Folly/folly/lang",
-    "ios/Pods/boost/boost/locale",
-    "ios/Pods/Flipper-Boost-iOSX/boost/predef/language",
-    "ios/Pods/boost/boost/predef/language",
-    "ios/Pods/Headers/Public/Flipper-Folly/folly/lang",
-    "ios/Pods/Headers/Public/RCT-Folly/folly/lang",
-    "ios/Pods/Headers/Private/RCT-Folly/folly/lang",
-    "ios/Pods/Headers/Private/Flipper-Folly/folly/lang"
+    "locales"
   ],
+  "i18n-ally.enabledFrameworks": [
+    "react",
+    "i18next",
+    "general",
+  ],
+  "i18n-ally.pathMatcher": "{locale}.json",
+  "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.displayLanguage": "en",
+  "i18n-ally.keystyle": "flat",
+  "i18n-ally.sortKeys": true,
+  "i18n-ally.keepFulfilled": true,
+  "i18n-ally.disablePathParsing": true,
+  "i18n-ally.extract.ignored": [],
+  "i18n-ally.annotationDelimiter": "=",
 }
