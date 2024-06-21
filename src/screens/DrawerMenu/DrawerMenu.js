@@ -26,8 +26,8 @@ export default function DrawerMenu () {
   const route = useRoute()
   const currentGroup = useSelector(getCurrentGroup)
   const memberships = useSelector(getMemberships)
-  const canAdmin = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_ADMINISTRATION, groupId: currentGroup.id }))
-  const canInvite = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_ADD_MEMBERS, groupId: currentGroup.id }))
+  const canAdmin = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_ADMINISTRATION, groupId: currentGroup?.id }))
+  const canInvite = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_ADD_MEMBERS, groupId: currentGroup?.id }))
 
   const myHome = route?.params?.myHome
 

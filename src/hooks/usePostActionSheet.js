@@ -38,12 +38,12 @@ export default function usePostActionSheet ({
   const dispatch = useDispatch()
   const currentGroup = useSelector(getCurrentGroup)
   const currentUser = useSelector(getMe)
-  const canModerate = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_MANAGE_CONTENT, groupId: currentGroup.id }))
+  const canModerate = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_MANAGE_CONTENT, groupId: currentGroup?.id }))
   const createActionSheetActions = () => {
     const isCreator = currentUser && creator && currentUser.id === creator.id
-    const postUrl = isContextGroup(currentGroup.slug)
-      ? postUrlCreator(postId, { context: currentGroup.slug })
-      : postUrlCreator(postId, { groupSlug: currentGroup.slug })
+    const postUrl = isContextGroup(currentGroup?.slug)
+      ? postUrlCreator(postId, { context: currentGroup?.slug })
+      : postUrlCreator(postId, { groupSlug: currentGroup?.slug })
     const editPost = isCreator
       ? () => navigation.navigate('Edit Post', { id: postId })
       : null

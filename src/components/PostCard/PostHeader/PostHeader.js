@@ -42,7 +42,7 @@ export default function PostHeader ({
   const { avatarUrl, name } = creator
   const handleShowMember = () => showMember && showMember(creator.id)
 
-  const currentGroupId = currentGroup && currentGroup.id
+  const currentGroupId = currentGroup?.id
   const badges = useSelector(state => getRolesForGroup(state, { person: creator, groupId: currentGroupId }))
   const creatorIsSteward = useSelector(state => hasResponsibilityForGroup(state, { person: creator, responsibility: RESP_ADMINISTRATION, groupId: currentGroupId }))
   return (
