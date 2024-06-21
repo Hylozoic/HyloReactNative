@@ -1,14 +1,16 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { View, Text, Platform } from 'react-native'
 import { PROPOSAL_STATUS_COMPLETED } from 'store/models/Post'
 
 const QuorumBar = ({ totalVoters, quorum, actualVoters, proposalStatus }) => {
+  const { t } = useTranslation()
   const votersForQuorum = Math.ceil((quorum / 100) * totalVoters)
   const actualVotersWidth = (actualVoters / totalVoters) * 100
   const quorumReached = actualVoters >= votersForQuorum
 
-  let quorumStatus = quorumReached ? 'Quorum reached' : 'Quorum'
-  if (proposalStatus === PROPOSAL_STATUS_COMPLETED && !quorumReached) quorumStatus = 'Quorum not reached'
+  let quorumStatus = quorumReached ? t('Quorum reached') : t('Quorum')
+  if (proposalStatus === PROPOSAL_STATUS_COMPLETED && !quorumReached) quorumStatus = t('Quorum not reached')
   const bigQuorum = quorum > 75
   return (
     <View style={styles.voteProgressContainer}>

@@ -20,10 +20,12 @@ import Loading from 'components/Loading'
 import MemberHeader from 'screens/MemberProfile/MemberHeader'
 import Control from 'screens/MemberProfile/Control'
 import styles from './MemberDetails.styles'
+import { useTranslation } from 'react-i18next'
 
 export default function (props) {
+  const { t } = useTranslation()
   const isFocused = useIsFocused()
-  return <MemberDetails {...props} isFocused={isFocused} />
+  return <MemberDetails {...props} isFocused={isFocused} t={t} />
 }
 
 export function editableFields (person) {
@@ -44,9 +46,9 @@ export class MemberDetails extends React.Component {
 
   setHeader = () => {
     const { editing, changed } = this.state
-    const { navigation, route, currentGroup, logout } = this.props
+    const { navigation, route, currentGroup, logout, t } = this.props
     const title = editing
-      ? 'Edit Your Profile'
+      ? t('Edit Your Profile')
       : currentGroup?.name
     if (editing) {
       navigation.setOptions({
@@ -56,7 +58,7 @@ export class MemberDetails extends React.Component {
             title={title}
             headerLeftOnPress={this.saveChanges}
             headerLeftConfirm={changed}
-            headerRightButtonLabel={editing ? 'Save' : null}
+            headerRightButtonLabel={editing ? t('Save') : null}
             headerRightButtonOnPress={this.saveChanges}
             headerRightButtonDisabled={!changed || !this.isValid()}
           />
@@ -66,16 +68,17 @@ export class MemberDetails extends React.Component {
         header: headerProps =>
           <ModalHeader
             {...headerProps}
-            title='My Profile'
+            title={t('My Profile')}
             headerLeftOnPress={() => navigation.navigate('Home Tab')}
             headerLeftConfirm={changed}
-            headerRightButtonLabel='Logout'
+            headerRightButtonLabel={t('Logout')}
             headerRightButtonOnPress={() => confirmDiscardChanges({
-              title: 'Logout',
-              confirmationMessage: 'Are you sure you want to logout?',
-              continueButtonText: 'Cancel',
-              disgardButtonText: 'Yes',
-              onDiscard: logout
+              title: t('Logout'),
+              confirmationMessage: t('Are you sure you want to logout?'),
+              continueButtonText: t('Cancel'),
+              disgardButtonText: t('Yes'),
+              onDiscard: logout,
+              t
             })}
           />
       })
@@ -184,6 +187,7 @@ export class MemberDetails extends React.Component {
 }
 
 export function MemberBio (props) {
+  const { t } = useTranslation()
   const { person: { bio }, editable, updateSetting, isMe } = props
   const controlRef = useRef()
   const focus = () => controlRef.current?.focus()
@@ -193,7 +197,7 @@ export function MemberBio (props) {
   return (
     <View style={styles.bioContainer}>
       <View style={styles.labelWrapper}>
-        <Text style={[styles.sectionLabel, { marginTop: 10 }]}>ABOUT ME</Text>
+        <Text style={[styles.sectionLabel, { marginTop: 10 }]}>{t('ABOUT ME')}</Text>
         {editable && (
           <TouchableOpacity onPress={focus}>
             <EntypoIcon name='edit' style={styles.editIcon} />
@@ -204,7 +208,7 @@ export function MemberBio (props) {
         ref={controlRef}
         style={styles.bio}
         value={bio}
-        placeholder='Description'
+        placeholder={t('Description')}
         editable={editable}
         onChangeText={value => updateSetting('bio', value)}
         isMe={isMe}
@@ -216,12 +220,13 @@ export function MemberBio (props) {
 }
 
 export function MemberSkills ({ skills, editable, goToSkills }) {
+  const { t } = useTranslation()
   if (isEmpty(skills)) return null
 
   return (
     <View style={styles.skillsContainer}>
       <View style={styles.labelWrapper}>
-        <Text style={styles.sectionLabel}>MY SKILLS</Text>
+        <Text style={styles.sectionLabel}>{t('MY SKILLS')}</Text>
         {editable && (
           <TouchableOpacity onPress={goToSkills}>
             <EntypoIcon name='edit' style={styles.editIcon} />
@@ -238,12 +243,13 @@ export function MemberSkills ({ skills, editable, goToSkills }) {
 }
 
 export function MemberGroups ({ memberships, editing }) {
+  const { t } = useTranslation()
   const changeToGroup = useChangeToGroup()
   if (isEmpty(memberships)) return null
 
   return (
     <View style={styles.groupsContainer}>
-      <Text style={styles.sectionLabel}>Hylo Communities</Text>
+      <Text style={styles.sectionLabel}>{t('Hylo Communities')}</Text>
       {memberships.map(membership => (
         <GroupRow
           membership={membership} key={membership.id}
@@ -255,11 +261,12 @@ export function MemberGroups ({ memberships, editing }) {
 }
 
 export function MemberAffiliations ({ affiliations }) {
+  const { t } = useTranslation()
   if (isEmpty(affiliations)) return null
 
   return (
     <View style={styles.groupsContainer}>
-      <Text style={styles.sectionLabel}>Other Affiliations</Text>
+      <Text style={styles.sectionLabel}>{t('Other Affiliations')}</Text>
       {affiliations.map((affiliation, index) => (
         <View style={styles.groupRow} key={index}>
           <MemberAffiliation affiliation={affiliation} />

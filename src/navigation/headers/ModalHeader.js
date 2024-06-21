@@ -6,6 +6,7 @@ import FocusAwareStatusBar from 'components/FocusAwareStatusBar'
 import {
   black10onRhino, rhino05, rhino80, rhino10, havelockBlue, ghost
 } from 'style/colors'
+import { useTranslation } from 'react-i18next'
 
 export default function ModalHeader ({
   navigation,
@@ -30,6 +31,7 @@ export default function ModalHeader ({
   },
   ...otherProps
 }) {
+  const { t } = useTranslation()
   const headerLeftCloseIcon = options.headerLeftCloseIcon ?? providedHeaderLeftCloseIcon
   const headerTitleStyleColor = otherProps.headerTitleStyle?.color ||
     (options.headerTitleStyle?.color ?? black10onRhino)
@@ -54,7 +56,7 @@ export default function ModalHeader ({
         providedHeaderLeftOnPress ||
         navigation.goBack
       const onPress = headerLeftConfirm
-        ? () => confirmDiscardChanges({ onDiscard: headerLeftOnPress })
+        ? () => confirmDiscardChanges({ onDiscard: headerLeftOnPress, t })
         : headerLeftOnPress
       const label = headerLeftLabel || props.label
       return (

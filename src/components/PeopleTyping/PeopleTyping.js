@@ -4,11 +4,12 @@ import { each, values } from 'lodash'
 import { func, shape, string } from 'prop-types'
 
 import styles from './PeopleTyping.styles'
+import { withTranslation } from 'react-i18next'
 
 // the amount to delay before deciding that someone is no longer typing
 const MAX_TYPING_PAUSE = 5000
 
-export default class PeopleTyping extends React.PureComponent {
+class PeopleTyping extends React.PureComponent {
   static propTypes = {
     clearUserTyping: func.isRequired,
     peopleTyping: shape({})
@@ -29,10 +30,11 @@ export default class PeopleTyping extends React.PureComponent {
   }
 
   render () {
+    const { t } = this.props
     const names = values(this.props.peopleTyping).map(v => v.name)
     let message = ''
-    if (names.length === 1) message = `${names[0]} is typing...`
-    if (names.length > 1) message = 'Multiple people are typing...'
+    if (names.length === 1) message = `${names[0]} ${t('is typing')}...`
+    if (names.length > 1) message = t('Multiple people are typing')
 
     return (
       <View style={styles.container}>
@@ -41,3 +43,5 @@ export default class PeopleTyping extends React.PureComponent {
     )
   }
 }
+
+export default withTranslation()(PeopleTyping)

@@ -12,6 +12,22 @@ const mockStore = configureMockStore()
 const store = mockStore({
 })
 
+jest.mock('react-i18next', () => ({
+  ...jest.requireActual('react-i18next'),
+  withTranslation: () => Component => {
+    Component.defaultProps = { ...Component.defaultProps, t: (str) => str }
+    return Component
+  },
+  useTranslation: (domain) => {
+    return {
+      t: (str) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {})
+      }
+    }
+  }
+}))
+
 // Ugly, but seems to be necessary to dodge issues with debounce and timers
 // (see https://github.com/facebook/jest/issues/3465)
 jest.unmock('lodash')
@@ -43,6 +59,7 @@ describe('MemberDetails', () => {
     renderer.render(
       <Provider store={store}>
         <MemberDetails
+          t={str => str}
           isFocused
           person={{ id: 1 }}
           goToGroup={() => {}}
@@ -61,6 +78,7 @@ describe('MemberDetails', () => {
     renderer.render(
       <Provider store={store}>
         <MemberDetails
+          t={str => str}
           isFocused
           navigation={navigation}
           route={route}
@@ -149,7 +167,7 @@ describe('MemberDetails', () => {
       }
 
       const instance = ReactTestRenderer.create(
-        <MemberDetails {...props} />
+        <MemberDetails {...props} t={str => str} />
       ).getInstance()
       instance.editProfile()
       expect(instance.state.editing).toEqual(true)
@@ -237,7 +255,7 @@ describe('MemberSkills', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(
       <Provider store={store}>
-        <MemberSkills skills={skills} />
+        <MemberSkills skills={skills} t={str => str} />
       </Provider>
     )
     const actual = renderer.getRenderOutput()
@@ -252,7 +270,7 @@ describe('MemberSkills', () => {
 
     const renderer = new ReactShallowRenderer()
     renderer.render(
-      <MemberSkills person={person} />
+      <MemberSkills person={person} t={str => str} />
     )
     const actual = renderer.getRenderOutput()
 
@@ -273,7 +291,7 @@ describe('MemberGroups', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(
       <Provider store={store}>
-        <MemberGroups person={person} />
+        <MemberGroups person={person} t={str => str} />
       </Provider>
     )
     const actual = renderer.getRenderOutput()

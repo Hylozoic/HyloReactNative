@@ -14,10 +14,11 @@ import SocketSubscriber from 'components/SocketSubscriber'
 import ThreadHeaderTitle from './ThreadHeaderTitle'
 import styles from './Thread.styles'
 import { rhino10 } from 'style/colors'
+import { withTranslation } from 'react-i18next'
 
 const BOTTOM_THRESHOLD = 10
 
-export default class Thread extends React.Component {
+class Thread extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -155,13 +156,14 @@ export default class Thread extends React.Component {
       messages,
       pending,
       sendIsTyping,
-      isConnected
+      isConnected,
+      t
     } = this.props
     const { newMessages, notify } = this.state
     const showNotificationOverlay = notify // || !isConnected
     const overlayMessage = !isConnected
       ? '' // 'RECONNECTING...'
-      : `${newMessages} NEW MESSAGE${newMessages > 1 ? 'S' : ''}`
+      : `${newMessages} ${t('NEW MESSAGE')}${newMessages > 1 ? 'S' : ''}`
 
     return (
       <KeyboardFriendlyView style={styles.container}>
@@ -183,7 +185,7 @@ export default class Thread extends React.Component {
           multiline
           onSubmit={this.handleSubmit}
           sendIsTyping={sendIsTyping}
-          placeholder='Write something...'
+          placeholder={t('Write something')}
         />
         <PeopleTyping />
         {showNotificationOverlay && (
@@ -200,3 +202,5 @@ export default class Thread extends React.Component {
     )
   }
 }
+
+export default withTranslation()(Thread)

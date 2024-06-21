@@ -114,7 +114,7 @@ const ImageViewerHeader = ({ creator, onRequestClose, title }) => {
                 <Avatar avatarUrl={creator.avatarUrl} dimension={28} />
                 <View style={headerStyles.postDetailsNameAndDate}>
                   <Text style={headerStyles.postDetailsName}>{creator.name}</Text>
-                  <Text style={headerStyles.postDetailsDate}>3w ago</Text>
+                  {/* <Text style={headerStyles.postDetailsDate}>3w ago</Text> */}
                 </View>
               </>
             )}

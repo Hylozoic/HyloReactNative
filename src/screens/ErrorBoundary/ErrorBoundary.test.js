@@ -28,11 +28,11 @@ describe('Error Boundary', () => {
     const consoleSpy = jest.spyOn(console, 'error')
     consoleSpy.mockImplementation(() => {})
     const { getByText } = render(
-      <ErrorBoundary>
+      <ErrorBoundary t={str => str}>
         <ErrorComponent />
       </ErrorBoundary>
     )
-    expect(await getByText('Oops. Something Went Wrong')).toBeDefined()
+    expect(await getByText('Oops Something Went Wrong')).toBeDefined()
     expect(Sentry.captureException).toHaveBeenCalled()
     consoleSpy.mockRestore()
   })

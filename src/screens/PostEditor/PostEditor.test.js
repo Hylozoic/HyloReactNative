@@ -14,6 +14,22 @@ jest.mock('react-native/Libraries/Alert/Alert', () => {
   }
 })
 
+jest.mock('react-i18next', () => ({
+  ...jest.requireActual('react-i18next'),
+  withTranslation: () => Component => {
+    Component.defaultProps = { ...Component.defaultProps, t: (str) => str }
+    return Component
+  },
+  useTranslation: (domain) => {
+    return {
+      t: (str) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {})
+      }
+    }
+  }
+}))
+
 const mockPost = {
   details: 'myDetails',
   groups: [
@@ -45,6 +61,7 @@ describe('PostEditor', () => {
         navigation={navigation}
         route={route}
         save={save}
+        t={str => str}
       />
     )
     const actual = renderer.getRenderOutput()
@@ -64,6 +81,7 @@ describe('PostEditor', () => {
             'http://baz.com/baz.png'
           ]
         }}
+        t={str => str}
       />
     )
     const actual = renderer.getRenderOutput()
@@ -102,6 +120,7 @@ describe('PostEditor', () => {
                   }
                 )}
                 {...screenProps}
+                t={str => str}
               />
             )}
           </Stack.Screen>
@@ -117,7 +136,7 @@ describe('PostEditor', () => {
     fireEvent.press(getByText('Save'))
 
     await waitFor(() => {
-      getByText('Saving...')
+      getByText('Saving-ellipsis')
     })
 
     expect(fetchPost).toHaveBeenCalled()
@@ -138,6 +157,7 @@ describe('PostEditor', () => {
                 save={save}
                 post={mockPost}
                 {...screenProps}
+                t={str => str}
               />
             )}
           </MockedScreen>
@@ -172,6 +192,7 @@ describe('PostEditor', () => {
                 save={save}
                 post={mockPost}
                 {...screenProps}
+                t={str => str}
               />
             )}
           </MockedScreen>
@@ -210,6 +231,7 @@ describe('PostEditor', () => {
                 fetchPost={jest.fn()}
                 post={mockPost}
                 {...screenProps}
+                t={str => str}
               />
             )}
           </MockedScreen>
@@ -250,6 +272,7 @@ describe('PostEditor', () => {
                 isFocused
                 save={save}
                 post={mockPost}
+                t={str => str}
                 {...screenProps}
               />
             )}

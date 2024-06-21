@@ -3,8 +3,9 @@ import { Modal, Text, TouchableOpacity, View, FlatList } from 'react-native'
 import Icon from 'components/Icon'
 import { toUpper, isEmpty, trim } from 'lodash'
 import prompt from 'react-native-prompt-android'
+import { withTranslation } from 'react-i18next'
 
-export default class FlagContent extends React.PureComponent {
+class FlagContent extends React.PureComponent {
   state = {
     promptVisible: false,
     highlightRequired: false
@@ -47,20 +48,20 @@ export default class FlagContent extends React.PureComponent {
 
   showPrompt (selectedCategory) {
     this.setState({ selectedCategory })
-    const { type = 'content' } = this.props
+    const { type = 'content', t } = this.props
     const { highlightRequired } = this.state
 
-    let subtitle = `Why was this ${type} '${selectedCategory}'`
+    let subtitle = `${t('Why was this')} ${type} '${selectedCategory}'`
     if (!this.isOptionalExplanation(selectedCategory) && highlightRequired) {
-      subtitle += ' (explanation required)'
+      subtitle += t(' (explanation required)')
     }
 
     prompt(
       'Flag',
       subtitle,
       [
-        { text: 'Cancel', onPress: this.cancel, style: 'cancel' },
-        { text: 'Submit', onPress: value => this.submit(value) }
+        { text: t('Cancel'), onPress: this.cancel, style: 'cancel' },
+        { text: t('Submit'), onPress: value => this.submit(value) }
       ],
       {
         cancelable: false
@@ -69,15 +70,16 @@ export default class FlagContent extends React.PureComponent {
   }
 
   render () {
+    const { type = 'content', t } = this.props
+
     const options = [
-      { title: 'Inappropriate Content', id: 'inappropriate' },
-      { title: 'Spam', id: 'spam' },
-      { title: 'Offensive', id: 'offensive' },
-      { title: 'Illegal', id: 'illegal' },
-      { title: 'Other', id: 'other' }
+      { title: t('Inappropriate Content'), id: 'inappropriate' },
+      { title: t('Spam'), id: 'spam' },
+      { title: t('Offensive'), id: 'offensive' },
+      { title: t('Illegal'), id: 'illegal' },
+      { title: t('Other'), id: 'other' }
     ]
 
-    const { type = 'content' } = this.props
 
     return (
       <View>
@@ -92,7 +94,7 @@ export default class FlagContent extends React.PureComponent {
             <View style={styles.dialogContent}>
               <View style={styles.title}>
                 <Text style={styles.titleText}>
-                  FLAG THIS {toUpper(type)}
+                  {t('FLAG THIS')} {toUpper(type)}
                 </Text>
                 <TouchableOpacity onPress={() => this.closeModal()}>
                   <Icon name='Ex' style={styles.icon} />
@@ -180,3 +182,5 @@ const styles = {
     fontSize: 16
   }
 }
+
+export default withTranslation()(FlagContent)

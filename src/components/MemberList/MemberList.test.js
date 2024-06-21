@@ -11,6 +11,22 @@ import { render } from '@testing-library/react-native'
 const lodash = jest.requireActual('lodash/fp')
 lodash.debounce = (_, fn) => fn
 
+jest.mock('react-i18next', () => ({
+  ...jest.requireActual('react-i18next'),
+  withTranslation: () => Component => {
+    Component.defaultProps = { ...Component.defaultProps, t: (str) => str }
+    return Component
+  },
+  useTranslation: (domain) => {
+    return {
+      t: (str) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {})
+      }
+    }
+  }
+}))
+
 describe('MemberList', () => {
   it('renders with default props with default non-server search', () => {
     const renderer = new ReactShallowRenderer()
@@ -23,7 +39,7 @@ describe('MemberList', () => {
     }
 
     renderer.render(
-      <MemberList {...testProps} />
+      <MemberList {...testProps} t={str => str} />
     )
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
@@ -43,7 +59,7 @@ describe('MemberList', () => {
       ]
     }
     const instance = ReactTestRenderer.create(
-      <MemberList {...props} />
+      <MemberList {...props} t={str => str} />
     ).getInstance()
 
     instance.setState = jest.fn()
@@ -62,7 +78,7 @@ describe('MemberList', () => {
       ]
     }
     const renderer = ReactTestRenderer.create(
-      <MemberList {...props} />
+      <MemberList {...props} t={str => str} />
     )
     const searchField = renderer.root.findByType(TextInput)
     const instance = renderer.getInstance()
@@ -88,7 +104,7 @@ describe('MemberList', () => {
         <TestRoot>
           <MockedScreen>
             {screenProps => {
-              return <MemberList {...screenProps} {...testProps} />
+              return <MemberList {...screenProps} {...testProps} t={str => str} />
             }}
           </MockedScreen>
         </TestRoot>
@@ -104,7 +120,7 @@ describe('MemberList', () => {
       setSearch: jest.fn()
     }
     const renderer = ReactTestRenderer.create(
-      <MemberList {...props} />
+      <MemberList {...props} t={str => str} />
     )
     const searchField = renderer.root.findByType(TextInput)
     const searchText = 'hj'
@@ -124,7 +140,7 @@ describe('MemberList', () => {
     }
 
     renderer.render(
-      <MemberList {...testProps} />
+      <MemberList {...testProps} t={str => str} />
     )
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()

@@ -13,8 +13,10 @@ import Button from 'components/Button'
 import SettingControl from 'components/SettingControl'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 import styles from './SignupSetLocation.styles'
+import { useTranslation } from 'react-i18next'
 
 export default function SignupSetLocation ({ navigation }) {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const currentUser = useSelector(getMe)
   const [location, setLocation] = useState(currentUser?.location)
@@ -58,15 +60,15 @@ export default function SignupSetLocation ({ navigation }) {
     <KeyboardFriendlyView style={styles.container}>
       <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
         <View style={styles.header}>
-          <Text style={styles.title}>Add your location</Text>
+          <Text style={styles.title}>{t('Add your location')}</Text>
           <Text style={styles.subTitle}>
-            Add your location to see more relevant content and find people and projects near you.
+            {t('Add your location to see more relevant content and find people and projects near you')}.
           </Text>
         </View>
         <View style={styles.content}>
           <SettingControl
             ref={controlRef}
-            label='Where do you call home'
+            label={t('Where do you call home')}
             value={location}
             onFocus={() => showLocationPicker(location)}
           />
@@ -75,12 +77,12 @@ export default function SignupSetLocation ({ navigation }) {
       <View style={styles.bottomBar}>
         <Button
           style={styles.backButton}
-          text='< Back'
+          text={t('< Back')}
           onPress={() => navigation.goBack()}
         />
         <Button
           style={styles.continueButton}
-          text='Finish'
+          text={t('Finish')}
           onPress={finish}
         />
       </View>

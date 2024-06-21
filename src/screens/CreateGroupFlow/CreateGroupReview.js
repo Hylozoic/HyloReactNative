@@ -15,8 +15,10 @@ import {
 } from './CreateGroupFlow.store'
 import { white } from 'style/colors'
 import styles from './CreateGroupFlow.styles'
+import { useTranslation } from 'react-i18next'
 
 export default function CreateGroupReview () {
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const dispatch = useDispatch()
   const groupData = useSelector(getGroupData)
@@ -50,15 +52,15 @@ export default function CreateGroupReview () {
     <View style={styles.container}>
       <ScrollView style={{ flex: 1 }}>
         <View style={styles.header}>
-          <Text style={styles.heading}>Everything look good?</Text>
-          <Text style={styles.description}>You can always come back and change your details at any time</Text>
+          <Text style={styles.heading}>{t('Everything look good?')}</Text>
+          <Text style={styles.description}>{t('You can always come back and change your details at any time')}</Text>
         </View>
         <View style={styles.content}>
 
           <View style={styles.textInputContainer}>
             <View style={stepStyles.itemHeader}>
-              <Text style={stepStyles.textInputLabel}>What's the name of your group?</Text>
-              <EditButton onPress={() => navigation.navigate('CreateGroupName')} />
+              <Text style={stepStyles.textInputLabel}>{t('Whats the name of your group?')}</Text>
+              <EditButton t={t} onPress={() => navigation.navigate('CreateGroupName')} />
             </View>
             <TextInput
               style={stepStyles.reviewTextInput}
@@ -71,7 +73,7 @@ export default function CreateGroupReview () {
 
           <View style={styles.textInputContainer}>
             <View style={stepStyles.itemHeader}>
-              <Text style={stepStyles.textInputLabel}>What's the URL of your group?</Text>
+              <Text style={stepStyles.textInputLabel}>{t('Whats the URL of your group?')}</Text>
               <EditButton onPress={() => navigation.navigate('CreateGroupUrl')} />
             </View>
             <TextInput
@@ -85,7 +87,7 @@ export default function CreateGroupReview () {
 
           <View style={styles.textInputContainer}>
             <View style={stepStyles.itemHeader}>
-              <Text style={stepStyles.textInputLabel}>What is the purpose of this group</Text>
+              <Text style={stepStyles.textInputLabel}>{t('What is the purpose of this group')}</Text>
               <EditButton onPress={() => navigation.navigate('CreateGroupPurpose')} />
             </View>
             <TextInput
@@ -101,7 +103,7 @@ export default function CreateGroupReview () {
 
         <View style={styles.textInputContainer}>
           <View style={stepStyles.itemHeader}>
-            <Text style={stepStyles.textInputLabel}>Who can see this group?</Text>
+            <Text style={stepStyles.textInputLabel}>{t('Who can see this group?')}</Text>
             <EditButton onPress={() => navigation.navigate('CreateGroupVisibilityAccessibility')} />
           </View>
           <TextInput
@@ -116,7 +118,7 @@ export default function CreateGroupReview () {
 
         <View style={styles.textInputContainer}>
           <View style={stepStyles.itemHeader}>
-            <Text style={stepStyles.textInputLabel}>Who can join this group?</Text>
+            <Text style={stepStyles.textInputLabel}>{t('Who can join this group?')}</Text>
             <EditButton onPress={() => navigation.navigate('CreateGroupVisibilityAccessibility')} />
           </View>
           <TextInput
@@ -132,7 +134,7 @@ export default function CreateGroupReview () {
         {parentGroups.length > 0 && (
           <View style={styles.textInputContainer}>
             <View style={stepStyles.itemHeader}>
-              <Text style={stepStyles.textInputLabel}>Is this group a member of other groups?</Text>
+              <Text style={stepStyles.textInputLabel}>{t('Is this group a member of other groups?')}</Text>
               <EditButton onPress={() => navigation.navigate('CreateGroupParentGroups')} />
             </View>
             <View style={stepStyles.groupRows}>
@@ -154,9 +156,9 @@ const GroupRow = ({ group }) => (
   </View>
 )
 
-const EditButton = ({ onPress }) => (
+const EditButton = ({ onPress, t }) => (
   <TouchableOpacity onPress={onPress}>
-    <Text style={stepStyles.editLink}>Edit</Text>
+    <Text style={stepStyles.editLink}>{t('Edit')}</Text>
   </TouchableOpacity>
 )
 

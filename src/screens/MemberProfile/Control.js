@@ -13,7 +13,7 @@ export default class Control extends React.Component {
 
   focus = () => this.inputRef.current && this.inputRef.current.focus()
 
-  render () {  
+  render () {
     const {
       value,
       onChangeText,

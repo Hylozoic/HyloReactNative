@@ -3,6 +3,14 @@ import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ReactTestRenderer from 'react-test-renderer'
 import MessageInput from './MessageInput'
 
+jest.mock('react-i18next', () => ({
+  ...jest.requireActual('react-i18next'),
+  withTranslation: () => Component => {
+    Component.defaultProps = { ...Component.defaultProps, t: (str) => str }
+    return Component
+  }
+}))
+
 it('matches the last snapshot', () => {
   const shallow = new ReactShallowRenderer()
   shallow.render(<MessageInput onSubmit={() => {}} placeholder='Wombats...' />)

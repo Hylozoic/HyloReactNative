@@ -10,6 +10,7 @@ import Avatar from 'components/Avatar'
 import FlagContent from 'components/FlagContent'
 import Icon from 'components/Icon'
 import styles, { labelStyles } from './PostHeader.styles'
+import { useTranslation } from 'react-i18next'
 
 export default function PostHeader ({
   announcement,
@@ -93,14 +94,24 @@ export default function PostHeader ({
 }
 
 export function PostLabel ({ type }) {
+  const { t } = useTranslation()
   const labelTypeStyle = get(type, labelStyles) || labelStyles.discussion
   const boxStyle = [labelStyles.box, labelTypeStyle.box]
   const textStyle = [labelStyles.text, labelTypeStyle.text]
 
+  // explicit invocations of dynamic content
+  t('discussion')
+  t('event')
+  t('project')
+  t('proposal')
+  t('offer')
+  t('request')
+  t('resource')
+
   return (
     <View style={boxStyle}>
       <Text style={textStyle}>
-        {type.toUpperCase()}
+        {t(type).toUpperCase()}
       </Text>
     </View>
   )
