@@ -1,91 +1,278 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MemberList renders with default props with default non-server search 1`] = `
-<FlatList
-  ListFooterComponent={null}
-  ListHeaderComponent={
-    <View>
-      <View>
-        <SearchBar
-          onChangeText={[Function]}
-          placeholder="Search Members"
-        />
-        <PopupMenuButton
-          actions={[]}
-        >
-          <Text />
-          <Icon
-            name="ArrowDown"
-          />
-        </PopupMenuButton>
-      </View>
-    </View>
-  }
-  data={
-    [
+<SafeAreaProvider>
+  <TRenderEngineProvider
+    baseStyle={
       {
-        "groupRoles": [],
-        "id": "1",
-        "moderatedGroupMemberships": [],
-        "name": "Loren",
-      },
+        "fontSize": 14,
+      }
+    }
+    classesStyles={{}}
+    customHTMLElementModels={{}}
+    emSize={14}
+    enableCSSInlineProcessing={true}
+    enableUserAgentStyles={true}
+    fallbackFonts={
       {
-        "groupRoles": [],
-        "id": "2",
-        "moderatedGroupMemberships": [],
-        "name": "Robbie",
-      },
-    ]
-  }
-  keyExtractor={[Function]}
-  numColumns="2"
-  onEndReached={false}
-  renderItem={[Function]}
-/>
+        "monospace": "Menlo",
+        "sans-serif": "system",
+        "serif": "Times New Roman",
+      }
+    }
+    htmlParserOptions={
+      {
+        "decodeEntities": true,
+      }
+    }
+    ignoredDomTags={[]}
+    ignoredStyles={[]}
+    systemFonts={
+      [
+        "San Francisco",
+        "Arial",
+        "ArialHebrew",
+        "Avenir",
+        "Baskerville",
+        "Bodoni 72",
+        "Bradley Hand",
+        "Chalkboard SE",
+        "Cochin",
+        "Copperplate",
+        "Courier",
+        "Courier New",
+        "Damascus",
+        "Didot",
+        "Futura",
+        "Geeza Pro",
+        "Georgia",
+        "Gill Sans",
+        "Helvetica",
+        "Helvetica Neue",
+        "Hiragino Sans",
+        "Hoefler Text",
+        "Iowan Old Style",
+        "Kailasa",
+        "Khmer Sangam MN",
+        "Marker Felt",
+        "Menlo",
+        "Mishafi",
+        "Noteworthy",
+        "Optima",
+        "Palatino",
+        "Papyrus",
+        "Savoye LET",
+        "Symbol",
+        "Thonburi",
+        "Times New Roman",
+        "Trebuchet MS",
+        "Verdana",
+        "Zapf Dingbats",
+        "Zapfino",
+      ]
+    }
+    tagsStyles={{}}
+  >
+    <Provider
+      store={
+        {
+          "dispatch": [MockFunction],
+          "getState": [MockFunction],
+          "subscribe": [MockFunction],
+        }
+      }
+    >
+      <HyloHTMLConfigProvider>
+        <ForwardRef(NavigationContainerInner)>
+          <MemberList
+            fetchMembers={[Function]}
+            fetchMoreMembers={[Function]}
+            group={
+              {
+                "id": 2,
+              }
+            }
+            hasMore={null}
+            hideSortOptions={false}
+            isServerSearch={false}
+            members={
+              [
+                {
+                  "groupRoles": {
+                    "items": [],
+                  },
+                  "id": "1",
+                  "membershipCommonRoles": {
+                    "items": [],
+                  },
+                  "name": "Loren",
+                },
+                {
+                  "groupRoles": {
+                    "items": [],
+                  },
+                  "id": "2",
+                  "membershipCommonRoles": {
+                    "items": [],
+                  },
+                  "name": "Robbie",
+                },
+              ]
+            }
+            navigation={{}}
+            pending={false}
+            search={null}
+            setSearch={[Function]}
+            setSort={[Function]}
+            slug=""
+            sortBy={null}
+            sortKeys={null}
+            t={[Function]}
+          >
+            
+          </MemberList>
+        </ForwardRef(NavigationContainerInner)>
+      </HyloHTMLConfigProvider>
+    </Provider>
+  </TRenderEngineProvider>
+</SafeAreaProvider>
 `;
 
 exports[`MemberList runs call for new results if server search 1`] = `
-<FlatList
-  ListFooterComponent={null}
-  ListHeaderComponent={
-    <View>
-      <View>
-        <SearchBar
-          onChangeText={[Function]}
-          placeholder="Search Members"
-        />
-        <PopupMenuButton
-          actions={[]}
-        >
-          <Text />
-          <Icon
-            name="ArrowDown"
-          />
-        </PopupMenuButton>
-      </View>
-    </View>
-  }
-  data={
-    [
+<SafeAreaProvider>
+  <TRenderEngineProvider
+    baseStyle={
       {
-        "groupRoles": [],
-        "id": "1",
-        "moderatedGroupMemberships": [],
-        "name": "Loren",
-      },
+        "fontSize": 14,
+      }
+    }
+    classesStyles={{}}
+    customHTMLElementModels={{}}
+    emSize={14}
+    enableCSSInlineProcessing={true}
+    enableUserAgentStyles={true}
+    fallbackFonts={
       {
-        "groupRoles": [],
-        "id": "2",
-        "moderatedGroupMemberships": [],
-        "name": "Robbie",
-      },
-    ]
-  }
-  keyExtractor={[Function]}
-  numColumns="2"
-  onEndReached={[Function]}
-  renderItem={[Function]}
-/>
+        "monospace": "Menlo",
+        "sans-serif": "system",
+        "serif": "Times New Roman",
+      }
+    }
+    htmlParserOptions={
+      {
+        "decodeEntities": true,
+      }
+    }
+    ignoredDomTags={[]}
+    ignoredStyles={[]}
+    systemFonts={
+      [
+        "San Francisco",
+        "Arial",
+        "ArialHebrew",
+        "Avenir",
+        "Baskerville",
+        "Bodoni 72",
+        "Bradley Hand",
+        "Chalkboard SE",
+        "Cochin",
+        "Copperplate",
+        "Courier",
+        "Courier New",
+        "Damascus",
+        "Didot",
+        "Futura",
+        "Geeza Pro",
+        "Georgia",
+        "Gill Sans",
+        "Helvetica",
+        "Helvetica Neue",
+        "Hiragino Sans",
+        "Hoefler Text",
+        "Iowan Old Style",
+        "Kailasa",
+        "Khmer Sangam MN",
+        "Marker Felt",
+        "Menlo",
+        "Mishafi",
+        "Noteworthy",
+        "Optima",
+        "Palatino",
+        "Papyrus",
+        "Savoye LET",
+        "Symbol",
+        "Thonburi",
+        "Times New Roman",
+        "Trebuchet MS",
+        "Verdana",
+        "Zapf Dingbats",
+        "Zapfino",
+      ]
+    }
+    tagsStyles={{}}
+  >
+    <Provider
+      store={
+        {
+          "dispatch": [MockFunction],
+          "getState": [MockFunction],
+          "subscribe": [MockFunction],
+        }
+      }
+    >
+      <HyloHTMLConfigProvider>
+        <ForwardRef(NavigationContainerInner)>
+          <MemberList
+            fetchMembers={[Function]}
+            fetchMoreMembers={[Function]}
+            group={
+              {
+                "id": 2,
+              }
+            }
+            hasMore={null}
+            hideSortOptions={false}
+            isServerSearch={true}
+            members={
+              [
+                {
+                  "groupRoles": {
+                    "items": [],
+                  },
+                  "id": "1",
+                  "membershipCommonRoles": {
+                    "items": [],
+                  },
+                  "name": "Loren",
+                },
+                {
+                  "groupRoles": {
+                    "items": [],
+                  },
+                  "id": "2",
+                  "membershipCommonRoles": {
+                    "items": [],
+                  },
+                  "name": "Robbie",
+                },
+              ]
+            }
+            pending={false}
+            search={null}
+            setSearch={[Function]}
+            setSort={[Function]}
+            slug=""
+            sortBy={null}
+            sortKeys={null}
+            t={[Function]}
+          >
+            
+          </MemberList>
+        </ForwardRef(NavigationContainerInner)>
+      </HyloHTMLConfigProvider>
+    </Provider>
+  </TRenderEngineProvider>
+</SafeAreaProvider>
 `;
 
 exports[`MemberList server search fetches new results when search provided 1`] = `

@@ -11,13 +11,12 @@ import { useTranslation } from 'react-i18next'
 
 export default function Members ({
   group,
-  canModerate,
+  canInvite,
   navigation,
   ...forwardedProps
 }) {
   const goToInvitePeople = () => navigation.navigate('Group Settings', { screen: 'Invite' })
-  // TODO RESP: defo invite poeple, not admin/cooridnator
-  const showInviteButton = get('allowGroupInvites', group) || canModerate
+  const showInviteButton = get('allowGroupInvites', group) || canInvite
 
   return (
     <View style={styles.container}>

@@ -20,7 +20,6 @@ describe('DrawerMenu', () => {
     goToMyProfile: () => {},
     showSettings: () => {},
     currentGroupId: 12,
-    canModerateCurrentGroup: true,
     networks: [],
     goToGroupSettings: jest.fn(),
     currentGroup: { name: 'foo', avatarUrl: 'someurl' },

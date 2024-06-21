@@ -20,6 +20,7 @@ import OneSignal from 'react-native-onesignal'
 import registerDevice from 'store/actions/registerDevice'
 import i18n from '../../i18n'
 import { fetchNotifications, updateNewNotificationCount } from 'screens/NotificationsList/NotificationsList.store'
+import fetchCommonRoles from 'store/actions/fetchCommonRoles'
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
@@ -49,6 +50,7 @@ export default function AuthRootNavigator () {
       setLoading(false)
     })()
     dispatch(fetchNotifications())
+    dispatch(fetchCommonRoles())
     dispatch(updateNewNotificationCount())
   }, [])
 

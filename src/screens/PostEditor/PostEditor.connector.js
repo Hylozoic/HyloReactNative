@@ -3,7 +3,6 @@ import { get } from 'lodash/fp'
 import { bindActionCreators } from 'redux'
 import { getPresentedPost } from 'store/selectors/getPost'
 import isPendingFor from 'store/selectors/isPendingFor'
-import getCanModerate from 'store/selectors/getCanModerate'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getMe from 'store/selectors/getMe'
 import upload from 'store/actions/upload'
@@ -42,7 +41,6 @@ export function mapStateToProps (state, props) {
     post: post || defaultPost,
     mapCoordinate,
     groupOptions,
-    canModerate: getCanModerate(state),
     postLoading: isPendingFor(fetchPost, state)
   }
 }

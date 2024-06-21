@@ -359,7 +359,7 @@ exports[`renders correctly with no group (all groups default) 1`] = `
                                 "groupRoles": [],
                                 "id": "1",
                                 "location": "here",
-                                "moderatedGroupMemberships": [],
+                                "membershipCommonRoles": [],
                                 "name": "Foo Lane",
                               },
                               {
@@ -368,7 +368,7 @@ exports[`renders correctly with no group (all groups default) 1`] = `
                                 "groupRoles": [],
                                 "id": "2",
                                 "location": "there",
-                                "moderatedGroupMemberships": [],
+                                "membershipCommonRoles": [],
                                 "name": "Bar Jones",
                               },
                               {
@@ -376,21 +376,21 @@ exports[`renders correctly with no group (all groups default) 1`] = `
                                 "bio": "Could be",
                                 "groupRoles": [],
                                 "id": "3",
-                                "moderatedGroupMemberships": [],
+                                "membershipCommonRoles": [],
                                 "name": "Baz Chu",
                               },
                               {
                                 "avatarUrl": "bonk.jpg",
                                 "groupRoles": [],
                                 "id": "4",
-                                "moderatedGroupMemberships": [],
+                                "membershipCommonRoles": [],
                                 "name": "Bonk Gundsdottir",
                               },
                               {
                                 "avatarUrl": "woof.png",
                                 "groupRoles": [],
                                 "id": "5",
-                                "moderatedGroupMemberships": [],
+                                "membershipCommonRoles": [],
                               },
                               {
                                 "id": -1,
@@ -575,6 +575,41 @@ exports[`renders correctly with no group (all groups default) 1`] = `
                                       accessible={true}
                                       collapsable={false}
                                       focusable={true}
+                                      onClick={[Function]}
+                                      onResponderGrant={[Function]}
+                                      onResponderMove={[Function]}
+                                      onResponderRelease={[Function]}
+                                      onResponderTerminate={[Function]}
+                                      onResponderTerminationRequest={[Function]}
+                                      onStartShouldSetResponder={[Function]}
+                                    >
+                                      <View>
+                                        <Text>
+                                          🛡️
+                                        </Text>
+                                      </View>
+                                    </View>
+                                    <View
+                                      accessibilityState={
+                                        {
+                                          "busy": undefined,
+                                          "checked": undefined,
+                                          "disabled": undefined,
+                                          "expanded": undefined,
+                                          "selected": undefined,
+                                        }
+                                      }
+                                      accessibilityValue={
+                                        {
+                                          "max": undefined,
+                                          "min": undefined,
+                                          "now": undefined,
+                                          "text": undefined,
+                                        }
+                                      }
+                                      accessible={true}
+                                      collapsable={false}
+                                      focusable={true}
                                       hitSlop={5}
                                       onClick={[Function]}
                                       onResponderGrant={[Function]}
@@ -662,6 +697,41 @@ exports[`renders correctly with no group (all groups default) 1`] = `
                                     there
                                   </Text>
                                   <View>
+                                    <View
+                                      accessibilityState={
+                                        {
+                                          "busy": undefined,
+                                          "checked": undefined,
+                                          "disabled": undefined,
+                                          "expanded": undefined,
+                                          "selected": undefined,
+                                        }
+                                      }
+                                      accessibilityValue={
+                                        {
+                                          "max": undefined,
+                                          "min": undefined,
+                                          "now": undefined,
+                                          "text": undefined,
+                                        }
+                                      }
+                                      accessible={true}
+                                      collapsable={false}
+                                      focusable={true}
+                                      onClick={[Function]}
+                                      onResponderGrant={[Function]}
+                                      onResponderMove={[Function]}
+                                      onResponderRelease={[Function]}
+                                      onResponderTerminate={[Function]}
+                                      onResponderTerminationRequest={[Function]}
+                                      onStartShouldSetResponder={[Function]}
+                                    >
+                                      <View>
+                                        <Text>
+                                          🛡️
+                                        </Text>
+                                      </View>
+                                    </View>
                                     <View
                                       accessibilityState={
                                         {
@@ -795,6 +865,41 @@ exports[`renders correctly with no group (all groups default) 1`] = `
                                       accessible={true}
                                       collapsable={false}
                                       focusable={true}
+                                      onClick={[Function]}
+                                      onResponderGrant={[Function]}
+                                      onResponderMove={[Function]}
+                                      onResponderRelease={[Function]}
+                                      onResponderTerminate={[Function]}
+                                      onResponderTerminationRequest={[Function]}
+                                      onStartShouldSetResponder={[Function]}
+                                    >
+                                      <View>
+                                        <Text>
+                                          🛡️
+                                        </Text>
+                                      </View>
+                                    </View>
+                                    <View
+                                      accessibilityState={
+                                        {
+                                          "busy": undefined,
+                                          "checked": undefined,
+                                          "disabled": undefined,
+                                          "expanded": undefined,
+                                          "selected": undefined,
+                                        }
+                                      }
+                                      accessibilityValue={
+                                        {
+                                          "max": undefined,
+                                          "min": undefined,
+                                          "now": undefined,
+                                          "text": undefined,
+                                        }
+                                      }
+                                      accessible={true}
+                                      collapsable={false}
+                                      focusable={true}
                                       hitSlop={5}
                                       onClick={[Function]}
                                       onResponderGrant={[Function]}
@@ -879,6 +984,41 @@ exports[`renders correctly with no group (all groups default) 1`] = `
                                     Bonk Gundsdottir
                                   </Text>
                                   <View>
+                                    <View
+                                      accessibilityState={
+                                        {
+                                          "busy": undefined,
+                                          "checked": undefined,
+                                          "disabled": undefined,
+                                          "expanded": undefined,
+                                          "selected": undefined,
+                                        }
+                                      }
+                                      accessibilityValue={
+                                        {
+                                          "max": undefined,
+                                          "min": undefined,
+                                          "now": undefined,
+                                          "text": undefined,
+                                        }
+                                      }
+                                      accessible={true}
+                                      collapsable={false}
+                                      focusable={true}
+                                      onClick={[Function]}
+                                      onResponderGrant={[Function]}
+                                      onResponderMove={[Function]}
+                                      onResponderRelease={[Function]}
+                                      onResponderTerminate={[Function]}
+                                      onResponderTerminationRequest={[Function]}
+                                      onStartShouldSetResponder={[Function]}
+                                    >
+                                      <View>
+                                        <Text>
+                                          🛡️
+                                        </Text>
+                                      </View>
+                                    </View>
                                     <View
                                       accessibilityState={
                                         {
@@ -1282,6 +1422,7 @@ exports[`renders with invite button when a moderator 1`] = `
                                 group={
                                   {
                                     "allowGroupInvites": true,
+                                    "id": 2,
                                   }
                                 }
                                 handleInviteOnPress={[Function]}
@@ -1308,41 +1449,61 @@ exports[`renders with invite button when a moderator 1`] = `
                               {
                                 "avatarUrl": "foo.gif",
                                 "bio": "Hello!",
-                                "groupRoles": [],
+                                "groupRoles": {
+                                  "items": [],
+                                },
                                 "id": "1",
                                 "location": "here",
-                                "moderatedGroupMemberships": [],
+                                "membershipCommonRoles": {
+                                  "items": [],
+                                },
                                 "name": "Foo Lane",
                               },
                               {
                                 "avatarUrl": "bar.png",
                                 "bio": "Not a stork",
-                                "groupRoles": [],
+                                "groupRoles": {
+                                  "items": [],
+                                },
                                 "id": "2",
                                 "location": "there",
-                                "moderatedGroupMemberships": [],
+                                "membershipCommonRoles": {
+                                  "items": [],
+                                },
                                 "name": "Bar Jones",
                               },
                               {
                                 "avatarUrl": "baz.png",
                                 "bio": "Could be",
-                                "groupRoles": [],
+                                "groupRoles": {
+                                  "items": [],
+                                },
                                 "id": "3",
-                                "moderatedGroupMemberships": [],
+                                "membershipCommonRoles": {
+                                  "items": [],
+                                },
                                 "name": "Baz Chu",
                               },
                               {
                                 "avatarUrl": "bonk.jpg",
-                                "groupRoles": [],
+                                "groupRoles": {
+                                  "items": [],
+                                },
                                 "id": "4",
-                                "moderatedGroupMemberships": [],
+                                "membershipCommonRoles": {
+                                  "items": [],
+                                },
                                 "name": "Bonk Gundsdottir",
                               },
                               {
                                 "avatarUrl": "woof.png",
-                                "groupRoles": [],
+                                "groupRoles": {
+                                  "items": [],
+                                },
                                 "id": "5",
-                                "moderatedGroupMemberships": [],
+                                "membershipCommonRoles": {
+                                  "items": [],
+                                },
                               },
                               {
                                 "id": -1,

@@ -86,7 +86,6 @@ exports[`DrawerMenu matches the last snapshot 1`] = `
         <ForwardRef(NavigationContainerInner)>
           <DrawerMenu
             avatarUrl="http://anyurl"
-            canModerateCurrentGroup={true}
             currentGroup={
               {
                 "avatarUrl": "someurl",

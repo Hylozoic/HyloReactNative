@@ -76,6 +76,22 @@ export default function fetchCurrentUser () {
                 }
               }
             }
+            groupRoles {
+              items {
+                id
+                name
+                emoji
+                active
+                groupId
+                responsibilities {
+                  items {
+                    id
+                    title
+                    description
+                  }
+                }
+              }
+            }
             affiliations {
               items {
                 id
@@ -86,6 +102,14 @@ export default function fetchCurrentUser () {
                 createdAt
                 updatedAt
                 isActive
+              }
+            }
+            membershipCommonRoles {
+              items {
+                id
+                commonRoleId
+                groupId
+                userId
               }
             }
             memberships {

@@ -11,6 +11,9 @@ import FlagContent from 'components/FlagContent'
 import Icon from 'components/Icon'
 import styles, { labelStyles } from './PostHeader.styles'
 import { useTranslation } from 'react-i18next'
+import { RESP_ADMINISTRATION } from 'store/constants'
+import hasResponsibilityForGroup from 'store/selectors/hasResponsibilityForGroup'
+import getRolesForGroup from 'store/selectors/getRolesForGroup'
 
 export default function PostHeader ({
   announcement,
@@ -40,9 +43,8 @@ export default function PostHeader ({
   const handleShowMember = () => showMember && showMember(creator.id)
 
   const currentGroupId = currentGroup && currentGroup.id
-  const badges = (currentGroupId && creator.groupRoles?.filter(role => role.groupId === currentGroupId)) || []
-  const creatorIsSteward = creator.moderatedGroupMemberships?.find(moderatedMembership => moderatedMembership.groupId === currentGroupId)
-
+  const badges = useSelector(state => getRolesForGroup(state, { person: creator, groupId: currentGroupId }))
+  const creatorIsSteward = useSelector(state => hasResponsibilityForGroup(state, { person: creator, responsibility: RESP_ADMINISTRATION, groupId: currentGroupId }))
   return (
     <View style={[styles.container, style]}>
       <View style={styles.avatarSpacing}>

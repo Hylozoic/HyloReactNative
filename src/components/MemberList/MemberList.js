@@ -15,6 +15,10 @@ import styles from './MemberList.styles'
 import SearchBar from 'components/SearchBar'
 import CondensingBadgeRow from '../CondensingBadgeRow/CondensingBadgeRow'
 import { useTranslation } from 'react-i18next'
+import getRolesForGroup from 'store/selectors/getRolesForGroup'
+import { useSelector } from 'react-redux'
+import hasResponsibilityForGroup from 'store/selectors/hasResponsibilityForGroup'
+import { RESP_ADMINISTRATION } from 'store/constants'
 
 export class MemberList extends React.Component {
   static defaultProps = {
@@ -150,10 +154,8 @@ export default function (props) {
 }
 
 export function Member ({ member, showMember, group }) {
-  const { moderatedGroupMemberships, groupRoles, id } = member
-  const badges = (group && groupRoles.filter(role => role.groupId === group.id)) || []
-  const creatorIsSteward = moderatedGroupMemberships.find(moderatedMembership => moderatedMembership.groupId === group?.id)
-  
+  const badges = group ? useSelector(state => getRolesForGroup(state, { person: member, groupId: group.id })) : []
+  const creatorIsSteward = group ? useSelector(state => hasResponsibilityForGroup(state, { person: member, responsibility: RESP_ADMINISTRATION, groupId: group.id })) : []
   return (
     <TouchableOpacity
       onPress={() => isFunction(showMember) && showMember(member.id)}
@@ -165,8 +167,8 @@ export function Member ({ member, showMember, group }) {
       <Text style={styles.memberName}>{member.name}</Text>
       {!!member.location &&
         <Text style={styles.memberLocation}>{member.location}</Text>}
-        <CondensingBadgeRow badges={badges} limit={32} creatorIsSteward={creatorIsSteward} currentGroup={group} containerStyle={styles.badgeRow} />
-        {/* The limit is just a unrealistically large number here */}
+      <CondensingBadgeRow badges={badges} limit={32} creatorIsSteward={creatorIsSteward} currentGroup={group} containerStyle={styles.badgeRow} />
+      {/* The limit is just a unrealistically large number here */}
       <Text style={styles.memberBio} numberOfLines={4}>
         {member.bio}
       </Text>

@@ -109,7 +109,7 @@ exports[`createGroup matches snapshot 1`] = `
       avatarUrl
     }
   }
-  moderators {
+  stewards {
     items {
       id
       name
