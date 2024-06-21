@@ -7,6 +7,16 @@ import gql from 'graphql-tag'
 export const MeMembershipsMemberCountQuery = gql`
   query MeMembershipsMemberCountQuery {
     me {
+      joinRequests(status: 0) {
+        items {
+          id
+          status
+          createdAt
+          group {
+            id
+          }
+        }
+      }
       memberships {
         group {
           id

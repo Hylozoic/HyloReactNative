@@ -142,6 +142,7 @@ export default function fetchCurrentUser () {
                     title
                   }
                 }
+                // REMOVE BEGIN
                 childGroups(first: 300) {
                   items {
                     accessibility
@@ -197,6 +198,7 @@ export default function fetchCurrentUser () {
                     }
                   }
                 }
+                // REMOVE END
                 settings {
                   allowGroupInvites
                   askJoinQuestions

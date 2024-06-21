@@ -1,5 +1,5 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Text, ScrollView, View, TouchableOpacity } from 'react-native'
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { openURL } from 'hooks/useOpenURL'
@@ -9,8 +9,11 @@ import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import Icon from 'components/Icon'
 import TopicsNavigation from 'components/TopicsNavigation'
 import styles from './GroupNavigation.styles'
+import fetchGroupDetails from 'store/actions/fetchGroupDetails'
+import Loading from 'components/Loading'
 
 export default function GroupNavigation () {
+  const dispatch = useDispatch()
   const navigation = useNavigation()
   const route = useRoute()
   const currentGroup = useSelector(getCurrentGroup)
@@ -19,6 +22,12 @@ export default function GroupNavigation () {
   const { navigate } = navigation
   const customViews = (currentGroup && currentGroup.customViews && currentGroup.customViews.toRefArray()) || []
   const myHome = route?.params?.myHome
+
+  useEffect(() => {
+    (
+      async () => await dispatch(fetchGroupDetails({ slug: currentGroup?.slug }))
+    )()
+  }, [currentGroup?.slug])
 
   useFocusEffect(() => {
     navigation.setOptions({ title: myHome ? 'My Home' : currentGroup?.name })
@@ -67,6 +76,8 @@ export default function GroupNavigation () {
       ]
 
   const shownNavItems = navItems.filter(navItem => !navItem?.hidden)
+
+  if (!currentGroup?.parentGroups) return <Loading />
 
   return (
     <ScrollView style={styles.container}>
