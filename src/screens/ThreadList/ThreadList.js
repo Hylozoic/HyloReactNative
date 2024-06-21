@@ -6,10 +6,12 @@ import { getSocket } from 'util/websockets'
 import ThreadCard from 'components/ThreadCard'
 import styles from './ThreadList.styles'
 import Loading from 'components/Loading'
+import { useTranslation } from 'react-i18next'
 
 export default function (props) {
   const isFocused = useIsFocused()
-  return <ThreadList {...props} isFocused={isFocused} />
+  const { t } = useTranslation()
+  return <ThreadList {...props} isFocused={isFocused} t={t} />
 }
 
 export class ThreadList extends Component {
@@ -36,7 +38,8 @@ export class ThreadList extends Component {
       fetchMoreThreads,
       showThread,
       refreshThreads,
-      pendingRefresh
+      pendingRefresh,
+      t
       // isConnected
     } = this.props
 
@@ -46,7 +49,7 @@ export class ThreadList extends Component {
           <Loading />
         )}
         {!pending && threads.length === 0 && (
-          <Text style={styles.center}>No active conversations</Text>
+          <Text style={styles.center}>{t('No active conversations')}</Text>
         )}
         <FlatList
           data={threads}

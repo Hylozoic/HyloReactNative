@@ -340,12 +340,14 @@ exports[`default render matches snapshot 1`] = `
                           <View>
                             <View>
                               <Text>
-                                Let's do this!
+                                Lets do this!
                               </Text>
                               <Text>
                                 Hi 
                                 <Text />
-                                 we just need to know your name and password and you're account will be created.
+                                 
+                                we just need to know your name and password and youre account will be created
+                                .
                               </Text>
                             </View>
                             <View>

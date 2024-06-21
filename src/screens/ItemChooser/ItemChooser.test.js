@@ -9,10 +9,27 @@ const items = [
   { id: 'member2' }
 ]
 
+jest.mock('react-i18next', () => ({
+  ...jest.requireActual('react-i18next'),
+  withTranslation: () => Component => {
+    Component.defaultProps = { ...Component.defaultProps, t: (str) => str }
+    return Component
+  },
+  useTranslation: (domain) => {
+    return {
+      t: (str) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {})
+      }
+    }
+  }
+}))
+
 const testProps = {
   fetchSearchSuggestions: () => {
     return { type: 'test-search' }
   },
+  t: str => str,
   getSearchSuggestions: () => items,
   setSearchTerm: jest.fn(),
   ItemRowComponent: item => null,

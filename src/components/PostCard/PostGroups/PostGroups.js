@@ -5,6 +5,7 @@ import { PUBLIC_GROUP } from 'store/models/Group'
 import GroupsList from 'components/GroupsList'
 import Icon from 'components/Icon'
 import { caribbeanGreen, rhino40 } from 'style/colors'
+import { useTranslation } from 'react-i18next'
 
 export default function PostGroups ({
   goToGroup,
@@ -12,6 +13,7 @@ export default function PostGroups ({
   includePublic,
   style
 }) {
+  const { t } = useTranslation()
   const [expanded, setExpanded] = useState(false)
   const toggleExpanded = () => setExpanded(!expanded)
 
@@ -28,7 +30,7 @@ export default function PostGroups ({
     <View style={[style, expanded && styles.expanded]}>
       <TouchableOpacity onPress={toggleExpanded}>
         <View style={styles.row}>
-          <Text style={styles.reminderText}>Posted In: </Text>
+          <Text style={styles.reminderText}>{t('Posted In')} </Text>
           {!expanded && (
             <GroupsListSummary
               expandFunc={toggleExpanded}
@@ -50,8 +52,9 @@ export default function PostGroups ({
 }
 
 export function GroupsListSummary ({ groups, goToGroup, expandFunc }) {
+  const { t } = useTranslation()
   const moreGroups = groups.length > 1
-  const othersText = n => (n === 1 ? '1 other' : `${n} others`)
+  const othersText = n => (n === 1 ? t('1 other') : `${n} ${t('others')}`)
 
   return (
     <View style={[styles.groupList, styles.row]}>
@@ -62,7 +65,7 @@ export function GroupsListSummary ({ groups, goToGroup, expandFunc }) {
       </TouchableOpacity>
       {moreGroups && (
         <View style={[styles.row]}>
-          <Text style={styles.reminderText}> and {othersText(groups.length - 1)}</Text>
+          <Text style={styles.reminderText}> {t('and')} {othersText(groups.length - 1)}</Text>
         </View>
       )}
     </View>

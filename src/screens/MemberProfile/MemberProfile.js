@@ -12,13 +12,14 @@ import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from 'assets/default-user-banner.jpg'
 import styles from './MemberProfile.styles'
 import ModalHeaderTransparent from 'navigation/headers/ModalHeaderTransparent'
+import { withTranslation } from 'react-i18next'
 
 export const blockUserWithNav = async ({ navigation, person, blockUser }) => {
   await blockUser(person.id)
   navigation.goBack()
 }
 
-export default function MemberProfile ({
+function MemberProfile ({
   isBlocked,
   canFlag,
   goToDetails,
@@ -34,7 +35,8 @@ export default function MemberProfile ({
   person,
   updateUserSettings,
   fetchPerson,
-  currentGroup
+  currentGroup,
+  t
 }) {
   const navigation = useNavigation()
   const isModalScreen = useIsModalScreen()
@@ -76,6 +78,7 @@ export default function MemberProfile ({
   const header = (
     <View>
       <MemberBanner
+        t={t}
         isFocused={isFocused}
         isMe={isMe}
         person={person}
@@ -93,7 +96,7 @@ export default function MemberProfile ({
           goToManageNotifications={goToManageNotifications}
           goToBlockedUsers={goToBlockedUsers}
         />
-        <ReadMoreButton goToDetails={goToDetails} />
+        <ReadMoreButton goToDetails={goToDetails} t={t} />
       </View>
       {flaggingVisible && (
         <FlagContent
@@ -131,7 +134,7 @@ export class MemberBanner extends React.Component {
   }
 
   render () {
-    const { person: { id, avatarUrl, bannerUrl }, isMe } = this.props
+    const { person: { id, avatarUrl, bannerUrl }, isMe, t } = this.props
     const { avatarPickerPending, bannerPickerPending, avatarLocalUri, bannerLocalUri } = this.state
 
     const avatarSource = avatarLocalUri
@@ -155,7 +158,7 @@ export class MemberBanner extends React.Component {
     return (
       <View>
         <ImagePicker
-          title='Change Banner'
+          title={t('Change Banner')}
           type='userBanner'
           style={styles.bannerImagePicker}
           id={id}
@@ -164,12 +167,12 @@ export class MemberBanner extends React.Component {
           disabled={!isMe}
         >
           <FastImage source={bannerSource} style={styles.bannerImage} />
-          {isMe && <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />}
+          {isMe && <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} t={t} />}
         </ImagePicker>
         <View style={styles.avatarW3}>
           <ImagePicker
             style={styles.avatarWrapperWrapper}
-            title='Change Avatar'
+            title={t('Change Avatar')}
             type='userAvatar'
             id={id}
             onChoice={choice => this.handleBannerImageUpload(choice, 'avatar')}
@@ -187,15 +190,15 @@ export class MemberBanner extends React.Component {
   }
 }
 
-export function EditButton ({ isLoading, style }) {
+export function EditButton ({ isLoading, style, t }) {
   return (
     <View style={[styles.editButton, style]}>
       {isLoading
-        ? <Text style={styles.editButtonText}>loading</Text>
+        ? <Text style={styles.editButtonText}>{t('loading')}</Text>
         : (
           <View style={{ flexDirection: 'row' }}>
             <EntypoIcon name='edit' style={styles.editIcon} />
-            <Text style={styles.editButtonText}>edit</Text>
+            <Text style={styles.editButtonText}>{t('edit')}</Text>
           </View>
           )
       }
@@ -203,14 +206,16 @@ export function EditButton ({ isLoading, style }) {
   )
 }
 
-export function ReadMoreButton ({ goToDetails }) {
+export function ReadMoreButton ({ goToDetails, t }) {
   return (
     <View style={styles.buttonContainer}>
       <TouchableOpacity onPress={goToDetails} style={styles.buttonWrapper}>
         <View style={styles.button}>
-          <Text style={styles.buttonText}>Read More</Text>
+          <Text style={styles.buttonText}>{t('Read More')}</Text>
         </View>
       </TouchableOpacity>
     </View>
   )
 }
+
+export default withTranslation()(MemberProfile)

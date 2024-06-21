@@ -8,8 +8,10 @@ import {
   caribbeanGreen, rhino30, white, white20onCaribbeanGreen, white40onCaribbeanGreen
 } from 'style/colors'
 import { useKeyboard } from '@react-native-community/hooks'
+import { useTranslation } from 'react-i18next'
 
 export default function CreateGroupTabBar ({ state, descriptors, navigation }) {
+  const { t } = useTranslation()
   const workflowOptions = useSelector(getWorkflowOptions)
   const disableContinue = !!workflowOptions?.disableContinue
   const [completeButtonDisabled, setCompleteButtonDisabled] = useState(false)
@@ -67,14 +69,14 @@ export default function CreateGroupTabBar ({ state, descriptors, navigation }) {
     <View style={[styles.container, { height: keyboardAdjustedHeight }]}>
       {prevStepScreenName && (
         <Button
-          text='< Back'
+          text={t('< Back')}
           onPress={gotoPrevStep}
           style={styles.backButton}
         />
       )}
       {nextStepScreenName && (
         <Button
-          text='Continue'
+          text={t('Continue')}
           onPress={gotoNextStep}
           style={styles.continueButton}
           disabled={disableContinue}
@@ -82,7 +84,7 @@ export default function CreateGroupTabBar ({ state, descriptors, navigation }) {
       )}
       {!nextStepScreenName && (
         <Button
-          text="Let's Do This!"
+          text={t("Lets Do This!")}
           onPress={completeWorkflow}
           disabled={completeButtonDisabled}
           style={styles.continueButton}

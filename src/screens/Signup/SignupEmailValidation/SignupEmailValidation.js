@@ -15,10 +15,12 @@ import FormattedError from 'components/FormattedError'
 import controlStyles from 'components/SettingControl/SettingControl.styles'
 import styles from './SignupEmailValidation.styles'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useTranslation } from 'react-i18next'
 
 const CODE_LENGTH = 6
 
 export default function SignupEmailValidation ({ navigation, route }) {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const [loading, setLoading] = useState()
   const [verificationCode, setVerificationCode] = useState()
@@ -63,7 +65,7 @@ export default function SignupEmailValidation ({ navigation, route }) {
         setError(responseError)
       }
     } catch (e) {
-      setError('Expired or invalid code')
+      setError(t('Expired or invalid code'))
     } finally {
       setLoading(false)
     }
@@ -95,12 +97,12 @@ export default function SignupEmailValidation ({ navigation, route }) {
       <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
         <View style={styles.header}>
           <Text style={styles.title}>
-            Check your email
+            {t('Check your email')}
           </Text>
           <View>
-            <Text style={styles.subTitle}>We've sent a 6 digit code to:</Text>
+            <Text style={styles.subTitle}>{t('Weve sent a 6 digit code to')}:</Text>
             <Text style={[styles.subTitle, { marginVertical: 10, fontWeight: 'bold' }]}>{email}</Text>
-            <Text style={styles.subTitle}>The code will expire shortly, so please enter it here soon.</Text>
+            <Text style={styles.subTitle}>{t('The code will expire shortly, so please enter it here soon')}.</Text>
           </View>
         </View>
         <View style={styles.content}>
@@ -129,7 +131,7 @@ export default function SignupEmailValidation ({ navigation, route }) {
             />
           )}
           <TouchableOpacity onPress={resendCode} style={styles.resendCodeLink}>
-            <Text style={styles.resendCodeLinkText}><FontAwesome5Icon name='redo-alt' /> Resend code</Text>
+            <Text style={styles.resendCodeLinkText}><FontAwesome5Icon name='redo-alt' /> {t('Resend code')}</Text>
           </TouchableOpacity>
         </View>
         <FormattedError error={error} styles={controlStyles} />

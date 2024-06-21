@@ -17,8 +17,10 @@ import { bannerlinearGradientColors } from 'style/colors'
 // import groupExplorerUrl from 'assets/group-explorer.png'
 import earthUrl from 'assets/earth.png'
 import myHomeUrl from 'assets/my-home.png'
+import { useTranslation } from 'react-i18next'
 
 export default function DrawerMenu () {
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const route = useRoute()
   const currentGroup = useSelector(getCurrentGroup)
@@ -60,7 +62,7 @@ export default function DrawerMenu () {
   }
 
   const publicMap = {
-    name: 'Public Map',
+    name: t('Public Map'),
     navigateTo: navigateToPublicMap,
     id: 'publicMap',
     avatarUrl: Image.resolveAssetSource(earthUrl).uri
@@ -75,7 +77,7 @@ export default function DrawerMenu () {
   // }
 
   const publicRoutes = [
-    { ...PUBLIC_GROUP, navigateTo: navigateToPublicStream },
+    { ...PUBLIC_GROUP, navigateTo: navigateToPublicStream, name: t('Public Stream')},
     // publicGroups,
     publicMap
   ]
@@ -100,7 +102,7 @@ export default function DrawerMenu () {
   const listSections = [
     {
       data: [{
-        name: 'My Home',
+        name: t('My Home'),
         navigateTo: navigateToMyHome,
         id: 'myHome',
         avatarUrl: Image.resolveAssetSource(myHomeUrl).uri
@@ -136,13 +138,13 @@ export default function DrawerMenu () {
                   style={styles.currentGroupButton}
                   iconName='Settings'
                   onPress={goToGroupSettings}
-                  text='Settings'
+                  text={t('Settings')}
                 />
                 <Button
                   style={styles.currentGroupButton}
                   iconName='Invite'
                   onPress={goToInvitePeople}
-                  text='Invite'
+                  text={t('Invite')}
                 />
               </View>
             )}
@@ -159,7 +161,7 @@ export default function DrawerMenu () {
         sections={listSections}
         stickySectionHeadersEnabled={false}
       />
-      <Button text='Start a Group' onPress={goToCreateGroup} style={styles.createGroupButton} />
+      <Button text={t('Start a Group')} onPress={goToCreateGroup} style={styles.createGroupButton} />
     </View>
   )
 }

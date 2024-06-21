@@ -12,8 +12,10 @@ import {
 } from 'style/colors'
 import { useKeyboard } from '@react-native-community/hooks'
 import { ALL_GROUP } from 'store/models/Group'
+import { useTranslation } from 'react-i18next'
 
 export default function GroupWelcomeTabBar ({ group, acceptedAllAgreements, agreements, handleAccept, allQuestionsAnswered }) {
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const dispatch = useDispatch()
   const workflowOptions = useSelector(getWorkflowOptions)
@@ -58,14 +60,14 @@ export default function GroupWelcomeTabBar ({ group, acceptedAllAgreements, agre
 
   const handleBackOut = async () => {
     const enforceAgreements = !isEmpty(agreements)
-    let explainerText = 'There are still some required steps before you can view group contents'
+    let explainerText = t('There are still some required steps before you can view group contents')
     if (onAgreementStepButNotReady) {
-      explainerText = 'To view the group contents, you have to adhere to the group agreements'
+      explainerText = t('To view the group contents, you have to adhere to the group agreements')
     }
     if (onJoinQuestionStepButNotReady) {
-      explainerText = 'Please answer all the join questions to continue'
+      explainerText = t('Please answer all the join questions to continue')
     }
-    const getOutTitle = enforceAgreements ? 'Exit this Group & Return Home' : 'Skip'
+    const getOutTitle = enforceAgreements ? t('Exit this Group & Return Home') : t('Skip')
     const getOutFunc = enforceAgreements
       ? () => {
           navigation.navigate('Group Navigation', { groupSlug: ALL_GROUP.slug })
@@ -73,11 +75,11 @@ export default function GroupWelcomeTabBar ({ group, acceptedAllAgreements, agre
         }
       : () => completeWorkflow()
     Alert.alert(
-      'Are you sure you want to leave the Group Welcome?',
+      t('Are you sure you want to leave the Group Welcome?'),
       explainerText,
       [
         {
-          text: 'Return to Group Welcome',
+          text: t('Return to Group Welcome'),
           onPress: () => {} // noop that closes alert
         },
         {
@@ -111,21 +113,21 @@ export default function GroupWelcomeTabBar ({ group, acceptedAllAgreements, agre
     <View style={[styles.container, { height: keyboardAdjustedHeight }]}>
       {nextStepScreenName && (
         <Button
-          text='Exit'
+          text={t('Exit')}
           onPress={handleBackOut}
           style={styles.backButton}
         />
       )}
       {prevStepScreenName && (
         <Button
-          text='< Back'
+          text={t('< Back')}
           onPress={gotoPrevStep}
           style={styles.backButton}
         />
       )}
       {nextStepScreenName && (
         <Button
-          text='Continue'
+          text={t('Continue')}
           onPress={(onAgreementStepButNotReady || onJoinQuestionStepButNotReady) ? handleBackOut : gotoNextStep}
           style={styles.continueButton}
           disabled={disableContinue}
@@ -133,7 +135,7 @@ export default function GroupWelcomeTabBar ({ group, acceptedAllAgreements, agre
       )}
       {!nextStepScreenName && (
         <Button
-          text="Let's Do This!"
+          text={t('Lets Do This!')}
           onPress={(onAgreementStepButNotReady || onJoinQuestionStepButNotReady) ? handleBackOut : completeWorkflow}
           disabled={completeButtonDisabled || onAgreementStepButNotReady || onJoinQuestionStepButNotReady}
           style={styles.continueButton}

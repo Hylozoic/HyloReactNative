@@ -2,6 +2,22 @@ import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import ThreadCard, { lastMessageCreator, threadNames, ThreadAvatars } from './index'
 
+jest.mock('react-i18next', () => ({
+  ...jest.requireActual('react-i18next'),
+  withTranslation: () => Component => {
+    Component.defaultProps = { ...Component.defaultProps, t: (str) => str }
+    return Component
+  },
+  useTranslation: (domain) => {
+    return {
+      t: (str) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {})
+      }
+    }
+  }
+}))
+
 it('renders correctly', () => {
   const message = {
     text: 'Hey, just checking in. Test, test, test.',
