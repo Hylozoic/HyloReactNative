@@ -4,42 +4,57 @@ import { useDispatch } from 'react-redux'
 import fetchGraphQLAction from 'store/actions/fetchGraphQL'
 
 const usageError = new Error(
-  'Parameter is required, like: `executeQueryOrAction(graphqlQueryOrAction, optionalVariables)`'
+  'A value for either "query" or "action" is required'
+)
+
+const onlyQueryOrActionError = new Error(
+  'Only one of "query" or "action" can be provided'
 )
 
 const noDataError = new Error(
   'No data returned from the GraphQL query or action.'
 )
 
-export default function useHyloQuery (graphqlQueryOrAction, variables) {
+export default function useHyloQuery ({ query, action, variables, meta }) {
   const dispatch = useDispatch()
   const [data, setData] = useState(null)
   const [fetching, setFetching] = useState(true)
   const [error, setError] = useState(null)
 
-  const fetchData = async (action, vars) => {
+  const executeQuery = useCallback(async () => {
     try {
-      if (!action) {
+      if (!query && !action) {
         throw usageError
+      }
+
+      if (query && action) {
+        throw onlyQueryOrActionError
       }
 
       let response
       setFetching(true)
 
-      if (isString(action)) {
-        response = await dispatch(fetchGraphQLAction({
-          query: action,
-          vars
-        }))
-      } else if (isFunction(action)) {
-        response = await dispatch(action(variables))
-      } else if (isObject(action) && Object.hasOwnProperty.call(action, 'definitions')) {
-        response = await dispatch(fetchGraphQLAction({
-          query: action,
-          vars
-        }))
+      // Action Creator (without params)
+      if (isFunction(action)) {
+        response = await dispatch(action())
+      // Action
       } else if (isObject(action) && Object.hasOwnProperty.call(action, 'type')) {
         response = await dispatch(action)
+        console.log(action)
+      // GraphQL query string
+      } else if (isString(query)) {
+        response = await dispatch(fetchGraphQLAction({
+          query,
+          variables: variables || {},
+          meta: meta || {}
+        }))
+      // GraphQL operation object (compiled by gql tag)
+      } else if (isObject(query) && Object.hasOwnProperty.call(query, 'definitions')) {
+        response = await dispatch(fetchGraphQLAction({
+          query,
+          variables: variables || {},
+          meta: meta || {}
+        }))
       }
 
       if (response?.payload?.getData() === null) {
@@ -52,24 +67,9 @@ export default function useHyloQuery (graphqlQueryOrAction, variables) {
     } finally {
       setFetching(false)
     }
-  }
+  }, [variables, meta])
 
-  const executeQueryOrAction = useCallback(() => {
-    fetchData(graphqlQueryOrAction, variables)
-  }, [graphqlQueryOrAction, variables])
+  useEffect(() => { executeQuery() }, [variables, meta])
 
-  const executeQueryOrActionWithData = useCallback(() => {
-    executeQueryOrAction()
-    return [{ data, fetching, error }, executeQueryOrAction]
-  }, [graphqlQueryOrAction, variables])
-
-  useEffect(() => {
-    if (graphqlQueryOrAction) {
-      executeQueryOrAction()
-    }
-  }, [graphqlQueryOrAction, variables])
-
-  if (!graphqlQueryOrAction) return executeQueryOrActionWithData
-
-  return [{ data, fetching, error }, executeQueryOrAction]
+  return [{ data, fetching, error }, executeQuery]
 }
