@@ -6,7 +6,7 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import FastImage from 'react-native-fast-image'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
-import useRouteParam from 'hooks/useRouteParam'
+import useRouteParams from 'hooks/useRouteParams'
 import loginAction from 'store/actions/login'
 import validator from 'validator'
 import errorMessages from 'util/errorMessages'
@@ -28,8 +28,7 @@ export default function Login () {
   const [bannerError, setBannerError] = useState()
   const [bannerMessage, setBannerMessage] = useState()
   const [formError, setFormError] = useState()
-  const bannerMessageParam = useRouteParam('bannerMessage')
-  const bannerErrorParam = useRouteParam('bannerError')
+  const { bannerMessage: bannerMessageParam, bannerError: bannerErrorParam } = useRouteParams()
 
   const setError = errorMessage => {
     setFormError(errorMessages(errorMessage))

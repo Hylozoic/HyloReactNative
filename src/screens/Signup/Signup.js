@@ -14,7 +14,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import validator from 'validator'
 import { openURL } from 'hooks/useOpenURL'
 import { useNavigation, useRoute, useNavigationState } from '@react-navigation/native'
-import useRouteParam from 'hooks/useRouteParam'
+import useRouteParams from 'hooks/useRouteParams'
 import FormattedError from 'components/FormattedError'
 import sendEmailVerification from 'store/actions/sendEmailVerification'
 import { getAuthState, AuthState } from 'store/selectors/getAuthState'
@@ -34,9 +34,7 @@ export default function Signup () {
   const safeAreaInsets = useSafeAreaInsets()
   const dispatch = useDispatch()
   const authState = useSelector(getAuthState)
-  const routeEmail = useRouteParam('email')
-  const routeError = useRouteParam('error')
-  const routeBannerError = useRouteParam('bannerError')
+  const { email: routeEmail, error: routeError, routeBannerError: bannerError } = useRouteParams()
   const [email, providedSetEmail] = useState(routeEmail)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(routeError)

@@ -13,7 +13,7 @@ import createProject from 'store/actions/createProject'
 import updatePost from 'store/actions/updatePost'
 import { pollingFindOrCreateLocation as providedPollingFindOrCreateLocation } from 'screens/LocationPicker/LocationPicker.store'
 
-// TODO: Replace this with useRouteParam when PostEditor is migrated to a functional component
+// TODO: Replace this with useRouteParams when PostEditor is migrated to a functional component
 export function getRouteParam (key, route = {}) {
   if (!route) throw new Error('`route` param is empty')
 

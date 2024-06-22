@@ -4,7 +4,7 @@ import { Text, ScrollView, View, TouchableOpacity } from 'react-native'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
 import { openURL } from 'hooks/useOpenURL'
-import useRouteParam from 'hooks/useRouteParam'
+import useRouteParams from 'hooks/useRouteParams'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
@@ -20,7 +20,7 @@ export default function GroupNavigation () {
   const parentGroups = useSelector(getParentGroups)
   const { navigate } = navigation
   const customViews = (currentGroup && currentGroup.customViews && currentGroup.customViews.toRefArray()) || []
-  const myHome = useRouteParam('myHome')
+  const { myHome } = useRouteParams()
 
   useFocusEffect(() => {
     navigation.setOptions({ title: myHome ? t('My Home') : currentGroup?.name })

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import FastImage from 'react-native-fast-image'
 import LinearGradient from 'react-native-linear-gradient'
-import useRouteParam from 'hooks/useRouteParam'
+import useRouteParams from 'hooks/useRouteParams'
 import useIsModalScreen from 'hooks/useIsModalScreen'
 import { GROUP_ACCESSIBILITY } from 'store/models/Group'
 import fetchGroupDetailsAction from 'store/actions/fetchGroupDetails'
@@ -25,7 +25,7 @@ export default function GroupDetail () {
   const dispatch = useDispatch()
   const navigation = useNavigation()
   const isModalScreen = useIsModalScreen()
-  const groupSlug = useRouteParam('groupSlug')
+  const { groupSlug } = useRouteParams()
   const group = useSelector(state => presentGroup(getGroup(state, { slug: groupSlug })))
   const hasPendingRequest = useSelector(getMyJoinRequests).find(joinRequest => joinRequest.group.slug === groupSlug)
   const myMemberships = useSelector(getMemberships)

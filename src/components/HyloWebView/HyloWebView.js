@@ -1,7 +1,7 @@
 import React, { useCallback, forwardRef, useState, useEffect } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 import Loading from 'components/Loading'
-import useRouteParam from 'hooks/useRouteParam'
+import useRouteParams from 'hooks/useRouteParams'
 import AutoHeightWebView from 'react-native-autoheight-webview'
 import * as QueryString from 'query-string'
 import { WebViewMessageTypes } from 'hylo-shared'
@@ -21,8 +21,7 @@ const HyloWebView = forwardRef(function HyloWebView ({
 }, webViewRef) {
   const [cookie, setCookie] = useState()
   const [uri, setUri] = useState()
-  const postId = useRouteParam('postId')
-  const routePath = useRouteParam('path')
+  const { postId, routePath } = useRouteParams()
 
   useEffect(() => {
     const path = pathProp || routePath

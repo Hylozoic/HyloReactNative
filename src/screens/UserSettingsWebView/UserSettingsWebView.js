@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { WebViewMessageTypes } from 'hylo-shared'
-import useRouteParam from 'hooks/useRouteParam'
+import useRouteParams from 'hooks/useRouteParams'
 import logout from 'store/actions/logout'
 import { LEAVE_GROUP } from 'store/constants'
 import HyloWebView from 'components/HyloWebView'
@@ -9,7 +9,7 @@ import HyloWebView from 'components/HyloWebView'
 export default function UserSettingsWebView ({ path: pathProp, route }) {
   const dispatch = useDispatch()
   const webViewRef = useRef(null)
-  const routePath = useRouteParam('path')
+  const { path: routePath } = useRouteParams()
   const path = pathProp || routePath
   const source = route?.params.uri && { uri: route?.params.uri }
   const sourceOrPath = source

@@ -7,7 +7,7 @@ import { get } from 'lodash/fp'
 import { AnalyticsEvents } from 'hylo-shared'
 import useGoToMember from 'hooks/useGoToMember'
 import useIsModalScreen from 'hooks/useIsModalScreen'
-import useRouteParam from 'hooks/useRouteParam'
+import useRouteParams from 'hooks/useRouteParams'
 import fetchPostAction from 'store/actions/fetchPost'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { getPresentedPost } from 'store/selectors/getPost'
@@ -23,7 +23,7 @@ export default function PostDetails () {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigation = useNavigation()
-  const postId = useRouteParam('id')
+  const { id: postId } = useRouteParams()
   const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
   const currentGroup = useSelector(getCurrentGroup)
   const commentsRef = React.useRef()

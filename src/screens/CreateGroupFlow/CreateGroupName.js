@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useFocusEffect } from '@react-navigation/native'
 import { Text, View, ScrollView, TextInput } from 'react-native'
-import useRouteParam from 'hooks/useRouteParam'
+import useRouteParams from 'hooks/useRouteParams'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import {
   getGroupData, getEdited, updateGroupData, setWorkflowOptions,
@@ -22,7 +22,7 @@ export default function CreateGroupName ({ route }) {
   const groupData = useSelector(getGroupData)
   const [groupName, setGroupName] = useState()
   const [error, setError] = useState()
-  const reset = useRouteParam('reset')
+  const { reset } = useRouteParams()
 
   useEffect(() => {
     if (reset) {

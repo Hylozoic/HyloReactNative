@@ -6,7 +6,7 @@ import { WebViewMessageTypes } from 'hylo-shared'
 import { DEFAULT_APP_HOST } from 'navigation/linking'
 import { openURL } from 'hooks/useOpenURL'
 import useIsModalScreen, { modalScreenName } from 'hooks/useIsModalScreen'
-import useRouteParam from 'hooks/useRouteParam'
+import useRouteParams from 'hooks/useRouteParams'
 import HyloWebView from 'components/HyloWebView'
 import fetchGroupModerators from 'store/actions/fetchGroupModerators'
 import fetchGroupDetails from 'store/actions/fetchGroupDetails'
@@ -18,7 +18,7 @@ export default function GroupExploreWebView () {
   const navigation = useNavigation()
   const isModalScreen = useIsModalScreen()
   const webViewRef = useRef(null)
-  const groupSlug = useRouteParam('groupSlug')
+  const { groupSlug } = useRouteParams()
   const currentGroup = useSelector(state => getGroup(state, { slug: groupSlug }))
   const [path, setPath] = useState()
   const [canGoBack, setCanGoBack] = useState(false)

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { every, isEmpty } from 'lodash/fp'
 import setReturnToOnAuthPath from 'store/actions/setReturnToOnAuthPath'
-import useRouteParam from 'hooks/useRouteParam'
+import useRouteParams from 'hooks/useRouteParams'
 import { getAuthorized } from 'store/selectors/getAuthState'
 import { openURL } from 'hooks/useOpenURL'
 import useInvitation from 'store/actions/useInvitation'
@@ -18,18 +18,14 @@ export default function JoinGroup (props) {
   const route = useRoute()
   const dispatch = useDispatch()
   const isAuthorized = useSelector(getAuthorized)
-  const invitationToken = useRouteParam('token')
-  const accessCode = useRouteParam('accessCode')
+  const { token, accessCode } = useRouteParams()
 
   // Might be more clear to simply use `useEffect`
   useFocusEffect(
     useCallback(() => {
       (async function () {
         try {
-          const invitationTokenAndCode = {
-            invitationToken,
-            accessCode
-          }
+          const invitationTokenAndCode = { token, accessCode }
 
           if (every(isEmpty, invitationTokenAndCode)) {
             throw new Error('Please provide either a `token` query string parameter or `accessCode` route param')
