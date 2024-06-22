@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
+import OneSignal from 'react-native-onesignal'
+import registerDevice from 'store/actions/registerDevice'
+import i18n from '../../i18n'
+import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
 import { modalScreenName } from 'hooks/useIsModalScreen'
 import ModalHeader from 'navigation/headers/ModalHeader'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
@@ -16,43 +20,37 @@ import { white } from 'style/colors'
 import { HyloHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
 import { useDispatch } from 'react-redux'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import OneSignal from 'react-native-onesignal'
-import registerDevice from 'store/actions/registerDevice'
-import i18n from '../../i18n'
 import { fetchNotifications, updateNewNotificationCount } from 'screens/NotificationsList/NotificationsList.store'
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
   const dispatch = useDispatch()
-  const [loading, setLoading] = useState(true)
+  const [{ fetching, data, error }] = useHyloQuery(fetchCurrentUser)
+
+  useHyloQuery(fetchNotifications)
+  useHyloQuery(updateNewNotificationCount)
 
   useEffect(() => {
     (async function () {
-      const response = await dispatch(fetchCurrentUser())
-
-      if (!response.payload?.getData()?.error) {
+      if (!error) {
         const deviceState = await OneSignal.getDeviceState()
 
-        const locale = response.payload?.getData().settings?.locale || 'en'
+        const locale = data?.settings?.locale || 'en'
         i18n.changeLanguage(locale)
 
         if (deviceState?.userId) {
           await dispatch(registerDevice(deviceState?.userId))
-          OneSignal.setExternalUserId(response.payload?.getData()?.me?.id)
+          OneSignal.setExternalUserId(data?.id)
           // Prompt for push notifications (iOS only)
           OneSignal.promptForPushNotificationsWithUserResponse(() => {})
         } else {
           console.warn('Not registering to OneSignal for push notifications. OneSignal did not successfully retrieve a userId')
         }
       }
-
-      setLoading(false)
     })()
-    dispatch(fetchNotifications())
-    dispatch(updateNewNotificationCount())
   }, [])
 
-  if (loading) return <LoadingScreen />
+  if (fetching) return <LoadingScreen />
 
   const navigatorProps = {
     screenOptions: {
