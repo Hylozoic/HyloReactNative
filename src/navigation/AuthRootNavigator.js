@@ -25,10 +25,10 @@ import { fetchNotifications, updateNewNotificationCount } from 'screens/Notifica
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
   const dispatch = useDispatch()
-  const [{ fetching, data, error }] = useHyloQuery(fetchCurrentUser)
+  const [{ fetching, data, error }] = useHyloQuery({ action: fetchCurrentUser })
 
-  useHyloQuery(fetchNotifications)
-  useHyloQuery(updateNewNotificationCount)
+  useHyloQuery({ action: fetchNotifications })
+  useHyloQuery({ action: updateNewNotificationCount })
 
   useEffect(() => {
     (async function () {

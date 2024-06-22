@@ -9,7 +9,7 @@ import useGoToMember from 'hooks/useGoToMember'
 import useIsModalScreen from 'hooks/useIsModalScreen'
 import useRouteParams from 'hooks/useRouteParams'
 import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
-import fetchPostAction from 'store/actions/fetchPost'
+import fetchPostActionCreator from 'store/actions/fetchPost'
 import trackAnalyticsEvent from 'store/actions/trackAnalyticsEvent'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { getPresentedPost } from 'store/selectors/getPost'
@@ -24,10 +24,10 @@ export default function PostDetails () {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigation = useNavigation()
-  const { id: postId } = useRouteParams()
-  const [{ fetching, error }] = useHyloQuery(fetchPostAction, postId)
-  const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
   const currentGroup = useSelector(getCurrentGroup)
+  const { id: postId } = useRouteParams()
+  const [{ fetching, error }] = useHyloQuery({ action: fetchPostActionCreator(postId) })
+  const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
   const commentsRef = React.useRef()
   const isModalScreen = useIsModalScreen()
   const goToMember = useGoToMember()
@@ -49,16 +49,8 @@ export default function PostDetails () {
 
   useEffect(() => { setHeader() }, [currentGroup?.slug])
 
-  if (error) {
-    Alert.alert(
-      t('Sorry, we couldn\'t find that post'),
-      t('It may have been removed, or you don\'t have permission to view it'),
-      [{ text: t('Ok'), onPress: () => navigation.replace('Feed') }]
-    )
-  }
-
   useEffect(() => {
-    if (post) {
+    if (!error && post) {
       dispatch(trackAnalyticsEvent(AnalyticsEvents.POST_OPENED, {
         postId: post.id,
         groupId: post.groups.map(g => g.id),
@@ -67,7 +59,16 @@ export default function PostDetails () {
         type: post.type
       }))
     }
-  }, [post])
+  }, [error, post])
+
+  if (error) {
+    Alert.alert(
+      t('Sorry, we couldn\'t find that post'),
+      t('It may have been removed, or you don\'t have permission to view it'),
+      [{ text: t('Ok'), onPress: () => navigation.replace('Feed') }]
+    )
+    return null
+  }
 
   const renderPostDetails = panHandlers => {
     const firstGroupSlug = get('groups.0.slug', post)
