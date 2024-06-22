@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { ScrollView, View, Text } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { AnalyticsEvents } from 'hylo-shared'
 import useCurrentLocation from 'hooks/useCurrentLocation'
 import getMe from 'store/selectors/getMe'
@@ -13,7 +14,6 @@ import Button from 'components/Button'
 import SettingControl from 'components/SettingControl'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 import styles from './SignupSetLocation.styles'
-import { useTranslation } from 'react-i18next'
 
 export default function SignupSetLocation ({ navigation }) {
   const { t } = useTranslation()
@@ -52,7 +52,8 @@ export default function SignupSetLocation ({ navigation }) {
       onPick: pickedLocation => {
         setLocation(pickedLocation?.fullText)
         pickedLocation?.id !== 'NEW' && setLocationId(pickedLocation?.id)
-      }
+      },
+      t
     })
   }
 
