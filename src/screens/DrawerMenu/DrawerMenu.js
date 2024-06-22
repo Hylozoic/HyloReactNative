@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, TouchableOpacity, View, SectionList, Image } from 'react-native'
 import { useSelector } from 'react-redux'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import FastImage from 'react-native-fast-image'
 import LinearGradient from 'react-native-linear-gradient'
 
@@ -18,16 +18,15 @@ import { bannerlinearGradientColors } from 'style/colors'
 import earthUrl from 'assets/earth.png'
 import myHomeUrl from 'assets/my-home.png'
 import { useTranslation } from 'react-i18next'
+import useRouteParam from 'hooks/useRouteParam'
 
 export default function DrawerMenu () {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const route = useRoute()
   const currentGroup = useSelector(getCurrentGroup)
   const memberships = useSelector(getMemberships)
   const canModerateCurrentGroup = useSelector(getCanModerate)
-
-  const myHome = route?.params?.myHome
+  const myHome = useRouteParam('myHome')
 
   const myGroups = memberships
     .map(m => m.group.ref)

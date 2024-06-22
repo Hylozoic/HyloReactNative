@@ -1,23 +1,23 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import FastImage from 'react-native-fast-image'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
+import useRouteParam from 'hooks/useRouteParam'
 import loginAction from 'store/actions/login'
 import validator from 'validator'
 import errorMessages from 'util/errorMessages'
 import SocialAuth from 'components/SocialAuth'
 import styles from './Login.styles'
-import { useTranslation } from 'react-i18next'
 import LocaleSelector from 'components/LocaleSelector/LocaleSelector'
 
 export default function Login () {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const passwordInputRef = useRef()
-  const route = useRoute()
   const dispatch = useDispatch()
   const defaultLoginEmail = useSelector(state => state.session?.defaultLoginEmail)
 
@@ -28,8 +28,8 @@ export default function Login () {
   const [bannerError, setBannerError] = useState()
   const [bannerMessage, setBannerMessage] = useState()
   const [formError, setFormError] = useState()
-  const bannerMessageParam = route?.params?.bannerMessage
-  const bannerErrorParam = route?.params?.bannerError
+  const bannerMessageParam = useRouteParam('bannerMessage')
+  const bannerErrorParam = useRouteParam('bannerError')
 
   const setError = errorMessage => {
     setFormError(errorMessages(errorMessage))

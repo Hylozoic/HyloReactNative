@@ -1,26 +1,26 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Text, ScrollView, View, TouchableOpacity } from 'react-native'
-import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 import { openURL } from 'hooks/useOpenURL'
+import useRouteParam from 'hooks/useRouteParam'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import Icon from 'components/Icon'
 import TopicsNavigation from 'components/TopicsNavigation'
 import styles from './GroupNavigation.styles'
-import { useTranslation } from 'react-i18next'
 
 export default function GroupNavigation () {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const route = useRoute()
   const currentGroup = useSelector(getCurrentGroup)
   const childGroups = useSelector(getChildGroups)
   const parentGroups = useSelector(getParentGroups)
   const { navigate } = navigation
   const customViews = (currentGroup && currentGroup.customViews && currentGroup.customViews.toRefArray()) || []
-  const myHome = route?.params?.myHome
+  const myHome = useRouteParam('myHome')
 
   useFocusEffect(() => {
     navigation.setOptions({ title: myHome ? t('My Home') : currentGroup?.name })

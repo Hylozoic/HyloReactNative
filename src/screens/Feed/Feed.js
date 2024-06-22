@@ -10,12 +10,12 @@ import useChangeToGroup from 'hooks/useChangeToGroup'
 import useGoToTopic from 'hooks/useGoToTopic'
 import { useTranslation } from 'react-i18next'
 import { PUBLIC_GROUP_ID } from 'store/models/Group'
+import useRouteParam from 'hooks/useRouteParam'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getCustomView from 'store/selectors/getCustomView'
 import getGroupTopic from 'store/selectors/getGroupTopic'
 import getMe from 'store/selectors/getMe'
 import getMemberships from 'store/selectors/getMemberships'
-import getRouteParam from 'store/selectors/getRouteParam'
 import toggleGroupTopicSubscribeAction from 'store/actions/toggleGroupTopicSubscribe'
 import fetchGroupTopic from 'store/actions/fetchGroupTopic'
 import Avatar from 'components/Avatar'
@@ -44,13 +44,13 @@ export default function Feed ({ topicName: providedTopicName }) {
   const route = useRoute()
   const dispatch = useDispatch()
 
-  const customViewId = getRouteParam('customViewId', route)
+  const customViewId = useRouteParam('customViewId')
   const customView = useSelector(state => getCustomView(state, { customViewId }))
-  const feedType = getRouteParam('feedType', route)
-  const myHome = route?.params?.myHome
+  const feedType = useRouteParam('feedType')
+  const myHome = useRouteParam('myHome')
   const changeToGroup = useChangeToGroup()
   const goToTopicDefault = useGoToTopic()
-  const topicName = providedTopicName || getRouteParam('topicName', route)
+  const topicName = providedTopicName || useRouteParam('topicName')
 
   const customViewType = customView?.type
   const customPostTypes = customViewType === 'stream' ? customView?.postTypes : null

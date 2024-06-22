@@ -1,12 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { useDispatch, useSelector } from 'react-redux'
 import { URL } from 'react-native-url-polyfill'
 import { WebViewMessageTypes } from 'hylo-shared'
 import { DEFAULT_APP_HOST } from 'navigation/linking'
 import { openURL } from 'hooks/useOpenURL'
 import useIsModalScreen, { modalScreenName } from 'hooks/useIsModalScreen'
+import useRouteParam from 'hooks/useRouteParam'
 import HyloWebView from 'components/HyloWebView'
-import { useDispatch, useSelector } from 'react-redux'
 import fetchGroupModerators from 'store/actions/fetchGroupModerators'
 import fetchGroupDetails from 'store/actions/fetchGroupDetails'
 import ModalHeaderTransparent from 'navigation/headers/ModalHeaderTransparent'
@@ -14,11 +15,10 @@ import getGroup from 'store/selectors/getGroup'
 
 export default function GroupExploreWebView () {
   const dispatch = useDispatch()
-  const route = useRoute()
   const navigation = useNavigation()
   const isModalScreen = useIsModalScreen()
   const webViewRef = useRef(null)
-  const groupSlug = route?.params?.groupSlug
+  const groupSlug = useRouteParam('groupSlug')
   const currentGroup = useSelector(state => getGroup(state, { slug: groupSlug }))
   const [path, setPath] = useState()
   const [canGoBack, setCanGoBack] = useState(false)

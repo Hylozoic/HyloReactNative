@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { modalScreenName } from 'hooks/useIsModalScreen'
-import getRouteParam from 'store/selectors/getRouteParam'
+import useRouteParam from 'hooks/useRouteParam'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import HyloWebView from 'components/HyloWebView'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
@@ -12,7 +12,7 @@ export default function ChatRoom () {
   const navigation = useNavigation()
   const route = useRoute()
   const currentGroup = useSelector(getCurrentGroup)
-  const topicName = getRouteParam('topicName', route)
+  const topicName = useRouteParam('topicName')
   const path = `/groups/${currentGroup.slug}/topics/${topicName}`
   const handledWebRoutes = [
     `/groups/${currentGroup.slug}/topics/:topicName`

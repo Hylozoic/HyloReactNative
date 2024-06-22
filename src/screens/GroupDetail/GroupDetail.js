@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Text, ScrollView, View, TouchableOpacity, TextInput } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import FastImage from 'react-native-fast-image'
 import LinearGradient from 'react-native-linear-gradient'
+import useRouteParam from 'hooks/useRouteParam'
 import useIsModalScreen from 'hooks/useIsModalScreen'
 import { GROUP_ACCESSIBILITY } from 'store/models/Group'
 import fetchGroupDetailsAction from 'store/actions/fetchGroupDetails'
@@ -22,10 +23,9 @@ import styles from './GroupDetail.styles'
 /* DEPRECATED: Replaced by `GroupExplorerWebView` */
 export default function GroupDetail () {
   const dispatch = useDispatch()
-  const route = useRoute()
   const navigation = useNavigation()
   const isModalScreen = useIsModalScreen()
-  const groupSlug = route.params.groupSlug
+  const groupSlug = useRouteParam('groupSlug')
   const group = useSelector(state => presentGroup(getGroup(state, { slug: groupSlug })))
   const hasPendingRequest = useSelector(getMyJoinRequests).find(joinRequest => joinRequest.group.slug === groupSlug)
   const myMemberships = useSelector(getMemberships)
