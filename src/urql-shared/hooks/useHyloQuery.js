@@ -40,7 +40,6 @@ export default function useHyloQuery ({ query, action, variables, meta }) {
       // Action
       } else if (isObject(action) && Object.hasOwnProperty.call(action, 'type')) {
         response = await dispatch(action)
-        console.log(action)
       // GraphQL query string
       } else if (isString(query)) {
         response = await dispatch(fetchGraphQLAction({
