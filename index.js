@@ -26,6 +26,10 @@ if (!isDev) {
   Sentry.init({ dsn: process.env.SENTRY_DSN_URL })
 }
 
+if (__DEV__) {
+  require('./ReactotronConfig')
+}
+
 // For Layout animation support: https://reactnative.dev/docs/layoutanimation
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true)
