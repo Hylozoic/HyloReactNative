@@ -34,7 +34,7 @@ export default function Signup () {
   const safeAreaInsets = useSafeAreaInsets()
   const dispatch = useDispatch()
   const authState = useSelector(getAuthState)
-  const { email: routeEmail, error: routeError, routeBannerError: bannerError } = useRouteParams()
+  const { email: routeEmail, error: routeError, bannerError: routeBannerError } = useRouteParams()
   const [email, providedSetEmail] = useState(routeEmail)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(routeError)
