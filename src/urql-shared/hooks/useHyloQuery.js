@@ -67,9 +67,9 @@ export default function useHyloQuery ({ query, action, variables, meta }) {
     } finally {
       setFetching(false)
     }
-  }, [variables, meta])
+  }, [variables])
 
-  useEffect(() => { executeQuery() }, [variables, meta])
+  useEffect(() => { executeQuery() }, [variables])
 
   return [{ data, fetching, error }, executeQuery]
 }

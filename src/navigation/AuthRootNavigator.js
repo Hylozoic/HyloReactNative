@@ -19,13 +19,13 @@ import Thread from 'screens/Thread'
 import { white } from 'style/colors'
 import { HyloHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
 import { useDispatch } from 'react-redux'
-import fetchCurrentUser from 'store/actions/fetchCurrentUser'
+import fetchCurrentUserActionCreator from 'store/actions/fetchCurrentUser'
 import { fetchNotifications, updateNewNotificationCount } from 'screens/NotificationsList/NotificationsList.store'
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
   const dispatch = useDispatch()
-  const [{ fetching, data, error }] = useHyloQuery({ action: fetchCurrentUser })
+  const [{ fetching, data, error }] = useHyloQuery({ action: fetchCurrentUserActionCreator })
 
   useHyloQuery({ action: fetchNotifications })
   useHyloQuery({ action: updateNewNotificationCount })
