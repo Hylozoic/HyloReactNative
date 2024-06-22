@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { rhino05 } from 'style/colors'
 
 export default StyleSheet.create({
   notificationsList: {
@@ -6,10 +7,7 @@ export default StyleSheet.create({
     position: 'relative'
   },
   loadingContainer: {
-    position: 'absolute',
-    left: 0,
-    top: 12,
-    zIndex: 2
+    backgroundColor: rhino05
   },
   center: {
     padding: 20

@@ -16,7 +16,7 @@ export default StyleSheet.create({
   container: {
     flexDirection: 'row',
     paddingTop: 15,
-    backgroundColor: 'white'
+    backgroundColor: rhino05
   },
   content: {
     flex: 1,
@@ -40,7 +40,7 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
   highlight: {
-    backgroundColor: rhino05
+    backgroundColor: 'white'
   },
   name: {
     color: nevada,
