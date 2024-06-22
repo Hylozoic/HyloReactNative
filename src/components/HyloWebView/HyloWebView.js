@@ -21,7 +21,7 @@ const HyloWebView = forwardRef(function HyloWebView ({
 }, webViewRef) {
   const [cookie, setCookie] = useState()
   const [uri, setUri] = useState()
-  const { postId, routePath } = useRouteParams()
+  const { postId, path: routePath } = useRouteParams()
 
   useEffect(() => {
     const path = pathProp || routePath

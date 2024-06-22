@@ -31,7 +31,7 @@ export default function CreateGroupPurpose ({ route }) {
     } else {
       setGroupPurpose(groupData?.purpose)
     }
-  }, [])
+  }, [reset])
 
   useFocusEffect(useCallback(() => {
     dispatch(updateGroupData({ purpose: groupPurpose }))

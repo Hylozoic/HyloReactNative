@@ -18,14 +18,14 @@ export default function JoinGroup (props) {
   const route = useRoute()
   const dispatch = useDispatch()
   const isAuthorized = useSelector(getAuthorized)
-  const { token, accessCode } = useRouteParams()
+  const { token: invitationToken, accessCode } = useRouteParams()
 
   // Might be more clear to simply use `useEffect`
   useFocusEffect(
     useCallback(() => {
       (async function () {
         try {
-          const invitationTokenAndCode = { token, accessCode }
+          const invitationTokenAndCode = { invitationToken, accessCode }
 
           if (every(isEmpty, invitationTokenAndCode)) {
             throw new Error('Please provide either a `token` query string parameter or `accessCode` route param')
