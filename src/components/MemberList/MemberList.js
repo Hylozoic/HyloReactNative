@@ -7,6 +7,7 @@ import {
   View, FlatList, Text, TouchableOpacity
 } from 'react-native'
 import { useIsFocused, useScrollToTop } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
@@ -14,7 +15,6 @@ import PopupMenuButton from 'components/PopupMenuButton'
 import styles from './MemberList.styles'
 import SearchBar from 'components/SearchBar'
 import CondensingBadgeRow from '../CondensingBadgeRow/CondensingBadgeRow'
-import { useTranslation } from 'react-i18next'
 
 export class MemberList extends React.Component {
   static defaultProps = {
@@ -98,7 +98,7 @@ export class MemberList extends React.Component {
     t('Newest')
     t('Name')
     t('Location')
-    
+
     const header = (
       <View>
         {children || null}
@@ -153,7 +153,7 @@ export function Member ({ member, showMember, group }) {
   const { moderatedGroupMemberships, groupRoles, id } = member
   const badges = (group && groupRoles.filter(role => role.groupId === group.id)) || []
   const creatorIsModerator = moderatedGroupMemberships.find(moderatedMembership => moderatedMembership.groupId === group?.id)
-  
+
   return (
     <TouchableOpacity
       onPress={() => isFunction(showMember) && showMember(member.id)}
