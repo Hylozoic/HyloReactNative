@@ -127,7 +127,6 @@ dependencies {
     implementation("com.facebook.react:react-android")
 
     implementation "androidx.core:core-splashscreen:1.0.0"
-    implementation project(':@sentry_react-native')
     implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
