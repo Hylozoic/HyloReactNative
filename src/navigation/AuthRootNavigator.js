@@ -32,7 +32,7 @@ export default function AuthRootNavigator () {
 
   useEffect(() => {
     (async function () {
-      if (!error) {
+      if (!fetching && !error) {
         const deviceState = await OneSignal.getDeviceState()
 
         const locale = data?.settings?.locale || 'en'
@@ -48,7 +48,7 @@ export default function AuthRootNavigator () {
         }
       }
     })()
-  }, [])
+  }, [fetching, error])
 
   if (fetching) return <LoadingScreen />
 
