@@ -41,7 +41,7 @@ export default function NotificationCard ({ notification }) {
         </Text>
         <Text style={[ styles.text, unreadTextStyle ]}>
           <Text style={[ styles.name, unreadTextStyle ]}>{`${actor?.name.split(' ')[0]} `}</Text>
-          <Text style={[ styles.text, unreadTextStyle ]}>{body}</Text>
+          {body}
           {group && (
             <Text style={[ styles.group, unreadTextStyle ]}> { group }</Text>
           )}
