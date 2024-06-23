@@ -1,18 +1,17 @@
 import { isObject } from 'lodash/fp'
-import { useTranslation } from 'react-i18next'
 import { locationSearch } from 'screens/LocationPicker/LocationPicker.store'
 import LocationPickerItemRow from 'screens/LocationPicker/LocationPickerItemRow'
 
 export default function LocationPicker ({
-  screenTitle = 'Choose a Location',
+  screenTitle: providedScreenTitle,
   navigation,
   currentLocation,
   initialSearchTerm = '',
-  onPick
+  onPick,
+  t
 }) {
-  const { t } = useTranslation()
   navigation.navigate('ItemChooser', {
-    screenTitle,
+    screenTitle: t(providedScreenTitle || 'Choose a Location'),
     searchPlaceholder: t('Search for your location'),
     initialSearchTerm,
     ItemRowComponent: LocationPickerItemRow,
