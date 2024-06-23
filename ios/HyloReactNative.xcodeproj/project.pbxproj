@@ -703,7 +703,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = HyloReactNativeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -735,7 +735,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEVELOPMENT_TEAM = L4KZBPS2F3;
 				INFOPLIST_FILE = HyloReactNativeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
