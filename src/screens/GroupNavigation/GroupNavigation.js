@@ -3,19 +3,24 @@ import { useSelector } from 'react-redux'
 import { Text, ScrollView, View, TouchableOpacity } from 'react-native'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
+import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
 import { openURL } from 'hooks/useOpenURL'
 import useRouteParams from 'hooks/useRouteParams'
+import fetchGroupDetails from 'store/actions/fetchGroupDetails'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import Icon from 'components/Icon'
 import TopicsNavigation from 'components/TopicsNavigation'
 import styles from './GroupNavigation.styles'
+import Loading from 'components/Loading'
 
 export default function GroupNavigation () {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const currentGroup = useSelector(getCurrentGroup)
+  console.error(currentGroup?.slug)
+  const [{ data, fetching, error }] = useHyloQuery({ action: fetchGroupDetails({ slug: currentGroup?.slug }) })
   const childGroups = useSelector(getChildGroups)
   const parentGroups = useSelector(getParentGroups)
   const { navigate } = navigation
@@ -25,6 +30,11 @@ export default function GroupNavigation () {
   useFocusEffect(() => {
     navigation.setOptions({ title: myHome ? t('My Home') : currentGroup?.name })
   })
+
+  if (fetching && currentGroup?.slug) {
+    return <Loading />
+  }
+  // console.error('!!!!! data', currentGroup?.slug, data?.customViews)
 
   const navItems = myHome
     ? [
