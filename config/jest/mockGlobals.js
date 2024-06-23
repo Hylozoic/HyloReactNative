@@ -91,3 +91,19 @@ jest.mock('react-native-onesignal', () => ({
 jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter.js', () =>
   require('react-native/Libraries/EventEmitter/__mocks__/NativeEventEmitter.js')
 )
+
+jest.mock('react-i18next', () => ({
+  ...jest.requireActual('react-i18next'),
+  withTranslation: () => Component => {
+    Component.defaultProps = { ...Component.defaultProps, t: (str) => str }
+    return Component
+  },
+  useTranslation: (domain) => {
+    return {
+      t: (str) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {})
+      }
+    }
+  }
+}))

@@ -9,22 +9,6 @@ import { NotificationsListClassComponent, NotificationRow } from './Notification
 
 jest.mock('util/platform', () => ({ isIOS: true }))
 
-jest.mock('react-i18next', () => ({
-  ...jest.requireActual('react-i18next'),
-  withTranslation: () => Component => {
-    Component.defaultProps = { ...Component.defaultProps, t: (str) => str }
-    return Component
-  },
-  useTranslation: (domain) => {
-    return {
-      t: (str) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {})
-      }
-    }
-  }
-}))
-
 const testNotifications = [
   {
     activityId: '1',
