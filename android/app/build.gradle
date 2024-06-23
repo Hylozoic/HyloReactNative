@@ -1,15 +1,17 @@
 buildscript {
     repositories {
-        maven { url 'https://plugins.gradle.org/m2/' } // Gradle Plugin Portal 
+        maven { url 'https://plugins.gradle.org/m2/' } // Gradle Plugin Portal
     }
     dependencies {
         classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.6, 0.99.99]'
+        classpath("io.sentry:sentry-android-gradle-plugin:4.8.0")
     }
 }
 
 apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 apply plugin: 'com.android.application'
 apply plugin: "com.facebook.react"
+apply from: "../../node_modules/@sentry/react-native/sentry.gradle"
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -125,6 +127,7 @@ dependencies {
     implementation("com.facebook.react:react-android")
 
     implementation "androidx.core:core-splashscreen:1.0.0"
+    implementation project(':@sentry_react-native')
     implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
