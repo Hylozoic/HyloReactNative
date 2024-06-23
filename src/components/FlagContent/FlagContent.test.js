@@ -4,14 +4,6 @@ import TestRenderer from 'react-test-renderer'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import FlagContent from './FlagContent'
 
-jest.mock('react-i18next', () => ({
-  ...jest.requireActual('react-i18next'),
-  withTranslation: () => Component => {
-    Component.defaultProps = { ...Component.defaultProps, t: (str) => str }
-    return Component
-  }
-}))
-
 describe('FlagContent', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
