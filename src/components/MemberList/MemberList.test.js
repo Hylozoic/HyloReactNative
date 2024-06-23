@@ -11,22 +11,6 @@ import { render } from '@testing-library/react-native'
 const lodash = jest.requireActual('lodash/fp')
 lodash.debounce = (_, fn) => fn
 
-jest.mock('react-i18next', () => ({
-  ...jest.requireActual('react-i18next'),
-  withTranslation: () => Component => {
-    Component.defaultProps = { ...Component.defaultProps, t: (str) => str }
-    return Component
-  },
-  useTranslation: (domain) => {
-    return {
-      t: (str) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {})
-      }
-    }
-  }
-}))
-
 describe('MemberList', () => {
   it('renders with default props with default non-server search', () => {
     const renderer = new ReactShallowRenderer()

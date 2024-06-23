@@ -1,11 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`matches the last snapshot 1`] = `
-<PeopleTyping
-  addUserTyping={[Function]}
-  clearUserTyping={[Function]}
-  i18n={{}}
-  t={[Function]}
-  tReady={false}
-/>
+<View>
+  <Text>
+    
+  </Text>
+</View>
 `;
