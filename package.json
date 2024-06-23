@@ -79,7 +79,7 @@
     "react-native-linear-gradient": "^2.6.2",
     "react-native-localization": "^2.3.2",
     "react-native-modal": "^13.0.0",
-    "react-native-onesignal": "^4.4.1",
+    "react-native-onesignal": "^4.5.1",
     "react-native-pager-view": "^6.0.1",
     "react-native-picker-select": "^8.0.4",
     "react-native-prompt-android": "^1.1.0",
