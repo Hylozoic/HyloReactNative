@@ -11,8 +11,14 @@ import fetchPost from 'store/actions/fetchPost'
 import createPost from 'store/actions/createPost'
 import createProject from 'store/actions/createProject'
 import updatePost from 'store/actions/updatePost'
-import getRouteParam from 'store/selectors/getRouteParam'
 import { pollingFindOrCreateLocation as providedPollingFindOrCreateLocation } from 'screens/LocationPicker/LocationPicker.store'
+
+// TODO: Replace this with useRouteParams when PostEditor is migrated to a functional component
+export function getRouteParam (key, route = {}) {
+  if (!route) throw new Error('`route` param is empty')
+
+  return get(`params.${key}`, route)
+}
 
 export function mapStateToProps (state, props) {
   const currentGroup = get('ref', getCurrentGroup(state))

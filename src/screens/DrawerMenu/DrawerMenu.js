@@ -1,10 +1,11 @@
 import React from 'react'
 import { Text, TouchableOpacity, View, SectionList, Image } from 'react-native'
 import { useSelector } from 'react-redux'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 import FastImage from 'react-native-fast-image'
 import LinearGradient from 'react-native-linear-gradient'
-
+import useRouteParams from 'hooks/useRouteParams'
 import useChangeToGroup from 'hooks/useChangeToGroup'
 import { PUBLIC_GROUP, ALL_GROUP, MY_CONTEXT_GROUP } from 'store/models/Group'
 import getMemberships from 'store/selectors/getMemberships'
@@ -13,21 +14,17 @@ import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import styles from './DrawerMenu.styles'
 import Button from 'components/Button'
 import { bannerlinearGradientColors } from 'style/colors'
-
 // import groupExplorerUrl from 'assets/group-explorer.png'
 import earthUrl from 'assets/earth.png'
 import myHomeUrl from 'assets/my-home.png'
-import { useTranslation } from 'react-i18next'
 
 export default function DrawerMenu () {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const route = useRoute()
   const currentGroup = useSelector(getCurrentGroup)
   const memberships = useSelector(getMemberships)
   const canModerateCurrentGroup = useSelector(getCanModerate)
-
-  const myHome = route?.params?.myHome
+  const { myHome } = useRouteParams()
 
   const myGroups = memberships
     .map(m => m.group.ref)
