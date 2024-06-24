@@ -43,7 +43,15 @@ export default {
     borderColor: capeCod10,
     borderRadius: 4,
     borderWidth: 1,
-    position: 'relative'
+    position: 'relative',
+    shadowColor: 'rgba(35, 65, 91, 0.3)',
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3
   },
   detailsContainer: {
     marginBottom: 16
