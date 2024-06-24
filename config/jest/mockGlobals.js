@@ -108,3 +108,10 @@ jest.mock('react-i18next', () => ({
     }
   }
 }))
+
+jest.mock('react-native-webview', () => {
+  const { View } = require('react-native')
+  return {
+    WebView: () => View
+  }
+})
