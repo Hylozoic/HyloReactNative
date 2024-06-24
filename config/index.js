@@ -13,7 +13,7 @@ export const sentryConfig = {
     ? process.env.SENTRY_DEV_DSN_URL
     : process.env.SENTRY_DSN_URL,
   // Only enable if in production or an SENTRY_DEV_DSN_URL exists
-  enabled: isProduction || (isDev && process.env.SENTRY_DEV_DSN_URL),
+  enabled: isProduction || (isDev && !!process.env.SENTRY_DEV_DSN_URL),
   // Current version from package.json + the BITRISE_BUILD_NUMBER if exists
   release: `hyloreactnative@${version}${process.env.BITRISE_BUILD_NUMBER ? '+' + process.env.BITRISE_BUILD_NUMBER : ''}`,
   // Indicates which API used
