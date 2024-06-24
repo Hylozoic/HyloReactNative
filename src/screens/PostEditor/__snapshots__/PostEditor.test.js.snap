@@ -301,6 +301,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
           <View
             accessibilityElementsHidden={true}
             closing={false}
+            collapsable={false}
             gestureVelocityImpact={0.3}
             importantForAccessibility="no-hide-descendants"
             onClose={[Function]}
@@ -1236,6 +1237,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
           <View
             accessibilityElementsHidden={false}
             closing={false}
+            collapsable={false}
             gestureVelocityImpact={0.3}
             importantForAccessibility="auto"
             onClose={[Function]}
