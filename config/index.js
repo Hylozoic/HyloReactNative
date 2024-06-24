@@ -8,11 +8,15 @@ export const isProduction = environment === 'production'
 export const onStagingAPI = process.env.API_HOST.includes('staging')
 
 export const sentryConfig = {
-  dsn: process.env.SENTRY_DSN_URL,
-  enabled: isProduction || (isDev && process.env.ENABLE_SENTRY_IN_DEV),
-  // release: current version from package.json + the BITRISE_BUILD_NUMBER if exists
+  // Use the dev DSN (hyloreactnative-dev in Sentry) is available, otherwise always default to production DSN
+  dsn: isDev && process.env.SENTRY_DEV_DSN_URL
+    ? process.env.SENTRY_DEV_DSN_URL
+    : process.env.SENTRY_DSN_URL,
+  // Only enable if in production or an SENTRY_DEV_DSN_URL exists
+  enabled: isProduction || (isDev && process.env.SENTRY_DEV_DSN_URL),
+  // Current version from package.json + the BITRISE_BUILD_NUMBER if exists
   release: `hyloreactnative@${version}${process.env.BITRISE_BUILD_NUMBER ? '+' + process.env.BITRISE_BUILD_NUMBER : ''}`,
-  // environment: indicates which API used
+  // Indicates which API used
   environment: isDev || isTest
     ? 'local'
     : onStagingAPI
