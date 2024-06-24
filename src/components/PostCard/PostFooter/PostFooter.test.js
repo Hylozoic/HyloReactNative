@@ -15,9 +15,9 @@ it('renders as expected', async () => {
         eventAttendees={[]}
         showActivityLabel
         commenters={[
-          { avatarUrl: 'a.png' },
-          { avatarUrl: 'b.png' },
-          { avatarUrl: 'c.png' }
+          { id: 1, name: 'Person One', avatarUrl: 'a.png' },
+          { id: 2, name: 'Person Two', avatarUrl: 'b.png' },
+          { id: 3, name: 'Person Three', avatarUrl: 'c.png' }
         ]}
         t={string => string}
       />
