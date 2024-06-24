@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Text, TouchableOpacity, View, SectionList, Image } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
@@ -17,9 +17,6 @@ import { bannerlinearGradientColors } from 'style/colors'
 // import groupExplorerUrl from 'assets/group-explorer.png'
 import earthUrl from 'assets/earth.png'
 import myHomeUrl from 'assets/my-home.png'
-import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
-import gql from 'graphql-tag'
-import LoadingScreen from 'screens/LoadingScreen'
 
 export default function DrawerMenu () {
   const { t } = useTranslation()
@@ -28,148 +25,6 @@ export default function DrawerMenu () {
   const currentGroup = useSelector(getCurrentGroup)
   const canModerateCurrentGroup = useSelector(getCanModerate)
   const { myHome } = useRouteParams()
-  const [{ fetching, error }] = useHyloQuery({
-    query: gql`
-        query DrawerMenuQuery {
-          me {
-            id
-            memberships {
-              id
-              lastViewedAt
-              newPostCount
-              hasModeratorRole
-              settings {
-                agreementsAcceptedAt
-                joinQuestionsAnsweredAt
-                sendEmail
-                sendPushNotifications
-                showJoinForm
-              }
-              person {
-                id
-              }
-              group {
-                accessibility
-                avatarUrl
-                bannerUrl
-                customViews {
-                  items {
-                    id
-                    activePostsOnly
-                    collectionId
-                    defaultSort
-                    defaultViewMode
-                    externalLink
-                    groupId
-                    isActive
-                    icon
-                    name
-                    order
-                    postTypes
-                    topics {
-                      id
-                      name
-                    }
-                    type
-                  }
-                }
-                description
-                id
-                name
-                purpose
-                slug
-                memberCount
-                visibility
-                agreements {
-                  items {
-                    id
-                    description
-                    order
-                    title
-                  }
-                }
-                childGroups(first: 300) {
-                  items {
-                    accessibility
-                    avatarUrl
-                    bannerUrl
-                    description
-                    memberCount
-                    id
-                    name
-                    slug
-                    visibility
-                    settings {
-                      allowGroupInvites
-                      askGroupToGroupJoinQuestions
-                      askJoinQuestions
-                      hideExtensionData
-                      locationDisplayPrecision
-                      publicMemberDirectory
-                      showSuggestedSkills
-                    }
-                  }
-                }
-                groupTopics(subscribed: true) {
-                  total
-                  hasMore
-                  items {
-                    followersTotal
-                    id
-                    isSubscribed
-                    newPostCount
-                    postsTotal
-                    topic {
-                      id
-                      name
-                    }
-                  }
-                }
-                parentGroups {
-                  items {
-                    accessibility
-                    avatarUrl
-                    bannerUrl
-                    description
-                    id
-                    memberCount
-                    name
-                    slug
-                    visibility
-                    settings {
-                      allowGroupInvites
-                      askJoinQuestions
-                      publicMemberDirectory
-                    }
-                  }
-                }
-                settings {
-                  allowGroupInvites
-                  askJoinQuestions
-                }
-                suggestedSkills {
-                  items {
-                    id
-                    name
-                  }
-                }
-                joinQuestions {
-                  items {
-                    id
-                    questionId
-                    text
-                  }
-                }
-              }
-            }
-          }
-      }
-    `,
-    meta: {
-      afterInteractions: true,
-      extractModel: 'Me'
-    }
-  })
 
   const myGroups = memberships
     .map(m => m.group.ref)
@@ -183,14 +38,6 @@ export default function DrawerMenu () {
   const goToInvitePeople = () => canModerateCurrentGroup &&
       navigation.navigate('Group Settings', { screen: 'Invite' })
   const changeToGroup = useChangeToGroup()
-
-  useEffect(() => {
-    if (error) {
-      console.error(error)
-    }
-  }, [error])
-
-  if (fetching) return <LoadingScreen />
 
   const navigateToPublicStream = () => {
     navigation.navigate('Group Navigation', { groupSlug: PUBLIC_GROUP.slug })
@@ -274,6 +121,7 @@ export default function DrawerMenu () {
   const groupBannerImage = currentGroup?.bannerUrl
     ? { uri: currentGroup?.bannerUrl }
     : null
+
   return (
     <View style={styles.container}>
       {currentGroup && !myHome && (

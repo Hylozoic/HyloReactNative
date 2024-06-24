@@ -18,23 +18,31 @@ import Loading from 'components/Loading'
 export default function GroupNavigation () {
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const { myHome } = useRouteParams()
   const currentGroup = useSelector(getCurrentGroup)
-  const [{ data, fetching, error }] = useHyloQuery({ action: fetchGroupDetails({ slug: currentGroup?.slug }) })
   const childGroups = useSelector(getChildGroups)
   const parentGroups = useSelector(getParentGroups)
-  const { navigate } = navigation
-  const customViews = (currentGroup && currentGroup.customViews && currentGroup.customViews.toRefArray()) || []
-  const { myHome } = useRouteParams()
+  const [{ fetching }] = useHyloQuery({
+    action: fetchGroupDetails({
+      slug: currentGroup?.slug,
+      withExtensions: false,
+      withWidgets: false,
+      withTopics: false,
+      withJoinQuestions: true,
+      withPrerequisites: true
+    })
+  })
 
   useFocusEffect(() => {
     navigation.setOptions({ title: myHome ? t('My Home') : currentGroup?.name })
   })
 
-  if (fetching && currentGroup?.slug) {
+  if (fetching) {
     return <Loading />
   }
-  // console.error('!!!!! data', currentGroup?.slug, data?.customViews)
 
+  const { navigate } = navigation
+  const customViews = (currentGroup && currentGroup.customViews && currentGroup.customViews.toRefArray()) || []
   const navItems = myHome
     ? [
         { label: t('Create'), iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },

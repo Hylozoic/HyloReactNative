@@ -5,6 +5,9 @@ import {
 } from 'store/constants'
 import postQuery from 'graphql/queries/postQuery'
 
+const getItems = get('payload.data.post.comments')
+const getType = () => FETCH_COMMENTS
+
 export default function fetchPost (id, query = postQuery) {
   return {
     type: FETCH_POST,
@@ -18,8 +21,8 @@ export default function fetchPost (id, query = postQuery) {
       afterInteractions: true,
       extractModel: 'Post',
       extractQueryResults: {
-        getType: () => FETCH_COMMENTS,
-        getItems: get('payload.data.post.comments')
+        getType,
+        getItems
       }
     }
   }
