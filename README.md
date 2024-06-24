@@ -60,14 +60,9 @@ This video was recorded in December of 2023 and may be somewhat out-of-date, als
   - Add release notes
   - Submit for review/release
 - Once the release is accepted by both the stores run `npm version prereleaase` on `dev` and `git push --tags` to setup the next prereleae build versioning (will bump up on patch version and add `-0` to the end of the version number)
-
-### Enabling Sentry exception tracking in dev
-
-Sentry error reporting is always on in production, and optionally enabled in dev. To enable it in dev you need to set `SENTRY_DEV_DSN_URL` to be the DSN URL for the Sentry "hyloreactnative-dev" project. This can be found by logging into Sentry and is also available in the Hylo password vault under the Sentry record.
-
 - Open a new Milestone with the current pre-release patch version:
   - Look to `package.json#version` to get the version generated, but leave off the `-0`
-  
+
 ### Enabling Sentry exception tracking in dev
 
 Sentry error reporting is always on in production, and optionally enabled in dev. To enable it in dev you need to set `SENTRY_DEV_DSN_URL` to be the DSN URL for the Sentry "hyloreactnative-dev" project. This can be found by logging into Sentry and is also available in the Hylo password vault under the Sentry record.
