@@ -1,5 +1,6 @@
 import { createLogger } from 'redux-logger'
 import { compact } from 'lodash'
+import { isDev } from 'config'
 import afterInteractionsMiddleware from './afterInteractions'
 import apiMiddleware from './apiMiddleware'
 import graphQLMiddleware from './graphqlMiddleware'
@@ -10,7 +11,6 @@ import userFetchedMiddleware from './userFetchedMiddleware'
 import groupFetchedMiddleware from './groupFetchedMiddleware'
 import userBlockingMiddleware from './userBlockingMiddleware'
 import mixpanelMiddleware from './mixpanelMiddleware'
-import { isDev } from 'config'
 
 const middleware = compact([
   graphQLMiddleware,
