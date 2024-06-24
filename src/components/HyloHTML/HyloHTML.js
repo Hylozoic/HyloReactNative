@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useWindowDimensions } from 'react-native'
 import { RenderHTMLConfigProvider, RenderHTMLSource } from 'react-native-render-html'
 import WebView from 'react-native-webview'
@@ -9,19 +9,17 @@ import { openURL } from 'hooks/useOpenURL'
 import useGoToMember from 'hooks/useGoToMember'
 import useGoToTopic from 'hooks/useGoToTopic'
 
-const wrapInHTMLDoc = source => {
-  return `
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <base href="https://hylo.com">
-    </head>
-    <body>
-      ${source}
-    </body>
-    </html>
-  `
-}
+const wrapInHTMLDoc = source => `
+  <html>
+  <head>
+    <meta charset="utf-8">
+    <base href="https://hylo.com">
+  </head>
+  <body>
+    ${source}
+  </body>
+  </html>
+`
 
 const htmlConfig = {
   customHTMLElementModels: {
@@ -37,6 +35,7 @@ const defaultTextProps = {
 const SpanRenderer = ({ TDefaultRenderer, ...props }) => {
   const goToMember = useGoToMember()
   const goToTopic = useGoToTopic()
+
   const handlePress = () => {
     const textNode = props.tnode
 
@@ -57,9 +56,7 @@ const SpanRenderer = ({ TDefaultRenderer, ...props }) => {
 // Not possible using `react-native-render-html` due to lack of CSS Selectors
 // Watch this feature request for updates on that: https://bit.ly/3MrQYZq
 const CustomPRenderer = ({ TDefaultRenderer, ...props }) => {
-  const fixMarginInListStyle = props?.tnode?.parent?.tagName === 'li'
-    ? { marginBottom: 5 }
-    : null
+  const fixMarginInListStyle = props?.tnode?.parent?.tagName === 'li' ? { marginBottom: 5 } : null
 
   return (
     <TDefaultRenderer {...props} style={{ ...props.style, ...fixMarginInListStyle }} />
@@ -72,7 +69,7 @@ const renderers = {
   p: CustomPRenderer
 }
 
-export function HyloHTMLConfigProvider ({ children }) {
+export function HyloHTMLConfigProvider({ children }) {
   const currentlySelectedGroup = useSelector(getCurrentGroup)
 
   const handleLinkPress = useCallback(
@@ -80,10 +77,10 @@ export function HyloHTMLConfigProvider ({ children }) {
     [currentlySelectedGroup?.slug]
   )
 
-  const renderersProps = {
+  const renderersProps = useMemo(() => ({
     a: { onPress: handleLinkPress },
     iframe: { scalesPageToFit: true }
-  }
+  }), [handleLinkPress])
 
   return (
     <RenderHTMLConfigProvider
