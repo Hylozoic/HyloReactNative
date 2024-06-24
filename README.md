@@ -25,27 +25,44 @@ npx react-native generate-bootsplash ./bootsplash_logo.png --background-color "#
 
 ## Additional Docs for Hylo App Dev
 
-#### Deploy vid
-https://www.youtube.com/watch?v=sE60ymB4ZHM
-- 30 min: How to release an app that points to staging
-- 35:50 min: Installing the release into a stimulator
-- 48 min: discussion on breaking changes in NODE and EVO
+#### Release video walkthrough
 
-#### Deploy todo list
+This video was recorded in December of 2023 and may be somewhat out-of-date, also review the Release Checklist below
 
-- Merge changes to dev
-- Make sure tests are passing *
-- Make sure CHANGELOG is up to date, including anticipated version (5.4.0) today
-- Run `npm version patch|minor|major`
+- https://www.youtube.com/watch?v=sE60ymB4ZHM
+  - 30 min: How to release an app that points to staging
+  - 35:50 min: Installing the release into a stimulator
+  - 48 min: discussion on breaking changes in NODE and EVO
+
+#### Release checklist
+
+- Merge changes to `dev`
+- Make sure tests are passing
+- Update and commit `CHANGELOG`:
+  - Remove any pre-release qualifier from the version heading (e.g. 5.4.0-0 becomes 5.4.0)
+  - Review Github Milestone for release and existing entries in `CHANGELOG` for the current pre-release
+- Run `npm version patch|minor|major` to move off current pre-release version:
+  - For example, if current version is 5.4.0-0 running `npm version minor` will move the version to 5.4.0
 - `git push --tags`
-- Wait for Bitrise build
-- Check Bitrise build, did it build successfully?
-- Install and manually test Bitrise builds. For iOS install from TestFlight, for Android manually install APK file on physical device (or emulator if no physical device available)
-- Prepare release notes appropriate for stores from CHANGELOG / Github Issues
-- Login to Apple Developer account and submit app for review / release
-- Login to Google Play Store Console and submit app for review / release
+- Wait for Bitrise build and confirm it built successfully
+- Install and manually test Bitrise builds
+  - For iOS install from TestFlight
+  - For Android manually install APK file on physical device (or emulator if no physical device available)
+- Prepare release notes appropriate for stores by reviewing `CHANGELOG` and the related issues and PRs on the release Github Milestone
+- Submit to Apple App Store:
+  - Login to Apple Developer account and submit app for review / release
+  - Be sure to double-check that you're submitting the exactly version/Bitrise build number which was build and tested above
+  - Add release notes
+  - Submit for review
+- Submit to Google Play Store:
+  - Login to Google Play Store Console 
+  - Upload the APK file downloaded from Bitrise and tested above
+  - Add release notes
+  - Submit for review/release
 - Once the release is accepted by both the stores run `npm version prereleaase` on `dev` and `git push --tags` to setup the next prereleae build versioning (will bump up on patch version and add `-0` to the end of the version number)
-
+- Open a new Milestone with the current pre-release patch version:
+  - Look to `package.json#version` to get the version generated, but leave off the `-0`
+  
 ### Enabling Sentry exception tracking in dev
 
 Sentry error reporting is always on in production, and optionally enabled in dev. To enable it in dev you need to set `SENTRY_DEV_DSN_URL` to be the DSN URL for the Sentry "hyloreactnative-dev" project. This can be found by logging into Sentry and is also available in the Hylo password vault under the Sentry record.
