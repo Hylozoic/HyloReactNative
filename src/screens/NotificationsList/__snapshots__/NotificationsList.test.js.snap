@@ -1,6 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NotificationsList matches the last snapshot 1`] = `
+exports[`NotificationRow matches the last snapshot for the test notification 1`] = `
+<View>
+  <TouchableOpacity
+    onPress={[Function]}
+  >
+    <NotificationCard
+      notification={
+        {
+          "activityId": "1",
+          "actor": {
+            "avatarUrl": "https://wombat.com",
+            "name": "Wombat McAardvark",
+          },
+          "avatarSeparator": false,
+          "createdAt": "2 min ago",
+          "id": "1",
+          "onPress": [MockFunction] {
+            "calls": [
+              [],
+              [],
+            ],
+            "results": [
+              {
+                "type": "return",
+                "value": undefined,
+              },
+              {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          },
+          "unread": true,
+        }
+      }
+    />
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`NotificationsListClassComponent matches the last snapshot 1`] = `
 <View>
   <RCTScrollView
     data={
@@ -129,32 +169,7 @@ exports[`NotificationsList matches the last snapshot 1`] = `
 </View>
 `;
 
-exports[`NotificationsList matches the last snapshot for NotificationRow 1`] = `
-<View>
-  <TouchableOpacity
-    onPress={[Function]}
-  >
-    <NotificationCard
-      notification={
-        {
-          "activityId": "1",
-          "actor": {
-            "avatarUrl": "https://wombat.com",
-            "name": "Wombat McAardvark",
-          },
-          "avatarSeparator": false,
-          "createdAt": "2 min ago",
-          "id": "1",
-          "onPress": [MockFunction],
-          "unread": false,
-        }
-      }
-    />
-  </TouchableOpacity>
-</View>
-`;
-
-exports[`NotificationsList matches the renders CreateGroupNotice if user does not have memberships 1`] = `
+exports[`NotificationsListClassComponent matches the renders CreateGroupNotice if user does not have memberships 1`] = `
 <View>
   <Text>
     No notifications here, try creating your own Group!
