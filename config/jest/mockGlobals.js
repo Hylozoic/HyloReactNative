@@ -66,7 +66,8 @@ jest.mock('react-native-safe-area-context', () => mockSafeAreaContext)
 jest.mock('react-native-background-timer', () => {})
 
 jest.mock('@sentry/react-native', () => ({
-  init: jest.fn()
+  init: jest.fn(),
+  captureException: jest.fn()
 }))
 
 // import mockRNCNetInfo from '@react-native-community/netinfo/jest/netinfo-mock.js'
