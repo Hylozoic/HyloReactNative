@@ -112,15 +112,15 @@ PODS:
   - MixpanelReactNative (2.3.1):
     - Mixpanel-swift (= 4.1.3)
     - React-Core
-  - OneSignalXCFramework (3.12.4):
-    - OneSignalXCFramework/OneSignalCore (= 3.12.4)
-    - OneSignalXCFramework/OneSignalExtension (= 3.12.4)
-    - OneSignalXCFramework/OneSignalOutcomes (= 3.12.4)
-  - OneSignalXCFramework/OneSignalCore (3.12.4)
-  - OneSignalXCFramework/OneSignalExtension (3.12.4):
+  - OneSignalXCFramework (3.12.9):
+    - OneSignalXCFramework/OneSignalCore (= 3.12.9)
+    - OneSignalXCFramework/OneSignalExtension (= 3.12.9)
+    - OneSignalXCFramework/OneSignalOutcomes (= 3.12.9)
+  - OneSignalXCFramework/OneSignalCore (3.12.9)
+  - OneSignalXCFramework/OneSignalExtension (3.12.9):
     - OneSignalXCFramework/OneSignalCore
     - OneSignalXCFramework/OneSignalOutcomes
-  - OneSignalXCFramework/OneSignalOutcomes (3.12.4):
+  - OneSignalXCFramework/OneSignalOutcomes (3.12.9):
     - OneSignalXCFramework/OneSignalCore
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2021.07.22.00):
@@ -433,8 +433,8 @@ PODS:
     - React
   - react-native-image-picker (4.10.3):
     - React-Core
-  - react-native-onesignal (4.5.1):
-    - OneSignalXCFramework (= 3.12.4)
+  - react-native-onesignal (4.5.3):
+    - OneSignalXCFramework (= 3.12.9)
     - React (< 1.0.0, >= 0.13.0)
   - react-native-pager-view (6.2.0):
     - React-Core
@@ -611,9 +611,11 @@ PODS:
   - RNScreens (3.24.0):
     - React-Core
     - React-RCTImage
-  - RNSentry (5.0.0-alpha.7):
+  - RNSentry (5.24.1):
+    - hermes-engine
     - React-Core
-    - Sentry (= 7.29.0)
+    - React-hermes
+    - Sentry/HybridSDK (= 8.29.1)
   - RNShare (8.2.2):
     - React-Core
   - RNSVG (12.5.1):
@@ -626,9 +628,7 @@ PODS:
   - SDWebImageWebPCoder (0.8.5):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.10)
-  - Sentry (7.29.0):
-    - Sentry/Core (= 7.29.0)
-  - Sentry/Core (7.29.0)
+  - Sentry/HybridSDK (8.29.1)
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -665,7 +665,7 @@ DEPENDENCIES:
   - "intercom-react-native (from `../node_modules/@intercom/intercom-react-native`)"
   - libevent (~> 2.1.12)
   - MixpanelReactNative (from `../node_modules/mixpanel-react-native`)
-  - OneSignalXCFramework (< 4.0, >= 3.10.1)
+  - OneSignalXCFramework (< 4.0, >= 3.12.9)
   - OpenSSL-Universal (= 1.1.1100)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
@@ -926,7 +926,7 @@ SPEC CHECKSUMS:
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
   Mixpanel-swift: d7c7c6a2f7c65f735af3cb4746ed61a5aab0e551
   MixpanelReactNative: 07c808338a1eb69b0c9077668e3acfb0b2dd6689
-  OneSignalXCFramework: 087934ab0d4d7445fcf1c015c7c782359e26c020
+  OneSignalXCFramework: 3c3ef25ecca5eae1bf80a3272c49fd1dbab96b35
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: b6cea797b684c6d8d82ba0107cef58cbb679afdb
@@ -948,7 +948,7 @@ SPEC CHECKSUMS:
   react-native-document-picker: 69ca2094d8780cfc1e7e613894d15290fdc54bba
   react-native-geolocation-service: 608e1da71a1ac31b4de64d9ef2815f697978c55b
   react-native-image-picker: 60f4246eb5bb7187fc15638a8c1f13abd3820695
-  react-native-onesignal: 7bd44dbd031d8d57110c0203836ffc37ddead526
+  react-native-onesignal: 55ecc835638c7ee860583e080762cd9b7512671c
   react-native-pager-view: 0ccb8bf60e2ebd38b1f3669fa3650ecce81db2df
   react-native-render-html: 984dfe2294163d04bf5fe25d7c9f122e60e05ebe
   react-native-restart: 45c8dca02491980f2958595333cbccd6877cb57e
@@ -983,17 +983,17 @@ SPEC CHECKSUMS:
   RNGoogleSignin: 81521697b2c8f97f9a586ac7257b1a1d9b51b115
   RNReanimated: 726395a2fa2f04cea340274ba57a4e659bc0d9c1
   RNScreens: b21dc57dfa2b710c30ec600786a3fc223b1b92e7
-  RNSentry: 35d1debe8bc2c6c3d838ed74194302f63e2171f8
+  RNSentry: e9aa15bb2f3e18c822c002eea13bbd3b222ab493
   RNShare: d82e10f6b7677f4b0048c23709bd04098d5aee6c
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
-  Sentry: 4272663eb0eda312024d795ca3f5a562a8ce5e18
+  Sentry: c446963245407030e17f1b926a83c6337dc99f4e
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 87e59f6d458e5061d2421086c5de994b3f7cd151
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: e2e73f113798d17b08c3b9190b773af7826ab2fb
+PODFILE CHECKSUM: f0912981fdb6a810eb5e8b8afea958d160cd03bb
 
 COCOAPODS: 1.14.3
