@@ -167,8 +167,12 @@ export default function PostBodyProposal ({
           </TouchableOpacity>
         )
       })}
-      {quorum && quorum > 0 && <QuorumBar totalVoters={numberOfPossibleVoters} quorum={quorum} actualVoters={proposalVoterCount} proposalStatus={proposalStatus} />}
-      {proposalOutcome && fulfilledAt && <Text style={styles.proposalOutcome}>{t('Outcome')}: {proposalOutcome}</Text>}
+      {!!(quorum && quorum > 0) && (
+        <QuorumBar totalVoters={numberOfPossibleVoters} quorum={quorum} actualVoters={proposalVoterCount} proposalStatus={proposalStatus} />
+      )}
+      {!!(proposalOutcome && fulfilledAt) && (
+        <Text style={styles.proposalOutcome}>{t('Outcome')}: {proposalOutcome}</Text>
+      )}
     </View>
   )
 }
