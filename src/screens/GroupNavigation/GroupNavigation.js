@@ -19,7 +19,6 @@ export default function GroupNavigation () {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const currentGroup = useSelector(getCurrentGroup)
-  console.error(currentGroup?.slug)
   const [{ data, fetching, error }] = useHyloQuery({ action: fetchGroupDetails({ slug: currentGroup?.slug }) })
   const childGroups = useSelector(getChildGroups)
   const parentGroups = useSelector(getParentGroups)
