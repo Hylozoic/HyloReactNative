@@ -58,8 +58,8 @@ module.exports = {
         'jest/valid-expect': 'error',
         'testing-library/prefer-screen-queries': 'off',
         'testing-library/prefer-user-event': 'off',
-        'testing-library/await-async-query': 'error',
-        'testing-library/no-await-sync-query': 'error',
+        'testing-library/await-async-queries': 'error',
+        'testing-library/no-await-sync-queries': 'error',
         'testing-library/no-debugging-utils': 'warn',
         'testing-library/no-dom-import': 'off',
         'testing-library/consistent-data-testid': [

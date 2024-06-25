@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
-import TestRenderer, { act } from 'react-test-renderer'
+import TestRenderer from 'react-test-renderer'
 import { PostEditor, TypeSelector } from './PostEditor'
 import { Alert } from 'react-native'
 import { TestRoot } from 'util/testing'
 import MockedScreen from 'util/testing/MockedScreen'
-import { fireEvent, render, waitFor } from '@testing-library/react-native'
+import { act, fireEvent, render, screen } from '@testing-library/react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 
 jest.mock('react-native/Libraries/Alert/Alert', () => {
@@ -112,19 +112,17 @@ describe('PostEditor', () => {
         </Stack.Navigator>
       </TestRoot>
     )
-    const { getByText, getByPlaceholderText, toJSON } = render(component)
-    fireEvent.changeText(
-      getByPlaceholderText('Create a post'),
-      'title of this post'
-    )
-    fireEvent.press(getByText('Save'))
-
-    await waitFor(() => {
-      getByText('Saving-ellipsis')
+    render(component)
+    await act(async () => {
+      fireEvent.changeText(
+        screen.getByPlaceholderText('Create a post'),
+        'title of this post'
+      )
+      fireEvent.press(screen.getByText('Save'))
     })
 
     expect(fetchPost).toHaveBeenCalled()
-    expect(toJSON()).toMatchSnapshot()
+    expect(screen.toJSON()).toMatchSnapshot()
   })
 
   it('calls alert when announcementEnabled', async () => {
@@ -288,39 +286,3 @@ describe('TypeButton', () => {
     expect(actual).toMatchSnapshot()
   })
 })
-
-// TODO: Moved save from connector and these
-// tests may be retrofit here
-// it('calls save correctly', async () => {
-//   expect.assertions(6)
-//   const props = {
-//     route: {
-//       params: {
-//         groupId,
-//         id
-//       }
-//     },
-//     navigation: {
-//       navigate: jest.fn()
-//     }
-//   }
-//   const dispatch = jest.fn(val => Promise.resolve(val))
-//   const dispatchProps = mapDispatchToProps(dispatch, props)
-//   expect(dispatchProps).toMatchSnapshot()
-
-//   const postData = {
-//     title: '',
-//     groups: []
-//   }
-
-//   await expect(dispatchProps.save(postData)).rejects.toHaveProperty('message', 'Title cannot be blank')
-
-//   postData.title = 'a title'
-//   await expect(dispatchProps.save(postData)).rejects.toHaveProperty('message', 'You must select a group')
-
-//   postData.groups = [{ id: 1 }]
-//   await expect(dispatchProps.save(postData)).resolves.toBeDefined()
-
-//   expect(dispatch).toHaveBeenCalled()
-//   expect(dispatch.mock.calls).toMatchSnapshot()
-// })
