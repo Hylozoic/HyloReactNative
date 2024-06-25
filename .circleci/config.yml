@@ -41,7 +41,7 @@ jobs:
         - ~/.cache/yarn
         - ./node_modules
         - ./ios/Pods
-    - run: yarn test -- --coverage --runInBand
+    - run: yarn test --coverage --runInBand
     - run: yarn run codecov
     - store_test_results:
         path: /tmp/circleci-test-results
