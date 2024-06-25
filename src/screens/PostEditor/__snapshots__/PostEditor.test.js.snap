@@ -1869,6 +1869,7 @@ exports[`TypeButton renders correctly 1`] = `
   <RNPickerSelect
     Icon={[Function]}
     InputAccessoryView={null}
+    darkTheme={false}
     disabled={false}
     doneText="Done"
     fixAndroidTouchableBug={false}
