@@ -115,7 +115,6 @@
     "@react-native/eslint-config": "^0.72.2",
     "@react-native/metro-config": "^0.72.12",
     "@react-navigation/devtools": "^6.0.26",
-    "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "12.5.1",
     "@tsconfig/react-native": "^3.0.5",
     "@types/react": "^18.3.3",
@@ -168,7 +167,7 @@
       "./node_modules/react-native-gesture-handler/jestSetup.js"
     ],
     "setupFilesAfterEnv": [
-      "@testing-library/jest-native/extend-expect"
+      "@testing-library/react-native/extend-expect"
     ],
     "moduleNameMapper": {
       "\\.(png)$": "jest-transform-stub"
