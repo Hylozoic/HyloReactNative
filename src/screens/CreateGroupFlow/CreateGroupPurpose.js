@@ -68,7 +68,9 @@ export default function CreateGroupPurpose ({ route }) {
               multiline
             />
           </View>
-          {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
+          {error && (
+            <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>
+          )}
         </View>
       </ScrollView>
     </View>

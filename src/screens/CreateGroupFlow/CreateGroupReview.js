@@ -142,7 +142,9 @@ export default function CreateGroupReview () {
           </View>
         )}
 
-        {error && <View style={styles.errorBubble}><ErrorBubble text={error} /></View>}
+        {error && (
+          <View style={styles.errorBubble}><ErrorBubble text={error} /></View>
+        )}
       </ScrollView>
     </View>
   )

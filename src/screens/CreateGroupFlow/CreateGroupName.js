@@ -70,7 +70,9 @@ export default function CreateGroupName ({ route }) {
               maxLength={60}
             />
           </View>
-          {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
+          {error && (
+            <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>
+          )}
         </View>
       </ScrollView>
     </View>

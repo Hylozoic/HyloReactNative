@@ -86,7 +86,9 @@ export default function CreateGroupUrl ({ navigation }) {
               underlineColorAndroid='transparent'
             />
           </View>
-          {error && <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>}
+          {error && (
+            <View style={styles.errorBubble}><ErrorBubble text={error} topArrow /></View>
+          )}
         </View>
       </ScrollView>
     </View>

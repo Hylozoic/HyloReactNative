@@ -106,8 +106,12 @@ export default function Login () {
           </View>
         </View>
 
-        {bannerError && <Text style={styles.bannerError}>{bannerError}</Text>}
-        {(!bannerError && bannerMessage) && <Text style={styles.bannerMessage}>{bannerMessage}</Text>}
+        {bannerError && (
+          <Text style={styles.bannerError}>{bannerError}</Text>
+        )}
+        {(!bannerError && bannerMessage) && (
+          <Text style={styles.bannerMessage}>{bannerMessage}</Text>
+        )}
 
         <FastImage
           style={styles.logo}

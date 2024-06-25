@@ -581,7 +581,9 @@ export class PostEditor extends React.Component {
                 <Text style={styles.pressSelectionLeftText}>{t('Project Members')}</Text>
                 <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.pressSelectionRightIcon} /></View>
               </View>
-              {members.length > 0 && <ProjectMembersSummary style={styles.pressSelectionValue} members={members} />}
+              {members.length > 0 && (
+                <ProjectMembersSummary style={styles.pressSelectionValue} members={members} />
+              )}
             </TouchableOpacity>
           )}
 

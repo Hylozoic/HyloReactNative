@@ -116,10 +116,18 @@ export default function GroupWelcomeLanding ({ route }) {
           </ImageBackground>
         </View>
         <View style={{ flex: 1, gap: 6, paddingLeft: 16, paddingRight: 16 }}>
-          {currentStepIndex === 0 && <LandingBodyContent description={description} purpose={purpose} currentStepIndex={currentStepIndex} />}
-          {routeNames[currentStepIndex] === GROUP_WELCOME_AGREEMENTS && <AgreementsBodyContent agreements={agreements} agreementsChanged={agreementsChanged} acceptedAgreements={acceptedAgreements} handleCheckAgreement={handleCheckAgreement} acceptedAllAgreements={acceptedAllAgreements} handleCheckAllAgreements={handleCheckAllAgreements} numAgreements={numAgreements} />}
-          {routeNames[currentStepIndex] === GROUP_WELCOME_JOIN_QUESTIONS && <JoinQuestionsBodyContent questionAnswers={questionAnswers} setQuestionAnswers={setQuestionAnswers} setAllQuestionsAnswered={setAllQuestionsAnswered} />}
-          {routeNames[currentStepIndex] === GROUP_WELCOME_SUGGESTED_SKILLS && <SuggestedSkills addSkill={addSkill} currentUser={currentUser} group={group} removeSkill={removeSkill} />}
+          {currentStepIndex === 0 && (
+            <LandingBodyContent description={description} purpose={purpose} currentStepIndex={currentStepIndex} />
+          )}
+          {routeNames[currentStepIndex] === GROUP_WELCOME_AGREEMENTS && (
+            <AgreementsBodyContent agreements={agreements} agreementsChanged={agreementsChanged} acceptedAgreements={acceptedAgreements} handleCheckAgreement={handleCheckAgreement} acceptedAllAgreements={acceptedAllAgreements} handleCheckAllAgreements={handleCheckAllAgreements} numAgreements={numAgreements} />
+          )}
+          {routeNames[currentStepIndex] === GROUP_WELCOME_JOIN_QUESTIONS && (
+            <JoinQuestionsBodyContent questionAnswers={questionAnswers} setQuestionAnswers={setQuestionAnswers} setAllQuestionsAnswered={setAllQuestionsAnswered} />
+          )}
+          {routeNames[currentStepIndex] === GROUP_WELCOME_SUGGESTED_SKILLS && (
+            <SuggestedSkills addSkill={addSkill} currentUser={currentUser} group={group} removeSkill={removeSkill} />
+          )}
         </View>
       </ScrollView>
       <GroupWelcomeTabBar group={group} agreements={agreements} acceptedAllAgreements={acceptedAllAgreements} handleAccept={handleAccept} allQuestionsAnswered={allQuestionsAnswered} />

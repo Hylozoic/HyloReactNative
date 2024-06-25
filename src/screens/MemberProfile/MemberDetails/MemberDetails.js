@@ -310,7 +310,9 @@ export function GroupRow ({ membership, editing }) {
       <TouchableOpacity onPress={() => changeToGroup(group.slug)} disabled={editing}>
         <Text style={styles.groupName}>{group.name}</Text>
       </TouchableOpacity>
-      {hasModeratorRole && <Icon name='Star' style={styles.starIcon} />}
+      {hasModeratorRole && (
+        <Icon name='Star' style={styles.starIcon} />
+      )}
       <Text style={styles.memberCount}>{memberCount}</Text>
       <Icon name='Members' style={styles.memberIcon} />
     </View>

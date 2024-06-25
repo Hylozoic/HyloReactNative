@@ -183,7 +183,9 @@ export class MemberBanner extends React.Component {
           >
             <View style={styles.avatarWrapper}>
               <FastImage source={avatarSource} style={styles.avatarImage} />
-              {isMe && <EditButton isLoading={avatarPickerPending} style={styles.avatarEditButton} />}
+              {isMe && (
+                <EditButton isLoading={avatarPickerPending} style={styles.avatarEditButton} />
+              )}
             </View>
           </ImagePicker>
         </View>

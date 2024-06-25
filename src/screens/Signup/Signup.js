@@ -116,8 +116,12 @@ export default function Signup () {
   return (
     <KeyboardFriendlyView style={styles.container}>
       <ScrollView>
-        {loading && <Text style={styles.bannerMessage}>{t('SIGNING UP')}</Text>}
-        {bannerError && <Text style={styles.bannerError}>{bannerError}</Text>}
+        {loading && (
+          <Text style={styles.bannerMessage}>{t('SIGNING UP')}</Text>
+        )}
+        {bannerError && (
+          <Text style={styles.bannerError}>{bannerError}</Text>
+        )}
 
         <ImageBackground
           source={backgroundImage}
