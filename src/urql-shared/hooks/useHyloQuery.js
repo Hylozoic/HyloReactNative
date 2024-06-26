@@ -12,11 +12,15 @@ const onlyQueryOrActionError = new Error(
   'Only one of "query" or "action" can be provided'
 )
 
-const noDataError = new Error(
-  'No data returned from the provided GraphQL query or action.'
+const invalidQueryOrActionError = new Error(
+  'The provided "query" or "action" must be either an action or action creator function or a GraphQL operation or string'
 )
 
-export default function useHyloQuery ({ query, action, variables, meta }) {
+const noDataError = new Error(
+  'No data was returned from the provided GraphQL query or action.'
+)
+
+export default function useHyloQuery ({ query, action, variables, meta, pause }) {
   const dispatch = useDispatch()
   const [data, setData] = useState(null)
   const [fetching, setFetching] = useState(true)
@@ -39,28 +43,32 @@ export default function useHyloQuery ({ query, action, variables, meta }) {
       }
 
       let response
-      setFetching(true)
 
-      // Action Creator (without params)
+      // Redux Action Creator (with or without params)
       if (isFunction(memoizedAction)) {
-        response = await dispatch(memoizedAction())
-      // Action
+        if (memoizedVariables || memoizedMeta) {
+          response = await dispatch(memoizedAction({
+            variables: memoizedVariables || {},
+            meta: memoizedMeta || {}
+          }))
+        } else {
+          response = await dispatch(memoizedAction())
+        }
+      // Redux Action
       } else if (isObject(memoizedAction) && Object.hasOwnProperty.call(memoizedAction, 'type')) {
         response = await dispatch(memoizedAction)
-      // GraphQL query string
-      } else if (isString(memoizedQuery)) {
+      // GraphQL query string or operation object (the result of using the `gql` tag)
+      } else if (
+        isString(memoizedQuery) ||
+        (isObject(memoizedQuery) && Object.hasOwnProperty.call(memoizedQuery, 'definitions'))
+      ) {
         response = await dispatch(fetchGraphqlActionCreator({
           query: memoizedQuery,
           variables: memoizedVariables || {},
           meta: memoizedMeta || {}
         }))
-      // GraphQL operation object (compiled by gql tag)
-      } else if (isObject(memoizedQuery) && Object.hasOwnProperty.call(memoizedQuery, 'definitions')) {
-        response = await dispatch(fetchGraphqlActionCreator({
-          query: memoizedQuery,
-          variables: memoizedVariables || {},
-          meta: memoizedMeta || {}
-        }))
+      } else {
+        throw invalidQueryOrActionError
       }
 
       if (response?.payload?.getData() === null) {
@@ -76,8 +84,10 @@ export default function useHyloQuery ({ query, action, variables, meta }) {
   }, [dispatch, memoizedQuery, memoizedAction, memoizedVariables, memoizedMeta])
 
   useEffect(() => {
-    executeQuery()
-  }, [executeQuery])
+    if (!pause) {
+      executeQuery()
+    }
+  }, [pause, executeQuery])
 
   return [{ data, fetching, error }, executeQuery]
 }
