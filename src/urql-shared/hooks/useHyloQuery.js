@@ -16,7 +16,7 @@ const noDataError = new Error(
   'No data returned from the GraphQL query or action.'
 )
 
-export default function useHyloQuery({ query, action, variables, meta }) {
+export default function useHyloQuery ({ query, action, variables, meta }) {
   const dispatch = useDispatch()
   const [data, setData] = useState(null)
   const [fetching, setFetching] = useState(true)

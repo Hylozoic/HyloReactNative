@@ -74,7 +74,7 @@ export default function DrawerMenu () {
   // }
 
   const publicRoutes = [
-    { ...PUBLIC_GROUP, navigateTo: navigateToPublicStream, name: t('Public Stream')},
+    { ...PUBLIC_GROUP, navigateTo: navigateToPublicStream, name: t('Public Stream') },
     // publicGroups,
     publicMap
   ]
