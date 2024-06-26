@@ -9,7 +9,7 @@ import useGoToMember from 'hooks/useGoToMember'
 import useIsModalScreen from 'hooks/useIsModalScreen'
 import useRouteParams from 'hooks/useRouteParams'
 import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
-import fetchPostActionCreator from 'store/actions/fetchPost'
+import fetchPost from 'store/actions/fetchPost'
 import trackAnalyticsEvent from 'store/actions/trackAnalyticsEvent'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { getPresentedPost } from 'store/selectors/getPost'
@@ -26,7 +26,7 @@ export default function PostDetails () {
   const navigation = useNavigation()
   const currentGroup = useSelector(getCurrentGroup)
   const { id: postId } = useRouteParams()
-  const [{ fetching, error }] = useHyloQuery({ action: fetchPostActionCreator(postId) })
+  const [{ fetching, error }] = useHyloQuery({ action: fetchPost(postId) })
   const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
   const commentsRef = React.useRef()
   const isModalScreen = useIsModalScreen()
@@ -61,6 +61,8 @@ export default function PostDetails () {
     }
   }, [error, post])
 
+  if (fetching) return <Loading />
+
   if (error) {
     Alert.alert(
       t('Sorry, we couldn\'t find that post'),
@@ -91,8 +93,6 @@ export default function PostDetails () {
       />
     )
   }
-
-  if (fetching) return <Loading />
 
   return (
     <View style={styles.container}>

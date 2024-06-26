@@ -21,6 +21,7 @@ export default function fetchGroupDetails ({
     },
     meta: {
       extractModel: 'Group',
+      afterInteractions: true,
       slug
     }
   }
