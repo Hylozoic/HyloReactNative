@@ -20,23 +20,27 @@ export function fetchMemberPosts ({ id, first = 10, offset }) {
       query: gql`
         query MemberPosts (
           $activePostsOnly: Boolean,
-          $afterTime: Date
-          $beforeTime: Date
+          $afterTime: Date,
+          $announcementsOnly: Boolean,
+          $beforeTime: Date,
           $boundingBox: [PointInput],
-          $collectionToFilterOut: ID
-          $filter: String
-          $first: Int,
-          $forCollection: ID
-          $groupSlugs: [String]
-          $id: ID
-          $isFulfilled: Boolean
-          $offset: Int,
+          $collectionToFilterOut: ID,
           $context: String,
-          $order: String
-          $sortBy: String,
+          $createdBy: [ID],
+          $filter: String,
+          $first: Int,
+          $forCollection: ID,
+          $groupSlugs: [String],
+          $id: ID,
+          $interactedWithBy: [ID],
+          $isFulfilled: Boolean,
+          $mentionsOf: [ID],
+          $offset: Int,
+          $order: String,
           $search: String,
-          $topic: ID
-          $topics: [ID]
+          $sortBy: String,
+          $topic: ID,
+          $topics: [ID],
           $types: [String]
         ) {
           person (id: $id) {
@@ -61,26 +65,28 @@ export function fetchMemberComments ({ id, first = 20, offset }) {
   return {
     type: FETCH_MEMBER_COMMENTS,
     graphql: {
-      query: `query MemberComments ($id: ID, $first: Int, $offset: Int) {
-        person (id: $id) {
-          id
-          comments (first: $first, offset: $offset, order: "desc") {
-            hasMore
-            items {
-              id
-              text
-              creator {
+      query: gql`
+        query MemberComments ($id: ID, $first: Int, $offset: Int) {
+          person (id: $id) {
+            id
+            comments (first: $first, offset: $offset, order: "desc") {
+              hasMore
+              items {
                 id
+                text
+                creator {
+                  id
+                }
+                post {
+                  id
+                  title
+                }
+                createdAt
               }
-              post {
-                id
-                title
-              }
-              createdAt
             }
           }
         }
-      }`,
+      `,
       variables: { id, first, offset }
     },
     meta: {
@@ -97,43 +103,45 @@ export function fetchMemberUpvotes ({ id, first = 20, offset }) {
   return {
     type: FETCH_MEMBER_UPVOTES,
     graphql: {
-      query: `query MemberVotes ($id: ID, $first: Int, $offset: Int) {
-        person (id: $id) {
-          id
-          votes (first: $first, offset: $offset, order: "desc") {
-            hasMore
-            items {
-              id
-              post {
+      query: gql`
+        query MemberVotes ($id: ID, $first: Int, $offset: Int) {
+          person (id: $id) {
+            id
+            votes (first: $first, offset: $offset, order: "desc") {
+              hasMore
+              items {
                 id
-                title
-                details
-                type
-                creator {
+                post {
                   id
-                  name
-                  avatarUrl
+                  title
+                  details
+                  type
+                  creator {
+                    id
+                    name
+                    avatarUrl
+                  }
+                  commenters {
+                    id,
+                    name,
+                    avatarUrl
+                  }
+                  commentersTotal
+                  groups {
+                    id
+                    name
+                  }
+                  createdAt
                 }
-                commenters {
-                  id,
-                  name,
-                  avatarUrl
-                }
-                commentersTotal
-                groups {
+                voter {
                   id
-                  name
                 }
                 createdAt
               }
-              voter {
-                id
-              }
-              createdAt
             }
           }
         }
-      }`,
+      `,
       variables: { id, first, offset }
     },
     meta: {
