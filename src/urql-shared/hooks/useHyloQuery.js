@@ -75,7 +75,7 @@ export default function useHyloQuery ({ query, action, variables, meta, pause })
         throw noDataError
       }
 
-      setData(response?.payload?.getData())
+      setData(response?.payload?.data)
     } catch (e) {
       setError(e)
     } finally {

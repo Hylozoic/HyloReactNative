@@ -25,7 +25,8 @@ import { white } from 'style/colors'
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
   const dispatch = useDispatch()
-  const [{ fetching, data: currentUser, error }] = useHyloQuery({ action: fetchCurrentUser })
+  const [{ fetching, data, error }] = useHyloQuery({ action: fetchCurrentUser })
+  const currentUser = data?.me
 
   useHyloQuery({ action: fetchNotifications })
   useHyloQuery({ action: updateNewNotificationCount })
