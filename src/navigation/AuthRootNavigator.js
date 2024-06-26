@@ -2,9 +2,13 @@ import React, { useEffect } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import OneSignal from 'react-native-onesignal'
 import registerDevice from 'store/actions/registerDevice'
+import { useDispatch } from 'react-redux'
 import i18n from '../../i18n'
-import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
+import { HyloHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
 import { modalScreenName } from 'hooks/useIsModalScreen'
+import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
+import fetchCurrentUser from 'store/actions/fetchCurrentUser'
+import { fetchNotifications, updateNewNotificationCount } from 'screens/NotificationsList/NotificationsList.store'
 import ModalHeader from 'navigation/headers/ModalHeader'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
 import DrawerNavigator from 'navigation/DrawerNavigator'
@@ -17,15 +21,11 @@ import PostEditor from 'screens/PostEditor'
 import NotificationsList from 'screens/NotificationsList'
 import Thread from 'screens/Thread'
 import { white } from 'style/colors'
-import { HyloHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
-import { useDispatch } from 'react-redux'
-import fetchCurrentUserActionCreator from 'store/actions/fetchCurrentUser'
-import { fetchNotifications, updateNewNotificationCount } from 'screens/NotificationsList/NotificationsList.store'
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
   const dispatch = useDispatch()
-  const [{ fetching, data, error }] = useHyloQuery({ action: fetchCurrentUserActionCreator })
+  const [{ fetching, data: currentUser, error }] = useHyloQuery({ action: fetchCurrentUser })
 
   useHyloQuery({ action: fetchNotifications })
   useHyloQuery({ action: updateNewNotificationCount })
@@ -35,12 +35,12 @@ export default function AuthRootNavigator () {
       if (!fetching && !error) {
         const deviceState = await OneSignal.getDeviceState()
 
-        const locale = data?.settings?.locale || 'en'
+        const locale = currentUser?.settings?.locale || 'en'
         i18n.changeLanguage(locale)
 
         if (deviceState?.userId) {
           await dispatch(registerDevice(deviceState?.userId))
-          OneSignal.setExternalUserId(data?.id)
+          OneSignal.setExternalUserId(currentUser?.id)
           // Prompt for push notifications (iOS only)
           OneSignal.promptForPushNotificationsWithUserResponse(() => {})
         } else {
@@ -51,6 +51,8 @@ export default function AuthRootNavigator () {
   }, [fetching, error])
 
   if (fetching) return <LoadingScreen />
+  // TODO: What do we want to happen if there is an error loading the current user?
+  if (error) console.error(error)
 
   const navigatorProps = {
     screenOptions: {

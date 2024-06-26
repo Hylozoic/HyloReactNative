@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
 import { openURL } from 'hooks/useOpenURL'
 import useRouteParams from 'hooks/useRouteParams'
-import fetchGroupDetails from 'store/actions/fetchGroupDetails'
+import fetchGroupDetailsAction from 'store/actions/fetchGroupDetails'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
@@ -23,23 +23,22 @@ export default function GroupNavigation () {
   const childGroups = useSelector(getChildGroups)
   const parentGroups = useSelector(getParentGroups)
   const [{ fetching }] = useHyloQuery({
-    action: fetchGroupDetails({
+    action: fetchGroupDetailsAction({
       slug: currentGroup?.slug,
       withExtensions: false,
       withWidgets: false,
       withTopics: false,
       withJoinQuestions: true,
       withPrerequisites: true
-    })
+    }),
+    pause: !currentGroup?.slug
   })
 
   useFocusEffect(() => {
     navigation.setOptions({ title: myHome ? t('My Home') : currentGroup?.name })
   })
 
-  if (fetching) {
-    return <Loading />
-  }
+  if (fetching) return <Loading />
 
   const { navigate } = navigation
   const customViews = (currentGroup && currentGroup.customViews && currentGroup.customViews.toRefArray()) || []
