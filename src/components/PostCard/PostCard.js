@@ -1,6 +1,8 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import { useTranslation } from 'react-i18next'
 import { LocationHelpers } from 'hylo-shared'
+import { useCurrentUser } from 'hooks/useCurrentUser'
 import PostHeader from './PostHeader'
 import PostBody from './PostBody'
 import PostGroups from './PostGroups'
@@ -10,7 +12,6 @@ import Files from 'components/Files'
 import Icon from 'components/Icon'
 import Topics from 'components/Topics'
 import styles from 'components/PostCard/PostCard.styles'
-import { useCurrentUser } from 'hooks/useCurrentUser'
 
 export default function PostCard ({
   goToGroup,
@@ -24,6 +25,7 @@ export default function PostCard ({
   childPost,
   showTopic: goToTopic
 }) {
+  const { t } = useTranslation()
   const images = post.imageUrls && post.imageUrls.map(uri => ({ uri }))
   const locationText = LocationHelpers.generalLocationString(post.locationObject, post.location)
   const currentUser = useCurrentUser()
@@ -33,7 +35,7 @@ export default function PostCard ({
       {childPost && (
         <View style={styles.childPost}>
           <View style={styles.childPostInner}>
-            <Icon name='Subgroup' style={styles.childPostIcon} /><Text style={styles.childPostText}>{' '}post from child group</Text>
+            <Icon name='Subgroup' style={styles.childPostIcon} /><Text style={styles.childPostText}>{' '}{t('post from child group')}</Text>
           </View>
         </View>)}
       <View style={styles.container}>

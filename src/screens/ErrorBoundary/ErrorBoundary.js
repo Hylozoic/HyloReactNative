@@ -2,8 +2,7 @@ import React from 'react'
 import { Text, View, Button, Image } from 'react-native'
 import RNRestart from 'react-native-restart'
 import * as Sentry from '@sentry/react-native'
-
-import { isDev } from 'config'
+import { useTranslation } from 'react-i18next'
 
 const axelFretting = require('assets/Axel_Fretting.png')
 
@@ -16,7 +15,7 @@ export default class ErrorBoundary extends React.Component {
   componentDidCatch (error, info) {
     this.setState({ hasError: true })
 
-    !isDev && Sentry.captureException(error, { extra: info })
+    Sentry.captureException(error, { extra: info })
   }
 
   render () {
@@ -29,11 +28,12 @@ export default class ErrorBoundary extends React.Component {
 }
 
 function DefaultErrorMessage () {
+  const { t } = useTranslation()
   return (
     <View style={styles.container}>
-      <Text style={styles.titleText}>Oops. Something Went Wrong</Text>
+      <Text style={styles.titleText}>{t('Oops Something Went Wrong')}</Text>
       <Image source={axelFretting} style={styles.merkabaImage} />
-      <Button title='Restart Hylo' style={styles.button} onPress={() => RNRestart.Restart()} />
+      <Button title={t('Restart Hylo')} style={styles.button} onPress={() => RNRestart.Restart()} />
     </View>
   )
 }

@@ -305,6 +305,7 @@ exports[`MemberList server search fetches new results when search provided 1`] =
           <View
             accessibilityElementsHidden={false}
             closing={false}
+            collapsable={false}
             gestureVelocityImpact={0.3}
             importantForAccessibility="auto"
             onClose={[Function]}

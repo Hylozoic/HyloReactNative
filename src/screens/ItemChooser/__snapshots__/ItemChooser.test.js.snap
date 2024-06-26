@@ -175,7 +175,6 @@ exports[`ItemChooser full renders as expected 1`] = `
         editable={true}
         onChangeText={[Function]}
         onFocus={[MockFunction]}
-        placeholder="Begin type to searching"
         underlineColorAndroid="transparent"
       />
     </View>
@@ -244,9 +243,9 @@ exports[`ItemChooser shallow renders as expected 1`] = `
         },
       }
     }
-    searchPlaceholder="Begin type to searching"
     setSearchTerm={[Function]}
     suggestedItems={[]}
+    t={[Function]}
   />
   <SectionList
     ListFooterComponent={<View />}

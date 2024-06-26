@@ -27,8 +27,10 @@ import PersonPickerItemRow from 'screens/ItemChooser/PersonPickerItemRow'
 import styles from './NewMessage.styles'
 import useGraphqlAction from 'hooks/useGraphqlAction'
 import gql from 'graphql-tag'
+import { useTranslation } from 'react-i18next'
 
 export default function NewMessage (props) {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const route = useRoute()
   const navigation = useNavigation()
@@ -106,7 +108,7 @@ export default function NewMessage (props) {
   }
 
   const openParticipantChooser = useCallback(() => {
-    const screenTitle = 'Add Participant'
+    const screenTitle = t('Add Participant')
     const chooserProps = {
       screenTitle,
       fetchSearchSuggestions: scopedFetchPeopleAutocomplete,
@@ -114,7 +116,7 @@ export default function NewMessage (props) {
       initialItems: participants,
       pickItem: handleAddParticipant,
       ItemRowComponent: PersonPickerItemRow,
-      defaultSuggestedItemsLabel: 'Recent Contacts',
+      defaultSuggestedItemsLabel: t('Recent Contacts'),
       defaultSuggestedItems: recentContacts
     }
     navigation.navigate('ItemChooser', chooserProps)
@@ -137,7 +139,7 @@ export default function NewMessage (props) {
         </TouchableOpacity>
         <View style={styles.addParticipantButtonWrapper}>
           <Button
-            text='Add Participant'
+            text={t('Add Participant')}
             style={styles.addParticipantButton}
             onPress={() => openParticipantChooser()}
           />
@@ -148,7 +150,7 @@ export default function NewMessage (props) {
         value={prompt}
         multiline
         onSubmit={createMessage}
-        placeholder='Type your message here'
+        placeholder={t('Type your message here')}
         emptyParticipants={emptyParticipantsList}
       />
     </KeyboardFriendlyView>

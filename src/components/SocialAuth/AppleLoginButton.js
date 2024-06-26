@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import { appleAuth, AppleButton } from '@invertase/react-native-apple-authentication'
+import { useTranslation } from 'react-i18next'
 
 export async function onAppleButtonPress ({
   authorizedCallback,
   createErrorNotification
 }) {
+  const { t } = useTranslation()
   // performs login request
   try {
     const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -25,7 +27,7 @@ export async function onAppleButtonPress ({
     }
   } catch (error) {
     if (error.code !== appleAuth.Error.CANCELED) {
-      createErrorNotification('Could not sign in with your Apple account')
+      createErrorNotification(t('Could not sign in with your Apple account'))
     }
   }
 }
@@ -36,11 +38,12 @@ export default function AppleLoginButton ({
   style: providedStyle,
   signup
 }) {
+  const { t } = useTranslation()
   useEffect(() => {
     if (!appleAuth.isSupported) return null
     // onCredentialRevoked returns a function that will remove the event listener. useEffect will call this function when the component unmounts
     return appleAuth.onCredentialRevoked(async () => {
-      console.warn('If this function executes, User Credentials have been Revoked')
+      console.warn(t('If this function executes, User Credentials have been Revoked'))
     })
   }, []) // passing in an empty array as the second argument ensures this is only ran once when component mounts initially.
 

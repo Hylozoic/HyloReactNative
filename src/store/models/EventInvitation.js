@@ -22,10 +22,10 @@ export const RESPONSES = {
   INTERESTED: 'interested'
 }
 
-export const humanResponse = (response) => {
+export const humanResponse = (response, t) => {
   return {
-    yes: 'Going',
-    no: 'Not Going',
-    interested: 'Interested'
+    yes: t('Going'),
+    no: t('Not Going'),
+    interested: t('Interested')
   }[response]
 }

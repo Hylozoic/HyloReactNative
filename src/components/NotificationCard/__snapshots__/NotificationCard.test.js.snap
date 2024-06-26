@@ -17,7 +17,9 @@ exports[`NotificationCard matches the last snapshot for a comment 1`] = `
       <Text
         numberOfLines={2}
       >
-         A post to end all other posts, having an extremely long post title that just seems to go on and on and on and on
+         "
+        A post to end all other posts, having an extremely long post title that just seems to go on and on and on and on
+        "
       </Text>
     </Text>
     <Text>
@@ -45,7 +47,8 @@ exports[`NotificationCard matches the last snapshot for a comment mention 1`] = 
       numberOfLines={2}
     >
       <Text>
-        Wombat Aardvark 
+        Wombat Aardvark
+         
       </Text>
       <Text>
         mentioned you in a comment on
@@ -53,7 +56,9 @@ exports[`NotificationCard matches the last snapshot for a comment mention 1`] = 
       <Text
         numberOfLines={2}
       >
-         A post to end all other posts, having an extremely long post title that just seems to go on and on and on and on
+         "
+        A post to end all other posts, having an extremely long post title that just seems to go on and on and on and on
+        "
       </Text>
     </Text>
     <Text>
@@ -90,7 +95,8 @@ exports[`NotificationCard matches the last snapshot for a join approved 1`] = `
       </Text>
       approved your request to join
       <Text>
-         Hydroponic Gardening
+         
+        Hydroponic Gardening
       </Text>
     </Text>
     <Text>
@@ -112,7 +118,8 @@ exports[`NotificationCard matches the last snapshot for a join request 1`] = `
       numberOfLines={2}
     >
       <Text>
-        Wombat Aardvark 
+        Wombat Aardvark
+         
       </Text>
       <Text>
         New join request
@@ -124,7 +131,8 @@ exports[`NotificationCard matches the last snapshot for a join request 1`] = `
       </Text>
       requested to join
       <Text>
-         Hydroponic Gardening
+         
+        Hydroponic Gardening
       </Text>
     </Text>
     <Text>
@@ -146,7 +154,8 @@ exports[`NotificationCard matches the last snapshot for a mention 1`] = `
       numberOfLines={2}
     >
       <Text>
-        Wombat Aardvark 
+        Wombat Aardvark
+         
       </Text>
       <Text>
         mentioned you
@@ -154,7 +163,9 @@ exports[`NotificationCard matches the last snapshot for a mention 1`] = `
       <Text
         numberOfLines={2}
       >
-         A post to end all other posts, having an extremely long post title that just seems to go on and on and on and on
+         "
+        A post to end all other posts, having an extremely long post title that just seems to go on and on and on and on
+        "
       </Text>
     </Text>
     <Text>

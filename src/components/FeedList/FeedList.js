@@ -11,6 +11,7 @@ import { isContextGroup } from 'store/models/Group'
 import styles from './FeedList.styles'
 import Icon from 'components/Icon'
 import { pictonBlue } from 'style/colors'
+import { useTranslation } from 'react-i18next'
 
 // tracks: `hylo-evo/src/components/StreamViewControls/StreamViewControls.js`
 export const POST_TYPE_OPTIONS = [
@@ -19,6 +20,7 @@ export const POST_TYPE_OPTIONS = [
   { id: 'event', label: 'Events' },
   { id: 'offer', label: 'Offers' },
   { id: 'project', label: 'Projects' },
+  { id: 'proposal', label: 'Proposals' },
   { id: 'request', label: 'Requests' },
   { id: 'resource', label: 'Resources' }
 ]
@@ -48,8 +50,25 @@ export const EVENT_STREAM_TIMEFRAME_OPTIONS = [
 
 export default function FeedList (props) {
   const isFocused = useIsFocused()
+  const { t } = useTranslation()
 
-  return <FeedListClassComponent {...props} isFocused={isFocused} />
+  // Explicit invocation of dynamic strings
+  t('All Posts')
+  t('Discussions')
+  t('Events')
+  t('Offers')
+  t('Projects')
+  t('Proposals')
+  t('Requests')
+  t('Resources')
+  t('Manual')
+  t('Latest activity')
+  t('Post Date')
+  t('Popular')
+  t('Upcoming Events')
+  t('Past Events')
+
+  return <FeedListClassComponent {...props} isFocused={isFocused} t={t} />
 }
 
 export class FeedListClassComponent extends React.Component {

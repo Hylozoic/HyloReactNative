@@ -1,10 +1,11 @@
 import React from 'react'
 import { Text, TouchableOpacity, View, SectionList, Image } from 'react-native'
 import { useSelector } from 'react-redux'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 import FastImage from 'react-native-fast-image'
 import LinearGradient from 'react-native-linear-gradient'
-
+import useRouteParams from 'hooks/useRouteParams'
 import useChangeToGroup from 'hooks/useChangeToGroup'
 import { PUBLIC_GROUP, ALL_GROUP, MY_CONTEXT_GROUP } from 'store/models/Group'
 import getMemberships from 'store/selectors/getMemberships'
@@ -13,19 +14,17 @@ import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import styles from './DrawerMenu.styles'
 import Button from 'components/Button'
 import { bannerlinearGradientColors } from 'style/colors'
-
 // import groupExplorerUrl from 'assets/group-explorer.png'
 import earthUrl from 'assets/earth.png'
 import myHomeUrl from 'assets/my-home.png'
 
 export default function DrawerMenu () {
+  const { t } = useTranslation()
   const navigation = useNavigation()
-  const route = useRoute()
   const currentGroup = useSelector(getCurrentGroup)
   const memberships = useSelector(getMemberships)
   const canModerateCurrentGroup = useSelector(getCanModerate)
-
-  const myHome = route?.params?.myHome
+  const { myHome } = useRouteParams()
 
   const myGroups = memberships
     .map(m => m.group.ref)
@@ -60,7 +59,7 @@ export default function DrawerMenu () {
   }
 
   const publicMap = {
-    name: 'Public Map',
+    name: t('Public Map'),
     navigateTo: navigateToPublicMap,
     id: 'publicMap',
     avatarUrl: Image.resolveAssetSource(earthUrl).uri
@@ -75,7 +74,7 @@ export default function DrawerMenu () {
   // }
 
   const publicRoutes = [
-    { ...PUBLIC_GROUP, navigateTo: navigateToPublicStream },
+    { ...PUBLIC_GROUP, navigateTo: navigateToPublicStream, name: t('Public Stream')},
     // publicGroups,
     publicMap
   ]
@@ -100,7 +99,7 @@ export default function DrawerMenu () {
   const listSections = [
     {
       data: [{
-        name: 'My Home',
+        name: t('My Home'),
         navigateTo: navigateToMyHome,
         id: 'myHome',
         avatarUrl: Image.resolveAssetSource(myHomeUrl).uri
@@ -136,13 +135,13 @@ export default function DrawerMenu () {
                   style={styles.currentGroupButton}
                   iconName='Settings'
                   onPress={goToGroupSettings}
-                  text='Settings'
+                  text={t('Settings')}
                 />
                 <Button
                   style={styles.currentGroupButton}
                   iconName='Invite'
                   onPress={goToInvitePeople}
-                  text='Invite'
+                  text={t('Invite')}
                 />
               </View>
             )}
@@ -159,7 +158,7 @@ export default function DrawerMenu () {
         sections={listSections}
         stickySectionHeadersEnabled={false}
       />
-      <Button text='Start a Group' onPress={goToCreateGroup} style={styles.createGroupButton} />
+      <Button text={t('Start a Group')} onPress={goToCreateGroup} style={styles.createGroupButton} />
     </View>
   )
 }

@@ -13,6 +13,7 @@ import { caribbeanGreen, white20onCaribbeanGreen, white } from 'style/colors'
 import { getGroupData, updateGroupData } from './CreateGroupFlow.store'
 import styles from './CreateGroupFlow.styles'
 import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
+import { useTranslation } from 'react-i18next'
 
 const groupVisibilityOptions = Object.keys(GROUP_VISIBILITY).map(label => ({
   label: label + ': ' + visibilityDescription(GROUP_VISIBILITY[label]),
@@ -27,6 +28,7 @@ const groupAccessibilityOptions = Object.keys(GROUP_ACCESSIBILITY).map(label => 
 }))
 
 export default function CreateGroupVisibilityAccessibility ({ navigation }) {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const groupData = useSelector(getGroupData)
   const [visibility, setVisibility] = useState(groupData.visibility)
@@ -41,7 +43,7 @@ export default function CreateGroupVisibilityAccessibility ({ navigation }) {
       <ScrollView style={{ margins: 0 }}>
         <View style={styles.content}>
           <View style={stepStyles.optionsContainer}>
-            <Text style={stepStyles.optionsLabel}>Who can see this group?</Text>
+            <Text style={stepStyles.optionsLabel}>{t('Who can see this group')}</Text>
             {groupVisibilityOptions.map(option => (
               <Option
                 option={option} chosen={option.value === visibility}
@@ -50,7 +52,7 @@ export default function CreateGroupVisibilityAccessibility ({ navigation }) {
             ))}
           </View>
           <View style={styles.optionsContainer}>
-            <Text style={stepStyles.optionsLabel}>Who can join this group?</Text>
+            <Text style={stepStyles.optionsLabel}>{t('Who can join this group')}</Text>
             {groupAccessibilityOptions.map(option => (
               <Option
                 option={option} chosen={option.value === accessibility}

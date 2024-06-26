@@ -8,13 +8,14 @@ import LinearGradient from 'react-native-linear-gradient'
 import { isUndefined } from 'lodash'
 import useChangeToGroup from 'hooks/useChangeToGroup'
 import useGoToTopic from 'hooks/useGoToTopic'
+import { useTranslation } from 'react-i18next'
 import { PUBLIC_GROUP_ID } from 'store/models/Group'
+import useRouteParams from 'hooks/useRouteParams'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getCustomView from 'store/selectors/getCustomView'
 import getGroupTopic from 'store/selectors/getGroupTopic'
 import getMe from 'store/selectors/getMe'
 import getMemberships from 'store/selectors/getMemberships'
-import getRouteParam from 'store/selectors/getRouteParam'
 import toggleGroupTopicSubscribeAction from 'store/actions/toggleGroupTopicSubscribe'
 import fetchGroupTopic from 'store/actions/fetchGroupTopic'
 import Avatar from 'components/Avatar'
@@ -28,27 +29,26 @@ import GroupWelcomeCheck from 'components/GroupWelcomeCheck'
 import { bannerlinearGradientColors } from 'style/colors'
 import styles from './Feed.styles'
 
-export function headerTitle (currentGroup, feedType, myHome) {
+export function headerTitle (currentGroup, feedType, myHome, t) {
   if (myHome) return myHome
   let title
   title = currentGroup?.name
-  title = feedType ? capitalize(feedType + 's') : title
+  title = feedType ? capitalize(t(feedType) + 's') : title
   return title
 }
 
 export default function Feed ({ topicName: providedTopicName }) {
   const ref = useRef(null)
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const route = useRoute()
   const dispatch = useDispatch()
 
-  const customViewId = getRouteParam('customViewId', route)
+  const { customViewId, feedType, myHome, topicName: routeTopicName } = useRouteParams()
   const customView = useSelector(state => getCustomView(state, { customViewId }))
-  const feedType = getRouteParam('feedType', route)
-  const myHome = route?.params?.myHome
   const changeToGroup = useChangeToGroup()
   const goToTopicDefault = useGoToTopic()
-  const topicName = providedTopicName || getRouteParam('topicName', route)
+  const topicName = providedTopicName || routeTopicName
 
   const customViewType = customView?.type
   const customPostTypes = customViewType === 'stream' ? customView?.postTypes : null
@@ -85,7 +85,7 @@ export default function Feed ({ topicName: providedTopicName }) {
 
   useEffect(() => {
     navigation.setOptions({
-      title: headerTitle(currentGroup, feedType, myHome)
+      title: headerTitle(currentGroup, feedType, myHome, t)
     })
   }, [navigation, topicName, currentGroup, currentGroup?.id, feedType, myHome])
 
@@ -95,7 +95,7 @@ export default function Feed ({ topicName: providedTopicName }) {
     return (
       <CreateGroupNotice
         goToCreateGroup={goToCreateGroup}
-        text='No posts here, try creating your own Group!'
+        text={t('no_posts_here_try_creating_your_own_group')}
       />
     )
   }
@@ -181,13 +181,13 @@ export default function Feed ({ topicName: providedTopicName }) {
   )
 }
 
-export function postPromptString (type = '', { firstName }) {
+export function postPromptString (type = '', { firstName }, t) {
   const postPrompts = {
-    offer: `Hi ${firstName}, what would you like to share?`,
-    request: `Hi ${firstName}, what are you looking for?`,
-    project: `Hi ${firstName}, what would you like to create?`,
-    event: `Hi ${firstName}, want to create an event?`,
-    default: `Hi ${firstName}, press here to post`
+    offer: t('Hi {{firstName}}, what would you like to share?', { firstName }),
+    request: t('Hi {{firstName}}, what are you looking for?', { firstName }),
+    project: t('Hi {{firstName}}, what would you like to create?', { firstName }),
+    event: t('Hi {{firstName}}, want to create an event?', { firstName }),
+    default: t('Hi {{firstName}}, press here to post', { firstName })
   }
 
   return postPrompts[type] || postPrompts.default
@@ -195,6 +195,7 @@ export function postPromptString (type = '', { firstName }) {
 
 export function PostPrompt ({ currentUser, forGroup, currentType, currentTopicName }) {
   const navigation = useNavigation()
+  const { t } = useTranslation()
 
   if (!currentUser) return null
 
@@ -212,14 +213,15 @@ export function PostPrompt ({ currentUser, forGroup, currentType, currentTopicNa
     <View style={styles.postPrompt}>
       <TouchableOpacity onPress={handleOpenPostEditor} style={styles.promptButton}>
         <Avatar avatarUrl={avatarUrl} style={styles.avatar} />
-        <Text style={styles.promptText}>{postPromptString(currentType, { firstName: currentUser.firstName() })}</Text>
+        <Text style={styles.promptText}>{postPromptString(currentType, { firstName: currentUser.firstName() }, t)}</Text>
       </TouchableOpacity>
     </View>
   )
 }
 
 export function SubscribeButton ({ active, onPress }) {
-  const text = active ? 'Unsubscribe' : 'Subscribe'
+  const { t } = useTranslation()
+  const text = active ? t('Unsubscribe') : t('Subscribe')
   const style = active ? styles.unsubscribeButton : styles.subscribeButton
   return <Button onPress={onPress} style={style} iconName='Star' text={text} />
 }

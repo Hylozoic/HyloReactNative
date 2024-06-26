@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { View, Alert } from 'react-native'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { get } from 'lodash/fp'
 import { useQuery } from 'urql'
 import { AnalyticsEvents } from 'hylo-shared'
@@ -10,6 +11,7 @@ import useIsModalScreen from 'hooks/useIsModalScreen'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import getRouteParam from 'store/selectors/getRouteParam'
 import postQuery from 'graphql/queries/postQuery'
+import useRouteParams from 'hooks/useRouteParams'
 import { KeyboardAccessoryCommentEditor } from 'components/CommentEditor/CommentEditor'
 import Comments from 'components/Comments'
 import Loading from 'components/Loading'
@@ -18,25 +20,11 @@ import SocketSubscriber from 'components/SocketSubscriber'
 import { white } from 'style/colors'
 import trackAnalyticsEvent from 'store/actions/trackAnalyticsEvent'
 
-/*
-
-TODO: Confirm that we're ok not checking for focus:
-
-Confirm by testing for scenarios where many of this screen could be mounted
-in the navigation stack at once. Modals are one possible case, but I don't
-think there is currently much chances for that.
-
-Relevant removed code from the class component:
-
-const isFocused = useIsFocused()
-shouldComponentUpdate (nextProps) { return !!nextProps.isFocused }
-
-*/
 export default function PostDetails () {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigation = useNavigation()
-  const route = useRoute()
-  const postId = getRouteParam('id', route)
+  const { id: postId } = useRouteParams()
 
   const [postResult] = useQuery({
     query: postQuery,
@@ -46,9 +34,7 @@ export default function PostDetails () {
 
   // const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
   const post = postData?.post
-
   const currentGroup = useSelector(getCurrentGroup)
-
   const commentsRef = React.useRef()
   const isModalScreen = useIsModalScreen()
   const goToMember = useGoToMember()

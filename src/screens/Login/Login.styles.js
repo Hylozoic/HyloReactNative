@@ -56,10 +56,19 @@ export default {
   container: {
     backgroundColor: 'white'
   },
+  localeContainer: {
+    marginTop: 40,
+    flexDirection: 'row',
+    flex: 1,
+    alignSelf: 'flex-start'
+  },
+  localeContents: {
+    marginLeft: 10
+  },
   logo: {
     height: 80,
     width: 80,
-    marginTop: (screenHeight - 580) * 0.6,
+    marginTop: (screenHeight - 580) * 0.4,
     marginBottom: 10
   },
   title: {

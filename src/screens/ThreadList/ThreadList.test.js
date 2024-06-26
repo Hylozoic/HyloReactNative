@@ -25,6 +25,7 @@ describe('ThreadList', () => {
     const fetchThreads = jest.fn()
     const renderer = TestRenderer.create(
       <ThreadList
+        t={str => str}
         fetchThreads={fetchThreads}
         hasMore
         isFocused
@@ -41,7 +42,7 @@ describe('ThreadList', () => {
   it('handles pending correctly without threads', () => {
     const renderer = new ReactShallowRenderer()
     const threads = []
-    renderer.render(<ThreadList threads={threads} updateLastViewed={jest.fn()} isFocused pending />)
+    renderer.render(<ThreadList t={str => str} threads={threads} updateLastViewed={jest.fn()} isFocused pending />)
     const actual = renderer.getRenderOutput()
 
     expect(actual).toMatchSnapshot()
@@ -50,6 +51,7 @@ describe('ThreadList', () => {
   it('handles pending correctly with threads', () => {
     const renderer = TestRenderer.create(
       <ThreadList
+        t={str => str}
         fetchThreads={() => {}}
         isFocused
         updateLastViewed={jest.fn()}
@@ -63,6 +65,7 @@ describe('ThreadList', () => {
   it('handles when there are no threads correctly', () => {
     const renderer = TestRenderer.create(
       <ThreadList
+        t={str => str}
         fetchThreads={() => {}}
         isFocused
         updateLastViewed={jest.fn()}
@@ -113,6 +116,7 @@ describe('MessageRow', () => {
 
     const renderer = TestRenderer.create(
       <MessageRow
+        t={str => str}
         showThread={showThread}
         message={message}
         participants={participants}

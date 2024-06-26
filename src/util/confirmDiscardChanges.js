@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Alert } from 'react-native'
 
 export default function confirmDiscardChanges ({
@@ -6,15 +7,20 @@ export default function confirmDiscardChanges ({
   title = 'You have unsaved changes',
   confirmationMessage = 'Are you sure you want to discard your changes?',
   disgardButtonText = 'Discard',
-  continueButtonText = 'Continue Editing'
+  continueButtonText = 'Continue Editing',
+  t
 }) {
+  t('You have unsaved changes')
+  t('Are you sure you want to discard your changes?')
+  t('Discard')
+  t('Continue Editing')
   if (hasChanges) {
     Alert.alert(
-      title,
-      confirmationMessage,
+      t(title),
+      t(confirmationMessage),
       [
-        { text: disgardButtonText, onPress: onDiscard },
-        { text: continueButtonText, style: 'cancel' }
+        { text: t(disgardButtonText), onPress: onDiscard },
+        { text: t(continueButtonText), style: 'cancel' }
       ])
   } else {
     onDiscard()

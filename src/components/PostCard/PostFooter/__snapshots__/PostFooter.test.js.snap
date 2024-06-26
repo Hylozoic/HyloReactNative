@@ -167,7 +167,7 @@ exports[`renders as expected 1`] = `
         </View>
       </View>
       <Text>
-        You, You and 17 others commented
+        manyCommentersInTheFooter commented
       </Text>
     </View>
   </div>,

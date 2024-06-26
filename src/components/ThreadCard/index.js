@@ -4,10 +4,12 @@ import { filter, get, map, find, isEmpty } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
 import Avatar from 'components/Avatar'
 import styles from './ThreadCard.styles'
+import { useTranslation } from 'react-i18next'
 
 const MAX_THREAD_PREVIEW_LENGTH = 54
 
 export default function ThreadCard (props) {
+  const { t } = useTranslation()
   if (!props?.message) return null
 
   const { message, currentUser, participants, isLast, unread } = props
@@ -34,21 +36,23 @@ export default function ThreadCard (props) {
 }
 
 export function lastMessageCreator (message, currentUser, participants) {
-  if (get('id', message.creator) === currentUser.id) return 'You: '
+  const { t } = useTranslation()
+  if (get('id', message.creator) === currentUser.id) return `${t('You')}: `
   if (participants.length <= 2) return ''
-  return (find(p => p.id === get('id', message.creator), participants)?.name || 'Deleted User') + ': '
+  return (find(p => p.id === get('id', message.creator), participants)?.name || t('Deleted User')) + ': '
 }
 
 export function threadNames (names) {
+  const { t } = useTranslation()
   const l = names.length
   switch (l) {
     case 0:
-      return 'You'
+      return t('You')
     case 1:
     case 2:
       return names.join(', ')
     default:
-      return `${names.slice(0, 1).join(', ')} and ${l - 1} other${l > 2 ? 's' : ''}`
+      return `${names.slice(0, 1).join(', ')} ${t('and')} ${l - 1} ${t('other')}${l > 2 ? 's' : ''}`
   }
 }
 

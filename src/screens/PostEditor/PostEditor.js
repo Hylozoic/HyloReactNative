@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select'
 import { useIsFocused } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
 import moment from 'moment-timezone'
 import { Validators, TextHelpers } from 'hylo-shared'
@@ -53,13 +54,14 @@ const titlePlaceholders = {
   offer: 'What help can you offer?',
   resource: 'What resource is available?',
   project: 'What would you like to call your project?',
+  proposal: 'What is your proposal?',
   event: 'What is your event called?'
 }
 
 export default function (props) {
   const isFocused = useIsFocused()
-
-  return <PostEditor {...props} isFocused={isFocused} />
+  const { t } = useTranslation()
+  return <PostEditor {...props} isFocused={isFocused} t={t} />
 }
 
 export class PostEditor extends React.Component {
@@ -110,7 +112,7 @@ export class PostEditor extends React.Component {
 
   componentDidMount () {
     const { isNewPost } = this.state
-    const { fetchPost, pollingFindOrCreateLocation, mapCoordinate } = this.props
+    const { fetchPost, pollingFindOrCreateLocation, mapCoordinate, t } = this.props
     if (!isNewPost) {
       fetchPost()
     } else {
@@ -130,8 +132,9 @@ export class PostEditor extends React.Component {
       e.preventDefault()
       confirmDiscardChanges({
         onDiscard: () => this.props.navigation.dispatch(e.data.action),
-        title: 'Are you sure?',
-        confirmationMessage: 'If you made changes they will be lost.'
+        title: t('Are you sure?'),
+        confirmationMessage: t('If you made changes they will be lost'),
+        t
       })
     })
 
@@ -205,20 +208,21 @@ export class PostEditor extends React.Component {
 
   handleSave = () => {
     const { announcementEnabled } = this.state
+    const { t } = this.props
 
     this.setIsSaving(true)
 
     if (announcementEnabled) {
       Alert.alert(
-        'MAKE AN ANNOUNCEMENT',
-        'This means that all members of this group will receive an instant email and push notification about this Post. \n(This feature is available to moderators only.)',
+        t('makeAnAnnouncement'),
+        t('announcementExplainer'),
         [
           {
-            text: 'Send It',
+            text: t('Send It'),
             onPress: this.save
           },
           {
-            text: 'Go Back',
+            text: t('Go Back'),
             style: 'cancel',
             onPress: () => this.setIsSaving(false)
           }
@@ -357,12 +361,12 @@ export class PostEditor extends React.Component {
   }
 
   handleShowProjectMembersEditor = () => {
-    const { navigation } = this.props
+    const { navigation, t } = this.props
     const { members } = this.state
-    const screenTitle = 'Project Members'
+    const screenTitle = t('Project Members')
     navigation.navigate('ItemChooser', {
       screenTitle,
-      searchPlaceholder: 'Type in the names of people to add to project',
+      searchPlaceholder: t('Type in the names of people to add to project'),
       ItemRowComponent: ItemChooserItemRow,
       initialItems: members,
       updateItems: this.handleUpdateProjectMembers,
@@ -372,11 +376,11 @@ export class PostEditor extends React.Component {
   }
 
   handleShowTopicsPicker = () => {
-    const { navigation } = this.props
-    const screenTitle = 'Pick a Topic'
+    const { navigation, t } = this.props
+    const screenTitle = t('Pick a Topic')
     navigation.navigate('ItemChooser', {
       screenTitle,
-      searchPlaceholder: 'Search for a topic by name',
+      searchPlaceholder: t('Search for a topic by name'),
       ItemRowComponent: TopicRow,
       pickItem: topic => { this.handleAddTopic(topic, true) },
       // FIX: Will only find topics for first group
@@ -386,12 +390,12 @@ export class PostEditor extends React.Component {
   }
 
   handleShowGroupsEditor = () => {
-    const { navigation, groupOptions } = this.props
-    const screenTitle = 'Post in Groups'
+    const { navigation, groupOptions, t } = this.props
+    const screenTitle = t('Post in Groups')
     navigation.navigate('ItemChooser', {
       screenTitle,
-      searchPlaceholder: 'Search for group by name',
-      defaultSuggestedItemsLabel: 'Your Groups',
+      searchPlaceholder: t('Search for group by name'),
+      defaultSuggestedItemsLabel: t('Your Groups'),
       defaultSuggestedItems: groupOptions,
       ItemRowComponent: GroupChooserItemRow,
       pickItem: this.handleAddGroup,
@@ -405,7 +409,8 @@ export class PostEditor extends React.Component {
     LocationPicker({
       navigation: this.props.navigation,
       initialSearchTerm: this.state?.location,
-      onPick: this.handlePickLocation
+      onPick: this.handlePickLocation,
+      t
     })
   }
 
@@ -454,12 +459,13 @@ export class PostEditor extends React.Component {
   }
 
   renderHeader = () => {
+    const { t } = this.props
     const { isValid, isSaving, isNewPost, type } = this.state
     const headerRightButtonLabel = isSaving
-      ? 'Saving...'
+      ? t('Saving-ellipsis')
       : isNewPost
-        ? 'Post'
-        : 'Save'
+        ? t('Post')
+        : t('Save')
 
     return (
       <View style={styles.headerContainer}>
@@ -470,7 +476,7 @@ export class PostEditor extends React.Component {
             onPress={this.handleCancel}
           />
           <TypeSelector
-            disabled={isSaving}
+            disabled={isSaving || type === 'proposal'}
             onValueChange={this.handleUpdateType}
             placeholder={{}}
             value={type}
@@ -487,13 +493,21 @@ export class PostEditor extends React.Component {
   }
 
   renderForm = () => {
-    const { canModerate, post, postLoading } = this.props
+    const { post, postLoading, t } = this.props
     const {
       isSaving, topics, title, type, filePickerPending, announcementEnabled,
       titleLengthError, members, groups, startTime, endTime, location, donationsLink,
       locationObject, projectManagementLink, isPublic, topicsPicked, files, images
     } = this.state
     const canHaveTimeframe = type !== 'discussion'
+
+    t('Create a post')
+    t('What are you looking for help with?')
+    t('What help can you offer?')
+    t('What resource is available?')
+    t('What would you like to call your project?')
+    t('What is your proposal?')
+    t('What is your event called?')
 
     return (
       <View style={styles.formContainer}>
@@ -506,7 +520,7 @@ export class PostEditor extends React.Component {
               style={[styles.titleInput]}
               editable={!isSaving}
               onChangeText={this.handleUpdateTitle}
-              placeholder={titlePlaceholders[type]}
+              placeholder={t(titlePlaceholders[type])}
               placeholderTextColor={rhino30}
               underlineColorAndroid='transparent'
               autoCorrect={false}
@@ -517,13 +531,13 @@ export class PostEditor extends React.Component {
               maxLength={MAX_TITLE_LENGTH}
             />
             {titleLengthError && (
-              <Text style={styles.titleInputError}>😬 {MAX_TITLE_LENGTH} characters max</Text>
+              <Text style={styles.titleInputError}>😬 {MAX_TITLE_LENGTH} {t('characters max')}</Text>
             )}
           </View>
 
           <View style={[styles.textInputWrapper, styles.detailsInputWrapper]}>
             <HyloEditorWebView
-              placeholder='Add a description'
+              placeholder={t('Add a description')}
               contentHTML={post?.details}
               // groupIds={groupOptions && groupOptions.map(g => g.id)}
               onChange={this.handleUpdateDetails}
@@ -542,7 +556,7 @@ export class PostEditor extends React.Component {
             onPress={this.handleShowTopicsPicker}
           >
             <View style={styles.pressSelection}>
-              <Text style={styles.pressSelectionLeftText}>Topics</Text>
+              <Text style={styles.pressSelectionLeftText}>{t('Topics')}</Text>
               <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.pressSelectionRightIcon} /></View>
             </View>
             <Topics
@@ -555,10 +569,16 @@ export class PostEditor extends React.Component {
             />
           </TouchableOpacity>
 
+          {type === 'proposal' && (
+            <View style={styles.pressSelection}>
+              <Text style={styles.pressSelectionLeftText}>{t('Proposal details can be edited in the web-app')}</Text>
+            </View>
+          )}
+
           {type === 'project' && (
             <TouchableOpacity style={styles.pressSelectionSection} onPress={this.handleShowProjectMembersEditor}>
               <View style={styles.pressSelection}>
-                <Text style={styles.pressSelectionLeftText}>Project Members</Text>
+                <Text style={styles.pressSelectionLeftText}>{t('Project Members')}</Text>
                 <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.pressSelectionRightIcon} /></View>
               </View>
               {members.length > 0 && <ProjectMembersSummary style={styles.pressSelectionValue} members={members} />}
@@ -569,14 +589,14 @@ export class PostEditor extends React.Component {
             <>
               <DatePickerWithLabel
                 style={styles.pressSelectionSection}
-                label='Start Time'
+                label={t('Start Time')}
                 date={startTime}
                 minimumDate={new Date()}
                 onSelect={startTime => this.setState({ startTime }, this.setIsValid)}
               />
               <DatePickerWithLabel
                 style={styles.pressSelectionSection}
-                label='End Time'
+                label={t('End Time')}
                 disabled={!startTime}
                 date={endTime}
                 minimumDate={startTime || new Date()}
@@ -590,7 +610,7 @@ export class PostEditor extends React.Component {
             onPress={this.handleShowLocationPicker}
           >
             <View style={styles.pressSelection}>
-              <Text style={styles.pressSelectionLeftText}>Location</Text>
+              <Text style={styles.pressSelectionLeftText}>{t('Location')}</Text>
               <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View>
             </View>
             {(location || locationObject) && (
@@ -603,7 +623,7 @@ export class PostEditor extends React.Component {
             onPress={this.handleShowGroupsEditor}
           >
             <View style={styles.pressSelection}>
-              <Text style={styles.pressSelectionLeftText}>Post In</Text>
+              <Text style={styles.pressSelectionLeftText}>{t('Post In')}</Text>
               <View style={styles.pressSelectionRight}><Icon name='Plus' style={styles.pressSelectionRightIcon} /></View>
             </View>
             <GroupsList
@@ -623,7 +643,7 @@ export class PostEditor extends React.Component {
             onPress={this.handleShowLocationPicker}
           >
             <View style={styles.pressSelection}>
-              <Text style={styles.pressSelectionLeft}>Location</Text>
+              <Text style={styles.pressSelectionLeft}>{t('Location')}</Text>
               <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View>
             </View>
             {(location || locationObject) && (
@@ -634,7 +654,7 @@ export class PostEditor extends React.Component {
           {type === 'project' && (
             <View style={[styles.pressSelectionSection, styles.topics]}>
               <View style={styles.pressSelection}>
-                <Text style={styles.pressSelectionLeft}>Donation Link</Text>
+                <Text style={styles.pressSelectionLeft}>{t('Donation Link')}</Text>
                 {/* <View style={styles.pressSelectionRight}><Icon name='ArrowDown' style={styles.pressSelectionRightIcon} /></View> */}
               </View>
               <TextInput
@@ -652,7 +672,7 @@ export class PostEditor extends React.Component {
           {type === 'project' && (
             <View style={[styles.pressSelectionSection, styles.topics]}>
               <View style={styles.pressSelection}>
-                <Text style={styles.pressSelectionLeft}>Project Management</Text>
+                <Text style={styles.pressSelectionLeft}>{t('Project Management')}</Text>
               </View>
               <TextInput
                 style={styles.pressSelectionValue}
@@ -681,7 +701,7 @@ export class PostEditor extends React.Component {
                   style={[{ fontSize: 16, marginRight: 10 }, isPublic && styles.pressSelectionSectionPublicSelected]}
                   color={rhino80}
                 />
-                <Text style={[styles.pressSelectionLeftText, isPublic && styles.pressSelectionSectionPublicSelected]}>Make Public:</Text>
+                <Text style={[styles.pressSelectionLeftText, isPublic && styles.pressSelectionSectionPublicSelected]}>{t('Make Public')}</Text>
               </View>
               <View style={styles.pressSelectionRightNoBorder}>
                 <Switch
@@ -704,7 +724,7 @@ export class PostEditor extends React.Component {
                   style={[{ fontSize: 16, marginRight: 10 }, announcementEnabled && styles.pressSelectionSectionPublicSelected]}
                   color={rhino80}
                 />
-                <Text style={[styles.pressSelectionLeftText, announcementEnabled && styles.pressSelectionSectionPublicSelected]}>Announcement?</Text>
+                <Text style={[styles.pressSelectionLeftText, announcementEnabled && styles.pressSelectionSectionPublicSelected]}>{t('Announcement?')}</Text>
               </View>
               <View style={styles.pressSelectionRightNoBorder}>
                 <Switch
@@ -734,7 +754,7 @@ export class PostEditor extends React.Component {
                   style={{ padding: 0, margin: 0, fontSize: 24, marginRight: 5 }}
                   color={rhino80}
                 />
-                <Text style={styles.pressSelectionLeftText}>Images</Text>
+                <Text style={styles.pressSelectionLeftText}>{t('Images')}</Text>
               </View>
               <View style={styles.pressSelectionRight}>
                 <ImagePicker
@@ -782,7 +802,7 @@ export class PostEditor extends React.Component {
                   style={{ padding: 0, margin: 0, fontSize: 24, marginRight: 5 }}
                   color={rhino80}
                 />
-                <Text style={styles.pressSelectionLeftText}>Files</Text>
+                <Text style={styles.pressSelectionLeftText}>{t('Files')}</Text>
               </View>
               <View style={styles.pressSelectionRight}>
                 <TouchableOpacity onPress={this.handleShowFilePicker}>
@@ -834,6 +854,14 @@ export class PostEditor extends React.Component {
 }
 
 export function TypeSelector (props) {
+  const { t } = useTranslation()
+  // explicit invocation of dynamic labels
+  t('Discussion')
+  t('Request')
+  t('Offer')
+  t('Resource')
+  t('Project')
+  t('Event')
   return (
     <View style={styles.typeSelectorWrapper}>
       <RNPickerSelect
@@ -843,7 +871,7 @@ export function TypeSelector (props) {
         pickerProps={{ itemStyle: { backgroundColor: white, letterSpacing: 2, fontWeight: 'bold', fontSize: 20 } }}
         items={
           ['Discussion', 'Request', 'Offer', 'Resource', 'Project', 'Event'].map(type => ({
-            label: type.toUpperCase(),
+            label: t(type).toUpperCase(),
             value: type.toLowerCase(),
             color: typeSelectorStyles(type.toLowerCase()).inputIOS.color
           }))
@@ -873,6 +901,7 @@ export function DatePickerWithLabel ({
   },
   dateFormat = 'MM/DD/YYYY LT z'
 }) {
+  const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   const handleOnPress = () => {
     !disabled && setOpen(true)
@@ -909,8 +938,8 @@ export function DatePickerWithLabel ({
         date={date || new Date()}
         mode='datetime'
         title={label}
-        confirmText='Set'
-        cancelText='Clear'
+        confirmText={t('Set')}
+        cancelText={t('Clear')}
         onConfirm={handleOnConfirm}
         onCancel={handleOnCancel}
       />

@@ -40,6 +40,7 @@ exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
   }
   createdAt
   updatedAt
+  isAnonymousVote
   isPublic
   fulfilledAt
   startTime
@@ -177,8 +178,33 @@ exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
     neighborhood
     region
   }
-  votesTotal
   peopleReactedTotal
+  proposalStatus
+  proposalOutcome
+  votingMethod
+  quorum
+  proposalOptions {
+    total
+    hasMore
+    items {
+      id
+      text
+      emoji
+    }
+  }
+  proposalVotes {
+      total
+      hasMore
+      items {
+        id
+        optionId
+        user {
+          id
+          name
+          avatarUrl
+        }
+      }
+  }
   myReactions {
     emojiFull
     id

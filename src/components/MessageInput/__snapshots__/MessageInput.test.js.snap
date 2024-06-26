@@ -19,6 +19,7 @@ exports[`matches the last snapshot 1`] = `
         "paddingVertical": 0,
       }
     }
+    t={[Function]}
     underlineColorAndroid="transparent"
   />
   <TouchableOpacity

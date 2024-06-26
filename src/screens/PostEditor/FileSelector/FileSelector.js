@@ -5,6 +5,7 @@ import { Text, View } from 'react-native'
 import Icon from 'components/Icon'
 import DocumentPicker from 'react-native-document-picker'
 import styles from './FileSelector.styles'
+import { useTranslation } from 'react-i18next'
 
 export function cleanName (url) {
   return decodeURIComponent(last(url.split('/')))
@@ -73,10 +74,11 @@ export async function showFilePicker ({
 }
 
 function renderFileButton (file, buttonIndex, onRemove) {
+  const { t } = useTranslation()
   return (
     <PopupMenuButton
       key={file.local}
-      actions={[['Remove File', () => onRemove(file)]]}
+      actions={[[t('Remove File'), () => onRemove(file)]]}
       destructiveButtonIndex={0}
     >
       <FileLabel url={file.local} />

@@ -18,6 +18,7 @@ import { useDispatch } from 'react-redux'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import OneSignal from 'react-native-onesignal'
 import registerDevice from 'store/actions/registerDevice'
+import i18n from '../../i18n'
 import { fetchNotifications, updateNewNotificationCount } from 'screens/NotificationsList/NotificationsList.store'
 
 const AuthRoot = createStackNavigator()
@@ -31,6 +32,9 @@ export default function AuthRootNavigator () {
 
       if (!response.payload?.getData()?.error) {
         const deviceState = await OneSignal.getDeviceState()
+
+        const locale = response.payload?.getData().settings?.locale || 'en'
+        i18n.changeLanguage(locale)
 
         if (deviceState?.userId) {
           await dispatch(registerDevice(deviceState?.userId))

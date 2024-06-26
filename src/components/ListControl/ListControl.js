@@ -4,8 +4,11 @@ import { isIOS } from 'util/platform'
 import useHyloActionSheet from 'hooks/useHyloActionSheet'
 import Icon from 'components/Icon'
 import { rhino } from 'style/colors'
+import { useTranslation } from 'react-i18next'
 
 export default function ListControl ({ selected, options, onChange }) {
+  const { t } = useTranslation()
+
   const { showHyloActionSheet } = useHyloActionSheet()
 
   const actionSheetActions = options.map(option => [option.label, () => onChange(option.id)])
@@ -15,15 +18,15 @@ export default function ListControl ({ selected, options, onChange }) {
       onPress={() => showHyloActionSheet({ actions: actionSheetActions })}
       style={styles.listControl}
     >
-      <Text style={styles.optionText}>{optionText(selected, options)}</Text>
+      <Text style={styles.optionText}>{optionText(selected, options, t)}</Text>
       <Icon name='ArrowDown' style={[styles.optionText, styles.downArrow]} />
     </TouchableOpacity>
   )
 }
 
-const optionText = (id, options) => {
+const optionText = (id, options, t) => {
   const option = find(o => o.id === id, options) || options[0]
-  return option.label
+  return t(option.label)
 }
 
 const styles = {
