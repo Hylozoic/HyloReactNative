@@ -8,6 +8,10 @@ import { useQuery } from 'urql'
 import { AnalyticsEvents } from 'hylo-shared'
 import useGoToMember from 'hooks/useGoToMember'
 import useIsModalScreen from 'hooks/useIsModalScreen'
+import useRouteParams from 'hooks/useRouteParams'
+import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
+import fetchPost from 'store/actions/fetchPost'
+import trackAnalyticsEvent from 'store/actions/trackAnalyticsEvent'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import postQuery from 'graphql/queries/postQuery'
 import useRouteParams from 'hooks/useRouteParams'
@@ -17,31 +21,27 @@ import Loading from 'components/Loading'
 import PostCardForDetails from 'components/PostCard/PostCardForDetails'
 import SocketSubscriber from 'components/SocketSubscriber'
 import { white } from 'style/colors'
-import trackAnalyticsEvent from 'store/actions/trackAnalyticsEvent'
 
 export default function PostDetails () {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigation = useNavigation()
+  const isModalScreen = useIsModalScreen()
   const { id: postId } = useRouteParams()
-
-  const [postResult] = useQuery({
+  // const [{ fetching, error }] = useHyloQuery({ action: fetchPost(postId) })
+  const [{ data: postData, fetching, error }] = useQuery({
     query: postQuery,
     variables: { id: postId }
   })
-  const { data: postData, fetching: postFetching, error: postError } = postResult
 
   // const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
   const post = postData?.post
   const currentGroup = useSelector(getCurrentGroup)
   const commentsRef = React.useRef()
-  const isModalScreen = useIsModalScreen()
   const goToMember = useGoToMember()
 
   const [selectedComment, setSelectedComment] = useState(null)
   const groupId = get('groups.0.id', post)
-
-  // const fetchPost = () => dispatch(fetchPostAction(postId))
 
   const setHeader = () => {
     !isModalScreen && navigation.setOptions({ title: currentGroup?.name })
@@ -55,22 +55,30 @@ export default function PostDetails () {
     commentsRef.current && commentsRef.current.scrollToComment(selectedComment)
   }
 
-  useEffect(() => {
-    if (!post) return
-    dispatch(trackAnalyticsEvent(AnalyticsEvents.POST_OPENED, {
-      postId: post.id,
-      groupId: post.groups.map(g => g.id),
-      isPublic: post.isPublic,
-      topics: post.topics?.map(t => t.name),
-      type: post.type
-    }))
-  }, [post])
-
-  useEffect(() => {
-    setHeader()
-  }, [])
-
   useEffect(() => { setHeader() }, [currentGroup?.slug])
+
+  useEffect(() => {
+    if (!error && post) {
+      dispatch(trackAnalyticsEvent(AnalyticsEvents.POST_OPENED, {
+        postId: post.id,
+        groupId: post.groups.map(g => g.id),
+        isPublic: post.isPublic,
+        topics: post.topics?.map(t => t.name),
+        type: post.type
+      }))
+    }
+  }, [error, post])
+
+  if (fetching) return <Loading />
+
+  if (error) {
+    Alert.alert(
+      t('Sorry, we couldn\'t find that post'),
+      t('It may have been removed, or you don\'t have permission to view it'),
+      [{ text: t('Ok'), onPress: () => navigation.replace('Feed') }]
+    )
+    return null
+  }
 
   const renderPostDetails = panHandlers => {
     const firstGroupSlug = get('groups.0.slug', post)
@@ -92,24 +100,6 @@ export default function PostDetails () {
         panHandlers={panHandlers}
       />
     )
-  }
-
-  if (postFetching) return <Loading />
-  if (postError) {
-    Alert.alert(
-      'Sorry, an error occurred when retrieving that post',
-      postError.message,
-      [{ text: 'Ok', onPress: () => navigation.replace('Feed')}]
-    )
-    return null
-  }
-  if (!postData || !postData.post) {
-    Alert.alert(
-      "Sorry, we couldn't find that post",
-      "It may have been removed, or you don't have permission to view it",
-      [{ text: 'Ok', onPress: () => navigation.replace('Feed')}]
-    )
-    return null
   }
 
   return (
