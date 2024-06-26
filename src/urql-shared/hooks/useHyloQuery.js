@@ -2,7 +2,7 @@ import { isString, isObject, isFunction } from 'lodash/fp'
 import { useState, useEffect, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import useDeepCompareMemoize from './useDeepCompareMemoize'
-import fetchGraphQLAction from 'store/actions/fetchGraphQL'
+import fetchGraphqlActionCreator from 'store/actions/fetchGraphQL'
 
 const usageError = new Error(
   'A value for either "query" or "action" is required'
@@ -13,7 +13,7 @@ const onlyQueryOrActionError = new Error(
 )
 
 const noDataError = new Error(
-  'No data returned from the GraphQL query or action.'
+  'No data returned from the provided GraphQL query or action.'
 )
 
 export default function useHyloQuery ({ query, action, variables, meta }) {
@@ -49,14 +49,14 @@ export default function useHyloQuery ({ query, action, variables, meta }) {
         response = await dispatch(memoizedAction)
       // GraphQL query string
       } else if (isString(memoizedQuery)) {
-        response = await dispatch(fetchGraphQLAction({
+        response = await dispatch(fetchGraphqlActionCreator({
           query: memoizedQuery,
           variables: memoizedVariables || {},
           meta: memoizedMeta || {}
         }))
       // GraphQL operation object (compiled by gql tag)
       } else if (isObject(memoizedQuery) && Object.hasOwnProperty.call(memoizedQuery, 'definitions')) {
-        response = await dispatch(fetchGraphQLAction({
+        response = await dispatch(fetchGraphqlActionCreator({
           query: memoizedQuery,
           variables: memoizedVariables || {},
           meta: memoizedMeta || {}

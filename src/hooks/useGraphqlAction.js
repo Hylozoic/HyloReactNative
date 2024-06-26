@@ -1,4 +1,4 @@
-import { isString, isObject} from 'lodash/fp'
+import { isString, isObject } from 'lodash/fp'
 import { useDispatch } from 'react-redux'
 import fetchGraphQLAction from 'store/actions/fetchGraphQL'
 
