@@ -159,7 +159,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
 
     case ACTION_NEW_COMMENT:
       return {
-        body: `wrote: ${truncateHTML(comment.text)}`,
+        body: `wrote: "${truncateHTML(comment.text)}"`,
         header: 'New Comment on',
         onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
         title: post.title
@@ -167,7 +167,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
 
     case ACTION_MENTION:
       return {
-        body: `wrote: ${truncateHTML(post.details)}`,
+        body: `wrote: "${truncateHTML(post.details)}"`,
         header: 'mentioned you',
         onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
         nameInHeader: true
@@ -177,7 +177,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
       const topicReason = find(r => r.startsWith('tag: '), meta.reasons)
       const topic = topicReason.split(': ')[1]
       return {
-        body: `wrote: ${truncateHTML(post.details)}`,
+        body: `wrote: "${truncateHTML(post.details)}"`,
         header: 'New Post in',
         onPress: () => {
           navigate('Chat', { topicName: topic, postId: post.id })
@@ -188,7 +188,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
 
     case ACTION_NEW_POST: {
       return {
-        body: `wrote: ${truncateHTML(post.details)}`,
+        body: `wrote: "${truncateHTML(post.details)}"`,
         header: 'New Post in',
         onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
         objectName: group.name
@@ -218,7 +218,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
       }
     case ACTION_ANNOUNCEMENT:
       return {
-        body: `wrote: ${truncateText(post.title)}`,
+        body: `wrote: "${truncateText(post.title)}"`,
         header: 'posted an announcement',
         onPress: () => navigate(modalScreenName('Post Details'), { id: post.id }),
         nameInHeader: true

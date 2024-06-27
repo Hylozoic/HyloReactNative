@@ -13,22 +13,6 @@ jest.mock('util/websockets', () => {
   }
 })
 
-jest.mock('react-i18next', () => ({
-  ...jest.requireActual('react-i18next'),
-  withTranslation: () => Component => {
-    Component.defaultProps = { ...Component.defaultProps, t: (str) => str }
-    return Component
-  },
-  useTranslation: (domain) => {
-    return {
-      t: (str) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {})
-      }
-    }
-  }
-}))
-
 describe('ThreadList', () => {
   it('renders correctly', () => {
     const threads = [{ id: 1, participants: [{ id: 1, avatarUrl: 'blah' }], lastMessage: { id: 1 } }]

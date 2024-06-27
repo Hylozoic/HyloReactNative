@@ -66,5 +66,5 @@ target 'HyloReactNative' do
 end
 
 target 'OneSignalNotificationServiceExtension' do
-  pod 'OneSignalXCFramework', '>= 3.10.1', '< 4.0'
+  pod 'OneSignalXCFramework', '>= 3.12.9', '< 4.0'
 end

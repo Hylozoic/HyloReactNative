@@ -9,10 +9,12 @@ import {
   TextInput
 } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import validator from 'validator'
 import { openURL } from 'hooks/useOpenURL'
 import { useNavigation, useRoute, useNavigationState } from '@react-navigation/native'
+import useRouteParams from 'hooks/useRouteParams'
 import FormattedError from 'components/FormattedError'
 import sendEmailVerification from 'store/actions/sendEmailVerification'
 import { getAuthState, AuthState } from 'store/selectors/getAuthState'
@@ -20,7 +22,6 @@ import KeyboardFriendlyView from 'components/KeyboardFriendlyView'
 import Button from 'components/Button'
 import providedStyles from './Signup.styles'
 import SocialAuth from 'components/SocialAuth'
-import { useTranslation } from 'react-i18next'
 
 const backgroundImage = require('assets/signin_background.png')
 const merkabaImage = require('assets/merkaba_white.png')
@@ -33,12 +34,13 @@ export default function Signup () {
   const safeAreaInsets = useSafeAreaInsets()
   const dispatch = useDispatch()
   const authState = useSelector(getAuthState)
-  const [email, providedSetEmail] = useState(route.params?.email)
+  const { email: routeEmail, error: routeError, bannerError: routeBannerError } = useRouteParams()
+  const [email, providedSetEmail] = useState(routeEmail)
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState()
+  const [error, setError] = useState(routeError)
   // WIP: Positive message for `checkInvitation` result
   // const [message, setMessage] = useState(route.params?.message)
-  const [bannerError, setBannerError] = useState()
+  const [bannerError, setBannerError] = useState(routeBannerError)
   const [canSubmit, setCanSubmit] = useState(!loading && email)
   const genericError = new Error(t('An account may already exist for this email address, Login or try resetting your password'))
 
@@ -64,11 +66,6 @@ export default function Signup () {
   useEffect(() => {
     if (!loading) signupRedirect()
   }, [loading, authState])
-
-  useEffect(() => {
-    setBannerError(route.params?.bannerError)
-    setError(route.params?.error)
-  }, [route.params?.bannerError, route.params?.error])
 
   const setEmail = validateEmail => {
     setBannerError()

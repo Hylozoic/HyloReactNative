@@ -7,6 +7,7 @@ import {
   View, FlatList, Text, TouchableOpacity
 } from 'react-native'
 import { useIsFocused, useScrollToTop } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 import Avatar from 'components/Avatar'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
@@ -102,7 +103,7 @@ export class MemberList extends React.Component {
     t('Newest')
     t('Name')
     t('Location')
-    
+
     const header = (
       <View>
         {children || null}

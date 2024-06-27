@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 import RNPickerSelect from 'react-native-picker-select'
 import { useIsFocused } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 import { get, uniq, uniqBy, isEmpty } from 'lodash/fp'
 import moment from 'moment-timezone'
 import { Validators, TextHelpers } from 'hylo-shared'
@@ -46,7 +47,6 @@ import styles, { typeSelectorStyles } from './PostEditor.styles'
 import HeaderLeftCloseIcon from 'navigation/headers/HeaderLeftCloseIcon'
 import confirmDiscardChanges from 'util/confirmDiscardChanges'
 import { caribbeanGreen, rhino30, rhino80, white } from 'style/colors'
-import { useTranslation } from 'react-i18next'
 
 const titlePlaceholders = {
   discussion: 'Create a post',
@@ -409,7 +409,8 @@ export class PostEditor extends React.Component {
     LocationPicker({
       navigation: this.props.navigation,
       initialSearchTerm: this.state?.location,
-      onPick: this.handlePickLocation
+      onPick: this.handlePickLocation,
+      t
     })
   }
 

@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
 import { useIsFocused } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 import ModalHeader from 'navigation/headers/ModalHeader'
 import NotificationCard from 'components/NotificationCard'
 import CreateGroupNotice from 'components/CreateGroupNotice'
-import styles from './NotificationsList.styles'
 import Loading from 'components/Loading'
-import { useTranslation } from 'react-i18next'
+import cardStyles from 'components/NotificationCard/NotificationCard.styles'
+import styles from './NotificationsList.styles'
 
-export default function (props) {
+export default function NotificationsList (props) {
   const isFocused = useIsFocused()
   const { t } = useTranslation()
-  return <NotificationsList {...props} isFocused={isFocused} t={t} />
+  return <NotificationsListClassComponent {...props} isFocused={isFocused} t={t} />
 }
-export class NotificationsList extends Component {
+export class NotificationsListClassComponent extends Component {
   state = { ready: false }
 
   setHeader = () => {
@@ -80,8 +81,10 @@ export class NotificationsList extends Component {
       <View style={styles.notificationsList}>
         {
           pending &&
-            <View style={styles.loadingContainer}>
-              <Loading />
+            <View style={cardStyles.container}>
+              <View style={cardStyles.content}>
+                <Loading />
+              </View>
             </View>
         }
         <FlatList

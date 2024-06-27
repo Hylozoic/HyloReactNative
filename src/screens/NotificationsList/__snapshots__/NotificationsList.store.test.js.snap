@@ -410,7 +410,7 @@ exports[`action creators matches the last snapshot from updateNewNotificationCou
 
 exports[`selectors/refiners refineActivity matches the previous ACTION_ANNOUNCEMENT snapshot 1`] = `
 {
-  "body": "wrote: This post should have a really long title. It should not even come close to …",
+  "body": "wrote: "This post should have a really long title. It should not even come close to …"",
   "header": "posted an announcement",
   "nameInHeader": true,
   "onPress": [Function],
@@ -428,7 +428,7 @@ exports[`selectors/refiners refineActivity matches the previous ACTION_APPROVED_
 
 exports[`selectors/refiners refineActivity matches the previous ACTION_COMMENT snapshot 1`] = `
 {
-  "body": "wrote: Rich Churcher",
+  "body": "wrote: "Rich Churcher"",
   "header": "New Comment on",
   "onPress": [Function],
   "title": "This post should have a really long title. It should not even come close to fitting on a notification header. It should be truncated.",
@@ -457,7 +457,7 @@ exports[`selectors/refiners refineActivity matches the previous ACTION_JOIN_REQU
 
 exports[`selectors/refiners refineActivity matches the previous ACTION_MENTION snapshot 1`] = `
 {
-  "body": "wrote: So detailed.",
+  "body": "wrote: "So detailed."",
   "header": "mentioned you",
   "nameInHeader": true,
   "onPress": [Function],
@@ -466,7 +466,7 @@ exports[`selectors/refiners refineActivity matches the previous ACTION_MENTION s
 
 exports[`selectors/refiners refineActivity matches the previous ACTION_TAG snapshot 1`] = `
 {
-  "body": "wrote: So detailed.",
+  "body": "wrote: "So detailed."",
   "header": "New Post in",
   "objectName": "aardvark",
   "onPress": [Function],

@@ -4,6 +4,7 @@ import {
   Text, View, TextInput, ScrollView, TouchableOpacity
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
 import { openURL } from 'hooks/useOpenURL'
 import ErrorBubble from 'components/ErrorBubble'
 import { accessibilityDescription, visibilityDescription } from 'store/models/Group'
@@ -15,7 +16,6 @@ import {
 } from './CreateGroupFlow.store'
 import { white } from 'style/colors'
 import styles from './CreateGroupFlow.styles'
-import { useTranslation } from 'react-i18next'
 
 export default function CreateGroupReview () {
   const { t } = useTranslation()
@@ -24,7 +24,6 @@ export default function CreateGroupReview () {
   const groupData = useSelector(getGroupData)
   const parentGroups = useSelector(getNewGroupParentGroups)
   const [error, setError] = useState(null)
-
 
   useEffect(() => {
     return navigation.addListener('tabPress', async event => {
@@ -60,7 +59,7 @@ export default function CreateGroupReview () {
           <View style={styles.textInputContainer}>
             <View style={stepStyles.itemHeader}>
               <Text style={stepStyles.textInputLabel}>{t('Whats the name of your group?')}</Text>
-              <EditButton t={t} onPress={() => navigation.navigate('CreateGroupName')} />
+              <EditButton onPress={() => navigation.navigate('CreateGroupName')} />
             </View>
             <TextInput
               style={stepStyles.reviewTextInput}
@@ -156,11 +155,15 @@ const GroupRow = ({ group }) => (
   </View>
 )
 
-const EditButton = ({ onPress, t }) => (
-  <TouchableOpacity onPress={onPress}>
-    <Text style={stepStyles.editLink}>{t('Edit')}</Text>
-  </TouchableOpacity>
-)
+const EditButton = ({ onPress }) => {
+  const { t } = useTranslation()
+
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <Text style={stepStyles.editLink}>{t('Edit')}</Text>
+    </TouchableOpacity>
+  )
+}
 
 const stepStyles = {
   textInputLabel: {

@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   Alert
 } from 'react-native'
+import { useTranslation } from 'react-i18next'
 import Icon from 'components/Icon'
 import PopupMenuButton from 'components/PopupMenuButton'
 import { filter, get, isEmpty } from 'lodash/fp'
@@ -11,7 +12,6 @@ import styles from './MemberHeader.styles'
 import { AXOLOTL_ID } from 'store/models/Person'
 import LocationPicker from 'screens/LocationPicker/LocationPicker'
 import Control from 'screens/MemberProfile/Control'
-import { useTranslation } from 'react-i18next'
 
 export default function MemberHeader ({
   person,
@@ -43,7 +43,8 @@ export default function MemberHeader ({
       onPick: location => {
         updateSetting('location', location?.fullText)
         updateSetting('locationId', location?.id)
-      }
+      },
+      t
     })
   }
 

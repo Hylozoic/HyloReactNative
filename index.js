@@ -8,8 +8,8 @@ import { AppRegistry, Platform, AppState, UIManager } from 'react-native'
 import Timer from 'react-native-background-timer'
 import * as Sentry from '@sentry/react-native'
 import OneSignal from 'react-native-onesignal'
-import { isDev } from 'config'
-import store from './src/store'
+import { sentryConfig } from 'config'
+import store from 'store'
 import { name as appName } from './app.json'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { TRenderEngineProvider, defaultSystemFonts } from 'react-native-render-html'
@@ -22,9 +22,7 @@ import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 import { baseStyle, tagsStyles, classesStyles } from 'components/HyloHTML/HyloHTML.styles'
 // import FastImage from 'react-native-fast-image'
 
-if (!isDev) {
-  Sentry.init({ dsn: process.env.SENTRY_DSN_URL })
-}
+Sentry.init(sentryConfig)
 
 // For Layout animation support: https://reactnative.dev/docs/layoutanimation
 if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {

@@ -10,7 +10,6 @@ import LinkPreview from 'components/PostCard/LinkPreview'
 import Icon from 'components/Icon'
 import PopupMenuButton from 'components/PopupMenuButton'
 import PostBodyProposal from '../PostBodyProposal/PostBodyProposal'
-// import VideoPlayerWebView from 'components/VideoPlayerWebView'
 import { caribbeanGreen, rhino, white, white20onCaribbeanGreen } from 'style/colors'
 import { useTranslation } from 'react-i18next'
 
@@ -48,10 +47,6 @@ export default function PostBody ({
           />
         )}
       </View>
-      {/* {linkPreviewFeatured && (
-        <LinkPreview {...linkPreview} />
-      )} */}
-      {/* <VideoPlayerWebView url={linkPreview.url} /> */}
       <HyloHTML
         html={presentedDetails}
         baseStyle={{ marginBottom: 8 }}

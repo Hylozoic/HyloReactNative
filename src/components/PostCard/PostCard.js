@@ -1,6 +1,8 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import { useTranslation } from 'react-i18next'
 import { LocationHelpers } from 'hylo-shared'
+import { useCurrentUser } from 'hooks/useCurrentUser'
 import PostHeader from './PostHeader'
 import PostBody from './PostBody'
 import PostGroups from './PostGroups'
@@ -10,8 +12,6 @@ import Files from 'components/Files'
 import Icon from 'components/Icon'
 import Topics from 'components/Topics'
 import styles from 'components/PostCard/PostCard.styles'
-import { useCurrentUser } from 'hooks/useCurrentUser'
-import { useTranslation } from 'react-i18next'
 
 export default function PostCard ({
   goToGroup,

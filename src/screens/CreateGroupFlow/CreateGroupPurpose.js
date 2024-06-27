@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useFocusEffect } from '@react-navigation/native'
 import { Text, View, ScrollView, TextInput } from 'react-native'
 import { useTranslation } from 'react-i18next'
-import getRouteParam from 'store/selectors/getRouteParam'
+import useRouteParams from 'hooks/useRouteParams'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import {
   getGroupData, getEdited, updateGroupData, setWorkflowOptions,
@@ -22,16 +22,16 @@ export default function CreateGroupPurpose ({ route }) {
   const groupData = useSelector(getGroupData)
   const [groupPurpose, setGroupPurpose] = useState()
   const [error, setError] = useState()
+  const { reset } = useRouteParams()
 
   useEffect(() => {
-    const reset = getRouteParam('reset', route)
     if (reset) {
       dispatch(clearCreateGroupStore())
       setGroupPurpose('')
     } else {
       setGroupPurpose(groupData?.purpose)
     }
-  }, [])
+  }, [reset])
 
   useFocusEffect(useCallback(() => {
     dispatch(updateGroupData({ purpose: groupPurpose }))

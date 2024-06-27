@@ -1,7 +1,7 @@
 import { includes } from 'lodash/fp'
 import PropTypes from 'prop-types'
 import { attr, fk, many, Model } from 'redux-orm'
-import featureFlag from '../../config/featureFlags'
+import featureFlag from 'config/featureFlags'
 
 export function firstName (user) {
   return user.name ? user.name.split(' ')[0] : null

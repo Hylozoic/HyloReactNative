@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native'
 import FastImage from 'react-native-fast-image'
 import { useNavigation } from '@react-navigation/native'
 import useIsModalScreen from 'hooks/useIsModalScreen'
+import { useTranslation, withTranslation } from 'react-i18next'
 import Loading from 'components/Loading'
 import MemberFeed from './MemberFeed'
 import MemberHeader from './MemberHeader'
@@ -12,7 +13,6 @@ import EntypoIcon from 'react-native-vector-icons/Entypo'
 import defaultBanner from 'assets/default-user-banner.jpg'
 import styles from './MemberProfile.styles'
 import ModalHeaderTransparent from 'navigation/headers/ModalHeaderTransparent'
-import { withTranslation } from 'react-i18next'
 
 export const blockUserWithNav = async ({ navigation, person, blockUser }) => {
   await blockUser(person.id)
@@ -96,7 +96,7 @@ function MemberProfile ({
           goToManageNotifications={goToManageNotifications}
           goToBlockedUsers={goToBlockedUsers}
         />
-        <ReadMoreButton goToDetails={goToDetails} t={t} />
+        <ReadMoreButton goToDetails={goToDetails} />
       </View>
       {flaggingVisible && (
         <FlagContent
@@ -167,7 +167,9 @@ export class MemberBanner extends React.Component {
           disabled={!isMe}
         >
           <FastImage source={bannerSource} style={styles.bannerImage} />
-          {isMe && <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} t={t} />}
+          {isMe && (
+            <EditButton isLoading={bannerPickerPending} style={styles.bannerEditButton} />
+          )}
         </ImagePicker>
         <View style={styles.avatarW3}>
           <ImagePicker
@@ -190,7 +192,9 @@ export class MemberBanner extends React.Component {
   }
 }
 
-export function EditButton ({ isLoading, style, t }) {
+export function EditButton ({ isLoading, style }) {
+  const { t } = useTranslation()
+
   return (
     <View style={[styles.editButton, style]}>
       {isLoading
@@ -206,7 +210,9 @@ export function EditButton ({ isLoading, style, t }) {
   )
 }
 
-export function ReadMoreButton ({ goToDetails, t }) {
+export function ReadMoreButton ({ goToDetails }) {
+  const { t } = useTranslation()
+
   return (
     <View style={styles.buttonContainer}>
       <TouchableOpacity onPress={goToDetails} style={styles.buttonWrapper}>
