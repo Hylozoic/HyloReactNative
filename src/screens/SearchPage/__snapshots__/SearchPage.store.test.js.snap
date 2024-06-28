@@ -10,7 +10,7 @@ exports[`fetchSearchResults matches snapshot 1`] = `
           items {
             id
             content {
-              __typename
+              __typename: contentTypeName
               ... on Person {
                 id
                 name
