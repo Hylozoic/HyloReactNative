@@ -4,16 +4,15 @@ import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { get } from 'lodash/fp'
-import { useQuery } from 'urql'
 import { AnalyticsEvents } from 'hylo-shared'
 import useGoToMember from 'hooks/useGoToMember'
 import useIsModalScreen from 'hooks/useIsModalScreen'
 import useRouteParams from 'hooks/useRouteParams'
-// import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
-// import fetchPost from 'store/actions/fetchPost'
+import useQueryAction from 'urql-shared/hooks/useQueryAction'
 import trackAnalyticsEvent from 'store/actions/trackAnalyticsEvent'
+import fetchPost from 'store/actions/fetchPost'
+import { getPresentedPost } from 'store/selectors/getPost'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import postQuery from 'graphql/queries/postQuery'
 import { KeyboardAccessoryCommentEditor } from 'components/CommentEditor/CommentEditor'
 import Comments from 'components/Comments'
 import Loading from 'components/Loading'
@@ -27,14 +26,9 @@ export default function PostDetails () {
   const navigation = useNavigation()
   const isModalScreen = useIsModalScreen()
   const { id: postId } = useRouteParams()
-  // const [{ fetching, error }] = useHyloQuery({ action: fetchPost(postId) })
-  const [{ data: postData, fetching, error }] = useQuery({
-    query: postQuery,
-    variables: { id: postId }
-  })
-
-  // const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
-  const post = postData?.post
+  const [{ fetching, error }] = useQueryAction({ action: fetchPost(postId) })
+  const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
+  // const post = postData?.post
   const currentGroup = useSelector(getCurrentGroup)
   const commentsRef = React.useRef()
   const goToMember = useGoToMember()
