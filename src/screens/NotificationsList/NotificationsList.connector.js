@@ -11,8 +11,6 @@ import {
 } from './NotificationsList.store'
 import getMemberships from 'store/selectors/getMemberships'
 
-const NOTIFICATIONS_PAGE_SIZE = 20
-
 export function mapStateToProps (state, props) {
   return {
     hasMore: getHasMoreNotifications(state),
@@ -24,8 +22,8 @@ export function mapStateToProps (state, props) {
 
 export function mapDispatchToProps (dispatch, { navigation }) {
   return {
-    fetchNotifications: () => dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE)),
-    fetchMore: offset => dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE, offset)),
+    fetchNotifications: () => dispatch(fetchNotifications()),
+    fetchMore: offset => dispatch(fetchNotifications({ offset })),
     markAllActivitiesRead: () => dispatch(markAllActivitiesRead()),
     markActivityRead: id => dispatch(markActivityRead(id)),
     updateNewNotificationCount: () => dispatch(updateNewNotificationCount()),

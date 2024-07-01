@@ -38,7 +38,7 @@ export const UPDATE_NEW_NOTIFICATION_COUNT_PENDING = `${UPDATE_NEW_NOTIFICATION_
 
 const getItems = get('payload.data.notifications')
 const postFieldsFragmentWithComments = postFieldsFragment(true)
-export function fetchNotifications ({ first = NOTIFICATIONS_PAGE_SIZE, offset = 0 }) {
+export function fetchNotifications ({ first = NOTIFICATIONS_PAGE_SIZE, offset = 0 } = {}) {
   return {
     type: FETCH_NOTIFICATIONS,
     graphql: {
