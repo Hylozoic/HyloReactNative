@@ -16,7 +16,6 @@ import { bannerlinearGradientColors } from 'style/colors'
 // import groupExplorerUrl from 'assets/group-explorer.png'
 import earthUrl from 'assets/earth.png'
 import myHomeUrl from 'assets/my-home.png'
-import { useTranslation } from 'react-i18next'
 import hasResponsibilityForGroup from 'store/selectors/hasResponsibilityForGroup'
 import { RESP_ADD_MEMBERS, RESP_ADMINISTRATION } from 'store/constants'
 
