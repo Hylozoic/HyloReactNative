@@ -27,6 +27,7 @@ export const NOTIFICATIONS_WHITELIST = [
   ACTION_ANNOUNCEMENT,
   ACTION_NEW_POST
 ]
+export const NOTIFICATIONS_PAGE_SIZE = 20
 export const NOTIFICATION_TEXT_MAX = 76
 export const MODULE_NAME = 'NotificationsList'
 export const FETCH_NOTIFICATIONS = `${MODULE_NAME}/FETCH_NOTIFICATIONS`
@@ -35,7 +36,9 @@ export const MARK_ALL_ACTIVITIES_READ = `${MODULE_NAME}/MARK_ALL_ACTIVITIES_READ
 export const UPDATE_NEW_NOTIFICATION_COUNT = `${MODULE_NAME}/UPDATE_NEW_NOTIFICATION_COUNT`
 export const UPDATE_NEW_NOTIFICATION_COUNT_PENDING = `${UPDATE_NEW_NOTIFICATION_COUNT}_PENDING`
 
-export function fetchNotifications (first = 20, offset = 0) {
+const getItems = get('payload.data.notifications')
+const postFieldsFragmentWithComments = postFieldsFragment(true)
+export function fetchNotifications ({ first = NOTIFICATIONS_PAGE_SIZE, offset = 0 }) {
   return {
     type: FETCH_NOTIFICATIONS,
     graphql: {
@@ -58,7 +61,7 @@ export function fetchNotifications (first = 20, offset = 0) {
                 text
               }
               post {
-                ${postFieldsFragment(true)}
+                ${postFieldsFragmentWithComments}
               }
               group {
                 id
@@ -80,7 +83,7 @@ export function fetchNotifications (first = 20, offset = 0) {
       afterInteractions: true,
       extractModel: 'Notification',
       extractQueryResults: {
-        getItems: get('payload.data.notifications')
+        getItems
       },
       resetCount: true
     }

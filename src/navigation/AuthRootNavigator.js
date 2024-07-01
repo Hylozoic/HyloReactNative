@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import OneSignal from 'react-native-onesignal'
 import registerDevice from 'store/actions/registerDevice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import i18n from '../../i18n'
 import { HyloHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
 import { modalScreenName } from 'hooks/useIsModalScreen'
 import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
+import useQueryAction from 'urql-shared/hooks/useQueryAction'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import { fetchNotifications, updateNewNotificationCount } from 'screens/NotificationsList/NotificationsList.store'
 import ModalHeader from 'navigation/headers/ModalHeader'
@@ -25,18 +26,19 @@ import { white } from 'style/colors'
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
   const dispatch = useDispatch()
-  const [{ fetching, data, error }] = useHyloQuery({ action: fetchCurrentUser })
+  const [{ fetching, data, error }] = useQueryAction({ action: fetchCurrentUser() })
+  const [loading, setLoading] = useState(true)
   const currentUser = data?.me
 
-  useHyloQuery({ action: fetchNotifications })
+  useQueryAction({ action: fetchNotifications() })
   useHyloQuery({ action: updateNewNotificationCount })
 
   useEffect(() => {
     (async function () {
       if (!fetching && !error) {
         const deviceState = await OneSignal.getDeviceState()
-
         const locale = currentUser?.settings?.locale || 'en'
+
         i18n.changeLanguage(locale)
 
         if (deviceState?.userId) {
@@ -47,11 +49,12 @@ export default function AuthRootNavigator () {
         } else {
           console.warn('Not registering to OneSignal for push notifications. OneSignal did not successfully retrieve a userId')
         }
+        setLoading(false)
       }
     })()
   }, [fetching, error])
 
-  if (fetching) return <LoadingScreen />
+  if (loading) return <LoadingScreen />
   // TODO: What do we want to happen if there is an error loading the current user?
   if (error) console.error(error)
 
