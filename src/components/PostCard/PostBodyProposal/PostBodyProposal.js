@@ -125,7 +125,6 @@ export default function PostBodyProposal ({
       </View>
       {proposalOptionsArray && proposalOptionsArray.map((option, i) => {
         const optionVotes = proposalVotesArray.filter(vote => vote.optionId === option.id)
-        const voterNames = isAnonymousVote ? [] : optionVotes.map(vote => vote.user.name)
         const avatarUrls = optionVotes.map(vote => vote.user.avatarUrl)
         return (
           <TouchableOpacity key={`${option.id}+${currentUserVotesOptionIds.includes(option.id)}`} style={[styles.proposalOption, votingComplete && styles.completed, proposalStatus === PROPOSAL_STATUS_DISCUSSION && styles.discussion, proposalStatus === PROPOSAL_STATUS_VOTING && styles.voting, proposalStatus === PROPOSAL_STATUS_CASUAL && styles.casual, currentUserVotesOptionIds.includes(option.id) && styles.selected, votingComplete && styles.completed, votingComplete && highestVotedOptions.includes(option.id) && styles.highestVote]} onPress={isVotingOpen(proposalStatus) && !votingComplete ? () => handleVote(option.id) : () => {}}>
@@ -141,7 +140,9 @@ export default function PostBodyProposal ({
                 </Text>
               </View>
             </View>
-            <View style={styles.proposalOptionVotesContainer} data-tip={voterNames.join('\n')} data-for='voters-tt'>
+            {/* I'm not very excited by having to put an empty view but the flex/overflow rules here don't seem to be respected like they are in EVO */}
+            <View style={{ flexGrow: 2, flexShrink: 0 }} />
+            <View style={styles.proposalOptionVotesContainer}>
               <View style={styles.proposalOptionVoteCount}>
                 {(!isAnonymousVote || votingComplete) &&
                   <Text style={[votingComplete && styles.completed, proposalStatus === PROPOSAL_STATUS_DISCUSSION && styles.discussion, proposalStatus === PROPOSAL_STATUS_VOTING && styles.voting, proposalStatus === PROPOSAL_STATUS_CASUAL && styles.casual, votingComplete && styles.completed, currentUserVotesOptionIds.includes(option.id) && styles.selected, votingComplete && highestVotedOptions.includes(option.id) && styles.highestVote]}>
@@ -239,6 +240,7 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    position: 'relative'
   },
   proposalOutcome: {
     padding: 6,
@@ -254,7 +256,7 @@ const styles = {
   },
   discussion: {
     borderColor: '#C0C5CD',
-    color: '#C0C5CD',
+    color: '#C0C5CD'
   },
   proposalOptionEmoji: {
     fontSize: 24
@@ -262,14 +264,23 @@ const styles = {
   proposalOptionTextContainer: {
     height: 30,
     display: 'flex',
+    position: 'relative',
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
     margin: 5,
-    fontSize: 18
+    fontSize: 18,
+    flexGrow: 1,
+    flexShrink: 1
   },
   proposalOptionVoteCount: {
-    fontSize: 12
+    fontSize: 12,
+    position: 'relative'
+  },
+  proposalOptionVoteAvatars: {
+    flex: 1,
+    flexDirection: 'row',
+    position: 'relative'
   },
   proposalOptionVotesContainer: {
     height: 30,
@@ -277,6 +288,7 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    margin: 5
+    margin: 5,
+    flexGrow: 1
   }
 }
