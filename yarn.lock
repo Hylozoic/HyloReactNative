@@ -3439,6 +3439,15 @@
   dependencies:
     wonka ">= 4.0.9"
 
+"@urql/exchange-graphcache@^7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@urql/exchange-graphcache/-/exchange-graphcache-7.1.1.tgz#ab6871f9838390f71ea99997e249dadf33968f50"
+  integrity sha512-9aqgVrFY79MxCQ/u4F4RHZQ4NqToVJJk4I2sQx/5d/lvB9tInA5Z8ZL5XuflaKM7NJ8Pm5HGisB/iD7mKHKriA==
+  dependencies:
+    "@0no-co/graphql.web" "^1.0.5"
+    "@urql/core" "^5.0.0"
+    wonka "^6.3.2"
+
 "@xmldom/xmldom@^0.8.8":
   version "0.8.10"
   resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.8.10.tgz#a1337ca426aa61cef9fe15b5b28e340a72f6fa99"
