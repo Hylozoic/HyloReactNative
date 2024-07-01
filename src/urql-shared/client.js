@@ -33,10 +33,11 @@ const mergePaginationResults = (existing = {}, incoming) => {
 // List of types that contain the items field
 const typesWithItemsField = [
   'GroupPostsQuery',
-  'Post',
-  'Comment',
-  'Group'
-  // Add more types as necessary
+  'CommentQuerySet',
+  'NotificationQuerySet',
+  'GroupQuerySet',
+  'GroupJoinQuestionQuerySet',
+  'PostQuerySet'
 ]
 
 const generateTypePolicies = (types) => {
@@ -58,13 +59,34 @@ const generateTypePolicies = (types) => {
 const typePolicies = generateTypePolicies(typesWithItemsField)
 
 const customKeys = {
-  GroupQuerySet: (data) => data.parent.id
-  // Define keys for other entity types as needed
+  AffiliationQuerySet: () => null,
+  ActivityMeta: () => null,
+  AgreementQuerySet: () => null,
+  CommentQuerySet: () => null,
+  CustomViewQuerySet: () => null,
+  EventInvitationQuerySet: () => null,
+  GroupJoinQuestionQuerySet: () => null,
+  GroupQuerySet: () => null,
+  GroupRole: () => null,
+  GroupSettings: () => null,
+  JoinRequestQuerySet: () => null,
+  Location: () => null,
+  MemberSettings: () => null,
+  Membership: () => null,
+  MembershipSettings: () => null,
+  NotificationQuerySet: () => null,
+  PersonQuerySet: () => null,
+  Point: () => null,
+  PostQuerySet: () => null,
+  ProposalOptionQuerySet: () => null,
+  ProposalVoteQuerySet: () => null,
+  SkillQuerySet: () => null,
+  UserSettings: () => null
 }
 
 const cache = cacheExchange({
   typePolicies,
-  customKeys
+  keys: customKeys
 })
 
 const client = createClient({
