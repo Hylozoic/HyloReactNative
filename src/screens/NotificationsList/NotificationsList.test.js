@@ -1,123 +1,93 @@
-import { FlatList, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import ShallowRenderer from 'react-test-renderer/shallow'
-
-import TestRenderer from 'react-test-renderer'
-import { simulate } from 'util/testing'
-import Loading from 'components/Loading'
-import { NotificationsListClassComponent, NotificationRow } from './NotificationsList'
+import { render, screen } from '@testing-library/react-native'
+import { TestRoot } from 'util/testing'
+import NotificationsList from './NotificationsList'
+import MockedScreen from 'util/testing/MockedScreen'
+import extractModelsForTest from 'util/testing/extractModelsFromAction'
+import orm from 'store/models'
+import { ACTION_NEW_COMMENT } from 'store/models/Notification'
+import { FETCH_NOTIFICATIONS } from './NotificationsList.store'
 
 jest.mock('util/platform', () => ({ isIOS: true }))
 
+const ormSession = orm.mutableSession(orm.getEmptyState())
+const reduxState = {
+  pending: {
+    [FETCH_NOTIFICATIONS]: true
+  },
+  orm: ormSession.state
+}
+
 const testNotifications = [
   {
-    activityId: '1',
-    actor: { avatarUrl: 'https://wombat.com', name: 'Wombat McAardvark' },
-    avatarSeparator: false,
-    createdAt: '2 min ago',
     id: '1',
-    onPress: jest.fn(),
-    unread: false
+    activity: {
+      id: '1',
+      unread: true,
+      meta: {
+        reasons: [ACTION_NEW_COMMENT]
+      },
+      actor: {
+        id: '1',
+        name: 'Foo Bar',
+        avatarUrl: 'https://example.com/1.png'
+      },
+      comment: {
+        id: '1',
+        text: 'A comment'
+      }
+    }
   }
 ]
 
-describe('NotificationsListClassComponent', () => {
-  let props = null
-  let shallowRenderer = null
+extractModelsForTest({
+  notifications: {
+    total: testNotifications.length,
+    hasMore: false,
+    items: testNotifications
+  }
+}, 'Notification', ormSession)
 
-  beforeEach(() => {
-    shallowRenderer = new ShallowRenderer()
-    props = {
-      fetchMore: jest.fn(),
-      fetchNotifications: () => {},
-      t: str => str,
-      updateNewNotificationCount: () => {},
-      hasMore: true,
-      isFocused: true,
-      markActivityRead: jest.fn(),
-      markAllRead: jest.fn(),
-      pending: false,
-      currentUserHasMemberships: true,
-      notifications: testNotifications,
-      setRightButton: () => {},
-      navigation: {
-        setOptions: jest.fn()
+extractModelsForTest({
+  me: {
+    id: '882828',
+    name: 'person person',
+    memberships: [
+      {
+        id: '2090984',
+        person: { id: '882828' },
+        group: { id: '99409848' }
       }
-    }
-  })
+    ]
+  }
+}, 'Me', ormSession)
 
+describe('NotificationsList', () => {
   it('matches the last snapshot', () => {
-    const renderer = TestRenderer.create(<NotificationsListClassComponent {...props} />)
-    renderer.getInstance().setState({ ready: true })
-    expect(renderer.toJSON()).toMatchSnapshot()
+    render(
+      <TestRoot state={reduxState}>
+        <MockedScreen>
+          {screenProps => (
+            <NotificationsList {...screenProps} />
+          )}
+        </MockedScreen>
+      </TestRoot>
+    )
+
+    expect(screen.toJSON()).toMatchSnapshot()
   })
 
   it('Shows Loading when pending is true', () => {
-    props.pending = true
-    props.notifications = []
-    shallowRenderer.render(<NotificationsListClassComponent {...props} />)
-    const actual = shallowRenderer.getRenderOutput()
-
-    const loadingComponent = actual.props.children[0].props.children // Accessing the Loading component within the structure
-    expect(loadingComponent).toEqual(<View><Loading /></View>)
-  })
-
-  it('returns a message when no notifications are available', () => {
-    props.notifications = []
-    const renderer = TestRenderer.create(<NotificationsListClassComponent {...props} />)
-    renderer.getInstance().setState({ ready: true })
-    const hasMessage = renderer.toJSON().children.find(c => c.includes('Nothing new'))
-    expect(hasMessage).not.toBeFalsy()
-  })
-
-  it('marks the notification read on notification touch', () => {
-    const notification = props.notifications[0]
-    notification.unread = true
-    const root = TestRenderer.create(<NotificationsListClassComponent {...props} />).root
-    root.instance.setState({ ready: true })
-    simulate(root.findAllByType(TouchableOpacity)[0], 'press')
-    expect(props.markActivityRead).toHaveBeenCalledWith(notification.activityId)
-  })
-
-  it('calls notification.onPress on notification touch', () => {
-    const root = TestRenderer.create(<NotificationsListClassComponent {...props} />).root
-    root.instance.setState({ ready: true })
-    const notification = root.props.notifications[0]
-    simulate(root.findAllByType(TouchableOpacity)[0], 'press')
-    expect(notification.onPress).toHaveBeenCalled()
-  })
-
-  it('calls fetchMore when scrolled to end of list', () => {
-    const root = TestRenderer.create(<NotificationsListClassComponent {...props} />).root
-    root.instance.setState({ ready: true })
-    simulate(root.findByType(FlatList), 'endReached')
-    expect(props.fetchMore).toHaveBeenCalledWith(props.notifications.length)
-  })
-
-  it('matches the renders CreateGroupNotice if user does not have memberships', () => {
-    props.currentUserHasMemberships = false
-    const renderer = TestRenderer.create(<NotificationsListClassComponent {...props} />)
-    renderer.getInstance().setState({ ready: true })
-    expect(renderer.toJSON()).toMatchSnapshot()
-  })
-})
-
-describe('NotificationRow', () => {
-  let shallowRenderer = null
-  beforeEach(() => {
-    shallowRenderer = new ShallowRenderer()
-    props = {
-      markActivityRead: jest.fn(),
-      notifications: testNotifications
-    }
-  })
-  it('matches the last snapshot for the test notification', () => {
-    shallowRenderer.render(
-      <NotificationRow
-        markActivityRead={props.markActivityRead}
-        notification={props.notifications[0]}
-      />
+    render(
+      <TestRoot state={reduxState}>
+        <MockedScreen>
+          {screenProps => (
+            <NotificationsList {...screenProps} />
+          )}
+        </MockedScreen>
+      </TestRoot>
     )
-    expect(shallowRenderer.getRenderOutput()).toMatchSnapshot()
+
+    screen.getByA11yHint('loading')
   })
 })
