@@ -30,6 +30,7 @@ query (
     followersTotal
     isDefault
     isSubscribed
+    lastReadPostId
     newPostCount
     postsTotal
     visibility
@@ -93,6 +94,7 @@ query (
     followersTotal
     isDefault
     isSubscribed
+    lastReadPostId
     newPostCount
     postsTotal
     visibility
