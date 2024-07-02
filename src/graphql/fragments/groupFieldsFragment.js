@@ -4,27 +4,6 @@ const groupFieldsFragment = ({ withTopics, withJoinQuestions, withPrerequisites,
   accessibility
   avatarUrl
   bannerUrl
-  customViews {
-    items {
-      id
-      activePostsOnly
-      collectionId
-      defaultSort
-      defaultViewMode
-      externalLink
-      groupId
-      isActive
-      icon
-      name
-      order
-      postTypes
-      topics {
-        id
-        name
-      }
-      type
-    }
-  }
   description
   geoShape
   location
@@ -69,6 +48,27 @@ const groupFieldsFragment = ({ withTopics, withJoinQuestions, withPrerequisites,
       visibility
     }
   }
+  customViews {
+    items {
+      id
+      activePostsOnly
+      collectionId
+      defaultSort
+      defaultViewMode
+      externalLink
+      groupId
+      isActive
+      icon
+      name
+      order
+      postTypes
+      topics {
+        id
+        name
+      }
+      type
+    }
+  }
   locationObject {
     id
     addressNumber
@@ -100,6 +100,12 @@ const groupFieldsFragment = ({ withTopics, withJoinQuestions, withPrerequisites,
       id
       name
       avatarUrl
+      groupRoles {
+        name
+        emoji
+        active
+        groupId
+      }
     }
   }
   parentGroups {
@@ -114,71 +120,82 @@ const groupFieldsFragment = ({ withTopics, withJoinQuestions, withPrerequisites,
       visibility
     }
   }
-  ${withTopics ? `
-  groupTopics(first: 8) {
-    items {
-      id
-      topic {
+  ${withTopics
+    ? `
+    groupTopics(first: 8) {
+      items {
+        id
+        lastReadPostId
+        topic {
+          id
+          name
+        }
+        postsTotal
+      }
+    }`
+    : ''}
+  ${withJoinQuestions
+    ? `
+    joinQuestions {
+      items {
+        id
+        questionId
+        text
+      }
+    }
+    suggestedSkills {
+      items {
         id
         name
       }
-      postsTotal
-    }
-  }` : ''}
-  ${withJoinQuestions ? `
-  joinQuestions {
-    items {
-      id
-      questionId
-      text
-    }
-  }
-  suggestedSkills {
-    items {
-      id
-      name
-    }
-  }` : ''}
-  ${withPrerequisites ? `
-  prerequisiteGroups(onlyNotMember: true) {
-    items {
-      avatarUrl
-      id
-      name
-      settings {
-        agreementsLastUpdatedAt
-        allowGroupInvites
-        askGroupToGroupJoinQuestions
-        askJoinQuestions
-        hideExtensionData
-        locationDisplayPrecision
-        publicMemberDirectory
-        showSuggestedSkills
+    }`
+    : ''}
+  ${withPrerequisites
+    ? `
+    prerequisiteGroups(onlyNotMember: true) {
+      items {
+        avatarUrl
+        id
+        name
+        settings {
+          agreementsLastUpdatedAt
+          allowGroupInvites
+          askGroupToGroupJoinQuestions
+          askJoinQuestions
+          hideExtensionData
+          locationDisplayPrecision
+          publicMemberDirectory
+          showSuggestedSkills
+        }
+        slug
       }
-      slug
     }
-  }
-  numPrerequisitesLeft
-  ` : ''}
-  ${withExtensions ? `
-  groupExtensions {
-    items {
-      id
-      data
-      type
-      active
-    }
-  }` : ''}
-  ${withWidgets ? `
-  widgets {
-    items {
-      id
-      name
-      context
-      order
-      isVisible
-    }
-  }` : ''}
+    numPrerequisitesLeft
+    `
+    : ''}
+  ${withExtensions
+    ? `
+    groupExtensions {
+      items {
+        id
+        data
+        type
+        active
+      }
+    }`
+    : ''}
+  ${withWidgets
+    ? `
+    widgets {
+      items {
+        id
+        name
+        context
+        order
+        isVisible
+      }
+    }`
+    : ''}
 `
 
 export default groupFieldsFragment

@@ -3,29 +3,45 @@ import { useSelector } from 'react-redux'
 import { Text, ScrollView, View, TouchableOpacity } from 'react-native'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
+import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
 import { openURL } from 'hooks/useOpenURL'
 import useRouteParams from 'hooks/useRouteParams'
+import fetchGroupDetailsAction from 'store/actions/fetchGroupDetails'
 import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import Icon from 'components/Icon'
 import TopicsNavigation from 'components/TopicsNavigation'
 import styles from './GroupNavigation.styles'
+import Loading from 'components/Loading'
 
 export default function GroupNavigation () {
   const { t } = useTranslation()
   const navigation = useNavigation()
+  const { myHome } = useRouteParams()
   const currentGroup = useSelector(getCurrentGroup)
   const childGroups = useSelector(getChildGroups)
   const parentGroups = useSelector(getParentGroups)
-  const { navigate } = navigation
-  const customViews = (currentGroup && currentGroup.customViews && currentGroup.customViews.toRefArray()) || []
-  const { myHome } = useRouteParams()
+  const [{ fetching }] = useHyloQuery({
+    action: fetchGroupDetailsAction({
+      slug: currentGroup?.slug,
+      withExtensions: false,
+      withWidgets: false,
+      withTopics: false,
+      withJoinQuestions: true,
+      withPrerequisites: true
+    }),
+    pause: !currentGroup?.slug
+  })
 
   useFocusEffect(() => {
     navigation.setOptions({ title: myHome ? t('My Home') : currentGroup?.name })
   })
 
+  if (fetching) return <Loading />
+
+  const { navigate } = navigation
+  const customViews = (currentGroup && currentGroup.customViews && currentGroup.customViews.toRefArray()) || []
   const navItems = myHome
     ? [
         { label: t('Create'), iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
