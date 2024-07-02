@@ -24,10 +24,10 @@ import { isEmpty } from 'lodash'
 const NOTIFICATIONS_PAGE_SIZE = 20
 
 export const NotificationsList = (props) => {
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const dispatch = useDispatch()
   const isFocused = useIsFocused()
-  const { t } = useTranslation()
 
   const [ready, setReady] = useState(false)
 
