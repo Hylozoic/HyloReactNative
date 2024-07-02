@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FlatList, View, TouchableOpacity } from 'react-native'
 import { isEmpty } from 'lodash/fp'
 import { didPropsChange } from 'util/index'
 import { useIsFocused } from '@react-navigation/native'
-import { NO_POST_FILTER } from './FeedList.store'
+import { NO_POST_FILTER, getPostIds } from './FeedList.store'
 import PostRow from './PostRow'
 import ListControl from 'components/ListControl'
 import Loading from 'components/Loading'
@@ -12,6 +12,9 @@ import styles from './FeedList.styles'
 import Icon from 'components/Icon'
 import { pictonBlue } from 'style/colors'
 import { useTranslation } from 'react-i18next'
+import useQueryAction from 'urql-shared/hooks/useQueryAction'
+import fetchPosts from 'store/actions/fetchPosts'
+import { useSelector } from 'react-redux'
 
 // tracks: `hylo-evo/src/components/StreamViewControls/StreamViewControls.js`
 export const POST_TYPE_OPTIONS = [
@@ -51,7 +54,14 @@ export const EVENT_STREAM_TIMEFRAME_OPTIONS = [
 export default function FeedList (props) {
   const isFocused = useIsFocused()
   const { t } = useTranslation()
+  const [{ fetching, data: posts }] = useQueryAction({
+    action: fetchPosts(props.fetchPostParam),
+    pause: !isEmpty(props?.postIds) && props?.hasMore !== true
+  })
+  // const postIds = useSelector(getPostIds, fetchPosts(props.fetchPostParam))
+  console.log('!!!!!!', props?.postIds)
 
+  console.log('!!! fetchPosts(props.fetchPostParam):', fetchPosts(props.fetchPostParam))
   // Explicit invocation of dynamic strings
   t('All Posts')
   t('Discussions')
@@ -68,40 +78,12 @@ export default function FeedList (props) {
   t('Upcoming Events')
   t('Past Events')
 
-  return <FeedListClassComponent {...props} isFocused={isFocused} t={t} />
+  if (fetching) return <Loading />
+
+  return <FeedListClassComponent {...props} postsisFocused={isFocused} t={t} />
 }
 
 export class FeedListClassComponent extends React.Component {
-  fetchOrShowCached () {
-    const { hasMore, postIds, fetchPosts } = this.props
-
-    if (fetchPosts && isEmpty(postIds) && hasMore !== false) {
-      fetchPosts()
-    }
-  }
-
-  componentDidMount () {
-    this.props.isFocused && this.fetchOrShowCached()
-  }
-
-  shouldComponentUpdate (nextProps) {
-    return nextProps.isFocused && didPropsChange(this.props, nextProps)
-  }
-
-  componentDidUpdate (prevProps) {
-    if (
-      (!prevProps.isFocused && this.props.isFocused) ||
-      prevProps.sortBy !== this.props.sortBy ||
-      prevProps.filter !== this.props.filter ||
-      prevProps.timeframe !== this.props.timeframe ||
-      prevProps.forGroup?.id !== this.props.forGroup?.id ||
-      prevProps.topicName !== this.props.topicName ||
-      prevProps.fetchPostParam.childPostInclusion !== this.props.fetchPostParam.childPostInclusion
-    ) {
-      this.fetchOrShowCached()
-    }
-  }
-
   handleChildPostToggle = () => {
     const childPostInclusion = this.props.fetchPostParam.childPostInclusion === 'yes' ? 'no' : 'yes'
     this.props.updateUserSettings({ settings: { streamChildPosts: childPostInclusion } })
@@ -128,7 +110,7 @@ export class FeedListClassComponent extends React.Component {
     } = this.props
 
     const context = fetchPostParam?.context
-
+    console.log('!!!!!!', postIds)
     const extraToggleStyles = fetchPostParam.childPostInclusion === 'yes'
       ? {
           backgroundColor: pictonBlue
@@ -142,8 +124,8 @@ export class FeedListClassComponent extends React.Component {
           ref={scrollRef}
           data={postIds}
           renderItem={({ item }) => renderPostRow({ ...this.props, postId: item })}
-          onRefresh={refreshPosts}
-          refreshing={!!pendingRefresh}
+          // onRefresh={refreshPosts}
+          // refreshing={!!pendingRefresh}
           keyExtractor={this.keyExtractor}
           onEndReached={fetchMorePosts}
           ListHeaderComponent={
