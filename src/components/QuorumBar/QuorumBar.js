@@ -73,10 +73,10 @@ const styles = {
     top: Platform.OS === 'ios' ? 0 : -1,
     color: 'red',
     fontSize: 12,
-    right: -64
+    right: -80
   },
   bigQuorum: {
-    right: 10,
+    right: 12,
     color: 'white',
     fontSize: 12
   },
