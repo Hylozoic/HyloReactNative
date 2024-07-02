@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { FlatList, TouchableOpacity, View, Text } from 'react-native'
 import { useIsFocused, useNavigation } from '@react-navigation/native'
@@ -36,31 +36,15 @@ export const NotificationsList = (props) => {
   const notifications = useSelector(state => getNotifications(state, props))
   const currentUserHasMemberships = useSelector(state => !isEmpty(getMemberships(state)))
 
-  const fetchNotificationsHandler = useCallback(() => {
-    dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE))
-  }, [dispatch])
+  const fetchNotificationsHandler = () => dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE))
+  const fetchMoreHandler = offset => dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE, offset))
+  const markAllActivitiesReadHandler = () => dispatch(markAllActivitiesRead())
+  const markActivityReadHandler = id => dispatch(markActivityRead(id))
+  const updateNewNotificationCountHandler = () => dispatch(updateNewNotificationCount())
 
-  const fetchMoreHandler = useCallback((offset) => {
-    dispatch(fetchNotifications(NOTIFICATIONS_PAGE_SIZE, offset))
-  }, [dispatch])
+  const goToCreateGroupHandler = () => navigation.navigate('Create Group')
 
-  const markAllActivitiesReadHandler = useCallback(() => {
-    dispatch(markAllActivitiesRead())
-  }, [dispatch])
-
-  const markActivityReadHandler = useCallback((id) => {
-    dispatch(markActivityRead(id))
-  }, [dispatch])
-
-  const updateNewNotificationCountHandler = useCallback(() => {
-    dispatch(updateNewNotificationCount())
-  }, [dispatch])
-
-  const goToCreateGroupHandler = useCallback(() => {
-    navigation.navigate('Create Group')
-  }, [navigation])
-
-  const setHeader = useCallback(() => {
+  const setHeader = () => {
     navigation.setOptions({
       title: t('Notifications'),
       header: props => (
@@ -71,13 +55,13 @@ export const NotificationsList = (props) => {
         />
       )
     })
-  }, [navigation, t, markAllActivitiesReadHandler])
+  }
 
   useEffect(() => {
     setHeader()
     fetchNotificationsHandler()
     updateNewNotificationCountHandler()
-  }, [setHeader, fetchNotificationsHandler, updateNewNotificationCountHandler])
+  }, [])
 
   useEffect(() => {
     if (isFocused) {
@@ -85,7 +69,7 @@ export const NotificationsList = (props) => {
       fetchNotificationsHandler()
       updateNewNotificationCountHandler()
     }
-  }, [isFocused, setHeader, fetchNotificationsHandler, updateNewNotificationCountHandler])
+  }, [isFocused])
 
   useEffect(() => {
     if (!pending) {
