@@ -21,8 +21,8 @@ import myHomeUrl from 'assets/my-home.png'
 export default function DrawerMenu () {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const currentGroup = useSelector(getCurrentGroup)
   const memberships = useSelector(getMemberships)
+  const currentGroup = useSelector(getCurrentGroup)
   const canModerateCurrentGroup = useSelector(getCanModerate)
   const { myHome } = useRouteParams()
 
@@ -74,7 +74,7 @@ export default function DrawerMenu () {
   // }
 
   const publicRoutes = [
-    { ...PUBLIC_GROUP, navigateTo: navigateToPublicStream, name: t('Public Stream')},
+    { ...PUBLIC_GROUP, navigateTo: navigateToPublicStream, name: t('Public Stream') },
     // publicGroups,
     publicMap
   ]
@@ -121,6 +121,7 @@ export default function DrawerMenu () {
   const groupBannerImage = currentGroup?.bannerUrl
     ? { uri: currentGroup?.bannerUrl }
     : null
+
   return (
     <View style={styles.container}>
       {currentGroup && !myHome && (
