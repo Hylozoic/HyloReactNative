@@ -1,17 +1,32 @@
-import React from 'react'
+import React, { useEffect, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { FlatList, View, TouchableOpacity } from 'react-native'
-import { isEmpty } from 'lodash/fp'
-import { didPropsChange } from 'util/index'
+import { isEmpty, get } from 'lodash/fp'
 import { useIsFocused } from '@react-navigation/native'
-import { NO_POST_FILTER } from './FeedList.store'
+import {
+  getSort,
+  getFilter,
+  getTimeframe,
+  setSort,
+  setFilter as setFilterAction,
+  setTimeframe as setTimeframeAction,
+  getPostIds,
+  getHasMorePosts,
+  getQueryProps,
+  NO_POST_FILTER
+} from './FeedList.store'
+import { FETCH_POSTS } from 'store/constants'
+import { ALL_GROUP_ID, isContextGroup, MY_CONTEXT_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
+import getMe from 'store/selectors/getMe'
+import fetchPosts from 'store/actions/fetchPosts'
+import resetNewPostCount from 'store/actions/resetNewPostCount'
+import updateUserSettings from 'store/actions/updateUserSettings'
 import PostRow from './PostRow'
 import ListControl from 'components/ListControl'
 import Loading from 'components/Loading'
-import { isContextGroup } from 'store/models/Group'
-import styles from './FeedList.styles'
 import Icon from 'components/Icon'
 import { pictonBlue } from 'style/colors'
-import { useTranslation } from 'react-i18next'
+import styles from './FeedList.styles'
 
 // tracks: `hylo-evo/src/components/StreamViewControls/StreamViewControls.js`
 export const POST_TYPE_OPTIONS = [
@@ -48,138 +63,156 @@ export const EVENT_STREAM_TIMEFRAME_OPTIONS = [
   { id: 'past', label: 'Past Events' }
 ]
 
-export default function FeedList (props) {
+const FeedList = (props) => {
   const isFocused = useIsFocused()
-  const { t } = useTranslation()
+  const dispatch = useDispatch()
 
-  // Explicit invocation of dynamic strings
-  t('All Posts')
-  t('Discussions')
-  t('Events')
-  t('Offers')
-  t('Projects')
-  t('Proposals')
-  t('Requests')
-  t('Resources')
-  t('Manual')
-  t('Latest activity')
-  t('Post Date')
-  t('Popular')
-  t('Upcoming Events')
-  t('Past Events')
+  const {
+    forGroup, topicName, customView, myHome, feedType, header, scrollRef
+  } = props
+  const currentUser = useSelector(getMe)
 
-  return <FeedListClassComponent {...props} isFocused={isFocused} t={t} />
-}
+  const defaultSortBy = get('settings.streamSortBy', currentUser) || 'updated'
+  const childPostInclusion = get('settings.streamChildPosts', currentUser) || 'yes'
+  const postTypeFilter = props?.feedType ||
+    useSelector(state => getFilter(state, props)) ||
+    get('settings.streamPostType', currentUser) ||
+    null
+  const customViewSort = customView?.defaultSort
 
-export class FeedListClassComponent extends React.Component {
-  fetchOrShowCached () {
-    const { hasMore, postIds, fetchPosts } = this.props
+  let sortBy = customViewSort ||
+    useSelector(state => getSort(state, props)) ||
+    get('settings.streamSortBy', currentUser) ||
+    'updated'
 
-    if (fetchPosts && isEmpty(postIds) && hasMore !== false) {
-      fetchPosts()
+  if (!customView && sortBy === 'order') {
+    sortBy = 'updated'
+  }
+
+  const timeframe = useSelector(state => getTimeframe(state, props))
+  const activePostsOnly = customView?.activePostsOnly
+  const customViewType = customView?.type
+  const customPostTypes = customViewType === 'stream' ? customView?.postTypes : null
+  const customViewTopics = customViewType === 'stream' ? customView?.topics : null
+
+  const customViewCollectionId = customView?.collectionId
+
+  let fetchPostParam = useSelector(state => getQueryProps(state, {
+    activePostsOnly,
+    childPostInclusion,
+    forCollection: customViewCollectionId,
+    context: isContextGroup(forGroup?.slug) ? forGroup.slug : myHome ? 'my' : 'groups',
+    myHome,
+    slug: myHome ? undefined : forGroup?.slug,
+    topicName,
+    sortBy,
+    topics: customViewTopics?.toModelArray().map(t => t.id) || null,
+    types: customPostTypes,
+    filter: postTypeFilter === NO_POST_FILTER ? null : postTypeFilter
+  }))
+
+  if (myHome === 'Mentions') fetchPostParam.mentionsOf = [currentUser.id]
+  if (myHome === 'Announcements') fetchPostParam.announcementsOnly = true
+  if (myHome === 'Interactions') fetchPostParam.interactedWithBy = [currentUser.id]
+  if (myHome === 'My Posts') fetchPostParam.createdBy = [currentUser.id]
+
+  if (props.feedType === 'event') {
+    fetchPostParam = {
+      ...fetchPostParam,
+      order: timeframe === 'future' ? 'asc' : 'desc',
+      afterTime: timeframe === 'future' ? new Date().toISOString() : null,
+      beforeTime: timeframe === 'past' ? new Date().toISOString() : null
     }
   }
 
-  componentDidMount () {
-    this.props.isFocused && this.fetchOrShowCached()
-  }
+  const pending = useSelector(state => state.pending[FETCH_POSTS])
+  const postIds = useSelector(state => getPostIds(state, fetchPostParam))
+  const hasMore = useSelector(state => getHasMorePosts(state, fetchPostParam))
 
-  shouldComponentUpdate (nextProps) {
-    return nextProps.isFocused && didPropsChange(this.props, nextProps)
-  }
-
-  componentDidUpdate (prevProps) {
-    if (
-      (!prevProps.isFocused && this.props.isFocused) ||
-      prevProps.sortBy !== this.props.sortBy ||
-      prevProps.filter !== this.props.filter ||
-      prevProps.timeframe !== this.props.timeframe ||
-      prevProps.forGroup?.id !== this.props.forGroup?.id ||
-      prevProps.topicName !== this.props.topicName ||
-      prevProps.fetchPostParam.childPostInclusion !== this.props.fetchPostParam.childPostInclusion
-    ) {
-      this.fetchOrShowCached()
-    }
-  }
-
-  handleChildPostToggle = () => {
-    const childPostInclusion = this.props.fetchPostParam.childPostInclusion === 'yes' ? 'no' : 'yes'
-    this.props.updateUserSettings({ settings: { streamChildPosts: childPostInclusion } })
-  }
-
-  keyExtractor = (item) => `post${item}`
-
-  render () {
-    const {
-      fetchPostParam,
-      postIds,
-      pendingRefresh,
-      refreshPosts,
-      fetchMorePosts,
-      setFilter,
-      setSort,
-      setTimeframe,
-      scrollRef,
-      sortBy,
-      feedType,
-      filter,
-      timeframe,
-      customPostTypes
-    } = this.props
-
-    const context = fetchPostParam?.context
-
-    const extraToggleStyles = fetchPostParam.childPostInclusion === 'yes'
-      ? {
-          backgroundColor: pictonBlue
-        }
-      : {
-          backgroundColor: '#FFFFFF'
-        }
-    return (
-      <View style={styles.container}>
-        <FlatList
-          ref={scrollRef}
-          data={postIds}
-          renderItem={({ item }) => renderPostRow({ ...this.props, postId: item })}
-          onRefresh={refreshPosts}
-          refreshing={!!pendingRefresh}
-          keyExtractor={this.keyExtractor}
-          onEndReached={fetchMorePosts}
-          ListHeaderComponent={
-            <View>
-              {this.props.header}
-              {!feedType && (
-                <View style={[styles.listControls]}>
-                  <ListControl selected={sortBy} onChange={setSort} options={STREAM_SORT_OPTIONS} />
-                  <View style={styles.steamControlRightSide}>
-                    {!['my', 'public'].includes(context) &&
-                      <TouchableOpacity onPress={this.handleChildPostToggle}>
-                        <View style={{ ...styles.childGroupToggle, ...extraToggleStyles }}><Icon name='Subgroup' color={fetchPostParam.childPostInclusion === 'yes' ? '#FFFFFF' : pictonBlue} /></View>
-                      </TouchableOpacity>}
-                    {!customPostTypes && <ListControl selected={filter} onChange={setFilter} options={POST_TYPE_OPTIONS} />}
-                  </View>
-                </View>
-              )}
-              {feedType === 'event' && (
-                <View style={[styles.listControls]}>
-                  <ListControl selected={timeframe} onChange={setTimeframe} options={EVENT_STREAM_TIMEFRAME_OPTIONS} />
-                </View>
-              )}
-            </View>
-          }
-          ListFooterComponent={
-            this.props.pending
-              ? <Loading style={styles.loading} />
-              : null
-          }
-        />
-      </View>
+  const fetchPostsAndResetCount = useCallback(() => {
+    const forGroupId = get('id', forGroup)
+    const shouldReset = slug => (
+      slug !== ALL_GROUP_ID &&
+      slug !== PUBLIC_GROUP_ID &&
+      slug !== MY_CONTEXT_ID &&
+      !topicName &&
+      sortBy === defaultSortBy &&
+      !postTypeFilter
     )
+
+    if (shouldReset(fetchPostParam.context)) {
+      dispatch(resetNewPostCount(forGroupId, 'Membership'))
+    }
+
+    dispatch(fetchPosts(fetchPostParam))
+  }, [fetchPostParam, forGroup?.id, sortBy, postTypeFilter, topicName])
+
+  const refreshPosts = useCallback(() => dispatch(fetchPosts(fetchPostParam, { reset: true })), [fetchPostParam])
+  const fetchMorePosts = useCallback(() => {
+    if (hasMore && !pending) {
+      dispatch(fetchPosts({ ...fetchPostParam, offset: postIds.length }))
+    }
+  }, [dispatch, hasMore, pending, fetchPostParam, postIds.length])
+  const handleChildPostToggle = () => {
+    const childPostInclusion = fetchPostParam.childPostInclusion === 'yes' ? 'no' : 'yes'
+    dispatch(updateUserSettings({ settings: { streamChildPosts: childPostInclusion } }))
   }
+  const setFilter = filterType => dispatch(setFilterAction(filterType))
+  const setTimeframe = timeframe => dispatch(setTimeframeAction(timeframe))
+
+  useEffect(() => {
+    if (isFocused && isEmpty(postIds) && hasMore !== false) {
+      fetchPostsAndResetCount()
+    }
+  }, [isFocused, postIds, hasMore, fetchPostsAndResetCount])
+
+  const extraToggleStyles = fetchPostParam.childPostInclusion === 'yes'
+    ? { backgroundColor: pictonBlue }
+    : { backgroundColor: '#FFFFFF' }
+
+  return (
+    <View style={styles.container}>
+      <FlatList
+        ref={scrollRef}
+        data={postIds}
+        renderItem={({ item }) => renderPostRow({ ...props, postId: item })}
+        onRefresh={refreshPosts}
+        refreshing={!!pending}
+        keyExtractor={item => `post${item}`}
+        onEndReached={fetchMorePosts}
+        ListHeaderComponent={
+          <View>
+            {header}
+            {!feedType && (
+              <View style={[styles.listControls]}>
+                <ListControl selected={sortBy} onChange={setSort} options={STREAM_SORT_OPTIONS} />
+                <View style={styles.steamControlRightSide}>
+                  {!['my', 'public'].includes(fetchPostParam.context) &&
+                    <TouchableOpacity onPress={handleChildPostToggle}>
+                      <View style={{ ...styles.childGroupToggle, ...extraToggleStyles }}>
+                        <Icon name='Subgroup' color={fetchPostParam.childPostInclusion === 'yes' ? '#FFFFFF' : pictonBlue} />
+                      </View>
+                    </TouchableOpacity>}
+                  {!customPostTypes && (
+                    <ListControl selected={postTypeFilter} onChange={setFilter} options={POST_TYPE_OPTIONS} />
+                  )}
+                </View>
+              </View>
+            )}
+            {feedType === 'event' && (
+              <View style={[styles.listControls]}>
+                <ListControl selected={timeframe} onChange={setTimeframe} options={EVENT_STREAM_TIMEFRAME_OPTIONS} />
+              </View>
+            )}
+          </View>
+        }
+        ListFooterComponent={pending ? <Loading style={styles.loading} /> : null}
+      />
+    </View>
+  )
 }
 
-export function renderPostRow ({
+const renderPostRow = ({
   postId,
   fetchPostParam,
   forGroup,
@@ -187,17 +220,17 @@ export function renderPostRow ({
   showMember,
   showTopic,
   goToGroup
-}) {
-  return (
-    <PostRow
-      context={fetchPostParam?.context}
-      postId={postId}
-      forGroupId={forGroup?.id}
-      showGroups={!forGroup?.id || isContextGroup(forGroup?.slug)}
-      showPost={showPost}
-      showMember={showMember}
-      showTopic={showTopic}
-      goToGroup={goToGroup}
-    />
-  )
-}
+}) => (
+  <PostRow
+    context={fetchPostParam?.context}
+    postId={postId}
+    forGroupId={forGroup?.id}
+    showGroups={!forGroup?.id || isContextGroup(forGroup?.slug)}
+    showPost={showPost}
+    showMember={showMember}
+    showTopic={showTopic}
+    goToGroup={goToGroup}
+  />
+)
+
+export default FeedList
