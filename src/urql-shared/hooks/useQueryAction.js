@@ -2,7 +2,7 @@ import { isString, isObject, isFunction } from 'lodash/fp'
 import { useState, useEffect, useCallback } from 'react'
 import useDeepCompareMemoize from './useDeepCompareMemoize'
 import fetchGraphqlActionCreator from 'store/actions/fetchGraphQL'
-import { useClient, useQuery } from 'urql'
+import { useClient } from 'urql'
 import { useDispatch } from 'react-redux'
 
 const usageError = new Error(
@@ -93,7 +93,9 @@ export default function useQueryAction ({ query, action, variables, meta, pause 
       )
       if (!pause && queryAction) {
         setLoading(true)
+
         const urqlResponse = await executeQuery()
+
         if (urqlResponse?.data && queryAction?.meta) {
           const { data } = urqlResponse
           await dispatch({

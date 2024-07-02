@@ -58,6 +58,8 @@ const generateTypePolicies = (types) => {
 
 const typePolicies = generateTypePolicies(typesWithItemsField)
 
+// Explicit recognition of the lack of an id field on a selection set avoids a URQL warning:
+// https://commerce.nearform.com/open-source/urql/docs/graphcache/normalized-caching
 const customKeys = {
   AffiliationQuerySet: () => null,
   ActivityMeta: () => null,
