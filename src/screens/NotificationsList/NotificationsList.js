@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { FlatList, TouchableOpacity, View, Text } from 'react-native'
+import { FlatList, TouchableOpacity, View, Text, StyleSheet } from 'react-native'
 import { useIsFocused, useNavigation } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
 import ModalHeader from 'navigation/headers/ModalHeader'
@@ -8,7 +8,6 @@ import NotificationCard from 'components/NotificationCard'
 import CreateGroupNotice from 'components/CreateGroupNotice'
 import Loading from 'components/Loading'
 import cardStyles from 'components/NotificationCard/NotificationCard.styles'
-import styles from './NotificationsList.styles'
 import {
   FETCH_NOTIFICATIONS,
   fetchNotifications,
@@ -23,7 +22,17 @@ import { isEmpty } from 'lodash'
 
 const NOTIFICATIONS_PAGE_SIZE = 20
 
-export const NotificationsList = (props) => {
+const styles = StyleSheet.create({
+  notificationsList: {
+    backgroundColor: 'white',
+    position: 'relative'
+  },
+  center: {
+    padding: 20
+  }
+})
+
+export const NotificationsList = props => {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const dispatch = useDispatch()
