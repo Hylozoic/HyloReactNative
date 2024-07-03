@@ -9,17 +9,19 @@ import { openURL } from 'hooks/useOpenURL'
 import useGoToMember from 'hooks/useGoToMember'
 import useGoToTopic from 'hooks/useGoToTopic'
 
-const wrapInHTMLDoc = source => `
-  <html>
-  <head>
-    <meta charset="utf-8">
-    <base href="https://hylo.com">
-  </head>
-  <body>
-    ${source}
-  </body>
-  </html>
-`
+const wrapInHTMLDoc = source => {
+  return `
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <base href="https://www.hylo.com">
+    </head>
+    <body>
+      ${source}
+    </body>
+    </html>
+  `
+}
 
 const htmlConfig = {
   customHTMLElementModels: {
