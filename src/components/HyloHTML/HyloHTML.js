@@ -13,7 +13,7 @@ const wrapInHTMLDoc = source => `
   <html>
   <head>
     <meta charset="utf-8">
-    <base href="https://hylo.com">
+    <base href="https://www.hylo.com">
   </head>
   <body>
     ${source}
