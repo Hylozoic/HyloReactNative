@@ -22,11 +22,9 @@ import { RESP_ADD_MEMBERS, RESP_ADMINISTRATION } from 'store/constants'
 export default function DrawerMenu () {
   const { t } = useTranslation()
   const navigation = useNavigation()
-  const currentGroup = useSelector(getCurrentGroup)
   const memberships = useSelector(getMemberships)
   const canAdmin = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_ADMINISTRATION, groupId: currentGroup?.id }))
   const canInvite = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_ADD_MEMBERS, groupId: currentGroup?.id }))
-
   const { myHome } = useRouteParams()
 
   const myGroups = memberships
@@ -77,7 +75,7 @@ export default function DrawerMenu () {
   // }
 
   const publicRoutes = [
-    { ...PUBLIC_GROUP, navigateTo: navigateToPublicStream, name: t('Public Stream')},
+    { ...PUBLIC_GROUP, navigateTo: navigateToPublicStream, name: t('Public Stream') },
     // publicGroups,
     publicMap
   ]
@@ -124,6 +122,7 @@ export default function DrawerMenu () {
   const groupBannerImage = currentGroup?.bannerUrl
     ? { uri: currentGroup?.bannerUrl }
     : null
+
   return (
     <View style={styles.container}>
       {currentGroup && !myHome && (

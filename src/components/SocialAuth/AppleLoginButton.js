@@ -40,7 +40,7 @@ export default function AppleLoginButton ({
 }) {
   const { t } = useTranslation()
   useEffect(() => {
-    if (!appleAuth.isSupported) return null
+    if (!appleAuth.isSupported) return
     // onCredentialRevoked returns a function that will remove the event listener. useEffect will call this function when the component unmounts
     return appleAuth.onCredentialRevoked(async () => {
       console.warn(t('If this function executes, User Credentials have been Revoked'))

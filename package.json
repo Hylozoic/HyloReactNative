@@ -1,6 +1,6 @@
 {
   "name": "HyloReactNative",
-  "version": "5.6.0-0",
+  "version": "5.6.0",
   "private": true,
   "scripts": {
     "android": "adb reverse tcp:3001 tcp:3001 && adb reverse tcp:3000 tcp:3000 && react-native run-android",
@@ -149,6 +149,7 @@
     "react-native-clean-project": "^4.0.3",
     "react-native-version": "^4.0.0",
     "react-test-renderer": "18.2.0",
+    "reactotron-react-native": "^5.1.7",
     "redux-logger": "^3.0.6",
     "reselect-tools": "^0.0.7",
     "standard": "^17.1.0",
