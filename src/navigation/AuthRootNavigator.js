@@ -21,13 +21,6 @@ import PostEditor from 'screens/PostEditor'
 import NotificationsList from 'screens/NotificationsList'
 import Thread from 'screens/Thread'
 import { white } from 'style/colors'
-import { HyloHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
-import { useDispatch } from 'react-redux'
-import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import OneSignal from 'react-native-onesignal'
-import registerDevice from 'store/actions/registerDevice'
-import i18n from '../../i18n'
-import { fetchNotifications, updateNewNotificationCount } from 'screens/NotificationsList/NotificationsList.store'
 import fetchCommonRoles from 'store/actions/fetchCommonRoles'
 
 const AuthRoot = createStackNavigator()
