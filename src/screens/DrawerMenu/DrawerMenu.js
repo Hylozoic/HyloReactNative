@@ -9,7 +9,7 @@ import useRouteParams from 'hooks/useRouteParams'
 import useChangeToGroup from 'hooks/useChangeToGroup'
 import { PUBLIC_GROUP, ALL_GROUP, MY_CONTEXT_GROUP } from 'store/models/Group'
 import getMemberships from 'store/selectors/getMemberships'
-import getCurrentGroup from 'store/selectors/getCurrentGroup'
+// import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import styles from './DrawerMenu.styles'
 import Button from 'components/Button'
 import { bannerlinearGradientColors } from 'style/colors'
@@ -18,11 +18,13 @@ import earthUrl from 'assets/earth.png'
 import myHomeUrl from 'assets/my-home.png'
 import hasResponsibilityForGroup from 'store/selectors/hasResponsibilityForGroup'
 import { RESP_ADD_MEMBERS, RESP_ADMINISTRATION } from 'store/constants'
+import useCurrentGroup from 'hooks/useCurrentGroup'
 
 export default function DrawerMenu () {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const memberships = useSelector(getMemberships)
+  const [currentGroup] = useCurrentGroup()
   const canAdmin = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_ADMINISTRATION, groupId: currentGroup?.id }))
   const canInvite = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_ADD_MEMBERS, groupId: currentGroup?.id }))
   const { myHome } = useRouteParams()
