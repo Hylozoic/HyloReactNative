@@ -141,7 +141,7 @@ export default function FeedList (props) {
       }))
     }
   }, [fetchPostParam, hasMore, pending, postIds.length])
-  console.log('!!! fetchPostParam', fetchPostParam)
+
   if (!fetchPostParam) return null
 
   const sortOptions = customView?.type === 'collection'
