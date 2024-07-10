@@ -33,13 +33,13 @@ export const POST_TYPE_OPTIONS = [
   { id: 'resource', label: 'Resources' }
 ]
 // tracks: `hylo/hylo-evo/src/util/constants.js`
-export const STREAM_SORT_OPTIONS = [ // LOOK UP
+export const STREAM_SORT_OPTIONS = [
   { id: 'updated', label: 'Latest activity' },
   { id: 'created', label: 'Post Date' },
   { id: 'reactions', label: 'Popular' }
 ]
 // tracks: `hylo/hylo-evo/src/util/constants.js`
-export const COLLECTION_SORT_OPTIONS = [ // LOOK UP
+export const COLLECTION_SORT_OPTIONS = [
   { id: 'order', label: 'Manual' },
   { id: 'updated', label: 'Latest activity' },
   { id: 'created', label: 'Post Date' },
@@ -141,10 +141,10 @@ export default function FeedList (props) {
       }))
     }
   }, [fetchPostParam, hasMore, pending, postIds.length])
-
+  console.log('!!! fetchPostParam', fetchPostParam)
   if (!fetchPostParam) return null
 
-  const sortOptions = customView
+  const sortOptions = customView?.type === 'collection'
     ? COLLECTION_SORT_OPTIONS
     : STREAM_SORT_OPTIONS
 
