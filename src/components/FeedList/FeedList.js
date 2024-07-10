@@ -1,32 +1,29 @@
 import React, { useEffect, useCallback, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { FlatList, View, TouchableOpacity } from 'react-native'
+import { createSelector } from 'reselect'
 import { isEmpty, get } from 'lodash/fp'
 import { useIsFocused } from '@react-navigation/native'
-import {
-  getPostIds,
-  getHasMorePosts,
-  getQueryProps,
-  NO_POST_FILTER,
-  defaultTimeframe,
-  defaultSortBy
-} from './FeedList.store'
 import { FETCH_POSTS } from 'store/constants'
 import { ALL_GROUP_ID, isContextGroup, MY_CONTEXT_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
+import { makeGetQueryResults } from 'store/reducers/queryResults'
+import useFetchPostParam from './useFetchPostParam'
 import getMe from 'store/selectors/getMe'
 import fetchPosts from 'store/actions/fetchPosts'
 import resetNewPostCount from 'store/actions/resetNewPostCount'
 import updateUserSettings from 'store/actions/updateUserSettings'
-import PostRow from './PostRow'
+import Icon from 'components/Icon'
 import ListControl from 'components/ListControl'
 import Loading from 'components/Loading'
-import Icon from 'components/Icon'
+import PostRow from './PostRow'
 import { pictonBlue } from 'style/colors'
 import styles from './FeedList.styles'
 
+/* === CONSTANTS === */
+
 // tracks: `hylo-evo/src/components/StreamViewControls/StreamViewControls.js`
 export const POST_TYPE_OPTIONS = [
-  { id: NO_POST_FILTER, label: 'All Posts' },
+  { id: undefined, label: 'All Posts' },
   { id: 'discussion', label: 'Discussions' },
   { id: 'event', label: 'Events' },
   { id: 'offer', label: 'Offers' },
@@ -35,145 +32,124 @@ export const POST_TYPE_OPTIONS = [
   { id: 'request', label: 'Requests' },
   { id: 'resource', label: 'Resources' }
 ]
-
 // tracks: `hylo/hylo-evo/src/util/constants.js`
-export const STREAM_SORT_OPTIONS = [
+export const STREAM_SORT_OPTIONS = [ // LOOK UP
   { id: 'updated', label: 'Latest activity' },
   { id: 'created', label: 'Post Date' },
-  { id: 'votes', label: 'Popular' }
+  { id: 'reactions', label: 'Popular' }
 ]
-
-// Not currently used
 // tracks: `hylo/hylo-evo/src/util/constants.js`
-export const COLLECTION_SORT_OPTIONS = [
+export const COLLECTION_SORT_OPTIONS = [ // LOOK UP
   { id: 'order', label: 'Manual' },
   { id: 'updated', label: 'Latest activity' },
   { id: 'created', label: 'Post Date' },
-  { id: 'votes', label: 'Popular' }
+  { id: 'reactions', label: 'Popular' }
 ]
-
 // tracks: `hylo-evo/src/routes/Events/Events.js`
 export const EVENT_STREAM_TIMEFRAME_OPTIONS = [
   { id: 'future', label: 'Upcoming Events' },
   { id: 'past', label: 'Past Events' }
 ]
+export const DEFAULT_SORT_BY_ID = 'updated'
+export const DEFAULT_TIMEFRAME_ID = 'future'
 
+/* === SELECTORS === */
+
+const getPostResults = makeGetQueryResults(FETCH_POSTS)
+
+export const getPostIds = createSelector(
+  getPostResults,
+  results => isEmpty(results) ? [] : results.ids
+)
+
+export const getHasMorePosts = createSelector(getPostResults, get('hasMore'))
+
+/* === COMPONENTS === */
 
 export default function FeedList (props) {
   const {
-    forGroup, topicName, customView, myHome, feedType, header, scrollRef
+    customView,
+    feedType,
+    forGroup,
+    header,
+    myHome,
+    scrollRef,
+    topicName
   } = props
   const dispatch = useDispatch()
   const isFocused = useIsFocused()
-
   const currentUser = useSelector(getMe)
-
-  const [filter, setFilter] = useState(NO_POST_FILTER)
+  const [filter, setFilter] = useState()
   const [sortBy, setSortBy] = useState(
     get('settings.streamSortBy', currentUser) ||
     customView?.defaultSort ||
-    defaultSortBy
-    // TODO: Integrate this additional logic after the above
-    // if (!customView && sortBy === 'order') {
-    //   sortBy = 'updated'
-    // }
+    DEFAULT_SORT_BY_ID
   )
-
-  const [timeframe, setTimeframe] = useState(defaultTimeframe)
-
-  const activePostsOnly = customView?.activePostsOnly
-  const childPostInclusion = get('settings.streamChildPosts', currentUser) || 'yes'
-  const customViewCollectionId = customView?.collectionId
-  const customViewType = customView?.type
-  const customViewTopics = customViewType === 'stream' ? customView?.topics : null
-  const customPostTypes = customViewType === 'stream' ? customView?.postTypes : null
-  const postTypeFilter = props?.feedType ||
-    filter ||
-    get('settings.streamPostType', currentUser) ||
-    null
-
-  const fetchPostParam = useSelector(state => (
-    getQueryProps(state, {
-      activePostsOnly,
-      childPostInclusion,
-      forCollection: customViewCollectionId,
-      context: isContextGroup(forGroup?.slug) ? forGroup.slug : myHome ? 'my' : 'groups',
-      myHome,
-      slug: myHome ? undefined : forGroup?.slug,
-      topicName,
-      sortBy,
-      topics: customViewTopics?.toModelArray().map(t => t.id) || null,
-      types: customPostTypes,
-      filter: postTypeFilter === NO_POST_FILTER ? null : postTypeFilter
-    })
-  ))
-
-  switch (myHome) {
-    case 'Mentions': {
-      fetchPostParam.mentionsOf = [currentUser.id]
-      break
-    }
-    case 'Announcements': {
-      fetchPostParam.announcementsOnly = true
-      break
-    }
-    case 'Interactions': {
-      fetchPostParam.interactedWithBy = [currentUser.id]
-      break
-    }
-    case 'My Posts': {
-      fetchPostParam.createdBy = [currentUser.id]
-      break
-    }
-  }
-
-  if (props.feedType === 'event') {
-    fetchPostParam.order = timeframe === 'future' ? 'asc' : 'desc'
-    fetchPostParam.afterTime = timeframe === 'future' ? new Date().toISOString() : null
-    fetchPostParam.beforeTime = timeframe === 'past' ? new Date().toISOString() : null
-  }
+  const [timeframe, setTimeframe] = useState(DEFAULT_TIMEFRAME_ID)
+  const fetchPostParam = useFetchPostParam({
+    customView,
+    feedType,
+    filter,
+    forGroup,
+    myHome,
+    sortBy,
+    timeframe,
+    topicName
+  })
 
   const pending = useSelector(state => state.pending[FETCH_POSTS])
   const postIds = useSelector(state => getPostIds(state, fetchPostParam))
   const hasMore = useSelector(state => getHasMorePosts(state, fetchPostParam))
 
   const fetchPostsAndResetCount = useCallback(() => {
-    const forGroupId = get('id', forGroup)
-    const shouldReset = slug => (
-      slug !== ALL_GROUP_ID &&
-      slug !== PUBLIC_GROUP_ID &&
-      slug !== MY_CONTEXT_ID &&
-      !topicName &&
-      sortBy === defaultSortBy &&
-      !postTypeFilter
-    )
+    if (fetchPostParam) {
+      const forGroupId = get('id', forGroup)
+      const shouldReset = slug => (
+        slug !== ALL_GROUP_ID &&
+        slug !== PUBLIC_GROUP_ID &&
+        slug !== MY_CONTEXT_ID &&
+        !topicName &&
+        sortBy === DEFAULT_SORT_BY_ID &&
+        !fetchPostParam.filter
+      )
 
-    if (shouldReset(fetchPostParam.context)) {
-      dispatch(resetNewPostCount(forGroupId, 'Membership'))
+      if (shouldReset(fetchPostParam.context)) {
+        dispatch(resetNewPostCount(forGroupId, 'Membership'))
+      }
+
+      dispatch(fetchPosts(fetchPostParam))
     }
-
-    dispatch(fetchPosts(fetchPostParam))
-  }, [fetchPostParam, forGroup?.id, sortBy, postTypeFilter, topicName])
-
-  const refreshPosts = useCallback(() => dispatch(fetchPosts(fetchPostParam, { reset: true })), [fetchPostParam])
-  const fetchMorePosts = useCallback(() => {
-    if (hasMore && !pending) {
-      dispatch(fetchPosts({ ...fetchPostParam, offset: postIds.length }))
-    }
-  }, [hasMore, pending, fetchPostParam, postIds.length])
-  const handleChildPostToggle = () => {
-    const childPostInclusion = fetchPostParam.childPostInclusion === 'yes' ? 'no' : 'yes'
-    dispatch(updateUserSettings({ settings: { streamChildPosts: childPostInclusion } }))
-  }
-  const sortOptions = customView ? COLLECTION_SORT_OPTIONS : STREAM_SORT_OPTIONS
+  }, [fetchPostParam])
 
   useEffect(() => {
     if (isFocused && isEmpty(postIds) && hasMore !== false) {
       fetchPostsAndResetCount()
     }
-  }, [isFocused, postIds, hasMore, fetchPostsAndResetCount])
+  }, [fetchPostsAndResetCount, hasMore, isFocused, postIds])
 
-  const extraToggleStyles = fetchPostParam.childPostInclusion === 'yes'
+  // Only custom views can be sorted by manual order
+  useEffect(() => {
+    if (!customView && sortBy === 'order') {
+      setSortBy('updated')
+    }
+  }, [customView, sortBy])
+
+  const refreshPosts = useCallback(() => fetchPostParam && dispatch(fetchPosts(fetchPostParam, { reset: true })), [fetchPostParam])
+  const fetchMorePosts = useCallback(() => {
+    if (fetchPostParam && hasMore && !pending) {
+      dispatch(fetchPosts({ ...fetchPostParam, offset: postIds.length }))
+    }
+  }, [fetchPostParam, hasMore, pending, postIds.length])
+
+  if (!fetchPostParam) return null
+
+  const sortOptions = customView ? COLLECTION_SORT_OPTIONS : STREAM_SORT_OPTIONS
+  const handleChildPostToggle = () => {
+    const childPostInclusion = fetchPostParam?.childPostInclusion === 'yes' ? 'no' : 'yes'
+    dispatch(updateUserSettings({ settings: { streamChildPosts: childPostInclusion } }))
+  }
+
+  const extraToggleStyles = fetchPostParam?.childPostInclusion === 'yes'
     ? { backgroundColor: pictonBlue }
     : { backgroundColor: '#FFFFFF' }
 
@@ -194,14 +170,14 @@ export default function FeedList (props) {
               <View style={[styles.listControls]}>
                 <ListControl selected={sortBy} onChange={setSortBy} options={sortOptions} />
                 <View style={styles.steamControlRightSide}>
-                  {!['my', 'public'].includes(fetchPostParam.context) &&
+                  {!['my', 'public'].includes(fetchPostParam?.context) &&
                     <TouchableOpacity onPress={handleChildPostToggle}>
                       <View style={{ ...styles.childGroupToggle, ...extraToggleStyles }}>
-                        <Icon name='Subgroup' color={fetchPostParam.childPostInclusion === 'yes' ? '#FFFFFF' : pictonBlue} />
+                        <Icon name='Subgroup' color={fetchPostParam?.childPostInclusion === 'yes' ? '#FFFFFF' : pictonBlue} />
                       </View>
                     </TouchableOpacity>}
-                  {!customPostTypes && (
-                    <ListControl selected={postTypeFilter} onChange={setFilter} options={POST_TYPE_OPTIONS} />
+                  {!fetchPostParam?.types && (
+                    <ListControl selected={fetchPostParam.filter} onChange={setFilter} options={POST_TYPE_OPTIONS} />
                   )}
                 </View>
               </View>
@@ -219,7 +195,7 @@ export default function FeedList (props) {
   )
 }
 
-const renderPostRow = ({
+function renderPostRow ({
   postId,
   fetchPostParam,
   forGroup,
@@ -227,15 +203,17 @@ const renderPostRow = ({
   showMember,
   showTopic,
   goToGroup
-}) => (
-  <PostRow
-    context={fetchPostParam?.context}
-    postId={postId}
-    forGroupId={forGroup?.id}
-    showGroups={!forGroup?.id || isContextGroup(forGroup?.slug)}
-    showPost={showPost}
-    showMember={showMember}
-    showTopic={showTopic}
-    goToGroup={goToGroup}
-  />
-)
+}) {
+  return (
+    <PostRow
+      context={fetchPostParam?.context}
+      postId={postId}
+      forGroupId={forGroup?.id}
+      showGroups={!forGroup?.id || isContextGroup(forGroup?.slug)}
+      showPost={showPost}
+      showMember={showMember}
+      showTopic={showTopic}
+      goToGroup={goToGroup}
+    />
+  )
+}
