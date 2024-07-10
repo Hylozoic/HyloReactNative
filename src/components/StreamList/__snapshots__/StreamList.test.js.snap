@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FeedList renders correctly 1`] = `
+exports[`StreamList renders correctly 1`] = `
 <SafeAreaProvider>
   <TRenderEngineProvider
     baseStyle={
@@ -84,7 +84,7 @@ exports[`FeedList renders correctly 1`] = `
     >
       <HyloHTMLConfigProvider>
         <ForwardRef(NavigationContainerInner)>
-          <FeedList
+          <StreamList
             fetchMorePosts={[Function]}
             filter="all"
             pending={true}

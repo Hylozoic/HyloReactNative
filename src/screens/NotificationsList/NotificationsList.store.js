@@ -223,7 +223,7 @@ export function refineActivity ({ action, actor, comment, group, post, meta }, {
         body: 'approved your request to join',
         group: group.name,
         header: 'Join Request Approved',
-        onPress: () => navigate('Feed', { groupId: group.id })
+        onPress: () => navigate('Stream', { groupId: group.id })
       }
     case ACTION_ANNOUNCEMENT:
       return {

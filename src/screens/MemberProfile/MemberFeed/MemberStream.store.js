@@ -7,7 +7,7 @@ import {
 import gql from 'graphql-tag'
 import presentPost from 'store/presenters/presentPost'
 
-export const MODULE_NAME = 'MemberFeed'
+export const MODULE_NAME = 'MemberStream'
 export const SET_CHOICE = `${MODULE_NAME}/SET_CHOICE`
 export const FETCH_MEMBER_POSTS = `${MODULE_NAME}/FETCH_MEMBER_POSTS`
 export const FETCH_MEMBER_COMMENTS = `${MODULE_NAME}/FETCH_MEMBER_COMMENTS`

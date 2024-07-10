@@ -1,7 +1,7 @@
-import { mapStateToProps, mapDispatchToProps, mergeProps } from './MemberFeed.connector'
+import { mapStateToProps, mapDispatchToProps, mergeProps } from './MemberStream.connector'
 import {
   FETCH_MEMBER_POSTS, FETCH_MEMBER_COMMENTS, FETCH_MEMBER_UPVOTES, MODULE_NAME
-} from './MemberFeed.store'
+} from './MemberStream.store'
 
 describe('mapStateToProps', () => {
   const baseState = {

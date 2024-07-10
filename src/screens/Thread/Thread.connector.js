@@ -39,7 +39,7 @@ export function mapDispatchToProps (dispatch, { navigation, route }) {
     updateThreadReadTime: () => dispatch(updateThreadReadTime(threadId)),
     showMember: id => confirmNavigate(() => navigation.navigate('Member', { id })),
     showTopic: topicName => {
-      confirmNavigate(() => navigation.navigate('Feed', { topicName }))
+      confirmNavigate(() => navigation.navigate('Stream', { topicName }))
     }
   }
 }

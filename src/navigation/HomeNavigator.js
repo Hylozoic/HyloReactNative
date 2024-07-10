@@ -11,7 +11,7 @@ import TabStackHeader from 'navigation/headers/TabStackHeader'
 // Screens
 import AllTopicsWebView from 'screens/AllTopicsWebView'
 import ChatRoom from 'screens/ChatRoomWebView'
-import Feed from 'screens/Feed'
+import Stream from 'screens/Stream'
 import GroupExploreWebView from 'screens/GroupExploreWebView'
 import GroupNavigation from 'screens/GroupNavigation'
 import Groups from 'screens/Groups'
@@ -32,7 +32,7 @@ export default function HomeNavigator ({ navigation }) {
 
   useEffect(() => {
     if (!initialURL && !returnToOnAuthPath) {
-      setTimeout(() => navigation.navigate('Feed'), 400)
+      setTimeout(() => navigation.navigate('Stream'), 400)
     }
   }, [])
 
@@ -81,12 +81,12 @@ export default function HomeNavigator ({ navigation }) {
   return (
     <HomeTab.Navigator {...navigatorProps}>
       <HomeTab.Screen name='Group Navigation' component={GroupNavigation} />
-      <HomeTab.Screen name='Feed' options={{ title: 'Stream' }} component={Feed} />
+      <HomeTab.Screen name='Stream' options={{ title: 'Stream' }} component={Stream} />
       <HomeTab.Screen name='Post Details' key='Post Details' component={PostDetails} />
-      <HomeTab.Screen name='Projects' component={Feed} initialParams={{ feedType: 'project' }} />
+      <HomeTab.Screen name='Projects' component={Stream} initialParams={{ streamType: 'project' }} />
       <HomeTab.Screen name='Project Members' key='Project Members' component={ProjectMembers} />
-      <HomeTab.Screen name='Events' component={Feed} initialParams={{ feedType: 'event' }} />
-      <HomeTab.Screen name='Governance' component={Feed} initialParams={{ feedType: 'proposal' }} />
+      <HomeTab.Screen name='Events' component={Stream} initialParams={{ streamType: 'event' }} />
+      <HomeTab.Screen name='Governance' component={Stream} initialParams={{ streamType: 'proposal' }} />
       <HomeTab.Screen name='Members' component={MembersComponent} />
       <HomeTab.Screen name='Member' key='Member' component={MemberProfile} />
       <HomeTab.Screen name='Member Details' component={MemberDetails} />
@@ -95,10 +95,10 @@ export default function HomeNavigator ({ navigation }) {
       <HomeTab.Screen name='Topics' component={AllTopicsWebView} />
       <HomeTab.Screen name='Map' component={MapWebView} />
       <HomeTab.Screen name='Chat' component={ChatRoom} />
-      <HomeTab.Screen name='My Posts' component={Feed} initialParams={{ myHome: 'My Posts' }} />
-      <HomeTab.Screen name='Announcements' component={Feed} initialParams={{ myHome: 'Announcements' }} />
-      <HomeTab.Screen name='Mentions' component={Feed} initialParams={{ myHome: 'Mentions' }} />
-      <HomeTab.Screen name='Interactions' component={Feed} initialParams={{ myHome: 'Interactions' }} />
+      <HomeTab.Screen name='My Posts' component={Stream} initialParams={{ myHome: 'My Posts' }} />
+      <HomeTab.Screen name='Announcements' component={Stream} initialParams={{ myHome: 'Announcements' }} />
+      <HomeTab.Screen name='Mentions' component={Stream} initialParams={{ myHome: 'Mentions' }} />
+      <HomeTab.Screen name='Interactions' component={Stream} initialParams={{ myHome: 'Interactions' }} />
       <HomeTab.Screen name={GROUP_WELCOME_LANDING} component={GroupWelcomeLanding} />
     </HomeTab.Navigator>
   )

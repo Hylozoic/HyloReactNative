@@ -17,7 +17,7 @@ import {
   FETCH_MEMBER_POSTS,
   FETCH_MEMBER_COMMENTS,
   FETCH_MEMBER_UPVOTES
-} from './MemberFeed.store'
+} from './MemberStream.store'
 
 export function mapStateToProps (state, props) {
   const choice = getChoice(state, props)
@@ -64,7 +64,7 @@ export function mapDispatchToProps (dispatch, { navigation }) {
     }, dispatch),
     showMember: id => navigation.navigate('Member', { id }),
     showPost: id => navigation.navigate(modalScreenName('Post Details'), { id }),
-    showTopic: topicName => navigation.navigate('Feed', { topicName })
+    showTopic: topicName => navigation.navigate('Stream', { topicName })
   }
 }
 

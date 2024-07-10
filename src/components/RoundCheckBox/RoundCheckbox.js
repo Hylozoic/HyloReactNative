@@ -7,7 +7,7 @@
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Animated, View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
+import { Animated, View, TouchableWithoutStreamback, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const hitSlop = { top: 8, bottom: 8, left: 8, right: 8 };
@@ -71,7 +71,7 @@ export default class RoundCheckbox extends React.PureComponent {
     };
 
     return (
-      <TouchableWithoutFeedback hitSlop={hitSlop} onPress={this._onPress} style={style}>
+      <TouchableWithoutStreamback hitSlop={hitSlop} onPress={this._onPress} style={style}>
         <View style={styles.parentWrapper} shouldRasterizeIOS={true}>
           <Animated.View
             style={[
@@ -99,7 +99,7 @@ export default class RoundCheckbox extends React.PureComponent {
             />
           </Animated.View>
         </View>
-      </TouchableWithoutFeedback>
+      </TouchableWithoutStreamback>
     );
   }
 

@@ -1,4 +1,4 @@
-import { initialState } from './MemberFeed.store'
+import { initialState } from './MemberStream.store'
 
 describe('initialState', () => {
   it('is how it should be', () => {

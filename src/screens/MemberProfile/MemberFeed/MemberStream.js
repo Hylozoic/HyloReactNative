@@ -3,11 +3,11 @@ import { Text, View, TouchableOpacity, FlatList } from 'react-native'
 import PostCard from 'components/PostCard'
 import Comment from 'components/Comment'
 import Loading from 'components/Loading'
-import styles from './MemberFeed.styles'
+import styles from './MemberStream.styles'
 import useChangeToGroup from 'hooks/useChangeToGroup'
 import { useTranslation } from 'react-i18next'
 
-export default function MemberFeed ({
+export default function MemberStream ({
   id,
   items,
   itemType,
@@ -54,7 +54,7 @@ export const HeaderComponent = ({
   header,
   setChoice
 }) => {
-  const feedOptions = ['Posts', 'Comments', 'Upvotes']
+  const streamOptions = ['Posts', 'Comments', 'Upvotes']
   const { t } = useTranslation()
   // explicit invocation of dynamic content
   t('Posts')
@@ -64,9 +64,9 @@ export const HeaderComponent = ({
   return (
     <View>
       {header}
-      <View style={styles.feedTabs}>
-        {feedOptions.map(option =>
-          <FeedTab
+      <View style={styles.streamTabs}>
+        {streamOptions.map(option =>
+          <StreamTab
             key={option}
             option={option}
             chosen={option === choice}
@@ -126,7 +126,7 @@ export function ContentRow ({
   )
 }
 
-export function FeedTab ({ option, chosen, onPress }) {
+export function StreamTab ({ option, chosen, onPress }) {
   const { t } = useTranslation()
   return (
     <TouchableOpacity onPress={onPress}>

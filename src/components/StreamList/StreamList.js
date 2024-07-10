@@ -17,7 +17,7 @@ import ListControl from 'components/ListControl'
 import Loading from 'components/Loading'
 import PostRow from './PostRow'
 import { pictonBlue } from 'style/colors'
-import styles from './FeedList.styles'
+import styles from './StreamList.styles'
 
 /* === CONSTANTS === */
 
@@ -66,10 +66,10 @@ export const getHasMorePosts = createSelector(getPostResults, get('hasMore'))
 
 /* === COMPONENTS === */
 
-export default function FeedList (props) {
+export default function StreamList (props) {
   const {
     customView,
-    feedType,
+    streamType,
     forGroup,
     header,
     myHome,
@@ -88,7 +88,7 @@ export default function FeedList (props) {
   const [timeframe, setTimeframe] = useState(DEFAULT_TIMEFRAME_ID)
   const fetchPostParam = useFetchPostParam({
     customView,
-    feedType,
+    streamType,
     filter,
     forGroup,
     myHome,
@@ -170,7 +170,7 @@ export default function FeedList (props) {
         ListHeaderComponent={
           <View>
             {header}
-            {!feedType && (
+            {!streamType && (
               <View style={[styles.listControls]}>
                 <ListControl selected={sortBy} onChange={setSortBy} options={sortOptions} />
                 <View style={styles.steamControlRightSide}>
@@ -186,7 +186,7 @@ export default function FeedList (props) {
                 </View>
               </View>
             )}
-            {feedType === 'event' && (
+            {streamType === 'event' && (
               <View style={[styles.listControls]}>
                 <ListControl selected={timeframe} onChange={setTimeframe} options={EVENT_STREAM_TIMEFRAME_OPTIONS} />
               </View>

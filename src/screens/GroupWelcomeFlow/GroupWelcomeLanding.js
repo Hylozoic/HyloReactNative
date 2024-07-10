@@ -57,7 +57,7 @@ export default function GroupWelcomeLanding ({ route }) {
       !agreementsChanged &&
       (joinQuestionsAnsweredAt ||
       !group.settings?.askJoinQuestions)) {
-      navigation.navigate('Feed', { groupId, initial: false })
+      navigation.navigate('Stream', { groupId, initial: false })
     }
   }, [showJoinForm, agreementsChanged, joinQuestionsAnsweredAt])
 

@@ -435,7 +435,7 @@ exports[`renders correctly if currentUserHasMemberships 1`] = `
     >
       <HyloHTMLConfigProvider>
         <ForwardRef(NavigationContainerInner)>
-          <Feed
+          <Stream
             currentUser={
               {
                 "id": "2",
@@ -546,7 +546,7 @@ exports[`renders correctly if currentUserHasMemberships is false 1`] = `
     >
       <HyloHTMLConfigProvider>
         <ForwardRef(NavigationContainerInner)>
-          <Feed
+          <Stream
             currentUser={
               {
                 "id": "2",
