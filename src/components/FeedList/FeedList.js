@@ -96,13 +96,12 @@ export default function FeedList (props) {
     timeframe,
     topicName
   })
-
   const pending = useSelector(state => state.pending[FETCH_POSTS])
   const postIds = useSelector(state => getPostIds(state, fetchPostParam))
   const hasMore = useSelector(state => getHasMorePosts(state, fetchPostParam))
 
-  const fetchPostsAndResetCount = useCallback(() => {
-    if (fetchPostParam) {
+  useEffect(() => {
+    if (fetchPostParam && isFocused && isEmpty(postIds) && hasMore !== false) {
       const forGroupId = get('id', forGroup)
       const shouldReset = slug => (
         slug !== ALL_GROUP_ID &&
@@ -119,13 +118,7 @@ export default function FeedList (props) {
 
       dispatch(fetchPosts(fetchPostParam))
     }
-  }, [fetchPostParam])
-
-  useEffect(() => {
-    if (isFocused && isEmpty(postIds) && hasMore !== false) {
-      fetchPostsAndResetCount()
-    }
-  }, [fetchPostsAndResetCount, hasMore, isFocused, postIds])
+  }, [fetchPostParam, hasMore, isFocused, postIds])
 
   // Only custom views can be sorted by manual order
   useEffect(() => {
@@ -134,16 +127,27 @@ export default function FeedList (props) {
     }
   }, [customView, sortBy])
 
-  const refreshPosts = useCallback(() => fetchPostParam && dispatch(fetchPosts(fetchPostParam, { reset: true })), [fetchPostParam])
+  const refreshPosts = useCallback(() => {
+    if (fetchPostParam) {
+      dispatch(fetchPosts(fetchPostParam, { reset: true }))
+    }
+  }, [fetchPostParam])
+
   const fetchMorePosts = useCallback(() => {
     if (fetchPostParam && hasMore && !pending) {
-      dispatch(fetchPosts({ ...fetchPostParam, offset: postIds.length }))
+      dispatch(fetchPosts({
+        ...fetchPostParam,
+        offset: postIds.length
+      }))
     }
   }, [fetchPostParam, hasMore, pending, postIds.length])
 
   if (!fetchPostParam) return null
 
-  const sortOptions = customView ? COLLECTION_SORT_OPTIONS : STREAM_SORT_OPTIONS
+  const sortOptions = customView
+    ? COLLECTION_SORT_OPTIONS
+    : STREAM_SORT_OPTIONS
+
   const handleChildPostToggle = () => {
     const childPostInclusion = fetchPostParam?.childPostInclusion === 'yes' ? 'no' : 'yes'
     dispatch(updateUserSettings({ settings: { streamChildPosts: childPostInclusion } }))
