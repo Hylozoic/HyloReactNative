@@ -141,6 +141,7 @@ exports[`ThreadList handles pending correctly with threads 1`] = `
 <View>
   <View>
     <ActivityIndicator
+      accessibilityHint="loading"
       color="#818A88"
       size="small"
     />
