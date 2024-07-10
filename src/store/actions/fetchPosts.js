@@ -73,7 +73,7 @@ export default function fetchPosts ({
       }
     },
     meta: {
-      afterInteractions: true,
+      afterInteractions: false,
       slug,
       extractModel,
       extractQueryResults: {
