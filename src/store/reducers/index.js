@@ -9,7 +9,6 @@ import returnToOnAuthPath from './returnToOnAuthPathReducer'
 import resetStore from './resetStore'
 import { handleSetState, composeReducers } from './util'
 // Local store
-import FeedList from 'components/FeedList/FeedList.store'
 import ItemChooser from 'screens/ItemChooser/ItemChooser.store'
 import MemberFeed from 'screens/MemberProfile/MemberFeed/MemberFeed.store'
 import Members from 'screens/Members/Members.store'
@@ -30,7 +29,6 @@ export const createCombinedReducers = () => combineReducers({
   mixpanel,
   returnToOnAuthPath,
   // Local store (Component)
-  FeedList,
   ItemChooser,
   MemberFeed,
   Members,
