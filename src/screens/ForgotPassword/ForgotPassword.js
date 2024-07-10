@@ -6,8 +6,10 @@ import validator from 'validator'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import sendPasswordReset from 'store/actions/sendPasswordReset'
 import styles from './ForgotPassword.styles'
+import { useTranslation } from 'react-i18next'
 
 export default function ForgotPassword ({ error }) {
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const dispatch = useDispatch()
   const [emailIsValid, setEmailIsValid] = useState(false)
@@ -22,7 +24,7 @@ export default function ForgotPassword ({ error }) {
     await dispatch(sendPasswordReset(email))
 
     navigation.navigate('Login', {
-      bannerMessage: `A link to reset your password has been sent to you at ${email}`
+      bannerMessage: t('A link to reset your password has been sent to you at {{email}}', { email })
     })
   }
 
@@ -30,8 +32,7 @@ export default function ForgotPassword ({ error }) {
     <ScrollView contentContainerStyle={styles.forgotPassword} style={styles.container}>
       <View style={styles.paddedRow}>
         <Text style={styles.messageText}>
-          Enter your email address below and we'll send you an email
-          message with a link for resetting your password.
+          {t('forgotPasswordDescription')}
         </Text>
       </View>
       {error && (
@@ -39,7 +40,7 @@ export default function ForgotPassword ({ error }) {
       )}
       {!error && (
         <View style={styles.labelRow}>
-          <Text style={styles.labelText}>Email address</Text>
+          <Text style={styles.labelText}>{t('Email address')}</Text>
         </View>
       )}
       <View style={styles.paddedRow}>
@@ -64,7 +65,7 @@ export default function ForgotPassword ({ error }) {
       </View>
       <View style={styles.paddedRow}>
         <TouchableOpacity onPress={handleSubmit} disabled={!emailIsValid} style={styles.forgotPasswordButton}>
-          <Text style={styles.forgotPasswordText}>Send</Text>
+          <Text style={styles.forgotPasswordText}>{t('Send')}</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -72,9 +73,10 @@ export default function ForgotPassword ({ error }) {
 }
 
 export function FormError () {
+  const { t } = useTranslation()
   const rowStyle = styles.emailErrorRow
   const triangleStyle = styles.emailTriangle
-  const message = 'Password is invalid or unknown error'
+  const message = t('Password is invalid or unknown error')
   return (
     <View style={styles.errorView}>
       <View style={rowStyle}>

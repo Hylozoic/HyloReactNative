@@ -66,7 +66,8 @@ jest.mock('react-native-safe-area-context', () => mockSafeAreaContext)
 jest.mock('react-native-background-timer', () => {})
 
 jest.mock('@sentry/react-native', () => ({
-  init: jest.fn()
+  init: jest.fn(),
+  captureException: jest.fn()
 }))
 
 // import mockRNCNetInfo from '@react-native-community/netinfo/jest/netinfo-mock.js'
@@ -91,3 +92,26 @@ jest.mock('react-native-onesignal', () => ({
 jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter.js', () =>
   require('react-native/Libraries/EventEmitter/__mocks__/NativeEventEmitter.js')
 )
+
+jest.mock('react-i18next', () => ({
+  ...jest.requireActual('react-i18next'),
+  withTranslation: () => Component => {
+    Component.defaultProps = { ...Component.defaultProps, t: (str) => str }
+    return Component
+  },
+  useTranslation: (domain) => {
+    return {
+      t: (str) => str,
+      i18n: {
+        changeLanguage: () => new Promise(() => {})
+      }
+    }
+  }
+}))
+
+jest.mock('react-native-webview', () => {
+  const { View } = require('react-native')
+  return {
+    WebView: () => View
+  }
+})

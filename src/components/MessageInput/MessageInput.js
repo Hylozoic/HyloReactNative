@@ -11,12 +11,13 @@ import { throttle } from 'lodash'
 import Icon from 'components/Icon'
 import { azureRadiance, rhino30 } from 'style/colors'
 import styles from './MessageInput.style'
+import { withTranslation } from 'react-i18next'
 
 const IS_TYPING_THROTTLE = 3000
 const MIN_INPUT_HEIGHT = 22
 const MAX_INPUT_HEIGHT = 100
 
-export default class extends React.PureComponent {
+class MessageInput extends React.PureComponent {
   static propTypes = {
     blurOnSubmit: bool,
     multiline: bool,
@@ -63,7 +64,7 @@ export default class extends React.PureComponent {
 
   handleSubmit = () => {
     const { submittable } = this.state
-    const { message, emptyParticipants } = this.props
+    const { message, emptyParticipants, t } = this.props
     const canSend = submittable || message.length > 0
     // NOTE: The calling code is responsible for sanitisation.
     if (canSend && !emptyParticipants) {
@@ -72,10 +73,10 @@ export default class extends React.PureComponent {
     }
     if (emptyParticipants) {
       Alert.alert(
-        'Missing message recipient!',
-        'Click on a user name or user the search bar.',
+        t('Missing message recipient!'),
+        t('Click on a user name or user the search bar'),
         [
-          { text: 'OK' }
+          { text: t('Ok') }
         ],
         { cancelable: true }
       )
@@ -117,3 +118,5 @@ export default class extends React.PureComponent {
     )
   }
 }
+
+export default withTranslation()(MessageInput)

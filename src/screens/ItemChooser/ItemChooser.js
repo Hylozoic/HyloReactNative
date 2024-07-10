@@ -10,6 +10,7 @@ import { isEqual, isFunction, debounce } from 'lodash/fp'
 import ModalHeader from 'navigation/headers/ModalHeader'
 import SearchBar from 'components/SearchBar'
 import styles from './ItemChooser.styles'
+import { withTranslation } from 'react-i18next'
 
 export const propTypesForItemRowComponent = {
   item: PropTypes.object.isRequired,
@@ -20,7 +21,7 @@ export const propTypesForItemRowComponent = {
   pickItem: PropTypes.func
 }
 
-export default class ItemChooser extends React.Component {
+class ItemChooser extends React.Component {
   static propTypes = {
     // From screen / route.params
     screenTitle: PropTypes.string,
@@ -56,8 +57,7 @@ export default class ItemChooser extends React.Component {
   static defaultProps = {
     searchTerm: undefined,
     initialItems: [],
-    suggestedItems: [],
-    searchPlaceholder: 'Begin type to searching'
+    suggestedItems: []
   }
 
   state = {
@@ -69,7 +69,8 @@ export default class ItemChooser extends React.Component {
 
     this.state = {
       chosenItems: this.props.initialItems,
-      initialItems: this.props.initialItems
+      initialItems: this.props.initialItems,
+      searchPlaceholder: this.props.t('Begin type to searching')
     }
   }
 
@@ -89,14 +90,14 @@ export default class ItemChooser extends React.Component {
   }
 
   setHeader = () => {
-    const { navigation, screenTitle, updateItems } = this.props
+    const { navigation, screenTitle, updateItems, t } = this.props
     const { chosenItems, initialItems } = this.state
     const headerProps = {
       title: screenTitle,
       headerLeftConfirm: !isEqual(chosenItems, initialItems)
     }
     if (isFunction(updateItems)) {
-      headerProps.headerRightButtonLabel = 'Done'
+      headerProps.headerRightButtonLabel = t('Done')
       headerProps.headerRightButtonOnPress = this.done
     }
     navigation.setOptions({
@@ -131,7 +132,7 @@ export default class ItemChooser extends React.Component {
   }
 
   setupItemSections = suggestedItems => {
-    const { searchTerm, defaultSuggestedItems, defaultSuggestedItemsLabel, updateItems } = this.props
+    const { searchTerm, defaultSuggestedItems, defaultSuggestedItemsLabel, updateItems, t } = this.props
     const { chosenItems, initialItems } = this.state
     const chosenItemIds = chosenItems.map(p => p.id)
     const initialItemIds = initialItems.map(item => item.id)
@@ -145,11 +146,11 @@ export default class ItemChooser extends React.Component {
     if (updateItems) {
       if (searchTerm) return [{ data: addSelected(suggestedItems) }]
       if (initialItems.length > 0) {
-        const label = addedItems.length > 0 ? 'Current Selection' : undefined
+        const label = addedItems.length > 0 ? t('Current Selection') : undefined
         sections.push({ label, data: addSelected(initialItems) })
       }
       if (addedItems.length > 0) {
-        sections.push({ label: 'Added', data: addSelected(addedItems) })
+        sections.push({ label: t('Added'), data: addSelected(addedItems) })
       }
     // picker
     } else {
@@ -202,8 +203,8 @@ export default class ItemChooser extends React.Component {
   }
 
   render () {
-    const { searchTerm, style, suggestedItems } = this.props
-    const headerText = searchTerm ? `Matching "${searchTerm}"` : undefined
+    const { searchTerm, style, suggestedItems, t } = this.props
+    const headerText = searchTerm ? `${t('Matching')} "${searchTerm}"` : undefined
     const sections = this.setupItemSections(suggestedItems)
 
     return (
@@ -249,7 +250,8 @@ export class ItemChooserListHeader extends React.Component {
       searchPlaceholder,
       autoFocus,
       onFocus,
-      loading
+      loading,
+      t
     } = this.props
     return (
       <View style={styles.listHeader}>
@@ -259,7 +261,7 @@ export class ItemChooserListHeader extends React.Component {
           onFocus={onFocus}
           value={searchTerm}
           onChangeText={setSearchTerm}
-          placeholder={searchPlaceholder}
+          placeholder={searchPlaceholder || this?.state?.searchPlaceholder}
           // onCancel={clearSearchTerm}
           // onCancelText='Clear'
           loading={loading}
@@ -270,7 +272,7 @@ export class ItemChooserListHeader extends React.Component {
               <Text>{headerText}</Text>
             </Text>
             <TouchableOpacity onPress={clearSearchTerm}>
-              <Text style={styles.listHeaderClear}>Clear Search</Text>
+              <Text style={styles.listHeaderClear}>{t('Clear Search')}</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -278,3 +280,5 @@ export class ItemChooserListHeader extends React.Component {
     )
   }
 }
+
+export default withTranslation()(ItemChooser)

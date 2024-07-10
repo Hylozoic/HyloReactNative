@@ -5,6 +5,7 @@ import { modalScreenName } from 'hooks/useIsModalScreen'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { ALL_GROUP_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import HyloWebView from 'components/HyloWebView'
+import { useTranslation } from 'react-i18next'
 
 // Matches actual group paths (e.g. not /all or /public)
 export const MATCHER_GROUP_SLUG = '[a-zA-Z0-9-]+$'
@@ -14,6 +15,7 @@ export const MATCHER_GROUP_ROOT_PATH = `/groups/${MATCHER_GROUP_SLUG}$`
 export const MATCHER_GROUP_ALL_AND_PUBLIC_ROOT_PATH = `/(${ALL_GROUP_ID}|${PUBLIC_GROUP_ID})$`
 
 export default function MapWebView ({ navigation }) {
+  const { t } = useTranslation()
   const webViewRef = useRef(null)
   const group = useSelector(getCurrentGroup)
   const openURL = useOpenURL()
@@ -22,7 +24,7 @@ export default function MapWebView ({ navigation }) {
 
   useEffect(() => {
     navigation.setOptions({
-      title: group?.id === PUBLIC_GROUP_ID ? 'Public Map' : group?.name,
+      title: group?.id === PUBLIC_GROUP_ID ? t('Public Map') : group?.name,
       // Disables going back by pull right on this screen
       gestureEnabled: false,
       headerLeftOnPress: canGoBack ? webViewRef.current.goBack : navigation.goBack

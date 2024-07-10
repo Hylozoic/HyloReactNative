@@ -7,8 +7,10 @@ import { isIOS } from 'util/platform'
 import AppleLoginButton from './AppleLoginButton'
 import GoogleLoginButton from './GoogleLoginButton'
 import { rhino60 } from 'style/colors'
+import { useTranslation } from 'react-i18next'
 
 export default function SocialAuth ({ onStart, onComplete, forSignup }) {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
 
   const socialLoginMaker = loginWith => async token => {
@@ -35,7 +37,7 @@ export default function SocialAuth ({ onStart, onComplete, forSignup }) {
 
   return (
     <View style={styles.connectWith}>
-      <Text style={styles.connectWithText}>Or connect with:</Text>
+      <Text style={styles.connectWithText}>{t('Or connect with')}:</Text>
       {isIOS && (
         <AppleLoginButton
           style={styles.socialLoginButton}

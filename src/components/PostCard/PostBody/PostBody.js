@@ -9,8 +9,9 @@ import EmojiRow from 'components/EmojiRow'
 import LinkPreview from 'components/PostCard/LinkPreview'
 import Icon from 'components/Icon'
 import PopupMenuButton from 'components/PopupMenuButton'
-// import VideoPlayerWebView from 'components/VideoPlayerWebView'
+import PostBodyProposal from '../PostBodyProposal/PostBodyProposal'
 import { caribbeanGreen, rhino, white, white20onCaribbeanGreen } from 'style/colors'
+import { useTranslation } from 'react-i18next'
 
 const MAX_DETAILS_LENGTH = 144
 
@@ -46,15 +47,12 @@ export default function PostBody ({
           />
         )}
       </View>
-      {/* {linkPreviewFeatured && (
-        <LinkPreview {...linkPreview} />
-      )} */}
-      {/* <VideoPlayerWebView url={linkPreview.url} /> */}
       <HyloHTML
         html={presentedDetails}
         baseStyle={{ marginBottom: 8 }}
       />
       {/* {!linkPreviewFeatured && ( */}
+      {type === 'proposal' && <PostBodyProposal {...post} currentUser={currentUser} />}
       <LinkPreview {...linkPreview} />
       {/* )} */}
       <EmojiRow
@@ -66,16 +64,17 @@ export default function PostBody ({
 }
 
 export function EventRSVP ({ myEventResponse, respondToEvent }) {
+  const { t } = useTranslation()
   const actions = [
-    [humanResponse(RESPONSES.YES), () => respondToEvent(RESPONSES.YES)],
-    [humanResponse(RESPONSES.INTERESTED), () => respondToEvent(RESPONSES.INTERESTED)],
-    [humanResponse(RESPONSES.NO), () => respondToEvent(RESPONSES.NO)]
+    [humanResponse(RESPONSES.YES, t), () => respondToEvent(RESPONSES.YES)],
+    [humanResponse(RESPONSES.INTERESTED, t), () => respondToEvent(RESPONSES.INTERESTED)],
+    [humanResponse(RESPONSES.NO, t), () => respondToEvent(RESPONSES.NO)]
   ]
 
   return (
     <PopupMenuButton actions={actions}>
       <View style={styles.RSVPOption}>
-        <Text style={styles.RSVPOptionText}>{humanResponse(myEventResponse)} |</Text>
+        <Text style={styles.RSVPOptionText}>{humanResponse(myEventResponse, t)} |</Text>
         <Icon name='ArrowDown' color={white} style={styles.RSVPOptionText} />
       </View>
     </PopupMenuButton>

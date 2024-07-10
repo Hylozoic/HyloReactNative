@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useFocusEffect } from '@react-navigation/native'
 import { Text, View, ScrollView, TextInput } from 'react-native'
-import getRouteParam from 'store/selectors/getRouteParam'
+import useRouteParams from 'hooks/useRouteParams'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import {
   getGroupData, getEdited, updateGroupData, setWorkflowOptions,
@@ -11,26 +11,27 @@ import {
 import ErrorBubble from 'components/ErrorBubble'
 import styles from './CreateGroupFlow.styles'
 import { ALL_GROUP_ID, MY_CONTEXT_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
+import { useTranslation } from 'react-i18next'
 
 export default function CreateGroupName ({ route }) {
-  
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   // Add current group in as pre-selected as a parent group for Parent Groups Step
   const edited = useSelector(getEdited)
   const currentGroup = useSelector(getCurrentGroup)
   const groupData = useSelector(getGroupData)
   const [groupName, setGroupName] = useState()
   const [error, setError] = useState()
+  const { reset } = useRouteParams()
 
   useEffect(() => {
-    const reset = getRouteParam('reset', route)
     if (reset) {
       dispatch(clearCreateGroupStore())
       setGroupName('')
     } else {
       setGroupName(groupData?.name)
     }
-  }, [])
+  }, [reset])
 
   useFocusEffect(useCallback(() => {
     if (!groupName || groupName.length === 0) {
@@ -52,12 +53,12 @@ export default function CreateGroupName ({ route }) {
     <View style={styles.container}>
       <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
         <View style={styles.header}>
-          <Text style={styles.heading}>Let's get started!</Text>
-          <Text style={styles.description}>All good things start somewhere! Let's kick things off with a catchy name for your group.</Text>
+          <Text style={styles.heading}>{t('Lets get started!')}</Text>
+          <Text style={styles.description}>{t('All good things start somewhere! Lets kick things off with a catchy name for your group')}</Text>
         </View>
         <View style={styles.content}>
           <View style={styles.textInputContainer}>
-            <Text style={styles.textInputLabel}>What's the name of your group?</Text>
+            <Text style={styles.textInputLabel}>{t('Whats the name of your group?')}</Text>
             <TextInput
               style={styles.textInput}
               onChangeText={setGroupName}

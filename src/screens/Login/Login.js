@@ -1,20 +1,23 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
+import { useTranslation } from 'react-i18next'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import FastImage from 'react-native-fast-image'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
+import useRouteParams from 'hooks/useRouteParams'
 import loginAction from 'store/actions/login'
 import validator from 'validator'
 import errorMessages from 'util/errorMessages'
 import SocialAuth from 'components/SocialAuth'
 import styles from './Login.styles'
+import LocaleSelector from 'components/LocaleSelector/LocaleSelector'
 
 export default function Login () {
+  const { t } = useTranslation()
   const navigation = useNavigation()
   const passwordInputRef = useRef()
-  const route = useRoute()
   const dispatch = useDispatch()
   const defaultLoginEmail = useSelector(state => state.session?.defaultLoginEmail)
 
@@ -25,15 +28,14 @@ export default function Login () {
   const [bannerError, setBannerError] = useState()
   const [bannerMessage, setBannerMessage] = useState()
   const [formError, setFormError] = useState()
-  const bannerMessageParam = route?.params?.bannerMessage
-  const bannerErrorParam = route?.params?.bannerError
+  const { bannerMessage: bannerMessageParam, bannerError: bannerErrorParam } = useRouteParams()
 
   const setError = errorMessage => {
     setFormError(errorMessages(errorMessage))
   }
 
   const setLoadingMessage = loadingStatus => {
-    if (loadingStatus) setBannerMessage('LOGGING IN...')
+    if (loadingStatus) setBannerMessage(t('LOGGING IN'))
   }
 
   const clearErrors = useCallback(() => {
@@ -98,6 +100,12 @@ export default function Login () {
   return (
     <SafeAreaView style={{ flex: 1 }} edges={['bottom', 'left', 'right']}>
       <ScrollView contentContainerStyle={styles.login} style={styles.container}>
+        <View style={styles.localeContainer}>
+          <View style={styles.localeContents}>
+            <LocaleSelector />
+          </View>
+        </View>
+
         {bannerError && <Text style={styles.bannerError}>{bannerError}</Text>}
         {(!bannerError && bannerMessage) && <Text style={styles.bannerMessage}>{bannerMessage}</Text>}
 
@@ -105,10 +113,10 @@ export default function Login () {
           style={styles.logo}
           source={require('assets/merkaba-green-on-white.png')}
         />
-        <Text style={styles.title}>Log in to Hylo</Text>
+        <Text style={styles.title}>{t('Log in to Hylo')}</Text>
         <FormError>{formError}</FormError>
         <View style={styles.labelRow}>
-          <Text style={styles.labelText}>Email address</Text>
+          <Text style={styles.labelText}>{t('Email address')}</Text>
         </View>
         <View style={styles.paddedRow}>
           <View style={emailIsValid ? styles.paddedBorderValid : styles.paddedBorder}>
@@ -132,9 +140,9 @@ export default function Login () {
           </View>
         </View>
         <View style={styles.labelRow}>
-          <Text style={styles.labelText}>Password</Text>
+          <Text style={styles.labelText}>{t('Password')}</Text>
           <TouchableOpacity onPress={goToResetPassword}>
-            <Text style={styles.forgotPasswordText}>Forgot your password?</Text>
+            <Text style={styles.forgotPasswordText}>{t('Forgot your password?')}</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.paddedRow}>
@@ -163,7 +171,7 @@ export default function Login () {
         </View>
         <View style={styles.paddedRow}>
           <TouchableOpacity onPress={login} disabled={!emailIsValid} style={styles.loginButton}>
-            <Text style={styles.loginText}>Log In</Text>
+            <Text style={styles.loginText}>{t('Log In')}</Text>
           </TouchableOpacity>
         </View>
         <SocialAuth onStart={handleSocialAuthStart} onComplete={handleSocialAuthComplete} />
@@ -174,11 +182,12 @@ export default function Login () {
 }
 
 export function SignupLink ({ goToSignup }) {
+  const { t } = useTranslation()
   return (
     <View style={styles.signup}>
-      <Text style={styles.signupText}>Dont have an account? </Text>
+      <Text style={styles.signupText}>{t('Dont have an account?')} </Text>
       <TouchableOpacity onPress={goToSignup}>
-        <Text style={styles.signupLink}>Sign up now</Text>
+        <Text style={styles.signupLink}>{t('Sign up now')}</Text>
       </TouchableOpacity>
     </View>
   )

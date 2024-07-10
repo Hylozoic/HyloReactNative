@@ -23,25 +23,4 @@ export default function useCurrentGroup (loading = false) {
   }
 
   return [currentGroup, setCurrentGroup]
-
-  // useEffect(() => {
-  //   (async function () {
-  //     if (!loading) {
-  //       if (
-  //         groupFromRouteParam &&
-  //         (currentGroup?.slug !== groupFromRouteParam?.slug)
-  //       ) {
-  //         await dispatch(setCurrentGroupSlug(groupFromRouteParam.id))
-  //       } else if (!currentGroup) {
-  //         await dispatch(setCurrentGroupSlug(lastViewedGroup?.id || ALL_GROUP_ID))
-  //         await navigation.navigate('Home Tab', { screen: 'Feed', initial: false })
-  //       }
-  //     }
-  //   })()
-  // }, [
-  //   loading,
-  //   groupFromRouteParam?.id
-  // ])
-
-  // return null
 }

@@ -138,6 +138,14 @@ export const labelStyles = {
     text: {
       color: POST_TYPES.request.primaryColor
     }
+  },
+  proposal: {
+    box: {
+      backgroundColor: POST_TYPES.proposal.backgroundColor
+    },
+    text: {
+      color: POST_TYPES.proposal.primaryColor
+    }
   }
 }
 

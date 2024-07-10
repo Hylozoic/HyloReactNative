@@ -14,7 +14,8 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
       <View>
         <View>
           <Text>
-            FLAG THIS 
+            FLAG THIS
+             
             POST
           </Text>
           <View
@@ -305,7 +306,8 @@ exports[`FlagContent changes title based on type 1`] = `
       <View>
         <View>
           <Text>
-            FLAG THIS 
+            FLAG THIS
+             
             POST
           </Text>
           <TouchableOpacity
@@ -364,7 +366,8 @@ exports[`FlagContent matches the last snapshot 1`] = `
       <View>
         <View>
           <Text>
-            FLAG THIS 
+            FLAG THIS
+             
             CONTENT
           </Text>
           <TouchableOpacity

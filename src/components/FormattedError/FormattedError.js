@@ -5,6 +5,7 @@ import LinkButton from 'components/LinkButton'
 import Triangle from 'react-native-triangle'
 import { amaranth, white } from 'style/colors'
 import errorMessages from 'util/errorMessages'
+import { useTranslation } from 'react-i18next'
 
 export const defaultStyles = {
   errorWrapper: {
@@ -32,6 +33,7 @@ export default function FormattedError ({
   styles: providedStyles = {},
   theme = {}
 }) {
+  const { t } = useTranslation()
   if (!error) return null
 
   const styles = merge(defaultStyles, providedStyles, theme)
@@ -52,10 +54,10 @@ export default function FormattedError ({
     return (
       <Error styles={styles}>
         <Text style={styles.errorText}>
-          Your account has no password set. <LinkButton to='/reset-password'>Set your password here.</LinkButton>
+          {t('Your account has no password set')}. <LinkButton to='/reset-password'>{t('Set your password here')}.</LinkButton>
         </Text>
         {options[0] && (
-          <Text style={styles.errorText}>Or log in with {options.join(' or ')}.</Text>
+          <Text style={styles.errorText}>{t('Or log in with')} {options.join(' or ')}.</Text>
         )}
       </Error>
     )

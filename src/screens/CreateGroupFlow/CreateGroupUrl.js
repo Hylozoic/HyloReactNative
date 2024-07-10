@@ -13,8 +13,10 @@ import {
   fetchGroupExists, getGroupData
 } from './CreateGroupFlow.store'
 import styles from './CreateGroupFlow.styles'
+import { useTranslation } from 'react-i18next'
 
 export default function CreateGroupUrl ({ navigation }) {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const groupData = useSelector(getGroupData)
   const [error, providedSetError] = useState()
@@ -43,19 +45,19 @@ export default function CreateGroupUrl ({ navigation }) {
       const groupExists = data?.payload?.data?.groupExists?.exists
 
       if (error) {
-        setError('There was an error, please try again.')
+        setError(t('There was an error please try again'))
       } else if (groupExists === false) {
         dispatch(updateGroupData({ slug }))
         clearError()
         dispatch(setWorkflowOptions({ disableContinue: false }))
       } else if (groupExists) {
-        setError('This URL already exists. Please choose another one.')
+        setError(t('This URL already exists Please choose another one'))
       } else {
         // if there is no error or groupExists variable, assume some other error
-        setError('There was an error, please try again.')
+        setError(t('There was an error please try again'))
       }
     } catch (error) {
-      setError('There was an error, please try again.')
+      setError(t('There was an error please try again'))
     }
   }), [])
 
@@ -68,12 +70,12 @@ export default function CreateGroupUrl ({ navigation }) {
     <View style={styles.container}>
       <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
         <View style={styles.header}>
-          <Text style={styles.heading}>Choose an address for your group</Text>
-          <Text style={styles.description}>Your URL is the address that members will use to access your group online. The shorter the better!</Text>
+          <Text style={styles.heading}>{t('Choose an address for your group')}</Text>
+          <Text style={styles.description}>{t('Your URL is the address that members will use to access your group online The shorter the better')}</Text>
         </View>
         <View style={styles.content}>
           <View style={styles.textInputContainer}>
-            <Text style={styles.textInputLabel}>What's the address for your group?</Text>
+            <Text style={styles.textInputLabel}>{t('Whats the address for your group')}</Text>
             <TextInput
               style={styles.textInput}
               onChangeText={slug => setGroupSlug(removeDomainFromURL(slug))}

@@ -12,8 +12,10 @@ import Button from 'components/Button'
 import Icon from 'components/Icon'
 import Loading from 'components/Loading'
 import styles from './SignupUploadAvatar.styles'
+import { useTranslation } from 'react-i18next'
 
 export default function SignupUploadAvatar ({ navigation }) {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const currentUser = useSelector(getMe)
   const [avatarUrl, setAvatarUrl] = useState(currentUser?.avatarUrl)
@@ -47,7 +49,7 @@ export default function SignupUploadAvatar ({ navigation }) {
     <KeyboardFriendlyView style={styles.container}>
       <ScrollView keyboardDismissMode='on-drag' keyboardShouldPersistTaps='handled'>
         <View style={styles.header}>
-          <Text style={styles.title}>Upload a Photo</Text>
+          <Text style={styles.title}>{t('Upload a Photo')}</Text>
         </View>
         <View style={styles.content}>
           <ImagePicker
@@ -78,7 +80,7 @@ export default function SignupUploadAvatar ({ navigation }) {
         <Button
           style={styles.continueButton}
           disabled={imagePickerPending}
-          text='Continue'
+          text={t('Continue')}
           onPress={saveAndNext}
         />
       </View>

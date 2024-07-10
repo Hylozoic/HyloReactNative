@@ -23,7 +23,7 @@ describe('MemberList', () => {
     }
 
     renderer.render(
-      <MemberList {...testProps} />
+      <MemberList {...testProps} t={str => str} />
     )
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()
@@ -43,7 +43,7 @@ describe('MemberList', () => {
       ]
     }
     const instance = ReactTestRenderer.create(
-      <MemberList {...props} />
+      <MemberList {...props} t={str => str} />
     ).getInstance()
 
     instance.setState = jest.fn()
@@ -62,7 +62,7 @@ describe('MemberList', () => {
       ]
     }
     const renderer = ReactTestRenderer.create(
-      <MemberList {...props} />
+      <MemberList {...props} t={str => str} />
     )
     const searchField = renderer.root.findByType(TextInput)
     const instance = renderer.getInstance()
@@ -88,7 +88,7 @@ describe('MemberList', () => {
         <TestRoot>
           <MockedScreen>
             {screenProps => {
-              return <MemberList {...screenProps} {...testProps} />
+              return <MemberList {...screenProps} {...testProps} t={str => str} />
             }}
           </MockedScreen>
         </TestRoot>
@@ -104,7 +104,7 @@ describe('MemberList', () => {
       setSearch: jest.fn()
     }
     const renderer = ReactTestRenderer.create(
-      <MemberList {...props} />
+      <MemberList {...props} t={str => str} />
     )
     const searchField = renderer.root.findByType(TextInput)
     const searchText = 'hj'
@@ -124,7 +124,7 @@ describe('MemberList', () => {
     }
 
     renderer.render(
-      <MemberList {...testProps} />
+      <MemberList {...testProps} t={str => str} />
     )
     const actual = renderer.getRenderOutput()
     expect(actual).toMatchSnapshot()

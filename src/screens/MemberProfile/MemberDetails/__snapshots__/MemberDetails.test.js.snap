@@ -130,6 +130,7 @@ exports[`MemberDetails matches the last snapshot 1`] = `
         "name": "MemberProfile",
       }
     }
+    t={[Function]}
   />
 </Context.Provider>
 `;
@@ -174,6 +175,7 @@ exports[`MemberDetails returns Loading when there's no person 1`] = `
         "name": "MemberProfile",
       }
     }
+    t={[Function]}
   />
 </Context.Provider>
 `;
@@ -221,6 +223,7 @@ exports[`MemberGroups matches the last snapshot 1`] = `
         ],
       }
     }
+    t={[Function]}
   />
 </Context.Provider>
 `;
@@ -269,6 +272,7 @@ exports[`MemberSkills matches the last snapshot 1`] = `
         },
       ]
     }
+    t={[Function]}
   />
 </Context.Provider>
 `;

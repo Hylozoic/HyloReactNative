@@ -13,6 +13,7 @@ const testProps = {
   fetchSearchSuggestions: () => {
     return { type: 'test-search' }
   },
+  t: str => str,
   getSearchSuggestions: () => items,
   setSearchTerm: jest.fn(),
   ItemRowComponent: item => null,
