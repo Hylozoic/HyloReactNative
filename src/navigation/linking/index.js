@@ -99,14 +99,10 @@ export const initialRouteNamesConfig = {
   'Messages Tab': 'Messages'
 }
 
-export const DEFAULT_APP_HOST = 'https://hylo.com'
+export const DEFAULT_APP_HOST = 'https://www.hylo.com'
 
 export const prefixes = [
   DEFAULT_APP_HOST,
-  'http://hylo.com',
-  'http://www.hylo.com',
-  'https://www.hylo.com',
-  'http://staging.hylo.com',
   'https://staging.hylo.com',
   'hyloapp://'
 ]
