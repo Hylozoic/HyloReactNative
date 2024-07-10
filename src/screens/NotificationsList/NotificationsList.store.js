@@ -4,7 +4,6 @@ import { get, find, pick } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
 import orm from 'store/models'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
-import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
 import { modalScreenName } from 'hooks/useIsModalScreen'
 import {
   ACTION_NEW_COMMENT,
@@ -60,7 +59,13 @@ export function fetchNotifications (first = 20, offset = 0) {
                   text
                 }
                 post {
-                  ${postFieldsFragment(true)}
+                  id
+                  title
+                  details
+                  groups {
+                    id
+                    slug
+                  }  
                 }
                 group {
                   id
