@@ -27,12 +27,9 @@ export default function PostDetails () {
   const isModalScreen = useIsModalScreen()
   const { id: postId } = useRouteParams()
   const [{ fetching, error }] = useQueryAction({ action: fetchPost(postId) })
+  const currentGroup = useSelector(getCurrentGroup)
   const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
   // const post = postData?.post
-  const currentGroup = useSelector(getCurrentGroup)
-  const { id: postId } = useRouteParams()
-  const [{ fetching, error }] = useHyloQuery({ action: fetchPost(postId) })
-  const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
   const commentsRef = React.useRef()
   const goToMember = useGoToMember()
 
