@@ -245,7 +245,7 @@ posts: viewPosts(
     },
   },
   "meta": {
-    "afterInteractions": true,
+    "afterInteractions": false,
     "extractModel": "Group",
     "extractQueryResults": {
       "getItems": [Function],
