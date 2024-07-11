@@ -4,7 +4,6 @@ import { get, find, pick } from 'lodash/fp'
 import { TextHelpers } from 'hylo-shared'
 import orm from 'store/models'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
-import postFieldsFragment from 'graphql/fragments/postFieldsFragment'
 import { modalScreenName } from 'hooks/useIsModalScreen'
 import {
   ACTION_NEW_COMMENT,
@@ -16,6 +15,7 @@ import {
   ACTION_ANNOUNCEMENT,
   ACTION_NEW_POST
 } from 'store/models/Notification'
+import gql from 'graphql-tag'
 
 export const NOTIFICATIONS_WHITELIST = [
   ACTION_NEW_COMMENT,
@@ -39,41 +39,49 @@ export function fetchNotifications (first = 20, offset = 0) {
   return {
     type: FETCH_NOTIFICATIONS,
     graphql: {
-      query: `query ($first: Int, $offset: Int) {
-        notifications (first: $first, offset: $offset, order: "desc") {
-          total
-          hasMore
-          items {
-            id
-            createdAt
-            activity {
+      query: gql`
+        query ($first: Int, $offset: Int) {
+          notifications (first: $first, offset: $offset, order: "desc") {
+            total
+            hasMore
+            items {
               id
-              actor {
+              createdAt
+              activity {
                 id
-                name
-                avatarUrl
+                actor {
+                  id
+                  name
+                  avatarUrl
+                }
+                comment {
+                  id
+                  text
+                }
+                post {
+                  id
+                  title
+                  details
+                  groups {
+                    id
+                    slug
+                  }  
+                }
+                group {
+                  id
+                  name
+                  slug
+                }
+                meta {
+                  reasons
+                }
+                action
+                unread
               }
-              comment {
-                id
-                text
-              }
-              post {
-                ${postFieldsFragment(true)}
-              }
-              group {
-                id
-                name
-                slug
-              }
-              meta {
-                reasons
-              }
-              action
-              unread
             }
           }
         }
-      }`,
+      `,
       variables: { first, offset }
     },
     meta: {
@@ -91,11 +99,13 @@ export function markActivityRead (id) {
   return {
     type: MARK_ACTIVITY_READ,
     graphql: {
-      query: `mutation ($id: ID) {
-        markActivityRead(id: $id) {
-          id
+      query: gql`
+        mutation ($id: ID) {
+          markActivityRead(id: $id) {
+            id
+          }
         }
-      }`,
+      `,
       variables: { id }
     },
     meta: {
@@ -109,11 +119,13 @@ export function markAllActivitiesRead () {
   return {
     type: MARK_ALL_ACTIVITIES_READ,
     graphql: {
-      query: `mutation {
-        markAllActivitiesRead {
-          success
+      query: gql`
+        mutation {
+          markAllActivitiesRead {
+            success
+          }
         }
-      }`
+      `
     },
     meta: {
       optimistic: true
@@ -125,11 +137,13 @@ export function updateNewNotificationCount () {
   return {
     type: UPDATE_NEW_NOTIFICATION_COUNT,
     graphql: {
-      query: `mutation ($changes: MeInput) {
-        updateMe(changes: $changes) {
-          id
+      query: gql`
+        mutation ($changes: MeInput) {
+          updateMe(changes: $changes) {
+            id
+          }
         }
-      }`,
+      `,
       variables: {
         changes: {
           newNotificationCount: 0

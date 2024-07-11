@@ -333,6 +333,7 @@ exports[`default render matches snapshot 1`] = `
                     >
                       <View>
                         <ActivityIndicator
+                          accessibilityHint="loading"
                           color="#818A88"
                           size="small"
                         />

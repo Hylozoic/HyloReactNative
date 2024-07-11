@@ -879,6 +879,7 @@ exports[`PostDetails renders correctly 1`] = `
                               <View>
                                 <View>
                                   <ActivityIndicator
+                                    accessibilityHint="loading"
                                     color="#818A88"
                                     size="small"
                                   />
