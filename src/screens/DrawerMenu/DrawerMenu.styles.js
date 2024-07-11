@@ -74,7 +74,7 @@ export default {
     paddingVertical: 10,
     paddingHorizontal: 10
   },
-  allFeedsIcon: {
+  allStreamsIcon: {
     marginLeft: 5,
     marginRight: 11
   },

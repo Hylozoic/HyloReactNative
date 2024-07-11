@@ -8,7 +8,7 @@ export default function useFetchPostParam ({
   filter,
   forGroup,
   myHome,
-  feedType,
+  streamType,
   topicName,
   customView,
   sortBy,
@@ -21,11 +21,11 @@ export default function useFetchPostParam ({
     setFetchPostParam(
       omitBy(x => isNull(x) || isUndefined(x), {
         activePostsOnly: customView?.activePostsOnly || null,
-        afterTime: feedType === 'event'
+        afterTime: streamType === 'event'
           ? (timeframe === 'future' ? new Date().toISOString() : null)
           : null,
         announcementsOnly: (myHome === 'Announcements') || null,
-        beforeTime: feedType === 'event'
+        beforeTime: streamType === 'event'
           ? (timeframe === 'past' ? new Date().toISOString() : null)
           : null,
         childPostInclusion: currentUser?.settings?.streamChildPosts || 'yes',
@@ -39,7 +39,7 @@ export default function useFetchPostParam ({
           ? [currentUser.id]
           : null,
         cursor: null,
-        filter: feedType ||
+        filter: streamType ||
           filter ||
           currentUser?.settings?.streamPostType ||
           undefined,
@@ -52,7 +52,7 @@ export default function useFetchPostParam ({
           ? [currentUser.id]
           : null,
         myHome,
-        order: feedType === 'event'
+        order: streamType === 'event'
           ? (timeframe === 'future' ? 'asc' : 'desc')
           : null,
         search: null,
@@ -70,7 +70,7 @@ export default function useFetchPostParam ({
       })
     )
   }, [
-    feedType,
+    streamType,
     filter,
     customView?.activePostsOnly,
     timeframe,

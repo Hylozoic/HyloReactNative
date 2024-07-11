@@ -71,7 +71,7 @@ export default function GroupWelcomeTabBar ({ group, acceptedAllAgreements, agre
     const getOutFunc = enforceAgreements
       ? () => {
           navigation.navigate('Group Navigation', { groupSlug: ALL_GROUP.slug })
-          navigation.navigate('Feed', { initial: false })
+          navigation.navigate('Stream', { initial: false })
         }
       : () => completeWorkflow()
     Alert.alert(

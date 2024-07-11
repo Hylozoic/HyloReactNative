@@ -1,7 +1,7 @@
 import { capeCod } from 'style/colors'
 import { isIOS } from 'util/platform'
 
-const feedMargin = 12
+const streamMargin = 12
 
 export default {
   container: {
@@ -23,8 +23,8 @@ export default {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 10,
-    marginRight: feedMargin,
-    marginLeft: feedMargin
+    marginRight: streamMargin,
+    marginLeft: streamMargin
   },
   listControl: {
     flexDirection: 'row'

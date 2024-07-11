@@ -41,7 +41,7 @@ export default function DrawerMenu () {
 
   const navigateToPublicStream = () => {
     navigation.navigate('Group Navigation', { groupSlug: PUBLIC_GROUP.slug })
-    navigation.navigate('Feed', { initial: false })
+    navigation.navigate('Stream', { initial: false })
   }
 
   const navigateToPublicMap = () => {
