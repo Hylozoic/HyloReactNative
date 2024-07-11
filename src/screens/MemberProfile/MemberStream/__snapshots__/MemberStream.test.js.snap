@@ -39,7 +39,7 @@ exports[`ContentRow shows a PostCard when itemType is post 1`] = `
 </TouchableOpacity>
 `;
 
-exports[`FeedTab matches the last snapshot 1`] = `
+exports[`StreamTab matches the last snapshot 1`] = `
 <TouchableOpacity
   onPress={[Function]}
 >
@@ -133,7 +133,7 @@ exports[`MemberProfile matches the last snapshot 1`] = `
     >
       <HyloHTMLConfigProvider>
         <ForwardRef(NavigationContainerInner)>
-          <MemberFeed
+          <MemberStream
             choice="Comments"
             fetchMoreItems={[Function]}
             header={

@@ -45,7 +45,7 @@ export default function GroupExploreWebView () {
 
   const joinGroup = async groupToJoinSlug => {
     // Re-fetching CurrentUser fixes some things, but takes too long. Look into reducers
-    // such that the Membership update propagates everywhere, including in Feed if
+    // such that the Membership update propagates everywhere, including in Stream if
     // currently on this group:
     // await dispatch(fetchCurrentUser())
     await dispatch(fetchGroupDetails({ slug: groupToJoinSlug }))

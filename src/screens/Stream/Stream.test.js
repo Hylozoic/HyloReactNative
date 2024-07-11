@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import { render } from '@testing-library/react-native'
 import { TestRoot } from 'util/testing'
-import Feed from './Feed'
+import Stream from './Stream'
 
 jest.mock('store/selectors/getCurrentGroupSlug', () => () => 'public')
 jest.mock('react-native-share', () => ({
@@ -23,7 +23,7 @@ it('renders correctly if currentUserHasMemberships', () => {
   const renderer = new ReactShallowRenderer()
   renderer.render(
     <TestRoot>
-      <Feed
+      <Stream
         group={group}
         currentUser={currentUser}
         currentUserHasMemberships
@@ -54,7 +54,7 @@ it('renders correctly if currentUserHasMemberships is false', () => {
   const renderer = new ReactShallowRenderer()
   renderer.render(
     <TestRoot>
-      <Feed
+      <Stream
         group={group}
         currentUser={currentUser}
         currentUserHasMemberships={false}
@@ -89,9 +89,9 @@ it('calls fetchGroupTopic on componentDidMount', () => {
   const component = (
     <TestRoot>
       <TestStack.Navigator>
-        <TestStack.Screen name='Feed'>
+        <TestStack.Screen name='Stream'>
           {screenProps => (
-            <Feed {...props} {...screenProps} />
+            <Stream {...props} {...screenProps} />
           )}
         </TestStack.Screen>
       </TestStack.Navigator>

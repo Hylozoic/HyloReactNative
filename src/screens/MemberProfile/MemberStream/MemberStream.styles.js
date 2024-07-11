@@ -17,7 +17,7 @@ export default {
   container: {
     backgroundColor: 'white'
   },
-  feedTabs: {
+  streamTabs: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginHorizontal: screenMargin,
