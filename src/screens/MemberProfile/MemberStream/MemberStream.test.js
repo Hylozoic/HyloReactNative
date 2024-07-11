@@ -2,7 +2,7 @@ import React from 'react'
 import { Text } from 'react-native'
 import ReactShallowRenderer from 'react-test-renderer/shallow'
 import { TestRoot } from 'util/testing'
-import MemberFeed, { ContentRow, FeedTab } from './MemberFeed'
+import MemberStream, { ContentRow, StreamTab } from './MemberStream'
 
 jest.mock('react-native-share', () => ({
   default: jest.fn()
@@ -16,7 +16,7 @@ describe('MemberProfile', () => {
     const renderer = new ReactShallowRenderer()
     renderer.render(
       <TestRoot>
-        <MemberFeed
+        <MemberStream
           items={items}
           itemType='Comment'
           choice='Comments'
@@ -59,10 +59,10 @@ describe('ContentRow', () => {
   })
 })
 
-describe('FeedTab', () => {
+describe('StreamTab', () => {
   it('matches the last snapshot', () => {
     const renderer = new ReactShallowRenderer()
-    renderer.render(<FeedTab
+    renderer.render(<StreamTab
       option='Posts'
       chosen='Comments'
       onPress={() => {}}

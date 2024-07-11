@@ -52,7 +52,7 @@ export default function GroupNavigation () {
       ]
     : [
         { label: t('Create'), iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },
-        { label: t('Stream'), iconName: 'Stream', onPress: () => navigate('Feed') },
+        { label: t('Stream'), iconName: 'Stream', onPress: () => navigate('Stream') },
         {
           label: t('Explore'),
           iconName: 'Binoculars',
@@ -80,7 +80,7 @@ export default function GroupNavigation () {
           // onPress: customView.type !== 'externalLink' ? `${rootPath}/custom/${customView.id}` : false,
           onPress: customView.type === 'externalLink'
             ? () => openURL(customView.externalLink)
-            : () => navigate('Feed', { customViewId: customView?.id })
+            : () => navigate('Stream', { customViewId: customView?.id })
         }))
       ]
 

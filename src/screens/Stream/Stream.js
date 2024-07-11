@@ -22,29 +22,29 @@ import Avatar from 'components/Avatar'
 import Button from 'components/Button'
 import CreateGroupNotice from 'components/CreateGroupNotice'
 import Icon from 'components/Icon'
-import FeedList from 'components/FeedList'
+import StreamList from 'components/StreamList'
 import Loading from 'components/Loading'
 import SocketSubscriber from 'components/SocketSubscriber'
 import GroupWelcomeCheck from 'components/GroupWelcomeCheck'
 import { bannerlinearGradientColors } from 'style/colors'
-import styles from './Feed.styles'
+import styles from './Stream.styles'
 
-export function headerTitle (currentGroup, feedType, myHome, t) {
+export function headerTitle (currentGroup, streamType, myHome, t) {
   if (myHome) return myHome
   let title
   title = currentGroup?.name
-  title = feedType ? capitalize(t(feedType) + 's') : title
+  title = streamType ? capitalize(t(streamType) + 's') : title
   return title
 }
 
-export default function Feed ({ topicName: providedTopicName }) {
+export default function Stream ({ topicName: providedTopicName }) {
   const ref = useRef(null)
   const { t } = useTranslation()
   const navigation = useNavigation()
   const route = useRoute()
   const dispatch = useDispatch()
 
-  const { customViewId, feedType, myHome, topicName: routeTopicName } = useRouteParams()
+  const { customViewId, streamType, myHome, topicName: routeTopicName } = useRouteParams()
   const customView = useSelector(state => getCustomView(state, { customViewId }))
   const changeToGroup = useChangeToGroup()
   const goToTopicDefault = useGoToTopic()
@@ -85,9 +85,9 @@ export default function Feed ({ topicName: providedTopicName }) {
 
   useEffect(() => {
     navigation.setOptions({
-      title: headerTitle(currentGroup, feedType, myHome, t)
+      title: headerTitle(currentGroup, streamType, myHome, t)
     })
-  }, [navigation, topicName, currentGroup, currentGroup?.id, feedType, myHome])
+  }, [navigation, topicName, currentGroup, currentGroup?.id, streamType, myHome])
 
   if (!currentUser) return <Loading style={{ flex: 1 }} />
 
@@ -111,7 +111,7 @@ export default function Feed ({ topicName: providedTopicName }) {
     : null
   const pluralFollowers = (topicFollowersTotal !== 1)
   const pluralPosts = (topicPostsTotal !== 1)
-  const feedListHeader = (
+  const streamListHeader = (
     <View
       style={[
         styles.bannerContainer,
@@ -149,7 +149,7 @@ export default function Feed ({ topicName: providedTopicName }) {
         currentUser={currentUser}
         forGroup={currentGroup}
         currentTopicName={topicName}
-        currentType={feedType}
+        currentType={streamType}
       />
     </View>
   )
@@ -157,19 +157,19 @@ export default function Feed ({ topicName: providedTopicName }) {
   return (
     <>
       <GroupWelcomeCheck groupId={currentGroup?.id} />
-      <FeedList
+      <StreamList
         scrollRef={ref}
         forGroup={currentGroup}
         showPost={goToPostDetails}
         goToGroup={changeToGroup}
-        header={feedListHeader}
+        header={streamListHeader}
         route={route}
         navigation={navigation}
         showMember={goToMember}
         showTopic={goToTopic}
         customView={customView}
         topicName={topicName}
-        feedType={feedType}
+        streamType={streamType}
         myHome={myHome}
         // Custom Views
         customPostTypes={customPostTypes}

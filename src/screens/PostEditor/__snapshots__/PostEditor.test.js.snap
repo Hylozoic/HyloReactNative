@@ -436,6 +436,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                 <View>
                                   <View>
                                     <ActivityIndicator
+                                      accessibilityHint="loading"
                                       color="#818A88"
                                       size="small"
                                     />

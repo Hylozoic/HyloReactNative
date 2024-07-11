@@ -13,7 +13,7 @@ export default function Loading ({
         Without it being explcitely set the indicator will be invisble in Android.
         Remove once the bug is fixed: https://github.com/facebook/react-native/pull/29830
       */}
-      <ActivityIndicator size={size} color={gunsmoke} />
+      <ActivityIndicator size={size} color={gunsmoke} accessibilityHint='loading' />
     </View>
   )
 }
