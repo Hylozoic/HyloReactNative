@@ -81,7 +81,7 @@ export default function HomeNavigator ({ navigation }) {
   return (
     <HomeTab.Navigator {...navigatorProps}>
       <HomeTab.Screen name='Group Navigation' component={GroupNavigation} />
-      <HomeTab.Screen name='Stream' options={{ title: 'Stream' }} component={Stream} />
+      <HomeTab.Screen name='Stream' component={Stream} />
       <HomeTab.Screen name='Post Details' key='Post Details' component={PostDetails} />
       <HomeTab.Screen name='Projects' component={Stream} initialParams={{ streamType: 'project' }} />
       <HomeTab.Screen name='Project Members' key='Project Members' component={ProjectMembers} />
