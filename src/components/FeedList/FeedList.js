@@ -1,21 +1,29 @@
-import React from 'react'
+import React, { useEffect, useCallback, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { FlatList, View, TouchableOpacity } from 'react-native'
-import { isEmpty } from 'lodash/fp'
-import { didPropsChange } from 'util/index'
+import { createSelector } from 'reselect'
+import { isEmpty, get } from 'lodash/fp'
 import { useIsFocused } from '@react-navigation/native'
-import { NO_POST_FILTER } from './FeedList.store'
-import PostRow from './PostRow'
+import { FETCH_POSTS } from 'store/constants'
+import { ALL_GROUP_ID, isContextGroup, MY_CONTEXT_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
+import { makeGetQueryResults } from 'store/reducers/queryResults'
+import useFetchPostParam from './useFetchPostParam'
+import getMe from 'store/selectors/getMe'
+import fetchPosts from 'store/actions/fetchPosts'
+import resetNewPostCount from 'store/actions/resetNewPostCount'
+import updateUserSettings from 'store/actions/updateUserSettings'
+import Icon from 'components/Icon'
 import ListControl from 'components/ListControl'
 import Loading from 'components/Loading'
-import { isContextGroup } from 'store/models/Group'
-import styles from './FeedList.styles'
-import Icon from 'components/Icon'
+import PostRow from './PostRow'
 import { pictonBlue } from 'style/colors'
-import { useTranslation } from 'react-i18next'
+import styles from './FeedList.styles'
+
+/* === CONSTANTS === */
 
 // tracks: `hylo-evo/src/components/StreamViewControls/StreamViewControls.js`
 export const POST_TYPE_OPTIONS = [
-  { id: NO_POST_FILTER, label: 'All Posts' },
+  { id: undefined, label: 'All Posts' },
   { id: 'discussion', label: 'Discussions' },
   { id: 'event', label: 'Events' },
   { id: 'offer', label: 'Offers' },
@@ -24,162 +32,174 @@ export const POST_TYPE_OPTIONS = [
   { id: 'request', label: 'Requests' },
   { id: 'resource', label: 'Resources' }
 ]
-
 // tracks: `hylo/hylo-evo/src/util/constants.js`
 export const STREAM_SORT_OPTIONS = [
-  { id: 'order', label: 'Manual' },
   { id: 'updated', label: 'Latest activity' },
   { id: 'created', label: 'Post Date' },
-  { id: 'votes', label: 'Popular' }
+  { id: 'reactions', label: 'Popular' }
 ]
-
-// Not currently used
 // tracks: `hylo/hylo-evo/src/util/constants.js`
 export const COLLECTION_SORT_OPTIONS = [
   { id: 'order', label: 'Manual' },
   { id: 'updated', label: 'Latest activity' },
   { id: 'created', label: 'Post Date' },
-  { id: 'votes', label: 'Popular' }
+  { id: 'reactions', label: 'Popular' }
 ]
-
 // tracks: `hylo-evo/src/routes/Events/Events.js`
 export const EVENT_STREAM_TIMEFRAME_OPTIONS = [
   { id: 'future', label: 'Upcoming Events' },
   { id: 'past', label: 'Past Events' }
 ]
+export const DEFAULT_SORT_BY_ID = 'updated'
+export const DEFAULT_TIMEFRAME_ID = 'future'
+
+/* === SELECTORS === */
+
+const getPostResults = makeGetQueryResults(FETCH_POSTS)
+
+export const getPostIds = createSelector(
+  getPostResults,
+  results => isEmpty(results) ? [] : results.ids
+)
+
+export const getHasMorePosts = createSelector(getPostResults, get('hasMore'))
+
+/* === COMPONENTS === */
 
 export default function FeedList (props) {
+  const {
+    customView,
+    feedType,
+    forGroup,
+    header,
+    myHome,
+    scrollRef,
+    topicName
+  } = props
+  const dispatch = useDispatch()
   const isFocused = useIsFocused()
-  const { t } = useTranslation()
+  const currentUser = useSelector(getMe)
+  const [filter, setFilter] = useState()
+  const [sortBy, setSortBy] = useState(
+    get('settings.streamSortBy', currentUser) ||
+    customView?.defaultSort ||
+    DEFAULT_SORT_BY_ID
+  )
+  const [timeframe, setTimeframe] = useState(DEFAULT_TIMEFRAME_ID)
+  const fetchPostParam = useFetchPostParam({
+    customView,
+    feedType,
+    filter,
+    forGroup,
+    myHome,
+    sortBy,
+    timeframe,
+    topicName
+  })
+  const pending = useSelector(state => state.pending[FETCH_POSTS])
+  const postIds = useSelector(state => getPostIds(state, fetchPostParam))
+  const hasMore = useSelector(state => getHasMorePosts(state, fetchPostParam))
 
-  // Explicit invocation of dynamic strings
-  t('All Posts')
-  t('Discussions')
-  t('Events')
-  t('Offers')
-  t('Projects')
-  t('Proposals')
-  t('Requests')
-  t('Resources')
-  t('Manual')
-  t('Latest activity')
-  t('Post Date')
-  t('Popular')
-  t('Upcoming Events')
-  t('Past Events')
+  useEffect(() => {
+    if (fetchPostParam && isFocused && isEmpty(postIds) && hasMore !== false) {
+      const forGroupId = get('id', forGroup)
+      const shouldReset = slug => (
+        slug !== ALL_GROUP_ID &&
+        slug !== PUBLIC_GROUP_ID &&
+        slug !== MY_CONTEXT_ID &&
+        !topicName &&
+        sortBy === DEFAULT_SORT_BY_ID &&
+        !fetchPostParam.filter
+      )
 
-  return <FeedListClassComponent {...props} isFocused={isFocused} t={t} />
+      if (shouldReset(fetchPostParam.context)) {
+        dispatch(resetNewPostCount(forGroupId, 'Membership'))
+      }
+
+      dispatch(fetchPosts(fetchPostParam))
+    }
+  }, [fetchPostParam, hasMore, isFocused, postIds])
+
+  // Only custom views can be sorted by manual order
+  useEffect(() => {
+    if (!customView && sortBy === 'order') {
+      setSortBy('updated')
+    }
+  }, [customView, sortBy])
+
+  const refreshPosts = useCallback(() => {
+    if (fetchPostParam) {
+      dispatch(fetchPosts(fetchPostParam, { reset: true }))
+    }
+  }, [fetchPostParam])
+
+  const fetchMorePosts = useCallback(() => {
+    if (fetchPostParam && hasMore && !pending) {
+      dispatch(fetchPosts({
+        ...fetchPostParam,
+        offset: postIds.length
+      }))
+    }
+  }, [fetchPostParam, hasMore, pending, postIds.length])
+
+  if (!fetchPostParam) return null
+
+  const sortOptions = customView?.type === 'collection'
+    ? COLLECTION_SORT_OPTIONS
+    : STREAM_SORT_OPTIONS
+
+  const handleChildPostToggle = () => {
+    const childPostInclusion = fetchPostParam?.childPostInclusion === 'yes' ? 'no' : 'yes'
+    dispatch(updateUserSettings({ settings: { streamChildPosts: childPostInclusion } }))
+  }
+
+  const extraToggleStyles = fetchPostParam?.childPostInclusion === 'yes'
+    ? { backgroundColor: pictonBlue }
+    : { backgroundColor: '#FFFFFF' }
+
+  return (
+    <View style={styles.container}>
+      <FlatList
+        ref={scrollRef}
+        data={postIds}
+        renderItem={({ item }) => renderPostRow({ ...props, postId: item })}
+        onRefresh={refreshPosts}
+        refreshing={!!pending}
+        keyExtractor={item => `post${item}`}
+        onEndReached={fetchMorePosts}
+        ListHeaderComponent={
+          <View>
+            {header}
+            {!feedType && (
+              <View style={[styles.listControls]}>
+                <ListControl selected={sortBy} onChange={setSortBy} options={sortOptions} />
+                <View style={styles.steamControlRightSide}>
+                  {!['my', 'public'].includes(fetchPostParam?.context) &&
+                    <TouchableOpacity onPress={handleChildPostToggle}>
+                      <View style={{ ...styles.childGroupToggle, ...extraToggleStyles }}>
+                        <Icon name='Subgroup' color={fetchPostParam?.childPostInclusion === 'yes' ? '#FFFFFF' : pictonBlue} />
+                      </View>
+                    </TouchableOpacity>}
+                  {!fetchPostParam?.types && (
+                    <ListControl selected={fetchPostParam.filter} onChange={setFilter} options={POST_TYPE_OPTIONS} />
+                  )}
+                </View>
+              </View>
+            )}
+            {feedType === 'event' && (
+              <View style={[styles.listControls]}>
+                <ListControl selected={timeframe} onChange={setTimeframe} options={EVENT_STREAM_TIMEFRAME_OPTIONS} />
+              </View>
+            )}
+          </View>
+        }
+        ListFooterComponent={pending ? <Loading style={styles.loading} /> : null}
+      />
+    </View>
+  )
 }
 
-export class FeedListClassComponent extends React.Component {
-  fetchOrShowCached () {
-    const { hasMore, postIds, fetchPosts } = this.props
-
-    if (fetchPosts && isEmpty(postIds) && hasMore !== false) {
-      fetchPosts()
-    }
-  }
-
-  componentDidMount () {
-    this.props.isFocused && this.fetchOrShowCached()
-  }
-
-  shouldComponentUpdate (nextProps) {
-    return nextProps.isFocused && didPropsChange(this.props, nextProps)
-  }
-
-  componentDidUpdate (prevProps) {
-    if (
-      (!prevProps.isFocused && this.props.isFocused) ||
-      prevProps.sortBy !== this.props.sortBy ||
-      prevProps.filter !== this.props.filter ||
-      prevProps.timeframe !== this.props.timeframe ||
-      prevProps.forGroup?.id !== this.props.forGroup?.id ||
-      prevProps.topicName !== this.props.topicName ||
-      prevProps.fetchPostParam.childPostInclusion !== this.props.fetchPostParam.childPostInclusion
-    ) {
-      this.fetchOrShowCached()
-    }
-  }
-
-  handleChildPostToggle = () => {
-    const childPostInclusion = this.props.fetchPostParam.childPostInclusion === 'yes' ? 'no' : 'yes'
-    this.props.updateUserSettings({ settings: { streamChildPosts: childPostInclusion } })
-  }
-
-  keyExtractor = (item) => `post${item}`
-
-  render () {
-    const {
-      fetchPostParam,
-      postIds,
-      pendingRefresh,
-      refreshPosts,
-      fetchMorePosts,
-      setFilter,
-      setSort,
-      setTimeframe,
-      scrollRef,
-      sortBy,
-      feedType,
-      filter,
-      timeframe,
-      customPostTypes
-    } = this.props
-
-    const context = fetchPostParam?.context
-
-    const extraToggleStyles = fetchPostParam.childPostInclusion === 'yes'
-      ? {
-          backgroundColor: pictonBlue
-        }
-      : {
-          backgroundColor: '#FFFFFF'
-        }
-    return (
-      <View style={styles.container}>
-        <FlatList
-          ref={scrollRef}
-          data={postIds}
-          renderItem={({ item }) => renderPostRow({ ...this.props, postId: item })}
-          onRefresh={refreshPosts}
-          refreshing={!!pendingRefresh}
-          keyExtractor={this.keyExtractor}
-          onEndReached={fetchMorePosts}
-          ListHeaderComponent={
-            <View>
-              {this.props.header}
-              {!feedType && (
-                <View style={[styles.listControls]}>
-                  <ListControl selected={sortBy} onChange={setSort} options={STREAM_SORT_OPTIONS} />
-                  <View style={styles.steamControlRightSide}>
-                    {!['my', 'public'].includes(context) &&
-                      <TouchableOpacity onPress={this.handleChildPostToggle}>
-                        <View style={{ ...styles.childGroupToggle, ...extraToggleStyles }}><Icon name='Subgroup' color={fetchPostParam.childPostInclusion === 'yes' ? '#FFFFFF' : pictonBlue} /></View>
-                      </TouchableOpacity>}
-                    {!customPostTypes && <ListControl selected={filter} onChange={setFilter} options={POST_TYPE_OPTIONS} />}
-                  </View>
-                </View>
-              )}
-              {feedType === 'event' && (
-                <View style={[styles.listControls]}>
-                  <ListControl selected={timeframe} onChange={setTimeframe} options={EVENT_STREAM_TIMEFRAME_OPTIONS} />
-                </View>
-              )}
-            </View>
-          }
-          ListFooterComponent={
-            this.props.pending
-              ? <Loading style={styles.loading} />
-              : null
-          }
-        />
-      </View>
-    )
-  }
-}
-
-export function renderPostRow ({
+function renderPostRow ({
   postId,
   fetchPostParam,
   forGroup,
