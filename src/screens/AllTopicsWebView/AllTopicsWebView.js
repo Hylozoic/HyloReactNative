@@ -13,7 +13,7 @@ export default function AllTopicsWebView () {
 
   const nativeRouteHandler = () => ({
     '/:groupSlug(all)/topics/:topicName': ({ routeParams: { topicName } }) => {
-      navigation.navigate('Feed', { topicName })
+      navigation.navigate('Stream', { topicName })
     },
     '(.*)/topics/:topicName': ({ routeParams: { topicName } }) => {
       navigation.navigate('Chat', { topicName })

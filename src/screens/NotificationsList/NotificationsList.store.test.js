@@ -179,12 +179,12 @@ describe('selectors/refiners', () => {
       expect(actual).toMatchSnapshot()
     })
 
-    it('navigates to Feed (group) for ACTION_APPROVED_JOIN_REQUEST', () => {
+    it('navigates to Stream (group) for ACTION_APPROVED_JOIN_REQUEST', () => {
       session.Activity.withId('1').update({ action: 'approvedJoinRequest', group: '222' })
       const notification = session.Notification.withId('1')
       const actual = store.refineActivity(notification.activity, navigation)
       actual.onPress()
-      expect(navigation.navigate).toHaveBeenCalledWith('Feed', { groupId: '222' })
+      expect(navigation.navigate).toHaveBeenCalledWith('Stream', { groupId: '222' })
     })
 
     it('matches the previous ACTION_ANNOUNCEMENT snapshot', () => {

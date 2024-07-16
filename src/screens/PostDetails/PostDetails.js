@@ -67,7 +67,7 @@ export default function PostDetails () {
     Alert.alert(
       t('Sorry, we couldn\'t find that post'),
       t('It may have been removed, or you don\'t have permission to view it'),
-      [{ text: t('Ok'), onPress: () => navigation.replace('Feed') }]
+      [{ text: t('Ok'), onPress: () => navigation.replace('Stream') }]
     )
     return null
   }
