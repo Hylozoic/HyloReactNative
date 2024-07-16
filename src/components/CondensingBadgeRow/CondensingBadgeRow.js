@@ -14,33 +14,25 @@ export default function CondensingBadgeRow ({ postId, creatorIsSteward, badges, 
   
   return (
     <View style={[styles.badgeRow, containerStyle]}>
-      {creatorIsSteward && (
-        <BadgeEmoji onPress={handleShowBadges} key='mod' emoji='🛡️' isSteward name={currentGroup?.stewardDescriptor || 'Steward'} id={postId} />
-      )}
       <TouchableOpacity styles={styles.badgeRow} hitSlop={5} onPress={handleShowBadges}>
-      {badges.length + moderatorCount <= limit
-        ? (<View style={styles.badgeRow}>
-            {badges.map(badge => <BadgeEmoji onPress={handleShowBadges} key={badge.name} {...badge} id={postId} />)}
-          </View>)
-        : (
-          <View style={styles.badgePill}>
-            <BadgeEmoji onPress={handleShowBadges} extraStyle={{ height: 20, width: 16 }} key={badges[0].name} {...badges[0]} id={postId} />
-            <Text>+{badges.length - 1} </Text>
-          </View>
-        )
-      }
+        {badges.length + moderatorCount <= limit
+          ? (
+            <View style={styles.badgeRow}>
+              {badges.map(badge => <BadgeEmoji isSteward={creatorIsSteward} onPress={handleShowBadges} key={badge.name} {...badge} id={postId} />)}
+            </View>)
+          : (
+            <View style={styles.badgePill}>
+              <BadgeEmoji isSteward={creatorIsSteward} onPress={handleShowBadges} extraStyle={{ height: 20, width: 16 }} key={badges[0].name} {...badges[0]} id={postId} />
+              <Text>+{badges.length - 1} </Text>
+            </View>
+            )
+        }
       </TouchableOpacity>
       {showAllBadges &&
         <View style={styles.allBadgesPill}>
-          {creatorIsSteward && (
-            <View key='mod' style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingLeft: 2, paddingRight: 4, gap: 2}}>
-              <BadgeEmoji emoji='🛡️' isSteward name={currentGroup?.stewardDescriptor || 'Steward'} extraStyle={{ height: 26, width: 26 }} emojiStyle={{ fontSize: 16,lineHeight: 20}} />
-              <Text>{currentGroup?.stewardDescriptor || 'Steward'}</Text>
-            </View>
-          )}
           {badges.map(badge => (
-            <View key={badge.name} style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingLeft: 2, paddingRight: 4, gap: 2}}>
-              <BadgeEmoji extraStyle={{ height: 26, width: 26 }} emojiStyle={{ fontSize: 20,lineHeight: 22}} {...badge} id={postId} />
+            <View key={badge.name} style={{flex: 1, flexDirection: 'row', alignItems: 'center', paddingLeft: 2, paddingRight: 4, gap: 2 }}>
+              <BadgeEmoji extraStyle={{ height: 26, width: 26 }} emojiStyle={{ fontSize: 20, lineHeight: 22 }} {...badge} id={postId} />
               <Text>{badge.name}</Text>
             </View>))}
         </View>}
@@ -49,7 +41,7 @@ export default function CondensingBadgeRow ({ postId, creatorIsSteward, badges, 
 }
 
 const styles = {
-  allBadgesPill:{
+  allBadgesPill: {
     backgroundColor: white40onCaribbeanGreen,
     borderRadius: 10,
     border: 1,
@@ -78,5 +70,5 @@ const styles = {
     justifyContent: 'center',
     gap: 1,
     marginRight: 1
-  },
+  }
 }

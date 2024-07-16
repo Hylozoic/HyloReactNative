@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import useIsModalScreen from 'hooks/useIsModalScreen'
 import { useTranslation, withTranslation } from 'react-i18next'
 import Loading from 'components/Loading'
-import MemberFeed from './MemberFeed'
+import MemberStream from './MemberStream'
 import MemberHeader from './MemberHeader'
 import ImagePicker from 'components/ImagePicker'
 import FlagContent from 'components/FlagContent'
@@ -108,7 +108,7 @@ function MemberProfile ({
     </View>
   )
 
-  return <MemberFeed id={id} header={header} navigation={navigation} />
+  return <MemberStream id={id} header={header} navigation={navigation} />
 }
 export class MemberBanner extends React.Component {
   state = {

@@ -57,7 +57,7 @@ export default function ImageAttachments ({
 }
 
 // this is from fudging and looking at how it turns out. since it's fixed, the
-// aspect ratio of the image is slightly different between the feed and post
+// aspect ratio of the image is slightly different between the stream and post
 // details.
 const backgroundHeight = Dimensions.get('window').width * 0.62
 

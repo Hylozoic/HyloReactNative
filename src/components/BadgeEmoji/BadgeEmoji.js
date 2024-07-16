@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 
 export default function Badge ({ emoji, onPress, isSteward, extraStyle, emojiStyle }) {
   if (!emoji) return null
+
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={[styles.container, isSteward && styles.isSteward, extraStyle]}>
@@ -21,7 +22,11 @@ const styles = {
     textAlign: 'center',
     width: 24,
     height: 24,
-    marginRight: 1
+    marginRight: 1,
+    backgroundColor: '#d1f3e9',
+    borderRadius: 30,
+    border: 1,
+    borderColor: '#ffd192'
 
   },
   emoji: {

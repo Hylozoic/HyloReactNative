@@ -44,7 +44,7 @@ export default function PostHeader ({
 
   const currentGroupId = currentGroup?.id
   const badges = useSelector(state => getRolesForGroup(state, { person: creator, groupId: currentGroupId }))
-  const creatorIsSteward = useSelector(state => hasResponsibilityForGroup(state, { person: creator, responsibility: RESP_ADMINISTRATION, groupId: currentGroupId }))
+  const creatorIsSteward = useSelector(state => hasResponsibilityForGroup(state, { person: creator, responsibility: null, groupId: currentGroupId }))
   return (
     <View style={[styles.container, style]}>
       <View style={styles.avatarSpacing}>

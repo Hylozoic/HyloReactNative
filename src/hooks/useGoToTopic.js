@@ -13,7 +13,7 @@ export default function useGoToTopic () {
       return null
     } else {
       if (isContextGroup(currentGroup?.slug)) {
-        return navigation.navigate('Feed', { topicName })
+        return navigation.navigate('Stream', { topicName })
       } else {
         return navigation.navigate('Chat', { topicName })
       }
