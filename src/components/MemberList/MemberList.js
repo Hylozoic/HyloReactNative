@@ -155,7 +155,7 @@ export default function (props) {
 
 export function Member ({ member, showMember, group }) {
   const badges = group ? useSelector(state => getRolesForGroup(state, { person: member, groupId: group.id })) : []
-  const creatorIsSteward = group ? useSelector(state => hasResponsibilityForGroup(state, { person: member, responsibility: RESP_ADMINISTRATION, groupId: group.id })) : []
+  const creatorIsSteward = group ? useSelector(state => hasResponsibilityForGroup(state, { person: member, responsibility: null, groupId: group.id })) : []
   return (
     <TouchableOpacity
       onPress={() => isFunction(showMember) && showMember(member.id)}
