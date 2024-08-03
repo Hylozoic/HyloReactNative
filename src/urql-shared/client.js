@@ -76,6 +76,7 @@ const customKeys = {
   MemberSettings: () => null,
   Membership: () => null,
   MembershipSettings: () => null,
+  MembershipCommonRoleQuerySet: () => null,
   NotificationQuerySet: () => null,
   PersonQuerySet: () => null,
   Point: () => null,
