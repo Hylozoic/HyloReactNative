@@ -12,6 +12,8 @@ import {
   setSearch,
   setSort
 } from './Members.store'
+import hasResponsibilityForGroup from 'store/selectors/hasResponsibilityForGroup'
+import { RESP_ADD_MEMBERS } from 'store/constants'
 
 export function makeFetchOpts (props) {
   const { group, sortBy } = props
@@ -37,7 +39,7 @@ export function sortKeysFactory () {
 export function mapStateToProps (state, props) {
   const currentUser = getMe(state, props)
   const group = getCurrentGroup(state, props)
-  const canModerate = currentUser && currentUser.canModerate(group)
+  const canInvite = hasResponsibilityForGroup(state, { responsibility: RESP_ADD_MEMBERS, groupId: group.id })
   const search = getSearch(state)
   const sortBy = getSort(state)
   const fetchOpts = makeFetchOpts({ group, sortBy, search })
@@ -47,7 +49,7 @@ export function mapStateToProps (state, props) {
   return {
     currentUser,
     group,
-    canModerate,
+    canInvite,
     fetchOpts,
     hasMore: getHasMoreMembers(state, getOpts),
     members: getMembers(state, getOpts),

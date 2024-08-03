@@ -32,6 +32,8 @@ describe('mapStateToProps', () => {
     const group = session.Group.create({ id: '10', slug: 'tom' })
     session.Me.create({
       id: 123,
+      groupRoles: { items: [] },
+      membershipCommonRoles: { items: [] },
       memberships: [session.Membership.create({
         id: '345',
         group: group.id,

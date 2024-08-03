@@ -9,21 +9,24 @@ import useRouteParams from 'hooks/useRouteParams'
 import useChangeToGroup from 'hooks/useChangeToGroup'
 import { PUBLIC_GROUP, ALL_GROUP, MY_CONTEXT_GROUP } from 'store/models/Group'
 import getMemberships from 'store/selectors/getMemberships'
-import getCanModerate from 'store/selectors/getCanModerate'
-import getCurrentGroup from 'store/selectors/getCurrentGroup'
+// import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import styles from './DrawerMenu.styles'
 import Button from 'components/Button'
 import { bannerlinearGradientColors } from 'style/colors'
 // import groupExplorerUrl from 'assets/group-explorer.png'
 import earthUrl from 'assets/earth.png'
 import myHomeUrl from 'assets/my-home.png'
+import hasResponsibilityForGroup from 'store/selectors/hasResponsibilityForGroup'
+import { RESP_ADD_MEMBERS, RESP_ADMINISTRATION } from 'store/constants'
+import useCurrentGroup from 'hooks/useCurrentGroup'
 
 export default function DrawerMenu () {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const memberships = useSelector(getMemberships)
-  const currentGroup = useSelector(getCurrentGroup)
-  const canModerateCurrentGroup = useSelector(getCanModerate)
+  const [currentGroup] = useCurrentGroup()
+  const canAdmin = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_ADMINISTRATION, groupId: currentGroup?.id }))
+  const canInvite = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_ADD_MEMBERS, groupId: currentGroup?.id }))
   const { myHome } = useRouteParams()
 
   const myGroups = memberships
@@ -33,9 +36,9 @@ export default function DrawerMenu () {
   const goToCreateGroup = () => {
     navigation.navigate('Create Group', { screen: 'CreateGroupName', params: { reset: true } })
   }
-  const goToGroupSettings = () => canModerateCurrentGroup &&
+  const goToGroupSettings = () => canAdmin &&
     navigation.navigate('Group Settings')
-  const goToInvitePeople = () => canModerateCurrentGroup &&
+  const goToInvitePeople = () => canInvite &&
       navigation.navigate('Group Settings', { screen: 'Invite' })
   const changeToGroup = useChangeToGroup()
 
@@ -130,20 +133,20 @@ export default function DrawerMenu () {
           <View style={[styles.headerContent]}>
             <FastImage source={{ uri: currentGroup.avatarUrl }} style={styles.headerAvatar} />
             <Text style={styles.headerText}>{currentGroup.name}</Text>
-            {canModerateCurrentGroup && (
+            {(canAdmin || canInvite) && (
               <View style={styles.currentGroupButtons}>
-                <Button
+                {canAdmin && <Button
                   style={styles.currentGroupButton}
                   iconName='Settings'
                   onPress={goToGroupSettings}
                   text={t('Settings')}
-                />
-                <Button
+                />}
+                {canInvite && <Button
                   style={styles.currentGroupButton}
                   iconName='Invite'
                   onPress={goToInvitePeople}
                   text={t('Invite')}
-                />
+                />}
               </View>
             )}
           </View>

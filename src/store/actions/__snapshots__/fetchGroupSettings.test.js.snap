@@ -42,7 +42,7 @@ exports[`fetchGroupSettings 1`] = `
                 avatarUrl
               }
             }
-            moderators (first: 100) {
+            stewards (first: 100) {
               hasMore
               items {
                 id

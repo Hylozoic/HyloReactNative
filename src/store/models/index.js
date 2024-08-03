@@ -5,9 +5,10 @@ import Agreement from './Agreement'
 import Attachment from './Attachment'
 import Collection, { CollectionPost } from './Collection'
 import Comment from './Comment'
+import CommonRole from './CommonRole'
 import CustomView from './CustomView'
 import EventInvitation from './EventInvitation'
-import Group, { GroupRelationship, GroupModerator, GroupJoinQuestion, GroupPrerequisite, GroupToGroupJoinQuestion } from './Group'
+import Group, { GroupRelationship, GroupSteward, GroupJoinQuestion, GroupPrerequisite, GroupToGroupJoinQuestion } from './Group'
 import GroupRelationshipInvite, { GroupToGroupJoinRequestQuestionAnswer } from './GroupRelationshipInvite'
 import GroupTopic from './GroupTopic'
 import Invitation from './Invitation'
@@ -38,11 +39,12 @@ orm.register(
   Collection,
   CollectionPost,
   Comment,
+  CommonRole,
   CustomView,
   EventInvitation,
   Group,
   GroupJoinQuestion,
-  GroupModerator,
+  GroupSteward,
   GroupPrerequisite,
   GroupRelationship,
   GroupRelationshipInvite,
