@@ -9,7 +9,6 @@ import useHyloActionSheet from 'hooks/useHyloActionSheet'
 import useMixpanelTrack from 'hooks/useMixpanelTrack'
 import getMe from 'store/selectors/getMe'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
-import getCanModerate from 'store/selectors/getCanModerate'
 import {
   removePost as removePostAction,
   deletePost as deletePostAction,
@@ -20,6 +19,8 @@ import Icon from 'components/Icon'
 import { isContextGroup } from 'store/models/Group'
 import { postUrl as postUrlCreator } from 'util/navigation'
 import { useTranslation } from 'react-i18next'
+import hasResponsibilityForGroup from 'store/selectors/hasResponsibilityForGroup'
+import { RESP_MANAGE_CONTENT } from 'store/constants'
 
 export default function usePostActionSheet ({
   baseHostURL = process.env.HYLO_WEB_BASE_URL,
@@ -37,12 +38,12 @@ export default function usePostActionSheet ({
   const dispatch = useDispatch()
   const currentGroup = useSelector(getCurrentGroup)
   const currentUser = useSelector(getMe)
-  const canModerate = useSelector(getCanModerate)
+  const canModerate = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_MANAGE_CONTENT, groupId: currentGroup?.id }))
   const createActionSheetActions = () => {
     const isCreator = currentUser && creator && currentUser.id === creator.id
-    const postUrl = isContextGroup(currentGroup.slug)
-      ? postUrlCreator(postId, { context: currentGroup.slug })
-      : postUrlCreator(postId, { groupSlug: currentGroup.slug })
+    const postUrl = isContextGroup(currentGroup?.slug)
+      ? postUrlCreator(postId, { context: currentGroup?.slug })
+      : postUrlCreator(postId, { groupSlug: currentGroup?.slug })
     const editPost = isCreator
       ? () => navigation.navigate('Edit Post', { id: postId })
       : null

@@ -11,6 +11,9 @@ import FlagContent from 'components/FlagContent'
 import Icon from 'components/Icon'
 import styles, { labelStyles } from './PostHeader.styles'
 import { useTranslation } from 'react-i18next'
+import { RESP_ADMINISTRATION } from 'store/constants'
+import hasResponsibilityForGroup from 'store/selectors/hasResponsibilityForGroup'
+import getRolesForGroup from 'store/selectors/getRolesForGroup'
 
 export default function PostHeader ({
   announcement,
@@ -39,10 +42,9 @@ export default function PostHeader ({
   const { avatarUrl, name } = creator
   const handleShowMember = () => showMember && showMember(creator.id)
 
-  const currentGroupId = currentGroup && currentGroup.id
-  const badges = (currentGroupId && creator.groupRoles?.filter(role => role.groupId === currentGroupId)) || []
-  const creatorIsModerator = creator.moderatedGroupMemberships?.find(moderatedMembership => moderatedMembership.groupId === currentGroupId)
-
+  const currentGroupId = currentGroup?.id
+  const badges = useSelector(state => getRolesForGroup(state, { person: creator, groupId: currentGroupId }))
+  const creatorIsSteward = useSelector(state => hasResponsibilityForGroup(state, { person: creator, responsibility: null, groupId: currentGroupId }))
   return (
     <View style={[styles.container, style]}>
       <View style={styles.avatarSpacing}>
@@ -56,7 +58,7 @@ export default function PostHeader ({
             <Text style={styles.name}>{name}</Text>
           )}
         </TouchableOpacity>
-        <CondensingBadgeRow badges={badges} creatorIsModerator={creatorIsModerator} currentGroup={currentGroup} postId={postId} />
+        <CondensingBadgeRow badges={badges} creatorIsSteward={creatorIsSteward} currentGroup={currentGroup} postId={postId} />
         <Text style={styles.date}>{TextHelpers.humanDate(date)}</Text>
       </View>
       <View style={styles.upperRight}>

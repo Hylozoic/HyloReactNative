@@ -65,10 +65,10 @@ export default function GroupSettingsTabsNavigator () {
         }}
       />
       <GroupSettings.Screen
-        name='Moderators'
+        name='Responsibilities'
         component={GroupSettingsWebView}
         initialParams={{
-          path: `/groups/${selectedGroup?.slug}/settings/moderators`
+          path: `/groups/${selectedGroup?.slug}/settings/responsibilities`
         }}
       />
       <GroupSettings.Screen

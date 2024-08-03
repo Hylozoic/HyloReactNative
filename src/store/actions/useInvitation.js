@@ -13,7 +13,6 @@ export default function useInvitation (inviteCodes = {}) {
           useInvitation (invitationToken: $invitationToken, accessCode: $accessCode) {
             membership {
               id
-              role
               group {
                 id
                 accessibility

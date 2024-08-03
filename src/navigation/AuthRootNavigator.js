@@ -22,6 +22,7 @@ import PostEditor from 'screens/PostEditor'
 import NotificationsList from 'screens/NotificationsList'
 import Thread from 'screens/Thread'
 import { white } from 'style/colors'
+import fetchCommonRoles from 'store/actions/fetchCommonRoles'
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
@@ -32,6 +33,7 @@ export default function AuthRootNavigator () {
 
   useQueryAction({ action: fetchNotifications() })
   useHyloQuery({ action: updateNewNotificationCount })
+  useHyloQuery({ action: fetchCommonRoles })
 
   useEffect(() => {
     (async function () {
