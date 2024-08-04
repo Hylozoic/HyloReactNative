@@ -404,7 +404,7 @@ exports[`default render matches snapshot 1`] = `
           </View>
         </View>
       </View>
-      <RNSScreenContainer
+      <View
         onLayout={[Function]}
         style={
           {
@@ -412,24 +412,8 @@ exports[`default render matches snapshot 1`] = `
           }
         }
       >
-        <RNSScreen
-          activityState={1}
-          collapsable={false}
-          gestureResponseDistance={
-            {
-              "bottom": -1,
-              "end": -1,
-              "start": -1,
-              "top": -1,
-            }
-          }
-          onGestureCancel={[Function]}
+        <View
           pointerEvents="box-none"
-          sheetAllowedDetents="large"
-          sheetCornerRadius={-1}
-          sheetExpandsWhenScrolledToEdge={true}
-          sheetGrabberVisible={false}
-          sheetLargestUndimmedDetent="all"
           style={
             {
               "bottom": 0,
@@ -635,6 +619,7 @@ exports[`default render matches snapshot 1`] = `
                                 </Text>
                                 <TextInput
                                   autoCapitalize="characters"
+                                  autoComplete="one-time-code"
                                   autoCorrect={false}
                                   blurOnSubmit={false}
                                   caretHidden={true}
@@ -718,25 +703,9 @@ exports[`default render matches snapshot 1`] = `
               </View>
             </View>
           </View>
-        </RNSScreen>
-        <RNSScreen
-          activityState={1}
-          collapsable={false}
-          gestureResponseDistance={
-            {
-              "bottom": -1,
-              "end": -1,
-              "start": -1,
-              "top": -1,
-            }
-          }
-          onGestureCancel={[Function]}
+        </View>
+        <View
           pointerEvents="box-none"
-          sheetAllowedDetents="large"
-          sheetCornerRadius={-1}
-          sheetExpandsWhenScrolledToEdge={true}
-          sheetGrabberVisible={false}
-          sheetLargestUndimmedDetent="all"
           style={
             {
               "bottom": 0,
@@ -877,8 +846,8 @@ exports[`default render matches snapshot 1`] = `
               </View>
             </View>
           </View>
-        </RNSScreen>
-      </RNSScreenContainer>
+        </View>
+      </View>
     </View>
   </View>
 </View>
