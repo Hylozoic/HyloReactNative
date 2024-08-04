@@ -1,3 +1,7 @@
+import 'react-native-gesture-handler/jestSetup'
+import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock'
+import mockClipboard from '@react-native-clipboard/clipboard/jest/clipboard-mock.js';
+
 // Mocking the global.fetch included in React Native
 global.fetch = jest.fn() // eslint-disable-line no-undef
 global.XMLHttpRequest = jest.fn()
@@ -23,7 +27,6 @@ global.FormData = jest.fn(() => {
 })
 
 // React Navigation - https://reactnavigation.org/docs/testing/
-import 'react-native-gesture-handler/jestSetup'
 jest.mock('react-native-reanimated', () => {
   const Reanimated = require('react-native-reanimated/mock')
   // The mock for `call` immediately calls the callback which is incorrect
@@ -60,7 +63,6 @@ jest.mock('@react-native-google-signin/google-signin', () => ({
   }
 }))
 
-import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock'
 jest.mock('react-native-safe-area-context', () => mockSafeAreaContext)
 
 jest.mock('react-native-background-timer', () => {})
@@ -115,3 +117,6 @@ jest.mock('react-native-webview', () => {
     WebView: () => View
   }
 })
+
+// https://github.com/react-native-clipboard/clipboard
+jest.mock('@react-native-clipboard/clipboard', () => mockClipboard)

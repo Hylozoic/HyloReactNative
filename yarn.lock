@@ -2794,7 +2794,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-clipboard/clipboard@npm:^1.10.0":
+"@react-native-clipboard/clipboard@npm:^1.14.1":
   version: 1.14.1
   resolution: "@react-native-clipboard/clipboard@npm:1.14.1"
   peerDependencies:
@@ -4118,7 +4118,7 @@ __metadata:
     "@invertase/react-native-apple-authentication": ^2.2.2
     "@native-html/iframe-plugin": ^2.6.1
     "@react-native-async-storage/async-storage": ^1.17.10
-    "@react-native-clipboard/clipboard": ^1.10.0
+    "@react-native-clipboard/clipboard": ^1.14.1
     "@react-native-community/eslint-config": ^3.2.0
     "@react-native-community/hooks": ^2.8.0
     "@react-native-google-signin/google-signin": ^8.0.1
