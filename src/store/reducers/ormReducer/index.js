@@ -111,7 +111,7 @@ export default function ormReducer (state = orm.getEmptyState(), action) {
 
     case ADD_MODERATOR_PENDING: {
       person = Person.withId(meta.personId)
-      Group.withId(meta.groupId).updateAppending({ moderators: [person] })
+      Group.withId(meta.groupId).updateAppending({ stewards: [person] })
       break
     }
 
@@ -346,10 +346,10 @@ export default function ormReducer (state = orm.getEmptyState(), action) {
 
     case REMOVE_MODERATOR_PENDING: {
       group = Group.withId(meta.groupId)
-      const moderators = group.moderators.filter(m =>
+      const stewards = group.stewards.filter(m =>
         m.id !== meta.personId)
         .toModelArray()
-      group.update({ moderators })
+      group.update({ stewards })
       break
     }
 

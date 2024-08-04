@@ -27,12 +27,24 @@ exports[`mapDispatchToProps returns the right keys 1`] = `
 
 exports[`mapStateToProps handles null value for lastViewedGroup 1`] = `
 {
-  "canModerate": true,
+  "canInvite": false,
   "currentUser": SessionBoundModel {
     "_fields": {
+      "groupRoles": {
+        "items": [],
+      },
       "id": 123,
+      "membershipCommonRoles": {
+        "items": [],
+      },
+    },
+    "groupRoles": {
+      "items": [],
     },
     "id": 123,
+    "membershipCommonRoles": {
+      "items": [],
+    },
   },
   "fetchOpts": {
     "search": undefined,

@@ -19,6 +19,8 @@ import styles from './Comment.styles'
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5'
 import ImageAttachments from 'components/ImageAttachments'
 import { useTranslation } from 'react-i18next'
+import hasResponsibilityForGroup from 'store/selectors/hasResponsibilityForGroup'
+import { RESP_MANAGE_CONTENT } from 'store/constants'
 
 export default function Comment ({
   comment,
@@ -41,7 +43,7 @@ export default function Comment ({
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
   const currentUser = useSelector(getMe)
   const group = useSelector(state => getGroup(state, { slug }))
-  const canModerate = currentUser && currentUser.canModerate(group)
+  const canModerate = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_MANAGE_CONTENT, groupId: group.id }))
   const isCreator = currentUser && (comment.creator.id === currentUser.id)
   const { creator, text, createdAt, post: postId } = comment
   const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: group?.id }))
@@ -63,7 +65,7 @@ export default function Comment ({
       ]
     )
   )
-  const handleDelete = isCreator && (
+  const handleDelete = (isCreator) && (
     () => {
       Alert.alert(
         t('Confirm Delete'),
