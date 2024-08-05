@@ -31,7 +31,7 @@
     "@invertase/react-native-apple-authentication": "^2.2.2",
     "@native-html/iframe-plugin": "^2.6.1",
     "@react-native-async-storage/async-storage": "^1.17.10",
-    "@react-native-clipboard/clipboard": "^1.10.0",
+    "@react-native-clipboard/clipboard": "^1.14.1",
     "@react-native-community/hooks": "^2.8.0",
     "@react-native-google-signin/google-signin": "^8.0.1",
     "@react-native-picker/picker": "^2.7.7",
@@ -248,5 +248,5 @@
       ]
     }
   },
-  "packageManager": "yarn@4.4.0"
+  "packageManager": "yarn@3.6.4"
 }
