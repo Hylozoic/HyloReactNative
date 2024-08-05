@@ -4,7 +4,7 @@
 
 1. Run through the React Native environment setup on the [React Native website](https://reactnative.dev/docs/environment-setup)
 2. `yarn install`
-3. Ask a teammate for a copy of the `.env` file, copy that into the root of this project (make sure to set `NO_FLIPPER=true`)
+3. Ask a teammate for a copy of the `.env` file, copy that into the root of this project (also available in Hylo 1Password)
 4. Then run `scripts/configure.sh`
 5. `cd ios`
 6. `bundle install` (** assuming you have a functioning version of Ruby)
@@ -20,7 +20,10 @@ Currently the splash screen on boot for both iOS and Android is handled by `reac
 Current Bootsplash screens / logo were generated using this command and parameters:
 
 ```
-npx react-native generate-bootsplash ./bootsplash_logo.png --background-color "#0DC39F" --logo-width 160
+yarn react-native generate-bootsplash ./bootsplash_logo.png \
+  --platforms=android,ios \
+  --background=0DC39F \
+  --logo-width=160
 ```
 
 ## Additional Docs for Hylo App Dev
