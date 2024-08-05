@@ -3,7 +3,6 @@ buildscript {
         maven { url 'https://plugins.gradle.org/m2/' } // Gradle Plugin Portal
     }
     dependencies {
-        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.6, 0.99.99]'
         classpath("io.sentry:sentry-android-gradle-plugin:4.8.0")
     }
 }
@@ -128,6 +127,7 @@ dependencies {
     implementation("com.facebook.react:react-android")
 
     implementation "androidx.core:core-splashscreen:1.0.0"
+    implementation "com.onesignal:OneSignal:[5.0.0, 5.99.99]"
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
