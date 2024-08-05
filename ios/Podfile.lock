@@ -20,9 +20,9 @@ PODS:
     - AppAuth/Core (~> 1.6)
     - GTMSessionFetcher/Core (< 3.0, >= 1.5)
   - GTMSessionFetcher/Core (2.3.0)
-  - hermes-engine (0.74.4):
-    - hermes-engine/Pre-built (= 0.74.4)
-  - hermes-engine/Pre-built (0.74.4)
+  - hermes-engine (0.74.5):
+    - hermes-engine/Pre-built (= 0.74.5)
+  - hermes-engine/Pre-built (0.74.5)
   - Intercom (16.5.9)
   - intercom-react-native (6.8.1):
     - Intercom (~> 16.5.9)
@@ -1701,7 +1701,7 @@ SPEC CHECKSUMS:
   GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
   GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
   GTMSessionFetcher: 3a63d75eecd6aa32c2fc79f578064e1214dfdec2
-  hermes-engine: 6312f669c895e05f0f6029554061593711770ea6
+  hermes-engine: 8c1577f3fdb849cbe7729c2e7b5abc4b845e88f8
   Intercom: d9c81b3e45e6ecd9b2db2dc188d0521a40393f56
   intercom-react-native: 267c5e40d45cf663da091c4417b5306d8ecfe4ee
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
