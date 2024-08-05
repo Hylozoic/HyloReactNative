@@ -1,3 +1,4 @@
+import { Image } from 'react-native'
 import 'react-native-gesture-handler/jestSetup'
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock'
 import mockClipboard from '@react-native-clipboard/clipboard/jest/clipboard-mock.js'
@@ -120,3 +121,5 @@ jest.mock('react-native-webview', () => {
 
 // https://github.com/react-native-clipboard/clipboard
 jest.mock('@react-native-clipboard/clipboard', () => mockClipboard)
+
+Image.resolveAssetSource = jest.fn().mockImplementation(source => source)
