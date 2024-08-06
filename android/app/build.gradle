@@ -1,15 +1,14 @@
 buildscript {
     repositories {
-        maven { url 'https://plugins.gradle.org/m2/' } // Gradle Plugin Portal
+        maven { url "https://plugins.gradle.org/m2/" } // Gradle Plugin Portal
     }
     dependencies {
-        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.6, 0.99.99]'
         classpath("io.sentry:sentry-android-gradle-plugin:4.8.0")
     }
 }
 
-apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
-apply plugin: 'com.android.application'
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 apply from: "../../node_modules/@sentry/react-native/sentry.gradle"
 
@@ -75,12 +74,13 @@ def enableProguardInReleaseBuilds = false
  * give correct results when using with locales other than en-US. Note that
  * this variant is about 6MiB larger per architecture than default.
  */
-def jscFlavor = 'org.webkit:android-jsc:+'
+def jscFlavor = "org.webkit:android-jsc:+"
 
 android {
     ndkVersion rootProject.ext.ndkVersion
     
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdk rootProject.ext.compileSdkVersion
 
     namespace "com.hylo.hyloandroid"
     defaultConfig {
@@ -127,14 +127,8 @@ dependencies {
     implementation("com.facebook.react:react-android")
 
     implementation "androidx.core:core-splashscreen:1.0.0"
-    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
+    implementation "com.onesignal:OneSignal:[5.0.0, 5.99.99]"
 
-    debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
-    debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
-        exclude group:'com.squareup.okhttp3', module:'okhttp'
-    }
-
-    debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}")
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {
@@ -144,4 +138,4 @@ dependencies {
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 
-apply plugin: 'com.google.gms.google-services'
+apply plugin: "com.google.gms.google-services"

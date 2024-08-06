@@ -89,7 +89,7 @@ exports[`FlagContent calls submit successfully with category:other 1`] = `
           onScrollEndDrag={[Function]}
           removeClippedSubviews={false}
           renderItem={[Function]}
-          scrollEventThrottle={50}
+          scrollEventThrottle={0.0001}
           stickyHeaderIndices={[]}
           viewabilityConfigCallbackPairs={[]}
         >

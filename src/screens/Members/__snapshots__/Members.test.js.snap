@@ -395,7 +395,7 @@ exports[`renders correctly with no group (all groups default) 1`] = `
                           onScrollEndDrag={[Function]}
                           removeClippedSubviews={false}
                           renderItem={[Function]}
-                          scrollEventThrottle={50}
+                          scrollEventThrottle={0.0001}
                           stickyHeaderIndices={[]}
                           viewabilityConfigCallbackPairs={[]}
                         >
@@ -1353,7 +1353,7 @@ exports[`renders with invite button when a moderator 1`] = `
                           onScrollEndDrag={[Function]}
                           removeClippedSubviews={false}
                           renderItem={[Function]}
-                          scrollEventThrottle={50}
+                          scrollEventThrottle={0.0001}
                           stickyHeaderIndices={[]}
                           viewabilityConfigCallbackPairs={[]}
                         >

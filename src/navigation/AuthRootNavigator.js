@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import OneSignal from 'react-native-onesignal'
+import { OneSignal } from 'react-native-onesignal'
 import registerDevice from 'store/actions/registerDevice'
 import { useDispatch } from 'react-redux'
 import i18n from '../../i18n'
@@ -36,16 +36,15 @@ export default function AuthRootNavigator () {
   useEffect(() => {
     (async function () {
       if (!fetching && !error) {
-        const deviceState = await OneSignal.getDeviceState()
+        const onesignalPushSubscriptionId = await OneSignal.User.pushSubscription.getIdAsync()
 
         const locale = currentUser?.settings?.locale || 'en'
         i18n.changeLanguage(locale)
 
-        if (deviceState?.userId) {
-          await dispatch(registerDevice(deviceState?.userId))
-          OneSignal.setExternalUserId(currentUser?.id)
-          // Prompt for push notifications (iOS only)
-          OneSignal.promptForPushNotificationsWithUserResponse(() => {})
+        if (onesignalPushSubscriptionId) {
+          await dispatch(registerDevice(onesignalPushSubscriptionId))
+          OneSignal.login(currentUser?.id)
+          OneSignal.Notifications.requestPermission(true)
         } else {
           console.warn('Not registering to OneSignal for push notifications. OneSignal did not successfully retrieve a userId')
         }

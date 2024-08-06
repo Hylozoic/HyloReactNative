@@ -1018,6 +1018,7 @@ exports[`PostEditor renders correctly while saving 1`] = `
                     <View
                       collapsable={false}
                       pointerEvents="box-none"
+                      style={{}}
                     >
                       <View
                         accessibilityElementsHidden={true}
@@ -1119,19 +1120,6 @@ exports[`PostEditor renders correctly while saving 1`] = `
                                     </View>
                                   </View>
                                 </View>
-                                <Modal
-                                  hardwareAccelerated={false}
-                                  onOrientationChange={[Function]}
-                                  supportedOrientations={
-                                    [
-                                      "portrait",
-                                      "landscape",
-                                    ]
-                                  }
-                                  testID="ios_modal"
-                                  transparent={true}
-                                  visible={false}
-                                />
                               </View>
                             </View>
                             <View>
