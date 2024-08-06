@@ -1,3 +1,4 @@
+import { Image } from 'react-native'
 import 'react-native-gesture-handler/jestSetup'
 import mockSafeAreaContext from 'react-native-safe-area-context/jest/mock'
 import mockClipboard from '@react-native-clipboard/clipboard/jest/clipboard-mock.js'
@@ -120,3 +121,9 @@ jest.mock('react-native-webview', () => {
 
 // https://github.com/react-native-clipboard/clipboard
 jest.mock('@react-native-clipboard/clipboard', () => mockClipboard)
+
+// TODO: Workaround for a mocking issue introduced in RN 0.73 in conjunction with FastImage.
+// ref. https://github.com/facebook/react-native/issues/41907#issuecomment-1858445188
+// Should be able to be removed after upgrading to RN 0.75.x as there is already a patch in
+// the current release candidate of that version:
+Image.resolveAssetSource = jest.fn().mockImplementation(source => source)

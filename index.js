@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import { AppRegistry, Platform, AppState, UIManager } from 'react-native'
 import Timer from 'react-native-background-timer'
 import * as Sentry from '@sentry/react-native'
-import OneSignal from 'react-native-onesignal'
+import { OneSignal } from 'react-native-onesignal'
 import client from 'urql-shared/client'
 import { sentryConfig } from 'config'
 import store from 'store'
@@ -58,28 +58,29 @@ export default function App () {
   const [appState, setAppState] = useState(AppState.currentState)
 
   useEffect(() => {
-    OneSignal.setAppId(process.env.ONESIGNAL_APP_ID)
+    OneSignal.initialize(process.env.ONESIGNAL_APP_ID)
 
     // Uncomment for OneSignal debugging
-    // OneSignal.setLogLevel(6, 0)
+    // OneSignal.Debug.setLogLevel(LogLevel.Verbose);
 
     // Method for handling notifications received while app in foreground
-    OneSignal.setNotificationWillShowInForegroundHandler(notifReceivedEvent => {
+    const foregroundWillDisplayHandler = notIfReceivedEvent => {
       // Complete with null means don't show a notification.
-      notifReceivedEvent.complete()
-    })
+      notIfReceivedEvent.complete()
+    }
+    OneSignal.Notifications.addEventListener('foregroundWillDisplay', foregroundWillDisplayHandler)
 
     const appStateHandler = AppState.addEventListener('change', handleAppStateChange)
 
     return () => {
       appStateHandler && appStateHandler.remove()
-      OneSignal.clearHandlers()
+      OneSignal.Notifications.removeEventListener('foregroundWillDisplay', foregroundWillDisplayHandler)
     }
   }, [])
 
   const handleAppStateChange = nextAppState => {
     if (appState.match(/inactive|background/) && nextAppState === 'active') {
-      OneSignal.clearOneSignalNotifications()
+      OneSignal.Notifications.clearAll()
     }
     setAppState(nextAppState)
   }

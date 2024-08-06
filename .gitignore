@@ -24,24 +24,11 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 ios/*.app.dSYM.zip
-ios/fastlane/report.xml
 ios/debug.xcconfig
 ios/release.xcconfig
 ios/.xcode.env.local
 
-# fastlane
-#
-# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
-# screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://docs.fastlane.tools/best-practices/source-control/
-
-**/fastlane/report.xml
-**/fastlane/Preview.html
-**/fastlane/screenshots
-**/fastlane/test_output
-
-# Ruby Gems / Bundle (Fastlane related)
+# Ruby Gems / Bundle
 
 /vendor/bundle/
 .bundle/*

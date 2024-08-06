@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useSelector } from 'react-redux'
 import { navigationRef } from 'navigation/linking/helpers'
-import OneSignal from 'react-native-onesignal'
+import { OneSignal } from 'react-native-onesignal'
 import RNBootSplash from 'react-native-bootsplash'
 import customLinking, {
   AUTH_ROOT_SCREEN_NAME,
@@ -37,10 +37,17 @@ export default function RootNavigator () {
 
   // Handle Push Notifications opened
   useEffect(() => {
-    return OneSignal.setNotificationOpenedHandler(({ notification }) => {
-      const path = notification?.additionalData?.path
-      openURL(path)
-    })
+    const notificationClickHandler = ({ notification }) => {
+      const path = notification?.additionalData?.path;
+      if (path) {
+        openURL(path)
+      }
+    }
+    OneSignal.Notifications.addEventListener('click', notificationClickHandler)
+
+    return () => {
+      OneSignal.Notifications.removeEventListener('click', notificationClickHandler)
+    }
   }, [])
 
   if (fetching) return <LoadingScreen />

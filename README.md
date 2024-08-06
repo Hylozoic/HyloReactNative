@@ -4,7 +4,7 @@
 
 1. Run through the React Native environment setup on the [React Native website](https://reactnative.dev/docs/environment-setup)
 2. `yarn install`
-3. Ask a teammate for a copy of the `.env` file, copy that into the root of this project (make sure to set `NO_FLIPPER=true`)
+3. Ask a teammate for a copy of the `.env` file, copy that into the root of this project (also available in Hylo 1Password)
 4. Then run `scripts/configure.sh`
 5. `cd ios`
 6. `bundle install` (** assuming you have a functioning version of Ruby)
@@ -13,6 +13,12 @@
 9. `yarn start`
 10. `yarn run android` or `yarn run ios`
 
+## Contributions and Code of Conduct
+
+Please review our [Contribution Guide](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) to step into co-creative stewardship with us.
+
+## Additional Docs for Hylo App Dev
+
 ## Boot Splash Screen
 
 Currently the splash screen on boot for both iOS and Android is handled by `react-native-boot-splash` and is limited to using only a centered icon with a choice of background color. It can be readily re-generated using the provided cli utility with the library, see: [react-native-bootstrap#asset-generation](https://github.com/zoontek/react-native-bootsplash#assets-generation)
@@ -20,19 +26,11 @@ Currently the splash screen on boot for both iOS and Android is handled by `reac
 Current Bootsplash screens / logo were generated using this command and parameters:
 
 ```
-npx react-native generate-bootsplash ./bootsplash_logo.png --background-color "#0DC39F" --logo-width 160
+yarn react-native generate-bootsplash ./bootsplash_logo.png \
+  --platforms=android,ios \
+  --background=0DC39F \
+  --logo-width=160
 ```
-
-## Additional Docs for Hylo App Dev
-
-#### Release video walkthrough
-
-This video was recorded in December of 2023 and may be somewhat out-of-date, also review the Release Checklist below
-
-- https://www.youtube.com/watch?v=sE60ymB4ZHM
-  - 30 min: How to release an app that points to staging
-  - 35:50 min: Installing the release into a stimulator
-  - 48 min: discussion on breaking changes in NODE and EVO
 
 #### Release checklist
 
