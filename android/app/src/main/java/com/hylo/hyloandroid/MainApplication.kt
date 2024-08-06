@@ -39,7 +39,7 @@ class MainApplication : Application(), ReactApplication {
     SoLoader.init(this, false)
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
-      load(bridgelessEnabled = false)
+      load()
     }
 
     IntercomModule.initialize(this, "android_sdk-0aa2608fb3b46dd9efcb74339fc87073a6ed0ba9", "wwelodje")
