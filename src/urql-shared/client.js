@@ -70,6 +70,7 @@ const customKeys = {
   GroupJoinQuestionQuerySet: () => null,
   GroupQuerySet: () => null,
   GroupRole: () => null,
+  GroupRoleQuerySet: () => null,
   GroupSettings: () => null,
   JoinRequestQuerySet: () => null,
   Location: () => null,

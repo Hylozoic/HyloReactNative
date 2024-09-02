@@ -3949,6 +3949,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@urql/devtools@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@urql/devtools@npm:2.0.3"
+  dependencies:
+    wonka: ">= 4.0.9"
+  peerDependencies:
+    "@urql/core": ">= 1.14.0"
+    graphql: ">= 0.11.0"
+  checksum: 9b4a46dd0b6cca5296667bc0e658212c3101cd1c0d01dcc0be736e5b5159beaf6aa982115dd7546ff5425ed91e1688132a82a8f101bf8ad560245b97bb533f59
+  languageName: node
+  linkType: hard
+
 "@urql/exchange-graphcache@npm:^7.1.1":
   version: 7.1.1
   resolution: "@urql/exchange-graphcache@npm:7.1.1"
@@ -4012,6 +4024,7 @@ __metadata:
     "@testing-library/react-native": 12.5.2
     "@types/react": ^18.2.6
     "@types/react-test-renderer": ^18.0.0
+    "@urql/devtools": ^2.0.3
     "@urql/exchange-graphcache": ^7.1.1
     babel-jest: ^29.6.3
     babel-plugin-import-graphql: ^2.8.1
@@ -13836,7 +13849,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"wonka@npm:^6.3.2":
+"wonka@npm:>= 4.0.9, wonka@npm:^6.3.2":
   version: 6.3.4
   resolution: "wonka@npm:6.3.4"
   checksum: 6bb57955cb2982fb469a7824484e6854b436f89a7f10b6a981348789d88fbc944665771adc4cc404f62416417eb47ab2b8657d898e5301ccd4a53eaac6a10508
