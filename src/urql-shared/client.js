@@ -84,6 +84,7 @@ const customKeys = {
   PostQuerySet: () => null,
   ProposalOptionQuerySet: () => null,
   ProposalVoteQuerySet: () => null,
+  ResponsibilityQuerySet: () => null,
   SkillQuerySet: () => null,
   UserSettings: () => null
 }
