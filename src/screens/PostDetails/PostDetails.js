@@ -8,7 +8,7 @@ import { AnalyticsEvents } from 'hylo-shared'
 import useGoToMember from 'hooks/useGoToMember'
 import useIsModalScreen from 'hooks/useIsModalScreen'
 import useRouteParams from 'hooks/useRouteParams'
-import useQueryAction from 'urql-shared/hooks/useQueryAction'
+import useUrqlQueryAction from 'urql-shared/hooks/useUrqlQueryAction'
 import trackAnalyticsEvent from 'store/actions/trackAnalyticsEvent'
 import fetchPost from 'store/actions/fetchPost'
 import { getPresentedPost } from 'store/selectors/getPost'
@@ -26,7 +26,7 @@ export default function PostDetails () {
   const navigation = useNavigation()
   const isModalScreen = useIsModalScreen()
   const { id: postId } = useRouteParams()
-  const [{ fetching, error }] = useQueryAction({ action: fetchPost(postId) })
+  const [{ fetching, error }] = useUrqlQueryAction({ action: fetchPost(postId) })
   const currentGroup = useSelector(getCurrentGroup)
   const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
   // const post = postData?.post

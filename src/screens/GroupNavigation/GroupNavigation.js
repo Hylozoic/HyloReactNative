@@ -13,7 +13,7 @@ import Icon from 'components/Icon'
 import TopicsNavigation from 'components/TopicsNavigation'
 import styles from './GroupNavigation.styles'
 import Loading from 'components/Loading'
-import useQueryAction from 'urql-shared/hooks/useQueryAction'
+import useUrqlQueryAction from 'urql-shared/hooks/useUrqlQueryAction'
 
 export default function GroupNavigation () {
   const { t } = useTranslation()
@@ -22,7 +22,7 @@ export default function GroupNavigation () {
   const currentGroup = useSelector(getCurrentGroup)
   const childGroups = useSelector(getChildGroups)
   const parentGroups = useSelector(getParentGroups)
-  const [{ fetching }] = useQueryAction({
+  const [{ fetching }] = useUrqlQueryAction({
     action: fetchGroupDetailsAction({
       slug: currentGroup?.slug,
       withExtensions: false,

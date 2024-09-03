@@ -7,7 +7,7 @@ import i18n from '../../i18n'
 import { HyloHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
 import { modalScreenName } from 'hooks/useIsModalScreen'
 import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
-import useQueryAction from 'urql-shared/hooks/useQueryAction'
+import useUrqlQueryAction from 'urql-shared/hooks/useUrqlQueryAction'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
 import { fetchNotifications, updateNewNotificationCount } from 'screens/NotificationsList/NotificationsList.store'
 import ModalHeader from 'navigation/headers/ModalHeader'
@@ -27,11 +27,11 @@ import fetchCommonRoles from 'store/actions/fetchCommonRoles'
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
   const dispatch = useDispatch()
-  const [{ fetching, data, error }] = useQueryAction({ action: fetchCurrentUser() })
+  const [{ fetching, data, error }] = useUrqlQueryAction({ action: fetchCurrentUser() })
   const [loading, setLoading] = useState(true)
   const currentUser = data?.me
 
-  useQueryAction({ action: fetchNotifications() })
+  useUrqlQueryAction({ action: fetchNotifications() })
   useHyloQuery({ action: updateNewNotificationCount })
   useHyloQuery({ action: fetchCommonRoles })
 

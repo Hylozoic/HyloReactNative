@@ -10,7 +10,7 @@ import customLinking, {
   AUTH_ROOT_SCREEN_NAME,
   NON_AUTH_ROOT_SCREEN_NAME
 } from 'navigation/linking'
-import useQueryAction from 'urql-shared/hooks/useQueryAction'
+import useUrqlQueryAction from 'urql-shared/hooks/useUrqlQueryAction'
 import { openURL } from 'hooks/useOpenURL'
 import checkLogin from 'store/actions/checkLogin'
 import { getAuthorized } from 'store/selectors/getAuthState'
@@ -28,7 +28,7 @@ const Root = createStackNavigator()
 export default function RootNavigator () {
   // Here and `JoinGroup` should be the only place we check for a session from the API.
   // Routes will not be available until this check is complete.
-  const [{ fetching, error }] = useQueryAction({ action: checkLogin() })
+  const [{ fetching, error }] = useUrqlQueryAction({ action: checkLogin() })
   const isAuthorized = useSelector(getAuthorized)
 
   if (error) {

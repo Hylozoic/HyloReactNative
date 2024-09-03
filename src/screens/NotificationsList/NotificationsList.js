@@ -4,7 +4,7 @@ import { FlatList, TouchableOpacity, View, Text, StyleSheet } from 'react-native
 import { useIsFocused, useNavigation } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'lodash'
-import useQueryAction from 'urql-shared/hooks/useQueryAction'
+import useUrqlQueryAction from 'urql-shared/hooks/useUrqlQueryAction'
 import getMemberships from 'store/selectors/getMemberships'
 import {
   fetchNotifications,
@@ -37,7 +37,7 @@ export default function NotificationsList (props) {
   const { t } = useTranslation()
   const notifications = useSelector(state => getNotifications(state, props))
   const offset = isEmpty(notifications) ? 0 : notifications.length
-  const [{ fetching, data, error }, refetch] = useQueryAction({ action: fetchNotifications({ offset }) })
+  const [{ fetching, data, error }, refetch] = useUrqlQueryAction({ action: fetchNotifications({ offset }) })
   const hasMore = useSelector(getHasMoreNotifications)
   const memberships = useSelector(getMemberships)
   const currentUserHasMemberships = !isEmpty(memberships)

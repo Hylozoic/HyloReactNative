@@ -21,7 +21,7 @@ const noQueryAction = new Error(
   'No queryAction was returned from the provided GraphQL query or action.'
 )
 
-export default function useQueryAction ({ query, action, variables, meta, pause }) {
+export default function useUrqlQueryAction ({ query, action, variables, meta, pause }) {
   const dispatch = useDispatch()
   const client = useClient()
   const [queryAction, setQueryAction] = useState()
