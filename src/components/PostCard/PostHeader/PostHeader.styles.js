@@ -1,5 +1,5 @@
 import { POST_TYPES } from 'store/models/Post'
-import { rhino30, rhino50, caribbeanGreen, rhino40 } from 'style/colors'
+import {amaranth, rhino30, rhino50, caribbeanGreen, rhino40 } from 'style/colors'
 
 export const styles = {
   container: {
@@ -62,6 +62,11 @@ export const styles = {
     fontSize: 20,
     color: rhino50,
     marginRight: 10
+  },
+  flagIcon: {
+    fontSize: 24,
+    color: amaranth,
+    marginRight: 6
   },
   moreIcon: {
     fontSize: 20,

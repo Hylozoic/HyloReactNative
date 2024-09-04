@@ -84,6 +84,7 @@ export default function PostDetails () {
           <PostCardForDetails
             post={post}
             showGroups={showGroups}
+            groupId={groupId}
           />
         )}
         onSelect={setSelectedComment}

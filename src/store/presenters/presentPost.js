@@ -12,6 +12,7 @@ export default function presentPost (post, forGroupId) {
     ...post.ref,
     attachments: post.attachments
       .orderBy('position').toModelArray(),
+    clickthrough: post.clickthrough,
     creator: post.creator,
     commenters: post.commenters.toModelArray(),
     eventInvitations: post.eventInvitations.toModelArray().map(eventInvitation => {

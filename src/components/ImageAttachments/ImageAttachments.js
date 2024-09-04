@@ -8,6 +8,7 @@ export default function ImageAttachments ({
   children,
   creator,
   firstImageStyle,
+  isFlagged,
   images,
   onlyLongPress,
   onPress,

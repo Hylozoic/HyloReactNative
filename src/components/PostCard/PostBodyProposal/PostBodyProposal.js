@@ -60,6 +60,7 @@ export default function PostBodyProposal ({
   proposalOutcome,
   votingMethod,
   proposalOptions,
+  isFlagged,
   proposalVotes,
   isAnonymousVote,
   startTime,
@@ -123,7 +124,7 @@ export default function PostBodyProposal ({
           {startTime && votingComplete && `${new Date(endTime).toLocaleDateString()}`}
         </Text>
       </View>
-      {proposalOptionsArray && proposalOptionsArray.map((option, i) => {
+      {!isFlagged && proposalOptionsArray && proposalOptionsArray.map((option, i) => {
         const optionVotes = proposalVotesArray.filter(vote => vote.optionId === option.id)
         const avatarUrls = optionVotes.map(vote => vote.user.avatarUrl)
         return (

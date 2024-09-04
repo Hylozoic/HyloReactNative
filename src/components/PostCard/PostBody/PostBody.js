@@ -9,7 +9,7 @@ import EmojiRow from 'components/EmojiRow'
 import LinkPreview from 'components/PostCard/LinkPreview'
 import Icon from 'components/Icon'
 import PopupMenuButton from 'components/PopupMenuButton'
-import PostBodyProposal from '../PostBodyProposal/PostBodyProposal'
+import PostBodyProposal from '../PostBodyProposal'
 import { caribbeanGreen, rhino, white, white20onCaribbeanGreen } from 'style/colors'
 import { useTranslation } from 'react-i18next'
 
@@ -22,6 +22,7 @@ export default function PostBody ({
   details,
   startTime,
   endTime,
+  isFlagged,
   post,
   linkPreview,
   // linkPreviewFeatured,
@@ -32,6 +33,7 @@ export default function PostBody ({
   const presentedDetails = useMemo(() => {
     return shouldTruncate ? TextHelpers.truncateHTML(details, MAX_DETAILS_LENGTH) : details
   }, [details, shouldTruncate])
+  const { t } = useTranslation()
 
   return (
     <View style={styles.container}>
@@ -39,7 +41,7 @@ export default function PostBody ({
         <Text style={styles.resourceEndsAt}>{TextHelpers.formatDatePair(startTime, endTime)}</Text>
       )}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <PostTitle title={title} />
+        <PostTitle title={isFlagged ? t('Post flagged') : title} />
         {type === 'event' && !!respondToEvent && (
           <EventRSVP
             myEventResponse={isEmpty(myEventResponse) ? RESPONSES.NO : myEventResponse}
@@ -48,11 +50,11 @@ export default function PostBody ({
         )}
       </View>
       <HyloHTML
-        html={presentedDetails}
+        html={isFlagged ? '<p>' + t('Contents obscured') + '</p>' : presentedDetails}
         baseStyle={{ marginBottom: 8 }}
       />
       {/* {!linkPreviewFeatured && ( */}
-      {type === 'proposal' && <PostBodyProposal {...post} currentUser={currentUser} />}
+      {type === 'proposal' && <PostBodyProposal {...post} currentUser={currentUser} isFlagged={isFlagged} />}
       <LinkPreview {...linkPreview} />
       {/* )} */}
       <EmojiRow

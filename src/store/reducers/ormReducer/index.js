@@ -43,7 +43,10 @@ import {
   UPDATE_THREAD_READ_TIME,
   UPDATE_USER_SETTINGS_PENDING as UPDATE_USER_SETTINGS_GLOBAL_PENDING,
   UPDATE_WIDGET,
-  USE_INVITATION
+  USE_INVITATION,
+  CREATE_MODERATION_ACTION_PENDING,
+  CLEAR_MODERATION_ACTION_PENDING,
+  RECORD_CLICKTHROUGH_PENDING
 } from 'store/constants'
 import {
   CREATE_MESSAGE, CREATE_MESSAGE_PENDING, UPDATE_THREAD_READ_TIME_PENDING
@@ -135,6 +138,14 @@ export default function ormReducer (state = orm.getEmptyState(), action) {
       break
     }
 
+    case CLEAR_MODERATION_ACTION_PENDING: {
+      if (meta && meta?.moderationActionId) {
+        const moderationAction = session.ModerationAction.withId(meta.moderationActionId)
+        moderationAction.update({ status: 'cleared' })
+      }
+      break
+    }
+
     case CANCEL_GROUP_RELATIONSHIP_INVITE:
     case REJECT_GROUP_RELATIONSHIP_INVITE: {
       const invite = GroupRelationshipInvite.withId(meta.id)
@@ -203,6 +214,21 @@ export default function ormReducer (state = orm.getEmptyState(), action) {
         createdAt: new Date().toString(),
         creator: Me.first().id
       })
+      break
+    }
+
+    case CREATE_MODERATION_ACTION_PENDING: {
+      if (meta.data) {
+        post = Post.withId(meta?.data?.postId)
+        if (post) {
+          const flaggedGroups = post.flaggedGroups
+          if (flaggedGroups) post.flaggedGroups.push(meta?.data?.groupId)
+          const moderationActions = post.moderationActions
+          if (moderationActions) post.moderationActions.unshift(meta?.data)
+          post.update({ flaggedGroups: flaggedGroups || [meta?.data?.groupId] })
+          post.update({ moderationActions: moderationActions || [meta?.data] })
+        }
+      }
       break
     }
 
@@ -549,6 +575,11 @@ export default function ormReducer (state = orm.getEmptyState(), action) {
       me = Me.first()
       me.updateAppending({ memberships: [payload.data.useInvitation.membership.id] })
       Invitation.filter({ email: me.email, group: payload.data.useInvitation.membership.group.id }).delete()
+      break
+    }
+    case RECORD_CLICKTHROUGH_PENDING: {
+      post = Post.withId(meta.postId)
+      post.update({ clickthrough: true })
       break
     }
 
