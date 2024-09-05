@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import getMe from 'store/selectors/getMe'
 import { isEmpty } from 'lodash/fp'
 import {
   getHasMoreComments,
@@ -23,7 +22,6 @@ export function mapStateToProps (state, props) {
     comments: getComments(state, queryCacheParams),
     total: getTotalComments(state, queryCacheParams),
     hasMore: getHasMoreComments(state, queryCacheParams),
-    currentUser: getMe(state),
     pending: state.pending[FETCH_COMMENTS]
   }
 }

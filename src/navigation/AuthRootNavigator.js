@@ -37,7 +37,7 @@ export default function AuthRootNavigator () {
 
   useEffect(() => {
     (async function () {
-      if (!fetching && !error) {
+      if (currentUser && !fetching && !error) {
         const onesignalPushSubscriptionId = await OneSignal.User.pushSubscription.getIdAsync()
 
         const locale = currentUser?.settings?.locale || 'en'

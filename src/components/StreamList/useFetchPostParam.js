@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { isNull, isUndefined, omitBy } from 'lodash/fp'
+import useCurrentUser from 'urql-shared/hooks/useCurrentUser'
 import { isContextGroup } from 'store/models/Group'
-import getMe from 'store/selectors/getMe'
 
 export default function useFetchPostParam ({
   filter,
@@ -14,8 +13,10 @@ export default function useFetchPostParam ({
   sortBy,
   timeframe
 }) {
-  const currentUser = useSelector(getMe)
+  const currentUser = useCurrentUser()
   const [fetchPostParam, setFetchPostParam] = useState()
+
+  // console.log('!!!!!!! IN USEFETCHPOSTPARAM:', fetching, data, error)
 
   useEffect(() => {
     setFetchPostParam(

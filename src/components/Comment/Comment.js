@@ -6,9 +6,9 @@ import { TextHelpers } from 'hylo-shared'
 import { useDispatch, useSelector } from 'react-redux'
 import useHyloActionSheet from 'hooks/useHyloActionSheet'
 import useReactionActions from 'hooks/useReactionActions'
+import useCurrentUser from 'urql-shared/hooks/useCurrentUser'
 import deleteCommentAction from 'store/actions/deleteComment'
 import getGroup from 'store/selectors/getGroup'
-import getMe from 'store/selectors/getMe'
 import { getPresentedPost } from 'store/selectors/getPost'
 import Avatar from 'components/Avatar'
 import EmojiRow from 'components/EmojiRow'
@@ -41,7 +41,7 @@ export default function Comment ({
   const { showHyloActionSheet } = useHyloActionSheet()
   const { reactOnEntity, removeReactOnFromEntity } = useReactionActions()
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
-  const currentUser = useSelector(getMe)
+  const currentUser = useCurrentUser()
   const group = useSelector(state => getGroup(state, { slug }))
   const canModerate = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_MANAGE_CONTENT, groupId: group.id }))
   const isCreator = currentUser && (comment.creator.id === currentUser.id)

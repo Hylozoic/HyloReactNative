@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import { find, get } from 'lodash/fp'
 import { LocationHelpers } from 'hylo-shared'
@@ -9,7 +9,7 @@ import { openURL } from 'hooks/useOpenURL'
 import useChangeToGroup from 'hooks/useChangeToGroup'
 import useGoToMember from 'hooks/useGoToMember'
 import useGoToTopic from 'hooks/useGoToTopic'
-import getMe from 'store/selectors/getMe'
+import useCurrentUser from 'urql-shared/hooks/useCurrentUser'
 import joinProjectAction from 'store/actions/joinProject'
 import leaveProjectAction from 'store/actions/leaveProject'
 import respondToEventAction from 'store/actions/respondToEvent'
@@ -31,7 +31,7 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigation = useNavigation
-  const currentUser = useSelector(getMe)
+  const currentUser = useCurrentUser()
   const changeToGroup = useChangeToGroup()
   const goToMember = useGoToMember()
   const goToTopic = useGoToTopic()

@@ -8,7 +8,7 @@ import { FETCH_POSTS } from 'store/constants'
 import { ALL_GROUP_ID, isContextGroup, MY_CONTEXT_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import { makeGetQueryResults } from 'store/reducers/queryResults'
 import useFetchPostParam from './useFetchPostParam'
-import getMe from 'store/selectors/getMe'
+import useCurrentUser from 'urql-shared/hooks/useCurrentUser'
 import fetchPosts from 'store/actions/fetchPosts'
 import resetNewPostCount from 'store/actions/resetNewPostCount'
 import updateUserSettings from 'store/actions/updateUserSettings'
@@ -78,7 +78,7 @@ export default function StreamList (props) {
   } = props
   const dispatch = useDispatch()
   const isFocused = useIsFocused()
-  const currentUser = useSelector(getMe)
+  const currentUser = useCurrentUser()
   const [filter, setFilter] = useState()
   const [sortBy, setSortBy] = useState(
     get('settings.streamSortBy', currentUser) ||
