@@ -406,6 +406,7 @@ export class PostEditor extends React.Component {
   }
 
   handleShowLocationPicker = () => {
+    const { t } = this.props
     LocationPicker({
       navigation: this.props.navigation,
       initialSearchTerm: this.state?.location,
