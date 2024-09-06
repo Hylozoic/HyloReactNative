@@ -4,4 +4,5 @@
     <string name="link_schema">HyloApp</string>
     <string name="facebook_app_id">Facebook App ID</string>
     <string name="facebook_client_token">Facebook Client ID</string>
+    <string name="onesignal_notification_accent_color">FF0DC39F</string>
 </resources>
