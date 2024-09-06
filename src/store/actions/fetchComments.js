@@ -8,6 +8,8 @@ export default function fetchComments ({ commentId, postId }, opts = {}) {
   if (postId) return fetchPostComments(postId, opts)
 }
 
+const childCommentsGetItems = get('payload.data.comment.childComments')
+
 export function fetchChildComments (commentId, opts = {}) {
   const { cursor } = opts
 
@@ -24,11 +26,13 @@ export function fetchChildComments (commentId, opts = {}) {
       afterInteractions: true,
       extractModel: 'Comment',
       extractQueryResults: {
-        getItems: get('payload.data.comment.childComments')
+        getItems: childCommentsGetItems
       }
     }
   }
 }
+
+const postCommentsGetItems = get('payload.data.post.comments')
 
 export function fetchPostComments (postId, opts = {}) {
   const { cursor } = opts
@@ -46,7 +50,7 @@ export function fetchPostComments (postId, opts = {}) {
       afterInteractions: true,
       extractModel: 'Post',
       extractQueryResults: {
-        getItems: get('payload.data.post.comments'),
+        getItems: postCommentsGetItems,
         extractSubComments: true
       }
     }
