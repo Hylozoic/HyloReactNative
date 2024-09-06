@@ -1,14 +1,12 @@
-import React, { useEffect, useCallback, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { FlatList, View, TouchableOpacity } from 'react-native'
-import { createSelector } from 'reselect'
 import { isEmpty, get } from 'lodash/fp'
 import { useIsFocused } from '@react-navigation/native'
-import { FETCH_POSTS } from 'store/constants'
 import { ALL_GROUP_ID, isContextGroup, MY_CONTEXT_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
-import { makeGetQueryResults } from 'store/reducers/queryResults'
 import useFetchPostParam from './useFetchPostParam'
 import useCurrentUser from 'urql-shared/hooks/useCurrentUser'
+import useUrqlQueryAction from 'urql-shared/hooks/useUrqlQueryAction'
 import fetchPosts from 'store/actions/fetchPosts'
 import resetNewPostCount from 'store/actions/resetNewPostCount'
 import updateUserSettings from 'store/actions/updateUserSettings'
@@ -53,17 +51,6 @@ export const EVENT_STREAM_TIMEFRAME_OPTIONS = [
 export const DEFAULT_SORT_BY_ID = 'updated'
 export const DEFAULT_TIMEFRAME_ID = 'future'
 
-/* === SELECTORS === */
-
-const getPostResults = makeGetQueryResults(FETCH_POSTS)
-
-export const getPostIds = createSelector(
-  getPostResults,
-  results => isEmpty(results) ? [] : results.ids
-)
-
-export const getHasMorePosts = createSelector(getPostResults, get('hasMore'))
-
 /* === COMPONENTS === */
 
 export default function StreamList (props) {
@@ -96,9 +83,10 @@ export default function StreamList (props) {
     timeframe,
     topicName
   })
-  const pending = useSelector(state => state.pending[FETCH_POSTS])
-  const postIds = useSelector(state => getPostIds(state, fetchPostParam))
-  const hasMore = useSelector(state => getHasMorePosts(state, fetchPostParam))
+  const [{ data, pending, error }] = useUrqlQueryAction({ action: fetchPostParam ? fetchPosts(fetchPostParam) : () => {}, pause: !fetchPostParam })
+  const postIds = data?.group?.posts?.items.map(p => p.id)
+  // const postIds = useSelector(state => getPostIds(state, fetchPostParam))
+  const hasMore = !!data?.group?.posts?.hasMore
 
   useEffect(() => {
     if (fetchPostParam && isFocused && isEmpty(postIds) && hasMore !== false) {
@@ -116,7 +104,7 @@ export default function StreamList (props) {
         dispatch(resetNewPostCount(forGroupId, 'Membership'))
       }
 
-      dispatch(fetchPosts(fetchPostParam))
+      // dispatch(fetchPosts(fetchPostParam))
     }
   }, [fetchPostParam, hasMore, isFocused, postIds])
 
@@ -127,20 +115,20 @@ export default function StreamList (props) {
     }
   }, [customView, sortBy])
 
-  const refreshPosts = useCallback(() => {
-    if (fetchPostParam) {
-      dispatch(fetchPosts(fetchPostParam, { reset: true }))
-    }
-  }, [fetchPostParam])
+  // const refreshPosts = useCallback(() => {
+  //   if (fetchPostParam) {
+  //     dispatch(fetchPosts(fetchPostParam, { reset: true }))
+  //   }
+  // }, [fetchPostParam])
 
-  const fetchMorePosts = useCallback(() => {
-    if (fetchPostParam && hasMore && !pending) {
-      dispatch(fetchPosts({
-        ...fetchPostParam,
-        offset: postIds.length
-      }))
-    }
-  }, [fetchPostParam, hasMore, pending, postIds.length])
+  // const fetchMorePosts = useCallback(() => {
+  //   if (fetchPostParam && hasMore && !pending) {
+  //     dispatch(fetchPosts({
+  //       ...fetchPostParam,
+  //       offset: postIds.length
+  //     }))
+  //   }
+  // }, [fetchPostParam, hasMore, pending, postIds.length])
 
   if (!fetchPostParam) return null
 
@@ -163,10 +151,10 @@ export default function StreamList (props) {
         ref={scrollRef}
         data={postIds}
         renderItem={({ item }) => renderPostRow({ ...props, postId: item })}
-        onRefresh={refreshPosts}
+        // onRefresh={refreshPosts}
         refreshing={!!pending}
         keyExtractor={item => `post${item}`}
-        onEndReached={fetchMorePosts}
+        // onEndReached={fetchMorePosts}
         ListHeaderComponent={
           <View>
             {header}

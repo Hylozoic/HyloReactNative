@@ -1,8 +1,11 @@
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import respondToEvent from 'store/actions/respondToEvent'
-import { getPresentedPost } from 'store/selectors/getPost'
+// import { getPresentedPost } from 'store/selectors/getPost'
+import { gql } from 'urql'
+import useUrqlQueryAction from 'urql-shared/hooks/useUrqlQueryAction'
+import fetchPost from 'store/actions/fetchPost'
 import PostCard from 'components/PostCard'
 import styles from './PostRow.styles'
 
@@ -17,11 +20,13 @@ export default function PostRow ({
   showTopic
 }) {
   const dispatch = useDispatch()
-  const post = useSelector(state => getPresentedPost(state, { postId, forGroupId }))
-  const groupIds = post.groups.map(group => group.id)
-  const handleRespondToEvent = response => dispatch(respondToEvent(post, response))
+  const [{ data, pending, error }] = useUrqlQueryAction({ action: fetchPost(postId), variables: { id: postId } })
+  const post = data?.post
 
-  if (!post) return null
+  if (pending || !post) return null
+
+  const handleRespondToEvent = response => dispatch(respondToEvent(post, response))
+  const groupIds = post.groups.map(group => group.id)
 
   return (
     <View style={styles.postRow}>
