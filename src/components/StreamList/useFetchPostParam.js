@@ -16,8 +16,6 @@ export default function useFetchPostParam ({
   const currentUser = useCurrentUser()
   const [fetchPostParam, setFetchPostParam] = useState()
 
-  // console.log('!!!!!!! IN USEFETCHPOSTPARAM:', fetching, data, error)
-
   useEffect(() => {
     setFetchPostParam(
       omitBy(x => isNull(x) || isUndefined(x), {
