@@ -2,6 +2,8 @@ import { createClient, fetchExchange } from 'urql'
 import { cacheExchange } from '@urql/exchange-graphcache'
 import { devtoolsExchange } from '@urql/devtools'
 import apiHost from 'util/apiHost'
+import cursorPagination from './cursorPagination'
+import { simplePagination } from '@urql/exchange-graphcache/extras'
 
 const mergePaginationResults = (existing = {}, incoming) => {
   if (!existing.items) {
@@ -81,7 +83,10 @@ const customKeys = {
   NotificationQuerySet: () => null,
   PersonQuerySet: () => null,
   Point: () => null,
-  PostQuerySet: () => null,
+  PostQuerySet: (data) => {
+    console.log('!!! here in PostQuerySet -- data:', Object.keys(data))
+    return null
+  },
   ProposalOptionQuerySet: () => null,
   ProposalVoteQuerySet: () => null,
   ResponsibilityQuerySet: () => null,
@@ -91,7 +96,14 @@ const customKeys = {
 
 const cache = cacheExchange({
   typePolicies,
-  keys: customKeys
+  keys: customKeys,
+  resolvers: {
+    Query: {
+      comments: cursorPagination('comments'),
+      threadList: cursorPagination('threadList'),
+      posts: simplePagination({ offsetArgument: 'offset', limitArgument: 'first' })
+    }
+  }
 })
 
 const client = createClient({

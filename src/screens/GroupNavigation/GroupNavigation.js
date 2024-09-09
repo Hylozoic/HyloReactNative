@@ -1,38 +1,39 @@
 import React from 'react'
+import { useQuery } from 'urql'
 import { useSelector } from 'react-redux'
 import { Text, ScrollView, View, TouchableOpacity } from 'react-native'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
 import { openURL } from 'hooks/useOpenURL'
 import useRouteParams from 'hooks/useRouteParams'
+import getCurrentGroupSlug from 'store/selectors/getCurrentGroupSlug'
 import fetchGroupDetailsAction from 'store/actions/fetchGroupDetails'
-import { getChildGroups, getParentGroups } from 'store/selectors/getGroupRelationships'
 import { isContextGroup, PUBLIC_GROUP_ID } from 'store/models/Group'
-import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import Icon from 'components/Icon'
 import TopicsNavigation from 'components/TopicsNavigation'
 import styles from './GroupNavigation.styles'
 import Loading from 'components/Loading'
-import useUrqlQueryAction from 'urql-shared/hooks/useUrqlQueryAction'
 
 export default function GroupNavigation () {
   const { t } = useTranslation()
   const navigation = useNavigation()
   const { myHome } = useRouteParams()
-  const currentGroup = useSelector(getCurrentGroup)
-  const childGroups = useSelector(getChildGroups)
-  const parentGroups = useSelector(getParentGroups)
-  const [{ fetching }] = useUrqlQueryAction({
-    action: fetchGroupDetailsAction({
-      slug: currentGroup?.slug,
+  // TODO: This is a session store value, keep in Redux or move elsewhere?
+  const currentGroupSlug = useSelector(getCurrentGroupSlug)
+  const [{ data, error, fetching }] = useQuery({
+    ...fetchGroupDetailsAction({
+      slug: currentGroupSlug,
       withExtensions: false,
       withWidgets: false,
       withTopics: false,
       withJoinQuestions: true,
       withPrerequisites: true
-    }),
-    pause: !currentGroup?.slug
+    }).graphql,
+    pause: !currentGroupSlug
   })
+  const currentGroup = data?.group
+  const childGroups = currentGroup?.childGroups?.items
+  const parentGroups = currentGroup?.parentGroups?.items
 
   useFocusEffect(() => {
     navigation.setOptions({ title: myHome ? t('My Home') : currentGroup?.name })
@@ -41,7 +42,7 @@ export default function GroupNavigation () {
   if (fetching) return <Loading />
 
   const { navigate } = navigation
-  const customViews = (currentGroup && currentGroup.customViews && currentGroup.customViews.toRefArray()) || []
+  const customViews = (currentGroup && currentGroup.customViews?.items) || []
   const navItems = myHome
     ? [
         { label: t('Create'), iconName: 'Create', onPress: () => navigate('Edit Post', { id: null }) },

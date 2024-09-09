@@ -87,11 +87,13 @@ export default function useUrqlQueryAction ({ query, action, variables, meta, pa
 
   useEffect(() => {
     (async function () {
-      const executeQuery = () => client.query(
-        queryAction?.graphql?.query,
-        queryAction?.graphql?.variables || {},
-        operationContext || {}
-      )
+      const executeQuery = (variables = {}) => {
+        return client.query(
+          queryAction?.graphql?.query,
+          { ...queryAction?.graphql?.variables, ...variables } || {},
+          operationContext || {}
+        )
+      }
       if (!pause && queryAction) {
         setLoading(true)
 

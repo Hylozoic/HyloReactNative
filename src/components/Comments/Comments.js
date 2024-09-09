@@ -1,19 +1,13 @@
 /* eslint-disable camelcase */
-import React, { useEffect, useState, useRef, useImperativeHandle, forwardRef, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useRef, useImperativeHandle, forwardRef, useCallback } from 'react'
 import { Text, TouchableOpacity, View, SectionList } from 'react-native'
+import { omit } from 'lodash/fp'
 import { isIOS } from 'util/platform'
+import fetchCommentsAction, { fetchPostComments } from 'store/actions/fetchComments'
 import Comment from 'components/Comment'
 import Loading from 'components/Loading'
 import styles from './Comments.styles'
-import { isEmpty, omit } from 'lodash/fp'
-import {
-  getHasMoreComments,
-  getComments,
-  getTotalComments
-} from 'store/selectors/getComments'
-import fetchCommentsAction from 'store/actions/fetchComments'
-import { FETCH_COMMENTS } from 'store/constants'
+import { useQuery } from 'urql'
 
 function Comments ({
   postId,
@@ -24,15 +18,25 @@ function Comments ({
   panHandlers,
   onSelect
 }, ref) {
-  const dispatch = useDispatch()
-  const comments = useSelector(state => getComments(state, { postId })) || []
-  const pending = useSelector(state => state.pending[FETCH_COMMENTS])
-  const sections = comments.map(comment => ({
-    comment: omit(['subComments'], comment),
-    data: comment.subComments
-  }))
+  const [{ data, pending, error }] = useQuery(fetchPostComments(postId)?.graphql)
+
+  // TODO: Review selector and data shape from the URQL result to make sure things work as before
+  // in 'store/selectors/getComments':
+  // - Cursor / pagination
+  // - Attachments (sorting)
+  // - Section Index ?
+  // const comments = useSelector(state => getComments(state, { postId })) || []
+  const comments = data?.post?.comments?.items || []
+  // console.log(JSON.stringify(data?.post?.comments, null, 4))
+
   const [highlightedComment, setHighlightedComment] = useState()
   const commentsListRef = useRef()
+  const sections = comments?.map(comment => {
+    return ({
+      comment: omit(['subComments'], comment),
+      data: comment.childComments?.items || []
+    })
+  })
 
   const scrollToComment = useCallback((comment, viewPosition = 0.2) => {
     const parentCommentId = comment.parentComment || comment.id
@@ -56,14 +60,10 @@ function Comments ({
     clearHighlightedComment: () => setHighlightedComment(null)
   }), [setHighlightedComment, scrollToComment])
 
-  useEffect(() => {
-    dispatch(fetchCommentsAction({ postId }))
-  }, [dispatch, postId])
-
   const Header = () => (
     <>
       {providedHeader}
-      <ShowMore postId={postId} />
+      {/* <ShowMore postId={postId} /> */}
       {pending && (
         <View style={styles.loadingContainer}>
           <Loading style={styles.loading} />
@@ -75,7 +75,7 @@ function Comments ({
   const SectionFooter = ({ section: { comment } }) => {
     return (
       <>
-        <ShowMore commentId={comment.id} style={styles.subCommentsShowMore} forSubcomments />
+        {/* <ShowMore commentId={comment.id} style={styles.subCommentsShowMore} forSubcomments /> */}
         <Comment
           clearHighlighted={() => setHighlightedComment(null)}
           comment={comment}
@@ -108,6 +108,7 @@ function Comments ({
     )
   }
 
+  // return null
   return (
     <SectionList
       style={style}
@@ -133,12 +134,13 @@ export default forwardRef(Comments)
 
 export function ShowMore ({ postId, commentId, forSubcomments = false, style = {} }) {
   const queryParams = commentId ? { commentId } : { postId }
-  const dispatch = useDispatch()
-  const fetchComments = () => dispatch(fetchCommentsAction(queryParams, { cursor }))
-  const comments = useSelector(state => getComments(state, queryParams)) || []
-  const cursor = !isEmpty(comments) && comments[comments.length - 1].id
-  const total = useSelector(state => getTotalComments(state, queryParams)) || 0
-  const hasMore = useSelector(state => getHasMoreComments(state, queryParams))
+  // TODO: Manage cursor / pagination
+  // const fetchComments = () => dispatch(fetchCommentsAction(queryParams, { cursor }))
+  const [{ data, pending, error }, fetchComments] = useQuery(fetchCommentsAction(queryParams).graphql)
+  const comments = data?.post?.comments?.items || []
+  // const cursor = !isEmpty(comments) && comments[comments.length - 1].id
+  const total = comments?.total || 0
+  const hasMore = comments?.hasMore
   const extra = total - comments.length
 
   if (!hasMore || extra < 1) return null

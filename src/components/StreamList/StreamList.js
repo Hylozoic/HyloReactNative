@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { FlatList, View, TouchableOpacity } from 'react-native'
 import { isEmpty, get } from 'lodash/fp'
@@ -6,8 +6,7 @@ import { useIsFocused } from '@react-navigation/native'
 import { ALL_GROUP_ID, isContextGroup, MY_CONTEXT_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import useFetchPostParam from './useFetchPostParam'
 import useCurrentUser from 'urql-shared/hooks/useCurrentUser'
-import useUrqlQueryAction from 'urql-shared/hooks/useUrqlQueryAction'
-import fetchPosts from 'store/actions/fetchPosts'
+import fetchPostsAction from 'store/actions/fetchPosts'
 import resetNewPostCount from 'store/actions/resetNewPostCount'
 import updateUserSettings from 'store/actions/updateUserSettings'
 import Icon from 'components/Icon'
@@ -16,6 +15,7 @@ import Loading from 'components/Loading'
 import PostRow from './PostRow'
 import { pictonBlue } from 'style/colors'
 import styles from './StreamList.styles'
+import { useQuery } from 'urql'
 
 /* === CONSTANTS === */
 
@@ -83,10 +83,17 @@ export default function StreamList (props) {
     timeframe,
     topicName
   })
-  const [{ data, pending, error }] = useUrqlQueryAction({ action: fetchPostParam ? fetchPosts(fetchPostParam) : () => {}, pause: !fetchPostParam })
-  const postIds = data?.group?.posts?.items.map(p => p.id)
-  // const postIds = useSelector(state => getPostIds(state, fetchPostParam))
-  const hasMore = !!data?.group?.posts?.hasMore
+  const [offset, setOffset] = useState(0)
+  const [{ data, pending, error }] = useQuery({
+    ...fetchPostParam
+      ? fetchPostsAction({ ...fetchPostParam, limit: 20, offset })?.graphql
+      : { query: 'query test { me { id } }' },
+    pause: !fetchPostParam
+  })
+  console.log('rendering', error)
+  const posts = data?.group?.posts?.items
+  const postIds = posts?.map(p => p.id)
+  const hasMore = data?.group?.posts?.hasMore
 
   useEffect(() => {
     if (fetchPostParam && isFocused && isEmpty(postIds) && hasMore !== false) {
@@ -104,7 +111,7 @@ export default function StreamList (props) {
         dispatch(resetNewPostCount(forGroupId, 'Membership'))
       }
 
-      // dispatch(fetchPosts(fetchPostParam))
+      // reexecuteQuery({ })
     }
   }, [fetchPostParam, hasMore, isFocused, postIds])
 
@@ -121,14 +128,11 @@ export default function StreamList (props) {
   //   }
   // }, [fetchPostParam])
 
-  // const fetchMorePosts = useCallback(() => {
-  //   if (fetchPostParam && hasMore && !pending) {
-  //     dispatch(fetchPosts({
-  //       ...fetchPostParam,
-  //       offset: postIds.length
-  //     }))
-  //   }
-  // }, [fetchPostParam, hasMore, pending, postIds.length])
+  const fetchMorePosts = useCallback(() => {
+    if (postIds && hasMore && !pending) {
+      setOffset(postIds?.length)
+    }
+  }, [hasMore, pending, postIds])
 
   if (!fetchPostParam) return null
 
@@ -149,12 +153,12 @@ export default function StreamList (props) {
     <View style={styles.container}>
       <FlatList
         ref={scrollRef}
-        data={postIds}
-        renderItem={({ item }) => renderPostRow({ ...props, postId: item })}
+        data={posts}
+        renderItem={({ item }) => renderPostRow({ ...props, post: item })}
         // onRefresh={refreshPosts}
         refreshing={!!pending}
         keyExtractor={item => `post${item}`}
-        // onEndReached={fetchMorePosts}
+        onEndReached={fetchMorePosts}
         ListHeaderComponent={
           <View>
             {header}
@@ -188,7 +192,7 @@ export default function StreamList (props) {
 }
 
 function renderPostRow ({
-  postId,
+  post,
   fetchPostParam,
   forGroup,
   showPost,
@@ -199,7 +203,7 @@ function renderPostRow ({
   return (
     <PostRow
       context={fetchPostParam?.context}
-      postId={postId}
+      post={post}
       forGroupId={forGroup?.id}
       showGroups={!forGroup?.id || isContextGroup(forGroup?.slug)}
       showPost={showPost}

@@ -18,12 +18,12 @@ export default function fetchPost (id, query = postQuery) {
       }
     },
     meta: {
-      afterInteractions: true,
-      extractModel: 'Post',
-      extractQueryResults: {
-        getType,
-        getItems
-      }
+      // afterInteractions: true,
+      // extractModel: 'Post',
+      // extractQueryResults: {
+      //   getType,
+      //   getItems
+      // }
     }
   }
 }

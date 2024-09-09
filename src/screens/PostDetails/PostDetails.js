@@ -8,10 +8,8 @@ import { AnalyticsEvents } from 'hylo-shared'
 import useGoToMember from 'hooks/useGoToMember'
 import useIsModalScreen from 'hooks/useIsModalScreen'
 import useRouteParams from 'hooks/useRouteParams'
-import useUrqlQueryAction from 'urql-shared/hooks/useUrqlQueryAction'
 import trackAnalyticsEvent from 'store/actions/trackAnalyticsEvent'
 import fetchPost from 'store/actions/fetchPost'
-import { getPresentedPost } from 'store/selectors/getPost'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { KeyboardAccessoryCommentEditor } from 'components/CommentEditor/CommentEditor'
 import Comments from 'components/Comments'
@@ -19,6 +17,7 @@ import Loading from 'components/Loading'
 import PostCardForDetails from 'components/PostCard/PostCardForDetails'
 import SocketSubscriber from 'components/SocketSubscriber'
 import { white } from 'style/colors'
+import { useQuery } from 'urql'
 
 export default function PostDetails () {
   const { t } = useTranslation()
@@ -26,10 +25,9 @@ export default function PostDetails () {
   const navigation = useNavigation()
   const isModalScreen = useIsModalScreen()
   const { id: postId } = useRouteParams()
-  const [{ fetching, error }] = useUrqlQueryAction({ action: fetchPost(postId) })
   const currentGroup = useSelector(getCurrentGroup)
-  const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: currentGroup?.id }))
-  // const post = postData?.post
+  const [{ data, fetching, error }] = useQuery(fetchPost(postId).graphql)
+  const post = data?.post
   const commentsRef = React.useRef()
   const goToMember = useGoToMember()
 
@@ -51,16 +49,16 @@ export default function PostDetails () {
   useEffect(() => { setHeader() }, [currentGroup?.slug])
 
   useEffect(() => {
-    if (!error && post) {
+    if (!fetching && !error && post) {
       dispatch(trackAnalyticsEvent(AnalyticsEvents.POST_OPENED, {
-        postId: post.id,
+        postId: post?.id,
         groupId: post.groups.map(g => g.id),
         isPublic: post.isPublic,
         topics: post.topics?.map(t => t.name),
         type: post.type
       }))
     }
-  }, [error, post])
+  }, [fetching, error, post])
 
   if (fetching) return <Loading />
 

@@ -53,7 +53,7 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
   const openProjectMembersModal = () => navigation.navigate('Project Members', { id: post.id, members: get('members', post) })
 
   const isProject = get('type', post) === 'project'
-  const isProjectMember = find(member => member.id === currentUser.id, post.members)
+  const isProjectMember = find(member => member.id === currentUser.id, post.members?.items)
   const locationText = LocationHelpers.generalLocationString(post.locationObject, post.location)
   const images = post.imageUrls && post.imageUrls.map(uri => ({ uri }))
 
@@ -181,13 +181,13 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
         />
       )}
       <PostFooter
-        commenters={post.commenters}
-        commentersTotal={post.commentersTotal}
+        commenters={post.commenters?.items}
+        commentersTotal={post.commenters?.total}
         currentUser={currentUser}
         eventInvitations={post.eventInvitations}
         forDetails
         postId={post.id}
-        members={post.members}
+        members={post.members?.items}
         peopleReactedTotal={post.peopleReactedTotal}
         style={styles.postFooter}
         type={post.type}

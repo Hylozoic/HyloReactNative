@@ -8,7 +8,7 @@ export default function fetchComments ({ commentId, postId }, opts = {}) {
   if (postId) return fetchPostComments(postId, opts)
 }
 
-const childCommentsGetItems = get('payload.data.comment.childComments')
+// const childCommentsGetItems = get('payload.data.comment.childComments')
 
 export function fetchChildComments (commentId, opts = {}) {
   const { cursor } = opts
@@ -23,16 +23,16 @@ export function fetchChildComments (commentId, opts = {}) {
       }
     },
     meta: {
-      afterInteractions: true,
-      extractModel: 'Comment',
-      extractQueryResults: {
-        getItems: childCommentsGetItems
-      }
+      // afterInteractions: true,
+      // extractModel: 'Comment',
+      // extractQueryResults: {
+      //   getItems: childCommentsGetItems
+      // }
     }
   }
 }
 
-const postCommentsGetItems = get('payload.data.post.comments')
+// const postCommentsGetItems = get('payload.data.post.comments')
 
 export function fetchPostComments (postId, opts = {}) {
   const { cursor } = opts
@@ -47,12 +47,12 @@ export function fetchPostComments (postId, opts = {}) {
       }
     },
     meta: {
-      afterInteractions: true,
-      extractModel: 'Post',
-      extractQueryResults: {
-        getItems: postCommentsGetItems,
-        extractSubComments: true
-      }
+      // afterInteractions: true,
+      // extractModel: 'Post',
+      // extractQueryResults: {
+      //   getItems: postCommentsGetItems,
+      //   extractSubComments: true
+      // }
     }
   }
 }

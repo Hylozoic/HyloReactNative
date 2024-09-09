@@ -1,10 +1,6 @@
-import { get } from 'lodash/fp'
 import { FETCH_POSTS } from 'store/constants'
 import postsQueryFragment from 'graphql/fragments/postsQueryFragment'
 import groupViewPostsQueryFragment from 'graphql/fragments/groupViewPostsQueryFragment'
-
-const getGroupPosts = get('payload.data.group.posts')
-const getPosts = get('payload.data.posts')
 
 export default function fetchPosts ({
   activePostsOnly,
@@ -31,16 +27,12 @@ export default function fetchPosts ({
   topics,
   types
 }) {
-  let query, extractModel, getItems
+  let query
 
   if (context === 'groups') {
     query = groupQuery(childPostInclusion === 'yes')
-    extractModel = 'Group'
-    getItems = getGroupPosts
   } else if (context === 'all' || context === 'public' || context === 'my') {
     query = postsQuery
-    extractModel = 'Post'
-    getItems = getPosts
   } else {
     throw new Error(`FETCH_POSTS with context=${context} is not implemented`)
   }
@@ -72,14 +64,6 @@ export default function fetchPosts ({
         topic,
         topics,
         types
-      }
-    },
-    meta: {
-      afterInteractions: false,
-      slug,
-      extractModel,
-      extractQueryResults: {
-        getItems
       }
     }
   }
