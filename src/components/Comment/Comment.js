@@ -43,7 +43,7 @@ export default function Comment ({
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
   const currentUser = useSelector(getMe)
   const group = useSelector(state => getGroup(state, { slug }))
-  const canModerate = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_MANAGE_CONTENT, groupId: group.id }))
+  const canModerate = useSelector(state => hasResponsibilityForGroup(state, { responsibility: RESP_MANAGE_CONTENT, groupId: group?.id }))
   const isCreator = currentUser && (comment.creator.id === currentUser.id)
   const { creator, text, createdAt, post: postId } = comment
   const post = useSelector(state => getPresentedPost(state, { postId, forGroupId: group?.id }))
