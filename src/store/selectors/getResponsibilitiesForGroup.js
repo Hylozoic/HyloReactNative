@@ -13,7 +13,7 @@ const getResponsibilitiesForGroup = ormCreateSelector(
     const membershipCommonRoles = person.membershipCommonRoles.items.filter(mcr => mcr.groupId === groupId)
     const commonResp = commonRoles.filter(cr => membershipCommonRoles.find(mcr => mcr.commonRoleId === cr.id)).map(cr => cr.responsibilities.items).flat()
     const groupRolesForGroup = person?.groupRoles?.items.filter(groupRole => groupRole.groupId === groupId) || []
-    const resp = groupRolesForGroup.map(groupRole => groupRole.responsibilities.items || []).flat()
+    const resp = groupRolesForGroup.map(groupRole => groupRole?.responsibilities?.items || []).flat()
     return [...resp, ...commonResp] || []
   }
 )
