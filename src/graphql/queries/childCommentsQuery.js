@@ -1,7 +1,8 @@
+import { gql } from 'urql'
 import commentFieldsFragment from 'graphql/fragments/commentFieldsFragment'
 
-export default `
-query subCommentsQuery (
+export default gql`
+query ChildCommentsQuery (
   $commentId: ID,
   $cursor: ID
 ) {

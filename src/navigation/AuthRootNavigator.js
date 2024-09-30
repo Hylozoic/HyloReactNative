@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { OneSignal } from 'react-native-onesignal'
 import registerDevice from 'store/actions/registerDevice'
+import { useMutation, useQuery } from 'urql'
 import { useDispatch } from 'react-redux'
 import i18n from '../../i18n'
 import { HyloHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
@@ -9,7 +10,7 @@ import { modalScreenName } from 'hooks/useIsModalScreen'
 import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
 import useUrqlQueryAction from 'urql-shared/hooks/useUrqlQueryAction'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import { fetchNotifications, updateNewNotificationCount } from 'screens/NotificationsList/NotificationsList.store'
+import { fetchNotifications, updateNewNotificationCount as resetNotificationCountAction } from 'screens/NotificationsList/NotificationsList.store'
 import ModalHeader from 'navigation/headers/ModalHeader'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
 import DrawerNavigator from 'navigation/DrawerNavigator'
@@ -22,7 +23,7 @@ import PostEditor from 'screens/PostEditor'
 import NotificationsList from 'screens/NotificationsList'
 import Thread from 'screens/Thread'
 import { white } from 'style/colors'
-import fetchCommonRoles from 'store/actions/fetchCommonRoles'
+// import fetchCommonRoles from 'store/actions/fetchCommonRoles'
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
@@ -31,9 +32,15 @@ export default function AuthRootNavigator () {
   const [loading, setLoading] = useState(true)
   const currentUser = data?.me
 
-  useUrqlQueryAction({ action: fetchNotifications() })
-  useHyloQuery({ action: updateNewNotificationCount })
-  useHyloQuery({ action: fetchCommonRoles })
+  useQuery(fetchNotifications().graphql)
+  // TODO: Why is this pre-fetch needed?
+  // useQuery(fetchCommonRoles().graphql)
+  // useHyloQuery({ action: fetchCommonRoles })
+  const [, resetNotificationsCount] = useMutation(resetNotificationCountAction().graphql.query)
+
+  useEffect(() => {
+    resetNotificationsCount(resetNotificationCountAction().graphql.variables)
+  }, [])
 
   useEffect(() => {
     (async function () {

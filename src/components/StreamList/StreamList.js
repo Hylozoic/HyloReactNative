@@ -84,13 +84,13 @@ export default function StreamList (props) {
     topicName
   })
   const [offset, setOffset] = useState(0)
-  const [{ data, pending, error }] = useQuery({
+  const [{ data, fetching, error }] = useQuery({
     ...fetchPostParam
       ? fetchPostsAction({ ...fetchPostParam, limit: 20, offset })?.graphql
+      // TODO: This is a temporary hack. How to handle initial laod with an empty query? Or ammend fetchPostParam to be available on initial load
       : { query: 'query test { me { id } }' },
     pause: !fetchPostParam
   })
-  console.log('rendering', error)
   const posts = data?.group?.posts?.items
   const postIds = posts?.map(p => p.id)
   const hasMore = data?.group?.posts?.hasMore
@@ -129,10 +129,10 @@ export default function StreamList (props) {
   // }, [fetchPostParam])
 
   const fetchMorePosts = useCallback(() => {
-    if (postIds && hasMore && !pending) {
+    if (postIds && hasMore && !fetching) {
       setOffset(postIds?.length)
     }
-  }, [hasMore, pending, postIds])
+  }, [hasMore, fetching, postIds])
 
   if (!fetchPostParam) return null
 
@@ -156,8 +156,8 @@ export default function StreamList (props) {
         data={posts}
         renderItem={({ item }) => renderPostRow({ ...props, post: item })}
         // onRefresh={refreshPosts}
-        refreshing={!!pending}
-        keyExtractor={item => `post${item}`}
+        refreshing={!!fetching}
+        keyExtractor={item => `post${item.id}`}
         onEndReached={fetchMorePosts}
         ListHeaderComponent={
           <View>
@@ -185,7 +185,7 @@ export default function StreamList (props) {
             )}
           </View>
         }
-        ListFooterComponent={pending ? <Loading style={styles.loading} /> : null}
+        ListFooterComponent={fetching ? <Loading style={styles.loading} /> : null}
       />
     </View>
   )

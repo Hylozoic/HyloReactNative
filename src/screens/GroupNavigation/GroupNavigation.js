@@ -71,7 +71,7 @@ export default function GroupNavigation () {
         {
           label: t('Groups'),
           iconName: 'Groups',
-          onPress: () => navigate('Group Relationships'),
+          onPress: () => navigate('Group Relationships', { group: currentGroup }),
           hidden: !(childGroups?.length > 0 || parentGroups?.length > 0)
         },
         { label: t('Map'), iconName: 'Globe', onPress: () => navigate('Map') },

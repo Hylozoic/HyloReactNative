@@ -9,7 +9,7 @@ import useGoToMember from 'hooks/useGoToMember'
 import useIsModalScreen from 'hooks/useIsModalScreen'
 import useRouteParams from 'hooks/useRouteParams'
 import trackAnalyticsEvent from 'store/actions/trackAnalyticsEvent'
-import fetchPost from 'store/actions/fetchPost'
+import postQuery from 'graphql/queries/postQuery'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import { KeyboardAccessoryCommentEditor } from 'components/CommentEditor/CommentEditor'
 import Comments from 'components/Comments'
@@ -26,7 +26,7 @@ export default function PostDetails () {
   const isModalScreen = useIsModalScreen()
   const { id: postId } = useRouteParams()
   const currentGroup = useSelector(getCurrentGroup)
-  const [{ data, fetching, error }] = useQuery(fetchPost(postId).graphql)
+  const [{ data, fetching, error }] = useQuery({ query: postQuery, variables: { id: postId } })
   const post = data?.post
   const commentsRef = React.useRef()
   const goToMember = useGoToMember()
