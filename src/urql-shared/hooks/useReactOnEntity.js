@@ -1,7 +1,7 @@
 import { gql, useMutation } from 'urql'
 
 const REACT_ON_MUTATION = gql` 
-  mutation ReactOn($entityId: ID, $data: ReactionInput) {
+  mutation reactOn($entityId: ID, $data: ReactionInput) {
     reactOn(entityId: $entityId, data: $data) {
       id
     }
@@ -9,7 +9,7 @@ const REACT_ON_MUTATION = gql`
 `
 
 const REMOVE_REACT_ON_MUTATION = gql`
-  mutation RemoveReactOn($entityId: ID, $data: ReactionInput) {
+  mutation removeReactOn($entityId: ID, $data: ReactionInput) {
     deleteReaction(entityId: $entityId, data: $data) {
       id
     }

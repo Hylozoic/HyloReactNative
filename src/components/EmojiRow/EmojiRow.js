@@ -15,7 +15,7 @@ export default function EmojiRow (props) {
 
   if (!post) return null
 
-  const entityType = comment ? 'Comment' : 'Post'
+  const entityType = comment ? 'comment' : 'post'
   const entityId = comment ? comment?.id : post?.id
   // const groupIds = post.groups.map(g => g.id)
   const handleReaction = (emojiFull) => reactOnEntity(entityType, entityId, emojiFull)
