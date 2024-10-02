@@ -3,7 +3,7 @@ import cursorPagination from './cursorPagination'
 
 export default {
   Query: {
-    threadList: cursorPagination(),
+    // threadList: cursorPagination(),
     posts: simplePagination({ offsetArgument: 'offset', limitArgument: 'first' })
   },
   Post: {

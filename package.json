@@ -41,6 +41,7 @@
     "@urql/devtools": "^2.0.3",
     "@urql/exchange-graphcache": "^7.1.1",
     "babel-plugin-import-graphql": "^2.8.1",
+    "cross-fetch": "^4.0.0",
     "emoji-datasource-apple": "^15.1.2",
     "emoji-mart": "^5.6.0",
     "emoji-mart-native": "^0.6.5-beta",

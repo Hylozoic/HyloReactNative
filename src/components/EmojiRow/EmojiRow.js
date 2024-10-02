@@ -11,15 +11,15 @@ export default function EmojiRow (props) {
     post,
     includePicker = true
   } = props
-  const { reactOnEntity, removeReactOnFromEntity } = useReactOnEntity()
+  const { reactOnEntity, deleteReactionFromEntity } = useReactOnEntity()
 
-  if (!post) return null
+  if (!post && !comment) return null
 
   const entityType = comment ? 'comment' : 'post'
   const entityId = comment ? comment?.id : post?.id
   // const groupIds = post.groups.map(g => g.id)
   const handleReaction = (emojiFull) => reactOnEntity(entityType, entityId, emojiFull)
-  const handleRemoveReaction = (emojiFull) => removeReactOnFromEntity(entityType, entityId, emojiFull)
+  const handleRemoveReaction = (emojiFull) => deleteReactionFromEntity(entityType, entityId, emojiFull)
   const myReactions = (comment ? comment.myReactions : post.myReactions) || []
   const entityReactions = (comment ? comment.commentReactions : post.postReactions) || []
   const myEmojis = myReactions.map((reaction) => reaction.emojiFull)

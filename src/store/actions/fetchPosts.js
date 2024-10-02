@@ -89,6 +89,7 @@ const groupQuery = childPostInclusion => `query GroupPostsQuery (
   $types: [String]
 ) {
   group(slug: $slug, updateLastViewed: true) {
+    __typename
     id
     slug
     name
@@ -129,5 +130,6 @@ const postsQuery = `query PostsQuery (
   $topics: [ID],
   $types: [String]
 ) {
+  __typename
   ${postsQueryFragment}
 }`

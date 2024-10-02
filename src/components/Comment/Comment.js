@@ -39,7 +39,7 @@ export default function Comment ({
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const { showHyloActionSheet } = useHyloActionSheet()
-  const { reactOnEntity, removeReactOnFromEntity } = useReactOnEntity()
+  const { reactOnEntity, deleteReactionFromEntity } = useReactOnEntity()
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
   const currentUser = useCurrentUser()
   const group = useSelector(state => getGroup(state, { slug }))
@@ -52,8 +52,8 @@ export default function Comment ({
   const myEmojis = myReactions.map((reaction) => reaction.emojiFull)
   const groupIds = post?.groups.map(g => g.id)
 
-  const handleReaction = (emojiFull) => reactOnEntity({ commentId: comment?.id, emojiFull, entityType: 'comment', groupIds, postId: post })
-  const handleRemoveReaction = (emojiFull) => removeReactOnFromEntity({ commentId: comment?.id, emojiFull, entityType: 'comment', postId: post })
+  const handleReaction = (emojiFull) => reactOnEntity('comment', comment?.id, emojiFull, postId)
+  const handleRemoveReaction = (emojiFull) => deleteReactionFromEntity('comment', comment?.id, emojiFull, postId)
   const handleReply = onReply && (() => onReply(comment))
   const handleRemove = (!isCreator && canModerate) && (
     () => Alert.alert(

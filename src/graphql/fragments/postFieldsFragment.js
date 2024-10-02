@@ -1,4 +1,5 @@
 const postFieldsFragment = () => `
+  __typename
   id
   announcement
   title
@@ -106,10 +107,12 @@ const postFieldsFragment = () => `
       }
   }
   myReactions {
+    __typename
     emojiFull
     id
   }
   postReactions {
+    __typename
     emojiFull
     id
     user {
@@ -118,6 +121,7 @@ const postFieldsFragment = () => `
     }
   }
   groups {
+    __typename
     id
     name
     slug

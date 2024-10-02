@@ -19,7 +19,6 @@ function Comments ({
   onSelect
 }, ref) {
   const [{ data, pending }] = useQuery({ query: commentsQuery, variables: { postId } })
-
   const post = data?.post
   const commentsQuerySet = post?.comments
   const comments = commentsQuerySet?.items || []
