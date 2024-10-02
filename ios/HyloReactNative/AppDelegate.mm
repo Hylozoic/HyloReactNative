@@ -21,10 +21,11 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
 
+
   // Intercom
   [IntercomModule
-    initialize:@"ios_sdk-b11cb526589263a9890b895d40b934bffa876c43"
-    withAppId:@"wwelodje"
+    initialize:[RNCConfig envFor:@"INTERCOM_IOS_API_KEY"]
+    withAppId:[RNCConfig envFor:@"INTERCOM_APP_ID"]
   ];
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
