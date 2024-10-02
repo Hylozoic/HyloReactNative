@@ -1,6 +1,5 @@
 import socketIo from 'socket.io-client'
 import sailsIo from 'sails.io.js'
-import Config from 'react-native-config'
 import apiHost from '../apiHost'
 import { getSessionCookie } from '../session'
 import { curry } from 'lodash/fp'
@@ -16,7 +15,7 @@ function setupSocketPromise () {
     }
 
     const io = sailsIo(socketIo)
-    io.sails.environment = Config.NODE_ENV || 'development'
+    io.sails.environment = process.env.NODE_ENV || 'development'
     io.sails.reconnection = true
     io.sails.autoConnect = false
 

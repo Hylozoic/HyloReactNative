@@ -2,7 +2,7 @@ import Config from 'react-native-config'
 import { once } from 'lodash'
 import { version } from '../package.json'
 
-export const environment = Config.NODE_ENV || 'development'
+export const environment = process.env.NODE_ENV || 'development'
 export const isTest = environment === 'test'
 export const isDev = environment === 'development'
 export const isProduction = environment === 'production'
