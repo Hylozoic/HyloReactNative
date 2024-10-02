@@ -5,11 +5,11 @@ import React, { useEffect, useState } from 'react'
 import { RootSiblingParent } from 'react-native-root-siblings'
 import { Provider as UrqlProvider } from 'urql'
 import { Provider } from 'react-redux'
-import { AppRegistry, Platform, AppState, UIManager } from 'react-native'
+import { AppRegistry, Platform, AppState, UIManager, LogBox } from 'react-native'
 import Timer from 'react-native-background-timer'
 import * as Sentry from '@sentry/react-native'
 import { OneSignal } from 'react-native-onesignal'
-import client from 'urql-shared/client'
+import setupUrqlClient from 'urql-shared/setupUrqlClient'
 import { sentryConfig } from 'config'
 import store from 'store'
 import { name as appName } from './app.json'
@@ -22,6 +22,7 @@ import './i18n'
 import 'intl-pluralrules'
 import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 import { baseStyle, tagsStyles, classesStyles } from 'components/HyloHTML/HyloHTML.styles'
+import Loading from 'components/Loading'
 // import FastImage from 'react-native-fast-image'
 
 Sentry.init(sentryConfig)
@@ -56,8 +57,10 @@ enableScreens()
 
 export default function App () {
   const [appState, setAppState] = useState(AppState.currentState)
-
+  const [client, setClient] = useState(null)
   useEffect(() => {
+    setupUrqlClient().then(setClient)
+
     OneSignal.initialize(process.env.ONESIGNAL_APP_ID)
 
     // Uncomment for OneSignal debugging
@@ -83,6 +86,10 @@ export default function App () {
       OneSignal.Notifications.clearAll()
     }
     setAppState(nextAppState)
+  }
+
+  if (!client) {
+    return <Loading />
   }
 
   return (
