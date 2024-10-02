@@ -27,6 +27,7 @@ const cursorPagination = () => {
       results.push(...(data || []))
     })
     return {
+      // TODO: introspect for this!
       __typename: 'CommentQuerySet',
       items: results,
       hasMore,

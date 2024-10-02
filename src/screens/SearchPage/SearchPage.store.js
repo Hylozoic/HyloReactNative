@@ -86,7 +86,7 @@ export function fetchSearchResults ({ search, offset = 0, filter }) {
                   }
                 }
                 ... on Post {
-                  ${postFieldsFragment()}
+                  ${postFieldsFragment(false)}
                 }
                 ... on Comment {
                   id

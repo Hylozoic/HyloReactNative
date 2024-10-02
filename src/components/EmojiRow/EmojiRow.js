@@ -1,8 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
+import useReactOnEntity from 'urql-shared/hooks/useReactOnEntity'
 import EmojiPicker from 'components/EmojiPicker'
 import EmojiPill from 'components/EmojiPill'
-import useReactionActions from 'urql-shared/hooks/useReactionActions'
 
 export default function EmojiRow (props) {
   const {
@@ -11,11 +11,11 @@ export default function EmojiRow (props) {
     post,
     includePicker = true
   } = props
-  const { reactOnEntity, removeReactOnFromEntity } = useReactionActions()
+  const { reactOnEntity, removeReactOnFromEntity } = useReactOnEntity()
 
   if (!post) return null
 
-  const entityType = comment ? 'comment' : 'post'
+  const entityType = comment ? 'Comment' : 'Post'
   const entityId = comment ? comment?.id : post?.id
   // const groupIds = post.groups.map(g => g.id)
   const handleReaction = (emojiFull) => reactOnEntity(entityType, entityId, emojiFull)

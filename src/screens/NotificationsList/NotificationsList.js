@@ -1,24 +1,23 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useMutation, useQuery } from 'urql'
 import { FlatList, TouchableOpacity, View, Text, StyleSheet } from 'react-native'
 import { useIsFocused, useNavigation } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'lodash'
-import useUrqlQueryAction from 'urql-shared/hooks/useUrqlQueryAction'
 import getMemberships from 'store/selectors/getMemberships'
 import {
-  fetchNotifications,
-  getNotifications,
-  getHasMoreNotifications,
-  markActivityRead as markActivityReadActionCreator,
-  markAllActivitiesRead as markAllActivitiesReadActionCreator,
-  updateNewNotificationCount as updateNewNotificationCountActionCreator
+  markActivityReadMutation,
+  markAllActivitiesReadMutation,
+  refineNotifications
 } from './NotificationsList.store'
 import ModalHeader from 'navigation/headers/ModalHeader'
 import NotificationCard from 'components/NotificationCard'
 import CreateGroupNotice from 'components/CreateGroupNotice'
 import Loading from 'components/Loading'
 import cardStyles from 'components/NotificationCard/NotificationCard.styles'
+import notificationsQuery, { NOTIFICATIONS_PAGE_SIZE } from 'graphql/queries/notificationsQuery'
+import resetNotificationsCountMutation from 'graphql/mutations/resetNotificationsCountMutation'
 
 const styles = StyleSheet.create({
   notificationsList: {
@@ -31,17 +30,21 @@ const styles = StyleSheet.create({
 })
 
 export default function NotificationsList (props) {
-  const dispatch = useDispatch()
   const navigation = useNavigation()
   const isFocused = useIsFocused()
   const { t } = useTranslation()
-  const notifications = useSelector(state => getNotifications(state, props))
-  const offset = isEmpty(notifications) ? 0 : notifications.length
-  const [{ fetching, data, error }, refetch] = useUrqlQueryAction({ action: fetchNotifications({ offset }) })
-  const hasMore = useSelector(getHasMoreNotifications)
+  const [offset, setOffset] = useState(0)
+  const [, resetNotificationsCount] = useMutation(resetNotificationsCountMutation)
+  const [, markActivityRead] = useMutation(markActivityReadMutation)
+  // TODO: markAllActivitiesRead needs to optimistically updated
+  const [, markAllActivitiesRead] = useMutation(markAllActivitiesReadMutation)
+  const response = useQuery({ query: notificationsQuery, variables: { first: NOTIFICATIONS_PAGE_SIZE, offset } })
+  const [{ data, error, fetching }] = response
+
+  const notifications = refineNotifications(data?.notifications?.items, navigation)
+  const hasMore = notifications?.hasMore
   const memberships = useSelector(getMemberships)
   const currentUserHasMemberships = !isEmpty(memberships)
-
   const setHeader = () => {
     navigation.setOptions({
       title: t('Notifications'),
@@ -49,26 +52,23 @@ export default function NotificationsList (props) {
         <ModalHeader
           {...props}
           headerRightButtonLabel={t('Mark as read')}
-          headerRightButtonOnPress={() => dispatch(markAllActivitiesReadActionCreator())}
+          headerRightButtonOnPress={() => markAllActivitiesRead()}
         />
       )
     })
   }
 
-  const markActivityRead = id => dispatch(markActivityReadActionCreator(id))
-  const updateNewNotificationCount = () => dispatch(updateNewNotificationCountActionCreator())
   const goToCreateGroup = () => navigation.navigate('Create Group')
 
   useEffect(() => {
     setHeader()
-    updateNewNotificationCount()
+    resetNotificationsCount()
   }, [])
 
   useEffect(() => {
     if (isFocused) {
       setHeader()
-      refetch && refetch()
-      updateNewNotificationCount()
+      resetNotificationsCount()
     }
   }, [isFocused])
 
@@ -99,7 +99,7 @@ export default function NotificationsList (props) {
       <FlatList
         data={notifications}
         keyExtractor={keyExtractor}
-        onEndReached={hasMore ? () => refetch && refetch() : null}
+        onEndReached={hasMore ? () => setOffset(notifications?.length) : null}
         renderItem={({ item }) =>
           <NotificationRow
             markActivityRead={markActivityRead}
@@ -115,7 +115,8 @@ export function NotificationRow ({ markActivityRead, notification }) {
     <View>
       <TouchableOpacity
         onPress={() => {
-          if (notification.unread) markActivityRead(notification.activityId)
+          if (notification.unread) markActivityRead({ id: notification.activityId })
+          console.log('!! notification', notification)
           notification.onPress()
         }}
       >

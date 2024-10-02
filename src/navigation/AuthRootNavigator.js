@@ -7,10 +7,11 @@ import { useDispatch } from 'react-redux'
 import i18n from '../../i18n'
 import { HyloHTMLConfigProvider } from 'components/HyloHTML/HyloHTML'
 import { modalScreenName } from 'hooks/useIsModalScreen'
-import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
 import useUrqlQueryAction from 'urql-shared/hooks/useUrqlQueryAction'
 import fetchCurrentUser from 'store/actions/fetchCurrentUser'
-import { fetchNotifications, updateNewNotificationCount as resetNotificationCountAction } from 'screens/NotificationsList/NotificationsList.store'
+// import { updateNewNotificationCount as resetNotificationCountAction } from 'screens/NotificationsList/NotificationsList.store'
+import resetNotificationsCountMutation from 'graphql/mutations/resetNotificationsCountMutation'
+import fetchNotificationsQuery, { NOTIFICATIONS_PAGE_SIZE } from 'graphql/queries/notificationsQuery'
 import ModalHeader from 'navigation/headers/ModalHeader'
 import CreateGroupTabsNavigator from 'navigation/CreateGroupTabsNavigator'
 import DrawerNavigator from 'navigation/DrawerNavigator'
@@ -23,23 +24,24 @@ import PostEditor from 'screens/PostEditor'
 import NotificationsList from 'screens/NotificationsList'
 import Thread from 'screens/Thread'
 import { white } from 'style/colors'
+// import MeQuery from 'graphql/queries/MeQuery'
 // import fetchCommonRoles from 'store/actions/fetchCommonRoles'
-
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
   const dispatch = useDispatch()
+  // TODO: Need to figure-out roles and getResponsibilitiesForGroup selection before switching to useQuery({ query: MeQuery })
   const [{ fetching, data, error }] = useUrqlQueryAction({ action: fetchCurrentUser() })
   const [loading, setLoading] = useState(true)
   const currentUser = data?.me
 
-  useQuery(fetchNotifications().graphql)
+  useQuery({ query: fetchNotificationsQuery, variables: { first: NOTIFICATIONS_PAGE_SIZE, offset: 0 } })
   // TODO: Why is this pre-fetch needed?
   // useQuery(fetchCommonRoles().graphql)
   // useHyloQuery({ action: fetchCommonRoles })
-  const [, resetNotificationsCount] = useMutation(resetNotificationCountAction().graphql.query)
+  const [, resetNotificationsCount] = useMutation(resetNotificationsCountMutation)
 
   useEffect(() => {
-    resetNotificationsCount(resetNotificationCountAction().graphql.variables)
+    resetNotificationsCount()
   }, [])
 
   useEffect(() => {

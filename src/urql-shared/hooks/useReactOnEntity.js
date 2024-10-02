@@ -4,18 +4,6 @@ const REACT_ON_MUTATION = gql`
   mutation ReactOn($entityId: ID, $data: ReactionInput) {
     reactOn(entityId: $entityId, data: $data) {
       id
-      myReactions {
-        emojiFull
-        id
-      }
-      postReactions {
-        emojiFull
-        id
-        user {
-          id
-          name
-        }
-      }
     }
   }
 `
@@ -24,18 +12,6 @@ const REMOVE_REACT_ON_MUTATION = gql`
   mutation RemoveReactOn($entityId: ID, $data: ReactionInput) {
     deleteReaction(entityId: $entityId, data: $data) {
       id
-      myReactions {
-        emojiFull
-        id
-      }
-      postReactions {
-        emojiFull
-        id
-        user {
-          id
-          name
-        }
-      }
     }
   }
 `

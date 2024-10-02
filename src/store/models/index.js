@@ -19,7 +19,6 @@ import Me, { MySkillsToLearn } from './Me'
 import Membership from './Membership'
 import Message from './Message'
 import MessageThread from './MessageThread'
-import Notification from './Notification'
 import Person, { PersonSkillsToLearn } from './Person'
 import PersonConnection from './PersonConnection'
 import Post, { PostFollower, PostCommenter, ProjectMember } from './Post'
@@ -61,7 +60,6 @@ orm.register(
   Message,
   MessageThread,
   MySkillsToLearn,
-  Notification,
   Person,
   PersonConnection,
   PersonSkillsToLearn,

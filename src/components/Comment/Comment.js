@@ -5,7 +5,7 @@ import Clipboard from '@react-native-clipboard/clipboard'
 import { TextHelpers } from 'hylo-shared'
 import { useDispatch, useSelector } from 'react-redux'
 import useHyloActionSheet from 'hooks/useHyloActionSheet'
-import useReactionActions from 'urql-shared/hooks/useReactionActions'
+import useReactOnEntity from 'urql-shared/hooks/useReactOnEntity'
 import useCurrentUser from 'urql-shared/hooks/useCurrentUser'
 import deleteCommentAction from 'store/actions/deleteComment'
 import getGroup from 'store/selectors/getGroup'
@@ -39,7 +39,7 @@ export default function Comment ({
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const { showHyloActionSheet } = useHyloActionSheet()
-  const { reactOnEntity, removeReactOnFromEntity } = useReactionActions()
+  const { reactOnEntity, removeReactOnFromEntity } = useReactOnEntity()
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
   const currentUser = useCurrentUser()
   const group = useSelector(state => getGroup(state, { slug }))
@@ -52,8 +52,8 @@ export default function Comment ({
   const myEmojis = myReactions.map((reaction) => reaction.emojiFull)
   const groupIds = post?.groups.map(g => g.id)
 
-  const handleReaction = (emojiFull) => reactOnEntity({ commentId: comment?.id, emojiFull, entityType: 'comment', groupIds, postId: post })
-  const handleRemoveReaction = (emojiFull) => removeReactOnFromEntity({ commentId: comment?.id, emojiFull, entityType: 'comment', postId: post })
+  const handleReaction = (emojiFull) => reactOnEntity({ commentId: comment?.id, emojiFull, entityType: 'Comment', groupIds, postId: post })
+  const handleRemoveReaction = (emojiFull) => removeReactOnFromEntity({ commentId: comment?.id, emojiFull, entityType: 'Comment', postId: post })
   const handleReply = onReply && (() => onReply(comment))
   const handleRemove = (!isCreator && canModerate) && (
     () => Alert.alert(
