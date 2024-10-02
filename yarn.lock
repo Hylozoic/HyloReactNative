@@ -4028,6 +4028,7 @@ __metadata:
     react-native-bootsplash: 6.1.0
     react-native-bouncy-checkbox: ^3.0.7
     react-native-clean-project: ^4.0.3
+    react-native-config: ^1.5.3
     react-native-confirmation-code-field: ^7.4.0
     react-native-date-picker: ^4.2.6
     react-native-device-info: ^10.3.0
@@ -11171,6 +11172,18 @@ __metadata:
   bin:
     react-native-clean-project: source/index.js
   checksum: 7cf9dc6d80b2b0d6d22b66570c4dd1159c293474d0ba247c7d249cd9875b0fa3dc6b8bec21254162d08f9dcb80fdf5a699d77a8b0580ca0eb6f792d08f2b8a3b
+  languageName: node
+  linkType: hard
+
+"react-native-config@npm:^1.5.3":
+  version: 1.5.3
+  resolution: "react-native-config@npm:1.5.3"
+  peerDependencies:
+    react-native-windows: ">=0.61"
+  peerDependenciesMeta:
+    react-native-windows:
+      optional: true
+  checksum: 0eb74e0a10ae6e96422671482da83dea16571f4f5ad848d1f18015dccbecb9cbc066788df72a88c630abf4aed0edb7616ec27704817cff18bd6ed7d61979d671
   languageName: node
   linkType: hard
 

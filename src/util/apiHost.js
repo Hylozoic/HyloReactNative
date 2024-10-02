@@ -1,3 +1,5 @@
-process.env.NODE_ENV !== 'test' && console.log(`API host: ${process.env.API_HOST}`)
+import Config from 'react-native-config'
 
-export default process.env.API_HOST
+Config.NODE_ENV !== 'test' && console.log(`API host: ${Config.API_HOST}`)
+
+export default Config.API_HOST

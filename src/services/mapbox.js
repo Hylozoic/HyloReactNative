@@ -1,3 +1,5 @@
+import Config from 'react-native-config'
+
 const MAPBOX_GEOCODING_API_URL = 'https://api.tiles.mapbox.com/geocoding/v5/mapbox.places'
 
 export async function fetchMapboxLocations (searchTerm, {
@@ -9,7 +11,7 @@ export async function fetchMapboxLocations (searchTerm, {
     '/' +
     encodeURIComponent(searchTerm) +
     '.json?access_token=' +
-    process.env.MAPBOX_TOKEN +
+    Config.MAPBOX_TOKEN +
     // used to center map, send the existing location you're editing or current location
     (proximity ? '&proximity=' + proximity : '') +
     (bbox ? '&bbox=' + bbox : '') +

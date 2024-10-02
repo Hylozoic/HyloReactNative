@@ -63,6 +63,7 @@
     "react-native-background-timer": "^2.4.1",
     "react-native-bootsplash": "6.1.0",
     "react-native-bouncy-checkbox": "^3.0.7",
+    "react-native-config": "^1.5.3",
     "react-native-confirmation-code-field": "^7.4.0",
     "react-native-date-picker": "^4.2.6",
     "react-native-device-info": "^10.3.0",
