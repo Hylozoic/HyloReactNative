@@ -12,7 +12,6 @@ export default {
   GroupSettings: () => null,
   JoinRequestQuerySet: () => null,
   Location: () => null,
-  MemberSettings: () => null,
   Membership: () => null,
   MembershipSettings: () => null,
   MembershipCommonRoleQuerySet: () => null,

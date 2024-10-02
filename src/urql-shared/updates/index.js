@@ -1,4 +1,4 @@
-import reactOn from 'urql-shared/optimistic/reactOn'
+import reactOn from './reactOn'
 
 export default {
   Mutation: {

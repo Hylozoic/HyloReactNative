@@ -2,11 +2,12 @@ import { createClient, fetchExchange} from 'urql'
 import { cacheExchange } from '@urql/exchange-graphcache'
 import { devtoolsExchange } from '@urql/devtools'
 import apiHost from 'util/apiHost'
-import resolvers from './resolvers'
-import updates from './updates'
 import keys from './keys'
+import resolvers from './resolvers'
+import optimistic from './optimistic'
+import updates from './updates'
 import { getIntrospectionQuery } from 'graphql'
-// NOTE: This can be used on Web as well
+// TODO: Switch to this from isomorphic-fetch on Web as well
 import fetch from 'cross-fetch'
 
 const GRAPHQL_ENDPOINT_URL = `${apiHost}/noo/graphql`
@@ -30,7 +31,7 @@ async function setupUrqlClient () {
     keys,
     resolvers,
     updates,
-    // optimistic,
+    optimistic,
     schema
   })
 
