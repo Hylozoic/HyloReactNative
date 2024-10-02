@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next'
 
 export async function onAppleButtonPress ({
   authorizedCallback,
-  createErrorNotification
+  createErrorNotification,
+  t
 }) {
-  const { t } = useTranslation()
   // performs login request
   try {
     const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -62,7 +62,8 @@ export default function AppleLoginButton ({
       style={style}
       onPress={() => onAppleButtonPress({
         authorizedCallback: onLoginFinished,
-        createErrorNotification
+        createErrorNotification,
+        t
       })}
     />
   )

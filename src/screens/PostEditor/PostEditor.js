@@ -415,7 +415,7 @@ export class PostEditor extends React.Component {
       navigation: this.props.navigation,
       initialSearchTerm: this.state?.location,
       onPick: this.handlePickLocation,
-      t
+      t: this.props.t
     })
   }
 
