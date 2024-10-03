@@ -1,4 +1,5 @@
 import React from 'react'
+import Config from 'react-native-config'
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import Button from 'components/Button'
 import { withTranslation } from 'react-i18next'
@@ -15,8 +16,8 @@ class GoogleLoginButton extends React.Component {
 
   componentDidMount () {
     this.GoogleSignin.configure({
-      iosClientId: process.env.IOS_GOOGLE_CLIENT_ID,
-      webClientId: process.env.WEB_GOOGLE_CLIENT_ID
+      iosClientId: Config.IOS_GOOGLE_CLIENT_ID,
+      webClientId: Config.WEB_GOOGLE_CLIENT_ID
     })
   }
 

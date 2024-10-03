@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler'
 import { enableScreens } from 'react-native-screens'
 import React, { useEffect, useState } from 'react'
+import Config from 'react-native-config'
 // Required for react-native-root-toast
 import { RootSiblingParent } from 'react-native-root-siblings'
 import { Provider } from 'react-redux'
@@ -56,7 +57,7 @@ export default function App () {
   const [appState, setAppState] = useState(AppState.currentState)
 
   useEffect(() => {
-    OneSignal.initialize(process.env.ONESIGNAL_APP_ID)
+    OneSignal.initialize(Config.ONESIGNAL_APP_ID)
 
     // Uncomment for OneSignal debugging
     // OneSignal.Debug.setLogLevel(LogLevel.Verbose);

@@ -42,6 +42,6 @@ class MainApplication : Application(), ReactApplication {
       load()
     }
 
-    IntercomModule.initialize(this, "android_sdk-0aa2608fb3b46dd9efcb74339fc87073a6ed0ba9", "wwelodje")
+    IntercomModule.initialize(this, BuildConfig.INTERCOM_ANDROID_API_KEY, BuildConfig.INTERCOM_APP_ID)
   }
 }

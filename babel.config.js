@@ -2,13 +2,6 @@ module.exports = {
   presets: ['module:@react-native/babel-preset'],
   plugins: [
     [
-      'inline-dotenv',
-      {
-        silent: true
-      }
-    ],
-    'transform-inline-environment-variables',
-    [
       'module-resolver',
       {
         extensions: [

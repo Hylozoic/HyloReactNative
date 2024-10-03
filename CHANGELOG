@@ -4,6 +4,22 @@ All notable changes to HyloReactNative (the Hylo mobile app) will be documented 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### [5.8.2] - 2024-09-27
+
+- Fix missing function call blocking Apple account login
+- Android icon fix
+
+### [5.8.1] - 2024-09-10
+
+- Fix android push notification icon
+- child/parent group bug-fix
+
+### [5.8.0] - 2024-09-05
+
+- Add code of conduct, contribution guide and full license details
+- i18n bug-fix for location search
+- Update numerous dependencies
+
 ### [5.7.0] - 2024-07-15
 
 - Add 'responsibilties' in place of 'moderators'
