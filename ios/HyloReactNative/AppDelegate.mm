@@ -7,6 +7,7 @@
 #import "RNBootSplash.h"
 #import <RNGoogleSignin/RNGoogleSignin.h>
 #import <IntercomModule.h>
+#import "RNCConfig.h"
 
 @implementation AppDelegate
 
