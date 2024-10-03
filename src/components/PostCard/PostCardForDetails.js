@@ -84,7 +84,7 @@ export default function PostCardForDetails ({ post, showGroups = true, groupId }
           style={styles.topics}
         />
       )}
-      {(images && images.length > 0) && (
+      {(images && images.length > 0) && !(isFlagged && !post.clickthrough) && (
         <ImageAttachments
           creator={post.creator}
           isFlagged={isFlagged}
