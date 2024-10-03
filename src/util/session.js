@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import Config from 'react-native-config'
 import { isNull, isUndefined, omitBy, reduce } from 'lodash'
 
 export async function setSessionCookie (resp) {
@@ -11,16 +12,16 @@ export async function setSessionCookie (resp) {
   return getSessionCookie().then(str => {
     const oldCookies = parseCookies(str)
     const merged = omitBy({ ...oldCookies, ...newCookies }, invalidPair)
-    return AsyncStorage.setItem(process.env.SESSION_COOKIE_KEY, serializeCookie(merged))
+    return AsyncStorage.setItem(Config.SESSION_COOKIE_KEY, serializeCookie(merged))
   })
 }
 
 export async function getSessionCookie () {
-  return AsyncStorage.getItem(process.env.SESSION_COOKIE_KEY)
+  return AsyncStorage.getItem(Config.SESSION_COOKIE_KEY)
 }
 
 export async function clearSessionCookie () {
-  return AsyncStorage.removeItem(process.env.SESSION_COOKIE_KEY)
+  return AsyncStorage.removeItem(Config.SESSION_COOKIE_KEY)
 }
 
 // this is a bag of hacks that probably only works with our current backend.

@@ -1,5 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux'
 import { Alert } from 'react-native'
+import Config from 'react-native-config'
+import { useDispatch, useSelector } from 'react-redux'
 import Share from 'react-native-share'
 import { useNavigation } from '@react-navigation/native'
 import { filter, isEmpty } from 'lodash/fp'
@@ -23,7 +24,7 @@ import hasResponsibilityForGroup from 'store/selectors/hasResponsibilityForGroup
 import { RESP_MANAGE_CONTENT } from 'store/constants'
 
 export default function usePostActionSheet ({
-  baseHostURL = process.env.HYLO_WEB_BASE_URL,
+  baseHostURL = Config.HYLO_WEB_BASE_URL,
   closeOnDelete,
   creator,
   pinned,

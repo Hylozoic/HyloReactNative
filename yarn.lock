@@ -3979,11 +3979,9 @@ __metadata:
     "@types/react-test-renderer": ^18.0.0
     babel-jest: ^29.6.3
     babel-plugin-import-graphql: ^2.8.1
-    babel-plugin-inline-dotenv: ^1.7.0
     babel-plugin-module-resolver: ^5.0.2
     babel-plugin-remove-style: ^0.1.0
     babel-plugin-syntax-jsx: ^6.18.0
-    babel-plugin-transform-inline-environment-variables: ^0.4.4
     babel-plugin-transform-remove-console: ^6.9.4
     babel-plugin-transform-runtime: ^6.23.0
     emoji-datasource-apple: ^15.1.2
@@ -4028,6 +4026,7 @@ __metadata:
     react-native-bootsplash: 6.1.0
     react-native-bouncy-checkbox: ^3.0.7
     react-native-clean-project: ^4.0.3
+    react-native-config: ^1.5.3
     react-native-confirmation-code-field: ^7.4.0
     react-native-date-picker: ^4.2.6
     react-native-device-info: ^10.3.0
@@ -4506,20 +4505,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-inline-dotenv@npm:^1.7.0":
-  version: 1.7.0
-  resolution: "babel-plugin-inline-dotenv@npm:1.7.0"
-  dependencies:
-    dotenv: ^16.0.0
-  peerDependencies:
-    dotenv-expand: ">= 5.0.0"
-  peerDependenciesMeta:
-    dotenv-expand:
-      optional: true
-  checksum: 1203b100b84d247a0db5d1f2565f452e1afa3f747e5ad872ddbf3533b49ec2173ba2c99d22c05fa902914da8de331fbc714132c2eda7b0a2a26fa909dbb10a67
-  languageName: node
-  linkType: hard
-
 "babel-plugin-istanbul@npm:^6.1.1":
   version: 6.1.1
   resolution: "babel-plugin-istanbul@npm:6.1.1"
@@ -4614,13 +4599,6 @@ __metadata:
   dependencies:
     "@babel/plugin-syntax-flow": ^7.12.1
   checksum: fd52aef54448e01948a9d1cca0c8f87d064970c8682458962b7a222c372704bc2ce26ae8109e0ab2566e7ea5106856460f04c1a5ed794ab3bcd2f42cae1d9845
-  languageName: node
-  linkType: hard
-
-"babel-plugin-transform-inline-environment-variables@npm:^0.4.4":
-  version: 0.4.4
-  resolution: "babel-plugin-transform-inline-environment-variables@npm:0.4.4"
-  checksum: fa361287411301237fd8ce332aff4f8e8ccb8db30e87a2ddc7224c8bf7cd792eda47aca24dc2e09e70bce4c027bc8cbe22f4999056be37a25d2472945df21ef5
   languageName: node
   linkType: hard
 
@@ -5879,13 +5857,6 @@ __metadata:
     domelementtype: ^2.3.0
     domhandler: ^5.0.3
   checksum: e5757456ddd173caa411cfc02c2bb64133c65546d2c4081381a3bafc8a57411a41eed70494551aa58030be9e58574fcc489828bebd673863d39924fb4878f416
-  languageName: node
-  linkType: hard
-
-"dotenv@npm:^16.0.0":
-  version: 16.4.5
-  resolution: "dotenv@npm:16.4.5"
-  checksum: 301a12c3d44fd49888b74eb9ccf9f07a1f5df43f489e7fcb89647a2edcd84c42d6bc349dc8df099cd18f07c35c7b04685c1a4f3e6a6a9e6b30f8d48c15b7f49c
   languageName: node
   linkType: hard
 
@@ -11171,6 +11142,18 @@ __metadata:
   bin:
     react-native-clean-project: source/index.js
   checksum: 7cf9dc6d80b2b0d6d22b66570c4dd1159c293474d0ba247c7d249cd9875b0fa3dc6b8bec21254162d08f9dcb80fdf5a699d77a8b0580ca0eb6f792d08f2b8a3b
+  languageName: node
+  linkType: hard
+
+"react-native-config@npm:^1.5.3":
+  version: 1.5.3
+  resolution: "react-native-config@npm:1.5.3"
+  peerDependencies:
+    react-native-windows: ">=0.61"
+  peerDependenciesMeta:
+    react-native-windows:
+      optional: true
+  checksum: 0eb74e0a10ae6e96422671482da83dea16571f4f5ad848d1f18015dccbecb9cbc066788df72a88c630abf4aed0edb7616ec27704817cff18bd6ed7d61979d671
   languageName: node
   linkType: hard
 

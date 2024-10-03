@@ -25,7 +25,7 @@
     <meta-data
       android:name="com.onesignal.NotificationServiceExtension"
       android:value="com.hylo.hyloandroid.NotificationServiceExtension" />
-  <meta-data
+    <meta-data
         android:name="com.onesignal.messaging.default_notification_icon"
         android:resource="@drawable/ic_stat_onesignal_default" />
     <meta-data

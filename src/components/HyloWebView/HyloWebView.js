@@ -1,5 +1,6 @@
 import React, { useCallback, forwardRef, useState, useEffect } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
+import Config from 'react-native-config'
 import Loading from 'components/Loading'
 import useRouteParams from 'hooks/useRouteParams'
 import AutoHeightWebView from 'react-native-autoheight-webview'
@@ -25,7 +26,7 @@ const HyloWebView = forwardRef(function HyloWebView ({
 
   useEffect(() => {
     const path = pathProp || routePath
-    setUri((source?.uri || `${process.env.HYLO_WEB_BASE_URL}${path || ''}`) + (postId ? `?postId=${postId}` : ''))
+    setUri((source?.uri || `${Config.HYLO_WEB_BASE_URL}${path || ''}`) + (postId ? `?postId=${postId}` : ''))
   }, [source?.uri, pathProp, routePath])
 
   useFocusEffect(
