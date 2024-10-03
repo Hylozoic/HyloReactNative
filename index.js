@@ -22,7 +22,6 @@ import './i18n'
 import 'intl-pluralrules'
 import { ActionSheetProvider } from '@expo/react-native-action-sheet'
 import { baseStyle, tagsStyles, classesStyles } from 'components/HyloHTML/HyloHTML.styles'
-import Loading from 'components/Loading'
 
 // import FastImage from 'react-native-fast-image'
 
@@ -73,7 +72,7 @@ if (__DEV__) {
   const filterIgnoredMessages = (logger) => (...args) => {
     const output = connectConsoleTextFromArgs(args)
 
-    if (!suppressedMessages.some((log) => output.includes(log))) {
+    if (output && !suppressedMessages.some((log) => output.includes(log))) {
       logger(...args)
     }
   }
@@ -94,6 +93,7 @@ enableScreens()
 export default function App () {
   const [appState, setAppState] = useState(AppState.currentState)
   const [client, setClient] = useState(null)
+
   useEffect(() => {
     setupUrqlClient().then(setClient)
 
@@ -125,7 +125,7 @@ export default function App () {
   }
 
   if (!client) {
-    return <Loading />
+    return null
   }
 
   return (
