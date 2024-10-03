@@ -22,11 +22,9 @@ ${includeChildGroupPosts ? 'posts: viewPosts(' : 'posts('}
   topics: $topics,
   types: $types
 ) {
-  __typename
   hasMore
   total
   items {
-    __typename
     ${postFieldsFragment()}
   }
 }`

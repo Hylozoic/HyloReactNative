@@ -9,7 +9,7 @@ import { AppRegistry, Platform, AppState, UIManager, LogBox } from 'react-native
 import Timer from 'react-native-background-timer'
 import * as Sentry from '@sentry/react-native'
 import { OneSignal } from 'react-native-onesignal'
-import setupUrqlClient from 'urql-shared/setupUrqlClient'
+import client from 'urql-shared/client'
 import { sentryConfig } from 'config'
 import store from 'store'
 import { name as appName } from './app.json'
@@ -92,11 +92,8 @@ enableScreens()
 
 export default function App () {
   const [appState, setAppState] = useState(AppState.currentState)
-  const [client, setClient] = useState(null)
 
   useEffect(() => {
-    setupUrqlClient().then(setClient)
-
     OneSignal.initialize(process.env.ONESIGNAL_APP_ID)
 
     // Uncomment for OneSignal debugging
@@ -122,10 +119,6 @@ export default function App () {
       OneSignal.Notifications.clearAll()
     }
     setAppState(nextAppState)
-  }
-
-  if (!client) {
-    return null
   }
 
   return (

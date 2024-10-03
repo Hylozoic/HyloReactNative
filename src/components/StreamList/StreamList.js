@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { gql, useMutation, useQuery } from 'urql'
 import { FlatList, View, TouchableOpacity } from 'react-native'
 import { isEmpty, get } from 'lodash/fp'
 import { useIsFocused } from '@react-navigation/native'
@@ -7,15 +7,13 @@ import { ALL_GROUP_ID, isContextGroup, MY_CONTEXT_ID, PUBLIC_GROUP_ID } from 'st
 import useFetchPostParam from './useFetchPostParam'
 import useCurrentUser from 'urql-shared/hooks/useCurrentUser'
 import fetchPostsAction from 'store/actions/fetchPosts'
-import resetNewPostCount from 'store/actions/resetNewPostCount'
-import updateUserSettings from 'store/actions/updateUserSettings'
+import updateUserSettingsMutation from 'graphql/mutations/updateUserSettingsMutation'
 import Icon from 'components/Icon'
 import ListControl from 'components/ListControl'
 import Loading from 'components/Loading'
 import PostRow from './PostRow'
 import { pictonBlue } from 'style/colors'
 import styles from './StreamList.styles'
-import { useQuery } from 'urql'
 
 /* === CONSTANTS === */
 
@@ -51,6 +49,23 @@ export const EVENT_STREAM_TIMEFRAME_OPTIONS = [
 export const DEFAULT_SORT_BY_ID = 'updated'
 export const DEFAULT_TIMEFRAME_ID = 'future'
 
+// Currently unused
+export const resetGroupTopicNewPostCountMutation = gql`
+  mutation($id: ID) {
+    updateGroupTopicFollow(id: $id, data: { newPostCount: 0 }) {
+      success
+    }
+  }
+`
+
+export const resetGroupNewPostCountMutation = gql`
+  mutation($id: ID) {
+    updateMembership(groupId: $id, data: { newPostCount: 0 }) {
+      id
+    }
+  }
+`
+
 /* === COMPONENTS === */
 
 export default function StreamList (props) {
@@ -63,7 +78,6 @@ export default function StreamList (props) {
     scrollRef,
     topicName
   } = props
-  const dispatch = useDispatch()
   const isFocused = useIsFocused()
   const currentUser = useCurrentUser()
   const [filter, setFilter] = useState()
@@ -83,17 +97,20 @@ export default function StreamList (props) {
     timeframe,
     topicName
   })
+  const [, updateUserSettings] = useMutation(updateUserSettingsMutation)
+  const [, resetGroupNewPostCount] = useMutation(resetGroupNewPostCountMutation)
   const [offset, setOffset] = useState(0)
-  const [{ data, fetching, error }] = useQuery({
+  const [{ data, fetching }] = useQuery({
     ...fetchPostParam
-      ? fetchPostsAction({ ...fetchPostParam, limit: 20, offset })?.graphql
+      ? fetchPostsAction({ ...fetchPostParam, first: 20, offset })?.graphql
       // TODO: This is a temporary hack. How to handle initial laod with an empty query? Or ammend fetchPostParam to be available on initial load
       : { query: 'query test { me { id } }' },
     pause: !fetchPostParam
   })
-  const posts = data?.group?.posts?.items
+  const postsQuerySet = data?.posts || data?.group?.posts
+  const hasMore = postsQuerySet?.hasMore
+  const posts = postsQuerySet?.items
   const postIds = posts?.map(p => p.id)
-  const hasMore = data?.group?.posts?.hasMore
 
   useEffect(() => {
     if (fetchPostParam && isFocused && isEmpty(postIds) && hasMore !== false) {
@@ -108,7 +125,7 @@ export default function StreamList (props) {
       )
 
       if (shouldReset(fetchPostParam.context)) {
-        dispatch(resetNewPostCount(forGroupId, 'Membership'))
+        resetGroupNewPostCount({ id: forGroupId })
       }
 
       // reexecuteQuery({ })
@@ -142,7 +159,7 @@ export default function StreamList (props) {
 
   const handleChildPostToggle = () => {
     const childPostInclusion = fetchPostParam?.childPostInclusion === 'yes' ? 'no' : 'yes'
-    dispatch(updateUserSettings({ settings: { streamChildPosts: childPostInclusion } }))
+    updateUserSettings({ changes: { settings: { streamChildPosts: childPostInclusion } } })
   }
 
   const extraToggleStyles = fetchPostParam?.childPostInclusion === 'yes'
