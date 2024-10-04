@@ -60,7 +60,9 @@ exports[`fetchSearchResults matches snapshot 1`] = `
     }
   }
   createdAt
+  clickthrough
   updatedAt
+  flaggedGroups
   isAnonymousVote
   isPublic
   fulfilledAt

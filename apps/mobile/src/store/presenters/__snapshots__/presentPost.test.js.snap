@@ -3,6 +3,7 @@
 exports[`presentPost matches the snapshot 1`] = `
 {
   "attachments": [],
+  "clickthrough": undefined,
   "commenters": [],
   "creator": null,
   "eventInvitations": [

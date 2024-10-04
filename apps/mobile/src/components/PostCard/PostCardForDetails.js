@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import { find, get } from 'lodash/fp'
@@ -13,6 +13,7 @@ import getMe from 'store/selectors/getMe'
 import joinProjectAction from 'store/actions/joinProject'
 import leaveProjectAction from 'store/actions/leaveProject'
 import respondToEventAction from 'store/actions/respondToEvent'
+import { recordClickthrough } from 'store/actions/moderationActions'
 import Button from 'components/Button'
 import Files from 'components/Files'
 import Icon from 'components/Icon'
@@ -27,7 +28,7 @@ import styles from 'components/PostCard/PostCard.styles'
 import { SvgUri } from 'react-native-svg'
 import { useTranslation } from 'react-i18next'
 
-export default function PostCardForDetails ({ post, showGroups = true }) {
+export default function PostCardForDetails ({ post, showGroups = true, groupId }) {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const navigation = useNavigation
@@ -56,11 +57,13 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
   const isProjectMember = find(member => member.id === currentUser.id, post.members)
   const locationText = LocationHelpers.generalLocationString(post.locationObject, post.location)
   const images = post.imageUrls && post.imageUrls.map(uri => ({ uri }))
+  const isFlagged = post.flaggedGroups && post.flaggedGroups.includes(groupId)
 
   return (
     <View style={styles.detailsContainer}>
       <PostHeader
         announcement={post.announcement}
+        isFlagged={isFlagged}
         closeOnDelete
         creator={post.creator}
         date={post.createdAt}
@@ -81,9 +84,10 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
           style={styles.topics}
         />
       )}
-      {(images && images.length > 0) && (
+      {(images && images.length > 0) && !(isFlagged && !post.clickthrough) && (
         <ImageAttachments
           creator={post.creator}
+          isFlagged={isFlagged}
           images={images}
           style={styles.images}
           title={post.title}
@@ -94,6 +98,17 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
             style={[styles.topics, styles.topicsOnImage]}
           />
         </ImageAttachments>
+      )}
+      {isFlagged && !post.clickthrough && (
+        <View style={styles.clickthroughContainer}>
+          <Text style={styles.clickthroughText}>{t('clickthroughExplainer')}</Text>
+          <TouchableOpacity
+            style={styles.clickthroughButton}
+            onPress={() => dispatch(recordClickthrough({ postId: post.id }))}
+          >
+            <Text style={styles.clickthroughButtonText}>{t('View post')}</Text>
+          </TouchableOpacity>
+        </View>
       )}
       {!!locationText && (
         <View style={styles.locationRow}>
@@ -108,6 +123,7 @@ export default function PostCardForDetails ({ post, showGroups = true }) {
         linkPreviewFeatured={post.linkPreviewFeatured}
         myEventResponse={post.myEventResponse}
         respondToEvent={handleRespondToEvent}
+        isFlagged={isFlagged && !post.clickthrough}
         startTime={post.startTime}
         title={post.title}
         type={post.type}

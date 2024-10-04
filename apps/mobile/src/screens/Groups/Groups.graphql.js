@@ -14,12 +14,14 @@ export const MeMembershipsMemberCountQuery = gql`
           childGroups {
             items {
               id
+              name
               memberCount
             }
           }
           parentGroups {
             items {
               id
+              name
               memberCount
             }
           }

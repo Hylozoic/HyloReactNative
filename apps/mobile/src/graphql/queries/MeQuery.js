@@ -124,6 +124,14 @@ export default gql`
       }
       group {
         id
+        agreements {
+          items {
+            id
+            description
+            order
+            title
+          }
+        }
         avatarUrl
         bannerUrl
         name

@@ -33,6 +33,9 @@ export const slateGrey = '#67768A'
 export const sunsetOrange = '#FE4850'
 export const suvaGrey = '#929292'
 export const treePoppy = '#FF9D21'
+export const mediumPurple = '#9883E5'
+export const regent = '#808C9B'
+export const mangoYellow = '#FDD549'
 
 // these colors are the equivalent of reducing the opacity of the colors named
 // above, on a white background. use these where possible, to avoid any impact
