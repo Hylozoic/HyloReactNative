@@ -15,6 +15,7 @@ import Invitation from './Invitation'
 import JoinRequest, { JoinRequestQuestionAnswer, Question } from './JoinRequest'
 import LinkPreview from './LinkPreview'
 import Location from './Location'
+import ModerationAction from './ModerationAction'
 import Me, { MySkillsToLearn } from './Me'
 import Membership from './Membership'
 import Message from './Message'
@@ -22,6 +23,7 @@ import MessageThread from './MessageThread'
 import Notification from './Notification'
 import Person, { PersonSkillsToLearn } from './Person'
 import PersonConnection from './PersonConnection'
+import PlatformAgreement from './PlatformAgreement'
 import Post, { PostFollower, PostCommenter, ProjectMember } from './Post'
 import PostMembership from './PostMembership'
 import SearchResult from './SearchResult'
@@ -60,11 +62,13 @@ orm.register(
   Membership,
   Message,
   MessageThread,
+  ModerationAction,
   MySkillsToLearn,
   Notification,
   Person,
   PersonConnection,
   PersonSkillsToLearn,
+  PlatformAgreement,
   Post,
   PostCommenter,
   PostFollower,

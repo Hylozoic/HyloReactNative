@@ -1,5 +1,5 @@
 import { POST_TYPES } from 'store/models/Post'
-import { capeCod10, rhino60, caribbeanGreen, white } from 'style/colors'
+import { capeCod10, rhino60, caribbeanGreen, white, regent, mangoYellow, black } from 'style/colors'
 
 export default {
   childPost: {
@@ -116,5 +116,42 @@ export default {
     backgroundColor: 'rgba(225, 229, 233, 0.3)',
     paddingVertical: 5,
     paddingHorizontal: 12
+  },
+  clickthroughContainer: {
+    position: 'absolute',
+    top: 44,
+    left: 0,
+    right: 0,
+    zIndex: 15,
+    backgroundColor: mangoYellow,
+    borderRadius: 5,
+    padding: 20,
+    marginHorizontal: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: black,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 15,
+    elevation: 5,
+  },
+  clickthroughText: {
+    color: regent,
+    fontSize: 14,
+    lineHeight: 20,
+    textAlign: 'center',
+  },
+  clickthroughButton: {
+    marginTop: 6,
+    width: 120,
+    height: 30,
+    borderWidth: 1,
+    borderColor: regent,
+    borderRadius: 4,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  clickthroughButtonText: {
+    color: regent
   }
 }
