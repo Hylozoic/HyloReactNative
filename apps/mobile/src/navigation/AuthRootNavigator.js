@@ -27,6 +27,7 @@ import { white } from 'style/colors'
 // import MeQuery from 'graphql/queries/MeQuery'
 // import fetchCommonRoles from 'store/actions/fetchCommonRoles'
 import fetchPlatformAgreements from 'store/actions/fetchPlatformAgreements'
+import useHyloQuery from 'urql-shared/hooks/useHyloQuery'
 
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
