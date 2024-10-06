@@ -93,7 +93,9 @@ posts: viewPosts(
     }
   }
   createdAt
+  clickthrough
   updatedAt
+  flaggedGroups
   isAnonymousVote
   isPublic
   fulfilledAt

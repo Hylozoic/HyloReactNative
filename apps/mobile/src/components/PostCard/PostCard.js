@@ -1,8 +1,10 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
 import { LocationHelpers } from 'hylo-shared'
 import useCurrentUser from 'urql-shared/hooks/useCurrentUser'
+import { recordClickthrough } from 'store/actions/moderationActions'
 import PostHeader from './PostHeader'
 import PostBody from './PostBody'
 import PostGroups from './PostGroups'
@@ -13,9 +15,11 @@ import Icon from 'components/Icon'
 import Topics from 'components/Topics'
 import styles from 'components/PostCard/PostCard.styles'
 
+
 export default function PostCard ({
   goToGroup,
   hideDetails,
+  groupId,
   hideMenu,
   onPress,
   post = {},
@@ -26,9 +30,11 @@ export default function PostCard ({
   showTopic: goToTopic
 }) {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
   const images = post.imageUrls && post.imageUrls.map(uri => ({ uri }))
   const locationText = LocationHelpers.generalLocationString(post.locationObject, post.location)
   const currentUser = useCurrentUser()
+  const isFlagged = post.flaggedGroups && post.flaggedGroups.includes(groupId)
 
   return (
     <>
@@ -45,12 +51,24 @@ export default function PostCard ({
           currentUser={currentUser}
           date={post.createdAt}
           hideMenu={hideMenu}
+          isFlagged={isFlagged}
           pinned={post.pinned}
           postId={post.id}
           showMember={showMember}
           title={post.title}
           type={post.type}
         />
+        {isFlagged && !post.clickthrough && (
+          <View style={styles.clickthroughContainer}>
+            <Text style={styles.clickthroughText}>{t('clickthroughExplainer')}</Text>
+            <TouchableOpacity
+              style={styles.clickthroughButton}
+              onPress={() => dispatch(recordClickthrough({ postId: post.id }))}
+            >
+              <Text style={styles.clickthroughButtonText}>{t('View post')}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
         {(!images || images.length === 0) && (
           <Topics
             topics={post.topics}
@@ -58,10 +76,11 @@ export default function PostCard ({
             style={styles.topics}
           />
         )}
-        {(images && images.length > 0) && (
+        {(images && images.length > 0) && !(isFlagged && !post.clickthrough) && (
           <ImageAttachments
             creator={post.creator}
             images={images}
+            isFlagged={isFlagged && !post.clickthrough}
             onlyLongPress
             onPress={onPress}
             style={styles.images}
@@ -86,6 +105,7 @@ export default function PostCard ({
           currentUser={currentUser}
           endTime={post.endTime}
           hideDetails={hideDetails}
+          isFlagged={isFlagged && !post.clickthrough}
           linkPreview={post.linkPreview}
           linkPreviewFeatured={post.linkPreviewFeatured}
           myEventResponse={post.myEventResponse}

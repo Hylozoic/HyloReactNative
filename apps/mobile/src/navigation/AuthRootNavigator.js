@@ -26,6 +26,8 @@ import Thread from 'screens/Thread'
 import { white } from 'style/colors'
 // import MeQuery from 'graphql/queries/MeQuery'
 // import fetchCommonRoles from 'store/actions/fetchCommonRoles'
+import fetchPlatformAgreements from 'store/actions/fetchPlatformAgreements'
+
 const AuthRoot = createStackNavigator()
 export default function AuthRootNavigator () {
   const dispatch = useDispatch()
@@ -35,14 +37,15 @@ export default function AuthRootNavigator () {
   const currentUser = data?.me
 
   useQuery({ query: fetchNotificationsQuery, variables: { first: NOTIFICATIONS_PAGE_SIZE, offset: 0 } })
-  // TODO: Why is this pre-fetch needed?
-  // useQuery(fetchCommonRoles().graphql)
-  // useHyloQuery({ action: fetchCommonRoles })
   const [, resetNotificationsCount] = useMutation(resetNotificationsCountMutation)
 
   useEffect(() => {
     resetNotificationsCount()
   }, [])
+  // TODO: Why is this pre-fetch needed?
+  // useQuery(fetchCommonRoles().graphql)
+  // useHyloQuery({ action: fetchCommonRoles })
+  useHyloQuery({ action: fetchPlatformAgreements })
 
   useEffect(() => {
     (async function () {

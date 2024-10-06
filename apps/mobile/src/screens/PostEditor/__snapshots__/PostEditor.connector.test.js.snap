@@ -54,7 +54,9 @@ exports[`PostEditor mapDispatchToProps maps the action generators 2`] = `
     }
   }
   createdAt
+  clickthrough
   updatedAt
+  flaggedGroups
   isAnonymousVote
   isPublic
   fulfilledAt
@@ -364,6 +366,7 @@ exports[`PostEditor mapStateToProps maps 1`] = `
         },
       },
     ],
+    "clickthrough": undefined,
     "commenters": [],
     "creator": SessionBoundModel {
       "_fields": {

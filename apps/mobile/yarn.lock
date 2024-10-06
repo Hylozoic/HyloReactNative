@@ -2445,6 +2445,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-community/checkbox@npm:^0.5.17":
+  version: 0.5.17
+  resolution: "@react-native-community/checkbox@npm:0.5.17"
+  peerDependencies:
+    react: "*"
+    react-native: ">= 0.62"
+    react-native-windows: ">=0.62"
+  peerDependenciesMeta:
+    react-native-windows:
+      optional: true
+  checksum: 98cddff11b976a1f712bfc4d7de946d5e102108bedc016bbcb668b3917757dd5092b5b93f651f740508dd8437ba3a0ce5ca15cef3ebf7bcfc15a490b0b7d0d6b
+  languageName: node
+  linkType: hard
+
 "@react-native-community/cli-clean@npm:13.6.9":
   version: 13.6.9
   resolution: "@react-native-community/cli-clean@npm:13.6.9"
@@ -4005,6 +4019,7 @@ __metadata:
     "@native-html/iframe-plugin": ^2.6.1
     "@react-native-async-storage/async-storage": ^1.24.0
     "@react-native-clipboard/clipboard": ^1.14.1
+    "@react-native-community/checkbox": ^0.5.17
     "@react-native-community/eslint-config": ^3.2.0
     "@react-native-community/hooks": ^2.8.0
     "@react-native-google-signin/google-signin": ^8.0.1

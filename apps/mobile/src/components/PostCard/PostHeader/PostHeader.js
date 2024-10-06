@@ -8,17 +8,20 @@ import CondensingBadgeRow from 'components/CondensingBadgeRow'
 import getCurrentGroup from 'store/selectors/getCurrentGroup'
 import Avatar from 'components/Avatar'
 import FlagContent from 'components/FlagContent'
+import FlagGroupContent from 'components/FlagGroupContent'
 import Icon from 'components/Icon'
 import styles, { labelStyles } from './PostHeader.styles'
 import { useTranslation } from 'react-i18next'
 import hasResponsibilityForGroup from 'store/selectors/hasResponsibilityForGroup'
 import getRolesForGroup from 'store/selectors/getRolesForGroup'
+import { useNavigation } from '@react-navigation/native'
 
 export default function PostHeader ({
   announcement,
   closeOnDelete,
   creator,
   date,
+  isFlagged,
   hideMenu,
   pinned,
   postId,
@@ -28,6 +31,7 @@ export default function PostHeader ({
   title,
   type
 }) {
+  const navigation = useNavigation()
   const [flaggingVisible, setFlaggingVisible] = useState(false)
   const { showPostActionSheet } = usePostActionSheet({
     postId,
@@ -62,6 +66,11 @@ export default function PostHeader ({
         <Text style={styles.date}>{TextHelpers.humanDate(date)}</Text>
       </View>
       <View style={styles.upperRight}>
+        {isFlagged && (
+          <TouchableOpacity hitSlop={5} onPress={() => navigation.navigate('Decisions', { streamType: 'moderation', initial: false, options: { title: 'Moderation' } })}>
+            <Icon name='Flag' style={styles.flagIcon} />
+          </TouchableOpacity>
+        )}
         {pinned && (
           <Icon name='Pin' style={styles.pinIcon} />
         )}
@@ -69,7 +78,7 @@ export default function PostHeader ({
           <Icon name='Announcement' style={styles.announcementIcon} />
         )}
         {type && (
-          <PostLabel type={type} />
+          <PostLabel type={type} condensed={isFlagged} />
         )}
         {!hideMenu && (
           <TouchableOpacity
@@ -79,8 +88,19 @@ export default function PostHeader ({
             <Icon name='More' style={styles.moreIcon} />
           </TouchableOpacity>
         )}
-        {flaggingVisible && (
+        {flaggingVisible && !currentGroupId && (
           <FlagContent
+            type='post'
+            linkData={{
+              slug: currentGroup?.slug,
+              id: postId,
+              type: 'post'
+            }}
+            onClose={() => setFlaggingVisible(false)}
+          />
+        )}
+        {flaggingVisible && currentGroupId && (
+          <FlagGroupContent
             type='post'
             linkData={{
               slug: currentGroup?.slug,
@@ -95,7 +115,7 @@ export default function PostHeader ({
   )
 }
 
-export function PostLabel ({ type }) {
+export function PostLabel ({ type, condensed }) {
   const { t } = useTranslation()
   const labelTypeStyle = get(type, labelStyles) || labelStyles.discussion
   const boxStyle = [labelStyles.box, labelTypeStyle.box]
@@ -113,7 +133,9 @@ export function PostLabel ({ type }) {
   return (
     <View style={boxStyle}>
       <Text style={textStyle}>
-        {t(type).toUpperCase()}
+        {condensed
+          ? `${t(type).toUpperCase().slice(0, 4)}.`
+          : t(type).toUpperCase()}
       </Text>
     </View>
   )

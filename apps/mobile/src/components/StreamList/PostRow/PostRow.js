@@ -37,6 +37,7 @@ export default function PostRow ({
           showGroups={showGroups}
           showMember={showMember}
           showTopic={showTopic}
+          groupId={forGroupId}
           childPost={forGroupId !== 'all' && forGroupId !== 'public' && context !== 'my' && !groupIds.includes(forGroupId)}
         />
       </TouchableOpacity>

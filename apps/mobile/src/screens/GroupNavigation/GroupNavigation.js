@@ -69,6 +69,12 @@ export default function GroupNavigation () {
           hidden: isContextGroup(currentGroup?.slug)
         },
         {
+          label: t('Decisions'),
+          iconName: 'Proposal',
+          onPress: () => navigate('Decisions'),
+          hidden: isContextGroup(currentGroup?.slug)
+        },
+        {
           label: t('Groups'),
           iconName: 'Groups',
           onPress: () => navigate('Group Relationships', { group: currentGroup }),

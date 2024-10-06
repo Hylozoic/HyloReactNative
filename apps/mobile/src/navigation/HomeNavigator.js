@@ -23,12 +23,14 @@ import ProjectMembers from 'screens/ProjectMembers/ProjectMembers'
 import MapWebView from 'screens/MapWebView/MapWebView'
 import GroupWelcomeLanding from 'screens/GroupWelcomeFlow/GroupWelcomeLanding'
 import { GROUP_WELCOME_LANDING } from 'screens/GroupWelcomeFlow/GroupWelcomeFlow.store'
+import { useTranslation } from 'react-i18next'
 
 const HomeTab = createStackNavigator()
 export default function HomeNavigator ({ navigation }) {
   const initialURL = useSelector(state => state.initialURL)
   const returnToOnAuthPath = useSelector(getReturnToOnAuthPath)
   const [, setCurrentGroup] = useCurrentGroup()
+  const { t } = useTranslation()
 
   useEffect(() => {
     if (!initialURL && !returnToOnAuthPath) {
@@ -86,7 +88,7 @@ export default function HomeNavigator ({ navigation }) {
       <HomeTab.Screen name='Projects' component={Stream} initialParams={{ streamType: 'project' }} />
       <HomeTab.Screen name='Project Members' key='Project Members' component={ProjectMembers} />
       <HomeTab.Screen name='Events' component={Stream} initialParams={{ streamType: 'event' }} />
-      <HomeTab.Screen name='Governance' component={Stream} initialParams={{ streamType: 'proposal' }} />
+      <HomeTab.Screen name='Decisions' component={Stream} initialParams={{ streamType: 'proposal' }} options={{ title: t('Decisions') }} />
       <HomeTab.Screen name='Members' component={MembersComponent} />
       <HomeTab.Screen name='Member' key='Member' component={MemberProfile} />
       <HomeTab.Screen name='Member Details' component={MemberDetails} />

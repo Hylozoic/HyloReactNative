@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { gql, useMutation, useQuery } from 'urql'
 import { FlatList, View, TouchableOpacity } from 'react-native'
 import { isEmpty, get } from 'lodash/fp'
-import { useIsFocused } from '@react-navigation/native'
+import { useIsFocused, useNavigation } from '@react-navigation/native'
 import { ALL_GROUP_ID, isContextGroup, MY_CONTEXT_ID, PUBLIC_GROUP_ID } from 'store/models/Group'
 import useFetchPostParam from './useFetchPostParam'
 import useCurrentUser from 'urql-shared/hooks/useCurrentUser'
@@ -46,6 +46,12 @@ export const EVENT_STREAM_TIMEFRAME_OPTIONS = [
   { id: 'future', label: 'Upcoming Events' },
   { id: 'past', label: 'Past Events' }
 ]
+
+export const DECISIONS_OPTIONS = [
+  { id: 'proposal', label: 'Proposals' },
+  { id: 'moderation', label: 'Moderation' }
+]
+
 export const DEFAULT_SORT_BY_ID = 'updated'
 export const DEFAULT_TIMEFRAME_ID = 'future'
 
@@ -78,6 +84,7 @@ export default function StreamList (props) {
     scrollRef,
     topicName
   } = props
+  const navigation = useNavigation()
   const isFocused = useIsFocused()
   const currentUser = useCurrentUser()
   const [filter, setFilter] = useState()
@@ -198,6 +205,11 @@ export default function StreamList (props) {
             {streamType === 'event' && (
               <View style={[styles.listControls]}>
                 <ListControl selected={timeframe} onChange={setTimeframe} options={EVENT_STREAM_TIMEFRAME_OPTIONS} />
+              </View>
+            )}
+            {streamType === 'proposal' && (
+              <View style={[styles.listControls]}>
+                <ListControl selected={streamType} onChange={() => navigation.navigate('Decisions', { streamType: 'moderation', initial: false, options: { title: 'Moderation' } })} options={DECISIONS_OPTIONS} />
               </View>
             )}
           </View>

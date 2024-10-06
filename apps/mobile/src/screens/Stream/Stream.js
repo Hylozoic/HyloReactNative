@@ -29,12 +29,14 @@ import SocketSubscriber from 'components/SocketSubscriber'
 import GroupWelcomeCheck from 'components/GroupWelcomeCheck'
 import { bannerlinearGradientColors } from 'style/colors'
 import styles from './Stream.styles'
+import ModerationList from 'components/ModerationList'
 
 export function headerTitle (currentGroup, streamType, myHome, t) {
   if (myHome) return myHome
   let title
   title = currentGroup?.name
   title = streamType ? capitalize(t(streamType) + 's') : title
+  if (streamType === 'Moderation') title = t('Moderation')
   return title
 }
 
@@ -155,26 +157,54 @@ export default function Stream ({ topicName: providedTopicName }) {
     </View>
   )
 
+  const moderationListHeader = (
+    <View
+      style={[
+        styles.bannerContainer
+      ]}
+    >
+      <FastImage source={image} style={styles.image} />
+      <LinearGradient style={styles.gradient} colors={bannerlinearGradientColors} />
+      <View style={styles.titleRow}>
+        <View style={styles.title}>
+          <Text style={styles.name} numberOfLines={3}>
+            {customViewName || myHome || name}
+          </Text>
+        </View>
+      </View>
+    </View>
+  )
+
   return (
     <>
       <GroupWelcomeCheck groupId={currentGroup?.id} />
-      <StreamList
-        scrollRef={ref}
-        forGroup={currentGroup}
-        showPost={goToPostDetails}
-        goToGroup={changeToGroup}
-        header={streamListHeader}
-        route={route}
-        navigation={navigation}
-        showMember={goToMember}
-        showTopic={goToTopic}
-        customView={customView}
-        topicName={topicName}
-        streamType={streamType}
-        myHome={myHome}
-        // Custom Views
-        customPostTypes={customPostTypes}
-      />
+      {streamType !== 'moderation' && (
+        <StreamList
+          scrollRef={ref}
+          forGroup={currentGroup}
+          showPost={goToPostDetails}
+          goToGroup={changeToGroup}
+          header={streamListHeader}
+          route={route}
+          showMember={goToMember}
+          showTopic={goToTopic}
+          customView={customView}
+          topicName={topicName}
+          streamType={streamType}
+          myHome={myHome}
+          // Custom Views
+          customPostTypes={customPostTypes}
+        />
+      )}
+      {streamType === 'moderation' && (
+        <ModerationList
+          scrollRef={ref}
+          forGroup={currentGroup}
+          header={moderationListHeader}
+          route={route}
+          streamType={streamType}
+        />
+      )}
       {!topicName && currentGroup && (
         <SocketSubscriber type='group' id={currentGroup.id} />
       )}
@@ -197,12 +227,13 @@ export function postPromptString (type = '', { firstName }, t) {
 export function PostPrompt ({ currentUser, forGroup, currentType, currentTopicName }) {
   const navigation = useNavigation()
   const { t } = useTranslation()
+  const checkedCurrentType = currentType === 'moderation' ? 'discussion' : currentType
 
   if (!currentUser) return null
 
   const handleOpenPostEditor = () => (
     navigation.navigate('Edit Post', {
-      type: currentType,
+      type: checkedCurrentType,
       groupId: forGroup.id,
       topicName: currentTopicName
     })

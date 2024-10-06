@@ -34,7 +34,9 @@ const postFieldsFragment = () => `
     }
   }
   createdAt
+  clickthrough
   updatedAt
+  flaggedGroups
   isAnonymousVote
   isPublic
   fulfilledAt
